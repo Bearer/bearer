@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-If you think you've found a security vulnerability in `curio`, please report it directly by sending an email to [security@bearer.sh](mailto:security@bearer.sh). **Avoid posting any information publicly**, such as creating a new issue on GitHub. In your email, please include the following:
+If you think you've found a security vulnerability in `bearer`, please report it directly by sending an email to [security@bearer.sh](mailto:security@bearer.sh). **Avoid posting any information publicly**, such as creating a new issue on GitHub. In your email, please include the following:
 
 - Describe the vulnerability and it's impact as best you can.
 - Include versions, platforms, or any other system information that may help identify a fix.

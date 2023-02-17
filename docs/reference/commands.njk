@@ -2,15 +2,15 @@
 title: Commands
 layout: layouts/doc.njk
 ---
-{# Welcome :wave:. The content of this page is automatically generated based on Curio's CLI help files.
-They can be found here: https://github.com/Bearer/curio/tree/main/pkg/commands
+{# Welcome :wave:. The content of this page is automatically generated based on Bearer's CLI help files.
+They can be found here: https://github.com/Bearer/bearer/tree/main/pkg/commands
  #}
 
-{% set items = [curio_scan, curio_init, curio_version] %}
+{% set items = [bearer_scan, bearer_init, bearer_version] %}
 {% renderTemplate "md" %}
 # Commands
 
-Curio offers a number of commands to use and customize the CLI to your needs.
+Bearer offers a number of commands to use and customize the CLI to your needs.
 {% endrenderTemplate %}
 <ul>
   {% for item in items %}
@@ -21,11 +21,11 @@ Curio offers a number of commands to use and customize the CLI to your needs.
 </ul>
 
 {% for item in items %}
-  <h2 class="inline-block text-neutral-100 bg-code p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e}}">curio {{ item.name | trim | escape }}</h2>
+  <h2 class="inline-block text-neutral-100 bg-code p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e}}">bearer {{ item.name | trim | escape }}</h2>
 
   <p>{{item.synopsis}}</p>
 
-  <pre class="language-bash"><code class="language-bash">curio {{item.usage | trim}}</code></pre>
+  <pre class="language-bash"><code class="language-bash">bearer {{item.usage | trim}}</code></pre>
 
   <h3 id="{{item.name | trim}}-flags">Flags</h3>
   <table class="table-auto">

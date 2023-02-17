@@ -4,29 +4,29 @@ layout: "layouts/doc"
 permalink: "/"
 ---
 
-# Curio
+# Bearer
 
-Welcome to the Curio documentation. Curio is a static code analysis tool (SAST) dedicated to data security. It scans your source code to [discover sensitive data](/explanations/discovery-and-classification) flows (PHI, PII, PD as well as Data stores, internal and external APIs) and data security risks (leaks, missing encryption, third-party sharing etc).
+Welcome to the Bearer documentation. Bearer is a static code analysis tool (SAST) dedicated to data security. It scans your source code to [discover sensitive data](/explanations/discovery-and-classification) flows (PHI, PII, PD as well as Data stores, internal and external APIs) and data security risks (leaks, missing encryption, third-party sharing etc).
 
 ## Getting started
 
-New to Curio? Check out the [quickstart](/quickstart/) to scan your first project. 
+New to Bearer? Check out the [quickstart](/quickstart/) to scan your first project. 
 
-Ready to dive in? Curio's [reports](/explanations/reports/) are your path to analyzing data security risks in your application. Check the [supported languages](/reference/supported-languages/), then view the [command reference](/reference/commands/) to configure Curio to your needs.
+Ready to dive in? Bearer's [reports](/explanations/reports/) are your path to analyzing data security risks in your application. Check the [supported languages](/reference/supported-languages/), then view the [command reference](/reference/commands/) to configure Bearer to your needs.
 
 ## Guides
 
-Guides help you make the most of Curio so you can get up and running quickly.
+Guides help you make the most of Bearer so you can get up and running quickly.
 
 - [Using the GitHub action](/guides/github-action/)
 - [Create a custom rule](/guides/custom-rule/)
 
 ## Explanations
 
-Explanations dive into the rational behind Curio and explain some of its heavier concepts.
+Explanations dive into the rational behind Bearer and explain some of its heavier concepts.
 
-- [How Curio discovers and classifies data](/explanations/discovery-and-classification/)
-- [Curio's report types](/explanations/reports/)
+- [How Bearer discovers and classifies data](/explanations/discovery-and-classification/)
+- [Bearer's report types](/explanations/reports/)
 
 ## Reference
 
@@ -40,9 +40,9 @@ Reference documents are where you'll find detailed information about each comman
 
 ## Contributing
 
-We'd love to see the impact you can bring to Curio. Our contributing documentation will help get you started, whether you want to dive deep into the code or simply fix a typo.
+We'd love to see the impact you can bring to Bearer. Our contributing documentation will help get you started, whether you want to dive deep into the code or simply fix a typo.
 
-- [Get started contributing to Curio](/contributing/)
-- [Set up Curio locally to contribute code](/contributing/code/)
+- [Get started contributing to Bearer](/contributing/)
+- [Set up Bearer locally to contribute code](/contributing/code/)
 - [Help improve and apply fixes to the documentation](/contributing/docs/)
-- [Add new recipes to Curio's database](/contributing/recipes/)
+- [Add new recipes to Bearer's database](/contributing/recipes/)

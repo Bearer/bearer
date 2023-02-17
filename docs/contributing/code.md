@@ -4,11 +4,11 @@ title: Contributing to code
 
 # Contributing code
 
-If you're interested in contributing code to Curio, this guide will help you do it. If you haven't already, review the [contributing overview](/contributing/) for different ways you can contribute.
+If you're interested in contributing code to Bearer, this guide will help you do it. If you haven't already, review the [contributing overview](/contributing/) for different ways you can contribute.
 
-## Set up Curio locally
+## Set up Bearer locally
 
-Curio is written in [Go](https://www.go.dev), so you'll need golang v1.19 or greater installed. Installation instructions for your architecture can be found at [golang downloads page](https://go.dev/dl/).
+Bearer is written in [Go](https://www.go.dev), so you'll need golang v1.19 or greater installed. Installation instructions for your architecture can be found at [golang downloads page](https://go.dev/dl/).
 
 Next, confirm the installation by running the following command:
 
@@ -18,13 +18,13 @@ go version
 
 You should receive a response with the installed version and architecture.
 
-With Go installed, [Fork and clone](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) the [Curio repository](https://github.com/Bearer/curio) locally using your preferred method. For example:
+With Go installed, [Fork and clone](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) the [Bearer repository](https://github.com/Bearer/bearer) locally using your preferred method. For example:
 
 ```bash
-git clone https://github.com/Bearer/curio.git
+git clone https://github.com/Bearer/bearer.git
 ```
 
-Next, navigate into the curio project in your terminal, and install the required go modules:
+Next, navigate into the Bearer project in your terminal, and install the required go modules:
 
 ```bash
 go mod download
@@ -36,18 +36,18 @@ Finally, we use [direnv](https://direnv.net/) to manage env vars in development.
 - Run tests using the script method mentioned [below](#running-tests).
 
 
-## Running Curio locally from source
+## Running Bearer locally from source
 
-To run Curio from source use the following command from the curio directory:
+To run Bearer from source use the following command from the bearer directory:
 
 ```bash
-go run ./cmd/curio/main.go [COMMAND]
+go run ./cmd/bearer/main.go [COMMAND]
 ```
 Use commands and flags as normal in place of `[COMMAND]`.
 
 ## Running tests
 
-Running tests is best performed using the [`run_tests.sh` script](https://github.com/Bearer/curio/blob/main/scripts/run_tests.sh). This will configure all needed variables to handle both unit and integration tests.
+Running tests is best performed using the [`run_tests.sh` script](https://github.com/Bearer/bearer/blob/main/scripts/run_tests.sh). This will configure all needed variables to handle both unit and integration tests.
 
 ```
 # From the project base
@@ -76,7 +76,7 @@ go test -run ^TestSchema$ ./pkg/classification/schema -count=1
 
 ### Integration testing
 
-These tests work by running an instance of the Curio application, with a
+These tests work by running an instance of the Bearer application, with a
 specified set of arguments, and then capturing the standard output and standard
 error streams. The captured output is compared against a snapshot of the
 expected output, using the [cupaloy](https://github.com/bradleyjkemp/cupaloy)
@@ -100,7 +100,7 @@ UPDATE_SNAPSHOTS=true go test ./...
 
 ## Generating CLI Documentation
 
-Curio's reference pages are built, in-part, by files created from the CLI source. Whenever updating CLI commands or flags, it's best to rerun the generator below and include the created files in your PR. Upon a new doc build, the docs website will reflect these changes.
+Bearer's reference pages are built, in-part, by files created from the CLI source. Whenever updating CLI commands or flags, it's best to rerun the generator below and include the created files in your PR. Upon a new doc build, the docs website will reflect these changes.
 
 From the root of the project run:
 

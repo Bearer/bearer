@@ -4,9 +4,9 @@ title: Add or update a recipe
 
 # Add or update a recipe
 
-Recipes are part of how Curio makes connections between your code and other sources. These are things like data stores, APIs, and internal services. They work by providing information about endpoints, API base urls, package information, etc.
+Recipes are part of how Bearer makes connections between your code and other sources. These are things like data stores, APIs, and internal services. They work by providing information about endpoints, API base urls, package information, etc.
 
-Recipes are located at `curio/pkg/classification/db/recipes/`.
+Recipes are located at `bearer/pkg/classification/db/recipes/`.
 
 ```md
 .
@@ -21,7 +21,7 @@ Each recipe consists of a `JSON` file containing the following properties:
 - `metadata` (object): Metadata about the recipe itself. Used for tracking recipe versions. Ex: `"metadata": { "version": "1.0" }`.
 - `name` (string): The name of the recipe.
 - `type` (string): The recipe type. Supported  types are `external_service`, `internal_service`, and `data_store`.
-- `urls` (array of strings): URLs used by the service. Curio will use this to aid in finding connections within a codebase. Supports wildcards.
+- `urls` (array of strings): URLs used by the service. Bearer will use this to aid in finding connections within a codebase. Supports wildcards.
 - `exclude_urls` (array of strings): Any urls that would be caught by the wildcards in the `urls` list that you'd like to explicitly exclude.
 - `packages` (array of objects): Common packages that connect to the service. Each package object should contain:
   - `name` (string): The official name of the package used by package managers.
@@ -42,7 +42,7 @@ Each recipe consists of a `JSON` file containing the following properties:
   - `internal_service` subtypes:
     - `message_bus`
 
-If any of the existing properties and available values don't meet the needs of your new recipe, [open a new issue](https://github.com/Bearer/curio/issues/new/choose). You can view the existing recipes [in the GitHub repo](https://github.com/Bearer/curio/tree/main/pkg/classification/db/recipes).
+If any of the existing properties and available values don't meet the needs of your new recipe, [open a new issue](https://github.com/Bearer/bearer/issues/new/choose). You can view the existing recipes [in the GitHub repo](https://github.com/Bearer/bearer/tree/main/pkg/classification/db/recipes).
 
 ## Generating a UUID
 
@@ -62,4 +62,4 @@ uuidgen | tr "[:upper:]" "[:lower:]"
 
 ## Commiting the new recipe
 
-To contribute the new recipe to Curio, refer to the [Contributing Code guide](/contributing/code/).
+To contribute the new recipe to Bearer, refer to the [Contributing Code guide](/contributing/code/).

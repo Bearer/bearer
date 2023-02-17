@@ -3,14 +3,14 @@ title: Configuration
 layout: layouts/doc.njk
 ---
 
-# Configuring Curio
+# Configuring Bearer
 
-Configuration of Curio can be done with [flags on the `scan` command](/reference/commands/#scan), or by using a `curio.yml` file in the project directory.
+Configuration of Bearer can be done with [flags on the `scan` command](/reference/commands/#scan), or by using a `bearer.yml` file in the project directory.
 
 To initialize the config file, run the following from your project directory:
 
 ```bash
-curio init
+bearer init
 ```
 
 This creates a config file in your current directory. Below is an annotated version of that file.
@@ -62,4 +62,4 @@ scan:
 
 ## Utilizing a custom config
 
-By default, Curio will look for a `curio.yml` file in the project directory where the scan is run. Alternatively, you can use the `--config-file` flag with the scan command to reference a config file that is outside the project directory.
+By default, Bearer will look for a `bearer.yml` file in the project directory where the scan is run. Alternatively, you can use the `--config-file` flag with the scan command to reference a config file that is outside the project directory.

@@ -1,4 +1,4 @@
-Sitemap: https://curio.sh/sitemap.xml
+Sitemap: https://docs.bearer.com/sitemap.xml
 
 User-agent: *
 Disallow:

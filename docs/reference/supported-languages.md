@@ -5,7 +5,7 @@ layout: layouts/doc.njk
 
 # Supported languages
 
-Curio currently fully supports Ruby, with JavaScript/TypeScript support coming soon. Additional languages listed below are supported only for the Privacy Report features for now.
+Bearer currently fully supports Ruby, with JavaScript/TypeScript support coming soon. Additional languages listed below are supported only for the Privacy Report features for now.
 
 | Languages       | Privacy Report | Summary Report |
 | --------------- | -------------- | -------------- |
@@ -17,7 +17,7 @@ Curio currently fully supports Ruby, with JavaScript/TypeScript support coming s
 | Go              | ✅              | Coming later   |
 | Python          | ✅              | Coming later   |
 
-In addition, Curio also supports these common structured data file formats:
+In addition, Bearer also supports these common structured data file formats:
 
 | Format   | Support |
 | -------- | ------- |

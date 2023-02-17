@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/bearer/curio/cmd/curio/build"
-	"github.com/bearer/curio/pkg/commands"
+	"github.com/bearer/bearer/cmd/bearer/build"
+	"github.com/bearer/bearer/pkg/commands"
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 )
@@ -39,10 +39,10 @@ func writeDocs(cmd *cobra.Command, dir string) error {
 	}
 
 	// create a file to use
-	basename := "curio.yaml"
+	basename := "bearer.yaml"
 
 	if cmd.CommandPath() != "" {
-		basename = strings.Replace(cmd.CommandPath(), " ", "curio_", -1) + ".yaml"
+		basename = strings.Replace(cmd.CommandPath(), " ", "bearer_", -1) + ".yaml"
 	}
 
 	filename := filepath.Join(dir, basename)

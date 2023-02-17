@@ -2,9 +2,9 @@
 title: Contributing to documentation
 ---
 
-# Contribute to Curio's documentation
+# Contribute to Bearer's documentation
 
-If you're interested in contributing to Curio's documentation, this guide will help you do it. If you haven't already, review the [contributing overview](/contributing/) for different ways you can contribute.
+If you're interested in contributing to Bearer's documentation, this guide will help you do it. If you haven't already, review the [contributing overview](/contributing/) for different ways you can contribute.
 
 ## Contribute directly on GitHub
 
@@ -17,7 +17,7 @@ The documentation is built with [eleventy](https://www.11ty.dev) and [tailwindcs
 Once you've forked and cloned the repo, navigate to the docs directory, and `npm install` to bootstrap the dependencies.
 
 ```bash
-# github.com/bearer/curio/docs
+# github.com/bearer/bearer/docs
 npm install
 ```
 

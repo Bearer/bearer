@@ -1,0 +1,70 @@
+name: " scan"
+synopsis: Scan a directory or file
+usage: " scan [flags] <path>"
+options:
+  - name: config-file
+    usage: Load configuration from the specified path.
+  - name: context
+    usage: |
+      Expand context of schema classification e.g., --context=health, to include data types particular to health
+  - name: data-subject-mapping
+    usage: |
+      Override default data subject mapping by providing a path to a custom mapping JSON file
+  - name: debug
+    default_value: "false"
+    usage: Enable debug logs
+  - name: disable-domain-resolution
+    default_value: "true"
+    usage: |
+      Do not attempt to resolve detected domains during classification
+  - name: domain-resolution-timeout
+    default_value: 3s
+    usage: |
+      Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s
+  - name: external-rule-dir
+    default_value: "[]"
+    usage: |
+      Specify directories paths that contain .yaml files with external rules configuration
+  - name: force
+    default_value: "false"
+    usage: Disable the cache and runs the detections again
+  - name: format
+    shorthand: f
+    usage: Specify report format (json, yaml)
+  - name: help
+    shorthand: h
+    default_value: "false"
+    usage: help for scan
+  - name: internal-domains
+    default_value: "[]"
+    usage: |
+      Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
+  - name: only-rule
+    default_value: "[]"
+    usage: |
+      Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
+  - name: output
+    usage: Specify the output path for the report.
+  - name: quiet
+    default_value: "false"
+    usage: Suppress non-essential messages
+  - name: report
+    default_value: summary
+    usage: Specify the type of report (summary, privacy).
+  - name: severity
+    default_value: critical,high,medium,low,warning
+    usage: Specify which severities are included in the report.
+  - name: skip-path
+    default_value: "[]"
+    usage: |
+      Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
+  - name: skip-rule
+    default_value: "[]"
+    usage: |
+      Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
+example: |4-
+      # Scan a local project, including language-specific files
+      $ bearer scan /path/to/your_project
+see_also:
+  - " - "
+aliases: s

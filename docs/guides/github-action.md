@@ -4,18 +4,18 @@ title: Using the GitHub Action
 
 # Using the GitHub Action
 
-Running Curio from the CLI is great, but if you want it integrated directly with your Git workflow there's nothing easier than a GitHub action. If you're unfamiliar with GitHub actions, here's a [primer available from GitHub](https://github.com/features/actions). You can also see how the action works directly on our [Bear Publishing example app](https://github.com/Bearer/bear-publishing/actions/workflows/curio.yml).
+Running Bearer from the CLI is great, but if you want it integrated directly with your Git workflow there's nothing easier than a GitHub action. If you're unfamiliar with GitHub actions, here's a [primer available from GitHub](https://github.com/features/actions). You can also see how the action works directly on our [Bear Publishing example app](https://github.com/Bearer/bear-publishing/actions/workflows/bearer.yml).
 
 ## Getting started
 
-You can [view the action here](https://github.com/marketplace/actions/curio-sh), or follow along below.
+You can [view the action here](https://github.com/marketplace/actions/bearer-sh), or follow along below.
 
-Actions live in the `.github/workflows/` directory within your repository. Start by creating a `curio.yml` file in the workflows directory.
+Actions live in the `.github/workflows/` directory within your repository. Start by creating a `bearer.yml` file in the workflows directory.
 
-We recommend the following config in `.github/workflows/curio.yml` to run Curio's summary report:
+We recommend the following config in `.github/workflows/bearer.yml` to run Bearer's summary report:
 
 ```yml
-name: Curio
+name: Bearer
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Report
         id: report
-        uses: bearer/curio-action@v0.2
+        uses: bearer/bearer-action@v0.2
       - id: summary
         name: Display Summary
         uses: actions/github-script@v6
@@ -44,7 +44,7 @@ jobs:
             if(!passed){ core.setFailed(report); }
 ```
 
-This will run the summary report, display the results to the action summary screen within GitHub, and flag the action as pass or fail based on whether Curio's default rules pass or fail.
+This will run the summary report, display the results to the action summary screen within GitHub, and flag the action as pass or fail based on whether Bearer's default rules pass or fail.
 
 ## Further configuration
 
@@ -53,10 +53,10 @@ Just as with the CLI app, you can configure the action to meet the needs of your
 ```yml
 steps:
   - uses: actions/checkout@v3
-  - name: Curio
-    uses: bearer/curio-action@v0.1
+  - name: Bearer
+    uses: bearer/bearer-action@v0.1
     with:
-      config-file: '/some/path/curio.yml'
+      config-file: '/some/path/bearer.yml'
       only-rule: 'ruby_lang_cookies,ruby_lang_http_post_insecure_with_data'
       skip-path: 'users/*.go,users/admin.sql'
 ```
@@ -67,7 +67,7 @@ The following are a list of available inputs and outputs:
 
 #### `config-file`
 
-**Optional** Curio configuration file path
+**Optional** Bearer configuration file path
 
 #### `only-rule`
 
@@ -89,10 +89,10 @@ Details of any rule breaches that occur. This is URL encoded to work round GitHu
 
 #### `exit_code`
 
-Exit code of the curio binary, 0 indicates a pass
+Exit code of the bearer binary, 0 indicates a pass
 
-## Make the most of Curio
+## Make the most of Bearer
 
-For more ways to use Curio, check out the different [report types](https://curio.sh/explanations/reports/), [available rules](https://curio.sh/reference/rules/), [supported data types](https://curio.sh/reference/datatypes/). 
+For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/). 
 
 Have a question or need help? Join our [Discord community]({{meta.links.discord}}) or [open an issue on GitHub]({{meta.links.issues}}).
