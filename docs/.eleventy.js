@@ -53,6 +53,16 @@ module.exports = function (eleventyConfig) {
     arr.sort((a, b) => (a.metadata.id > b.metadata.id ? 1 : -1));
     return arr;
   });
+  eleventyConfig.addFilter("setAttribute", (obj, key, value) => {
+    obj[key] = value;
+    return obj;
+  });
+  eleventyConfig.addFilter("deduplicate", (arr) => {
+    const result = arr.filter(
+      (value, index, self) => index === self.findIndex((t) => t.id === value.id)
+    );
+    return result;
+  });
 
   eleventyConfig.addNunjucksGlobal("navHighlight", (parent, child) => {
     const target = parent.split(path.sep).slice(1, -1);

@@ -42,7 +42,9 @@ Curio's built-in rules aim to keep you protected from the top data security risk
           {% if rule.languages %}
             <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">{{rule.languages}}</li>
           {% endif %}
-          <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">{{rule.metadata.dsr_id}}</li>
+          {% for id in rule.metadata.cwe_id %}
+            <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">CWE-{{id}}</li>
+          {% endfor %}
         </ul>
       </div>
     </li>
@@ -61,7 +63,7 @@ Curio's built-in rules aim to keep you protected from the top data security risk
     let found = false
     if (filtersActive) {
       filters.forEach(f => {
-        if (source.includes(f.value)) {
+        if (source.includes(f.value.toLowerCase())) {
           found = true
         }
       })
@@ -83,7 +85,7 @@ Curio's built-in rules aim to keep you protected from the top data security risk
       .getElementById('search-input')
       .value;
     rules.forEach(rule => {
-      if (compare(rule, query, filters)) {
+      if (compare(rule, query.toLowerCase(), filters)) {
         rule
           .classList
           .remove('hidden')
@@ -96,8 +98,12 @@ Curio's built-in rules aim to keep you protected from the top data security risk
   };
   const input = document.getElementById('search-input')
   const checkboxes = document.querySelectorAll('.filter-toggle')
+  const form = document.getElementById('rule-search')
   let timer;
   const delay = 300;
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+  })
   input.addEventListener('keyup', (e) => {
     clearTimeout(timer)
     timer = setTimeout(filterResults, delay)
