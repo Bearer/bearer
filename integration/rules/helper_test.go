@@ -84,11 +84,12 @@ func (runner *Runner) runTest(t *testing.T, projectPath string) {
 	}
 
 	for _, file := range files {
+		myfile := file
 		ext := filepath.Ext(file.FilePath)
 		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
-
 		t.Run(testName, func(t *testing.T) {
-			runner.ScanSingleFile(t, testDataPath, file, snapshotsPath)
+			t.Parallel()
+			runner.ScanSingleFile(t, testDataPath, myfile, snapshotsPath)
 		})
 	}
 }
