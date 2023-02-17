@@ -2,17 +2,14 @@ package integration_test
 
 import (
 	"bytes"
-	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 
-	"github.com/bearer/curio/integration/internal/testhelper"
 	"github.com/bearer/curio/pkg/commands"
 	"github.com/bearer/curio/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/commands/process/settings/rules"
 	"github.com/bearer/curio/pkg/commands/process/worker"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/flag"
@@ -20,11 +17,7 @@ import (
 	"github.com/bearer/curio/pkg/types"
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bradleyjkemp/cupaloy"
-
-	"github.com/rs/zerolog/log"
 )
-
-var rulesFs = &rules.Rules
 
 func TestTest(t *testing.T) {
 	getRunner(t).runTest(t, "../../pkg/commands/process/settings/rules/"+"javascript/lang/logger")
@@ -126,47 +119,4 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
 	cupaloyCopy.SnapshotT(t, outputBuffer.String())
-}
-
-func buildRulesTestCase(name, reportType, ruleID, filename string) testhelper.TestCase {
-	arguments := []string{
-		"scan",
-		filepath.Join("pkg", "commands", "process", "settings", "rules", filename),
-		"--report=" + reportType,
-		"--format=yaml",
-		"--only-rule=" + ruleID,
-	}
-	options := testhelper.TestCaseOptions{}
-
-	return testhelper.NewTestCase(name, arguments, options)
-}
-
-func runRulesTest(folderPath, format, ruleID string, t *testing.T) {
-	snapshotDirectory := "../../pkg/commands/process/settings/rules/" + folderPath + "/.snapshots"
-
-	testDataDir := fmt.Sprintf("%s/testdata", folderPath)
-
-	log.Debug().Msgf("%s", testDataDir)
-
-	testdataDirEntries, err := rulesFs.ReadDir(testDataDir)
-	if err != nil {
-		t.Fatalf("failed to read rules/%s dir %e", folderPath, err)
-	}
-
-	dataflowTests := []testhelper.TestCase{}
-	for _, testdataFile := range testdataDirEntries {
-		name := testdataFile.Name()
-
-		testName := strings.Replace(fmt.Sprintf("%s_%s_%s", format, folderPath, name), "/", "_", -1)
-		dataflowTests = append(dataflowTests,
-			buildRulesTestCase(
-				testName,
-				format,
-				ruleID,
-				fmt.Sprintf("%s/testdata/%s", folderPath, name),
-			),
-		)
-	}
-
-	testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, snapshotDirectory)
 }
