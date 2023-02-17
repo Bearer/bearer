@@ -115,4 +115,4 @@ By default, Bearer maps all subjects to “User”, but you can override this by
 bearer scan . --report=privacy --data-subject-mapping=/path/to/mappings.json
 ```
 
-The custom map file should follow the format used by [subject_mapping.json](https://github.com/Bearer/bearer/blob/main/pkg/classification/db/subject_mapping.json). Replace a key’s value with the higher-level subject you’d like to associate it with. Some examples might include Customer, Employee, Client, Patient, etc. Bearer will use your replacement file instead of the default, so make sure to include any and all subjects you want reported.
+The custom map file should follow the format used by [subject_mapping.json]({{meta.sourcePath}}/blob/main/pkg/classification/db/subject_mapping.json). Replace a key’s value with the higher-level subject you’d like to associate it with. Some examples might include Customer, Employee, Client, Patient, etc. Bearer will use your replacement file instead of the default, so make sure to include any and all subjects you want reported.

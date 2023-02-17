@@ -1,4 +1,0 @@
-Sitemap: https://docs.bearer.com/sitemap.xml
-
-User-agent: *
-Disallow:

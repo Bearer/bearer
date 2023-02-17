@@ -42,7 +42,7 @@ Each recipe consists of a `JSON` file containing the following properties:
   - `internal_service` subtypes:
     - `message_bus`
 
-If any of the existing properties and available values don't meet the needs of your new recipe, [open a new issue](https://github.com/Bearer/bearer/issues/new/choose). You can view the existing recipes [in the GitHub repo](https://github.com/Bearer/bearer/tree/main/pkg/classification/db/recipes).
+If any of the existing properties and available values don't meet the needs of your new recipe, [open a new issue]({{meta.sourcePath}}/issues/new/choose). You can view the existing recipes [in the GitHub repo]({{meta.sourcePath}}/tree/main/pkg/classification/db/recipes).
 
 ## Generating a UUID
 

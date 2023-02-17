@@ -2,9 +2,9 @@ module.exports = {
   sourcePath: "https://github.com/bearer/bearer",
   homePage: "/",
   name: "Bearer",
-  url: "https://bearer.sh",
+  url: "https://docs.bearer.com",
   description:
-    "Bearer is a static code analysis testing (SAST) solution that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII).",
+    "Bearer is an open Source code security scanning tool that natively filters and prioritizes security risks by business impact",
   favicon: "https://bearer.sh/assets/img/favicon.svg",
   links: {
     discord: "https://discord.gg/eaHZBJUXRF",

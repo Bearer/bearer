@@ -18,7 +18,7 @@ go version
 
 You should receive a response with the installed version and architecture.
 
-With Go installed, [Fork and clone](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) the [Bearer repository](https://github.com/Bearer/bearer) locally using your preferred method. For example:
+With Go installed, [Fork and clone](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) the [Bearer repository]({{meta.sourcePath}}) locally using your preferred method. For example:
 
 ```bash
 git clone https://github.com/Bearer/bearer.git
@@ -47,7 +47,7 @@ Use commands and flags as normal in place of `[COMMAND]`.
 
 ## Running tests
 
-Running tests is best performed using the [`run_tests.sh` script](https://github.com/Bearer/bearer/blob/main/scripts/run_tests.sh). This will configure all needed variables to handle both unit and integration tests.
+Running tests is best performed using the [`run_tests.sh` script]({{meta.sourcePath}}/blob/main/scripts/run_tests.sh). This will configure all needed variables to handle both unit and integration tests.
 
 ```
 # From the project base

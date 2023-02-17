@@ -108,4 +108,4 @@ Our latest tests of unknown data sets **yield an accuracy of 93%**, or 7% false 
 
 ## You can improve Bearer's detection and classification
 
-Bearer is extensible. Just as you can add specific rules that work for your own needs, you can also new data types, detectors, and classification patterns. Documentation on how to do so is **coming soon**, but for now, you can [browse the repo](https://github.com/Bearer/bearer) to see how these are implemented.
+Bearer is extensible. Just as you can add specific rules that work for your own needs, you can also new data types, detectors, and classification patterns. Documentation on how to do so is **coming soon**, but for now, you can [browse the repo]({{meta.sourcePath}}) to see how these are implemented.

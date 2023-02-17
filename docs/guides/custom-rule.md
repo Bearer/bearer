@@ -12,7 +12,7 @@ Before you begin, you’ll want to have Bearer installed, and have run it succes
 
 ## The rule configuration file
 
-Each rule is a unique `yml` file. Custom rules share the same format as internal rules, so it can be helpful when creating rules to reference similar concepts in the [rules directory on GitHub](https://github.com/Bearer/bearer/tree/main/pkg/commands/process/settings/rules). 
+Each rule is a unique `yml` file. Custom rules share the same format as internal rules, so it can be helpful when creating rules to reference similar concepts in the [rules directory on GitHub]({{meta.sourcePath}}/tree/main/pkg/commands/process/settings/rules). 
 
 To better understand the structure of a rule file, let’s look at each key:
 
@@ -32,10 +32,10 @@ To better understand the structure of a rule file, let’s look at each key:
   - `id`: A unique identifier. Internal rules are named `lang_framework_rule_name`. For rules targeting the language core, `lang` is used instead of a framework name. For example `ruby_lang_logger` and `ruby_rails_logger`. For custom rules, you may consider appending your org name.
   - `description`: A brief, one-sentence description of the rule. The best practice is to make this an actionable “rule” phrase, such as “Do X” or “Do not do X in Y”.
   - `dsr_id`: The DSR ID corresponding to the Top 10 Data Security Risks list. (Optional)
-  - `associated_recipe`: Links the rule to a [recipe](https://github.com/Bearer/bearer/tree/main/pkg/classification/db/recipes). Useful for associating a rule with a third party. Example: “Sentry” (Optional)
+  - `associated_recipe`: Links the rule to a [recipe]({{meta.sourcePath}}/tree/main/pkg/classification/db/recipes). Useful for associating a rule with a third party. Example: “Sentry” (Optional)
   - `remediation_message`: Used for internal rules, this builds the documentation page for a rule. (Optional)
   - `documentation_url`: Used to pass custom documentation URL for the summary report. This can be useful for linking to your own internal documentation or policies. By default, all rules in the main repo will automatically generate a link to the rule on [docs.bearer.com](/). (Optional)
-- `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption](https://github.com/Bearer/bearer/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) rule for examples. (Optional)
+- `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) rule for examples. (Optional)
 - `skip_data_types`: Allows you to prevent the specified data types from triggering this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 - `only_data_types`: Allows you to limit the specified data types that trigger this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 
@@ -144,7 +144,7 @@ patterns:
 - `detection`: Detection filters rely on existing filter types, so they handle much of the logic for you.
   - `datatype`: This is the detection type you’ll most often see. It uses Bearer's scan to match any data type.
   - `insecure_url`: Useful for instances where you want to prevent unsecured HTTP requests. It explicitly matches `http://`.
-  - `<auxiliary-detection-id>`: This allows you to link external and custom detection types by their id. See the `auxiliary` description in the rule config at the top of this page for more details, and the [weak_encryption rule](https://github.com/Bearer/bearer/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) for an example.
+  - `<auxiliary-detection-id>`: This allows you to link external and custom detection types by their id. See the `auxiliary` description in the rule config at the top of this page for more details, and the [weak_encryption rule]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) for an example.
 
 To better understand how filters and variables interact, see the pattern examples below.
 
