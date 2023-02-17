@@ -1,0 +1,58 @@
+patterns:
+  - pattern: |
+      $<CLIENT>.notify($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - either:
+        - variable: CLIENT
+          detection: javascript_third_parties_bugsnag_client
+        - variable: CLIENT
+          detection: javascript_third_parties_bugsnag_session
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<CLIENT>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: CLIENT
+        detection: javascript_third_parties_bugsnag_client
+      - variable: METHOD
+        values:
+          - start
+          - leaveBreadcrumb
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_third_parties_bugsnag_client
+    patterns:
+      - |
+        Bugsnag
+  - id: javascript_third_parties_bugsnag_session
+    patterns:
+      - pattern: $<CLIENT>.startSession
+        filters:
+          - variable: CLIENT
+            detection: javascript_third_parties_bugsnag_client
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Bugsnag."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Bugsnag.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Bugsnag Docs](https://docs.bugsnag.com/platforms/javascript/)
+  dsr_id: DSR-1
+  associated_recipe: Bugsnag
+  id: javascript_third_parties_bugsnag

@@ -1,0 +1,1 @@
+Bugsnag.leaveBreadcrumb(user.email)

@@ -116,3 +116,8 @@ func TestJavascriptOpenTelemetrySummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/open_telemetry", "summary", "javascript_third_parties_open_telemetry", t)
 }
+
+func TestJavascriptBugsnagSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/bugsnag", "summary", "javascript_third_parties_bugsnag", t)
+}
