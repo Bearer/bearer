@@ -111,3 +111,8 @@ func TestJavascriptAirbrakeSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/airbrake", "summary", "javascript_third_parties_airbrake", t)
 }
+
+func TestJavascriptOpenTelemetrySummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/open_telemetry", "summary", "javascript_third_parties_open_telemetry", t)
+}
