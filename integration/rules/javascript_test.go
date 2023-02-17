@@ -85,16 +85,13 @@ func TestJavascriptHoneybadgerSummary(t *testing.T) {
 }
 
 func TestJavascriptAirbrakeSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/airbrake", "summary", "javascript_third_parties_airbrake", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/airbrake")
 }
 
 func TestJavascriptOpenTelemetrySummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/open_telemetry", "summary", "javascript_third_parties_open_telemetry", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/javascript_third_parties_open_telemetry")
 }
 
 func TestJavascriptBugsnagSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/bugsnag", "summary", "javascript_third_parties_bugsnag", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/bugsnag")
 }
