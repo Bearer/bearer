@@ -106,3 +106,8 @@ func TestJavascriptHoneybadgerSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/honeybadger", "summary", "javascript_honeybadger", t)
 }
+
+func TestJavascriptAirbrakeSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/airbrake", "summary", "javascript_third_parties_airbrake", t)
+}

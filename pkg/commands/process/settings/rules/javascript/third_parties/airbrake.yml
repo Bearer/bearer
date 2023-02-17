@@ -1,0 +1,38 @@
+languages:
+  - javascript
+patterns:
+  - pattern: |
+      $<AIRBRAKE>.notify($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: AIRBRAKE
+        detection: javascript_airbrake_init
+      - variable: DATA_TYPE
+        detection: datatype
+auxiliary:
+  - id: javascript_airbrake_init
+    patterns:
+    - |
+      new Notifier($<...>)
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Airbrake."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Airbrake Docs](https://docs.airbrake.io/)
+  dsr_id: DSR-1
+  associated_recipe: Airbrake
+  id: javascript_third_parties_airbrake
