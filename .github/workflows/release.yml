@@ -82,7 +82,7 @@ jobs:
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release --rm-dist --split
+          args: release --clean --split
         env:
           GOOS: linux
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -126,7 +126,7 @@ jobs:
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release  --rm-dist --split
+          args: release  --clean --split
         env:
           GOOS: darwin
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

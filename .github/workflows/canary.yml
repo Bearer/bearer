@@ -83,7 +83,7 @@ jobs:
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release --rm-dist --split -f ./.goreleaser/canary.yaml
+          args: release --clean --split -f ./.goreleaser/canary.yaml
         env:
           GOOS: linux
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -127,7 +127,7 @@ jobs:
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release --rm-dist --split -f ./.goreleaser/canary.yaml
+          args: release --clean --split -f ./.goreleaser/canary.yaml
         env:
           GOOS: darwin
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
