@@ -89,7 +89,7 @@ func TestJavascriptAirbrakeSummary(t *testing.T) {
 }
 
 func TestJavascriptOpenTelemetrySummary(t *testing.T) {
-	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/javascript_third_parties_open_telemetry")
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/open_telemetry")
 }
 
 func TestJavascriptBugsnagSummary(t *testing.T) {
