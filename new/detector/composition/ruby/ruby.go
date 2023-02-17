@@ -24,6 +24,12 @@ import (
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
 
+type CustomDetectorInitialisation struct {
+	Error    error
+	Detector detectortypes.Detector
+	RuleName string
+}
+
 type Composition struct {
 	customDetectorTypes []string
 	detectorSet         detectortypes.DetectorSet
@@ -84,24 +90,44 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	composition.closers = append(composition.closers, detector.Close)
 
 	// instantiate custom ruby detectors
+	jsRules := map[string]*settings.Rule{}
 	for ruleName, rule := range rules {
 		if !slices.Contains(rule.Languages, "ruby") {
 			continue
 		}
+		jsRules[ruleName] = rule
+	}
+
+	reciever := make(chan CustomDetectorInitialisation, len(jsRules))
+
+	for ruleName, rule := range jsRules {
+		patterns := rule.Patterns
+		ruleName2 := ruleName
 
 		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		go func() {
+			customDetector, err := custom.New(
+				lang,
+				ruleName2,
+				patterns,
+			)
 
-		customDetector, err := custom.New(
-			lang,
-			ruleName,
-			rule.Patterns,
-		)
-		if err != nil {
+			reciever <- CustomDetectorInitialisation{
+				Error:    err,
+				Detector: customDetector,
+				RuleName: ruleName2,
+			}
+		}()
+	}
+
+	for i := 0; i < len(jsRules); i++ {
+		response := <-reciever
+		detectors = append(detectors, response.Detector)
+		composition.closers = append(composition.closers, response.Detector.Close)
+		if response.Error != nil {
 			composition.Close()
-			return nil, fmt.Errorf("failed to create rule %s: %s", ruleName, err)
+			return nil, fmt.Errorf("failed to create custom detector %s: %s", response.RuleName, err)
 		}
-		detectors = append(detectors, customDetector)
-		composition.closers = append(composition.closers, customDetector.Close)
 	}
 
 	detectorSet, err := detectorset.New(detectors)
