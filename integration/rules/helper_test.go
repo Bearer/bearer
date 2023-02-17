@@ -19,10 +19,6 @@ import (
 	"github.com/bradleyjkemp/cupaloy"
 )
 
-func TestTest(t *testing.T) {
-	getRunner(t).runTest(t, "../../pkg/commands/process/settings/rules/"+"javascript/lang/logger")
-}
-
 var runner *Runner
 
 type Runner struct {
