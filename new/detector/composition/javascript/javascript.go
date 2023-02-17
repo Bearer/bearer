@@ -70,16 +70,30 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		},
 	}
 
+	// instantiate custom javascript detectors
+	jsRules := map[string]*settings.Rule{}
+	for ruleName, rule := range rules {
+		if !slices.Contains(rule.Languages, "javascript") {
+			continue
+		}
+		jsRules[ruleName] = rule
+	}
+
+	detectorsLen := len(jsRules) + len(staticDetectors)
+	reciever := make(chan CustomDetectorInitialisation, detectorsLen)
+
 	var detectors []detectortypes.Detector
 
 	for _, detectorCreator := range staticDetectors {
-		detector, err := detectorCreator.constructor(lang)
-		if err != nil {
-			composition.Close()
-			return nil, fmt.Errorf("failed to create %s: %s", detectorCreator.name, err)
-		}
-		detectors = append(detectors, detector)
-		composition.closers = append(composition.closers, detector.Close)
+		creator := detectorCreator
+		go func() {
+			detector, err := creator.constructor(lang)
+			reciever <- CustomDetectorInitialisation{
+				Error:    err,
+				Detector: detector,
+				RuleName: creator.name,
+			}
+		}()
 	}
 
 	detector, err := datatype.New(lang, classifier.Schema)
@@ -90,38 +104,27 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	detectors = append(detectors, detector)
 	composition.closers = append(composition.closers, detector.Close)
 
-	// instantiate custom javascript detectors
-	jsRules := map[string]*settings.Rule{}
-	for ruleName, rule := range rules {
-		if !slices.Contains(rule.Languages, "javascript") {
-			continue
-		}
-		jsRules[ruleName] = rule
-	}
-
-	reciever := make(chan CustomDetectorInitialisation, len(jsRules))
-
 	for ruleName, rule := range jsRules {
 		patterns := rule.Patterns
-		ruleName2 := ruleName
+		localRuleName := ruleName
 
 		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
 		go func() {
 			customDetector, err := custom.New(
 				lang,
-				ruleName2,
+				localRuleName,
 				patterns,
 			)
 
 			reciever <- CustomDetectorInitialisation{
 				Error:    err,
 				Detector: customDetector,
-				RuleName: ruleName2,
+				RuleName: "customDetector: " + localRuleName,
 			}
 		}()
 	}
 
-	for i := 0; i < len(jsRules); i++ {
+	for i := 0; i < detectorsLen; i++ {
 		response := <-reciever
 		detectors = append(detectors, response.Detector)
 		composition.closers = append(composition.closers, response.Detector.Close)
