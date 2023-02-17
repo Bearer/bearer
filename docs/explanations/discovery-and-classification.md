@@ -14,7 +14,7 @@ Curio supports 120+ data types from sensitive data categories such as Personal D
 
 ## Data Discovery
 
-Discovery is the first step of the process. Curio uses static code analysis (SCA) in two ways.
+Discovery is the first step of the process. Curio uses static code analysis in two ways.
 
 - Analyzing class **names, methods, functions, variables, properties, and attributes**. It then ties those together to detected data structures. It goes as far as doing variable reconciliation.
 - Analyzing **data structure definitions files** such as OpenAPI, SQL, GraphQL, and Protobuf files.
