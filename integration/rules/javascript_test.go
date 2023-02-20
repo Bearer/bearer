@@ -4,67 +4,67 @@ import "testing"
 
 const javascriptRulesPath string = "../../pkg/commands/process/settings/rules/javascript/"
 
-func TestJavascriptLangLoggerSummary(t *testing.T) {
+func TestJavascriptLangLogger(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/logger")
 }
 
-func TestJavascriptLangSessionSummary(t *testing.T) {
+func TestJavascriptLangSession(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/session")
 }
 
-func TestJavascriptWeakEncryptionSummary(t *testing.T) {
+func TestJavascriptWeakEncryption(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/weak_encryption")
 }
 
-func TestJavascriptJWTSummary(t *testing.T) {
+func TestJavascriptJWT(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/jwt")
 }
 
-func TestJavascriptHTTPInsecureSummary(t *testing.T) {
+func TestJavascriptHTTPInsecure(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/http_insecure")
 }
 
-func TestJavascriptLangExceptionSummary(t *testing.T) {
+func TestJavascriptLangException(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/exception")
 }
 
-func TestJavascriptLangFileGenerationSummary(t *testing.T) {
+func TestJavascriptLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")
 }
 
-func TestExpressSecureCookieSummary(t *testing.T) {
+func TestExpressSecureCookie(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
 }
 
-func TestJavascriptReactGoogleAnalyticsSummary(t *testing.T) {
+func TestJavascriptReactGoogleAnalytics(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"react/google_analytics")
 }
 
-func TestJavascriptThirdPartySentrySummary(t *testing.T) {
+func TestJavascriptThirdPartySentry(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/sentry")
 }
 
-func TestJavascriptGTMSummary(t *testing.T) {
+func TestJavascriptGTM(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/google_tag_manager")
 }
 
-func TestJavascriptGoogleAnalyticsSummary(t *testing.T) {
+func TestJavascriptGoogleAnalytics(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/google_analytics")
 }
 
-func TestJavascriptAlgoliaSummary(t *testing.T) {
+func TestJavascriptAlgolia(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/algolia")
 }
 
-func TestJavascriptDataDogSummary(t *testing.T) {
+func TestJavascriptDataDog(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/datadog")
 }
 
-func TestJavascriptDataDogBrowserSummary(t *testing.T) {
+func TestJavascriptDataDogBrowser(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/datadog_browser")
 }
 
-func TestJavascriptElasticSearchSummary(t *testing.T) {
+func TestJavascriptElasticSearch(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/elasticsearch")
 }
 
@@ -72,26 +72,26 @@ func TestJavascriptSegmentDataflow(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/segment")
 }
 
-func TestJavascriptNewRelicSummary(t *testing.T) {
+func TestJavascriptNewRelic(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/new_relic")
 }
 
-func TestJavascriptRollbarSummary(t *testing.T) {
+func TestJavascriptRollbar(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/rollbar")
 }
 
-func TestJavascriptHoneybadgerSummary(t *testing.T) {
+func TestJavascriptHoneybadger(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/honeybadger")
 }
 
-func TestJavascriptAirbrakeSummary(t *testing.T) {
+func TestJavascriptAirbrake(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/airbrake")
 }
 
-func TestJavascriptOpenTelemetrySummary(t *testing.T) {
+func TestJavascriptOpenTelemetry(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/open_telemetry")
 }
 
-func TestJavascriptBugsnagSummary(t *testing.T) {
+func TestJavascriptBugsnag(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/bugsnag")
 }
