@@ -1,0 +1,21 @@
+patterns:
+  - pattern: res.sendFile($<EXPRESS_REQ>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_request_obj
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_express_request_obj
+    patterns:
+      - req.$<_>.$<_>
+trigger: presence
+severity:
+  default: "warning"
+metadata:
+  description: "Do not allow user input to control filename or path."
+  remediation_message: |
+    ## Description TODO
+  cwe_id:
+    - 73
+  id: "javascript_express_external_file_upload"

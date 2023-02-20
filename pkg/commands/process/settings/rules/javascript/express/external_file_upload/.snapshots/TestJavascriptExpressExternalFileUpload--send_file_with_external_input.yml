@@ -1,0 +1,19 @@
+warning:
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_external_file_upload
+      rule_description: Do not allow user input to control filename or path.
+      rule_documentation_url: https://curio.sh/reference/rules/javascript_express_external_file_upload
+      line_number: 8
+      filename: send_file_with_external_input.js
+      parent_line_number: 8
+      parent_content: res.sendFile(file)
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_external_file_upload
+      rule_description: Do not allow user input to control filename or path.
+      rule_documentation_url: https://curio.sh/reference/rules/javascript_express_external_file_upload
+      line_number: 9
+      filename: send_file_with_external_input.js
+      parent_line_number: 9
+      parent_content: res.sendFile(path.resolve(file))
+
+
