@@ -74,7 +74,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	}
 
 	detectorsLen := len(rubyRules) + len(staticDetectors)
-	reciever := make(chan types.DetectorInitResult, detectorsLen)
+	receiver := make(chan types.DetectorInitResult, detectorsLen)
 
 	var detectors []detectortypes.Detector
 
@@ -82,7 +82,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		creator := detectorCreator
 		go func() {
 			detector, err := creator.constructor(lang)
-			reciever <- types.DetectorInitResult{
+			receiver <- types.DetectorInitResult{
 				Error:        err,
 				Detector:     detector,
 				DetectorName: creator.name,
@@ -110,7 +110,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 				patterns,
 			)
 
-			reciever <- types.DetectorInitResult{
+			receiver <- types.DetectorInitResult{
 				Error:        err,
 				Detector:     customDetector,
 				DetectorName: "customDetector:" + localRuleName,
@@ -119,7 +119,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	}
 
 	for i := 0; i < detectorsLen; i++ {
-		response := <-reciever
+		response := <-receiver
 		detectors = append(detectors, response.Detector)
 		composition.closers = append(composition.closers, response.Detector.Close)
 		if response.Error != nil {
