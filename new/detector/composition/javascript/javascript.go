@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/util/file"
 	"github.com/rs/zerolog/log"
 
+	"github.com/bearer/curio/new/detector/composition/types"
 	"github.com/bearer/curio/new/detector/evaluator"
 	"github.com/bearer/curio/new/detector/implementation/custom"
 	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
@@ -64,16 +65,30 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		},
 	}
 
+	// instantiate custom javascript detectors
+	jsRules := map[string]*settings.Rule{}
+	for ruleName, rule := range rules {
+		if !slices.Contains(rule.Languages, "javascript") {
+			continue
+		}
+		jsRules[ruleName] = rule
+	}
+
+	detectorsLen := len(jsRules) + len(staticDetectors)
+	receiver := make(chan types.DetectorInitResult, detectorsLen)
+
 	var detectors []detectortypes.Detector
 
 	for _, detectorCreator := range staticDetectors {
-		detector, err := detectorCreator.constructor(lang)
-		if err != nil {
-			composition.Close()
-			return nil, fmt.Errorf("failed to create %s: %s", detectorCreator.name, err)
-		}
-		detectors = append(detectors, detector)
-		composition.closers = append(composition.closers, detector.Close)
+		creator := detectorCreator
+		go func() {
+			detector, err := creator.constructor(lang)
+			receiver <- types.DetectorInitResult{
+				Error:        err,
+				Detector:     detector,
+				DetectorName: creator.name,
+			}
+		}()
 	}
 
 	detector, err := datatype.New(lang, classifier.Schema)
@@ -84,25 +99,34 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	detectors = append(detectors, detector)
 	composition.closers = append(composition.closers, detector.Close)
 
-	// instantiate custom javascript detectors
-	for ruleName, rule := range rules {
-		if !slices.Contains(rule.Languages, "javascript") {
-			continue
-		}
+	for ruleName, rule := range jsRules {
+		patterns := rule.Patterns
+		localRuleName := ruleName
 
 		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		go func() {
+			customDetector, err := custom.New(
+				lang,
+				localRuleName,
+				patterns,
+			)
 
-		customDetector, err := custom.New(
-			lang,
-			ruleName,
-			rule.Patterns,
-		)
-		if err != nil {
+			receiver <- types.DetectorInitResult{
+				Error:        err,
+				Detector:     customDetector,
+				DetectorName: "customDetector: " + localRuleName,
+			}
+		}()
+	}
+
+	for i := 0; i < detectorsLen; i++ {
+		response := <-receiver
+		detectors = append(detectors, response.Detector)
+		composition.closers = append(composition.closers, response.Detector.Close)
+		if response.Error != nil {
 			composition.Close()
-			return nil, fmt.Errorf("failed to create custom detector %s: %s", ruleName, err)
+			return nil, fmt.Errorf("failed to create detector %s: %s", response.DetectorName, err)
 		}
-		detectors = append(detectors, customDetector)
-		composition.closers = append(composition.closers, customDetector.Close)
 	}
 
 	detectorSet, err := detectorset.New(detectors)
