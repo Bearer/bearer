@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/util/file"
 	"github.com/rs/zerolog/log"
 
+	"github.com/bearer/curio/new/detector/composition/types"
 	"github.com/bearer/curio/new/detector/evaluator"
 	"github.com/bearer/curio/new/detector/implementation/custom"
 	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
@@ -30,12 +31,6 @@ type Composition struct {
 	detectorSet         detectortypes.DetectorSet
 	lang                languagetypes.Language
 	closers             []func()
-}
-
-type CustomDetectorInitialisation struct {
-	Error    error
-	Detector detectortypes.Detector
-	RuleName string
 }
 
 func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
@@ -80,7 +75,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	}
 
 	detectorsLen := len(jsRules) + len(staticDetectors)
-	reciever := make(chan CustomDetectorInitialisation, detectorsLen)
+	reciever := make(chan types.DetectorInitResult, detectorsLen)
 
 	var detectors []detectortypes.Detector
 
@@ -88,10 +83,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		creator := detectorCreator
 		go func() {
 			detector, err := creator.constructor(lang)
-			reciever <- CustomDetectorInitialisation{
-				Error:    err,
-				Detector: detector,
-				RuleName: creator.name,
+			reciever <- types.DetectorInitResult{
+				Error:        err,
+				Detector:     detector,
+				DetectorName: creator.name,
 			}
 		}()
 	}
@@ -116,10 +111,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 				patterns,
 			)
 
-			reciever <- CustomDetectorInitialisation{
-				Error:    err,
-				Detector: customDetector,
-				RuleName: "customDetector: " + localRuleName,
+			reciever <- types.DetectorInitResult{
+				Error:        err,
+				Detector:     customDetector,
+				DetectorName: "customDetector: " + localRuleName,
 			}
 		}()
 	}
@@ -130,7 +125,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		composition.closers = append(composition.closers, response.Detector.Close)
 		if response.Error != nil {
 			composition.Close()
-			return nil, fmt.Errorf("failed to create custom detector %s: %s", response.RuleName, err)
+			return nil, fmt.Errorf("failed to create detector %s: %s", response.DetectorName, err)
 		}
 	}
 
