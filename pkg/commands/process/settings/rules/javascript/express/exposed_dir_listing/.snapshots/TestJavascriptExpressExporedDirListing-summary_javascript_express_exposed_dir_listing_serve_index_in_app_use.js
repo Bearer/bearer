@@ -1,0 +1,13 @@
+warning:
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_exposed_dir_listing
+      rule_description: Ensure directory listing is not inappropriately exposed.
+      rule_documentation_url: https://curio.sh/reference/rules/javascript_express_exposed_dir_listing
+      line_number: 5
+      filename: pkg/commands/process/settings/rules/javascript/express/exposed_dir_listing/testdata/serve_index_in_app_use.js
+      parent_line_number: 5
+      parent_content: app.use('/public', serveIndex(__dirname + 'files'))
+
+
+--
+

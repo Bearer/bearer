@@ -95,3 +95,8 @@ func TestJavascriptOpenTelemetry(t *testing.T) {
 func TestJavascriptBugsnag(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/bugsnag")
 }
+
+func TestJavascriptExpressExporedDirListing(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/express/exposed_dir_listing", "summary", "javascript_express_exposed_dir_listing", t)
+}
