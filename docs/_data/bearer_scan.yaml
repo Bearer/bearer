@@ -64,7 +64,7 @@ options:
         Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
 example: |4-
       # Scan a local project, including language-specific files
-      $ curio scan /path/to/your_project
+      $ bearer scan /path/to/your_project
 see_also:
     - ' - '
 aliases: s

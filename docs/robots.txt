@@ -1,4 +1,0 @@
-Sitemap: https://curio.sh/sitemap.xml
-
-User-agent: *
-Disallow:

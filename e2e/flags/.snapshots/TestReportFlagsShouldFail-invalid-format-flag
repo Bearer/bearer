@@ -7,7 +7,7 @@ Aliases:
   scan, s
 Examples:
   # Scan a local project, including language-specific files
-  $ curio scan /path/to/your_project
+  $ bearer scan /path/to/your_project
 
 
 Report Flags

@@ -1,5 +1,5 @@
 name: ' init'
-synopsis: Generates a default config to `curio.yml`
+synopsis: Generates a default config to `bearer.yml`
 usage: ' init [flags]'
 options:
     - name: help

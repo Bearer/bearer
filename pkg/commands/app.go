@@ -37,19 +37,19 @@ func NewRootCommand() *cobra.Command {
 
 Discover sensitive data flows and security risks.
 
-Usage: curio <command> [flags]
+Usage: bearer <command> [flags]
 
 Available Commands:
 	scan              Scan a directory or file
-	init              Write the default config to curio.yml
+	init              Write the default config to bearer.yml
 	version           Print the version
 
 Examples:
 	# Scan local directory or file and output security risks
-	$ curio scan <path>
+	$ bearer scan <path>
 
 	# Scan current directory and output the privacy report to a file
-	$ curio scan --report privacy --output <output-path> .
+	$ bearer scan --report privacy --output <output-path> .
 
 Learn More:
 	Curio is a static code analysis tool (SAST) that scans your source code to
@@ -57,7 +57,7 @@ Learn More:
 	at risk (PHI, PD, PII).
 
 	For more examples, tutorials, and to learn more about the project
-	visit https://curio.sh
+	visit https://docs.bearer.com
 `
 
 	cmd := &cobra.Command{

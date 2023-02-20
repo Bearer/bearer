@@ -41,7 +41,7 @@ func NewScanCommand() *cobra.Command {
 		Aliases: []string{"s"},
 		Short:   "Scan a directory or file",
 		Example: `  # Scan a local project, including language-specific files
-  $ curio scan /path/to/your_project`,
+  $ bearer scan /path/to/your_project`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := ScanFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)

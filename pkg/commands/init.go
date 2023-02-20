@@ -10,19 +10,19 @@ import (
 func NewInitCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "init",
-		Short: "Generates a default config to `curio.yml`",
+		Short: "Generates a default config to `bearer.yml`",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := ScanFlags.BindForConfigInit(NewScanCommand()); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			viper.SetConfigFile("./curio.yml")
+			viper.SetConfigFile("./bearer.yml")
 			err := viper.WriteConfig()
 			if err != nil {
 				return err
 			}
 
-			cmd.PrintErrln("Created: curio.yml (default configuration file)")
+			cmd.PrintErrln("Created: bearer.yml (default configuration file)")
 			return nil
 		},
 	}

@@ -9,13 +9,13 @@ Thanks for your interest in contributing! This guide will help you get started.
 ## Ways to contribute
 
 You can contribute in a variety of ways:
-- [File a new issue](https://github.com/Bearer/curio/issues/new/choose) on GitHub.
+- [File a new issue]({{meta.sourcePath}}/issues/new/choose) on GitHub.
 - [Browse the issues]({{meta.links.issues}}) and fix a bug by [contributing code](/contributing/code/).
 - Improve this [documentation](/contributing/docs/).
-- [Add a new recipe](/contributing/recipes/) to the recipes database to help Curio identify more third-parties.
+- [Add a new recipe](/contributing/recipes/) to the recipes database to help Bearer identify more third-parties.
 - Help others in the [Community Discord]({{meta.links.discord}})
 
-All contributions and interactions with the community must adhere to our [contributor code of conduct](https://github.com/Bearer/curio/blob/main/CODE_OF_CONDUCT.md).
+All contributions and interactions with the community must adhere to our [contributor code of conduct]({{meta.sourcePath}}/blob/main/CODE_OF_CONDUCT.md).
 
 ## Best practices
 

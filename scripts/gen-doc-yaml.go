@@ -39,10 +39,10 @@ func writeDocs(cmd *cobra.Command, dir string) error {
 	}
 
 	// create a file to use
-	basename := "curio.yaml"
+	basename := "bearer.yaml"
 
 	if cmd.CommandPath() != "" {
-		basename = strings.Replace(cmd.CommandPath(), " ", "curio_", -1) + ".yaml"
+		basename = strings.Replace(cmd.CommandPath(), " ", "bearer_", -1) + ".yaml"
 	}
 
 	filename := filepath.Join(dir, basename)

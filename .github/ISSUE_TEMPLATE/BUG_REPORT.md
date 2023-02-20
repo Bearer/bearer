@@ -32,9 +32,9 @@ if possible link to code repo or code sample that causes the error if relevant
 <!--- Include as many relevant details about the environment you experienced the bug in -->
 
 - Operating System and version:
-- Output of 'curio version':
+- Output of 'bearer version':
 ```
-curio version: 0.00.0
+bearer version: 0.00.0
 sha: xxx
 ```
 
