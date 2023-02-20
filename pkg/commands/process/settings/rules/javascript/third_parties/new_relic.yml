@@ -66,4 +66,6 @@ metadata:
     - [New Relic Docs](https://docs.newrelic.com/)
     - [Log obfuscation](https://docs.newrelic.com/docs/logs/ui-data/obfuscation-ui/)
   dsr_id: DSR-1
+  cwe_id:
+    - 201
   id: "javascript_third_parties_new_relic"

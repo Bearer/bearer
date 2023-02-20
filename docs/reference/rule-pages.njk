@@ -18,9 +18,7 @@ eleventyComputed:
   <li>
     <strong>Rule ID:</strong>
     {{rule.metadata.id}}</li>
-  <li>
-    <strong>Data Security Risk ID:</strong>
-    {{rule.metadata.dsr_id}}</li>
+
   {% if rule.languages %}
     <li>
       <strong>Languages:</strong>
@@ -37,3 +35,33 @@ rule.metadata %}
 {{remediation_message}}
 
 {% endrenderTemplate %}
+
+{% if rule.metadata.cwe_id %}
+  {% set owaspList = [] %}
+  <h2 id="associated-cwe">Associated CWE</h2>
+  <ul>
+    {% for id in rule.metadata.cwe_id %}
+      <li>
+        <a href="https://cwe.mitre.org/data/definitions/{{id}}.html">
+    CWE-{{id}}: {{cweList[id].name}}
+        </a>
+      </li>
+      {% if cweList[id].owasp %}
+        {% set owaspList = (owaspList.push(cweList[id].owasp), owaspList) %}
+      {% endif %}
+      {% endfor%}
+    </ul>
+    {% if owaspList %}
+      <h2 id="owasp-top10">OWASP Top 10</h2>
+      <ul>
+        {% for value in owaspList | deduplicate %}
+          <li>
+            <a href="{{owaspURLs[value.id]}}">
+              {{value.id}} - {{value.name}}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+  {% endif %}
