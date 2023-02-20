@@ -28,7 +28,7 @@ Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "he
 `
 )
 
-var scanFlags = &flag.Flags{
+var ScanFlags = &flag.Flags{
 	ScanFlagGroup:    flag.NewScanFlagGroup(),
 	RuleFlagGroup:    flag.NewRuleFlagGroup(),
 	ReportFlagGroup:  flag.NewReportFlagGroup(),
@@ -43,13 +43,13 @@ func NewScanCommand() *cobra.Command {
 		Example: `  # Scan a local project, including language-specific files
   $ curio scan /path/to/your_project`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if err := scanFlags.Bind(cmd); err != nil {
+			if err := ScanFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := scanFlags.Bind(cmd); err != nil {
+			if err := ScanFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
 
@@ -59,7 +59,7 @@ func NewScanCommand() *cobra.Command {
 				return err
 			}
 
-			options, err := scanFlags.ToOptions(args)
+			options, err := ScanFlags.ToOptions(args)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}
@@ -82,8 +82,8 @@ func NewScanCommand() *cobra.Command {
 		SilenceUsage:  false,
 	}
 
-	scanFlags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, scanFlags.Usages(cmd)))
+	ScanFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, ScanFlags.Usages(cmd)))
 
 	return cmd
 }

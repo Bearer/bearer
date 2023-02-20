@@ -1,0 +1,16 @@
+critical:
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_google_analytics
+      rule_description: Do not send sensitive data to Google Analytics.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_google_analytics
+      line_number: 2
+      filename: datatype_in_custom_dimension.rb
+      category_groups:
+        - PII
+      parent_line_number: 1
+      parent_content: |-
+        Google::Apis::AnalyticsreportingV4::CustomDimension.new(
+          value: user.email
+        )
+
+

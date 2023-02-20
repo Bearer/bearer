@@ -1,1 +1,3 @@
-localStorage.setItem("user", user.name);
+const user = { name: "jhon" };
+
+localStorage.setItem("user", user);

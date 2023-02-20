@@ -22,7 +22,7 @@ type Repository struct {
 type ProcessRequest struct {
 	Repository
 	Files                  []File
-	FilePath               string
+	ReportPath             string
 	BlameRevisionsFilePath string
 }
 

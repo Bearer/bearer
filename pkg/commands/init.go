@@ -12,7 +12,7 @@ func NewInitCommand() *cobra.Command {
 		Use:   "init",
 		Short: "Generates a default config to `curio.yml`",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := scanFlags.BindForConfigInit(NewScanCommand()); err != nil {
+			if err := ScanFlags.BindForConfigInit(NewScanCommand()); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 

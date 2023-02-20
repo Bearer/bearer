@@ -1,0 +1,39 @@
+warning:
+    - rule_dsrid: DSR-10
+      rule_display_id: ruby_rails_default_encryption
+      rule_description: Force application-level encryption when processing sensitive data.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_default_encryption
+      line_number: 3
+      filename: application_level_encryption_missing/structure_sql/db/structure.sql
+      category_groups:
+        - PII
+      parent_line_number: 1
+      parent_content: |-
+        CREATE TABLE public.users (
+          id bigint NOT NULL,
+          name character varying,
+          password character varying,
+          created_at timestamp(6) without time zone NOT NULL,
+          updated_at timestamp(6) without time zone NOT NULL,
+          email character varying DEFAULT ''::character varying NOT NULL
+        )
+    - rule_dsrid: DSR-10
+      rule_display_id: ruby_rails_default_encryption
+      rule_description: Force application-level encryption when processing sensitive data.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_default_encryption
+      line_number: 7
+      filename: application_level_encryption_missing/structure_sql/db/structure.sql
+      category_groups:
+        - PII
+      parent_line_number: 1
+      parent_content: |-
+        CREATE TABLE public.users (
+          id bigint NOT NULL,
+          name character varying,
+          password character varying,
+          created_at timestamp(6) without time zone NOT NULL,
+          updated_at timestamp(6) without time zone NOT NULL,
+          email character varying DEFAULT ''::character varying NOT NULL
+        )
+
+

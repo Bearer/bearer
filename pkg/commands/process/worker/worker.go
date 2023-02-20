@@ -15,50 +15,71 @@ import (
 	"github.com/bearer/curio/pkg/scanner"
 )
 
+type Worker struct {
+	classifer *classification.Classifier
+}
+
+func (worker *Worker) Setup(config config.Config) error {
+	classifier, err := classification.NewClassifier(&classification.Config{Config: config})
+	if err != nil {
+		return err
+	}
+
+	err = detectors.SetupLegacyDetector(config.BuiltInRules)
+	if err != nil {
+		return err
+	}
+	err = customdetector.Setup(&config, classifier)
+	if err != nil {
+		return err
+	}
+
+	worker.classifer = classifier
+
+	return nil
+}
+
+func (worker *Worker) Scan(scanRequest work.ProcessRequest) error {
+	blamer := blamer.New(scanRequest.Dir, scanRequest.BlameRevisionsFilePath, scanRequest.PreviousCommitSHA)
+
+	var filesList []string
+	for _, file := range scanRequest.Files {
+		filesList = append(filesList, file.FilePath)
+	}
+
+	return scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.ReportPath, worker.classifer)
+}
+
 func Start(port string) error {
-	var classifier *classification.Classifier
+	worker := Worker{}
 
 	err := http.ListenAndServe(`localhost:`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close() //golint:all,errcheck
 
-		response := work.StatusResponse{}
-
 		switch r.URL.Path {
 		case work.RouteStatus:
 			var config config.Config
-			var err error
 			json.NewDecoder(r.Body).Decode(&config) //nolint:all,errcheck
 
-			classifier, err = classification.NewClassifier(&classification.Config{Config: config})
+			response := work.StatusResponse{}
+
+			err := worker.Setup(config)
 			if err != nil {
 				response.ClassifierError = err.Error()
-			}
-
-			err = detectors.SetupLegacyDetector(config.BuiltInRules)
-			if err != nil {
-				response.CustomDetectorError = err.Error()
-			}
-			err = customdetector.Setup(&config, classifier)
-			if err != nil {
-				response.CustomDetectorError = err.Error()
 			}
 
 			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 		case work.RouteProcess:
 			runtime.GC()
-
 			var scanRequest work.ProcessRequest
 			json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
 
-			blamer := blamer.New(scanRequest.Dir, scanRequest.BlameRevisionsFilePath, scanRequest.PreviousCommitSHA)
+			response := work.ProcessResponse{}
 
-			response := &work.ProcessResponse{}
-			var filesList []string
-			for _, file := range scanRequest.Files {
-				filesList = append(filesList, file.FilePath)
+			err := worker.Scan(scanRequest)
+			if err != nil {
+				response.Error = err
 			}
-
-			response.Error = scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.FilePath, classifier)
 
 			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 		default:

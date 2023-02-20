@@ -1,0 +1,23 @@
+critical:
+    - rule_dsrid: DSR-1
+      rule_display_id: javascript_third_parties_open_telemetry
+      rule_description: Do not send sensitive data to Open Telemetry.
+      rule_documentation_url: https://curio.sh/reference/rules/javascript_third_parties_open_telemetry
+      line_number: 6
+      filename: datatype_in_set_attribute.js
+      category_groups:
+        - PII
+      parent_line_number: 6
+      parent_content: span.setAttribute("current-user", currentUser.emailAddress)
+    - rule_dsrid: DSR-1
+      rule_display_id: javascript_third_parties_open_telemetry
+      rule_description: Do not send sensitive data to Open Telemetry.
+      rule_documentation_url: https://curio.sh/reference/rules/javascript_third_parties_open_telemetry
+      line_number: 11
+      filename: datatype_in_set_attribute.js
+      category_groups:
+        - PII
+      parent_line_number: 11
+      parent_content: span.setAttribute("current-user", user.email)
+
+

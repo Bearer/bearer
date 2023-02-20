@@ -4,182 +4,148 @@ import (
 	"testing"
 )
 
-func TestRubyLangCookiesSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/cookies", "summary", "ruby_lang_cookies", t)
+const rubyRulesPath string = "../../pkg/commands/process/settings/rules/ruby/"
+
+func TestRubyLangCookies(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/cookies")
 }
 
-func TestRubyLangDeserializationOfUserInputSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/deserialization_of_user_input", "summary", "ruby_lang_deserialization_of_user_input", t)
+func TestRubyLangDeserializationOfUserInput(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/deserialization_of_user_input")
 }
 
 func TestRubyLangEvalUsingUserInput(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/eval_using_user_input", "summary", "ruby_lang_eval_using_user_input", t)
+	getRunner(t).runTest(t, rubyRulesPath+"lang/eval_using_user_input")
 }
 
-func TestRubyLangFileGenerationSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/file_generation", "summary", "ruby_lang_file_generation", t)
+func TestRubyLangFileGeneration(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/file_generation")
 }
 
-func TestRubyLangHttpGetParamsSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/http_get_params", "summary", "ruby_lang_http_get_params", t)
+func TestRubyLangHttpGetParams(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/http_get_params")
 }
 
-func TestRubyLangHttpInsecureSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/http_insecure", "summary", "ruby_lang_http_insecure", t)
+func TestRubyLangHttpInsecure(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/http_insecure")
 }
 
-func TestRubyLangHttpPostInsecureWithDataSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/http_post_insecure_with_data", "summary", "ruby_lang_http_post_insecure_with_data", t)
+func TestRubyLangHttpPostInsecureWithData(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/http_post_insecure_with_data")
 }
 
-func TestRubyLangInsecureFtpSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/insecure_ftp", "summary", "ruby_lang_insecure_ftp", t)
+func TestRubyLangInsecureFtp(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/insecure_ftp")
 }
 
-func TestRubyLangJwtSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/jwt", "summary", "ruby_lang_jwt", t)
+func TestRubyLangJwt(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/jwt")
 }
 
-func TestRubyLangLoggerSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/logger", "summary", "ruby_lang_logger", t)
+func TestRubyLangLogger(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/logger")
 }
 
-func TestRubyLangExceptionSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/exception", "summary", "ruby_lang_exception", t)
+func TestRubyLangException(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/exception")
 }
 
-func TestRubyLangSslVerificationSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/ssl_verification", "summary", "ruby_lang_ssl_verification", t)
+func TestRubyLangSslVerification(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/ssl_verification")
 }
 
-func TestRubyLangWeakEncryptionSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/weak_encryption", "summary", "ruby_lang_weak_encryption", t)
+func TestRubyLangWeakEncryption(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption")
 }
 
-func TestRubyLangWeakEncryptionWithDataSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/lang/weak_encryption_with_data", "summary", "ruby_lang_weak_encryption_with_data", t)
+func TestRubyLangWeakEncryptionWithData(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption_with_data")
 }
 
-func TestRubyRailsDefaultEncryptionSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/default_encryption", "summary", "ruby_rails_default_encryption", t)
+func TestRubyRailsDefaultEncryption(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"rails/default_encryption")
 }
 
-func TestRubyRailsInsecureCommunicationSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/insecure_communication", "summary", "ruby_rails_insecure_communication", t)
+func TestRubyRailsInsecureCommunication(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_communication")
 }
 
-func TestRubyRailsInsecureSmtpSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/insecure_smtp", "summary", "ruby_rails_insecure_smtp", t)
+func TestRubyRailsInsecureSmtp(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_smtp")
 }
 
-func TestRubyRailsLoggerSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/logger", "summary", "ruby_rails_logger", t)
+func TestRubyRailsLogger(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"rails/logger")
 }
 
-func TestRubyRailsPasswordLengthSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/password_length", "summary", "ruby_rails_password_length", t)
+func TestRubyRailsPasswordLength(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"rails/password_length")
 }
 
-func TestRubyRailsSessionSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/session", "summary", "ruby_rails_session", t)
+func TestRubyRailsSession(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"rails/session")
 }
 
-func TestRubyThirdPartiesAlgoliaSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/algolia", "summary", "ruby_third_parties_algolia", t)
+func TestRubyThirdPartiesAlgolia(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/algolia")
 }
 
-func TestRubyThirdPartiesBigQuerySummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/bigquery", "summary", "ruby_third_parties_bigquery", t)
+func TestRubyThirdPartiesBigQuery(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/bigquery")
 }
 
-func TestRubyThirdPartiesDatadogSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/datadog", "summary", "ruby_third_parties_datadog", t)
+func TestRubyThirdPartiesDatadog(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/datadog")
 }
 
-func TestRubyThirdPartiesElasticsearchSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/elasticsearch", "summary", "ruby_third_parties_elasticsearch", t)
+func TestRubyThirdPartiesElasticsearch(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/elasticsearch")
 }
 
-func TestRubyThirdPartiesNewRelicSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/new_relic", "summary", "ruby_third_parties_new_relic", t)
+func TestRubyThirdPartiesNewRelic(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/new_relic")
 }
 
-func TestRubyThirdPartiesRollbarSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/rollbar", "summary", "ruby_third_parties_rollbar", t)
+func TestRubyThirdPartiesRollbar(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/rollbar")
 }
 
-func TestRubyThirdPartiesScoutAPMSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/scout_apm", "summary", "ruby_third_parties_scout_apm", t)
+func TestRubyThirdPartiesScoutAPM(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/scout_apm")
 }
 
-func TestRubyThirdPartiesSentrySummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/sentry", "summary", "ruby_third_parties_sentry", t)
+func TestRubyThirdPartiesSentry(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/sentry")
 }
 
-func TestRubyThirdPartiesBugsnagSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/bugsnag", "summary", "ruby_third_parties_bugsnag", t)
+func TestRubyThirdPartiesBugsnag(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/bugsnag")
 }
 
-func TestRubyThirdPartiesHoneybadgerSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/honeybadger", "summary", "ruby_third_parties_honeybadger", t)
+func TestRubyThirdPartiesHoneybadger(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/honeybadger")
 }
 
-func TestRubyThirdPartiesAirbrakeSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/airbrake", "summary", "ruby_third_parties_airbrake", t)
+func TestRubyThirdPartiesAirbrake(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/airbrake")
 }
 
-func TestRubyThirdPartiesOpenTelemetrySummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/open_telemetry", "summary", "ruby_third_parties_open_telemetry", t)
+func TestRubyThirdPartiesOpenTelemetry(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/open_telemetry")
 }
 
-func TestRubyThirdPartiesSegmentSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/segment", "summary", "ruby_third_parties_segment", t)
+func TestRubyThirdPartiesSegment(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/segment")
 }
 
-func TestRubyThirdPartiesGoogleDataflowSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/google_dataflow", "summary", "ruby_third_parties_google_dataflow", t)
+func TestRubyThirdPartiesGoogleDataflow(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/google_dataflow")
 }
 
-func TestRubyThirdPartiesGoogleAnalyticsSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/google_analytics", "summary", "ruby_third_parties_google_analytics", t)
+func TestRubyThirdPartiesGoogleAnalytics(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/google_analytics")
 }
 
-func TestRubyThirdPartiesClickHouseSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/third_parties/clickhouse", "summary", "ruby_third_parties_clickhouse", t)
+func TestRubyThirdPartiesClickHouse(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"third_parties/clickhouse")
 }

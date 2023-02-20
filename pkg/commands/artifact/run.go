@@ -185,7 +185,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 				PreviousCommitSHA: "",
 				CommitSHA:         "",
 			},
-			FilePath: r.reportPath,
+			ReportPath: r.reportPath,
 		})
 		result := <-task.Done
 
