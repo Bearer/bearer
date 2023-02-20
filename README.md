@@ -1,3 +1,5 @@
+# We are currently in the process of [renaming the project](https://github.com/Bearer/curio/issues/604) to Bearer. Some of the documentation may be out of date you can see the last stable version of [curio documentation here](https://github.com/Bearer/curio/tree/v0.24.0)
+
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/img/curio-logo-dark.svg">
