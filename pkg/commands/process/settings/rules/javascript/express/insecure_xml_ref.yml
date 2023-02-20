@@ -1,0 +1,36 @@
+patterns:
+  - pattern: |
+      $<LIB_XML>.$<METHOD>(
+        $<_>,
+        {
+          $<!>noent: true
+        }
+      )
+    filter:
+      - variable: LIB_XML
+        values:
+          - libxml
+          - libxmljs
+          - libxml2
+          - libxml2js
+      - variable: METHOD
+        values:
+          - parseXml
+          - parseXmlString
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  description: "Ensure proper restriction of XML external entity references."
+  remediation_message: |
+    ## Description
+    Avoid generating XML documents that include XML entities with URIs that resolve to resources that are outside of the current context.
+  dsr_id: "DSR-3"
+  cwe_id:
+    - 611
+  id: "express_insecure_xml_ref"

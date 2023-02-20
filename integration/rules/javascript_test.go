@@ -40,6 +40,10 @@ func TestExpressSecureCookie(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
 }
 
+func TestExpressInsecureXmlRef(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_xml_ref")
+}
+
 func TestJavascriptReactGoogleAnalytics(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"react/google_analytics")
 }
