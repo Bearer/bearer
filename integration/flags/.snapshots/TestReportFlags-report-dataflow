@@ -1,4 +1,0 @@
-{"data_types":[{"name":"Email Address","detectors":[{"name":"ruby","locations":[{"filename":"integration/flags/testdata/simple/main.rb","line_number":1,"field_name":"email","object_name":"user","subject_name":"User"}]}]}],"components":[]}
-
---
-

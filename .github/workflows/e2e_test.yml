@@ -1,4 +1,4 @@
-name: Integration Tests
+name: End to end Tests
 on:
   push:
     branches:
@@ -21,8 +21,10 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.19
+      - name: Build binary for integration tests
+        run: go build -a -o ./curio ./cmd/curio/main.go
       - name: Run tests
-        run: go test -v ./integration/... -p 8
+        run: go test -v ./e2e/... -p 8
         timeout-minutes: 10
         env:
           CURIO_BINARY: true

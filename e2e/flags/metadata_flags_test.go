@@ -3,7 +3,7 @@ package flags_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/integration/internal/testhelper"
+	"github.com/bearer/curio/e2e/internal/testhelper"
 )
 
 func newMetadataTest(name string, arguments []string) testhelper.TestCase {
@@ -11,6 +11,7 @@ func newMetadataTest(name string, arguments []string) testhelper.TestCase {
 }
 
 func TestMetadataFlags(t *testing.T) {
+	t.Parallel()
 	tests := []testhelper.TestCase{
 		newMetadataTest("help", []string{"help"}),
 		newMetadataTest("version", []string{"version"}),
