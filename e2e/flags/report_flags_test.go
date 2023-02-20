@@ -11,7 +11,7 @@ import (
 )
 
 func newScanTest(name string, arguments []string) testhelper.TestCase {
-	arguments = append([]string{"scan", filepath.Join("integration", "flags", "testdata", "simple")}, arguments...)
+	arguments = append([]string{"scan", filepath.Join("e2e", "flags", "testdata", "simple")}, arguments...)
 	return testhelper.NewTestCase(name, arguments, testhelper.TestCaseOptions{})
 }
 

@@ -2,21 +2,19 @@ package rules_test
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/bearer/curio/e2e/internal/testhelper"
-	"github.com/bearer/curio/pkg/commands/process/settings/rules"
 )
-
-var rulesFs = &rules.Rules
 
 func buildRulesTestCase(testName, fileName, ruleID string) testhelper.TestCase {
 	arguments := []string{
 		"scan",
 		fileName,
-		"--external-rule-dir=" + filepath.Join("testdata", "rules"),
+		"--external-rule-dir=" + filepath.Join("e2e", "rules", "testdata", "rules"),
 		"--only-rule=" + ruleID,
 		"--format=yaml",
 	}
@@ -26,11 +24,11 @@ func buildRulesTestCase(testName, fileName, ruleID string) testhelper.TestCase {
 }
 
 func runRulesTest(folderPath string, ruleID string, t *testing.T) {
-	snapshotDirectory := "/.snapshots"
+	snapshotDirectory := ".snapshots"
 
 	testDataDir := fmt.Sprintf("testdata/data/%s", folderPath)
 
-	testdataDirEntries, err := rulesFs.ReadDir(testDataDir)
+	testdataDirEntries, err := os.ReadDir(testDataDir)
 	if err != nil {
 		t.Fatalf("failed to read rules/%s dir %e", folderPath, err)
 	}
@@ -45,7 +43,7 @@ func runRulesTest(folderPath string, ruleID string, t *testing.T) {
 		testCases = append(testCases,
 			buildRulesTestCase(
 				testName,
-				filepath.Join(testDataDir, filePath),
+				filepath.Join("e2e", "rules", testDataDir, filePath),
 				ruleID,
 			),
 		)
