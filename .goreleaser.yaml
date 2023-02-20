@@ -11,12 +11,12 @@ release:
 
 brews:
   - # Name template of the recipe
-    name: curio
+    name: bearer
     folder: Formula
-    install: bin.install "curio"
+    install: bin.install "bearer"
     tap:
       owner: Bearer
-      name: homebrew-curio
+      name: homebrew-bearer
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
 
     commit_author:
@@ -25,7 +25,7 @@ brews:
 
     commit_msg_template: "chore: Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
 
-    homepage: "https://curio.sh"
+    homepage: "https://bearer.com"
 
     license: "Elastic License 2.0"
 
@@ -33,12 +33,12 @@ brews:
 
 dockers:
   - image_templates:
-      - "docker.io/bearer/curio:{{ .Tag }}-amd64"
-      - "docker.io/bearer/curio:{{ .Version }}-amd64"
-      - "docker.io/bearer/curio:latest-amd64"
-      - "ghcr.io/bearer/curio:{{ .Tag }}-amd64"
-      - "ghcr.io/bearer/curio:{{ .Version }}-amd64"
-      - "ghcr.io/bearer/curio:latest-amd64"
+      - "docker.io/bearer/bearer:{{ .Tag }}-amd64"
+      - "docker.io/bearer/bearer:{{ .Version }}-amd64"
+      - "docker.io/bearer/bearer:latest-amd64"
+      - "ghcr.io/bearer/bearer:{{ .Tag }}-amd64"
+      - "ghcr.io/bearer/bearer:{{ .Version }}-amd64"
+      - "ghcr.io/bearer/bearer:latest-amd64"
     use: buildx
     goos: linux
     goarch: amd64
@@ -52,8 +52,8 @@ dockers:
       - "--label=org.opencontainers.image.created={{ .Date }}"
       - "--label=org.opencontainers.image.source=https://github.com/bearer/bearer"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
-      - "--label=org.opencontainers.image.url=https://curio.sh"
-      - "--label=org.opencontainers.image.documentation=https://curio.sh"
+      - "--label=org.opencontainers.image.url=https://bearer.com"
+      - "--label=org.opencontainers.image.documentation=https://docs.bearer.com"
       - "--platform=linux/amd64"
 
 announce:
@@ -71,7 +71,7 @@ nfpms:
       - rpm
       - archlinux
     vendor: Bearer
-    homepage: "https://curio.sh"
+    homepage: "https://bearer.com"
     maintainer: "Bearer <dev@bearer.sh>"
     description: "A data-first security scanner that finds risks and vulnerabilities in your code so you can protect sensitive data (PHI, PD, PII)."
     license: "Elastic License 2.0"
