@@ -1,9 +1,9 @@
 package knex
 
 import (
-	"github.com/bearer/curio/pkg/detectors/javascript/util"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/bearer/pkg/detectors/javascript/util"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

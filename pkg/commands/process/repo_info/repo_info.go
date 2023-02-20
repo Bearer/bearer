@@ -6,8 +6,8 @@ import (
 
 	"github.com/wlredeye/jsonlines"
 
-	"github.com/bearer/curio/pkg/commands/process/worker/work"
-	"github.com/bearer/curio/pkg/git"
+	"github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/git"
 )
 
 type renamedFileReport struct {

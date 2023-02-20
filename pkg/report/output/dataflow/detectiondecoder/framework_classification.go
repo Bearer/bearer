@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	frameworkclassification "github.com/bearer/curio/pkg/classification/frameworks"
+	frameworkclassification "github.com/bearer/bearer/pkg/classification/frameworks"
 )
 
 func GetClassifiedFramework(detection interface{}) (frameworkclassification.ClassifiedFramework, error) {

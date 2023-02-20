@@ -1,12 +1,12 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	parserdatatype "github.com/bearer/bearer/pkg/parser/datatype"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/smacker/go-tree-sitter/javascript"
 )
 

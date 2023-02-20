@@ -6,13 +6,13 @@ import (
 	"net/http"
 	"runtime"
 
-	customdetector "github.com/bearer/curio/new/scanner"
-	"github.com/bearer/curio/pkg/classification"
-	config "github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/commands/process/worker/blamer"
-	"github.com/bearer/curio/pkg/commands/process/worker/work"
-	"github.com/bearer/curio/pkg/detectors"
-	"github.com/bearer/curio/pkg/scanner"
+	customdetector "github.com/bearer/bearer/new/scanner"
+	"github.com/bearer/bearer/pkg/classification"
+	config "github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/worker/blamer"
+	"github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/detectors"
+	"github.com/bearer/bearer/pkg/scanner"
 )
 
 type Worker struct {

@@ -5,16 +5,16 @@ import (
 	"encoding/json"
 	"sort"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
-	"github.com/bearer/curio/pkg/report/output/dataflow/types"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/detectiondecoder"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
+	"github.com/bearer/bearer/pkg/report/schema"
 
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/util/classify"
-	"github.com/bearer/curio/pkg/util/maputil"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/util/maputil"
 )
 
 type Holder struct {

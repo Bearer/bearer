@@ -5,17 +5,17 @@ import (
 
 	"github.com/smacker/go-tree-sitter/csharp"
 
-	"github.com/bearer/curio/pkg/detectors/csharp/datatype"
-	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/interfacedetector"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/values"
-	"github.com/bearer/curio/pkg/report/variables"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/detectors/csharp/datatype"
+	"github.com/bearer/bearer/pkg/detectors/types"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/interfacedetector"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/values"
+	"github.com/bearer/bearer/pkg/report/variables"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 )
 
 var (

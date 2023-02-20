@@ -4,10 +4,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/bearer/curio/pkg/commands/process/balancer/filelist"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/commands/process/worker/work"
-	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/stretchr/testify/assert"
 )
 

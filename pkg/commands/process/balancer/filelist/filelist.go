@@ -6,11 +6,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/bearer/curio/pkg/commands/process/balancer/fileignore"
-	"github.com/bearer/curio/pkg/commands/process/balancer/timeout"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/commands/process/worker/work"
-	"github.com/bearer/curio/pkg/util/gitutil"
+	"github.com/bearer/bearer/pkg/commands/process/balancer/fileignore"
+	"github.com/bearer/bearer/pkg/commands/process/balancer/timeout"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/util/gitutil"
 	"github.com/rs/zerolog/log"
 )
 

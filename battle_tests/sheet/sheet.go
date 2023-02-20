@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/bearer/curio/battle_tests/build"
-	"github.com/bearer/curio/battle_tests/config"
-	battletests "github.com/bearer/curio/battle_tests/config"
-	metricsscan "github.com/bearer/curio/battle_tests/metrics_scan"
-	"github.com/bearer/curio/pkg/classification/db"
+	"github.com/bearer/bearer/battle_tests/build"
+	"github.com/bearer/bearer/battle_tests/config"
+	battletests "github.com/bearer/bearer/battle_tests/config"
+	metricsscan "github.com/bearer/bearer/battle_tests/metrics_scan"
+	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/rs/zerolog/log"
 
 	"google.golang.org/api/drive/v3"

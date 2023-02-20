@@ -3,8 +3,8 @@ package set
 import (
 	"fmt"
 
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/tree"
 )
 
 type set struct {

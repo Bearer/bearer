@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/bearer/curio/pkg/report/operations"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/report/operations"
+	"github.com/bearer/bearer/pkg/util/file"
 	"gopkg.in/yaml.v3"
 )
 

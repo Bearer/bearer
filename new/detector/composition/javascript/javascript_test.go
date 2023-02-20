@@ -4,8 +4,8 @@ import (
 	_ "embed"
 	"testing"
 
-	"github.com/bearer/curio/new/detector/composition/javascript"
-	"github.com/bearer/curio/new/detector/composition/testhelper"
+	"github.com/bearer/bearer/new/detector/composition/javascript"
+	"github.com/bearer/bearer/new/detector/composition/testhelper"
 )
 
 //go:embed testdata/insecureURL.yml

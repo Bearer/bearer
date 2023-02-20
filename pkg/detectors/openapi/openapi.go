@@ -5,19 +5,19 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/bearer/curio/pkg/detectors/openapi/v2json"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/detectors/openapi/v2json"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/ghodss/yaml" // Need to use this as some features use custom JSON unmarshalling
 	"golang.org/x/mod/semver"
 
-	"github.com/bearer/curio/pkg/detectors/openapi/v2yaml"
-	"github.com/bearer/curio/pkg/detectors/openapi/v3json"
-	"github.com/bearer/curio/pkg/detectors/openapi/v3yaml"
-	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/detectors/openapi/v2yaml"
+	"github.com/bearer/bearer/pkg/detectors/openapi/v3json"
+	"github.com/bearer/bearer/pkg/detectors/openapi/v3yaml"
+	"github.com/bearer/bearer/pkg/detectors/types"
+	"github.com/bearer/bearer/pkg/report/detectors"
 
-	reporttypes "github.com/bearer/curio/pkg/report"
+	reporttypes "github.com/bearer/bearer/pkg/report"
 )
 
 type version struct {

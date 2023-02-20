@@ -1,10 +1,10 @@
 package base
 
 import (
-	"github.com/bearer/curio/new/language/implementation"
-	"github.com/bearer/curio/new/language/patternquery"
-	"github.com/bearer/curio/new/language/tree"
-	"github.com/bearer/curio/new/language/types"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/patternquery"
+	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/new/language/types"
 )
 
 type Language struct {

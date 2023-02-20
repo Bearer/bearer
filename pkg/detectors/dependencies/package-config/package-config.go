@@ -1,18 +1,18 @@
 package packageconfig
 
 import (
-	"github.com/bearer/curio/pkg/detectors/dependencies/depsbase"
-	"github.com/bearer/curio/pkg/parser"
-	xml "github.com/bearer/curio/pkg/parser/sitter/xml2"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
+	"github.com/bearer/bearer/pkg/parser"
+	xml "github.com/bearer/bearer/pkg/parser/sitter/xml2"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 	"github.com/rs/zerolog/log"
 )
 
 var language = xml.GetLanguage()
 
 var queryDependencies = parser.QueryMustCompile(language, `
-(element 
+(element
 	(_
     	(tag_name) @helper_package
         (#match? @helper_package "^package$")
@@ -26,7 +26,7 @@ var queryDependencies = parser.QueryMustCompile(language, `
             (#match? @helper_version "^version$")
 			(attribute_value) @param_version
         )
-    ) 
+    )
 )
 `)
 

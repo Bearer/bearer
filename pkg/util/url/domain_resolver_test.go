@@ -6,7 +6,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/bearer/curio/pkg/util/url"
+	"github.com/bearer/bearer/pkg/util/url"
 	"github.com/stretchr/testify/assert"
 )
 

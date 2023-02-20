@@ -67,7 +67,7 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	select {
 	case <-timer.C:
 		cancel()
-		t.Fatalf("command failed to complete on time 'curio %s'", strings.Join(arguments, " "))
+		t.Fatalf("command failed to complete on time 'bearer %s'", strings.Join(arguments, " "))
 	case <-commandFinished:
 		cancel()
 	}
@@ -82,10 +82,10 @@ func CreateCurioCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 
 	ctx, cancel := context.WithCancel(context.Background())
 
-	if os.Getenv("CURIO_BINARY") != "" {
-		cmd = exec.CommandContext(ctx, "./curio", arguments...)
+	if os.Getenv("USE_BINARY") != "" {
+		cmd = exec.CommandContext(ctx, "./bearer", arguments...)
 	} else {
-		arguments = append([]string{"run", GetCWD() + "/cmd/curio/main.go"}, arguments...)
+		arguments = append([]string{"run", GetCWD() + "/cmd/bearer/main.go"}, arguments...)
 		cmd = exec.CommandContext(ctx, "go", arguments...)
 	}
 

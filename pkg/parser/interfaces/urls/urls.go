@@ -4,10 +4,10 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/curio/pkg/report/values"
-	"github.com/bearer/curio/pkg/report/variables"
-	"github.com/bearer/curio/pkg/util/normalize_key"
-	"github.com/bearer/curio/pkg/util/regex"
+	"github.com/bearer/bearer/pkg/report/values"
+	"github.com/bearer/bearer/pkg/report/variables"
+	"github.com/bearer/bearer/pkg/util/normalize_key"
+	"github.com/bearer/bearer/pkg/util/regex"
 	"golang.org/x/net/publicsuffix"
 )
 

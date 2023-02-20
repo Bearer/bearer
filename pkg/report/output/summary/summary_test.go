@@ -3,12 +3,12 @@ package summary_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/report/output/dataflow"
-	"github.com/bearer/curio/pkg/report/output/dataflow/types"
-	"github.com/bearer/curio/pkg/report/output/summary"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/report/output/dataflow"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
+	"github.com/bearer/bearer/pkg/report/output/summary"
+	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/hhatto/gocloc"
 )

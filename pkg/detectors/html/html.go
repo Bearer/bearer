@@ -1,17 +1,17 @@
 package html
 
 import (
-	"github.com/bearer/curio/pkg/detectors/javascript"
-	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/interfaces"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	html "github.com/bearer/curio/pkg/parser/sitter/html2"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	interfacetype "github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/report/values"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/detectors/javascript"
+	"github.com/bearer/bearer/pkg/detectors/types"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/interfaces"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	html "github.com/bearer/bearer/pkg/parser/sitter/html2"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	interfacetype "github.com/bearer/bearer/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/report/values"
+	"github.com/bearer/bearer/pkg/util/file"
 )
 
 var (

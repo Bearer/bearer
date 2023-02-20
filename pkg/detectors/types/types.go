@@ -1,8 +1,8 @@
 package types
 
 import (
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/util/file"
 )
 
 type DetectorConstructor func() Detector

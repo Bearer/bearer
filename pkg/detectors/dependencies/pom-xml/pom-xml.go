@@ -1,11 +1,11 @@
 package pomxml
 
 import (
-	"github.com/bearer/curio/pkg/detectors/dependencies/depsbase"
-	"github.com/bearer/curio/pkg/parser"
-	xml "github.com/bearer/curio/pkg/parser/sitter/xml2"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
+	"github.com/bearer/bearer/pkg/parser"
+	xml "github.com/bearer/bearer/pkg/parser/sitter/xml2"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 	"github.com/rs/zerolog/log"
 )
 
@@ -13,8 +13,8 @@ var language = xml.GetLanguage()
 
 var queryDependencies = parser.QueryMustCompile(language, `
 (element
-	(start_tag 
-		(tag_name) @helper_dependency 
+	(start_tag
+		(tag_name) @helper_dependency
 		(#match? @helper_dependency "^dependency$")
 	)
  ) @param_dependency

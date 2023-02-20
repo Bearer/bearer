@@ -3,11 +3,11 @@ package cache
 import (
 	"github.com/smacker/go-tree-sitter/ruby"
 
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/frameworks/rails"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/frameworks/rails"
+	"github.com/bearer/bearer/pkg/util/file"
 )
 
 var (

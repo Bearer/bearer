@@ -3,7 +3,7 @@ package classify
 import (
 	"regexp"
 
-	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/detectors"
 )
 
 type ValidationState string

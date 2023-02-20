@@ -1,11 +1,11 @@
 package queries
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/schema/schemahelper"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/schema/schemahelper"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

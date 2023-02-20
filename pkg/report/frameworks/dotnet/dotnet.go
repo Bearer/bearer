@@ -1,7 +1,7 @@
 package dotnet
 
 import (
-	"github.com/bearer/curio/pkg/report/frameworks"
+	"github.com/bearer/bearer/pkg/report/frameworks"
 )
 
 const TypeDatabase frameworks.Type = "database"

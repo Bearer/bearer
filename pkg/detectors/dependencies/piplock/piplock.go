@@ -1,10 +1,10 @@
 package piplock
 
 import (
-	"github.com/bearer/curio/pkg/detectors/dependencies/depsbase"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/javascript"
 )
@@ -12,15 +12,15 @@ import (
 var language = javascript.GetLanguage()
 
 var queryDependencies = parser.QueryMustCompile(language, `
-(pair 
+(pair
 	key: (string) @param_dependency
-    value: (object 
+    value: (object
     	(pair
         	key: (string) @helper_version
             (#match? @helper_version "^\"version\"$")
             value: (string) @param_version
     	)
-    ) 
+    )
 )
 `)
 

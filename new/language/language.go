@@ -3,11 +3,11 @@ package language
 import (
 	"fmt"
 
-	"github.com/bearer/curio/new/language/base"
-	"github.com/bearer/curio/new/language/implementation"
-	"github.com/bearer/curio/new/language/implementation/javascript"
-	"github.com/bearer/curio/new/language/implementation/ruby"
-	"github.com/bearer/curio/new/language/types"
+	"github.com/bearer/bearer/new/language/base"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/implementation/javascript"
+	"github.com/bearer/bearer/new/language/implementation/ruby"
+	"github.com/bearer/bearer/new/language/types"
 )
 
 func Get(name string) (types.Language, error) {

@@ -1,4 +1,4 @@
-module github.com/bearer/curio
+module github.com/bearer/bearer
 
 go 1.18
 

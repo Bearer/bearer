@@ -4,13 +4,13 @@ import (
 	"sort"
 	"strings"
 
-	classificationschema "github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/util/normalize_key"
+	classificationschema "github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/util/normalize_key"
 	pluralize "github.com/gertd/go-pluralize"
 )
 

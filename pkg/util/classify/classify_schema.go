@@ -3,7 +3,7 @@ package classify
 import (
 	"fmt"
 
-	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/detectors"
 )
 
 var objectStopWords = map[string]struct{}{

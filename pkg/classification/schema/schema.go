@@ -3,12 +3,12 @@ package schema
 import (
 	"regexp"
 
-	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/bearer/pkg/flag"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/util/classify"
-	"github.com/bearer/curio/pkg/util/normalize_key"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/util/normalize_key"
 )
 
 var regexpIdentifierMatcher = regexp.MustCompile(`(uu)?id$`)

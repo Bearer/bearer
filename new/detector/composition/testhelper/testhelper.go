@@ -7,11 +7,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/pkg/classification"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bradleyjkemp/cupaloy"
 	"gopkg.in/yaml.v2"
 )

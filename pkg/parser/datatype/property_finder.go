@@ -1,8 +1,8 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report/schema/datatype"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

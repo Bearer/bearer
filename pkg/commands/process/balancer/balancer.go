@@ -10,8 +10,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 
-	config "github.com/bearer/curio/pkg/commands/process/settings"
-	workertype "github.com/bearer/curio/pkg/commands/process/worker/work"
+	config "github.com/bearer/bearer/pkg/commands/process/settings"
+	workertype "github.com/bearer/bearer/pkg/commands/process/worker/work"
 )
 
 var ErrorOutOfMemory = errors.New("process went out of memory")

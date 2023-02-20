@@ -1,12 +1,12 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	php "github.com/bearer/curio/pkg/parser/sitter/php2"
-	"github.com/bearer/curio/pkg/report/schema"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	parserdatatype "github.com/bearer/bearer/pkg/parser/datatype"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	php "github.com/bearer/bearer/pkg/parser/sitter/php2"
+	"github.com/bearer/bearer/pkg/report/schema"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

@@ -1,7 +1,7 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/report/schema/datatype"
 )
 
 // MergeDatatypesByPropertyNames iterates trough source properties and adds missing datatypes from enrichment
@@ -33,8 +33,8 @@ func MergeDatatypesByPropertyNames(source datatype.DataTypable, enrichment datat
 	}
 }
 
-// CloneDeepestProperties deep clones source and iterates trough various levels 
-// of same name source and enrichement properties adding enrichment properties 
+// CloneDeepestProperties deep clones source and iterates trough various levels
+// of same name source and enrichement properties adding enrichment properties
 // to the edge of source only when source edge doesn't have any properties
 func CloneDeepestProperties(source datatype.DataTypable, enrichment datatype.DataTypable) datatype.DataTypable {
 	clonedSource := source.Clone()

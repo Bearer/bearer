@@ -1,9 +1,9 @@
 package yaml
 
 import (
-	"github.com/bearer/curio/pkg/detectors/openapi/queries"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report/operations/operationshelper"
+	"github.com/bearer/bearer/pkg/detectors/openapi/queries"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report/operations/operationshelper"
 	"github.com/smacker/go-tree-sitter/yaml"
 )
 
@@ -12,7 +12,7 @@ var queryPaths = parser.QueryMustCompile(yaml.GetLanguage(), `
 	(block_mapping_pair
     	key: (flow_node) @helper_paths
         (#match? @helper_paths "^paths$")
-        value: 
+        value:
         	(block_node
             	(block_mapping
                 	(block_mapping_pair
@@ -28,7 +28,7 @@ var queryPaths = parser.QueryMustCompile(yaml.GetLanguage(), `
                     )
                 )
             )
-    ) 
+    )
 )`)
 
 func AnnotatePaths(tree *parser.Tree, foundValues map[parser.Node]*operationshelper.Operation) error {

@@ -3,14 +3,14 @@ package scanner
 import (
 	"fmt"
 
-	"github.com/bearer/curio/new/detector/composition/javascript"
-	"github.com/bearer/curio/new/detector/composition"
-	"github.com/bearer/curio/new/detector/composition/ruby"
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/pkg/classification"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/new/detector/composition/javascript"
+	"github.com/bearer/bearer/new/detector/composition"
+	"github.com/bearer/bearer/new/detector/composition/ruby"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/util/file"
 )
 
 type language struct {

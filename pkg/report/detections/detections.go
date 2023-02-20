@@ -3,9 +3,9 @@ package detections
 import (
 	"time"
 
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/frameworks"
-	"github.com/bearer/curio/pkg/report/source"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/frameworks"
+	"github.com/bearer/bearer/pkg/report/source"
 )
 
 type DetectionType string

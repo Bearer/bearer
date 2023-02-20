@@ -1,7 +1,7 @@
 package queries
 
 import (
-	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser"
 )
 
 type ChildMatch interface {

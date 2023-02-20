@@ -4,11 +4,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report/output/dataflow"
-	"github.com/bearer/curio/pkg/report/output/dataflow/types"
-	"github.com/bearer/curio/pkg/report/output/detectors"
-	globaltypes "github.com/bearer/curio/pkg/types"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/output/dataflow"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
+	"github.com/bearer/bearer/pkg/report/output/detectors"
+	globaltypes "github.com/bearer/bearer/pkg/types"
 	"github.com/stretchr/testify/assert"
 )
 

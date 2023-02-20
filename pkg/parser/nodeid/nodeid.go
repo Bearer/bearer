@@ -3,7 +3,7 @@ package nodeid
 import (
 	"strconv"
 
-	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser"
 	"github.com/google/uuid"
 )
 

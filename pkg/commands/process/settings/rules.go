@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/maps"
 	"gopkg.in/yaml.v3"

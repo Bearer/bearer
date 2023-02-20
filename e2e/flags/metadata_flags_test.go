@@ -3,7 +3,7 @@ package flags_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/e2e/internal/testhelper"
+	"github.com/bearer/bearer/e2e/internal/testhelper"
 )
 
 func newMetadataTest(name string, arguments []string) testhelper.TestCase {

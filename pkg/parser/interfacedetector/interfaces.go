@@ -1,14 +1,14 @@
 package interfacedetector
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	parsercontext "github.com/bearer/curio/pkg/parser/context"
-	"github.com/bearer/curio/pkg/parser/interfaces"
-	"github.com/bearer/curio/pkg/report"
-	reportinterface "github.com/bearer/curio/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/parser"
+	parsercontext "github.com/bearer/bearer/pkg/parser/context"
+	"github.com/bearer/bearer/pkg/parser/interfaces"
+	"github.com/bearer/bearer/pkg/report"
+	reportinterface "github.com/bearer/bearer/pkg/report/interfaces"
 
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/values"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/values"
 )
 
 type Request struct {

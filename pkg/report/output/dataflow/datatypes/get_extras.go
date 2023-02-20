@@ -5,11 +5,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/output/dataflow/types"
-	regohelper "github.com/bearer/curio/pkg/util/rego"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
+	regohelper "github.com/bearer/bearer/pkg/util/rego"
 	"github.com/open-policy-agent/opa/rego"
 )
 

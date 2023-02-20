@@ -3,8 +3,8 @@ package settings_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/stretchr/testify/assert"
 )
 

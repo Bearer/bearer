@@ -1,7 +1,7 @@
 package blamer
 
 import (
-	"github.com/bearer/curio/pkg/git"
+	"github.com/bearer/bearer/pkg/git"
 	"github.com/rs/zerolog/log"
 )
 

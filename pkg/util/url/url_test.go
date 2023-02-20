@@ -6,11 +6,11 @@ import (
 	"net"
 	"testing"
 
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/source"
-	"github.com/bearer/curio/pkg/util/classify"
-	"github.com/bearer/curio/pkg/util/url"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/source"
+	"github.com/bearer/bearer/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/util/url"
 	"github.com/stretchr/testify/assert"
 )
 

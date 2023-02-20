@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/schema"
 )
 
 func StripQuotes(value string) string {

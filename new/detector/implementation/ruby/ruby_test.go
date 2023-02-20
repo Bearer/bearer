@@ -3,8 +3,8 @@ package ruby_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/new/detector/composition/ruby"
-	"github.com/bearer/curio/new/detector/implementation/testhelper"
+	"github.com/bearer/bearer/new/detector/composition/ruby"
+	"github.com/bearer/bearer/new/detector/implementation/testhelper"
 )
 
 func TestRubyObjectDetector(t *testing.T) {

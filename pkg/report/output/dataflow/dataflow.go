@@ -6,17 +6,17 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report/customdetectors"
-	"github.com/bearer/curio/pkg/report/detections"
-	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/output/dataflow/components"
-	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
-	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
-	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
-	"github.com/bearer/curio/pkg/util/output"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/customdetectors"
+	"github.com/bearer/bearer/pkg/report/detections"
+	reportdetectors "github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/components"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/datatypes"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/detectiondecoder"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/risks"
+	"github.com/bearer/bearer/pkg/util/output"
 
-	"github.com/bearer/curio/pkg/report/output/dataflow/types"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 )
 
 type DataFlow struct {

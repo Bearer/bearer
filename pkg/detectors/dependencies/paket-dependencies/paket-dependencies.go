@@ -6,9 +6,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/curio/pkg/detectors/dependencies/depsbase"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/linescanner"
+	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/linescanner"
 	"github.com/rs/zerolog/log"
 )
 

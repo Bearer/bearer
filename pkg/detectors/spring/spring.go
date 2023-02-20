@@ -9,14 +9,14 @@ import (
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
 
-	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/frameworks/spring"
-	"github.com/bearer/curio/pkg/report/source"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/linescanner"
-	"github.com/bearer/curio/pkg/util/pointers"
+	"github.com/bearer/bearer/pkg/detectors/types"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/frameworks/spring"
+	"github.com/bearer/bearer/pkg/report/source"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/linescanner"
+	"github.com/bearer/bearer/pkg/util/pointers"
 )
 
 var (

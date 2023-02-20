@@ -1,13 +1,13 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	parserdatatype "github.com/bearer/bearer/pkg/parser/datatype"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 )
 
 func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Generator) {

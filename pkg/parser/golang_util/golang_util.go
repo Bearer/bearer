@@ -6,7 +6,7 @@ import (
 
 	"github.com/smacker/go-tree-sitter/golang"
 
-	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser"
 )
 
 var (

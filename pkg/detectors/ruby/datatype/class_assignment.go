@@ -3,9 +3,9 @@ package datatype
 import (
 	"strings"
 
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report/schema"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report/schema"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 

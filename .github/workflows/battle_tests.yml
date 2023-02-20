@@ -31,19 +31,19 @@ on:
           - "crm"
 
       attempt:
-        description: "Attempt (if you need to re-trigger for the same curio version)"
+        description: "Attempt (if you need to re-trigger for the same version)"
         required: true
         default: "1"
         type: string
 
-      curio_release_id:
+      bearer_release_id:
         description: "release id"
         default: ""
         required: true
         type: string
 
-      curio_version:
-        description: "curio version for report"
+      bearer_version:
+        description: "binary version for report"
         default: "latest"
         required: true
         type: string
@@ -80,14 +80,14 @@ jobs:
       - uses: robinraju/release-downloader@v1.7
         id: latest_artifact
         with:
-          releaseId: ${{ inputs.curio_release_id }}
+          releaseId: ${{ inputs.bearer_release_id }}
           fileName: "*_linux_amd64.tar.gz"
       - name: Extract artifact
         run: |
-          tar -xzvf curio_*_linux_amd64.tar.gz
+          tar -xzvf bearer_*_linux_amd64.tar.gz
           ls -ltr
           mkdir dist
-          cp curio dist/
+          cp bearer dist/
 
       - name: Build and push latest
         uses: docker/build-push-action@v4
@@ -97,7 +97,7 @@ jobs:
           file: battle_tests/Dockerfile
           tags: bearersh/battle-test:latest
           build-args: |
-            CURIO_VERSION=${{ inputs.curio_version }}
+            CURIO_VERSION=${{ inputs.bearer_version }}
             BATTLE_TEST_SHA=${{ github.sha }}
             ATTEMPT=${{ inputs.attempt }}
             LANGUAGE=${{ inputs.language }}

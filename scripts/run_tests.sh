@@ -29,7 +29,7 @@ TEST_ARGS=$DEFAULT_TEST_ARGS
 [ $# -eq 0 ] || TEST_ARGS="$@"
 
 do_info "Running tests..."
-CURIO_BINARY=1 GITHUB_WORKSPACE=`pwd` go test $TEST_ARGS
+USE_BINARY=1 GITHUB_WORKSPACE=`pwd` go test $TEST_ARGS
 TEST_STATUS=$?
 
 do_cleanup

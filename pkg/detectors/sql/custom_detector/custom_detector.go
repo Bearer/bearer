@@ -3,9 +3,9 @@ package customdetector
 import (
 	"strings"
 
-	"github.com/bearer/curio/pkg/detectors/custom/config"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/sitter/sql"
+	"github.com/bearer/bearer/pkg/detectors/custom/config"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/sitter/sql"
 )
 
 var language = sql.GetLanguage()

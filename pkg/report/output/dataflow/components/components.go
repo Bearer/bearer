@@ -3,13 +3,13 @@ package components
 import (
 	"strings"
 
-	"github.com/bearer/curio/pkg/report/output/dataflow/types"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 
-	dependenciesclassification "github.com/bearer/curio/pkg/classification/dependencies"
-	frameworkclassification "github.com/bearer/curio/pkg/classification/frameworks"
-	interfaceclassification "github.com/bearer/curio/pkg/classification/interfaces"
-	"github.com/bearer/curio/pkg/util/classify"
-	"github.com/bearer/curio/pkg/util/maputil"
+	dependenciesclassification "github.com/bearer/bearer/pkg/classification/dependencies"
+	frameworkclassification "github.com/bearer/bearer/pkg/classification/frameworks"
+	interfaceclassification "github.com/bearer/bearer/pkg/classification/interfaces"
+	"github.com/bearer/bearer/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/util/maputil"
 )
 
 type Holder struct {

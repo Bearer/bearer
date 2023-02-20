@@ -10,10 +10,10 @@ import (
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/curio/new/language/implementation"
-	patternquerytypes "github.com/bearer/curio/new/language/patternquery/types"
-	"github.com/bearer/curio/new/language/tree"
-	"github.com/bearer/curio/pkg/util/regex"
+	"github.com/bearer/bearer/new/language/implementation"
+	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
+	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/util/regex"
 )
 
 var (

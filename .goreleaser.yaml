@@ -50,7 +50,7 @@ dockers:
       - "--label=org.opencontainers.image.vendor=Bearer"
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.created={{ .Date }}"
-      - "--label=org.opencontainers.image.source=https://github.com/Bearer/curio"
+      - "--label=org.opencontainers.image.source=https://github.com/bearer/bearer"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.url=https://curio.sh"
       - "--label=org.opencontainers.image.documentation=https://curio.sh"
@@ -60,7 +60,7 @@ announce:
   discord:
     enabled: true
     message_template: |
-      Curio {{ .Tag }} is out now! Check it out: https://github.com/Bearer/curio/releases/tag/{{ .Tag }}
+      Curio {{ .Tag }} is out now! Check it out: https://github.com/bearer/bearer/releases/tag/{{ .Tag }}
 
       {{ .ReleaseNotes }}
 

@@ -3,17 +3,17 @@ package proto
 import (
 	"strings"
 
-	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/sitter/proto"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/detectors/types"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/sitter/proto"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/gertd/go-pluralize"
 
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	parserschema "github.com/bearer/curio/pkg/parser/schema"
-	reporttypes "github.com/bearer/curio/pkg/report"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	parserschema "github.com/bearer/bearer/pkg/parser/schema"
+	reporttypes "github.com/bearer/bearer/pkg/report"
 )
 
 var (

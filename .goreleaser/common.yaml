@@ -18,8 +18,8 @@ builds:
       - amd64
     ldflags:
       - -s -w
-      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
-      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.CommitSHA={{.Commit}}"
     hooks:
       post:
         - |
@@ -57,8 +57,8 @@ builds:
     ldflags:
       - -s -w
       - -extldflags "-static"
-      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
-      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.CommitSHA={{.Commit}}"
 
 checksum:
   name_template: "checksums.txt"

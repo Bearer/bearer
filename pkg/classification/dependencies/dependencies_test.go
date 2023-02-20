@@ -3,11 +3,11 @@ package dependencies_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/classification/dependencies"
-	reportdependencies "github.com/bearer/curio/pkg/report/dependencies"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/source"
-	"github.com/bearer/curio/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/classification/dependencies"
+	reportdependencies "github.com/bearer/bearer/pkg/report/dependencies"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/source"
+	"github.com/bearer/bearer/pkg/util/classify"
 
 	"github.com/stretchr/testify/assert"
 )

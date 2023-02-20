@@ -4,7 +4,7 @@ import (
 	"io/fs"
 	"time"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
 
 func Assign(d fs.DirEntry, config settings.Config) time.Duration {

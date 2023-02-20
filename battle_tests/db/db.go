@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/bearer/curio/battle_tests/build"
+	"github.com/bearer/bearer/battle_tests/build"
 	"github.com/rs/zerolog/log"
 )
 
