@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	classification "github.com/bearer/curio/pkg/classification"
-	"github.com/bearer/curio/pkg/detectors"
-	"github.com/bearer/curio/pkg/report/writer"
-	"github.com/bearer/curio/pkg/util/blamer"
+	classification "github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/detectors"
+	"github.com/bearer/bearer/pkg/report/writer"
+	"github.com/bearer/bearer/pkg/util/blamer"
 )
 
 func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath string, classifier *classification.Classifier) error {

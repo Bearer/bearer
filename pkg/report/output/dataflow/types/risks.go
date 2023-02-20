@@ -1,6 +1,6 @@
 package types
 
-import "github.com/bearer/curio/pkg/report/schema"
+import "github.com/bearer/bearer/pkg/report/schema"
 
 type RiskDetector struct {
 	DetectorID string         `json:"detector_id" yaml:"detector_id"`

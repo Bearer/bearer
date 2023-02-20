@@ -6,19 +6,19 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/types"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/output"
-	"github.com/bearer/curio/pkg/util/rego"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/types"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/curio/pkg/report/output/dataflow"
-	stats "github.com/bearer/curio/pkg/report/output/stats"
+	"github.com/bearer/bearer/pkg/report/output/dataflow"
+	stats "github.com/bearer/bearer/pkg/report/output/stats"
 )
 
 var underline = color.New(color.Underline).SprintFunc()

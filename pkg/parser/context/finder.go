@@ -1,8 +1,8 @@
 package context
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report/variables"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report/variables"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

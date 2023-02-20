@@ -6,7 +6,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/bearer/curio/battle_tests/scan"
+	"github.com/bearer/bearer/battle_tests/scan"
 	"github.com/rs/zerolog/log"
 )
 

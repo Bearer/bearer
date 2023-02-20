@@ -1,8 +1,8 @@
 package schema
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
 )
 
 type UUIDHolder struct {

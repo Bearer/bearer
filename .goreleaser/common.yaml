@@ -1,4 +1,4 @@
-project_name: curio
+project_name: bearer
 
 before:
   hooks:
@@ -7,8 +7,8 @@ before:
 
 builds:
   - id: darwin
-    main: ./cmd/curio
-    binary: curio
+    main: ./cmd/bearer
+    binary: bearer
     env:
       - CGO_ENABLED=1
     goos:
@@ -18,8 +18,8 @@ builds:
       - amd64
     ldflags:
       - -s -w
-      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
-      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.CommitSHA={{.Commit}}"
     hooks:
       post:
         - |
@@ -28,7 +28,7 @@ builds:
           cat >"$fn" <<EOF
           source = ["dist/darwin/darwin_{{.Target}}/{{.Name}}"]
 
-          bundle_id = "com.bearer.curio"
+          bundle_id = "com.bearer.bearer"
 
           apple_id {
             password = "@env:AC_PASSWORD"
@@ -39,14 +39,14 @@ builds:
           }
 
           zip {
-            output_path = "curio_{{.Target}}.zip"
+            output_path = "bearer_{{.Target}}.zip"
           }
           EOF
           '
         - "gon -log-level DEBUG 'dist/darwin/darwin_{{.Target}}/gon.hcl'"
   - id: linux
-    main: ./cmd/curio
-    binary: curio
+    main: ./cmd/bearer
+    binary: bearer
     env:
       - CGO_ENABLED=1
     goos:
@@ -57,8 +57,8 @@ builds:
     ldflags:
       - -s -w
       - -extldflags "-static"
-      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
-      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
+      - -X "github.com/bearer/bearer/cmd/bearer/build.CommitSHA={{.Commit}}"
 
 checksum:
   name_template: "checksums.txt"

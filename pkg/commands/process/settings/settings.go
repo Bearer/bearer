@@ -8,8 +8,8 @@ import (
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v2"
 
-	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/util/rego"
+	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/rego"
 )
 
 var (

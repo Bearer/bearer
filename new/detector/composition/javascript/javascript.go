@@ -6,24 +6,24 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/curio/pkg/classification"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/rs/zerolog/log"
 
-	"github.com/bearer/curio/new/detector/composition/types"
-	"github.com/bearer/curio/new/detector/evaluator"
-	"github.com/bearer/curio/new/detector/implementation/custom"
-	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
-	"github.com/bearer/curio/new/detector/implementation/generic/insecureurl"
-	"github.com/bearer/curio/new/detector/implementation/javascript/object"
-	"github.com/bearer/curio/new/detector/implementation/javascript/property"
-	"github.com/bearer/curio/new/language"
+	"github.com/bearer/bearer/new/detector/composition/types"
+	"github.com/bearer/bearer/new/detector/evaluator"
+	"github.com/bearer/bearer/new/detector/implementation/custom"
+	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
+	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
+	"github.com/bearer/bearer/new/detector/implementation/javascript/object"
+	"github.com/bearer/bearer/new/detector/implementation/javascript/property"
+	"github.com/bearer/bearer/new/language"
 
-	stringdetector "github.com/bearer/curio/new/detector/implementation/javascript/string"
-	detectorset "github.com/bearer/curio/new/detector/set"
-	detectortypes "github.com/bearer/curio/new/detector/types"
-	languagetypes "github.com/bearer/curio/new/language/types"
+	stringdetector "github.com/bearer/bearer/new/detector/implementation/javascript/string"
+	detectorset "github.com/bearer/bearer/new/detector/set"
+	detectortypes "github.com/bearer/bearer/new/detector/types"
+	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type Composition struct {

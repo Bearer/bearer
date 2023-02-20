@@ -3,8 +3,8 @@ package rediscli
 import (
 	"errors"
 
-	"github.com/bearer/curio/battle_tests/build"
-	"github.com/bearer/curio/battle_tests/config"
+	"github.com/bearer/bearer/battle_tests/build"
+	"github.com/bearer/bearer/battle_tests/config"
 	"github.com/go-redis/redis"
 )
 

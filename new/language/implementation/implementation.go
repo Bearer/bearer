@@ -3,8 +3,8 @@ package implementation
 import (
 	sitter "github.com/smacker/go-tree-sitter"
 
-	patternquerytypes "github.com/bearer/curio/new/language/patternquery/types"
-	"github.com/bearer/curio/new/language/tree"
+	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
+	"github.com/bearer/bearer/new/language/tree"
 )
 
 type Implementation interface {

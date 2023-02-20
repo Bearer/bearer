@@ -7,11 +7,11 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/curio/new/language/implementation"
-	"github.com/bearer/curio/new/language/patternquery/types"
-	"github.com/bearer/curio/new/language/tree"
-	languagetypes "github.com/bearer/curio/new/language/types"
-	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/patternquery/types"
+	"github.com/bearer/bearer/new/language/tree"
+	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
 )
 
 type InputParams struct {

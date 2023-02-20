@@ -7,12 +7,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bearer/curio/battle_tests/build"
-	"github.com/bearer/curio/battle_tests/config"
-	repodb "github.com/bearer/curio/battle_tests/db"
-	metricsscan "github.com/bearer/curio/battle_tests/metrics_scan"
-	"github.com/bearer/curio/battle_tests/rediscli"
-	"github.com/bearer/curio/battle_tests/sheet"
+	"github.com/bearer/bearer/battle_tests/build"
+	"github.com/bearer/bearer/battle_tests/config"
+	repodb "github.com/bearer/bearer/battle_tests/db"
+	metricsscan "github.com/bearer/bearer/battle_tests/metrics_scan"
+	"github.com/bearer/bearer/battle_tests/rediscli"
+	"github.com/bearer/bearer/battle_tests/sheet"
 	"github.com/rs/zerolog/log"
 
 	"github.com/aws/aws-sdk-go/aws"

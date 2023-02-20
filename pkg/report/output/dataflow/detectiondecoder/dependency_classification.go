@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	dependenciesclassification "github.com/bearer/curio/pkg/classification/dependencies"
+	dependenciesclassification "github.com/bearer/bearer/pkg/classification/dependencies"
 )
 
 func GetClassifiedDependency(detection interface{}) (dependenciesclassification.ClassifiedDependency, error) {

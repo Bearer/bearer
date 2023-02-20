@@ -1,10 +1,10 @@
 package npm
 
 import (
-	"github.com/bearer/curio/pkg/detectors/dependencies/depsbase"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/javascript"
 )
@@ -17,10 +17,10 @@ var language = javascript.GetLanguage()
 //		}
 //	}
 var queryDependencies = parser.QueryMustCompile(language, `
-(pair 
+(pair
 	key: (string) @helper_dependencies
     (#match? @helper_dependencies "^\"dependencies\"$")
-    value: (object 
+    value: (object
     	(pair
         	key: (string) @param_dependency
             value: (object
@@ -31,7 +31,7 @@ var queryDependencies = parser.QueryMustCompile(language, `
                 )
             )
     	)
-    ) 
+    )
 )
 `)
 
@@ -39,15 +39,15 @@ var queryDependencies = parser.QueryMustCompile(language, `
 //		name: version
 //	}
 var queryRequires = parser.QueryMustCompile(language, `
-(pair 
+(pair
 	key: (string) @helper_requires
     (#match? @helper_requires "^\"requires\"$")
-    value: (object 
+    value: (object
     	(pair
         	key: (string) @param_dependency
             value: (string) @param_version
     	)
-    ) 
+    )
 )
 `)
 

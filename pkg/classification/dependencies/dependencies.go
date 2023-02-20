@@ -3,10 +3,10 @@ package dependencies
 import (
 	"errors"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/report/dependencies"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/report/dependencies"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/util/classify"
 )
 
 type ClassifiedDependency struct {

@@ -3,9 +3,9 @@ package commands
 import (
 	"fmt"
 
-	"github.com/bearer/curio/pkg/commands/artifact"
-	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/util/output"
+	"github.com/bearer/bearer/pkg/commands/artifact"
+	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/xerrors"

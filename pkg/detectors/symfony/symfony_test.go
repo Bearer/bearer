@@ -7,9 +7,9 @@ import (
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bearer/curio/pkg/detectors/internal/testhelper"
+	"github.com/bearer/bearer/pkg/detectors/internal/testhelper"
 
-	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
+	reportdetectors "github.com/bearer/bearer/pkg/report/detectors"
 )
 
 const detectorType = reportdetectors.DetectorSymfony

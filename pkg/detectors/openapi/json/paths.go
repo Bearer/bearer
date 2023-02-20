@@ -1,9 +1,9 @@
 package json
 
 import (
-	"github.com/bearer/curio/pkg/detectors/openapi/queries"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report/operations/operationshelper"
+	"github.com/bearer/bearer/pkg/detectors/openapi/queries"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report/operations/operationshelper"
 	"github.com/smacker/go-tree-sitter/javascript"
 )
 
@@ -12,20 +12,20 @@ var queryPaths = parser.QueryMustCompile(javascript.GetLanguage(), `
 	(pair
     	key: (string) @helper_paths
         (#match? @helper_paths "^\"paths\"$")
-        value: 
+        value:
         	(object
             	(pair
                 	key: (string) @param_path
 					value:
                     	(object
                         	(pair
-                            	key: 
+                            	key:
                                 	(string) @param_request_type
                             )
                         )
                 )
             )
-    ) 
+    )
 )`)
 
 func AnnotatePaths(tree *parser.Tree, foundValues map[parser.Node]*operationshelper.Operation) error {

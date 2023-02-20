@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/bearer/curio/cmd/curio/build"
-	"github.com/bearer/curio/pkg/commands"
+	"github.com/bearer/bearer/cmd/bearer/build"
+	"github.com/bearer/bearer/pkg/commands"
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 )

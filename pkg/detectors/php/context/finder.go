@@ -1,10 +1,10 @@
 package context
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/context"
-	"github.com/bearer/curio/pkg/report/variables"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/context"
+	"github.com/bearer/bearer/pkg/report/variables"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 )
 
 func FindContext(tree *parser.Tree) *context.Resolver {

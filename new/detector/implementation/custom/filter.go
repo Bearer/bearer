@@ -5,10 +5,10 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/new/language/tree"
-	languagetypes "github.com/bearer/curio/new/language/types"
-	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/tree"
+	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
 
 func matchFilter(

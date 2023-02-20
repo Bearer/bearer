@@ -3,7 +3,7 @@ package flag
 import (
 	"errors"
 
-	"github.com/bearer/curio/pkg/types"
+	"github.com/bearer/bearer/pkg/types"
 )
 
 var (

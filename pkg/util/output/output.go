@@ -4,7 +4,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"

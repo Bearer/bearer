@@ -3,16 +3,16 @@ package frameworks_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/classification/frameworks"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/frameworks/beego"
-	"github.com/bearer/curio/pkg/report/frameworks/django"
-	"github.com/bearer/curio/pkg/report/frameworks/dotnet"
-	"github.com/bearer/curio/pkg/report/frameworks/rails"
-	"github.com/bearer/curio/pkg/report/frameworks/spring"
-	"github.com/bearer/curio/pkg/report/frameworks/symfony"
-	"github.com/bearer/curio/pkg/report/source"
-	"github.com/bearer/curio/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/classification/frameworks"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/frameworks/beego"
+	"github.com/bearer/bearer/pkg/report/frameworks/django"
+	"github.com/bearer/bearer/pkg/report/frameworks/dotnet"
+	"github.com/bearer/bearer/pkg/report/frameworks/rails"
+	"github.com/bearer/bearer/pkg/report/frameworks/spring"
+	"github.com/bearer/bearer/pkg/report/frameworks/symfony"
+	"github.com/bearer/bearer/pkg/report/source"
+	"github.com/bearer/bearer/pkg/util/classify"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -1,10 +1,10 @@
 package knex
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	reportknex "github.com/bearer/curio/pkg/report/frameworks/knex"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	reportknex "github.com/bearer/bearer/pkg/report/frameworks/knex"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

@@ -6,12 +6,12 @@ import (
 
 	"github.com/bradleyjkemp/cupaloy"
 
-	"github.com/bearer/curio/pkg/detectors/html"
-	detectortypes "github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/detectors/html"
+	detectortypes "github.com/bearer/bearer/pkg/report/detectors"
 
-	"github.com/bearer/curio/pkg/detectors"
-	"github.com/bearer/curio/pkg/detectors/internal/testhelper"
-	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/detectors"
+	"github.com/bearer/bearer/pkg/detectors/internal/testhelper"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
 )
 
 const detectorType = detectortypes.DetectorHTML

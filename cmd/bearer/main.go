@@ -3,10 +3,10 @@ package main
 import (
 	"os"
 
-	"github.com/bearer/curio/cmd/curio/build"
+	"github.com/bearer/bearer/cmd/bearer/build"
 
-	"github.com/bearer/curio/pkg/commands"
-	"github.com/bearer/curio/pkg/util/output"
+	"github.com/bearer/bearer/pkg/commands"
+	"github.com/bearer/bearer/pkg/util/output"
 )
 
 func main() {

@@ -5,14 +5,14 @@ import (
 
 	"github.com/gertd/go-pluralize"
 
-	"github.com/bearer/curio/new/detector/implementation/custom"
-	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
-	detectortypes "github.com/bearer/curio/new/detector/types"
-	reportdetections "github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/source"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/new/detector/implementation/custom"
+	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
+	detectortypes "github.com/bearer/bearer/new/detector/types"
+	reportdetections "github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/source"
+	"github.com/bearer/bearer/pkg/util/file"
 )
 
 func ReportDetections(report reportdetections.ReportDetection, file *file.FileInfo, detections []*detectortypes.Detection) {

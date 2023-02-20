@@ -1,8 +1,8 @@
 package types
 
 import (
-	"github.com/bearer/curio/new/language/tree"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/util/file"
 )
 
 type Detection struct {

@@ -3,11 +3,11 @@ package schema_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/report/detectors"
-	reportschema "github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	reportschema "github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/util/classify"
 	"github.com/stretchr/testify/assert"
 )
 

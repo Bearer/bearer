@@ -1,8 +1,8 @@
 package schemahelper
 
 import (
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/source"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/source"
 )
 
 type Schema struct {

@@ -6,18 +6,18 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/curio/pkg/detectors/dependencies/depsbase"
-	"github.com/bearer/curio/pkg/parser"
-	xml "github.com/bearer/curio/pkg/parser/sitter/xml2"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
+	"github.com/bearer/bearer/pkg/parser"
+	xml "github.com/bearer/bearer/pkg/parser/sitter/xml2"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 	"github.com/rs/zerolog/log"
 )
 
 var language = xml.GetLanguage()
 
 var query = `
-(element 
+(element
 	(_
     	(tag_name) @helper_module
         (#match? @helper_module "^module$")
@@ -31,7 +31,7 @@ var query = `
             (#match? @helper_organisation_name "^name$")
 			(attribute_value) @param_module_name
         )
-    ) 
+    )
     (element
       	(_
             (tag_name) @helper_revision
@@ -54,7 +54,7 @@ var queryDependencies = parser.QueryMustCompile(language, fmt.Sprintf(`
               (tag_name) @helper_dependencies
               (#match? @helper_dependencies "^dependencies$")
           	)
-            
+
             %s
       )
     )

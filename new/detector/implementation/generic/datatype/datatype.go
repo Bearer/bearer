@@ -1,14 +1,14 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/new/language/tree"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
 
-	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
-	languagetypes "github.com/bearer/curio/new/language/types"
-	classificationschema "github.com/bearer/curio/pkg/classification/schema"
+	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
+	languagetypes "github.com/bearer/bearer/new/language/types"
+	classificationschema "github.com/bearer/bearer/pkg/classification/schema"
 )
 
 type Data struct {

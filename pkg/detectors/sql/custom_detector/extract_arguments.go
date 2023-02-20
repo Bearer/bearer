@@ -1,11 +1,11 @@
 package customdetector
 
 import (
-	"github.com/bearer/curio/pkg/detectors/sql/util"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report/schema"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/detectors/sql/util"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report/schema"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 )
 
 func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {

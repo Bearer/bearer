@@ -3,9 +3,9 @@ package schema_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/classification/schema/internal/testhelper"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/classification/schema/internal/testhelper"
 	"github.com/bradleyjkemp/cupaloy"
 )
 

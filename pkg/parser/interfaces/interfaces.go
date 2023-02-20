@@ -1,10 +1,10 @@
 package interfaces
 
 import (
-	"github.com/bearer/curio/pkg/parser/interfaces/paths"
-	"github.com/bearer/curio/pkg/parser/interfaces/urls"
-	"github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/report/values"
+	"github.com/bearer/bearer/pkg/parser/interfaces/paths"
+	"github.com/bearer/bearer/pkg/parser/interfaces/urls"
+	"github.com/bearer/bearer/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/report/values"
 )
 
 func KeyIsRelevant(key string) bool {

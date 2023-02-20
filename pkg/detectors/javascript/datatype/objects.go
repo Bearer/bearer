@@ -3,10 +3,10 @@ package datatype
 import (
 	"strings"
 
-	"github.com/bearer/curio/pkg/parser"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/smacker/go-tree-sitter/javascript"
 )
 

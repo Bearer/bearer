@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	interfaceclassification "github.com/bearer/curio/pkg/classification/interfaces"
+	interfaceclassification "github.com/bearer/bearer/pkg/classification/interfaces"
 )
 
 func GetClassifiedInterface(detection interface{}) (interfaceclassification.ClassifiedInterface, error) {

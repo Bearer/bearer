@@ -1,6 +1,6 @@
 package types
 
-import "github.com/bearer/curio/new/language/tree"
+import "github.com/bearer/bearer/new/language/tree"
 
 type PatternQueryResult struct {
 	MatchNode *tree.Node

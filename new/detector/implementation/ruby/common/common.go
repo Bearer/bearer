@@ -1,6 +1,6 @@
 package common
 
-import "github.com/bearer/curio/new/language/tree"
+import "github.com/bearer/bearer/new/language/tree"
 
 func GetLiteralKey(keyNode *tree.Node) string {
 	switch keyNode.Type() {

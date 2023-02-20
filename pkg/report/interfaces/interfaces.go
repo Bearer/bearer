@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"github.com/bearer/curio/pkg/report/values"
+	"github.com/bearer/bearer/pkg/report/values"
 )
 
 type Type string

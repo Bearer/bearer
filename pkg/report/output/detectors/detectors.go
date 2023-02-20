@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/types"
-	"github.com/bearer/curio/pkg/util/output"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/types"
+	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/rs/zerolog/log"
 	"github.com/wlredeye/jsonlines"
 )

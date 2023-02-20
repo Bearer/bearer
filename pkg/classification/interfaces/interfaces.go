@@ -5,11 +5,11 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/util/classify"
-	"github.com/bearer/curio/pkg/util/url"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/util/classify"
+	"github.com/bearer/bearer/pkg/util/url"
 )
 
 type ClassifiedInterface struct {

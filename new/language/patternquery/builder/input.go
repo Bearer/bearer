@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/bearer/curio/new/language/implementation"
+	"github.com/bearer/bearer/new/language/implementation"
 )
 
 func processInput(langImplementation implementation.Implementation, input string) (string, *InputParams, error) {

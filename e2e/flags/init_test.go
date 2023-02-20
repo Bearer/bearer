@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/bearer/curio/e2e/internal/testhelper"
+	"github.com/bearer/bearer/e2e/internal/testhelper"
 	"github.com/bradleyjkemp/cupaloy"
 )
 

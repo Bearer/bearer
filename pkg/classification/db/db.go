@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/tangzero/inflector"
 )
 

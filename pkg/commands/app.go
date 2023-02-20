@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/bearer/curio/pkg/commands/artifact"
-	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/bearer/pkg/commands/artifact"
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/spf13/cobra"
 	"golang.org/x/xerrors"
 )

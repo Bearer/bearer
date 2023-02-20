@@ -3,14 +3,14 @@ package interfaces_test
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/classification/interfaces"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/classification/interfaces"
 
-	"github.com/bearer/curio/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detections"
 
-	reportinterfaces "github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/report/values"
-	"github.com/bearer/curio/pkg/util/classify"
+	reportinterfaces "github.com/bearer/bearer/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/report/values"
+	"github.com/bearer/bearer/pkg/util/classify"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,15 +1,15 @@
 package v2json
 
 import (
-	"github.com/bearer/curio/pkg/detectors/openapi/json"
-	"github.com/bearer/curio/pkg/detectors/openapi/queries"
-	"github.com/bearer/curio/pkg/detectors/openapi/reportadder"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	reporttypes "github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/operations/operationshelper"
-	"github.com/bearer/curio/pkg/report/schema/schemahelper"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/detectors/openapi/json"
+	"github.com/bearer/bearer/pkg/detectors/openapi/queries"
+	"github.com/bearer/bearer/pkg/detectors/openapi/reportadder"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	reporttypes "github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/operations/operationshelper"
+	"github.com/bearer/bearer/pkg/report/schema/schemahelper"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/smacker/go-tree-sitter/javascript"
 )
 

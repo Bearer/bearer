@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	schemaclassification "github.com/bearer/curio/pkg/classification/schema"
+	schemaclassification "github.com/bearer/bearer/pkg/classification/schema"
 
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/schema"
 )
 
 func GetSchemaClassification(schema schema.Schema) (schemaclassification.Classification, error) {

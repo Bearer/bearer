@@ -1,7 +1,7 @@
 package output
 
 import (
-	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/schollz/progressbar/v3"
 )
 

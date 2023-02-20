@@ -1,13 +1,13 @@
 package classification
 
 import (
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/classification/dependencies"
-	"github.com/bearer/curio/pkg/classification/frameworks"
-	"github.com/bearer/curio/pkg/classification/interfaces"
-	"github.com/bearer/curio/pkg/classification/schema"
-	config "github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/util/url"
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/classification/dependencies"
+	"github.com/bearer/bearer/pkg/classification/frameworks"
+	"github.com/bearer/bearer/pkg/classification/interfaces"
+	"github.com/bearer/bearer/pkg/classification/schema"
+	config "github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/util/url"
 )
 
 type Classifier struct {

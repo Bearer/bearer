@@ -1,10 +1,10 @@
 package object
 
 import (
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/tree"
 
-	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
+	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 )
 
 func (detector *objectDetector) getProperties(

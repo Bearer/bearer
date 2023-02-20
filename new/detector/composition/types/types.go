@@ -1,7 +1,7 @@
 package types
 
 import (
-	detectortypes "github.com/bearer/curio/new/detector/types"
+	detectortypes "github.com/bearer/bearer/new/detector/types"
 )
 
 type DetectorInitResult struct {

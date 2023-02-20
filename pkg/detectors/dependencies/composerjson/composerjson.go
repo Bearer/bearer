@@ -4,15 +4,15 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/javascript"
 
-	"github.com/bearer/curio/pkg/detectors/dependencies/depsbase"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 )
 
 var language = javascript.GetLanguage()
 var queryDependencies = parser.QueryMustCompile(language, `
-(pair 
+(pair
 	key: (string) @helper_require
     (#match? @helper_require "^\"require\"$")
     value: (object) @param_value

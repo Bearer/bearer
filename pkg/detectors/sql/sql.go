@@ -1,13 +1,13 @@
 package sql
 
 import (
-	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/detectors/types"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/util/file"
 
-	reporttypes "github.com/bearer/curio/pkg/report"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	reporttypes "github.com/bearer/bearer/pkg/report"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 )
 
 type detector struct {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/bearer/curio/pkg/parser/sitter/proto"
+	"github.com/bearer/bearer/pkg/parser/sitter/proto"
 	"github.com/stretchr/testify/assert"
 
 	sitter "github.com/smacker/go-tree-sitter"

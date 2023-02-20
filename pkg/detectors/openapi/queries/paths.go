@@ -1,10 +1,10 @@
 package queries
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report/operations"
-	"github.com/bearer/curio/pkg/report/operations/operationshelper"
-	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/report/operations"
+	"github.com/bearer/bearer/pkg/report/operations/operationshelper"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

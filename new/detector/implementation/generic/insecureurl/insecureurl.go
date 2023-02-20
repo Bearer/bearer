@@ -3,11 +3,11 @@ package insecureurl
 import (
 	"regexp"
 
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/tree"
 
-	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
-	languagetypes "github.com/bearer/curio/new/language/types"
+	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
+	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type insecureURLDetector struct {

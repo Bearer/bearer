@@ -1,14 +1,14 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/datatype"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/datatype"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 	"github.com/smacker/go-tree-sitter/python"
 )
 

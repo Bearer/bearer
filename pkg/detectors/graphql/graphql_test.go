@@ -4,11 +4,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/bearer/curio/pkg/detectors"
-	"github.com/bearer/curio/pkg/detectors/graphql"
-	"github.com/bearer/curio/pkg/detectors/internal/testhelper"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	detectortypes "github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/detectors"
+	"github.com/bearer/bearer/pkg/detectors/graphql"
+	"github.com/bearer/bearer/pkg/detectors/internal/testhelper"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	detectortypes "github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bradleyjkemp/cupaloy"
 )
 

@@ -9,7 +9,7 @@ Usage: $this [-b] bindir [-d] [tag]
   -b sets bindir or installation directory, Defaults to ./bin
   -d turns on debug logging
    [tag] is a tag from
-   https://github.com/Bearer/curio/releases
+   https://github.com/bearer/bearer/releases
    If tag is missing, then the latest will be used.
 EOF
   exit 2

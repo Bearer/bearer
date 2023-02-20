@@ -1,16 +1,16 @@
 package report
 
 import (
-	"github.com/bearer/curio/pkg/report/dependencies"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/frameworks"
-	"github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/report/dependencies"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/frameworks"
+	"github.com/bearer/bearer/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/schema/datatype"
 
-	"github.com/bearer/curio/pkg/report/secret"
-	"github.com/bearer/curio/pkg/report/source"
+	"github.com/bearer/bearer/pkg/report/secret"
+	"github.com/bearer/bearer/pkg/report/source"
 )
 
 type Report interface {

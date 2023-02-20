@@ -3,9 +3,9 @@ package commands
 import (
 	"fmt"
 
-	"github.com/bearer/curio/pkg/commands/process/worker"
-	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/util/output"
+	"github.com/bearer/bearer/pkg/commands/process/worker"
+	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 )

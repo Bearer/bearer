@@ -3,10 +3,10 @@ package patternquery
 import (
 	"fmt"
 
-	"github.com/bearer/curio/new/language/implementation"
-	"github.com/bearer/curio/new/language/patternquery/builder"
-	"github.com/bearer/curio/new/language/tree"
-	languagetypes "github.com/bearer/curio/new/language/types"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/patternquery/builder"
+	"github.com/bearer/bearer/new/language/tree"
+	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/rs/zerolog/log"
 )
 

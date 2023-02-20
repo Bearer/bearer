@@ -13,7 +13,7 @@ import (
 	"github.com/go-enry/go-enry/v2"
 	"github.com/rs/zerolog/log"
 
-	"github.com/bearer/curio/pkg/util/regex"
+	"github.com/bearer/bearer/pkg/util/regex"
 
 	ignore "github.com/sabhiram/go-gitignore"
 )

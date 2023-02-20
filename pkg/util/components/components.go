@@ -3,8 +3,8 @@ package components
 import (
 	"regexp"
 
-	"github.com/bearer/curio/pkg/util/normalize_key"
-	"github.com/bearer/curio/pkg/util/regex"
+	"github.com/bearer/bearer/pkg/util/normalize_key"
+	"github.com/bearer/bearer/pkg/util/regex"
 )
 
 var keyPatterns = []*regexp.Regexp{

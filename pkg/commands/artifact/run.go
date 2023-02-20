@@ -17,15 +17,15 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/bearer/curio/cmd/curio/build"
-	"github.com/bearer/curio/pkg/commands/process/balancer"
-	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/commands/process/worker/work"
-	"github.com/bearer/curio/pkg/flag"
-	reportoutput "github.com/bearer/curio/pkg/report/output"
-	outputhandler "github.com/bearer/curio/pkg/util/output"
+	"github.com/bearer/bearer/cmd/bearer/build"
+	"github.com/bearer/bearer/pkg/commands/process/balancer"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/flag"
+	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
-	"github.com/bearer/curio/pkg/types"
+	"github.com/bearer/bearer/pkg/types"
 )
 
 // TargetKind represents what kind of artifact curio scans

@@ -8,12 +8,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/bearer/curio/battle_tests/build"
-	"github.com/bearer/curio/battle_tests/config"
-	"github.com/bearer/curio/battle_tests/db"
-	"github.com/bearer/curio/battle_tests/rediscli"
-	"github.com/bearer/curio/battle_tests/sheet"
-	"github.com/bearer/curio/battle_tests/sync"
+	"github.com/bearer/bearer/battle_tests/build"
+	"github.com/bearer/bearer/battle_tests/config"
+	"github.com/bearer/bearer/battle_tests/db"
+	"github.com/bearer/bearer/battle_tests/rediscli"
+	"github.com/bearer/bearer/battle_tests/sheet"
+	"github.com/bearer/bearer/battle_tests/sync"
 )
 
 type CurioVersion struct {

@@ -13,8 +13,8 @@ release:
 
 dockers:
   - image_templates:
-      - "docker.io/bearer/curio:canary-amd64"
-      - "ghcr.io/bearer/curio:canary-amd64"
+      - "docker.io/bearer/bearer:canary-amd64"
+      - "ghcr.io/bearer/bearer:canary-amd64"
     use: buildx
     goos: linux
     goarch: amd64
@@ -26,8 +26,8 @@ dockers:
       - "--label=org.opencontainers.image.vendor=Bearer"
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.created={{ .Date }}"
-      - "--label=org.opencontainers.image.source=https://github.com/Bearer/curio"
+      - "--label=org.opencontainers.image.source=https://github.com/bearer/bearer"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
-      - "--label=org.opencontainers.image.url=https://curio.sh"
-      - "--label=org.opencontainers.image.documentation=https://curio.sh"
+      - "--label=org.opencontainers.image.url=https://bearer.com"
+      - "--label=org.opencontainers.image.documentation=https://docs.bearer.com"
       - "--platform=linux/amd64"

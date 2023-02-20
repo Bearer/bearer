@@ -8,10 +8,10 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/bearer/curio/battle_tests/config"
-	"github.com/bearer/curio/battle_tests/fs"
-	"github.com/bearer/curio/battle_tests/git"
-	"github.com/bearer/curio/pkg/util/tmpfile"
+	"github.com/bearer/bearer/battle_tests/config"
+	"github.com/bearer/bearer/battle_tests/fs"
+	"github.com/bearer/bearer/battle_tests/git"
+	"github.com/bearer/bearer/pkg/util/tmpfile"
 )
 
 type Scanner struct {

@@ -25,4 +25,4 @@ jobs:
         run: go test -v ./integration/... -p 8
         timeout-minutes: 10
         env:
-          CURIO_BINARY: true
+          USE_BINARY: true

@@ -5,13 +5,13 @@ import (
 
 	"github.com/smacker/go-tree-sitter/ruby"
 
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	parserschema "github.com/bearer/curio/pkg/parser/schema"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	parserschema "github.com/bearer/bearer/pkg/parser/schema"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/util/file"
 	pluralize "github.com/gertd/go-pluralize"
 )
 

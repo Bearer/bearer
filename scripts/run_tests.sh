@@ -1,6 +1,6 @@
 #!/bin/sh -
 #
-# Run the Curio test suite
+# Run the project test suite
 
 DEFAULT_TEST_ARGS="-count=1 -v ./..."
 
@@ -15,21 +15,21 @@ do_error() {
 
 do_cleanup() {
   do_info "Cleaning up"
-  rm -f ./curio || do_error "Failed to clean up"
+  rm -f ./bearer || do_error "Failed to clean up"
 }
 
 trap do_cleanup 1 2 3 6
 
-do_info "Building Curio binary..."
-go build -a -o ./curio ./cmd/curio/main.go || do_error "Failed to build Curio binary"
+do_info "Building binary..."
+go build -a -o ./bearer ./cmd/bearer/main.go || do_error "Failed to build binary"
 
-[ -f curio ] || do_error "No Curio binary found"
+[ -f bearer ] || do_error "No binary found"
 
 TEST_ARGS=$DEFAULT_TEST_ARGS
 [ $# -eq 0 ] || TEST_ARGS="$@"
 
 do_info "Running tests..."
-CURIO_BINARY=1 GITHUB_WORKSPACE=`pwd` go test $TEST_ARGS
+USE_BINARY=1 GITHUB_WORKSPACE=`pwd` go test $TEST_ARGS
 TEST_STATUS=$?
 
 do_cleanup

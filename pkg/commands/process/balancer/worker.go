@@ -11,14 +11,14 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/wlredeye/jsonlines"
 
-	"github.com/bearer/curio/pkg/commands/process/balancer/filelist"
-	"github.com/bearer/curio/pkg/commands/process/repo_info"
-	config "github.com/bearer/curio/pkg/commands/process/settings"
-	workertype "github.com/bearer/curio/pkg/commands/process/worker/work"
-	"github.com/bearer/curio/pkg/git"
-	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/util/output"
-	"github.com/bearer/curio/pkg/util/tmpfile"
+	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/repo_info"
+	config "github.com/bearer/bearer/pkg/commands/process/settings"
+	workertype "github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/git"
+	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/util/tmpfile"
 )
 
 var ErrFileListEmpty = errors.New("We couldn't find any files to scan in the specified directory.")

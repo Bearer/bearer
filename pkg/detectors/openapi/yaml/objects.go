@@ -1,10 +1,10 @@
 package yaml
 
 import (
-	"github.com/bearer/curio/pkg/detectors/openapi/queries"
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/report/schema/schemahelper"
+	"github.com/bearer/bearer/pkg/detectors/openapi/queries"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/bearer/bearer/pkg/report/schema/schemahelper"
 	"github.com/smacker/go-tree-sitter/yaml"
 )
 

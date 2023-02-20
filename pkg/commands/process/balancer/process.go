@@ -12,8 +12,8 @@ import (
 	"strconv"
 	"time"
 
-	config "github.com/bearer/curio/pkg/commands/process/settings"
-	workertype "github.com/bearer/curio/pkg/commands/process/worker/work"
+	config "github.com/bearer/bearer/pkg/commands/process/settings"
+	workertype "github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/rs/zerolog/log"
 	"github.com/struCoder/pidusage"
 )

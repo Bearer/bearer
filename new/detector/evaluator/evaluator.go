@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/bearer/curio/new/detector/types"
-	"github.com/bearer/curio/new/language/tree"
-	langtree "github.com/bearer/curio/new/language/tree"
-	languagetypes "github.com/bearer/curio/new/language/types"
+	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	languagetypes "github.com/bearer/bearer/new/language/types"
 	"golang.org/x/exp/slices"
 )
 

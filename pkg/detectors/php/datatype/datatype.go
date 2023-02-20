@@ -1,16 +1,16 @@
 package datatype
 
 import (
-	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/datatype"
-	"github.com/bearer/curio/pkg/report/detections"
-	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/bearer/pkg/parser"
+	"github.com/bearer/bearer/pkg/parser/datatype"
+	"github.com/bearer/bearer/pkg/report/detections"
+	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 
-	"github.com/bearer/curio/pkg/parser/nodeid"
-	php "github.com/bearer/curio/pkg/parser/sitter/php2"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+	php "github.com/bearer/bearer/pkg/parser/sitter/php2"
+	"github.com/bearer/bearer/pkg/report"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
 )
 
 var classesQuery = parser.QueryMustCompile(php.GetLanguage(),

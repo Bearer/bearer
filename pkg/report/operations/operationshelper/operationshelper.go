@@ -1,8 +1,8 @@
 package operationshelper
 
 import (
-	"github.com/bearer/curio/pkg/report/operations"
-	"github.com/bearer/curio/pkg/report/source"
+	"github.com/bearer/bearer/pkg/report/operations"
+	"github.com/bearer/bearer/pkg/report/source"
 )
 
 type Operation struct {
