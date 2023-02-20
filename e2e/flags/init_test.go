@@ -9,6 +9,7 @@ import (
 )
 
 func TestInitCommand(t *testing.T) {
+	t.Parallel()
 	filePath := testhelper.GetCWD() + "/curio.yml"
 	arguments := []string{"init"}
 

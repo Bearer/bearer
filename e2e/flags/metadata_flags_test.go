@@ -11,6 +11,7 @@ func newMetadataTest(name string, arguments []string) testhelper.TestCase {
 }
 
 func TestMetadataFlags(t *testing.T) {
+	t.Parallel()
 	tests := []testhelper.TestCase{
 		newMetadataTest("help", []string{"help"}),
 		newMetadataTest("version", []string{"version"}),

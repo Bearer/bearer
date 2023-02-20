@@ -1,0 +1,44 @@
+patterns:
+  - pattern: |
+      $<CLIENT>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: CLIENT
+        detection: javascript_third_parties_hotshot_statsd_test
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: METHOD
+        values:
+          - event
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_third_parties_hotshot_statsd_test
+    patterns:
+      - |
+        new StatsD($<...>)
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Datadog."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Datadog docs](https://docs.datadoghq.com)
+    - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
+  dsr_id: DSR-1
+  cwe_id:
+    - 201
+  associated_recipe: Datadog
+  id: javascript_third_parties_datadog_test
