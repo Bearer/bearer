@@ -20,7 +20,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not send sensitive data to Scout APM."
+  description: "Sensitive data sent to Scout APM detected."
   remediation_message: |
     ## Description
     Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Scout APM.

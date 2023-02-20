@@ -24,7 +24,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not send sensitive data to Rollbar."
+  description: "Sensitive data sent to Rollbar detected."
   remediation_message: |
     ## Description
 

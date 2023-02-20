@@ -22,7 +22,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not send sensitive data to Honeybadger."
+  description: "Sensitive data sent to Honeybadger detected."
   remediation_message: |
     ## Description
 

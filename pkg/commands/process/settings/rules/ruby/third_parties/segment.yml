@@ -29,7 +29,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not send sensitive data to Segment."
+  description: "Sensitive data sent to Segment detected.."
   remediation_message: |
     ## Description
     Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Segment.

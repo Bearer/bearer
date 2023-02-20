@@ -15,7 +15,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not store sensitive data in session cookies."
+  description: "Sensitive data stored in a session cookie detected."
   remediation_message: |
     ## Description
 

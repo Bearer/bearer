@@ -22,7 +22,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Ensure cookies are sent over HTTPS."
+  description: "Missing secure options for cookie detected."
   remediation_message: |
     ## Description
     To make sure cookies don't open your application up to exploits or unauthorized access, don't use default cookie values and make sure to set security options appropriately.

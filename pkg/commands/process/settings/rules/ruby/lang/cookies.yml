@@ -32,7 +32,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not store sensitive data in cookies."
+  description: "Sensitive data stored in a cookie detected."
   remediation_message: |
     ## Description
 

@@ -20,7 +20,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Only communicate with secure SMTP connections."
+  description: "Communication with an unsecure SMTP connection detected."
   remediation_message: |
     ## Description
 

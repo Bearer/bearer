@@ -119,7 +119,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not use weak encryption libraries to encrypt sensitive data."
+  description: "Sensitive data encrypted with a weak encryption library detected."
   remediation_message: |
     ## Description
 

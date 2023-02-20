@@ -28,7 +28,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not send sensitive data to Open Telemetry."
+  description: "Sensitive data sent to Open Telemetry detected."
   remediation_message: |
     ## Description
     Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Open Telemetry.

@@ -33,7 +33,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not send sensitive data as HTTP GET parameters."
+  description: "Sensitive data communicated through GET parameters detected."
   remediation_message: |
     ## Description
     Sensitive data should never be sent as part of the query string in HTTP GET requests. This rule checks if sensitive data types are sent as GET parameters.

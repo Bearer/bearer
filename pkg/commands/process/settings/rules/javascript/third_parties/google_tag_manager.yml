@@ -18,7 +18,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not send sensitive data to google tag manager."
+  description: "Sensitive data sent to Google Tag Manager detected."
   remediation_message: |
     ## Description
 
