@@ -1,17 +1,13 @@
-package flags_test
+package rules_test
 
 import (
 	"os"
 	"testing"
 
-	"github.com/bearer/curio/integration/internal/testhelper"
-	"github.com/bradleyjkemp/cupaloy"
+	"github.com/bearer/curio/e2e/internal/testhelper"
 )
 
-func TestInitCommand(t *testing.T) {
-	filePath := testhelper.GetCWD() + "/curio.yml"
-	arguments := []string{"init"}
-
+func createTestCase(arguments []string) {
 	cmd, _ := testhelper.CreateCurioCommand(arguments)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
@@ -33,6 +29,8 @@ func TestInitCommand(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to read created config file err: %s", err)
 	}
+}
 
-	cupaloy.SnapshotT(t, string(fileContent))
+func TestAuxilaryRule(t *testing.T) {
+
 }
