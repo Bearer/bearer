@@ -7,13 +7,4 @@
           matchnode: {}
           data:
             name: first_name
-- position: "1:8"
-  content: '{ first_name: "" }'
-  data:
-    name: ""
-    properties:
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: first_name
 
