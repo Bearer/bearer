@@ -1,0 +1,22 @@
+patterns:
+  - pattern: |
+      app.use($<...>serveIndex()$<...>)
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "warning"
+metadata:
+  description: "Ensure directory listing is not inappropriately exposed."
+  remediation_message: |
+    ## Description
+    Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.
+
+    ## Remediations
+    - Restrict access to sensitive directories and files
+
+    ## Resources
+    - [Express Serve Index Middleware](https://expressjs.com/en/resources/middleware/serve-index.html)
+  cwe_id:
+    - 548
+  id: "javascript_express_exposed_dir_listing"
