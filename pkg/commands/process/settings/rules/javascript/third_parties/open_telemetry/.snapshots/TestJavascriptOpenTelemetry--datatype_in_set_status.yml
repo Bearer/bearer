@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_open_telemetry
-      rule_description: Do not send sensitive data to Open Telemetry.
+      rule_description: Sensitive data sent to Open Telemetry detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_open_telemetry
       line_number: 9
       filename: datatype_in_set_status.js

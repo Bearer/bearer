@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-5
       rule_display_id: javascript_lang_exception
-      rule_description: Do not send sensitive data to exceptions.
+      rule_description: Sensitive data in a exception message detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_exception
       line_number: 5
       filename: reject.js
@@ -11,7 +11,7 @@ critical:
       parent_content: reject("Error with user " + user)
     - rule_dsrid: DSR-5
       rule_display_id: javascript_lang_exception
-      rule_description: Do not send sensitive data to exceptions.
+      rule_description: Sensitive data in a exception message detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_exception
       line_number: 14
       filename: reject.js

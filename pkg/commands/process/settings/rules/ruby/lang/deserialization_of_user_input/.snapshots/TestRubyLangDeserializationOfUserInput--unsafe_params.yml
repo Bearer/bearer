@@ -1,7 +1,7 @@
 high:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 1
       filename: unsafe_params.rb
@@ -9,7 +9,7 @@ high:
       parent_content: YAML.load(params[:oops])
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 3
       filename: unsafe_params.rb
@@ -17,7 +17,7 @@ high:
       parent_content: Psych.load(params[:oops])
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 5
       filename: unsafe_params.rb
@@ -25,7 +25,7 @@ high:
       parent_content: Syck.load(params[:oops])
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 7
       filename: unsafe_params.rb
@@ -33,7 +33,7 @@ high:
       parent_content: JSON.load(params[:oops])
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 9
       filename: unsafe_params.rb
@@ -43,7 +43,7 @@ high:
         end
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 11
       filename: unsafe_params.rb
@@ -51,7 +51,7 @@ high:
       parent_content: Oj.object_load(params[:oops])
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 13
       filename: unsafe_params.rb
@@ -59,7 +59,7 @@ high:
       parent_content: Marshal.load(params[:oops])
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: Do not pass user input to unsafe deserialization methods.
+      rule_description: User input detected in an unsafe deserialization method.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 14
       filename: unsafe_params.rb

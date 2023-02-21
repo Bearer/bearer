@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_segment
-      rule_description: Do not send sensitive data to Segment.
+      rule_description: Sensitive data sent to Segment detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
       line_number: 8
       filename: datatype_in_identify.js
@@ -20,7 +20,7 @@ critical:
         })
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_segment
-      rule_description: Do not send sensitive data to Segment.
+      rule_description: Sensitive data sent to Segment detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
       line_number: 9
       filename: datatype_in_identify.js
@@ -39,7 +39,7 @@ critical:
         })
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_segment
-      rule_description: Do not send sensitive data to Segment.
+      rule_description: Sensitive data sent to Segment detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
       line_number: 11
       filename: datatype_in_identify.js
@@ -58,7 +58,7 @@ critical:
         })
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_segment
-      rule_description: Do not send sensitive data to Segment.
+      rule_description: Sensitive data sent to Segment detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
       line_number: 18
       filename: datatype_in_identify.js

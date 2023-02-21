@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-6
       rule_display_id: ruby_third_parties_clickhouse
-      rule_description: Do not store sensitive data in ClickHouse.
+      rule_description: Sensitive data sent to ClickHouse detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_clickhouse
       line_number: 6
       filename: datatype_in_insert_rows.rb
@@ -17,7 +17,7 @@ critical:
             ]
     - rule_dsrid: DSR-6
       rule_display_id: ruby_third_parties_clickhouse
-      rule_description: Do not store sensitive data in ClickHouse.
+      rule_description: Sensitive data sent to ClickHouse detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_clickhouse
       line_number: 7
       filename: datatype_in_insert_rows.rb

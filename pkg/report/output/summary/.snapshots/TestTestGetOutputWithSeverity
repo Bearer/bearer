@@ -3,7 +3,7 @@
     (summary.Result) {
       RuleDSRID: (string) (len=5) "DSR-5",
       RuleDisplayId: (string) (len=17) "ruby_rails_logger",
-      RuleDescription: (string) (len=44) "Do not send sensitive data to Rails loggers.",
+      RuleDescription: (string) (len=46) "Sensitive data sent to Rails loggers detected.",
       RuleDocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger",
       LineNumber: (int) 1,
       Filename: (string) (len=20) "pkg/datatype_leak.rb",

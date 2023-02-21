@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-6
       rule_display_id: ruby_third_parties_algolia
-      rule_description: Do not store sensitive data in Algolia.
+      rule_description: Sensitive data sent to Algolia detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_algolia
       line_number: 4
       filename: datatype_in_save_object.rb
@@ -11,7 +11,7 @@ critical:
       parent_content: 'index.save_object({ email: user.email }, { auto_generate_object_id_if_not_exist: true })'
     - rule_dsrid: DSR-6
       rule_display_id: ruby_third_parties_algolia
-      rule_description: Do not store sensitive data in Algolia.
+      rule_description: Sensitive data sent to Algolia detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_algolia
       line_number: 6
       filename: datatype_in_save_object.rb

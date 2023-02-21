@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_google_dataflow
-      rule_description: Do not send sensitive data to Google Dataflow.
+      rule_description: Sensitive data sent to Google Dataflow detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
       line_number: 5
       filename: datatype_in_template_job_creation.rb

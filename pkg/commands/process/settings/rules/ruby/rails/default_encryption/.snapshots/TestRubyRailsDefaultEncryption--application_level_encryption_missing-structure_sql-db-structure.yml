@@ -1,7 +1,7 @@
 warning:
     - rule_dsrid: DSR-10
       rule_display_id: ruby_rails_default_encryption
-      rule_description: Force application-level encryption when processing sensitive data.
+      rule_description: Missing application-level encryption of sensitive data detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_default_encryption
       line_number: 3
       filename: application_level_encryption_missing/structure_sql/db/structure.sql
@@ -19,7 +19,7 @@ warning:
         )
     - rule_dsrid: DSR-10
       rule_display_id: ruby_rails_default_encryption
-      rule_description: Force application-level encryption when processing sensitive data.
+      rule_description: Missing application-level encryption of sensitive data detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_default_encryption
       line_number: 7
       filename: application_level_encryption_missing/structure_sql/db/structure.sql

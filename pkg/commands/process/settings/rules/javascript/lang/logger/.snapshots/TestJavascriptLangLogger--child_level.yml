@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-5
       rule_display_id: javascript_lang_logger
-      rule_description: Do not send sensitive data to loggers.
+      rule_description: Sensitive data in a logger message detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
       line_number: 3
       filename: child_level.js
@@ -11,7 +11,7 @@ critical:
       parent_content: logger.child(ctx)
     - rule_dsrid: DSR-5
       rule_display_id: javascript_lang_logger
-      rule_description: Do not send sensitive data to loggers.
+      rule_description: Sensitive data in a logger message detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
       line_number: 7
       filename: child_level.js

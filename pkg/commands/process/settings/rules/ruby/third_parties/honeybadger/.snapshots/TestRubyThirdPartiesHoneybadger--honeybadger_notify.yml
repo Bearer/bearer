@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_honeybadger
-      rule_description: Do not send sensitive data to Honeybadger.
+      rule_description: Sensitive data sent to Honeybadger detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 2
       filename: honeybadger_notify.rb
@@ -19,7 +19,7 @@ critical:
         )
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_honeybadger
-      rule_description: Do not send sensitive data to Honeybadger.
+      rule_description: Sensitive data sent to Honeybadger detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 9
       filename: honeybadger_notify.rb
@@ -37,7 +37,7 @@ critical:
         )
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_honeybadger
-      rule_description: Do not send sensitive data to Honeybadger.
+      rule_description: Sensitive data sent to Honeybadger detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 13
       filename: honeybadger_notify.rb
@@ -55,7 +55,7 @@ critical:
         )
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_honeybadger
-      rule_description: Do not send sensitive data to Honeybadger.
+      rule_description: Sensitive data sent to Honeybadger detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 14
       filename: honeybadger_notify.rb
@@ -73,7 +73,7 @@ critical:
         )
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_honeybadger
-      rule_description: Do not send sensitive data to Honeybadger.
+      rule_description: Sensitive data sent to Honeybadger detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 22
       filename: honeybadger_notify.rb
@@ -91,7 +91,7 @@ critical:
         )
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_honeybadger
-      rule_description: Do not send sensitive data to Honeybadger.
+      rule_description: Sensitive data sent to Honeybadger detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 29
       filename: honeybadger_notify.rb

@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_sentry
-      rule_description: Do not send sensitive data to Sentry.
+      rule_description: Sensitive data sent to Sentry detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_sentry
       line_number: 1
       filename: datatype_in_set_context.rb
@@ -11,7 +11,7 @@ critical:
       parent_content: 'Sentry.set_context(''email'', { email: user.email })'
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_sentry
-      rule_description: Do not send sensitive data to Sentry.
+      rule_description: Sensitive data sent to Sentry detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_sentry
       line_number: 4
       filename: datatype_in_set_context.rb
@@ -21,7 +21,7 @@ critical:
       parent_content: 'scope.set_context(''email'', { email: user.email })'
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_sentry
-      rule_description: Do not send sensitive data to Sentry.
+      rule_description: Sensitive data sent to Sentry detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_sentry
       line_number: 8
       filename: datatype_in_set_context.rb

@@ -1,7 +1,7 @@
 low:
     - rule_dsrid: ""
       rule_display_id: express_insecure_xml_ref
-      rule_description: Ensure proper restriction of XML external entity references.
+      rule_description: Missing proper restriction of XML external entity references detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/express_insecure_xml_ref
       line_number: 4
       filename: lib_xml_with_noent_true.js
