@@ -35,7 +35,10 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: high # FIXME
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
   description: "Do not pass user input to unsafe deserialization methods."
   remediation_message: |

@@ -1,4 +1,4 @@
-high:
+low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_deserialization_of_user_input
       rule_description: Do not pass user input to unsafe deserialization methods.

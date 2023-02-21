@@ -1,4 +1,4 @@
-high:
+low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_rails_session_key_using_user_input
       rule_description: Do not use user input in a session key.

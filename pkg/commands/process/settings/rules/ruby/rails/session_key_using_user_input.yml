@@ -14,7 +14,10 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: high # FIXME
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
   description: "Do not use user input in a session key."
   remediation_message: |
@@ -29,4 +32,6 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-? # FIXME
+  cwe_id:
+    - 276
   id: ruby_rails_session_key_using_user_input
