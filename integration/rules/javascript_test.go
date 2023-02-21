@@ -32,6 +32,10 @@ func TestJavascriptLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")
 }
 
+func TestJavascriptExpressUnsafeDeserialization(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/unsafe_deserialization")
+}
+
 func TestJavascriptExpressExposedDirListing(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/exposed_dir_listing")
 }
