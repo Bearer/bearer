@@ -8,7 +8,7 @@ languages:
 auxiliary:
   - id: javascript_express_request_obj
     patterns:
-      - req.$<_>.$<_>
+      - req.$<_>
 trigger: presence
 severity:
   default: "warning"
