@@ -185,7 +185,7 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 	}
 
 	if reportPassed {
-		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://curio.sh/guides/custom-rule\n")
+		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.sh/guides/custom-rule\n")
 	}
 
 	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, results, len(rules), failures, severityForFailure)
@@ -234,7 +234,7 @@ func writeStatsToString(
 		return
 	}
 	if stats.AnythingFoundFor(statistics) {
-		reportStr.WriteString("\nCurio found:\n")
+		reportStr.WriteString("\nBearer found:\n")
 		stats.WriteStatsToString(reportStr, statistics)
 		reportStr.WriteString("\n")
 	}

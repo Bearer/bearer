@@ -16,7 +16,7 @@ import (
 	"github.com/bearer/bearer/battle_tests/sync"
 )
 
-type CurioVersion struct {
+type Version struct {
 	Version string
 }
 
@@ -29,7 +29,7 @@ func main() {
 		log.Debug().Msgf("failed to init redis")
 	}
 
-	log.Debug().Msgf("curio version %s", build.CurioVersion)
+	log.Debug().Msgf("Binary version %s", build.Version)
 	log.Debug().Msgf("battle tests SHA %s", build.BattleTestSHA)
 	log.Debug().Msgf("S3 bucket %s", build.S3Bucket)
 

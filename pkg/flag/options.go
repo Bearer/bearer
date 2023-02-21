@@ -82,7 +82,7 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 	if flag == nil {
 		return nil
 	} else if flag.Name == "" {
-		// This flag is available only in curio.yaml
+		// This flag is available only in bearer.yaml
 		viper.SetDefault(flag.ConfigName, flag.Value)
 		return nil
 	}
@@ -91,7 +91,7 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 		return err
 	}
 	// We don't use viper.AutomaticEnv, so we need to add a prefix manually here.
-	if err := viper.BindEnv(flag.ConfigName, strings.ToUpper("curio_"+strings.ReplaceAll(flag.Name, "-", "_"))); err != nil {
+	if err := viper.BindEnv(flag.ConfigName, strings.ToUpper("bearer_"+strings.ReplaceAll(flag.Name, "-", "_"))); err != nil {
 		return err
 	}
 

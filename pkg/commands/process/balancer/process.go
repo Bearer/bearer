@@ -85,7 +85,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 
 	err = process.WaitForOnline(task)
 	if err != nil {
-		log.Fatal().Msgf("Failed to start curio, error with your configuration %s", err)
+		log.Fatal().Msgf("Failed to start bearer, error with your configuration %s", err)
 		return err
 	}
 

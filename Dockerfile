@@ -4,11 +4,11 @@ RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache git
 
-COPY curio /usr/local/bin/
+COPY bearer /usr/local/bin/
 
 RUN addgroup -S rungroup && adduser -S runuser -G rungroup
 USER runuser
 
 RUN git config --global --add safe.directory '*'
 
-ENTRYPOINT ["curio"]
+ENTRYPOINT ["bearer"]

@@ -22,7 +22,7 @@ Examples:
 	$ bearer scan --report privacy --output <output-path> .
 
 Learn More:
-	Curio is a static code analysis tool (SAST) that scans your source code to
+	Bearer is a static code analysis tool (SAST) that scans your source code to
 	discover security risks and vulnerabilities that put your sensitive data
 	at risk (PHI, PD, PII).
 

@@ -28,7 +28,7 @@ import (
 	"github.com/bearer/bearer/pkg/types"
 )
 
-// TargetKind represents what kind of artifact curio scans
+// TargetKind represents what kind of artifact bearer scans
 type TargetKind string
 
 const (
@@ -71,7 +71,7 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 		log.Error().Msgf("failed to build scan id for caching %e", err)
 	}
 
-	path := os.TempDir() + "/curio" + scanID
+	path := os.TempDir() + "/bearer" + scanID
 	completedPath := strings.Replace(path, ".jsonl", "-completed.jsonl", 1)
 
 	r.reportPath = path
@@ -147,10 +147,9 @@ func buildScanID(scanSettings settings.Config) (string, error) {
 
 	configHash := hex.EncodeToString(detectorsHashBuilder.Sum(nil)[:])
 
-	// we want curio sha as it might change detections
-	curioSHA := build.CommitSHA
-
-	scanID := strings.TrimSuffix(string(sha), "\n") + "-" + curioSHA + "-" + configHash + ".jsonl"
+	// we want sha as it might change detections
+	buildSHA := build.CommitSHA
+	scanID := strings.TrimSuffix(string(sha), "\n") + "-" + buildSHA + "-" + configHash + ".jsonl"
 
 	return scanID, nil
 }

@@ -164,7 +164,7 @@ func GetPlaceholderOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.Da
 	outputStr = &strings.Builder{}
 	statistics, err := GetOutput(inputgocloc, inputDataflow, config)
 
-	supportURL := "https://curio.sh/explanations/reports/"
+	supportURL := "https://docs.bearer.sh/explanations/reports/"
 	outputStr.WriteString(fmt.Sprintf(`
 The policy report is not yet available for your stack. Learn more at %s`,
 		supportURL))
@@ -179,7 +179,7 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 
 	WriteStatsToString(outputStr, statistics)
 
-	suggestedCommand := color.New(color.Italic).Sprintf("curio scan %s --report dataflow", config.Target)
+	suggestedCommand := color.New(color.Italic).Sprintf("bearer scan %s --report dataflow", config.Target)
 	outputStr.WriteString(fmt.Sprintf(`
 
 Run the data flow report if you want the full output using: %s`, suggestedCommand))

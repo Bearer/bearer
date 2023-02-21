@@ -28,7 +28,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 	// add default documentaiton urls for default rules
 	for id, definition := range definitions {
 		if definition.Metadata.DocumentationUrl == "" {
-			definitions[id].Metadata.DocumentationUrl = "https://curio.sh/reference/rules/" + id
+			definitions[id].Metadata.DocumentationUrl = "https://docs.bearer.com/reference/rules/" + id
 		}
 	}
 

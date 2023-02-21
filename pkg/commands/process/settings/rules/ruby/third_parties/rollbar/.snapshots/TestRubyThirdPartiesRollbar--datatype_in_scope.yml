@@ -2,7 +2,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_rollbar
       rule_description: Do not send sensitive data to Rollbar.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_rollbar
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_rollbar
       line_number: 1
       filename: datatype_in_scope.rb
       category_groups:
@@ -12,7 +12,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_rollbar
       rule_description: Do not send sensitive data to Rollbar.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_rollbar
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_rollbar
       line_number: 3
       filename: datatype_in_scope.rb
       category_groups:
@@ -22,7 +22,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_rollbar
       rule_description: Do not send sensitive data to Rollbar.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_rollbar
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_rollbar
       line_number: 7
       filename: datatype_in_scope.rb
       category_groups:

@@ -10,7 +10,7 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			cmd.Printf("curio version: %s\nsha: %s\n", version, commitSHA)
+			cmd.Printf("bearer version: %s\nsha: %s\n", version, commitSHA)
 			return nil
 		},
 	}

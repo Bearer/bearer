@@ -2,7 +2,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 3
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -18,7 +18,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 9
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -34,7 +34,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 17
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -50,7 +50,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 23
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -66,7 +66,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 31
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -81,7 +81,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 36
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -96,7 +96,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 43
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -112,7 +112,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 49
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -128,7 +128,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 57
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -145,7 +145,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 64
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -162,7 +162,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 73
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -178,7 +178,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 79
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -194,7 +194,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 101
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
@@ -210,7 +210,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_airbrake
       rule_description: Do not send sensitive data to Airbrake.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 107
       filename: datatype_in_extended_notify_methods.rb
       category_groups:

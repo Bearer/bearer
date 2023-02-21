@@ -2,7 +2,7 @@ critical:
     - rule_dsrid: DSR-4
       rule_display_id: javascript_lang_file_generation
       rule_description: Do not write sensitive data to static files.
-      rule_documentation_url: https://curio.sh/reference/rules/javascript_lang_file_generation
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
       line_number: 8
       filename: file_generation.js
       category_groups:
@@ -16,7 +16,7 @@ critical:
     - rule_dsrid: DSR-4
       rule_display_id: javascript_lang_file_generation
       rule_description: Do not write sensitive data to static files.
-      rule_documentation_url: https://curio.sh/reference/rules/javascript_lang_file_generation
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
       line_number: 11
       filename: file_generation.js
       category_groups:
@@ -30,7 +30,7 @@ critical:
     - rule_dsrid: DSR-4
       rule_display_id: javascript_lang_file_generation
       rule_description: Do not write sensitive data to static files.
-      rule_documentation_url: https://curio.sh/reference/rules/javascript_lang_file_generation
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
       line_number: 12
       filename: file_generation.js
       category_groups:

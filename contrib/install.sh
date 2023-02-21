@@ -4,7 +4,7 @@ set -e
 usage() {
   this=$1
   cat <<EOF
-$this: download go binaries for Bearer/curio
+$this: download go binaries for Bearer
 Usage: $this [-b] bindir [-d] [tag]
   -b sets bindir or installation directory, Defaults to ./bin
   -d turns on debug logging
@@ -53,10 +53,10 @@ execute() {
 
 get_binaries() {
   case "$PLATFORM" in
-    darwin/amd64) BINARIES="curio" ;;
-    darwin/arm64) BINARIES="curio" ;;
-    linux/386) BINARIES="curio" ;;
-    linux/amd64) BINARIES="curio" ;;
+    darwin/amd64) BINARIES="bearer" ;;
+    darwin/arm64) BINARIES="bearer" ;;
+    linux/386) BINARIES="bearer" ;;
+    linux/amd64) BINARIES="bearer" ;;
     *)
       log_crit "platform $PLATFORM is not supported.  Make sure this script is up-to-date and file request at https://github.com/${PREFIX}/issues/new"
       exit 1
@@ -296,10 +296,10 @@ hash_sha256_verify() {
   fi
 }
 
-PROJECT_NAME="curio"
+PROJECT_NAME="bearer"
 OWNER=Bearer
-REPO="curio"
-BINARY=curio
+REPO="bearer"
+BINARY=bearer
 FORMAT=tar.gz
 OS=$(uname_os)
 ARCH=$(uname_arch)

@@ -2,7 +2,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_open_telemetry
       rule_description: Do not send sensitive data to Open Telemetry.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_open_telemetry
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
       line_number: 7
       filename: datatype_in_span_attributes.rb
       category_groups:
@@ -16,7 +16,7 @@ critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_open_telemetry
       rule_description: Do not send sensitive data to Open Telemetry.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_open_telemetry
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
       line_number: 13
       filename: datatype_in_span_attributes.rb
       category_groups:

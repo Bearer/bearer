@@ -58,7 +58,7 @@ func (scanner *Scanner) Start(reportType string) (outputBytes []byte, startTime 
 	log.Debug().Msgf("scan process (%s) on %s start at %s", reportType, scanner.repositoryUrl, processStartedAt)
 	// process scan
 	output, err := exec.Command(
-		config.Runtime.CurioExecutablePath,
+		config.Runtime.ExecutablePath,
 		"scan",
 		fmt.Sprintf("--report=%s", reportType),
 		"--quiet",
