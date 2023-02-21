@@ -1,0 +1,11 @@
+low:
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_external_resource
+      rule_description: Avoid rendering resources resolved from external names or references.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_resource
+      line_number: 6
+      filename: require_external_resource.js
+      parent_line_number: 6
+      parent_content: require(req.query.user.path)
+
+

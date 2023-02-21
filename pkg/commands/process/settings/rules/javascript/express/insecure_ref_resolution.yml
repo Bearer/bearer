@@ -1,0 +1,28 @@
+patterns:
+  - pattern: |
+      require($<EXPRESS_REQ>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_insecure_ref_resolution_request_obj
+  - pattern: |
+      res.render($<EXPRESS_REQ>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_insecure_ref_resolution_request_obj
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_express_insecure_ref_resolution_request_obj
+    patterns:
+      - req.$<_>
+trigger: presence
+severity:
+  default: "low"
+metadata:
+  description: "Avoid rendering resources resolved from external names or references."
+  remediation_message: |
+    ## Description
+    Coming soon.
+  cwe_id:
+    - 706
+  id: "javascript_express_external_resource"
