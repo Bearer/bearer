@@ -70,6 +70,10 @@ func TestRubyRailsInsecureCommunication(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_communication")
 }
 
+func TestRubyRailsInsecureHTTPPassowrd(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_http_password")
+}
+
 func TestRubyRailsInsecureSmtp(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_smtp")
 }
