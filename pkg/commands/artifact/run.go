@@ -23,6 +23,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
 	"github.com/bearer/bearer/pkg/types"
@@ -200,6 +201,10 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
+	if !opts.Quiet {
+		output.StdErrLogger().Msg("Loading rules")
+	}
+
 	scanSettings, err := settings.FromOptions(opts)
 	scanSettings.Target = opts.Target
 	if err != nil {
