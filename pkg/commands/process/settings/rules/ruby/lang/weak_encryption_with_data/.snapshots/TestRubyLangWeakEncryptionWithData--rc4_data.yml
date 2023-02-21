@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-7
       rule_display_id: ruby_lang_weak_encryption_with_data
-      rule_description: Do not use weak encryption libraries to encrypt sensitive data.
+      rule_description: Sensitive data encrypted with a weak encryption library detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
       line_number: 1
       filename: rc4_data.rb
@@ -11,7 +11,7 @@ critical:
       parent_content: RC4.new("insecure").encrypt(user.password)
     - rule_dsrid: DSR-7
       rule_display_id: ruby_lang_weak_encryption_with_data
-      rule_description: Do not use weak encryption libraries to encrypt sensitive data.
+      rule_description: Sensitive data encrypted with a weak encryption library detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
       line_number: 4
       filename: rc4_data.rb
@@ -22,7 +22,7 @@ critical:
 low:
     - rule_dsrid: DSR-7
       rule_display_id: ruby_lang_weak_encryption
-      rule_description: Avoid weak encryption libraries.
+      rule_description: Weak encryption library usage detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
       line_number: 1
       filename: rc4_data.rb
@@ -32,7 +32,7 @@ low:
       parent_content: RC4.new("insecure").encrypt(user.password)
     - rule_dsrid: DSR-7
       rule_display_id: ruby_lang_weak_encryption
-      rule_description: Avoid weak encryption libraries.
+      rule_description: Weak encryption library usage detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
       line_number: 4
       filename: rc4_data.rb

@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-3
       rule_display_id: ruby_lang_cookies
-      rule_description: Do not store sensitive data in cookies.
+      rule_description: Sensitive data stored in a cookie detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_cookies
       line_number: 2
       filename: datatype_object_in_cookie.rb
@@ -11,7 +11,7 @@ critical:
       parent_content: 'cookies[:login] = { value: user.to_json, expires: 1.hour, secure: true }'
     - rule_dsrid: DSR-3
       rule_display_id: ruby_lang_cookies
-      rule_description: Do not store sensitive data in cookies.
+      rule_description: Sensitive data stored in a cookie detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_cookies
       line_number: 3
       filename: datatype_object_in_cookie.rb

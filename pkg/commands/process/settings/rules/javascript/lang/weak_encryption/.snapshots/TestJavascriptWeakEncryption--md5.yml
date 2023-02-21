@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-5
       rule_display_id: javascript_weak_encryption
-      rule_description: Do not weak encrypt sensitive information
+      rule_description: Weak encryption library usage detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_weak_encryption
       line_number: 4
       filename: md5.js
@@ -11,7 +11,7 @@ critical:
       parent_content: crypto.createHmac("md5", key).update(user.password)
     - rule_dsrid: DSR-5
       rule_display_id: javascript_weak_encryption
-      rule_description: Do not weak encrypt sensitive information
+      rule_description: Weak encryption library usage detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_weak_encryption
       line_number: 5
       filename: md5.js

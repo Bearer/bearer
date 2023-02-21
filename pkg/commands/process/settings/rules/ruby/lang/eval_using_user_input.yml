@@ -39,9 +39,12 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: high # FIXME
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
-  description: "Do not generate code using user input."
+  description: "Potential command injection with user input detected."
   remediation_message: |
     ## Description
 
@@ -54,4 +57,6 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-? # FIXME
+  cwe_id:
+    - 94
   id: ruby_lang_eval_using_user_input

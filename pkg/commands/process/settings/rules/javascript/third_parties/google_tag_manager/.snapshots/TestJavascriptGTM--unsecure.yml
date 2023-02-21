@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: javascript_google_tag_manager
-      rule_description: Do not send sensitive data to google tag manager.
+      rule_description: Sensitive data sent to Google Tag Manager detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
       line_number: 1
       filename: unsecure.js
@@ -14,7 +14,7 @@ critical:
         })
     - rule_dsrid: DSR-1
       rule_display_id: javascript_google_tag_manager
-      rule_description: Do not send sensitive data to google tag manager.
+      rule_description: Sensitive data sent to Google Tag Manager detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
       line_number: 4
       filename: unsecure.js

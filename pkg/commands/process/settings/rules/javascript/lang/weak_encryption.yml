@@ -31,7 +31,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not weak encrypt sensitive information"
+  description: "Weak encryption library usage detected."
   remediation_message: |
     ## Description
 

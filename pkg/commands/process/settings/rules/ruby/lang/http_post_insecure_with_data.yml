@@ -32,7 +32,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Only send sensitive data through HTTPS connections."
+  description: "Sensitive data sent through an an unsecure HTTP communication detected."
   remediation_message: |
     ## Description
 

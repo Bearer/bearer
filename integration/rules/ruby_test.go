@@ -22,6 +22,10 @@ func TestRubyLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/file_generation")
 }
 
+func TestRubyLangFtpUsingUserInput(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/ftp_using_user_input")
+}
+
 func TestRubyLangHttpGetParams(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/http_get_params")
 }
@@ -48,6 +52,10 @@ func TestRubyLangLogger(t *testing.T) {
 
 func TestRubyLangException(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/exception")
+}
+
+func TestRubyLangPathUsingUserInput(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/path_using_user_input")
 }
 
 func TestRubyLangSslVerification(t *testing.T) {

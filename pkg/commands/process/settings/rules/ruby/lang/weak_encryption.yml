@@ -92,7 +92,7 @@ trigger: presence
 severity:
   default: low
 metadata:
-  description: "Avoid weak encryption libraries."
+  description: "Weak encryption library usage detected."
   remediation_message: |
     ## Description
 

@@ -120,12 +120,12 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 
 	for i := 0; i < detectorsLen; i++ {
 		response := <-receiver
-		detectors = append(detectors, response.Detector)
-		composition.closers = append(composition.closers, response.Detector.Close)
 		if response.Error != nil {
 			composition.Close()
-			return nil, fmt.Errorf("failed to create detector %s: %s", response.DetectorName, err)
+			return nil, fmt.Errorf("failed to create detector %s: %s", response.DetectorName, response.Error)
 		}
+		detectors = append(detectors, response.Detector)
+		composition.closers = append(composition.closers, response.Detector.Close)
 	}
 
 	detectorSet, err := detectorset.New(detectors)

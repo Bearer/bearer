@@ -15,7 +15,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not set sensitive data to session."
+  description: "Sensitive data stored in HTML local storage detected."
   remediation_message: |
     ## Description
 

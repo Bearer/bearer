@@ -1,7 +1,7 @@
 low:
     - rule_dsrid: DSR-5
       rule_display_id: javascript_jwt
-      rule_description: Do not store sensitive data in jwt.
+      rule_description: Sensitive data in a JWT detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_jwt
       line_number: 2
       filename: unsecure.js

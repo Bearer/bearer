@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_datadog
-      rule_description: Do not send sensitive data to Datadog.
+      rule_description: Sensitive data sent to Datadog detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 2
       filename: datatype_in_tags.rb
@@ -11,7 +11,7 @@ critical:
       parent_content: c.tags = user
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_datadog
-      rule_description: Do not send sensitive data to Datadog.
+      rule_description: Sensitive data sent to Datadog detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 7
       filename: datatype_in_tags.rb
@@ -21,7 +21,7 @@ critical:
       parent_content: span.set_tag('user.email', user.email)
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_datadog
-      rule_description: Do not send sensitive data to Datadog.
+      rule_description: Sensitive data sent to Datadog detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 9
       filename: datatype_in_tags.rb
@@ -31,7 +31,7 @@ critical:
       parent_content: Datadog::Tracing.active_span&.set_tag('customer.id', user.email)
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_datadog
-      rule_description: Do not send sensitive data to Datadog.
+      rule_description: Sensitive data sent to Datadog detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 10
       filename: datatype_in_tags.rb
@@ -41,7 +41,7 @@ critical:
       parent_content: Datadog::Tracing.active_span.set_tag('customer.id', user.email)
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_datadog
-      rule_description: Do not send sensitive data to Datadog.
+      rule_description: Sensitive data sent to Datadog detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 12
       filename: datatype_in_tags.rb
@@ -54,7 +54,7 @@ critical:
         end
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_datadog
-      rule_description: Do not send sensitive data to Datadog.
+      rule_description: Sensitive data sent to Datadog detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 17
       filename: datatype_in_tags.rb

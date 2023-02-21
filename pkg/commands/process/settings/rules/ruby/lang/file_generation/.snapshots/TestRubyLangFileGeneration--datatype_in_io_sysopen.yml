@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-4
       rule_display_id: ruby_lang_file_generation
-      rule_description: Do not write sensitive data to static files.
+      rule_description: Sensitive data detected as part of a dynamic file generation.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
       line_number: 3
       filename: datatype_in_io_sysopen.rb

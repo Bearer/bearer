@@ -7,7 +7,7 @@ trigger: presence
 severity:
   default: "warning"
 metadata:
-  description: "Ensure directory listing is not inappropriately exposed."
+  description: "Missing access restriction to directory listing detected."
   remediation_message: |
     ## Description
     Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.

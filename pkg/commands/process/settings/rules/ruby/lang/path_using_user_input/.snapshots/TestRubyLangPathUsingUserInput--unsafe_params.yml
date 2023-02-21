@@ -1,0 +1,101 @@
+low:
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 1
+      filename: unsafe_params.rb
+      parent_line_number: 1
+      parent_content: 'Dir["foo", base: params[:oops]]'
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 3
+      filename: unsafe_params.rb
+      parent_line_number: 3
+      parent_content: Dir.chdir("/home/#{params[:oops]}")
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 5
+      filename: unsafe_params.rb
+      parent_line_number: 5
+      parent_content: File.exist?(params[:oops])
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 7
+      filename: unsafe_params.rb
+      parent_line_number: 7
+      parent_content: IO.readlines("/home/#{params[:oops]}")
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 9
+      filename: unsafe_params.rb
+      parent_line_number: 9
+      parent_content: |-
+        Kernel.open(params[:oops], "w+") do
+        end
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 12
+      filename: unsafe_params.rb
+      parent_line_number: 12
+      parent_content: open(params[:oops])
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 14
+      filename: unsafe_params.rb
+      parent_line_number: 14
+      parent_content: PStore.new(params[:oops])
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 16
+      filename: unsafe_params.rb
+      parent_line_number: 16
+      parent_content: Pathname.new(params[:oops])
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 17
+      filename: unsafe_params.rb
+      parent_line_number: 17
+      parent_content: path + params[:two]
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 18
+      filename: unsafe_params.rb
+      parent_line_number: 18
+      parent_content: path / params[:three]
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 19
+      filename: unsafe_params.rb
+      parent_line_number: 19
+      parent_content: path.join("a", params[:four])
+    - rule_dsrid: DSR-?
+      rule_display_id: ruby_lang_path_using_user_input
+      rule_description: Do not use user input to form file paths.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 21
+      filename: unsafe_params.rb
+      parent_line_number: 21
+      parent_content: Rails.root.join(params[:oops])
+
+
