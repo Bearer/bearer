@@ -35,6 +35,11 @@ patterns:
           - to_pem
           - to_s
   - pattern: |
+      OpenSSL::PKey::RSA.new($<LENGTH>)
+    filters:
+      - variable: LENGTH
+        less_than: 2048
+  - pattern: |
       $<VAR>.$<METHOD>($<_>)
     filters:
       - variable: VAR
