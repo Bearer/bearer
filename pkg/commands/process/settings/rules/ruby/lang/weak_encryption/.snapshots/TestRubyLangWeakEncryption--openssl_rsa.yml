@@ -11,17 +11,33 @@ low:
       rule_display_id: ruby_lang_weak_encryption
       rule_description: Avoid weak encryption libraries.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
-      line_number: 5
+      line_number: 6
       filename: openssl_rsa.rb
-      parent_line_number: 5
+      parent_line_number: 6
       parent_content: rsa_encrypt.export(cipher, "hello world")
     - rule_dsrid: DSR-7
       rule_display_id: ruby_lang_weak_encryption
       rule_description: Avoid weak encryption libraries.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
-      line_number: 7
+      line_number: 9
       filename: openssl_rsa.rb
-      parent_line_number: 7
+      parent_line_number: 9
       parent_content: OpenSSL::PKey::RSA.new(2048).to_pem(cipher, "hello world")
+    - rule_dsrid: DSR-7
+      rule_display_id: ruby_lang_weak_encryption
+      rule_description: Avoid weak encryption libraries.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 12
+      filename: openssl_rsa.rb
+      parent_line_number: 12
+      parent_content: OpenSSL::PKey::RSA.new(512).to_pem(cipher, "hello world")
+    - rule_dsrid: DSR-7
+      rule_display_id: ruby_lang_weak_encryption
+      rule_description: Avoid weak encryption libraries.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 13
+      filename: openssl_rsa.rb
+      parent_line_number: 13
+      parent_content: OpenSSL::PKey::RSA.new(low_size).to_pem(cipher, "hello world")
 
 

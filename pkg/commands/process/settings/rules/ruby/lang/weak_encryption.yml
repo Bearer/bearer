@@ -35,11 +35,6 @@ patterns:
           - to_pem
           - to_s
   - pattern: |
-      OpenSSL::PKey::RSA.new($<LENGTH>)
-    filters:
-      - variable: LENGTH
-        less_than: 2048
-  - pattern: |
       $<VAR>.$<METHOD>($<_>)
     filters:
       - variable: VAR
@@ -80,8 +75,11 @@ auxiliary:
         RC4.new()
   - id: openssl_rsa_init
     patterns:
-      - |
-        OpenSSL::PKey::RSA.new()
+      - pattern: |
+          OpenSSL::PKey::RSA.new($<LENGTH>)
+        filters:
+          - variable: LENGTH
+            less_than: 2048
   - id: openssl_dsa_init
     patterns:
       - |
