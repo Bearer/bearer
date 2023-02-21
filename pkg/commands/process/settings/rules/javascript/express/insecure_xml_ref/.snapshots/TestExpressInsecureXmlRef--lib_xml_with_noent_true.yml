@@ -1,5 +1,5 @@
 low:
-    - rule_dsrid: DSR-3
+    - rule_dsrid: ""
       rule_display_id: express_insecure_xml_ref
       rule_description: Ensure proper restriction of XML external entity references.
       rule_documentation_url: https://curio.sh/reference/rules/express_insecure_xml_ref
