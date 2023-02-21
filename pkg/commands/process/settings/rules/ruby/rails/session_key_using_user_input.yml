@@ -19,7 +19,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not use user input in a session key."
+  description: "User input detected in a session key."
   remediation_message: |
     ## Description
 

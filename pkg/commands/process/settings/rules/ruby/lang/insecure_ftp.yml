@@ -19,7 +19,7 @@ severity:
   PII: critical
   PD: high
 metadata:
-  description: "Only communicate using SFTP connections."
+  description: "Communication with an unsecure FTP server detected."
   remediation_message: |
     ## Description
 

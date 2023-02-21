@@ -9,7 +9,7 @@ trigger: presence
 severity:
   default: low
 metadata:
-  description: "Force all incoming communication through SSL."
+  description: "Missing force SSL configuration for incoming communication detected."
   remediation_message: |
     ## Description
     When applications process sensitive data, they should default to always use SSL when available. This rule checks if force SSL is enabled at the application level.

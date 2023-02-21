@@ -13,7 +13,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not store sensitive data in JWTs."
+  description: "Sensitive data in a JWT detected."
   remediation_message: |
     ## Description
 

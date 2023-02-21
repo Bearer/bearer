@@ -18,7 +18,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not write sensitive data to static files."
+  description: "Sensitive data detected as part of a dynamic file generation."
   remediation_message: |
     ## Description
 

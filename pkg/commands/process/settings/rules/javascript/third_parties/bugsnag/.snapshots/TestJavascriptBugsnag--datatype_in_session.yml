@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_bugsnag
-      rule_description: Do not send sensitive data to Bugsnag.
+      rule_description: Sensitive data sent to Bugsnag detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
       line_number: 4
       filename: datatype_in_session.js

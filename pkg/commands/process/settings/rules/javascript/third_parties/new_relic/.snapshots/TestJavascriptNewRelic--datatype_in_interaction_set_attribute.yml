@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_new_relic
-      rule_description: Do not send sensitive data to New Relic.
+      rule_description: Sensitive data sent to New Relic detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
       line_number: 6
       filename: datatype_in_interaction_set_attribute.js
@@ -13,7 +13,7 @@ critical:
             .setAttribute("username", user.first_name)
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_new_relic
-      rule_description: Do not send sensitive data to New Relic.
+      rule_description: Sensitive data sent to New Relic detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
       line_number: 7
       filename: datatype_in_interaction_set_attribute.js
@@ -26,7 +26,7 @@ critical:
             .setAttribute("postal-code", user.post_code)
     - rule_dsrid: DSR-1
       rule_display_id: javascript_third_parties_new_relic
-      rule_description: Do not send sensitive data to New Relic.
+      rule_description: Sensitive data sent to New Relic detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
       line_number: 13
       filename: datatype_in_interaction_set_attribute.js

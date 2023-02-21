@@ -23,7 +23,7 @@ trigger: presence
 severity:
   default: "low"
 metadata:
-  description: "Ensure proper restriction of XML external entity references."
+  description: "Missing proper restriction of XML external entity references detected."
   remediation_message: |
     ## Description
     Avoid generating XML documents that include XML entities with URIs that resolve to resources that are outside of the current context.

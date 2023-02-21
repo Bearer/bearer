@@ -13,7 +13,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not send sensitive data to Google Analytics."
+  description: "Sensitive data sent to Google Analytic detected."
   remediation_message: |
     ## Description
 

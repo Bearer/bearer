@@ -11,7 +11,7 @@ trigger: presence
 severity:
   default: low
 metadata:
-  description: "Enable SSL Certificate Verification."
+  description: "Missing SSL certificate verification detected."
   remediation_message: |
     ## Description
 

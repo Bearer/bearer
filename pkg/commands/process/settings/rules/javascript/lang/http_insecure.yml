@@ -35,7 +35,7 @@ trigger: presence
 severity:
   default: low
 metadata:
-  description: "Only communicate using HTTPS connections."
+  description: "Connection with an unsecure HTTP communication detected."
   remediation_message: |
     ## Description
 

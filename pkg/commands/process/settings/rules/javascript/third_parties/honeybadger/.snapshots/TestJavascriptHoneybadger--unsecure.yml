@@ -1,7 +1,7 @@
 low:
     - rule_dsrid: DSR-1
       rule_display_id: javascript_honeybadger
-      rule_description: Do not send sensitive data to Honeybadger.
+      rule_description: Sensitive data sent to Honeybadger detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_honeybadger
       line_number: 3
       filename: unsecure.js

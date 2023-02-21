@@ -25,7 +25,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not send sensitive data to New Relic."
+  description: "Sensitive data sent to New Relic detected."
   remediation_message: |
     ## Description
     Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to New Relic.

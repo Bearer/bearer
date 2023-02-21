@@ -1,7 +1,7 @@
 critical:
     - rule_dsrid: DSR-3
       rule_display_id: ruby_lang_jwt
-      rule_description: Do not store sensitive data in JWTs.
+      rule_description: Sensitive data in a JWT detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_jwt
       line_number: 1
       filename: datatype_in_jwt.rb

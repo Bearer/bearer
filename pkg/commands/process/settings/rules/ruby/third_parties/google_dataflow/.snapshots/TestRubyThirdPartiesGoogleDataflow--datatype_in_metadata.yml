@@ -1,7 +1,7 @@
 high:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_google_dataflow
-      rule_description: Do not send sensitive data to Google Dataflow.
+      rule_description: Sensitive data sent to Google Dataflow detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
       line_number: 2
       filename: datatype_in_metadata.rb
@@ -11,7 +11,7 @@ high:
       parent_content: 'custom_metadata.value = "ip: #{customer.ip_address}"'
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_google_dataflow
-      rule_description: Do not send sensitive data to Google Dataflow.
+      rule_description: Sensitive data sent to Google Dataflow detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
       line_number: 5
       filename: datatype_in_metadata.rb
@@ -21,7 +21,7 @@ high:
       parent_content: 'template_metadata.description ="ip: #{customer.ip_address}"'
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_google_dataflow
-      rule_description: Do not send sensitive data to Google Dataflow.
+      rule_description: Sensitive data sent to Google Dataflow detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
       line_number: 6
       filename: datatype_in_metadata.rb

@@ -16,7 +16,7 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Do not store sensitive data in jwt."
+  description: "Sensitive data in a JWT detected."
   remediation_message: |
     ## Description
 

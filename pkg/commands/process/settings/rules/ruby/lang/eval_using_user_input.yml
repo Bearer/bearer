@@ -44,7 +44,7 @@ severity:
   PHI: medium
   PD: high
 metadata:
-  description: "Do not generate code using user input."
+  description: "Potential command injection with user input detected."
   remediation_message: |
     ## Description
 
