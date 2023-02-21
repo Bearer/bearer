@@ -2,7 +2,7 @@ high:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_rails_session_key_using_user_input
       rule_description: Do not use user input in a session key.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_session_key_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_session_key_using_user_input
       line_number: 1
       filename: unsafe.rb
       parent_line_number: 1
@@ -10,7 +10,7 @@ high:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_rails_session_key_using_user_input
       rule_description: Do not use user input in a session key.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_session_key_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_session_key_using_user_input
       line_number: 3
       filename: unsafe.rb
       parent_line_number: 3
@@ -18,7 +18,7 @@ high:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_rails_session_key_using_user_input
       rule_description: Do not use user input in a session key.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_session_key_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_session_key_using_user_input
       line_number: 5
       filename: unsafe.rb
       parent_line_number: 5

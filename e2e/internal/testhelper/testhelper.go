@@ -40,7 +40,7 @@ func NewTestCase(name string, arguments []string, options TestCaseOptions) TestC
 }
 
 func executeApp(t *testing.T, arguments []string) (string, error) {
-	cmd, cancel := CreateCurioCommand(arguments)
+	cmd, cancel := CreateCommand(arguments)
 
 	buffOut := bytes.NewBuffer(nil)
 	buffErr := bytes.NewBuffer(nil)
@@ -77,7 +77,7 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	return combinedOutput, err
 }
 
-func CreateCurioCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
+func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 	var cmd *exec.Cmd
 
 	ctx, cancel := context.WithCancel(context.Background())

@@ -60,7 +60,7 @@ announce:
   discord:
     enabled: true
     message_template: |
-      Curio {{ .Tag }} is out now! Check it out: https://github.com/bearer/bearer/releases/tag/{{ .Tag }}
+      Bearer {{ .Tag }} is out now! Check it out: https://github.com/bearer/bearer/releases/tag/{{ .Tag }}
 
       {{ .ReleaseNotes }}
 

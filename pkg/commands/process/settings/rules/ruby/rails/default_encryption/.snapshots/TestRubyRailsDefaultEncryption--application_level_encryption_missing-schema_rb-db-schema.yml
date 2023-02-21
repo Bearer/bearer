@@ -2,7 +2,7 @@ warning:
     - rule_dsrid: DSR-10
       rule_display_id: ruby_rails_default_encryption
       rule_description: Force application-level encryption when processing sensitive data.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_default_encryption
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_default_encryption
       line_number: 3
       filename: application_level_encryption_missing/schema_rb/db/schema.rb
       category_groups:
@@ -19,7 +19,7 @@ warning:
     - rule_dsrid: DSR-10
       rule_display_id: ruby_rails_default_encryption
       rule_description: Force application-level encryption when processing sensitive data.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_default_encryption
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_default_encryption
       line_number: 4
       filename: application_level_encryption_missing/schema_rb/db/schema.rb
       category_groups:

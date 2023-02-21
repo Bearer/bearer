@@ -97,7 +97,7 @@ jobs:
           file: battle_tests/Dockerfile
           tags: bearersh/battle-test:latest
           build-args: |
-            CURIO_VERSION=${{ inputs.bearer_version }}
+            BEARER_VERSION=${{ inputs.bearer_version }}
             BATTLE_TEST_SHA=${{ github.sha }}
             ATTEMPT=${{ inputs.attempt }}
             LANGUAGE=${{ inputs.language }}

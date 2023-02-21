@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	config.Runtime.CurioExecutablePath = os.Getenv("CURIO_EXECUTABLE_PATH")
-	log.Debug().Msgf("binary path: %s", config.Runtime.CurioExecutablePath)
+	config.Runtime.ExecutablePath = os.Getenv("BEARER_EXECUTABLE_PATH")
+	log.Debug().Msgf("binary path: %s", config.Runtime.ExecutablePath)
 	ctx := context.TODO()
 	log.Debug().Msg("Starting local test")
 	metricsReport := make(chan *metricsscan.MetricsReport, 1)

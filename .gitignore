@@ -2,12 +2,12 @@
 dist
 
 # build folder
-curio-build
+bearer-build
 
 .DS_Store
 
-# curio binaries
-curio
+# binaries
+bearer
 
 temp/
 

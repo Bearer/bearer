@@ -9,12 +9,12 @@ import (
 	"golang.org/x/xerrors"
 )
 
-// VersionInfo holds the curio version
+// VersionInfo holds the bearer version
 type VersionInfo struct {
 	Version string `json:",omitempty" yaml:",omitempty"`
 }
 
-// NewApp is the factory method to return Curio CLI
+// NewApp is the factory method to return CLI
 func NewApp(version string, commitSHA string) *cobra.Command {
 	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
@@ -52,7 +52,7 @@ Examples:
 	$ bearer scan --report privacy --output <output-path> .
 
 Learn More:
-	Curio is a static code analysis tool (SAST) that scans your source code to
+	Bearer is a static code analysis tool (SAST) that scans your source code to
 	discover security risks and vulnerabilities that put your sensitive data
 	at risk (PHI, PD, PII).
 

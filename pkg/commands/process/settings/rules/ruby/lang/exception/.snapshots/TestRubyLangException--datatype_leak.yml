@@ -2,7 +2,7 @@ critical:
     - rule_dsrid: DSR-5
       rule_display_id: ruby_lang_exception
       rule_description: Do not send sensitive data to exceptions.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_exception
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exception
       line_number: 1
       filename: datatype_leak.rb
       category_groups:
@@ -12,7 +12,7 @@ critical:
     - rule_dsrid: DSR-5
       rule_display_id: ruby_lang_exception
       rule_description: Do not send sensitive data to exceptions.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_exception
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exception
       line_number: 2
       filename: datatype_leak.rb
       category_groups:

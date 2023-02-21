@@ -2,7 +2,7 @@ critical:
     - rule_dsrid: DSR-6
       rule_display_id: ruby_third_parties_algolia
       rule_description: Do not store sensitive data in Algolia.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_algolia
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_algolia
       line_number: 4
       filename: datatype_in_save_object.rb
       category_groups:
@@ -12,7 +12,7 @@ critical:
     - rule_dsrid: DSR-6
       rule_display_id: ruby_third_parties_algolia
       rule_description: Do not store sensitive data in Algolia.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_algolia
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_algolia
       line_number: 6
       filename: datatype_in_save_object.rb
       category_groups:

@@ -13,7 +13,7 @@ func TestInitCommand(t *testing.T) {
 	filePath := testhelper.GetCWD() + "/bearer.yml"
 	arguments := []string{"init"}
 
-	cmd, _ := testhelper.CreateCurioCommand(arguments)
+	cmd, _ := testhelper.CreateCommand(arguments)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		t.Fatalf("failed to run init command err: %s output: %s", err, string(output))
@@ -27,7 +27,7 @@ func TestInitCommand(t *testing.T) {
 
 	_, err = os.Stat(filePath)
 	if err != nil {
-		t.Fatalf("failed to find created curio.yaml file err:%s", err)
+		t.Fatalf("failed to find created bearer.yaml file err:%s", err)
 	}
 
 	fileContent, err := os.ReadFile(filePath)
