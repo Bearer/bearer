@@ -40,6 +40,10 @@ func TestJavascriptExpressExposedDirListing(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/exposed_dir_listing")
 }
 
+func TestJavascriptExpressServerSideRequestForgery(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/server_side_request_forgery")
+}
+
 func TestExpressSecureCookie(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
 }
