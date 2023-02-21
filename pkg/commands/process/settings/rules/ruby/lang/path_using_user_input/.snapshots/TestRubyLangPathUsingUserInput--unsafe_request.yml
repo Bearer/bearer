@@ -2,7 +2,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 1
       filename: unsafe_request.rb
       parent_line_number: 1
@@ -10,7 +10,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 3
       filename: unsafe_request.rb
       parent_line_number: 3
@@ -18,7 +18,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 5
       filename: unsafe_request.rb
       parent_line_number: 5
@@ -26,7 +26,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 7
       filename: unsafe_request.rb
       parent_line_number: 7
@@ -34,7 +34,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 9
       filename: unsafe_request.rb
       parent_line_number: 9
@@ -44,7 +44,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 12
       filename: unsafe_request.rb
       parent_line_number: 12
@@ -52,7 +52,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 14
       filename: unsafe_request.rb
       parent_line_number: 14
@@ -60,7 +60,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 16
       filename: unsafe_request.rb
       parent_line_number: 16
@@ -68,7 +68,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 17
       filename: unsafe_request.rb
       parent_line_number: 17
@@ -76,7 +76,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 18
       filename: unsafe_request.rb
       parent_line_number: 18
@@ -84,7 +84,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 19
       filename: unsafe_request.rb
       parent_line_number: 19
@@ -92,7 +92,7 @@ low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_path_using_user_input
       rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_path_using_user_input
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
       line_number: 21
       filename: unsafe_request.rb
       parent_line_number: 21

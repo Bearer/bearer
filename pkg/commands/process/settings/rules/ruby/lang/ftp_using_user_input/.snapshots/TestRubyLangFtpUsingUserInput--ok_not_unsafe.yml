@@ -1,16 +1,16 @@
 low:
     - rule_dsrid: DSR-2
       rule_display_id: ruby_lang_insecure_ftp
-      rule_description: Only communicate using SFTP connections.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_insecure_ftp
+      rule_description: Communication with an unsecure FTP server detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
       line_number: 1
       filename: ok_not_unsafe.rb
       parent_line_number: 1
       parent_content: Net::FTP.new(x)
     - rule_dsrid: DSR-2
       rule_display_id: ruby_lang_insecure_ftp
-      rule_description: Only communicate using SFTP connections.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_insecure_ftp
+      rule_description: Communication with an unsecure FTP server detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
       line_number: 3
       filename: ok_not_unsafe.rb
       parent_line_number: 3
@@ -20,8 +20,8 @@ low:
         end
     - rule_dsrid: DSR-2
       rule_display_id: ruby_lang_insecure_ftp
-      rule_description: Only communicate using SFTP connections.
-      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_insecure_ftp
+      rule_description: Communication with an unsecure FTP server detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
       line_number: 8
       filename: ok_not_unsafe.rb
       parent_line_number: 8
