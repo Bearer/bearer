@@ -14,7 +14,6 @@ release:
 dockers:
   - image_templates:
       - "docker.io/bearer/bearer:canary-amd64"
-      - "ghcr.io/bearer/bearer:canary-amd64"
     use: buildx
     goos: linux
     goarch: amd64
