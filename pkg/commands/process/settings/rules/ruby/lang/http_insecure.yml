@@ -2,8 +2,47 @@ languages:
   - ruby
 patterns:
   - pattern: |
-      Net::HTTP.post_form($<INSECURE_URL>)
+      Net::HTTP.$<METHOD>($<INSECURE_URL>$<...>)
     filters:
+      - variable: METHOD
+        values:
+          - post
+          - post_form
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      Net::HTTP.$<METHOD>($<...>$<INSECURE_URL>$<...>)$<...>
+    filters:
+      - variable: METHOD
+        values:
+          - get
+          - get_print
+          - get_response
+          - new
+          - newobj
+          - start
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      Net::HTTP::$<CLASS>.new($<INSECURE_URL>$<...>)
+    filters:
+      - variable: CLASS
+        values:
+          - Get
+          - Head
+          - Post
+          - Put
+          - Delete
+          - Options
+          - Trace
+          - Patch
+          - Propfind
+          - Proppatch
+          - Mkcol
+          - Copy
+          - Move
+          - Lock
+          - Unlock
       - variable: INSECURE_URL
         detection: insecure_url
   - pattern: |
@@ -12,12 +51,87 @@ patterns:
       - variable: INSECURE_URL
         detection: insecure_url
   - pattern: |
-      $<CLIENT>.get($<INSECURE_URL>)
+      Curl.http($<_>, $<INSECURE_URL>$<...>)$<...>
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      Curl.$<METHOD>($<INSECURE_URL>$<...>)$<...>
+    filters:
+      - variable: METHOD
+        values:
+          - get
+          - post
+          - put
+          - delete
+          - patch
+          - head
+          - options
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      Curl::Easy.$<METHOD>($<INSECURE_URL>$<...>)$<...>
+    filters:
+      - variable: METHOD
+        values:
+          - new
+          - perform
+          - download
+          - http_delete
+          - http_post
+          - http_put
+          - http_head
+          - http_get
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      $<CURB>.url = $<INSECURE_URL>
+    filters:
+      - variable: CURB
+        detection: ruby_lang_http_insecure_curb
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      Curl::Multi.$<METHOD>($<INSECURE_URL>$<...>)$<...>
+    filters:
+      - variable: METHOD
+        values:
+          - get
+          - download
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      Curl::Multi.$<METHOD>($<INSECURE_URL_HASH>$<...>)$<...>
+    filters:
+      - variable: METHOD
+        values:
+          - http
+          - post
+          - put
+      - variable: INSECURE_URL_HASH
+        detection: ruby_lang_http_insecure_url_hash
+  - pattern: |
+      Excon.$<METHOD>($<INSECURE_URL>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - new
+          - connect
+          - delete
+          - get
+          - head
+          - options
+          - patch
+          - post
+          - put
+          - trace
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      $<CLIENT>.get($<INSECURE_URL>$<...>)$<...>
     filters:
       - variable: CLIENT
         values:
-          - Curl
-          - Excon
           - Faraday
           - HTTP
           - HTTParty
@@ -27,12 +141,10 @@ patterns:
       - variable: INSECURE_URL
         detection: insecure_url
   - pattern: |
-      $<CLIENT>.post($<INSECURE_URL>)
+      $<CLIENT>.post($<INSECURE_URL>$<...>)$<...>
     filters:
       - variable: CLIENT
         values:
-          - Curl
-          - Excon
           - Faraday
           - HTTP
           - HTTParty
@@ -41,6 +153,18 @@ patterns:
           - Typhoeus
       - variable: INSECURE_URL
         detection: insecure_url
+auxiliary:
+  - id: ruby_lang_http_insecure_curb
+    patterns:
+      - |
+        Curl::Easy.new$<...>
+  - id: ruby_lang_http_insecure_url_hash
+    patterns:
+      - pattern: |
+          { url: $<INSECURE_URL> }
+        filters:
+          - variable: INSECURE_URL
+            detection: insecure_url
 trigger: presence
 severity:
   default: low
