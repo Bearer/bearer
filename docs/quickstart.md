@@ -15,17 +15,17 @@ The quickest way to install Bearer is with the install script. It will auto-sele
 curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh
 ```
 
-Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Bearer's official Homebrew package](https://github.com/Bearer/homebrew-bearer):
+Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Bearer's official Homebrew tap](https://github.com/Bearer/homebrew-tap):
 
 ```bash
-brew install Bearer/bearer/bearer
+brew install Bearer/tap/bearer
 ```
 
 If you need more control or another way to install Bearer, we offer more [advanced installation options](https://github.com/Bearer/bearer#gear-additional-installation-options).
 
 ## Scan your project
 
-The easiest way to try out Bearer is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.  
+The easiest way to try out Bearer is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.
 
 ```bash
 git clone https://github.com/Bearer/bear-publishing.git
