@@ -19,6 +19,7 @@ import (
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/maputil"
 
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/ruby/string"
 	detectorset "github.com/bearer/bearer/new/detector/set"
@@ -140,7 +141,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		constructedDetectors[response.Order] = response
 	}
 
-	for _, constructed := range constructedDetectors {
+	for _, constructed := range maputil.ToSortedSlice(constructedDetectors) {
 		detectors = append(detectors, constructed.Detector)
 		composition.closers = append(composition.closers, constructed.Detector.Close)
 	}
