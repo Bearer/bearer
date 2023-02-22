@@ -81,6 +81,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 
 	for _, detectorCreator := range staticDetectors {
 		creator := detectorCreator
+
 		go func() {
 			detector, err := creator.constructor(lang)
 			receiver <- types.DetectorInitResult{

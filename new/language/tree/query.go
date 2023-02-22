@@ -2,6 +2,7 @@ package tree
 
 import (
 	"errors"
+	"sync"
 
 	sitter "github.com/smacker/go-tree-sitter"
 )
@@ -16,14 +17,18 @@ type Query struct {
 
 type QueryResult map[string]*Node
 
+var mu sync.Mutex = sync.Mutex{}
+
 func CompileQuery(sitterLanguage *sitter.Language, input string) (*Query, error) {
 	sitterQuery, err := sitter.NewQuery([]byte(input), sitterLanguage)
 	if err != nil {
 		return nil, err
 	}
 
+	mu.Lock()
 	id := maxQueryID
 	maxQueryID += 1
+	defer mu.Unlock()
 
 	return &Query{sitterQuery: sitterQuery, id: id, input: input}, nil
 }

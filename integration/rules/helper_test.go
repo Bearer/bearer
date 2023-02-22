@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands"
@@ -20,6 +21,7 @@ import (
 )
 
 var runner *Runner
+var mu sync.Mutex
 
 type Runner struct {
 	config settings.Config
@@ -27,6 +29,8 @@ type Runner struct {
 }
 
 func getRunner(t *testing.T) *Runner {
+	mu.Lock()
+	defer mu.Unlock()
 	if runner != nil {
 		return runner
 	}
@@ -81,7 +85,6 @@ func (runner *Runner) runTest(t *testing.T, projectPath string) {
 		ext := filepath.Ext(file.FilePath)
 		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
 		t.Run(testName, func(t *testing.T) {
-			t.Parallel()
 			runner.ScanSingleFile(t, testDataPath, myfile, snapshotsPath)
 		})
 	}

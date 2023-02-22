@@ -103,6 +103,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		localRuleName := ruleName
 
 		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+
 		go func() {
 			customDetector, err := custom.New(
 				lang,

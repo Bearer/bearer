@@ -18,7 +18,7 @@ critical:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: OpenSSL::PKey::RSA.new(2048).to_pem(cipher, user.first_name)
+      parent_content: OpenSSL::PKey::DSA.new(2048).to_pem(cipher, user.first_name)
 low:
     - rule_dsrid: DSR-7
       rule_display_id: ruby_lang_weak_encryption
@@ -39,6 +39,6 @@ low:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: OpenSSL::PKey::RSA.new(2048).to_pem(cipher, user.first_name)
+      parent_content: OpenSSL::PKey::DSA.new(2048).to_pem(cipher, user.first_name)
 
 

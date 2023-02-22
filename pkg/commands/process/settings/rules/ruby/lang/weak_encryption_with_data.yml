@@ -13,7 +13,7 @@ patterns:
       $<VAR>.$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: VAR
-        detection: rc4_init
+        detection: ruby_lang_weak_encryption_with_data_rc4_init
       - variable: METHOD
         values:
           - encrypt
@@ -25,7 +25,7 @@ patterns:
       $<VAR>.$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: VAR
-        detection: openssl_rsa_init
+        detection: ruby_lang_weak_encryption_with_data_openssl_rsa_init
       - variable: METHOD
         values:
           - private_decrypt
@@ -38,7 +38,7 @@ patterns:
       $<VAR>.$<METHOD>($<_>, $<DATA_TYPE>)
     filters:
       - variable: VAR
-        detection: openssl_rsa_init
+        detection: ruby_lang_weak_encryption_with_data_openssl_rsa_init
       - variable: METHOD
         values:
           - export
@@ -50,7 +50,7 @@ patterns:
       $<VAR>.$<METHOD>($<_>, $<DATA_TYPE>)
     filters:
       - variable: VAR
-        detection: openssl_dsa_init
+        detection: ruby_lang_weak_encryption_with_data_openssl_dsa_init
       - variable: METHOD
         values:
           - export
@@ -62,7 +62,7 @@ patterns:
       $<VAR>.$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: VAR
-        detection: blowfish_init
+        detection: ruby_lang_weak_encryption_with_data_blowfish_init
       - variable: METHOD
         values:
           - encrypt_string
@@ -73,7 +73,7 @@ patterns:
       $<VAR>.$<METHOD>($<_>, $<DATA_TYPE>)
     filters:
       - variable: VAR
-        detection: blowfish_init
+        detection: ruby_lang_weak_encryption_with_data_blowfish_init
       - variable: METHOD
         values:
           - encrypt_pair
@@ -86,7 +86,7 @@ patterns:
       end
     filters:
       - variable: VAR
-        detection: blowfish_init
+        detection: ruby_lang_weak_encryption_with_data_blowfish_init
       - variable: METHOD
         values:
           - encrypt_block
@@ -96,19 +96,22 @@ patterns:
 languages:
   - ruby
 auxiliary:
-  - id: rc4_init
+  - id: ruby_lang_weak_encryption_with_data_rc4_init
     patterns:
       - |
         RC4.new()
-  - id: openssl_rsa_init
+  - id: ruby_lang_weak_encryption_with_data_openssl_rsa_init
     patterns:
-      - |
-        OpenSSL::PKey::RSA.new()
-  - id: openssl_dsa_init
+      - pattern: |
+          OpenSSL::PKey::RSA.new()
+        filters:
+          - variable: LENGTH
+            less_than: 2048
+  - id: ruby_lang_weak_encryption_with_data_openssl_dsa_init
     patterns:
       - |
         OpenSSL::PKey::DSA.new()
-  - id: blowfish_init
+  - id: ruby_lang_weak_encryption_with_data_blowfish_init
     patterns:
       - |
         Crypt::Blowfish.new()

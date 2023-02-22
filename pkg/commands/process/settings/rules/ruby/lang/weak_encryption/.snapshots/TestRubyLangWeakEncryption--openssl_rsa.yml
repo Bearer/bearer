@@ -3,25 +3,9 @@ low:
       rule_display_id: ruby_lang_weak_encryption
       rule_description: Weak encryption library usage detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
-      line_number: 1
+      line_number: 8
       filename: openssl_rsa.rb
-      parent_line_number: 1
-      parent_content: OpenSSL::PKey::RSA.new(File.read('rsa.pem')).private_encrypt("test")
-    - rule_dsrid: DSR-7
-      rule_display_id: ruby_lang_weak_encryption
-      rule_description: Weak encryption library usage detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
-      line_number: 5
-      filename: openssl_rsa.rb
-      parent_line_number: 5
-      parent_content: rsa_encrypt.export(cipher, "hello world")
-    - rule_dsrid: DSR-7
-      rule_display_id: ruby_lang_weak_encryption
-      rule_description: Weak encryption library usage detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
-      line_number: 7
-      filename: openssl_rsa.rb
-      parent_line_number: 7
-      parent_content: OpenSSL::PKey::RSA.new(2048).to_pem(cipher, "hello world")
+      parent_line_number: 8
+      parent_content: OpenSSL::PKey::RSA.new(512).to_pem(cipher, "hello world")
 
 
