@@ -1,0 +1,27 @@
+patterns:
+  - pattern: |
+      path.$<METHOD>($<...>$<EXPRESS_REQ>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - join
+          - resolve
+      - variable: EXPRESS_REQ
+        detection: javascript_express_path_traversal_request_obj
+auxiliary:
+  - id: javascript_express_path_traversal_request_obj
+    patterns:
+      - req.$<_>
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "warning"
+metadata:
+  description: "Possible path traversal vulnerability detected."
+  remediation_message: |
+    ## Description
+    TODO
+  cwe_id:
+    - 611
+  id: "javascript_express_path_traversal"
