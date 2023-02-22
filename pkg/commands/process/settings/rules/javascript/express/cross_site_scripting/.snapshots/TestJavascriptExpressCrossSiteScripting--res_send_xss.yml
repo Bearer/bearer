@@ -1,0 +1,11 @@
+low:
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_cross_site_scripting
+      rule_description: Cross-site scripting (XSS) vulnerability detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
+      line_number: 5
+      filename: res_send_xss.js
+      parent_line_number: 5
+      parent_content: res.send("<p>" + req.body.customer.name + "</p>")
+
+
