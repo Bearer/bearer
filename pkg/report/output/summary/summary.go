@@ -57,17 +57,21 @@ type Output struct {
 }
 
 type Result struct {
-	RuleDSRID            string   `json:"rule_dsrid" yaml:"rule_dsrid"`
-	RuleDisplayId        string   `json:"rule_display_id" yaml:"rule_display_id"`
-	RuleDescription      string   `json:"rule_description" yaml:"rule_description"`
-	RuleDocumentationUrl string   `json:"rule_documentation_url" yaml:"rule_documentation_url"`
-	LineNumber           int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename             string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroups       []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	ParentLineNumber     int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent        string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
-	OmitParent           bool     `json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
-	DetailedContext      string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	Rule             *RuleResultSummary `json:"rule" yaml:"rule"`
+	LineNumber       int                `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename         string             `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroups   []string           `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	ParentLineNumber int                `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent    string             `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
+
+	DetailedContext string `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+}
+
+type RuleResultSummary struct {
+	CWEIDs           []string `json:"cwe_ids" yaml:"cwe_ids"`
+	Id               string   `json:"id" yaml:"id"`
+	Description      string   `json:"description" yaml:"description"`
+	DocumentationUrl string   `json:"documentation_url" yaml:"documentation_url"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]Result, error) {
@@ -119,18 +123,20 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			}
 
 			for _, output := range results["policy_failure"] {
+				ruleSummay := &RuleResultSummary{
+					Description:      rule.Description,
+					Id:               rule.Id,
+					CWEIDs:           rule.CWEIDs,
+					DocumentationUrl: rule.DocumentationUrl,
+				}
 				result := Result{
-					RuleDescription:      rule.Description,
-					RuleDisplayId:        rule.Id,
-					RuleDSRID:            rule.DSRID,
-					RuleDocumentationUrl: rule.DocumentationUrl,
-					Filename:             output.Filename,
-					LineNumber:           output.LineNumber,
-					CategoryGroups:       output.CategoryGroups,
-					OmitParent:           rule.OmitParent,
-					ParentLineNumber:     output.ParentLineNumber,
-					ParentContent:        output.ParentContent,
-					DetailedContext:      output.DetailedContext,
+					Rule:             ruleSummay,
+					Filename:         output.Filename,
+					LineNumber:       output.LineNumber,
+					CategoryGroups:   output.CategoryGroups,
+					ParentLineNumber: output.ParentLineNumber,
+					ParentContent:    output.ParentContent,
+					DetailedContext:  output.DetailedContext,
 				}
 
 				severity := FindHighestSeverity(result.CategoryGroups, rule.Severity)
@@ -180,7 +186,9 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		}
 
 		for _, failure := range results[severityLevel] {
-			failures[severityLevel][failure.RuleDSRID] = true
+			for i := 0; i < len(failure.Rule.CWEIDs); i++ {
+				failures[severityLevel]["CWE-"+failure.Rule.CWEIDs[i]] = true
+			}
 			writeFailureToString(reportStr, failure, severityLevel)
 		}
 	}
@@ -245,24 +253,27 @@ func writeRuleListToString(
 	reportStr *strings.Builder,
 	rules map[string]*settings.Rule) {
 	// list rules that were run
-	reportStr.WriteString("\nChecks: \n\n")
-	ruleList := []string{}
+	reportStr.WriteString("\n\nRules: \n")
+	defaultRuleCount := 0
+	customRuleCount := 0
+
 	for key := range rules {
 		rule := rules[key]
 		if !rule.PolicyType() {
 			continue
 		}
-
-		ruleDSR := ""
-		if rule.DSRID != "" {
-			ruleDSR = " [" + rule.DSRID + "]"
+		if strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") {
+			defaultRuleCount++
+		} else {
+			customRuleCount++
 		}
-
-		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" ("+rule.Id+")"+ruleDSR+"\n"))
 	}
 
-	sort.Strings(ruleList)
-	reportStr.WriteString(strings.Join(ruleList, ""))
+	reportStr.WriteString(fmt.Sprintf(" - %d default rules applied ", defaultRuleCount))
+	reportStr.WriteString(color.HiBlackString("(https://docs.bearer.com/reference/rules)\n"))
+	if customRuleCount > 0 {
+		reportStr.WriteString(fmt.Sprintf(" - %d custom rules applied", customRuleCount))
+	}
 }
 
 func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
@@ -335,17 +346,22 @@ func checkAndWriteFailureSummaryToString(
 func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(severity))
-	reportStr.WriteString(result.RuleDescription)
-	if result.RuleDSRID != "" {
-		reportStr.WriteString(" [" + result.RuleDSRID + "]")
+	reportStr.WriteString(result.Rule.Description)
+	cweCount := len(result.Rule.CWEIDs)
+	if cweCount > 0 {
+		var displayCWEList = []string{}
+		for i := 0; i < cweCount; i++ {
+			displayCWEList = append(displayCWEList, "CWE-"+result.Rule.CWEIDs[i])
+		}
+		reportStr.WriteString(" [" + strings.Join(displayCWEList, ", ") + "]")
 	}
 	reportStr.WriteString("\n")
 
-	if result.RuleDocumentationUrl != "" {
-		reportStr.WriteString(color.HiBlackString(result.RuleDocumentationUrl + "\n"))
+	if result.Rule.DocumentationUrl != "" {
+		reportStr.WriteString(color.HiBlackString(result.Rule.DocumentationUrl + "\n"))
 	}
 
-	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.RuleDisplayId + "\n"))
+	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.Rule.Id + "\n"))
 	reportStr.WriteString("\n")
 	if result.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + result.DetailedContext + "\n")
