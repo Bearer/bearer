@@ -1,0 +1,13 @@
+medium:
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_server_side_request_forgery
+      rule_description: Ensure server-side requests are sent to expected destination.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
+      line_number: 7
+      filename: axios_ssrf_injection.js
+      parent_line_number: 7
+      parent_content: |-
+        axios
+            .get(req.query.path)
+
+

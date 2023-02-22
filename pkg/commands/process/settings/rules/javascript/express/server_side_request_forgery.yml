@@ -1,0 +1,50 @@
+patterns:
+  - pattern: |
+      fetch($<EXPRESS_REQ>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_ssrf_request_obj
+  - pattern: |
+      axios.get($<EXPRESS_REQ>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_ssrf_request_obj
+  - pattern: |
+      $<PUPPETEER_PAGE>.$<METHOD>($<EXPRESS_REQ>)
+    filters:
+      - variable: PUPPETEER_PAGE
+        detection:
+      - variable: METHOD
+        values:
+          - goto
+          - setContent
+          - evaluate
+          - evaluateOnNewDocument
+      - variable: EXPRESS_REQ
+        detection: javascript_express_ssrf_request_obj
+auxiliary:
+  - id: javascript_express_ssrf_request_obj
+    patterns:
+      - req.$<_>
+  - id: javascript_puppeteer_page
+    patterns:
+      - $<PUPPETEER_BROWSER>.newPage()
+    filters:
+      - variable: PUPPETEER_BROWSER
+        detection: javascript_puppeteer_browser
+  - id: javascript_puppeteer_browser
+    patterns:
+      - puppeteer.launch()
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "medium"
+metadata:
+  description: "Ensure server-side requests are sent to expected destination."
+  remediation_message: |
+    ## Description
+    TODO.
+  cwe_id:
+    - 918
+  id: "javascript_express_server_side_request_forgery"
