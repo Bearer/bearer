@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
@@ -79,7 +80,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 
 	bar := output.GetProgressBar(len(config.Rules), config, "rules")
 
-	for _, rule := range config.Rules {
+	for _, rule := range maputil.ToSortedSlice(config.Rules) {
 		err := bar.Add(1)
 		if err != nil {
 			output.StdErrLogger().Msgf("Rule %s failed to write progress bar %e", rule.Id, err)
