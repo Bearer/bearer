@@ -2,11 +2,11 @@ patterns:
   - pattern: res.sendFile($<EXPRESS_REQ>)
     filters:
       - variable: EXPRESS_REQ
-        detection: javascript_express_request_obj
+        detection: javascript_express_external_file_upload_request_obj
 languages:
   - javascript
 auxiliary:
-  - id: javascript_express_request_obj
+  - id: javascript_express_external_file_upload_request_obj
     patterns:
       - req.$<_>
 trigger: presence
