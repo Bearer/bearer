@@ -126,6 +126,11 @@ func TestRubyRailsSessionKeyUsingUserInput(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"rails/session_key_using_user_input")
 }
 
+func TestRubyRailsOpenRedirect(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"rails/open_redirect")
+}
+
 func TestRubyThirdPartiesAlgolia(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"third_parties/algolia")

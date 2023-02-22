@@ -1,0 +1,16 @@
+patterns:
+  - pattern: |
+      redirect_to(params[$<_>])
+languages:
+  - ruby
+trigger: presence
+severity:
+  default: low
+metadata:
+  description: "Open redirect detected"
+  remediation_message: |
+    ## Description
+    A web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.
+  cwe_id:
+    - 601
+  id: "rails_redirect_to"
