@@ -16,7 +16,7 @@ brews:
     install: bin.install "bearer"
     tap:
       owner: Bearer
-      name: homebrew-bearer
+      name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
 
     commit_author:

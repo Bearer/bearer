@@ -51,10 +51,10 @@ The quickest way to install Curio is with the install script. It will auto-selec
 curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh
 ```
 
-Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Curio's official Homebrew package](https://github.com/Bearer/homebrew-curio):
+Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Bearer's official Homebrew tap](https://github.com/Bearer/homebrew-tap):
 
 ```bash
-brew install Bearer/curio/curio
+brew install Bearer/tap/curio
 ```
 
 #### Debian/Ubuntu
