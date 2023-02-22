@@ -8,4 +8,5 @@ type DetectorInitResult struct {
 	Error        error
 	Detector     detectortypes.Detector
 	DetectorName string
+	Order        int
 }

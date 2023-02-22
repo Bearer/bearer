@@ -76,17 +76,21 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 
 	detectorsLen := len(jsRules) + len(staticDetectors)
 	receiver := make(chan types.DetectorInitResult, detectorsLen)
+	detectorIterator := 0
 
 	var detectors []detectortypes.Detector
 
 	for _, detectorCreator := range staticDetectors {
 		creator := detectorCreator
+		localIterator := detectorIterator
+		detectorIterator++
 		go func() {
 			detector, err := creator.constructor(lang)
 			receiver <- types.DetectorInitResult{
 				Error:        err,
 				Detector:     detector,
 				DetectorName: creator.name,
+				Order:        localIterator,
 			}
 		}()
 	}
@@ -102,8 +106,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	for ruleName, rule := range jsRules {
 		patterns := rule.Patterns
 		localRuleName := ruleName
+		localIterator := detectorIterator
 
 		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		detectorIterator++
 		go func() {
 			customDetector, err := custom.New(
 				lang,
@@ -115,18 +121,24 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 				Error:        err,
 				Detector:     customDetector,
 				DetectorName: "customDetector: " + localRuleName,
+				Order:        localIterator,
 			}
 		}()
 	}
 
+	constructedDetectors := map[int]types.DetectorInitResult{}
 	for i := 0; i < detectorsLen; i++ {
 		response := <-receiver
 		if response.Error != nil {
 			composition.Close()
 			return nil, fmt.Errorf("failed to create detector %s: %s", response.DetectorName, response.Error)
 		}
-		detectors = append(detectors, response.Detector)
-		composition.closers = append(composition.closers, response.Detector.Close)
+		constructedDetectors[response.Order] = response
+	}
+
+	for _, constructed := range constructedDetectors {
+		detectors = append(detectors, constructed.Detector)
+		composition.closers = append(composition.closers, constructed.Detector.Close)
 	}
 
 	detectorSet, err := detectorset.New(detectors)

@@ -14,6 +14,7 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/ruby/object"
 	"github.com/bearer/bearer/new/detector/implementation/ruby/property"
 	"github.com/bearer/bearer/new/language"
+	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -78,14 +79,20 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 
 	var detectors []detectortypes.Detector
 
+	detectorIterator := 0
+
 	for _, detectorCreator := range staticDetectors {
+		localIterator := detectorIterator
 		creator := detectorCreator
+		detectorIterator++
 		go func() {
+			log.Debug().Msgf("adding ruby rule %d", localIterator)
 			detector, err := creator.constructor(lang)
 			receiver <- types.DetectorInitResult{
 				Error:        err,
 				Detector:     detector,
 				DetectorName: creator.name,
+				Order:        localIterator,
 			}
 		}()
 	}
@@ -101,8 +108,12 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	for ruleName, rule := range rubyRules {
 		patterns := rule.Patterns
 		localRuleName := ruleName
+		localIterator := detectorIterator
 
 		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		detectorIterator++
+		log.Debug().Msgf("adding ruby custom rule %d", localIterator)
+
 		go func() {
 			customDetector, err := custom.New(
 				lang,
@@ -114,18 +125,24 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 				Error:        err,
 				Detector:     customDetector,
 				DetectorName: "customDetector:" + localRuleName,
+				Order:        localIterator,
 			}
 		}()
 	}
 
+	constructedDetectors := map[int]types.DetectorInitResult{}
 	for i := 0; i < detectorsLen; i++ {
 		response := <-receiver
 		if response.Error != nil {
 			composition.Close()
 			return nil, fmt.Errorf("failed to create detector %s: %s", response.DetectorName, response.Error)
 		}
-		detectors = append(detectors, response.Detector)
-		composition.closers = append(composition.closers, response.Detector.Close)
+		constructedDetectors[response.Order] = response
+	}
+
+	for _, constructed := range constructedDetectors {
+		detectors = append(detectors, constructed.Detector)
+		composition.closers = append(composition.closers, constructed.Detector.Close)
 	}
 
 	detectorSet, err := detectorset.New(detectors)
