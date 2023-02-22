@@ -1,7 +1,7 @@
 warning:
     - rule_dsrid: ""
       rule_display_id: javascript_express_unsafe_deserialization
-      rule_description: Do not deserialize untrusted data.
+      rule_description: Deserialization of untrusted data detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_unsafe_deserialization
       line_number: 4
       filename: serialize_error.js

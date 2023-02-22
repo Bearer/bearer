@@ -41,7 +41,7 @@ trigger: presence
 severity:
   default: "medium"
 metadata:
-  description: "Ensure server-side requests are sent to expected destination."
+  description: "Risk of server-side request forgery detected."
   remediation_message: |
     ## Description
     TODO.

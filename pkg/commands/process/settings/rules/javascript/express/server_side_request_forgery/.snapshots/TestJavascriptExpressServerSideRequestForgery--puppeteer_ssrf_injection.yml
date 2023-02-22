@@ -1,7 +1,7 @@
 medium:
     - rule_dsrid: ""
       rule_display_id: javascript_express_server_side_request_forgery
-      rule_description: Ensure server-side requests are sent to expected destination.
+      rule_description: Risk of server-side request forgery detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
       line_number: 11
       filename: puppeteer_ssrf_injection.js
@@ -9,7 +9,7 @@ medium:
       parent_content: page.setContent(content)
     - rule_dsrid: ""
       rule_display_id: javascript_express_server_side_request_forgery
-      rule_description: Ensure server-side requests are sent to expected destination.
+      rule_description: Risk of server-side request forgery detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
       line_number: 12
       filename: puppeteer_ssrf_injection.js
