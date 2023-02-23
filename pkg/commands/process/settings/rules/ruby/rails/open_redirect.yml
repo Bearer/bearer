@@ -1,8 +1,17 @@
 patterns:
   - pattern: |
-      redirect_to(params[$<_>])
+      redirect_to($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: rails_redirect_to_user_input
 languages:
   - ruby
+auxiliary:
+  - id: rails_redirect_to_user_input
+    patterns:
+      - params
+      - request
+      - cookies
 trigger: presence
 severity:
   default: low
