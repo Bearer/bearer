@@ -62,6 +62,11 @@ func TestJavascriptExpressServerSideRequestForgery(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/server_side_request_forgery")
 }
 
+func TestJavascriptExpressSqlInjection(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/sql_injection")
+}
+
 func TestExpressSecureCookie(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
