@@ -1,0 +1,1 @@
+Faraday.post(params[:oops])
