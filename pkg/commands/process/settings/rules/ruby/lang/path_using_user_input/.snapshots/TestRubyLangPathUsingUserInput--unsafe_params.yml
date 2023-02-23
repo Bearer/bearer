@@ -111,5 +111,25 @@ low:
       filename: unsafe_params.rb
       parent_line_number: 19
       parent_content: path.join("a", params[:four])
+    - rule:
+        cwe_ids:
+            - "22"
+        id: ruby_lang_path_using_user_input
+        description: Do not use user input to form file paths.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 21
+      filename: unsafe_params.rb
+      parent_line_number: 21
+      parent_content: Rails.root.join(params[:oops])
+    - rule:
+        cwe_ids:
+            - "22"
+        id: ruby_lang_path_using_user_input
+        description: Do not use user input to form file paths.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 23
+      filename: unsafe_params.rb
+      parent_line_number: 23
+      parent_content: Gem::Util.traverse_parents(params[:oops]) {}
 
 
