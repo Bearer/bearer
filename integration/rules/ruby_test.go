@@ -100,6 +100,11 @@ func TestRubyRailsInsecureCommunication(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_communication")
 }
 
+func TestRubyRailsInsecureDisablingOfCallback(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_disabling_of_callback")
+}
+
 func TestRubyRailsInsecureHTTPPassowrd(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_http_password")
