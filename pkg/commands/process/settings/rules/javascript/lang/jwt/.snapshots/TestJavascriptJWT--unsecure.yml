@@ -3,9 +3,13 @@ low:
       rule_display_id: javascript_jwt
       rule_description: Sensitive data in a JWT detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_jwt
-      line_number: 2
+      line_number: 3
       filename: unsecure.js
       parent_line_number: 2
-      parent_content: 'jwt.sign({ user: { email: "jhon@gmail.com" } }, "shhhhh")'
+      parent_content: |-
+        jwt.sign(
+        	{ user: { email: "jhon@gmail.com" } },
+        	process.env.JWT_SECRET
+        )
 
 
