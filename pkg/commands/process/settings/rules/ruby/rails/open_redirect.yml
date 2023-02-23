@@ -1,0 +1,25 @@
+patterns:
+  - pattern: |
+      redirect_to($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: rails_redirect_to_user_input
+languages:
+  - ruby
+auxiliary:
+  - id: rails_redirect_to_user_input
+    patterns:
+      - params
+      - request
+      - cookies
+trigger: presence
+severity:
+  default: low
+metadata:
+  description: "Open redirect detected"
+  remediation_message: |
+    ## Description
+    A web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.
+  cwe_id:
+    - 601
+  id: "rails_redirect_to"
