@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
@@ -146,8 +145,6 @@ func (implementation *javascriptImplementation) ExtractPatternVariables(input st
 		}
 
 		dummyValue := produceDummyValue(i, nodeTypes[0])
-
-		log.Debug().Msgf("name is %s", submatches[nameIndex])
 
 		params = append(params, patternquerytypes.Variable{
 			Name:       submatches[nameIndex],
