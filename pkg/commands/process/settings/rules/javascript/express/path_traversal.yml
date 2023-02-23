@@ -23,5 +23,5 @@ metadata:
     ## Description
     TODO
   cwe_id:
-    - 611
+    - 22
   id: "javascript_express_path_traversal"
