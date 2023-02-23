@@ -3,12 +3,34 @@ patterns:
     filters:
       - variable: EXPRESS_REQ
         detection: javascript_express_external_file_upload_request_obj
+  - pattern: res.sendFile($<EXPRESS_REQ>, $<OPTIONS>$<...>)
+    filters:
+      - not:
+          variable: OPTIONS
+          detection: javascript_express_external_file_upload_root_option_not_request_obj
+  - pattern: res.sendFile($<_>, $<EXPRESS_REQ>$<...>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_external_file_upload_request_obj
 languages:
   - javascript
 auxiliary:
   - id: javascript_express_external_file_upload_request_obj
     patterns:
       - req.$<_>
+  - id: javascript_express_external_file_upload_root_option
+    patterns:
+      - |
+        { root: $<_> }
+  - id: javascript_express_external_file_upload_root_option_not_request_obj
+    patterns:
+      - pattern: $<OPTIONS>
+        filters:
+          - variable: OPTIONS
+            detection: javascript_express_external_file_upload_root_option
+          - not:
+              variable: OPTIONS
+              detection: javascript_express_external_file_upload_request_obj
 trigger: presence
 severity:
   default: "warning"

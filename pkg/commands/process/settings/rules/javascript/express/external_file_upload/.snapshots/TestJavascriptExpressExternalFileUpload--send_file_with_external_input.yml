@@ -1,7 +1,7 @@
 warning:
     - rule_dsrid: ""
       rule_display_id: javascript_express_external_file_upload
-      rule_description: Do not allow user input to control filename or path.
+      rule_description: External control of filename or path detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
       line_number: 8
       filename: send_file_with_external_input.js
@@ -9,11 +9,27 @@ warning:
       parent_content: res.sendFile(file)
     - rule_dsrid: ""
       rule_display_id: javascript_express_external_file_upload
-      rule_description: Do not allow user input to control filename or path.
+      rule_description: External control of filename or path detected.
       rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
       line_number: 9
       filename: send_file_with_external_input.js
       parent_line_number: 9
       parent_content: res.sendFile(path.resolve(file))
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_external_file_upload
+      rule_description: External control of filename or path detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
+      line_number: 10
+      filename: send_file_with_external_input.js
+      parent_line_number: 10
+      parent_content: res.sendFile(req.params.file, {}, () => { })
+    - rule_dsrid: ""
+      rule_display_id: javascript_express_external_file_upload
+      rule_description: External control of filename or path detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
+      line_number: 11
+      filename: send_file_with_external_input.js
+      parent_line_number: 11
+      parent_content: 'res.sendFile("file.txt", { root: path.join(__dirname, req.params.root) })'
 
 
