@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_sentry
-      rule_description: Sensitive data sent to Sentry detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_sentry
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_sentry
+        description: Sensitive data sent to Sentry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_sentry
       line_number: 2
       filename: javascript_configure_scope_set_extra.js
       category_groups:

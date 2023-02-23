@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_new_relic
-      rule_description: Sensitive data sent to New Relic detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_new_relic
+        description: Sensitive data sent to New Relic detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
       line_number: 6
       filename: datatype_in_interaction_set_attribute.js
       category_groups:
@@ -11,10 +13,12 @@ critical:
       parent_content: |-
         newrelic.interaction()
             .setAttribute("username", user.first_name)
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_new_relic
-      rule_description: Sensitive data sent to New Relic detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_new_relic
+        description: Sensitive data sent to New Relic detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
       line_number: 7
       filename: datatype_in_interaction_set_attribute.js
       category_groups:
@@ -24,10 +28,12 @@ critical:
         newrelic.interaction()
             .setAttribute("username", user.first_name)
             .setAttribute("postal-code", user.post_code)
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_new_relic
-      rule_description: Sensitive data sent to New Relic detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_new_relic
+        description: Sensitive data sent to New Relic detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
       line_number: 13
       filename: datatype_in_interaction_set_attribute.js
       category_groups:

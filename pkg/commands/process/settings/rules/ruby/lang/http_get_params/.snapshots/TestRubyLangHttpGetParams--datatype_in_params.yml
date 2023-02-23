@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_get_params
-      rule_description: Sensitive data communicated through GET parameters detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_get_params
+    - rule:
+        cwe_ids:
+            - "598"
+        id: ruby_lang_http_get_params
+        description: Sensitive data communicated through GET parameters detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_get_params
       line_number: 1
       filename: datatype_in_params.rb
       category_groups:
@@ -10,10 +12,12 @@ critical:
         - Personal Data (Sensitive)
       parent_line_number: 1
       parent_content: URI("https://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_get_params
-      rule_description: Sensitive data communicated through GET parameters detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_get_params
+    - rule:
+        cwe_ids:
+            - "598"
+        id: ruby_lang_http_get_params
+        description: Sensitive data communicated through GET parameters detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_get_params
       line_number: 3
       filename: datatype_in_params.rb
       category_groups:

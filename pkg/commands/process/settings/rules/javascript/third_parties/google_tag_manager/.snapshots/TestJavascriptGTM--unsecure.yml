@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_google_tag_manager
-      rule_description: Sensitive data sent to Google Tag Manager detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_google_tag_manager
+        description: Sensitive data sent to Google Tag Manager detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
       line_number: 1
       filename: unsecure.js
       category_groups:
@@ -12,10 +14,12 @@ critical:
         window.dataLayer.push({
         	email: user.email,
         })
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_google_tag_manager
-      rule_description: Sensitive data sent to Google Tag Manager detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_google_tag_manager
+        description: Sensitive data sent to Google Tag Manager detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
       line_number: 4
       filename: unsecure.js
       category_groups:

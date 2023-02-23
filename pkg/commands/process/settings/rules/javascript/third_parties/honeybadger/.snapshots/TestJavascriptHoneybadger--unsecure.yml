@@ -1,8 +1,10 @@
 low:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_honeybadger
-      rule_description: Sensitive data sent to Honeybadger detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_honeybadger
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_honeybadger
       line_number: 3
       filename: unsecure.js
       parent_line_number: 5

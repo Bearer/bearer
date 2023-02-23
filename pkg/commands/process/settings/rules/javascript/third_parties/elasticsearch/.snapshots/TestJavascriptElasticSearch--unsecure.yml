@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_elasticsearch
-      rule_description: Sensitive data sent to ElasticSearch detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_elasticsearch
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_elasticsearch
+        description: Sensitive data sent to ElasticSearch detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_elasticsearch
       line_number: 1
       filename: unsecure.js
       category_groups:

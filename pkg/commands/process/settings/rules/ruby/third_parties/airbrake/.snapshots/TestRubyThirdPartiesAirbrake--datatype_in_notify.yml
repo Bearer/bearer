@@ -1,18 +1,22 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: ruby_third_parties_airbrake
-      rule_description: Sensitive data sent to Airbrake detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_airbrake
+        description: Sensitive data sent to Airbrake detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 1
       filename: datatype_in_notify.rb
       category_groups:
         - PII
       parent_line_number: 1
       parent_content: Airbrake.notify(user.first_name)
-    - rule_dsrid: DSR-1
-      rule_display_id: ruby_third_parties_airbrake
-      rule_description: Sensitive data sent to Airbrake detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_airbrake
+        description: Sensitive data sent to Airbrake detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 4
       filename: datatype_in_notify.rb
       category_groups:
@@ -22,10 +26,12 @@ critical:
         Airbrake.notify('App crashed!', {
           current_user: user.email
         })
-    - rule_dsrid: DSR-1
-      rule_display_id: ruby_third_parties_airbrake
-      rule_description: Sensitive data sent to Airbrake detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_airbrake
+        description: Sensitive data sent to Airbrake detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 8
       filename: datatype_in_notify.rb
       category_groups:

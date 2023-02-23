@@ -1,16 +1,20 @@
 low:
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_ssl_verification
-      rule_description: Missing SSL certificate verification detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification
+    - rule:
+        cwe_ids:
+            - "295"
+        id: ruby_lang_ssl_verification
+        description: Missing SSL certificate verification detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification
       line_number: 1
       filename: verification_disabled.rb
       parent_line_number: 1
       parent_content: http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_ssl_verification
-      rule_description: Missing SSL certificate verification detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification
+    - rule:
+        cwe_ids:
+            - "295"
+        id: ruby_lang_ssl_verification
+        description: Missing SSL certificate verification detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification
       line_number: 4
       filename: verification_disabled.rb
       parent_line_number: 4

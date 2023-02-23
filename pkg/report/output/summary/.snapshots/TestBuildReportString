@@ -3,14 +3,12 @@
 Summary Report
 
 =====================================
-Checks: 
 
-- Its a test! (custom_test_rule)
-- Missing SSL certificate verification detected. (ruby_lang_ssl_verification) [DSR-2]
-- Sensitive data sent to Rails loggers detected. (ruby_rails_logger) [DSR-5]
+Rules: 
+ - 2 default rules applied (https://docs.bearer.com/reference/rules)
+ - 1 custom rules applied
 
-
-CRITICAL: Sensitive data sent to Rails loggers detected. [DSR-5]
+CRITICAL: Sensitive data sent to Rails loggers detected. [CWE-209, CWE-532]
 https://docs.bearer.com/reference/rules/ruby_rails_logger
 To skip this rule, use the flag --skip-rule=ruby_rails_logger
 
@@ -18,7 +16,7 @@ File: pkg/datatype_leak.rb:1
 
 
 
-LOW: Missing SSL certificate verification detected. [DSR-2]
+LOW: Missing SSL certificate verification detected. [CWE-295]
 https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification
 To skip this rule, use the flag --skip-rule=ruby_lang_ssl_verification
 
@@ -29,10 +27,10 @@ File: config/application.rb:2
 
 3 checks, 2 failures, 0 warnings
 
-CRITICAL: 1 (DSR-5)
+CRITICAL: 1 (CWE-209, CWE-532)
 HIGH: 0
 MEDIUM: 0
-LOW: 1 (DSR-2)
+LOW: 1 (CWE-295)
 WARNING: 0
 
 Need help or want to discuss the output? Join the Community https://discord.gg/eaHZBJUXRF

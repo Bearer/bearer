@@ -1,8 +1,11 @@
 critical:
-    - rule_dsrid: DSR-7
-      rule_display_id: ruby_lang_weak_encryption_with_data
-      rule_description: Sensitive data encrypted with a weak encryption library detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
+    - rule:
+        cwe_ids:
+            - "326"
+            - "331"
+        id: ruby_lang_weak_encryption_with_data
+        description: Sensitive data encrypted with a weak encryption library detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
       line_number: 1
       filename: digest_sha1.rb
       category_groups:
@@ -10,10 +13,13 @@ critical:
       parent_line_number: 1
       parent_content: Digest::SHA1.hexidigest(user.first_name)
 low:
-    - rule_dsrid: DSR-7
-      rule_display_id: ruby_lang_weak_encryption
-      rule_description: Weak encryption library usage detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
       line_number: 1
       filename: digest_sha1.rb
       category_groups:

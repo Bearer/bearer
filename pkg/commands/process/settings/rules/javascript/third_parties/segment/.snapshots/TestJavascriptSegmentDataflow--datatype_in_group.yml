@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_segment
-      rule_description: Sensitive data sent to Segment detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_segment
+        description: Sensitive data sent to Segment detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
       line_number: 8
       filename: datatype_in_group.js
       category_groups:

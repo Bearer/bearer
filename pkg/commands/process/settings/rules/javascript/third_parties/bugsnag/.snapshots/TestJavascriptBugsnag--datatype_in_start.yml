@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_bugsnag
-      rule_description: Sensitive data sent to Bugsnag detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_bugsnag
+        description: Sensitive data sent to Bugsnag detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
       line_number: 3
       filename: datatype_in_start.js
       category_groups:
@@ -20,10 +22,12 @@ critical:
             session.setUser(user.email)
           }
         })
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_bugsnag
-      rule_description: Sensitive data sent to Bugsnag detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_bugsnag
+        description: Sensitive data sent to Bugsnag detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
       line_number: 5
       filename: datatype_in_start.js
       category_groups:
@@ -41,10 +45,12 @@ critical:
             session.setUser(user.email)
           }
         })
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_bugsnag
-      rule_description: Sensitive data sent to Bugsnag detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_bugsnag
+        description: Sensitive data sent to Bugsnag detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
       line_number: 9
       filename: datatype_in_start.js
       category_groups:

@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_rollbar
-      rule_description: Sensitive data sent to Rollbar detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_rollbar
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_rollbar
+        description: Sensitive data sent to Rollbar detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_rollbar
       line_number: 1
       filename: browser_unsecure.js
       category_groups:

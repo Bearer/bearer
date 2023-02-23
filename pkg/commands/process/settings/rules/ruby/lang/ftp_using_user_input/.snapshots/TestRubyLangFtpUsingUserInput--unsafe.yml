@@ -1,16 +1,20 @@
 low:
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_ftp_using_user_input
-      rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ftp_using_user_input
+    - rule:
+        cwe_ids:
+            - "22"
+        id: ruby_lang_ftp_using_user_input
+        description: Do not use user input to form file paths.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ftp_using_user_input
       line_number: 1
       filename: unsafe.rb
       parent_line_number: 1
       parent_content: Net::FTP.new(params[:oops])
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_ftp_using_user_input
-      rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ftp_using_user_input
+    - rule:
+        cwe_ids:
+            - "22"
+        id: ruby_lang_ftp_using_user_input
+        description: Do not use user input to form file paths.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ftp_using_user_input
       line_number: 3
       filename: unsafe.rb
       parent_line_number: 3
@@ -18,26 +22,32 @@ low:
         Net::FTP.open("example.com", username: params[:user]) do
 
         end
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_ftp_using_user_input
-      rule_description: Do not use user input to form file paths.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ftp_using_user_input
+    - rule:
+        cwe_ids:
+            - "22"
+        id: ruby_lang_ftp_using_user_input
+        description: Do not use user input to form file paths.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_ftp_using_user_input
       line_number: 9
       filename: unsafe.rb
       parent_line_number: 9
       parent_content: ftp.puttextfile("local.txt", event["filename"])
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_insecure_ftp
-      rule_description: Communication with an unsecure FTP server detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_insecure_ftp
+        description: Communication with an unsecure FTP server detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
       line_number: 1
       filename: unsafe.rb
       parent_line_number: 1
       parent_content: Net::FTP.new(params[:oops])
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_insecure_ftp
-      rule_description: Communication with an unsecure FTP server detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_insecure_ftp
+        description: Communication with an unsecure FTP server detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
       line_number: 3
       filename: unsafe.rb
       parent_line_number: 3
@@ -45,10 +55,12 @@ low:
         Net::FTP.open("example.com", username: params[:user]) do
 
         end
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_insecure_ftp
-      rule_description: Communication with an unsecure FTP server detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_insecure_ftp
+        description: Communication with an unsecure FTP server detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
       line_number: 8
       filename: unsafe.rb
       parent_line_number: 8

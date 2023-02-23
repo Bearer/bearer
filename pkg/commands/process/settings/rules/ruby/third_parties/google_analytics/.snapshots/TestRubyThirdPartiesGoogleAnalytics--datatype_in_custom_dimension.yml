@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: ruby_third_parties_google_analytics
-      rule_description: Sensitive data sent to Google Analytics detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_analytics
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_analytics
+        description: Sensitive data sent to Google Analytics detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_analytics
       line_number: 2
       filename: datatype_in_custom_dimension.rb
       category_groups:
