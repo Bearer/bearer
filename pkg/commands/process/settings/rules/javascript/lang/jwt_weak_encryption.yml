@@ -1,0 +1,32 @@
+type: risk
+patterns:
+  - pattern: |
+      jwt.sign($<_>, $<_>, {
+        algorithm: "none"
+      })
+  - pattern: |
+      jwt.sign($<_>, $<_>, {
+        algorithm: [$<...>"none"$<...>]
+      })
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: critical
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Weak jwt encryption deceted"
+  remediation_message: |
+    ## Description
+
+    Use any default encryption algorithm jwt library provides
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-5"
+  cwe_id:
+    - 327
+  id: "javascript_jwt_weak_encryption"
