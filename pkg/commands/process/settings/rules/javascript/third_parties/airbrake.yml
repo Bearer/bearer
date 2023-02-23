@@ -33,7 +33,6 @@ metadata:
 
     ## Resources
     - [Airbrake Docs](https://docs.airbrake.io/)
-  dsr_id: DSR-1
   cwe_id:
     - 201
   associated_recipe: Airbrake

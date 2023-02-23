@@ -181,7 +181,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Detectors:          definition.Detectors,
 			Processors:         definition.Processors,
 			AutoEncrytPrefix:   definition.AutoEncrytPrefix,
-			DSRID:              definition.Metadata.DSRID,
+			CWEIDs:             definition.Metadata.CWEIDs,
 			Languages:          definition.Languages,
 			ParamParenting:     definition.ParamParenting,
 			Patterns:           definition.Patterns,

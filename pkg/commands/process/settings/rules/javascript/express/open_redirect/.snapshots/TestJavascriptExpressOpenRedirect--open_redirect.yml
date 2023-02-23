@@ -1,32 +1,40 @@
 low:
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_open_redirect
-      rule_description: Open redirect detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
+    - rule:
+        cwe_ids:
+            - "601"
+        id: javascript_express_open_redirect
+        description: Open redirect detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
       line_number: 2
       filename: open_redirect.js
       parent_line_number: 2
       parent_content: res.redirect(req.params.url)
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_open_redirect
-      rule_description: Open redirect detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
+    - rule:
+        cwe_ids:
+            - "601"
+        id: javascript_express_open_redirect
+        description: Open redirect detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
       line_number: 3
       filename: open_redirect.js
       parent_line_number: 3
       parent_content: res.redirect(req.query.url + "/bar")
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_open_redirect
-      rule_description: Open redirect detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
+    - rule:
+        cwe_ids:
+            - "601"
+        id: javascript_express_open_redirect
+        description: Open redirect detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
       line_number: 4
       filename: open_redirect.js
       parent_line_number: 4
       parent_content: res.redirect("https://" + req.params.url + "/bar")
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_open_redirect
-      rule_description: Open redirect detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
+    - rule:
+        cwe_ids:
+            - "601"
+        id: javascript_express_open_redirect
+        description: Open redirect detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_open_redirect
       line_number: 5
       filename: open_redirect.js
       parent_line_number: 5

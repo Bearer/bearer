@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-5
-      rule_display_id: ruby_lang_exception
-      rule_description: Sensitive data in a exception message detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exception
+    - rule:
+        cwe_ids:
+            - "210"
+        id: ruby_lang_exception
+        description: Sensitive data in a exception message detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exception
       line_number: 2
       filename: bugsnag_notify.rb
       category_groups:

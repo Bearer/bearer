@@ -1,66 +1,82 @@
 low:
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 3
       filename: insecure_curb.rb
       parent_line_number: 3
       parent_content: |-
         Curl.http("GET", "http://my.api.com/users/search", nil) do
         end
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 6
       filename: insecure_curb.rb
       parent_line_number: 6
       parent_content: Curl.get("http://my.api.com/users/search") {}
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 8
       filename: insecure_curb.rb
       parent_line_number: 8
       parent_content: Curl::Easy.perform("http://my.api.com/users/search") {}
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 10
       filename: insecure_curb.rb
       parent_line_number: 10
       parent_content: Curl::Easy.new("http://my.api.com/users/search") {}
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 11
       filename: insecure_curb.rb
       parent_line_number: 11
       parent_content: easy.url = "http://my.api.com/customers"
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 14
       filename: insecure_curb.rb
       parent_line_number: 14
       parent_content: easy2.url = "http://my.api.com/users/search"
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 16
       filename: insecure_curb.rb
       parent_line_number: 16
       parent_content: Curl::Multi.get(["https://my.api.com/secure", "http://my.api.com/users/search"], {}) {}
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_http_insecure
-      rule_description: Connection through an unsecure HTTP communication detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
       line_number: 18
       filename: insecure_curb.rb
       parent_line_number: 18

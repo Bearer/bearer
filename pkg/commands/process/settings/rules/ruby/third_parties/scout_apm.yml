@@ -31,7 +31,6 @@ metadata:
 
     ## Resources
     - [Scout APM docs](https://scoutapm.com/docs/ruby)
-  dsr_id: DSR-1
   cwe_id:
     - 201
   associated_recipe: Scout APM

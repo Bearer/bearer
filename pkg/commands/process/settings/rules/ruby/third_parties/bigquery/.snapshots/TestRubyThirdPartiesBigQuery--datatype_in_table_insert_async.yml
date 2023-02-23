@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-6
-      rule_display_id: ruby_third_parties_bigquery
-      rule_description: Sensitive data sent to BigQuery detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_bigquery
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_bigquery
+        description: Sensitive data sent to BigQuery detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_bigquery
       line_number: 9
       filename: datatype_in_table_insert_async.rb
       category_groups:

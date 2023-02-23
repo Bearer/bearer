@@ -53,7 +53,6 @@ metadata:
 
     ## Resources
     - [Bugsnag Docs](https://docs.bugsnag.com/platforms/javascript/)
-  dsr_id: DSR-1
   cwe_id:
     - 201
   associated_recipe: Bugsnag

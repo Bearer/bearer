@@ -1,8 +1,11 @@
 critical:
-    - rule_dsrid: DSR-5
-      rule_display_id: javascript_lang_logger
-      rule_description: Sensitive data in a logger message detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
+    - rule:
+        cwe_ids:
+            - "1295"
+            - "532"
+        id: javascript_lang_logger
+        description: Sensitive data in a logger message detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
       line_number: 1
       filename: datatype_leak.js
       category_groups:

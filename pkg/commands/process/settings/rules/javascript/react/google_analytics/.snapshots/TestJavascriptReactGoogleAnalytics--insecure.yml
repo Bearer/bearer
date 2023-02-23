@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_react_google_analytics
-      rule_description: Sensitive data sent to Google Analytics detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_react_google_analytics
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_react_google_analytics
+        description: Sensitive data sent to Google Analytics detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_react_google_analytics
       line_number: 1
       filename: insecure.js
       category_groups:
@@ -14,10 +16,12 @@ critical:
         	action: "logged_in",
         	value: user.email,
         })
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_react_google_analytics
-      rule_description: Sensitive data sent to Google Analytics detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_react_google_analytics
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_react_google_analytics
+        description: Sensitive data sent to Google Analytics detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_react_google_analytics
       line_number: 5
       filename: insecure.js
       category_groups:

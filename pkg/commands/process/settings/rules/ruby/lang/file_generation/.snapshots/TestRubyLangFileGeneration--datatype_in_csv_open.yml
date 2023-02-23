@@ -1,8 +1,11 @@
 critical:
-    - rule_dsrid: DSR-4
-      rule_display_id: ruby_lang_file_generation
-      rule_description: Sensitive data detected as part of a dynamic file generation.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
+    - rule:
+        cwe_ids:
+            - "532"
+            - "313"
+        id: ruby_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
       line_number: 5
       filename: datatype_in_csv_open.rb
       category_groups:
@@ -14,10 +17,13 @@ critical:
         			user.first_name,
         			user.last_name
         		]
-    - rule_dsrid: DSR-4
-      rule_display_id: ruby_lang_file_generation
-      rule_description: Sensitive data detected as part of a dynamic file generation.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
+    - rule:
+        cwe_ids:
+            - "532"
+            - "313"
+        id: ruby_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
       line_number: 6
       filename: datatype_in_csv_open.rb
       category_groups:
@@ -29,10 +35,13 @@ critical:
         			user.first_name,
         			user.last_name
         		]
-    - rule_dsrid: DSR-4
-      rule_display_id: ruby_lang_file_generation
-      rule_description: Sensitive data detected as part of a dynamic file generation.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
+    - rule:
+        cwe_ids:
+            - "532"
+            - "313"
+        id: ruby_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
       line_number: 7
       filename: datatype_in_csv_open.rb
       category_groups:

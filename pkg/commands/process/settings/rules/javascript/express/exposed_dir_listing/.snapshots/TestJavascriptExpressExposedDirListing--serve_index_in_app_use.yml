@@ -1,8 +1,10 @@
 warning:
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_exposed_dir_listing
-      rule_description: Missing access restriction to directory listing detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_exposed_dir_listing
+    - rule:
+        cwe_ids:
+            - "548"
+        id: javascript_express_exposed_dir_listing
+        description: Missing access restriction to directory listing detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_exposed_dir_listing
       line_number: 5
       filename: serve_index_in_app_use.js
       parent_line_number: 5

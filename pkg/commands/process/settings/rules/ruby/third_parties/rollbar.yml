@@ -63,7 +63,6 @@ metadata:
     ## Resources
     - [Rollbar docs](https://docs.rollbar.com/docs/ruby)
     - [Scrubbing items](https://docs.rollbar.com/docs/ruby#section-scrubbing-items)
-  dsr_id: DSR-1
   cwe_id:
     - 201
   associated_recipe: Rollbar

@@ -1,16 +1,20 @@
 medium:
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_server_side_request_forgery
-      rule_description: Risk of server-side request forgery detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
+    - rule:
+        cwe_ids:
+            - "918"
+        id: javascript_express_server_side_request_forgery
+        description: Risk of server-side request forgery detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
       line_number: 11
       filename: puppeteer_ssrf_injection.js
       parent_line_number: 11
       parent_content: page.setContent(content)
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_server_side_request_forgery
-      rule_description: Risk of server-side request forgery detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
+    - rule:
+        cwe_ids:
+            - "918"
+        id: javascript_express_server_side_request_forgery
+        description: Risk of server-side request forgery detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
       line_number: 12
       filename: puppeteer_ssrf_injection.js
       parent_line_number: 12

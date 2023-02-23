@@ -77,7 +77,6 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: DSR-2
   cwe_id:
     - 598
   id: ruby_lang_http_get_params

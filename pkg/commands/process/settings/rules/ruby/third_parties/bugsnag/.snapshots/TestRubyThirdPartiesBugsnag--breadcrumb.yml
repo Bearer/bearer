@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: ruby_third_parties_bugsnag
-      rule_description: Sensitive data sent to Bugsnag detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_bugsnag
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_bugsnag
+        description: Sensitive data sent to Bugsnag detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_bugsnag
       line_number: 2
       filename: breadcrumb.rb
       category_groups:

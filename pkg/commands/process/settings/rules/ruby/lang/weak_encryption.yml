@@ -120,7 +120,6 @@ metadata:
 
     ## Resources
     - [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)
-  dsr_id: DSR-7
   cwe_id:
     - 331
     - 326

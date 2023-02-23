@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-4
-      rule_display_id: javascript_lang_file_generation
-      rule_description: Sensitive data detected as part of a dynamic file generation.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
+    - rule:
+        cwe_ids:
+            - "313"
+        id: javascript_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
       line_number: 8
       filename: file_generation.js
       category_groups:
@@ -13,10 +15,12 @@ critical:
           if (err) console.log(err)
           else console.log("Data saved")
         })
-    - rule_dsrid: DSR-4
-      rule_display_id: javascript_lang_file_generation
-      rule_description: Sensitive data detected as part of a dynamic file generation.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
+    - rule:
+        cwe_ids:
+            - "313"
+        id: javascript_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
       line_number: 11
       filename: file_generation.js
       category_groups:
@@ -27,10 +31,12 @@ critical:
           if (err) console.log(err)
           else console.log("Data saved")
         })
-    - rule_dsrid: DSR-4
-      rule_display_id: javascript_lang_file_generation
-      rule_description: Sensitive data detected as part of a dynamic file generation.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
+    - rule:
+        cwe_ids:
+            - "313"
+        id: javascript_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
       line_number: 12
       filename: file_generation.js
       category_groups:

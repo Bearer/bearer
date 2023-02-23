@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_new_relic
-      rule_description: Sensitive data sent to New Relic detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_new_relic
+        description: Sensitive data sent to New Relic detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
       line_number: 3
       filename: datatype_in_set_custom_attribute.js
       category_groups:

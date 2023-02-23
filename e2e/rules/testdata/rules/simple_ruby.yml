@@ -27,7 +27,6 @@ metadata:
 
     ## Resources
     - [Configuring Rails Applications - Ruby on Rails Guides](https://guides.rubyonrails.org/configuring.html#config-force-ssl)
-  dsr_id: DSR-2
   cwe_id:
     - 319
   id: ruby_rails_insecure_communication_test

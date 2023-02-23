@@ -29,7 +29,7 @@ func TestBuildReportString(t *testing.T) {
 	customRule := &settings.Rule{
 		Id:          "custom_test_rule",
 		Description: "Its a test!",
-		DSRID:       "",
+		CWEIDs:      []string{},
 		Type:        "risk",
 		Severity:    map[string]string{"default": "low"},
 	}

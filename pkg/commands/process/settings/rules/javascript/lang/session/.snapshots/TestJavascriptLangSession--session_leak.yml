@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-5
-      rule_display_id: javascript_session
-      rule_description: Sensitive data stored in HTML local storage detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_session
+    - rule:
+        cwe_ids:
+            - "312"
+        id: javascript_session
+        description: Sensitive data stored in HTML local storage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_session
       line_number: 1
       filename: session_leak.js
       category_groups:

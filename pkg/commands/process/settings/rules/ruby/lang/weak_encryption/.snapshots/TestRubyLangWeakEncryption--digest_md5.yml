@@ -1,8 +1,11 @@
 low:
-    - rule_dsrid: DSR-7
-      rule_display_id: ruby_lang_weak_encryption
-      rule_description: Weak encryption library usage detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
       line_number: 1
       filename: digest_md5.rb
       parent_line_number: 1

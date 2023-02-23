@@ -56,7 +56,6 @@ metadata:
 
     - Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)
     - [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)
-  dsr_id: DSR-3
   cwe_id:
     - 315
     - 539

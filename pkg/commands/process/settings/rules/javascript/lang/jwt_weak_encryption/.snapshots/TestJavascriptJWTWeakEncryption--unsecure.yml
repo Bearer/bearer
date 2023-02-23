@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-5
-      rule_display_id: javascript_jwt_weak_encryption
-      rule_description: Weak jwt encryption deceted
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_jwt_weak_encryption
+    - rule:
+        cwe_ids:
+            - "327"
+        id: javascript_jwt_weak_encryption
+        description: Weak jwt encryption deceted
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_jwt_weak_encryption
       line_number: 3
       filename: unsecure.js
       parent_line_number: 3

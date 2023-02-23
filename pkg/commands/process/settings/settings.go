@@ -63,12 +63,12 @@ type PolicyModule struct {
 }
 
 type RuleMetadata struct {
-	Description        string `mapstructure:"description" json:"description" yaml:"description"`
-	RemediationMessage string `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
-	DSRID              string `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
-	AssociatedRecipe   string `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
-	ID                 string `mapstructure:"id" json:"id" yaml:"id"`
-	DocumentationUrl   string `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
+	Description        string   `mapstructure:"description" json:"description" yaml:"description"`
+	RemediationMessage string   `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
+	CWEIDs             []string `mapstructure:"cwe_id" json:"cwe_id" yaml:"cwe_id"`
+	AssociatedRecipe   string   `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
+	ID                 string   `mapstructure:"id" json:"id" yaml:"id"`
+	DocumentationUrl   string   `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
 }
 
 type RuleDefinition struct {
@@ -128,7 +128,7 @@ type Rule struct {
 	Severity           map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
 	Description        string            `mapstructure:"description" json:"description" yaml:"description"`
 	RemediationMessage string            `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
-	DSRID              string            `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
+	CWEIDs             []string          `mapstructure:"cwe_ids" json:"cwe_ids" yaml:"cwe_ids"`
 	Languages          []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
 	Patterns           []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
 	DocumentationUrl   string            `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`

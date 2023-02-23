@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-6
-      rule_display_id: javascript_third_parties_algolia
-      rule_description: Sensitive data sent to Algolia detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_algolia
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_algolia
+        description: Sensitive data sent to Algolia detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_algolia
       line_number: 4
       filename: datatype_in_index.js
       category_groups:

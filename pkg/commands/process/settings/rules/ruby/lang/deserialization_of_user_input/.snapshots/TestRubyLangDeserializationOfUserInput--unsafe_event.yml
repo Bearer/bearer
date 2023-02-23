@@ -1,66 +1,82 @@
 low:
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 2
       filename: unsafe_event.rb
       parent_line_number: 2
       parent_content: YAML.load(event["oops"])
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 4
       filename: unsafe_event.rb
       parent_line_number: 4
       parent_content: Psych.load(event["oops"])
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 6
       filename: unsafe_event.rb
       parent_line_number: 6
       parent_content: Syck.load(event["oops"])
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 8
       filename: unsafe_event.rb
       parent_line_number: 8
       parent_content: JSON.load(event["oops"])
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 10
       filename: unsafe_event.rb
       parent_line_number: 10
       parent_content: Oj.load(event["oops"])
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 11
       filename: unsafe_event.rb
       parent_line_number: 11
       parent_content: |-
         Oj.object_load(event["oops"]) do |json|
           end
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 14
       filename: unsafe_event.rb
       parent_line_number: 14
       parent_content: Marshal.load(event["oops"])
-    - rule_dsrid: DSR-?
-      rule_display_id: ruby_lang_deserialization_of_user_input
-      rule_description: User input detected in an unsafe deserialization method.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 15
       filename: unsafe_event.rb
       parent_line_number: 15

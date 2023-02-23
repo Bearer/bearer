@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-1
-      rule_display_id: javascript_third_parties_open_telemetry
-      rule_description: Sensitive data sent to Open Telemetry detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_open_telemetry
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_open_telemetry
+        description: Sensitive data sent to Open Telemetry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_open_telemetry
       line_number: 5
       filename: datatype_in_add_event.js
       category_groups:

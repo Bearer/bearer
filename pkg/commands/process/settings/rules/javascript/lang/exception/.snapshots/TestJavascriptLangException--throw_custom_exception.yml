@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-5
-      rule_display_id: javascript_lang_exception
-      rule_description: Sensitive data in a exception message detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_exception
+    - rule:
+        cwe_ids:
+            - "210"
+        id: javascript_lang_exception
+        description: Sensitive data in a exception message detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_exception
       line_number: 5
       filename: throw_custom_exception.js
       category_groups:

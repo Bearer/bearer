@@ -1,8 +1,10 @@
 critical:
-    - rule_dsrid: DSR-2
-      rule_display_id: ruby_lang_insecure_ftp
-      rule_description: Communication with an unsecure FTP server detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_insecure_ftp
+        description: Communication with an unsecure FTP server detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
       line_number: 3
       filename: ftp_open_with_datatype.rb
       category_groups:
