@@ -1,0 +1,23 @@
+patterns:
+  - pattern: |
+      res.redirect($<EXPRESS_REQ>$<...>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_open_redirect_request_obj
+auxiliary:
+  - id: javascript_express_open_redirect_request_obj
+    patterns:
+      - req.$<_>
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "low"
+metadata:
+  description: "Open redirect detected."
+  remediation_message: |
+    ## Description
+    TODO.
+  cwe_id:
+    - 601
+  id: "javascript_express_open_redirect"

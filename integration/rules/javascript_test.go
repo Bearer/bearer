@@ -39,6 +39,11 @@ func TestJavascriptLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")
 }
 
+func TestJavascriptExpressOpenRedirect(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/open_redirect")
+}
+
 func TestJavascriptExpressUnsafeDeserialization(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/unsafe_deserialization")
