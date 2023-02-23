@@ -4,10 +4,6 @@ patterns:
       jwt.sign($<_>, $<_>, {
         algorithm: "none"
       })
-  - pattern: |
-      jwt.sign($<_>, $<_>, {
-        algorithm: [$<...>"none"$<...>]
-      })
 languages:
   - javascript
 trigger: presence
