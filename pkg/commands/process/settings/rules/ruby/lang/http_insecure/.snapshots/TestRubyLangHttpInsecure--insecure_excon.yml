@@ -1,0 +1,19 @@
+low:
+    - rule_dsrid: DSR-2
+      rule_display_id: ruby_lang_http_insecure
+      rule_description: Connection through an unsecure HTTP communication detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 1
+      filename: insecure_excon.rb
+      parent_line_number: 1
+      parent_content: 'Excon.new("http://my.api.com/insecure", foo: true)'
+    - rule_dsrid: DSR-2
+      rule_display_id: ruby_lang_http_insecure
+      rule_description: Connection through an unsecure HTTP communication detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 3
+      filename: insecure_excon.rb
+      parent_line_number: 3
+      parent_content: 'Excon.get("http://my.api.com/insecure", foo: true)'
+
+
