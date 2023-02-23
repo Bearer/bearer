@@ -123,14 +123,14 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			}
 
 			for _, output := range results["policy_failure"] {
-				ruleSummay := &RuleResultSummary{
+				ruleSummary := &RuleResultSummary{
 					Description:      rule.Description,
 					Id:               rule.Id,
 					CWEIDs:           rule.CWEIDs,
 					DocumentationUrl: rule.DocumentationUrl,
 				}
 				result := Result{
-					Rule:             ruleSummay,
+					Rule:             ruleSummary,
 					Filename:         output.Filename,
 					LineNumber:       output.LineNumber,
 					CategoryGroups:   output.CategoryGroups,
