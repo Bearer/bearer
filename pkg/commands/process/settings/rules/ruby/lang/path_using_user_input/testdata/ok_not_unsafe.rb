@@ -19,4 +19,8 @@ path + x
 path / x
 path.join("a", x)
 
+
 Rails.root.join(x)
+
+render(partial: x, locals: { z: params[:ok] })
+render_to_string({ file: "/templates/#{x}", locals: { z: params[:ok] } })

@@ -17,5 +17,3 @@ path = Pathname.new(request.env[:oops])
 path + request.headers[:oops]
 path / request.query_parameters[:oops]
 path.join("a", request.body)
-
-Rails.root.join(request.env[:oops])
