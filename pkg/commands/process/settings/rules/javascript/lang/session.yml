@@ -41,7 +41,6 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: "DSR-5"
   cwe_id:
     - 312
   id: "javascript_session"

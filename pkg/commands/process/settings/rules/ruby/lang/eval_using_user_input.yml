@@ -56,7 +56,6 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: DSR-? # FIXME
   cwe_id:
     - 94
   id: ruby_lang_eval_using_user_input

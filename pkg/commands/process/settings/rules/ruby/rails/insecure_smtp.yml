@@ -39,7 +39,6 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: DSR-2
   cwe_id:
     - 319
   id: ruby_rails_insecure_smtp

@@ -43,7 +43,6 @@ metadata:
     ## Resources
     - [Segment Node.js docs](https://segment.com/docs/connections/sources/catalog/libraries/server/node/)
     - [Segment JavaScript docs](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/)
-  dsr_id: DSR-1
   cwe_id:
     - 201
   associated_recipe: Segment

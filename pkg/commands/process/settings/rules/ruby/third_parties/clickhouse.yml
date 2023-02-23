@@ -33,7 +33,6 @@ metadata:
 
     ## Resources
     - [ClickHouse docs](https://clickhouse.com/docs/en/intro/)
-  dsr_id: DSR-6
   cwe_id:
     - 201
   associated_recipe: ClickHouse

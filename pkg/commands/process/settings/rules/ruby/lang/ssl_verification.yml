@@ -40,7 +40,6 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: DSR-2
   cwe_id:
     - 295
   id: ruby_lang_ssl_verification

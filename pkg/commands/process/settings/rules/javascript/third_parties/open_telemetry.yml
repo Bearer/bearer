@@ -39,7 +39,6 @@ metadata:
 
     ## Resources
     - [Open Telemetry Docs](https://opentelemetry.io/docs/)
-  dsr_id: DSR-1
   cwe_id:
     - 201
   id: javascript_third_parties_open_telemetry
