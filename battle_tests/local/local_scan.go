@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"os"
 
 	"github.com/bearer/bearer/battle_tests/config"
@@ -29,6 +30,6 @@ func main() {
 			log.Error().Msgf("Failed to serialize metrics to JSON: %s", err)
 			return
 		}
-		log.Debug().Msgf("result %s", string(data[:]))
+		fmt.Println(string(data[:]))
 	}
 }
