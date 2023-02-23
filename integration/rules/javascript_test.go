@@ -67,9 +67,9 @@ func TestExpressSecureCookie(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
 }
 
-func TestExpressInsecureXmlRef(t *testing.T) {
+func TestExpressXXEVulnerability(t *testing.T) {
 	t.Parallel()
-	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_xml_ref")
+	getRunner(t).runTest(t, javascriptRulesPath+"express/xml_external_entity_vulnerability")
 }
 
 func TestJavascriptReactGoogleAnalytics(t *testing.T) {
