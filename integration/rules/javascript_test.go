@@ -29,6 +29,11 @@ func TestJavascriptJWTWeakEncryption(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/jwt_weak_encryption")
 }
 
+func TestJavascriptJWTHardcodedSecret(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/jwt_hardcoded_secret")
+}
+
 func TestJavascriptHTTPInsecure(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/http_insecure")
