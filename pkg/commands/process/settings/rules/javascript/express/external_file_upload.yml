@@ -13,7 +13,7 @@ trigger: presence
 severity:
   default: "warning"
 metadata:
-  description: "Do not allow user input to control filename or path."
+  description: "External control of filename or path detected."
   remediation_message: |
     ## Description TODO
   cwe_id:
