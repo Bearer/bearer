@@ -50,6 +50,7 @@ func TestJavascriptExpressUnsafeDeserialization(t *testing.T) {
 }
 
 func TestJavascriptExpressInsecureRefResolution(t *testing.T) {
+	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_ref_resolution")
 }
 
@@ -58,7 +59,13 @@ func TestJavascriptExpressExposedDirListing(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/exposed_dir_listing")
 }
 
+func TestJavascriptExpressCrossSiteScripting(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/cross_site_scripting")
+}
+
 func TestJavascriptExpressServerSideRequestForgery(t *testing.T) {
+	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/server_side_request_forgery")
 }
 
