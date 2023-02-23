@@ -1,7 +1,6 @@
-import { Sequelize } from "sequelize";
+const express = require("express");
+const app = express();
 
-module.exports.fooBar = function(req, _res) {
-  var sqlite = new Sequelize('sqlite::memory:')
-  var customerQuery = "SELECT * FROM customers WHERE status = ACTIVE"
-  sqlite.query(customerQuery)
-}
+app.get("/goos", (_, res) => {
+  res.send("<p>hello world</p>")
+})

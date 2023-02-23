@@ -9,20 +9,10 @@ patterns:
     filters:
       - variable: EXPRESS_REQ
         detection: javascript_express_cross_site_scripting_request_obj
-  - pattern: |
-      $<SEQUELIZE>.query($<EXPRESS_REQ>)
-    filters:
-      - variable: SEQUELIZE
-        detection: javascript_express_cross_site_scripting_sequelize_init
-      - variable: EXPRESS_REQ
-        detection: javascript_express_cross_site_scripting_request_obj
 auxiliary:
   - id: javascript_express_cross_site_scripting_request_obj
     patterns:
       - req.$<_>
-  - id: javascript_express_cross_site_scripting_sequelize_init
-    patterns:
-      - new Sequelize()
 languages:
   - javascript
 trigger: presence
