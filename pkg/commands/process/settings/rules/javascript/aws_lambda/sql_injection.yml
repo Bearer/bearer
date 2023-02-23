@@ -8,17 +8,30 @@ patterns:
           - whereRaw
       - variable: AWS_LAMBDA_EVENT
         detection: javascript_aws_lambda_sql_injection_event
-  # - pattern: |
-  #     $<SEQUELIZE>.query($<AWS_LAMBDA_EVENT>)
-  #   filters:
-  #     - variable: SEQUELIZE
-  #       detection: javascript_aws_lambda_sql_injection_sequelize_init
-  #     - variable: AWS_LAMBDA_EVENT
-  #       detection: javascript_aws_lambda_sql_injection_event
+  - pattern: |
+      $<PG_CLIENT>.query($<...>$<AWS_LAMBDA_EVENT>$<...>)
+    filters:
+      - variable: PG_CLIENT
+        detection: javascript_aws_lambda_sql_injection_pg_client
+      - variable: AWS_LAMBDA_EVENT
+        detection: javascript_aws_lambda_sql_injection_event
+  - pattern: |
+      $<SEQUELIZE>.query($<...>$<AWS_LAMBDA_EVENT>$<...>)
+    filters:
+      - variable: SEQUELIZE
+        detection: javascript_aws_lambda_sql_injection_sequelize_init
+      - variable: AWS_LAMBDA_EVENT
+        detection: javascript_aws_lambda_sql_injection_event
 auxiliary:
   - id: javascript_aws_lambda_sql_injection_event
     patterns:
       - event.$<_>
+  - id: javascript_aws_lambda_sql_injection_pg_client
+    patterns:
+      - new Client()
+  - id: javascript_aws_lambda_sql_injection_sequelize_init
+    patterns:
+      - new Sequelize()
 languages:
   - javascript
 trigger: presence
