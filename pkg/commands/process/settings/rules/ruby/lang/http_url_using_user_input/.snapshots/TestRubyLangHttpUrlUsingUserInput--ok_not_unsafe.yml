@@ -1,0 +1,27 @@
+low:
+    - rule_dsrid: DSR-2
+      rule_display_id: ruby_lang_http_insecure
+      rule_description: Connection through an unsecure HTTP communication detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 20
+      filename: ok_not_unsafe.rb
+      parent_line_number: 20
+      parent_content: 'Excon.new("http://example.com", path: x)'
+    - rule_dsrid: DSR-2
+      rule_display_id: ruby_lang_http_insecure
+      rule_description: Connection through an unsecure HTTP communication detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 34
+      filename: ok_not_unsafe.rb
+      parent_line_number: 34
+      parent_content: 'Excon.post("http://example.com", path: x)'
+    - rule_dsrid: DSR-2
+      rule_display_id: ruby_lang_http_insecure
+      rule_description: Connection through an unsecure HTTP communication detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 40
+      filename: ok_not_unsafe.rb
+      parent_line_number: 40
+      parent_content: Net::HTTP.post_form("http://#{x}/users/search")
+
+
