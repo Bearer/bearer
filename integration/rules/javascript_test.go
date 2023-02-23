@@ -64,6 +64,11 @@ func TestJavascriptExpressCrossSiteScripting(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/cross_site_scripting")
 }
 
+func TestJavascriptExpressPathTraversal(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/path_traversal")
+}
+
 func TestJavascriptExpressServerSideRequestForgery(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/server_side_request_forgery")

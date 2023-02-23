@@ -46,6 +46,10 @@ func TestRubyLangHttpPostInsecureWithData(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/http_post_insecure_with_data")
 }
 
+func TestRubyLangHttpUrlUsingUserInput(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/http_url_using_user_input")
+}
+
 func TestRubyLangInsecureFtp(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/insecure_ftp")
