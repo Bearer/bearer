@@ -222,6 +222,13 @@ func (builder *builder) compileLeafNode(node *tree.Node) {
 func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
 	builder.write("[")
 
+	var lastNode *tree.Node
+	if slices.Contains(builder.langImplementation.AnonymousPatternNodeParentTypes(), node.Type()) {
+		lastNode = node.Child(node.ChildCount() - 1)
+	} else {
+		lastNode = node.NamedChild(node.NamedChildCount() - 1)
+	}
+
 	for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
 		builder.write("(")
 		builder.write(nodeType)
@@ -229,7 +236,9 @@ func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
 		for i := 0; i < node.ChildCount(); i++ {
 			builder.write(" ")
 
-			if err := builder.compileNode(node.Child(i), false, i == node.ChildCount()-1); err != nil {
+			child := node.Child(i)
+
+			if err := builder.compileNode(child, false, child.Equal(lastNode)); err != nil {
 				return err
 			}
 		}
