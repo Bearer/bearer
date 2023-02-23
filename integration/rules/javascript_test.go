@@ -49,6 +49,11 @@ func TestJavascriptLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")
 }
 
+func TestJavascriptAwsLambdaSqlInjection(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"aws_lambda/sql_injection")
+}
+
 func TestJavascriptExpressOpenRedirect(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/open_redirect")

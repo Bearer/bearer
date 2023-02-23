@@ -1,0 +1,14 @@
+low:
+    - rule_dsrid: ""
+      rule_display_id: javascript_aws_lambda_sql_injection
+      rule_description: SQL injection vulnerability detected.
+      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
+      line_number: 6
+      filename: knex_sql_injection.js
+      parent_line_number: 6
+      parent_content: |-
+        knex.select('user.cart_details')
+            .from('users')
+            .whereRaw('name = '+ event.user.name)
+
+

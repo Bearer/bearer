@@ -1,0 +1,34 @@
+patterns:
+  - pattern: | # knex function calls
+      $<_>.$<METHOD>($<...>$<AWS_LAMBDA_EVENT>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - raw
+          - whereRaw
+      - variable: AWS_LAMBDA_EVENT
+        detection: javascript_aws_lambda_sql_injection_event
+  # - pattern: |
+  #     $<SEQUELIZE>.query($<AWS_LAMBDA_EVENT>)
+  #   filters:
+  #     - variable: SEQUELIZE
+  #       detection: javascript_aws_lambda_sql_injection_sequelize_init
+  #     - variable: AWS_LAMBDA_EVENT
+  #       detection: javascript_aws_lambda_sql_injection_event
+auxiliary:
+  - id: javascript_aws_lambda_sql_injection_event
+    patterns:
+      - event.$<_>
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: low
+metadata:
+  description: "SQL injection vulnerability detected."
+  remediation_message: |
+    ## Description
+    TODO
+  cwe_id:
+    - 89
+  id: "javascript_aws_lambda_sql_injection"
