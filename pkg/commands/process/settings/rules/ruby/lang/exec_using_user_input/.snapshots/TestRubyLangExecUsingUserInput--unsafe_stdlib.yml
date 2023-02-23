@@ -1,0 +1,93 @@
+high:
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 3
+      filename: unsafe_stdlib.rb
+      parent_line_number: 3
+      parent_content: Kernel.exec(params[:oops])
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 5
+      filename: unsafe_stdlib.rb
+      parent_line_number: 5
+      parent_content: spawn(params[:oops])
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 7
+      filename: unsafe_stdlib.rb
+      parent_line_number: 7
+      parent_content: IO.popen(params[:oops]) {}
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 9
+      filename: unsafe_stdlib.rb
+      parent_line_number: 9
+      parent_content: Process.exec(params[:oops])
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 11
+      filename: unsafe_stdlib.rb
+      parent_line_number: 11
+      parent_content: Open3.popen3(["cmd", params[:oops]], "abc") {}
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 13
+      filename: unsafe_stdlib.rb
+      parent_line_number: 13
+      parent_content: Gem::Util.silent_system(x, params[:oops])
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 15
+      filename: unsafe_stdlib.rb
+      parent_line_number: 15
+      parent_content: PTY.spawn("/bin/#{params[:oops]}") {}
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 17
+      filename: unsafe_stdlib.rb
+      parent_line_number: 17
+      parent_content: '%x{/bin/#{params[:oops]}}'
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 19
+      filename: unsafe_stdlib.rb
+      parent_line_number: 19
+      parent_content: '`/bin/#{params[:oops]}`'
+
+
