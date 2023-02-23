@@ -9,8 +9,6 @@ languages:
 trigger: presence
 severity:
   default: critical
-skip_data_types:
-  - "Unique Identifier"
 metadata:
   description: "Weak jwt encryption deceted"
   remediation_message: |
