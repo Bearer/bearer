@@ -1,1 +1,1 @@
-Excon.post("http://my.api.com/users/search")
+Faraday.post("http://api.insecure.com")
