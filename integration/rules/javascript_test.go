@@ -39,12 +39,18 @@ func TestJavascriptLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")
 }
 
+func TestJavascriptExpressOpenRedirect(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/open_redirect")
+}
+
 func TestJavascriptExpressUnsafeDeserialization(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/unsafe_deserialization")
 }
 
 func TestJavascriptExpressInsecureRefResolution(t *testing.T) {
+	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_ref_resolution")
 }
 
@@ -53,8 +59,19 @@ func TestJavascriptExpressExposedDirListing(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/exposed_dir_listing")
 }
 
+func TestJavascriptExpressCrossSiteScripting(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/cross_site_scripting")
+}
+
 func TestJavascriptExpressServerSideRequestForgery(t *testing.T) {
+	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/server_side_request_forgery")
+}
+
+func TestJavascriptExpressSqlInjection(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/sql_injection")
 }
 
 func TestExpressSecureCookie(t *testing.T) {
@@ -62,9 +79,9 @@ func TestExpressSecureCookie(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
 }
 
-func TestExpressInsecureXmlRef(t *testing.T) {
+func TestExpressXXEVulnerability(t *testing.T) {
 	t.Parallel()
-	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_xml_ref")
+	getRunner(t).runTest(t, javascriptRulesPath+"express/xml_external_entity_vulnerability")
 }
 
 func TestJavascriptReactGoogleAnalytics(t *testing.T) {
