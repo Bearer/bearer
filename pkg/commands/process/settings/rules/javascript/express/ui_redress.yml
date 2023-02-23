@@ -1,0 +1,31 @@
+patterns:
+  - pattern: |
+      res.set('X-Frame-Options', $<EXPRESS_REQ>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_ui_redress_request_obj
+  - pattern: |
+      res.set("X-Frame-Options", $<EXPRESS_REQ>)
+    filters:
+      - variable: EXPRESS_REQ
+        detection: javascript_express_ui_redress_request_obj
+auxiliary:
+  - id: javascript_express_ui_redress_request_obj
+    patterns:
+      - req.$<_>
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  description: "User Interface (UI) redress vulnerability (clickjacking) detected."
+  remediation_message: |
+    ## Description
+    Coming Soon.
+  cwe_id:
+    - 1021
+  id: "javascript_express_ui_redress"
