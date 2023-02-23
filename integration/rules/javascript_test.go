@@ -44,6 +44,10 @@ func TestJavascriptLangException(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/exception")
 }
 
+func TestJavascriptLangEvalUserInput(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/eval_user_input")
+}
 func TestJavascriptLangFileGeneration(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")

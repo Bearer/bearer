@@ -1,0 +1,34 @@
+patterns:
+  - pattern: |
+      eval($<...>$<USER_INPUT>$<...>)
+    filters:
+      - variable: USER_INPUT
+        detection: javascript_eval_user_input_user_input
+auxiliary:
+  - id: javascript_eval_user_input_user_input
+    patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: critical
+metadata:
+  description: "Dangerous use of eval with user input detected"
+  remediation_message: |
+    ## Description
+
+    Using eval with user input is dangerous, It can lead to remote code execution.
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-5"
+  cwe_id:
+    - 95
+  id: "javascript_eval_user_input"
