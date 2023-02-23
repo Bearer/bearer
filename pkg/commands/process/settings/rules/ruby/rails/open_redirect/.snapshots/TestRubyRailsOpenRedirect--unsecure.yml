@@ -1,8 +1,10 @@
 low:
-    - rule_dsrid: ""
-      rule_display_id: rails_redirect_to
-      rule_description: Open redirect detected
-      rule_documentation_url: https://docs.bearer.com/reference/rules/rails_redirect_to
+    - rule:
+        cwe_ids:
+            - "601"
+        id: rails_redirect_to
+        description: Open redirect detected
+        documentation_url: https://docs.bearer.com/reference/rules/rails_redirect_to
       line_number: 3
       filename: unsecure.rb
       parent_line_number: 3
