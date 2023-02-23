@@ -6,6 +6,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
@@ -32,7 +33,7 @@ var (
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression"}
+	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression", "string"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 
@@ -145,6 +146,8 @@ func (implementation *javascriptImplementation) ExtractPatternVariables(input st
 		}
 
 		dummyValue := produceDummyValue(i, nodeTypes[0])
+
+		log.Debug().Msgf("name is %s", submatches[nameIndex])
 
 		params = append(params, patternquerytypes.Variable{
 			Name:       submatches[nameIndex],
