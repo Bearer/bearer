@@ -1,0 +1,53 @@
+patterns:
+  - pattern: | # AWS SDK V3 DynamoDB
+      new QueryCommand($<QUERY>)
+    filters:
+      - variable: QUERY
+        detection: javascript_aws_lambda_query_injection_raw_user_input
+  - pattern: | # AWS SDK V2 DynamoDB
+      $<DYNAMODB_INIT>.query($<QUERY>, $<...>)
+    filters:
+      - variable: QUERY
+        detection: javascript_aws_lambda_query_injection_raw_user_input
+      - variable: DYNAMODB_INIT
+        detection: javascript_aws_lambda_query_injection_dynamodb_v2_init
+auxiliary:
+  - id: javascript_aws_lambda_query_injection_user_input
+    patterns:
+      - event[$<_>]
+  - id: javascript_aws_lambda_query_injection_test
+    patterns:
+      - |
+        {$<...>}
+  - id: javascript_aws_lambda_query_injection_dynamodb_v2_init
+    patterns:
+      - new AWS.DynamoDB.DocumentClient()
+  - id: javascript_aws_lambda_query_injection_raw_user_input
+    patterns:
+      - pattern: $<USER_INPUT>
+        filters:
+          - variable: USER_INPUT
+            detection: javascript_aws_lambda_query_injection_user_input
+          - not:
+              variable: USER_INPUT
+              detection: javascript_aws_lambda_query_injection_test
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: low
+metadata:
+  description: "Raw user input in data store query detected."
+  remediation_message: |
+    ## Description
+    Including unsanitized data, such as user input or request data, in raw queries makes your application vulnerable to injection attacks.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 89
+  id: "javascript_aws_lambda_query_injection"

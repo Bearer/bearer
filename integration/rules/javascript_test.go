@@ -64,6 +64,11 @@ func TestJavascriptDangeoursInsertHTML(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/dangerous_insert_html")
 }
 
+func TestJavascriptAwsLambdaQueryInjection(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"aws_lambda/query_injection")
+}
+
 func TestJavascriptAwsLambdaSqlInjection(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"aws_lambda/sql_injection")

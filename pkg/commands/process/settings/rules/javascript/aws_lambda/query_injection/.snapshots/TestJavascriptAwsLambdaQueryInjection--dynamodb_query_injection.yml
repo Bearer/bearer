@@ -1,0 +1,23 @@
+low:
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_query_injection
+        description: Raw user input in data store query detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_query_injection
+      line_number: 10
+      filename: dynamodb_query_injection.js
+      parent_line_number: 10
+      parent_content: new QueryCommand(params)
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_query_injection
+        description: Raw user input in data store query detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_query_injection
+      line_number: 18
+      filename: dynamodb_query_injection.js
+      parent_line_number: 18
+      parent_content: docClient.query(event["query"]["params"], function(err, data) {})
+
+
