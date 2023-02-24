@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/bearer/bearer/battle_tests/scan"
+	summary "github.com/bearer/bearer/pkg/report/output/summary"
 	"github.com/rs/zerolog/log"
 )
 
@@ -21,29 +22,15 @@ type ScanReport struct {
 	DataTypes         []DataType `json:"data_types" yaml:"data_types"`
 }
 
-type PolicyScanReport struct {
-	// PolicyName      string `json:"policy_name" yaml:"policy_name"`
-	CWEIDs          []string `json:"rule_cwe_ids" yaml:"rule_cwe_ids"`
-	PolicyDisplayId string   `json:"rule_display_id" yaml:"rule_display_id"`
-	// PolicyDescription string   `json:"policy_description" yaml:"policy_description"`
-	LineNumber     int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename       string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroups []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	// ParentLineNumber  int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	// ParentContent     string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
-	// OmitParent        bool     `json:"omit_parent" yaml:"omit_parent"`
-	// DetailedContext   string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
-}
-
 type MetricsReport struct {
-	URL                string                        `json:"url"`          // full url
-	RepoSizeKB         float64                       `json:"repo_size_kb"` // repository size in KB
-	Time               float64                       `json:"time"`         // time it took in Seconds
-	Language           string                        `json:"language"`
-	NumberOfDataTypes  float64                       `json:"nb_data_type"`
-	NumberOfLineOfCode float64                       `json:"nb_line_of_code"` // number of line of code
-	DataTypes          []DataType                    `json:"data_types"`      // datatypes detected
-	PolicyBreaches     map[string][]PolicyScanReport `json:"policy_breaches"` // policy breaches, grouped by severity
+	URL                string                      `json:"url"`          // full url
+	RepoSizeKB         float64                     `json:"repo_size_kb"` // repository size in KB
+	Time               float64                     `json:"time"`         // time it took in Seconds
+	Language           string                      `json:"language"`
+	NumberOfDataTypes  float64                     `json:"nb_data_type"`
+	NumberOfLineOfCode float64                     `json:"nb_line_of_code"` // number of line of code
+	DataTypes          []DataType                  `json:"data_types"`      // datatypes detected
+	PolicyBreaches     map[string][]summary.Result `json:"policy_breaches"` // policy breaches, grouped by severity
 }
 
 func FakeScanRepository(repositoryUrl string, reportingChan chan *MetricsReport) {
@@ -120,7 +107,7 @@ func ScanRepository(repositoryUrl string, language string, reportingChan chan *M
 		return
 	}
 
-	var policiesReportData map[string][]PolicyScanReport
+	var policiesReportData map[string][]summary.Result
 	err = json.Unmarshal(policiesOutput, &policiesReportData)
 	if err != nil {
 		log.Debug().Msgf("summary marshalling failed: %s", err)
