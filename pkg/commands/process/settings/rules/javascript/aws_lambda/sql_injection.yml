@@ -75,7 +75,14 @@ metadata:
   description: "SQL injection vulnerability detected."
   remediation_message: |
     ## Description
-    TODO
+    Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 89
   id: "javascript_aws_lambda_sql_injection"
