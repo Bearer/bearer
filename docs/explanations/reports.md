@@ -8,13 +8,14 @@ Bearer can generate two types of reports about your codebase, all from the same 
 
 ## Summary Report
 
-Rules are the core feature of Bearer. The summary report allows you to quickly see data security vulnerabilities in your codebase. The report breaks down rule violations by severity level: Critical, High, Medium, Low, Warning. These levels help you prioritize issues and fix the most important vulnerabilities. The summary report is Bearer's default report type.
+[Rules](/reference/rules) are the core feature of Bearer. The security report allows you to quickly see security risks and vulnerabilities in your codebase. The report breaks down rule violations by severity level: Critical, High, Medium, Low, Warning. These levels help you prioritize issues and fix the most important issues. This report is Bearer's default report type.
 
-For each violation, the summary report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the summary report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
+For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the summary report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
 
 ```txt
+$ bearer scan .
 ...
-CRITICAL: Do not store sensitive data in JWTs. [DSR-3]
+CRITICAL: Sensitive data stored in a JWT detected.
 https://docs.bearer.com/reference/rules/ruby_lang_jwt
 To skip this rule, use the flag --skip-rule=ruby_lang_jwt
 
@@ -36,10 +37,10 @@ File: /bear-publishing/lib/jwt.rb:6
 
 24 checks, 18 failures, 0 warnings
 
-CRITICAL: 15 (DSR-1, DSR-2, DSR-3, DSR-5)
+CRITICAL: 15
 HIGH: 0
 MEDIUM: 0
-LOW: 3 (DSR-2, DSR-7)
+LOW: 3
 WARNING: 0
 
 exit status 1
@@ -47,24 +48,24 @@ exit status 1
 
 Note that if only warning-level violations are found, the report does not return an exit status of 1.
 
-```
+```txt
 24 checks, 2 warnings
 
 CRITICAL: 0
 HIGH: 0
 MEDIUM: 0
 LOW: 0
-WARNING: 2 (DSR-10)
+WARNING: 2
 
 ```
 
-Summary reports are [currently available](/reference/supported-languages/) for Ruby projects, with Javascript/Typescript coming soon and more languages to follow.
+The summary report is [currently available](/reference/supported-languages/) for Ruby and JavaScript projects, more languages to follow.
 
 To run your first summary report, run `bearer scan .` on your project directory. By default, the summary report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
 
 ## Privacy Report
 
-The privacy report provides useful information about how your codebase uses sensitive data, with an emphasis on data subjects and third parties.
+The privacy report provides useful information about how your codebase uses sensitive data, with an emphasis on [data subjects](https://ico.org.uk/for-organisations/sme-web-hub/key-data-protection-terms-you-need-to-know/#datasubject) and third parties services.
 
 The data subjects portion displays information about each detected subject and any data types associated with it. It also provides statistics on total detections and any counts of rule failures associated with the data type. In the example below, the report detects 14 instances of user telephone numbers with no rule failures.
 
@@ -86,7 +87,7 @@ _Note: These examples use JSON for readability, but the default format for the p
 ```
 
 
-The third parties portion displays data subjects and types that are sent to or processed by known third-party services. In the example below, Bearer detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has failed associated with this data point.
+The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has failed associated with this data point.
 
 ```json
 "ThirdParty": [
@@ -104,6 +105,8 @@ The third parties portion displays data subjects and types that are sent to or p
   }
 ]
 ```
+
+The detection of third-party services is performed through an internal database knowns as Recipes. You can easily [contribute to new recipes](/contributing/recipes/).
 
 To run the privacy report, run `bearer scan` with the `--report privacy` flag. By default, the privacy report is output in CSV format. To format as JSON, use the `--format json` flag.
 

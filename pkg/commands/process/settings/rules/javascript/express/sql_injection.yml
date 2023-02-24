@@ -1,58 +1,68 @@
 patterns:
-  - pattern: | # knex function calls
-      $<METHOD>($<...>$<EXPRESS_REQ>$<...>)
+  - pattern: |
+      $<KNEX_CLIENT>.$<METHOD>($<...>$<EXPRESS_INPUT>$<...>)
     filters:
+      - variable: USER_INPUT
+        detection: javascript_express_sql_injection_request_input
+      - variable: KNEX_CLIENT
+        values:
+          - knex
+          - knexClient
+          - client
       - variable: METHOD
         values:
-          - raw
+          - fromRaw
           - whereRaw
-      - variable: EXPRESS_REQ
-        detection: javascript_express_sql_injection_request_obj
+          - raw
   - pattern: |
-      $<PG_CLIENT>.query($<...>$<EXPRESS_REQ>$<...>)
+      $<PG_CLIENT>.query($<...>$<EXPRESS_INPUT>$<...>)
     filters:
       - variable: PG_CLIENT
         detection: javascript_express_sql_injection_pg_client
-      - variable: EXPRESS_REQ
-        detection: javascript_express_sql_injection_request_obj
+      - variable: EXPRESS_INPUT
+        detection: javascript_express_sql_injection_request_input
   - pattern: |
-      $<SEQUELIZE>.query($<EXPRESS_REQ>)
+      $<SEQUELIZE>.query($<EXPRESS_INPUT>)
     filters:
       - variable: SEQUELIZE
         detection: javascript_express_sql_injection_sequelize_init
-      - variable: EXPRESS_REQ
-        detection: javascript_express_sql_injection_request_obj
+      - variable: EXPRESS_INPUT
+        detection: javascript_express_sql_injection_request_input
   - pattern: |
-      $<MYSQL_CONN>.$<METHOD>($<...>$<EXPRESS_REQ>$<...>)
+      $<MYSQL_CONN>.$<METHOD>($<...>$<EXPRESS_INPUT>$<...>)
     filters:
       - variable: MYSQL_CONN
         detection: javascript_express_sql_injection_mysql_conn
-      - variable: EXPRESS_REQ
-        detection: javascript_express_sql_injection_request_obj
+      - variable: EXPRESS_INPUT
+        detection: javascript_express_sql_injection_request_input
       - variable: METHOD
         values:
           - query
           - execute
   - pattern: |
-      $<MYSQL_POOL>.query($<...>$<EXPRESS_REQ>$<...>)
+      $<MYSQL_POOL>.query($<...>$<EXPRESS_INPUT>$<...>)
     filters:
       - variable: MYSQL_POOL
         detection: javascript_express_sql_injection_mysql_pool
-      - variable: EXPRESS_REQ
-        detection: javascript_express_sql_injection_request_obj
+      - variable: EXPRESS_INPUT
+        detection: javascript_express_sql_injection_request_input
   - pattern: |
       $<MYSQL_POOL>.getConnection(function($<_>, $<CONN:identifier>){
-        $<CONN>.query($<...>$<EXPRESS_REQ>$<...>)
+        $<CONN>.query($<...>$<EXPRESS_INPUT>$<...>)
       })
     filters:
       - variable: MYSQL_POOL
         detection: javascript_express_sql_injection_mysql_pool
-      - variable: EXPRESS_REQ
-        detection: javascript_express_sql_injection_request_obj
+      - variable: EXPRESS_INPUT
+        detection: javascript_express_sql_injection_request_input
 auxiliary:
-  - id: javascript_express_sql_injection_request_obj
+  - id: javascript_express_sql_injection_request_input
     patterns:
-      - req.$<_>
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
   - id: javascript_express_sql_injection_pg_client
     patterns:
       - new Client()

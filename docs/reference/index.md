@@ -11,3 +11,4 @@ Reference documents are where you'll find detailed information about each comman
 - [Commands](/reference/commands/)
 - [Supported Languages](/reference/supported-languages/)
 - [Configuration](/reference/config/)
+- [Installation](/reference/installation/)

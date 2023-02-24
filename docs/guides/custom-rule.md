@@ -4,7 +4,7 @@ title: Create a custom rule
 
 # How to create a custom rule
 
-Bearer rules are ways to ensure your codebase meets a set of standards for securing your code and associated data. Bearer ships with [many rules by default](/reference/rules/), but custom rules allow you to add specific requirements to suit your organization's needs. 
+Bearer rules are ways to ensure your codebase meets a set of standards for securing your code. Bearer ships with [many rules by default](/reference/rules/), but custom rules allow you to add specific requirements to suit your organization's needs. 
 
 ## Getting started
 
@@ -31,7 +31,7 @@ To better understand the structure of a rule file, let’s look at each key:
 - `metadata`: Rule metadata is used for output to the summary report, and documentation for the internal rules.
   - `id`: A unique identifier. Internal rules are named `lang_framework_rule_name`. For rules targeting the language core, `lang` is used instead of a framework name. For example `ruby_lang_logger` and `ruby_rails_logger`. For custom rules, you may consider appending your org name.
   - `description`: A brief, one-sentence description of the rule. The best practice is to make this an actionable “rule” phrase, such as “Do X” or “Do not do X in Y”.
-  - `dsr_id`: The DSR ID corresponding to the Top 10 Data Security Risks list. (Optional)
+  - `cwe_id`: The associated list of [CWE](https://cwe.mitre.org/) identifers. (Optional)
   - `associated_recipe`: Links the rule to a [recipe]({{meta.sourcePath}}/tree/main/pkg/classification/db/recipes). Useful for associating a rule with a third party. Example: “Sentry” (Optional)
   - `remediation_message`: Used for internal rules, this builds the documentation page for a rule. (Optional)
   - `documentation_url`: Used to pass custom documentation URL for the summary report. This can be useful for linking to your own internal documentation or policies. By default, all rules in the main repo will automatically generate a link to the rule on [docs.bearer.com](/). (Optional)

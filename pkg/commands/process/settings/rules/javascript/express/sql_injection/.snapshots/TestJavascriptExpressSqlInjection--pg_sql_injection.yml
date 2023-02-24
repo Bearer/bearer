@@ -8,6 +8,9 @@ low:
       line_number: 8
       filename: pg_sql_injection.js
       parent_line_number: 8
-      parent_content: client.query('SELECT * FROM users WHERE user.name = ' + req.user.name)
+      parent_content: |-
+        client.query(
+        		"SELECT * FROM users WHERE user.name = " + req.params.user.name
+        	)
 
 
