@@ -109,6 +109,11 @@ func TestExpressXXEVulnerability(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/xml_external_entity_vulnerability")
 }
 
+func TestJavascriptExpressEvalUserInput(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/eval_user_input")
+}
+
 func TestJavascriptReactGoogleAnalytics(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"react/google_analytics")
