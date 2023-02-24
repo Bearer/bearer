@@ -22,7 +22,7 @@ The default installation script works well for most use cases, but if you need m
 - `[tag]`: specifies a tag release (defaults to the latest release)
 
 ```text
-curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 ```
 
 ## Homebrew
