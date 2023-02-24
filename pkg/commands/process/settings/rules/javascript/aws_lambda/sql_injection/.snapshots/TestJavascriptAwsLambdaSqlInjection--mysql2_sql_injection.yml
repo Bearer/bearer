@@ -1,0 +1,55 @@
+low:
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_sql_injection
+        description: SQL injection vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
+      line_number: 5
+      filename: mysql2_sql_injection.js
+      category_groups:
+        - PII
+      parent_line_number: 5
+      parent_content: connection.query("SELECT * FROM `user` WHERE name = " + event.customer.name)
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_sql_injection
+        description: SQL injection vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
+      line_number: 7
+      filename: mysql2_sql_injection.js
+      category_groups:
+        - PII
+      parent_line_number: 7
+      parent_content: asyncConn.execute("SELECT * FROM `admin_users` WHERE ID = " + event.admin.id)
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_sql_injection
+        description: SQL injection vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
+      line_number: 11
+      filename: mysql2_sql_injection.js
+      category_groups:
+        - PII
+      parent_line_number: 11
+      parent_content: pool.query("SELECT * FROM users WHERE name = " + event.user_name, function() {})
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_sql_injection
+        description: SQL injection vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
+      line_number: 12
+      filename: mysql2_sql_injection.js
+      category_groups:
+        - PII
+      parent_line_number: 12
+      parent_content: |-
+        pool.getConnection(function(_err, conn) {
+            conn.query("SELECT * FROM users WHERE name = " + event.user_name, function() {})
+            pool.releaseConnection(conn)
+          })
+
+

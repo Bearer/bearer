@@ -1,4 +1,20 @@
 patterns:
+  - pattern: | # knex function calls
+      $<METHOD>($<...>$<EXPRESS_REQ>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - raw
+          - whereRaw
+      - variable: EXPRESS_REQ
+        detection: javascript_express_sql_injection_request_obj
+  - pattern: |
+      $<PG_CLIENT>.query($<...>$<EXPRESS_REQ>$<...>)
+    filters:
+      - variable: PG_CLIENT
+        detection: javascript_express_sql_injection_pg_client
+      - variable: EXPRESS_REQ
+        detection: javascript_express_sql_injection_request_obj
   - pattern: |
       $<SEQUELIZE>.query($<EXPRESS_REQ>)
     filters:
@@ -6,13 +22,50 @@ patterns:
         detection: javascript_express_sql_injection_sequelize_init
       - variable: EXPRESS_REQ
         detection: javascript_express_sql_injection_request_obj
+  - pattern: |
+      $<MYSQL_CONN>.$<METHOD>($<...>$<EXPRESS_REQ>$<...>)
+    filters:
+      - variable: MYSQL_CONN
+        detection: javascript_express_sql_injection_mysql_conn
+      - variable: EXPRESS_REQ
+        detection: javascript_express_sql_injection_request_obj
+      - variable: METHOD
+        values:
+          - query
+          - execute
+  - pattern: |
+      $<MYSQL_POOL>.query($<...>$<EXPRESS_REQ>$<...>)
+    filters:
+      - variable: MYSQL_POOL
+        detection: javascript_express_sql_injection_mysql_pool
+      - variable: EXPRESS_REQ
+        detection: javascript_express_sql_injection_request_obj
+  - pattern: |
+      $<MYSQL_POOL>.getConnection(function($<_>, $<CONN:identifier>){
+        $<CONN>.query($<...>$<EXPRESS_REQ>$<...>)
+      })
+    filters:
+      - variable: MYSQL_POOL
+        detection: javascript_express_sql_injection_mysql_pool
+      - variable: EXPRESS_REQ
+        detection: javascript_express_sql_injection_request_obj
 auxiliary:
   - id: javascript_express_sql_injection_request_obj
     patterns:
       - req.$<_>
+  - id: javascript_express_sql_injection_pg_client
+    patterns:
+      - new Client()
   - id: javascript_express_sql_injection_sequelize_init
     patterns:
       - new Sequelize()
+  - id: javascript_express_sql_injection_mysql_conn
+    patterns:
+      - mysql.createConnection()
+      - await mysql.createConnection()
+  - id: javascript_express_sql_injection_mysql_pool
+    patterns:
+      - mysql.createPool()
 languages:
   - javascript
 trigger: presence
@@ -22,7 +75,14 @@ metadata:
   description: "SQL injection vulnerability detected."
   remediation_message: |
     ## Description
-    TODO
+    Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 89
   id: "javascript_express_sql_injection"
