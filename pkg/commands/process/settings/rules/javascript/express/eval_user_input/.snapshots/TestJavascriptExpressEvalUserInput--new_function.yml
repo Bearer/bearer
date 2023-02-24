@@ -6,8 +6,8 @@ critical:
         description: Dangerous use of eval with user input detected
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_eval_user_input
       line_number: 4
-      filename: unsecure.js
+      filename: new_function.js
       parent_line_number: 4
-      parent_content: eval(command)
+      parent_content: new Function(command)
 
 
