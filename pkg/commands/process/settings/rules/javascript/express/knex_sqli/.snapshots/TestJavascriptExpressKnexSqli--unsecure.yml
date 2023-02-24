@@ -1,0 +1,11 @@
+critical:
+  - rule:
+      cwe_ids:
+        - "89"
+      id: javascript_express_knex_sqli
+      description: Dangerous use of user input in knex sql query builder detected
+      documentation_url: https://docs.bearer.com/reference/rules/javascript_express_knex_sqli
+    line_number: 9
+    filename: unsecure.js
+    parent_line_number: 9
+    parent_content: knex.raw("count " + req.query.user_field + "")

@@ -1,0 +1,45 @@
+patterns:
+  - pattern: |
+      $<KNEX_CLIENT>.$<METHOD>($<...>$<USER_INPUT>$<...>)
+    filters:
+      - variable: USER_INPUT
+        detection: javascript_express_knex_sqli_user_input
+      - variable: KNEX_CLIENT
+        values:
+          - knex
+          - knexClient
+          - client
+      - variable: METHOD
+        values:
+          - fromRaw
+          - whereRaw
+          - raw
+auxiliary:
+  - id: javascript_express_knex_sqli_user_input
+    patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: critical
+metadata:
+  description: "Dangerous use of user input in knex sql query builder detected"
+  remediation_message: |
+    ## Description
+
+    Using user input coupled with raw method of knex library can lead to dangerous sql injection vulnerabilities.
+    Use some of the safe methods which perform input sanitization.
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-5"
+  cwe_id:
+    - 89
+  id: "javascript_express_knex_sqli"
