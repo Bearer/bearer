@@ -22,7 +22,7 @@ metadata:
   remediation_message: |
     ## Description
 
-    Using eval with user input is dangerous, It can lead to remote code execution.
+    Using eval with user input is dangerous. It can lead to remote code execution.
 
     <!--
     ## Resources
