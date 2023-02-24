@@ -2,9 +2,9 @@ critical:
     - rule:
         cwe_ids:
             - "95"
-        id: javascript_eval_user_input
+        id: javascript_express_eval_user_input
         description: Dangerous use of eval with user input detected
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_eval_user_input
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_eval_user_input
       line_number: 4
       filename: unsecure.js
       parent_line_number: 4

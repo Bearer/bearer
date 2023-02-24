@@ -3,9 +3,9 @@ patterns:
       eval($<...>$<USER_INPUT>$<...>)
     filters:
       - variable: USER_INPUT
-        detection: javascript_eval_user_input_user_input
+        detection: javascript_express_eval_user_input_user_input
 auxiliary:
-  - id: javascript_eval_user_input_user_input
+  - id: javascript_express_eval_user_input_user_input
     patterns:
       - req.params
       - req.query
@@ -31,4 +31,4 @@ metadata:
   dsr_id: "DSR-5"
   cwe_id:
     - 95
-  id: "javascript_eval_user_input"
+  id: "javascript_express_eval_user_input"
