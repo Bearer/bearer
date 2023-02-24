@@ -5,7 +5,7 @@ layout: layouts/doc.njk
 
 # Quick Start
 
-Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Bearer, run a scan on a local project, and view the results of a [summary report](/explanations/reports/#summary-report). Let's get started!
+Discover your application security risks and vulnerabilities in only a few minutes. In this guide you will install Bearer, run a scan on a local project, and view the results of a [summary report](/explanations/reports/#summary-report). Let's get started!
 
 ## Installation
 
@@ -21,11 +21,11 @@ Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Beare
 brew install Bearer/tap/bearer
 ```
 
-If you need more control or another way to install Bearer, we offer more [advanced installation options](https://github.com/Bearer/bearer#gear-additional-installation-options).
+If you need more control or another way to install Bearer, we offer more [installation options](/reference/installation).
 
 ## Scan your project
 
-The easiest way to try out Bearer is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.
+The easiest way to try out Bearer is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common security flaws. Clone or download it to a convenient location to get started.
 
 ```bash
 git clone https://github.com/Bearer/bear-publishing.git
@@ -43,7 +43,7 @@ Once the scan is complete, Bearer will output a summary report with details of a
 
 ## Analyze the report
 
-The summary report is an easily digestible view of the data security problems detected by Bearer. A report is made up of:
+The summary report is an easily digestible view of the security problems detected by Bearer. A report is made up of:
 
 - The list of [rules](/reference/rules/) run against your code.
 - Each detected failure, containing the file location and lines that triggered the rules failure.
@@ -52,29 +52,31 @@ The summary report is an easily digestible view of the data security problems de
 The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output containing a failure snippet and the final summary:
 
 ```text
+CRITICAL: Only communicate using SFTP connections.
+https://docs.bearer.sh/reference/rules/ruby_lang_insecure_ftp
 
-HIGH: Application level encryption missing rule failure with PHI, PII
-Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
+File: bear-publishing/app/services/marketing_export.rb:34
 
-File: /bear-publishing/db/schema.rb:22
+ 34     Net::FTP.open(
+ 35       'marketing.example.com',
+ 36       'marketing',
+ 37       'password123'
+  	...
+ 41     end
 
- 14 create_table "authors", force: :cascade do |t|
- 15     t.string "name"
- 16     t.datetime "created_at", null: false
- 17     t.datetime "updated_at", null: false
- 18   end
 
 =====================================
 
-Rule failures detected
+56 checks, 10 failures, 6 warnings
 
-14 rules were run and 12 failures were detected.
+CRITICAL: 7
+HIGH: 0
+MEDIUM: 0
+LOW: 3
+WARNING: 6
 
-CRITICAL: 0
-HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category,
-          JWT leaking, Logger leaking, Cookie leaking, Third-party data category exposure)
-MEDIUM: 2 (Insecure SMTP, Insecure FTP)
-LOW: 0
 ```
 
-The summary report is just one report type available in Bearer. Additional options for using and configuring the `scan` command can be found in the [scan documentation](/reference/commands/#scan). For additional guides and usage tips, [view the docs](/).
+The summary report is just one [report type](/explanations/reports) available in Bearer. Additional options for using and configuring the `scan` command can be found in the [scan documentation](/reference/commands/#scan). 
+
+For additional guides and usage tips, [view the docs](/).

@@ -6,20 +6,31 @@ permalink: "/"
 
 # Bearer
 
-Welcome to the Bearer documentation. Bearer is a static code analysis tool (SAST) dedicated to data security. It scans your source code to [discover sensitive data](/explanations/discovery-and-classification) flows (PHI, PII, PD as well as Data stores, internal and external APIs) and data security risks (leaks, missing encryption, third-party sharing etc).
+Welcome to the Bearer documentation. Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your [data flows]((/explanations/discovery-and-classification)) to discover, filter and prioritize security risks and vulnerabilities leading to [sensitive data](/reference/datatypes/) exposures (PII, PHI, PD).
+
+We provides [built-in rules](/reference/rules) against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/). Here are some practical examples of what those rules look for:
+- Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
+- Usage of weak encryption libraries or misusage of encryption algorithms.
+- Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive information.
+- Non-filtered user input.
+- Hard-coded secrets and tokens
+
+And [many more](/reference/rules).
+
+Bearer currenty supporting **JavaScript** and **Ruby** stacks, more will follow.
 
 ## Getting started
 
 New to Bearer? Check out the [quickstart](/quickstart/) to scan your first project. 
 
-Ready to dive in? Bearer's [reports](/explanations/reports/) are your path to analyzing data security risks in your application. Check the [supported languages](/reference/supported-languages/), then view the [command reference](/reference/commands/) to configure Bearer to your needs.
+Ready to dive in? Bearer's [reports](/explanations/reports/) are your path to analyzing security risks and vulnerabilities in your application. Check the [command reference](/reference/commands/) to configure Bearer to your needs.
 
 ## Guides
 
 Guides help you make the most of Bearer so you can get up and running quickly.
 
-- [Using the GitHub action](/guides/github-action/)
-- [Create a custom rule](/guides/custom-rule/)
+- [GitHub action integration](/guides/github-action/)
+- [Create custom rule](/guides/custom-rule/)
 
 ## Explanations
 
@@ -32,11 +43,12 @@ Explanations dive into the rational behind Bearer and explain some of its heavie
 
 Reference documents are where you'll find detailed information about each command, as well as support charges for languages, rules, datatypes, and more.
 
+- [Installation](/reference/installation/)
+- [Configuration](/reference/config/)
+- [Commands](/reference/commands/)
 - [Built-in Rules](/reference/rules/)
 - [Supported Data Types](/reference/datatypes/)
-- [Commands](/reference/commands/)
 - [Supported Languages](/reference/supported-languages/)
-- [Configuration](/reference/config/)
 
 ## Contributing
 
