@@ -5,9 +5,9 @@ low:
         id: javascript_express_cross_site_scripting
         description: Cross-site scripting (XSS) vulnerability detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
-      line_number: 10
+      line_number: 11
       filename: knex_sql_injection.js
-      parent_line_number: 10
+      parent_line_number: 11
       parent_content: res.send(prepareJson(cartDetails))
 
 
