@@ -22,7 +22,13 @@ metadata:
   description: "Cross-site scripting (XSS) vulnerability detected."
   remediation_message: |
     ## Description
-    TODO
+    Sending unsanitized user input in a response puts your application at risk of cross-site scripting attacks.
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 79
   id: "javascript_express_cross_site_scripting"

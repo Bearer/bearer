@@ -17,7 +17,13 @@ metadata:
   description: "Open redirect detected."
   remediation_message: |
     ## Description
-    TODO.
+    A redirect using unsanitized user input is bad practice and puts your application at greater risk of phishing attacks.
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 601
   id: "javascript_express_open_redirect"

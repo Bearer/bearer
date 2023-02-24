@@ -39,7 +39,13 @@ metadata:
   description: "Deserialization of untrusted data detected."
   remediation_message: |
     ## Description
-    TODO
+    It is bad practice to deserialize untrusted data, such as data direct from the request object.
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 502
   id: "javascript_express_unsafe_deserialization"

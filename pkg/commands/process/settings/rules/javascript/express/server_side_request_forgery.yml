@@ -44,7 +44,13 @@ metadata:
   description: "Risk of server-side request forgery detected."
   remediation_message: |
     ## Description
-    TODO.
+    Using unsanitized URLs from the request object when retrieving data puts your application at risk of server-side request forgery (SSRF) attacks.
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 918
   id: "javascript_express_server_side_request_forgery"

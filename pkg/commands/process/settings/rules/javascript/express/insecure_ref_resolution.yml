@@ -19,10 +19,16 @@ trigger: presence
 severity:
   default: "low"
 metadata:
-  description: "Avoid rendering resources resolved from external names or references."
+  description: "Rendering of resources resolved from external name or reference detected."
   remediation_message: |
     ## Description
     Coming soon.
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 706
   id: "javascript_express_external_resource"
