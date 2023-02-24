@@ -1,8 +1,10 @@
 low:
-    - rule_dsrid: ""
-      rule_display_id: javascript_aws_lambda_sql_injection
-      rule_description: SQL injection vulnerability detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_sql_injection
+        description: SQL injection vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
       line_number: 8
       filename: pg_sql_injection.js
       parent_line_number: 8

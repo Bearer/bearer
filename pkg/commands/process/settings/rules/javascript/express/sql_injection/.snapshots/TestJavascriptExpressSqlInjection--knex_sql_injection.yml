@@ -1,8 +1,10 @@
 low:
-    - rule_dsrid: ""
-      rule_display_id: javascript_express_cross_site_scripting
-      rule_description: Cross-site scripting (XSS) vulnerability detected.
-      rule_documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
+    - rule:
+        cwe_ids:
+            - "79"
+        id: javascript_express_cross_site_scripting
+        description: Cross-site scripting (XSS) vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
       line_number: 10
       filename: knex_sql_injection.js
       parent_line_number: 10
