@@ -192,6 +192,23 @@ func (rule *Rule) PolicyType() bool {
 	return true
 }
 
+func (rule *Rule) Language() string {
+	if rule.Languages == nil {
+		return "secret"
+	}
+
+	switch rule.Languages[0] {
+	case "javascript":
+		return "JavaScript"
+	case "ruby":
+		return "Ruby"
+	case "sql":
+		return "SQL"
+	default:
+		return rule.Languages[0]
+	}
+}
+
 func defaultWorkerOptions() WorkerOptions {
 	return WorkerOptions{
 		Workers:                   Workers,

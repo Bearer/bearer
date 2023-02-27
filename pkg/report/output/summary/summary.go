@@ -165,7 +165,7 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		color.NoColor = true
 	}
 
-	writeRuleListToString(reportStr, rules)
+	rulesAvailableCount := writeRuleListToString(reportStr, rules, lineOfCodeOutput.Languages)
 
 	failures := map[string]map[string]bool{
 		types.LevelCritical: make(map[string]bool),
@@ -197,10 +197,10 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.sh/guides/custom-rule\n")
 	}
 
-	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, results, len(rules), failures, severityForFailure)
+	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, results, rulesAvailableCount, failures, severityForFailure)
 
 	if noFailureSummary {
-		writeSuccessToString(len(rules), reportStr)
+		writeSuccessToString(rulesAvailableCount, reportStr)
 		writeStatsToString(reportStr, config, lineOfCodeOutput, dataflow)
 	}
 
@@ -251,7 +251,9 @@ func writeStatsToString(
 
 func writeRuleListToString(
 	reportStr *strings.Builder,
-	rules map[string]*settings.Rule) {
+	rules map[string]*settings.Rule,
+	languages map[string]*gocloc.Language,
+) int {
 	// list rules that were run
 	reportStr.WriteString("\n\nRules: \n")
 	defaultRuleCount := 0
@@ -262,6 +264,13 @@ func writeRuleListToString(
 		if !rule.PolicyType() {
 			continue
 		}
+
+		exists := rule.Language() == "secret" || languages[rule.Language()] != nil
+
+		if !exists {
+			continue
+		}
+
 		if strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") {
 			defaultRuleCount++
 		} else {
@@ -274,6 +283,8 @@ func writeRuleListToString(
 	if customRuleCount > 0 {
 		reportStr.WriteString(fmt.Sprintf(" - %d custom rules applied", customRuleCount))
 	}
+
+	return defaultRuleCount + customRuleCount
 }
 
 func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
