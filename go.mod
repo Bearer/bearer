@@ -3,7 +3,7 @@ module github.com/bearer/bearer
 go 1.18
 
 require (
-	github.com/aws/aws-sdk-go v1.44.204
+	github.com/aws/aws-sdk-go v1.44.209
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/fatih/color v1.14.1
 	github.com/gertd/go-pluralize v0.2.1
@@ -15,18 +15,18 @@ require (
 	github.com/hhatto/gocloc v0.4.3
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00
-	github.com/open-policy-agent/opa v0.49.0
+	github.com/open-policy-agent/opa v0.49.2
 	github.com/rs/zerolog v1.29.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
 	github.com/schollz/progressbar/v3 v3.13.0
 	github.com/smacker/go-tree-sitter v0.0.0-20220829074436-0a7a807924f2
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	github.com/struCoder/pidusage v0.2.1
 	github.com/tangzero/inflector v1.0.0
-	github.com/weppos/publicsuffix-go v0.20.0
+	github.com/weppos/publicsuffix-go v0.30.0
 	github.com/wlredeye/jsonlines v0.0.0-20160904163743-36b5e1bd13d0
-	github.com/zricethezav/gitleaks/v8 v8.15.3
+	github.com/zricethezav/gitleaks/v8 v8.16.0
 	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326
 	golang.org/x/mod v0.8.0
 	golang.org/x/net v0.7.0
