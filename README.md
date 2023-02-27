@@ -13,7 +13,7 @@
   Currently supporting <strong>JavaScript</strong> and <strong>Ruby</strong> stacks.
   <br /><br />
 
-  [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.sh) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
+  [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
 
   [![GitHub Release][release-img]][release]
   [![Test][test-img]][test]
