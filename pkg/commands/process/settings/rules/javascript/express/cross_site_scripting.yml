@@ -19,6 +19,11 @@ auxiliary:
       - req.body.$<_>
       - req.cookies.$<_>
       - req.headers.$<_>
+      - req.params[$<_>]
+      - req.query[$<_>]
+      - req.body[$<_>]
+      - req.cookies[$<_>]
+      - req.headers[$<_>]
 trigger: presence
 severity:
   default: low
