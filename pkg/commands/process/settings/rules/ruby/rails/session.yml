@@ -1,6 +1,6 @@
 patterns:
   - pattern: |
-      session[] = $<DATA_TYPE>
+      session[$<_>] = $<DATA_TYPE>
     filters:
       - variable: DATA_TYPE
         detection: datatype

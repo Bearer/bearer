@@ -1,7 +1,7 @@
 type: risk
 patterns:
   - pattern: |
-      jwt.sign($<DATA_TYPE>)
+      jwt.sign($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: DATA_TYPE
         detection: datatype

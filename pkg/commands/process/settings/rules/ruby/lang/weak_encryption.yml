@@ -4,7 +4,7 @@ patterns:
   - pattern: |
       Digest::MD5.hexdigest()
   - pattern: |
-      $<VAR>.$<METHOD>($<_>)
+      $<VAR>.$<METHOD>()
     filters:
       - variable: VAR
         detection: rc4_init
@@ -14,7 +14,7 @@ patterns:
           - encrypt!
           - decrypt
   - pattern: |
-      $<VAR>.$<METHOD>($<_>)
+      $<VAR>.$<METHOD>()
     filters:
       - variable: VAR
         detection: openssl_rsa_init
@@ -25,7 +25,7 @@ patterns:
           - public_decrypt
           - public_encrypt
   - pattern: |
-      $<VAR>.$<METHOD>($<_>)
+      $<VAR>.$<METHOD>()
     filters:
       - variable: VAR
         detection: openssl_rsa_init
@@ -35,7 +35,7 @@ patterns:
           - to_pem
           - to_s
   - pattern: |
-      $<VAR>.$<METHOD>($<_>)
+      $<VAR>.$<METHOD>()
     filters:
       - variable: VAR
         detection: openssl_dsa_init

@@ -1,6 +1,6 @@
 patterns:
   - pattern: |
-      JWT.encode($<DATA_TYPE>)
+      JWT.encode($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: DATA_TYPE
         detection: datatype

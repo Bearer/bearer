@@ -74,7 +74,7 @@ type Implementation interface {
 	//   end
 	// it is natural for `$<ARG>`` to only match the first argument, but
 	// we wouldn't expect `other_call` to be the first expression in the block
-	PatternIsAnchored(node *tree.Node) bool
+	PatternIsAnchored(node *tree.Node) (bool, bool)
 	// PatternNodeTypes returns the types to use for a given node. This allows us
 	// to match using equivalent syntax without having to enumerate all the
 	// combinations in rules.

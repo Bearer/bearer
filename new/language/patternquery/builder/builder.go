@@ -124,7 +124,8 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		)
 	}
 
-	anchored := !isRoot && node.IsNamed() && builder.langImplementation.PatternIsAnchored(node)
+	nodeAnchoredBefore, nodeAnchoredAfter := builder.langImplementation.PatternIsAnchored(node)
+	anchored := !isRoot && node.IsNamed() && nodeAnchoredBefore
 
 	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.StartByte()) {
 		builder.write(". ")
@@ -144,7 +145,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		builder.write(" @match")
 	}
 
-	if anchored && isLastChild && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.EndByte()) {
+	if anchored && isLastChild && nodeAnchoredAfter && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.EndByte()) {
 		builder.write(" .")
 	}
 

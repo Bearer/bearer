@@ -20,7 +20,7 @@ patterns:
           - notify_queue_sync
   - pattern: |
       Airbrake.$<METHOD>() do |$<NOTIFY:identifier>|
-        $<NOTIFY>[][] = $<DATA_TYPE>
+        $<NOTIFY>[$<_>][$<_>] = $<DATA_TYPE>
       end
     filters:
       - variable: DATA_TYPE
