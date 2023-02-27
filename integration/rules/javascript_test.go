@@ -49,6 +49,11 @@ func TestJavascriptLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")
 }
 
+func TestJavascriptHardcodedSecret(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/hardcoded_secret")
+}
+
 func TestJavascriptAwsLambdaSqlInjection(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"aws_lambda/sql_injection")
@@ -192,4 +197,9 @@ func TestJavascriptOpenTelemetry(t *testing.T) {
 func TestJavascriptBugsnag(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/bugsnag")
+}
+
+func TestJavascripPassportHardcodedSecret(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/passport_hardcoded_secret")
 }
