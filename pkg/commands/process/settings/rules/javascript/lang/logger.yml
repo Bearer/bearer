@@ -1,6 +1,6 @@
 patterns:
   - pattern: |
-      $<LOG>.$<METHOD>($<DATA_TYPE>)
+      $<LOG>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
@@ -16,7 +16,7 @@ patterns:
           - log
           - logger
   - pattern: |
-      console.$<METHOD>($<DATA_TYPE>)
+      console.$<METHOD>($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
@@ -28,7 +28,7 @@ patterns:
           - log
           - table
   - pattern: |
-      $<LOG>.child($<DATA_TYPE>)
+      $<LOG>.child($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
@@ -37,7 +37,7 @@ patterns:
           - log
           - logger
   - pattern: |
-      $<VAR>.$<METHOD>($<DATA_TYPE>)
+      $<VAR>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
