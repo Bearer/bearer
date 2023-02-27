@@ -54,9 +54,11 @@ func TestBuildReportString(t *testing.T) {
 
 	dummyGoclocLanguage := gocloc.Language{}
 	dummyGoclocResult := gocloc.Result{
-		Total:         &dummyGoclocLanguage,
-		Files:         map[string]*gocloc.ClocFile{},
-		Languages:     map[string]*gocloc.Language{},
+		Total: &dummyGoclocLanguage,
+		Files: map[string]*gocloc.ClocFile{},
+		Languages: map[string]*gocloc.Language{
+			"Ruby": {},
+		},
 		MaxPathLength: 0,
 	}
 
