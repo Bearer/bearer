@@ -6,7 +6,7 @@ permalink: "/"
 
 # Bearer
 
-Welcome to the Bearer documentation. Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your [data flows]((/explanations/discovery-and-classification)) to discover, filter and prioritize security risks and vulnerabilities leading to [sensitive data](/reference/datatypes/) exposures (PII, PHI, PD).
+Welcome to the Bearer documentation. Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your [data flows](/explanations/discovery-and-classification) to discover, filter and prioritize security risks and vulnerabilities leading to [sensitive data](/reference/datatypes/) exposures (PII, PHI, PD).
 
 We provides [built-in rules](/reference/rules) against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/). Here are some practical examples of what those rules look for:
 - Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
