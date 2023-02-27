@@ -24,7 +24,7 @@ require (
 	github.com/stretchr/testify v1.8.1
 	github.com/struCoder/pidusage v0.2.1
 	github.com/tangzero/inflector v1.0.0
-	github.com/weppos/publicsuffix-go v0.20.0
+	github.com/weppos/publicsuffix-go v0.30.0
 	github.com/wlredeye/jsonlines v0.0.0-20160904163743-36b5e1bd13d0
 	github.com/zricethezav/gitleaks/v8 v8.15.3
 	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326
