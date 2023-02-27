@@ -26,7 +26,11 @@ patterns:
 auxiliary:
   - id: javascript_express_insecure_deserialization_request_obj
     patterns:
-      - req.$<_>
+      - req.params.$<_>
+      - req.query.$<_>
+      - req.body.$<_>
+      - req.cookies.$<_>
+      - req.headers.$<_>
   - id: javascript_express_deserialization_buffer
     patterns:
       - Buffer.from(req.$<_>).toString()

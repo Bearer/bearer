@@ -12,7 +12,11 @@ patterns:
 auxiliary:
   - id: javascript_express_ui_redress_request_obj
     patterns:
-      - req.$<_>
+      - req.params.$<_>
+      - req.query.$<_>
+      - req.body.$<_>
+      - req.cookies.$<_>
+      - req.headers.$<_>
 languages:
   - javascript
 trigger: presence
