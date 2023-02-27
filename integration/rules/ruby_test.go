@@ -47,6 +47,7 @@ func TestRubyLangHttpPostInsecureWithData(t *testing.T) {
 }
 
 func TestRubyLangHttpUrlUsingUserInput(t *testing.T) {
+	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/http_url_using_user_input")
 }
 
@@ -68,6 +69,11 @@ func TestRubyLangLogger(t *testing.T) {
 func TestRubyLangException(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/exception")
+}
+
+func TestRubyLangExecUsingUserInput(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"lang/exec_using_user_input")
 }
 
 func TestRubyLangPathUsingUserInput(t *testing.T) {

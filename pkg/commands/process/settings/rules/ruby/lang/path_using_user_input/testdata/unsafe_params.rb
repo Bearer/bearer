@@ -17,3 +17,7 @@ path = Pathname.new(params[:oops])
 path + params[:two]
 path / params[:three]
 path.join("a", params[:four])
+
+Rails.root.join(params[:oops])
+
+Gem::Util.traverse_parents(params[:oops]) {}

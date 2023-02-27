@@ -11,8 +11,21 @@ patterns:
         values:
           - Dir
           - File
-          - IO
           - Pathname
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      IO.$<METHOD>($<...>$<USER_INPUT>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - binread
+          - binwrite
+          - foreach
+          - read
+          - readlines
+          - sysopen
+          - write
       - variable: USER_INPUT
         detection: ruby_lang_path_using_user_input_user_input
   - pattern: |
@@ -28,6 +41,16 @@ patterns:
   - pattern: |
       PStore.new($<USER_INPUT>$<...>)
     filters:
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      Gem::Util.$<METHOD>($<...>$<USER_INPUT>$<...>)$<...>
+    filters:
+      - variable: METHOD
+        values:
+          - correct_for_windows_path
+          - glob_files_in_dir
+          - traverse_parents
       - variable: USER_INPUT
         detection: ruby_lang_path_using_user_input_user_input
   - pattern: |
@@ -51,6 +74,68 @@ patterns:
         detection: ruby_lang_path_using_user_input_pathname
       - variable: USER_INPUT
         detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      Shell.$<METHOD>($<USER_INPUT>)
+    filters:
+      - variable: METHOD
+        values:
+          - new
+          - cd
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      Shell.default_system_path = $<USER_INPUT>
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      $<SHELL>.$<METHOD>($<USER_INPUT>$<...>)
+    filters:
+      - variable: SHELL
+        detection: ruby_lang_path_using_user_input_shell
+      - variable: METHOD
+        values:
+          - chdir
+          - expand_path
+          - pushdir
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      $<PROCESSOR>.$<METHOD>($<...>$<USER_INPUT>$<...>)$<...>
+    filters:
+      - variable: PROCESSOR
+        detection: ruby_lang_path_using_user_input_shell_cmd_proc
+      - variable: METHOD
+        values:
+          - cat
+          - expand_path
+          - foreach
+          - glob
+          - sort
+          - mkdir
+          - open
+          - rmdir
+          - tee
+          - test
+          - unlink
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      $<PROCESSOR>[$<_>, $<...>$<USER_INPUT>$<...>]
+    filters:
+      - variable: PROCESSOR
+        detection: ruby_lang_path_using_user_input_shell_cmd_proc
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      $<PROCESSOR>.transact do
+        $<!>$<PROCESSOR_TRANSACT_USER_INPUT>
+      end
+    filters:
+      - variable: PROCESSOR
+        detection: ruby_lang_path_using_user_input_shell_cmd_proc
+      - variable: PROCESSOR_TRANSACT_USER_INPUT
+        detection: ruby_lang_path_using_user_input_shell_cmd_trans_user_input
   - pattern: |
       $<METHOD>($<ARGUMENT>: $<USER_INPUT>)
     filters:
@@ -93,8 +178,39 @@ auxiliary:
   - id: ruby_lang_path_using_user_input_pathname
     patterns:
       - Rails.root
-      - Pathname.$<_>
-      - Pathname.$<_>()
+      - Pathname.$<_>$<...>
+  - id: ruby_lang_path_using_user_input_shell
+    patterns:
+      - |
+        Shell.new$<...>
+  - id: ruby_lang_path_using_user_input_shell_cmd_proc
+    patterns:
+      - pattern: |
+          $<SHELL>.command_processor
+        filters:
+          - variable: SHELL
+            detection: ruby_lang_path_using_user_input_shell
+      - Shell::CommandProcessor.new$<...>
+  - id: ruby_lang_path_using_user_input_shell_cmd_trans_user_input
+    patterns:
+      - pattern:
+          $<METHOD>($<...>$<USER_INPUT>$<...>)$<...>
+        filters:
+          - variable: METHOD
+            values:
+              - cat
+              - expand_path
+              - foreach
+              - glob
+              - sort
+              - mkdir
+              - open
+              - rmdir
+              - tee
+              - test
+              - unlink
+          - variable: USER_INPUT
+            detection: ruby_lang_path_using_user_input_user_input
 languages:
   - ruby
 trigger: presence
