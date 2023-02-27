@@ -32,16 +32,9 @@ low:
         id: javascript_express_sql_injection
         description: SQL injection vulnerability detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_sql_injection
-      line_number: 22
+      line_number: 23
       filename: mysql2_sql_injection.js
-      parent_line_number: 22
-      parent_content: |-
-        pool.getConnection(function (_err, conn) {
-        		conn.query(
-        			"SELECT * FROM users WHERE name = " + req.params.user_name,
-        			function () {}
-        		);
-        		pool.releaseConnection(conn);
-        	})
+      parent_line_number: 23
+      parent_content: conn.query("SELECT * FROM users WHERE name = " + req.params.user_name, function () {})
 
 

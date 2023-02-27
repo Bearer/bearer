@@ -20,10 +20,7 @@ module.exports.fooBar = function (req, _res) {
 		function () {}
 	);
 	pool.getConnection(function (_err, conn) {
-		conn.query(
-			"SELECT * FROM users WHERE name = " + req.params.user_name,
-			function () {}
-		);
+		conn.query("SELECT * FROM users WHERE name = " + req.params.user_name, function () {});
 		pool.releaseConnection(conn);
 	});
 
