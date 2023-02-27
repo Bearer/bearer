@@ -299,8 +299,8 @@ github.com/onsi/gomega v1.7.1/go.mod h1:XdKZgCCFLUoM/7CFJVPcG8C1xQ1AJ0vpAezJrB7J
 github.com/onsi/gomega v1.10.1/go.mod h1:iN09h71vgCQne3DLsj+A5owkum+a2tYe+TOCB1ybHNo=
 github.com/onsi/gomega v1.24.1 h1:KORJXNNTzJXzu4ScJWssJfJMnJ+2QJqhoQSRwNlze9E=
 github.com/onsi/gomega v1.24.1/go.mod h1:3AOiACssS3/MajrniINInwbfOOtfZvplPzuRSmvt1jM=
-github.com/open-policy-agent/opa v0.49.0 h1:TIlpCT1B5FSm8Dqo/a4t23gKmHkQysC3+7W77F99P4k=
-github.com/open-policy-agent/opa v0.49.0/go.mod h1:WTLWtu498/QNTDkiHx76Xj7jaJUPvLJAPtdMkCcst0w=
+github.com/open-policy-agent/opa v0.49.2 h1:n8ntRq/yDWy+cmYaqSLrHXmrT3tX8WlK28vjFQdC6W8=
+github.com/open-policy-agent/opa v0.49.2/go.mod h1:7L3lN5qe8xboRmEHxC5lGjo5KsRMdK+CCLiFoOCP7rU=
 github.com/pelletier/go-toml v1.9.5 h1:4yBQzkHv+7BHq2PQUZF3Mx0IYxG7LsP222s7Agd3ve8=
 github.com/pelletier/go-toml v1.9.5/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
 github.com/pelletier/go-toml/v2 v2.0.6 h1:nrzqCb7j9cDFj2coyLNLaZuJTLjWjlaz6nvTvIwycIU=
