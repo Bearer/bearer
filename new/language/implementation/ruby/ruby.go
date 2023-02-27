@@ -157,7 +157,7 @@ func (*rubyImplementation) PatternLeafContentTypes() []string {
 		// identifiers
 		"identifier", "constant",
 		// datatypes/literals
-		"number", "string_content", "integer", "float", "boolean", "nil", "symbol", "hash_key_symbol",
+		"number", "string_content", "integer", "float", "boolean", "nil", "simple_symbol", "hash_key_symbol",
 	}
 }
 
