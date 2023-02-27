@@ -51,6 +51,36 @@ patterns:
         detection: ruby_lang_path_using_user_input_pathname
       - variable: USER_INPUT
         detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      $<METHOD>($<ARGUMENT>: $<USER_INPUT>)
+    filters:
+      - variable: METHOD
+        values:
+          - render
+          - render_to_string
+      - variable: ARGUMENT
+        values:
+          - action
+          - file
+          - partial
+          - template
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      $<METHOD>({ $<ARGUMENT>: $<USER_INPUT> })
+    filters:
+      - variable: METHOD
+        values:
+          - render
+          - render_to_string
+      - variable: ARGUMENT
+        values:
+          - action
+          - file
+          - partial
+          - template
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
 auxiliary:
   - id: ruby_lang_path_using_user_input_user_input
     patterns:

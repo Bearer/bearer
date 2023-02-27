@@ -18,6 +18,4 @@ def my_handler(event:, context:)
   path + event["two"]
   path / event["two"]
   path.join("a", event["three"])
-
-  Rails.root.join(event["oops"])
 end
