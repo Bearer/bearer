@@ -90,11 +90,6 @@ func TestRubyLangWeakEncryptionWithData(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption_with_data")
 }
 
-func TestRubyRailsDefaultEncryption(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/default_encryption")
-}
-
 func TestRubyRailsInsecureCommunication(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_communication")
