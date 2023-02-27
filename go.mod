@@ -3,7 +3,7 @@ module github.com/bearer/bearer
 go 1.18
 
 require (
-	github.com/aws/aws-sdk-go v1.44.204
+	github.com/aws/aws-sdk-go v1.44.209
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/fatih/color v1.14.1
 	github.com/gertd/go-pluralize v0.2.1
