@@ -1,16 +1,16 @@
 patterns:
   - pattern: |
-      fetch($<EXPRESS_REQ>)
+      fetch($<USER_INPUT>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_ssrf_request_obj
   - pattern: |
-      axios.get($<EXPRESS_REQ>)
+      axios.get($<USER_INPUT>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_ssrf_request_obj
   - pattern: |
-      $<PUPPETEER_PAGE>.$<METHOD>($<EXPRESS_REQ>)
+      $<PUPPETEER_PAGE>.$<METHOD>($<USER_INPUT>)
     filters:
       - variable: PUPPETEER_PAGE
         detection:
@@ -20,16 +20,26 @@ patterns:
           - setContent
           - evaluate
           - evaluateOnNewDocument
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_ssrf_request_obj
 auxiliary:
   - id: javascript_express_ssrf_request_obj
     patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
       - req.params.$<_>
       - req.query.$<_>
       - req.body.$<_>
       - req.cookies.$<_>
       - req.headers.$<_>
+      - req.params[$<_>]
+      - req.query[$<_>]
+      - req.body[$<_>]
+      - req.cookies[$<_>]
+      - req.headers[$<_>]
   - id: javascript_puppeteer_page
     patterns:
       - $<PUPPETEER_BROWSER>.newPage()

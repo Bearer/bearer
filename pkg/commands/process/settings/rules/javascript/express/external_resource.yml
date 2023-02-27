@@ -1,24 +1,34 @@
 patterns:
   - pattern: |
-      require($<EXPRESS_REQ>)
+      require($<USER_INPUT>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_external_resource_req_object
   - pattern: |
-      res.render($<EXPRESS_REQ>$<...>)
+      res.render($<USER_INPUT>$<...>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_external_resource_req_object
 languages:
   - javascript
 auxiliary:
   - id: javascript_express_external_resource_req_object
     patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
       - req.params.$<_>
       - req.query.$<_>
       - req.body.$<_>
       - req.cookies.$<_>
       - req.headers.$<_>
+      - req.params[$<_>]
+      - req.query[$<_>]
+      - req.body[$<_>]
+      - req.cookies[$<_>]
+      - req.headers[$<_>]
 trigger: presence
 severity:
   default: "low"

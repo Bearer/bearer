@@ -1,22 +1,32 @@
 patterns:
   - pattern: |
-      res.set('X-Frame-Options', $<EXPRESS_REQ>)
+      res.set('X-Frame-Options', $<USER_INPUT>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_ui_redress_request_obj
   - pattern: |
-      res.set("X-Frame-Options", $<EXPRESS_REQ>)
+      res.set("X-Frame-Options", $<USER_INPUT>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_ui_redress_request_obj
 auxiliary:
   - id: javascript_express_ui_redress_request_obj
     patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
       - req.params.$<_>
       - req.query.$<_>
       - req.body.$<_>
       - req.cookies.$<_>
       - req.headers.$<_>
+      - req.params[$<_>]
+      - req.query[$<_>]
+      - req.body[$<_>]
+      - req.cookies[$<_>]
+      - req.headers[$<_>]
 languages:
   - javascript
 trigger: presence

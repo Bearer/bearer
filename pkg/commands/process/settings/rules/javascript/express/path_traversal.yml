@@ -1,21 +1,31 @@
 patterns:
   - pattern: |
-      path.$<METHOD>($<...>$<EXPRESS_REQ>$<...>)
+      path.$<METHOD>($<...>$<USER_INPUT>$<...>)
     filters:
       - variable: METHOD
         values:
           - join
           - resolve
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_path_traversal_request_obj
 auxiliary:
   - id: javascript_express_path_traversal_request_obj
     patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
       - req.params.$<_>
       - req.query.$<_>
       - req.body.$<_>
       - req.cookies.$<_>
       - req.headers.$<_>
+      - req.params[$<_>]
+      - req.query[$<_>]
+      - req.body[$<_>]
+      - req.cookies[$<_>]
+      - req.headers[$<_>]
 languages:
   - javascript
 trigger: presence

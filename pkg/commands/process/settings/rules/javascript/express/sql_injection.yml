@@ -1,6 +1,6 @@
 patterns:
   - pattern: |
-      $<KNEX_CLIENT>.$<METHOD>($<...>$<EXPRESS_INPUT>$<...>)
+      $<KNEX_CLIENT>.$<METHOD>($<...>$<USER_INPUT>$<...>)
     filters:
       - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
@@ -15,52 +15,62 @@ patterns:
           - whereRaw
           - raw
   - pattern: |
-      $<PG_CLIENT>.query($<...>$<EXPRESS_INPUT>$<...>)
+      $<PG_CLIENT>.query($<...>$<USER_INPUT>$<...>)
     filters:
       - variable: PG_CLIENT
         detection: javascript_express_sql_injection_pg_client
-      - variable: EXPRESS_INPUT
+      - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
   - pattern: |
-      $<SEQUELIZE>.query($<EXPRESS_INPUT>)
+      $<SEQUELIZE>.query($<USER_INPUT>)
     filters:
       - variable: SEQUELIZE
         detection: javascript_express_sql_injection_sequelize_init
-      - variable: EXPRESS_INPUT
+      - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
   - pattern: |
-      $<MYSQL_CONN>.$<METHOD>($<...>$<EXPRESS_INPUT>$<...>)
+      $<MYSQL_CONN>.$<METHOD>($<...>$<USER_INPUT>$<...>)
     filters:
       - variable: MYSQL_CONN
         detection: javascript_express_sql_injection_mysql_conn
-      - variable: EXPRESS_INPUT
+      - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
       - variable: METHOD
         values:
           - query
           - execute
   - pattern: |
-      $<MYSQL_POOL>.query($<...>$<EXPRESS_INPUT>$<...>)
+      $<MYSQL_POOL>.query($<...>$<USER_INPUT>$<...>)
     filters:
       - variable: MYSQL_POOL
         detection: javascript_express_sql_injection_mysql_pool
-      - variable: EXPRESS_INPUT
+      - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
   - pattern: |
-      $<CONN>.query($<EXPRESS_INPUT>, $<_>)
+      $<CONN>.query($<USER_INPUT>, $<_>)
     filters:
       - variable: CONN
         detection: javascript_express_sql_injection_pool_conn
-      - variable: EXPRESS_INPUT
+      - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
 auxiliary:
   - id: javascript_express_sql_injection_request_input
     patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
       - req.params.$<_>
       - req.query.$<_>
       - req.body.$<_>
       - req.cookies.$<_>
       - req.headers.$<_>
+      - req.params[$<_>]
+      - req.query[$<_>]
+      - req.body[$<_>]
+      - req.cookies[$<_>]
+      - req.headers[$<_>]
   - id: javascript_express_sql_injection_pg_client
     patterns:
       - new Client()
