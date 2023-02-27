@@ -78,6 +78,7 @@ policy_failure contains item if {
 policy_failure contains item if {
 	input.rule.trigger == "stored_data_types"
 
+	contains(input.rule.languages, input.dataflow.data_types[_].detectors[_].name)
 	data_type = input.dataflow.data_types[_]
 	not contains(input.rule.skip_data_types, data_type.name)
 
@@ -101,16 +102,16 @@ policy_failure contains item if {
 
 # used by inventory report
 local_rule_failure contains item if {
-  some detector in local_failures
+	some detector in local_failures
 	data_type = detector.data_types[_]
 
-  location = data_type.locations[_]
+	location = data_type.locations[_]
 	item := {
-    "name": data_type.name,
+		"name": data_type.name,
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
-    "subject_name": location.subject_name,
-    "line_number": location.line_number,
-    "rule_id": input.rule.id,
-    "third_party": input.rule.associated_recipe
-  }
+		"subject_name": location.subject_name,
+		"line_number": location.line_number,
+		"rule_id": input.rule.id,
+		"third_party": input.rule.associated_recipe,
+	}
 }
