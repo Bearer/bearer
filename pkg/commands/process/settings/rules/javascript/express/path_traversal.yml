@@ -21,7 +21,13 @@ metadata:
   description: "Possible path traversal vulnerability detected."
   remediation_message: |
     ## Description
-    TODO
+    Allowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 22
   id: "javascript_express_path_traversal"
