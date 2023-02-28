@@ -20,6 +20,9 @@ patterns:
     filters:
       - variable: DATA_TYPE
         detection: datatype
+      - not:
+          variable: DATA_TYPE
+          detection: javascript_lang_logger_async_function_call
       - variable: METHOD
         values:
           - warn
@@ -60,6 +63,9 @@ auxiliary:
             values:
               - log
               - logger
+  - id: javascript_lang_logger_async_function_call
+    patterns:
+      - await this.$<_>()
 languages:
   - javascript
 trigger: local
