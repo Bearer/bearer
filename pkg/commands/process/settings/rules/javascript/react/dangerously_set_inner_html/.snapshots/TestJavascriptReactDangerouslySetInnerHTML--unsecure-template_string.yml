@@ -5,9 +5,9 @@ medium:
         id: javascript_react_dangerously_set_inner_html
         description: Sensitive data sent to Google Analytics detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_react_dangerously_set_inner_html
-      line_number: 2
-      filename: unsecure.js
-      parent_line_number: 2
-      parent_content: '{ __html: input }'
+      line_number: 4
+      filename: unsecure-template_string.js
+      parent_line_number: 4
+      parent_content: '{ __html: `<a href=${input}>home page</a>` }'
 
 

@@ -8,9 +8,18 @@ patterns:
 auxiliary:
   - id: javascript_react_dangerously_set_inner_html_sanitzed_input
     patterns:
-      - $<ANYTHING:string>
+      - pattern: |
+          $<ANYTHING:string|template_string>
+        filters:
+          - not:
+              variable: ANYTHING
+              detection: javascript_react_dangerously_set_inner_html_unsanitzed_input
       - sanitize($<_>)
       - sanitizeHTML($<_>)
+  - id: javascript_react_dangerously_set_inner_html_unsanitzed_input
+    patterns:
+      - |
+        `$<...>${$<...>$<_>$<...>}$<...>`
 languages:
   - javascript
 trigger: presence
