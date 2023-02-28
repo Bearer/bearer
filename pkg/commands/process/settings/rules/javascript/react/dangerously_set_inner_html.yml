@@ -1,0 +1,36 @@
+patterns:
+  - pattern: |
+      { __html: $<DATA> }
+    filters:
+      - not:
+          variable: DATA
+          detection: javascript_react_dangerously_set_inner_html_sanitzed_input
+auxiliary:
+  - id: javascript_react_dangerously_set_inner_html_sanitzed_input
+    patterns:
+      - $<ANYTHING:string>
+      - sanitize($<_>)
+      - sanitizeHTML($<_>)
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: medium
+metadata:
+  description: "Sensitive data sent to Google Analytics detected."
+  remediation_message: |
+    ## Description
+
+    Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Google Analytics.
+
+    ## Remediations
+
+    When sending data to analytics libraries, ensure all sensitive data is removed.
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 201
+  id: "javascript_react_dangerously_set_inner_html"
