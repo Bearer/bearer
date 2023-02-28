@@ -74,9 +74,9 @@ func TestJavascriptExpressUnsafeDeserialization(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/unsafe_deserialization")
 }
 
-func TestJavascriptExpressInsecureRefResolution(t *testing.T) {
+func TestJavascriptExpressExternalResource(t *testing.T) {
 	t.Parallel()
-	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_ref_resolution")
+	getRunner(t).runTest(t, javascriptRulesPath+"express/external_resource")
 }
 
 func TestJavascriptExpressExternalFileUpload(t *testing.T) {

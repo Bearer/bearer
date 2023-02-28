@@ -1,35 +1,43 @@
 patterns:
   - pattern: |
-      $<LIB_METHOD>($<EXPRESS_REQ>)
+      $<LIB_METHOD>($<USER_INPUT>)
     filters:
       - variable: LIB_METHOD
         values:
           - deserializeError
           - deserialize_error
       - either:
-        - variable: EXPRESS_REQ
+        - variable: USER_INPUT
           detection: javascript_express_insecure_deserialization_request_obj
-        - variable: EXPRESS_REQ
+        - variable: USER_INPUT
           detection: javascript_express_deserialization_buffer
   - pattern: |
-      $<LIB>.unserialize($<EXPRESS_REQ>)
+      $<LIB>.unserialize($<USER_INPUT>)
     filters:
       - variable: LIB
         values:
           - nodeSerialize
           - node_serialize
       - either:
-        - variable: EXPRESS_REQ
+        - variable: USER_INPUT
           detection: javascript_express_insecure_deserialization_request_obj
-        - variable: EXPRESS_REQ
+        - variable: USER_INPUT
           detection: javascript_express_deserialization_buffer
 auxiliary:
   - id: javascript_express_insecure_deserialization_request_obj
     patterns:
-      - req.$<_>
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
   - id: javascript_express_deserialization_buffer
     patterns:
-      - Buffer.from(req.$<_>).toString()
+      - pattern: |
+          Buffer.from($<USER_INPUT>).toString()
+        filters:
+          - variable: USER_INPUT
+            detection: javascript_express_insecure_deserialization_request_obj
 languages:
   - javascript
 trigger: presence

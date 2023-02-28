@@ -1,20 +1,37 @@
 patterns:
   - pattern: |
-      res.write($<EXPRESS_REQ>)
+      res.write($<USER_INPUT>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_cross_site_scripting_request_obj
+      - not:
+          variable: USER_INPUT
+          detection: javascript_express_cross_site_scripting_string_interpolation
   - pattern: |
-      res.send($<EXPRESS_REQ>)
+      res.send($<USER_INPUT>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_cross_site_scripting_request_obj
+      - not:
+          variable: USER_INPUT
+          detection: javascript_express_cross_site_scripting_string_interpolation
+languages:
+  - javascript
 auxiliary:
   - id: javascript_express_cross_site_scripting_request_obj
     patterns:
-      - req.$<_>
-languages:
-  - javascript
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
+  - id: javascript_express_cross_site_scripting_string_interpolation
+    patterns:
+      - pattern: |
+          { $<...>$<_>: $<USER_INPUT>$<...> }
+        filters:
+          - variable: USER_INPUT
+            detection: javascript_express_cross_site_scripting_request_obj
 trigger: presence
 severity:
   default: low

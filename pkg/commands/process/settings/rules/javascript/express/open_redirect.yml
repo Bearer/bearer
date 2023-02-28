@@ -1,13 +1,17 @@
 patterns:
   - pattern: |
-      res.redirect($<EXPRESS_REQ>$<...>)
+      res.redirect($<USER_INPUT>$<...>)
     filters:
-      - variable: EXPRESS_REQ
+      - variable: USER_INPUT
         detection: javascript_express_open_redirect_request_obj
 auxiliary:
   - id: javascript_express_open_redirect_request_obj
     patterns:
-      - req.$<_>
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
 languages:
   - javascript
 trigger: presence
