@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
+	"github.com/ssoroka/slice"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
@@ -52,7 +53,6 @@ type Output struct {
 	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	Severity         string   `json:"severity,omitempty" yaml:"severity,omitempty"`
-	OmitParent       bool     `json:"omit_parent" yaml:"omit_parent"`
 	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
@@ -95,7 +95,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 		}
 
 		policy := config.Policies[rule.Type]
-
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
 			Input{
@@ -165,7 +164,7 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		color.NoColor = true
 	}
 
-	rulesAvailableCount := writeRuleListToString(reportStr, rules, lineOfCodeOutput.Languages)
+	rulesAvailableCount := writeRuleListToString(reportStr, rules, lineOfCodeOutput.Languages, config)
 
 	failures := map[string]map[string]bool{
 		types.LevelCritical: make(map[string]bool),
@@ -253,6 +252,7 @@ func writeRuleListToString(
 	reportStr *strings.Builder,
 	rules map[string]*settings.Rule,
 	languages map[string]*gocloc.Language,
+	config settings.Config,
 ) int {
 	// list rules that were run
 	reportStr.WriteString("\n\nRules: \n")
@@ -265,9 +265,15 @@ func writeRuleListToString(
 			continue
 		}
 
-		exists := rule.Language() == "secret" || languages[rule.Language()] != nil
+		var shouldCount bool
 
-		if !exists {
+		if rule.Language() == "secret" {
+			shouldCount = slice.Contains(config.Scan.Scanner, "secrets")
+		} else {
+			shouldCount = languages[rule.Language()] != nil && slice.Contains(config.Scan.Scanner, "sast")
+		}
+
+		if !shouldCount {
 			continue
 		}
 

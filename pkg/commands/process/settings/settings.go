@@ -87,7 +87,6 @@ type RuleDefinition struct {
 	SkipDataTypes     []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
 	OnlyDataTypes     []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
 	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
-	DetailedContext   bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 	Metadata          *RuleMetadata     `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
 	Auxiliary         []Auxiliary       `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
 }
@@ -117,7 +116,6 @@ type Rule struct {
 	AssociatedRecipe   string            `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
 	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
 	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
-	DetailedContext    bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 	Detectors          []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
 	Processors         []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 	Stored             bool              `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
@@ -185,11 +183,7 @@ var policiesFs embed.FS
 var processorsFs embed.FS
 
 func (rule *Rule) PolicyType() bool {
-	if rule.Type == "data_type" || rule.Type == "verifier" {
-		return false
-	}
-
-	return true
+	return rule.Type == "risk"
 }
 
 func (rule *Rule) Language() string {

@@ -16,5 +16,7 @@ scan:
     force: false
     internal-domains: []
     quiet: false
+    scanner:
+        - sast
     skip-path: []
 
