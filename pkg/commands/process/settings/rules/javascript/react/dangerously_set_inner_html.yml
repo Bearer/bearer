@@ -1,0 +1,45 @@
+patterns:
+  - pattern: |
+      { __html: $<DATA> }
+    filters:
+      - not:
+          variable: DATA
+          detection: javascript_react_dangerously_set_inner_html_sanitzed_input
+auxiliary:
+  - id: javascript_react_dangerously_set_inner_html_sanitzed_input
+    patterns:
+      - pattern: |
+          $<ANYTHING:string|template_string>
+        filters:
+          - not:
+              variable: ANYTHING
+              detection: javascript_react_dangerously_set_inner_html_unsanitzed_input
+      - sanitize($<_>)
+      - sanitizeHTML($<_>)
+  - id: javascript_react_dangerously_set_inner_html_unsanitzed_input
+    patterns:
+      - |
+        `$<...>${$<...>$<_>$<...>}$<...>`
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: medium
+metadata:
+  description: "React's dangerously set inner HTML detected."
+  remediation_message: |
+    ## Description
+
+    TODO
+
+    ## Remediations
+
+    TODO
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 79
+  id: "javascript_react_dangerously_set_inner_html"

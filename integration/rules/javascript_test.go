@@ -133,6 +133,11 @@ func TestJavascriptReactGoogleAnalytics(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"react/google_analytics")
 }
 
+func TestJavascriptReactDangerouslySetInnerHTML(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"react/dangerously_set_inner_html")
+}
+
 func TestJavascriptThirdPartySentry(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/sentry")
