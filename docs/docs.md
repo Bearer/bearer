@@ -19,9 +19,7 @@ And [many more](/reference/rules).
 
 Bearer currenty supporting **JavaScript** and **Ruby** stacks, more will follow.
 
-<p>&nbsp;</p>
-<img title="bearer security scanner" alt="A screencast of Bearer OSS" src="assets/img/Bearer-security-OSS.gif">
-<p>&nbsp;</p>
+![bearer security scanner gif](/assets/img/Bearer-security-OSS.gif)
 
 ## Getting started
 
@@ -63,5 +61,4 @@ We'd love to see the impact you can bring to Bearer. Our contributing documentat
 - [Help improve and apply fixes to the documentation](/contributing/docs/)
 - [Add new recipes to Bearer's database](/contributing/recipes/)
   
-<p>&nbsp;</p>
-<img title="Sunglasses Bear" alt="A cut polar bear with sunglasses in a purple circle" src="assets/img/contribute-bearer.png">
+![Sunglasses Bear](/assets/img/contribute-bearer.png)
