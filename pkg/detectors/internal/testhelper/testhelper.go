@@ -64,7 +64,8 @@ func Extract(
 }
 
 func RegistrationFor(detectorType reportdetectors.Type) []detectors.InitializedDetector {
-	for _, registration := range detectors.Registrations() {
+	scanners := []string{"sast", "secrets"}
+	for _, registration := range detectors.Registrations(scanners) {
 		if registration.Type == detectorType {
 			return []detectors.InitializedDetector{registration}
 		}

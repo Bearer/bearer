@@ -186,6 +186,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			ParamParenting:     definition.ParamParenting,
 			Patterns:           definition.Patterns,
 			DocumentationUrl:   definition.Metadata.DocumentationUrl,
+			OmitParentContent:  definition.OmitParentContent,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {

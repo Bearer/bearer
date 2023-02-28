@@ -11,9 +11,13 @@ type Context string
 const (
 	Health Context = "health"
 	Empty  Context = ""
+
+	ScannerSAST    = "sast"
+	ScannerSecrets = "secrets"
 )
 
 var ErrInvalidContext = errors.New("invalid context argument; supported values: health")
+var ErrInvalidScanner = errors.New("invalid scanner argument; supported values: sast, secrets")
 
 var (
 	SkipPathFlag = Flag{
@@ -76,9 +80,16 @@ var (
 		Value:      []string{},
 		Usage:      "Specify directories paths that contain .yaml files with external rules configuration",
 	}
+	ScannerFlag = Flag{
+		Name:       "scanner",
+		ConfigName: "scan.scanner",
+		Value:      []string{ScannerSAST},
+		Usage:      "Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast",
+	}
 )
 
 type ScanFlagGroup struct {
+	ScannerFlag                 *Flag
 	SkipPathFlag                *Flag
 	DebugFlag                   *Flag
 	DisableDomainResolutionFlag *Flag
@@ -103,6 +114,7 @@ type ScanOptions struct {
 	Quiet                   bool          `mapstructure:"quiet" json:"quiet" yaml:"quiet"`
 	Force                   bool          `mapstructure:"force" json:"force" yaml:"force"`
 	ExternalRuleDir         []string      `mapstructure:"external-rule-dir" json:"external-rule-dir" yaml:"external-rule-dir"`
+	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -117,6 +129,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		QuietFlag:                   &QuietFlag,
 		ForceFlag:                   &ForceFlag,
 		ExternalRuleDirFlag:         &ExternalRuleDirFlag,
+		ScannerFlag:                 &ScannerFlag,
 	}
 }
 
@@ -136,6 +149,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.QuietFlag,
 		f.ForceFlag,
 		f.ExternalRuleDirFlag,
+		f.ScannerFlag,
 	}
 }
 
@@ -152,6 +166,16 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		return ScanOptions{}, ErrInvalidContext
 	}
 
+	scanners := getStringSlice(f.ScannerFlag)
+	for _, scanner := range scanners {
+		switch scanner {
+		case ScannerSAST:
+		case ScannerSecrets:
+		default:
+			return ScanOptions{}, ErrInvalidScanner
+		}
+	}
+
 	return ScanOptions{
 		SkipPath:                getStringSlice(f.SkipPathFlag),
 		Debug:                   getBool(f.DebugFlag),
@@ -164,6 +188,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Force:                   getBool(f.ForceFlag),
 		Target:                  target,
 		ExternalRuleDir:         getStringSlice(f.ExternalRuleDirFlag),
+		Scanner:                 scanners,
 	}, nil
 }
 

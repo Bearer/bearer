@@ -124,7 +124,7 @@ func buildScanID(scanSettings settings.Config) (string, error) {
 	}
 
 	// we want hash of all active custom detector rules and their content
-	detectorsHashBuilder := md5.New()
+	hashBuilder := md5.New()
 	var ruleNames []string
 	for key := range scanSettings.Rules {
 		ruleNames = append(ruleNames, key)
@@ -132,7 +132,7 @@ func buildScanID(scanSettings settings.Config) (string, error) {
 	sort.Strings(ruleNames)
 
 	for _, ruleName := range ruleNames {
-		_, err := detectorsHashBuilder.Write([]byte(ruleName))
+		_, err := hashBuilder.Write([]byte(ruleName))
 		if err != nil {
 			return "", err
 		}
@@ -140,13 +140,24 @@ func buildScanID(scanSettings settings.Config) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		_, err = detectorsHashBuilder.Write(detectorContent)
+		_, err = hashBuilder.Write(detectorContent)
 		if err != nil {
 			return "", err
 		}
 	}
 
-	configHash := hex.EncodeToString(detectorsHashBuilder.Sum(nil)[:])
+	var scanners []string
+	scanners = append(scanners, scanSettings.Scan.Scanner...)
+	sort.Strings(scanners)
+
+	for _, scanner := range scanners {
+		_, err := hashBuilder.Write([]byte(scanner))
+		if err != nil {
+			return "", err
+		}
+	}
+
+	configHash := hex.EncodeToString(hashBuilder.Sum(nil)[:])
 
 	// we want sha as it might change detections
 	buildSHA := build.CommitSHA

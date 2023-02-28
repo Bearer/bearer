@@ -31,6 +31,7 @@ func TestBuildReportString(t *testing.T) {
 		Description: "Its a test!",
 		CWEIDs:      []string{},
 		Type:        "risk",
+		Languages:   []string{"ruby"},
 		Severity:    map[string]string{"default": "low"},
 	}
 
@@ -120,7 +121,9 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 
 func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 	opts := flag.Options{
-		ScanOptions:    flag.ScanOptions{},
+		ScanOptions: flag.ScanOptions{
+			Scanner: []string{"sast"},
+		},
 		RuleOptions:    flag.RuleOptions{},
 		RepoOptions:    flag.RepoOptions{},
 		ReportOptions:  reportOptions,

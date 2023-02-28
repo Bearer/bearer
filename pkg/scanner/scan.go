@@ -10,7 +10,14 @@ import (
 	"github.com/bearer/bearer/pkg/util/blamer"
 )
 
-func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath string, classifier *classification.Classifier) error {
+func Scan(
+	rootDir string,
+	FilesToScan []string,
+	blamer blamer.Blamer,
+	outputPath string,
+	classifier *classification.Classifier,
+	scanners []string,
+) error {
 	file, err := os.OpenFile(outputPath, os.O_RDWR|os.O_TRUNC, 0666)
 
 	if err != nil {
@@ -24,7 +31,7 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 		File:       file,
 	}
 
-	if err := detectors.Extract(rootDir, FilesToScan, &rep); err != nil {
+	if err := detectors.Extract(rootDir, FilesToScan, &rep, scanners); err != nil {
 		return err
 	}
 

@@ -28,14 +28,15 @@ import (
 	"github.com/bearer/bearer/pkg/detectors/rails"
 	"github.com/bearer/bearer/pkg/detectors/ruby"
 	"github.com/bearer/bearer/pkg/detectors/simple"
+	"github.com/bearer/bearer/pkg/detectors/spring"
+	"github.com/bearer/bearer/pkg/detectors/sql"
+	"github.com/bearer/bearer/pkg/detectors/symfony"
 	"github.com/bearer/bearer/pkg/detectors/tsx"
 	"github.com/bearer/bearer/pkg/detectors/typescript"
 	"github.com/bearer/bearer/pkg/detectors/yamlconfig"
 	"github.com/bearer/bearer/pkg/util/file"
+	"golang.org/x/exp/slices"
 
-	"github.com/bearer/bearer/pkg/detectors/spring"
-	"github.com/bearer/bearer/pkg/detectors/sql"
-	"github.com/bearer/bearer/pkg/detectors/symfony"
 	"github.com/bearer/bearer/pkg/detectors/types"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
 	"github.com/rs/zerolog/log"
@@ -62,53 +63,67 @@ func SetupLegacyDetector(config map[string]*settings.Rule) error {
 	return detector.CompileRules(config)
 }
 
-func Registrations() []InitializedDetector {
+func Registrations(scanners []string) []InitializedDetector {
 	// The order of these is important, the first one to claim a file will win
+	detectors := []InitializedDetector{}
 
-	detectors := []InitializedDetector{
-		{reportdetectors.DetectorCustom, customDetector},
-		// gitleaks detector
-		{reportdetectors.DetectorGitleaks, gitleaks.New(&nodeid.UUIDGenerator{})},
-		//dependencies detectors
-		{reportdetectors.DetectorDependencies, dependencies.New()},
+	if slices.Contains(scanners, "secrets") {
+		// Enable GitLeaks
+		detectors = append(
+			detectors,
+			InitializedDetector{
+				reportdetectors.DetectorGitleaks, gitleaks.New(&nodeid.UUIDGenerator{}),
+			},
+		)
+	}
 
-		{reportdetectors.DetectorBeego, beego.New()},
-		{reportdetectors.DetectorGo, golang.New(&nodeid.UUIDGenerator{})},
+	if slices.Contains(scanners, "sast") {
+		detectors = append(
+			detectors,
+			[]InitializedDetector{
+				{reportdetectors.DetectorCustom, customDetector},
 
-		{reportdetectors.DetectorDjango, django.New()},
-		{reportdetectors.DetectorPython, python.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorDependencies, dependencies.New()},
 
-		{reportdetectors.DetectorDotnet, dotnet.New()},
-		{reportdetectors.DetectorCSharp, csharp.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorBeego, beego.New()},
+				{reportdetectors.DetectorGo, golang.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorOpenAPI, openapi.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorDjango, django.New()},
+				{reportdetectors.DetectorPython, python.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorEnvFile, envfile.New()},
+				{reportdetectors.DetectorDotnet, dotnet.New()},
+				{reportdetectors.DetectorCSharp, csharp.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorJavascript, javascript.New(&nodeid.UUIDGenerator{})},
-		{reportdetectors.DetectorTsx, tsx.New(&nodeid.UUIDGenerator{})},
-		{reportdetectors.DetectorTypescript, typescript.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorOpenAPI, openapi.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorRails, rails.New(&nodeid.UUIDGenerator{})},
-		{reportdetectors.DetectorRuby, ruby.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorEnvFile, envfile.New()},
 
-		{reportdetectors.DetectorSpring, spring.New()},
-		{reportdetectors.DetectorJava, java.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorJavascript, javascript.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorTsx, tsx.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorTypescript, typescript.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorSymfony, symfony.New()},
-		{reportdetectors.DetectorPHP, php.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorRails, rails.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorRuby, ruby.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorYamlConfig, yamlconfig.New()},
+				{reportdetectors.DetectorSpring, spring.New()},
+				{reportdetectors.DetectorJava, java.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorSQL, sql.New(&nodeid.UUIDGenerator{})},
-		{reportdetectors.DetectorProto, proto.New(&nodeid.UUIDGenerator{})},
-		{reportdetectors.DetectorGraphQL, graphql.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorSymfony, symfony.New()},
+				{reportdetectors.DetectorPHP, php.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorHTML, html.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorYamlConfig, yamlconfig.New()},
 
-		{reportdetectors.DetectorIPYNB, ipynb.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorSQL, sql.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorProto, proto.New(&nodeid.UUIDGenerator{})},
+				{reportdetectors.DetectorGraphQL, graphql.New(&nodeid.UUIDGenerator{})},
 
-		{reportdetectors.DetectorSimple, simple.New()},
+				{reportdetectors.DetectorHTML, html.New(&nodeid.UUIDGenerator{})},
+
+				{reportdetectors.DetectorIPYNB, ipynb.New(&nodeid.UUIDGenerator{})},
+
+				{reportdetectors.DetectorSimple, simple.New()},
+			}...,
+		)
 	}
 
 	return detectors
@@ -118,8 +133,9 @@ func Extract(
 	path string,
 	files []string,
 	report reporttypes.Report,
+	scanners []string,
 ) error {
-	return ExtractWithDetectors(path, files, report, Registrations())
+	return ExtractWithDetectors(path, files, report, Registrations(scanners))
 }
 
 func ExtractWithDetectors(

@@ -13,28 +13,35 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/detectors"
 	"github.com/bearer/bearer/pkg/scanner"
+	"golang.org/x/exp/slices"
 )
 
 type Worker struct {
 	classifer *classification.Classifier
+	scanners  []string
 }
 
 func (worker *Worker) Setup(config config.Config) error {
-	classifier, err := classification.NewClassifier(&classification.Config{Config: config})
-	if err != nil {
-		return err
-	}
+	worker.scanners = config.Scan.Scanner
 
-	err = detectors.SetupLegacyDetector(config.BuiltInRules)
-	if err != nil {
-		return err
-	}
-	err = customdetector.Setup(&config, classifier)
-	if err != nil {
-		return err
-	}
+	if slices.Contains(worker.scanners, "sast") {
+		classifier, err := classification.NewClassifier(&classification.Config{Config: config})
+		if err != nil {
+			return err
+		}
 
-	worker.classifer = classifier
+		err = detectors.SetupLegacyDetector(config.BuiltInRules)
+		if err != nil {
+			return err
+		}
+
+		err = customdetector.Setup(&config, classifier)
+		if err != nil {
+			return err
+		}
+
+		worker.classifer = classifier
+	}
 
 	return nil
 }
@@ -47,7 +54,7 @@ func (worker *Worker) Scan(scanRequest work.ProcessRequest) error {
 		filesList = append(filesList, file.FilePath)
 	}
 
-	return scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.ReportPath, worker.classifer)
+	return scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.ReportPath, worker.classifer, worker.scanners)
 }
 
 func Start(port string) error {
