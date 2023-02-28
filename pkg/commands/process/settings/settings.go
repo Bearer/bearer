@@ -183,11 +183,7 @@ var policiesFs embed.FS
 var processorsFs embed.FS
 
 func (rule *Rule) PolicyType() bool {
-	if rule.Type == "risk" {
-		return true
-	}
-
-	return false
+	return rule.Type == "risk"
 }
 
 func (rule *Rule) Language() string {
