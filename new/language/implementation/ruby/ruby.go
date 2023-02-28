@@ -206,6 +206,16 @@ func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 		return false, false
 	}
 
+	// Conditional body
+	if parent.Type() == "then" {
+		return false, false
+	}
+
+	if (parent.Type() == "if" || parent.Type() == "elsif" || parent.Type() == "unless") &&
+		node.Equal(parent.ChildByFieldName("condition")) {
+		return true, false
+	}
+
 	return true, true
 }
 
