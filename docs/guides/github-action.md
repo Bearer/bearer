@@ -8,7 +8,7 @@ Running Bearer from the CLI is great, but if you want it integrated directly wit
 
 ## Getting started
 
-You can [view the action here](https://github.com/marketplace/actions/bearer-sh), or follow along below.
+You can [view the action here](https://github.com/marketplace/actions/bearer-security), or follow along below.
 
 Actions live in the `.github/workflows/` directory within your repository. Start by creating a `bearer.yml` file in the workflows directory.
 
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Report
         id: report
-        uses: bearer/bearer-action@v0.2
+        uses: bearer/bearer-action@v0.4
       - id: summary
         name: Display Summary
         uses: actions/github-script@v6
