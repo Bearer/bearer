@@ -157,7 +157,7 @@ func (*rubyImplementation) PatternLeafContentTypes() []string {
 		// identifiers
 		"identifier", "constant",
 		// datatypes/literals
-		"number", "string_content", "integer", "float", "boolean", "nil", "symbol", "hash_key_symbol",
+		"number", "string_content", "integer", "float", "boolean", "nil", "simple_symbol", "hash_key_symbol",
 	}
 }
 
@@ -169,32 +169,44 @@ func (*rubyImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
-func (*rubyImplementation) PatternIsAnchored(node *tree.Node) bool {
+func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 	if slices.Contains(unanchoredPatternNodeTypes, node.Type()) {
-		return false
+		return false, false
 	}
 
 	parent := node.Parent()
 	if parent == nil {
-		return true
+		return true, true
 	}
 
 	// Class body
-	if parent.Type() == "class" && !node.Equal(parent.ChildByFieldName("name")) {
-		return false
+	if parent.Type() == "class" {
+		if node.Equal(parent.ChildByFieldName("name")) {
+			return true, false
+		}
+
+		return false, false
 	}
 
 	// Block body
-	if (parent.Type() == "do_block" || parent.Type() == "block") && !node.Equal(parent.ChildByFieldName("parameters")) {
-		return false
+	if parent.Type() == "do_block" || parent.Type() == "block" {
+		if node.Equal(parent.ChildByFieldName("parameters")) {
+			return true, false
+		}
+
+		return false, false
 	}
 
 	// Method body
-	if parent.Type() == "method" && !node.Equal(parent.ChildByFieldName("name")) && !node.Equal(parent.ChildByFieldName("parameters")) {
-		return false
+	if parent.Type() == "method" {
+		if node.Equal(parent.ChildByFieldName("name")) || node.Equal(parent.ChildByFieldName("parameters")) {
+			return true, false
+		}
+
+		return false, false
 	}
 
-	return true
+	return true, true
 }
 
 func (*rubyImplementation) PatternNodeTypes(node *tree.Node) []string {

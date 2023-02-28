@@ -75,12 +75,13 @@ patterns:
       - variable: USER_INPUT
         detection: ruby_lang_path_using_user_input_user_input
   - pattern: |
-      Shell.$<METHOD>($<USER_INPUT>)
+      Shell.cd($<USER_INPUT>)
     filters:
-      - variable: METHOD
-        values:
-          - new
-          - cd
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      Shell.new($<USER_INPUT>$<...>)
+    filters:
       - variable: USER_INPUT
         detection: ruby_lang_path_using_user_input_user_input
   - pattern: |

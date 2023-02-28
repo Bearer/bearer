@@ -19,3 +19,6 @@ processor2[:exists?, x, params[:oops], y]
 processor2.transact do
   test(:exists?, params[:oops])
 end
+
+# optional arg
+shell = Shell.new(params[:oops])

@@ -74,6 +74,10 @@ func TestJavascriptExpressInsecureRefResolution(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_ref_resolution")
 }
 
+func TestJavascriptExpressExternalFileUpload(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/external_file_upload")
+}
+
 func TestJavascriptExpressExposedDirListing(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/exposed_dir_listing")

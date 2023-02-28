@@ -1,11 +1,11 @@
 patterns:
   - pattern: |
-      cookies[] = $<DATA_TYPE>
+      cookies[$<_>] = $<DATA_TYPE>
     filters:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      cookies.$<METHOD>[] = $<DATA_TYPE>
+      cookies.$<METHOD>[$<_>] = $<DATA_TYPE>
     filters:
       - variable: METHOD
         values:
@@ -14,12 +14,12 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      cookies.permanent.signed[] = $<DATA_TYPE>
+      cookies.permanent.signed[$<_>] = $<DATA_TYPE>
     filters:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      cookies.signed.permanent[] = $<DATA_TYPE>
+      cookies.signed.permanent[$<_>] = $<DATA_TYPE>
     filters:
       - variable: DATA_TYPE
         detection: datatype

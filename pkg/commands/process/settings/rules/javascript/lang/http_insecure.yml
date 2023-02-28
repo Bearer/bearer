@@ -1,6 +1,6 @@
 patterns:
   - pattern: |
-      $<LIBRARY>.$<METHOD>($<INSECURE_URL>)
+      $<LIBRARY>.$<METHOD>($<INSECURE_URL>$<...>)
     filters:
       - variable: INSECURE_URL
         detection: insecure_url
@@ -15,12 +15,12 @@ patterns:
           - patch
           - delete
   - pattern: |
-      fetch($<INSECURE_URL>)
+      fetch($<INSECURE_URL>$<...>)
     filters:
       - variable: INSECURE_URL
         detection: insecure_url
   - pattern: |
-      $<REQUEST>.open($<_>, $<INSECURE_URL>);
+      $<REQUEST>.open($<_>, $<INSECURE_URL>$<...>);
     filters:
       - variable: INSECURE_URL
         detection: insecure_url

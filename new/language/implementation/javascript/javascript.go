@@ -218,10 +218,10 @@ func (*javascriptImplementation) PatternLeafContentTypes() []string {
 	}
 }
 
-func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
+func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 	parent := node.Parent()
 	if parent == nil {
-		return true
+		return true, true
 	}
 
 	// Class body class_body
@@ -230,7 +230,8 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	// method statement_blocks
 	unAnchored := []string{"statement_blocks", "class_body", "pair"}
 
-	return !slices.Contains(unAnchored, node.Type())
+	isUnanchored := !slices.Contains(unAnchored, node.Type())
+	return isUnanchored, isUnanchored
 }
 
 func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Node) bool {

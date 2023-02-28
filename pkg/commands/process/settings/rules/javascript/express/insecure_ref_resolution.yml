@@ -5,7 +5,7 @@ patterns:
       - variable: EXPRESS_REQ
         detection: javascript_express_insecure_ref_resolution_request_obj
   - pattern: |
-      res.render($<EXPRESS_REQ>)
+      res.render($<EXPRESS_REQ>$<...>)
     filters:
       - variable: EXPRESS_REQ
         detection: javascript_express_insecure_ref_resolution_request_obj
