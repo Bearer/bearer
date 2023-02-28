@@ -79,5 +79,15 @@ low:
       filename: unsafe_shell.rb
       parent_line_number: 20
       parent_content: test(:exists?, params[:oops])
+    - rule:
+        cwe_ids:
+            - "22"
+        id: ruby_lang_path_using_user_input
+        description: Do not use user input to form file paths.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 24
+      filename: unsafe_shell.rb
+      parent_line_number: 24
+      parent_content: Shell.new(params[:oops])
 
 
