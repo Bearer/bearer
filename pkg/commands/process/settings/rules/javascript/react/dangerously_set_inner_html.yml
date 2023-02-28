@@ -26,15 +26,15 @@ trigger: presence
 severity:
   default: medium
 metadata:
-  description: "Sensitive data sent to Google Analytics detected."
+  description: "React's dangerously set inner HTML detected."
   remediation_message: |
     ## Description
 
-    Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Google Analytics.
+    TODO
 
     ## Remediations
 
-    When sending data to analytics libraries, ensure all sensitive data is removed.
+    TODO
 
     <!--
     ## Resources
