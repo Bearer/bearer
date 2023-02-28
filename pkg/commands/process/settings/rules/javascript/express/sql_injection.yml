@@ -61,16 +61,6 @@ auxiliary:
       - req.body
       - req.cookies
       - req.headers
-      - req.params.$<_>
-      - req.query.$<_>
-      - req.body.$<_>
-      - req.cookies.$<_>
-      - req.headers.$<_>
-      - req.params[$<_>]
-      - req.query[$<_>]
-      - req.body[$<_>]
-      - req.cookies[$<_>]
-      - req.headers[$<_>]
   - id: javascript_express_sql_injection_pg_client
     patterns:
       - new Client()
