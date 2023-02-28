@@ -1,0 +1,13 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "79"
+        id: javascript_dangerous_insert_html
+        description: dangerous dynamic HTML insert detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_dangerous_insert_html
+      line_number: 2
+      filename: unsecure-element_ref.js
+      parent_line_number: 2
+      parent_content: this.ref.replaceChildren(`<li>${input}</li>`)
+
+

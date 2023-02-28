@@ -1,13 +1,11 @@
 patterns:
   - pattern: |
-      document.write($<DATA>$<...>)
+      document.$<METHOD>($<...>$<DATA>$<...>)
     filters:
-      - not:
-          variable: DATA
-          detection: javascript_dangerous_insert_html_sanitzed_input
-  - pattern: |
-      document.writeln($<DATA>$<...>)
-    filters:
+      - variable: METHOD
+        values:
+          - write
+          - writeLn
       - not:
           variable: DATA
           detection: javascript_dangerous_insert_html_sanitzed_input
@@ -25,7 +23,7 @@ patterns:
           variable: DATA
           detection: javascript_dangerous_insert_html_sanitzed_input
 auxiliary:
-  - id: javascript_react_dangerously_set_inner_html_sanitzed_input
+  - id: javascript_dangerous_insert_html_sanitzed_input
     patterns:
       - pattern: |
           $<ANYTHING:string|template_string>
@@ -45,7 +43,7 @@ trigger: presence
 severity:
   default: medium
 metadata:
-  description: "React's dangerous insert html detected."
+  description: "dangerous dynamic HTML insert detected."
   remediation_message: |
     ## Description
 
