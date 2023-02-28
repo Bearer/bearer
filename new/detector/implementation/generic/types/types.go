@@ -12,5 +12,6 @@ type Property struct {
 }
 
 type String struct {
-	Value string
+	Value     string
+	IsLiteral bool
 }

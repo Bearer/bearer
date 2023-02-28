@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/util/stringutil"
-	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -30,7 +29,10 @@ func (detector *stringDetector) DetectAt(
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string":
-		return []interface{}{generictypes.String{Value: stringutil.StripQuotes(node.Content())}}, nil
+		return []interface{}{generictypes.String{
+			Value:     stringutil.StripQuotes(node.Content()),
+			IsLiteral: true,
+		}}, nil
 	case "template_string":
 		return handleTemplateString(node, evaluator)
 	case "binary_expression":
@@ -44,6 +46,7 @@ func (detector *stringDetector) DetectAt(
 
 func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	value := ""
+	isLiteral := true
 
 	for i := 0; i < node.ChildCount(); i += 1 {
 		child := node.Child(i)
@@ -51,52 +54,67 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 			continue
 		}
 
-		childValue, err := getStringValue(child, evaluator)
+		childValue, childIsLiteral, err := getStringValue(child, evaluator)
 		if err != nil {
 			return nil, err
 		}
 
 		value += childValue
+
+		if !childIsLiteral {
+			isLiteral = false
+		}
 	}
 
-	return []interface{}{generictypes.String{Value: value}}, nil
+	return []interface{}{generictypes.String{
+		Value:     value,
+		IsLiteral: isLiteral,
+	}}, nil
 }
 
 func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	text := ""
+	isLiteral := true
 
 	err := node.EachContentPart(func(partText string) error {
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {
-		childValue, err := getStringValue(child.Child(1), evaluator)
+		childValue, childIsLiteral, err := getStringValue(child.Child(1), evaluator)
 		if err != nil {
 			return err
 		}
 
 		text += childValue
 
+		if !childIsLiteral {
+			isLiteral = false
+		}
+
 		return nil
 	})
 
-	log.Debug().Msgf("node is %s", node.Debug())
-
-	return []interface{}{generictypes.String{Value: text}}, err
+	return []interface{}{generictypes.String{
+		Value:     text,
+		IsLiteral: isLiteral,
+	}}, err
 }
 
-func getStringValue(node *tree.Node, evaluator types.Evaluator) (string, error) {
+func getStringValue(node *tree.Node, evaluator types.Evaluator) (string, bool, error) {
 	detections, err := evaluator.ForNode(node, "string", true)
 	if err != nil {
-		return "", err
+		return "", false, err
 	}
 
 	switch len(detections) {
 	case 0:
-		return "*", nil
+		return "*", false, nil
 	case 1:
-		return detections[0].Data.(generictypes.String).Value, nil
+		childString := detections[0].Data.(generictypes.String)
+
+		return childString.Value, childString.IsLiteral, nil
 	default:
-		return "", fmt.Errorf("expected single string detection but got %d", len(detections))
+		return "", false, fmt.Errorf("expected single string detection but got %d", len(detections))
 	}
 }
 
