@@ -5,7 +5,7 @@ patterns:
       - variable: QUERY
         detection: javascript_aws_lambda_query_injection_raw_user_input
   - pattern: | # AWS SDK V2 DynamoDB
-      $<DYNAMODB_INIT>.query($<QUERY>, $<...>)
+      $<DYNAMODB_INIT>.query($<QUERY>, $<_>)
     filters:
       - variable: QUERY
         detection: javascript_aws_lambda_query_injection_raw_user_input
@@ -14,6 +14,7 @@ patterns:
 auxiliary:
   - id: javascript_aws_lambda_query_injection_user_input
     patterns:
+      - event.$<_>
       - event[$<_>]
   - id: javascript_aws_lambda_query_injection_test
     patterns:
