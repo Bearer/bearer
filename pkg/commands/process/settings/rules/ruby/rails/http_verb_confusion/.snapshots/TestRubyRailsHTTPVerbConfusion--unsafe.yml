@@ -1,0 +1,40 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "650"
+        id: ruby_rails_http_verb_confusion
+        description: Potential for HTTP verb confusion detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_http_verb_confusion
+      line_number: 1
+      filename: unsafe.rb
+      parent_line_number: 1
+      parent_content: |-
+        if request.get?
+        else
+          change_state
+        end
+    - rule:
+        cwe_ids:
+            - "650"
+        id: ruby_rails_http_verb_confusion
+        description: Potential for HTTP verb confusion detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_http_verb_confusion
+      line_number: 6
+      filename: unsafe.rb
+      parent_line_number: 6
+      parent_content: change_state unless request.get?
+    - rule:
+        cwe_ids:
+            - "650"
+        id: ruby_rails_http_verb_confusion
+        description: Potential for HTTP verb confusion detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_http_verb_confusion
+      line_number: 8
+      filename: unsafe.rb
+      parent_line_number: 8
+      parent_content: |-
+        unless request.get?
+          change_state
+        end
+
+
