@@ -65,6 +65,10 @@ The following are a list of available inputs and outputs:
 
 ### Inputs
 
+#### `scanner`
+
+ **Optional** Specify the comma-separated scanner to use e.g. `sast,secrets`
+
 #### `config-file`
 
 **Optional** Bearer configuration file path
@@ -93,6 +97,6 @@ Exit code of the bearer binary, 0 indicates a pass
 
 ## Make the most of Bearer
 
-For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/). 
+For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/).
 
 Have a question or need help? Join our [Discord community]({{meta.links.discord}}) or [open an issue on GitHub]({{meta.links.issues}}).
