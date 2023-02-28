@@ -1,7 +1,7 @@
 report:
     format: ""
     output: ""
-    report: summary
+    report: security
     severity: critical,high,medium,low,warning
 rule:
     only-rule: []

@@ -277,9 +277,9 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	}
 
 	if config.Report.Format == flag.FormatEmpty {
-		if config.Report.Report == flag.ReportSummary {
+		if config.Report.Report == flag.ReportSecurity {
 			// for policy report, default report format is NOT JSON
-			reportPassed, err := reportoutput.ReportSummary(report, logger, config)
+			reportPassed, err := reportoutput.ReportSecurity(report, logger, config)
 			if err != nil {
 				return false, fmt.Errorf("error generating report %w", err)
 			}

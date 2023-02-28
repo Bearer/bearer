@@ -12,7 +12,7 @@ var (
 	FormatEmpty = ""
 
 	ReportPrivacy   = "privacy"
-	ReportSummary   = "summary"
+	ReportSecurity  = "security"
 	ReportDetectors = "detectors" // nodoc: internal report type
 	ReportDataFlow  = "dataflow"  // nodoc: internal report type
 	ReportStats     = "stats"     // nodoc: internal report type
@@ -21,7 +21,7 @@ var (
 )
 
 var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
-var ErrInvalidReport = errors.New("invalid report argument; supported values: summary, privacy")
+var ErrInvalidReport = errors.New("invalid report argument; supported values: security, privacy")
 var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 
 var (
@@ -35,8 +35,8 @@ var (
 	ReportFlag = Flag{
 		Name:       "report",
 		ConfigName: "report.report",
-		Value:      ReportSummary,
-		Usage:      "Specify the type of report (summary, privacy).",
+		Value:      ReportSecurity,
+		Usage:      "Specify the type of report (security, privacy).",
 	}
 	OutputFlag = Flag{
 		Name:       "output",
@@ -101,7 +101,7 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	report := getString(f.Report)
 	switch report {
 	case ReportPrivacy:
-	case ReportSummary:
+	case ReportSecurity:
 	// hidden flags for development use
 	case ReportDetectors:
 	case ReportDataFlow:

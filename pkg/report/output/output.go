@@ -10,7 +10,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
-	"github.com/bearer/bearer/pkg/report/output/summary"
+	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/google/uuid"
 
 	"github.com/bearer/bearer/pkg/report/output/detectors"
@@ -25,7 +25,7 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func ReportSummary(report types.Report, output *zerolog.Event, config settings.Config) (reportPassed bool, err error) {
+func ReportSecurity(report types.Report, output *zerolog.Event, config settings.Config) (reportPassed bool, err error) {
 	reportSupported := false
 	reportPassed = false
 	err = nil
@@ -57,12 +57,12 @@ func ReportSummary(report types.Report, output *zerolog.Event, config settings.C
 		return
 	}
 
-	summaryResults, err := summary.GetOutput(dataflow, config)
+	securityResults, err := security.GetOutput(dataflow, config)
 	if err != nil {
 		return
 	}
 
-	reportStr, reportPassed := summary.BuildReportString(config, summaryResults, lineOfCodeOutput, dataflow)
+	reportStr, reportPassed := security.BuildReportString(config, securityResults, lineOfCodeOutput, dataflow)
 
 	output.Msg(reportStr.String())
 
@@ -117,12 +117,12 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		return detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
 		return getDataflow(report, config, false)
-	case flag.ReportSummary:
+	case flag.ReportSecurity:
 		dataflow, err := getDataflow(report, config, true)
 		if err != nil {
 			return nil, err
 		}
-		return summary.GetOutput(dataflow, config)
+		return security.GetOutput(dataflow, config)
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:

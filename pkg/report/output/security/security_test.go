@@ -1,4 +1,4 @@
-package summary_test
+package security_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
-	"github.com/bearer/bearer/pkg/report/output/summary"
+	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/hhatto/gocloc"
@@ -15,7 +15,7 @@ import (
 
 func TestBuildReportString(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
-		Report: "summary",
+		Report: "security",
 		Severity: map[string]bool{
 			"critical": true,
 			"high":     true,
@@ -47,9 +47,9 @@ func TestBuildReportString(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	results, err := summary.GetOutput(&dataflow, config)
+	results, err := security.GetOutput(&dataflow, config)
 	if err != nil {
-		t.Fatalf("failed to generate summary output err:%s", err)
+		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
 	dummyGoclocLanguage := gocloc.Language{}
@@ -62,13 +62,13 @@ func TestBuildReportString(t *testing.T) {
 		MaxPathLength: 0,
 	}
 
-	stringBuilder, _ := summary.BuildReportString(config, results, &dummyGoclocResult, &dataflow)
+	stringBuilder, _ := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
 func TestGetOutput(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
-		Report: "summary",
+		Report: "security",
 		Severity: map[string]bool{
 			"critical": true,
 			"high":     true,
@@ -84,9 +84,9 @@ func TestGetOutput(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	res, err := summary.GetOutput(&dataflow, config)
+	res, err := security.GetOutput(&dataflow, config)
 	if err != nil {
-		t.Fatalf("failed to generate summary output err:%s", err)
+		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
 	cupaloy.SnapshotT(t, res)
@@ -94,7 +94,7 @@ func TestGetOutput(t *testing.T) {
 
 func TestTestGetOutputWithSeverity(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
-		Report: "summary",
+		Report: "security",
 		Severity: map[string]bool{
 			"critical": true,
 			"high":     true,
@@ -110,9 +110,9 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	res, err := summary.GetOutput(&dataflow, config)
+	res, err := security.GetOutput(&dataflow, config)
 	if err != nil {
-		t.Fatalf("failed to generate summary output err:%s", err)
+		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
 	cupaloy.SnapshotT(t, res)
