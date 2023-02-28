@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: javascript_http_insecure
+        description: Connection with an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_http_insecure
+      line_number: 7
+      filename: axios_with_config_insecure.js
+      parent_line_number: 7
+      parent_content: axios(config)
+
+

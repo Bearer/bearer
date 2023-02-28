@@ -15,6 +15,11 @@ patterns:
           - patch
           - delete
   - pattern: |
+      axios($<INSECURE_CONFIG>)
+    filters:
+      - variable: INSECURE_CONFIG
+        detection: javascript_http_insecure_axios_object
+  - pattern: |
       fetch($<INSECURE_URL>$<...>)
     filters:
       - variable: INSECURE_URL
@@ -29,6 +34,14 @@ patterns:
           - req
           - request
           - xhttp
+auxiliary:
+  - id: javascript_http_insecure_axios_object
+    patterns:
+      - pattern: |
+          { url: $<INSECURE_URL> }
+        filters:
+          - variable: INSECURE_URL
+            detection: insecure_url
 languages:
   - javascript
 trigger: presence
