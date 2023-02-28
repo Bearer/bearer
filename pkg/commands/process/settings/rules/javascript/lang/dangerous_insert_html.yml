@@ -1,0 +1,64 @@
+patterns:
+  - pattern: |
+      document.write($<DATA>$<...>)
+    filters:
+      - not:
+          variable: DATA
+          detection: javascript_dangerous_insert_html_sanitzed_input
+  - pattern: |
+      document.writeln($<DATA>$<...>)
+    filters:
+      - not:
+          variable: DATA
+          detection: javascript_dangerous_insert_html_sanitzed_input
+  - pattern: |
+      $<_>.$<METHOD>($<...>$<DATA>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - setHTML
+          - insertAdjacentHTML
+          - createElement
+          - replaceWith
+          - replaceChildren
+      - not:
+          variable: DATA
+          detection: javascript_dangerous_insert_html_sanitzed_input
+auxiliary:
+  - id: javascript_react_dangerously_set_inner_html_sanitzed_input
+    patterns:
+      - pattern: |
+          $<ANYTHING:string|template_string>
+        filters:
+          - not:
+              variable: ANYTHING
+              detection: javascript_dangerous_insert_html_unsanitzed_input
+      - sanitize($<_>)
+      - sanitizeHTML($<_>)
+  - id: javascript_dangerous_insert_html_unsanitzed_input
+    patterns:
+      - |
+        `$<...>${$<...>$<_>$<...>}$<...>`
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: medium
+metadata:
+  description: "React's dangerous insert html detected."
+  remediation_message: |
+    ## Description
+
+    TODO
+
+    ## Remediations
+
+    TODO
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 79
+  id: "javascript_dangerous_insert_html"

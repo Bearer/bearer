@@ -54,6 +54,11 @@ func TestJavascriptHardcodedSecret(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/hardcoded_secret")
 }
 
+func TestJavascriptDangeoursInsertHTML(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/dangerous_insert_html")
+}
+
 func TestJavascriptAwsLambdaSqlInjection(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"aws_lambda/sql_injection")
