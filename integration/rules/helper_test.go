@@ -45,7 +45,7 @@ func getRunner(t *testing.T) *Runner {
 		t.Fatalf("failed to generate default flags: %s", err)
 	}
 	configFlags.Format = flag.FormatYAML
-	configFlags.Report = flag.ReportSummary
+	configFlags.Report = flag.ReportSecurity
 	configFlags.Quiet = true
 
 	config, err := settings.FromOptions(configFlags)

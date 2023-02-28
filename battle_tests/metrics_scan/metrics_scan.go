@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/bearer/bearer/battle_tests/scan"
-	summary "github.com/bearer/bearer/pkg/report/output/summary"
+	security "github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/rs/zerolog/log"
 )
 
@@ -23,14 +23,14 @@ type ScanReport struct {
 }
 
 type MetricsReport struct {
-	URL                string                      `json:"url"`          // full url
-	RepoSizeKB         float64                     `json:"repo_size_kb"` // repository size in KB
-	Time               float64                     `json:"time"`         // time it took in Seconds
-	Language           string                      `json:"language"`
-	NumberOfDataTypes  float64                     `json:"nb_data_type"`
-	NumberOfLineOfCode float64                     `json:"nb_line_of_code"` // number of line of code
-	DataTypes          []DataType                  `json:"data_types"`      // datatypes detected
-	PolicyBreaches     map[string][]summary.Result `json:"policy_breaches"` // policy breaches, grouped by severity
+	URL                string                       `json:"url"`          // full url
+	RepoSizeKB         float64                      `json:"repo_size_kb"` // repository size in KB
+	Time               float64                      `json:"time"`         // time it took in Seconds
+	Language           string                       `json:"language"`
+	NumberOfDataTypes  float64                      `json:"nb_data_type"`
+	NumberOfLineOfCode float64                      `json:"nb_line_of_code"` // number of line of code
+	DataTypes          []DataType                   `json:"data_types"`      // datatypes detected
+	PolicyBreaches     map[string][]security.Result `json:"policy_breaches"` // policy breaches, grouped by severity
 }
 
 func FakeScanRepository(repositoryUrl string, reportingChan chan *MetricsReport) {
@@ -101,13 +101,13 @@ func ScanRepository(repositoryUrl string, language string, reportingChan chan *M
 	metrics.DataTypes = reportData.DataTypes
 
 	// Run summary
-	policiesOutput, _, err := scanner.Start("summary")
+	policiesOutput, _, err := scanner.Start("security")
 	if err != nil {
 		log.Debug().Msgf("summary output failed: %s", err)
 		return
 	}
 
-	var policiesReportData map[string][]summary.Result
+	var policiesReportData map[string][]security.Result
 	err = json.Unmarshal(policiesOutput, &policiesReportData)
 	if err != nil {
 		log.Debug().Msgf("summary marshalling failed: %s", err)

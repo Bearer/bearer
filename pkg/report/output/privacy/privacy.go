@@ -12,7 +12,7 @@ import (
 	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
-	"github.com/bearer/bearer/pkg/report/output/summary"
+	"github.com/bearer/bearer/pkg/report/output/security"
 )
 
 type RuleInput struct {
@@ -201,7 +201,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
 
 				// update subject rule failures
-				ruleSeverity := summary.FindHighestSeverity(ruleOutputFailure.CategoryGroups, rule.Severity)
+				ruleSeverity := security.FindHighestSeverity(ruleOutputFailure.CategoryGroups, rule.Severity)
 
 				key := buildKey(ruleOutputFailure.DataSubject, ruleOutputFailure.DataType)
 				subjectRuleFailure, ok := subjectRuleFailures[key]

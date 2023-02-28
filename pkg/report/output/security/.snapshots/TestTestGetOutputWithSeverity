@@ -1,7 +1,7 @@
-(map[string][]summary.Result) (len=1) {
-  (string) (len=8) "critical": ([]summary.Result) (len=1) {
-    (summary.Result) {
-      Rule: (*summary.RuleResultSummary)({
+(map[string][]security.Result) (len=1) {
+  (string) (len=8) "critical": ([]security.Result) (len=1) {
+    (security.Result) {
+      Rule: (*security.RuleResultSummary)({
         CWEIDs: ([]string) (len=2) {
           (string) (len=3) "209",
           (string) (len=3) "532"
