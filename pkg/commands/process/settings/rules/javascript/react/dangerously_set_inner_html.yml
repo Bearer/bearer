@@ -41,5 +41,5 @@ metadata:
     Coming soon.
     -->
   cwe_id:
-    - 201
+    - 79
   id: "javascript_react_dangerously_set_inner_html"
