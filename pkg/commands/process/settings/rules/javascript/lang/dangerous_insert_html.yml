@@ -43,7 +43,7 @@ trigger: presence
 severity:
   default: medium
 metadata:
-  description: "dangerous dynamic HTML insert detected."
+  description: "Dangerous dynamic HTML insert detected."
   remediation_message: |
     ## Description
 
