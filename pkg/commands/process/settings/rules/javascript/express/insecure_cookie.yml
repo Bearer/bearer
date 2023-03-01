@@ -11,6 +11,14 @@ patterns:
           $<!>httpOnly: true
         }
       }
+  - pattern: |
+      cookieSession({
+        $<!>secure: false
+      })
+  - pattern: |
+      cookieSession({
+        $<!>httpOnly: true
+      })
 languages:
   - javascript
 trigger: presence

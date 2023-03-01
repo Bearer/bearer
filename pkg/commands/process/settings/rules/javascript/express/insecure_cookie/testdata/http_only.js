@@ -1,4 +1,4 @@
-const session = require("cookie-session");
+const session = require("express-session");
 const express = require("express");
 const app = express();
 

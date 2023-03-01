@@ -4,41 +4,41 @@ patterns:
         cookie: $<!>$<HASH_CONTENT>
       }
     filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_default_cookie_config_name_attribute
+      - either:
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_name_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_expiry_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_path_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_domain_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_secure_attribute
   - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
+      cookieSession($<!>$<HASH_CONTENT>)
     filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_default_cookie_config_expiry_attribute
-  - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_default_cookie_config_path_attribute
-  - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_default_cookie_config_domain_attribute
-  - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_default_cookie_config_secure_attribute
+      - either:
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_name_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_expiry_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_path_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_domain_attribute
+        - not:
+            variable: HASH_CONTENT
+            detection: express_default_cookie_config_secure_attribute
 languages:
   - javascript
 auxiliary:
