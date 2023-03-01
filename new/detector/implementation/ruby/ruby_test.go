@@ -21,6 +21,11 @@ func TestRubyPropertyDetector(t *testing.T) {
 	runTest(t, "property_pair", "property", "testdata/property_pair.rb")
 }
 
+func TestRubyStringDetector(t *testing.T) {
+	runTest(t, "string_literal", "string", "testdata/string_literal.rb")
+	runTest(t, "string_non_literal", "string", "testdata/string_non_literal.rb")
+}
+
 func runTest(t *testing.T, name string, detectorType, fileName string) {
 	testhelper.RunTest(t, name, ruby.New, detectorType, fileName)
 }

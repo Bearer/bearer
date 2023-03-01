@@ -36,11 +36,11 @@ auxiliary:
   - id: javascript_dangerous_insert_html_sanitzed_input
     patterns:
       - pattern: |
-          $<ANYTHING:string|template_string>
+          $<STRING_LITERAL>
         filters:
-          - not:
-              variable: ANYTHING
-              detection: javascript_dangerous_insert_html_unsanitzed_input
+          - variable: STRING_LITERAL
+            detection: string_literal
+            contains: false
       - sanitize($<_>)
       - sanitizeHTML($<_>)
   - id: javascript_dangerous_insert_html_unsanitzed_input
