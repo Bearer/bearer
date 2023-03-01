@@ -16,6 +16,7 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/custom"
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
+	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
 	"github.com/bearer/bearer/new/detector/implementation/javascript/object"
 	"github.com/bearer/bearer/new/detector/implementation/javascript/property"
 	"github.com/bearer/bearer/new/language"
@@ -62,6 +63,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		{
 			constructor: insecureurl.New,
 			name:        "insecure url detector",
+		},
+		{
+			constructor: stringliteral.New,
+			name:        "string literal detector",
 		},
 	}
 
@@ -169,7 +174,7 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
 
 	var result []*detectortypes.Detection
-	for _, detectorType := range composition.customDetectorTypes {
+	for _, detectorType := range detectorTypes {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType, false)
 		if err != nil {
 			return nil, err

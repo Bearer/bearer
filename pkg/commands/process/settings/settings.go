@@ -143,6 +143,7 @@ type PatternFilter struct {
 	Either             []PatternFilter `mapstructure:"either" json:"either" yaml:"either"`
 	Variable           string          `mapstructure:"variable" json:"variable" yaml:"variable"`
 	Detection          string          `mapstructure:"detection" json:"detection" yaml:"detection"`
+	Contains           *bool           `mapstructure:"contains" json:"contains" yaml:"contains"`
 	Regex              *Regexp         `mapstructure:"regex" json:"regex" yaml:"regex"`
 	Values             []string        `mapstructure:"values" json:"values" yaml:"values"`
 	LessThan           *int            `mapstructure:"less_than" json:"less_than" yaml:"less_than"`

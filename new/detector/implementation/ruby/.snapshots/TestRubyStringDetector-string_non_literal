@@ -1,0 +1,31 @@
+- position: "1:1"
+  content: '"a" + x'
+  data:
+    value: a*
+    isliteral: false
+- position: "1:1"
+  content: '"a"'
+  data:
+    value: a
+    isliteral: true
+- position: "1:2"
+  content: a
+  data:
+    value: a
+    isliteral: true
+- position: "3:1"
+  content: '"#{x} b"'
+  data:
+    value: '* b'
+    isliteral: false
+- position: "3:2"
+  content: '#{x}'
+  data:
+    value: '*'
+    isliteral: false
+- position: "3:6"
+  content: ' b'
+  data:
+    value: ' b'
+    isliteral: true
+

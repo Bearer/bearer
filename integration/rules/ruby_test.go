@@ -31,6 +31,11 @@ func TestRubyLangFtpUsingUserInput(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/ftp_using_user_input")
 }
 
+func TestRubyLangHardcodedSecret(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"lang/hardcoded_secret")
+}
+
 func TestRubyLangHttpGetParams(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/http_get_params")
@@ -81,6 +86,11 @@ func TestRubyLangPathUsingUserInput(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/path_using_user_input")
 }
 
+func TestRubyLangRegexUsingUserInput(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"lang/regex_using_user_input")
+}
+
 func TestRubyLangSslVerification(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/ssl_verification")
@@ -94,6 +104,11 @@ func TestRubyLangWeakEncryption(t *testing.T) {
 func TestRubyLangWeakEncryptionWithData(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption_with_data")
+}
+
+func TestRubyRailsHTTPVerbConfusion(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"rails/http_verb_confusion")
 }
 
 func TestRubyRailsInsecureCommunication(t *testing.T) {

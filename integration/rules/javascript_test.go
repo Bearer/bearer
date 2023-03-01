@@ -19,6 +19,11 @@ func TestJavascriptWeakEncryption(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/weak_encryption")
 }
 
+func TestJavascriptWeakPasswordEncryption(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/weak_password_encryption")
+}
+
 func TestJavascriptJWT(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/jwt")
@@ -54,6 +59,11 @@ func TestJavascriptHardcodedSecret(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/hardcoded_secret")
 }
 
+func TestJavascriptDangeoursInsertHTML(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/dangerous_insert_html")
+}
+
 func TestJavascriptAwsLambdaSqlInjection(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"aws_lambda/sql_injection")
@@ -81,6 +91,10 @@ func TestJavascriptExpressExternalResource(t *testing.T) {
 
 func TestJavascriptExpressExternalFileUpload(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/external_file_upload")
+}
+
+func TestJavascriptExpressJwtNotRevoked(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/jwt_not_revoked")
 }
 
 func TestJavascriptExpressExposedDirListing(t *testing.T) {

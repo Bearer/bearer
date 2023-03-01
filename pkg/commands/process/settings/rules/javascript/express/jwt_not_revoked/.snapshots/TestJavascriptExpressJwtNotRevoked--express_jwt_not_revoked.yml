@@ -1,0 +1,15 @@
+warning:
+    - rule:
+        cwe_ids:
+            - "525"
+        id: javascript_express_jwt_not_revoked
+        description: Unrevoked JWT detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_jwt_not_revoked
+      line_number: 5
+      filename: express_jwt_not_revoked.js
+      category_groups:
+        - PII
+      parent_line_number: 5
+      parent_content: 'expressjwt({ secret: currentUser.email, algorithms: ["HS256"] })'
+
+

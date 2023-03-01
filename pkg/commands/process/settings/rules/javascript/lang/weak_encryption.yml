@@ -6,6 +6,29 @@ patterns:
         detection: create_hash
       - variable: DATA_TYPE
         detection: datatype
+  - pattern: |
+      CryptoJS.$<METHOD>($<DATA_TYPE>)
+    filters:
+      - variable: METHOD
+        values:
+          - SHA1
+          - MD5
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      CryptoJS.HmacSHA1($<DATA_TYPE>, $<_>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      CryptoJS.$<MODULE>.encrypt($<DATA_TYPE>, $<_>)
+    filters:
+      - variable: MODULE
+        values:
+          - RC4
+          - DES
+      - variable: DATA_TYPE
+        detection: datatype
 languages:
   - javascript
 auxiliary:
@@ -30,6 +53,7 @@ severity:
   PD: high
 skip_data_types:
   - "Unique Identifier"
+  - "Passwords" # see javascript_weak_password_encryption
 metadata:
   description: "Weak encryption library usage detected."
   remediation_message: |

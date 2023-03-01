@@ -3,6 +3,8 @@ low:
         cwe_ids:
             - "1004"
             - "614"
+            - "523"
+            - "522"
         id: express_insecure_cookie
         description: Missing secure options for cookie detected.
         documentation_url: https://docs.bearer.com/reference/rules/express_insecure_cookie
@@ -10,5 +12,36 @@ low:
       filename: insecure_cookie.js
       parent_line_number: 9
       parent_content: 'secure: false'
+    - rule:
+        cwe_ids:
+            - "1004"
+            - "614"
+            - "523"
+            - "522"
+        id: express_insecure_cookie
+        description: Missing secure options for cookie detected.
+        documentation_url: https://docs.bearer.com/reference/rules/express_insecure_cookie
+      line_number: 23
+      filename: insecure_cookie.js
+      parent_line_number: 23
+      parent_content: 'httpOnly: true'
+    - rule:
+        cwe_ids:
+            - "1004"
+            - "614"
+            - "523"
+            - "522"
+        id: express_insecure_cookie
+        description: Missing secure options for cookie detected.
+        documentation_url: https://docs.bearer.com/reference/rules/express_insecure_cookie
+      line_number: 33
+      filename: insecure_cookie.js
+      parent_line_number: 33
+      parent_content: |-
+        {
+        			domain: "example.com",
+        			secure: true,
+        			httpOnly: false
+        		}
 
 

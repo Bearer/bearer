@@ -10,8 +10,6 @@ Bearer can generate two types of reports about your codebase, all from the same 
 
 The security report allows you to quickly see security risks and vulnerabilities found in your codebase using a security [scanner type](/explanations/scanners), by default SAST. 
 
-The report breaks down violations by severity level: Critical, High, Medium, Low, Warning. These levels help you prioritize issues and fix the most important issues. This report is Bearer's default report type.
-
 For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the security report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
 
 ```txt

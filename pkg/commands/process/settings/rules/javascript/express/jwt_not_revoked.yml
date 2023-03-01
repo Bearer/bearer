@@ -1,0 +1,41 @@
+patterns:
+  - pattern: |
+      expressjwt($<HASH_CONTENT>)
+    filters:
+      - variable: HASH_CONTENT
+        detection: javascript_express_jwt_not_revoked_secret_datatype
+      - not:
+          variable: HASH_CONTENT
+          detection: javascript_express_jwt_not_revoked_is_revoked
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_express_jwt_not_revoked_secret_datatype
+    patterns:
+      - pattern: |
+          { $<...>secret: $<DATA_TYPE>$<...> }
+        filters:
+          - variable: DATA_TYPE
+            detection: datatype
+  - id: javascript_express_jwt_not_revoked_is_revoked
+    patterns:
+      - pattern: |
+          { $<...>isRevoked: $<_>$<...> }
+trigger: presence
+severity:
+  default: "warning"
+metadata:
+  description: "Unrevoked JWT detected."
+  remediation_message: |
+    ## Description
+    The best practice caching policy is to revoke JWTs especially when these contain senstitive information.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 525
+  id: "javascript_express_jwt_not_revoked"

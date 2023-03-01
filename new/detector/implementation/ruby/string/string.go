@@ -28,7 +28,10 @@ func (detector *stringDetector) DetectAt(
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string_content":
-		return []interface{}{generictypes.String{Value: node.Content()}}, nil
+		return []interface{}{generictypes.String{
+			Value:     node.Content(),
+			IsLiteral: true,
+		}}, nil
 	case "interpolation", "string":
 		return concatenateChildren(node, evaluator)
 	case "binary":
@@ -42,6 +45,7 @@ func (detector *stringDetector) DetectAt(
 
 func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	value := ""
+	isLiteral := true
 
 	for i := 0; i < node.ChildCount(); i += 1 {
 		child := node.Child(i)
@@ -57,14 +61,24 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 		switch len(detections) {
 		case 0:
 			value += "*"
+			isLiteral = false
 		case 1:
-			value += detections[0].Data.(generictypes.String).Value
+			childString := detections[0].Data.(generictypes.String)
+
+			value += childString.Value
+
+			if !childString.IsLiteral {
+				isLiteral = false
+			}
 		default:
 			return nil, fmt.Errorf("expected single string detection but got %d", len(detections))
 		}
 	}
 
-	return []interface{}{generictypes.String{Value: value}}, nil
+	return []interface{}{generictypes.String{
+		Value:     value,
+		IsLiteral: isLiteral,
+	}}, nil
 }
 
 func (detector *stringDetector) Close() {}
