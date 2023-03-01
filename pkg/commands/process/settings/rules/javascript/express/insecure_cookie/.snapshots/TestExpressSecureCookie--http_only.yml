@@ -3,6 +3,7 @@ low:
         cwe_ids:
             - "1004"
             - "614"
+            - "523"
         id: express_insecure_cookie
         description: Missing secure options for cookie detected.
         documentation_url: https://docs.bearer.com/reference/rules/express_insecure_cookie
