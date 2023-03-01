@@ -6,11 +6,11 @@ title: Report Types
 
 Bearer can generate two types of reports about your codebase, all from the same underlying scan.
 
-## Summary Report
+## Security Report
 
 [Rules](/reference/rules) are the core feature of Bearer. The security report allows you to quickly see security risks and vulnerabilities in your codebase. The report breaks down rule violations by severity level: Critical, High, Medium, Low, Warning. These levels help you prioritize issues and fix the most important issues. This report is Bearer's default report type.
 
-For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the summary report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
+For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the security report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
 
 ```txt
 $ bearer scan .
@@ -59,9 +59,9 @@ WARNING: 2
 
 ```
 
-The summary report is [currently available](/reference/supported-languages/) for Ruby and JavaScript projects, more languages to follow.
+The security report is [currently available](/reference/supported-languages/) for Ruby and JavaScript projects, more languages to follow.
 
-To run your first summary report, run `bearer scan .` on your project directory. By default, the summary report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
+To run your first security report, run `bearer scan .` on your project directory. By default, the security report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
 
 ## Privacy Report
 
