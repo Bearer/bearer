@@ -137,6 +137,11 @@ func TestExpressDefaultCookieConfig(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/default_cookie_config")
 }
 
+func TestExpressDefaultSessionConfig(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/default_session_config")
+}
+
 func TestExpressXXEVulnerability(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/xml_external_entity_vulnerability")

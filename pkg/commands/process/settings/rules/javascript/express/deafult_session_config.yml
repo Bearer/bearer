@@ -1,0 +1,33 @@
+patterns:
+  - pattern: |
+      session($<!>$<HASH_CONTENT>)
+    filters:
+      - either:
+        - not:
+            variable: HASH_CONTENT
+            values:
+              - |
+                { $<...>name: $<_>$<...> }
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  description: "Session cookie with default config detected."
+  remediation_message: |
+    ## Description
+    To make sure session cookies don't open your application up to exploits or unauthorized access, don't use default cookie values.
+
+    ## Remediations
+    - Instead of the default session name, use generic names.
+
+    ## Resources
+    - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)
+  cwe_id:
+    - 523
+    - 522
+  id: "express_default_session_config"
