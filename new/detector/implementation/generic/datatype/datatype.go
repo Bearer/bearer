@@ -53,6 +53,10 @@ func (detector *datatypeDetector) Name() string {
 	return "datatype"
 }
 
+func (detector *datatypeDetector) NestedDetections() bool {
+	return false
+}
+
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
