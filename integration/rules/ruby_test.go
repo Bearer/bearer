@@ -31,6 +31,11 @@ func TestRubyLangFtpUsingUserInput(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/ftp_using_user_input")
 }
 
+func TestRubyLangHardcodedSecret(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"lang/hardcoded_secret")
+}
+
 func TestRubyLangHttpGetParams(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/http_get_params")

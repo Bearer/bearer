@@ -8,5 +8,16 @@ low:
       filename: insecure_controller.rb
       parent_line_number: 2
       parent_content: my-secret-password
+medium:
+    - rule:
+        cwe_ids:
+            - "798"
+        id: ruby_lang_hardcoded_secret
+        description: Hard-coded secret detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret
+      line_number: 2
+      filename: insecure_controller.rb
+      parent_line_number: 2
+      parent_content: 'http_basic_authenticate_with name: "foo", password: "my-secret-password"'
 
 

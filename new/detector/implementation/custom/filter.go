@@ -35,7 +35,13 @@ func matchFilter(
 	}
 
 	if filter.Detection != "" {
-		return matchDetectionFilter(result, evaluator, node, filter.Detection)
+		return matchDetectionFilter(
+			result,
+			evaluator,
+			node,
+			filter.Detection,
+			filter.Contains == nil || *filter.Contains,
+		)
 	}
 
 	return matchContentFilter(filter, node.Content()), nil, nil
@@ -96,14 +102,25 @@ func matchDetectionFilter(
 	evaluator types.Evaluator,
 	node *tree.Node,
 	detectorType string,
+	contains bool,
 ) (*bool, []*types.Detection, error) {
+	var evaluateDetections func(*tree.Node, string, bool) ([]*types.Detection, error)
+	var evaluateHasDetection func(*tree.Node, string) (bool, error)
+	if contains {
+		evaluateDetections = evaluator.ForTree
+		evaluateHasDetection = evaluator.TreeHas
+	} else {
+		evaluateDetections = evaluator.ForNode
+		evaluateHasDetection = evaluator.NodeHas
+	}
+
 	if detectorType == "datatype" {
-		detections, err := evaluator.ForTree(node, "datatype", true)
+		detections, err := evaluateDetections(node, "datatype", true)
 
 		return boolPointer(len(detections) != 0), detections, err
 	}
 
-	hasDetection, err := evaluator.TreeHas(node, detectorType)
+	hasDetection, err := evaluateHasDetection(node, detectorType)
 	return boolPointer(hasDetection), nil, err
 }
 
