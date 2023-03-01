@@ -16,10 +16,6 @@ bearer init
 This creates a config file in your current directory. Below is an annotated version of that file.
 
 ```yml
-# Scanner settings
-scanner:
-    # Specify the type of scanner (sast, secrets). 
-    scanner: sast
 # Report settings
 report:
     # Specify report format (json, yaml)
@@ -40,6 +36,10 @@ rule:
     skip-rule: []
 # Scan settings
 scan:
+    # Specify the type of scanner (sast, secrets). 
+    scanner:
+        - sast
+        - secrets
     # Expand context of schema classification 
     # For example, "health" will include data types particular to health
     context: ""
