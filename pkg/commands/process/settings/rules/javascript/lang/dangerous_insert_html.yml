@@ -10,6 +10,16 @@ patterns:
           variable: DATA
           detection: javascript_dangerous_insert_html_sanitzed_input
   - pattern: |
+      $<_>.$<PROPERTY> = $<DATA>
+    filters:
+      - variable: PROPERTY
+        values:
+          - outerHTML
+          - innerHTML
+      - not:
+          variable: DATA
+          detection: javascript_dangerous_insert_html_sanitzed_input
+  - pattern: |
       $<_>.$<METHOD>($<...>$<DATA>$<...>)
     filters:
       - variable: METHOD
