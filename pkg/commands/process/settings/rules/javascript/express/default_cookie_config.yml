@@ -45,25 +45,25 @@ auxiliary:
   - id: express_default_cookie_config_name_attribute
     patterns:
     - |
-      { $<...>name: $<_>$<...> }
+      { name: $<_> }
   - id: express_default_cookie_config_expiry_attribute
     patterns:
     - |
-      { $<...>maxAge: $<_>$<...> }
+      { maxAge: $<_> }
     - |
-      { $<...>expires: $<_>$<...> }
+      { expires: $<_> }
   - id: express_default_cookie_config_path_attribute
     patterns:
     - |
-      { $<...>path: $<_>$<...> }
+      { path: $<_> }
   - id: express_default_cookie_config_domain_attribute
     patterns:
     - |
-      { $<...>domain: $<_>$<...> }
+      { domain: $<_> }
   - id: express_default_cookie_config_secure_attribute
     patterns:
     - |
-      { $<...>secure: $<_>$<...> }
+      { secure: $<_> }
 trigger: presence
 severity:
   default: "low"
