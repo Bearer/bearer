@@ -25,7 +25,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 	if err := loadRuleDefinitions(definitions, rulesFs); err != nil {
 		return nil, nil, fmt.Errorf("error loading default rules: %s", err)
 	}
-	// add default documentaiton urls for default rules
+	// add default documentation urls for default rules
 	for id, definition := range definitions {
 		if definition.Metadata.DocumentationUrl == "" {
 			definitions[id].Metadata.DocumentationUrl = "https://docs.bearer.com/reference/rules/" + id
@@ -47,7 +47,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 		}
 	}
 
-	if err := validateRuleOptionIDs(options, definitions); err != nil {
+	if err := validateRuleOptionIDs(options, definitions, builtInDefinitions); err != nil {
 		return nil, nil, err
 	}
 
@@ -97,17 +97,27 @@ func loadRuleDefinitions(definitions map[string]RuleDefinition, dir fs.FS) error
 	})
 }
 
-func validateRuleOptionIDs(options flag.RuleOptions, definitions map[string]RuleDefinition) error {
+func validateRuleOptionIDs(
+	options flag.RuleOptions,
+	definitions map[string]RuleDefinition,
+	builtInDefinitions map[string]RuleDefinition,
+) error {
 	var invalidRuleIDs []string
 
 	for id := range options.OnlyRule {
-		if _, exists := definitions[id]; !exists {
+		_, existsInDefinition := definitions[id]
+		_, existsInBuiltInDefinition := builtInDefinitions[id]
+
+		if !existsInBuiltInDefinition && !existsInDefinition {
 			invalidRuleIDs = append(invalidRuleIDs, id)
 		}
 	}
 
 	for id := range options.SkipRule {
-		if _, exists := definitions[id]; !exists {
+		_, existsInDefinition := definitions[id]
+		_, existsInBuiltInDefinition := builtInDefinitions[id]
+
+		if !existsInBuiltInDefinition && !existsInDefinition {
 			invalidRuleIDs = append(invalidRuleIDs, id)
 		}
 	}

@@ -75,16 +75,31 @@ type RuleResultSummary struct {
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]Result, error) {
-	// results grouped by severity (critical, high, ...)
 	summaryResults := make(map[string][]Result)
-
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
 
-	bar := output.GetProgressBar(len(config.Rules), config, "rules")
+	err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow)
+	if err != nil {
+		return nil, err
+	}
+	err = evaluateRules(summaryResults, config.Rules, config, dataflow)
+	if err != nil {
+		return nil, err
+	}
 
-	for _, rule := range maputil.ToSortedSlice(config.Rules) {
+	return summaryResults, nil
+}
+
+func evaluateRules(
+	summaryResults map[string][]Result,
+	rules map[string]*settings.Rule,
+	config settings.Config,
+	dataflow *dataflow.DataFlow,
+) error {
+	bar := output.GetProgressBar(len(rules), config, "rules")
+	for _, rule := range maputil.ToSortedSlice(rules) {
 		err := bar.Add(1)
 		if err != nil {
 			output.StdErrLogger().Msgf("Rule %s failed to write progress bar %e", rule.Id, err)
@@ -106,19 +121,19 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			// TODO: perf question: can we do this once?
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var results map[string][]Output
 			err = json.Unmarshal(jsonRes, &results)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			for _, output := range results["policy_failure"] {
@@ -147,11 +162,13 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 		}
 	}
 
-	return summaryResults, nil
+	return nil
 }
 
 func BuildReportString(config settings.Config, results map[string][]Result, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
 	rules := config.Rules
+	builtInRules := config.BuiltInRules
+
 	withoutColor := config.Report.Output != ""
 	severityForFailure := config.Report.Severity
 	reportStr := &strings.Builder{}
@@ -164,7 +181,7 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		color.NoColor = true
 	}
 
-	rulesAvailableCount := writeRuleListToString(reportStr, rules, lineOfCodeOutput.Languages, config)
+	rulesAvailableCount := writeRuleListToString(reportStr, rules, builtInRules, lineOfCodeOutput.Languages, config)
 
 	failures := map[string]map[string]bool{
 		types.LevelCritical: make(map[string]bool),
@@ -251,11 +268,32 @@ func writeStatsToString(
 func writeRuleListToString(
 	reportStr *strings.Builder,
 	rules map[string]*settings.Rule,
+	builtInRules map[string]*settings.Rule,
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 ) int {
 	// list rules that were run
 	reportStr.WriteString("\n\nRules: \n")
+
+	defaultRuleCount, customRuleCount := countRules(rules, languages, config, false)
+	builtInCount, _ := countRules(builtInRules, languages, config, true)
+	defaultRuleCount = defaultRuleCount + builtInCount
+
+	reportStr.WriteString(fmt.Sprintf(" - %d default rules applied ", defaultRuleCount))
+	reportStr.WriteString(color.HiBlackString("(https://docs.bearer.com/reference/rules)\n"))
+	if customRuleCount > 0 {
+		reportStr.WriteString(fmt.Sprintf(" - %d custom rules applied", customRuleCount))
+	}
+
+	return defaultRuleCount + customRuleCount
+}
+
+func countRules(
+	rules map[string]*settings.Rule,
+	languages map[string]*gocloc.Language,
+	config settings.Config,
+	builtIn bool,
+) (int, int) {
 	defaultRuleCount := 0
 	customRuleCount := 0
 
@@ -277,20 +315,14 @@ func writeRuleListToString(
 			continue
 		}
 
-		if strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") {
+		if strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") || builtIn {
 			defaultRuleCount++
 		} else {
 			customRuleCount++
 		}
 	}
 
-	reportStr.WriteString(fmt.Sprintf(" - %d default rules applied ", defaultRuleCount))
-	reportStr.WriteString(color.HiBlackString("(https://docs.bearer.com/reference/rules)\n"))
-	if customRuleCount > 0 {
-		reportStr.WriteString(fmt.Sprintf(" - %d custom rules applied", customRuleCount))
-	}
-
-	return defaultRuleCount + customRuleCount
+	return defaultRuleCount, customRuleCount
 }
 
 func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
