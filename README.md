@@ -33,9 +33,9 @@ Bearer provides built-in rules against a common set of security risks and vulner
 * Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
 * Usage of weak encryption libraries or misusage of encryption algorithms.
 * Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive information.
-* Hard-coded secrets and tokens
+* Hard-coded secrets and tokens.
 
-And many [more](https://docs.bearer.sh/reference/rules/).
+And many [more](https://docs.bearer.com/reference/rules/).
 
 Bearer is Open Source ([*see license*](#mortar_board-license)) and fully customizable, from creating your own rules to component detection (database, API) and data classification.
 
@@ -150,22 +150,24 @@ bearer scan bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output a summary report with details of any rule failures, as well as where in the codebase the infractions happened and why.
+Once the scan is complete, Bearer will output a security report with details of any rule failures, as well as where in the codebase the infractions happened and why.
+
+By default the `scan` command use the SAST scanner, other [scanner types](https://docs.bearer.com/explanations/scanners) are available.
 
 ### Analyze the report
 
-The summary report is an easily digestible view of the security issues detected by Bearer. A report is made up of:
+The security report is an easily digestible view of the security issues detected by Bearer. A report is made up of:
 
-- The list of [rules](https://docs.bearer.sh/reference/rules/) run against your code.
+- The list of [rules](https://docs.bearer.com/reference/rules/) run against your code.
 - Each detected failure, containing the file location and lines that triggered the rule failure.
-- A summary of the report with the stats for passing and failing rules.
+- A stat section with a summary of rules checks, failures and warnings.
 
 The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output:
 
 ```text
 ...
 CRITICAL: Only communicate using SFTP connections.
-https://docs.bearer.sh/reference/rules/ruby_lang_insecure_ftp
+https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
 
 File: bear-publishing/app/services/marketing_export.rb:34
 
@@ -188,9 +190,11 @@ LOW: 3
 WARNING: 6
 ```
 
-The summary report is just one report type available in Bearer. Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://docs.bearer.sh/reference/commands/#scan).
+The security report is just one [report type](https://docs.bearer.com/explanations/reports) available in Bearer.
 
-For additional guides and usage tips, [view the docs](https://docs.bearer.sh).
+Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://docs.bearer.com/reference/commands/#scan). 
+
+For additional guides and usage tips, [view the docs](https://docs.bearer.com/).
 
 ## :question: FAQs
 
@@ -198,7 +202,7 @@ For additional guides and usage tips, [view the docs](https://docs.bearer.sh).
 
 When you run Bearer on your codebase, it discovers and classifies data by identifying patterns in the source code. Specifically, it looks for data types and matches against them. Most importantly, it never views the actual values (it just can’t)—but only the code itself.
 
-Bearer assesses 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.sh/reference/datatypes/).
+Bearer assesses 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.com/reference/datatypes/).
 
 In a nutshell, our static code analysis is performed on two levels:
 Analyzing class names, methods, functions, variables, properties, and attributes. It then ties those together to detected data structures. It does variable reconciliation etc.
@@ -206,7 +210,7 @@ Analyzing data structure definitions files such as OpenAPI, SQL, GraphQL, and Pr
 
 Bearer then passes this over to the classification engine we built to support this very particular discovery process.
 
-If you want to learn more, here is the [longer explanation](https://docs.bearer.sh/explanations/discovery-and-classification/).
+If you want to learn more, here is the [longer explanation](https://docs.bearer.com/explanations/discovery-and-classification/).
 
 ### When and where to use Bearer?
 
@@ -246,7 +250,7 @@ By using the most modern static code analysis techniques and providing a native 
 
 Thanks for using Bearer. Still have questions?
 
-- Start with the [documentation](https://docs.bearer.sh).
+- Start with the [documentation](https://docs.bearer.com).
 - Have a question or need some help? Find the Bearer team on [Discord][discord].
 - Got a feature request or found a bug? [Open a new issue](https://github.com/Bearer/bearer/issues/new/choose).
 - Found a security issue? Check out our [Security Policy](https://github.com/Bearer/bearer/security/policy) for reporting details.

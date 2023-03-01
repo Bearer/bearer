@@ -16,14 +16,18 @@ bearer init
 This creates a config file in your current directory. Below is an annotated version of that file.
 
 ```yml
+# Scanner settings
+scanner:
+    # Specify the type of scanner (sast, secrets). 
+    scanner: sast
 # Report settings
 report:
     # Specify report format (json, yaml)
     format: ""
     # Specify the output path for the report.
     output: ""
-    # Specify the type of report (summary, privacy). 
-    report: summary
+    # Specify the type of report (security, privacy). 
+    report: security
     # Specify which severities are included in the report as a comma separated string
     severity: "critical,high,medium,low,warning"
 # Rule settings

@@ -5,7 +5,7 @@ layout: layouts/doc.njk
 
 # Quick Start
 
-Discover your application security risks and vulnerabilities in only a few minutes. In this guide you will install Bearer, run a scan on a local project, and view the results of a [summary report](/explanations/reports/#summary-report). Let's get started!
+Discover your application security risks and vulnerabilities in only a few minutes. In this guide you will install Bearer, run the [SAST scanner](/explanations/scanners) on a local project, and view the results of a [security report](/explanations/reports/#security-report). Let's get started!
 
 ## Installation
 
@@ -39,15 +39,17 @@ bearer scan bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output a summary report with details of any rules failures, as well as where in the codebase the infractions happened.
+Once the scan is complete, Bearer will output a security report with details of any rules failures, as well as where in the codebase the infractions happened.
+
+By default the `scan` command use the SAST scanner, other [scanner types](/explanations/scanners) are available.
 
 ## Analyze the report
 
-The summary report is an easily digestible view of the security problems detected by Bearer. A report is made up of:
+The security report is an easily digestible view of the security problems detected by Bearer. A report is made up of:
 
 - The list of [rules](/reference/rules/) run against your code.
 - Each detected failure, containing the file location and lines that triggered the rules failure.
-- A summary of the report with the stats for passing and failing rules.
+- A stat section with a summary of rules checks, failures and warnings.
 
 The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output containing a failure snippet and the final summary:
 
@@ -77,6 +79,8 @@ WARNING: 6
 
 ```
 
-The summary report is just one [report type](/explanations/reports) available in Bearer. Additional options for using and configuring the `scan` command can be found in the [scan documentation](/reference/commands/#scan). 
+The security report is just one [report type](/explanations/reports) available in Bearer.
+
+Additional options for using and configuring the `scan` command can be found in the [scan documentation](/reference/commands/#scan). 
 
 For additional guides and usage tips, [view the docs](/).
