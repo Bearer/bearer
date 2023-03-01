@@ -11,8 +11,71 @@ patterns:
           $<!>httpOnly: true
         }
       }
+  - pattern: |
+      {
+        cookie: $<!>$<HASH_CONTENT>
+      }
+    filters:
+      - not:
+          variable: HASH_CONTENT
+          detection: express_insecure_cookie_name_attribute
+  - pattern: |
+      {
+        cookie: $<!>$<HASH_CONTENT>
+      }
+    filters:
+      - not:
+          variable: HASH_CONTENT
+          detection: express_insecure_cookie_expiry_attribute
+  - pattern: |
+      {
+        cookie: $<!>$<HASH_CONTENT>
+      }
+    filters:
+      - not:
+          variable: HASH_CONTENT
+          detection: express_insecure_cookie_path_attribute
+  - pattern: |
+      {
+        cookie: $<!>$<HASH_CONTENT>
+      }
+    filters:
+      - not:
+          variable: HASH_CONTENT
+          detection: express_insecure_cookie_domain_attribute
+  - pattern: |
+      {
+        cookie: $<!>$<HASH_CONTENT>
+      }
+    filters:
+      - not:
+          variable: HASH_CONTENT
+          detection: express_insecure_cookie_secure_attribute
 languages:
   - javascript
+auxiliary:
+  - id: express_insecure_cookie_name_attribute
+    patterns:
+    - |
+      { $<...>name: $<_>$<...> }
+  - id: express_insecure_cookie_expiry_attribute
+    patterns:
+    - |
+      { $<...>maxAge: $<_>$<...> }
+    - |
+      { $<...>expires: $<_>$<...> }
+  - id: express_insecure_cookie_path_attribute
+    patterns:
+    - |
+      { $<...>path: $<_>$<...> }
+  - id: express_insecure_cookie_domain_attribute
+    patterns:
+    - |
+      { $<...>domain: $<_>$<...> }
+  - id: express_insecure_cookie_secure_attribute
+    patterns:
+    - |
+      { $<...>secure: $<_>$<...> }
 trigger: presence
 severity:
   default: "low"
@@ -38,4 +101,5 @@ metadata:
     - 1004
     - 614
     - 523
+    - 522
   id: "express_insecure_cookie"

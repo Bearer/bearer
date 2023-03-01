@@ -7,6 +7,10 @@ app.use(
 		cookie: {
 			domain: "example.com",
 			httpOnly: true,
+			secure: true,
+			name: "my-custom-cookie-name",
+			maxAge: 24 * 60 * 60 * 1000,
+			path: "/some-path"
 		},
 	})
 );
