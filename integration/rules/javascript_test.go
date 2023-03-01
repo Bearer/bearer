@@ -83,6 +83,10 @@ func TestJavascriptExpressExternalFileUpload(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/external_file_upload")
 }
 
+func TestJavascriptExpressJwtNotRevoked(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/jwt_not_revoked")
+}
+
 func TestJavascriptExpressExposedDirListing(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/exposed_dir_listing")
