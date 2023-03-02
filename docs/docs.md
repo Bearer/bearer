@@ -19,6 +19,8 @@ And [many more](/reference/rules).
 
 Bearer currenty supporting **JavaScript** and **Ruby** stacks, more will follow.
 
+![bearer security scanner gif](/assets/img/Bearer-security-OSS.gif)
+
 ## Getting started
 
 New to Bearer? Check out the [quickstart](/quickstart/) to scan your first project. 
@@ -58,3 +60,5 @@ We'd love to see the impact you can bring to Bearer. Our contributing documentat
 - [Set up Bearer locally to contribute code](/contributing/code/)
 - [Help improve and apply fixes to the documentation](/contributing/docs/)
 - [Add new recipes to Bearer's database](/contributing/recipes/)
+  
+![Sunglasses Bear](/assets/img/contribute-bearer.png)
