@@ -2,6 +2,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -12,6 +13,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -22,6 +24,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -29,5 +32,16 @@ low:
       filename: unsafe_rails.rb
       parent_line_number: 4
       parent_content: 'render_to_string({ file: "/templates/#{params[:oops]}" })'
+    - rule:
+        cwe_ids:
+            - "22"
+            - "73"
+        id: ruby_lang_path_using_user_input
+        description: Do not use user input to form file paths.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
+      line_number: 6
+      filename: unsafe_rails.rb
+      parent_line_number: 6
+      parent_content: 'send_file params[:oops], type: "text/html"'
 
 
