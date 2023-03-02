@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
+	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
@@ -80,11 +81,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
 
-	err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow)
+	err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
 	if err != nil {
 		return nil, err
 	}
-	err = evaluateRules(summaryResults, config.Rules, config, dataflow)
+	err = evaluateRules(summaryResults, config.Rules, config, dataflow, false)
 	if err != nil {
 		return nil, err
 	}
@@ -97,12 +98,19 @@ func evaluateRules(
 	rules map[string]*settings.Rule,
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
+	builtIn bool,
 ) error {
-	bar := output.GetProgressBar(len(rules), config, "rules")
+	var bar *progressbar.ProgressBar
+	if !builtIn {
+		bar = output.GetProgressBar(len(rules), config, "rules")
+	}
+
 	for _, rule := range maputil.ToSortedSlice(rules) {
-		err := bar.Add(1)
-		if err != nil {
-			output.StdErrLogger().Msgf("Rule %s failed to write progress bar %e", rule.Id, err)
+		if !builtIn {
+			err := bar.Add(1)
+			if err != nil {
+				output.StdErrLogger().Msgf("Rule %s failed to write progress bar %e", rule.Id, err)
+			}
 		}
 
 		if !rule.PolicyType() {
