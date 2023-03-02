@@ -12,70 +12,15 @@ patterns:
         }
       }
   - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_insecure_cookie_name_attribute
+      cookieSession({
+        $<!>secure: false
+      })
   - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_insecure_cookie_expiry_attribute
-  - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_insecure_cookie_path_attribute
-  - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_insecure_cookie_domain_attribute
-  - pattern: |
-      {
-        cookie: $<!>$<HASH_CONTENT>
-      }
-    filters:
-      - not:
-          variable: HASH_CONTENT
-          detection: express_insecure_cookie_secure_attribute
+      cookieSession({
+        $<!>httpOnly: true
+      })
 languages:
   - javascript
-auxiliary:
-  - id: express_insecure_cookie_name_attribute
-    patterns:
-    - |
-      { $<...>name: $<_>$<...> }
-  - id: express_insecure_cookie_expiry_attribute
-    patterns:
-    - |
-      { $<...>maxAge: $<_>$<...> }
-    - |
-      { $<...>expires: $<_>$<...> }
-  - id: express_insecure_cookie_path_attribute
-    patterns:
-    - |
-      { $<...>path: $<_>$<...> }
-  - id: express_insecure_cookie_domain_attribute
-    patterns:
-    - |
-      { $<...>domain: $<_>$<...> }
-  - id: express_insecure_cookie_secure_attribute
-    patterns:
-    - |
-      { $<...>secure: $<_>$<...> }
 trigger: presence
 severity:
   default: "low"
@@ -88,10 +33,9 @@ metadata:
   description: "Missing secure options for cookie detected."
   remediation_message: |
     ## Description
-    To make sure cookies don't open your application up to exploits or unauthorized access, don't use default cookie values and make sure to set security options appropriately.
+    To make sure cookies don't open your application up to exploits or unauthorized access, make sure to set security options appropriately.
 
     ## Remediations
-    - Instead of the default cookie name, use generic names.
     - Set cookie security values to use HTTP(S) instead of client-side javascript.
     - Set `secure` values to `true` to force cookies to only send over HTTPS.
 
@@ -100,6 +44,4 @@ metadata:
   cwe_id:
     - 1004
     - 614
-    - 523
-    - 522
   id: "express_insecure_cookie"
