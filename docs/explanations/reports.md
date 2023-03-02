@@ -8,7 +8,7 @@ Bearer can generate two types of reports about your codebase, all from the same 
 
 ## Security Report
 
-The security report allows you to quickly see security risks and vulnerabilities found in your codebase using a security [scanner type](/explanations/scanners), by default SAST. 
+The security report allows you to quickly see security risks and vulnerabilities found in your codebase using a security [scanner type](/explanations/scanners) (SAST by default). 
 
 For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the security report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
 
