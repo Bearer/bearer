@@ -265,7 +265,7 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 		}
 
 		if opts.ReportOptions.Report == "privacy" && !slice.Contains(opts.ScanOptions.Scanner, "sast") {
-			return Options{}, ErrInvalidScannerReportCombinaison
+			return Options{}, ErrInvalidScannerReportCombination
 		}
 	}
 
