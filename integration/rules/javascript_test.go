@@ -99,6 +99,10 @@ func TestJavascriptExpressExternalResource(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/external_resource")
 }
 
+func TestJavascriptExpressInsecureAllowOrigin(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_allow_origin")
+}
+
 func TestJavascriptExpressExternalFileUpload(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/external_file_upload")
 }

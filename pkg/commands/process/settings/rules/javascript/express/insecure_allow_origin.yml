@@ -1,0 +1,62 @@
+patterns:
+  - pattern: |
+      res.$<METHOD>($<ORIGIN>, $<USER_INPUT>)
+    filters:
+      - variable: METHOD
+        values:
+          - set
+          - header
+      - variable: ORIGIN
+        values:
+          - '"Access-Control-Allow-Origin"'
+          - '"access-control-allow-origin"'
+          - "'Access-Control-Allow-Origin'"
+          - "'access-control-allow-origin'"
+      - variable: USER_INPUT
+        detection: javascript_express_insecure_allow_origin_user_input
+  - pattern: |
+      res.writeHead($<_>, $<INSECURE_CORS_HASH>)
+    filters:
+      - variable: INSECURE_CORS_HASH
+        detection: javascript_express_insecure_allow_origin_insecure_cors_hash
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_express_insecure_allow_origin_user_input
+    patterns:
+      - req.params
+      - req.query
+      - req.body
+      - req.cookies
+      - req.headers
+  - id: javascript_express_insecure_allow_origin_insecure_cors_hash
+    patterns:
+      - pattern: |
+          { $<ORIGIN>: $<USER_INPUT> }
+        filters:
+          - variable: ORIGIN
+            values:
+              - '"Access-Control-Allow-Origin"'
+              - '"access-control-allow-origin"'
+              - "'Access-Control-Allow-Origin'"
+              - "'access-control-allow-origin'"
+          - variable: USER_INPUT
+            detection: javascript_express_insecure_allow_origin_user_input
+trigger: presence
+severity:
+  default: "medium"
+metadata:
+  description: "Insecure Access-Control-Allow-Origin detected."
+  remediation_message: |
+    ## Description
+    Do not use unverified user-defined input to define Access-Control-Allow-Origin.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 346
+  id: "javascript_express_insecure_allow_origin"
