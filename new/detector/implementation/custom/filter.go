@@ -16,6 +16,14 @@ func matchFilter(
 	evaluator types.Evaluator,
 	filter settings.PatternFilter,
 ) (*bool, []*types.Detection, error) {
+	if filter.None != nil {
+		match, _, err := matchFilter(result, evaluator, *filter.None)
+		if match == nil {
+			return boolPointer(true), nil, err
+		}
+		return nil, nil, err
+	}
+
 	if filter.Not != nil {
 		match, _, err := matchFilter(result, evaluator, *filter.Not)
 		if match == nil {

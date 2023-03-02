@@ -1,0 +1,53 @@
+patterns:
+  - pattern: |
+      $<EXPRESS>.use($<FUNCTION_CALL>)
+    filters:
+      - variable: EXPRESS
+        detection: javascript_express_helmet_express_init
+      - variable: FUNCTION_CALL
+        detection: javascript_express_helmet_configuration
+trigger_rule_on: javascript_express_helmet_express_init
+trigger_rule_on_absent: javascript_express_helmet
+auxiliary:
+  - id: javascript_express_helmet_express_init
+    patterns:
+      - express()
+  # FIXME: we don't support `const helmet = require("helmet")` yet!
+  # - id: javascript_express_helmet_init
+  #   patterns:
+  #     - helmet()
+  - id: javascript_express_helmet_configuration
+    patterns:
+      - helmet()
+      - helmet.$<_>()
+      # - helmet.crossOriginEmbedderPolicy()
+      # - helmet.crossOriginOpenerPolicy()
+      # - helmet.crossOriginResourcePolicy()
+      # - helmet.dnsPrefetchControl()
+      # - helmet.frameguard()
+      # - helmet.hsts()
+      # - helmet.ieNoOpen()
+      # - helmet.noSniff()
+      # - helmet.originAgentCluster()
+      # - helmet.permittedCrossDomainPolicies()
+      # - helmet.referrerPolicy()
+      # - helmet.xssFilter()
+      # - helmet.hidePoweredBy()
+languages:
+  - javascript
+trigger: missing
+severity:
+  default: "low"
+metadata:
+  description: "Helmet."
+  remediation_message: |
+    ## Description
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+  id: javascript_express_helmet
