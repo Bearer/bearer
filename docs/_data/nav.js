@@ -17,13 +17,17 @@ module.exports = [
     name: "Explanations",
     items: [
       {
-        name: "Discovery & Classification",
-        url: "/explanations/discovery-and-classification/",
+        name: "Scanner types",
+        url: "/explanations/scanners/",
       },
       {
         name: "Report types",
         url: "/explanations/reports/",
       },
+      {
+        name: "Sensitive data flow",
+        url: "/explanations/discovery-and-classification/",
+      }
     ],
   },
   {

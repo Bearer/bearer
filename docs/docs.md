@@ -13,7 +13,7 @@ We provides [built-in rules](/reference/rules) against a common set of security 
 - Usage of weak encryption libraries or misusage of encryption algorithms.
 - Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive information.
 - Non-filtered user input.
-- Hard-coded secrets and tokens
+- Hard-coded secrets and tokens.
 
 And [many more](/reference/rules).
 
@@ -23,7 +23,7 @@ Bearer currenty supporting **JavaScript** and **Ruby** stacks, more will follow.
 
 New to Bearer? Check out the [quickstart](/quickstart/) to scan your first project. 
 
-Ready to dive in? Bearer's [reports](/explanations/reports/) are your path to analyzing security risks and vulnerabilities in your application. Check the [command reference](/reference/commands/) to configure Bearer to your needs.
+Ready to dive in? Bearer's [scanners](/explanations/scanners/) and [reports](/explanations/reports/) are your path to analyzing security risks and vulnerabilities in your application. Check the [command reference](/reference/commands/) to configure Bearer to your needs.
 
 ## Guides
 
@@ -35,9 +35,9 @@ Guides help you make the most of Bearer so you can get up and running quickly.
 ## Explanations
 
 Explanations dive into the rational behind Bearer and explain some of its heavier concepts.
-
-- [How Bearer discovers and classifies data](/explanations/discovery-and-classification/)
+- [Bearer's scanner types](/explanations/scanners/)
 - [Bearer's report types](/explanations/reports/)
+- [How Bearer discovers and classifies data](/explanations/discovery-and-classification/)
 
 ## Reference
 

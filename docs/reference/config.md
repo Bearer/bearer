@@ -22,8 +22,8 @@ report:
     format: ""
     # Specify the output path for the report.
     output: ""
-    # Specify the type of report (summary, privacy). 
-    report: summary
+    # Specify the type of report (security, privacy). 
+    report: security
     # Specify which severities are included in the report as a comma separated string
     severity: "critical,high,medium,low,warning"
 # Rule settings
@@ -36,6 +36,10 @@ rule:
     skip-rule: []
 # Scan settings
 scan:
+    # Specify the type of scanner (sast, secrets). 
+    scanner:
+        - sast
+        - secrets
     # Expand context of schema classification 
     # For example, "health" will include data types particular to health
     context: ""

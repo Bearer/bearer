@@ -33,7 +33,7 @@ Bearer provides built-in rules against a common set of security risks and vulner
 * Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
 * Usage of weak encryption libraries or misusage of encryption algorithms.
 * Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive information.
-* Hard-coded secrets and tokens
+* Hard-coded secrets and tokens.
 
 And many [more](https://docs.bearer.com/reference/rules/).
 
@@ -150,15 +150,17 @@ bearer scan bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output a summary report with details of any rule failures, as well as where in the codebase the infractions happened and why.
+Once the scan is complete, Bearer will output a security report with details of any rule failures, as well as where in the codebase the infractions happened and why.
+
+By default the `scan` command use the SAST scanner, other [scanner types](https://docs.bearer.com/explanations/scanners) are available.
 
 ### Analyze the report
 
-The summary report is an easily digestible view of the security issues detected by Bearer. A report is made up of:
+The security report is an easily digestible view of the security issues detected by Bearer. A report is made up of:
 
 - The list of [rules](https://docs.bearer.com/reference/rules/) run against your code.
 - Each detected failure, containing the file location and lines that triggered the rule failure.
-- A summary of the report with the stats for passing and failing rules.
+- A stat section with a summary of rules checks, failures and warnings.
 
 The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output:
 
@@ -188,9 +190,12 @@ LOW: 3
 WARNING: 6
 ```
 
-The summary report is just one report type available in Bearer. Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://docs.bearer.com/reference/commands/#scan).
 
-For additional guides and usage tips, [view the docs](https://docs.bearer.com).
+The security report is just one [report type](https://docs.bearer.com/explanations/reports) available in Bearer.
+
+Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://docs.bearer.com/reference/commands/#scan). 
+
+For additional guides and usage tips, [view the docs](https://docs.bearer.com/).
 
 ## :question: FAQs
 

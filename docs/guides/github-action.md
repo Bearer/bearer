@@ -12,7 +12,7 @@ You can [view the action here](https://github.com/marketplace/actions/bearer-sec
 
 Actions live in the `.github/workflows/` directory within your repository. Start by creating a `bearer.yml` file in the workflows directory.
 
-We recommend the following config in `.github/workflows/bearer.yml` to run Bearer's summary report:
+We recommend the following config in `.github/workflows/bearer.yml` to run Bearer's security report:
 
 ```yml
 name: Bearer
@@ -44,7 +44,7 @@ jobs:
             if(!passed){ core.setFailed(report); }
 ```
 
-This will run the summary report, display the results to the action summary screen within GitHub, and flag the action as pass or fail based on whether Bearer's default rules pass or fail.
+This will run the [security report](/explanations/reports), display the results to the action summary screen within GitHub, and flag the action as pass or fail based on whether Bearer's default rules pass or fail.
 
 ## Further configuration
 
@@ -64,6 +64,10 @@ steps:
 The following are a list of available inputs and outputs:
 
 ### Inputs
+
+#### `scanner`
+
+ **Optional** Specify the comma-separated scanner to use e.g. `sast,secrets`
 
 #### `config-file`
 
@@ -93,6 +97,6 @@ Exit code of the bearer binary, 0 indicates a pass
 
 ## Make the most of Bearer
 
-For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/). 
+For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/).
 
 Have a question or need help? Join our [Discord community]({{meta.links.discord}}) or [open an issue on GitHub]({{meta.links.issues}}).

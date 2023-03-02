@@ -2,9 +2,9 @@
 title: How detection and classification works
 ---
 
-# Discovery and Classification
+# Sensitive data flow
 
-Discovery and classification are the core of how Bearer identifies sensitive data in your codebase.
+Data discovery and data classification are the core of how Bearer identifies sensitive data flows in your codebase.
 
 ## How does Bearer discover and classify data?
 

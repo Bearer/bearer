@@ -1,6 +1,7 @@
 package flag
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 	"time"
@@ -8,8 +9,11 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
+	"github.com/ssoroka/slice"
 	"golang.org/x/xerrors"
 )
+
+var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
 
 type Flag struct {
 	// Name is for CLI flag and environment variable.
@@ -258,6 +262,10 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 		opts.ScanOptions, err = f.ScanFlagGroup.ToOptions(args)
 		if err != nil {
 			return Options{}, fmt.Errorf("scan flag error: %w", err)
+		}
+
+		if opts.ReportOptions.Report == "privacy" && !slice.Contains(opts.ScanOptions.Scanner, "sast") {
+			return Options{}, ErrInvalidScannerReportCombination
 		}
 	}
 
