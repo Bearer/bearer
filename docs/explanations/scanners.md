@@ -40,7 +40,7 @@ You can see a full list of [built-in rules](/reference/rules) or create a [custo
 
 ## Secrets Scanner
 
-The Secrets scanner type detect hard-coded secrets in your code. It checks for common secret patterns such as keys, tokens, and passwords using the popular [Gitleaks](https://gitleaks.io/) library.
+The Secrets scanner type detects hard-coded secrets in your code. It checks for common secret patterns such as keys, tokens, and passwords using the popular [Gitleaks](https://gitleaks.io/) library.
 
 ```txt
 $ bearer scan . --scanner=secrets
