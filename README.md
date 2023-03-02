@@ -190,6 +190,7 @@ LOW: 3
 WARNING: 6
 ```
 
+
 The security report is just one [report type](https://docs.bearer.com/explanations/reports) available in Bearer.
 
 Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://docs.bearer.com/reference/commands/#scan). 

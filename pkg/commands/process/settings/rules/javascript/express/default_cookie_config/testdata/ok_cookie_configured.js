@@ -6,11 +6,11 @@ app.use(
 	session({
 		cookie: {
 			domain: "example.com",
-			httpOnly: true,
 			secure: true,
-			name: "my-custom-cookie-name",
+			httpOnly: false,
 			maxAge: 24 * 60 * 60 * 1000,
-			path: "/some-path"
+			path: "/some-path",
+      name: "my-custom-cookie-name"
 		},
 	})
 );
