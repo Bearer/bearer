@@ -91,6 +91,11 @@ func TestRubyLangRegexUsingUserInput(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/regex_using_user_input")
 }
 
+func TestRubyLangReflectionUsingUserInput(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"lang/reflection_using_user_input")
+}
+
 func TestRubyLangSslVerification(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"lang/ssl_verification")
