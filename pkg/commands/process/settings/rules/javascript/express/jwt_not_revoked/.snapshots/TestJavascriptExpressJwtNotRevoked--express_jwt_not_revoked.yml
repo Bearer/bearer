@@ -7,9 +7,7 @@ warning:
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_jwt_not_revoked
       line_number: 5
       filename: express_jwt_not_revoked.js
-      category_groups:
-        - PII
       parent_line_number: 5
-      parent_content: 'expressjwt({ secret: currentUser.email, algorithms: ["HS256"] })'
+      parent_content: 'expressjwt({ secret: config.secret, algorithms: ["HS256"] })'
 
 

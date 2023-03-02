@@ -79,6 +79,11 @@ func TestJavascriptAwsLambdaOsCommandInjection(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"aws_lambda/os_command_injection")
 }
 
+func TestJavascriptExpressHardCodedSecret(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/hardcoded_secret")
+}
+
 func TestJavascriptExpressOpenRedirect(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/open_redirect")
