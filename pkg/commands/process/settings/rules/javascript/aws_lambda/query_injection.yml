@@ -16,7 +16,7 @@ auxiliary:
     patterns:
       - event.$<_>
       - event[$<_>]
-  - id: javascript_aws_lambda_query_injection_test
+  - id: javascript_aws_lambda_query_injection_hash
     patterns:
       - |
         {$<...>}
@@ -31,7 +31,7 @@ auxiliary:
             detection: javascript_aws_lambda_query_injection_user_input
           - not:
               variable: USER_INPUT
-              detection: javascript_aws_lambda_query_injection_test
+              detection: javascript_aws_lambda_query_injection_hash
 languages:
   - javascript
 trigger: presence
