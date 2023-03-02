@@ -13,7 +13,7 @@ import (
 	"golang.org/x/xerrors"
 )
 
-var ErrInvalidScannerReportCombinaison = errors.New("invalid scanner argument; privacy report requires sast scanner")
+var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
 
 type Flag struct {
 	// Name is for CLI flag and environment variable.
