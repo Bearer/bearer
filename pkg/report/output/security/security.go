@@ -210,7 +210,7 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 	}
 
 	if reportPassed {
-		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.sh/guides/custom-rule\n")
+		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.com/guides/custom-rule\n")
 	}
 
 	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, results, rulesAvailableCount, failures, severityForFailure)
