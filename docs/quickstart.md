@@ -41,7 +41,7 @@ A progress bar will display the status of the scan.
 
 Once the scan is complete, Bearer will output a security report with details of any rules failures, as well as where in the codebase the infractions happened.
 
-By default the `scan` command use the SAST scanner, other [scanner types](/explanations/scanners) are available.
+By default the `scan` command uses the SAST scanner; other [scanner types](/explanations/scanners) are also available.
 
 ## Analyze the report
 
