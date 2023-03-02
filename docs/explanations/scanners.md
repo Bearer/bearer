@@ -9,7 +9,7 @@ Bearer comes with two types of security scanners, SAST (default) and Secrets.
 ## SAST Scanner
 
 The SAST scanner is the default one if you don't specify any.
-This scanner is using the [built-in rules](/reference/rules) to detect various security risks and vulnerabilities in your code.
+This scanner uses the [built-in rules](/reference/rules) to detect various security risks and vulnerabilities in your code.
 
 The output of the SAST scanner depends on the [report type](/reference/reports) used, by default the security report will be selected and display the list of rules violations in your terminal.
 
