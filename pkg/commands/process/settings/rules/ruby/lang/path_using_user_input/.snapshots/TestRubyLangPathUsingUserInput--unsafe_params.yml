@@ -2,6 +2,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -12,6 +13,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -22,6 +24,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -32,6 +35,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -42,6 +46,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -54,6 +59,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -64,6 +70,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -74,6 +81,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -84,6 +92,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -94,6 +103,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -104,6 +114,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -114,6 +125,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input
@@ -124,6 +136,7 @@ low:
     - rule:
         cwe_ids:
             - "22"
+            - "73"
         id: ruby_lang_path_using_user_input
         description: Do not use user input to form file paths.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input

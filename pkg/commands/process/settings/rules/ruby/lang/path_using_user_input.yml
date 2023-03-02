@@ -167,6 +167,11 @@ patterns:
           - template
       - variable: USER_INPUT
         detection: ruby_lang_path_using_user_input_user_input
+  - pattern: |
+      send_file($<USER_INPUT>$<...>)
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_lang_path_using_user_input_user_input
 auxiliary:
   - id: ruby_lang_path_using_user_input_user_input
     patterns:
@@ -235,4 +240,5 @@ metadata:
     -->
   cwe_id:
     - 22
+    - 73
   id: ruby_lang_path_using_user_input

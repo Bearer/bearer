@@ -46,3 +46,5 @@ end
 
 render(partial: x, locals: { z: params[:ok] })
 render_to_string({ file: "/templates/#{x}", locals: { z: params[:ok] } })
+
+send_file x, type: "text/html"
