@@ -35,11 +35,7 @@ auxiliary:
           { $<ORIGIN>: $<USER_INPUT> }
         filters:
           - variable: ORIGIN
-            values:
-              - '"Access-Control-Allow-Origin"'
-              - '"access-control-allow-origin"'
-              - "'Access-Control-Allow-Origin'"
-              - "'access-control-allow-origin'"
+            regex: (?i)['"]access-control-allow-origin["']
           - variable: USER_INPUT
             detection: javascript_express_insecure_allow_origin_user_input
 trigger: presence
