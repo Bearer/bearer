@@ -164,7 +164,7 @@ func GetPlaceholderOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.Da
 	outputStr = &strings.Builder{}
 	statistics, err := GetOutput(inputgocloc, inputDataflow, config)
 
-	supportURL := "https://docs.bearer.sh/explanations/reports/"
+	supportURL := "https://docs.bearer.com/explanations/reports/"
 	outputStr.WriteString(fmt.Sprintf(`
 The policy report is not yet available for your stack. Learn more at %s`,
 		supportURL))
