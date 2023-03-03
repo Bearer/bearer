@@ -5,9 +5,9 @@ low:
         id: javascript_express_insecure_template_rendering
         description: Insecure template rendering detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_template_rendering
-      line_number: 6
+      line_number: 11
       filename: insecure_lodash_template.js
-      parent_line_number: 6
+      parent_line_number: 11
       parent_content: _.template(req.params.body)
 
 

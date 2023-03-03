@@ -5,9 +5,9 @@ low:
         id: javascript_express_insecure_template_rendering
         description: Insecure template rendering detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_template_rendering
-      line_number: 8
+      line_number: 13
       filename: insecure_liquid_template.js
-      parent_line_number: 8
+      parent_line_number: 13
       parent_content: 'engine.render(req.params.text, { hello: "world" })'
 
 
