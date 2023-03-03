@@ -18,11 +18,11 @@ To better understand the structure of a rule file, let’s look at each key:
 
 - `patterns`: See the section below for the Pattern Syntax.
 - `languages`: An array of the languages the rule applies to. Available values are: `ruby`, `javascript`
-- `trigger`: Defines the scope of the rule related and the data types Bearer detects. There are three trigger types:
+- `trigger`: Defines when the rule should raise a failure. There are four trigger types:
   - `local`: Use this trigger when your rule directly relies on data type detections in the pattern. Some examples are sending data to a logger, or making an HTTP request that includes sensitive data.
   - `global`: Some rules don’t match code with a data type directly, but you want them to trigger if Bearer finds any sensitive data types in the project. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
-  - `presence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection. Examples include best practices such as configuration settings like forcing SSL communication.
-  - `absence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection. Examples include best practices such as missing configuration like forcing SSL communication.
+  - `presence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection but on the presence of a pattern. Examples include best practices such as configuration settings like forcing SSL communication.
+  - `absence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection but on the absence of a pattern (if we have been able to confirm the presence of an auxiliary pattern). Examples include best practices such as missing configuration like forcing SSL communication.
 - `severity`: This sets the severity level. Bearer groups rule failures by severity, and you can configure the summary report to only fail on specific severity thresholds. Severity is set for each data type group, each of which takes a severity level of `warning`, `low`, `medium`, `high`, or `critical`. A severity level of `warning` won’t cause CI to fail.
   - `default`: This is the catch-all type in cases where no data types are associated with the rule.
   - `PII`: [Personally Identifiable Information](/reference/datatypes/#pii)
