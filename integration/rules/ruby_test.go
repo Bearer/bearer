@@ -151,6 +151,11 @@ func TestRubyRailsPermissiveRegexValidation(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"rails/permissive_regex_validation")
 }
 
+func TestRubyRailsRenderUsingUserInput(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"rails/render_using_user_input")
+}
+
 func TestRubyRailsSession(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"rails/session")
