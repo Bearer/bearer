@@ -19,4 +19,4 @@ app.use(cors())
 // app.use(helmet.xssFilter());
 
 // app.use(helmet.hidePoweredBy());
-// app.disable("x-powered-by")
+app.disable("x-powered-by")

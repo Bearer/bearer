@@ -1,16 +1,23 @@
-import { express } from "express"
-import { session } from "express-session";
+import { session } from "express-session"
+var express = require("express")
+var helmet = require("helmet")
 
-app = express.app();
+var app = express()
+app.use(helmet())
+app.use(helmet.hidePoweredBy())
 
-app.use(session({
-  name: "my-custom-session-name",
-  secret: "my-hardcoded-secret"
-}))
+app = express.app()
+
+app.use(
+  session({
+    name: "my-custom-session-name",
+    secret: "my-hardcoded-secret",
+  })
+)
 
 var sessionConfig = {
   name: "my-custom-session-name",
-  secret: "my-hardcoded-secret"
+  secret: "my-hardcoded-secret",
 }
 
 app.use(session(sessionConfig))

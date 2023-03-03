@@ -5,9 +5,9 @@ warning:
         id: javascript_express_exposed_dir_listing
         description: Missing access restriction to directory listing detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_exposed_dir_listing
-      line_number: 5
+      line_number: 9
       filename: serve_index_in_app_use.js
-      parent_line_number: 5
-      parent_content: app.use('/public', serveIndex(__dirname + 'files'))
+      parent_line_number: 9
+      parent_content: app.use("/public", serveIndex(__dirname + "files"))
 
 

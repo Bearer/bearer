@@ -1,5 +1,9 @@
-const session = require("express-session");
-const express = require("express");
-const app = express();
+const session = require("express-session")
+const express = require("express")
+var helmet = require("helmet")
 
-app.use(session({}));
+var app = express()
+app.use(helmet())
+app.use(helmet.hidePoweredBy())
+
+app.use(session({}))

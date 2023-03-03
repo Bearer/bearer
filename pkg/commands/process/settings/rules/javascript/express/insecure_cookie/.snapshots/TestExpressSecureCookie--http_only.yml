@@ -6,9 +6,9 @@ low:
         id: express_insecure_cookie
         description: Missing secure options for cookie detected.
         documentation_url: https://docs.bearer.com/reference/rules/express_insecure_cookie
-      line_number: 9
+      line_number: 13
       filename: http_only.js
-      parent_line_number: 9
+      parent_line_number: 13
       parent_content: 'httpOnly: true'
 
 

@@ -5,9 +5,9 @@ low:
         id: javascript_express_cross_site_scripting
         description: Cross-site scripting (XSS) vulnerability detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
-      line_number: 5
+      line_number: 9
       filename: res_send_xss.js
-      parent_line_number: 5
+      parent_line_number: 9
       parent_content: res.send("<p>" + req.body.customer.name + "</p>")
     - rule:
         cwe_ids:
@@ -15,9 +15,9 @@ low:
         id: javascript_express_cross_site_scripting
         description: Cross-site scripting (XSS) vulnerability detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
-      line_number: 9
+      line_number: 13
       filename: res_send_xss.js
-      parent_line_number: 9
+      parent_line_number: 13
       parent_content: res.send("<p>" + req.body["user_id"] + "</p>")
 
 
