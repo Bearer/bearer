@@ -43,5 +43,4 @@ metadata:
     - [Vulnerability explained](https://research.securitum.com/mutation-xss-via-mathml-mutation-dompurify-2-0-17-bypass)
   cwe_id:
     - 79
-  associated_recipe: Sentry
   id: javascript_dom_purify
