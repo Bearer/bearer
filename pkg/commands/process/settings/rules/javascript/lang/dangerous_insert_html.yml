@@ -41,8 +41,8 @@ auxiliary:
           - variable: STRING_LITERAL
             detection: string_literal
             contains: false
-      - $<_>.sanitize($<...>$<_>$<...>)
-      - $<_>.sanitizeHTML($<...>$<_>$<...>)
+      - $<_>.sanitize()
+      - $<_>.sanitizeHTML()
   - id: javascript_dangerous_insert_html_unsanitzed_input
     patterns:
       - |

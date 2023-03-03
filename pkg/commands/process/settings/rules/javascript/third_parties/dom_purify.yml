@@ -24,7 +24,7 @@ metadata:
   description: "Unsecure use of DOMPurify detected."
   remediation_message: |
     ## Description
-    There are xss vulnerabilites when using DOMPurify's sanitize without proper configuration
+    There are XSS vulnerabilites when using DOMPurify's sanitize without proper configuration
 
     ## Remediations
 
