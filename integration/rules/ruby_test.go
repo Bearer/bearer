@@ -146,6 +146,11 @@ func TestRubyRailsPasswordLength(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"rails/password_length")
 }
 
+func TestRubyRailsPermissiveRegexValidation(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"rails/permissive_regex_validation")
+}
+
 func TestRubyRailsSession(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"rails/session")
