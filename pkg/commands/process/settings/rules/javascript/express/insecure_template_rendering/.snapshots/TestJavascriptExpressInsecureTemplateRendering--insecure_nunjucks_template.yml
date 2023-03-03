@@ -1,0 +1,23 @@
+low:
+    - rule:
+        cwe_ids:
+            - "1336"
+        id: javascript_express_insecure_template_rendering
+        description: Insecure template rendering detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_template_rendering
+      line_number: 6
+      filename: insecure_nunjucks_template.js
+      parent_line_number: 6
+      parent_content: nunjucks.render(req.params.body)
+    - rule:
+        cwe_ids:
+            - "1336"
+        id: javascript_express_insecure_template_rendering
+        description: Insecure template rendering detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_template_rendering
+      line_number: 7
+      filename: insecure_nunjucks_template.js
+      parent_line_number: 7
+      parent_content: nunjucks.renderString(req.params.body)
+
+

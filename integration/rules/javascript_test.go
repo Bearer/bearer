@@ -131,9 +131,19 @@ func TestJavascriptExpressPathTraversal(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/path_traversal")
 }
 
+func TestJavascriptExpressHttpsProtocolMissing(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/https_protocol_missing")
+}
+
 func TestJavascriptExpressServerSideRequestForgery(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/server_side_request_forgery")
+}
+
+func TestJavascriptExpressInsecureTemplateRendering(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_template_rendering")
 }
 
 func TestJavascriptExpressUiRedress(t *testing.T) {
