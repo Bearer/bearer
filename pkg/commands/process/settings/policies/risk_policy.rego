@@ -29,7 +29,7 @@ presence_failures contains detector if {
 }
 
 policy_failure contains item if {
-	input.rule.trigger == "missing"
+	input.rule.trigger == "absence"
 	some detector in input.dataflow.risks
 
 	detector.detector_id == input.rule.trigger_rule_on_presence_of
@@ -42,7 +42,7 @@ policy_failure contains item if {
 }
 
 policy_failure contains item if {
-	input.rule.trigger == "missing"
+	input.rule.trigger == "absence"
 	some detector in input.dataflow.risks
 
 	detector.detector_id == input.rule.trigger_rule_on_presence_of

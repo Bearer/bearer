@@ -17,7 +17,7 @@ auxiliary:
       - helmet.$<_>()
 languages:
   - javascript
-trigger: missing
+trigger: absence
 severity:
   default: "medium"
 metadata:
