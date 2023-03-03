@@ -290,3 +290,8 @@ func TestJavascriptReduceFingerprint(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/reduce_fingerprint")
 }
+
+func TestJavascriptTestRule(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/test_rule")
+}

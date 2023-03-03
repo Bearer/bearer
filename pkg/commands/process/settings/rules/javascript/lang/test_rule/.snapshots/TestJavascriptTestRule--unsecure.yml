@@ -1,0 +1,13 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "79"
+        id: javascript_test_rule
+        description: Dangerous dynamic HTML insert detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_test_rule
+      line_number: 2
+      filename: unsecure.js
+      parent_line_number: 2
+      parent_content: document.doSomething(req.params.user)
+
+

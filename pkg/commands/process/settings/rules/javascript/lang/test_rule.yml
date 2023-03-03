@@ -1,0 +1,33 @@
+patterns:
+  - pattern: |
+      document.doSomething($<...>$<DATA>$<...>)
+    filters:
+      - variable: DATA
+        detection: javascript_test_rule_params
+auxiliary:
+  - id: javascript_test_rule_params
+    patterns:
+      - req.params
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: medium
+metadata:
+  description: "Dangerous dynamic HTML insert detected."
+  remediation_message: |
+    ## Description
+
+    TODO
+
+    ## Remediations
+
+    TODO
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 79
+  id: "javascript_test_rule"

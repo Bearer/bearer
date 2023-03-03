@@ -16,9 +16,11 @@ type objectDetector struct {
 	// Gathering properties
 	objectPairQuery *tree.Query
 	// Naming
-	assignmentQuery          *tree.Query
-	variableDeclarationQuery *tree.Query
-	parentPairQuery          *tree.Query
+	assignmentQuery *tree.Query
+	parentPairQuery *tree.Query
+	// Variables
+	variableDeclarationQuery  *tree.Query
+	objectDeconstructionQuery *tree.Query
 	// class
 	classNameQuery   *tree.Query
 	constructorQuery *tree.Query
@@ -40,6 +42,14 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	variableDeclarationQuery, err := lang.CompileQuery(`(variable_declarator name: (identifier) @name value: (_) @value) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling assignment query: %s", err)
+	}
+
+	// const { user } = <object>
+	// let { user } = <object>
+	// var { user } = <object>
+	objectDeconstructionQuery, err := lang.CompileQuery(`(variable_declarator name:(object_pattern) value: (_) @value) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling object deconstruction query: %s", err)
 	}
 
 	// user = <object>
@@ -80,14 +90,15 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	return &objectDetector{
-		objectPairQuery:          objectPairQuery,
-		assignmentQuery:          assignmentQuery,
-		variableDeclarationQuery: variableDeclarationQuery,
-		parentPairQuery:          parentPairQuery,
-		classNameQuery:           classNameQuery,
-		constructorQuery:         constructorQuery,
-		memberExpressionQuery:    memberExpressionQuery,
-		subscriptExpressionQuery: subscriptExpressionQuery,
+		objectPairQuery:           objectPairQuery,
+		assignmentQuery:           assignmentQuery,
+		variableDeclarationQuery:  variableDeclarationQuery,
+		objectDeconstructionQuery: objectDeconstructionQuery,
+		parentPairQuery:           parentPairQuery,
+		classNameQuery:            classNameQuery,
+		constructorQuery:          constructorQuery,
+		memberExpressionQuery:     memberExpressionQuery,
+		subscriptExpressionQuery:  subscriptExpressionQuery,
 	}, nil
 }
 
@@ -114,6 +125,11 @@ func (detector *objectDetector) DetectAt(
 	}
 
 	detections, err = detector.getVariableDeclaration(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
+	detections, err = detector.getObjectDeconstruction(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -185,36 +201,6 @@ func (detector *objectDetector) getAssigment(
 				Name:       result["left"].Content(),
 				Properties: objectData.Properties,
 			})
-		}
-	}
-
-	return detections, nil
-}
-
-func (detector *objectDetector) getVariableDeclaration(
-	node *tree.Node,
-	evaluator types.Evaluator,
-) ([]interface{}, error) {
-	result, err := detector.variableDeclarationQuery.MatchOnceAt(node)
-	if result == nil || err != nil {
-		return nil, err
-	}
-
-	objects, err := evaluator.ForNode(result["value"], "object", true)
-	if err != nil {
-		return nil, err
-	}
-
-	var detections []interface{}
-	for _, object := range objects {
-		objectData := object.Data.(generictypes.Object)
-
-		if objectData.Name == "" {
-			detections = append(detections, generictypes.Object{
-				Name:       result["name"].Content(),
-				Properties: objectData.Properties,
-			},
-			)
 		}
 	}
 
@@ -296,6 +282,7 @@ func (detector *objectDetector) Close() {
 	detector.objectPairQuery.Close()
 	detector.assignmentQuery.Close()
 	detector.variableDeclarationQuery.Close()
+	detector.objectDeconstructionQuery.Close()
 	detector.parentPairQuery.Close()
 	detector.classNameQuery.Close()
 	detector.memberExpressionQuery.Close()
