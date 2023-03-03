@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids:
+            - "79"
+        id: javascript_dom_purify
+        description: Unsecure use of DOMPurify detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_dom_purify
+      line_number: 2
+      filename: unsecure.js
+      parent_line_number: 2
+      parent_content: DOMPurify.sanitize(dirty, config)
+
+

@@ -266,6 +266,11 @@ func TestJavascripPassportHardcodedSecret(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/passport_hardcoded_secret")
 }
 
+func TestJavascriptDomPurify(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/dom_purify")
+}
+
 func TestJavascriptHelmetMissing(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/helmet_missing")
