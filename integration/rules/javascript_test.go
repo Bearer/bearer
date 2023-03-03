@@ -255,3 +255,8 @@ func TestJavascriptHelmetMissing(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/helmet_missing")
 }
+
+func TestJavascriptReduceFingerprint(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/reduce_fingerprint")
+}

@@ -1,0 +1,23 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "693"
+        id: javascript_express_helmet_missing
+        description: Security misconfiguration detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_helmet_missing
+      line_number: 4
+      filename: unsecure.js
+      parent_line_number: 4
+      parent_content: express()
+    - rule:
+        cwe_ids:
+            - "693"
+        id: javascript_express_reduce_fingerprint
+        description: Security misconfiguration detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_reduce_fingerprint
+      line_number: 4
+      filename: unsecure.js
+      parent_line_number: 4
+      parent_content: express()
+
+
