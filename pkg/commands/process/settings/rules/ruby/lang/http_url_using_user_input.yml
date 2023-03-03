@@ -307,8 +307,7 @@ auxiliary:
         def $<_>($<!>event:, context:)
         end
 trigger: presence
-severity:
-  default: high
+severity: high
 metadata:
   description: "HTTP communication with user-controlled destination detected."
   remediation_message: |

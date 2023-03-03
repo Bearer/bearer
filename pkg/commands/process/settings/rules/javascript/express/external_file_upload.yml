@@ -32,8 +32,7 @@ auxiliary:
               variable: OPTIONS
               detection: javascript_express_external_file_upload_request_obj
 trigger: presence
-severity:
-  default: "warning"
+severity: low
 metadata:
   description: "External control of filename or path detected."
   remediation_message: |

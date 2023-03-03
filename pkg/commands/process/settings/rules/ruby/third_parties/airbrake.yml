@@ -50,11 +50,7 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: low
 skip_data_types:
   - "Unique Identifier"
 metadata:
