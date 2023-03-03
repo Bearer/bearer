@@ -132,6 +132,7 @@ type Rule struct {
 	Patterns                []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
 	DocumentationUrl        string            `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
 	TriggerRuleOnPresenceOf string            `mapstructure:"trigger_rule_on_presence_of" json:"trigger_rule_on_presence_of" yaml:"trigger_rule_on_presence_of"`
+	IsAuxilary              bool              `mapstructure:"is_auxilary" json:"is_auxilary" yaml:"is_auxilary"`
 
 	// FIXME: remove after refactor of sql
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`

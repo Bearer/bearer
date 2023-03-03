@@ -207,6 +207,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 				ParamParenting: auxiliaryDefinition.ParamParenting,
 				Patterns:       auxiliaryDefinition.Patterns,
 				Stored:         auxiliaryDefinition.Stored,
+				IsAuxilary:     true,
 			}
 		}
 	}
