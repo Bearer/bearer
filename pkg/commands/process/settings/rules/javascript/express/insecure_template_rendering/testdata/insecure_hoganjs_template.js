@@ -1,5 +1,10 @@
 const express = require("express");
-const app = express();
+var helmet = require("helmet")
+
+var app = express()
+app.use(helmet())
+app.use(helmet.hidePoweredBy())
+
 
 const Hogan = require("hogan.js");
 
