@@ -7,8 +7,7 @@ patterns:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: critical
+severity: low
 metadata:
   description: "Weak jwt encryption deceted"
   remediation_message: |

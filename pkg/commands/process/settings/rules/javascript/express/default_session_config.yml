@@ -13,11 +13,7 @@ auxiliary:
     - |
       { name: $<_> }
 trigger: presence
-severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+severity: medium
 metadata:
   description: "Session cookie with default config detected."
   remediation_message: |

@@ -30,8 +30,7 @@ auxiliary:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
+severity: low
 metadata:
   description: "Regular expression built from user input detected."
   remediation_message: |

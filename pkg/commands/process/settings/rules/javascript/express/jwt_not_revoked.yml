@@ -22,8 +22,7 @@ auxiliary:
       - pattern: |
           { $<...>isRevoked: $<_>$<...> }
 trigger: presence
-severity:
-  default: "warning"
+severity: warning
 metadata:
   description: "Unrevoked JWT detected."
   remediation_message: |

@@ -18,11 +18,7 @@ patterns:
 languages:
   - javascript
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: low
 metadata:
   description: "Sensitive data sent to Rollbar detected."
   remediation_message: |

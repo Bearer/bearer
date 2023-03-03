@@ -34,11 +34,7 @@ auxiliary:
       - |
         $<_>.in_span() { |$<!>$<_:identifier>| }
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: low
 skip_data_types:
   - "Unique Identifier"
 metadata:

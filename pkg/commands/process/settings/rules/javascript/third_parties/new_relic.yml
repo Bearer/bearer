@@ -47,11 +47,7 @@ auxiliary:
               - newRelic
               - client
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: low
 metadata:
   description: "Sensitive data sent to New Relic detected."
   remediation_message: |

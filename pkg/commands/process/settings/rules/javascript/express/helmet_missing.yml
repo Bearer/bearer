@@ -18,8 +18,7 @@ auxiliary:
 languages:
   - javascript
 trigger: absence
-severity:
-  default: "medium"
+severity: low
 metadata:
   description: "Security misconfiguration detected."
   remediation_message: |

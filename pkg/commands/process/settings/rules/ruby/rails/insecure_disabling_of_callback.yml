@@ -18,8 +18,7 @@ patterns:
           - except
           - unless
 trigger: presence
-severity:
-  default: low
+severity: low
 metadata:
   description: "Insecure disabling of callback detected."
   remediation_message: |

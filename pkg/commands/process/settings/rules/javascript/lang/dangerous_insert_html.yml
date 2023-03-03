@@ -50,8 +50,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: medium
+severity: high
 metadata:
   description: "Dangerous dynamic HTML insert detected."
   remediation_message: |

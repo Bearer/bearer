@@ -34,11 +34,7 @@ auxiliary:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: high
 metadata:
   description: "User input detected in an unsafe deserialization method."
   remediation_message: |

@@ -13,8 +13,7 @@ auxiliary:
       - request
       - cookies
 trigger: presence
-severity:
-  default: low
+severity: medium
 metadata:
   description: "Open redirect detected"
   remediation_message: |

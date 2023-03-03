@@ -35,8 +35,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: low
+severity: high
 metadata:
   description: "Raw user input in data store query detected."
   remediation_message: |

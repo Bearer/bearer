@@ -38,11 +38,7 @@ auxiliary:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: high
 metadata:
   description: "Potential command injection with user input detected."
   remediation_message: |
@@ -58,4 +54,5 @@ metadata:
     -->
   cwe_id:
     - 94
+    - 95
   id: ruby_lang_eval_using_user_input

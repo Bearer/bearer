@@ -13,11 +13,7 @@ patterns:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
-  PHI: medium
-  PII: critical
-  PD: high
+severity: warning
 metadata:
   description: "Communication with an unsecure FTP server detected."
   remediation_message: |

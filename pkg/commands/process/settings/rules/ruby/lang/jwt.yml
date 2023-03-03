@@ -7,11 +7,7 @@ patterns:
 languages:
   - ruby
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: low
 metadata:
   description: "Sensitive data in a JWT detected."
   remediation_message: |

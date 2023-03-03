@@ -42,8 +42,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: "medium"
+severity: high
 metadata:
   description: "Risk of server-side request forgery detected."
   remediation_message: |

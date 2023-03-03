@@ -41,8 +41,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: "warning"
+severity: high
 metadata:
   description: "Deserialization of untrusted data detected."
   remediation_message: |
