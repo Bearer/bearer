@@ -9,6 +9,11 @@ func TestJavascriptLangLogger(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/logger")
 }
 
+func TestJavascriptOpenRedirect(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/open_redirect")
+}
+
 func TestJavascriptLangSession(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"lang/session")
