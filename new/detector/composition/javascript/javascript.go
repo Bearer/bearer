@@ -105,11 +105,21 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	detectors = append(detectors, detector)
 	composition.closers = append(composition.closers, detector.Close)
 
+	presenceRules := map[string]bool{}
+	for _, rule := range jsRules {
+		if rule.TriggerRuleOnPresenceOf != "" {
+			presenceRules[rule.TriggerRuleOnPresenceOf] = true
+		}
+	}
+
 	for ruleName, rule := range jsRules {
 		patterns := rule.Patterns
 		localRuleName := ruleName
 
-		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		if !rule.IsAuxilary || presenceRules[ruleName] {
+			composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		}
+
 		go func() {
 			customDetector, err := custom.New(
 				lang,
