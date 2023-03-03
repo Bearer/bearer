@@ -1,0 +1,30 @@
+patterns:
+  - pattern: |
+      https.createServer()
+    filters:
+trigger_rule_on_presence_of: javascript_express_https_protocol_missing_http_server
+auxiliary:
+  - id: javascript_express_https_protocol_missing_http_server
+    patterns:
+      - $<_>.createServer()
+languages:
+  - javascript
+trigger: absence
+severity:
+  default: "medium"
+metadata:
+  description: "Missing https protocol detected."
+  remediation_message: |
+    ## Description
+
+    Prefer https to http when using createServer()
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 693
+  id: javascript_express_https_protocol_missing
