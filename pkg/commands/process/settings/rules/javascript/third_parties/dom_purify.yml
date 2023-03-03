@@ -1,0 +1,47 @@
+patterns:
+  - pattern: |
+      DOMPurify.sanitize($<_>, $<CONFIG>)
+    filters:
+      - not:
+          variable: CONFIG
+          detection: javascript_dom_purify_safe_config
+auxiliary:
+  - id: javascript_dom_purify_safe_config
+    patterns:
+      - pattern: |
+          { RETURN_DOM_FRAGMENT: true }
+      - pattern: |
+          { RETURN_DOM_IMPORT: true }
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+metadata:
+  description: "Unsecure use of DOMPurify detected."
+  remediation_message: |
+    ## Description
+    There are xss voulnerabilites when using DOMPurify's sanitize without proper configuration
+
+    ## Remediations
+
+    Specify a secure configuration option:
+    ```
+      DOMPurify.sanitize(htmlToSanitize, { RETURN_DOM_IMPORT:true })
+    ```
+
+    or: 
+
+    ```
+      DOMPurify.sanitize(htmlToSanitize, { RETURN_DOM_FRAGMENT: true })
+    ```
+
+    ## Resources
+    - [Voulnerability explained](https://research.securitum.com/mutation-xss-via-mathml-mutation-dompurify-2-0-17-bypass)
+  cwe_id:
+    - 79
+  associated_recipe: Sentry
+  id: javascript_dom_purify
