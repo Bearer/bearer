@@ -1,0 +1,46 @@
+patterns:
+  - pattern: |
+      vm.$<METHOD>($<...>$<RAW_INPUT>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - createContext
+          - runInContext
+          - runInNewContext
+          - runInThisContext
+          - compileFunction
+      - variable: RAW_INPUT
+        detection: javascript_aws_lambda_code_injection_user_input
+  - pattern: |
+      new vm.$<METHOD>($<...>$<RAW_INPUT>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - Script
+      - variable: RAW_INPUT
+        detection: javascript_aws_lambda_code_injection_user_input
+auxiliary:
+  - id: javascript_aws_lambda_code_injection_user_input
+    patterns:
+      - event.$<_>
+      - event[$<_>]
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: low
+metadata:
+  description: "Code injection detected."
+  remediation_message: |
+    ## Description
+    Running code that contains unsanitized data, such as user input or request data, makes your application vulnerable to injection attacks.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 94
+  id: "javascript_aws_lambda_code_injection"
