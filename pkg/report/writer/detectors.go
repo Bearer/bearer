@@ -239,6 +239,6 @@ func (report *Detectors) Add(data interface{}) {
 
 	err := jsonlines.Encode(report.File, &detectionsToAdd)
 	if err != nil {
-		log.Printf("failed to encode data line %e", err)
+		log.Printf("failed to encode data line %s", err)
 	}
 }

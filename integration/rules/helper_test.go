@@ -73,7 +73,7 @@ func (runner *Runner) runTest(t *testing.T, projectPath string) {
 
 	files, err := filelist.Discover(testDataPath, runner.config)
 	if err != nil {
-		t.Fatalf("failed to discover files: %e", err)
+		t.Fatalf("failed to discover files: %s", err)
 	}
 
 	if len(files) == 0 {

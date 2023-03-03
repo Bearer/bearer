@@ -476,7 +476,7 @@ func (node *Node) QueryMustPass(query *sitter.Query) (captures []Captures) {
 	}
 	err := node.Query(query, onMatch)
 	if err != nil {
-		log.Fatal().Msgf("invalid query %e", err)
+		log.Fatal().Msgf("invalid query %s", err)
 	}
 	return returningCaptures
 }

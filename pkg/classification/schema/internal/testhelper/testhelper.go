@@ -69,14 +69,14 @@ func ExtractExpectedOutput(
 
 	val, err := os.ReadFile("././fixtures/" + lang + ".json")
 	if err != nil {
-		t.Errorf("error opening file %e", err)
+		t.Errorf("error opening file %s", err)
 	}
 
 	var input []Input
 	rawBytes := []byte(val)
 	err = json.Unmarshal(rawBytes, &input)
 	if err != nil {
-		t.Errorf("error unmarshalling JSON %e", err)
+		t.Errorf("error unmarshalling JSON %s", err)
 	}
 
 	for _, inputItem := range input {

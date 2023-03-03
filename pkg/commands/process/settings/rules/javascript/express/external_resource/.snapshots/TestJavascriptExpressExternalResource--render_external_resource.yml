@@ -5,13 +5,9 @@ low:
         id: javascript_express_external_resource
         description: Rendering of resources resolved from external name or reference detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_resource
-      line_number: 5
+      line_number: 9
       filename: render_external_resource.js
-      parent_line_number: 5
-      parent_content: |-
-        res.render(
-            req.query.path + "/results",
-            { page: 1 }
-          )
+      parent_line_number: 9
+      parent_content: 'res.render(req.query.path + "/results", { page: 1 })'
 
 

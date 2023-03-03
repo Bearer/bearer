@@ -6,17 +6,17 @@ low:
         id: express_default_cookie_config
         description: Cookie with default config detected.
         documentation_url: https://docs.bearer.com/reference/rules/express_default_cookie_config
-      line_number: 7
+      line_number: 11
       filename: default_express_session_cookie_config.js
-      parent_line_number: 7
+      parent_line_number: 11
       parent_content: |-
         {
-        			domain: "example.com",
-        			secure: true,
-        			httpOnly: false,
-        			maxAge: 24 * 60 * 60 * 1000,
-        			path: "/some-path"
-        		}
+              domain: "example.com",
+              secure: true,
+              httpOnly: false,
+              maxAge: 24 * 60 * 60 * 1000,
+              path: "/some-path",
+            }
     - rule:
         cwe_ids:
             - "523"
@@ -24,16 +24,16 @@ low:
         id: express_default_cookie_config
         description: Cookie with default config detected.
         documentation_url: https://docs.bearer.com/reference/rules/express_default_cookie_config
-      line_number: 19
+      line_number: 23
       filename: default_express_session_cookie_config.js
-      parent_line_number: 19
+      parent_line_number: 23
       parent_content: |-
         {
-        			domain: "example.com",
-        			secure: true,
-        			httpOnly: false,
-        			name: "my-custom-cookie-name"
-        		}
+              domain: "example.com",
+              secure: true,
+              httpOnly: false,
+              name: "my-custom-cookie-name",
+            }
     - rule:
         cwe_ids:
             - "523"
@@ -41,18 +41,18 @@ low:
         id: express_default_session_config
         description: Session cookie with default config detected.
         documentation_url: https://docs.bearer.com/reference/rules/express_default_session_config
-      line_number: 6
+      line_number: 10
       filename: default_express_session_cookie_config.js
-      parent_line_number: 6
+      parent_line_number: 10
       parent_content: |-
         {
-        		cookie: {
-        			domain: "example.com",
-        			secure: true,
-        			httpOnly: false,
-        			maxAge: 24 * 60 * 60 * 1000,
-        			path: "/some-path"
-        		},
-        	}
+            cookie: {
+              domain: "example.com",
+              secure: true,
+              httpOnly: false,
+              maxAge: 24 * 60 * 60 * 1000,
+              path: "/some-path",
+            },
+          }
 
 

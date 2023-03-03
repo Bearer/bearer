@@ -109,7 +109,7 @@ func evaluateRules(
 		if !builtIn {
 			err := bar.Add(1)
 			if err != nil {
-				output.StdErrLogger().Msgf("Rule %s failed to write progress bar %e", rule.Id, err)
+				output.StdErrLogger().Msgf("Rule %s failed to write progress bar %s", rule.Id, err)
 			}
 		}
 

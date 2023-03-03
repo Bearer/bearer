@@ -5,9 +5,9 @@ critical:
         id: javascript_express_eval_user_input
         description: Dangerous use of eval with user input detected
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_eval_user_input
-      line_number: 4
+      line_number: 11
       filename: set_timeout.js
-      parent_line_number: 4
+      parent_line_number: 11
       parent_content: setTimeout(command)
 
 

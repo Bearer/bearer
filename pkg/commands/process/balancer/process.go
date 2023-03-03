@@ -43,7 +43,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 	var err error
 	currentCommand, err := os.Executable()
 	if err != nil {
-		log.Fatal().Msgf("failed to get current command executable %e", err)
+		log.Fatal().Msgf("failed to get current command executable %s", err)
 	}
 
 	if process.isExternalWorker {
@@ -129,7 +129,7 @@ func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
 
 		req, err := http.NewRequestWithContext(process.context, http.MethodPost, process.workerUrl+workertype.RouteStatus, bytes.NewBuffer(marshalledConfig))
 		if err != nil {
-			log.Debug().Msgf("%s %s failed to build status online request %e", process.uuid, process.workeruuid, err)
+			log.Debug().Msgf("%s %s failed to build status online request %s", process.uuid, process.workeruuid, err)
 			continue
 		}
 
@@ -170,20 +170,20 @@ func (process *Process) doTask(task *Task) {
 	go func() {
 		taskBytes, err := json.Marshal(task.Definition)
 		if err != nil {
-			log.Debug().Msgf("failed to marshall task %e", err)
+			log.Debug().Msgf("failed to marshall task %s", err)
 			return
 		}
 
 		req, err := http.NewRequestWithContext(process.context, http.MethodPost, process.workerUrl+workertype.RouteProcess, bytes.NewBuffer(taskBytes))
 		if err != nil {
-			log.Debug().Msgf("%s %s failed to build process request %e", process.uuid, process.workeruuid, err)
+			log.Debug().Msgf("%s %s failed to build process request %s", process.uuid, process.workeruuid, err)
 			return
 		}
 
 		resp, err := process.client.Do(req)
 
 		if err != nil {
-			log.Debug().Msgf("%s %s failed to do process request %e", process.uuid, process.workeruuid, err)
+			log.Debug().Msgf("%s %s failed to do process request %s", process.uuid, process.workeruuid, err)
 			return
 		}
 

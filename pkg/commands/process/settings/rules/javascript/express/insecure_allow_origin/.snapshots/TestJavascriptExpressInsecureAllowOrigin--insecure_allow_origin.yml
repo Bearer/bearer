@@ -5,19 +5,19 @@ medium:
         id: javascript_express_insecure_allow_origin
         description: Insecure Access-Control-Allow-Origin detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_allow_origin
-      line_number: 6
+      line_number: 10
       filename: insecure_allow_origin.js
-      parent_line_number: 6
-      parent_content: 'res.writeHead(200, { ''Access-Control-Allow-Origin'': req.params.origin })'
+      parent_line_number: 10
+      parent_content: 'res.writeHead(200, { "Access-Control-Allow-Origin": req.params.origin })'
     - rule:
         cwe_ids:
             - "346"
         id: javascript_express_insecure_allow_origin
         description: Insecure Access-Control-Allow-Origin detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_allow_origin
-      line_number: 7
+      line_number: 11
       filename: insecure_allow_origin.js
-      parent_line_number: 7
+      parent_line_number: 11
       parent_content: res.set("access-control-allow-origin", origin)
 
 

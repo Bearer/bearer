@@ -48,7 +48,7 @@ func Extract(
 			return nil
 		})
 	if !assert.Nil(t, err) {
-		t.Errorf("report has errored %e", err)
+		t.Errorf("report has errored %s", err)
 	}
 
 	err = detectors.ExtractWithDetectors(path, files, &report, registrations)
@@ -57,7 +57,7 @@ func Extract(
 	}
 
 	if !assert.Nil(t, err) {
-		t.Errorf("report has errored %e", err)
+		t.Errorf("report has errored %s", err)
 	}
 
 	return &report

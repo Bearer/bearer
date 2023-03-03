@@ -145,7 +145,7 @@ func (worker *Worker) Start() {
 			shouldBreak = true
 		case response := <-worker.processErrored:
 			// add failed files to report
-			log.Debug().Msgf("worker %s got process error %e", worker.uuid, response.Error)
+			log.Debug().Msgf("worker %s got process error %s", worker.uuid, response.Error)
 			if worker.process != nil {
 				log.Debug().Msgf("process is not nil killing it")
 				worker.process.kill()
@@ -169,7 +169,7 @@ func (worker *Worker) Start() {
 			// ungzip report and add it to master file
 			f, err := os.Open(tmpReportFile)
 			if err != nil {
-				log.Error().Msgf("worker %s failed to open tmp report chunk file %e", worker.uuid, err)
+				log.Error().Msgf("worker %s failed to open tmp report chunk file %s", worker.uuid, err)
 				worker.complete(err)
 
 				break
@@ -177,7 +177,7 @@ func (worker *Worker) Start() {
 
 			reportBytes, err := io.ReadAll(f)
 			if err != nil {
-				log.Error().Msgf("worker %s failed to read tmp report chunk file %e", worker.uuid, err)
+				log.Error().Msgf("worker %s failed to read tmp report chunk file %s", worker.uuid, err)
 				worker.complete(err)
 				f.Close()
 				break
@@ -191,7 +191,7 @@ func (worker *Worker) Start() {
 
 		err := bar.Add(len(work))
 		if err != nil {
-			log.Error().Msgf("worker %s failed to write progress bar %e", worker.uuid, err)
+			log.Error().Msgf("worker %s failed to write progress bar %s", worker.uuid, err)
 		}
 
 		if shouldBreak {
@@ -297,7 +297,7 @@ func (worker *Worker) logError(reportFile *os.File, work []workertype.File, resp
 	for _, file := range work {
 		fileInfo, err := os.Stat(worker.task.Definition.Dir + "/" + file.FilePath)
 		if err != nil {
-			log.Debug().Msgf("worker %s failed to stat file %e", worker.uuid, err)
+			log.Debug().Msgf("worker %s failed to stat file %s", worker.uuid, err)
 			continue
 		}
 
@@ -312,7 +312,7 @@ func (worker *Worker) logError(reportFile *os.File, work []workertype.File, resp
 
 	err := jsonlines.Encode(reportFile, &errorsToAdd)
 	if err != nil {
-		log.Error().Msgf("worker %s failed to encode data line %e", worker.uuid, err)
+		log.Error().Msgf("worker %s failed to encode data line %s", worker.uuid, err)
 	}
 
 }

@@ -69,7 +69,7 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 
 	scanID, err := buildScanID(scanSettings)
 	if err != nil {
-		log.Error().Msgf("failed to build scan id for caching %e", err)
+		log.Error().Msgf("failed to build scan id for caching %s", err)
 	}
 
 	path := os.TempDir() + "/bearer" + scanID

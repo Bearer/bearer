@@ -5,9 +5,9 @@ warning:
         id: javascript_express_jwt_not_revoked
         description: Unrevoked JWT detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_jwt_not_revoked
-      line_number: 5
+      line_number: 11
       filename: express_jwt_not_revoked.js
-      parent_line_number: 5
+      parent_line_number: 11
       parent_content: 'expressjwt({ secret: config.secret, algorithms: ["HS256"] })'
 
 

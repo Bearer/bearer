@@ -28,6 +28,36 @@ presence_failures contains detector if {
 	detector.detector_id == input.rule.id
 }
 
+policy_failure contains item if {
+	input.rule.trigger == "absence"
+	some detector in input.dataflow.risks
+
+	detector.detector_id == input.rule.trigger_rule_on_presence_of
+	some init_location in detector.locations
+
+	x := {other | other := input.dataflow.risks[_]; other.detector_id == input.rule.id}
+	count(x) == 0
+
+	item := data.bearer.common.build_item(init_location)
+}
+
+policy_failure contains item if {
+	input.rule.trigger == "absence"
+	some detector in input.dataflow.risks
+
+	detector.detector_id == input.rule.trigger_rule_on_presence_of
+
+	some init_location in detector.locations
+	some other_detector in input.dataflow.risks
+
+	other_detector.detector_id == input.rule.id
+
+	x := {other_location | other_location := other_detector.locations[_]; init_location.filename == other_location.filename}
+	count(x) == 0
+
+	item := data.bearer.common.build_item(init_location)
+}
+
 local_data_types contains data_type if {
 	not input.rule.skip_data_types
 	not input.rule.only_data_types
