@@ -220,7 +220,7 @@ func mapSeverityKeysToCategories(ruleSeverity map[string]string) map[string]stri
 		switch key {
 		case "PD":
 			ruleSeverity["Personal Data"] = ruleSeverity[key]
-		case "PD(S)":
+		case "PDS":
 			ruleSeverity["Personal Data (Sensitive)"] = ruleSeverity[key]
 		default:
 		}
