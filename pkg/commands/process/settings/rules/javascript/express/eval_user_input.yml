@@ -1,21 +1,21 @@
 patterns:
   - pattern: |
-      eval($<...>$<USER_INPUT>$<...>)
+      eval($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
         detection: javascript_express_eval_user_input_user_input
   - pattern: |
-      new Function($<...>$<USER_INPUT>$<...>)
+      new Function($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
         detection: javascript_express_eval_user_input_user_input
   - pattern: |
-      setTimeout($<...>$<USER_INPUT>$<...>)
+      setTimeout($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
         detection: javascript_express_eval_user_input_user_input
   - pattern: |
-      setInterval($<...>$<USER_INPUT>$<...>)
+      setInterval($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
         detection: javascript_express_eval_user_input_user_input
