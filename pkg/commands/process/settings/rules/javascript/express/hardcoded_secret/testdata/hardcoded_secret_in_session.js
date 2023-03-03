@@ -17,7 +17,14 @@ app.use(
 
 var sessionConfig = {
   name: "my-custom-session-name",
-  secret: "my-hardcoded-secret",
+  secret: "hardcoded-secret",
+}
+
+app.use(session(sessionConfig))
+
+var sessionConfig = {
+  name: "my-custom-session-name",
+  secret: "",
 }
 
 app.use(session(sessionConfig))
