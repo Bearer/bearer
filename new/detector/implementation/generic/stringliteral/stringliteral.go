@@ -31,7 +31,9 @@ func (detector *stringLiteralDetector) DetectAt(
 
 	for _, detection := range detections {
 		if detection.Data.(generictypes.String).IsLiteral {
-			return []interface{}{nil}, nil
+			if len(detection.Data.(generictypes.String).Value) > 0 {
+				return []interface{}{nil}, nil
+			}
 		}
 	}
 
