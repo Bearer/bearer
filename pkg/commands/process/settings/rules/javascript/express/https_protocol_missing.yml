@@ -13,18 +13,16 @@ trigger: absence
 severity:
   default: "medium"
 metadata:
-  description: "Security misconfiguration detected."
+  description: "Missing https protocol detected."
   remediation_message: |
     ## Description
 
-    Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
-
-    ## Resources
-
-    - https://expressjs.com/en/advanced/best-practice-security.html
+    Prefer https to http when using createServer()
 
     <!--
     ## Remediations
+    Coming soon.
+    ## Resources
     Coming soon.
     -->
   cwe_id:
