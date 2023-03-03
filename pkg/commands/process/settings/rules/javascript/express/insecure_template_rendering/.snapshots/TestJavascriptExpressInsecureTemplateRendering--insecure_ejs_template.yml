@@ -1,0 +1,23 @@
+low:
+    - rule:
+        cwe_ids:
+            - "1336"
+        id: javascript_express_insecure_template_rendering
+        description: Insecure template rendering detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_template_rendering
+      line_number: 6
+      filename: insecure_ejs_template.js
+      parent_line_number: 6
+      parent_content: ejs.compile(req.body.user, options)
+    - rule:
+        cwe_ids:
+            - "1336"
+        id: javascript_express_insecure_template_rendering
+        description: Insecure template rendering detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_template_rendering
+      line_number: 11
+      filename: insecure_ejs_template.js
+      parent_line_number: 11
+      parent_content: ejs.render(req.params.name, data, options)
+
+
