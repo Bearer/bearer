@@ -1,0 +1,23 @@
+low:
+    - rule:
+        cwe_ids:
+            - "601"
+        id: javascript_lang_open_redirect
+        description: Open redirect detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_open_redirect
+      line_number: 4
+      filename: insecure.js
+      parent_line_number: 4
+      parent_content: window.location.href = myPath
+    - rule:
+        cwe_ids:
+            - "601"
+        id: javascript_lang_open_redirect
+        description: Open redirect detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_open_redirect
+      line_number: 5
+      filename: insecure.js
+      parent_line_number: 5
+      parent_content: location.href = myPath2
+
+

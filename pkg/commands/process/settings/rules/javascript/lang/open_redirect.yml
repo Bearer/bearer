@@ -1,0 +1,46 @@
+patterns:
+  - pattern: |
+      location.href = $<USER_INPUT>
+    filters:
+      - variable: USER_INPUT
+        detection: javascript_lang_open_redirect_url
+  - pattern: |
+      window.location.href = $<USER_INPUT>
+    filters:
+      - variable: USER_INPUT
+        detection: javascript_lang_open_redirect_url
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_lang_open_redirect_url
+    patterns:
+      - pattern: new $<METHOD>($<USER_INPUT>)
+        filters:
+          - variable: METHOD
+            values:
+              - URL
+              - URLSearchParams
+          - variable: USER_INPUT
+            detection: javascript_lang_open_redirect_user_input
+  - id: javascript_lang_open_redirect_user_input
+    patterns:
+      - window.location
+      - location
+trigger: presence
+severity:
+  default: "low"
+metadata:
+  description: "Open redirect detected."
+  remediation_message: |
+    ## Description
+    A redirect using unsanitized user input is bad practice and puts your application at greater risk of phishing attacks.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 601
+  id: "javascript_lang_open_redirect"
