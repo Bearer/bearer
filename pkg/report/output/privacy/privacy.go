@@ -165,7 +165,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 
 		err := bar.Add(1)
 		if err != nil {
-			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule.Id, err)
+			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %s", rule.Id, err)
 		}
 
 		if !rule.PolicyType() {

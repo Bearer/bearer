@@ -12,7 +12,7 @@ var ErrCreateFailed = errors.New("failed to create file")
 func Create(tmpDir string, ext string) string {
 	outputFile, err := os.CreateTemp(tmpDir, "*"+ext)
 	if err != nil {
-		log.Fatal().Msgf("got create fail error %e %e", err, ErrCreateFailed)
+		log.Fatal().Msgf("got create fail error %s %s", err, ErrCreateFailed)
 	}
 	outputFile.Close()
 

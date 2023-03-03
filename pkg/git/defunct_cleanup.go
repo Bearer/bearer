@@ -28,7 +28,7 @@ func cleanupDefunct() {
 	cmdProcess := exec.Command("ps", "-A", "-H")
 	stdout, err := cmdProcess.CombinedOutput()
 	if err != nil {
-		log.Debug().Msgf("failed to get output of command %e ", err)
+		log.Debug().Msgf("failed to get output of command %s", err)
 	}
 
 	defunctPIDs := make([]string, 0)
@@ -51,7 +51,7 @@ func cleanupDefunct() {
 	for _, pid := range defunctPIDs {
 		cmdKill := exec.Command("kill", pid)
 		if err := cmdKill.Run(); err != nil {
-			log.Debug().Msgf("failed to kill git process %e", err)
+			log.Debug().Msgf("failed to kill git process %s", err)
 		}
 	}
 

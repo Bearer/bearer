@@ -15,7 +15,6 @@ import (
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
-	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/maps"
@@ -110,7 +109,7 @@ func evaluateRules(
 		if !builtIn {
 			err := bar.Add(1)
 			if err != nil {
-				output.StdErrLogger().Msgf("Rule %s failed to write progress bar %e", rule.Id, err)
+				output.StdErrLogger().Msgf("Rule %s failed to write progress bar %s", rule.Id, err)
 			}
 		}
 
@@ -135,7 +134,6 @@ func evaluateRules(
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
-			log.Error().Msgf("jsonRes: %s", jsonRes)
 			if err != nil {
 				return err
 			}

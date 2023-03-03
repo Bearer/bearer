@@ -292,13 +292,13 @@ func EnsureFileExists(filePath string) *os.File {
 	if _, err := os.Stat(filePath); !os.IsNotExist(err) {
 		err := os.Truncate(filePath, 0)
 		if err != nil {
-			log.Panic().Msgf("Failed to truncate existing file %s %e", filePath, err)
+			log.Panic().Msgf("Failed to truncate existing file %s %s", filePath, err)
 		}
 	}
 
 	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
 	if err != nil {
-		log.Printf("Error creating output file %e", err)
+		log.Printf("Error creating output file %s", err)
 	}
 
 	return file

@@ -250,3 +250,8 @@ func TestJavascripPassportHardcodedSecret(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/passport_hardcoded_secret")
 }
+
+func TestJavascriptHelmetMissing(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/helmet_missing")
+}

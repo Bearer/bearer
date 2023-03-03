@@ -32,11 +32,11 @@ policy_failure contains item if {
 	input.rule.trigger == "missing"
 	some detector in input.dataflow.risks
 
-	detector.detector_id == input.rule.trigger_rule_on
+	detector.detector_id == input.rule.trigger_rule_on_presence_of
 	some init_location in detector.locations
 
-	p := {other | other := input.dataflow.risks[_]; other.detector_id == input.rule.trigger_rule_on_absent}
-	count(p) == 0
+	x := {other | other := input.dataflow.risks[_]; other.detector_id == input.rule.id}
+	count(x) == 0
 
 	item := data.bearer.common.build_item(init_location)
 }
@@ -45,12 +45,12 @@ policy_failure contains item if {
 	input.rule.trigger == "missing"
 	some detector in input.dataflow.risks
 
-	detector.detector_id == input.rule.trigger_rule_on
+	detector.detector_id == input.rule.trigger_rule_on_presence_of
 
 	some init_location in detector.locations
 	some other_detector in input.dataflow.risks
 
-	other_detector.detector_id == input.rule.trigger_rule_on_absent
+	other_detector.detector_id == input.rule.id
 
 	x := {other_location | other_location := other_detector.locations[_]; init_location.filename == other_location.filename}
 	count(x) == 0
