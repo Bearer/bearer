@@ -142,7 +142,6 @@ type Rule struct {
 }
 
 type PatternFilter struct {
-	None               *PatternFilter  `mapstructure:"none" json:"none" yaml:"none"`
 	Not                *PatternFilter  `mapstructure:"not" json:"not" yaml:"not"`
 	Either             []PatternFilter `mapstructure:"either" json:"either" yaml:"either"`
 	Variable           string          `mapstructure:"variable" json:"variable" yaml:"variable"`

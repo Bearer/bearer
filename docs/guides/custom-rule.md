@@ -4,7 +4,7 @@ title: Create a custom rule
 
 # How to create a custom rule
 
-Bearer rules are ways to ensure your codebase meets a set of standards for securing your code. Bearer ships with [many rules by default](/reference/rules/), but custom rules allow you to add specific requirements to suit your organization's needs. 
+Bearer rules are ways to ensure your codebase meets a set of standards for securing your code. Bearer ships with [many rules by default](/reference/rules/), but custom rules allow you to add specific requirements to suit your organization's needs.
 
 ## Getting started
 
@@ -12,16 +12,17 @@ Before you begin, you’ll want to have Bearer installed, and have run it succes
 
 ## The rule configuration file
 
-Each rule is a unique `yml` file. Custom rules share the same format as internal rules, so it can be helpful when creating rules to reference similar concepts in the [rules directory on GitHub]({{meta.sourcePath}}/tree/main/pkg/commands/process/settings/rules). 
+Each rule is a unique `yml` file. Custom rules share the same format as internal rules, so it can be helpful when creating rules to reference similar concepts in the [rules directory on GitHub]({{meta.sourcePath}}/tree/main/pkg/commands/process/settings/rules).
 
 To better understand the structure of a rule file, let’s look at each key:
 
 - `patterns`: See the section below for the Pattern Syntax.
 - `languages`: An array of the languages the rule applies to. Available values are: `ruby`, `javascript`
-- `trigger`: Defines the scope of the rule related and the data types Bearer detects. There are three trigger types:
+- `trigger`: Defines when the rule should raise a failure. There are four trigger types:
   - `local`: Use this trigger when your rule directly relies on data type detections in the pattern. Some examples are sending data to a logger, or making an HTTP request that includes sensitive data.
   - `global`: Some rules don’t match code with a data type directly, but you want them to trigger if Bearer finds any sensitive data types in the project. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
-  - `presence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection. Examples include best practices such as configuration settings like forcing SSL communication.
+  - `presence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection but on the presence of a pattern. Examples include best practices such as configuration settings like forcing SSL communication.
+  - `absence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection but on the absence of a pattern (if we have been able to confirm the presence of an auxiliary pattern). Examples include best practices such as missing configuration like forcing SSL communication.
 - `severity`: This sets the severity level. Bearer groups rule failures by severity, and you can configure the summary report to only fail on specific severity thresholds. Severity is set for each data type group, each of which takes a severity level of `warning`, `low`, `medium`, `high`, or `critical`. A severity level of `warning` won’t cause CI to fail.
   - `default`: This is the catch-all type in cases where no data types are associated with the rule.
   - `PII`: [Personally Identifiable Information](/reference/datatypes/#pii)
@@ -38,11 +39,12 @@ To better understand the structure of a rule file, let’s look at each key:
 - `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) rule for examples. (Optional)
 - `skip_data_types`: Allows you to prevent the specified data types from triggering this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 - `only_data_types`: Allows you to limit the specified data types that trigger this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
+- `trigger_rule_on_presence_of`: Used with the `absence` trigger. Indicates which rule is required to activate the failure on the absence of the main rule.
 
 
 ## Patterns
 
-Patterns allow rules to look for matches in your code, much like regular expressions, but they take advantage of Bearer’s underlying data type detection capabilities. 
+Patterns allow rules to look for matches in your code, much like regular expressions, but they take advantage of Bearer’s underlying data type detection capabilities.
 
 In their most simple form, patterns look for a code match. As an example, let’s try to match the use of an unsecured FTP connection in ruby:
 
@@ -65,7 +67,7 @@ In the YAML above, we’re using two patterns. One for a new FTP connection and 
 	- |
 		Net::FTP.open()
 	- pattern: |
-			Net::FTP.open() do 
+			Net::FTP.open() do
 				$<DATA_TYPE>
 			end
 		filters:
