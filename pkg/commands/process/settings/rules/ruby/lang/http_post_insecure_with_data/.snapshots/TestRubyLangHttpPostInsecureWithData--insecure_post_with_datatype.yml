@@ -1,4 +1,4 @@
-medium:
+low:
     - rule:
         cwe_ids:
             - "319"
@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 1
       parent_content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
+medium:
     - rule:
         cwe_ids:
             - "319"

@@ -18,8 +18,6 @@ patterns:
           variable: REGEX
           regex: \A([/'"]|%r.)\\A.*\\[zZ].\z
 trigger: presence
-severity:
-  default: low
 metadata:
   description: "Validation using permissive regular expression detected."
   remediation_message: |

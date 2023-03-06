@@ -109,7 +109,7 @@ high:
       filename: unsafe_excon.rb
       parent_line_number: 16
       parent_content: 'Excon.post("http://example.com", path: params[:oops])'
-low:
+warning:
     - rule:
         cwe_ids:
             - "319"
