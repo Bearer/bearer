@@ -28,7 +28,7 @@ require (
 	github.com/wlredeye/jsonlines v0.0.0-20160904163743-36b5e1bd13d0
 	github.com/zricethezav/gitleaks/v8 v8.16.0
 	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326
-	golang.org/x/mod v0.8.0
+	golang.org/x/mod v0.9.0
 	golang.org/x/net v0.7.0
 )
 
