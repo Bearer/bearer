@@ -1,6 +1,6 @@
 module quickstart
 
-go 1.18
+go 1.19
 
 require (
 	golang.org/x/oauth2 v0.2.0
