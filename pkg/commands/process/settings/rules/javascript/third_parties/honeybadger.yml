@@ -16,7 +16,6 @@ patterns:
 languages:
   - javascript
 trigger: local
-severity: low
 metadata:
   description: "Sensitive data sent to Honeybadger detected."
   remediation_message: |

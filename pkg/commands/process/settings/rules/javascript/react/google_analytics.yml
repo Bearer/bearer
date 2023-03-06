@@ -7,7 +7,6 @@ patterns:
 languages:
   - javascript
 trigger: local
-severity: low
 metadata:
   description: "Sensitive data sent to Google Analytics detected."
   remediation_message: |

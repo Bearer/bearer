@@ -26,7 +26,6 @@ patterns:
 languages:
   - ruby
 trigger: local
-severity: low
 metadata:
   description: "Sensitive data stored in a cookie detected."
   remediation_message: |

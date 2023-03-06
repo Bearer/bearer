@@ -4,7 +4,6 @@ patterns:
 languages:
   - javascript
 trigger: presence
-severity: low
 metadata:
   description: "Missing access restriction to directory listing detected."
   remediation_message: |

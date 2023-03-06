@@ -12,7 +12,6 @@ patterns:
 languages:
   - javascript
 trigger: local
-severity: low
 metadata:
   description: "Sensitive data sent to Google Tag Manager detected."
   remediation_message: |

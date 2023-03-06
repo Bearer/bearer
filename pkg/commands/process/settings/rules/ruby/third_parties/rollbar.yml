@@ -43,7 +43,6 @@ auxiliary:
       - |
         Rollbar.scope()
 trigger: local
-severity: low
 skip_data_types:
   - "Unique Identifier"
 metadata:

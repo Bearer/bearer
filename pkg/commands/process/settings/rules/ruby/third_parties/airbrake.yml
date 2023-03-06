@@ -50,7 +50,6 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
 trigger: local
-severity: low
 skip_data_types:
   - "Unique Identifier"
 metadata:
