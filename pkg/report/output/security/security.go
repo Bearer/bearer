@@ -257,7 +257,7 @@ func CalculateSeverity(groups []string, severity string, trigger string) string 
 		ruleSeverityWeighting = 5
 	case types.LevelMedium:
 		ruleSeverityWeighting = 3
-	case types.LevelMedium:
+	case types.LevelWarning:
 		ruleSeverityWeighting = 1
 	default:
 		ruleSeverityWeighting = 2 // low weighting as default

@@ -1,7 +1,7 @@
-(map[string]string) (len=5) {
-  (string) (len=8) "critical": (string) (len=8) "critical",
-  (string) (len=4) "high": (string) (len=4) "high",
-  (string) (len=3) "low": (string) (len=6) "medium",
-  (string) (len=6) "medium": (string) (len=6) "medium",
-  (string) (len=7) "warning": (string) (len=7) "warning"
+([]string) (len=5) {
+  (string) (len=8) "critical",
+  (string) (len=4) "high",
+  (string) (len=6) "medium",
+  (string) (len=6) "medium",
+  (string) (len=7) "warning"
 }

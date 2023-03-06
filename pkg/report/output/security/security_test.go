@@ -120,12 +120,12 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 }
 
 func TestCalculateSeverity(t *testing.T) {
-	res := map[string]string{
-		"critical": security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", "local"),
-		"high":     security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", "global"),
-		"medium":   security.CalculateSeverity([]string{"Personal Data"}, "low", "global"),
-		"low":      security.CalculateSeverity([]string{"Personal Data"}, "warning", "absence"),
-		"warning":  security.CalculateSeverity([]string{}, "warning", "presence"),
+	res := []string{
+		security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", "local"),
+		security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", "global"),
+		security.CalculateSeverity([]string{"Personal Data"}, "low", "global"),
+		security.CalculateSeverity([]string{"Personal Data"}, "warning", "absence"),
+		security.CalculateSeverity([]string{}, "warning", "presence"),
 	}
 
 	cupaloy.SnapshotT(t, res)
