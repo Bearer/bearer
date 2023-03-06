@@ -1,4 +1,4 @@
-low:
+medium:
     - rule:
         cwe_ids:
             - "1295"
@@ -8,6 +8,8 @@ low:
         documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
       line_number: 3
       filename: child.js
+      category_groups:
+        - PII
       parent_line_number: 7
       parent_content: logger.child(ctx)
 

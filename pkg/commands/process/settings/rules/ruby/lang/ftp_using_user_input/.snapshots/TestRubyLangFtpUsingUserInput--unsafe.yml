@@ -1,4 +1,4 @@
-low:
+high:
     - rule:
         cwe_ids:
             - "22"
@@ -32,6 +32,7 @@ low:
       filename: unsafe.rb
       parent_line_number: 9
       parent_content: ftp.puttextfile("local.txt", event["filename"])
+low:
     - rule:
         cwe_ids:
             - "319"

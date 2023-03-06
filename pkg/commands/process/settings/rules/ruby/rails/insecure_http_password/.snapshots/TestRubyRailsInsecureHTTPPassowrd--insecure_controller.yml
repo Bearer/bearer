@@ -1,14 +1,4 @@
-low:
-    - rule:
-        cwe_ids: []
-        id: ruby_rails_insecure_http_password
-        description: Insecure HTTP Password.
-        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_insecure_http_password
-      line_number: 2
-      filename: insecure_controller.rb
-      parent_line_number: 2
-      parent_content: my-secret-password
-medium:
+high:
     - rule:
         cwe_ids:
             - "798"
@@ -19,5 +9,15 @@ medium:
       filename: insecure_controller.rb
       parent_line_number: 2
       parent_content: 'password: "my-secret-password"'
+low:
+    - rule:
+        cwe_ids: []
+        id: ruby_rails_insecure_http_password
+        description: Insecure HTTP Password.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_insecure_http_password
+      line_number: 2
+      filename: insecure_controller.rb
+      parent_line_number: 2
+      parent_content: my-secret-password
 
 
