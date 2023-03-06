@@ -1,0 +1,70 @@
+- position: "1:1"
+  content: |-
+    x = {
+      y: {
+        user: { first_name: "" }
+      },
+      email: ""
+    }
+  data:
+    properties:
+        - name: x
+          classification:
+            name: x
+            datatype: null
+            decision:
+                state: valid
+                reason: invalid_object_with_valid_properties
+          datatype:
+            detectortype: datatype
+            matchnode: {}
+            data:
+                properties:
+                    - name: "y"
+                      classification:
+                        name: "y"
+                        datatype: null
+                        decision:
+                            state: invalid
+                            reason: invalid_property
+                      datatype:
+                        detectortype: datatype
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: user
+                                  classification:
+                                    name: user
+                                    datatype: null
+                                    decision:
+                                        state: valid
+                                        reason: valid_object_with_valid_properties
+                                  datatype:
+                                    detectortype: datatype
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: first_name
+                                              classification:
+                                                name: first name
+                                                subject_name: User
+                                                datatype:
+                                                    name: Firstname
+                                                    uuid: 380c8cde-ca2e-44ed-82db-2ab1e7c255c7
+                                                    category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+                                                decision:
+                                                    state: valid
+                                                    reason: known_pattern
+                                              datatype: null
+                    - name: email
+                      classification:
+                        name: email
+                        datatype:
+                            name: Email Address
+                            uuid: 22e24c62-82d3-4b72-827c-e261533331bd
+                            category_uuid: cef587dd-76db-430b-9e18-7b031e1a193b
+                        decision:
+                            state: valid
+                            reason: valid_unknown_pattern
+                      datatype: null
+
