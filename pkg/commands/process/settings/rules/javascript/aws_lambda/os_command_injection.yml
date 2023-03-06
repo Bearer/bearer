@@ -41,7 +41,6 @@ metadata:
 
         cp.exec(`cp ${filePattern} foo`, (error, stdout, stderr) => {});
     };
-
     ```
 
     ## Resources
