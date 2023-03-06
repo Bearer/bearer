@@ -82,8 +82,6 @@ auxiliary:
     patterns:
       - new Liquid()
 trigger: presence
-skip_data_types:
-  - "Unique Identifier"
 metadata:
   description: "Insecure template rendering detected."
   remediation_message: |
