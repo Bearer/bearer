@@ -19,11 +19,12 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 	pluralizer := pluralize.NewClient()
 
 	for _, detection := range detections {
+		detectorType := detectors.Type(detection.DetectorType)
 		data := detection.Data.(custom.Data)
 
 		if len(data.Datatypes) == 0 {
 			report.AddDetection(reportdetections.TypeCustomRisk,
-				detectors.Type(detection.DetectorType),
+				detectorType,
 				source.New(
 					file,
 					file.Path,
@@ -38,55 +39,64 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 		}
 
 		for _, datatypeDetection := range data.Datatypes {
-			datatypeData := datatypeDetection.Data.(datatype.Data)
-
-			report.AddDetection(
-				reportdetections.TypeCustomClassified,
-				detectors.Type(detection.DetectorType),
-				source.New(
-					file,
-					file.Path,
-					datatypeDetection.MatchNode.LineNumber(),
-					datatypeDetection.MatchNode.ColumnNumber(),
-					"",
-				),
-				schema.Schema{
-					ObjectName:           datatypeData.Name,
-					NormalizedObjectName: pluralizer.Singular(strings.ToLower(datatypeData.Name)),
-					Classification:       datatypeData.Classification,
-					Parent: &schema.Parent{
-						LineNumber: detection.MatchNode.LineNumber(),
-						Content:    detection.MatchNode.Content(),
-					},
-				},
+			reportDatatypeDetection(
+				report,
+				pluralizer,
+				file,
+				detectorType,
+				detection,
+				datatypeDetection,
+				"",
 			)
-
-			for _, property := range datatypeData.Properties {
-
-				report.AddDetection(
-					reportdetections.TypeCustomClassified,
-					detectors.Type(detection.DetectorType),
-					source.New(
-						file,
-						file.Path,
-						property.Detection.MatchNode.LineNumber(),
-						property.Detection.MatchNode.ColumnNumber(),
-						"",
-					),
-					schema.Schema{
-						ObjectName:           datatypeData.Name,
-						NormalizedObjectName: pluralizer.Singular(strings.ToLower(property.Name)),
-						FieldName:            property.Name,
-						NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
-						Classification:       property.Classification,
-						Parent: &schema.Parent{
-							LineNumber: detection.MatchNode.LineNumber(),
-							Content:    detection.MatchNode.Content(),
-						},
-					},
-				)
-			}
 		}
 	}
+}
 
+func reportDatatypeDetection(
+	report reportdetections.ReportDetection,
+	pluralizer *pluralize.Client,
+	file *file.FileInfo,
+	detectorType detectors.Type,
+	detection,
+	datatypeDetection *detectortypes.Detection,
+	objectName string,
+) {
+	data := datatypeDetection.Data.(datatype.Data)
+
+	for _, property := range data.Properties {
+		report.AddDetection(
+			reportdetections.TypeCustomClassified,
+			detectorType,
+			source.New(
+				file,
+				file.Path,
+				datatypeDetection.MatchNode.LineNumber(),
+				datatypeDetection.MatchNode.ColumnNumber(),
+				"",
+			),
+			schema.Schema{
+				ObjectName:           objectName,
+				NormalizedObjectName: pluralizer.Singular(strings.ToLower(objectName)),
+				FieldName:            property.Name,
+				NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
+				Classification:       property.Classification,
+				Parent: &schema.Parent{
+					LineNumber: detection.MatchNode.LineNumber(),
+					Content:    detection.MatchNode.Content(),
+				},
+			},
+		)
+
+		if property.Datatype != nil {
+			reportDatatypeDetection(
+				report,
+				pluralizer,
+				file,
+				detectorType,
+				detection,
+				property.Datatype,
+				property.Name,
+			)
+		}
+	}
 }
