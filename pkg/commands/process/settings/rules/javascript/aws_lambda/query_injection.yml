@@ -50,7 +50,6 @@ metadata:
     Example:
 
     ```javascript
-
     exports.handler = async function(event, context) {
         var params = {
             Key: {
