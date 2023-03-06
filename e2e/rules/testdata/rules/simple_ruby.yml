@@ -6,8 +6,7 @@ patterns:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
+severity: low
 metadata:
   description: "Force all incoming communication through SSL."
   remediation_message: |
