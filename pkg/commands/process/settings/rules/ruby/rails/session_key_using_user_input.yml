@@ -18,12 +18,11 @@ metadata:
   description: "User input detected in a session key."
   remediation_message: |
     ## Description
+    Using user-defined data in a session key is bad practice and can allow attackers to perform unsafe actions.
 
-    TODO
-
-    ## Remediations
-    TODO
     <!--
+    ## Remediations
+    Coming soon.
     ## Resources
     Coming soon.
     -->
