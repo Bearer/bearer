@@ -237,6 +237,11 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 }
 
 func CalculateSeverity(groups []string, severity string, trigger string) string {
+	if severity == types.LevelWarning {
+		log.Debug().Msgf("Calculated severity = %s (no calculation applied)", severity)
+		return types.LevelWarning
+	}
+
 	// highest sensitive data category
 	sensitiveDataCategoryWeighting := 0
 	if slices.Contains(groups, "PHI") {
@@ -257,8 +262,6 @@ func CalculateSeverity(groups []string, severity string, trigger string) string 
 		ruleSeverityWeighting = 5
 	case types.LevelMedium:
 		ruleSeverityWeighting = 3
-	case types.LevelWarning:
-		ruleSeverityWeighting = 1
 	default:
 		ruleSeverityWeighting = 2 // low weighting as default
 	}
@@ -277,11 +280,9 @@ func CalculateSeverity(groups []string, severity string, trigger string) string 
 		return types.LevelHigh
 	case finalWeighting >= 3:
 		return types.LevelMedium
-	case finalWeighting >= 2:
-		return types.LevelLow
 	}
 
-	return types.LevelWarning
+	return types.LevelLow
 }
 
 func writeStatsToString(

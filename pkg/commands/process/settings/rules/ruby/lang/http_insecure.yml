@@ -166,7 +166,7 @@ auxiliary:
           - variable: INSECURE_URL
             detection: insecure_url
 trigger: presence
-severity: warning
+severity: low
 metadata:
   description: "Connection through an unsecure HTTP communication detected."
   remediation_message: |

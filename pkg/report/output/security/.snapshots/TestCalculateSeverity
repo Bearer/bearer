@@ -2,6 +2,6 @@
   (string) (len=8) "critical",
   (string) (len=4) "high",
   (string) (len=6) "medium",
-  (string) (len=6) "medium",
+  (string) (len=7) "warning",
   (string) (len=7) "warning"
 }
