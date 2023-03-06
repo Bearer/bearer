@@ -15,6 +15,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
+severity: high
 metadata:
   description: "Unsecure use of DOMPurify detected."
   remediation_message: |
