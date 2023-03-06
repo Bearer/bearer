@@ -20,8 +20,12 @@ patterns:
           variable: DATA
           detection: javascript_dangerous_insert_html_sanitzed_input
   - pattern: |
-      $<_>.$<METHOD>($<...>$<DATA>$<...>)
+      $<SOURCE>.$<METHOD>($<...>$<DATA>$<...>)
     filters:
+      - not:
+          variable: SOURCE
+          values:
+            - React
       - variable: METHOD
         values:
           - setHTML
@@ -41,6 +45,11 @@ auxiliary:
           - variable: STRING_LITERAL
             detection: string_literal
             contains: false
+      - pattern: |
+          $<EMPTY_STRING>
+        filters:
+          - variable: EMPTY_STRING
+            regex: (""|'')
       - $<_>.sanitize()
       - $<_>.sanitizeHTML()
   - id: javascript_dangerous_insert_html_unsanitzed_input
