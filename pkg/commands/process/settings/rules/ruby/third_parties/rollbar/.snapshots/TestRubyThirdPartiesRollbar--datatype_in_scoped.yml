@@ -1,4 +1,4 @@
-low:
+medium:
     - rule:
         cwe_ids:
             - "201"
@@ -7,6 +7,8 @@ low:
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_rollbar
       line_number: 1
       filename: datatype_in_scoped.rb
+      category_groups:
+        - PII
       parent_line_number: 3
       parent_content: |-
         Rollbar.scoped(scope) do

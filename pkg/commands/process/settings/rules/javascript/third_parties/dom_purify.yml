@@ -15,11 +15,6 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
 metadata:
   description: "Unsecure use of DOMPurify detected."
   remediation_message: |
@@ -33,7 +28,7 @@ metadata:
       DOMPurify.sanitize(htmlToSanitize, { RETURN_DOM_IMPORT:true })
     ```
 
-    or: 
+    or:
 
     ```
       DOMPurify.sanitize(htmlToSanitize, { RETURN_DOM_FRAGMENT: true })

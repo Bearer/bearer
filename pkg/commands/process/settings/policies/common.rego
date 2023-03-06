@@ -20,6 +20,16 @@ cat_groups := set() if {
 	not input.dataflow.data_types
 }
 
+build_local_item(location, data_type) := {
+	"category_groups": groups_for_datatype(data_type),
+	"filename": location.filename,
+	"line_number": location.line_number,
+	"parent_line_number": location.parent.line_number,
+	"parent_content": location.parent.content,
+} if {
+	not input.rule.omit_parent_content == true
+}
+
 build_item(location) := {
 	"category_groups": cat_groups,
 	"filename": location.filename,
