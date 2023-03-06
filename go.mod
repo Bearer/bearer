@@ -8,7 +8,7 @@ require (
 	github.com/fatih/color v1.14.1
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-enry/go-enry/v2 v2.8.3
+	github.com/go-enry/go-enry/v2 v2.8.4
 	github.com/go-git/go-billy/v5 v5.4.1
 	github.com/go-git/go-git/v5 v5.5.2
 	github.com/google/uuid v1.3.0
