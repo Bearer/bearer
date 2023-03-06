@@ -249,7 +249,7 @@ func CalculateSeverity(groups []string, severity string, trigger string) string 
 		sensitiveDataCategoryWeighting = 1
 	}
 
-	ruleSeverityWeighting := 2
+	var ruleSeverityWeighting int
 	switch severity {
 	case types.LevelCritical:
 		ruleSeverityWeighting = 8
