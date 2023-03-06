@@ -1,0 +1,49 @@
+- position: "1:5"
+  content: 'nested = { "a": 123 }'
+  data:
+    properties:
+        - name: nested
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      object: null
+                isvirtual: false
+    isvirtual: true
+- position: "3:6"
+  content: |-
+    {
+      x: { n: nested },
+      y: { b: 4 }
+    }
+  data:
+    properties:
+        - name: x
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: "n"
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+        - name: "y"
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: b
+                      object: null
+                isvirtual: false
+    isvirtual: false
+

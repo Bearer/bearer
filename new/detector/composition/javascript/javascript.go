@@ -17,7 +17,6 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
 	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
 	"github.com/bearer/bearer/new/detector/implementation/javascript/object"
-	"github.com/bearer/bearer/new/detector/implementation/javascript/property"
 	"github.com/bearer/bearer/new/language"
 
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/javascript/string"
@@ -50,10 +49,6 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		{
 			constructor: object.New,
 			name:        "object detector",
-		},
-		{
-			constructor: property.New,
-			name:        "property detector",
 		},
 		{
 			constructor: stringdetector.New,

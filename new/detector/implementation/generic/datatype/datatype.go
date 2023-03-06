@@ -3,10 +3,8 @@ package datatype
 import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/schema"
 
-	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	classificationschema "github.com/bearer/bearer/pkg/classification/schema"
 )
@@ -61,45 +59,46 @@ func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	objectDetections, err := evaluator.ForNode(node, "object", false)
-	if err != nil {
-		return nil, err
-	}
+	return nil, nil
+	// objectDetections, err := evaluator.ForNode(node, "object", false)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	var result []interface{}
+	// var result []interface{}
 
-	for _, object := range objectDetections {
-		var properties []Property
+	// for _, object := range objectDetections {
+	// 	var properties []Property
 
-		objectData := object.Data.(generictypes.Object)
+	// 	objectData := object.Data.(generictypes.Object)
 
-		for _, property := range objectData.Properties {
-			propertyData := property.Data.(generictypes.Property)
-			properties = append(properties, Property{
-				Detection: property,
-				Name:      propertyData.Name,
-			})
-		}
+	// 	for _, property := range objectData.Properties {
+	// 		propertyData := property.Data.(generictypes.Property)
+	// 		properties = append(properties, Property{
+	// 			Detection: property,
+	// 			Name:      propertyData.Name,
+	// 		})
+	// 	}
 
-		data := Data{
-			Name:       objectData.Name,
-			Properties: properties,
-		}
+	// 	data := Data{
+	// 		Name:       objectData.Name,
+	// 		Properties: properties,
+	// 	}
 
-		classificationReqDetection := data.toClassifcationRequestDetection()
+	// 	classificationReqDetection := data.toClassifcationRequestDetection()
 
-		classification := detector.classifier.Classify(classificationschema.ClassificationRequest{
-			Value:        classificationReqDetection,
-			DetectorType: detectors.DetectorRuby,
-			Filename:     evaluator.FileName(),
-		})
+	// 	classification := detector.classifier.Classify(classificationschema.ClassificationRequest{
+	// 		Value:        classificationReqDetection,
+	// 		DetectorType: detectors.DetectorRuby,
+	// 		Filename:     evaluator.FileName(),
+	// 	})
 
-		mergeClassification(&data, classification)
+	// 	mergeClassification(&data, classification)
 
-		result = append(result, data)
-	}
+	// 	result = append(result, data)
+	// }
 
-	return result, nil
+	// return result, nil
 }
 
 func (detector *datatypeDetector) Close() {}

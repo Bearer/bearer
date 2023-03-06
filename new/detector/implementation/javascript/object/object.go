@@ -13,33 +13,33 @@ import (
 
 type objectDetector struct {
 	types.DetectorBase
-	// Gathering properties
+	// Base
 	objectPairQuery *tree.Query
+	classQuery      *tree.Query
 	// Naming
 	assignmentQuery *tree.Query
-	parentPairQuery *tree.Query
-	// Variables
-	variableDeclarationQuery  *tree.Query
-	objectDeconstructionQuery *tree.Query
-	// class
-	classNameQuery   *tree.Query
-	constructorQuery *tree.Query
-	// properties
+	// Projection
 	memberExpressionQuery    *tree.Query
 	subscriptExpressionQuery *tree.Query
+	// FIXME: what to do with this?
+	objectDeconstructionQuery *tree.Query
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
 	// { first_name: ..., ... }
-	objectPairQuery, err := lang.CompileQuery(`(object (pair) @pair) @root`)
+	objectPairQuery, err := lang.CompileQuery(`(object (pair key: (_) @key value: (_) @value)) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling object pair query: %s", err)
 	}
 
+	// user = <object>
 	// const user = <object>
 	// var user = <object>
 	// let user = <object>
-	variableDeclarationQuery, err := lang.CompileQuery(`(variable_declarator name: (identifier) @name value: (_) @value) @root`)
+	assignmentQuery, err := lang.CompileQuery(`[
+		(assignment_expression left: (identifier) @name right: (_) @value)
+		(variable_declarator name: (identifier) @name value: (_) @value)
+	] @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling assignment query: %s", err)
 	}
@@ -52,25 +52,17 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling object deconstruction query: %s", err)
 	}
 
-	// user = <object>
-	assignmentQuery, err := lang.CompileQuery(`(assignment_expression left: (identifier) @left right: (_) @right) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling assignment query: %s", err)
-	}
-
-	// { user: <object> }
-	parentPairQuery, err := lang.CompileQuery(`(pair key: (_) @key value: (_) @value) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling parent pair query: %s", err)
-	}
-
-	// new User()
-	constructorQuery, err := lang.CompileQuery(`(new_expression constructor: (identifier) @name) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling class name query: %s", err)
-	}
-
-	classNameQuery, err := lang.CompileQuery(`(class_declaration name: (type_identifier) @name) @root`)
+	// class User {
+	//	constructor(name, surname)
+	//	GetName()
+	// }
+	classQuery, err := lang.CompileQuery(`
+		(class_declaration
+			name: (identifier) @class_name
+			body: (class_body
+				(method_definition name: (property_identifier) @method_name (formal_parameters) @params)
+			)
+		) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling class name query: %s", err)
 	}
@@ -90,11 +82,8 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	return &objectDetector{
 		objectPairQuery:           objectPairQuery,
 		assignmentQuery:           assignmentQuery,
-		variableDeclarationQuery:  variableDeclarationQuery,
+		classQuery:                classQuery,
 		objectDeconstructionQuery: objectDeconstructionQuery,
-		parentPairQuery:           parentPairQuery,
-		constructorQuery:          constructorQuery,
-		classNameQuery:            classNameQuery,
 		memberExpressionQuery:     memberExpressionQuery,
 		subscriptExpressionQuery:  subscriptExpressionQuery,
 	}, nil
@@ -112,17 +101,12 @@ func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	detections, err := detector.getobject(node, evaluator)
+	detections, err := detector.getObject(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getAssigment(node, evaluator)
-	if len(detections) != 0 || err != nil {
-		return detections, err
-	}
-
-	detections, err = detector.getVariableDeclaration(node, evaluator)
+	detections, err = detector.getAssignment(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -137,46 +121,62 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getConstructor(node, evaluator)
-	if len(detections) != 0 || err != nil {
-		return detections, err
-	}
-
-	detections, err = detector.getProperties(node, evaluator)
-	if len(detections) != 0 || err != nil {
-		return detections, err
-	}
-
-	return detector.nameParentPairObject(node, evaluator)
+	return detector.getProjections(node, evaluator)
 }
 
-func (detector *objectDetector) getobject(
+func (detector *objectDetector) getObject(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	results, err := detector.objectPairQuery.MatchAt(node)
-	if err != nil {
+	if len(results) == 0 || err != nil {
 		return nil, err
 	}
 
-	if len(results) == 0 {
-		return nil, nil
-	}
-
-	var properties []*types.Detection
+	var properties []generictypes.Property
 	for _, result := range results {
-		nodeProperties, err := evaluator.ForNode(result["pair"], "property", false)
+		var name string
+		key := result["key"]
+
+		// {"user": "admin_user"}
+		if key.Type() == "string" {
+			name = stringutil.StripQuotes(key.Content())
+		}
+
+		// { user: "admin_user"}
+		if key.Type() == "property_identifier" {
+			name = key.Content()
+		}
+
+		if name == "" {
+			continue
+		}
+
+		propertyObjects, err := getNonVirtualObjects(evaluator, result["value"])
 		if err != nil {
 			return nil, err
 		}
 
-		properties = append(properties, nodeProperties...)
+		if len(propertyObjects) == 0 {
+			properties = append(properties, generictypes.Property{
+				Name: name,
+			})
+
+			continue
+		}
+
+		for _, propertyObject := range propertyObjects {
+			properties = append(properties, generictypes.Property{
+				Name:   name,
+				Object: propertyObject,
+			})
+		}
 	}
 
 	return []interface{}{generictypes.Object{Properties: properties}}, nil
 }
 
-func (detector *objectDetector) getAssigment(
+func (detector *objectDetector) getAssignment(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
@@ -185,104 +185,71 @@ func (detector *objectDetector) getAssigment(
 		return nil, err
 	}
 
-	objects, err := evaluator.ForNode(result["right"], "object", true)
+	objects, err := getNonVirtualObjects(evaluator, result["value"])
 	if err != nil {
 		return nil, err
 	}
 
 	var detections []interface{}
 	for _, object := range objects {
-		objectData := object.Data.(generictypes.Object)
-
-		if objectData.Name == "" {
-			detections = append(detections, generictypes.Object{
-				Name:       result["left"].Content(),
-				Properties: objectData.Properties,
-			})
-		}
+		detections = append(detections, generictypes.Object{
+			IsVirtual: true,
+			Properties: []generictypes.Property{{
+				Name:   result["name"].Content(),
+				Object: object,
+			}},
+		})
 	}
 
 	return detections, nil
 }
 
 func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
-	result, err := detector.classNameQuery.MatchOnceAt(node)
-	if result == nil || err != nil {
+	results, err := detector.classQuery.MatchAt(node)
+	if len(results) == 0 || err != nil {
 		return nil, err
 	}
 
-	data := generictypes.Object{
-		Name:       result["name"].Content(),
-		Properties: []*types.Detection{},
-	}
+	className := results[0]["class_name"].Content()
 
-	body := node.ChildByFieldName("body")
+	var properties []generictypes.Property
+	for _, result := range results {
+		methodName := result["method_name"].Content()
+		if methodName == "constructor" {
+			params := result["params"]
 
-	for i := 0; i < body.ChildCount(); i++ {
-		detections, err := evaluator.ForNode(body.Child(i), "property", true)
-		if err != nil {
-			return nil, err
+			for i := 0; i < params.ChildCount(); i++ {
+				param := params.Child(i)
+				if param.Type() != "identifier" {
+					continue
+				}
+
+				properties = append(properties, generictypes.Property{Name: param.Content()})
+			}
+		} else {
+			properties = append(properties, generictypes.Property{Name: methodName})
 		}
-		data.Properties = append(data.Properties, detections...)
 	}
 
-	return []interface{}{data}, nil
-}
-
-func (detector *objectDetector) getConstructor(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
-	result, err := detector.constructorQuery.MatchOnceAt(node)
-	if result == nil || err != nil {
-		return nil, err
-	}
-
-	data := generictypes.Object{
-		Name: result["name"].Content(),
-	}
-
-	return []interface{}{data}, nil
-}
-
-func (detector *objectDetector) nameParentPairObject(
-	node *tree.Node,
-	evaluator types.Evaluator,
-) ([]interface{}, error) {
-	result, err := detector.parentPairQuery.MatchOnceAt(node)
-	if result == nil || err != nil {
-		return nil, err
-	}
-
-	objects, err := evaluator.ForNode(result["value"], "object", true)
-	if err != nil {
-		return nil, err
-	}
-
-	var detections []interface{}
-	for _, object := range objects {
-		objectData := object.Data.(generictypes.Object)
-
-		objectName := result["key"].Content()
-		objectNameNode := result["key"]
-		if objectNameNode.Type() == "string" {
-			objectName = stringutil.StripQuotes(objectName)
-		}
-
-		detections = append(detections, generictypes.Object{
-			Name:       objectName,
-			Properties: objectData.Properties,
-		},
-		)
-	}
-
-	return detections, nil
+	return []interface{}{generictypes.Object{
+		Properties: []generictypes.Property{{
+			Name: className,
+			Object: &types.Detection{
+				DetectorType: "object",
+				MatchNode:    node,
+				Data: generictypes.Object{
+					Properties: properties,
+				},
+			},
+		}},
+	}}, nil
 }
 
 func (detector *objectDetector) Close() {
 	detector.objectPairQuery.Close()
 	detector.assignmentQuery.Close()
-	detector.variableDeclarationQuery.Close()
 	detector.objectDeconstructionQuery.Close()
-	detector.parentPairQuery.Close()
-	detector.classNameQuery.Close()
+	detector.classQuery.Close()
 	detector.memberExpressionQuery.Close()
 	detector.subscriptExpressionQuery.Close()
 }
