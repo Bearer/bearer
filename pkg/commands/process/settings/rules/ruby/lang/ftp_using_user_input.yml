@@ -38,12 +38,12 @@ metadata:
   description: "Do not use user input to form file paths."
   remediation_message: |
     ## Description
+    Using raw unsanitized input when forming filenames or file paths is bad practice.
+    It can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.
 
-    TODO
-
-    ## Remediations
-    TODO
     <!--
+    ## Remediations
+    Coming soon.
     ## Resources
     Coming soon.
     -->

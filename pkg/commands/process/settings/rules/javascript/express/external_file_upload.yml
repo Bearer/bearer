@@ -35,7 +35,16 @@ trigger: presence
 metadata:
   description: "External control of filename or path detected."
   remediation_message: |
-    ## Description TODO
+    ## Description
+    Using raw unsanitized input when forming filenames or file paths is bad practice.
+    It can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.
+
+    <!--
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
+    -->
   cwe_id:
     - 73
   id: "javascript_express_external_file_upload"
