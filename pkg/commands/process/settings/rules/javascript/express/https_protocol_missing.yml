@@ -1,7 +1,9 @@
 patterns:
-  - pattern: |
-      https.createServer()
+  - https.createServer()
+  - pattern: require($<HTTPS>).createServer()
     filters:
+      - variable: HTTPS
+        regex: ("|'|`)https("|'|`)
 trigger_rule_on_presence_of: javascript_express_https_protocol_missing_http_server
 auxiliary:
   - id: javascript_express_https_protocol_missing_http_server
