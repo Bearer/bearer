@@ -41,7 +41,10 @@ func TestJsonlines(t *testing.T) {
 		t.Fatalf("failed to encode %s", err)
 	}
 
-	file.Seek(0, 0)
+	_, err = file.Seek(0, 0)
+	if err != nil {
+		t.Fatalf("failed to seek file to begning %s", err)
+	}
 
 	decodedValue := make([]interface{}, 0)
 
