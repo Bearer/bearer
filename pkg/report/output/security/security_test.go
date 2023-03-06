@@ -32,7 +32,7 @@ func TestBuildReportString(t *testing.T) {
 		CWEIDs:      []string{},
 		Type:        "risk",
 		Languages:   []string{"ruby"},
-		Severity:    map[string]string{"default": "low"},
+		Severity:    "low",
 	}
 
 	// limit rules so that test doesn't fail just because
@@ -98,7 +98,7 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 		Report: "security",
 		Severity: map[string]bool{
 			"critical": true,
-			"high":     true,
+			"high":     false,
 			"medium":   false,
 			"low":      false,
 			"warning":  false,
@@ -114,6 +114,18 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 	res, err := security.GetOutput(&dataflow, config)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
+	}
+
+	cupaloy.SnapshotT(t, res)
+}
+
+func TestCalculateSeverity(t *testing.T) {
+	res := map[string]string{
+		"critical": security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", "local"),
+		"high":     security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", "global"),
+		"medium":   security.CalculateSeverity([]string{"Personal Data"}, "low", "global"),
+		"low":      security.CalculateSeverity([]string{"Personal Data"}, "warning", "absence"),
+		"warning":  security.CalculateSeverity([]string{}, "warning", "presence"),
 	}
 
 	cupaloy.SnapshotT(t, res)
@@ -160,20 +172,20 @@ func dummyDataflow() dataflow.DataFlow {
 		DetectorID: "ruby_rails_logger",
 		DataTypes: []types.RiskDatatype{
 			{
-				Name:         "Email Address",
+				Name:         "Biometric Data",
 				Stored:       false,
-				UUID:         "22e24c62-82d3-4b72-827c-e261533331bd",
-				CategoryUUID: "cef587dd-76db-430b-9e18-7b031e1a193b",
+				UUID:         "85599b0c-37b6-4855-af54-5789edc27c00",
+				CategoryUUID: "35b94efa-9b67-49b2-abb9-29b6a759a030",
 				Locations: []types.RiskLocation{
 					{
 						Filename:    "pkg/datatype_leak.rb",
 						LineNumber:  1,
-						FieldName:   "email",
+						FieldName:   "biometric_data",
 						ObjectName:  "user",
 						SubjectName: &subject,
 						Parent: &schema.Parent{
 							LineNumber: 1,
-							Content:    "Rails.logger.info(user.email)",
+							Content:    "Rails.logger.info(user.biometric_data)",
 						},
 					},
 				},

@@ -72,24 +72,24 @@ type RuleMetadata struct {
 }
 
 type RuleDefinition struct {
-	Disabled                bool              `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
-	Type                    string            `mapstructure:"type" json:"type" yaml:"type"`
-	Languages               []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
-	ParamParenting          bool              `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
-	Patterns                []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
-	Stored                  bool              `mapstructure:"stored" json:"stored" yaml:"stored"`
-	Detectors               []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
-	Processors              []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
-	AutoEncrytPrefix        string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
-	DetectPresence          bool              `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
-	Trigger                 string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
-	Severity                map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
-	SkipDataTypes           []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
-	OnlyDataTypes           []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
-	OmitParentContent       bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
-	Metadata                *RuleMetadata     `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
-	Auxiliary               []Auxiliary       `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
-	TriggerRuleOnPresenceOf string            `mapstructure:"trigger_rule_on_presence_of" json:"trigger_rule_on_presence_of" yaml:"trigger_rule_on_presence_of"`
+	Disabled                bool          `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Type                    string        `mapstructure:"type" json:"type" yaml:"type"`
+	Languages               []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
+	ParamParenting          bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Patterns                []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	Stored                  bool          `mapstructure:"stored" json:"stored" yaml:"stored"`
+	Detectors               []string      `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors              []string      `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
+	AutoEncrytPrefix        string        `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	DetectPresence          bool          `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+	Trigger                 string        `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
+	Severity                string        `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
+	SkipDataTypes           []string      `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
+	OnlyDataTypes           []string      `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
+	OmitParentContent       bool          `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	Metadata                *RuleMetadata `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
+	Auxiliary               []Auxiliary   `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
+	TriggerRuleOnPresenceOf string        `mapstructure:"trigger_rule_on_presence_of" json:"trigger_rule_on_presence_of" yaml:"trigger_rule_on_presence_of"`
 }
 
 type Auxiliary struct {
@@ -113,26 +113,26 @@ type Auxiliary struct {
 }
 
 type Rule struct {
-	Id                      string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
-	AssociatedRecipe        string            `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
-	Type                    string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
-	Trigger                 string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
-	Detectors               []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
-	Processors              []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
-	Stored                  bool              `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
-	AutoEncrytPrefix        string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
-	OmitParentContent       bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
-	SkipDataTypes           []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
-	OnlyDataTypes           []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
-	Severity                map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
-	Description             string            `mapstructure:"description" json:"description" yaml:"description"`
-	RemediationMessage      string            `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
-	CWEIDs                  []string          `mapstructure:"cwe_ids" json:"cwe_ids" yaml:"cwe_ids"`
-	Languages               []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
-	Patterns                []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
-	DocumentationUrl        string            `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
-	TriggerRuleOnPresenceOf string            `mapstructure:"trigger_rule_on_presence_of" json:"trigger_rule_on_presence_of" yaml:"trigger_rule_on_presence_of"`
-	IsAuxilary              bool              `mapstructure:"is_auxilary" json:"is_auxilary" yaml:"is_auxilary"`
+	Id                      string        `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
+	AssociatedRecipe        string        `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
+	Type                    string        `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
+	Trigger                 string        `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
+	Detectors               []string      `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors              []string      `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
+	Stored                  bool          `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
+	AutoEncrytPrefix        string        `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	OmitParentContent       bool          `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	SkipDataTypes           []string      `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
+	OnlyDataTypes           []string      `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
+	Severity                string        `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
+	Description             string        `mapstructure:"description" json:"description" yaml:"description"`
+	RemediationMessage      string        `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
+	CWEIDs                  []string      `mapstructure:"cwe_ids" json:"cwe_ids" yaml:"cwe_ids"`
+	Languages               []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
+	Patterns                []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	DocumentationUrl        string        `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
+	TriggerRuleOnPresenceOf string        `mapstructure:"trigger_rule_on_presence_of" json:"trigger_rule_on_presence_of" yaml:"trigger_rule_on_presence_of"`
+	IsAuxilary              bool          `mapstructure:"is_auxilary" json:"is_auxilary" yaml:"is_auxilary"`
 
 	// FIXME: remove after refactor of sql
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
