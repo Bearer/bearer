@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/wlredeye/jsonlines"
-
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/git"
+	"github.com/bearer/bearer/pkg/util/jsonlines"
 )
 
 type renamedFileReport struct {

@@ -12,7 +12,7 @@ type Scanner struct {
 	length     int
 	byteOffset int
 	lineNumber int
-	text       string
+	bytes      []byte
 	err        error
 }
 
@@ -23,21 +23,26 @@ func New(input io.Reader) *Scanner {
 	}
 }
 
+func NewSize(input io.Reader, size int) *Scanner {
+	return &Scanner{
+		input: bufio.NewReaderSize(input, size),
+	}
+}
+
 // Scan attempts to read a line and returns whether it was successful
 func (scanner *Scanner) Scan() bool {
 	if scanner.err != nil {
 		return false
 	}
 
-	text, err := scanner.input.ReadString('\n')
-
+	bytes, err := scanner.input.ReadBytes('\n')
+	scanner.bytes = bytes
 	scanner.err = err
 	scanner.byteOffset += scanner.length
-	scanner.length = len(text)
-	scanner.text = strings.TrimRight(text, "\r\n")
+	scanner.length = len(bytes)
 	scanner.lineNumber++
 
-	return err == nil || err != io.EOF
+	return true
 }
 
 // Err can be called once Scan returns false to see if the scan ended due to
@@ -52,7 +57,13 @@ func (scanner *Scanner) Err() error {
 
 // Text returns the text of the current line
 func (scanner *Scanner) Text() string {
-	return scanner.text
+	text := string(scanner.bytes)
+	return strings.TrimRight(text, "\r\n")
+}
+
+// Bytes returns the bytes of the current line
+func (scanner *Scanner) Bytes() []byte {
+	return scanner.bytes
 }
 
 // LineNumber returns the 1-based offset of the current line

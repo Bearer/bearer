@@ -25,7 +25,6 @@ require (
 	github.com/struCoder/pidusage v0.2.1
 	github.com/tangzero/inflector v1.0.0
 	github.com/weppos/publicsuffix-go v0.30.0
-	github.com/wlredeye/jsonlines v0.0.0-20160904163743-36b5e1bd13d0
 	github.com/zricethezav/gitleaks/v8 v8.16.0
 	golang.org/x/exp v0.0.0-20230304125523-9ff063c70017
 	golang.org/x/mod v0.9.0
@@ -103,7 +102,7 @@ require (
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
-	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	github.com/mitchellh/mapstructure v1.5.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pelletier/go-toml/v2 v2.0.7 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
