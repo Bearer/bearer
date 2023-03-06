@@ -22,12 +22,7 @@ To better understand the structure of a rule file, let’s look at each key:
   - `local`: Use this trigger when your rule directly relies on data type detections in the pattern. Some examples are sending data to a logger, or making an HTTP request that includes sensitive data.
   - `global`: Some rules don’t match code with a data type directly, but you want them to trigger if Bearer finds any sensitive data types in the project. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
   - `presence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection. Examples include best practices such as configuration settings like forcing SSL communication.
-- `severity`: This sets the severity level. Bearer groups rule failures by severity, and you can configure the summary report to only fail on specific severity thresholds. Severity is set for each data type group, each of which takes a severity level of `warning`, `low`, `medium`, `high`, or `critical`. A severity level of `warning` won’t cause CI to fail.
-  - `default`: This is the catch-all type in cases where no data types are associated with the rule.
-  - `PII`: [Personally Identifiable Information](/reference/datatypes/#pii)
-  - `PHI`: [Personal Health Information](/reference/datatypes/#phi)
-  - `PD`: [Personal Data](/reference/datatypes/#personal-data)
-  - `PDS`: [Personal Data (Sensitive)](/reference/datatypes/#personal-data-sensitive)
+- `severity`: This sets the lowest severity level of the rule, by default at `low`. The severity level can automatically increase based on the data type categories (PHI, PD, PDS, PII) detected depending on the rule `trigger` type. Bearer groups rule failures by severity, and you can configure the summary report to only fail on specific severity thresholds. Severity is set for each data type group, each of which takes a severity level of `warning`, `low`, `medium`, `high`, or `critical`. A severity level of `warning` won’t cause CI to fail.
 - `metadata`: Rule metadata is used for output to the summary report, and documentation for the internal rules.
   - `id`: A unique identifier. Internal rules are named `lang_framework_rule_name`. For rules targeting the language core, `lang` is used instead of a framework name. For example `ruby_lang_logger` and `ruby_rails_logger`. For custom rules, you may consider appending your org name.
   - `description`: A brief, one-sentence description of the rule. The best practice is to make this an actionable “rule” phrase, such as “Do X” or “Do not do X in Y”.
@@ -232,8 +227,7 @@ patterns:
 languages:
   - ruby
 trigger: local
-severity:
-  default: high
+severity: high
 metadata:
   id: custom_rule_name
   description: "This is an example rule created based on the tutorial."

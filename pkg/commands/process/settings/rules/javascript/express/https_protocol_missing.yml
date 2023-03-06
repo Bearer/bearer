@@ -10,7 +10,6 @@ auxiliary:
 languages:
   - javascript
 trigger: absence
-severity: low
 metadata:
   description: "Missing https protocol detected."
   remediation_message: |

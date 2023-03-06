@@ -27,7 +27,6 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
 trigger: local
-severity: low
 metadata:
   description: "Sensitive data communicated through GET parameters detected."
   remediation_message: |

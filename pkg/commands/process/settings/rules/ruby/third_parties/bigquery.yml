@@ -58,7 +58,6 @@ auxiliary:
           - variable: TABLE
             detection: ruby_third_parties_bigquery_table
 trigger: local
-severity: low
 skip_data_types:
   - "Unique Identifier"
 metadata:

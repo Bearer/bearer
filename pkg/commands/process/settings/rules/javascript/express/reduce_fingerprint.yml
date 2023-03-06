@@ -24,7 +24,6 @@ auxiliary:
 languages:
   - javascript
 trigger: absence
-severity: low
 metadata:
   description: "Security misconfiguration detected."
   remediation_message: |
