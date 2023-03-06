@@ -22,8 +22,6 @@ patterns:
 languages:
   - javascript
 trigger: presence
-skip_data_types:
-  - "Unique Identifier"
 metadata:
   description: "Missing secure options for cookie detected."
   remediation_message: |
