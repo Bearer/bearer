@@ -7,11 +7,6 @@ patterns:
 languages:
   - javascript
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
 metadata:
   description: "Sensitive data sent to Google Analytic detected."
   remediation_message: |

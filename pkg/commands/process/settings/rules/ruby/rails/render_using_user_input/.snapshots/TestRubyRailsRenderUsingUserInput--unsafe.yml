@@ -1,0 +1,23 @@
+high:
+    - rule:
+        cwe_ids:
+            - "79"
+        id: ruby_rails_render_using_user_input
+        description: Unsanitized user input detected in response.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_render_using_user_input
+      line_number: 1
+      filename: unsafe.rb
+      parent_line_number: 1
+      parent_content: 'render html: params[:oops]'
+    - rule:
+        cwe_ids:
+            - "79"
+        id: ruby_rails_render_using_user_input
+        description: Unsanitized user input detected in response.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_render_using_user_input
+      line_number: 2
+      filename: unsafe.rb
+      parent_line_number: 2
+      parent_content: 'render inline: "<h1>#{params[:oops]}</h1>"'
+
+

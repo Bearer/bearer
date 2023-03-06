@@ -1,6 +1,7 @@
-critical:
+high:
     - rule:
         cwe_ids:
+            - "94"
             - "95"
         id: javascript_express_eval_user_input
         description: Dangerous use of eval with user input detected

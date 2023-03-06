@@ -102,7 +102,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 18
       parent_content: instance4.post(request.env[:oops])
-low:
+warning:
     - rule:
         cwe_ids:
             - "319"

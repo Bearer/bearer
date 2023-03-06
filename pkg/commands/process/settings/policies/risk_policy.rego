@@ -88,7 +88,7 @@ policy_failure contains item if {
 	some data_type in local_data_types
 
 	location = data_type.locations[_]
-	item := data.bearer.common.build_item(location)
+	item := data.bearer.common.build_local_item(location, data_type)
 }
 
 policy_failure contains item if {
@@ -101,6 +101,7 @@ policy_failure contains item if {
 policy_failure contains item if {
 	some detector in presence_failures
 
+	# Add link to global datatypes here
 	location = detector.locations[_]
 	item := data.bearer.common.build_item(location)
 }

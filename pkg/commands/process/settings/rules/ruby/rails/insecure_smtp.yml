@@ -14,11 +14,6 @@ patterns:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
 metadata:
   description: "Communication with an unsecure SMTP connection detected."
   remediation_message: |

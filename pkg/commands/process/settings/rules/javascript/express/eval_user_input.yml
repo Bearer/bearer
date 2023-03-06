@@ -19,6 +19,23 @@ patterns:
     filters:
       - variable: USER_INPUT
         detection: javascript_express_eval_user_input_user_input
+  - pattern: |
+      vm.$<METHOD>($<...>$<USER_INPUT>$<...>)
+    filters:
+      - variable: METHOD
+        values:
+          - createContext
+          - runInContext
+          - runInNewContext
+          - runInThisContext
+          - compileFunction
+      - variable: USER_INPUT
+        detection: javascript_express_eval_user_input_user_input
+  - pattern: |
+      new vm.Script($<...>$<USER_INPUT>$<...>)
+    filters:
+      - variable: USER_INPUT
+        detection: javascript_express_eval_user_input_user_input
 auxiliary:
   - id: javascript_express_eval_user_input_user_input
     patterns:
@@ -31,8 +48,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: critical
+severity: high
 metadata:
   description: "Dangerous use of eval with user input detected"
   remediation_message: |
@@ -44,7 +60,7 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: "DSR-5"
   cwe_id:
+    - 94
     - 95
   id: "javascript_express_eval_user_input"

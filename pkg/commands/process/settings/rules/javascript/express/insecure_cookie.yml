@@ -22,13 +22,6 @@ patterns:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
-skip_data_types:
-  - "Unique Identifier"
 metadata:
   description: "Missing secure options for cookie detected."
   remediation_message: |

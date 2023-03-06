@@ -65,11 +65,7 @@ auxiliary:
     - |
       { secure: $<_> }
 trigger: presence
-severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+severity: medium
 metadata:
   description: "Cookie with default config detected."
   remediation_message: |

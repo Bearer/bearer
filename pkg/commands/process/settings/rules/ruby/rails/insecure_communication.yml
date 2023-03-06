@@ -6,8 +6,7 @@ patterns:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
+severity: high
 metadata:
   description: "Missing force SSL configuration for incoming communication detected."
   remediation_message: |

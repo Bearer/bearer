@@ -9,7 +9,6 @@ import (
 
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/rs/zerolog/log"
-	"golang.org/x/exp/maps"
 	"gopkg.in/yaml.v3"
 )
 
@@ -184,7 +183,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Trigger:                 definition.Trigger,
 			SkipDataTypes:           definition.SkipDataTypes,
 			OnlyDataTypes:           definition.OnlyDataTypes,
-			Severity:                mapSeverityKeysToCategories(definition.Severity),
+			Severity:                definition.Severity,
 			Description:             definition.Metadata.Description,
 			RemediationMessage:      definition.Metadata.RemediationMessage,
 			Stored:                  definition.Stored,
@@ -207,24 +206,10 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 				ParamParenting: auxiliaryDefinition.ParamParenting,
 				Patterns:       auxiliaryDefinition.Patterns,
 				Stored:         auxiliaryDefinition.Stored,
+				IsAuxilary:     true,
 			}
 		}
 	}
 
 	return rules
-}
-
-func mapSeverityKeysToCategories(ruleSeverity map[string]string) map[string]string {
-	// translate data category attributes to data category names
-	for _, key := range maps.Keys(ruleSeverity) {
-		switch key {
-		case "PD":
-			ruleSeverity["Personal Data"] = ruleSeverity[key]
-		case "PDS":
-			ruleSeverity["Personal Data (Sensitive)"] = ruleSeverity[key]
-		default:
-		}
-	}
-
-	return ruleSeverity
 }

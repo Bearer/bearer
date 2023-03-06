@@ -1,4 +1,4 @@
-low:
+medium:
     - rule:
         cwe_ids:
             - "312"
@@ -7,6 +7,8 @@ low:
         documentation_url: https://docs.bearer.com/reference/rules/javascript_jwt
       line_number: 3
       filename: unsecure.js
+      category_groups:
+        - PII
       parent_line_number: 2
       parent_content: |-
         jwt.sign(

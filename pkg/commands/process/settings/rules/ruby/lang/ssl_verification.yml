@@ -8,8 +8,7 @@ patterns:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
+severity: medium
 metadata:
   description: "Missing SSL certificate verification detected."
   remediation_message: |

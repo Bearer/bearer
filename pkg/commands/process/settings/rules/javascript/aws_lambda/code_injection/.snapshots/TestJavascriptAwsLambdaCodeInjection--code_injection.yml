@@ -1,0 +1,25 @@
+high:
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: javascript_aws_lambda_code_injection
+        description: Code injection detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_code_injection
+      line_number: 5
+      filename: code_injection.js
+      parent_line_number: 5
+      parent_content: vm.createContext(context)
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: javascript_aws_lambda_code_injection
+        description: Code injection detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_code_injection
+      line_number: 7
+      filename: code_injection.js
+      parent_line_number: 7
+      parent_content: new vm.Script(event["query"])
+
+

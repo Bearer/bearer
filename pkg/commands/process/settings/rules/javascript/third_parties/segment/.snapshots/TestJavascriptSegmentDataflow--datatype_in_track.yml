@@ -1,4 +1,4 @@
-critical:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -8,7 +8,6 @@ critical:
       line_number: 8
       filename: datatype_in_track.js
       category_groups:
-        - PII
         - Personal Data
       parent_line_number: 5
       parent_content: |-
@@ -17,6 +16,7 @@ critical:
           userId: user.id,
           userIpAddr: user.ip_address,
         })
+medium:
     - rule:
         cwe_ids:
             - "201"
@@ -27,7 +27,6 @@ critical:
       filename: datatype_in_track.js
       category_groups:
         - PII
-        - Personal Data
       parent_line_number: 17
       parent_content: browser.track(user.email)
 
