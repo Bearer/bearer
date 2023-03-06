@@ -1,4 +1,4 @@
-low:
+warning:
     - rule:
         cwe_ids:
             - "319"

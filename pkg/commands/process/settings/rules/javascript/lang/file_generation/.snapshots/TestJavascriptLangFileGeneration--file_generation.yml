@@ -1,4 +1,4 @@
-critical:
+medium:
     - rule:
         cwe_ids:
             - "313"

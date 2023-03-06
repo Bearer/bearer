@@ -74,8 +74,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: low
+severity: high
 metadata:
   description: "SQL injection vulnerability detected."
   remediation_message: |

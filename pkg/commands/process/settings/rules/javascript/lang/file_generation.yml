@@ -12,11 +12,6 @@ patterns:
 languages:
   - javascript
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
 metadata:
   description: "Sensitive data detected as part of a dynamic file generation."
   remediation_message: |

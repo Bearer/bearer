@@ -38,11 +38,6 @@ auxiliary:
           - variable: CLIENT
             detection: javascript_third_parties_algolia_client
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
 skip_data_types:
   - "Unique Identifier"
 metadata:

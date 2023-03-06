@@ -12,15 +12,16 @@
       }),
       LineNumber: (int) 1,
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
-      CategoryGroups: ([]string) (len=1) {
-        (string) (len=3) "PII"
+      CategoryGroups: ([]string) (len=2) {
+        (string) (len=3) "PII",
+        (string) (len=25) "Personal Data (Sensitive)"
       },
       ParentLineNumber: (int) 1,
-      ParentContent: (string) (len=29) "Rails.logger.info(user.email)",
+      ParentContent: (string) (len=38) "Rails.logger.info(user.biometric_data)",
       DetailedContext: (string) ""
     }
   },
-  (string) (len=3) "low": ([]security.Result) (len=1) {
+  (string) (len=6) "medium": ([]security.Result) (len=1) {
     (security.Result) {
       Rule: (*security.RuleResultSummary)({
         CWEIDs: ([]string) (len=1) {

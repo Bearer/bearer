@@ -19,8 +19,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: medium
+severity: high
 metadata:
   description: "React's dangerously set inner HTML detected."
   remediation_message: |

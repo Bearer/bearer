@@ -12,6 +12,7 @@ critical:
         - Personal Data (Sensitive)
       parent_line_number: 1
       parent_content: URI("https://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
+medium:
     - rule:
         cwe_ids:
             - "598"
@@ -22,7 +23,6 @@ critical:
       filename: datatype_in_params.rb
       category_groups:
         - PII
-        - Personal Data (Sensitive)
       parent_line_number: 3
       parent_content: RestClient.get("https://my.api.com/users/search?first_name=#{user.first_name}")
 

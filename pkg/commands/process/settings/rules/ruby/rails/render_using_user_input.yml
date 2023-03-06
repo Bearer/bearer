@@ -34,8 +34,7 @@ auxiliary:
           - variable: USER_INPUT
             detection: ruby_rails_render_using_user_input_user_input
 trigger: presence
-severity:
-  default: medium
+severity: high
 metadata:
   description: "Unsanitized user input detected in response."
   remediation_message: |

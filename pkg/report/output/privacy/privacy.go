@@ -201,7 +201,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
 
 				// update subject rule failures
-				ruleSeverity := security.FindHighestSeverity(ruleOutputFailure.CategoryGroups, rule.Severity)
+				ruleSeverity := security.CalculateSeverity(ruleOutputFailure.CategoryGroups, rule.Severity, rule.Trigger)
 
 				key := buildKey(ruleOutputFailure.DataSubject, ruleOutputFailure.DataType)
 				subjectRuleFailure, ok := subjectRuleFailures[key]
