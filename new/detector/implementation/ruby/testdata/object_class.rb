@@ -4,6 +4,6 @@ class A
   def three
   end
 
-  def four
+  def four(a, b)
   end
 end

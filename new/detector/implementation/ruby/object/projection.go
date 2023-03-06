@@ -2,30 +2,30 @@ package object
 
 import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
+	"github.com/bearer/bearer/new/detector/implementation/ruby/common"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/util/stringutil"
 )
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	result, err := detector.memberExpressionQuery.MatchOnceAt(node)
+	result, err := detector.callsQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
 	}
 
 	if result != nil {
-		objectNode, isPropertyAccess := getProjectedObject(result["object"])
+		receiverNode := result["receiver"]
 
 		objects, err := generic.ProjectObject(
 			node,
 			evaluator,
-			objectNode,
-			getObjectName(objectNode),
-			result["property"].Content(),
-			isPropertyAccess,
+			receiverNode,
+			getObjectName(receiverNode),
+			result["method"].Content(),
+			getIsPropertyAccess(receiverNode),
 		)
 		if err != nil {
 			return nil, err
@@ -34,14 +34,14 @@ func (detector *objectDetector) getProjections(
 		return objects, nil
 	}
 
-	result, err = detector.subscriptExpressionQuery.MatchOnceAt(node)
+	result, err = detector.elementReferenceQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
 	}
 
 	if result != nil {
-		objectNode, isPropertyAccess := getProjectedObject(result["object"])
-		propertyName := getSubscriptProperty(result["root"])
+		objectNode := result["object"]
+		propertyName := getElementProperty(result["root"])
 		if propertyName == "" {
 			return nil, nil
 		}
@@ -52,7 +52,7 @@ func (detector *objectDetector) getProjections(
 			objectNode,
 			getObjectName(objectNode),
 			propertyName,
-			isPropertyAccess,
+			getIsPropertyAccess(objectNode),
 		)
 		if err != nil {
 			return nil, err
@@ -70,32 +70,28 @@ func getObjectName(objectNode *tree.Node) string {
 		return objectNode.Content()
 	}
 
+	// @user.name or @user["name"]
+	if objectNode.Type() == "instance_variable" {
+		return objectNode.Content()[1:]
+	}
+
 	// address.city.zip or address.city["zip"]
-	if objectNode.Type() == "member_expression" {
-		return objectNode.ChildByFieldName("property").Content()
+	if objectNode.Type() == "call" {
+		return objectNode.ChildByFieldName("method").Content()
 	}
 
 	// address["city"].zip or address["city"]["zip"]
-	if objectNode.Type() == "subscript_expression" {
-		return getSubscriptProperty(objectNode)
+	if objectNode.Type() == "element_reference" {
+		return getElementProperty(objectNode)
 	}
 
 	return ""
 }
 
-func getSubscriptProperty(node *tree.Node) string {
-	indexNode := node.ChildByFieldName("index")
-	if indexNode.Type() == "string" {
-		return stringutil.StripQuotes(indexNode.Content())
-	}
-
-	return ""
+func getElementProperty(node *tree.Node) string {
+	return common.GetLiteralKey(node.NamedChild(1))
 }
 
-func getProjectedObject(objectNode *tree.Node) (*tree.Node, bool) {
-	if objectNode.Type() == "call_expression" {
-		return objectNode.ChildByFieldName("function"), false
-	}
-
-	return objectNode, true
+func getIsPropertyAccess(objectNode *tree.Node) bool {
+	return objectNode.Type() != "call" || objectNode.ChildByFieldName("arguments") == nil
 }

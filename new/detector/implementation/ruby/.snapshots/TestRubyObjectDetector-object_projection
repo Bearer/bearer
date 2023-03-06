@@ -127,10 +127,24 @@
                 isvirtual: true
     isvirtual: true
 - position: "9:1"
-  content: obj["w"]
+  content: '@myvar.x'
   data:
     properties:
-        - name: obj
+        - name: myvar
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: x
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- position: "10:1"
+  content: '@myvar["w"]'
+  data:
+    properties:
+        - name: myvar
           object:
             detectortype: object
             matchnode: {}
@@ -140,7 +154,7 @@
                       object: null
                 isvirtual: true
     isvirtual: true
-- position: "12:1"
+- position: "13:1"
   content: obj.x(i).a
   data:
     properties:

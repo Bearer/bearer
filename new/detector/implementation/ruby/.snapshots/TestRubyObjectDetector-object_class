@@ -6,26 +6,25 @@
       def three
       end
 
-      def four
+      def four(a, b)
       end
     end
   data:
-    name: A
     properties:
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: one
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: two
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: three
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: four
+        - name: A
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: one
+                      object: null
+                    - name: two
+                      object: null
+                    - name: three
+                      object: null
+                    - name: four
+                      object: null
+                isvirtual: false
+    isvirtual: false
 

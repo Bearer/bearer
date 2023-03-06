@@ -8,5 +8,5 @@ obj["x"].a
 obj.z
 obj["w"]
 
-// Stop at call
-obj.x().a
+// Call
+obj.x(i).a
