@@ -24,14 +24,11 @@ metadata:
   description: "React's dangerously set inner HTML detected."
   remediation_message: |
     ## Description
-
-    TODO
-
-    ## Remediations
-
-    TODO
+    There are XSS vulnerabilites when using React's dangerouslySetInnerHTML with unsanitized data.
 
     <!--
+    ## Remediations
+    Coming soon.
     ## Resources
     Coming soon.
     -->

@@ -56,14 +56,11 @@ metadata:
   description: "Dangerous dynamic HTML insert detected."
   remediation_message: |
     ## Description
-
-    TODO
-
-    ## Remediations
-
-    TODO
+    There are XSS vulnerabilites when dynamically inserting HTML that contains unsanitized data.
 
     <!--
+    ## Remediations
+    Coming soon.
     ## Resources
     Coming soon.
     -->
