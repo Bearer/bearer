@@ -88,16 +88,18 @@ metadata:
 
     Squelize example
     ```javascript
-      Post.findAll({
       const { Op } = require("sequelize");
-      Post.findAll({
-        where: {
-          [Op.or]: [
-            { authorId: event.authorID },
-            { authorId: 13 }
-          ]
-        }
-      });
+
+      module.exports= async function(event, context) {
+        await Post.findAll({
+          where: {
+            [Op.or]: [
+              { authorId: event.authorID },
+              { authorId: 13 }
+            ]
+          }
+        });
+      };
     ```
 
     ## Resources
