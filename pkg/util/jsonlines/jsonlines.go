@@ -7,7 +7,6 @@ import (
 	"reflect"
 
 	"github.com/bearer/bearer/pkg/util/linescanner"
-	"github.com/rs/zerolog/log"
 )
 
 const maxTokenSizeBytes int = 5 * 1024 * 1024
@@ -64,8 +63,6 @@ func Decode(r io.Reader, ptrToSlice interface{}) error {
 		}
 
 		newObj := reflect.New(member).Interface()
-
-		log.Debug().Msgf("got bytes %s", string(item))
 
 		err := json.Unmarshal(item, newObj)
 		if err != nil {
