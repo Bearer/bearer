@@ -9,7 +9,6 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
-	"github.com/wlredeye/jsonlines"
 
 	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/repo_info"
@@ -17,6 +16,7 @@ import (
 	workertype "github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/git"
 	"github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/util/jsonlines"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/tmpfile"
 )
