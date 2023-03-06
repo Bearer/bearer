@@ -13,7 +13,7 @@ patterns:
 languages:
   - ruby
 trigger: presence
-severity: warning
+severity: low
 metadata:
   description: "Communication with an unsecure FTP server detected."
   remediation_message: |

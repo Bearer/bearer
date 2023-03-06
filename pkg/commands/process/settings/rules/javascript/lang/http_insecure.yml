@@ -45,7 +45,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity: warning
+severity: low
 metadata:
   description: "Connection with an unsecure HTTP communication detected."
   remediation_message: |
