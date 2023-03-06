@@ -49,7 +49,7 @@ auxiliary:
           $<EMPTY_STRING>
         filters:
           - variable: EMPTY_STRING
-            regex: (""|'')
+            regex: (""|''|``)
       - $<_>.sanitize()
       - $<_>.sanitizeHTML()
   - id: javascript_dangerous_insert_html_unsanitzed_input
