@@ -66,8 +66,7 @@ auxiliary:
       - mysql.createPool()
   - id: javascript_aws_lambda_sql_injection_pool_conn
     patterns:
-      - pattern:
-          $<MYSQL_POOL>.getConnection(function($<_>, $<!>$<CONN:identifier>) {})
+      - pattern: $<MYSQL_POOL>.getConnection(function($<_>, $<!>$<CONN:identifier>) {})
         filters:
           - variable: MYSQL_POOL
             detection: javascript_express_sql_injection_mysql_pool
@@ -82,12 +81,28 @@ metadata:
     ## Description
     Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.
 
-    <!--
+
     ## Remediations
-    Coming soon.
+
+    Use safe sql libraries methods which sanitze user input
+
+    Squelize example
+    ```javascript
+      Post.findAll({
+      const { Op } = require("sequelize");
+      Post.findAll({
+        where: {
+          [Op.or]: [
+            { authorId: event.authorID },
+            { authorId: 13 }
+          ]
+        }
+      });
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [Owasp sql injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+
   cwe_id:
     - 89
   id: "javascript_aws_lambda_sql_injection"
