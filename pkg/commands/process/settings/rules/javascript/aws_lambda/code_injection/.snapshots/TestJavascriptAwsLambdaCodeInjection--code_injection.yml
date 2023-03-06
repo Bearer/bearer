@@ -1,6 +1,7 @@
-critical:
+high:
     - rule:
         cwe_ids:
+            - "94"
             - "95"
         id: javascript_aws_lambda_code_injection
         description: Code injection detected.
@@ -11,6 +12,7 @@ critical:
       parent_content: vm.createContext(context)
     - rule:
         cwe_ids:
+            - "94"
             - "95"
         id: javascript_aws_lambda_code_injection
         description: Code injection detected.

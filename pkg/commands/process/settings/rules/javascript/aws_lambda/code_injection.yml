@@ -44,8 +44,7 @@ auxiliary:
 languages:
   - javascript
 trigger: presence
-severity:
-  default: critical
+severity: high
 metadata:
   description: "Code injection detected."
   remediation_message: |
@@ -59,5 +58,6 @@ metadata:
     Coming soon.
     -->
   cwe_id:
+    - 94
     - 95
   id: "javascript_aws_lambda_code_injection"
