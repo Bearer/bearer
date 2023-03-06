@@ -12,11 +12,28 @@ patterns:
       - variable: RAW_INPUT
         detection: javascript_aws_lambda_code_injection_user_input
   - pattern: |
-      new vm.$<METHOD>($<...>$<RAW_INPUT>$<...>)
+      new vm.Script($<...>$<RAW_INPUT>$<...>)
     filters:
-      - variable: METHOD
-        values:
-          - Script
+      - variable: RAW_INPUT
+        detection: javascript_aws_lambda_code_injection_user_input
+  - pattern: |
+      eval($<RAW_INPUT>)
+    filters:
+      - variable: RAW_INPUT
+        detection: javascript_aws_lambda_code_injection_user_input
+  - pattern: |
+      new Function($<RAW_INPUT>)
+    filters:
+      - variable: RAW_INPUT
+        detection: javascript_aws_lambda_code_injection_user_input
+  - pattern: |
+      setTimeout($<RAW_INPUT>)
+    filters:
+      - variable: RAW_INPUT
+        detection: javascript_aws_lambda_code_injection_user_input
+  - pattern: |
+      setInterval($<RAW_INPUT>)
+    filters:
       - variable: RAW_INPUT
         detection: javascript_aws_lambda_code_injection_user_input
 auxiliary:
@@ -28,7 +45,7 @@ languages:
   - javascript
 trigger: presence
 severity:
-  default: low
+  default: critical
 metadata:
   description: "Code injection detected."
   remediation_message: |
@@ -42,5 +59,5 @@ metadata:
     Coming soon.
     -->
   cwe_id:
-    - 94
+    - 95
   id: "javascript_aws_lambda_code_injection"
