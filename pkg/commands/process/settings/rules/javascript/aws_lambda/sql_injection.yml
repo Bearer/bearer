@@ -86,7 +86,7 @@ metadata:
 
     Use safe sql libraries methods which sanitze user input
 
-    Squelize example
+    Sequelize example
     ```javascript
       const { Op } = require("sequelize");
 
