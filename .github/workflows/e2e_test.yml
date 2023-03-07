@@ -7,7 +7,6 @@ on:
     types:
       - opened
       - synchronize
-      - edited
       - reopened
 permissions:
   contents: read
