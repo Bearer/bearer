@@ -23,12 +23,27 @@ metadata:
   remediation_message: |
     ## Description
     Using external or user-defined input directly in an OS command can allow attackers to perform dangerous commands on the operating system.
-    <!--
+
     ## Remediations
-    Coming soon.
+
+    Think twice if user input is really needed there.
+
+    It might be possible to use dynamic hardcoded values:
+
+    ```javascript
+    exports.handler = async (event) => {
+        let filePattern = "*.js"
+
+        if event["graphql"] {
+          filePattern = "*.gql"
+        }
+
+        cp.exec(`cp ${filePattern} foo`, (error, stdout, stderr) => {});
+    };
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [Owasp command injection explained](https://owasp.org/www-community/attacks/Command_Injection)
   cwe_id:
     - 78
   id: "javascript_aws_lambda_os_command_injection"

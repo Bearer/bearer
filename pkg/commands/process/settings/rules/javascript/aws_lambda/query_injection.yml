@@ -42,12 +42,30 @@ metadata:
     ## Description
     Including unsanitized data, such as user input or request data, in raw queries makes your application vulnerable to injection attacks.
 
-    <!--
     ## Remediations
-    Coming soon.
+
+    Narrow down your query from the code instead of using unsanitzed user input to define it.
+
+    Example:
+
+    ```javascript
+    exports.handler = async function(event, context) {
+        var params = {
+            Key: {
+             "artist": {"S": event.input }, 
+             "song": {"S": "Carrot Eton"}
+            }, 
+            TableName: "artists"
+        };
+        var result = await dynamodb.getItem(params).promise()
+        console.log(JSON.stringify(result))
+    }
+    ```
+
+
     ## Resources
-    Coming soon.
-    -->
+    - [Owasp nosql injection explained](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05.6-Testing_for_NoSQL_Injection)
+
   cwe_id:
     - 89
   id: "javascript_aws_lambda_query_injection"
