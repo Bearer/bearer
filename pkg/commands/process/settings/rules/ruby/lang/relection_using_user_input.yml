@@ -88,8 +88,7 @@ auxiliary:
         def $<_>($<!>event:, context:)
         end
 trigger: presence
-severity:
-  default: medium
+severity: high
 metadata:
   description: "Use of reflection influenced by user input detected."
   remediation_message: |

@@ -16,8 +16,7 @@ skip_data_types:
   - Passwords
 auto_encrypt_prefix: encrypted_
 trigger: stored_data_types
-severity:
-  default: warning
+severity: warning
 metadata:
   description: "Missing application-level encryption of sensitive data detected."
   remediation_message: |

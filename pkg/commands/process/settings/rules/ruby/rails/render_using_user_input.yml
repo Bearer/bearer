@@ -1,0 +1,65 @@
+languages:
+  - ruby
+patterns:
+  - pattern: |
+      render(inline: $<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_rails_render_using_user_input_user_input
+      - not:
+          variable: USER_INPUT
+          detection: ruby_rails_render_using_user_input_sanitized
+  - pattern: |
+      render(html: $<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_rails_render_using_user_input_user_input
+      - not:
+          variable: USER_INPUT
+          detection: ruby_rails_render_using_user_input_sanitized
+auxiliary:
+  - id: ruby_rails_render_using_user_input_user_input
+    patterns:
+      - params
+      - request
+      - cookies
+  - id: ruby_rails_render_using_user_input_sanitized
+    patterns:
+      - pattern: $<METHOD>($<USER_INPUT>)
+        filters:
+          - variable: METHOD
+            values:
+              - sanitize
+              - strip_tags
+          - variable: USER_INPUT
+            detection: ruby_rails_render_using_user_input_user_input
+trigger: presence
+severity: high
+metadata:
+  description: "Unsanitized user input detected in response."
+  remediation_message: |
+    ## Description
+
+    Applications should not include unsanitized user input in responses. This
+    can allow cross-site scripting (XSS) attacks.
+
+    ## Remediations
+
+    ❌ Avoid including user input directly in the response:
+
+    ```ruby
+    render html: "<h1>#{params[:title]}</h1>"
+    ```
+
+    ✅ Sanitize user input when including it in a response:
+
+    ```ruby
+    render html: "<h1>#{strip_tags(params[:title])}</h1>"
+    ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 79
+  id: ruby_rails_render_using_user_input

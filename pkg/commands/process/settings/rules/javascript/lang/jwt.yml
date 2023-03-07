@@ -8,11 +8,6 @@ patterns:
 languages:
   - javascript
 trigger: local
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
 skip_data_types:
   - "Unique Identifier"
 metadata:

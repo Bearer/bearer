@@ -6,9 +6,9 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/types"
+	"github.com/bearer/bearer/pkg/util/jsonlines"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/rs/zerolog/log"
-	"github.com/wlredeye/jsonlines"
 )
 
 func GetOutput(report types.Report, config settings.Config) ([]interface{}, error) {

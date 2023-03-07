@@ -23,7 +23,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/source"
 
 	"github.com/bearer/bearer/pkg/util/blamer"
-	"github.com/wlredeye/jsonlines"
+	"github.com/bearer/bearer/pkg/util/jsonlines"
 )
 
 type StoredSchema struct {

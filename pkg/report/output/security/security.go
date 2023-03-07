@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
+	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/maps"
@@ -161,7 +162,7 @@ func evaluateRules(
 					DetailedContext:  output.DetailedContext,
 				}
 
-				severity := FindHighestSeverity(result.CategoryGroups, rule.Severity)
+				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, rule.Trigger)
 
 				if config.Report.Severity[severity] {
 					summaryResults[severity] = append(summaryResults[severity], result)
@@ -235,25 +236,53 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 	return reportStr, reportPassed
 }
 
-func FindHighestSeverity(groups []string, severity map[string]string) string {
-	var severities []string
-	for _, group := range groups {
-		severities = append(severities, severity[group])
-	}
-
-	if slices.Contains(severities, types.LevelCritical) {
-		return types.LevelCritical
-	} else if slices.Contains(severities, types.LevelHigh) {
-		return types.LevelHigh
-	} else if slices.Contains(severities, types.LevelMedium) {
-		return types.LevelMedium
-	} else if slices.Contains(severities, types.LevelLow) {
-		return types.LevelLow
-	} else if slices.Contains(severities, types.LevelWarning) {
+func CalculateSeverity(groups []string, severity string, trigger string) string {
+	if severity == types.LevelWarning {
+		log.Debug().Msgf("Calculated severity = %s (no calculation applied)", severity)
 		return types.LevelWarning
 	}
 
-	return severity["default"]
+	// highest sensitive data category
+	sensitiveDataCategoryWeighting := 0
+	if slices.Contains(groups, "PHI") {
+		sensitiveDataCategoryWeighting = 3
+	} else if slices.Contains(groups, "Personal Data (Sensitive)") {
+		sensitiveDataCategoryWeighting = 3
+	} else if slices.Contains(groups, "Personal Data") {
+		sensitiveDataCategoryWeighting = 2
+	} else if slices.Contains(groups, "PII") {
+		sensitiveDataCategoryWeighting = 1
+	}
+
+	var ruleSeverityWeighting int
+	switch severity {
+	case types.LevelCritical:
+		ruleSeverityWeighting = 8
+	case types.LevelHigh:
+		ruleSeverityWeighting = 5
+	case types.LevelMedium:
+		ruleSeverityWeighting = 3
+	default:
+		ruleSeverityWeighting = 2 // low weighting as default
+	}
+
+	triggerWeighting := 1
+	if trigger == types.LocalTrigger {
+		triggerWeighting = 2
+	}
+
+	log.Debug().Msgf("Calculated severity = %s : %d + (%s : %d * %s : %d)", severity, ruleSeverityWeighting, groups, sensitiveDataCategoryWeighting, trigger, triggerWeighting)
+
+	switch finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting); {
+	case finalWeighting >= 8:
+		return types.LevelCritical
+	case finalWeighting >= 5:
+		return types.LevelHigh
+	case finalWeighting >= 3:
+		return types.LevelMedium
+	}
+
+	return types.LevelLow
 }
 
 func writeStatsToString(

@@ -1,4 +1,25 @@
-warning:
+high:
+    - rule:
+        cwe_ids:
+            - "22"
+        id: javascript_express_path_traversal
+        description: Possible path traversal vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_path_traversal
+      line_number: 13
+      filename: send_file_with_external_input.js
+      parent_line_number: 13
+      parent_content: path.resolve(file)
+    - rule:
+        cwe_ids:
+            - "22"
+        id: javascript_express_path_traversal
+        description: Possible path traversal vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_path_traversal
+      line_number: 15
+      filename: send_file_with_external_input.js
+      parent_line_number: 15
+      parent_content: path.join(__dirname, req.params.root)
+low:
     - rule:
         cwe_ids:
             - "73"
@@ -39,25 +60,5 @@ warning:
       filename: send_file_with_external_input.js
       parent_line_number: 15
       parent_content: 'res.sendFile("file.txt", { root: path.join(__dirname, req.params.root) })'
-    - rule:
-        cwe_ids:
-            - "22"
-        id: javascript_express_path_traversal
-        description: Possible path traversal vulnerability detected.
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_path_traversal
-      line_number: 13
-      filename: send_file_with_external_input.js
-      parent_line_number: 13
-      parent_content: path.resolve(file)
-    - rule:
-        cwe_ids:
-            - "22"
-        id: javascript_express_path_traversal
-        description: Possible path traversal vulnerability detected.
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_path_traversal
-      line_number: 15
-      filename: send_file_with_external_input.js
-      parent_line_number: 15
-      parent_content: path.join(__dirname, req.params.root)
 
 

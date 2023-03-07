@@ -166,14 +166,13 @@ auxiliary:
           - variable: INSECURE_URL
             detection: insecure_url
 trigger: presence
-severity:
-  default: low
+severity: low
 metadata:
   description: "Connection through an unsecure HTTP communication detected."
   remediation_message: |
     ## Description
 
-    Applications processing sensitive data should only connect using HTTPS connections. This rule checks that all HTTP connections use HTTPS.
+    Applications should only connect to API using HTTPS connections. This rule checks that all HTTP connections use HTTPS.
 
     ## Remediations
 

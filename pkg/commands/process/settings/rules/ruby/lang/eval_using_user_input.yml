@@ -38,24 +38,20 @@ auxiliary:
 languages:
   - ruby
 trigger: presence
-severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+severity: high
 metadata:
   description: "Potential command injection with user input detected."
   remediation_message: |
     ## Description
+    It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
 
-    TODO
-
-    ## Remediations
-    TODO
     <!--
+    ## Remediations
+    Coming soon.
     ## Resources
     Coming soon.
     -->
   cwe_id:
     - 94
+    - 95
   id: ruby_lang_eval_using_user_input
