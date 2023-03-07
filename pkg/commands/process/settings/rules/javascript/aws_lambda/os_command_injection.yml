@@ -43,7 +43,7 @@ metadata:
     ```
 
     ## Resources
-    - [Owasp command injection explained](https://owasp.org/www-community/attacks/Command_Injection)
+    - [OWASP command injection explained](https://owasp.org/www-community/attacks/Command_Injection)
   cwe_id:
     - 78
   id: "javascript_aws_lambda_os_command_injection"

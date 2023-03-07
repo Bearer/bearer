@@ -51,12 +51,41 @@ metadata:
     ## Description
     Running code that contains unsanitized data, such as user input or request data, makes your application vulnerable to injection attacks.
 
-    <!--
     ## Remediations
-    Coming soon.
+        Think twice if user input is really needed there.
+
+        It might be possible to use dynamic hardcoded values:
+
+        ```javascript
+          exports.handler = async (event) => {
+              let myFunc = "(a, b) => a + b"
+
+              if event["singleMember"] {
+                myFunc = "(a) => a"
+              }
+
+              vm.compileFunction(myFunc);
+          };
+        ```
+
+        or pass user input to a compiled function, instead of compiling it with user input.
+
+        ```javascript
+          exports.handler = async (event) => {
+              let myFunc = "(a, b) => a + b"
+
+              if event["singleMember"] {
+                myFunc = "(a) => a"
+              }
+
+              let compiledFunction = vm.compileFunction(myFunc);
+
+              compiledFunction(event)
+          };
+        ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP sql injection explained](https://owasp.org/www-community/attacks/Code_Injection)
   cwe_id:
     - 94
     - 95

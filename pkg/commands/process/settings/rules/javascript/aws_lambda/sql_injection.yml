@@ -102,7 +102,7 @@ metadata:
     ```
 
     ## Resources
-    - [Owasp sql injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+    - [OWASP sql injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
 
   cwe_id:
     - 89
