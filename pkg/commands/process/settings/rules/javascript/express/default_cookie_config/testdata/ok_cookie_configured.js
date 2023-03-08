@@ -18,3 +18,9 @@ app.use(
     },
   })
 )
+
+// some other non-express cookie usage
+var config = {
+  hello: "world",
+  cookie: "some-encrypted-string"
+}
