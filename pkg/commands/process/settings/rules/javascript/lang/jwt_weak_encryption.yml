@@ -16,7 +16,7 @@ metadata:
 
     ## Remediations
 
-    Use HS256 algorithm for jwt encryption
+    Use the HS256 algorithm for JWT encryption
 
     ```
       jwt.sign({ "foo": "bar"}, process.env.JWT_SECRET, {
