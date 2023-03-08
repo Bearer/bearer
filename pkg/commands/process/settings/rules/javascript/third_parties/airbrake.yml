@@ -11,8 +11,8 @@ patterns:
 auxiliary:
   - id: javascript_airbrake_init
     patterns:
-    - |
-      new Notifier($<...>)
+      - |
+        new Notifier($<...>)
 trigger: local
 skip_data_types:
   - "Unique Identifier"
@@ -26,8 +26,18 @@ metadata:
 
     When logging errors or events, ensure all sensitive data is removed.
 
+    If you really need to identify users, use database's unique identifiers.
+
+    ```javascript
+    airbrake.notify({
+      error: err,
+      params: { user: user.uuid },
+    });
+    ```
+
     ## Resources
     - [Airbrake Docs](https://docs.airbrake.io/)
+    - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
   cwe_id:
     - 201
   associated_recipe: Airbrake
