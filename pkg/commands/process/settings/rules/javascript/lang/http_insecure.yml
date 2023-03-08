@@ -65,10 +65,8 @@ metadata:
     const response = axios.get('https://secure-api.com')
     ```
 
-    <!--
     ## Resources
-    Coming soon.
-    -->
+      - [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)
   cwe_id:
     - 319
   id: "javascript_http_insecure"

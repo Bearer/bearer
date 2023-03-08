@@ -44,6 +44,7 @@ auxiliary:
             contains: false
       - $<_>.sanitize()
       - $<_>.sanitizeHTML()
+      - $<_>.sanitizeHtml()
   - id: javascript_dangerous_insert_html_unsanitzed_input
     patterns:
       - |
@@ -56,14 +57,20 @@ metadata:
   description: "Dangerous dynamic HTML insert detected."
   remediation_message: |
     ## Description
-    There are XSS vulnerabilites when dynamically inserting HTML that contains unsanitized data.
+    There are XSS vulnerabilities when dynamically inserting HTML that contains unsanitized data.
 
-    <!--
     ## Remediations
-    Coming soon.
+    Make sure you use HTML sanitization library before inserting html
+
+    ```javascript
+    import sanitizeHtml from 'sanitize-html';
+
+    const html = `<strong>${user.Input}</strong>`;
+    document.body.innerHTML = sanitizeHtml(html)
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)
   cwe_id:
     - 79
   id: "javascript_dangerous_insert_html"
