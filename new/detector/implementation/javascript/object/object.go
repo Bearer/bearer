@@ -22,6 +22,7 @@ type objectDetector struct {
 	// Projection
 	memberExpressionQuery    *tree.Query
 	subscriptExpressionQuery *tree.Query
+	callQuery                *tree.Query
 	// FIXME: what to do with this?
 	objectDeconstructionQuery *tree.Query
 }
@@ -80,13 +81,19 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling subscript expression query %s", err)
 	}
 
+	callQuery, err := lang.CompileQuery(`(call_expression function: (_) @function arguments: (_) @arguments) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling call query: %s", err)
+	}
+
 	return &objectDetector{
 		objectPairQuery:           objectPairQuery,
 		assignmentQuery:           assignmentQuery,
-		classQuery:                classQuery,
 		objectDeconstructionQuery: objectDeconstructionQuery,
+		classQuery:                classQuery,
 		memberExpressionQuery:     memberExpressionQuery,
 		subscriptExpressionQuery:  subscriptExpressionQuery,
+		callQuery:                 callQuery,
 	}, nil
 }
 
@@ -250,4 +257,5 @@ func (detector *objectDetector) Close() {
 	detector.classQuery.Close()
 	detector.memberExpressionQuery.Close()
 	detector.subscriptExpressionQuery.Close()
+	detector.callQuery.Close()
 }

@@ -61,6 +61,35 @@ func (detector *objectDetector) getProjections(
 		return objects, nil
 	}
 
+	result, err = detector.callQuery.MatchOnceAt(node)
+	if err != nil {
+		return nil, err
+	}
+
+	if result != nil {
+		var objects []interface{}
+
+		functionDetections, err := evaluator.ForTree(result["function"], "object", true)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, detection := range functionDetections {
+			objects = append(objects, detection.Data)
+		}
+
+		argumentDetections, err := evaluator.ForTree(result["arguments"], "object", true)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, detection := range argumentDetections {
+			objects = append(objects, detection.Data)
+		}
+
+		return objects, nil
+	}
+
 	return nil, nil
 }
 

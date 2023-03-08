@@ -12,12 +12,12 @@
                       object: null
                 isvirtual: false
     isvirtual: true
-- position: "3:6"
+- position: "3:1"
   content: |-
-    {
+    call({
       x: { n: nested },
       y: { b: 4 }
-    }
+    })
   data:
     properties:
         - name: x

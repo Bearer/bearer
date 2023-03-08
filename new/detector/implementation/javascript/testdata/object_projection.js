@@ -9,4 +9,5 @@ obj.z
 obj["w"]
 
 // Call
-obj.x(i).a
+obj.x({ email: " " }, { first_name: "" })
+obj.x({ email: " " }, { first_name: "" }).a

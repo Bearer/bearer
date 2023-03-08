@@ -155,7 +155,70 @@
                 isvirtual: true
     isvirtual: true
 - position: "13:1"
-  content: obj.x(i).a
+  content: 'obj.x({ email: " " }, { first_name: "" })'
+  data:
+    properties:
+        - name: a
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: i
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- position: "13:1"
+  content: 'obj.x({ email: " " }, { first_name: "" })'
+  data:
+    properties:
+        - name: x
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: i
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+    isvirtual: true
+- position: "13:1"
+  content: 'obj.x({ email: " " }, { first_name: "" })'
+  data:
+    properties:
+        - name: obj
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: x
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- position: "13:1"
+  content: 'obj.x({ email: " " }, { first_name: "" })'
+  data:
+    properties:
+        - name: email
+          object: null
+    isvirtual: false
+- position: "13:1"
+  content: 'obj.x({ email: " " }, { first_name: "" })'
+  data:
+    properties:
+        - name: first_name
+          object: null
+    isvirtual: false
+- position: "14:1"
+  content: 'obj.x({ email: " " }, { first_name: "" }).a'
   data:
     properties:
         - name: x
