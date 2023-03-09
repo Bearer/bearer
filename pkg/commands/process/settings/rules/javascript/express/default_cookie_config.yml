@@ -4,6 +4,8 @@ patterns:
         cookie: $<!>$<HASH_CONTENT>
       }
     filters:
+      - variable: HASH_CONTENT
+        detection: express_default_cookie_config_hash_val
       - either:
         - not:
             variable: HASH_CONTENT
@@ -23,6 +25,8 @@ patterns:
   - pattern: |
       cookieSession($<!>$<HASH_CONTENT>)
     filters:
+      - variable: HASH_CONTENT
+        detection: express_default_cookie_config_hash_val
       - either:
         - not:
             variable: HASH_CONTENT
@@ -42,6 +46,10 @@ patterns:
 languages:
   - javascript
 auxiliary:
+  - id: express_default_cookie_config_hash_val
+    patterns:
+    - |
+      {}
   - id: express_default_cookie_config_name_attribute
     patterns:
     - |

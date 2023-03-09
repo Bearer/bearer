@@ -8,6 +8,12 @@ app.use(helmet.hidePoweredBy())
 
 app.use(
   session({
+    cookie: {},
+  })
+)
+
+app.use(
+  session({
     cookie: {
       domain: "example.com",
       secure: true,
