@@ -17,7 +17,7 @@ We provides [built-in rules](/reference/rules) against a common set of security 
 
 And [many more](/reference/rules).
 
-Bearer currenty supporting **JavaScript** and **Ruby** stacks, more will follow.
+Bearer currently supports **JavaScript** and **Ruby** stacks, more will follow.
 
 ![bearer security scanner gif](/assets/img/Bearer-security-OSS.gif)
 
