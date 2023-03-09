@@ -239,7 +239,7 @@ func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Nod
 }
 
 func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node) []string {
-	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
+	if node.Type() == "statement_block" && node.Parent().Type() == "program" && node.NamedChildCount() == 0 {
 		return []string{"object"}
 	}
 
