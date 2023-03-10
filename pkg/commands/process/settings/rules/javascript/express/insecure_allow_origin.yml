@@ -43,6 +43,7 @@ metadata:
 
     ## Remediations
     ❌ Avoid defining origins with user input wherever possible.
+
     ✅ If unavoidable, be sure to verify the input or to use a safe-list.
 
     ## Resources

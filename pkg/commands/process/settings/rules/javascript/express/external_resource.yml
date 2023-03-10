@@ -30,6 +30,7 @@ metadata:
     ❌ Avoid passing user or request input to res.render() or require().
 
     ✅ Sanitize the input or use a safelist
+
     Where it is unavoidable to rely on user input, sanitize the input or use a safelist to keep the rendered resources within the expected scope.
 
     ```javascript

@@ -94,6 +94,7 @@ metadata:
     ## Remediations
 
     ❌ Avoid raw queries, especially those that contain unsanitized user input
+
     ```javascript
       var sqlite = new Sequelize("sqlite::memory:");
       sqlite.query("SELECT * FROM users WHERE ID = " + req.params.userId);

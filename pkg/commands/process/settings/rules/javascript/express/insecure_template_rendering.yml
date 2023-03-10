@@ -90,6 +90,7 @@ metadata:
 
     ## Remediations
     ✅ Always validate external data (for example, with a safe list) before rendering it in a template.
+
     ✅ Sanitize external data before rendering it in a template to remove special characters that could introduce an injection attack.
 
     ## Resources

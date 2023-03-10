@@ -26,7 +26,7 @@ metadata:
     localStorage.setItem('user', email)
     ```
 
-     ✅ Instead, use a unique identifier:
+    ✅ Instead, use a unique identifier:
 
     ```javascript
     localStorage.setItem('user', user.uuid)
