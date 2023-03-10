@@ -82,6 +82,7 @@ metadata:
 
     ## Remediations
     ✅ Instead of the default cookie name, use generic names.
+
     ✅ Always set a maxAge or expires value
 
     ## Resources

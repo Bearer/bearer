@@ -30,6 +30,7 @@ metadata:
 
     ## Remediations
     ✅ Set cookie security values to use HTTP(S) instead of client-side javascript.
+
     ✅ Set `secure` values to `true` to force cookies to only send over HTTPS.
 
     ## Resources

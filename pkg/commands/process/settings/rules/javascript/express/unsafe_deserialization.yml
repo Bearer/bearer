@@ -51,7 +51,9 @@ metadata:
 
     ## Remediations
     ❌ Do not deserialize untrusted data
+
     ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
     Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
 
     ```javascript

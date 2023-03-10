@@ -57,6 +57,7 @@ metadata:
 
     ## Remediation
     ❌ As a general rule, avoid using `eval`.
+
     ❌ Avoid using code execution methods with unsanitized user input.
 
     Instead, it might be possible to use dynamic hardcoded values:
@@ -77,8 +78,10 @@ metadata:
         let compiledFunction = vm.compileFunction(myFunc);
         compiledFunction(req.params["pageCount"], req.params["appendixPageCount"])
       };
+    ```
 
     ✅ Use JavaScript's strict mode as best practice and to minimize the reach of code execution methods
+
     ```javascript
       "use strict"
 
