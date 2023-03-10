@@ -29,12 +29,19 @@ metadata:
     ## Description
     The best practice caching policy is to revoke JWTs especially when these contain senstitive information.
 
-    <!--
     ## Remediations
-    Coming soon.
+    ✅ Ensure JWTs are short-lived by revoking them
+
+    ```javascript
+    expressjwt({
+      ...
+      isRevoked: this.customRevokeCall(),
+      ...
+    })
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [ExpressJWT documentation on revoking tokens](https://github.com/auth0/express-jwt#revoked-tokens)
   cwe_id:
     - 525
   id: "javascript_express_jwt_not_revoked"

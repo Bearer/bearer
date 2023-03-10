@@ -1,12 +1,9 @@
 patterns:
   - pattern: |
-      res.set('X-Frame-Options', $<USER_INPUT>)
+      res.set($<HEADERS>, $<USER_INPUT>)
     filters:
-      - variable: USER_INPUT
-        detection: javascript_express_ui_redress_request_obj
-  - pattern: |
-      res.set("X-Frame-Options", $<USER_INPUT>)
-    filters:
+      - variable: HEADERS
+        regex: (?i)['"](x-frame-options|content-security-policy)["']
       - variable: USER_INPUT
         detection: javascript_express_ui_redress_request_obj
 auxiliary:
@@ -24,14 +21,32 @@ metadata:
   description: "User Interface (UI) redress vulnerability (clickjacking) detected."
   remediation_message: |
     ## Description
-    Using unsanitizer user input to set a X-Frame-Options HTTP response header puts your application at risk for UI redress attacks (clickjacking).
+    Using unsanitized user input to set X-Frame-Options or Content-Security-Policy HTTP headers puts your application at risk for UI redress attacks (clickjacking).
 
-    <!--
     ## Remediations
-    Coming soon.
+    ✅ Prefer the most secure values when setting these headers
+
+    ```javascript
+    res.set('X-Frame-Options', 'DENY')
+    res.set('Content-Security-Policy', "frame-ancestors 'none'")
+    ```
+
+    ✅ Avoid using user input directly to set the headers, or use a safelist to guard against clickjacking
+
+    ```javascript
+    if (req.query.options === 'same') {
+      res.set('X-Frame-Options', 'SAME')
+    }
+
+    // safelist
+    if (['deny', 'sameorigin'].includes(req.query.options.toLowerCase)) {
+      res.set('X-Frame-Options', req.query.options)
+    }
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Clickjacking attack explained](https://owasp.org/www-community/attacks/Clickjacking)
+    - [OWASP Clickjacking defense cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html)
   cwe_id:
     - 1021
   id: "javascript_express_ui_redress"

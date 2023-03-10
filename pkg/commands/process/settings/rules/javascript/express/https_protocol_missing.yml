@@ -14,15 +14,22 @@ metadata:
   description: "Missing https protocol detected."
   remediation_message: |
     ## Description
+    Use HTTPS wherever possible. HTTPS uses the TLS (Transport Layer Security) protocol to encrypt communication, making it more secure than HTTP.
 
-    Prefer https to http when using createServer()
-
-    <!--
     ## Remediations
-    Coming soon.
+    ✅ Use the `https` module when calling `createServer()`
+
+    ```javascript
+    var https = require('https');
+    var express = require('express');
+    var app = express();
+
+    var httpsServer = https.createServer(app)
+    httpsServer.listen(8080);
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [Express Security Best Practices: use TLS](https://expressjs.com/en/advanced/best-practice-security.html#use-tls)
   cwe_id:
     - 693
   id: javascript_express_https_protocol_missing

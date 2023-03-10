@@ -21,12 +21,23 @@ metadata:
   remediation_message: |
     ## Description
     A redirect using unsanitized user input is bad practice and puts your application at greater risk of phishing attacks.
-    <!--
+
     ## Remediations
-    Coming soon.
+    ❌ Do not use unsanitized user input when constructing URLs
+
+    ✅ Instead, ensure the input is validated by using a safe list or a mapping when constructing URLs
+
+    ```javascript
+      var map = {
+        "1": "/planes",
+        "2": "/trains",
+        "3": "/automobiles",
+      }
+
+      res.redirect(map[req.body.transport])
+    ```
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html)
   cwe_id:
     - 601
   id: "javascript_express_open_redirect"

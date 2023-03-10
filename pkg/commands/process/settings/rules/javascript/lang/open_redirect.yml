@@ -36,7 +36,7 @@ metadata:
 
     ## Remediations
 
-    Simply avoid using redirects and forwards.
+    Avoid using redirects and forwards.
 
     ## Resources
     - [OWASP open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html)

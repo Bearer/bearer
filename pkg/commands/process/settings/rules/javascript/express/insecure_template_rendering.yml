@@ -86,14 +86,14 @@ metadata:
   description: "Insecure template rendering detected."
   remediation_message: |
     ## Description
-    Do not include externally influenced or user-given input data in rendered templates.
+    Do not include externally influenced or user-given input data in rendered templates. This is bad practice and can lead to code injection attacks.
 
-    <!--
     ## Remediations
-    Coming soon.
+    ✅ Always validate external data (for example, with a safe list) before rendering it in a template.
+    ✅ Sanitize external data before rendering it in a template to remove special characters that could introduce an injection attack.
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Injection_Prevention_Cheat_Sheet.html#injection-prevention-rules)
   cwe_id:
     - 1336
   id: "javascript_express_insecure_template_rendering"

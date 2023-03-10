@@ -52,9 +52,9 @@ metadata:
     exports.handler = async function(event, context) {
         var params = {
             Key: {
-             "artist": {"S": event.input }, 
+             "artist": {"S": event.input },
              "song": {"S": "Carrot Eton"}
-            }, 
+            },
             TableName: "artists"
         };
         var result = await dynamodb.getItem(params).promise()

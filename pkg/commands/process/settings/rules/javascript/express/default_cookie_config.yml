@@ -81,8 +81,8 @@ metadata:
     To make sure cookies don't open your application up to exploits or unauthorized access, don't use default cookie values.
 
     ## Remediations
-    - Instead of the default cookie name, use generic names.
-    - Always set a maxAge or expires value
+    ✅ Instead of the default cookie name, use generic names.
+    ✅ Always set a maxAge or expires value
 
     ## Resources
     - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)

@@ -39,12 +39,17 @@ metadata:
   remediation_message: |
     ## Description
     Sending unsanitized user input in a response puts your application at risk of cross-site scripting attacks.
-    <!--
+
+
     ## Remediations
-    Coming soon.
+    ❌ Avoid including user input directly in a response:
+
+    ```javascript
+    res.send(req.body.data)
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
   cwe_id:
     - 79
   id: "javascript_express_cross_site_scripting"

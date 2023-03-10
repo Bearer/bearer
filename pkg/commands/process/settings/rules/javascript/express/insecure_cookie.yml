@@ -29,8 +29,8 @@ metadata:
     To make sure cookies don't open your application up to exploits or unauthorized access, make sure to set security options appropriately.
 
     ## Remediations
-    - Set cookie security values to use HTTP(S) instead of client-side javascript.
-    - Set `secure` values to `true` to force cookies to only send over HTTPS.
+    ✅ Set cookie security values to use HTTP(S) instead of client-side javascript.
+    ✅ Set `secure` values to `true` to force cookies to only send over HTTPS.
 
     ## Resources
     - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)
