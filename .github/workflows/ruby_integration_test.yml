@@ -1,4 +1,4 @@
-name: Javascript Integration Tests
+name: Ruby Integration Tests
 on:
   push:
     branches:
