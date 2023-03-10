@@ -166,22 +166,22 @@ func TestJavascriptExpressSqlInjection(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/sql_injection")
 }
 
-func TestExpressSecureCookie(t *testing.T) {
+func TestJavascriptExpressSecureCookie(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
 }
 
-func TestExpressDefaultCookieConfig(t *testing.T) {
+func TestJavascriptExpressDefaultCookieConfig(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/default_cookie_config")
 }
 
-func TestExpressDefaultSessionConfig(t *testing.T) {
+func TestJavascriptExpressDefaultSessionConfig(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/default_session_config")
 }
 
-func TestExpressXXEVulnerability(t *testing.T) {
+func TestJavascriptExpressXXEVulnerability(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/xml_external_entity_vulnerability")
 }
