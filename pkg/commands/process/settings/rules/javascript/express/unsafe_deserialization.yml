@@ -46,13 +46,20 @@ metadata:
   description: "Deserialization of untrusted data detected."
   remediation_message: |
     ## Description
-    It is bad practice to deserialize untrusted data, such as data direct from the request object.
-    <!--
+    It is bad practice to deserialize (unmarshal) untrusted data, such as data direct from the request object.
+    Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
     ## Remediations
-    Coming soon.
+    ❌ Do not deserialize untrusted data
+    ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+    Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+    ```javascript
+      JSON.parse(req.params)
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
   cwe_id:
     - 502
   id: "javascript_express_unsafe_deserialization"

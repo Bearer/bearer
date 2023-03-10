@@ -36,15 +36,22 @@ metadata:
   description: "External control of filename or path detected."
   remediation_message: |
     ## Description
-    Using raw unsanitized input when forming filenames or file paths is bad practice.
-    It can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.
+    Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.
 
-    <!--
     ## Remediations
-    Coming soon.
+    ✅ Set the root option to be an absolute path to a directory
+
+    ```javascript
+    app.post("/upload", (req, res) => {
+      var options = {
+        root: path.join(__dirname, "upload")
+      }
+      res.sendFile(req.params.filename, options)
+    }
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [Express sendFile API reference](http://expressjs.com/en/5x/api.html#res.sendFile)
   cwe_id:
     - 73
   id: "javascript_express_external_file_upload"

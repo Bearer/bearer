@@ -7,11 +7,7 @@ patterns:
           - set
           - header
       - variable: ORIGIN
-        values:
-          - '"Access-Control-Allow-Origin"'
-          - '"access-control-allow-origin"'
-          - "'Access-Control-Allow-Origin'"
-          - "'access-control-allow-origin'"
+        regex: (?i)['"]access-control-allow-origin["']
       - variable: USER_INPUT
         detection: javascript_express_insecure_allow_origin_user_input
   - pattern: |
@@ -43,14 +39,14 @@ metadata:
   description: "Insecure Access-Control-Allow-Origin detected."
   remediation_message: |
     ## Description
-    Do not use unverified user-defined input to define Access-Control-Allow-Origin.
+    Do not use unverified user-defined input to define Access-Control-Allow-Origin. This can lead to unintended user access to sensitive data.
 
-    <!--
     ## Remediations
-    Coming soon.
+    ❌ Avoid defining origins with user input wherever possible.
+    ✅ If unavoidable, be sure to verify the input or to use a safe-list.
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Origin & Access-Control-Allow-Origin](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/11-Client-side_Testing/07-Testing_Cross_Origin_Resource_Sharing)
   cwe_id:
     - 346
   id: "javascript_express_insecure_allow_origin"

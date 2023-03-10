@@ -25,14 +25,18 @@ metadata:
 
     Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
 
+    ## Remediations
+
+    ✅ Use Helmet middleware
+
+    ```javascript
+    const helmet = require("helmet")
+    app.use(helmet())
+    ```
+
     ## Resources
 
-    - https://expressjs.com/en/advanced/best-practice-security.html
-
-    <!--
-    ## Remediations
-    Coming soon.
-    -->
+    - [Express Security Best Practices: Use Helmet](https://expressjs.com/en/advanced/best-practice-security.html#use-helmet)
   cwe_id:
     - 693
   id: javascript_express_helmet_missing

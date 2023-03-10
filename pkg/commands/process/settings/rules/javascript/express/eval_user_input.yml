@@ -53,13 +53,42 @@ metadata:
   description: "Dangerous use of eval with user input detected"
   remediation_message: |
     ## Description
+    Using `eval` (and similar code execution methods such as `setTimeout`) with user input is dangerous and can lead to remote code execution.
 
-    Using eval with user input is dangerous. It can lead to remote code execution.
+    ## Remediation
+    ❌ As a general rule, avoid using `eval`.
+    ❌ Avoid using code execution methods with unsanitized user input.
 
-    <!--
+    Instead, it might be possible to use dynamic hardcoded values:
+    ```javascript
+      app.post("/:id", (req, res) => {
+        let myFunc = "(a, b) => a + b"
+        if req.params["single_item"] {
+          myFunc = "(a) => a"
+        }
+
+        setTimeout(myFunc);
+      };
+    ```
+    or pass user input to a compiled function, instead of compiling it with user input.
+    ```javascript
+      app.post("/:id", (req, res) => {
+        let myFunc = "(a, b) => a + b"
+        let compiledFunction = vm.compileFunction(myFunc);
+        compiledFunction(req.params["pageCount"], req.params["appendixPageCount"])
+      };
+
+    ✅ Use JavaScript's strict mode as best practice and to minimize the reach of code execution methods
+    ```javascript
+      "use strict"
+
+      app.post("/:id", (req, res) => {
+        ...
+      })
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [MDN JavaScript strict mode reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
   cwe_id:
     - 94
     - 95
