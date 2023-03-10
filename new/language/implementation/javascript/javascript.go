@@ -219,6 +219,10 @@ func (*javascriptImplementation) PatternLeafContentTypes() []string {
 }
 
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
+	if node.Type() == "pair" {
+		return false, false
+	}
+
 	parent := node.Parent()
 	if parent == nil {
 		return true, true
@@ -227,10 +231,10 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	// Class body class_body
 	// arrow functions statement_block
 	// function statement_block
-	// method statement_blocks
-	unAnchored := []string{"statement_blocks", "class_body", "pair"}
+	// method statement_block
+	unAnchored := []string{"statement_block", "class_body"}
 
-	isUnanchored := !slices.Contains(unAnchored, node.Type())
+	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
 }
 
@@ -239,8 +243,12 @@ func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Nod
 }
 
 func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node) []string {
-	if node.Type() == "statement_block" && node.Parent().Type() == "program" && node.NamedChildCount() == 0 {
-		return []string{"object"}
+	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
+		if node.NamedChildCount() == 0 {
+			return []string{"object"}
+		} else {
+			return []string{node.Type(), "program"}
+		}
 	}
 
 	return []string{node.Type()}

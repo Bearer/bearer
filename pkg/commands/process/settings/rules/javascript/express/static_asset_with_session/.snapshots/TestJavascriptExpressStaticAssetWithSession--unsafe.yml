@@ -1,0 +1,26 @@
+low:
+    - rule:
+        cwe_ids:
+            - "352"
+            - "668"
+        id: javascript_express_static_asset_with_session
+        description: Static asset with active session detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_static_asset_with_session
+      line_number: 3
+      filename: unsafe.js
+      parent_line_number: 3
+      parent_content: app.use(express.static(__dirname + "/public"))
+medium:
+    - rule:
+        cwe_ids:
+            - "523"
+            - "522"
+        id: express_default_session_config
+        description: Session cookie with default config detected.
+        documentation_url: https://docs.bearer.com/reference/rules/express_default_session_config
+      line_number: 1
+      filename: unsafe.js
+      parent_line_number: 1
+      parent_content: '{}'
+
+

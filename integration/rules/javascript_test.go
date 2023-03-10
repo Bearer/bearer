@@ -151,6 +151,11 @@ func TestJavascriptExpressInsecureTemplateRendering(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_template_rendering")
 }
 
+func TestJavascriptExpressStaticAssetWithSession(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"express/static_asset_with_session")
+}
+
 func TestJavascriptExpressUiRedress(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"express/ui_redress")
