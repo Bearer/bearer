@@ -8,3 +8,5 @@ call("secret" => x)
 { API_KEY: "a #{x}" }
 
 { "secret" => x }
+
+Passwordless.default_from_address = "some_address@bear.com"
