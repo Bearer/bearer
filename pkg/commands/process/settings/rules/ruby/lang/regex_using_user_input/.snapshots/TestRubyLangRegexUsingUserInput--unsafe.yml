@@ -28,6 +28,6 @@ low:
       line_number: 5
       filename: unsafe.rb
       parent_line_number: 5
-      parent_content: Regex.new(params[:oops])
+      parent_content: Regexp.new(params[:oops])
 
 
