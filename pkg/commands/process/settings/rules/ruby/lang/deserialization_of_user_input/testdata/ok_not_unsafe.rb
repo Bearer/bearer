@@ -7,6 +7,7 @@ Psych.load(x)
 Syck.load("--")
 
 JSON.load(event[:ok])
+JSON.load(JSON.parse(params[:user_body]))
 
 Oj.load(x)
 Oj.object_load("{}") do |json|
