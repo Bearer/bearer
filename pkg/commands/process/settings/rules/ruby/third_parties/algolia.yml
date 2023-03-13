@@ -32,10 +32,10 @@ metadata:
   remediation_message: |
     ## Description
     Leaking sensitive data to third-party data tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Algolia.
-    <!--
+
     ## Remediations
-    Coming soon.
-    -->
+    When sending data to third-party services, ensure all sensitive data is removed.
+
     ## Resources
     - [Algolia docs](https://www.algolia.com/doc/)
   cwe_id:
