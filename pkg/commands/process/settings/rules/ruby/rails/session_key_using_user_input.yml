@@ -20,12 +20,11 @@ metadata:
     ## Description
     Using user-defined data in a session key is bad practice and can allow attackers to perform unsafe actions.
 
-    <!--
     ## Remediations
-    Coming soon.
+    ❌ Avoid using user-defined data in session keys
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Session management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
   cwe_id:
     - 276
   id: ruby_rails_session_key_using_user_input

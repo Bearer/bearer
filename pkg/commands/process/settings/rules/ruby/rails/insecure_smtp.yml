@@ -30,10 +30,10 @@ metadata:
     	ssl: true
     }
     ```
-    <!--
+
     ## Resources
-    Coming soon.
-    -->
+    - [Ruby on Rails configuring Action Mailer](https://guides.rubyonrails.org/configuring.html#configuring-action-mailer)
+    - [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)
   cwe_id:
     - 319
   id: ruby_rails_insecure_smtp

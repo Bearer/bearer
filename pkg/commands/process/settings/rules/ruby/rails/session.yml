@@ -24,10 +24,9 @@ metadata:
     ```ruby
     Rails.application.config.session_store :active_record_store
     ```
-    <!--
+
     ## Resources
-    Coming soon.
-    -->
+    - [Rails guide on configuring Rails applications](https://guides.rubyonrails.org/configuring.html)
   cwe_id:
     - 315
   id: ruby_rails_session

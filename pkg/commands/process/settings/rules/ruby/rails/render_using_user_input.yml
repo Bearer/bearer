@@ -56,10 +56,9 @@ metadata:
     ```ruby
     render html: "<h1>#{strip_tags(params[:title])}</h1>"
     ```
-    <!--
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
   cwe_id:
     - 79
   id: ruby_rails_render_using_user_input

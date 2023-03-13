@@ -26,10 +26,8 @@ metadata:
     ## Remediations
     Whenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.
 
-    <!--
     ## Resources
-    Coming soon.
-    -->
+    - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
   cwe_id:
     - 312
   id: ruby_rails_default_encryption
