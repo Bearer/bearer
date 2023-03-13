@@ -70,8 +70,7 @@ metadata:
 
     <!--
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP information exposure through URL query strings](https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url)
   cwe_id:
     - 598
   id: ruby_lang_http_get_params

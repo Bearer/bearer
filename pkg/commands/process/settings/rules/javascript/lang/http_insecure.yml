@@ -66,7 +66,7 @@ metadata:
     ```
 
     ## Resources
-      - [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)
+    - [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)
   cwe_id:
     - 319
   id: "javascript_http_insecure"

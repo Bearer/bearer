@@ -60,11 +60,6 @@ metadata:
     ```
 
     In instances where writing sensitive data is intentional, make sure to document its location according to your internal policies.
-
-    <!--
-    ## Resources
-    Coming soon.
-    -->
   cwe_id:
     - 532
     - 313

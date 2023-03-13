@@ -337,10 +337,6 @@ metadata:
 
     Faraday.get("https://#{host}')
     ```
-    <!--
-    ## Resources
-    Coming soon.
-    -->
   cwe_id:
     - 918
   id: ruby_lang_http_url_using_user_input
