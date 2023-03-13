@@ -10,7 +10,7 @@ patterns:
       - variable: USER_INPUT
         detection: ruby_lang_regex_using_user_input_user_input
   - pattern: |
-      Regex.$<METHOD>($<USER_INPUT>$<...>)
+      Regexp.$<METHOD>($<USER_INPUT>$<...>)
     filters:
       - variable: METHOD
         values:
@@ -38,14 +38,19 @@ metadata:
     Applications should avoid constructing regular expressions from user input.
     Regular expressions can have exponential worst-case computational
     complexity, allowing users to trigger this behaviour can result in
-    excessive CPU consumption causing a denial of service.
+    excessive CPU consumption causing a regular expression denial of service (ReDoS).
 
-    <!--
     ## Remediations
-    Coming soon.
+    ❌ Avoid using untrusted or user data when building regular expressions
+
+    ✅ Specify a timeout when working with regular expressions
+
+    ```ruby
+      Regexp.new(/(a|b)/, timeout: 3)
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP ReDoS attacks explained](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS)
   cwe_id:
     - 1333
   id: ruby_lang_regex_using_user_input

@@ -228,12 +228,22 @@ metadata:
     Using raw unsanitized input when forming filenames or file paths is bad practice.
     It can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.
 
-    <!--
     ## Remediations
-    Coming soon.
+    ❌ Avoid wherever possible
+
+    ✅ Validate expected file paths using `File` methods
+
+    ```ruby
+      path = File.expand("/home/" + params[:resource_name])
+      if path.starts_with?("/home/")
+        Dir.chdir(path)
+      else
+        # path is unexpected
+      end
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP path traversal attack](https://owasp.org/www-community/attacks/Path_Traversal)
   cwe_id:
     - 22
     - 73

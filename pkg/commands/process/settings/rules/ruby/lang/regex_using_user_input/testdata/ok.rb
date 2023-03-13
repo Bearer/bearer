@@ -2,4 +2,4 @@
 
 %r{abc#{x}def}
 
-Regex.new(x)
+Regexp.new(x)
