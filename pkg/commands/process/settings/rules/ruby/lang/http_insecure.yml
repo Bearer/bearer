@@ -187,10 +187,9 @@ metadata:
     ```ruby
     response = HTTParty.get('https://secure-api.com')
     ```
-    <!--
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)
   cwe_id:
     - 319
   id: ruby_lang_http_insecure

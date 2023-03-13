@@ -117,10 +117,9 @@ metadata:
 
     method(method_name)
     ```
-    <!--
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
   cwe_id:
     - 94
   id: ruby_lang_reflection_using_user_input

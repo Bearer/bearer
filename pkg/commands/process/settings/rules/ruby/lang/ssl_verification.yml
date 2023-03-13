@@ -35,10 +35,9 @@ metadata:
     ```bash
     http.verify_mode = OpenSSL::SSL::VERIFY_PEER
     ```
-    <!--
+
     ## Resources
-    Coming soon.
-    -->
+    - [Ruby OpenSSL module](https://ruby.github.io/openssl/OpenSSL.html)
   cwe_id:
     - 295
   id: ruby_lang_ssl_verification

@@ -29,10 +29,6 @@ metadata:
     ```ruby
     raise CustomException.new(user.uuid)
     ```
-    <!--
-    ## Resources
-    Coming soon.
-    -->
   cwe_id:
     - 210
   id: ruby_lang_exception

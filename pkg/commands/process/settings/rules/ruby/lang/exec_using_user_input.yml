@@ -141,10 +141,10 @@ metadata:
 
     system(command)
     ```
-    <!--
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Ruby command injection cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Ruby_on_Rails_Cheat_Sheet.html#command-injection)
+    - [OWASP OS command injection cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html)
   cwe_id:
     - 78
   id: ruby_lang_exec_using_user_input
