@@ -48,7 +48,7 @@ metadata:
     ```
     <!--
     ## Resources
-    Coming soon.
+    - [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)
     -->
   cwe_id:
     - 625
