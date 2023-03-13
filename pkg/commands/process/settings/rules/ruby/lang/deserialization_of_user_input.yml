@@ -12,25 +12,42 @@ patterns:
           - Marshal
       - variable: USER_INPUT
         detection: ruby_lang_deserialization_of_user_input_user_input
+      - not:
+          variable: USER_INPUT
+          detection: ruby_lang_deserialization_of_user_input_sanitized_user_input
   - pattern: |
       Marshal.restore($<USER_INPUT>$<...>)
     filters:
       - variable: USER_INPUT
         detection: ruby_lang_deserialization_of_user_input_user_input
+      - not:
+          variable: USER_INPUT
+          detection: ruby_lang_deserialization_of_user_input_sanitized_user_input
   - pattern: |
       Oj.object_load($<USER_INPUT>$<...>)$<...>
     filters:
       - variable: USER_INPUT
         detection: ruby_lang_deserialization_of_user_input_user_input
+      - not:
+          variable: USER_INPUT
+          detection: ruby_lang_deserialization_of_user_input_sanitized_user_input
 auxiliary:
+  - id: ruby_lang_deserialization_of_user_input_sanitized_user_input
+    patterns:
+      - JSON.parse()
+      - Nokogiri::XML()
   - id: ruby_lang_deserialization_of_user_input_user_input
     patterns:
-      - params
-      - request
-      - cookies
       - | # AWS lambda
         def $<_>($<!>event:, context:)
         end
+      - pattern: $<USER_INPUT>
+        filters:
+          - variable: USER_INPUT
+            values:
+              - params
+              - request
+              - cookies
 languages:
   - ruby
 trigger: presence
@@ -40,13 +57,24 @@ metadata:
   remediation_message: |
     ## Description
     It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+    Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
 
-    <!--
     ## Remediations
-    Coming soon.
+    ❌ Do not deserialize untrusted data
+
+    ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+    Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+    ```javascript
+      user_data = JSON.parse(params[:user])
+      # handle any parsing errors
+
+      JSON.load(user)
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
   cwe_id:
     - 502
   id: ruby_lang_deserialization_of_user_input

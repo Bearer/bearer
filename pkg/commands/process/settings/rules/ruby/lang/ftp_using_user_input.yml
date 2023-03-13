@@ -35,18 +35,31 @@ languages:
 trigger: presence
 severity: high
 metadata:
-  description: "Do not use user input to form file paths."
+  description: "Do not use user input with FTP."
   remediation_message: |
     ## Description
-    Using raw unsanitized input when forming filenames or file paths is bad practice.
-    It can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.
+    Using raw unsanitized input with FTP methods is bad practice.
+    It could put your application at risk for code injection attacks, or lead to path traversal, by which attackers can gain access to resources outside of the intended scope
 
-    <!--
+
     ## Remediations
-    Coming soon.
+    ❌ Do not form filenames or file paths for FTP from raw user input
+    ```ruby
+    Net::FTP.open("public/#{params["resource_name"]}.txt" do
+      # ...
+    end
+    ```
+    ❌ Do not pass raw user input as arguments to FTP methods
+
+    ```ruby
+    Net::FTP.open("example.txt", username: params[:user]) do
+      # ...
+    end
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP code injection](https://owasp.org/www-community/attacks/Code_Injection)
+    - [OWASP path traversal](https://owasp.org/www-community/attacks/Path_Traversal)
   cwe_id:
     - 22
   id: ruby_lang_ftp_using_user_input

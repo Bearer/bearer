@@ -2,4 +2,4 @@
 
 %r{abc#{params[:oops]}def}
 
-Regex.new(params[:oops])
+Regexp.new(params[:oops])
