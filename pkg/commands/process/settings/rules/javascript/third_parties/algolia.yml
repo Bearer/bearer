@@ -47,7 +47,7 @@ metadata:
     Leaking sensitive data to third-party data tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Algolia.
 
     ## Remediations
-    If you really need to identify users, use database's unique identifiers.
+    If you really need to identify users, use unique identifiers from the database.
 
     ```javascript
       const algoliaSearch = require('algoliasearch')
