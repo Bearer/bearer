@@ -1,0 +1,54 @@
+low:
+    - rule:
+        cwe_ids:
+            - "706"
+        id: javascript_express_external_resource
+        description: Rendering of resources resolved from external name or reference detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_resource
+      line_number: 1
+      filename: require_destructured_resource.js
+      parent_line_number: 1
+      parent_content: const { path } = req.query;
+    - rule:
+        cwe_ids:
+            - "706"
+        id: javascript_express_external_resource
+        description: Rendering of resources resolved from external name or reference detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_resource
+      line_number: 1
+      filename: require_destructured_resource.js
+      parent_line_number: 1
+      parent_content: |
+        const { path } = req.query;
+    - rule:
+        cwe_ids:
+            - "706"
+        id: javascript_express_external_resource
+        description: Rendering of resources resolved from external name or reference detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_resource
+      line_number: 1
+      filename: require_destructured_resource.js
+      parent_line_number: 1
+      parent_content: path
+    - rule:
+        cwe_ids:
+            - "706"
+        id: javascript_express_external_resource
+        description: Rendering of resources resolved from external name or reference detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_resource
+      line_number: 1
+      filename: require_destructured_resource.js
+      parent_line_number: 1
+      parent_content: req.query
+    - rule:
+        cwe_ids:
+            - "706"
+        id: javascript_express_external_resource
+        description: Rendering of resources resolved from external name or reference detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_resource
+      line_number: 1
+      filename: require_destructured_resource.js
+      parent_line_number: 1
+      parent_content: '{ path } = req.query'
+
+

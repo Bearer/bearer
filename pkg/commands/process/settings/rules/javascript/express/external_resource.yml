@@ -18,7 +18,7 @@ auxiliary:
         filters:
           - variable: DATA
             detection: javascript_express_external_resource_user_input
-      - pattern: const { $<...>$<!>$<_>$<...> } = $<DATA>
+      - pattern: const { $<!>$<_> } = $<DATA>
         filters:
           - variable: DATA
             detection: javascript_express_external_resource_user_input
