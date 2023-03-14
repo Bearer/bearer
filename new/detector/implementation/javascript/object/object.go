@@ -47,7 +47,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	// const { user } = <object>
 	// let { user } = <object>
 	// var { user } = <object>
-	objectDeconstructionQuery, err := lang.CompileQuery(`(variable_declarator name:(object_pattern) value: (_) @value) @root`)
+	objectDeconstructionQuery, err := lang.CompileQuery(`(variable_declarator name:(object_pattern (shorthand_property_identifier_pattern) @match ) value: (_) @value) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling object deconstruction query: %s", err)
 	}

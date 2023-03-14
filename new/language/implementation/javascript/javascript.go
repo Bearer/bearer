@@ -103,13 +103,7 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				log.Debug().Msgf("name type is %s", name.Type())
 			}
 		case "shorthand_property_identifier_pattern":
-			{
-				visitChildren()
-				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-					node.UnifyWith(scopedNode)
-					scope.Assign(node.Content(), node)
-				}
-			}
+			scope.Assign(node.Content(), node)
 		case "identifier":
 			parent := node.Parent()
 			if parent == nil {
@@ -252,7 +246,7 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	// arrow functions statement_block
 	// function statement_block
 	// method statement_block
-	unAnchored := []string{"statement_block", "class_body"}
+	unAnchored := []string{"statement_block", "class_body", "object_pattern"}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored

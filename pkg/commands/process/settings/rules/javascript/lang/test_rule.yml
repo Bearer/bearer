@@ -1,33 +1,46 @@
+type: risk
 patterns:
   - pattern: |
-      document.doSomething($<...>$<DATA>$<...>)
+      document.doSomething($<...>$<DATA_TYPE>$<...>)
     filters:
-      - variable: DATA
-        detection: javascript_test_rule_params
+      - variable: DATA_TYPE
+        detection: javascript_test_rule_datatype
 auxiliary:
-  - id: javascript_test_rule_params
+  - id: javascript_test_rule_datatype
     patterns:
-      - req.params
+      - req.params.$<_>
+      - const { $<!>$<_> } = req.params
+      - var { $<!>$<_> } = req.params
 languages:
   - javascript
 trigger: presence
-severity:
-  default: medium
+skip_data_types:
+  - "Unique Identifier"
 metadata:
-  description: "Dangerous dynamic HTML insert detected."
+  description: "Sensitive data in a JWT detected."
   remediation_message: |
     ## Description
 
-    TODO
+    JWTs are not a secure place to store sensitive data. This rule looks for any sensitive data types saved to a JWT.
 
     ## Remediations
 
-    TODO
+    ❌ Avoid storing sensitive data in JWTs:
 
-    <!--
+    ```javascript
+      const jwt = require('jsonwebtoken');
+      const token = jwt.sign({ user: { email: 'jhon@gmail.com' }});
+    ```
+
+    ✅ If you need to store user's information, use their unique database identifier instead of personal identifiable information:
+
+    ```javascript
+      const jwt = require('jsonwebtoken');
+      const token = jwt.sign({ user: user.uuid });
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+      - [OWASP sensitive data exposure](https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure)
   cwe_id:
-    - 79
+    - 312
   id: "javascript_test_rule"
