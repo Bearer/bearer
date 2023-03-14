@@ -9,6 +9,16 @@ patterns:
 auxiliary:
   - id: javascript_express_ui_redress_request_obj
     patterns:
+      - pattern: $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_ui_redress_user_input
+      - pattern: const { $<!>$<_> } = $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_ui_redress_user_input
+  - id: javascript_express_ui_redress_user_input
+    patterns:
       - req.params
       - req.query
       - req.body

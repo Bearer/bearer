@@ -3,9 +3,19 @@ patterns:
       res.redirect($<USER_INPUT>$<...>)
     filters:
       - variable: USER_INPUT
-        detection: javascript_express_open_redirect_request_obj
+        detection: javascript_express_open_redirect_req_object
 auxiliary:
-  - id: javascript_express_open_redirect_request_obj
+  - id: javascript_express_open_redirect_req_object
+    patterns:
+      - pattern: $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_open_redirect_user_input
+      - pattern: const { $<!>$<_> } = $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_open_redirect_user_input
+  - id: javascript_express_open_redirect_user_input
     patterns:
       - req.params
       - req.query
