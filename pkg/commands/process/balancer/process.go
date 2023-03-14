@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"runtime/debug"
 	"strconv"
+	"strings"
 	"time"
 
 	config "github.com/bearer/bearer/pkg/commands/process/settings"
@@ -85,7 +86,15 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 
 	err = process.WaitForOnline(task)
 	if err != nil {
-		log.Fatal().Msgf("Failed to start bearer, error with your configuration %s", err)
+		var result = strings.Split(err.Error(), "failed to create detector customDetector:")
+		if len(result) > 1 {
+			// custom detector issue ; assume custom rule parse issue
+			var ruleName = strings.Split(result[1], ":")[0]
+			log.Fatal().Msgf("could not parse rule %s. Is this a custom rule? See documentation on rule patterns and format https://docs.bearer.com/guides/custom-rule/", ruleName)
+		} else {
+			log.Fatal().Msgf("failed to start bearer, error with your configuration %s", err)
+		}
+
 		return err
 	}
 
