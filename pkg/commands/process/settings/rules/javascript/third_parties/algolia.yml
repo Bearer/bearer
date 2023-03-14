@@ -45,12 +45,19 @@ metadata:
   remediation_message: |
     ## Description
     Leaking sensitive data to third-party data tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Algolia.
-    <!--
+
     ## Remediations
-    Coming soon.
-    -->
+    If you really need to identify users, use unique identifiers from the database.
+
+    ```javascript
+      const algoliaSearch = require('algoliasearch')
+      const myAlgolia = algoliaSearch("123", "123")
+      const index = myAlgolia.initIndex(user.uuid)
+    ```
+
     ## Resources
     - [Algolia docs](https://www.algolia.com/doc/)
+    - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
   cwe_id:
     - 201
   associated_recipe: Algolia
