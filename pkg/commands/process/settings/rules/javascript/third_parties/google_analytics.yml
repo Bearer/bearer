@@ -6,6 +6,8 @@ patterns:
         detection: datatype
 languages:
   - javascript
+skip_data_types:
+  - "Unique Identifier"
 trigger: local
 metadata:
   description: "Sensitive data sent to Google Analytic detected."
@@ -18,10 +20,19 @@ metadata:
 
     When sending data to analytics libraries, ensure all sensitive data is removed.
 
-    <!--
+    If you really need to identify users, use unique identifiers from the database.
+
+    ```javascript
+      gtag("event", "screen_view", {
+        user: {
+          subscribed: true,
+        },
+      });
+    ```
+
     ## Resources
-    Coming soon.
-    -->
+    - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
   cwe_id:
     - 201
   id: "javascript_google_analytics"
