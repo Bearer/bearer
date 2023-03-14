@@ -20,7 +20,7 @@ metadata:
 
     When sending data to analytics libraries, ensure all sensitive data is removed.
 
-    If you really need to identify users, use database's unique identifiers.
+    If you really need to identify users, use unique identifiers from the database.
 
     ```javascript
       gtag("event", "screen_view", {
