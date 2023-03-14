@@ -32,7 +32,7 @@ metadata:
 
     When logging errors or events, ensure all sensitive data is removed.
 
-    If you really need to identify users, use database's unique identifiers.
+    If you really need to identify users, use unique identifiers from the database.
 
     ```javascript
       const StatsD = require("hot-shots");
