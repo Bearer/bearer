@@ -60,7 +60,7 @@ func (detector *objectDetector) getObjectDeconstruction(
 	object := objects[0]
 	objectData := object.Data.(generictypes.Object)
 
-	name := result["name"]
+	name := result["match"]
 
 	for i := 0; i < name.ChildCount(); i++ {
 		child := name.Child(i)
