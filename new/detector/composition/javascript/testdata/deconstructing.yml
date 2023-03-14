@@ -1,0 +1,9 @@
+type: risk
+patterns:
+  - pattern: |
+      const { $<!>$<_> } = req.params
+languages:
+  - javascript
+trigger: presence
+metadata:
+  id: "javascript_deconstructing"

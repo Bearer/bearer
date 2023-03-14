@@ -1,2 +1,2 @@
 const { user } = req.params;
-document.doSomething(user);
+document.innerHTML = user;

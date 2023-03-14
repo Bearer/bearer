@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
@@ -90,17 +89,6 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				node.UnifyWith(value)
 
 				return err
-			}
-
-			if name.Type() == "object_pattern" {
-				err := visitChildren()
-
-				scope.Assign(name.Content(), node)
-				node.UnifyWith(value)
-
-				return err
-			} else {
-				log.Debug().Msgf("name type is %s", name.Type())
 			}
 		case "shorthand_property_identifier_pattern":
 			scope.Assign(node.Content(), node)
