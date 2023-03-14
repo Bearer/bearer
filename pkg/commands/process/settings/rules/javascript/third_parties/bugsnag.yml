@@ -3,10 +3,10 @@ patterns:
       $<CLIENT>.notify($<...>$<DATA_TYPE>$<...>)
     filters:
       - either:
-        - variable: CLIENT
-          detection: javascript_third_parties_bugsnag_client
-        - variable: CLIENT
-          detection: javascript_third_parties_bugsnag_session
+          - variable: CLIENT
+            detection: javascript_third_parties_bugsnag_client
+          - variable: CLIENT
+            detection: javascript_third_parties_bugsnag_session
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
@@ -46,8 +46,18 @@ metadata:
 
     When logging errors or events, ensure all sensitive data is removed.
 
+    If you really need to identify users, use unique identifiers from the database.
+
+    ```javascript
+      import { Bugsnag } from "@bugsnag/js"
+
+      var bugSession = Bugsnag.startSession()
+      bugSession.notify(user.uuid)
+    ```
+
     ## Resources
     - [Bugsnag Docs](https://docs.bugsnag.com/platforms/javascript/)
+    - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
   cwe_id:
     - 201
   associated_recipe: Bugsnag
