@@ -1,0 +1,51 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "313"
+        id: javascript_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
+      line_number: 8
+      filename: file_generation_ts.ts
+      category_groups:
+        - PII
+      parent_line_number: 18
+      parent_content: |-
+        fs.writeFile("data.csv", JSON.stringify(users), "utf-8", (err) => {
+          if (err) console.log(err)
+          else console.log("Data saved")
+        })
+    - rule:
+        cwe_ids:
+            - "313"
+        id: javascript_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
+      line_number: 11
+      filename: file_generation_ts.ts
+      category_groups:
+        - PII
+      parent_line_number: 18
+      parent_content: |-
+        fs.writeFile("data.csv", JSON.stringify(users), "utf-8", (err) => {
+          if (err) console.log(err)
+          else console.log("Data saved")
+        })
+    - rule:
+        cwe_ids:
+            - "313"
+        id: javascript_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_file_generation
+      line_number: 12
+      filename: file_generation_ts.ts
+      category_groups:
+        - PII
+      parent_line_number: 18
+      parent_content: |-
+        fs.writeFile("data.csv", JSON.stringify(users), "utf-8", (err) => {
+          if (err) console.log(err)
+          else console.log("Data saved")
+        })
+
+

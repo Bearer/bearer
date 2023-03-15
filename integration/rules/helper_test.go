@@ -47,6 +47,9 @@ func getRunner(t *testing.T) *Runner {
 	configFlags.Format = flag.FormatYAML
 	configFlags.Report = flag.ReportSecurity
 	configFlags.Quiet = true
+	configFlags.OnlyRule = map[string]bool{
+		"javascript_lang_file_generation": true,
+	}
 
 	config, err := settings.FromOptions(configFlags)
 	if err != nil {

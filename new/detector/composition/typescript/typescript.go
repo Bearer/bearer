@@ -1,4 +1,4 @@
-package javascript
+package typescript
 
 import (
 	"fmt"
@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/composition/types"
 	"github.com/bearer/bearer/new/detector/evaluator"
@@ -34,7 +35,7 @@ type Composition struct {
 }
 
 func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
-	lang, err := language.Get("javascript")
+	lang, err := language.Get("typescript")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
 	}
@@ -69,10 +70,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		},
 	}
 
-	// instantiate custom javascript detectors
+	// instantiate custom typescript detectors
 	jsRules := map[string]*settings.Rule{}
 	for ruleName, rule := range rules {
-		if !slices.Contains(rule.Languages, "javascript") {
+		if !slices.Contains(rule.Languages, "typescript") {
 			continue
 		}
 		jsRules[ruleName] = rule
@@ -165,7 +166,9 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detector
 }
 
 func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
-	if file.Language != "JavaScript" {
+	if file.Language != "TypeScript" {
+		log.Debug().Msgf("file language is %s", file.Language)
+
 		return nil, nil
 	}
 

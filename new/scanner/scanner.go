@@ -3,9 +3,10 @@ package scanner
 import (
 	"fmt"
 
-	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition"
+	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition/ruby"
+	"github.com/bearer/bearer/new/detector/composition/typescript"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -40,6 +41,10 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 		{
 			constructor: javascript.New,
 			name:        "javascript",
+		},
+		{
+			constructor: typescript.New,
+			name:        "typescript",
 		},
 	}
 

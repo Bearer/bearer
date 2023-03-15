@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/implementation/javascript"
 	"github.com/bearer/bearer/new/language/implementation/ruby"
+	"github.com/bearer/bearer/new/language/implementation/typescript"
 	"github.com/bearer/bearer/new/language/types"
 )
 
@@ -25,6 +26,8 @@ func getImplementation(name string) (implementation.Implementation, error) {
 		return ruby.Get(), nil
 	case "javascript":
 		return javascript.Get(), nil
+	case "typescript":
+		return typescript.Get(), nil
 	default:
 		return nil, fmt.Errorf("unsupported language '%s'", name)
 	}

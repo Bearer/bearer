@@ -51,6 +51,7 @@ auxiliary:
         `$<...>${$<...>$<_>$<...>}$<...>`
 languages:
   - javascript
+  - typescript
 trigger: presence
 severity: high
 metadata:

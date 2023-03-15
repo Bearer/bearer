@@ -11,6 +11,7 @@ patterns:
         detection: datatype
 languages:
   - javascript
+  - typescript
 trigger: local
 metadata:
   description: "Sensitive data detected as part of a dynamic file generation."

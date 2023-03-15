@@ -66,10 +66,10 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 
 	// class User
 	// end
-	classNameQuery, err := lang.CompileQuery(`(class_declaration name: (identifier) @name) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling class name query: %s", err)
-	}
+	// classNameQuery, err := lang.CompileQuery(`(class_declaration name: (identifier) @name) @root`)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("error compiling class name query: %s", err)
+	// }
 
 	// new User()
 	constructorQuery, err := lang.CompileQuery(`(new_expression constructor: (identifier) @name) @root`)
@@ -95,10 +95,10 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		variableDeclarationQuery:  variableDeclarationQuery,
 		objectDeconstructionQuery: objectDeconstructionQuery,
 		parentPairQuery:           parentPairQuery,
-		classNameQuery:            classNameQuery,
-		constructorQuery:          constructorQuery,
-		memberExpressionQuery:     memberExpressionQuery,
-		subscriptExpressionQuery:  subscriptExpressionQuery,
+		// classNameQuery:            classNameQuery,
+		constructorQuery:         constructorQuery,
+		memberExpressionQuery:    memberExpressionQuery,
+		subscriptExpressionQuery: subscriptExpressionQuery,
 	}, nil
 }
 
@@ -134,10 +134,10 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node, evaluator)
-	if len(detections) != 0 || err != nil {
-		return detections, err
-	}
+	// detections, err = detector.getClass(node, evaluator)
+	// if len(detections) != 0 || err != nil {
+	// 	return detections, err
+	// }
 
 	detections, err = detector.getConstructor(node, evaluator)
 	if len(detections) != 0 || err != nil {

@@ -1,7 +1,6 @@
 package javascript
 
 import (
-	"errors"
 	"fmt"
 	"regexp"
 	"strings"
@@ -166,23 +165,6 @@ func (implementation *javascriptImplementation) ExtractPatternVariables(input st
 	return replaced, params, nil
 }
 
-// TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) ExtractPatternMatchNode(input string) (string, int, error) {
-	inputBytes := []byte(input)
-	matches := matchNodeRegex.FindAllIndex(inputBytes, -1)
-
-	if len(matches) == 0 {
-		return input, 0, nil
-	}
-
-	if len(matches) > 1 {
-		return "", 0, errors.New("pattern must only contain a single match node")
-	}
-
-	match := matches[0]
-	return string(inputBytes[0:match[0]]) + string(inputBytes[match[1]:]), match[0], nil
-}
-
 func produceDummyValue(i int, nodeType string) string {
 	return "CurioVar" + fmt.Sprint(i)
 }
@@ -200,11 +182,6 @@ func (implementation *javascriptImplementation) FindPatternMatchNode(input []byt
 // TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
-}
-
-// TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
-	return false
 }
 
 func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
