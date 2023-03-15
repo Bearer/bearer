@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
 	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"golang.org/x/exp/slices"
@@ -265,7 +264,7 @@ func (evaluator *evaluator) detectAtNode(node *langtree.Node, detectorType strin
 	})
 }
 
-func (evaluator *evaluator) withCycleProtection(node *tree.Node, detectorType string, body func() error) error {
+func (evaluator *evaluator) withCycleProtection(node *langtree.Node, detectorType string, body func() error) error {
 	nodeID := node.ID()
 
 	executingDetectors := evaluator.executingDetectors[nodeID]
