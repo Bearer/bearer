@@ -12,11 +12,12 @@ import (
 )
 
 type evaluator struct {
-	lang               languagetypes.Language
-	detectorSet        types.DetectorSet
-	detectionCache     map[langtree.NodeID]map[string][]*types.Detection
-	executingDetectors map[langtree.NodeID][]string
-	fileName           string
+	lang                  languagetypes.Language
+	detectorSet           types.DetectorSet
+	detectionCache        map[langtree.NodeID]map[string][]*types.Detection
+	executingDetectors    map[langtree.NodeID][]string
+	fileName              string
+	rulesDisabledForNodes map[string][]*langtree.Node
 }
 
 func New(
@@ -28,11 +29,12 @@ func New(
 	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
 
 	return &evaluator{
-		lang:               lang,
-		fileName:           fileName,
-		detectorSet:        detectorSet,
-		detectionCache:     detectionCache,
-		executingDetectors: make(map[langtree.NodeID][]string),
+		lang:                  lang,
+		fileName:              fileName,
+		detectorSet:           detectorSet,
+		detectionCache:        detectionCache,
+		executingDetectors:    make(map[langtree.NodeID][]string),
+		rulesDisabledForNodes: mapNodesToDisabledRules(tree.RootNode()),
 	}
 }
 
@@ -107,6 +109,72 @@ func (evaluator *evaluator) ForNode(
 	}
 
 	return detections, nil
+}
+
+func (evaluator *evaluator) RuleDisabledForNode(ruleId string, node *langtree.Node) bool {
+	nodesToIgnore := evaluator.rulesDisabledForNodes[ruleId]
+	if nodesToIgnore == nil {
+		return false
+	}
+
+	// check node
+	for _, ignoredNode := range nodesToIgnore {
+		if ignoredNode.Equal(node) {
+			return true
+		}
+	}
+
+	// check node ancestors
+	parent := node.Parent()
+	for parent != nil {
+		for _, ignoredNode := range nodesToIgnore {
+			if ignoredNode.Equal(parent) {
+				return true
+			}
+		}
+
+		parent = parent.Parent()
+	}
+
+	return false
+}
+
+func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Node {
+	res := make(map[string][]*langtree.Node)
+	var disabledRules []string
+	err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
+		if node.Type() == "comment" {
+			// reset rules skipped array
+			disabledRules = []string{}
+
+			nodeContent := node.Content()
+			if strings.Contains(nodeContent, "bearer:disable") {
+				ruleIdsStr := strings.Split(nodeContent, "bearer:disable")[1]
+
+				for _, ruleId := range strings.Split(ruleIdsStr, ",") {
+					disabledRules = append(disabledRules, strings.TrimSpace(ruleId))
+				}
+			}
+
+			return visitChildren()
+		}
+
+		// add rules skipped and node to result map
+		for _, ruleId := range disabledRules {
+			res[ruleId] = append(res[ruleId], node)
+		}
+
+		// reset rules skipped array
+		disabledRules = []string{}
+		return visitChildren()
+	})
+
+	// walk itself shouldn't trigger an error, and we aren't creating any
+	if err != nil {
+		panic(err)
+	}
+
+	return res
 }
 
 func (evaluator *evaluator) nonUnifiedNodeDetections(
