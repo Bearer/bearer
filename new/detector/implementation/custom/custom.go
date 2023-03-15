@@ -58,10 +58,6 @@ func (detector *customDetector) DetectAt(
 ) ([]interface{}, error) {
 	var detectionsData []interface{}
 
-	if evaluator.RuleDisabledForNode(detector.Name(), node) {
-		return detectionsData, nil
-	}
-
 	for _, pattern := range detector.patterns {
 		results, err := pattern.Query.MatchAt(node)
 		if err != nil {

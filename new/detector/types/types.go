@@ -17,7 +17,6 @@ type Evaluator interface {
 	TreeHas(rootNode *tree.Node, detectorType string) (bool, error)
 	NodeHas(node *tree.Node, detectorType string) (bool, error)
 	FileName() string
-	RuleDisabledForNode(ruleId string, node *tree.Node) bool
 }
 
 type DetectorSet interface {

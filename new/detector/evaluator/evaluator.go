@@ -110,7 +110,7 @@ func (evaluator *evaluator) ForNode(
 	return detections, nil
 }
 
-func (evaluator *evaluator) RuleDisabledForNode(ruleId string, node *langtree.Node) bool {
+func (evaluator *evaluator) ruleDisabledForNode(ruleId string, node *langtree.Node) bool {
 	nodesToIgnore := evaluator.rulesDisabledForNodes[ruleId]
 	if nodesToIgnore == nil {
 		return false
@@ -246,6 +246,10 @@ func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType string) (b
 }
 
 func (evaluator *evaluator) detectAtNode(node *langtree.Node, detectorType string) error {
+	if evaluator.ruleDisabledForNode(detectorType, node) {
+		return nil
+	}
+
 	return evaluator.withCycleProtection(node, detectorType, func() error {
 		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, evaluator)
 		if err != nil {
