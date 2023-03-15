@@ -7,10 +7,10 @@ patterns:
           - deserializeError
           - deserialize_error
       - either:
-        - variable: USER_INPUT
-          detection: javascript_express_insecure_deserialization_request_obj
-        - variable: USER_INPUT
-          detection: javascript_express_deserialization_buffer
+          - variable: USER_INPUT
+            detection: javascript_express_insecure_deserialization_request_obj
+          - variable: USER_INPUT
+            detection: javascript_express_deserialization_buffer
   - pattern: |
       $<LIB>.unserialize($<USER_INPUT>)
     filters:
@@ -19,12 +19,22 @@ patterns:
           - nodeSerialize
           - node_serialize
       - either:
-        - variable: USER_INPUT
-          detection: javascript_express_insecure_deserialization_request_obj
-        - variable: USER_INPUT
-          detection: javascript_express_deserialization_buffer
+          - variable: USER_INPUT
+            detection: javascript_express_insecure_deserialization_request_obj
+          - variable: USER_INPUT
+            detection: javascript_express_deserialization_buffer
 auxiliary:
   - id: javascript_express_insecure_deserialization_request_obj
+    patterns:
+      - pattern: $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_insecure_deserialization_user_input
+      - pattern: const { $<!>$<_> } = $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_insecure_deserialization_user_input
+  - id: javascript_express_insecure_deserialization_user_input
     patterns:
       - req.params
       - req.query

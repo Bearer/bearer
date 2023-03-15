@@ -14,6 +14,9 @@ var insecureURLRule []byte
 //go:embed testdata/datatype.yml
 var datatypeRule []byte
 
+//go:embed testdata/deconstructing.yml
+var deconstructingRule []byte
+
 //go:embed testdata/class.yml
 var classNameRule []byte
 
@@ -45,6 +48,12 @@ func TestObjectSubscriptExpression(t *testing.T) {
 	testhelper.RunTest(t, map[string][]byte{
 		"logger": datatypeRule,
 	}, "testdata/testcases/object-subscript-expression", javascript.New)
+}
+
+func TestObjectDeconstructing(t *testing.T) {
+	testhelper.RunTest(t, map[string][]byte{
+		"logger": deconstructingRule,
+	}, "testdata/testcases/object-deconstructing", javascript.New)
 }
 
 func TestString(t *testing.T) {

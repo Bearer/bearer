@@ -3,22 +3,22 @@ patterns:
       eval($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
-        detection: javascript_express_eval_user_input_user_input
+        detection: javascript_express_eval_user_input_req_object
   - pattern: |
       new Function($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
-        detection: javascript_express_eval_user_input_user_input
+        detection: javascript_express_eval_user_input_req_object
   - pattern: |
       setTimeout($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
-        detection: javascript_express_eval_user_input_user_input
+        detection: javascript_express_eval_user_input_req_object
   - pattern: |
       setInterval($<USER_INPUT>)
     filters:
       - variable: USER_INPUT
-        detection: javascript_express_eval_user_input_user_input
+        detection: javascript_express_eval_user_input_req_object
   - pattern: |
       vm.$<METHOD>($<...>$<USER_INPUT>$<...>)
     filters:
@@ -30,13 +30,23 @@ patterns:
           - runInThisContext
           - compileFunction
       - variable: USER_INPUT
-        detection: javascript_express_eval_user_input_user_input
+        detection: javascript_express_eval_user_input_req_object
   - pattern: |
       new vm.Script($<...>$<USER_INPUT>$<...>)
     filters:
       - variable: USER_INPUT
-        detection: javascript_express_eval_user_input_user_input
+        detection: javascript_express_external_resource_req_object
 auxiliary:
+  - id: javascript_express_eval_user_input_req_object
+    patterns:
+      - pattern: $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_eval_user_input_user_input
+      - pattern: const { $<!>$<_> } = $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_eval_user_input_user_input
   - id: javascript_express_eval_user_input_user_input
     patterns:
       - req.params
@@ -44,7 +54,6 @@ auxiliary:
       - req.body
       - req.cookies
       - req.headers
-      - location
 languages:
   - javascript
 trigger: presence

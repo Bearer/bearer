@@ -14,6 +14,16 @@ languages:
 auxiliary:
   - id: javascript_express_external_resource_req_object
     patterns:
+      - pattern: $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_external_resource_user_input
+      - pattern: const { $<!>$<_> } = $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_external_resource_user_input
+  - id: javascript_express_external_resource_user_input
+    patterns:
       - req.params
       - req.query
       - req.body

@@ -9,7 +9,7 @@ patterns:
       - variable: ORIGIN
         regex: (?i)['"]access-control-allow-origin["']
       - variable: USER_INPUT
-        detection: javascript_express_insecure_allow_origin_user_input
+        detection: javascript_express_insecure_allow_origin_req_object
   - pattern: |
       res.writeHead($<_>, $<INSECURE_CORS_HASH>)
     filters:
@@ -18,6 +18,16 @@ patterns:
 languages:
   - javascript
 auxiliary:
+  - id: javascript_express_insecure_allow_origin_req_object
+    patterns:
+      - pattern: $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_insecure_allow_origin_user_input
+      - pattern: const { $<!>$<_> } = $<DATA>
+        filters:
+          - variable: DATA
+            detection: javascript_express_insecure_allow_origin_user_input
   - id: javascript_express_insecure_allow_origin_user_input
     patterns:
       - req.params
@@ -33,7 +43,7 @@ auxiliary:
           - variable: ORIGIN
             regex: (?i)['"]access-control-allow-origin["']
           - variable: USER_INPUT
-            detection: javascript_express_insecure_allow_origin_user_input
+            detection: javascript_express_external_resource_req_object
 trigger: presence
 metadata:
   description: "Insecure Access-Control-Allow-Origin detected."
