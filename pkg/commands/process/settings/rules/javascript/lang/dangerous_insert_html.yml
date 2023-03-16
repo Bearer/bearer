@@ -1,4 +1,4 @@
-disabled: true
+disabled: false
 patterns:
   - pattern: |
       document.$<METHOD>($<...>$<DATA>$<...>)

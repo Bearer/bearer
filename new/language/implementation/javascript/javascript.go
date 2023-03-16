@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
@@ -31,7 +32,7 @@ var (
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression", "string", "template_string"}
+	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression", "string", "template_string", "required_parameter"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 
@@ -106,6 +107,14 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				(parent.Type() == "subscript_expression" && node.Equal(parent.ChildByFieldName("object"))) {
 				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
+				}
+			}
+
+			// typescript: different type of identifier
+			if parent.Type() == "required_parameter" {
+				log.Debug().Msgf("%s", node.Debug())
+				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
+					scope.Assign(node.Content(), node)
 				}
 			}
 

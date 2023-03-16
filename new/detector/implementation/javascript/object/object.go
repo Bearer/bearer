@@ -13,6 +13,7 @@ import (
 
 type objectDetector struct {
 	types.DetectorBase
+	isTypescript bool
 	// Gathering properties
 	objectPairQuery *tree.Query
 	// Naming
@@ -29,7 +30,7 @@ type objectDetector struct {
 	subscriptExpressionQuery *tree.Query
 }
 
-func New(lang languagetypes.Language) (types.Detector, error) {
+func New(lang languagetypes.Language, isTypescript bool) (types.Detector, error) {
 	// { first_name: ..., ... }
 	objectPairQuery, err := lang.CompileQuery(`(object (pair) @pair) @root`)
 	if err != nil {
@@ -64,13 +65,6 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling parent pair query: %s", err)
 	}
 
-	// class User
-	// end
-	// classNameQuery, err := lang.CompileQuery(`(class_declaration name: (identifier) @name) @root`)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("error compiling class name query: %s", err)
-	// }
-
 	// new User()
 	constructorQuery, err := lang.CompileQuery(`(new_expression constructor: (identifier) @name) @root`)
 	if err != nil {
@@ -89,17 +83,30 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling subscript expression query %s", err)
 	}
 
-	return &objectDetector{
+	objectDetector := &objectDetector{
+		isTypescript:              isTypescript,
 		objectPairQuery:           objectPairQuery,
 		assignmentQuery:           assignmentQuery,
 		variableDeclarationQuery:  variableDeclarationQuery,
 		objectDeconstructionQuery: objectDeconstructionQuery,
 		parentPairQuery:           parentPairQuery,
-		// classNameQuery:            classNameQuery,
-		constructorQuery:         constructorQuery,
-		memberExpressionQuery:    memberExpressionQuery,
-		subscriptExpressionQuery: subscriptExpressionQuery,
-	}, nil
+		constructorQuery:          constructorQuery,
+		memberExpressionQuery:     memberExpressionQuery,
+		subscriptExpressionQuery:  subscriptExpressionQuery,
+	}
+
+	if !isTypescript {
+		// class User
+		// end
+		classNameQuery, err := lang.CompileQuery(`(class_declaration name: (identifier) @name) @root`)
+		if err != nil {
+			return nil, fmt.Errorf("error compiling class name query: %s", err)
+		}
+
+		objectDetector.classNameQuery = classNameQuery
+	}
+
+	return objectDetector, nil
 }
 
 func (detector *objectDetector) Name() string {
@@ -134,10 +141,12 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	// detections, err = detector.getClass(node, evaluator)
-	// if len(detections) != 0 || err != nil {
-	// 	return detections, err
-	// }
+	if !detector.isTypescript {
+		detections, err = detector.getClass(node, evaluator)
+		if len(detections) != 0 || err != nil {
+			return detections, err
+		}
+	}
 
 	detections, err = detector.getConstructor(node, evaluator)
 	if len(detections) != 0 || err != nil {

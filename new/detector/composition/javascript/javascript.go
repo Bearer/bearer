@@ -44,7 +44,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	}
 
 	staticDetectors := []struct {
-		constructor func(languagetypes.Language) (detectortypes.Detector, error)
+		constructor func(languagetypes.Language, bool) (detectortypes.Detector, error)
 		name        string
 	}{
 		{
@@ -59,6 +59,12 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 			constructor: stringdetector.New,
 			name:        "string detector",
 		},
+	}
+
+	genericDetectors := []struct {
+		constructor func(languagetypes.Language) (detectortypes.Detector, error)
+		name        string
+	}{
 		{
 			constructor: insecureurl.New,
 			name:        "insecure url detector",
@@ -78,12 +84,25 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		jsRules[ruleName] = rule
 	}
 
-	detectorsLen := len(jsRules) + len(staticDetectors)
+	detectorsLen := len(jsRules) + len(staticDetectors) + len(genericDetectors)
 	receiver := make(chan types.DetectorInitResult, detectorsLen)
 
 	var detectors []detectortypes.Detector
 
 	for _, detectorCreator := range staticDetectors {
+		creator := detectorCreator
+
+		go func() {
+			detector, err := creator.constructor(lang, false)
+			receiver <- types.DetectorInitResult{
+				Error:        err,
+				Detector:     detector,
+				DetectorName: creator.name,
+			}
+		}()
+	}
+
+	for _, detectorCreator := range genericDetectors {
 		creator := detectorCreator
 
 		go func() {
