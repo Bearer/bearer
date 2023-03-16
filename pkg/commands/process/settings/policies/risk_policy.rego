@@ -8,54 +8,33 @@ contains(arr, elem) if {
 	arr[_] = elem
 }
 
+# - presence of pattern
+# - detector has local data types
 local_failures contains detector if {
-	input.rule.trigger == "local"
+	input.rule.trigger.match_on == "presence"
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
+
+	some data_type in detector.data_types
 }
 
+# - presence of pattern
+# - data types required & detected
 global_failures contains detector if {
-	input.rule.trigger == "global"
+	input.rule.trigger.match_on == "presence"
+	input.rule.trigger.data_types_required
+
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
 
 	some data_type in data.bearer.common.global_data_types
 }
 
+# - presence of pattern
 presence_failures contains detector if {
-	input.rule.trigger == "presence"
+	input.rule.trigger.match_on == "presence"
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
-}
-
-policy_failure contains item if {
-	input.rule.trigger == "absence"
-	some detector in input.dataflow.risks
-
-	detector.detector_id == input.rule.trigger_rule_on_presence_of
-	some init_location in detector.locations
-
-	x := {other | other := input.dataflow.risks[_]; other.detector_id == input.rule.id}
-	count(x) == 0
-
-	item := data.bearer.common.build_item(init_location)
-}
-
-policy_failure contains item if {
-	input.rule.trigger == "absence"
-	some detector in input.dataflow.risks
-
-	detector.detector_id == input.rule.trigger_rule_on_presence_of
-
-	some init_location in detector.locations
-	some other_detector in input.dataflow.risks
-
-	other_detector.detector_id == input.rule.id
-
-	x := {other_location | other_location := other_detector.locations[_]; init_location.filename == other_location.filename}
-	count(x) == 0
-
-	item := data.bearer.common.build_item(init_location)
 }
 
 local_data_types contains data_type if {
@@ -83,6 +62,35 @@ local_data_types contains data_type if {
 }
 
 # Build policy failures
+policy_failure contains item if {
+	input.rule.trigger.match_on == "absence"
+	some detector in input.dataflow.risks
+
+	detector.detector_id == input.rule.trigger.required_detection
+	some init_location in detector.locations
+
+	x := {other | other := input.dataflow.risks[_]; other.detector_id == input.rule.id}
+	count(x) == 0
+
+	item := data.bearer.common.build_item(init_location)
+}
+
+policy_failure contains item if {
+	input.rule.trigger.match_on == "absence"
+	some detector in input.dataflow.risks
+
+	detector.detector_id == input.rule.trigger.required_detection
+
+	some init_location in detector.locations
+	some other_detector in input.dataflow.risks
+
+	other_detector.detector_id == input.rule.id
+
+	x := {other_location | other_location := other_detector.locations[_]; init_location.filename == other_location.filename}
+	count(x) == 0
+
+	item := data.bearer.common.build_item(init_location)
+}
 
 policy_failure contains item if {
 	some data_type in local_data_types
@@ -107,7 +115,7 @@ policy_failure contains item if {
 }
 
 policy_failure contains item if {
-	input.rule.trigger == "stored_data_types"
+	input.rule.trigger.match_on == "stored_data_types"
 
 	contains(input.rule.languages, input.dataflow.data_types[_].detectors[_].name)
 	data_type = input.dataflow.data_types[_]
