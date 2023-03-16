@@ -13,7 +13,6 @@ auxiliary:
     patterns:
       - |
         Clickhouse.connection.insert_rows() { |$<!>$<_:identifier>| }
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

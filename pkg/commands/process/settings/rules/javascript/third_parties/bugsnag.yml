@@ -33,7 +33,6 @@ auxiliary:
         filters:
           - variable: CLIENT
             detection: javascript_third_parties_bugsnag_client
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

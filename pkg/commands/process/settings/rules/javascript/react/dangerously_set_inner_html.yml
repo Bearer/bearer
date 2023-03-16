@@ -18,7 +18,6 @@ auxiliary:
       - sanitizeHTML($<_>)
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "React's dangerously set inner HTML detected."

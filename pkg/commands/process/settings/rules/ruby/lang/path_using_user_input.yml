@@ -219,7 +219,6 @@ auxiliary:
             detection: ruby_lang_path_using_user_input_user_input
 languages:
   - ruby
-trigger: presence
 severity: high
 metadata:
   description: "Do not use user input to form file paths."

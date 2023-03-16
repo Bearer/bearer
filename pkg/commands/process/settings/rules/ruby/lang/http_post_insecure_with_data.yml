@@ -25,7 +25,6 @@ patterns:
         detection: insecure_url
       - variable: DATA_TYPE
         detection: datatype
-trigger: local
 metadata:
   description: "Sensitive data sent through an unsecure HTTP communication detected."
   remediation_message: |

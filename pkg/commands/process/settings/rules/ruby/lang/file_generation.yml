@@ -38,7 +38,6 @@ auxiliary:
         IO.open()
       - |
         IO.open() { |$<!>$<_:identifier>| }
-trigger: local
 metadata:
   description: "Sensitive data detected as part of a dynamic file generation."
   remediation_message: |

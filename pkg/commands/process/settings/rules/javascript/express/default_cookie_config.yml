@@ -72,7 +72,6 @@ auxiliary:
     patterns:
     - |
       { secure: $<_> }
-trigger: presence
 severity: medium
 metadata:
   description: "Cookie with default config detected."

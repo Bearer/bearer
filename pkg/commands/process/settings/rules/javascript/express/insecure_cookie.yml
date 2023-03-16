@@ -21,7 +21,6 @@ patterns:
       })
 languages:
   - javascript
-trigger: presence
 metadata:
   description: "Missing secure options for cookie detected."
   remediation_message: |

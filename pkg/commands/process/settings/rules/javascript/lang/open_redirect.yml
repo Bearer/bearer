@@ -26,7 +26,6 @@ auxiliary:
     patterns:
       - window.location
       - location
-trigger: presence
 severity: medium
 metadata:
   description: "Open redirect detected."

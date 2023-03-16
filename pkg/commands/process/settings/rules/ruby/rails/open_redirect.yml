@@ -12,7 +12,6 @@ auxiliary:
       - params
       - request
       - cookies
-trigger: presence
 severity: medium
 metadata:
   description: "Open redirect detected"

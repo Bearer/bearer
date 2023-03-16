@@ -5,7 +5,6 @@ patterns:
     end
 languages:
   - ruby
-trigger: presence
 severity: low
 metadata:
   description: "Force all incoming communication through SSL."

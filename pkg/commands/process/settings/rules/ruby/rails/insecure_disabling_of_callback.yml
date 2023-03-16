@@ -17,7 +17,6 @@ patterns:
         values:
           - except
           - unless
-trigger: presence
 metadata:
   description: "Insecure disabling of callback detected."
   remediation_message: |

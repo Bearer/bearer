@@ -24,7 +24,6 @@ auxiliary:
         filters:
           - variable: CLIENT
             detection: ruby_third_parties_algolia_client
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

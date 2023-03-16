@@ -81,7 +81,6 @@ auxiliary:
   - id: javascript_express_insecure_template_rendering_liquid_init
     patterns:
       - new Liquid()
-trigger: presence
 metadata:
   description: "Insecure template rendering detected."
   remediation_message: |

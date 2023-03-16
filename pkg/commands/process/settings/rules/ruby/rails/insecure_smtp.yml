@@ -13,7 +13,6 @@ patterns:
     end
 languages:
   - ruby
-trigger: presence
 metadata:
   description: "Communication with an unsecure SMTP connection detected."
   remediation_message: |

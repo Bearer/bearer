@@ -13,7 +13,6 @@ auxiliary:
     patterns:
       - |
         new Notifier($<...>)
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

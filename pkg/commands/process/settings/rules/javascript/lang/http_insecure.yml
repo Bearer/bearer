@@ -44,7 +44,6 @@ auxiliary:
             detection: insecure_url
 languages:
   - javascript
-trigger: presence
 severity: low
 metadata:
   description: "Connection with an unsecure HTTP communication detected."

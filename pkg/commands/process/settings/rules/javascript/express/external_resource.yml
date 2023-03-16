@@ -29,7 +29,6 @@ auxiliary:
       - req.body
       - req.cookies
       - req.headers
-trigger: presence
 metadata:
   description: "Rendering of resources resolved from external name or reference detected."
   remediation_message: |

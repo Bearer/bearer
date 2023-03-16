@@ -165,7 +165,6 @@ auxiliary:
         filters:
           - variable: INSECURE_URL
             detection: insecure_url
-trigger: presence
 severity: low
 metadata:
   description: "Connection through an unsecure HTTP communication detected."
