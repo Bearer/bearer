@@ -13,7 +13,6 @@ import (
 
 type objectDetector struct {
 	types.DetectorBase
-	isTypescript bool
 	// Gathering properties
 	objectPairQuery *tree.Query
 	// Naming
@@ -30,7 +29,7 @@ type objectDetector struct {
 	subscriptExpressionQuery *tree.Query
 }
 
-func New(lang languagetypes.Language, isTypescript bool) (types.Detector, error) {
+func New(lang languagetypes.Language) (types.Detector, error) {
 	// { first_name: ..., ... }
 	objectPairQuery, err := lang.CompileQuery(`(object (pair) @pair) @root`)
 	if err != nil {

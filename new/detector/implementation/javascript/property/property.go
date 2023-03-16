@@ -14,14 +14,12 @@ import (
 type propertyDetector struct {
 	types.DetectorBase
 
-	isTypeScript bool
-
 	pairQuery         *tree.Query
 	functionNameQuery *tree.Query
 	methodNameQuery   *tree.Query
 }
 
-func New(lang languagetypes.Language, isTypescript bool) (types.Detector, error) {
+func New(lang languagetypes.Language) (types.Detector, error) {
 	// { user: "admin_user" }
 	pairQuery, err := lang.CompileQuery(`(pair key: (_) @key value: (_) @value) @root`)
 	if err != nil {
@@ -44,7 +42,6 @@ func New(lang languagetypes.Language, isTypescript bool) (types.Detector, error)
 	}
 
 	return &propertyDetector{
-		isTypeScript:      isTypescript,
 		pairQuery:         pairQuery,
 		functionNameQuery: functionNameQuery,
 		methodNameQuery:   methodNameQuery,

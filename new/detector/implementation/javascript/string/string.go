@@ -15,7 +15,7 @@ type stringDetector struct {
 	types.DetectorBase
 }
 
-func New(lang languagetypes.Language, isTypescript bool) (types.Detector, error) {
+func New(lang languagetypes.Language) (types.Detector, error) {
 	return &stringDetector{}, nil
 }
 
