@@ -54,7 +54,15 @@ func (implementation *typescriptImplementation) PatternMatchNodeContainerTypes()
 }
 
 func (implementation *typescriptImplementation) PatternLeafContentTypes() []string {
-	return implementation.javascript.PatternLeafContentTypes()
+	types := []string{"string_fragment"}
+	javascriptTypes := implementation.javascript.PatternLeafContentTypes()
+	for _, v := range javascriptTypes {
+		if v != "string" {
+			types = append(types, v)
+		}
+	}
+
+	return types
 }
 
 func (implementation *typescriptImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
