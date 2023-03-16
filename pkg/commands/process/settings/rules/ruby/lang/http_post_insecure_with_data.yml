@@ -27,7 +27,7 @@ patterns:
         detection: datatype
 trigger: local
 metadata:
-  description: "Sensitive data sent through an an unsecure HTTP communication detected."
+  description: "Sensitive data sent through an unsecure HTTP communication detected."
   remediation_message: |
     ## Description
 
