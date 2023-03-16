@@ -230,7 +230,6 @@ patterns:
       # YOUR CODE HERE
 languages:
   - ruby
-trigger: local
 severity: high
 metadata:
   id: custom_rule_name
