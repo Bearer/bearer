@@ -20,7 +20,7 @@ To better understand the structure of a rule file, let’s look at each key:
 - `languages`: An array of the languages the rule applies to. Available values are: `ruby`, `javascript`
 - `trigger`: Defines under which conditions the rule should raise a failure. Optional.
   - `match_on`: Refers to the rule's pattern matches.
-    - `presence`: Default. Examples include best practices such as configuration settings like forcing SSL communication.
+    - `presence`: Triggers if the rule's pattern is detected. (Default)
     - `absence`: Rule triggers on the absence of a pattern, but the presence of a `required_detection`. Examples include best practices such as missing configuration like forcing SSL communication. Note: rules that match on `absence` need a `required_detection` to be set.
   - `required_detection`:  Used with the `match_on: absence` trigger. Indicates which rule is required to activate the failure on the absence of the main rule.
   - `data_types_required`: Sometimes we may want a rule to trigger only for applications that process sensitive data. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
