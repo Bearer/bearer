@@ -7,6 +7,7 @@ patterns:
         detection: datatype
 languages:
   - javascript
+  - typescript
 trigger: local
 skip_data_types:
   - "Unique Identifier"

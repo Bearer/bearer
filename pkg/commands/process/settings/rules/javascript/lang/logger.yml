@@ -62,6 +62,7 @@ auxiliary:
               - logger
 languages:
   - javascript
+  - typescript
 trigger: local
 skip_data_types:
   - "Unique Identifier"
