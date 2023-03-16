@@ -6,6 +6,7 @@ patterns:
       })
 languages:
   - javascript
+  - typescript
 trigger: presence
 metadata:
   description: "Weak jwt encryption deceted"

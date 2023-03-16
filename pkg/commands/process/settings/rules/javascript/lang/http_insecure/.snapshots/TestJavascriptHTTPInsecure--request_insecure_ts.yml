@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: javascript_http_insecure
+        description: Connection with an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_http_insecure
+      line_number: 5
+      filename: request_insecure_ts.ts
+      parent_line_number: 5
+      parent_content: xhttp.open("GET", insecure_url, true)
+
+
