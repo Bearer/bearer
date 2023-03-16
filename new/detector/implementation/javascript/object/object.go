@@ -71,6 +71,11 @@ func New(lang languagetypes.Language, isTypescript bool) (types.Detector, error)
 		return nil, fmt.Errorf("error compiling class name query: %s", err)
 	}
 
+	classNameQuery, err := lang.CompileQuery(`(class_declaration name: (type_identifier) @name) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling class name query: %s", err)
+	}
+
 	// user.name
 	memberExpressionQuery, err := lang.CompileQuery(`(member_expression object: (_) @object property: (property_identifier) @property) @root`)
 	if err != nil {
@@ -83,30 +88,17 @@ func New(lang languagetypes.Language, isTypescript bool) (types.Detector, error)
 		return nil, fmt.Errorf("error compiling subscript expression query %s", err)
 	}
 
-	objectDetector := &objectDetector{
-		isTypescript:              isTypescript,
+	return &objectDetector{
 		objectPairQuery:           objectPairQuery,
 		assignmentQuery:           assignmentQuery,
 		variableDeclarationQuery:  variableDeclarationQuery,
 		objectDeconstructionQuery: objectDeconstructionQuery,
 		parentPairQuery:           parentPairQuery,
 		constructorQuery:          constructorQuery,
+		classNameQuery:            classNameQuery,
 		memberExpressionQuery:     memberExpressionQuery,
 		subscriptExpressionQuery:  subscriptExpressionQuery,
-	}
-
-	if !isTypescript {
-		// class User
-		// end
-		classNameQuery, err := lang.CompileQuery(`(class_declaration name: (identifier) @name) @root`)
-		if err != nil {
-			return nil, fmt.Errorf("error compiling class name query: %s", err)
-		}
-
-		objectDetector.classNameQuery = classNameQuery
-	}
-
-	return objectDetector, nil
+	}, nil
 }
 
 func (detector *objectDetector) Name() string {
@@ -141,11 +133,9 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	if !detector.isTypescript {
-		detections, err = detector.getClass(node, evaluator)
-		if len(detections) != 0 || err != nil {
-			return detections, err
-		}
+	detections, err = detector.getClass(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
 	}
 
 	detections, err = detector.getConstructor(node, evaluator)

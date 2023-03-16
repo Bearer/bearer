@@ -1,16 +1,3 @@
-medium:
-    - rule:
-        cwe_ids:
-            - "1295"
-            - "532"
-        id: javascript_lang_logger
-        description: Sensitive data in a logger message detected.
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
-      line_number: 1
-      filename: datatype_leak_ts.ts
-      category_groups:
-        - PII
-      parent_line_number: 1
-      parent_content: logger.info(user.email)
+{}
 
 

@@ -1,4 +1,4 @@
-disabled: false
+disabled: true
 patterns:
   - pattern: |
       document.$<METHOD>($<...>$<DATA>$<...>)
@@ -51,7 +51,6 @@ auxiliary:
         `$<...>${$<...>$<_>$<...>}$<...>`
 languages:
   - javascript
-  - typescript
 trigger: presence
 severity: high
 metadata:

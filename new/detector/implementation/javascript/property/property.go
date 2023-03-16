@@ -111,14 +111,8 @@ func (detector *propertyDetector) getMethod(
 		for i := 0; i < params.ChildCount(); i++ {
 			param := params.Child(i)
 
-			if detector.isTypeScript {
-				if !(param.Type() == "required_parameter" && param.Child(0) != nil && param.Child(0).Type() == "identifier") {
-					continue
-				}
-			} else {
-				if param.Type() != "identifier" {
-					continue
-				}
+			if !(param.Type() == "required_parameter" && param.Child(0) != nil && param.Child(0).Type() == "identifier") {
+				continue
 			}
 
 			properties = append(properties, generictypes.Property{Name: param.Content()})

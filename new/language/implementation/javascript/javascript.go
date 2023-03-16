@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/rs/zerolog/log"
-	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
@@ -16,6 +15,7 @@ import (
 
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	sitter "github.com/smacker/go-tree-sitter"
+	"github.com/smacker/go-tree-sitter/typescript/typescript"
 )
 
 var (
@@ -46,7 +46,7 @@ func Get() implementation.Implementation {
 }
 
 func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {
-	return javascript.GetLanguage()
+	return typescript.GetLanguage()
 }
 
 func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
@@ -202,7 +202,7 @@ func (*javascriptImplementation) PatternLeafContentTypes() []string {
 		// identifiers
 		"identifier", "property_identifier", "shorthand_property_identifier",
 		// datatypes/literals
-		"template_string", "string", "number", "null", "true", "false",
+		"template_string", "string_fragment", "number", "null", "true", "false",
 	}
 }
 

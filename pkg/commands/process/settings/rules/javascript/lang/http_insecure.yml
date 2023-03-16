@@ -44,7 +44,6 @@ auxiliary:
             detection: insecure_url
 languages:
   - javascript
-  - typescript
 trigger: presence
 severity: low
 metadata:
