@@ -48,6 +48,7 @@ type Input struct {
 }
 
 type Output struct {
+	IsLocal          *bool    `json:"is_local,omitempty" yaml:"is_local,omitempty"`
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
@@ -161,8 +162,7 @@ func evaluateRules(
 					DetailedContext:  output.DetailedContext,
 				}
 
-				// FIXME
-				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, rule.IsLocal)
+				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
 
 				if config.Report.Severity[severity] {
 					summaryResults[severity] = append(summaryResults[severity], result)
