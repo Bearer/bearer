@@ -5,26 +5,31 @@ import (
 	"fmt"
 
 	sitter "github.com/smacker/go-tree-sitter"
-	"github.com/smacker/go-tree-sitter/ruby"
+	sitterruby "github.com/smacker/go-tree-sitter/ruby"
 
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/implementation/ruby"
+	builderinput "github.com/bearer/bearer/new/language/patternquery/builder/input"
 	"github.com/bearer/bearer/pkg/ast/languages/ruby/patterns"
 	"github.com/bearer/bearer/pkg/ast/sourcefacts"
 	"github.com/bearer/bearer/pkg/ast/walker"
-	"github.com/bearer/bearer/pkg/souffle/writer"
-	filewriter "github.com/bearer/bearer/pkg/souffle/writer/file"
+	"github.com/bearer/bearer/pkg/util/souffle/writer"
+	filewriter "github.com/bearer/bearer/pkg/util/souffle/writer/file"
 )
 
 type Language struct {
-	sitterLanguage *sitter.Language
-	walker         *walker.Walker
+	sitterLanguage     *sitter.Language
+	langImplementation implementation.Implementation
+	walker             *walker.Walker
 }
 
 func New() *Language {
-	sitterLanguage := ruby.GetLanguage()
+	sitterLanguage := sitterruby.GetLanguage()
 
 	return &Language{
-		sitterLanguage: sitterLanguage,
-		walker:         walker.NewWalker(sitterLanguage),
+		sitterLanguage:     sitterLanguage,
+		langImplementation: ruby.Get(),
+		walker:             walker.NewWalker(sitterLanguage),
 	}
 }
 
@@ -56,17 +61,23 @@ func (language *Language) WriteRule(
 	input string,
 	writer *filewriter.Writer,
 ) error {
-	inputBytes := []byte(input)
+	processedInput, inputParams, err := builderinput.Process(language.langImplementation, input)
+	if err != nil {
+		return fmt.Errorf("error parsing bearer syntax: %w", err)
+	}
 
-	rootNode, err := sitter.ParseCtx(context.TODO(), inputBytes, language.sitterLanguage)
+	processedInputBytes := []byte(processedInput)
+
+	rootNode, err := sitter.ParseCtx(context.TODO(), processedInputBytes, language.sitterLanguage)
 	if err != nil {
 		return fmt.Errorf("parse error: %w", err)
 	}
 
 	if err := patterns.CompileRule(
 		language.walker,
+		inputParams,
 		ruleName,
-		inputBytes,
+		processedInputBytes,
 		rootNode,
 		writer,
 	); err != nil {

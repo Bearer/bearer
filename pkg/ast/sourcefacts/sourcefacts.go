@@ -6,8 +6,8 @@ import (
 	"github.com/bearer/bearer/pkg/ast/idgenerator"
 	"github.com/bearer/bearer/pkg/ast/languages/ruby/common"
 	"github.com/bearer/bearer/pkg/ast/walker"
-	writer "github.com/bearer/bearer/pkg/souffle/writer"
-	writerbase "github.com/bearer/bearer/pkg/souffle/writer/base"
+	writer "github.com/bearer/bearer/pkg/util/souffle/writer"
+	writerbase "github.com/bearer/bearer/pkg/util/souffle/writer/base"
 )
 
 type astWriter struct {

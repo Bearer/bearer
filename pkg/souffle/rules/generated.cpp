@@ -1010,27 +1010,63 @@ rel_Rule_159a590c7b2c8d95(&rel_Rule_159a590c7b2c8d95){
 }
 
 void Stratum_Rule_0e6b7aa9ece342e5::run([[maybe_unused]] const std::vector<RamDomain>& args,[[maybe_unused]] std::vector<RamDomain>& ret){
-signalHandler->setMsg(R"_(Rule("test_rule",node1) :- 
+signalHandler->setMsg(R"_(Rule("sql_lang_create_table",node1) :- 
    AST_NodeType(node1,"call"),
+   !AST_NodeField(node1,_,"receiver"),
    !AST_NodeField(node1,_,"block"),
-   AST_NodeField(node1,node2,"receiver"),
+   AST_NodeField(node1,node2,"method"),
    AST_NodeType(node2,"constant"),
-   AST_NodeContent(node2,"Foo"),
-   AST_NodeField(node1,node3,"method"),
-   AST_NodeType(node3,"identifier"),
-   AST_NodeContent(node3,"new"),
-   AST_NodeField(node1,node4,"arguments"),
-   AST_NodeType(node4,"argument_list"),
-   AST_ParentChild(node4,0,node5),
-   AST_NodeType(node5,"pair"),
-   AST_NodeField(node5,tmp0,"key"),
-   AST_NodeType(tmp0,"simple_symbol"),
-   AST_NodeContent(tmp0,":b"),
-   AST_NodeField(node5,node6,"value"),
-   AST_NodeType(node6,"integer"),
-   AST_NodeContent(node6,"1").
-in file rules.dl [1:1-1:714])_");
-if(!(rel_AST_NodeType_b38285ae9991409e->empty()) && !(rel_AST_NodeField_ca02670731ce3c99->empty()) && !(rel_AST_NodeContent_b2f3666572e60754->empty()) && !(rel_AST_ParentChild_be6259205eb66578->empty())) {
+   AST_NodeContent(node2,"CREATE"),
+   AST_NodeField(node1,node3,"arguments"),
+   AST_NodeType(node3,"argument_list"),
+   AST_ParentChild(node3,0,node4),
+   AST_NodeType(node4,"call"),
+   !AST_NodeField(node4,_,"receiver"),
+   !AST_NodeField(node4,_,"block"),
+   AST_NodeField(node4,node5,"method"),
+   AST_NodeType(node5,"constant"),
+   AST_NodeContent(node5,"TABLE"),
+   AST_NodeField(node4,node6,"arguments"),
+   AST_NodeType(node6,"argument_list"),
+   AST_ParentChild(node6,0,node7),
+   AST_NodeType(node7,"call"),
+   !AST_NodeField(node7,_,"block"),
+   AST_NodeField(node7,node8,"receiver"),
+   AST_NodeType(node8,"identifier"),
+   AST_NodeContent(node8,"public"),
+   AST_ParentChild(node7,0,node9),
+   AST_NodeType(node9,"."),
+   AST_ParentChild(node9,0,node10),
+   AST_NodeType(node10,"identifier"),
+   AST_NodeContent(node10,""),
+   AST_NodeField(node7,node11,"arguments"),
+   AST_NodeType(node11,"argument_list"),
+   AST_ParentChild(node11,0,node12),
+   AST_NodeType(node12,"call"),
+   !AST_NodeField(node12,_,"receiver"),
+   !AST_NodeField(node12,_,"block"),
+   AST_NodeField(node12,node13,"method"),
+   AST_NodeType(node13,"global_variable"),
+   AST_NodeField(node12,node14,"arguments"),
+   AST_NodeType(node14,"argument_list"),
+   AST_ParentChild(node14,0,node15),
+   AST_NodeType(node15,"parenthesized_statements"),
+   AST_ParentChild(node15,0,node16),
+   AST_NodeType(node16,"("),
+   AST_ParentChild(node15,1,node17),
+   AST_NodeType(node17,"ERROR"),
+   AST_ParentChild(node17,0,node18),
+   AST_NodeType(node18,"<"),
+   AST_ParentChild(node15,2,node19),
+   AST_NodeType(node19,"global_variable"),
+   AST_ParentChild(node15,3,node20),
+   AST_NodeType(node20,"ERROR"),
+   AST_ParentChild(node20,0,node21),
+   AST_NodeType(node21,">"),
+   AST_ParentChild(node15,4,node22),
+   AST_NodeType(node22,")").
+in file rules.dl [1:1-1:1954])_");
+if(!(rel_AST_ParentChild_be6259205eb66578->empty()) && !(rel_AST_NodeField_ca02670731ce3c99->empty()) && !(rel_AST_NodeType_b38285ae9991409e->empty()) && !(rel_AST_NodeContent_b2f3666572e60754->empty())) {
 [&](){
 CREATE_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt,rel_AST_NodeContent_b2f3666572e60754->createContext());
 CREATE_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt,rel_AST_NodeField_ca02670731ce3c99->createContext());
@@ -1039,27 +1075,108 @@ CREATE_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt,rel_AST_ParentChi
 CREATE_OP_CONTEXT(rel_Rule_159a590c7b2c8d95_op_ctxt,rel_Rule_159a590c7b2c8d95->createContext());
 auto range = rel_AST_NodeType_b38285ae9991409e->lowerUpperRange_01(Tuple<RamDomain,2>{{ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(0))}},Tuple<RamDomain,2>{{ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(0))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt));
 for(const auto& env0 : range) {
-if( !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty()) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(3))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env1 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(4))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(5))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(5))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(4))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(5))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(6))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env2 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env2[1]),ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env2[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(8))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(8))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env2[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env2[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env2[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
 for(const auto& env3 : range) {
-if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env3[1]),ramBitCast(RamSigned(9))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env3[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env3[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env3[2]),ramBitCast(RamSigned(0))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt)) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty()) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(3))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env4 : range) {
-if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env4[2]),ramBitCast(RamSigned(10))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(11))}},Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(11))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env4[1]),ramBitCast(RamSigned(8))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env4[1]),ramBitCast(RamSigned(5))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(6))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env5 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env5[1]),ramBitCast(RamSigned(12))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env5[1]),ramBitCast(RamSigned(13))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(14))}},Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(14))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env5[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env5[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env5[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
 for(const auto& env6 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env6[1]),ramBitCast(RamSigned(15))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env6[1]),ramBitCast(RamSigned(16))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-Tuple<RamDomain,2> tuple{{ramBitCast(RamSigned(17)),ramBitCast(env0[0])}};
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env6[2]),ramBitCast(RamSigned(0))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt)) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+for(const auto& env7 : range) {
+if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env7[1]),ramBitCast(RamSigned(9))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env7[1]),ramBitCast(RamSigned(10))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env8 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env8[2]),ramBitCast(RamSigned(11))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env8[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env8[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env9 : range) {
+if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env9[2]),ramBitCast(RamSigned(12))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env9[2]),ramBitCast(RamSigned(10))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(6))}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+for(const auto& env10 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env10[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env10[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env10[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env11 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env11[2]),ramBitCast(RamSigned(0))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt)) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty()) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(3))}},Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+for(const auto& env12 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env12[1]),ramBitCast(RamSigned(13))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(6))}},Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+for(const auto& env13 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env13[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env13[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env13[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env14 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env14[2]),ramBitCast(RamSigned(14))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env15 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env15[2]),ramBitCast(RamSigned(15))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(1)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(1)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env16 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env16[2]),ramBitCast(RamSigned(16))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env16[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env16[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env17 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env17[2]),ramBitCast(RamSigned(17))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(2)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(2)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env18 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env18[2]),ramBitCast(RamSigned(13))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(3)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(3)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env19 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env19[2]),ramBitCast(RamSigned(16))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env19[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env19[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env20 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env20[2]),ramBitCast(RamSigned(18))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(4)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(4)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env21 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env21[2]),ramBitCast(RamSigned(19))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+Tuple<RamDomain,2> tuple{{ramBitCast(RamSigned(20)),ramBitCast(env0[0])}};
 rel_Rule_159a590c7b2c8d95->insert(tuple,READ_OP_CONTEXT(rel_Rule_159a590c7b2c8d95_op_ctxt));
+break;
+}
+}
+break;
+}
+}
+}
+}
+break;
+}
+}
+break;
+}
+}
+}
+}
+break;
+}
+}
+}
+}
+}
+}
+break;
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
 }
 }
 }
@@ -1076,27 +1193,50 @@ rel_Rule_159a590c7b2c8d95->insert(tuple,READ_OP_CONTEXT(rel_Rule_159a590c7b2c8d9
 }
 }
 ();}
-signalHandler->setMsg(R"_(Rule("test_rule",node1) :- 
+signalHandler->setMsg(R"_(Rule("sql_lang_create_table",node1) :- 
    AST_NodeType(node1,"call"),
+   !AST_NodeField(node1,_,"receiver"),
    !AST_NodeField(node1,_,"block"),
-   AST_NodeField(node1,node2,"receiver"),
+   AST_NodeField(node1,node2,"method"),
    AST_NodeType(node2,"constant"),
-   AST_NodeContent(node2,"Foo"),
-   AST_NodeField(node1,node3,"method"),
-   AST_NodeType(node3,"identifier"),
-   AST_NodeContent(node3,"new"),
-   AST_NodeField(node1,node4,"arguments"),
-   AST_NodeType(node4,"argument_list"),
-   AST_ParentChild(node4,0,node5),
-   AST_NodeType(node5,"pair"),
-   AST_NodeField(node5,tmp0,"key"),
-   AST_NodeType(tmp0,"hash_key_symbol"),
-   AST_NodeContent(tmp0,"b"),
-   AST_NodeField(node5,node6,"value"),
-   AST_NodeType(node6,"integer"),
-   AST_NodeContent(node6,"1").
-in file rules.dl [1:1-1:714])_");
-if(!(rel_AST_NodeType_b38285ae9991409e->empty()) && !(rel_AST_NodeField_ca02670731ce3c99->empty()) && !(rel_AST_NodeContent_b2f3666572e60754->empty()) && !(rel_AST_ParentChild_be6259205eb66578->empty())) {
+   AST_NodeContent(node2,"CREATE"),
+   AST_NodeField(node1,node3,"arguments"),
+   AST_NodeType(node3,"argument_list"),
+   AST_ParentChild(node3,0,node4),
+   AST_NodeType(node4,"call"),
+   !AST_NodeField(node4,_,"receiver"),
+   !AST_NodeField(node4,_,"block"),
+   AST_NodeField(node4,node5,"method"),
+   AST_NodeType(node5,"constant"),
+   AST_NodeContent(node5,"TABLE"),
+   AST_NodeField(node4,node6,"arguments"),
+   AST_NodeType(node6,"argument_list"),
+   AST_ParentChild(node6,0,node7),
+   AST_NodeType(node7,"call"),
+   !AST_NodeField(node7,_,"receiver"),
+   !AST_NodeField(node7,_,"block"),
+   AST_NodeField(node7,node8,"method"),
+   AST_NodeType(node8,"global_variable"),
+   AST_NodeField(node7,node9,"arguments"),
+   AST_NodeType(node9,"argument_list"),
+   AST_ParentChild(node9,0,node10),
+   AST_NodeType(node10,"parenthesized_statements"),
+   AST_ParentChild(node10,0,node11),
+   AST_NodeType(node11,"("),
+   AST_ParentChild(node10,1,node12),
+   AST_NodeType(node12,"ERROR"),
+   AST_ParentChild(node12,0,node13),
+   AST_NodeType(node13,"<"),
+   AST_ParentChild(node10,2,node14),
+   AST_NodeType(node14,"global_variable"),
+   AST_ParentChild(node10,3,node15),
+   AST_NodeType(node15,"ERROR"),
+   AST_ParentChild(node15,0,node16),
+   AST_NodeType(node16,">"),
+   AST_ParentChild(node10,4,node17),
+   AST_NodeType(node17,")").
+in file rules.dl [2:1-2:1492])_");
+if(!(rel_AST_ParentChild_be6259205eb66578->empty()) && !(rel_AST_NodeField_ca02670731ce3c99->empty()) && !(rel_AST_NodeType_b38285ae9991409e->empty()) && !(rel_AST_NodeContent_b2f3666572e60754->empty())) {
 [&](){
 CREATE_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt,rel_AST_NodeContent_b2f3666572e60754->createContext());
 CREATE_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt,rel_AST_NodeField_ca02670731ce3c99->createContext());
@@ -1105,27 +1245,83 @@ CREATE_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt,rel_AST_ParentChi
 CREATE_OP_CONTEXT(rel_Rule_159a590c7b2c8d95_op_ctxt,rel_Rule_159a590c7b2c8d95->createContext());
 auto range = rel_AST_NodeType_b38285ae9991409e->lowerUpperRange_01(Tuple<RamDomain,2>{{ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(0))}},Tuple<RamDomain,2>{{ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(0))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt));
 for(const auto& env0 : range) {
-if( !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty()) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(3))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env1 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(4))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(5))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(5))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(4))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env1[1]),ramBitCast(RamSigned(5))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(6))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env2 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env2[1]),ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env2[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(8))}},Tuple<RamDomain,3>{{ramBitCast(env0[0]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(8))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env2[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env2[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env2[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
 for(const auto& env3 : range) {
-if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env3[1]),ramBitCast(RamSigned(9))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env3[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env3[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env3[2]),ramBitCast(RamSigned(0))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt)) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty()) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(3))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env4 : range) {
-if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env4[2]),ramBitCast(RamSigned(10))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(11))}},Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(11))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env4[1]),ramBitCast(RamSigned(8))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env4[1]),ramBitCast(RamSigned(5))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(6))}},Tuple<RamDomain,3>{{ramBitCast(env3[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
 for(const auto& env5 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env5[1]),ramBitCast(RamSigned(18))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env5[1]),ramBitCast(RamSigned(19))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(14))}},Tuple<RamDomain,3>{{ramBitCast(env4[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(14))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env5[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env5[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env5[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
 for(const auto& env6 : range) {
-if( rel_AST_NodeContent_b2f3666572e60754->contains(Tuple<RamDomain,2>{{ramBitCast(env6[1]),ramBitCast(RamSigned(15))}},READ_OP_CONTEXT(rel_AST_NodeContent_b2f3666572e60754_op_ctxt)) && rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env6[1]),ramBitCast(RamSigned(16))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
-Tuple<RamDomain,2> tuple{{ramBitCast(RamSigned(17)),ramBitCast(env0[0])}};
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env6[2]),ramBitCast(RamSigned(0))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt)) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(1))}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(1))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty()) && !(!rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(2))}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(2))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt)).empty())) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(3))}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(3))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+for(const auto& env7 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env7[1]),ramBitCast(RamSigned(13))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_NodeField_ca02670731ce3c99->lowerUpperRange_101(Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MIN_RAM_SIGNED), ramBitCast(RamSigned(6))}},Tuple<RamDomain,3>{{ramBitCast(env6[2]), ramBitCast<RamDomain>(MAX_RAM_SIGNED), ramBitCast(RamSigned(6))}},READ_OP_CONTEXT(rel_AST_NodeField_ca02670731ce3c99_op_ctxt));
+for(const auto& env8 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env8[1]),ramBitCast(RamSigned(7))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env8[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env8[1]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env9 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env9[2]),ramBitCast(RamSigned(14))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env10 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env10[2]),ramBitCast(RamSigned(15))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(1)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(1)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env11 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env11[2]),ramBitCast(RamSigned(16))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env11[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env12 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env12[2]),ramBitCast(RamSigned(17))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(2)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(2)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env13 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env13[2]),ramBitCast(RamSigned(13))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(3)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(3)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env14 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env14[2]),ramBitCast(RamSigned(16))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env14[2]), ramBitCast(RamUnsigned(0)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env15 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env15[2]),ramBitCast(RamSigned(18))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+auto range = rel_AST_ParentChild_be6259205eb66578->lowerUpperRange_110(Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(4)), ramBitCast<RamDomain>(MIN_RAM_SIGNED)}},Tuple<RamDomain,3>{{ramBitCast(env9[2]), ramBitCast(RamUnsigned(4)), ramBitCast<RamDomain>(MAX_RAM_SIGNED)}},READ_OP_CONTEXT(rel_AST_ParentChild_be6259205eb66578_op_ctxt));
+for(const auto& env16 : range) {
+if( rel_AST_NodeType_b38285ae9991409e->contains(Tuple<RamDomain,2>{{ramBitCast(env16[2]),ramBitCast(RamSigned(19))}},READ_OP_CONTEXT(rel_AST_NodeType_b38285ae9991409e_op_ctxt))) {
+Tuple<RamDomain,2> tuple{{ramBitCast(RamSigned(20)),ramBitCast(env0[0])}};
 rel_Rule_159a590c7b2c8d95->insert(tuple,READ_OP_CONTEXT(rel_Rule_159a590c7b2c8d95_op_ctxt));
+break;
+}
+}
+break;
+}
+}
+}
+}
+break;
+}
+}
+break;
+}
+}
+}
+}
+break;
+}
+}
+}
+}
+}
+}
+break;
+}
+}
 }
 }
 }
@@ -1194,7 +1390,7 @@ void Stratum_RuleMatch_4394a245605301ce::run([[maybe_unused]] const std::vector<
 signalHandler->setMsg(R"_(RuleMatch(name,location) :- 
    Rule(name,node),
    AST_NodeLocation(node,location).
-in file ruby.dl [8:1-8:81])_");
+in file rules.dl [8:1-8:81])_");
 if(!(rel_Rule_159a590c7b2c8d95->empty()) && !(rel_AST_NodeLocation_5f3f38ee7a82c12a->empty())) {
 [&](){
 CREATE_OP_CONTEXT(rel_AST_NodeLocation_5f3f38ee7a82c12a_op_ctxt,rel_AST_NodeLocation_5f3f38ee7a82c12a->createContext());
@@ -1224,10 +1420,10 @@ if (pruneImdtRels) rel_Rule_159a590c7b2c8d95->purge();
 
 namespace  souffle {
 using namespace souffle;
-class Sf_souffle: public SouffleProgram {
+class Sf_generated: public SouffleProgram {
 public:
- Sf_souffle();
- ~Sf_souffle();
+ Sf_generated();
+ ~Sf_generated();
 void run();
 void runAll(std::string inputDirectoryArg = "",std::string outputDirectoryArg = "",bool performIOArg = true,bool pruneImdtRelsArg = true);
 void printAll([[maybe_unused]] std::string outputDirectoryArg = "");
@@ -1273,28 +1469,29 @@ std::atomic<std::size_t> iter{};
 } // namespace  souffle
 namespace  souffle {
 using namespace souffle;
- Sf_souffle::Sf_souffle():
+ Sf_generated::Sf_generated():
 symTable({
 	R"_(call)_",
-	R"_(block)_",
 	R"_(receiver)_",
-	R"_(Foo)_",
-	R"_(constant)_",
+	R"_(block)_",
 	R"_(method)_",
-	R"_(new)_",
-	R"_(identifier)_",
+	R"_(CREATE)_",
+	R"_(constant)_",
 	R"_(arguments)_",
 	R"_(argument_list)_",
-	R"_(pair)_",
-	R"_(key)_",
-	R"_(:b)_",
-	R"_(simple_symbol)_",
-	R"_(value)_",
-	R"_(1)_",
-	R"_(integer)_",
-	R"_(test_rule)_",
-	R"_(b)_",
-	R"_(hash_key_symbol)_",
+	R"_(TABLE)_",
+	R"_(public)_",
+	R"_(identifier)_",
+	R"_(.)_",
+	R"_()_",
+	R"_(global_variable)_",
+	R"_(parenthesized_statements)_",
+	R"_(()_",
+	R"_(ERROR)_",
+	R"_(<)_",
+	R"_(>)_",
+	R"_())_",
+	R"_(sql_lang_create_table)_",
 }),
 recordTable(),
 regexCache(),
@@ -1328,10 +1525,10 @@ addRelation("Rule", wrapper_rel_Rule_159a590c7b2c8d95, false, false);
 addRelation("RuleMatch", wrapper_rel_RuleMatch_8974a5cadf2d4779, false, true);
 }
 
- Sf_souffle::~Sf_souffle(){
+ Sf_generated::~Sf_generated(){
 }
 
-void Sf_souffle::runFunction(std::string inputDirectoryArg,std::string outputDirectoryArg,bool performIOArg,bool pruneImdtRelsArg){
+void Sf_generated::runFunction(std::string inputDirectoryArg,std::string outputDirectoryArg,bool performIOArg,bool pruneImdtRelsArg){
 
     this->inputDirectory  = std::move(inputDirectoryArg);
     this->outputDirectory = std::move(outputDirectoryArg);
@@ -1379,44 +1576,26 @@ stratum_RuleMatch_a3becf205b4cd965.run(args, ret);
 signalHandler->reset();
 }
 
-void Sf_souffle::run(){
+void Sf_generated::run(){
 runFunction("", "", false, false);
 }
 
-void Sf_souffle::runAll(std::string inputDirectoryArg,std::string outputDirectoryArg,bool performIOArg,bool pruneImdtRelsArg){
+void Sf_generated::runAll(std::string inputDirectoryArg,std::string outputDirectoryArg,bool performIOArg,bool pruneImdtRelsArg){
 runFunction(inputDirectoryArg, outputDirectoryArg, performIOArg, pruneImdtRelsArg);
 }
 
-void Sf_souffle::printAll([[maybe_unused]] std::string outputDirectoryArg){
+void Sf_generated::printAll([[maybe_unused]] std::string outputDirectoryArg){
 try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","name\tlocation"},{"auxArity","0"},{"name","RuleMatch"},{"operation","output"},{"output-dir","."},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 2, \"params\": [\"name\", \"location\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 2, \"types\": [\"s:RuleName\", \"r:AST_Location\"]}}"}});
 if (!outputDirectoryArg.empty()) {directiveMap["output-dir"] = outputDirectoryArg;}
 IOSystem::getInstance().getWriter(directiveMap, symTable, recordTable)->writeAll(*rel_RuleMatch_8974a5cadf2d4779);
 } catch (std::exception& e) {std::cerr << e.what();exit(1);}
 }
 
-void Sf_souffle::loadAll([[maybe_unused]] std::string inputDirectoryArg){
+void Sf_generated::loadAll([[maybe_unused]] std::string inputDirectoryArg){
 try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","node\tcontent"},{"auxArity","0"},{"fact-dir","."},{"name","AST_NodeContent"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 2, \"params\": [\"node\", \"content\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 2, \"types\": [\"r:AST_Node\", \"s:AST_Content\"]}}"}});
 if (!inputDirectoryArg.empty()) {directiveMap["fact-dir"] = inputDirectoryArg;}
 IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(*rel_AST_NodeContent_b2f3666572e60754);
 } catch (std::exception& e) {std::cerr << "Error loading AST_NodeContent data: " << e.what() << '\n';
-exit(1);
-}
-try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","parent\tindex\tchild"},{"auxArity","0"},{"fact-dir","."},{"name","AST_ParentChild"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 3, \"params\": [\"parent\", \"index\", \"child\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 3, \"types\": [\"r:AST_Node\", \"u:unsigned\", \"r:AST_Node\"]}}"}});
-if (!inputDirectoryArg.empty()) {directiveMap["fact-dir"] = inputDirectoryArg;}
-IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(*rel_AST_ParentChild_be6259205eb66578);
-} catch (std::exception& e) {std::cerr << "Error loading AST_ParentChild data: " << e.what() << '\n';
-exit(1);
-}
-try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","node\ttype"},{"auxArity","0"},{"fact-dir","."},{"name","AST_NodeType"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 2, \"params\": [\"node\", \"type\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 2, \"types\": [\"r:AST_Node\", \"s:AST_Type\"]}}"}});
-if (!inputDirectoryArg.empty()) {directiveMap["fact-dir"] = inputDirectoryArg;}
-IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(*rel_AST_NodeType_b38285ae9991409e);
-} catch (std::exception& e) {std::cerr << "Error loading AST_NodeType data: " << e.what() << '\n';
-exit(1);
-}
-try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","node\tlocation"},{"auxArity","0"},{"fact-dir","."},{"name","AST_NodeLocation"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 2, \"params\": [\"node\", \"location\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 2, \"types\": [\"r:AST_Node\", \"r:AST_Location\"]}}"}});
-if (!inputDirectoryArg.empty()) {directiveMap["fact-dir"] = inputDirectoryArg;}
-IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(*rel_AST_NodeLocation_5f3f38ee7a82c12a);
-} catch (std::exception& e) {std::cerr << "Error loading AST_NodeLocation data: " << e.what() << '\n';
 exit(1);
 }
 try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","parent\tchild\tfield"},{"auxArity","0"},{"fact-dir","."},{"name","AST_NodeField"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 3, \"params\": [\"parent\", \"child\", \"field\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 3, \"types\": [\"r:AST_Node\", \"r:AST_Node\", \"s:AST_Field\"]}}"}});
@@ -1425,9 +1604,27 @@ IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(
 } catch (std::exception& e) {std::cerr << "Error loading AST_NodeField data: " << e.what() << '\n';
 exit(1);
 }
+try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","node\tlocation"},{"auxArity","0"},{"fact-dir","."},{"name","AST_NodeLocation"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 2, \"params\": [\"node\", \"location\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 2, \"types\": [\"r:AST_Node\", \"r:AST_Location\"]}}"}});
+if (!inputDirectoryArg.empty()) {directiveMap["fact-dir"] = inputDirectoryArg;}
+IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(*rel_AST_NodeLocation_5f3f38ee7a82c12a);
+} catch (std::exception& e) {std::cerr << "Error loading AST_NodeLocation data: " << e.what() << '\n';
+exit(1);
+}
+try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","node\ttype"},{"auxArity","0"},{"fact-dir","."},{"name","AST_NodeType"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 2, \"params\": [\"node\", \"type\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 2, \"types\": [\"r:AST_Node\", \"s:AST_Type\"]}}"}});
+if (!inputDirectoryArg.empty()) {directiveMap["fact-dir"] = inputDirectoryArg;}
+IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(*rel_AST_NodeType_b38285ae9991409e);
+} catch (std::exception& e) {std::cerr << "Error loading AST_NodeType data: " << e.what() << '\n';
+exit(1);
+}
+try {std::map<std::string, std::string> directiveMap({{"IO","file"},{"attributeNames","parent\tindex\tchild"},{"auxArity","0"},{"fact-dir","."},{"name","AST_ParentChild"},{"operation","input"},{"params","{\"records\": {\"AST_Location\": {\"arity\": 5, \"params\": [\"startByte\", \"startLine\", \"startColumn\", \"endLine\", \"endColumn\"]}, \"AST_Node\": {\"arity\": 2, \"params\": [\"file\", \"nodeId\"]}}, \"relation\": {\"arity\": 3, \"params\": [\"parent\", \"index\", \"child\"]}}"},{"types","{\"ADTs\": {}, \"records\": {\"r:AST_Location\": {\"arity\": 5, \"types\": [\"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\", \"i:AST_FilePosition\"]}, \"r:AST_Node\": {\"arity\": 2, \"types\": [\"i:AST_FileId\", \"i:AST_NodeId\"]}}, \"relation\": {\"arity\": 3, \"types\": [\"r:AST_Node\", \"u:unsigned\", \"r:AST_Node\"]}}"}});
+if (!inputDirectoryArg.empty()) {directiveMap["fact-dir"] = inputDirectoryArg;}
+IOSystem::getInstance().getReader(directiveMap, symTable, recordTable)->readAll(*rel_AST_ParentChild_be6259205eb66578);
+} catch (std::exception& e) {std::cerr << "Error loading AST_ParentChild data: " << e.what() << '\n';
+exit(1);
+}
 }
 
-void Sf_souffle::dumpInputs(){
+void Sf_generated::dumpInputs(){
 try {std::map<std::string, std::string> rwOperation;
 rwOperation["IO"] = "stdout";
 rwOperation["name"] = "AST_NodeContent";
@@ -1436,15 +1633,9 @@ IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(
 } catch (std::exception& e) {std::cerr << e.what();exit(1);}
 try {std::map<std::string, std::string> rwOperation;
 rwOperation["IO"] = "stdout";
-rwOperation["name"] = "AST_ParentChild";
-rwOperation["types"] = "{\"relation\": {\"arity\": 3, \"auxArity\": 0, \"types\": [\"r:AST_Node\", \"u:unsigned\", \"r:AST_Node\"]}}";
-IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(*rel_AST_ParentChild_be6259205eb66578);
-} catch (std::exception& e) {std::cerr << e.what();exit(1);}
-try {std::map<std::string, std::string> rwOperation;
-rwOperation["IO"] = "stdout";
-rwOperation["name"] = "AST_NodeType";
-rwOperation["types"] = "{\"relation\": {\"arity\": 2, \"auxArity\": 0, \"types\": [\"r:AST_Node\", \"s:AST_Type\"]}}";
-IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(*rel_AST_NodeType_b38285ae9991409e);
+rwOperation["name"] = "AST_NodeField";
+rwOperation["types"] = "{\"relation\": {\"arity\": 3, \"auxArity\": 0, \"types\": [\"r:AST_Node\", \"r:AST_Node\", \"s:AST_Field\"]}}";
+IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(*rel_AST_NodeField_ca02670731ce3c99);
 } catch (std::exception& e) {std::cerr << e.what();exit(1);}
 try {std::map<std::string, std::string> rwOperation;
 rwOperation["IO"] = "stdout";
@@ -1454,13 +1645,19 @@ IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(
 } catch (std::exception& e) {std::cerr << e.what();exit(1);}
 try {std::map<std::string, std::string> rwOperation;
 rwOperation["IO"] = "stdout";
-rwOperation["name"] = "AST_NodeField";
-rwOperation["types"] = "{\"relation\": {\"arity\": 3, \"auxArity\": 0, \"types\": [\"r:AST_Node\", \"r:AST_Node\", \"s:AST_Field\"]}}";
-IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(*rel_AST_NodeField_ca02670731ce3c99);
+rwOperation["name"] = "AST_NodeType";
+rwOperation["types"] = "{\"relation\": {\"arity\": 2, \"auxArity\": 0, \"types\": [\"r:AST_Node\", \"s:AST_Type\"]}}";
+IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(*rel_AST_NodeType_b38285ae9991409e);
+} catch (std::exception& e) {std::cerr << e.what();exit(1);}
+try {std::map<std::string, std::string> rwOperation;
+rwOperation["IO"] = "stdout";
+rwOperation["name"] = "AST_ParentChild";
+rwOperation["types"] = "{\"relation\": {\"arity\": 3, \"auxArity\": 0, \"types\": [\"r:AST_Node\", \"u:unsigned\", \"r:AST_Node\"]}}";
+IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(*rel_AST_ParentChild_be6259205eb66578);
 } catch (std::exception& e) {std::cerr << e.what();exit(1);}
 }
 
-void Sf_souffle::dumpOutputs(){
+void Sf_generated::dumpOutputs(){
 try {std::map<std::string, std::string> rwOperation;
 rwOperation["IO"] = "stdout";
 rwOperation["name"] = "RuleMatch";
@@ -1469,22 +1666,22 @@ IOSystem::getInstance().getWriter(rwOperation, symTable, recordTable)->writeAll(
 } catch (std::exception& e) {std::cerr << e.what();exit(1);}
 }
 
-SymbolTable& Sf_souffle::getSymbolTable(){
+SymbolTable& Sf_generated::getSymbolTable(){
 return symTable;
 }
 
-RecordTable& Sf_souffle::getRecordTable(){
+RecordTable& Sf_generated::getRecordTable(){
 return recordTable;
 }
 
-void Sf_souffle::setNumThreads(std::size_t numThreadsValue){
+void Sf_generated::setNumThreads(std::size_t numThreadsValue){
 SouffleProgram::setNumThreads(numThreadsValue);
 symTable.setNumLanes(getNumThreads());
 recordTable.setNumLanes(getNumThreads());
 regexCache.setNumLanes(getNumThreads());
 }
 
-void Sf_souffle::executeSubroutine(std::string name,const std::vector<RamDomain>& args,std::vector<RamDomain>& ret){
+void Sf_generated::executeSubroutine(std::string name,const std::vector<RamDomain>& args,std::vector<RamDomain>& ret){
 if (name == "AST_NodeContent") {
 stratum_AST_NodeContent_f29a0e907561c50c.run(args, ret);
 return;}
@@ -1511,8 +1708,8 @@ fatal(("unknown subroutine " + name).c_str());
 
 } // namespace  souffle
 namespace souffle {
-SouffleProgram *newInstance_souffle(){return new  souffle::Sf_souffle;}
-SymbolTable *getST_souffle(SouffleProgram *p){return &reinterpret_cast<souffle::Sf_souffle*>(p)->getSymbolTable();}
+SouffleProgram *newInstance_generated(){return new  souffle::Sf_generated;}
+SymbolTable *getST_generated(SouffleProgram *p){return &reinterpret_cast<souffle::Sf_generated*>(p)->getSymbolTable();}
 } // namespace souffle
 
 #ifndef __EMBEDDED_SOUFFLE__
@@ -1520,14 +1717,14 @@ SymbolTable *getST_souffle(SouffleProgram *p){return &reinterpret_cast<souffle::
 int main(int argc, char** argv)
 {
 try{
-souffle::CmdOptions opt(R"(souffle/ruby.dl)",
+souffle::CmdOptions opt(R"(souffle/rules.dl)",
 R"()",
 R"()",
 false,
 R"()",
 1);
 if (!opt.parse(argc,argv)) return 1;
-souffle::Sf_souffle obj;
+souffle::Sf_generated obj;
 #if defined(_OPENMP) 
 obj.setNumThreads(opt.getNumJobs());
 
@@ -1540,21 +1737,21 @@ return 0;
 
 namespace  souffle {
 using namespace souffle;
-class factory_Sf_souffle: souffle::ProgramFactory {
+class factory_Sf_generated: souffle::ProgramFactory {
 public:
 souffle::SouffleProgram* newInstance();
- factory_Sf_souffle();
+ factory_Sf_generated();
 private:
 };
 } // namespace  souffle
 namespace  souffle {
 using namespace souffle;
-souffle::SouffleProgram* factory_Sf_souffle::newInstance(){
-return new  souffle::Sf_souffle();
+souffle::SouffleProgram* factory_Sf_generated::newInstance(){
+return new  souffle::Sf_generated();
 }
 
- factory_Sf_souffle::factory_Sf_souffle():
-souffle::ProgramFactory("souffle"){
+ factory_Sf_generated::factory_Sf_generated():
+souffle::ProgramFactory("generated"){
 }
 
 } // namespace  souffle
@@ -1562,7 +1759,7 @@ namespace souffle {
 
 #ifdef __EMBEDDED_SOUFFLE__
 extern "C" {
-souffle::factory_Sf_souffle __factory_Sf_souffle_instance;
+souffle::factory_Sf_generated __factory_Sf_generated_instance;
 }
 #endif
 } // namespace souffle

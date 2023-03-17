@@ -1,6 +1,6 @@
 package writer
 
-import "github.com/bearer/bearer/pkg/souffle/writer/base"
+import "github.com/bearer/bearer/pkg/util/souffle/writer/base"
 
 type FactWriter interface {
 	Symbol(value string) base.Symbol

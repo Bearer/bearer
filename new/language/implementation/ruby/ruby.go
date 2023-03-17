@@ -13,7 +13,6 @@ import (
 	"github.com/bearer/bearer/new/language/implementation"
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/new/language/tree"
-	astlanguage "github.com/bearer/bearer/pkg/ast/languages/ruby"
 	"github.com/bearer/bearer/pkg/util/regex"
 )
 
@@ -33,17 +32,10 @@ var (
 	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
 )
 
-type rubyImplementation struct {
-	astLanguage *astlanguage.Language
-}
+type rubyImplementation struct{}
 
 func Get() implementation.Implementation {
-	astLanguage := astlanguage.New()
-	return &rubyImplementation{astLanguage: astLanguage}
-}
-
-func (implementation *rubyImplementation) ASTLanguage() *astlanguage.Language {
-	return implementation.astLanguage
+	return &rubyImplementation{}
 }
 
 func (*rubyImplementation) SitterLanguage() *sitter.Language {

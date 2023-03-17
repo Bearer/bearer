@@ -5,11 +5,9 @@ import (
 
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/new/language/tree"
-	astlanguage "github.com/bearer/bearer/pkg/ast/languages/ruby"
 )
 
 type Implementation interface {
-	ASTLanguage() *astlanguage.Language
 	SitterLanguage() *sitter.Language
 	// AnalyzeFlow unifies nodes that represent the same value in the tree.
 	//
