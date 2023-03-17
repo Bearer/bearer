@@ -1,7 +1,7 @@
 package relationwriter
 
 import (
-	"github.com/bearer/bearer/pkg/souffle/binding"
+	"github.com/bearer/bearer/pkg/util/souffle/binding"
 	"github.com/bearer/bearer/pkg/util/souffle/writer/base"
 )
 

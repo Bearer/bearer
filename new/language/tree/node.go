@@ -11,6 +11,10 @@ type Node struct {
 
 type NodeID *sitter.Node
 
+func (node *Node) SitterNode() *sitter.Node {
+	return node.sitterNode
+}
+
 func (node *Node) Debug() string {
 	return node.sitterNode.String()
 }
@@ -52,7 +56,7 @@ func (node *Node) ColumnNumber() int {
 }
 
 func (node *Node) Parent() *Node {
-	return node.tree.wrap(node.sitterNode.Parent())
+	return node.tree.Wrap(node.sitterNode.Parent())
 }
 
 func (node *Node) ChildCount() int {
@@ -71,7 +75,7 @@ func (node *Node) NamedChildCount() int {
 }
 
 func (node *Node) Child(i int) *Node {
-	return node.tree.wrap(node.sitterNode.Child(i))
+	return node.tree.Wrap(node.sitterNode.Child(i))
 }
 
 func (node *Node) NamedChild(i int) *Node {
@@ -81,7 +85,7 @@ func (node *Node) NamedChild(i int) *Node {
 
 		if child.IsNamed() {
 			if count == i {
-				return node.tree.wrap(child)
+				return node.tree.Wrap(child)
 			}
 
 			count++
@@ -114,7 +118,7 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 		}
 
 		if child.IsNamed() {
-			if err := onChild(node.tree.wrap(child)); err != nil {
+			if err := onChild(node.tree.Wrap(child)); err != nil {
 				return err
 			}
 		}
@@ -141,7 +145,7 @@ func (node *Node) AnonymousChild(i int) *Node {
 		}
 
 		if k == i {
-			return node.tree.wrap(child)
+			return node.tree.Wrap(child)
 		}
 
 		k += 1
@@ -151,7 +155,7 @@ func (node *Node) AnonymousChild(i int) *Node {
 }
 
 func (node *Node) ChildByFieldName(name string) *Node {
-	return node.tree.wrap(node.sitterNode.ChildByFieldName(name))
+	return node.tree.Wrap(node.sitterNode.ChildByFieldName(name))
 }
 
 func (node *Node) IsNamed() bool {

@@ -9,12 +9,16 @@ import (
 )
 
 type Language struct {
-	souffle        bool
 	implementation implementation.Implementation
+	souffle        bool
 }
 
 func New(souffle bool, implementation implementation.Implementation) *Language {
 	return &Language{souffle: souffle, implementation: implementation}
+}
+
+func (lang *Language) Implementation() implementation.Implementation {
+	return lang.implementation
 }
 
 func (lang *Language) Parse(input string) (*tree.Tree, error) {
@@ -36,7 +40,7 @@ func (lang *Language) CompileQuery(input string) (*tree.Query, error) {
 
 func (lang *Language) CompilePatternQuery(ruleName, input string) (types.PatternQuery, error) {
 	if lang.souffle {
-		return soufflequery.Compile(lang.implementation, ruleName, input)
+		return soufflequery.NewQuery(ruleName), nil
 	}
 
 	return patternquery.Compile(lang, lang.implementation, input)

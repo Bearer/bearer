@@ -1,6 +1,9 @@
 package types
 
-import "github.com/bearer/bearer/new/language/tree"
+import (
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/tree"
+)
 
 type PatternQueryResult struct {
 	MatchNode *tree.Node
@@ -14,6 +17,7 @@ type PatternQuery interface {
 }
 
 type Language interface {
+	Implementation() implementation.Implementation
 	Parse(input string) (*tree.Tree, error)
 	CompileQuery(input string) (*tree.Query, error)
 	CompilePatternQuery(ruleName, input string) (PatternQuery, error)

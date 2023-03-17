@@ -8,6 +8,8 @@ import (
 )
 
 var (
+	anonymousPatternNodeParentTypes = []string{"binary"}
+
 	leafNodeTypes = []string{
 		"identifier",
 		"constant",
@@ -100,4 +102,13 @@ func FieldName(node *sitter.Node) string {
 	}
 
 	return ""
+}
+
+func IncludeNode(node *sitter.Node) bool {
+	parent := node.Parent()
+	if parent != nil {
+		return node.IsNamed() || slices.Contains(anonymousPatternNodeParentTypes, parent.Type())
+	}
+
+	return node.IsNamed()
 }

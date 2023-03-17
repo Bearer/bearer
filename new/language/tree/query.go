@@ -63,7 +63,7 @@ func (query *Query) resultsFor(tree *Tree) (map[NodeID][]QueryResult, error) {
 
 		result := make(QueryResult)
 		for _, capture := range match.Captures {
-			result[query.sitterQuery.CaptureNameForId(capture.Index)] = tree.wrap(capture.Node)
+			result[query.sitterQuery.CaptureNameForId(capture.Index)] = tree.Wrap(capture.Node)
 		}
 
 		resultRoot, rootExists := result["root"]

@@ -2,6 +2,7 @@ package patterns
 
 import (
 	"fmt"
+	"log"
 
 	sitter "github.com/smacker/go-tree-sitter"
 
@@ -45,7 +46,6 @@ func (generator *nodeVariableGenerator) getId(node *sitter.Node) uint32 {
 type patternWriter struct {
 	*filewriter.Writer
 	inputParams           *builderinput.InputParams
-	ruleName              string
 	input                 []byte
 	literals              []writerbase.Literal
 	childIndex            uint32
@@ -54,12 +54,14 @@ type patternWriter struct {
 	nodeVariableGenerator *nodeVariableGenerator
 	tempIdGenerator       *idgenerator.Generator
 	handled               set.Set[*sitter.Node]
+	variableNodes         map[string][]writerbase.Identifier
 }
 
 func CompileRule(
 	walker *walker.Walker,
 	inputParams *builderinput.InputParams,
-	ruleName string,
+	ruleRelation,
+	variableRelation string,
 	input []byte,
 	rootNode *sitter.Node,
 	writer *filewriter.Writer,
@@ -67,11 +69,11 @@ func CompileRule(
 	w := &patternWriter{
 		Writer:                writer,
 		inputParams:           inputParams,
-		ruleName:              ruleName,
 		input:                 input,
 		nodeVariableGenerator: newNodeVariableGenerator(),
 		tempIdGenerator:       idgenerator.New(),
 		handled:               set.New[*sitter.Node](),
+		variableNodes:         make(map[string][]writerbase.Identifier),
 	}
 
 	err := walker.Walk(rootNode, w.visitNode)
@@ -79,10 +81,36 @@ func CompileRule(
 		return err
 	}
 
-	return writer.WriteRule(
-		writer.Predicate("Rule", writer.Symbol(w.ruleName), w.rootElement),
-		w.literals...,
-	)
+	var variablePredicates []writerbase.Predicate
+	for name, variables := range w.variableNodes {
+		for _, variable := range variables {
+			variablePredicates = append(variablePredicates, writer.Predicate(
+				variableRelation,
+				w.rootElement,
+				writer.Symbol(name),
+				variable,
+			))
+		}
+	}
+
+	if len(w.literals) > 20 {
+		log.Printf("rule too large, skipping")
+		return nil
+	}
+	log.Printf("#literals: %d", len(w.literals))
+
+	if err := writer.WriteRule(
+		// append(
+		// 	[]writerbase.Predicate(nil), //variablePredicates,
+		// 	writer.Predicate(ruleRelation, w.rootElement),
+		// ),
+		[]writerbase.Predicate{writer.Predicate(ruleRelation, w.rootElement)},
+		w.literals,
+	); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() error) error {
@@ -121,7 +149,15 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 	}
 
 	if variable := writer.getVariableFor(node); variable != nil {
-		// TODO
+		if variable.Name != "_" {
+			writer.variableNodes[variable.Name] = append(writer.variableNodes[variable.Name], nodeElement)
+		}
+
+		writer.literals = append(
+			writer.literals,
+			writer.Predicate("AST_NodeType", nodeElement, writer.Any()),
+		)
+
 		return nil
 	}
 

@@ -35,14 +35,14 @@ func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
 }
 
 func (tree *Tree) RootNode() *Node {
-	return tree.wrap(tree.sitterTree.RootNode())
+	return tree.Wrap(tree.sitterTree.RootNode())
 }
 
 func (tree *Tree) Close() {
 	tree.sitterTree.Close()
 }
 
-func (tree *Tree) wrap(sitterNode *sitter.Node) *Node {
+func (tree *Tree) Wrap(sitterNode *sitter.Node) *Node {
 	if sitterNode == nil {
 		return nil
 	}

@@ -40,10 +40,37 @@ func (writer *Writer) NegativePredicate(name string, elements ...base.LiteralEle
 	return base.NegativePredicate(base.Predicate{Name: name, Elements: elements})
 }
 
-func (writer *Writer) WriteRule(head base.Predicate, body ...base.Literal) error {
+// FIXME: use proper attribute type
+func (writer *Writer) WriteRelation(name string, attributes ...string) error {
+	builder := strings.Builder{}
+	builder.WriteString(".decl ")
+	builder.WriteString(name)
+	builder.WriteString("(")
+
+	for i, attribute := range attributes {
+		if i != 0 {
+			builder.WriteString(", ")
+		}
+
+		builder.WriteString(attribute)
+	}
+
+	builder.WriteString(")\n")
+
+	return writer.write(builder.String())
+}
+
+func (writer *Writer) WriteRule(heads []base.Predicate, body []base.Literal) error {
 	builder := strings.Builder{}
 
-	builder.WriteString(head.String())
+	for i, head := range heads {
+		if i != 0 {
+			builder.WriteString(", ")
+		}
+
+		builder.WriteString(head.String())
+	}
+
 	builder.WriteString(" :- ")
 	builder.WriteString(writer.Conjunction(body...).String())
 	builder.WriteString(".\n")

@@ -3,7 +3,6 @@
 .type AST_FilePosition <: number
 
 .type AST_NodeId <: number
-.type AST_Node = [file: AST_FileId, nodeId: AST_NodeId]
 
 .type AST_Type <: symbol
 .type AST_Field <: symbol
@@ -20,15 +19,15 @@
 .decl AST_File(file: AST_FileId, filename: AST_Filename)
 .input AST_File
 
-.decl AST_NodeType(node: AST_Node, type: AST_Type)
+.decl AST_NodeType(node: AST_NodeId, type: AST_Type)
 .input AST_NodeType
-.decl AST_NodeContent(node: AST_Node, content: AST_Content)
+.decl AST_NodeContent(node: AST_NodeId, content: AST_Content)
 .input AST_NodeContent
 
-.decl AST_NodeField(parent: AST_Node, child: AST_Node, field: AST_Field)
+.decl AST_NodeField(parent: AST_NodeId, child: AST_NodeId, field: AST_Field)
 .input AST_NodeField
-.decl AST_ParentChild(parent: AST_Node, index: unsigned, child: AST_Node)
+.decl AST_ParentChild(parent: AST_NodeId, index: unsigned, child: AST_NodeId)
 .input AST_ParentChild
 
-.decl AST_NodeLocation(node: AST_Node, location: AST_Location)
+.decl AST_NodeLocation(node: AST_NodeId, location: AST_Location)
 .input AST_NodeLocation

@@ -1,12 +1,23 @@
 #include "./ast.dl"
 
-.type RuleName <: symbol
 
-.decl Rule(rule: RuleName, node: AST_Node)
+.type Rule_Name <: symbol
+.type Rule_VariableName <: symbol
 
-.decl RuleMatch(name: RuleName, location: AST_Location)
-RuleMatch(name, location) :- Rule(name, node), AST_NodeLocation(node, location).
-.output RuleMatch
+
+.decl Rule(rule: Rule_Name, node: AST_NodeId)
+
+
+.decl Rule_Match(rule: Rule_Name, node: AST_NodeId, location: AST_Location)
+.output Rule_Match
+
+Rule_Match(rule, node, location) :- Rule(rule, node), AST_NodeLocation(node, location).
+
+
+// .decl Rule_MatchVariable(rule: Rule_Name, node: AST_Node, variable: Rule_VariableName, variableNode: AST_Node)
+// .output Rule_MatchVariable
+
+// Rule_MatchVariable(rule, node, variable, variableNode) :- Rule(rule, node), AST_NodeLocation(node, location).
 
 
 #include "./generated/rules.dl"

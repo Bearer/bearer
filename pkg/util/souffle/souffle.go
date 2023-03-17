@@ -21,6 +21,18 @@ func New(programName string) (*Souffle, error) {
 	return &Souffle{program: program}, nil
 }
 
+func (souffle *Souffle) Program() *binding.Program {
+	return souffle.program
+}
+
+func (souffle *Souffle) Run() {
+	souffle.program.Run()
+}
+
+func (souffle *Souffle) Relation(name string) (*binding.Relation, error) {
+	return souffle.program.Relation(name)
+}
+
 func (souffle *Souffle) Marshal(relation *binding.Relation, value any) (*binding.Tuple, error) {
 	fields, err := getFields(reflect.TypeOf(value))
 	if err != nil {
@@ -98,6 +110,10 @@ func (souffle *Souffle) Unmarshal(destination any, tuple *binding.Tuple) error {
 	}
 
 	return nil
+}
+
+func (souffle *Souffle) Close() {
+	souffle.program.Close()
 }
 
 func (souffle *Souffle) encodeRecord(value reflect.Value) (int32, error) {

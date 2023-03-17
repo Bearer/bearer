@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/implementation/ruby"
 	builderinput "github.com/bearer/bearer/new/language/patternquery/builder/input"
+	"github.com/bearer/bearer/pkg/ast/idgenerator"
 	"github.com/bearer/bearer/pkg/ast/languages/ruby/patterns"
 	"github.com/bearer/bearer/pkg/ast/sourcefacts"
 	"github.com/bearer/bearer/pkg/ast/walker"
@@ -34,30 +35,23 @@ func New() *Language {
 }
 
 func (language *Language) WriteSourceFacts(
-	fileId uint32,
 	input []byte,
+	rootNode *sitter.Node,
+	nodeIdGenerator *idgenerator.NodeIdGenerator,
 	writer writer.FactWriter,
 ) error {
-	rootNode, err := sitter.ParseCtx(context.TODO(), input, language.sitterLanguage)
-	if err != nil {
-		return fmt.Errorf("parse error: %w", err)
-	}
-
-	if err := sourcefacts.WriteFacts(
+	return sourcefacts.WriteFacts(
 		language.walker,
-		fileId,
 		input,
 		rootNode,
+		nodeIdGenerator,
 		writer,
-	); err != nil {
-		return fmt.Errorf("translation error: %w", err)
-	}
-
-	return nil
+	)
 }
 
 func (language *Language) WriteRule(
-	ruleName string,
+	ruleRelation,
+	variableRelation string,
 	input string,
 	writer *filewriter.Writer,
 ) error {
@@ -76,7 +70,8 @@ func (language *Language) WriteRule(
 	if err := patterns.CompileRule(
 		language.walker,
 		inputParams,
-		ruleName,
+		ruleRelation,
+		variableRelation,
 		processedInputBytes,
 		rootNode,
 		writer,

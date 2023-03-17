@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/souffle/compiler"
+	writerbase "github.com/bearer/bearer/pkg/util/souffle/writer/base"
 	filewriter "github.com/bearer/bearer/pkg/util/souffle/writer/file"
 	"golang.org/x/exp/slices"
 )
@@ -37,12 +38,20 @@ func do() error {
 	writer := filewriter.New(ruleFile)
 
 	for ruleName, rule := range config.BuiltInRules {
+		if !slices.Contains(rule.Languages, "ruby") {
+			continue
+		}
+
 		if err := compileRuleToSouffle(language, writer, ruleName, rule); err != nil {
 			return fmt.Errorf("built-in rule %s error: %w", ruleName, err)
 		}
 	}
 
 	for ruleName, rule := range config.Rules {
+		if !slices.Contains(rule.Languages, "ruby") {
+			continue
+		}
+
 		if err := compileRuleToSouffle(language, writer, ruleName, rule); err != nil {
 			return fmt.Errorf("rule %s error: %w", ruleName, err)
 		}
@@ -58,12 +67,21 @@ func compileRuleToSouffle(
 	ruleName string,
 	rule *settings.Rule,
 ) error {
-	if !slices.Contains(rule.Languages, "ruby") {
-		return nil
+	ruleRelation := fmt.Sprintf("Rule_Pattern_%s", ruleName)
+	writer.WriteRelation(ruleRelation, "node: AST_NodeId")
+
+	variableRelation := fmt.Sprintf("Rule_PatternVariable_%s", ruleName)
+	// writer.WriteRelation(variableRelation, "node: AST_NodeId", "variable: Rule_VariableName", "variableNode: AST_NodeId")
+
+	if err := writer.WriteRule(
+		[]writerbase.Predicate{writer.Predicate("Rule", writer.Symbol(ruleName), writer.Identifier("node"))},
+		[]writerbase.Literal{writer.Predicate(ruleRelation, writer.Identifier("node"))},
+	); err != nil {
+		return fmt.Errorf("error writing generic rule: %w", err)
 	}
 
 	for _, pattern := range rule.Patterns {
-		if err := language.WriteRule(ruleName, pattern.Pattern, writer); err != nil {
+		if err := language.WriteRule(ruleRelation, variableRelation, pattern.Pattern, writer); err != nil {
 			return fmt.Errorf("pattern error (%s)': %w", pattern.Pattern, err)
 		}
 	}

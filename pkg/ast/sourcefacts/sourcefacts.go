@@ -12,47 +12,22 @@ import (
 
 type astWriter struct {
 	writer.FactWriter
-	fileId          uint32
 	input           []byte
-	nodeIdGenerator *nodeIdGenerator
-	parentNode      writerbase.Element
+	nodeIdGenerator *idgenerator.NodeIdGenerator
 	childIndex      uint32
-}
-
-type nodeIdGenerator struct {
-	ids         map[*sitter.Node]uint32
-	idGenerator *idgenerator.Generator
-}
-
-func newNodeIdGenerator() *nodeIdGenerator {
-	return &nodeIdGenerator{
-		ids:         make(map[*sitter.Node]uint32),
-		idGenerator: idgenerator.New(),
-	}
-}
-
-func (generator *nodeIdGenerator) Get(node *sitter.Node) uint32 {
-	if id, cached := generator.ids[node]; cached {
-		return id
-	}
-
-	id := generator.idGenerator.Get()
-	generator.ids[node] = id
-	return id
 }
 
 func WriteFacts(
 	walker *walker.Walker,
-	fileId uint32,
 	input []byte,
 	rootNode *sitter.Node,
+	nodeIdGenerator *idgenerator.NodeIdGenerator,
 	writer writer.FactWriter,
 ) error {
 	w := &astWriter{
 		FactWriter:      writer,
-		fileId:          fileId,
 		input:           input,
-		nodeIdGenerator: newNodeIdGenerator(),
+		nodeIdGenerator: nodeIdGenerator,
 	}
 
 	return walker.Walk(rootNode, w.visitNode)
@@ -113,16 +88,5 @@ func (writer *astWriter) visitNode(node *sitter.Node, visitChildren func() error
 }
 
 func (writer *astWriter) node(node *sitter.Node) writerbase.Element {
-	return writer.Record(
-		writer.Unsigned(writer.fileId),
-		writer.Unsigned(writer.nodeIdGenerator.Get(node)),
-	)
-}
-
-func nodeEqual(a, b *sitter.Node) bool {
-	if a == nil || b == nil {
-		return false
-	}
-
-	return a.Equal(b)
+	return writer.Unsigned(writer.nodeIdGenerator.Get(node))
 }

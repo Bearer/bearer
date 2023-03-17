@@ -1,6 +1,7 @@
 package walker
 
 import (
+	"github.com/bearer/bearer/pkg/ast/languages/ruby/common"
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
 )
@@ -47,11 +48,13 @@ func (cursor *Cursor) visit(node *sitter.Node) error {
 
 	visitedChildren := false
 
-	if err := cursor.onVisit(node, func() error {
-		visitedChildren = true
-		return cursor.visitChildren(node)
-	}); err != nil {
-		return err
+	if common.IncludeNode(node) {
+		if err := cursor.onVisit(node, func() error {
+			visitedChildren = true
+			return cursor.visitChildren(node)
+		}); err != nil {
+			return err
+		}
 	}
 
 	if !visitedChildren {

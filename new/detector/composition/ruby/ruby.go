@@ -16,6 +16,7 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/ruby/property"
 	"github.com/bearer/bearer/new/language"
 
+	"github.com/bearer/bearer/pkg/ast/languages/ruby"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
@@ -176,6 +177,17 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 	tree, err := composition.lang.Parse(string(fileContent))
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
+	}
+
+	queryContext, err := soufflequery.NewContext(
+		souffle,
+		ruby.New(),
+		implementation,
+		tree,
+		[]byte(input),
+	)
+	if err != nil {
+		return err
 	}
 
 	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
