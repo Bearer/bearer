@@ -29,7 +29,7 @@ type customDetector struct {
 func New(lang languagetypes.Language, detectorType string, patterns []settings.RulePattern) (types.Detector, error) {
 	var compiledPatterns []Pattern
 	for _, pattern := range patterns {
-		patternQuery, err := lang.CompilePatternQuery(pattern.Pattern)
+		patternQuery, err := lang.CompilePatternQuery(detectorType, pattern.Pattern)
 		if err != nil {
 			return nil, fmt.Errorf("error compiling pattern: %s", err)
 		}

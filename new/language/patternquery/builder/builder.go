@@ -8,17 +8,12 @@ import (
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/new/language/implementation"
+	builderinput "github.com/bearer/bearer/new/language/patternquery/builder/input"
 	"github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
 )
-
-type InputParams struct {
-	Variables         []types.Variable
-	MatchNodeOffset   int
-	UnanchoredOffsets []int
-}
 
 type Result struct {
 	Query           string
@@ -31,7 +26,7 @@ type builder struct {
 	langImplementation implementation.Implementation
 	stringBuilder      strings.Builder
 	idGenerator        nodeid.Generator
-	inputParams        InputParams
+	inputParams        builderinput.InputParams
 	variableToParams   map[string][]string
 	paramToContent     map[string]map[string]string
 	matchNode          *tree.Node
@@ -42,7 +37,7 @@ func Build(
 	langImplementation implementation.Implementation,
 	input string,
 ) (*Result, error) {
-	processedInput, inputParams, err := processInput(langImplementation, input)
+	processedInput, inputParams, err := builderinput.Process(langImplementation, input)
 	if err != nil {
 		return nil, err
 	}

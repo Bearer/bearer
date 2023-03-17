@@ -1,0 +1,12 @@
+#include "./ast.dl"
+
+.type RuleName <: symbol
+
+.decl Rule(rule: RuleName, node: AST_Node)
+
+.decl RuleMatch(name: RuleName, location: AST_Location)
+RuleMatch(name, location) :- Rule(name, node), AST_NodeLocation(node, location).
+.output RuleMatch
+
+
+#include "./generated/rules.dl"

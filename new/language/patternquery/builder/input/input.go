@@ -1,13 +1,20 @@
-package builder
+package input
 
 import (
 	"errors"
 	"fmt"
 
 	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/patternquery/types"
 )
 
-func processInput(langImplementation implementation.Implementation, input string) (string, *InputParams, error) {
+type InputParams struct {
+	Variables         []types.Variable
+	MatchNodeOffset   int
+	UnanchoredOffsets []int
+}
+
+func Process(langImplementation implementation.Implementation, input string) (string, *InputParams, error) {
 	inputWithoutVariables, variables, err := langImplementation.ExtractPatternVariables(input)
 	if err != nil {
 		return "", nil, fmt.Errorf("error processing variables: %s", err)

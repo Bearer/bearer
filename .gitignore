@@ -13,3 +13,7 @@ temp/
 
 
 .envrc
+
+# souffle
+./souffle/generated
+./pkg/souffle/rules/generated.cpp
