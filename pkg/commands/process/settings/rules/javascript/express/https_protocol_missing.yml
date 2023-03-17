@@ -1,15 +1,15 @@
 patterns:
   - pattern: |
       https.createServer()
-    filters:
-trigger_rule_on_presence_of: javascript_express_https_protocol_missing_http_server
 auxiliary:
   - id: javascript_express_https_protocol_missing_http_server
     patterns:
       - $<_>.createServer()
 languages:
   - javascript
-trigger: absence
+trigger:
+  match_on: absence
+  required_detection: javascript_express_https_protocol_missing_http_server
 metadata:
   description: "Missing https protocol detected."
   remediation_message: |

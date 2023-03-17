@@ -176,27 +176,52 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			ruleType = defaultRuleType
 		}
 
+		// build rule trigger
+		ruleTrigger := RuleTrigger{
+			MatchOn:           PRESENCE,
+			DataTypesRequired: false,
+		}
+		if definition.Trigger != nil {
+			if definition.Trigger.MatchOn != nil {
+				ruleTrigger.MatchOn = *definition.Trigger.MatchOn
+			}
+			if definition.Trigger.DataTypesRequired != nil {
+				ruleTrigger.DataTypesRequired = *definition.Trigger.DataTypesRequired
+			}
+			if definition.Trigger.RequiredDetection != nil {
+				ruleTrigger.RequiredDetection = definition.Trigger.RequiredDetection
+			}
+		}
+
+		isLocal := false
+		for _, rulePattern := range definition.Patterns {
+			if strings.Contains(rulePattern.Pattern, "$<DATA_TYPE>") {
+				isLocal = true
+				break
+			}
+		}
+
 		rules[id] = &Rule{
-			Id:                      id,
-			Type:                    ruleType,
-			AssociatedRecipe:        definition.Metadata.AssociatedRecipe,
-			Trigger:                 definition.Trigger,
-			SkipDataTypes:           definition.SkipDataTypes,
-			OnlyDataTypes:           definition.OnlyDataTypes,
-			Severity:                definition.Severity,
-			Description:             definition.Metadata.Description,
-			RemediationMessage:      definition.Metadata.RemediationMessage,
-			Stored:                  definition.Stored,
-			Detectors:               definition.Detectors,
-			Processors:              definition.Processors,
-			AutoEncrytPrefix:        definition.AutoEncrytPrefix,
-			CWEIDs:                  definition.Metadata.CWEIDs,
-			Languages:               definition.Languages,
-			ParamParenting:          definition.ParamParenting,
-			Patterns:                definition.Patterns,
-			DocumentationUrl:        definition.Metadata.DocumentationUrl,
-			OmitParentContent:       definition.OmitParentContent,
-			TriggerRuleOnPresenceOf: definition.TriggerRuleOnPresenceOf,
+			Id:                 id,
+			Type:               ruleType,
+			AssociatedRecipe:   definition.Metadata.AssociatedRecipe,
+			Trigger:            ruleTrigger,
+			IsLocal:            isLocal,
+			SkipDataTypes:      definition.SkipDataTypes,
+			OnlyDataTypes:      definition.OnlyDataTypes,
+			Severity:           definition.Severity,
+			Description:        definition.Metadata.Description,
+			RemediationMessage: definition.Metadata.RemediationMessage,
+			Stored:             definition.Stored,
+			Detectors:          definition.Detectors,
+			Processors:         definition.Processors,
+			AutoEncrytPrefix:   definition.AutoEncrytPrefix,
+			CWEIDs:             definition.Metadata.CWEIDs,
+			Languages:          definition.Languages,
+			ParamParenting:     definition.ParamParenting,
+			Patterns:           definition.Patterns,
+			DocumentationUrl:   definition.Metadata.DocumentationUrl,
+			OmitParentContent:  definition.OmitParentContent,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {

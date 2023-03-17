@@ -30,7 +30,6 @@ auxiliary:
       - express.static()
 languages:
   - javascript
-trigger: presence
 metadata:
   description: Static asset with active session detected.
   remediation_message: |

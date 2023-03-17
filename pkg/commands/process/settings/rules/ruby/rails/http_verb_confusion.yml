@@ -10,7 +10,6 @@ patterns:
       end
   - pattern: |
       $<_> unless request.get?
-trigger: presence
 severity: medium
 metadata:
   description: "Potential for HTTP verb confusion detected."

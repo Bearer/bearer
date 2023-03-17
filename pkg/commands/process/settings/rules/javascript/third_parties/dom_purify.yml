@@ -14,7 +14,6 @@ auxiliary:
           { RETURN_DOM_IMPORT: true }
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "Unsecure use of DOMPurify detected."

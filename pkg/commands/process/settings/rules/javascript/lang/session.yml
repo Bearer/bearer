@@ -6,7 +6,6 @@ patterns:
         detection: datatype
 languages:
   - javascript
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

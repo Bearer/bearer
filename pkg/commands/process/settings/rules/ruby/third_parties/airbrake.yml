@@ -49,7 +49,6 @@ patterns:
     filters:
       - variable: DATA_TYPE
         detection: datatype
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

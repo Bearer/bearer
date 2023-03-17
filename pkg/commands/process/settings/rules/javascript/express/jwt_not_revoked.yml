@@ -21,7 +21,6 @@ auxiliary:
     patterns:
       - pattern: |
           { $<...>isRevoked: $<_>$<...> }
-trigger: presence
 severity: low
 metadata:
   description: "Unrevoked JWT detected."

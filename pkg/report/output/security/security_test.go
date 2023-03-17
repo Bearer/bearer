@@ -33,6 +33,7 @@ func TestBuildReportString(t *testing.T) {
 		Type:        "risk",
 		Languages:   []string{"ruby"},
 		Severity:    "low",
+		IsLocal:     false,
 	}
 
 	// limit rules so that test doesn't fail just because
@@ -121,11 +122,11 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 
 func TestCalculateSeverity(t *testing.T) {
 	res := []string{
-		security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", "local"),
-		security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", "global"),
-		security.CalculateSeverity([]string{"Personal Data"}, "low", "global"),
-		security.CalculateSeverity([]string{"Personal Data"}, "warning", "absence"),
-		security.CalculateSeverity([]string{}, "warning", "presence"),
+		security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", true),
+		security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", false),
+		security.CalculateSeverity([]string{"Personal Data"}, "low", false),
+		security.CalculateSeverity([]string{"Personal Data"}, "warning", false),
+		security.CalculateSeverity([]string{}, "warning", false),
 	}
 
 	cupaloy.SnapshotT(t, res)

@@ -12,7 +12,6 @@ patterns:
     Net::FTP.open()$<...>
 languages:
   - ruby
-trigger: presence
 severity: low
 metadata:
   description: "Communication with an unsecure FTP server detected."

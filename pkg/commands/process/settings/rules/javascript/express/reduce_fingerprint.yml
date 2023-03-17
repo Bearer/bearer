@@ -13,7 +13,6 @@ patterns:
         detection: javascript_express_reduce_fingerprint_express_init
       - variable: FUNCTION_CALL
         detection: javascript_express_reduce_fingerprint_helmet_configuration
-trigger_rule_on_presence_of: javascript_express_reduce_fingerprint_express_init
 auxiliary:
   - id: javascript_express_reduce_fingerprint_express_init
     patterns:
@@ -23,7 +22,9 @@ auxiliary:
       - helmet.hidePoweredBy()
 languages:
   - javascript
-trigger: absence
+trigger:
+  match_on: absence
+  required_detection: javascript_express_reduce_fingerprint_express_init
 metadata:
   description: "Security misconfiguration detected."
   remediation_message: |

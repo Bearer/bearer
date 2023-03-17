@@ -50,7 +50,6 @@ auxiliary:
             detection: javascript_express_insecure_deserialization_request_obj
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "Deserialization of untrusted data detected."

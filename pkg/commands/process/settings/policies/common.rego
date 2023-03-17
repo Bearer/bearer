@@ -21,6 +21,7 @@ cat_groups := set() if {
 }
 
 build_local_item(location, data_type) := {
+	"is_local": true,
 	"category_groups": groups_for_datatype(data_type),
 	"filename": location.filename,
 	"line_number": location.line_number,

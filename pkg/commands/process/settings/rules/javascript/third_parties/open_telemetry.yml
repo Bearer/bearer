@@ -19,7 +19,6 @@ auxiliary:
     patterns:
       - opentelemetry.trace.getSpan()
       - span
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

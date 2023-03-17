@@ -3,7 +3,6 @@ patterns:
       app.use($<...>serveIndex()$<...>)
 languages:
   - javascript
-trigger: presence
 metadata:
   description: "Missing access restriction to directory listing detected."
   remediation_message: |

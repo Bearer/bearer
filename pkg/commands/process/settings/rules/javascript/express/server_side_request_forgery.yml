@@ -41,7 +41,6 @@ auxiliary:
       - puppeteer.launch()
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "Risk of server-side request forgery detected."

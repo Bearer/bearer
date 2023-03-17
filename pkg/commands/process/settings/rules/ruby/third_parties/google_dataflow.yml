@@ -116,7 +116,6 @@ auxiliary:
     patterns:
       - |
         Google::Cloud::Dataflow::$<_>::TemplateMetadata.new
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

@@ -8,7 +8,6 @@ languages:
   - javascript
 skip_data_types:
   - "Unique Identifier"
-trigger: local
 metadata:
   description: "Sensitive data sent to Google Analytic detected."
   remediation_message: |

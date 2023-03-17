@@ -25,7 +25,6 @@ auxiliary:
         new Promise(function ($<_>, $<!>$<_>) {})
 languages:
   - javascript
-trigger: local
 skip_data_types:
   - Unique Identifier
 metadata:

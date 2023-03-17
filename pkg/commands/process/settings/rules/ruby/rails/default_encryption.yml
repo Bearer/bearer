@@ -15,7 +15,8 @@ skip_data_types:
   - Unique Identifier
   - Passwords
 auto_encrypt_prefix: encrypted_
-trigger: stored_data_types
+trigger:
+  match_on: stored_data_types
 severity: warning
 metadata:
   description: "Missing application-level encryption of sensitive data detected."

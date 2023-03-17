@@ -51,7 +51,6 @@ auxiliary:
         `$<...>${$<...>$<_>$<...>}$<...>`
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "Dangerous dynamic HTML insert detected."

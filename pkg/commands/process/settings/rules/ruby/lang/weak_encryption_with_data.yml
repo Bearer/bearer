@@ -115,7 +115,6 @@ auxiliary:
     patterns:
       - |
         Crypt::Blowfish.new()
-trigger: local
 metadata:
   description: "Sensitive data encrypted with a weak encryption library detected."
   remediation_message: |

@@ -32,7 +32,6 @@ auxiliary:
       - Net::FTP.open() { |$<!>$<_:identifier>| }
 languages:
   - ruby
-trigger: presence
 severity: high
 metadata:
   description: "Do not use user input with FTP."
