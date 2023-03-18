@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -25,6 +26,7 @@ func (detector *stringDetector) Name() string {
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string_content":

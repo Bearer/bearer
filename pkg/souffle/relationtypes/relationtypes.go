@@ -5,9 +5,10 @@ package relationtypes
  */
 
 type Rule_Match struct {
-	RuleName string
-	Node     uint32
-	Location AST_Location
+	RuleName     string
+	PatternIndex uint32
+	Node         uint32
+	Location     AST_Location
 }
 
 type AST_Location struct {

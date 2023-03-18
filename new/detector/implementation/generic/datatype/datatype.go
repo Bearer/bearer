@@ -5,6 +5,7 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/schema"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -56,6 +57,7 @@ func (detector *datatypeDetector) Name() string {
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]interface{}, error) {
 	objectDetections, err := evaluator.ForNode(node, "object", false)
 	if err != nil {

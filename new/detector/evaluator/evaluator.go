@@ -7,10 +7,12 @@ import (
 	"github.com/bearer/bearer/new/detector/types"
 	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 	"golang.org/x/exp/slices"
 )
 
 type evaluator struct {
+	queryContext          *soufflequery.QueryContext
 	lang                  languagetypes.Language
 	detectorSet           types.DetectorSet
 	detectionCache        map[langtree.NodeID]map[string][]*types.Detection
@@ -20,6 +22,7 @@ type evaluator struct {
 }
 
 func New(
+	queryContext *soufflequery.QueryContext,
 	lang languagetypes.Language,
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
@@ -28,6 +31,7 @@ func New(
 	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
 
 	return &evaluator{
+		queryContext:          queryContext,
 		lang:                  lang,
 		fileName:              fileName,
 		detectorSet:           detectorSet,
@@ -251,7 +255,7 @@ func (evaluator *evaluator) detectAtNode(node *langtree.Node, detectorType strin
 	}
 
 	return evaluator.withCycleProtection(node, detectorType, func() error {
-		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, evaluator)
+		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, evaluator, evaluator.queryContext)
 		if err != nil {
 			return err
 		}

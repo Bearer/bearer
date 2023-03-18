@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
@@ -113,6 +114,7 @@ func (detector *objectDetector) NestedDetections() bool {
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]interface{}, error) {
 	detections, err := detector.getobject(node, evaluator)
 	if len(detections) != 0 || err != nil {

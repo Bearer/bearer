@@ -52,6 +52,7 @@ func (language *Language) WriteSourceFacts(
 func (language *Language) WriteRule(
 	ruleRelation,
 	variableRelation string,
+	patternIndex int,
 	input string,
 	writer *filewriter.Writer,
 ) error {
@@ -72,6 +73,7 @@ func (language *Language) WriteRule(
 		inputParams,
 		ruleRelation,
 		variableRelation,
+		patternIndex,
 		processedInputBytes,
 		rootNode,
 		writer,

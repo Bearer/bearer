@@ -68,20 +68,29 @@ func compileRuleToSouffle(
 	rule *settings.Rule,
 ) error {
 	ruleRelation := fmt.Sprintf("Rule_Pattern_%s", ruleName)
-	writer.WriteRelation(ruleRelation, "node: AST_NodeId")
+	writer.WriteRelation(ruleRelation, "patternIndex: Rule_PatternIndex", "node: AST_NodeId")
 
 	variableRelation := fmt.Sprintf("Rule_PatternVariable_%s", ruleName)
 	// writer.WriteRelation(variableRelation, "node: AST_NodeId", "variable: Rule_VariableName", "variableNode: AST_NodeId")
 
 	if err := writer.WriteRule(
-		[]writerbase.Predicate{writer.Predicate("Rule", writer.Symbol(ruleName), writer.Identifier("node"))},
-		[]writerbase.Literal{writer.Predicate(ruleRelation, writer.Identifier("node"))},
+		[]writerbase.Predicate{writer.Predicate(
+			"Rule",
+			writer.Symbol(ruleName),
+			writer.Identifier("patternIndex"),
+			writer.Identifier("node"),
+		)},
+		[]writerbase.Literal{writer.Predicate(
+			ruleRelation,
+			writer.Identifier("patternIndex"),
+			writer.Identifier("node"),
+		)},
 	); err != nil {
 		return fmt.Errorf("error writing generic rule: %w", err)
 	}
 
-	for _, pattern := range rule.Patterns {
-		if err := language.WriteRule(ruleRelation, variableRelation, pattern.Pattern, writer); err != nil {
+	for i, pattern := range rule.Patterns {
+		if err := language.WriteRule(ruleRelation, variableRelation, i, pattern.Pattern, writer); err != nil {
 			return fmt.Errorf("pattern error (%s)': %w", pattern.Pattern, err)
 		}
 	}

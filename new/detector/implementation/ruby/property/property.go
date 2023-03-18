@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/implementation/ruby/common"
@@ -52,6 +53,7 @@ func (detector *propertyDetector) Name() string {
 func (detector *propertyDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]interface{}, error) {
 	// run hash pair query
 	result, err := detector.pairQuery.MatchOnceAt(node)

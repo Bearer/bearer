@@ -3,10 +3,12 @@ package property
 import (
 	"fmt"
 
+	"github.com/rs/zerolog/log"
+
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 	"github.com/bearer/bearer/pkg/util/stringutil"
-	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -55,6 +57,7 @@ func (detector *propertyDetector) Name() string {
 func (detector *propertyDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]interface{}, error) {
 	// run pair query
 	result, err := detector.pairQuery.MatchOnceAt(node)

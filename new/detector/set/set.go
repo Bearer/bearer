@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 )
 
 type set struct {
@@ -42,13 +43,14 @@ func (set *set) DetectAt(
 	node *tree.Node,
 	detectorType string,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]*types.Detection, error) {
 	detector, err := set.lookupDetector(detectorType)
 	if err != nil {
 		return nil, err
 	}
 
-	detectionsData, err := detector.DetectAt(node, evaluator)
+	detectionsData, err := detector.DetectAt(node, evaluator, queryContext)
 	if err != nil {
 		return nil, err
 	}

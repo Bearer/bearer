@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 )
 
 type Data struct {
@@ -55,13 +56,21 @@ func (detector *customDetector) Name() string {
 func (detector *customDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]interface{}, error) {
 	var detectionsData []interface{}
 
-	for _, pattern := range detector.patterns {
-		results, err := pattern.Query.MatchAt(node)
-		if err != nil {
-			return nil, err
+	for i, pattern := range detector.patterns {
+		var results []*languagetypes.PatternQueryResult
+
+		if queryContext == nil {
+			var err error
+			results, err = pattern.Query.MatchAt(node)
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			results = queryContext.MatchAt(detector.detectorType, i, node)
 		}
 
 		for _, result := range results {

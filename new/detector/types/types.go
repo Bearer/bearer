@@ -2,6 +2,7 @@ package types
 
 import (
 	"github.com/bearer/bearer/new/language/tree"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 	"github.com/bearer/bearer/pkg/util/file"
 )
 
@@ -25,12 +26,13 @@ type DetectorSet interface {
 		node *tree.Node,
 		detectorType string,
 		evaluator Evaluator,
+		queryContext *soufflequery.QueryContext,
 	) ([]*Detection, error)
 }
 
 type Detector interface {
 	Name() string
-	DetectAt(node *tree.Node, evaluator Evaluator) ([]interface{}, error)
+	DetectAt(node *tree.Node, evaluator Evaluator, queryContext *soufflequery.QueryContext) ([]interface{}, error)
 	NestedDetections() bool
 	Close()
 }

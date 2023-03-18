@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -27,6 +28,7 @@ func (detector *insecureURLDetector) Name() string {
 func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
+	queryContext *soufflequery.QueryContext,
 ) ([]interface{}, error) {
 	detections, err := evaluator.ForNode(node, "string", false)
 	if err != nil {

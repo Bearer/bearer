@@ -1,7 +1,6 @@
 package query
 
 import (
-	"errors"
 	"fmt"
 
 	"github.com/bearer/bearer/new/language/implementation"
@@ -16,7 +15,7 @@ import (
 )
 
 type QueryContext struct {
-	souffle            souffle.Souffle
+	souffle            *souffle.Souffle
 	language           *ruby.Language
 	langImplementation implementation.Implementation
 	cache              map[string]map[uint32][]*languagetypes.PatternQueryResult
@@ -24,13 +23,8 @@ type QueryContext struct {
 	tree               *tree.Tree
 }
 
-type Query struct {
-	context  *QueryContext
-	ruleName string
-}
-
 func NewContext(
-	souffle souffle.Souffle,
+	souffle *souffle.Souffle,
 	language *ruby.Language,
 	langImplementation implementation.Implementation,
 	tree *tree.Tree,
@@ -48,12 +42,8 @@ func NewContext(
 	return context, context.run(tree.RootNode().SitterNode(), input)
 }
 
-func (context *QueryContext) NewQuery(ruleName string) *Query {
-	return &Query{context: context, ruleName: ruleName}
-}
-
-func (context *QueryContext) get(node *tree.Node, ruleName string) []*languagetypes.PatternQueryResult {
-	nodeCache, ruleExists := context.cache[ruleName]
+func (context *QueryContext) MatchAt(ruleName string, patternIndex int, node *tree.Node) []*languagetypes.PatternQueryResult {
+	nodeCache, ruleExists := context.cache[patternKey(ruleName, patternIndex)]
 	if !ruleExists {
 		return nil
 	}
@@ -61,8 +51,8 @@ func (context *QueryContext) get(node *tree.Node, ruleName string) []*languagety
 	return nodeCache[context.nodeIdGenerator.Get(node.SitterNode())]
 }
 
-func (context *QueryContext) put(nodeId uint32, ruleName string, result *languagetypes.PatternQueryResult) {
-	nodeCache, ruleExists := context.cache[ruleName]
+func (context *QueryContext) put(nodeId uint32, ruleName string, patternIndex int, result *languagetypes.PatternQueryResult) {
+	nodeCache, ruleExists := context.cache[patternKey(ruleName, patternIndex)]
 	if !ruleExists {
 		nodeCache = make(map[uint32][]*languagetypes.PatternQueryResult)
 		context.cache[ruleName] = nodeCache
@@ -99,7 +89,7 @@ func (context *QueryContext) readMatches() error {
 			return fmt.Errorf("failed to read tuple %d for Rule_Match: %w", i, err)
 		}
 
-		context.put(match.Node, match.RuleName, &languagetypes.PatternQueryResult{
+		context.put(match.Node, match.RuleName, int(match.PatternIndex), &languagetypes.PatternQueryResult{
 			MatchNode: context.tree.Wrap(context.nodeIdGenerator.InverseLookup(match.Node)),
 			Variables: make(map[string]*tree.Node),
 		})
@@ -108,24 +98,6 @@ func (context *QueryContext) readMatches() error {
 	return nil
 }
 
-func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error) {
-	return query.context.get(node, query.ruleName), nil
+func patternKey(ruleName string, patternIndex int) string {
+	return fmt.Sprintf("%s:%d", ruleName, patternIndex)
 }
-
-func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error) {
-	results, err := query.MatchAt(node)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(results) == 0 {
-		return nil, nil
-	}
-	if len(results) > 1 {
-		return nil, errors.New("query returned more than one result")
-	}
-
-	return results[0], nil
-}
-
-func (query *Query) Close() {}

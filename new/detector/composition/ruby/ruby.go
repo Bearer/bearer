@@ -19,7 +19,9 @@ import (
 	"github.com/bearer/bearer/pkg/ast/languages/ruby"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/souffle"
 
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/ruby/string"
 	detectorset "github.com/bearer/bearer/new/detector/set"
@@ -179,18 +181,23 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
+	souffle, err := souffle.New("souffle")
+	if err != nil {
+		return nil, err
+	}
+
 	queryContext, err := soufflequery.NewContext(
 		souffle,
 		ruby.New(),
-		implementation,
+		composition.lang.Implementation(),
 		tree,
-		[]byte(input),
+		fileContent,
 	)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
+	evaluator := evaluator.New(queryContext, composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
 
 	var result []*detectortypes.Detection
 	for _, detectorType := range detectorTypes {

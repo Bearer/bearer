@@ -181,7 +181,7 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
-	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
+	evaluator := evaluator.New(nil, composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
 
 	var result []*detectortypes.Detection
 	for _, detectorType := range detectorTypes {

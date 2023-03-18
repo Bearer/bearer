@@ -3,15 +3,16 @@
 
 .type Rule_Name <: symbol
 .type Rule_VariableName <: symbol
+.type Rule_PatternIndex <: unsigned
 
 
-.decl Rule(rule: Rule_Name, node: AST_NodeId)
+.decl Rule(rule: Rule_Name, patternIndex: Rule_PatternIndex, node: AST_NodeId)
 
 
-.decl Rule_Match(rule: Rule_Name, node: AST_NodeId, location: AST_Location)
+.decl Rule_Match(rule: Rule_Name, patternIndex: Rule_PatternIndex, node: AST_NodeId, location: AST_Location)
 .output Rule_Match
 
-Rule_Match(rule, node, location) :- Rule(rule, node), AST_NodeLocation(node, location).
+Rule_Match(rule, patternIndex, node, location) :- Rule(rule, patternIndex, node), AST_NodeLocation(node, location).
 
 
 // .decl Rule_MatchVariable(rule: Rule_Name, node: AST_Node, variable: Rule_VariableName, variableNode: AST_Node)

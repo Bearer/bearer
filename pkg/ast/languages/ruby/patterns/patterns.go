@@ -24,7 +24,7 @@ type nodeVariableGenerator struct {
 func newNodeVariableGenerator() *nodeVariableGenerator {
 	return &nodeVariableGenerator{
 		ids:         make(map[*sitter.Node]uint32),
-		idGenerator: idgenerator.New(),
+		idGenerator: idgenerator.NewGenerator(),
 	}
 }
 
@@ -62,6 +62,7 @@ func CompileRule(
 	inputParams *builderinput.InputParams,
 	ruleRelation,
 	variableRelation string,
+	patternIndex int,
 	input []byte,
 	rootNode *sitter.Node,
 	writer *filewriter.Writer,
@@ -71,7 +72,7 @@ func CompileRule(
 		inputParams:           inputParams,
 		input:                 input,
 		nodeVariableGenerator: newNodeVariableGenerator(),
-		tempIdGenerator:       idgenerator.New(),
+		tempIdGenerator:       idgenerator.NewGenerator(),
 		handled:               set.New[*sitter.Node](),
 		variableNodes:         make(map[string][]writerbase.Identifier),
 	}
@@ -104,7 +105,7 @@ func CompileRule(
 		// 	[]writerbase.Predicate(nil), //variablePredicates,
 		// 	writer.Predicate(ruleRelation, w.rootElement),
 		// ),
-		[]writerbase.Predicate{writer.Predicate(ruleRelation, w.rootElement)},
+		[]writerbase.Predicate{writer.Predicate(ruleRelation, writer.Unsigned(uint32(patternIndex)), w.rootElement)},
 		w.literals,
 	); err != nil {
 		return err
