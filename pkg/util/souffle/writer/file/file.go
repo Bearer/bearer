@@ -32,6 +32,10 @@ func (writer *Writer) Disjunction(literals ...base.Literal) base.Disjunction {
 	return base.Disjunction(literals)
 }
 
+func (writer *Writer) Constraint(left base.LiteralElement, operator string, right base.LiteralElement) base.Constraint {
+	return base.Constraint{Left: left, Operator: operator, Right: right}
+}
+
 func (writer *Writer) Predicate(name string, elements ...base.LiteralElement) base.Predicate {
 	return base.Predicate{Name: name, Elements: elements}
 }
@@ -40,8 +44,12 @@ func (writer *Writer) NegativePredicate(name string, elements ...base.LiteralEle
 	return base.NegativePredicate(base.Predicate{Name: name, Elements: elements})
 }
 
+func (writer *Writer) WriteComment(text string) error {
+	return writer.write("// " + text + "\n")
+}
+
 // FIXME: use proper attribute type
-func (writer *Writer) WriteRelation(name string, attributes ...string) error {
+func (writer *Writer) WriteRelation(name string, typ base.RelationType, attributes ...string) error {
 	builder := strings.Builder{}
 	builder.WriteString(".decl ")
 	builder.WriteString(name)
@@ -56,6 +64,14 @@ func (writer *Writer) WriteRelation(name string, attributes ...string) error {
 	}
 
 	builder.WriteString(")\n")
+
+	if typ != base.Intermediate {
+		builder.WriteString(".")
+		builder.WriteString(string(typ))
+		builder.WriteString(" ")
+		builder.WriteString(name)
+		builder.WriteString("\n")
+	}
 
 	return writer.write(builder.String())
 }

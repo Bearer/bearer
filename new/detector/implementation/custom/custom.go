@@ -2,12 +2,15 @@ package custom
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/ast/idgenerator"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
+	"github.com/bearer/bearer/pkg/util/output"
 )
 
 type Data struct {
@@ -27,13 +30,22 @@ type customDetector struct {
 	patterns     []Pattern
 }
 
-func New(lang languagetypes.Language, detectorType string, patterns []settings.RulePattern) (types.Detector, error) {
+func New(
+	lang languagetypes.Language,
+	detectorType string,
+	patterns []settings.RulePattern,
+) (types.Detector, error) {
 	var compiledPatterns []Pattern
 	for _, pattern := range patterns {
-		patternQuery, err := lang.CompilePatternQuery(detectorType, pattern.Pattern)
-		if err != nil {
-			return nil, fmt.Errorf("error compiling pattern: %s", err)
+		var patternQuery languagetypes.PatternQuery
+		if !strings.HasPrefix(detectorType, "ruby_") {
+			var err error
+			patternQuery, err = lang.CompilePatternQuery(detectorType, pattern.Pattern)
+			if err != nil {
+				return nil, fmt.Errorf("error compiling pattern: %s", err)
+			}
 		}
+
 		compiledPatterns = append(compiledPatterns, Pattern{
 			Pattern: pattern.Pattern,
 			Query:   patternQuery,
@@ -70,10 +82,11 @@ func (detector *customDetector) DetectAt(
 				return nil, err
 			}
 		} else {
-			results = queryContext.MatchAt(detector.detectorType, i, node)
+			results = queryContext.MatchAt(idgenerator.PatternId(detector.detectorType, i), node)
 		}
 
 		for _, result := range results {
+			output.StdErrLogger().Msgf("found pattern %s at: %s", idgenerator.PatternId(detector.detectorType, i), result.MatchNode.Content())
 			filtersMatch, datatypeDetections, err := matchAllFilters(result, evaluator, pattern.Filters)
 			if err != nil {
 				return nil, err

@@ -1,8 +1,8 @@
-.type AST_FileId <: number
+.type AST_FileId <: unsigned
 .type AST_Filename <: symbol
-.type AST_FilePosition <: number
+.type AST_FilePosition <: unsigned
 
-.type AST_NodeId <: number
+.type AST_NodeId <: unsigned
 
 .type AST_Type <: symbol
 .type AST_Field <: symbol

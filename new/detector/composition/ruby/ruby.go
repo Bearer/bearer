@@ -15,7 +15,9 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/ruby/object"
 	"github.com/bearer/bearer/new/detector/implementation/ruby/property"
 	"github.com/bearer/bearer/new/language"
+	"github.com/bearer/bearer/pkg/util/set"
 
+	"github.com/bearer/bearer/pkg/ast/idgenerator"
 	"github.com/bearer/bearer/pkg/ast/languages/ruby"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -26,6 +28,8 @@ import (
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/ruby/string"
 	detectorset "github.com/bearer/bearer/new/detector/set"
 	detectortypes "github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/patternquery/builder/input"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
@@ -34,6 +38,7 @@ type Composition struct {
 	detectorSet         detectortypes.DetectorSet
 	lang                languagetypes.Language
 	closers             []func()
+	patternVariables    map[string][]string
 }
 
 func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
@@ -113,9 +118,20 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		}
 	}
 
+	composition.patternVariables = make(map[string][]string)
+
 	for ruleName, rule := range rubyRules {
 		patterns := rule.Patterns
 		localRuleName := ruleName
+
+		for patternIndex, pattern := range patterns {
+			variables, err := variablesFor(composition.lang.Implementation(), pattern.Pattern)
+			if err != nil {
+				return nil, fmt.Errorf("error with pattern %s_%d: %w", rule.Id, patternIndex, err)
+			}
+
+			composition.patternVariables[idgenerator.PatternId(ruleName, patternIndex)] = variables
+		}
 
 		if !rule.IsAuxilary || presenceRules[ruleName] {
 			composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
@@ -181,7 +197,7 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
-	souffle, err := souffle.New("souffle")
+	souffle, err := souffle.New("generated")
 	if err != nil {
 		return nil, err
 	}
@@ -192,6 +208,7 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		composition.lang.Implementation(),
 		tree,
 		fileContent,
+		composition.patternVariables,
 	)
 	if err != nil {
 		return nil, err
@@ -207,6 +224,28 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		}
 
 		result = append(result, detections...)
+	}
+
+	return result, nil
+}
+
+func variablesFor(langImplementation implementation.Implementation, pattern string) ([]string, error) {
+	_, params, err := input.Process(langImplementation, pattern)
+	if err != nil {
+		return nil, err
+	}
+
+	var result []string
+	seen := set.New[string]()
+
+	for _, variable := range params.Variables {
+		if variable.Name == "_" {
+			continue
+		}
+
+		if seen.Add(variable.Name) {
+			result = append(result, variable.Name)
+		}
 	}
 
 	return result, nil

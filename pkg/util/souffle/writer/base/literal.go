@@ -18,6 +18,12 @@ type Predicate struct {
 
 type NegativePredicate Predicate
 
+type Constraint struct {
+	Left     LiteralElement
+	Operator string
+	Right    LiteralElement
+}
+
 type Literal interface {
 	String() string
 	sealedLiteral()
@@ -27,6 +33,7 @@ func (Conjunction) sealedLiteral()       {}
 func (Disjunction) sealedLiteral()       {}
 func (Predicate) sealedLiteral()         {}
 func (NegativePredicate) sealedLiteral() {}
+func (Constraint) sealedLiteral()        {}
 
 type LiteralElement interface {
 	String() string
@@ -87,4 +94,8 @@ func (predicate Predicate) String() string {
 
 func (predicate NegativePredicate) String() string {
 	return "!" + Predicate(predicate).String()
+}
+
+func (constraint Constraint) String() string {
+	return constraint.Left.String() + constraint.Operator + constraint.Right.String()
 }

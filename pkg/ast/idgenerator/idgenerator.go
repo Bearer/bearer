@@ -1,9 +1,24 @@
 package idgenerator
 
-import sitter "github.com/smacker/go-tree-sitter"
+import (
+	"fmt"
+
+	sitter "github.com/smacker/go-tree-sitter"
+)
 
 type Generator struct {
 	next uint32
+}
+
+type NodeIdGenerator struct {
+	ids         map[*sitter.Node]uint32
+	inverseIds  map[uint32]*sitter.Node
+	idGenerator *Generator
+}
+
+type PatternIdGenerator struct {
+	ids         map[string]uint32
+	idGenerator *Generator
 }
 
 func NewGenerator() *Generator {
@@ -14,12 +29,6 @@ func (generator *Generator) Get() uint32 {
 	next := generator.next
 	generator.next++
 	return next
-}
-
-type NodeIdGenerator struct {
-	ids         map[*sitter.Node]uint32
-	inverseIds  map[uint32]*sitter.Node
-	idGenerator *Generator
 }
 
 func NewNodeIdGenerator() *NodeIdGenerator {
@@ -43,4 +52,8 @@ func (generator *NodeIdGenerator) Get(node *sitter.Node) uint32 {
 
 func (generator *NodeIdGenerator) InverseLookup(nodeId uint32) *sitter.Node {
 	return generator.inverseIds[nodeId]
+}
+
+func PatternId(ruleId string, patternIndex int) string {
+	return fmt.Sprintf("%s_%d", ruleId, patternIndex)
 }

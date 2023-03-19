@@ -60,9 +60,7 @@ type patternWriter struct {
 func CompileRule(
 	walker *walker.Walker,
 	inputParams *builderinput.InputParams,
-	ruleRelation,
-	variableRelation string,
-	patternIndex int,
+	patternId string,
 	input []byte,
 	rootNode *sitter.Node,
 	writer *filewriter.Writer,
@@ -82,15 +80,23 @@ func CompileRule(
 		return err
 	}
 
-	var variablePredicates []writerbase.Predicate
-	for name, variables := range w.variableNodes {
-		for _, variable := range variables {
-			variablePredicates = append(variablePredicates, writer.Predicate(
-				variableRelation,
-				w.rootElement,
-				writer.Symbol(name),
-				variable,
-			))
+	var variableTypes []string
+	var variableConstraints []writerbase.Literal
+	var variableElements []writerbase.LiteralElement
+
+	for _, variable := range inputParams.Variables {
+		souffleVariables := w.variableNodes[variable.Name]
+
+		if len(souffleVariables) == 0 {
+			continue
+		}
+
+		firstVariable := souffleVariables[0]
+		variableTypes = append(variableTypes, string(firstVariable)+": AST_NodeId")
+		variableElements = append(variableElements, firstVariable)
+
+		for _, souffleVariable := range souffleVariables[1:] {
+			variableConstraints = append(variableConstraints, writer.Constraint(souffleVariable, "=", firstVariable))
 		}
 	}
 
@@ -100,13 +106,18 @@ func CompileRule(
 	}
 	log.Printf("#literals: %d", len(w.literals))
 
+	writer.WriteRelation(
+		fmt.Sprintf("Rule_Match_%s", patternId),
+		writerbase.Output,
+		append([]string{"node: AST_NodeId"}, variableTypes...)...,
+	)
+
 	if err := writer.WriteRule(
-		// append(
-		// 	[]writerbase.Predicate(nil), //variablePredicates,
-		// 	writer.Predicate(ruleRelation, w.rootElement),
-		// ),
-		[]writerbase.Predicate{writer.Predicate(ruleRelation, writer.Unsigned(uint32(patternIndex)), w.rootElement)},
-		w.literals,
+		[]writerbase.Predicate{writer.Predicate(
+			fmt.Sprintf("Rule_Match_%s", patternId),
+			append([]writerbase.LiteralElement{w.rootElement}, variableElements...)...,
+		)},
+		append(w.literals, variableConstraints...),
 	); err != nil {
 		return err
 	}

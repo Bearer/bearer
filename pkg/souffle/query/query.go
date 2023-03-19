@@ -2,16 +2,18 @@ package query
 
 import (
 	"fmt"
+	"reflect"
+
+	"github.com/rs/zerolog/log"
+	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/ast/idgenerator"
 	"github.com/bearer/bearer/pkg/ast/languages/ruby"
-	"github.com/bearer/bearer/pkg/souffle/relationtypes"
 	"github.com/bearer/bearer/pkg/util/souffle"
 	relationwriter "github.com/bearer/bearer/pkg/util/souffle/writer/relation"
-	sitter "github.com/smacker/go-tree-sitter"
 )
 
 type QueryContext struct {
@@ -21,6 +23,7 @@ type QueryContext struct {
 	cache              map[string]map[uint32][]*languagetypes.PatternQueryResult
 	nodeIdGenerator    *idgenerator.NodeIdGenerator
 	tree               *tree.Tree
+	patternTypes       map[string]reflect.Type
 }
 
 func NewContext(
@@ -29,6 +32,7 @@ func NewContext(
 	langImplementation implementation.Implementation,
 	tree *tree.Tree,
 	input []byte,
+	patternVariables map[string][]string,
 ) (*QueryContext, error) {
 	context := &QueryContext{
 		souffle:            souffle,
@@ -37,25 +41,30 @@ func NewContext(
 		cache:              make(map[string]map[uint32][]*languagetypes.PatternQueryResult),
 		nodeIdGenerator:    idgenerator.NewNodeIdGenerator(),
 		tree:               tree,
+		patternTypes:       makePatternTypes(patternVariables),
 	}
 
 	return context, context.run(tree.RootNode().SitterNode(), input)
 }
 
-func (context *QueryContext) MatchAt(ruleName string, patternIndex int, node *tree.Node) []*languagetypes.PatternQueryResult {
-	nodeCache, ruleExists := context.cache[patternKey(ruleName, patternIndex)]
+func (context *QueryContext) MatchAt(patternId string, node *tree.Node) []*languagetypes.PatternQueryResult {
+	nodeCache, ruleExists := context.cache[patternId]
 	if !ruleExists {
 		return nil
 	}
 
-	return nodeCache[context.nodeIdGenerator.Get(node.SitterNode())]
+	r := nodeCache[context.nodeIdGenerator.Get(node.SitterNode())]
+
+	return r
 }
 
-func (context *QueryContext) put(nodeId uint32, ruleName string, patternIndex int, result *languagetypes.PatternQueryResult) {
-	nodeCache, ruleExists := context.cache[patternKey(ruleName, patternIndex)]
+func (context *QueryContext) put(nodeId uint32, patternId string, result *languagetypes.PatternQueryResult) {
+	log.Error().Msgf("putting result for %d: %#v", patternId, result)
+
+	nodeCache, ruleExists := context.cache[patternId]
 	if !ruleExists {
 		nodeCache = make(map[uint32][]*languagetypes.PatternQueryResult)
-		context.cache[ruleName] = nodeCache
+		context.cache[patternId] = nodeCache
 	}
 
 	nodeCache[nodeId] = append(nodeCache[nodeId], result)
@@ -71,33 +80,75 @@ func (context *QueryContext) run(rootNode *sitter.Node, input []byte) error {
 
 	context.souffle.Run()
 
-	return context.readMatches()
-}
-
-func (context *QueryContext) readMatches() error {
-	relation, err := context.souffle.Relation("Rule_Match")
-	if err != nil {
-		return err
-	}
-
-	iterator := relation.NewIterator()
-	defer iterator.Close()
-
-	for i := 0; iterator.HasNext(); i++ {
-		var match relationtypes.Rule_Match
-		if err := context.souffle.Unmarshal(&match, iterator.GetNext()); err != nil {
-			return fmt.Errorf("failed to read tuple %d for Rule_Match: %w", i, err)
-		}
-
-		context.put(match.Node, match.RuleName, int(match.PatternIndex), &languagetypes.PatternQueryResult{
-			MatchNode: context.tree.Wrap(context.nodeIdGenerator.InverseLookup(match.Node)),
-			Variables: make(map[string]*tree.Node),
-		})
+	if err := context.readMatches(); err != nil {
+		return fmt.Errorf("error reading matches: %w", err)
 	}
 
 	return nil
 }
 
-func patternKey(ruleName string, patternIndex int) string {
-	return fmt.Sprintf("%s:%d", ruleName, patternIndex)
+func (context *QueryContext) readMatches() error {
+	for patternId, typ := range context.patternTypes {
+		// FIXME: Define dynamic names in a common place
+		relation, err := context.souffle.Relation(fmt.Sprintf("Rule_Match_%s", patternId))
+		if err != nil {
+			// FIXME: need to filter rules by ones we actually compiled
+			log.Error().Msgf("pattern relation error: %w", err)
+			continue
+			// return err
+		}
+
+		iterator := relation.NewIterator()
+		defer iterator.Close()
+
+		log.Error().Msgf("output count: %d", relation.Size())
+
+		for i := 0; iterator.HasNext(); i++ {
+			match := reflect.New(typ)
+			matchValue := reflect.Indirect(match)
+			if err := context.souffle.Unmarshal(match.Interface(), iterator.GetNext()); err != nil {
+				return fmt.Errorf("failed to read tuple %d: %w", i, err)
+			}
+
+			matchNodeId := uint32(matchValue.Field(0).Uint())
+			matchNode := context.resultNode(matchNodeId)
+
+			variables := make(map[string]*tree.Node)
+
+			for i := 1; i < typ.NumField(); i++ {
+				fieldType := typ.Field(i)
+				field := matchValue.Field(i)
+
+				variables[fieldType.Name] = context.resultNode(uint32(field.Uint()))
+			}
+
+			context.put(matchNodeId, patternId, &languagetypes.PatternQueryResult{
+				MatchNode: matchNode,
+				Variables: variables,
+			})
+		}
+	}
+
+	return nil
+}
+
+func (context *QueryContext) resultNode(nodeId uint32) *tree.Node {
+	return context.tree.Wrap(context.nodeIdGenerator.InverseLookup(nodeId))
+}
+
+func makePatternTypes(patternVariables map[string][]string) map[string]reflect.Type {
+	uint32_t := reflect.TypeOf(uint32(0))
+	result := make(map[string]reflect.Type)
+
+	for patternId, variables := range patternVariables {
+		fields := []reflect.StructField{{Name: "Match", Type: uint32_t}}
+
+		for i := range variables {
+			fields = append(fields, reflect.StructField{Name: fmt.Sprintf("Variable%d", i), Type: uint32_t})
+		}
+
+		result[patternId] = reflect.StructOf(fields)
+	}
+
+	return result
 }

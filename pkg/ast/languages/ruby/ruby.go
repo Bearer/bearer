@@ -14,6 +14,7 @@ import (
 	"github.com/bearer/bearer/pkg/ast/languages/ruby/patterns"
 	"github.com/bearer/bearer/pkg/ast/sourcefacts"
 	"github.com/bearer/bearer/pkg/ast/walker"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/souffle/writer"
 	filewriter "github.com/bearer/bearer/pkg/util/souffle/writer/file"
 )
@@ -49,13 +50,23 @@ func (language *Language) WriteSourceFacts(
 	)
 }
 
-func (language *Language) WriteRule(
-	ruleRelation,
-	variableRelation string,
-	patternIndex int,
-	input string,
-	writer *filewriter.Writer,
-) error {
+func (language *Language) WriteRules(rules []*settings.Rule, writer *filewriter.Writer) error {
+	for _, rule := range rules {
+		writer.WriteComment(fmt.Sprintf("rule %s", rule.Id))
+
+		for patternIndex, pattern := range rule.Patterns {
+			patternId := idgenerator.PatternId(rule.Id, patternIndex)
+
+			if err := language.WriteRule(patternId, pattern.Pattern, writer); err != nil {
+				return fmt.Errorf("pattern error (%s)': %w", pattern.Pattern, err)
+			}
+		}
+	}
+
+	return nil
+}
+
+func (language *Language) WriteRule(patternId string, input string, writer *filewriter.Writer) error {
 	processedInput, inputParams, err := builderinput.Process(language.langImplementation, input)
 	if err != nil {
 		return fmt.Errorf("error parsing bearer syntax: %w", err)
@@ -71,9 +82,7 @@ func (language *Language) WriteRule(
 	if err := patterns.CompileRule(
 		language.walker,
 		inputParams,
-		ruleRelation,
-		variableRelation,
-		patternIndex,
+		patternId,
 		processedInputBytes,
 		rootNode,
 		writer,

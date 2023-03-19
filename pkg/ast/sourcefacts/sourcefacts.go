@@ -65,19 +65,19 @@ func (writer *astWriter) visitNode(node *sitter.Node, visitChildren func() error
 		}
 	}
 
-	if err := writer.WriteFact(
-		"AST_NodeLocation",
-		nodeElement,
-		writer.Record(
-			writer.Unsigned(node.StartByte()),
-			writer.Unsigned(node.StartPoint().Row+1),
-			writer.Unsigned(node.StartPoint().Column+1),
-			writer.Unsigned(node.EndPoint().Row+1),
-			writer.Unsigned(node.EndPoint().Column+1),
-		),
-	); err != nil {
-		return err
-	}
+	// if err := writer.WriteFact(
+	// 	"AST_NodeLocation",
+	// 	nodeElement,
+	// 	writer.Record(
+	// 		writer.Unsigned(node.StartByte()),
+	// 		writer.Unsigned(node.StartPoint().Row+1),
+	// 		writer.Unsigned(node.StartPoint().Column+1),
+	// 		writer.Unsigned(node.EndPoint().Row+1),
+	// 		writer.Unsigned(node.EndPoint().Column+1),
+	// 	),
+	// ); err != nil {
+	// 	return err
+	// }
 
 	oldChildIndex := writer.childIndex
 	writer.childIndex = 0
