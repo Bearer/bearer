@@ -18,7 +18,7 @@ require (
 	github.com/open-policy-agent/opa v0.50.0
 	github.com/rs/zerolog v1.29.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
-	github.com/schollz/progressbar/v3 v3.13.0
+	github.com/schollz/progressbar/v3 v3.13.1
 	github.com/smacker/go-tree-sitter v0.0.0-20220829074436-0a7a807924f2
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b
 	github.com/stretchr/testify v1.8.2
