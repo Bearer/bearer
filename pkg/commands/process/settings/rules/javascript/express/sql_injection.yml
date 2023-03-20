@@ -49,8 +49,6 @@ patterns:
   - pattern: |
       $<CONN>.query($<USER_INPUT>, $<_>)
     filters:
-      - variable: CONN
-        detection: javascript_express_sql_injection_pool_conn
       - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
 auxiliary:
@@ -74,12 +72,6 @@ auxiliary:
   - id: javascript_express_sql_injection_mysql_pool
     patterns:
       - mysql.createPool()
-  - id: javascript_express_sql_injection_pool_conn
-    patterns:
-      - pattern: $<MYSQL_POOL>.getConnection(function($<_>, $<!>$<CONN:required_parameter>) {})
-        filters:
-          - variable: MYSQL_POOL
-            detection: javascript_express_sql_injection_mysql_pool
 languages:
   - javascript
 trigger: presence

@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/rs/zerolog/log"
 )
 
 type Data struct {
@@ -59,6 +60,8 @@ func (detector *customDetector) DetectAt(
 	var detectionsData []interface{}
 
 	for _, pattern := range detector.patterns {
+		log.Debug().Msgf("trying to match %s at node: %s %s", detector.detectorType, node.Content(), node.Debug())
+
 		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
 			return nil, err
@@ -73,6 +76,8 @@ func (detector *customDetector) DetectAt(
 			if !filtersMatch {
 				continue
 			}
+
+			log.Debug().Msg("got a match")
 
 			detectionsData = append(detectionsData, Data{
 				Pattern:   pattern.Pattern,

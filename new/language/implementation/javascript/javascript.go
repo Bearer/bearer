@@ -32,7 +32,7 @@ var (
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression", "string", "template_string", "required_parameter"}
+	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression", "string", "template_string"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 
@@ -94,9 +94,12 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 			scope.Assign(node.Content(), node)
 		case "identifier":
 			parent := node.Parent()
+
 			if parent == nil {
 				break
 			}
+
+			log.Debug().Msgf("%s %s", node.Content(), node.Debug())
 
 			if slice.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
@@ -110,15 +113,7 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				}
 			}
 
-			// typescript: different type of identifier
 			if parent.Type() == "required_parameter" {
-				log.Debug().Msgf("%s", node.Debug())
-				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-					scope.Assign(node.Content(), node)
-				}
-			}
-
-			if parent.Type() == "formal_parameters" {
 				scope.Assign(node.Content(), node)
 			}
 		case "property_identifier":
@@ -134,7 +129,6 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 	})
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")

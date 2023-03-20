@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 )
 
@@ -56,6 +57,7 @@ func (evaluator *evaluator) ForTree(
 		result = append(result, detections...)
 
 		if followFlow {
+			log.Debug().Msgf("following flow for detector type %s", detectorType)
 			for _, unifiedNode := range node.UnifiedNodes() {
 				unifiedNodeDetections, err := evaluator.ForTree(unifiedNode, detectorType, true)
 				if err != nil {
@@ -64,9 +66,14 @@ func (evaluator *evaluator) ForTree(
 
 				result = append(result, unifiedNodeDetections...)
 			}
+
+			for _, v := range result {
+				log.Debug().Msgf("got matching node %s %s %s", v.DetectorType, v.MatchNode.Content(), v.MatchNode.Debug())
+			}
 		}
 
 		if len(detections) != 0 {
+			log.Debug().Msgf("getting nested detections for detector type %s", detectorType)
 			nestedDetections, err := evaluator.detectorSet.NestedDetections(detectorType)
 			if err != nil {
 				return err
@@ -97,6 +104,7 @@ func (evaluator *evaluator) ForNode(
 
 	if followFlow {
 		for _, unifiedNode := range node.UnifiedNodes() {
+			log.Debug().Msgf("node is %s", unifiedNode.Content(), unifiedNode.Debug())
 			unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType, true)
 			if err != nil {
 				return nil, err

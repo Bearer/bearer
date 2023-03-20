@@ -43,8 +43,6 @@ patterns:
   - pattern: |
       $<CONN>.query($<AWS_LAMBDA_EVENT>, $<_>)
     filters:
-      - variable: CONN
-        detection: javascript_aws_lambda_sql_injection_pool_conn
       - variable: AWS_LAMBDA_EVENT
         detection: javascript_aws_lambda_sql_injection_event
 auxiliary:
@@ -64,12 +62,6 @@ auxiliary:
   - id: javascript_aws_lambda_sql_injection_mysql_pool
     patterns:
       - mysql.createPool()
-  - id: javascript_aws_lambda_sql_injection_pool_conn
-    patterns:
-      - pattern: $<MYSQL_POOL>.getConnection(function($<_>, $<!>$<CONN:required_parameter>) {})
-        filters:
-          - variable: MYSQL_POOL
-            detection: javascript_express_sql_injection_mysql_pool
 languages:
   - javascript
 trigger: presence

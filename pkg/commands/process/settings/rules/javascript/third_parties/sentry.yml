@@ -11,12 +11,10 @@ patterns:
           - captureEvent
           - captureException
   - pattern: |
-      $<SCOPE>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
+      $<SCOPE>.setExtra()
     filters:
       - variable: SCOPE
         detection: javascript_third_parties_sentry_scope
-      - variable: DATA_TYPE
-        detection: datatype
       - variable: METHOD
         values:
           - setUser
@@ -29,7 +27,7 @@ auxiliary:
         Sentry.configureScope(($<!>$<_>) => {})
 languages:
   - javascript
-trigger: local
+trigger: presence
 skip_data_types:
   - "Unique Identifier"
 metadata:
