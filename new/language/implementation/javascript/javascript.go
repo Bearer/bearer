@@ -5,7 +5,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/rs/zerolog/log"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
@@ -28,7 +27,7 @@ var (
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
-	patternMatchNodeContainerTypes  = []string{}
+	patternMatchNodeContainerTypes  = []string{"required_parameter"}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
@@ -112,14 +111,8 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 			// typescript: different type of identifier
 			if parent.Type() == "required_parameter" {
-				log.Debug().Msgf("%s", node.Debug())
-				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-					scope.Assign(node.Content(), node)
-				}
-			}
-
-			if parent.Type() == "formal_parameters" {
 				scope.Assign(node.Content(), node)
+
 			}
 		case "property_identifier":
 			parent := node.Parent()
