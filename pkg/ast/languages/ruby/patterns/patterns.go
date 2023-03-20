@@ -84,9 +84,13 @@ func CompileRule(
 	var variableConstraints []writerbase.Literal
 	var variableElements []writerbase.LiteralElement
 
+	seen := set.New[string]()
 	for _, variable := range inputParams.Variables {
-		souffleVariables := w.variableNodes[variable.Name]
+		if !seen.Add(variable.Name) {
+			continue
+		}
 
+		souffleVariables := w.variableNodes[variable.Name]
 		if len(souffleVariables) == 0 {
 			continue
 		}

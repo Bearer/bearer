@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/pkg/ast/languages/ruby"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/bearer/bearer/pkg/util/souffle/compiler"
 	filewriter "github.com/bearer/bearer/pkg/util/souffle/writer/file"
 	"golang.org/x/exp/slices"
@@ -37,12 +38,12 @@ func do() error {
 	writer := filewriter.New(ruleFile)
 
 	var rules []*settings.Rule
-	for _, rule := range config.BuiltInRules {
+	for _, rule := range maputil.ToSortedSlice(config.BuiltInRules) {
 		if slices.Contains(rule.Languages, "ruby") {
 			rules = append(rules, rule)
 		}
 	}
-	for _, rule := range config.Rules {
+	for _, rule := range maputil.ToSortedSlice(config.Rules) {
 		if slices.Contains(rule.Languages, "ruby") {
 			rules = append(rules, rule)
 		}
