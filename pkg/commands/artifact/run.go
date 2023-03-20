@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
+	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
 	"golang.org/x/xerrors"
@@ -23,6 +24,8 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/report/output/stats"
 	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
@@ -287,40 +290,66 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		outputhandler.StdErrLogger().Msg("Using cached data")
 	}
 
-	if config.Report.Format == flag.FormatEmpty {
-		if config.Report.Report == flag.ReportSecurity {
-			// for policy report, default report format is NOT JSON
-			reportPassed, err := reportoutput.ReportSecurity(report, logger, config)
-			if err != nil {
-				return false, fmt.Errorf("error generating report %w", err)
-			}
-			outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
-			return reportPassed, nil
+	if config.Report.Format == flag.FormatEmpty && config.Report.Report == flag.ReportPrivacy {
+		// for privacy report, default report format is CSV
+		err := reportoutput.ReportCSV(report, logger, config)
+		if err != nil {
+			return false, fmt.Errorf("error generating report %w", err)
 		}
-		if config.Report.Report == flag.ReportPrivacy {
-			// for privacy report, default report format is CSV
-			err := reportoutput.ReportCSV(report, logger, config)
-			if err != nil {
-				return false, fmt.Errorf("error generating report %w", err)
-			}
-			outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
-			return true, nil
+
+		outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
+		return true, nil
+	}
+
+	detections, lineOfCodeOutput, dataflow, err := reportoutput.GetOutput(report, config)
+	if err != nil {
+		return false, err
+	}
+
+	reportSupported, err := anySupportedLanguagesPresent(lineOfCodeOutput, config)
+	if err != nil {
+		return false, err
+	}
+
+	if !reportSupported {
+		var placeholderStr *strings.Builder
+		placeholderStr, err = getPlaceholderOutput(report, config, lineOfCodeOutput)
+		if err != nil {
+			return false, err
 		}
+
+		output.StdOutLogger().Msg(placeholderStr.String())
+		return true, nil
+	}
+
+	if config.Report.Format == flag.FormatEmpty && config.Report.Report == flag.ReportSecurity {
+		report := detections.(*security.Results)
+		reportStr, reportPassed := security.BuildReportString(config, report, lineOfCodeOutput, dataflow)
+
+		log.Error().Msgf("-----------------------")
+		output.StdOutLogger().Msg(reportStr.String())
+
+		return reportPassed, nil
 	}
 
 	switch config.Report.Format {
 	case flag.FormatEmpty, flag.FormatJSON:
 		// default report format for is JSON
-		err := reportoutput.ReportJSON(report, logger, config)
+		content, err := reportoutput.ReportJSON(detections, config)
 		if err != nil {
-			return false, fmt.Errorf("error generating report %w", err)
+			return false, fmt.Errorf("error generating report %s", err)
 		}
+
+		logger.Msg(*content)
 	case flag.FormatYAML:
-		err := reportoutput.ReportYAML(report, logger, config)
+		content, err := reportoutput.ReportYAML(detections, config)
 		if err != nil {
-			return false, fmt.Errorf("error generating report %w", err)
+			return false, fmt.Errorf("error generating report %s", err)
 		}
+
+		logger.Msg(*content)
 	}
+
 	outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
 	return true, nil
 }
@@ -331,4 +360,40 @@ func outputCachedDataWarning(cacheUsed bool, quietMode bool) {
 	}
 
 	outputhandler.StdErrLogger().Msg("Cached data used (no code changes detected). Unexpected? Use --force to force a re-scan.\n")
+}
+
+func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {
+	ruleLanguages := make(map[string]bool)
+	for _, rule := range config.Rules {
+		for _, language := range rule.Languages {
+			ruleLanguages[language] = true
+		}
+	}
+
+	foundLanguages := make(map[string]bool)
+	for _, language := range inputgocloc.Languages {
+		foundLanguages[strings.ToLower(language.Name)] = true
+	}
+
+	_, rubyPresent := foundLanguages["ruby"]
+	if rubyPresent {
+		return true, nil
+	}
+
+	_, javascriptPresent := foundLanguages["javascript"]
+	if javascriptPresent {
+		return true, nil
+	}
+
+	log.Debug().Msg("No language found for which rules are applicable")
+	return false, nil
+}
+
+func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
+	dataflowOutput, _, _, err := reportoutput.GetDataflow(report, config, true)
+	if err != nil {
+		return
+	}
+
+	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput, config)
 }

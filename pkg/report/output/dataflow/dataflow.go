@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/risks"
 	"github.com/bearer/bearer/pkg/util/output"
+	"github.com/hhatto/gocloc"
 
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 )
@@ -45,25 +46,25 @@ func contains(detections []detections.DetectionType, detection detections.Detect
 	return false
 }
 
-func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
+func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, *gocloc.Result, *DataFlow, error) {
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
 
 	extras, err := datatypes.NewExtras(input, config)
 	if err != nil {
-		return nil, err
+		return nil, nil, nil, err
 	}
 
 	customExtras, err := datatypes.NewCustomExtras(input, config)
 	if err != nil {
-		return nil, err
+		return nil, nil, nil, err
 	}
 
 	for _, detection := range input {
 		detectionMap, ok := detection.(map[string]interface{})
 		if !ok {
-			return nil, fmt.Errorf("found detection in report which is not object")
+			return nil, nil, nil, fmt.Errorf("found detection in report which is not object")
 		}
 
 		detectionTypeS, ok := detectionMap["type"].(string)
@@ -83,11 +84,11 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		buf := bytes.NewBuffer(nil)
 		err := json.NewEncoder(buf).Encode(detection)
 		if err != nil {
-			return nil, err
+			return nil, nil, nil, err
 		}
 		err = json.NewDecoder(buf).Decode(&castDetection)
 		if err != nil {
-			return nil, err
+			return nil, nil, nil, err
 		}
 
 		// add full path to filename
@@ -103,7 +104,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 			err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 		case detections.TypeCustomRisk:
 			risksHolder.AddRiskPresence(castDetection)
@@ -113,7 +114,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			if !ok {
 				customDetector, ok = config.BuiltInRules[ruleName]
 				if !ok {
-					return nil, fmt.Errorf("custom detector not in config %s", ruleName)
+					return nil, nil, nil, fmt.Errorf("custom detector not in config %s", ruleName)
 				}
 			}
 
@@ -123,7 +124,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			case customdetectors.TypeRisk:
 				err := risksHolder.AddSchema(castDetection)
 				if err != nil {
-					return nil, err
+					return nil, nil, nil, err
 				}
 			case customdetectors.TypeDatatype:
 				var detectionExtras *datatypes.ExtraFields
@@ -131,7 +132,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 				if err != nil {
-					return nil, err
+					return nil, nil, nil, err
 				}
 			}
 
@@ -141,35 +142,34 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		case detections.TypeDependencyClassified:
 			classifiedDetection, err := detectiondecoder.GetClassifiedDependency(detection)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 
 			classifiedDetection.Source.Filename = fullFilename
 			err = componentsHolder.AddDependency(classifiedDetection)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 		case detections.TypeInterfaceClassified:
 			classifiedDetection, err := detectiondecoder.GetClassifiedInterface(detection)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 
 			classifiedDetection.Source.Filename = fullFilename
 			err = componentsHolder.AddInterface(classifiedDetection)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 		case detections.TypeFrameworkClassified:
 			classifiedDetection, err := detectiondecoder.GetClassifiedFramework(detection)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
-
 			classifiedDetection.Source.Filename = fullFilename
 			err = componentsHolder.AddFramework(classifiedDetection)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 		}
 	}
@@ -182,7 +182,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		Risks:      risksHolder.ToDataFlow(),
 		Components: componentsHolder.ToDataFlow(),
 	}
-	return dataflow, nil
+	return dataflow, nil, nil, nil
 }
 
 func getFullFilename(path string, filename string) string {

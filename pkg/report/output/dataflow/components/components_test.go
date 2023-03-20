@@ -116,7 +116,7 @@ func TestDataflowComponents(t *testing.T) {
 			}
 			file.Close()
 
-			detections, err := detectors.GetOutput(globaltypes.Report{
+			detections, _, _, err := detectors.GetOutput(globaltypes.Report{
 				Path: file.Name(),
 			}, settings.Config{})
 			if err != nil {
@@ -124,7 +124,7 @@ func TestDataflowComponents(t *testing.T) {
 				return
 			}
 
-			dataflow, err := dataflow.GetOutput(detections, settings.Config{}, false)
+			dataflow, _, _, err := dataflow.GetOutput(detections, settings.Config{}, false)
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return

@@ -40,6 +40,8 @@ var orderedSeverityLevels = [5]string{
 	types.LevelWarning,
 }
 
+type Results = map[string][]Result
+
 type Input struct {
 	RuleId         string             `json:"rule_id" yaml:"rule_id"`
 	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
@@ -59,12 +61,12 @@ type Output struct {
 }
 
 type Result struct {
-	Rule             *RuleResultSummary `json:"rule" yaml:"rule"`
-	LineNumber       int                `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename         string             `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroups   []string           `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	ParentLineNumber int                `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent    string             `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
+	*RuleResultSummary
+	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent    string   `json:"snippet,omitempty" yaml:"snippet,omitempty"`
 
 	DetailedContext string `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
@@ -76,8 +78,8 @@ type RuleResultSummary struct {
 	DocumentationUrl string   `json:"documentation_url" yaml:"documentation_url"`
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]Result, error) {
-	summaryResults := make(map[string][]Result)
+func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Results, error) {
+	summaryResults := make(Results)
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
@@ -91,11 +93,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 		return nil, err
 	}
 
-	return summaryResults, nil
+	return &summaryResults, nil
 }
 
 func evaluateRules(
-	summaryResults map[string][]Result,
+	summaryResults Results,
 	rules map[string]*settings.Rule,
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
@@ -153,13 +155,13 @@ func evaluateRules(
 					DocumentationUrl: rule.DocumentationUrl,
 				}
 				result := Result{
-					Rule:             ruleSummary,
-					Filename:         output.Filename,
-					LineNumber:       output.LineNumber,
-					CategoryGroups:   output.CategoryGroups,
-					ParentLineNumber: output.ParentLineNumber,
-					ParentContent:    output.ParentContent,
-					DetailedContext:  output.DetailedContext,
+					RuleResultSummary: ruleSummary,
+					Filename:          output.Filename,
+					LineNumber:        output.LineNumber,
+					CategoryGroups:    output.CategoryGroups,
+					ParentLineNumber:  output.ParentLineNumber,
+					ParentContent:     output.ParentContent,
+					DetailedContext:   output.DetailedContext,
 				}
 
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
@@ -174,10 +176,7 @@ func evaluateRules(
 	return nil
 }
 
-func BuildReportString(config settings.Config, results map[string][]Result, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
-	rules := config.Rules
-	builtInRules := config.BuiltInRules
-
+func BuildReportString(config settings.Config, results *Results, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
 	withoutColor := config.Report.Output != ""
 	severityForFailure := config.Report.Severity
 	reportStr := &strings.Builder{}
@@ -190,7 +189,13 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		color.NoColor = true
 	}
 
-	rulesAvailableCount := writeRuleListToString(reportStr, rules, builtInRules, lineOfCodeOutput.Languages, config)
+	rulesAvailableCount := writeRuleListToString(
+		reportStr,
+		config.Rules,
+		config.BuiltInRules,
+		lineOfCodeOutput.Languages,
+		config,
+	)
 
 	failures := map[string]map[string]bool{
 		types.LevelCritical: make(map[string]bool),
@@ -205,14 +210,14 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		if !severityForFailure[severityLevel] {
 			continue
 		}
-		if severityLevel != types.LevelWarning && len(results[severityLevel]) != 0 {
+		if severityLevel != types.LevelWarning && len((*results)[severityLevel]) != 0 {
 			// fail the report if we have failures above the severity threshold
 			reportPassed = false
 		}
 
-		for _, failure := range results[severityLevel] {
-			for i := 0; i < len(failure.Rule.CWEIDs); i++ {
-				failures[severityLevel]["CWE-"+failure.Rule.CWEIDs[i]] = true
+		for _, failure := range (*results)[severityLevel] {
+			for i := 0; i < len(failure.CWEIDs); i++ {
+				failures[severityLevel]["CWE-"+failure.CWEIDs[i]] = true
 			}
 			writeFailureToString(reportStr, failure, severityLevel)
 		}
@@ -222,7 +227,7 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.com/guides/custom-rule\n")
 	}
 
-	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, results, rulesAvailableCount, failures, severityForFailure)
+	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, *results, rulesAvailableCount, failures, severityForFailure)
 
 	if noFailureSummary {
 		writeSuccessToString(rulesAvailableCount, reportStr)
@@ -288,7 +293,7 @@ func writeStatsToString(
 	lineOfCodeOutput *gocloc.Result,
 	dataflow *dataflow.DataFlow,
 ) {
-	statistics, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
+	statistics, _, _, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
 	if err != nil {
 		return
 	}
@@ -367,7 +372,7 @@ func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
 
 func checkAndWriteFailureSummaryToString(
 	reportStr *strings.Builder,
-	results map[string][]Result,
+	results Results,
 	ruleCount int,
 	failures map[string]map[string]bool,
 	severityForFailure map[string]bool,
@@ -429,22 +434,22 @@ func checkAndWriteFailureSummaryToString(
 func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(severity))
-	reportStr.WriteString(result.Rule.Description)
-	cweCount := len(result.Rule.CWEIDs)
+	reportStr.WriteString(result.Description)
+	cweCount := len(result.CWEIDs)
 	if cweCount > 0 {
 		var displayCWEList = []string{}
 		for i := 0; i < cweCount; i++ {
-			displayCWEList = append(displayCWEList, "CWE-"+result.Rule.CWEIDs[i])
+			displayCWEList = append(displayCWEList, "CWE-"+result.CWEIDs[i])
 		}
 		reportStr.WriteString(" [" + strings.Join(displayCWEList, ", ") + "]")
 	}
 	reportStr.WriteString("\n")
 
-	if result.Rule.DocumentationUrl != "" {
-		reportStr.WriteString(color.HiBlackString(result.Rule.DocumentationUrl + "\n"))
+	if result.DocumentationUrl != "" {
+		reportStr.WriteString(color.HiBlackString(result.DocumentationUrl + "\n"))
 	}
 
-	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.Rule.Id + "\n"))
+	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.Id + "\n"))
 	reportStr.WriteString("\n")
 	if result.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + result.DetailedContext + "\n")

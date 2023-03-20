@@ -1,7 +1,6 @@
 package integration_test
 
 import (
-	"bytes"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,7 +15,6 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/types"
-	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bradleyjkemp/cupaloy"
 )
 
@@ -114,16 +112,10 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to do scan %s", err)
 	}
 
-	outputBuffer := bytes.NewBuffer(nil)
-	logger := output.PlainLogger(outputBuffer)
-
-	err = reportoutput.ReportYAML(types.Report{
+	report, _ := reportoutput.ReportYAML(types.Report{
 		Path: detectorsReportPath,
-	}, logger, runner.config)
-	if err != nil {
-		t.Fatalf("failed to generate report yaml: %s", err)
-	}
+	}, runner.config)
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
-	cupaloyCopy.SnapshotT(t, outputBuffer.String())
+	cupaloyCopy.SnapshotT(t, report)
 }
