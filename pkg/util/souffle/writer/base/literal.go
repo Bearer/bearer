@@ -97,5 +97,5 @@ func (predicate NegativePredicate) String() string {
 }
 
 func (constraint Constraint) String() string {
-	return constraint.Left.String() + constraint.Operator + constraint.Right.String()
+	return fmt.Sprintf("%s %s %s", constraint.Left.String(), constraint.Operator, constraint.Right.String())
 }

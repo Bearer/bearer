@@ -157,7 +157,7 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 		return nil
 	}
 
-	nodeElement := writer.Identifier(writer.nodeVariableGenerator.Get(node))
+	nodeElement := writer.nodeVariable(node)
 
 	if node.Type() == "program" {
 		if node.ChildCount() != 1 {
@@ -179,10 +179,10 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 			)
 		} else {
 			childIndexVariable := writer.Identifier(fmt.Sprintf("tmp%d", writer.tempIdGenerator.Get()))
-			nodeAnchoredBefore, _ := writer.langImplementation.PatternIsAnchored(node)
+			nodeAnchoredBefore, nodeAnchoredAfter := writer.langImplementation.PatternIsAnchored(node)
 
-			// Anchored before
-			if node.IsNamed() && nodeAnchoredBefore && !slices.Contains(writer.inputParams.UnanchoredOffsets, int(node.StartByte())) {
+			// anonymous node, or anchored before
+			if !node.IsNamed() || (nodeAnchoredBefore && !slices.Contains(writer.inputParams.UnanchoredOffsets, int(node.StartByte()))) {
 				if writer.lastChildIndexVariable != nil {
 					writer.literals = append(
 						writer.literals,
@@ -196,7 +196,7 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 					)
 
 				}
-			} else {
+			} else { // Unanchored before
 				if writer.lastChildIndexVariable != nil {
 					writer.literals = append(
 						writer.literals,
@@ -210,10 +210,20 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 				}
 			}
 
-			// FIXME: end anchoring
-			// if node.IsNamed() && isLastChild && nodeAnchoredAfter && !slices.Contains(writer.inputParams.UnanchoredOffsets, int(node.EndByte())) {
-			// 	// Last anchored
-			// }
+			// Last anchored after
+			// FIXME: Maybe this should happen one level up?
+			if node.IsNamed() && nodeIsLastNamed(node) && nodeAnchoredAfter && !slices.Contains(writer.inputParams.UnanchoredOffsets, int(node.EndByte())) {
+				writer.literals = append(
+					writer.literals,
+					writer.NegativePredicate(
+						"AST_ParentChild",
+						writer.parentElement,
+						// FIXME: hack! need expressions (maybe just make it all text!)
+						writer.Identifier(fmt.Sprintf("%s + 1", childIndexVariable)),
+						writer.Any(),
+					),
+				)
+			}
 
 			writer.literals = append(
 				writer.literals,
@@ -298,7 +308,7 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 }
 
 func (writer *patternWriter) optionalEmpty(node *sitter.Node, fieldName string) writerbase.Literal {
-	nodeElement := writer.Identifier(writer.nodeVariableGenerator.Get(node))
+	nodeElement := writer.nodeVariable(node)
 	tempVariable := writer.tempVariable()
 
 	return writer.Disjunction(
@@ -313,6 +323,25 @@ func (writer *patternWriter) optionalEmpty(node *sitter.Node, fieldName string) 
 			),
 		),
 	)
+}
+
+func (writer *patternWriter) nodeVariable(node *sitter.Node) writerbase.Identifier {
+	return writer.Identifier(writer.nodeVariableGenerator.Get(node))
+}
+
+func nodeIsLastNamed(node *sitter.Node) bool {
+	for {
+		next := node.NextSibling()
+		if next == nil {
+			return true
+		}
+
+		if next.IsNamed() {
+			return false
+		}
+
+		node = next
+	}
 }
 
 type literalNode struct {
