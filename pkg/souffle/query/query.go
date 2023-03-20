@@ -23,6 +23,7 @@ type QueryContext struct {
 	cache              map[string]map[uint32][]*languagetypes.PatternQueryResult
 	nodeIdGenerator    *idgenerator.NodeIdGenerator
 	tree               *tree.Tree
+	patternVariables   map[string][]string
 	patternTypes       map[string]reflect.Type
 }
 
@@ -41,6 +42,7 @@ func NewContext(
 		cache:              make(map[string]map[uint32][]*languagetypes.PatternQueryResult),
 		nodeIdGenerator:    idgenerator.NewNodeIdGenerator(),
 		tree:               tree,
+		patternVariables:   patternVariables,
 		patternTypes:       makePatternTypes(patternVariables),
 	}
 
@@ -101,7 +103,9 @@ func (context *QueryContext) readMatches() error {
 		iterator := relation.NewIterator()
 		defer iterator.Close()
 
-		log.Error().Msgf("output count: %d", relation.Size())
+		// log.Error().Msgf("output count: %d", relation.Size())
+
+		variableNames := context.patternVariables[patternId]
 
 		for i := 0; iterator.HasNext(); i++ {
 			match := reflect.New(typ)
@@ -116,10 +120,7 @@ func (context *QueryContext) readMatches() error {
 			variables := make(map[string]*tree.Node)
 
 			for i := 1; i < typ.NumField(); i++ {
-				fieldType := typ.Field(i)
-				field := matchValue.Field(i)
-
-				variables[fieldType.Name] = context.resultNode(uint32(field.Uint()))
+				variables[variableNames[i-1]] = context.resultNode(uint32(matchValue.Field(i).Uint()))
 			}
 
 			context.put(matchNodeId, patternId, &languagetypes.PatternQueryResult{

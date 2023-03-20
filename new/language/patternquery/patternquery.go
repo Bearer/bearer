@@ -115,6 +115,12 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 		variables[query.paramToVariable[paramName]] = node
 	}
 
+	// FIXME: why is match not set?
+	if _, ok := treeResult["match"]; !ok {
+		treeResult["match"] = treeResult["root"]
+		// log.Error().Msgf("NO MATCH!: %#v", treeResult)
+	}
+
 	return &languagetypes.PatternQueryResult{
 		MatchNode: treeResult["match"],
 		Variables: variables,

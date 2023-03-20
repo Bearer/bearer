@@ -144,6 +144,7 @@ func (iterator *RelationIterator) GetNext() *Tuple {
 }
 
 func (iterator *RelationIterator) Close() {
+	runtime.SetFinalizer(iterator, nil)
 	C.souffle_relation_iterator_free(iterator.c)
 }
 

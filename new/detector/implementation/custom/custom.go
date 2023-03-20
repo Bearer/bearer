@@ -86,10 +86,18 @@ func (detector *customDetector) DetectAt(
 		}
 
 		for _, result := range results {
-			output.StdErrLogger().Msgf("found pattern %s at: %s", idgenerator.PatternId(detector.detectorType, i), result.MatchNode.Content())
+			if queryContext != nil {
+				output.StdErrLogger().Msgf("match node %s %#v", idgenerator.PatternId(detector.detectorType, i), result.MatchNode)
+				output.StdErrLogger().Msgf("match captures %#v", result)
+				output.StdErrLogger().Msgf("found pattern: %s", result.MatchNode.Content())
+			}
 			filtersMatch, datatypeDetections, err := matchAllFilters(result, evaluator, pattern.Filters)
 			if err != nil {
 				return nil, err
+			}
+
+			if queryContext != nil {
+				output.StdErrLogger().Msgf("filter match: %t", filtersMatch)
 			}
 
 			if !filtersMatch {
