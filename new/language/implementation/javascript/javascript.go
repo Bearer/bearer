@@ -14,7 +14,7 @@ import (
 
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	sitter "github.com/smacker/go-tree-sitter"
-	"github.com/smacker/go-tree-sitter/typescript/typescript"
+	"github.com/smacker/go-tree-sitter/typescript/tsx"
 )
 
 var (
@@ -45,7 +45,7 @@ func Get() implementation.Implementation {
 }
 
 func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {
-	return typescript.GetLanguage()
+	return tsx.GetLanguage()
 }
 
 func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
