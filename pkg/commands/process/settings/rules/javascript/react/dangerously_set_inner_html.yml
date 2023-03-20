@@ -1,3 +1,4 @@
+disabled: true
 patterns:
   - pattern: |
       { __html: $<DATA> }
