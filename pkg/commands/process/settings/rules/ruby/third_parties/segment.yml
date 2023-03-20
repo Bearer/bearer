@@ -17,7 +17,7 @@ auxiliary:
   - id: segment_init
     patterns:
       - |
-        Segment::Analytics.new()
+        Segment::Analytics.new($<...>$<_>$<...>)
 languages:
   - ruby
 skip_data_types:

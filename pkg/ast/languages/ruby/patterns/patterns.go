@@ -1,11 +1,14 @@
 package patterns
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
 	sitter "github.com/smacker/go-tree-sitter"
+	"golang.org/x/exp/slices"
 
+	"github.com/bearer/bearer/new/language/implementation"
 	builderinput "github.com/bearer/bearer/new/language/patternquery/builder/input"
 	querytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/pkg/ast/idgenerator"
@@ -45,21 +48,26 @@ func (generator *nodeVariableGenerator) getId(node *sitter.Node) uint32 {
 
 type patternWriter struct {
 	*filewriter.Writer
-	inputParams           *builderinput.InputParams
-	input                 []byte
-	literals              []writerbase.Literal
-	childIndex            uint32
-	rootElement           writerbase.LiteralElement
-	parentElement         writerbase.LiteralElement
-	nodeVariableGenerator *nodeVariableGenerator
-	tempIdGenerator       *idgenerator.Generator
-	handled               set.Set[*sitter.Node]
-	variableNodes         map[string][]writerbase.Identifier
+	inputParams            *builderinput.InputParams
+	input                  []byte
+	literals               []writerbase.Literal
+	childIndex             uint32
+	rootElement            writerbase.LiteralElement
+	parentElement          writerbase.LiteralElement
+	nodeVariableGenerator  *nodeVariableGenerator
+	tempIdGenerator        *idgenerator.Generator
+	handled                set.Set[*sitter.Node]
+	variableNodes          map[string][]writerbase.Identifier
+	langImplementation     implementation.Implementation
+	lastChildIndexVariable writerbase.LiteralElement
 }
+
+var Skipped = errors.New("skipped")
 
 func CompileRule(
 	walker *walker.Walker,
 	inputParams *builderinput.InputParams,
+	langImplementation implementation.Implementation,
 	patternId string,
 	input []byte,
 	rootNode *sitter.Node,
@@ -73,7 +81,15 @@ func CompileRule(
 		tempIdGenerator:       idgenerator.NewGenerator(),
 		handled:               set.New[*sitter.Node](),
 		variableNodes:         make(map[string][]writerbase.Identifier),
+		langImplementation:    langImplementation,
 	}
+
+	matchNode := findMatchNode(
+		walker,
+		inputParams.MatchNodeOffset,
+		langImplementation.PatternMatchNodeContainerTypes(),
+		rootNode,
+	)
 
 	err := walker.Walk(rootNode, w.visitNode)
 	if err != nil {
@@ -105,10 +121,10 @@ func CompileRule(
 	}
 
 	if len(w.literals) > 20 {
-		log.Printf("rule too large, skipping")
-		return nil
+		log.Printf("rule too large %d, skipping %s", len(w.literals), patternId)
+		return Skipped
 	}
-	log.Printf("#literals: %d", len(w.literals))
+	// log.Printf("#literals: %d", len(w.literals))
 
 	writer.WriteRelation(
 		fmt.Sprintf("Rule_Match_%s", patternId),
@@ -119,11 +135,18 @@ func CompileRule(
 	if err := writer.WriteRule(
 		[]writerbase.Predicate{writer.Predicate(
 			fmt.Sprintf("Rule_Match_%s", patternId),
-			append([]writerbase.LiteralElement{w.rootElement}, variableElements...)...,
+			append(
+				[]writerbase.LiteralElement{w.Identifier(w.nodeVariableGenerator.Get(matchNode))},
+				variableElements...,
+			)...,
 		)},
 		append(w.literals, variableConstraints...),
 	); err != nil {
 		return err
+	}
+
+	if patternId == "blowfish_init_0" {
+		log.Printf("RULE: %s", matchNode.String())
 	}
 
 	return nil
@@ -155,12 +178,50 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 				writer.Predicate("AST_NodeField", writer.parentElement, nodeElement, writer.Symbol(fname)),
 			)
 		} else {
+			childIndexVariable := writer.Identifier(fmt.Sprintf("tmp%d", writer.tempIdGenerator.Get()))
+			nodeAnchoredBefore, _ := writer.langImplementation.PatternIsAnchored(node)
+
+			// Anchored before
+			if node.IsNamed() && nodeAnchoredBefore && !slices.Contains(writer.inputParams.UnanchoredOffsets, int(node.StartByte())) {
+				if writer.lastChildIndexVariable != nil {
+					writer.literals = append(
+						writer.literals,
+						// FIXME: constraint hack!
+						writer.Constraint(childIndexVariable, "= 1+", writer.lastChildIndexVariable),
+					)
+				} else {
+					writer.literals = append(
+						writer.literals,
+						writer.Constraint(childIndexVariable, "=", writer.Unsigned(writer.childIndex)),
+					)
+
+				}
+			} else {
+				if writer.lastChildIndexVariable != nil {
+					writer.literals = append(
+						writer.literals,
+						writer.Constraint(childIndexVariable, ">", writer.lastChildIndexVariable),
+					)
+				} else {
+					writer.literals = append(
+						writer.literals,
+						writer.Constraint(childIndexVariable, ">=", writer.Unsigned(0)),
+					)
+				}
+			}
+
+			// FIXME: end anchoring
+			// if node.IsNamed() && isLastChild && nodeAnchoredAfter && !slices.Contains(writer.inputParams.UnanchoredOffsets, int(node.EndByte())) {
+			// 	// Last anchored
+			// }
+
 			writer.literals = append(
 				writer.literals,
-				writer.Predicate("AST_ParentChild", writer.parentElement, writer.Unsigned(writer.childIndex), nodeElement),
+				writer.Predicate("AST_ParentChild", writer.parentElement, childIndexVariable, nodeElement),
 			)
 
 			writer.childIndex++
+			writer.lastChildIndexVariable = childIndexVariable
 		}
 	}
 
@@ -227,6 +288,7 @@ func (writer *patternWriter) visitNode(node *sitter.Node, visitChildren func() e
 	oldParentElement := writer.parentElement
 	oldChildIndex := writer.childIndex
 	writer.childIndex = 0
+	writer.lastChildIndexVariable = nil
 	writer.parentElement = nodeElement
 	err := visitChildren()
 	writer.childIndex = oldChildIndex
@@ -292,4 +354,30 @@ func (writer *patternWriter) getVariableFor(node *sitter.Node) *querytypes.Varia
 	}
 
 	return nil
+}
+
+func findMatchNode(
+	walker *walker.Walker,
+	offset int,
+	containerTypes []string,
+	rootNode *sitter.Node,
+) (matchNode *sitter.Node) {
+	err := walker.Walk(rootNode, func(node *sitter.Node, visitChildren func() error) error {
+		// FIXME: do this generically!
+		if node.Type() != "program" {
+			if node.StartByte() == uint32(offset) && !slices.Contains(containerTypes, node.Type()) {
+				matchNode = node
+				return nil
+			}
+		}
+
+		return visitChildren()
+	})
+
+	// walk itself shouldn't trigger an error, and we aren't creating any
+	if err != nil {
+		panic(err)
+	}
+
+	return
 }

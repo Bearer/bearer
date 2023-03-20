@@ -220,7 +220,7 @@ func (*javascriptImplementation) PatternLeafContentTypes() []string {
 	}
 }
 
-func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
+func (implementation *javascriptImplementation) PatternIsAnchored(node *sitter.Node) (bool, bool) {
 	if node.Type() == "pair" {
 		return false, false
 	}

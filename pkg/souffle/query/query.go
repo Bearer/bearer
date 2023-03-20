@@ -61,7 +61,7 @@ func (context *QueryContext) MatchAt(patternId string, node *tree.Node) []*langu
 }
 
 func (context *QueryContext) put(nodeId uint32, patternId string, result *languagetypes.PatternQueryResult) {
-	log.Error().Msgf("putting result for %d: %#v", patternId, result)
+	// log.Error().Msgf("putting result for %d: %#v", patternId, result)
 
 	nodeCache, ruleExists := context.cache[patternId]
 	if !ruleExists {

@@ -3,6 +3,7 @@ package ruby
 import (
 	"context"
 	"fmt"
+	"log"
 
 	sitter "github.com/smacker/go-tree-sitter"
 	sitterruby "github.com/smacker/go-tree-sitter/ruby"
@@ -53,13 +54,22 @@ func (language *Language) WriteSourceFacts(
 func (language *Language) WriteRules(rules []*settings.Rule, writer *filewriter.Writer) error {
 	for _, rule := range rules {
 		writer.WriteComment(fmt.Sprintf("rule %s", rule.Id))
+		ruleSkipped := false
 
 		for patternIndex, pattern := range rule.Patterns {
 			patternId := idgenerator.PatternId(rule.Id, patternIndex)
 
 			if err := language.WriteRule(patternId, pattern.Pattern, writer); err != nil {
+				if err == patterns.Skipped {
+					ruleSkipped = true
+					continue
+				}
 				return fmt.Errorf("pattern error (%s)': %w", pattern.Pattern, err)
 			}
+		}
+
+		if !ruleSkipped {
+			log.Printf("full rule available: %s", rule.Id)
 		}
 	}
 
@@ -82,11 +92,15 @@ func (language *Language) WriteRule(patternId string, input string, writer *file
 	if err := patterns.CompileRule(
 		language.walker,
 		inputParams,
+		language.langImplementation,
 		patternId,
 		processedInputBytes,
 		rootNode,
 		writer,
 	); err != nil {
+		if err == patterns.Skipped {
+			return err
+		}
 		return fmt.Errorf("error compiling rule: %w", err)
 	}
 

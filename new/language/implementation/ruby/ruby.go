@@ -169,7 +169,7 @@ func (*rubyImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
-func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
+func (*rubyImplementation) PatternIsAnchored(node *sitter.Node) (bool, bool) {
 	if slices.Contains(unanchoredPatternNodeTypes, node.Type()) {
 		return false, false
 	}
@@ -190,7 +190,7 @@ func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 
 	// Block body
 	if parent.Type() == "do_block" || parent.Type() == "block" {
-		if node.Equal(parent.ChildByFieldName("parameters")) {
+		if parameters := parent.ChildByFieldName("parameters"); parameters != nil && node.Equal(parameters) {
 			return true, false
 		}
 
@@ -199,7 +199,9 @@ func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 
 	// Method body
 	if parent.Type() == "method" {
-		if node.Equal(parent.ChildByFieldName("name")) || node.Equal(parent.ChildByFieldName("parameters")) {
+		name := parent.ChildByFieldName("name")
+		parameters := parent.ChildByFieldName("parameters")
+		if (name != nil && node.Equal(name)) || (parameters != nil && node.Equal(parameters)) {
 			return true, false
 		}
 

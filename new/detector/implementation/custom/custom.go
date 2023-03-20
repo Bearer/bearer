@@ -10,7 +10,6 @@ import (
 	"github.com/bearer/bearer/pkg/ast/idgenerator"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	soufflequery "github.com/bearer/bearer/pkg/souffle/query"
-	"github.com/bearer/bearer/pkg/util/output"
 )
 
 type Data struct {
@@ -87,9 +86,9 @@ func (detector *customDetector) DetectAt(
 
 		for _, result := range results {
 			if queryContext != nil {
-				output.StdErrLogger().Msgf("match node %s %#v", idgenerator.PatternId(detector.detectorType, i), result.MatchNode)
-				output.StdErrLogger().Msgf("match captures %#v", result)
-				output.StdErrLogger().Msgf("found pattern: %s", result.MatchNode.Content())
+				// output.StdErrLogger().Msgf("match node %s %#v", idgenerator.PatternId(detector.detectorType, i), result.MatchNode)
+				// output.StdErrLogger().Msgf("match captures %#v", result)
+				// output.StdErrLogger().Msgf("found pattern: %s", result.MatchNode.Content())
 			}
 			filtersMatch, datatypeDetections, err := matchAllFilters(result, evaluator, pattern.Filters)
 			if err != nil {
@@ -97,7 +96,7 @@ func (detector *customDetector) DetectAt(
 			}
 
 			if queryContext != nil {
-				output.StdErrLogger().Msgf("filter match: %t", filtersMatch)
+				// output.StdErrLogger().Msgf("filter match: %t", filtersMatch)
 			}
 
 			if !filtersMatch {

@@ -119,7 +119,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		)
 	}
 
-	nodeAnchoredBefore, nodeAnchoredAfter := builder.langImplementation.PatternIsAnchored(node)
+	nodeAnchoredBefore, nodeAnchoredAfter := builder.langImplementation.PatternIsAnchored(node.SitterNode())
 	anchored := !isRoot && node.IsNamed() && nodeAnchoredBefore
 
 	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.StartByte()) {
