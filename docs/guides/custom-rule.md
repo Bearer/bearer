@@ -241,22 +241,21 @@ metadata:
 If you have created a custom rule before v1.1 you will need to make the some small changes
 
 #### Local, Present
-If you use `trigger: local` or `trigger: present` you can simply remove the trigger attribute and your rule should work as before
+If you use `trigger: local` or `trigger: present` you can simply remove the trigger attribute and your rule should work as before.
 
 #### Absence
-If you have `trigger: absence`
-Replace it with the following syntax, and remove `trigger_rule_on_presence_of`
+If you use `trigger: absence`, replace it with the following syntax and remove `trigger_rule_on_presence_of` from your existing rule.
 
-```
+```yaml
 trigger:
   match_on: absence
   required_detection: # whatever value you had for `trigger_rule_on_presence_of`
 ```
 
 #### Global
-for `trigger: global` replace it with the following syntax
+For `trigger: global` replace it with the following syntax.
 
-```
+```yaml
 trigger:
   data_types_required: true
 ```
