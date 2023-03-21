@@ -11,12 +11,16 @@ var (
 	anonymousPatternNodeParentTypes = []string{"binary"}
 
 	leafNodeTypes = []string{
+		// identifiers
 		"identifier",
 		"constant",
+		// values
 		"integer",
 		"float",
 		"complex",
 		"rational",
+		"boolean",
+		"nil",
 		"string_content",
 		"simple_symbol",
 		"hash_key_symbol",

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/new/language/implementation"
@@ -94,8 +93,8 @@ func (context *QueryContext) readMatches() error {
 		// FIXME: Define dynamic names in a common place
 		relation, err := context.souffle.Relation(fmt.Sprintf("Rule_Match_%s", patternId))
 		if err != nil {
-			// FIXME: need to filter rules by ones we actually compiled
-			log.Error().Msgf("pattern relation error: %w", err)
+			// FIXME: need to support all rules
+			// log.Error().Msgf("pattern relation error: %w", err)
 			continue
 			// return err
 		}

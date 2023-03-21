@@ -22,7 +22,7 @@ func (writer *debugLogWriter) Write(data []byte) (int, error) {
 
 func Compile(inputFilename, outputFilename string) error {
 	log.Printf("running souffle")
-	cmd := exec.Command("souffle", "--verbose", "-g", outputFilename, inputFilename)
+	cmd := exec.Command("souffle", "-g", outputFilename, inputFilename)
 
 	logWriter := &debugLogWriter{}
 	cmd.Stderr = logWriter
