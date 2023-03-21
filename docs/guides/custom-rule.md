@@ -236,6 +236,30 @@ metadata:
   description: "This is an example rule created based on the tutorial."
 ```
 
+## Syntax updates
+### v1.1 Trigger changes
+If you have created a custom rule before v1.1 you will need to make the some small changes
+
+#### Local, Present
+If you use `trigger: local` or `trigger: present` you can simply remove the trigger attribute and your rule should work as before.
+
+#### Absence
+If you use `trigger: absence`, replace it with the following syntax and remove `trigger_rule_on_presence_of` from your existing rule.
+
+```yaml
+trigger:
+  match_on: absence
+  required_detection: # whatever value you had for `trigger_rule_on_presence_of`
+```
+
+#### Global
+For `trigger: global` replace it with the following syntax.
+
+```yaml
+trigger:
+  data_types_required: true
+```
+
 ## Need some help?
 
 If you’re running into any problems or need some help, check out the [Discord Community]({{meta.links.discord}}). You can also [create a new issue]({{meta.links.issues}}) on GitHub.
