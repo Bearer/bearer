@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/util/stringutil"
-	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -14,6 +13,7 @@ import (
 
 type propertyDetector struct {
 	types.DetectorBase
+
 	pairQuery         *tree.Query
 	functionNameQuery *tree.Query
 	methodNameQuery   *tree.Query
@@ -99,8 +99,6 @@ func (detector *propertyDetector) getMethod(
 		return nil, err
 	}
 
-	log.Debug().Msgf("")
-
 	// fetch all arguments from constructor
 	if result["name"].Content() == "constructor" {
 		properties := []interface{}{}
@@ -109,7 +107,8 @@ func (detector *propertyDetector) getMethod(
 
 		for i := 0; i < params.ChildCount(); i++ {
 			param := params.Child(i)
-			if param.Type() != "identifier" {
+
+			if !(param.Type() == "required_parameter" && param.Child(0) != nil && param.Child(0).Type() == "identifier") {
 				continue
 			}
 

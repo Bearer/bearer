@@ -64,15 +64,13 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling parent pair query: %s", err)
 	}
 
-	// class User
-	// end
-	classNameQuery, err := lang.CompileQuery(`(class_declaration name: (identifier) @name) @root`)
+	// new User()
+	constructorQuery, err := lang.CompileQuery(`(new_expression constructor: (identifier) @name) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling class name query: %s", err)
 	}
 
-	// new User()
-	constructorQuery, err := lang.CompileQuery(`(new_expression constructor: (identifier) @name) @root`)
+	classNameQuery, err := lang.CompileQuery(`(class_declaration name: (type_identifier) @name) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling class name query: %s", err)
 	}
@@ -95,8 +93,8 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		variableDeclarationQuery:  variableDeclarationQuery,
 		objectDeconstructionQuery: objectDeconstructionQuery,
 		parentPairQuery:           parentPairQuery,
-		classNameQuery:            classNameQuery,
 		constructorQuery:          constructorQuery,
+		classNameQuery:            classNameQuery,
 		memberExpressionQuery:     memberExpressionQuery,
 		subscriptExpressionQuery:  subscriptExpressionQuery,
 	}, nil

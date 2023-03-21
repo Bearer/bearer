@@ -1,12 +1,10 @@
 package javascript
 
 import (
-	"errors"
 	"fmt"
 	"regexp"
 	"strings"
 
-	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
@@ -16,6 +14,7 @@ import (
 
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	sitter "github.com/smacker/go-tree-sitter"
+	"github.com/smacker/go-tree-sitter/typescript/tsx"
 )
 
 var (
@@ -28,7 +27,7 @@ var (
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
-	patternMatchNodeContainerTypes  = []string{}
+	patternMatchNodeContainerTypes  = []string{"required_parameter"}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
@@ -46,7 +45,7 @@ func Get() implementation.Implementation {
 }
 
 func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {
-	return javascript.GetLanguage()
+	return tsx.GetLanguage()
 }
 
 func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
@@ -110,8 +109,10 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				}
 			}
 
-			if parent.Type() == "formal_parameters" {
+			// typescript: different type of identifier
+			if parent.Type() == "required_parameter" {
 				scope.Assign(node.Content(), node)
+
 			}
 		case "property_identifier":
 			parent := node.Parent()
@@ -166,23 +167,6 @@ func (implementation *javascriptImplementation) ExtractPatternVariables(input st
 	return replaced, params, nil
 }
 
-// TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) ExtractPatternMatchNode(input string) (string, int, error) {
-	inputBytes := []byte(input)
-	matches := matchNodeRegex.FindAllIndex(inputBytes, -1)
-
-	if len(matches) == 0 {
-		return input, 0, nil
-	}
-
-	if len(matches) > 1 {
-		return "", 0, errors.New("pattern must only contain a single match node")
-	}
-
-	match := matches[0]
-	return string(inputBytes[0:match[0]]) + string(inputBytes[match[1]:]), match[0], nil
-}
-
 func produceDummyValue(i int, nodeType string) string {
 	return "CurioVar" + fmt.Sprint(i)
 }
@@ -202,13 +186,12 @@ func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(inpu
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
-// TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
-	return false
-}
-
 func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
+}
+
+func (javascriptImplementation *javascriptImplementation) ShouldSkipNode(node *tree.Node) bool {
+	return node.Type() == "required_parameter"
 }
 
 func (*javascriptImplementation) PatternLeafContentTypes() []string {
@@ -216,7 +199,7 @@ func (*javascriptImplementation) PatternLeafContentTypes() []string {
 		// identifiers
 		"identifier", "property_identifier", "shorthand_property_identifier",
 		// datatypes/literals
-		"template_string", "string", "number", "null", "true", "false",
+		"template_string", "string_fragment", "number", "null", "true", "false",
 	}
 }
 

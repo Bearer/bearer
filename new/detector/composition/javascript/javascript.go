@@ -9,7 +9,6 @@ import (
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/composition/types"
 	"github.com/bearer/bearer/new/detector/evaluator"
@@ -166,8 +165,7 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detector
 }
 
 func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
-	if file.Language != "JavaScript" {
-		log.Debug().Msgf("file language is %s", file.Language)
+	if file.Language != "JavaScript" && file.Language != "TypeScript" && file.Language != "TSX" {
 		return nil, nil
 	}
 

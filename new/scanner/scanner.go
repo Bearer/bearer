@@ -3,8 +3,8 @@ package scanner
 import (
 	"fmt"
 
-	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition"
+	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition/ruby"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/pkg/classification"
