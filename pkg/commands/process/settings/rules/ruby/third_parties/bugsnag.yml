@@ -26,7 +26,6 @@ patterns:
       end
 languages:
   - ruby
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

@@ -87,7 +87,6 @@ auxiliary:
       - | # AWS lambda
         def $<_>($<!>event:, context:)
         end
-trigger: presence
 severity: high
 metadata:
   description: "Use of reflection influenced by user input detected."

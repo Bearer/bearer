@@ -106,8 +106,8 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 
 	presenceRules := map[string]bool{}
 	for _, rule := range jsRules {
-		if rule.TriggerRuleOnPresenceOf != "" {
-			presenceRules[rule.TriggerRuleOnPresenceOf] = true
+		if rule.Trigger.RequiredDetection != nil {
+			presenceRules[*rule.Trigger.RequiredDetection] = true
 		}
 	}
 

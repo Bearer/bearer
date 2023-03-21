@@ -18,11 +18,14 @@ To better understand the structure of a rule file, let’s look at each key:
 
 - `patterns`: See the section below for the Pattern Syntax.
 - `languages`: An array of the languages the rule applies to. Available values are: `ruby`, `javascript`
-- `trigger`: Defines when the rule should raise a failure. There are four trigger types:
-  - `local`: Use this trigger when your rule directly relies on data type detections in the pattern. Some examples are sending data to a logger, or making an HTTP request that includes sensitive data.
-  - `global`: Some rules don’t match code with a data type directly, but you want them to trigger if Bearer finds any sensitive data types in the project. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
-  - `presence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection but on the presence of a pattern. Examples include best practices such as configuration settings like forcing SSL communication.
-  - `absence`: Use this trigger when your rule isn’t related to a [data type](/reference/datatypes) detection but on the absence of a pattern (if we have been able to confirm the presence of an auxiliary pattern). Examples include best practices such as missing configuration like forcing SSL communication.
+- `trigger`: Defines under which conditions the rule should raise a failure. Optional.
+  - `match_on`: Refers to the rule's pattern matches.
+    - `presence`: Triggers if the rule's pattern is detected. (Default)
+    - `absence`: Rule triggers on the absence of a pattern, but the presence of a `required_detection`. Examples include best practices such as missing configuration like forcing SSL communication. Note: rules that match on `absence` need a `required_detection` to be set.
+  - `required_detection`:  Used with the `match_on: absence` trigger. Indicates which rule is required to activate the failure on the absence of the main rule.
+  - `data_types_required`: Sometimes we may want a rule to trigger only for applications that process sensitive data. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
+    - `false`: Default. Rule triggers whether or not any data types have been detected in the application.
+    - `true`: Rule only triggers if at least one data type is detected in the application.
 - `severity`: This sets the lowest severity level of the rule, by default at `low`. The severity level can automatically increase based on the data type categories (PHI, PD, PDS, PII) detected depending on the rule `trigger` type. A severity level of `warning`, however, will never increase. Bearer groups rule failures by severity, and you can configure the summary report to only fail on specific severity thresholds. Severity is set for each data type group, each of which takes a severity level of `warning`, `low`, `medium`, `high`, or `critical`. A severity level of `warning` won’t cause CI to fail.
 - `metadata`: Rule metadata is used for output to the summary report, and documentation for the internal rules.
   - `id`: A unique identifier. Internal rules are named `lang_framework_rule_name`. For rules targeting the language core, `lang` is used instead of a framework name. For example `ruby_lang_logger` and `ruby_rails_logger`. For custom rules, you may consider appending your org name.
@@ -34,7 +37,6 @@ To better understand the structure of a rule file, let’s look at each key:
 - `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) rule for examples. (Optional)
 - `skip_data_types`: Allows you to prevent the specified data types from triggering this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 - `only_data_types`: Allows you to limit the specified data types that trigger this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
-- `trigger_rule_on_presence_of`: Used with the `absence` trigger. Indicates which rule is required to activate the failure on the absence of the main rule.
 
 
 ## Patterns
@@ -228,11 +230,34 @@ patterns:
       # YOUR CODE HERE
 languages:
   - ruby
-trigger: local
 severity: high
 metadata:
   id: custom_rule_name
   description: "This is an example rule created based on the tutorial."
+```
+
+## Syntax updates
+### v1.1 Trigger changes
+If you have created a custom rule before v1.1 you will need to make the some small changes
+
+#### Local, Present
+If you use `trigger: local` or `trigger: present` you can simply remove the trigger attribute and your rule should work as before.
+
+#### Absence
+If you use `trigger: absence`, replace it with the following syntax and remove `trigger_rule_on_presence_of` from your existing rule.
+
+```yaml
+trigger:
+  match_on: absence
+  required_detection: # whatever value you had for `trigger_rule_on_presence_of`
+```
+
+#### Global
+For `trigger: global` replace it with the following syntax.
+
+```yaml
+trigger:
+  data_types_required: true
 ```
 
 ## Need some help?

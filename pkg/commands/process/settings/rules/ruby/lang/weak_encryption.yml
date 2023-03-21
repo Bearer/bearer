@@ -88,7 +88,6 @@ auxiliary:
     patterns:
       - |
         Crypt::Blowfish.new()
-trigger: presence
 metadata:
   description: "Weak encryption library usage detected."
   remediation_message: |

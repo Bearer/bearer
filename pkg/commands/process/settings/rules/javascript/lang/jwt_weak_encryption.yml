@@ -6,7 +6,6 @@ patterns:
       })
 languages:
   - javascript
-trigger: presence
 metadata:
   description: "Weak jwt encryption deceted"
   remediation_message: |

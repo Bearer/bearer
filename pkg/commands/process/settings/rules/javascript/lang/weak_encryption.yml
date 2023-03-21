@@ -45,7 +45,6 @@ auxiliary:
             values:
               - '"md5"'
               - '"sha1"'
-trigger: local
 skip_data_types:
   - "Unique Identifier"
   - "Passwords" # see javascript_weak_password_encryption

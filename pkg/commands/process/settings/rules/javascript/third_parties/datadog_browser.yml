@@ -9,7 +9,6 @@ patterns:
       })
 languages:
   - javascript
-trigger: presence
 metadata:
   description: "Sensitive data sent to Datadog detected."
   remediation_message: |

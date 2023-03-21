@@ -19,7 +19,6 @@ auxiliary:
     patterns:
       - |
         new StatsD($<...>)
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

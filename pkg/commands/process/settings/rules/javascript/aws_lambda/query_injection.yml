@@ -34,7 +34,6 @@ auxiliary:
               detection: javascript_aws_lambda_query_injection_hash
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "Raw user input in data store query detected."

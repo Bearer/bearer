@@ -37,7 +37,6 @@ auxiliary:
         end
 languages:
   - ruby
-trigger: presence
 severity: high
 metadata:
   description: "Potential command injection with user input detected."

@@ -42,7 +42,6 @@ auxiliary:
     patterns:
       - |
         Rollbar.scope()
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

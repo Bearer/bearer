@@ -26,7 +26,6 @@ auxiliary:
       - req.headers
 languages:
   - javascript
-trigger: presence
 metadata:
   description: "User Interface (UI) redress vulnerability (clickjacking) detected."
   remediation_message: |

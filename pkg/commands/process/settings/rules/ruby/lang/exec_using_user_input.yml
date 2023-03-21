@@ -110,7 +110,6 @@ auxiliary:
           - variable: SHELL
             detection: ruby_lang_exec_using_user_input_shell
       - Shell::CommandProcessor.new$<...>
-trigger: presence
 severity: high
 metadata:
   description: "Execution of OS command formed with user input detected."

@@ -15,7 +15,7 @@ medium:
         cwe_ids:
             - "319"
         id: ruby_lang_http_post_insecure_with_data
-        description: Sensitive data sent through an an unsecure HTTP communication detected.
+        description: Sensitive data sent through an unsecure HTTP communication detected.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_post_insecure_with_data
       line_number: 1
       filename: insecure_post_form_with_datatype.rb

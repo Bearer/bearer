@@ -82,7 +82,6 @@ auxiliary:
             detection: javascript_express_sql_injection_mysql_pool
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "SQL injection vulnerability detected."

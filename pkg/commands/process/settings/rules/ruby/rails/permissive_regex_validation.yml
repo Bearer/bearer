@@ -17,7 +17,6 @@ patterns:
       - not:
           variable: REGEX
           regex: \A([/'"]|%r.)\\A.*\\[zZ].\z
-trigger: presence
 metadata:
   description: "Validation using permissive regular expression detected."
   remediation_message: |

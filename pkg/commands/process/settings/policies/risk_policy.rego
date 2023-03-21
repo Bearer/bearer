@@ -8,31 +8,57 @@ contains(arr, elem) if {
 	arr[_] = elem
 }
 
-local_failures contains detector if {
-	input.rule.trigger == "local"
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-}
-
+# - presence of pattern & data types required
 global_failures contains detector if {
-	input.rule.trigger == "global"
+	input.rule.trigger.match_on == "presence"
+	input.rule.trigger.data_types_required
+
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
 
 	some data_type in data.bearer.common.global_data_types
 }
 
+# - presence of pattern & data types not required
 presence_failures contains detector if {
-	input.rule.trigger == "presence"
+	input.rule.trigger.match_on == "presence"
+	not input.rule.trigger.data_types_required
+
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
 }
 
+# - data types detected within pattern ($<DATA_TYPE>)
+local_data_types contains data_type if {
+	not input.rule.skip_data_types
+	not input.rule.only_data_types
+
+	some detector in presence_failures
+	data_type = detector.data_types[_]
+}
+
+local_data_types contains data_type if {
+	not input.rule.only_data_types
+
+	some detector in presence_failures
+	data_type = detector.data_types[_]
+	not contains(input.rule.skip_data_types, data_type.name)
+}
+
+local_data_types contains data_type if {
+	not input.rule.skip_data_types
+
+	some detector in presence_failures
+	data_type = detector.data_types[_]
+	contains(input.rule.only_data_types, data_type.name)
+}
+
+# Build policy failures
 policy_failure contains item if {
-	input.rule.trigger == "absence"
+	input.rule.trigger.match_on == "absence"
 	some detector in input.dataflow.risks
 
-	detector.detector_id == input.rule.trigger_rule_on_presence_of
+	detector.detector_id == input.rule.trigger.required_detection
 	some init_location in detector.locations
 
 	x := {other | other := input.dataflow.risks[_]; other.detector_id == input.rule.id}
@@ -42,10 +68,10 @@ policy_failure contains item if {
 }
 
 policy_failure contains item if {
-	input.rule.trigger == "absence"
+	input.rule.trigger.match_on == "absence"
 	some detector in input.dataflow.risks
 
-	detector.detector_id == input.rule.trigger_rule_on_presence_of
+	detector.detector_id == input.rule.trigger.required_detection
 
 	some init_location in detector.locations
 	some other_detector in input.dataflow.risks
@@ -57,32 +83,6 @@ policy_failure contains item if {
 
 	item := data.bearer.common.build_item(init_location)
 }
-
-local_data_types contains data_type if {
-	not input.rule.skip_data_types
-	not input.rule.only_data_types
-
-	some detector in local_failures
-	data_type = detector.data_types[_]
-}
-
-local_data_types contains data_type if {
-	not input.rule.only_data_types
-
-	some detector in local_failures
-	data_type = detector.data_types[_]
-	not contains(input.rule.skip_data_types, data_type.name)
-}
-
-local_data_types contains data_type if {
-	not input.rule.skip_data_types
-
-	some detector in local_failures
-	data_type = detector.data_types[_]
-	contains(input.rule.only_data_types, data_type.name)
-}
-
-# Build policy failures
 
 policy_failure contains item if {
 	some data_type in local_data_types
@@ -100,14 +100,14 @@ policy_failure contains item if {
 
 policy_failure contains item if {
 	some detector in presence_failures
+	count(local_data_types) == 0 # detector item already included (through local_data_types)
 
-	# Add link to global datatypes here
 	location = detector.locations[_]
 	item := data.bearer.common.build_item(location)
 }
 
 policy_failure contains item if {
-	input.rule.trigger == "stored_data_types"
+	input.rule.trigger.match_on == "stored_data_types"
 
 	contains(input.rule.languages, input.dataflow.data_types[_].detectors[_].name)
 	data_type = input.dataflow.data_types[_]
@@ -133,8 +133,8 @@ policy_failure contains item if {
 
 # used by inventory report
 local_rule_failure contains item if {
-	some detector in local_failures
-	data_type = detector.data_types[_]
+	some detector in presence_failures
+	some data_type in detector.data_types
 
 	location = data_type.locations[_]
 	item := {

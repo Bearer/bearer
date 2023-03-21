@@ -20,7 +20,6 @@ auxiliary:
         Segment::Analytics.new()
 languages:
   - ruby
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

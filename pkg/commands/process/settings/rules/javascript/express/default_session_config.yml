@@ -12,7 +12,6 @@ auxiliary:
     patterns:
     - |
       { name: $<_> }
-trigger: presence
 severity: medium
 metadata:
   description: "Session cookie with default config detected."

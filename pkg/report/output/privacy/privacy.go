@@ -141,10 +141,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 	thirdPartyRulesCounter := make(map[string]ThirdPartyRuleCounter)
 
 	for _, rule := range config.Rules {
-
 		// increment counters
-
-		if rule.Trigger == "local" {
+		if rule.IsLocal {
 			localRuleCounter += 1
 		}
 
@@ -199,9 +197,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
-
-				// update subject rule failures
-				ruleSeverity := security.CalculateSeverity(ruleOutputFailure.CategoryGroups, rule.Severity, rule.Trigger)
+				ruleSeverity := security.CalculateSeverity(ruleOutputFailure.CategoryGroups, rule.Severity, true)
 
 				key := buildKey(ruleOutputFailure.DataSubject, ruleOutputFailure.DataType)
 				subjectRuleFailure, ok := subjectRuleFailures[key]

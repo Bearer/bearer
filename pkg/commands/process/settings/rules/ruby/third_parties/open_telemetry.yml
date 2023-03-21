@@ -33,7 +33,6 @@ auxiliary:
         OpenTelemetry::Trace.current_span
       - |
         $<_>.in_span() { |$<!>$<_:identifier>| }
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

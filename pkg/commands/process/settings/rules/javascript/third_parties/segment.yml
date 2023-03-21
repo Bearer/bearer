@@ -22,7 +22,6 @@ auxiliary:
         AnalyticsBrowser.load()
 languages:
   - javascript
-trigger: local
 skip_data_types:
   - "Unique Identifier"
 metadata:

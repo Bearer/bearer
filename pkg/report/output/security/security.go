@@ -15,7 +15,6 @@ import (
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
-	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/maps"
@@ -49,6 +48,7 @@ type Input struct {
 }
 
 type Output struct {
+	IsLocal          *bool    `json:"is_local,omitempty" yaml:"is_local,omitempty"`
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
@@ -162,7 +162,7 @@ func evaluateRules(
 					DetailedContext:  output.DetailedContext,
 				}
 
-				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, rule.Trigger)
+				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
 
 				if config.Report.Severity[severity] {
 					summaryResults[severity] = append(summaryResults[severity], result)
@@ -236,9 +236,8 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 	return reportStr, reportPassed
 }
 
-func CalculateSeverity(groups []string, severity string, trigger string) string {
+func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) string {
 	if severity == types.LevelWarning {
-		log.Debug().Msgf("Calculated severity = %s (no calculation applied)", severity)
 		return types.LevelWarning
 	}
 
@@ -267,11 +266,9 @@ func CalculateSeverity(groups []string, severity string, trigger string) string 
 	}
 
 	triggerWeighting := 1
-	if trigger == types.LocalTrigger {
+	if hasLocalDataTypes {
 		triggerWeighting = 2
 	}
-
-	log.Debug().Msgf("Calculated severity = %s : %d + (%s : %d * %s : %d)", severity, ruleSeverityWeighting, groups, sensitiveDataCategoryWeighting, trigger, triggerWeighting)
 
 	switch finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting); {
 	case finalWeighting >= 8:

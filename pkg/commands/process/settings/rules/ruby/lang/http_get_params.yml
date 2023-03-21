@@ -26,7 +26,6 @@ patterns:
           - Typhoeus
       - variable: DATA_TYPE
         detection: datatype
-trigger: local
 metadata:
   description: "Sensitive data communicated through GET parameters detected."
   remediation_message: |

@@ -50,7 +50,6 @@ auxiliary:
               - cookies
 languages:
   - ruby
-trigger: presence
 severity: high
 metadata:
   description: "User input detected in an unsafe deserialization method."

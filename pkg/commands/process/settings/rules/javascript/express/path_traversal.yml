@@ -35,7 +35,6 @@ auxiliary:
       - $<_>.replace($<_>, '')
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "Possible path traversal vulnerability detected."

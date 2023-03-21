@@ -56,7 +56,6 @@ auxiliary:
       - req.headers
 languages:
   - javascript
-trigger: presence
 severity: high
 metadata:
   description: "Dangerous use of eval with user input detected"

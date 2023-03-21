@@ -46,7 +46,6 @@ auxiliary:
               - newrelic
               - newRelic
               - client
-trigger: local
 metadata:
   description: "Sensitive data sent to New Relic detected."
   remediation_message: |

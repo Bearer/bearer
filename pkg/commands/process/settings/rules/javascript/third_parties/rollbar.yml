@@ -19,7 +19,6 @@ languages:
   - javascript
 skip_data_types:
   - "Unique Identifier"
-trigger: local
 metadata:
   description: "Sensitive data sent to Rollbar detected."
   remediation_message: |
