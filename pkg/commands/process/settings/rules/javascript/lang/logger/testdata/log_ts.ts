@@ -1,1 +1,0 @@
-log.info(user.name);
