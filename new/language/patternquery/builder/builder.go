@@ -271,6 +271,10 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 
 func (builder *builder) getVariableFor(node *tree.Node) *types.Variable {
 	for _, variable := range builder.inputParams.Variables {
+		if builder.langImplementation.ShouldSkipNode(node) {
+			continue
+		}
+
 		if node.Content() == variable.DummyValue {
 			return &variable
 		}

@@ -190,6 +190,10 @@ func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes()
 	return patternMatchNodeContainerTypes
 }
 
+func (javascriptImplementation *javascriptImplementation) ShouldSkipNode(node *tree.Node) bool {
+	return node.Type() == "required_parameter"
+}
+
 func (*javascriptImplementation) PatternLeafContentTypes() []string {
 	return []string{
 		// identifiers

@@ -165,6 +165,10 @@ func (*rubyImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
+func (*rubyImplementation) ShouldSkipNode(node *tree.Node) bool {
+	return false
+}
+
 func (*rubyImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }

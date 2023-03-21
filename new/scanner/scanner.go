@@ -42,12 +42,9 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 			name:        "javascript",
 		},
 	}
-	rulesToRun := map[string]*settings.Rule{}
-	rulesToRun["javascript_third_parties_sentry"] = config.Rules["javascript_third_parties_sentry"]
-	rulesToRun["javascript_third_parties_sentry_scope"] = config.Rules["javascript_third_parties_sentry_scope"]
 
 	for _, instantiatior := range toInstantiate {
-		composition, err := instantiatior.constructor(rulesToRun, classifier)
+		composition, err := instantiatior.constructor(config.Rules, classifier)
 		if err != nil {
 			return fmt.Errorf("failed to instantiate composition %s:%s", instantiatior.name, err)
 		}
