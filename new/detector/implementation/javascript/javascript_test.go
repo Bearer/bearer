@@ -10,6 +10,18 @@ import (
 func TestJavascriptStringDetector(t *testing.T) {
 	runTest(t, "string_literal", "string", "testdata/string_literal.js")
 	runTest(t, "string_non_literal", "string", "testdata/string_non_literal.js")
+	runTest(t, "typed_object", "object", "testdata/typed_object.ts")
+}
+
+func TestJavascriptTypes(t *testing.T) {
+	runTest(t, "typed_object_const", "object", "testdata/typed_object_const.ts")
+	runTest(t, "typed_object_let", "object", "testdata/typed_object_let.ts")
+	runTest(t, "typed_object_var", "object", "testdata/typed_object_var.ts")
+}
+
+func TestJavascriptFileTypes(t *testing.T) {
+	runTest(t, "file_type_tsx", "object", "testdata/file_type.tsx")
+	runTest(t, "file_type_jsx", "object", "testdata/file_type.jsx")
 }
 
 func runTest(t *testing.T, name, detectorType, fileName string) {

@@ -165,7 +165,7 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detector
 }
 
 func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
-	if file.Language != "JavaScript" {
+	if file.Language != "JavaScript" && file.Language != "TypeScript" && file.Language != "TSX" {
 		return nil, nil
 	}
 
