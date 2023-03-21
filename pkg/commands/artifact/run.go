@@ -290,17 +290,6 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		outputhandler.StdErrLogger().Msg("Using cached data")
 	}
 
-	if config.Report.Format == flag.FormatEmpty && config.Report.Report == flag.ReportPrivacy {
-		// for privacy report, default report format is CSV
-		err := reportoutput.ReportCSV(report, logger, config)
-		if err != nil {
-			return false, fmt.Errorf("error generating report %w", err)
-		}
-
-		outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
-		return true, nil
-	}
-
 	detections, lineOfCodeOutput, dataflow, err := reportoutput.GetOutput(report, config)
 	if err != nil {
 		return false, err
@@ -311,7 +300,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		return false, err
 	}
 
-	if !reportSupported {
+	if !reportSupported && config.Report.Report != flag.ReportPrivacy {
 		var placeholderStr *strings.Builder
 		placeholderStr, err = getPlaceholderOutput(report, config, lineOfCodeOutput)
 		if err != nil {
@@ -322,14 +311,26 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		return true, nil
 	}
 
-	if config.Report.Format == flag.FormatEmpty && config.Report.Report == flag.ReportSecurity {
-		report := detections.(*security.Results)
-		reportStr, reportPassed := security.BuildReportString(config, report, lineOfCodeOutput, dataflow)
+	if config.Report.Format == flag.FormatEmpty {
+		if config.Report.Report == flag.ReportSecurity {
+			// for security report, default report format is Table
+			report := detections.(*security.Results)
+			reportStr, reportPassed := security.BuildReportString(config, report, lineOfCodeOutput, dataflow)
 
-		log.Error().Msgf("-----------------------")
-		output.StdOutLogger().Msg(reportStr.String())
+			output.StdOutLogger().Msg(reportStr.String())
 
-		return reportPassed, nil
+			return reportPassed, nil
+		} else if config.Report.Report == flag.ReportPrivacy {
+			// for privacy report, default report format is CSV
+			content, err := reportoutput.GetPrivacyReportCSVOutput(report, lineOfCodeOutput, dataflow, config)
+			if err != nil {
+				return false, fmt.Errorf("error generating report %s", err)
+			}
+
+			output.StdOutLogger().Msg(*content)
+
+			return true, nil
+		}
 	}
 
 	switch config.Report.Format {
@@ -363,6 +364,10 @@ func outputCachedDataWarning(cacheUsed bool, quietMode bool) {
 }
 
 func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {
+	if inputgocloc == nil {
+		return true, nil
+	}
+
 	ruleLanguages := make(map[string]bool)
 	for _, rule := range config.Rules {
 		for _, language := range rule.Languages {

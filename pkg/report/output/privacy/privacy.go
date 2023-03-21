@@ -86,10 +86,10 @@ type Report struct {
 	ThirdParty []ThirdParty `json:"third_party,omitempty" yaml:"third_party"`
 }
 
-func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
+func BuildCsvString(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
 	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed\n")
-	result, _, _, err := GetOutput(dataflow, config)
+	result, _, _, err := GetOutput(dataflow, lineOfCodeOutput, config)
 	if err != nil {
 		return csvStr, err
 	}
@@ -128,7 +128,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	return csvStr, nil
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *gocloc.Result, *dataflow.DataFlow, error) {
+func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, config settings.Config) (*Report, *gocloc.Result, *dataflow.DataFlow, error) {
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
@@ -370,7 +370,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *g
 	return &Report{
 		Subjects:   maps.Values(subjectInventory),
 		ThirdParty: thirdPartyInventory,
-	}, nil, nil, nil
+	}, lineOfCodeOutput, dataflow, nil
 }
 
 func buildKey(dataSubject string, dataType string) string {

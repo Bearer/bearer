@@ -18,20 +18,10 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/hhatto/gocloc"
-	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
-
-func ReportCSV(report types.Report, output *zerolog.Event, config settings.Config) error {
-	switch config.Report.Report {
-	case flag.ReportPrivacy:
-		return getPrivacyReportCSVOutput(report, output, config)
-	}
-
-	return fmt.Errorf("csv not supported for report type: %s", config.Report.Report)
-}
 
 func ReportJSON(outputDetections any, config settings.Config) (*string, error) {
 	jsonBytes, err := json.Marshal(&outputDetections)
@@ -70,28 +60,30 @@ func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result
 	return nil, nil, nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
-func getPrivacyReportCSVOutput(report types.Report, output *zerolog.Event, config settings.Config) error {
-	dataflow, _, _, err := GetDataflow(report, config, true)
+func GetPrivacyReportCSVOutput(report types.Report, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow, config settings.Config) (*string, error) {
+	csvString, err := privacy.BuildCsvString(dataflow, lineOfCodeOutput, config)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	csvString, err := privacy.BuildCsvString(dataflow, config)
-	if err != nil {
-		return err
-	}
+	content := csvString.String()
 
-	output.Msg(csvString.String())
-	return nil
+	return &content, nil
 }
 
 func getPrivacyReportOutput(report types.Report, config settings.Config) (*privacy.Report, *gocloc.Result, *dataflow.DataFlow, error) {
+	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
+	if err != nil {
+		log.Error().Msgf("error in line of code output %s", err)
+		return nil, nil, nil, err
+	}
+
 	dataflow, _, _, err := GetDataflow(report, config, true)
 	if err != nil {
 		return nil, nil, nil, err
 	}
 
-	return privacy.GetOutput(dataflow, config)
+	return privacy.GetOutput(dataflow, lineOfCodeOutput, config)
 }
 
 func GetDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, *gocloc.Result, *dataflow.DataFlow, error) {
