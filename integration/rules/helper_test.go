@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/worker"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/report/output"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/types"
 	"github.com/bradleyjkemp/cupaloy"
@@ -112,10 +113,19 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to do scan %s", err)
 	}
 
-	report, _ := reportoutput.ReportYAML(types.Report{
-		Path: detectorsReportPath,
-	}, runner.config)
+	runner.config.Scan.Target = testDataPath
+	detections, _, _, _ := output.GetOutput(
+		types.Report{
+			Path: detectorsReportPath,
+		},
+		runner.config,
+	)
+
+	report, _ := reportoutput.ReportYAML(
+		detections,
+		runner.config,
+	)
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
-	cupaloyCopy.SnapshotT(t, report)
+	cupaloyCopy.SnapshotT(t, *report)
 }

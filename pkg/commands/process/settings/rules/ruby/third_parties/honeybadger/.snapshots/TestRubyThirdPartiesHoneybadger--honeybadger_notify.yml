@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 28
-      parent_content: |-
+      snippet: |-
         Honeybadger.notify(
           "Something is wrong here for " + user.gender,
           class_name: "MyError",
@@ -30,7 +30,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 28
-      parent_content: |-
+      snippet: |-
         Honeybadger.notify(
           "Something is wrong here for " + user.gender,
           class_name: "MyError",
@@ -50,7 +50,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 28
-      parent_content: |-
+      snippet: |-
         Honeybadger.notify(
           "Something is wrong here for " + user.gender,
           class_name: "MyError",
@@ -70,7 +70,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 28
-      parent_content: |-
+      snippet: |-
         Honeybadger.notify(
           "Something is wrong here for " + user.gender,
           class_name: "MyError",
@@ -90,7 +90,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 28
-      parent_content: |-
+      snippet: |-
         Honeybadger.notify(
           "Something is wrong here for " + user.gender,
           class_name: "MyError",
@@ -110,7 +110,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 28
-      parent_content: |-
+      snippet: |-
         Honeybadger.notify(
           "Something is wrong here for " + user.gender,
           class_name: "MyError",
@@ -119,5 +119,4 @@ medium:
           context: context,
           parameters: parameters,
         )
-
 

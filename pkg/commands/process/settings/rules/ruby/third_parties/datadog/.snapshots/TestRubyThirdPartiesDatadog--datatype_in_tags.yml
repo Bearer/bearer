@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: c.tags = user
+      snippet: c.tags = user
     - rule:
         cwe_ids:
             - "201"
@@ -22,7 +22,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: span.set_tag('user.email', user.email)
+      snippet: span.set_tag('user.email', user.email)
     - rule:
         cwe_ids:
             - "201"
@@ -34,7 +34,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 9
-      parent_content: Datadog::Tracing.active_span&.set_tag('customer.id', user.email)
+      snippet: Datadog::Tracing.active_span&.set_tag('customer.id', user.email)
     - rule:
         cwe_ids:
             - "201"
@@ -46,7 +46,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 10
-      parent_content: Datadog::Tracing.active_span.set_tag('customer.id', user.email)
+      snippet: Datadog::Tracing.active_span.set_tag('customer.id', user.email)
     - rule:
         cwe_ids:
             - "201"
@@ -58,7 +58,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 12
-      parent_content: |-
+      snippet: |-
         Datadog::Tracing.trace("web.request", tags: { email: user.email }) do |span, trace|
           call
         end
@@ -73,6 +73,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 17
-      parent_content: span.set_tag('user.email', user.email)
-
+      snippet: span.set_tag('user.email', user.email)
 

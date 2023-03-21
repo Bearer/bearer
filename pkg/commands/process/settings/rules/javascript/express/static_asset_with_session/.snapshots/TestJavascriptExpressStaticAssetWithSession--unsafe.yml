@@ -9,7 +9,7 @@ low:
       line_number: 3
       filename: unsafe.js
       parent_line_number: 3
-      parent_content: app.use(express.static(__dirname + "/public"))
+      snippet: app.use(express.static(__dirname + "/public"))
 medium:
     - rule:
         cwe_ids:
@@ -21,6 +21,5 @@ medium:
       line_number: 1
       filename: unsafe.js
       parent_line_number: 1
-      parent_content: '{}'
-
+      snippet: '{}'
 

@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'Rollbar.critical("oops #{user.email}")'
+      snippet: 'Rollbar.critical("oops #{user.email}")'
     - rule:
         cwe_ids:
             - "201"
@@ -22,7 +22,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: 'Rollbar.critical(e, "oops #{user.email}")'
+      snippet: 'Rollbar.critical(e, "oops #{user.email}")'
     - rule:
         cwe_ids:
             - "201"
@@ -34,7 +34,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: 'Rollbar.critical(e, user: { email: "someone@example.com" })'
+      snippet: 'Rollbar.critical(e, user: { email: "someone@example.com" })'
     - rule:
         cwe_ids:
             - "201"
@@ -46,7 +46,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: 'Rollbar.critical(e, { user: { first_name: "someone" } })'
+      snippet: 'Rollbar.critical(e, { user: { first_name: "someone" } })'
     - rule:
         cwe_ids:
             - "201"
@@ -58,7 +58,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: 'Rollbar.error("oops #{user.email}")'
+      snippet: 'Rollbar.error("oops #{user.email}")'
     - rule:
         cwe_ids:
             - "201"
@@ -70,7 +70,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 8
-      parent_content: 'Rollbar.debug("oops #{user.email}")'
+      snippet: 'Rollbar.debug("oops #{user.email}")'
     - rule:
         cwe_ids:
             - "201"
@@ -82,7 +82,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 10
-      parent_content: 'Rollbar.info("oops #{user.email}")'
+      snippet: 'Rollbar.info("oops #{user.email}")'
     - rule:
         cwe_ids:
             - "201"
@@ -94,6 +94,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 12
-      parent_content: 'Rollbar.warning("oops #{user.email}")'
-
+      snippet: 'Rollbar.warning("oops #{user.email}")'
 

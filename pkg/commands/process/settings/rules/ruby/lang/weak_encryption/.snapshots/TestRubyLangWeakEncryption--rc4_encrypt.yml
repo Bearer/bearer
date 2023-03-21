@@ -9,7 +9,7 @@ low:
       line_number: 1
       filename: rc4_encrypt.rb
       parent_line_number: 1
-      parent_content: RC4.new("insecure").encrypt("hello world")
+      snippet: RC4.new("insecure").encrypt("hello world")
     - rule:
         cwe_ids:
             - "331"
@@ -20,6 +20,5 @@ low:
       line_number: 4
       filename: rc4_encrypt.rb
       parent_line_number: 4
-      parent_content: rc4_encrypt.encrypt!("hello world")
-
+      snippet: rc4_encrypt.encrypt!("hello world")
 

@@ -8,7 +8,7 @@ low:
       line_number: 4
       filename: unsecure.js
       parent_line_number: 4
-      parent_content: express()
+      snippet: express()
     - rule:
         cwe_ids:
             - "693"
@@ -18,6 +18,5 @@ low:
       line_number: 4
       filename: unsecure.js
       parent_line_number: 4
-      parent_content: express()
-
+      snippet: express()
 

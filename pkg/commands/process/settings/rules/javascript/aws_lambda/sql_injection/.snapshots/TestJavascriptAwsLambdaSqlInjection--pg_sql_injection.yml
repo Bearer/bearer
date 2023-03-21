@@ -8,6 +8,5 @@ high:
       line_number: 8
       filename: pg_sql_injection.js
       parent_line_number: 8
-      parent_content: client.query('SELECT * FROM users WHERE user.name = ' + event.user.name)
-
+      snippet: client.query('SELECT * FROM users WHERE user.name = ' + event.user.name)
 

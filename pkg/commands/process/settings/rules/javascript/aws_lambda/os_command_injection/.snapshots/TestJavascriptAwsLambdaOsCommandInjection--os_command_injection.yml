@@ -8,7 +8,7 @@ high:
       line_number: 4
       filename: os_command_injection.js
       parent_line_number: 4
-      parent_content: |-
+      snippet: |-
         exec("ls "+event["user_dir"]+"| wc -l", (err, stdout, stderr) => {
             // do something
           })
@@ -21,7 +21,7 @@ high:
       line_number: 8
       filename: os_command_injection.js
       parent_line_number: 8
-      parent_content: |-
+      snippet: |-
         execSync("ls "+event["user"]+"| wc -l", (err, stdout, stderr) => {
             // do something
           })
@@ -34,7 +34,7 @@ high:
       line_number: 12
       filename: os_command_injection.js
       parent_line_number: 12
-      parent_content: spawn(event["query"])
+      snippet: spawn(event["query"])
     - rule:
         cwe_ids:
             - "78"
@@ -44,6 +44,5 @@ high:
       line_number: 14
       filename: os_command_injection.js
       parent_line_number: 14
-      parent_content: spawnSync("grep " + event["tmp"])
-
+      snippet: spawnSync("grep " + event["tmp"])
 

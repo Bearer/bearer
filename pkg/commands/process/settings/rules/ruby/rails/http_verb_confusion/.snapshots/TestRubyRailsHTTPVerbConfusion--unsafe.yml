@@ -8,7 +8,7 @@ medium:
       line_number: 1
       filename: unsafe.rb
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         if request.get?
         else
           change_state
@@ -22,7 +22,7 @@ medium:
       line_number: 6
       filename: unsafe.rb
       parent_line_number: 6
-      parent_content: change_state unless request.get?
+      snippet: change_state unless request.get?
     - rule:
         cwe_ids:
             - "650"
@@ -32,9 +32,8 @@ medium:
       line_number: 8
       filename: unsafe.rb
       parent_line_number: 8
-      parent_content: |-
+      snippet: |-
         unless request.get?
           change_state
         end
-
 

@@ -9,6 +9,5 @@ low:
       line_number: 1
       filename: digest_md5.rb
       parent_line_number: 1
-      parent_content: Digest::MD5.hexdigest("hello world")
-
+      snippet: Digest::MD5.hexdigest("hello world")
 

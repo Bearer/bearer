@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 8
-      parent_content: 'config.metadata = { current_user_id: current_user.email }'
+      snippet: 'config.metadata = { current_user_id: current_user.email }'
     - rule:
         cwe_ids:
             - "201"
@@ -22,6 +22,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 14
-      parent_content: 'client_config.metadata = { current_user_id: current_user.email }'
-
+      snippet: 'client_config.metadata = { current_user_id: current_user.email }'
 

@@ -8,6 +8,5 @@ low:
       line_number: 1
       filename: insecure_get.rb
       parent_line_number: 1
-      parent_content: Faraday.get("http://api.insecure.com")
-
+      snippet: Faraday.get("http://api.insecure.com")
 

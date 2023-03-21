@@ -8,6 +8,5 @@ low:
       line_number: 1
       filename: insecure_post.rb
       parent_line_number: 1
-      parent_content: Faraday.post("http://api.insecure.com")
-
+      snippet: Faraday.post("http://api.insecure.com")
 

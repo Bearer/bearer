@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: crypto.createHmac("md5", key).update(user.email)
+      snippet: crypto.createHmac("md5", key).update(user.email)
     - rule:
         cwe_ids:
             - "327"
@@ -22,7 +22,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: crypto.createHash("md5").update(user.email)
+      snippet: crypto.createHash("md5").update(user.email)
     - rule:
         cwe_ids:
             - "327"
@@ -34,6 +34,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 9
-      parent_content: CryptoJS.MD5(user.email)
-
+      snippet: CryptoJS.MD5(user.email)
 

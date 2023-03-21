@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: 'JWT.encode({ user: current_user.email }, private_key, ''HS256'', {})'
+      snippet: 'JWT.encode({ user: current_user.email }, private_key, ''HS256'', {})'
     - rule:
         cwe_ids:
             - "315"
@@ -22,7 +22,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: 'JWT.encode({ user: current_user.email }, ENV["SECRET_KEY"])'
+      snippet: 'JWT.encode({ user: current_user.email }, ENV["SECRET_KEY"])'
     - rule:
         cwe_ids:
             - "315"
@@ -34,6 +34,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: 'JWT.encode({ user_name: user.name }, Rails.application.secret_key_base)'
-
+      snippet: 'JWT.encode({ user_name: user.name }, Rails.application.secret_key_base)'
 

@@ -8,6 +8,5 @@ low:
       line_number: 3
       filename: secure_app_disable.js
       parent_line_number: 3
-      parent_content: express()
-
+      snippet: express()
 

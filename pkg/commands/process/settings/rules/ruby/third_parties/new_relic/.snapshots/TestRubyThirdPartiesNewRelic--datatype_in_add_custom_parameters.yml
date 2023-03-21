@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: NewRelic::Agent.add_custom_parameters(user)
+      snippet: NewRelic::Agent.add_custom_parameters(user)
     - rule:
         cwe_ids:
             - "201"
@@ -22,6 +22,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: 'NewRelic::Agent.add_custom_parameters(user: { email: "user@example.com" })'
-
+      snippet: 'NewRelic::Agent.add_custom_parameters(user: { email: "user@example.com" })'
 

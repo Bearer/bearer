@@ -8,7 +8,7 @@ medium:
       line_number: 1
       filename: verification_disabled.rb
       parent_line_number: 1
-      parent_content: http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      snippet: http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     - rule:
         cwe_ids:
             - "295"
@@ -18,9 +18,8 @@ medium:
       line_number: 4
       filename: verification_disabled.rb
       parent_line_number: 4
-      parent_content: |-
+      snippet: |-
         Net::HTTP.start(uri.host, uri.port, :use_ssl => true, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
           Net::HTTP::Get.new uri
         end
-
 

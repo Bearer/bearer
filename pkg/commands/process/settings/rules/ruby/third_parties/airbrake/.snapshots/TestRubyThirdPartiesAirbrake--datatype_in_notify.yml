@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: Airbrake.notify(user.first_name)
+      snippet: Airbrake.notify(user.first_name)
     - rule:
         cwe_ids:
             - "201"
@@ -22,7 +22,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Airbrake.notify('App crashed!', {
           current_user: user.email
         })
@@ -37,9 +37,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: |-
+      snippet: |-
         Airbrake.notify('App crashed') do |notice|
           notice[:params][:email] = customer.email
         end
-
 

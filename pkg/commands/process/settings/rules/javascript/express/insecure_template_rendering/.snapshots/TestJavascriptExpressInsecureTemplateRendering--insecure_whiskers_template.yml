@@ -8,6 +8,5 @@ low:
       line_number: 13
       filename: insecure_whiskers_template.js
       parent_line_number: 13
-      parent_content: whiskers.render(req.params.text, context)
-
+      snippet: whiskers.render(req.params.text, context)
 

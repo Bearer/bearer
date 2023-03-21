@@ -8,7 +8,7 @@ low:
       line_number: 3
       filename: insecure_net_http.rb
       parent_line_number: 3
-      parent_content: Net::HTTP.post_form("http://my.api.com/users/search")
+      snippet: Net::HTTP.post_form("http://my.api.com/users/search")
     - rule:
         cwe_ids:
             - "319"
@@ -18,7 +18,7 @@ low:
       line_number: 5
       filename: insecure_net_http.rb
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         Net::HTTP.start("http://my.api.com/users/search") do
         end
     - rule:
@@ -30,6 +30,5 @@ low:
       line_number: 8
       filename: insecure_net_http.rb
       parent_line_number: 8
-      parent_content: 'Net::HTTP::Get.new("http://my.api.com/users/search", { "X-Test": 42 })'
-
+      snippet: 'Net::HTTP::Get.new("http://my.api.com/users/search", { "X-Test": 42 })'
 

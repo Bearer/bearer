@@ -8,7 +8,7 @@ low:
       line_number: 1
       filename: unsafe.rb
       parent_line_number: 1
-      parent_content: /#{params[:oops]}.*/
+      snippet: /#{params[:oops]}.*/
     - rule:
         cwe_ids:
             - "1333"
@@ -18,7 +18,7 @@ low:
       line_number: 3
       filename: unsafe.rb
       parent_line_number: 3
-      parent_content: '%r{abc#{params[:oops]}def}'
+      snippet: '%r{abc#{params[:oops]}def}'
     - rule:
         cwe_ids:
             - "1333"
@@ -28,6 +28,5 @@ low:
       line_number: 5
       filename: unsafe.rb
       parent_line_number: 5
-      parent_content: Regexp.new(params[:oops])
-
+      snippet: Regexp.new(params[:oops])
 

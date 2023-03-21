@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: |-
+      snippet: |-
         ReactGA.event({
         	category: "user",
         	action: "logged_in",
@@ -27,11 +27,10 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: |-
+      snippet: |-
         ReactGA.event({
         	category: "user",
         	action: "logged_in",
         	value: user.email,
         })
-
 

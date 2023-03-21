@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Net::FTP.open("ftp.site.com") do |ftp|
           file = Tempfile.new("user_data")
           begin
@@ -22,5 +22,4 @@ medium:
             file.close!
           end
         end
-
 

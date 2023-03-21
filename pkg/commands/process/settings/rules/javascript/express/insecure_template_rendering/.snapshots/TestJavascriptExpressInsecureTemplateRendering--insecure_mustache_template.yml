@@ -8,6 +8,5 @@ low:
       line_number: 12
       filename: insecure_mustache_template.js
       parent_line_number: 12
-      parent_content: 'Mustache.render(req.params, { name: "insecure" })'
-
+      snippet: 'Mustache.render(req.params, { name: "insecure" })'
 

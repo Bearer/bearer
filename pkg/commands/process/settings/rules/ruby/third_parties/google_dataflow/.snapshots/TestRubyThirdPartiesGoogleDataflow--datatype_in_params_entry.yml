@@ -10,6 +10,5 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 2
-      parent_content: 'param.value = "ip: #{customer.ip_address}"'
-
+      snippet: 'param.value = "ip: #{customer.ip_address}"'
 

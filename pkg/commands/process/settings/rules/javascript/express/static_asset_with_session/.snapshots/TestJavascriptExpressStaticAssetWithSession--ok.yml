@@ -9,6 +9,5 @@ medium:
       line_number: 2
       filename: ok.js
       parent_line_number: 2
-      parent_content: '{}'
-
+      snippet: '{}'
 

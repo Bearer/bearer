@@ -132,24 +132,25 @@ func reportSecurity(
 ) {
 	lineOfCodeOutput, err = stats.GoclocDetectorOutput(config.Scan.Target)
 	if err != nil {
+		log.Error().Msgf("error in line of code output %s", err)
 		return
 	}
 
 	dataflow, _, _, err = GetDataflow(report, config, true)
 	if err != nil {
+		log.Error().Msgf("error in dataflow %s", err)
 		return
 	}
 
 	securityResults, err = security.GetOutput(dataflow, config)
 	if err != nil {
+		log.Error().Msgf("error in security %s", err)
 		return
 	}
 
 	// TODO: Should send report to us
-	log.Error().Msgf("sends JSON report to us")
-	log.Error().Msgf("-----------------------")
-	content, err := ReportJSON(securityResults, config)
-	log.Error().Msg(*content)
+	// content, err := ReportJSON(securityResults, config)
+	// log.Error().Msg(*content)
 
 	return
 }

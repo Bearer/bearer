@@ -10,10 +10,9 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 16
-      parent_content: |-
+      snippet: |-
         airbrake.notify({
               error: err,
               params: { user: user.ipAddress },
             })
-
 

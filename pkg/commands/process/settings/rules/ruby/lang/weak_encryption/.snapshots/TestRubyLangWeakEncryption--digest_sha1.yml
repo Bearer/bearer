@@ -9,6 +9,5 @@ low:
       line_number: 1
       filename: digest_sha1.rb
       parent_line_number: 1
-      parent_content: Digest::SHA1.hexidigest("hello world")
-
+      snippet: Digest::SHA1.hexidigest("hello world")
 

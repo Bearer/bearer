@@ -8,6 +8,5 @@ low:
       line_number: 9
       filename: render_external_resource.js
       parent_line_number: 9
-      parent_content: 'res.render(req.query.path + "/results", { page: 1 })'
-
+      snippet: 'res.render(req.query.path + "/results", { page: 1 })'
 

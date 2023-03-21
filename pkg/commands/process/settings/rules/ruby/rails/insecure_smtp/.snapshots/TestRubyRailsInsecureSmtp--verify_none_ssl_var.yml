@@ -8,6 +8,5 @@ low:
       line_number: 3
       filename: verify_none_ssl_var.rb
       parent_line_number: 3
-      parent_content: :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE
-
+      snippet: :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE
 

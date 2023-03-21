@@ -61,7 +61,7 @@ type Output struct {
 }
 
 type Result struct {
-	*RuleResultSummary
+	*Rule
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
@@ -71,7 +71,7 @@ type Result struct {
 	DetailedContext string `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
-type RuleResultSummary struct {
+type Rule struct {
 	CWEIDs           []string `json:"cwe_ids" yaml:"cwe_ids"`
 	Id               string   `json:"id" yaml:"id"`
 	Description      string   `json:"description" yaml:"description"`
@@ -148,20 +148,20 @@ func evaluateRules(
 			}
 
 			for _, output := range results["policy_failure"] {
-				ruleSummary := &RuleResultSummary{
+				ruleSummary := &Rule{
 					Description:      rule.Description,
 					Id:               rule.Id,
 					CWEIDs:           rule.CWEIDs,
 					DocumentationUrl: rule.DocumentationUrl,
 				}
 				result := Result{
-					RuleResultSummary: ruleSummary,
-					Filename:          output.Filename,
-					LineNumber:        output.LineNumber,
-					CategoryGroups:    output.CategoryGroups,
-					ParentLineNumber:  output.ParentLineNumber,
-					ParentContent:     output.ParentContent,
-					DetailedContext:   output.DetailedContext,
+					Rule:             ruleSummary,
+					Filename:         output.Filename,
+					LineNumber:       output.LineNumber,
+					CategoryGroups:   output.CategoryGroups,
+					ParentLineNumber: output.ParentLineNumber,
+					ParentContent:    output.ParentContent,
+					DetailedContext:  output.DetailedContext,
 				}
 
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)

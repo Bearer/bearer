@@ -8,6 +8,5 @@ low:
       line_number: 1
       filename: unsecure.js
       parent_line_number: 1
-      parent_content: http.createServer(app)
-
+      snippet: http.createServer(app)
 

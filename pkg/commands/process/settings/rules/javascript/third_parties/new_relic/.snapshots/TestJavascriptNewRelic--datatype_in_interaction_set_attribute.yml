@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         newrelic.interaction()
             .setAttribute("username", user.first_name)
     - rule:
@@ -24,7 +24,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         newrelic.interaction()
             .setAttribute("username", user.first_name)
             .setAttribute("postal-code", user.post_code)
@@ -39,6 +39,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 13
-      parent_content: interaction.setAttribute("email", user.email_address)
-
+      snippet: interaction.setAttribute("email", user.email_address)
 

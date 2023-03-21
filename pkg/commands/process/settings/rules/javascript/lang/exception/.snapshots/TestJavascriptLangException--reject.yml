@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: reject("Error with user " + user)
+      snippet: reject("Error with user " + user)
     - rule:
         cwe_ids:
             - "210"
@@ -22,6 +22,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 16
-      parent_content: reject("Error with user " + user)
-
+      snippet: reject("Error with user " + user)
 

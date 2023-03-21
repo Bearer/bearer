@@ -10,6 +10,5 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 5
-      parent_content: 'Bugsnag.notify(user.ip_address + " : " + e)'
-
+      snippet: 'Bugsnag.notify(user.ip_address + " : " + e)'
 

@@ -8,7 +8,7 @@ medium:
       line_number: 2
       filename: open_redirect.js
       parent_line_number: 2
-      parent_content: res.redirect(req.params.url)
+      snippet: res.redirect(req.params.url)
     - rule:
         cwe_ids:
             - "601"
@@ -18,7 +18,7 @@ medium:
       line_number: 3
       filename: open_redirect.js
       parent_line_number: 3
-      parent_content: res.redirect(req.query.url + "/bar")
+      snippet: res.redirect(req.query.url + "/bar")
     - rule:
         cwe_ids:
             - "601"
@@ -28,7 +28,7 @@ medium:
       line_number: 4
       filename: open_redirect.js
       parent_line_number: 4
-      parent_content: res.redirect("https://" + req.params.url + "/bar")
+      snippet: res.redirect("https://" + req.params.url + "/bar")
     - rule:
         cwe_ids:
             - "601"
@@ -38,6 +38,5 @@ medium:
       line_number: 5
       filename: open_redirect.js
       parent_line_number: 5
-      parent_content: res.redirect("http://" + req.params.path + "/bar")
-
+      snippet: res.redirect("http://" + req.params.path + "/bar")
 

@@ -9,6 +9,5 @@ low:
       line_number: 13
       filename: insecure_cookie.js
       parent_line_number: 13
-      parent_content: 'secure: false'
-
+      snippet: 'secure: false'
 
