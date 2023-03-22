@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 5
       snippet: throw `${user.email}`
+      fingerprint: b01bf33ac7819807025094a0c9aedb34_0
 

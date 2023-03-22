@@ -22,6 +22,7 @@ medium:
             session.setUser(user.email)
           }
         })
+      fingerprint: 4707cfda64a1837cb5fe6f9270a5a8a6_0
     - rule:
         cwe_ids:
             - "201"
@@ -45,6 +46,7 @@ medium:
             session.setUser(user.email)
           }
         })
+      fingerprint: 4707cfda64a1837cb5fe6f9270a5a8a6_1
     - rule:
         cwe_ids:
             - "201"
@@ -68,4 +70,5 @@ medium:
             session.setUser(user.email)
           }
         })
+      fingerprint: 4707cfda64a1837cb5fe6f9270a5a8a6_2
 

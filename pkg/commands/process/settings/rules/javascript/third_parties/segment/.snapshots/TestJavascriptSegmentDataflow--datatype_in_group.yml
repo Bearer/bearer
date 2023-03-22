@@ -16,4 +16,5 @@ medium:
           groupId: user.job_title,
           traits: {},
         })
+      fingerprint: e06b3627d5c7a61440e243b72dbcfb7f_0
 

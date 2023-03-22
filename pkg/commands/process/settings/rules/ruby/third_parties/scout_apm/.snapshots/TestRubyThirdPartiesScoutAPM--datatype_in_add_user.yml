@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 2
       snippet: ScoutApm::Context.add_user(user)
+      fingerprint: fcbabdc4dc0184b7e0e1e363efb20e58_0
 

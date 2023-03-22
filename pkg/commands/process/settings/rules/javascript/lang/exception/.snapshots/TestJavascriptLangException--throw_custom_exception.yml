@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 5
       snippet: throw new PermissionDenied(`Error with ${current_user.email}`)
+      fingerprint: f62dc1acaf83122fd9fa9769dcccdfe0_0
 

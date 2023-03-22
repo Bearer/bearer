@@ -16,6 +16,7 @@ medium:
         	action: "logged_in",
         	value: user.email,
         })
+      fingerprint: 325d8627339fb8007772f3afafd6b47c_0
     - rule:
         cwe_ids:
             - "201"
@@ -33,4 +34,5 @@ medium:
         	action: "logged_in",
         	value: user.email,
         })
+      fingerprint: 325d8627339fb8007772f3afafd6b47c_1
 

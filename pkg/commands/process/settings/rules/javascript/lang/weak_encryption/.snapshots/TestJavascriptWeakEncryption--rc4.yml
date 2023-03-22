@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: CryptoJS.RC4.encrypt(user.email, "secret key")
+      fingerprint: 52ad6114081ffe4fa9da7f7fba034d11_0
 

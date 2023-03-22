@@ -10,6 +10,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 3
       snippet: Shell.cd(params[:oops])
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_0
     - rule:
         cwe_ids:
             - "22"
@@ -21,6 +22,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 5
       snippet: Shell.default_system_path = params[:oops]
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_1
     - rule:
         cwe_ids:
             - "22"
@@ -32,6 +34,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 7
       snippet: Shell.new(params[:oops], umask)
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_2
     - rule:
         cwe_ids:
             - "22"
@@ -43,6 +46,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 9
       snippet: shell.pushdir(params[:oops], true)
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_3
     - rule:
         cwe_ids:
             - "22"
@@ -54,6 +58,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 12
       snippet: processor1.foreach(params[:oops], rs) {}
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_4
     - rule:
         cwe_ids:
             - "22"
@@ -65,6 +70,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 15
       snippet: processor2.test(:exists?, x, params[:oops])
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_5
     - rule:
         cwe_ids:
             - "22"
@@ -76,6 +82,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 17
       snippet: processor2[:exists?, x, params[:oops], y]
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_6
     - rule:
         cwe_ids:
             - "22"
@@ -87,6 +94,7 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 20
       snippet: test(:exists?, params[:oops])
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_7
     - rule:
         cwe_ids:
             - "22"
@@ -98,4 +106,5 @@ high:
       filename: unsafe_shell.rb
       parent_line_number: 24
       snippet: Shell.new(params[:oops])
+      fingerprint: 34290eaa9921a15e05281b0a9f850e49_8
 

@@ -9,4 +9,5 @@ high:
       filename: unsecure.js
       parent_line_number: 2
       snippet: DOMPurify.sanitize(dirty, config)
+      fingerprint: c8b12645ba0ae58b6a56874acbd6011f_0
 

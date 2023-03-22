@@ -9,4 +9,5 @@ high:
       filename: sequelize_sql_injection.js
       parent_line_number: 7
       snippet: sqlite.query(customerQuery)
+      fingerprint: 517438dfc8bb854de841ed83af94969d_0
 

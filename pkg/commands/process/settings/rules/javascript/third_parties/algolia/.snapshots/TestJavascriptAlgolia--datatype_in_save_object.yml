@@ -13,6 +13,7 @@ high:
       snippet: |-
         index
           .saveObject(userObj, { autoGenerateObjectIDIfNotExist: true })
+      fingerprint: f7cd3e6cc20d31411535c7bef6ba52cc_1
 medium:
     - rule:
         cwe_ids:
@@ -26,4 +27,5 @@ medium:
         - PII
       parent_line_number: 12
       snippet: 'index.saveObjects([{ email: user.email }])'
+      fingerprint: f7cd3e6cc20d31411535c7bef6ba52cc_0
 

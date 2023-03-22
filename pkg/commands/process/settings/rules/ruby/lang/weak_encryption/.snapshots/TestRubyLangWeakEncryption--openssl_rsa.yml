@@ -10,4 +10,5 @@ low:
       filename: openssl_rsa.rb
       parent_line_number: 8
       snippet: OpenSSL::PKey::RSA.new(512).to_pem(cipher, "hello world")
+      fingerprint: ba6485255397a867cd439d5f883d98bd_0
 

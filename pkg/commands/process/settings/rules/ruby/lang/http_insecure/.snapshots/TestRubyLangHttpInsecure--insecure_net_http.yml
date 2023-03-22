@@ -9,6 +9,7 @@ low:
       filename: insecure_net_http.rb
       parent_line_number: 3
       snippet: Net::HTTP.post_form("http://my.api.com/users/search")
+      fingerprint: 3bf618c5f169740a6892f6784db0e242_0
     - rule:
         cwe_ids:
             - "319"
@@ -21,6 +22,7 @@ low:
       snippet: |-
         Net::HTTP.start("http://my.api.com/users/search") do
         end
+      fingerprint: 3bf618c5f169740a6892f6784db0e242_1
     - rule:
         cwe_ids:
             - "319"
@@ -31,4 +33,5 @@ low:
       filename: insecure_net_http.rb
       parent_line_number: 8
       snippet: 'Net::HTTP::Get.new("http://my.api.com/users/search", { "X-Test": 42 })'
+      fingerprint: 3bf618c5f169740a6892f6784db0e242_2
 

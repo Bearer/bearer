@@ -11,4 +11,5 @@ high:
         - Personal Data
       parent_line_number: 2
       snippet: 'param2.value = "ip: #{customer.ip_address}"'
+      fingerprint: b4e2689f234b169b1c69f3a9f96183b1_0
 

@@ -9,4 +9,5 @@ high:
       filename: knex_sql_injection.js
       parent_line_number: 11
       snippet: res.send(prepareJson(cartDetails))
+      fingerprint: 4facc1afc53beec979a800a78f0096d6_0
 

@@ -16,4 +16,5 @@ medium:
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
           }
+      fingerprint: 1ff98ac850681443899120830a7ed5c3_0
 

@@ -9,4 +9,5 @@ low:
       filename: insecure_post.rb
       parent_line_number: 1
       snippet: Faraday.post("http://api.insecure.com")
+      fingerprint: f5d6fb5a4467a3f9c1ed683b5de914e7_0
 

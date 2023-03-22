@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 4
       snippet: crypto.createHmac("md5", key).update(user.email)
+      fingerprint: 0f998b98cc9f987fb155d95b934a2462_0
     - rule:
         cwe_ids:
             - "327"
@@ -23,6 +24,7 @@ medium:
         - PII
       parent_line_number: 5
       snippet: crypto.createHash("md5").update(user.email)
+      fingerprint: 0f998b98cc9f987fb155d95b934a2462_1
     - rule:
         cwe_ids:
             - "327"
@@ -35,4 +37,5 @@ medium:
         - PII
       parent_line_number: 9
       snippet: CryptoJS.MD5(user.email)
+      fingerprint: 0f998b98cc9f987fb155d95b934a2462_2
 

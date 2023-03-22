@@ -12,6 +12,7 @@ medium:
         - PII
       parent_line_number: 5
       snippet: 'cookies[:login] = { value: user.to_json, expires: 1.hour, secure: true }'
+      fingerprint: 81cd660fcd6ad1c761838375c978b235_0
     - rule:
         cwe_ids:
             - "315"
@@ -25,4 +26,5 @@ medium:
         - PII
       parent_line_number: 5
       snippet: 'cookies[:login] = { value: user.to_json, expires: 1.hour, secure: true }'
+      fingerprint: 81cd660fcd6ad1c761838375c978b235_1
 

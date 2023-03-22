@@ -9,4 +9,5 @@ low:
       filename: fetch_insecure.js
       parent_line_number: 3
       snippet: fetch(insecure_url)
+      fingerprint: ee0e089397c6a22c3dc3dbdd1110359a_0
 

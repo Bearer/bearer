@@ -9,6 +9,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 3
       snippet: Kernel.exec(params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_0
     - rule:
         cwe_ids:
             - "78"
@@ -19,6 +20,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 5
       snippet: spawn(params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_1
     - rule:
         cwe_ids:
             - "78"
@@ -29,6 +31,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 7
       snippet: IO.popen(params[:oops]) {}
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_2
     - rule:
         cwe_ids:
             - "78"
@@ -39,6 +42,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 9
       snippet: Process.exec(params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_3
     - rule:
         cwe_ids:
             - "78"
@@ -49,6 +53,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 11
       snippet: Open3.popen3(["cmd", params[:oops]], "abc") {}
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_4
     - rule:
         cwe_ids:
             - "78"
@@ -59,6 +64,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 13
       snippet: Gem::Util.silent_system(x, params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_5
     - rule:
         cwe_ids:
             - "78"
@@ -69,6 +75,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 15
       snippet: PTY.spawn("/bin/#{params[:oops]}") {}
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_6
     - rule:
         cwe_ids:
             - "78"
@@ -79,6 +86,7 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 17
       snippet: '%x{/bin/#{params[:oops]}}'
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_7
     - rule:
         cwe_ids:
             - "78"
@@ -89,4 +97,5 @@ high:
       filename: unsafe_stdlib.rb
       parent_line_number: 19
       snippet: '`/bin/#{params[:oops]}`'
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_8
 

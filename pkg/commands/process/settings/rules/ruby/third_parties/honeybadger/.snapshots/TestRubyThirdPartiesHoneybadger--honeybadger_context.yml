@@ -14,6 +14,7 @@ medium:
         Honeybadger.context({
           tags: tags
         })
+      fingerprint: 2a45f28c5674d44e38bfeec519c6ab39_0
     - rule:
         cwe_ids:
             - "201"
@@ -29,4 +30,5 @@ medium:
         Honeybadger.context({
           my_data: current_user.email
         })
+      fingerprint: 2a45f28c5674d44e38bfeec519c6ab39_1
 

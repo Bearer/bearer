@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 3
       snippet: 'Sentry.set_user(email: user.email)'
+      fingerprint: 71e9361a1624916b6953641c812be8ef_0
     - rule:
         cwe_ids:
             - "201"
@@ -23,6 +24,7 @@ medium:
         - PII
       parent_line_number: 6
       snippet: 'scope.set_user(email: user.email)'
+      fingerprint: 71e9361a1624916b6953641c812be8ef_1
     - rule:
         cwe_ids:
             - "201"
@@ -35,4 +37,5 @@ medium:
         - PII
       parent_line_number: 10
       snippet: 'scope.set_user(email: user.email)'
+      fingerprint: 71e9361a1624916b6953641c812be8ef_2
 

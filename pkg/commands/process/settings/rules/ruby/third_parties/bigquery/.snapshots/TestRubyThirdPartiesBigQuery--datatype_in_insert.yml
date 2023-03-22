@@ -14,4 +14,5 @@ medium:
         dataset.insert("my_table", rows) do |result|
           call
         end
+      fingerprint: 328d2c307d14fffec14e504772fdae91_0
 

@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 2
       snippet: scope.set_extra(:email, user.email)
+      fingerprint: b3bb44fb228314f74b407bb1f5d88cca_0
     - rule:
         cwe_ids:
             - "201"
@@ -23,4 +24,5 @@ medium:
         - PII
       parent_line_number: 6
       snippet: scope.set_extra(:email, user.email)
+      fingerprint: b3bb44fb228314f74b407bb1f5d88cca_1
 

@@ -12,4 +12,5 @@ high:
         client.query(
         		"SELECT * FROM users WHERE user.name = " + req.params.user.name
         	)
+      fingerprint: c586d90217bd23f25dd04b101a799cbd_0
 

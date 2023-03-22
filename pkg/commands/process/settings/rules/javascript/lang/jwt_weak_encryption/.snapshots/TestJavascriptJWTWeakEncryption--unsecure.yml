@@ -12,4 +12,5 @@ low:
         jwt.sign({ foo: "bar" }, process.env.JWT_SECRET, {
         	algorithm: "none",
         })
+      fingerprint: a9ee605621c71f1b5acba0c3b6d8feca_0
 

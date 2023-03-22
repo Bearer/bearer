@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 4
       snippet: 'client.index({ index: ''users'', body: user })'
+      fingerprint: dc09bd3e7969a32bfa52b7c565cc0813_0
 

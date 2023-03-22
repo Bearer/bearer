@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: localStorage.setItem("user", user)
+      fingerprint: d081e8105d6ae2165d155f17906a1170_0
 

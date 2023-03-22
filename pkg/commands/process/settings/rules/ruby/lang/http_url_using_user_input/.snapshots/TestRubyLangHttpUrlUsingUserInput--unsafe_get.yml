@@ -9,4 +9,5 @@ high:
       filename: unsafe_get.rb
       parent_line_number: 1
       snippet: Faraday.get(params[:oops])
+      fingerprint: 92a4d85c724b164eb2ef93755d9d8ad4_0
 

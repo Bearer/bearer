@@ -20,6 +20,7 @@ medium:
             friends: user.friendCount
           }
         })
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_0
     - rule:
         cwe_ids:
             - "201"
@@ -41,6 +42,7 @@ medium:
             friends: user.friendCount
           }
         })
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_1
     - rule:
         cwe_ids:
             - "201"
@@ -62,6 +64,7 @@ medium:
             friends: user.friendCount
           }
         })
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_2
     - rule:
         cwe_ids:
             - "201"
@@ -74,4 +77,5 @@ medium:
         - PII
       parent_line_number: 18
       snippet: browser.identify(user.email)
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_3
 

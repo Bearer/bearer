@@ -13,6 +13,7 @@ medium:
         else
           change_state
         end
+      fingerprint: 321bd706c0672870ab92a7e6107bf90d_0
     - rule:
         cwe_ids:
             - "650"
@@ -23,6 +24,7 @@ medium:
       filename: unsafe.rb
       parent_line_number: 6
       snippet: change_state unless request.get?
+      fingerprint: 321bd706c0672870ab92a7e6107bf90d_1
     - rule:
         cwe_ids:
             - "650"
@@ -36,4 +38,5 @@ medium:
         unless request.get?
           change_state
         end
+      fingerprint: 321bd706c0672870ab92a7e6107bf90d_2
 

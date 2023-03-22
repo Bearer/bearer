@@ -12,6 +12,7 @@ medium:
         - PII
       parent_line_number: 5
       snippet: rsa_encrypt.export(cipher, user.password)
+      fingerprint: f7881251d777fec00daf7eac6b5d2ace_0
     - rule:
         cwe_ids:
             - "331"
@@ -25,4 +26,5 @@ medium:
         - PII
       parent_line_number: 7
       snippet: OpenSSL::PKey::RSA.new(1024).to_pem(cipher, user.first_name)
+      fingerprint: f7881251d777fec00daf7eac6b5d2ace_1
 

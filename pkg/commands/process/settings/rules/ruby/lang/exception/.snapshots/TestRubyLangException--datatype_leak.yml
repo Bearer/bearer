@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: raise CustomException.new(user.email)
+      fingerprint: 865a10823630b4befef09e4971d946ef_0
     - rule:
         cwe_ids:
             - "210"
@@ -23,4 +24,5 @@ medium:
         - PII
       parent_line_number: 2
       snippet: 'raise "User doesn''t exist #{user.email}"'
+      fingerprint: 865a10823630b4befef09e4971d946ef_1
 

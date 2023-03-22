@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: newrelic.setPageViewName(customer.bank_account_number, "$host")
+      fingerprint: 6070c362168c8594f5eb6151fc31b55d_0
 

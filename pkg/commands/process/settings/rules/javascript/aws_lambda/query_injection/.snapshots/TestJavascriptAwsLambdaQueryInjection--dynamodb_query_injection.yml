@@ -9,6 +9,7 @@ high:
       filename: dynamodb_query_injection.js
       parent_line_number: 10
       snippet: new QueryCommand(params)
+      fingerprint: 66820ec309f9420978198526e6038a5f_0
     - rule:
         cwe_ids:
             - "89"
@@ -19,6 +20,7 @@ high:
       filename: dynamodb_query_injection.js
       parent_line_number: 18
       snippet: docClient.query(event["query"]["params"], function(err, data) {})
+      fingerprint: 66820ec309f9420978198526e6038a5f_1
     - rule:
         cwe_ids:
             - "89"
@@ -29,4 +31,5 @@ high:
       filename: dynamodb_query_injection.js
       parent_line_number: 32
       snippet: new QueryCommand(params)
+      fingerprint: 66820ec309f9420978198526e6038a5f_2
 

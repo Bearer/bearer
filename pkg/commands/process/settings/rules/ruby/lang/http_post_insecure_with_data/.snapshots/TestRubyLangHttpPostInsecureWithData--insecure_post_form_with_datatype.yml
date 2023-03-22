@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'Net::HTTP.post_form("http://my.api.com/users/search", email: user.email)'
+      fingerprint: 77b5d28f826f72f969f4cb7b2d6e9897_0
     - rule:
         cwe_ids:
             - "319"
@@ -23,4 +24,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'Net::HTTP.post_form("http://my.api.com/users/search", email: user.email)'
+      fingerprint: bc934c346ffa45c50d2798c4e415c59d_0
 

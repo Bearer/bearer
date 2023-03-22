@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 2
       snippet: 'JWT.encode({ user: current_user.email }, private_key, ''HS256'', {})'
+      fingerprint: 5e7436068f843fa9eea7a6cf286b1077_0
     - rule:
         cwe_ids:
             - "315"
@@ -23,6 +24,7 @@ medium:
         - PII
       parent_line_number: 4
       snippet: 'JWT.encode({ user: current_user.email }, ENV["SECRET_KEY"])'
+      fingerprint: 5e7436068f843fa9eea7a6cf286b1077_1
     - rule:
         cwe_ids:
             - "315"
@@ -35,4 +37,5 @@ medium:
         - PII
       parent_line_number: 6
       snippet: 'JWT.encode({ user_name: user.name }, Rails.application.secret_key_base)'
+      fingerprint: 5e7436068f843fa9eea7a6cf286b1077_2
 

@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: newrelic.setCustomAttribute("user-id", customer.email)
+      fingerprint: 8103bc131e1f7ba4ffd808778772b56f_0
 

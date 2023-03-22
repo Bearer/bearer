@@ -15,4 +15,5 @@ medium:
           message: `my message for ${user.email}`,
           // ...
         })
+      fingerprint: 51f5ec8e972ab1d8ac18a963406e1ff4_0
 

@@ -13,4 +13,5 @@ low:
         blowfish.encrypt_block do
           "hello world"
         end
+      fingerprint: c290db874048c71a3f2807bb4ef98936_0
 

@@ -22,4 +22,5 @@ medium:
             file.close!
           end
         end
+      fingerprint: 9216dc42897b21b951350ad3b2eef2b1_0
 

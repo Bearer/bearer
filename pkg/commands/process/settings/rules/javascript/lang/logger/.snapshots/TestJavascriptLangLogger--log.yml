@@ -12,4 +12,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: log.info(user.name)
+      fingerprint: fe37ae4c682eb60e39d100fdfcd972c4_0
 

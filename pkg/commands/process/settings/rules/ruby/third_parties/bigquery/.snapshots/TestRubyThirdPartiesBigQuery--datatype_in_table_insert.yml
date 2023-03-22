@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 8
       snippet: table.insert(rows)
+      fingerprint: b40296bda3e30b75726bc80914ac6ffd_0
 

@@ -12,6 +12,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: RC4.new("insecure").encrypt(user.password)
+      fingerprint: a676d8e887d90aa629560bc01c04367f_0
     - rule:
         cwe_ids:
             - "331"
@@ -25,6 +26,7 @@ medium:
         - PII
       parent_line_number: 4
       snippet: rc4_encrypt.encrypt!(user.password)
+      fingerprint: a676d8e887d90aa629560bc01c04367f_1
     - rule:
         cwe_ids:
             - "326"
@@ -38,6 +40,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: RC4.new("insecure").encrypt(user.password)
+      fingerprint: 74009776053c7b35b9dac0a188aed511_0
     - rule:
         cwe_ids:
             - "326"
@@ -51,4 +54,5 @@ medium:
         - PII
       parent_line_number: 4
       snippet: rc4_encrypt.encrypt!(user.password)
+      fingerprint: 74009776053c7b35b9dac0a188aed511_1
 

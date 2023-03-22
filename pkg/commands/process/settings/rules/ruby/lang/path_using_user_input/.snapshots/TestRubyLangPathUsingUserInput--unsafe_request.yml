@@ -10,6 +10,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 1
       snippet: 'Dir["foo", base: request.env[:oops]]'
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_0
     - rule:
         cwe_ids:
             - "22"
@@ -21,6 +22,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 3
       snippet: Dir.chdir("/home/#{request.env[:oops]}")
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_1
     - rule:
         cwe_ids:
             - "22"
@@ -32,6 +34,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 5
       snippet: File.exist?(request.env[:oops])
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_2
     - rule:
         cwe_ids:
             - "22"
@@ -43,6 +46,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 7
       snippet: IO.readlines("/home/#{request.env[:oops]}")
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_3
     - rule:
         cwe_ids:
             - "22"
@@ -56,6 +60,7 @@ high:
       snippet: |-
         Kernel.open(request.env[:oops], "w+") do
         end
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_4
     - rule:
         cwe_ids:
             - "22"
@@ -67,6 +72,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 12
       snippet: open(request.env[:oops])
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_5
     - rule:
         cwe_ids:
             - "22"
@@ -78,6 +84,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 14
       snippet: PStore.new(request.env[:oops])
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_6
     - rule:
         cwe_ids:
             - "22"
@@ -89,6 +96,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 16
       snippet: Pathname.new(request.env[:oops])
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_7
     - rule:
         cwe_ids:
             - "22"
@@ -100,6 +108,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 17
       snippet: path + request.headers[:oops]
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_8
     - rule:
         cwe_ids:
             - "22"
@@ -111,6 +120,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 18
       snippet: path / request.query_parameters[:oops]
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_9
     - rule:
         cwe_ids:
             - "22"
@@ -122,4 +132,5 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 19
       snippet: path.join("a", request.body)
+      fingerprint: 89bd6bf8a581031b477b5953c7a3bb28_10
 

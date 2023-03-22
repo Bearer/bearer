@@ -9,6 +9,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 3
       snippet: Net::HTTP.post_form("http://#{params[:oops]}/users/search")
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_0
     - rule:
         cwe_ids:
             - "918"
@@ -22,6 +23,7 @@ high:
         Net::HTTP.start(params[:host]) do |instance1|
           instance1.head(params[:path])
         end
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_1
     - rule:
         cwe_ids:
             - "918"
@@ -32,6 +34,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 6
       snippet: instance1.head(params[:path])
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_2
     - rule:
         cwe_ids:
             - "918"
@@ -42,6 +45,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 9
       snippet: 'Net::HTTP::Get.new(params[:oops], { "X-Test": 42 })'
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_3
     - rule:
         cwe_ids:
             - "918"
@@ -52,6 +56,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 11
       snippet: Net::HTTP.start(params[:oops])
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_4
     - rule:
         cwe_ids:
             - "918"
@@ -62,6 +67,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 12
       snippet: instance2.ipaddr = request.env[:oops]
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_5
     - rule:
         cwe_ids:
             - "918"
@@ -72,6 +78,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 13
       snippet: instance2.send_request("GET", params[:oops], nil)
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_6
     - rule:
         cwe_ids:
             - "918"
@@ -82,6 +89,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 15
       snippet: Net::HTTP.new(params[:oops])
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_7
     - rule:
         cwe_ids:
             - "918"
@@ -92,6 +100,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 16
       snippet: instance3.patch(params[:path])
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_8
     - rule:
         cwe_ids:
             - "918"
@@ -102,6 +111,7 @@ high:
       filename: unsafe_net_http.rb
       parent_line_number: 18
       snippet: instance4.post(request.env[:oops])
+      fingerprint: d7e95ef774e486e9ed6deb86c1f22c5e_9
 low:
     - rule:
         cwe_ids:
@@ -113,4 +123,5 @@ low:
       filename: unsafe_net_http.rb
       parent_line_number: 3
       snippet: Net::HTTP.post_form("http://#{params[:oops]}/users/search")
+      fingerprint: 71635572f6c2736df1473f18c62a4464_0
 

@@ -16,4 +16,5 @@ medium:
           message: "Authenticated user #{user.email}",
           level: "info"
         )
+      fingerprint: 600f087e68efb2b7dacceb08829fd4c1_0
 

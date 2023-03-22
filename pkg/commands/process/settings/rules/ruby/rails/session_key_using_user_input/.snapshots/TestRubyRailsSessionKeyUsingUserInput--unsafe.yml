@@ -9,6 +9,7 @@ high:
       filename: unsafe.rb
       parent_line_number: 1
       snippet: session[params[:key]]
+      fingerprint: 87849f6231d866eb3f686e3113f68907_0
     - rule:
         cwe_ids:
             - "276"
@@ -19,6 +20,7 @@ high:
       filename: unsafe.rb
       parent_line_number: 3
       snippet: session[request.env[:key]]
+      fingerprint: 87849f6231d866eb3f686e3113f68907_1
     - rule:
         cwe_ids:
             - "276"
@@ -29,4 +31,5 @@ high:
       filename: unsafe.rb
       parent_line_number: 5
       snippet: session["test-#{cookies["oops"]}"]
+      fingerprint: 87849f6231d866eb3f686e3113f68907_2
 

@@ -13,4 +13,5 @@ high:
             name: "MyCustomError",
             message: req.params.error
           })
+      fingerprint: 6a5dfee75fcbe696dcfb98d2c9f41309_0
 

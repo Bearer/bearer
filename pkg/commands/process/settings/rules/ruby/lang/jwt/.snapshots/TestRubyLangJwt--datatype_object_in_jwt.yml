@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 6
       snippet: JWT.encode(payload, ENV.fetch("SECRET_KEY"))
+      fingerprint: aca904d7e3ea640d8731a1c880d8d489_0
 

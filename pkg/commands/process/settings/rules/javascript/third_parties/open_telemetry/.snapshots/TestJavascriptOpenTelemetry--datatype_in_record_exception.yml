@@ -11,4 +11,5 @@ high:
         - Personal Data
       parent_line_number: 9
       snippet: span.recordException(currentUser.ipAddress)
+      fingerprint: 5734006b93afe02b2c6b1ad94dd00a65_0
 

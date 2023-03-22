@@ -9,4 +9,5 @@ high:
       filename: unsafe_post.rb
       parent_line_number: 1
       snippet: Faraday.post(params[:oops])
+      fingerprint: 0fb264051314da6648d8c781340da923_0
 

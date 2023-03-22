@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: JWT.encode user.address, nil, "none"
+      fingerprint: 19adccb3dfd7120b5c2428755885153c_0
 

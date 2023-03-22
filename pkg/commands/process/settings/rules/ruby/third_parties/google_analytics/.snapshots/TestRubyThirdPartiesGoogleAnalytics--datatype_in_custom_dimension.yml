@@ -14,4 +14,5 @@ medium:
         Google::Apis::AnalyticsreportingV4::CustomDimension.new(
           value: user.email
         )
+      fingerprint: 20835043be22cc0d750385881269f91d_0
 

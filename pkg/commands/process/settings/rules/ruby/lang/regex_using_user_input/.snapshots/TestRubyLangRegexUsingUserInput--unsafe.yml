@@ -9,6 +9,7 @@ low:
       filename: unsafe.rb
       parent_line_number: 1
       snippet: /#{params[:oops]}.*/
+      fingerprint: 1e8ee47f5cc7f8e0addb596acc3642ab_0
     - rule:
         cwe_ids:
             - "1333"
@@ -19,6 +20,7 @@ low:
       filename: unsafe.rb
       parent_line_number: 3
       snippet: '%r{abc#{params[:oops]}def}'
+      fingerprint: 1e8ee47f5cc7f8e0addb596acc3642ab_1
     - rule:
         cwe_ids:
             - "1333"
@@ -29,4 +31,5 @@ low:
       filename: unsafe.rb
       parent_line_number: 5
       snippet: Regexp.new(params[:oops])
+      fingerprint: 1e8ee47f5cc7f8e0addb596acc3642ab_2
 

@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'Honeybadger.add_breadcrumb("Email Sent", metadata: { user_email: current_user.email, message: message })'
+      fingerprint: 4b5b56156abc4628eb657377754429a1_0
 

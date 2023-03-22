@@ -10,6 +10,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 1
       snippet: RubyVM::InstructionSequence.compile(params["oops"])
+      fingerprint: d047dec078244cc582c4250294366633_0
     - rule:
         cwe_ids:
             - "94"
@@ -21,6 +22,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 3
       snippet: a.eval(params["oops"], "test")
+      fingerprint: d047dec078244cc582c4250294366633_1
     - rule:
         cwe_ids:
             - "94"
@@ -32,6 +34,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 5
       snippet: a.instance_eval(params["oops"])
+      fingerprint: d047dec078244cc582c4250294366633_2
     - rule:
         cwe_ids:
             - "94"
@@ -43,6 +46,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 7
       snippet: a.class_eval(params["oops"])
+      fingerprint: d047dec078244cc582c4250294366633_3
     - rule:
         cwe_ids:
             - "94"
@@ -54,6 +58,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 9
       snippet: a.module_eval(params["oops"])
+      fingerprint: d047dec078244cc582c4250294366633_4
     - rule:
         cwe_ids:
             - "94"
@@ -65,6 +70,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 11
       snippet: eval(params["oops"])
+      fingerprint: d047dec078244cc582c4250294366633_5
     - rule:
         cwe_ids:
             - "94"
@@ -76,6 +82,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 13
       snippet: instance_eval(params["oops"], "test")
+      fingerprint: d047dec078244cc582c4250294366633_6
     - rule:
         cwe_ids:
             - "94"
@@ -87,6 +94,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 15
       snippet: class_eval(params["oops"])
+      fingerprint: d047dec078244cc582c4250294366633_7
     - rule:
         cwe_ids:
             - "94"
@@ -98,4 +106,5 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 17
       snippet: module_eval(params["oops"])
+      fingerprint: d047dec078244cc582c4250294366633_8
 

@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: CryptoJS.DES.encrypt(user.email, "secret key")
+      fingerprint: 6aba15ca33da3c20cb7c9872f985d625_0
 

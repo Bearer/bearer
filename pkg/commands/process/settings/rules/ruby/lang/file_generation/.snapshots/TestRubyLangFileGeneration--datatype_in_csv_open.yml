@@ -17,6 +17,7 @@ medium:
         			user.first_name,
         			user.last_name
         		]
+      fingerprint: 8bd0e497c50734bec32b81e68648901d_0
     - rule:
         cwe_ids:
             - "532"
@@ -35,6 +36,7 @@ medium:
         			user.first_name,
         			user.last_name
         		]
+      fingerprint: 8bd0e497c50734bec32b81e68648901d_1
     - rule:
         cwe_ids:
             - "532"
@@ -53,4 +55,5 @@ medium:
         			user.first_name,
         			user.last_name
         		]
+      fingerprint: 8bd0e497c50734bec32b81e68648901d_2
 

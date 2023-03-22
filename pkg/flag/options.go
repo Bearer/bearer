@@ -35,6 +35,9 @@ type Flag struct {
 	// DisableInConfig represents if flag should be present in config
 	DisableInConfig bool
 
+	// Do not show flag in the helper
+	Hide bool
+
 	// Deprecated represents if the flag is deprecated
 	Deprecated bool
 }
@@ -193,11 +196,10 @@ func (f *Flags) AddFlags(cmd *cobra.Command) {
 func (f *Flags) Usages(cmd *cobra.Command) string {
 	var usages string
 	for _, group := range f.groups() {
-
 		flags := pflag.NewFlagSet(cmd.Name(), pflag.ContinueOnError)
 		lflags := cmd.LocalFlags()
 		for _, flag := range group.Flags() {
-			if flag == nil || flag.Name == "" {
+			if flag == nil || flag.Name == "" || flag.Hide {
 				continue
 			}
 			flags.AddFlag(lflags.Lookup(flag.Name))

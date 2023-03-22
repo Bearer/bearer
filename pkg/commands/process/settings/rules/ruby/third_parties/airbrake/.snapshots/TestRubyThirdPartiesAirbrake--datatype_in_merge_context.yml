@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 2
       snippet: 'Airbrake.merge_context(users: users)'
+      fingerprint: e663a260055d6ba0fdf096e997420627_0
 

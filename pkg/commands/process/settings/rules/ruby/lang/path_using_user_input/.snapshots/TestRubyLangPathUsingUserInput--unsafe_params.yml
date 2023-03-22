@@ -10,6 +10,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 1
       snippet: 'Dir["foo", base: params[:oops]]'
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_0
     - rule:
         cwe_ids:
             - "22"
@@ -21,6 +22,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 3
       snippet: Dir.chdir("/home/#{params[:oops]}")
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_1
     - rule:
         cwe_ids:
             - "22"
@@ -32,6 +34,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 5
       snippet: File.exist?(params[:oops])
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_2
     - rule:
         cwe_ids:
             - "22"
@@ -43,6 +46,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 7
       snippet: IO.readlines("/home/#{params[:oops]}")
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_3
     - rule:
         cwe_ids:
             - "22"
@@ -56,6 +60,7 @@ high:
       snippet: |-
         Kernel.open(params[:oops], "w+") do
         end
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_4
     - rule:
         cwe_ids:
             - "22"
@@ -67,6 +72,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 12
       snippet: open(params[:oops])
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_5
     - rule:
         cwe_ids:
             - "22"
@@ -78,6 +84,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 14
       snippet: PStore.new(params[:oops])
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_6
     - rule:
         cwe_ids:
             - "22"
@@ -89,6 +96,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 16
       snippet: Pathname.new(params[:oops])
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_7
     - rule:
         cwe_ids:
             - "22"
@@ -100,6 +108,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 17
       snippet: path + params[:two]
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_8
     - rule:
         cwe_ids:
             - "22"
@@ -111,6 +120,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 18
       snippet: path / params[:three]
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_9
     - rule:
         cwe_ids:
             - "22"
@@ -122,6 +132,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 19
       snippet: path.join("a", params[:four])
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_10
     - rule:
         cwe_ids:
             - "22"
@@ -133,6 +144,7 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 21
       snippet: Rails.root.join(params[:oops])
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_11
     - rule:
         cwe_ids:
             - "22"
@@ -144,4 +156,5 @@ high:
       filename: unsafe_params.rb
       parent_line_number: 23
       snippet: Gem::Util.traverse_parents(params[:oops]) {}
+      fingerprint: 6f8801902ec5f070e313ae5cb0f96344_12
 
