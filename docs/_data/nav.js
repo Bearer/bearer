@@ -6,6 +6,7 @@ module.exports = [
   {
     name: "Guides",
     items: [
+      { name: "Configure the scan", url: "/guides/configure-scan/" },
       { name: "Using the GitHub action", url: "/guides/github-action/" },
       {
         name: "Create a custom rule",
@@ -27,7 +28,7 @@ module.exports = [
       {
         name: "Sensitive data flow",
         url: "/explanations/discovery-and-classification/",
-      }
+      },
     ],
   },
   {
@@ -38,7 +39,7 @@ module.exports = [
       { name: "Commands", url: "/reference/commands/" },
       { name: "Rules", url: "/reference/rules/" },
       { name: "Data Types", url: "/reference/datatypes/" },
-      { name: "Supported Languages", url: "/reference/supported-languages/" }
+      { name: "Supported Languages", url: "/reference/supported-languages/" },
     ],
   },
   {

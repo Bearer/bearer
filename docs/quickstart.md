@@ -79,8 +79,6 @@ WARNING: 6
 
 ```
 
-The security report is just one [report type](/explanations/reports) available in Bearer.
+The security report is just one [report type](/explanations/reports/) available in Bearer.
 
-Additional options for using and configuring the `scan` command can be found in the [scan documentation](/reference/commands/#scan). 
-
-For additional guides and usage tips, [view the docs](/).
+Ready for the next step? Additional options for using and configuring the `scan` command can be found in [configuring the scan command](/guides/configure-scan/).
