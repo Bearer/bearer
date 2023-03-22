@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Bugsnag.start({
           onError: function (e) {
             e.setUser(user.id, user.email, user.name)
@@ -33,7 +33,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Bugsnag.start({
           onError: function (e) {
             e.setUser(user.id, user.email, user.name)
@@ -56,7 +56,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Bugsnag.start({
           onError: function (e) {
             e.setUser(user.id, user.email, user.name)
@@ -68,5 +68,4 @@ medium:
             session.setUser(user.email)
           }
         })
-
 

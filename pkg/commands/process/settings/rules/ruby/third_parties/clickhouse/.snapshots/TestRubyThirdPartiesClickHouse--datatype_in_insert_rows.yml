@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         rows << [
               "123",
               2022,
@@ -28,12 +28,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         rows << [
               "123",
               2022,
               customer.email,
               customer.address
             ]
-
 

@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 18
-      parent_content: |-
+      snippet: |-
         fs.writeFile("data.csv", JSON.stringify(users), "utf-8", (err) => {
           if (err) console.log(err)
           else console.log("Data saved")
@@ -26,7 +26,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 18
-      parent_content: |-
+      snippet: |-
         fs.writeFile("data.csv", JSON.stringify(users), "utf-8", (err) => {
           if (err) console.log(err)
           else console.log("Data saved")
@@ -42,10 +42,9 @@ medium:
       category_groups:
         - PII
       parent_line_number: 18
-      parent_content: |-
+      snippet: |-
         fs.writeFile("data.csv", JSON.stringify(users), "utf-8", (err) => {
           if (err) console.log(err)
           else console.log("Data saved")
         })
-
 

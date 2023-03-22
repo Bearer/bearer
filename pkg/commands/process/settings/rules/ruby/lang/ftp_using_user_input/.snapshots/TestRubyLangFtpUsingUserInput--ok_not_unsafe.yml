@@ -8,7 +8,7 @@ low:
       line_number: 1
       filename: ok_not_unsafe.rb
       parent_line_number: 1
-      parent_content: Net::FTP.new(x)
+      snippet: Net::FTP.new(x)
     - rule:
         cwe_ids:
             - "319"
@@ -18,7 +18,7 @@ low:
       line_number: 3
       filename: ok_not_unsafe.rb
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Net::FTP.open("example.com", username: "user") do
 
         end
@@ -31,6 +31,5 @@ low:
       line_number: 8
       filename: ok_not_unsafe.rb
       parent_line_number: 8
-      parent_content: Net::FTP.open("example.com")
-
+      snippet: Net::FTP.open("example.com")
 

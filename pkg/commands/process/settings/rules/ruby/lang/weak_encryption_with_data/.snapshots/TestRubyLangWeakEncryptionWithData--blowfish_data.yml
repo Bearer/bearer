@@ -11,7 +11,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block { |user|
           user.password
         }
@@ -27,7 +27,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block do |user|
           user.password
         end
@@ -43,7 +43,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 9
-      parent_content: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+      snippet: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
     - rule:
         cwe_ids:
             - "326"
@@ -56,7 +56,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block { |user|
           user.password
         }
@@ -72,7 +72,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block do |user|
           user.password
         end
@@ -88,6 +88,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 9
-      parent_content: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
-
+      snippet: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
 

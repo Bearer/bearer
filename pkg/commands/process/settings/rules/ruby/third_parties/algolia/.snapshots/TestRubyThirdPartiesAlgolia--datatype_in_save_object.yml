@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: 'index.save_object({ email: user.email }, { auto_generate_object_id_if_not_exist: true })'
+      snippet: 'index.save_object({ email: user.email }, { auto_generate_object_id_if_not_exist: true })'
     - rule:
         cwe_ids:
             - "201"
@@ -22,6 +22,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: 'index.save_objects([{ email: user.email }], { auto_generate_object_id_if_not_exist: true })'
-
+      snippet: 'index.save_objects([{ email: user.email }], { auto_generate_object_id_if_not_exist: true })'
 

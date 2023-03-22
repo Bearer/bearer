@@ -8,6 +8,5 @@ low:
       line_number: 13
       filename: insecure_liquid_template.js
       parent_line_number: 13
-      parent_content: 'engine.render(req.params.text, { hello: "world" })'
-
+      snippet: 'engine.render(req.params.text, { hello: "world" })'
 

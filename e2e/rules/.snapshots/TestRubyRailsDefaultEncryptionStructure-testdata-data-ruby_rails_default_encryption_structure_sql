@@ -10,7 +10,7 @@ warning:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         CREATE TABLE public.users (
           id bigint NOT NULL,
           name character varying,

@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: span.setAttribute("current-user", currentUser.emailAddress)
+      snippet: span.setAttribute("current-user", currentUser.emailAddress)
     - rule:
         cwe_ids:
             - "201"
@@ -22,6 +22,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 11
-      parent_content: span.setAttribute("current-user", user.email)
-
+      snippet: span.setAttribute("current-user", user.email)
 

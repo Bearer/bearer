@@ -8,6 +8,5 @@ medium:
       line_number: 3
       filename: unsecure.rb
       parent_line_number: 3
-      parent_content: redirect_to(params[:id])
-
+      snippet: redirect_to(params[:id])
 

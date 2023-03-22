@@ -8,6 +8,5 @@ low:
       line_number: 2
       filename: axios_insecure.js
       parent_line_number: 2
-      parent_content: axios.get(insecure_url)
-
+      snippet: axios.get(insecure_url)
 

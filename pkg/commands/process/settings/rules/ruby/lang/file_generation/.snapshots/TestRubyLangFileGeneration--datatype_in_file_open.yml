@@ -11,7 +11,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'f.write "#{Time.now} - User #{user.email} logged in\n"'
+      snippet: 'f.write "#{Time.now} - User #{user.email} logged in\n"'
     - rule:
         cwe_ids:
             - "532"
@@ -24,6 +24,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: f.write "#{user.email},#{user.first_name},#{user.last_name}"
-
+      snippet: f.write "#{user.email},#{user.first_name},#{user.last_name}"
 

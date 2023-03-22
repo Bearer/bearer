@@ -10,7 +10,7 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 8
-      parent_content: |-
+      snippet: |-
         index
           .saveObject(userObj, { autoGenerateObjectIDIfNotExist: true })
 medium:
@@ -25,6 +25,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 12
-      parent_content: 'index.saveObjects([{ email: user.email }])'
-
+      snippet: 'index.saveObjects([{ email: user.email }])'
 

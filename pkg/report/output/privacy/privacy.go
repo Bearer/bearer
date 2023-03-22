@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/rego"
+	"github.com/hhatto/gocloc"
 	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
@@ -85,10 +86,10 @@ type Report struct {
 	ThirdParty []ThirdParty `json:"third_party,omitempty" yaml:"third_party"`
 }
 
-func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
+func BuildCsvString(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
 	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed\n")
-	result, err := GetOutput(dataflow, config)
+	result, _, _, err := GetOutput(dataflow, lineOfCodeOutput, config)
 	if err != nil {
 		return csvStr, err
 	}
@@ -127,7 +128,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	return csvStr, nil
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, error) {
+func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, config settings.Config) (*Report, *gocloc.Result, *dataflow.DataFlow, error) {
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
@@ -181,19 +182,19 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			},
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return nil, err
+			return nil, nil, nil, err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 
 			var ruleOutput map[string][]RuleOutput
 			err = json.Unmarshal(jsonRes, &ruleOutput)
 			if err != nil {
-				return nil, err
+				return nil, nil, nil, err
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
@@ -291,20 +292,23 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			Dataflow:       dataflow,
 			DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 		},
-		privacyReportPolicy.Modules.ToRegoModules())
+		privacyReportPolicy.Modules.ToRegoModules(),
+	)
+
 	if err != nil {
-		return nil, err
+		return nil, nil, nil, err
 	}
+
 	if len(rs) > 0 {
 		jsonRes, err := json.Marshal(rs)
 		if err != nil {
-			return nil, err
+			return nil, nil, nil, err
 		}
 
 		var outputItems map[string][]Output
 		err = json.Unmarshal(jsonRes, &outputItems)
 		if err != nil {
-			return nil, err
+			return nil, nil, nil, err
 		}
 
 		for _, outputItem := range outputItems["items"] {
@@ -366,7 +370,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 	return &Report{
 		Subjects:   maps.Values(subjectInventory),
 		ThirdParty: thirdPartyInventory,
-	}, nil
+	}, lineOfCodeOutput, dataflow, nil
 }
 
 func buildKey(dataSubject string, dataType string) string {

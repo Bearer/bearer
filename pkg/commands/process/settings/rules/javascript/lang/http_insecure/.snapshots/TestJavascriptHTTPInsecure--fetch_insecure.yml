@@ -8,6 +8,5 @@ low:
       line_number: 3
       filename: fetch_insecure.js
       parent_line_number: 3
-      parent_content: fetch(insecure_url)
-
+      snippet: fetch(insecure_url)
 

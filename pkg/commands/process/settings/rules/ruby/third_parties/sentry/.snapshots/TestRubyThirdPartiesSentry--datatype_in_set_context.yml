@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'Sentry.set_context(''email'', { email: user.email })'
+      snippet: 'Sentry.set_context(''email'', { email: user.email })'
     - rule:
         cwe_ids:
             - "201"
@@ -22,7 +22,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: 'scope.set_context(''email'', { email: user.email })'
+      snippet: 'scope.set_context(''email'', { email: user.email })'
     - rule:
         cwe_ids:
             - "201"
@@ -34,6 +34,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 8
-      parent_content: 'scope.set_context(''email'', { email: user.email })'
-
+      snippet: 'scope.set_context(''email'', { email: user.email })'
 

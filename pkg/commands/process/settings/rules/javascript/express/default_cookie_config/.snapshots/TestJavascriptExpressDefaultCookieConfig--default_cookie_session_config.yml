@@ -9,12 +9,11 @@ medium:
       line_number: 11
       filename: default_cookie_session_config.js
       parent_line_number: 11
-      parent_content: |-
+      snippet: |-
         {
             domain: "example.com",
             httpOnly: false,
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
           }
-
 

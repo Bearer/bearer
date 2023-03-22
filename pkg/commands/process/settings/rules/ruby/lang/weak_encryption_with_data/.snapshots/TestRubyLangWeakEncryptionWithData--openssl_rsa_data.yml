@@ -11,7 +11,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: rsa_encrypt.export(cipher, user.password)
+      snippet: rsa_encrypt.export(cipher, user.password)
     - rule:
         cwe_ids:
             - "331"
@@ -24,6 +24,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: OpenSSL::PKey::RSA.new(1024).to_pem(cipher, user.first_name)
-
+      snippet: OpenSSL::PKey::RSA.new(1024).to_pem(cipher, user.first_name)
 

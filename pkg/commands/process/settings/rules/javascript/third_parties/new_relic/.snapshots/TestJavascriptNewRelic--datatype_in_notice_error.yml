@@ -10,6 +10,5 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 7
-      parent_content: newrelic.noticeError(err, customer.ip_address)
-
+      snippet: newrelic.noticeError(err, customer.ip_address)
 

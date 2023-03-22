@@ -8,7 +8,7 @@ low:
       line_number: 20
       filename: ok_not_unsafe.rb
       parent_line_number: 20
-      parent_content: 'Excon.new("http://example.com", path: x)'
+      snippet: 'Excon.new("http://example.com", path: x)'
     - rule:
         cwe_ids:
             - "319"
@@ -18,7 +18,7 @@ low:
       line_number: 34
       filename: ok_not_unsafe.rb
       parent_line_number: 34
-      parent_content: 'Excon.post("http://example.com", path: x)'
+      snippet: 'Excon.post("http://example.com", path: x)'
     - rule:
         cwe_ids:
             - "319"
@@ -28,6 +28,5 @@ low:
       line_number: 40
       filename: ok_not_unsafe.rb
       parent_line_number: 40
-      parent_content: Net::HTTP.post_form("http://#{x}/users/search")
-
+      snippet: Net::HTTP.post_form("http://#{x}/users/search")
 

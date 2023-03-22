@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: 'NewRelic::Agent.notice_error(exception, { custom_params: user })'
+      snippet: 'NewRelic::Agent.notice_error(exception, { custom_params: user })'
     - rule:
         cwe_ids:
             - "201"
@@ -22,6 +22,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: 'NewRelic::Agent.notice_error(exception, expected: true, custom_params: { last_name: "foo" }, metric: "test")'
-
+      snippet: 'NewRelic::Agent.notice_error(exception, expected: true, custom_params: { last_name: "foo" }, metric: "test")'
 

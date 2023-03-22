@@ -8,7 +8,7 @@ low:
       line_number: 3
       filename: insecure_curb.rb
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Curl.http("GET", "http://my.api.com/users/search", nil) do
         end
     - rule:
@@ -20,7 +20,7 @@ low:
       line_number: 6
       filename: insecure_curb.rb
       parent_line_number: 6
-      parent_content: Curl.get("http://my.api.com/users/search") {}
+      snippet: Curl.get("http://my.api.com/users/search") {}
     - rule:
         cwe_ids:
             - "319"
@@ -30,7 +30,7 @@ low:
       line_number: 8
       filename: insecure_curb.rb
       parent_line_number: 8
-      parent_content: Curl::Easy.perform("http://my.api.com/users/search") {}
+      snippet: Curl::Easy.perform("http://my.api.com/users/search") {}
     - rule:
         cwe_ids:
             - "319"
@@ -40,7 +40,7 @@ low:
       line_number: 10
       filename: insecure_curb.rb
       parent_line_number: 10
-      parent_content: Curl::Easy.new("http://my.api.com/users/search") {}
+      snippet: Curl::Easy.new("http://my.api.com/users/search") {}
     - rule:
         cwe_ids:
             - "319"
@@ -50,7 +50,7 @@ low:
       line_number: 11
       filename: insecure_curb.rb
       parent_line_number: 11
-      parent_content: easy.url = "http://my.api.com/customers"
+      snippet: easy.url = "http://my.api.com/customers"
     - rule:
         cwe_ids:
             - "319"
@@ -60,7 +60,7 @@ low:
       line_number: 14
       filename: insecure_curb.rb
       parent_line_number: 14
-      parent_content: easy2.url = "http://my.api.com/users/search"
+      snippet: easy2.url = "http://my.api.com/users/search"
     - rule:
         cwe_ids:
             - "319"
@@ -70,7 +70,7 @@ low:
       line_number: 16
       filename: insecure_curb.rb
       parent_line_number: 16
-      parent_content: Curl::Multi.get(["https://my.api.com/secure", "http://my.api.com/users/search"], {}) {}
+      snippet: Curl::Multi.get(["https://my.api.com/secure", "http://my.api.com/users/search"], {}) {}
     - rule:
         cwe_ids:
             - "319"
@@ -80,6 +80,5 @@ low:
       line_number: 18
       filename: insecure_curb.rb
       parent_line_number: 18
-      parent_content: 'Curl::Multi.http([{ url: "http://my.api.com/users/search", method: :post }]) {}'
-
+      snippet: 'Curl::Multi.http([{ url: "http://my.api.com/users/search", method: :post }]) {}'
 

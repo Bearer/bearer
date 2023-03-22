@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Honeybadger.context({
           tags: tags
         })
@@ -25,9 +25,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: |-
+      snippet: |-
         Honeybadger.context({
           my_data: current_user.email
         })
-
 

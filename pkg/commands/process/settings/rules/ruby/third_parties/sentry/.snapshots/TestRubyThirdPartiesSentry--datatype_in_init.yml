@@ -10,6 +10,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: 'breadcrumb.message = "Authenticated user #{current_user.email}"'
-
+      snippet: 'breadcrumb.message = "Authenticated user #{current_user.email}"'
 

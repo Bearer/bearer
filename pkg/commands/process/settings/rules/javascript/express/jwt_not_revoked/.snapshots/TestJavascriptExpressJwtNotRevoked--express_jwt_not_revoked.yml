@@ -8,6 +8,5 @@ low:
       line_number: 11
       filename: express_jwt_not_revoked.js
       parent_line_number: 11
-      parent_content: 'expressjwt({ secret: config.secret, algorithms: ["HS256"] })'
-
+      snippet: 'expressjwt({ secret: config.secret, algorithms: ["HS256"] })'
 

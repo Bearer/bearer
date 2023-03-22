@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
+      snippet: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
     - rule:
         cwe_ids:
             - "319"
@@ -22,6 +22,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
-
+      snippet: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
 

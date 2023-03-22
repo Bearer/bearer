@@ -8,6 +8,5 @@ low:
       line_number: 7
       filename: require_destructured_resource.js
       parent_line_number: 7
-      parent_content: require(path)
-
+      snippet: require(path)
 

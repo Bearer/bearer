@@ -10,6 +10,5 @@ high:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: config.force_ssl = false
-
+      snippet: config.force_ssl = false
 

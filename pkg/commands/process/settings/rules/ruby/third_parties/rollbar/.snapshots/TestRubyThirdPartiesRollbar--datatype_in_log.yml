@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'Rollbar.log("error", "oops #{user.email}")'
+      snippet: 'Rollbar.log("error", "oops #{user.email}")'
     - rule:
         cwe_ids:
             - "201"
@@ -22,7 +22,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: 'Rollbar.log("error", "oops", user: { email: "someone@example.com" })'
+      snippet: 'Rollbar.log("error", "oops", user: { email: "someone@example.com" })'
     - rule:
         cwe_ids:
             - "201"
@@ -34,6 +34,5 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: 'Rollbar.log("error", "oops", { user: { first_name: "someone" } })'
-
+      snippet: 'Rollbar.log("error", "oops", { user: { first_name: "someone" } })'
 
