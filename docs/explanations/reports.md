@@ -4,7 +4,7 @@ title: Report Types
 
 # Report Types
 
-Bearer can generate two types of reports about your codebase, all from the same underlying scan.
+Bearer can generate various types of reports about your codebase, all from the same underlying scan.
 
 ## Security Report
 
@@ -119,3 +119,72 @@ bearer scan . --report=privacy --data-subject-mapping=/path/to/mappings.json
 ```
 
 The custom map file should follow the format used by [subject_mapping.json]({{meta.sourcePath}}/blob/main/pkg/classification/db/subject_mapping.json). Replace a key’s value with the higher-level subject you’d like to associate it with. Some examples might include Customer, Employee, Client, Patient, etc. Bearer will use your replacement file instead of the default, so make sure to include any and all subjects you want reported.
+
+## Data Flow Report
+
+The data flow report breaks down the data types and associated components detected in your code. It highlights areas in your code that process personal and sensitive data and where this data may be exposed to third parties and databases.
+
+You can use this to gain more detailed insights beyond what the Privacy report offers, and build additional documentation like data catalogs. In the following example, we can see all the places an `Email Address` is processed by our [example application](https://github.com/Bearer/bear-publishing):
+
+```json
+{
+  "data_types": [
+    {
+      "name": "Email Address",
+      "detectors": [
+        {
+          "name": "ruby",
+          "locations": [
+            {
+              "filename": "app/controllers/application_controller.rb",
+              "line_number": 35,
+              "field_name": "email",
+              "object_name": "current_user",
+              "subject_name": "User"
+            },
+            {
+              "filename": "app/controllers/application_controller.rb",
+              "line_number": 37,
+              "field_name": "email",
+              "object_name": "current_user",
+              "subject_name": "User"
+            },
+            ...
+          ]
+        },
+        {
+          "name": "schema_rb",
+          "locations": [
+            {
+              "filename": "db/schema.rb",
+              "line_number": 91,
+              "stored": true,
+              "parent": {
+                ...
+              },
+              "field_name": "email",
+              "object_name": "users",
+              "subject_name": "User"
+            }
+          ]
+        }
+      ]
+    },
+  ]
+}
+```
+
+If we look at the `db/schema.rb` file mentioned in the report, we can see that email is exposed:
+```ruby
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "telephone"
+    t.integer "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_users_on_organization_id"
+  end
+```
+
+To run your first data flow report, run `curio scan` with the `--report dataflow` flag. By default, the data flow report is output in JSON format. To format as YAML, use the `--format yaml` flag.
