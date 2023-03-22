@@ -50,7 +50,7 @@ options:
       usage: Suppress non-essential messages
     - name: report
       default_value: security
-      usage: Specify the type of report (security, privacy).
+      usage: Specify the type of report (security, privacy, dataflow).
     - name: scanner
       default_value: '[sast]'
       usage: |
