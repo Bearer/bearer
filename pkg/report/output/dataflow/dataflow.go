@@ -20,10 +20,13 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 )
 
+type DataTypes = []types.Datatype
+type Components = []types.Component
+
 type DataFlow struct {
-	Datatypes  []types.Datatype  `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks      []interface{}     `json:"risks,omitempty" yaml:"risks,omitempty"`
-	Components []types.Component `json:"components" yaml:"components"`
+	Datatypes  DataTypes     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	Risks      []interface{} `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Components Components    `json:"components" yaml:"components"`
 }
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{

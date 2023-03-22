@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
@@ -23,7 +24,7 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func ReportJSON(outputDetections any, config settings.Config) (*string, error) {
+func ReportJSON(outputDetections any) (*string, error) {
 	jsonBytes, err := json.Marshal(&outputDetections)
 	if err != nil {
 		return nil, fmt.Errorf("failed to json marshal detections: %s", err)
@@ -33,7 +34,7 @@ func ReportJSON(outputDetections any, config settings.Config) (*string, error) {
 	return &content, nil
 }
 
-func ReportYAML(outputDetections any, config settings.Config) (*string, error) {
+func ReportYAML(outputDetections any) (*string, error) {
 	yamlBytes, err := yaml.Marshal(&outputDetections)
 	if err != nil {
 		return nil, fmt.Errorf("failed to yaml marshal detections: %s", err)
@@ -140,9 +141,36 @@ func reportSecurity(
 		return
 	}
 
-	// TODO: Should send report to us
-	// content, err := ReportJSON(securityResults, config)
-	// log.Error().Msg(*content)
+	if config.Client != nil {
+		filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
+		files := []string{}
+		for _, file := range filesDiscovered {
+			files = append(files, file.FilePath)
+		}
+
+		content, _ := ReportJSON(&BearerReport{
+			Findings:   securityResults,
+			DataTypes:  &dataflow.Datatypes,
+			Components: &dataflow.Components,
+			Files:      files,
+			ScanInfo: ScanInfo{
+				Target: config.Scan.Target,
+			},
+		})
+		log.Error().Msg(*content)
+	}
 
 	return
+}
+
+type ScanInfo struct {
+	Target string `json:"target" yaml:"target"`
+}
+
+type BearerReport struct {
+	ScanInfo   ScanInfo                      `json:"scan_info" yaml:"scan_info"`
+	Findings   *map[string][]security.Result `json:"findings" yaml:"findings"`
+	DataTypes  *dataflow.DataTypes           `json:"data_types" yaml:"data_types"`
+	Components *dataflow.Components          `json:"components" yaml:"components"`
+	Files      []string                      `json:"files" yaml:"files"`
 }

@@ -8,6 +8,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v2"
 
+	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/rego"
 )
@@ -39,6 +40,7 @@ type WorkerOptions struct {
 }
 
 type Config struct {
+	Client       *api.API
 	Worker       WorkerOptions      `mapstructure:"worker" json:"worker" yaml:"worker"`
 	Scan         flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
 	Report       flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
@@ -265,6 +267,7 @@ func FromOptions(opts flag.Options) (Config, error) {
 	}
 
 	config := Config{
+		Client:       opts.Client,
 		Worker:       workerOptions,
 		Scan:         opts.ScanOptions,
 		Report:       opts.ReportOptions,
