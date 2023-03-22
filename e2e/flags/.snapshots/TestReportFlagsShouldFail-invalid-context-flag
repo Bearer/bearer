@@ -13,7 +13,7 @@ Examples:
 Report Flags
   -f, --format string     Specify report format (json, yaml)
       --output string     Specify the output path for the report.
-      --report string     Specify the type of report (security, privacy). (default "security")
+      --report string     Specify the type of report (security, privacy, dataflow). (default "security")
       --severity string   Specify which severities are included in the report. (default "critical,high,medium,low,warning")
 
 Rule Flags
