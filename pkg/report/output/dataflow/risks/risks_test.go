@@ -43,9 +43,10 @@ func TestDataflowRisks(t *testing.T) {
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							DataTypeCategories: []types.RiskDatatypeCategory{
+							Matches: []types.RiskMatch{
 								{
-									Name: "Username",
+									Category: "datatype",
+									Name:     "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",
@@ -76,9 +77,10 @@ func TestDataflowRisks(t *testing.T) {
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							DataTypeCategories: []types.RiskDatatypeCategory{
+							Matches: []types.RiskMatch{
 								{
-									Name: "Username",
+									Category: "datatype",
+									Name:     "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",
@@ -102,9 +104,10 @@ func TestDataflowRisks(t *testing.T) {
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							DataTypeCategories: []types.RiskDatatypeCategory{
+							Matches: []types.RiskMatch{
 								{
-									Name: "Username",
+									Category: "datatype",
+									Name:     "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											Stored:    true,
@@ -130,9 +133,10 @@ func TestDataflowRisks(t *testing.T) {
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							DataTypeCategories: []types.RiskDatatypeCategory{
+							Matches: []types.RiskMatch{
 								{
-									Name: "Username",
+									Category: "datatype",
+									Name:     "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",
@@ -157,9 +161,10 @@ func TestDataflowRisks(t *testing.T) {
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							DataTypeCategories: []types.RiskDatatypeCategory{
+							Matches: []types.RiskMatch{
 								{
-									Name: "Physical Address",
+									Category: "datatype",
+									Name:     "Physical Address",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "address",
@@ -167,7 +172,8 @@ func TestDataflowRisks(t *testing.T) {
 									},
 								},
 								{
-									Name: "Username",
+									Category: "datatype",
+									Name:     "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",

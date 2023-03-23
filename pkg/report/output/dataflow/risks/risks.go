@@ -32,19 +32,23 @@ type fileHolder struct {
 }
 
 type lineHolder struct {
-	lineNumber       int
+	lineNumber int
+	parent     map[string]parentHolder // group detections by parent
+}
+
+type parentHolder struct {
+	name             string
+	parent           *schema.Parent
 	dataTypeCategory map[string]dataTypeCategoryHolder // group detections by datatype category
 }
 
 type dataTypeCategoryHolder struct {
 	name     string
 	category string
-	parent   *schema.Parent
 	dataType map[string]dataTypeHolder
 }
 
 type dataTypeHolder struct {
-	parent      *schema.Parent
 	content     *string
 	fieldName   *string
 	objectName  *string
@@ -135,34 +139,44 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 	// create line number entry if it doesn't exist
 	if _, exists := file.lineNumber[lineNumber]; !exists {
 		file.lineNumber[lineNumber] = lineHolder{
-			lineNumber:       lineNumber,
-			dataTypeCategory: make(map[string]dataTypeCategoryHolder),
+			lineNumber: lineNumber,
+			parent:     make(map[string]parentHolder),
 		}
 	}
 
 	line := file.lineNumber[lineNumber]
-	// create datatype category entry if it doesn't exist
-	if _, exists := line.dataTypeCategory[datatype.Name]; !exists {
+	// create datatype parent entry if it doesn't exist
+	parentKey := "undefined_parent"
+	if schema.Parent != nil {
+		parentKey = schema.Parent.Content
+	}
+
+	if _, exists := line.parent[parentKey]; !exists {
+		line.parent[parentKey] = parentHolder{
+			name:             parentKey,
+			parent:           schema.Parent,
+			dataTypeCategory: make(map[string]dataTypeCategoryHolder),
+		}
+	}
+
+	parent := line.parent[parentKey]
+	// create datatype category if it doesn't exist
+	if _, exists := parent.dataTypeCategory[datatype.Name]; !exists {
 		categoryToAdd := dataTypeCategoryHolder{
 			name:     datatype.Name,
 			category: category,
 			dataType: make(map[string]dataTypeHolder),
 		}
 
-		if category == "presence" {
-			categoryToAdd.parent = schema.Parent
-		}
-
-		line.dataTypeCategory[datatype.Name] = categoryToAdd
+		parent.dataTypeCategory[datatype.Name] = categoryToAdd
 	}
 
 	if category == "datatype" {
-		datatypeCategory := line.dataTypeCategory[datatype.Name]
+		datatypeCategory := parent.dataTypeCategory[datatype.Name]
 		datatypeKey := schema.FieldName + schema.ObjectName
 		// create datatype if it doesn't exists
 		if _, exists := datatypeCategory.dataType[datatypeKey]; !exists {
 			datatypeCategory.dataType[datatypeKey] = dataTypeHolder{
-				parent:      schema.Parent,
 				fieldName:   &schema.FieldName,
 				objectName:  &schema.ObjectName,
 				subjectName: subjectName,
@@ -189,43 +203,47 @@ func (holder *Holder) ToDataFlow() []interface{} {
 		for _, file := range maputil.ToSortedSlice(detector.files) {
 
 			for _, line := range maputil.ToSortedSlice(file.lineNumber) {
-				location := types.RiskLocation{
-					Filename:   file.name,
-					LineNumber: line.lineNumber,
+
+				for _, parent := range maputil.ToSortedSlice(line.parent) {
+
+					location := types.RiskLocation{
+						Filename:   file.name,
+						LineNumber: line.lineNumber,
+						Parent:     parent.parent,
+					}
+
+					for _, dataTypeCategory := range maputil.ToSortedSlice(parent.dataTypeCategory) {
+						match := types.RiskMatch{
+							Name:     dataTypeCategory.name,
+							Category: dataTypeCategory.category,
+						}
+
+						if match.Category == categoryPresence {
+							match.Stored = &stored
+						}
+
+						for _, dataType := range maputil.ToSortedSlice(dataTypeCategory.dataType) {
+							riskDatatype := types.RiskDatatype{
+								SubjectName: dataType.subjectName,
+								Stored:      stored,
+							}
+
+							if dataType.fieldName != nil {
+								riskDatatype.FieldName = *dataType.fieldName
+							}
+							if dataType.objectName != nil {
+								riskDatatype.ObjectName = *dataType.objectName
+							}
+
+							match.DataTypes = append(match.DataTypes, riskDatatype)
+						}
+
+						location.Matches = append(location.Matches, match)
+					}
+
+					locations = append(locations, location)
 				}
 
-				for _, dataTypeCategory := range maputil.ToSortedSlice(line.dataTypeCategory) {
-					category := types.RiskDatatypeCategory{
-						Name:     dataTypeCategory.name,
-						Category: dataTypeCategory.category,
-					}
-
-					if category.Category == categoryPresence {
-						category.Parent = dataTypeCategory.parent
-						category.Stored = &stored
-					}
-
-					for _, dataType := range maputil.ToSortedSlice(dataTypeCategory.dataType) {
-						riskDatatype := types.RiskDatatype{
-							Parent:      dataType.parent,
-							SubjectName: dataType.subjectName,
-							Stored:      stored,
-						}
-
-						if dataType.fieldName != nil {
-							riskDatatype.FieldName = *dataType.fieldName
-						}
-						if dataType.objectName != nil {
-							riskDatatype.ObjectName = *dataType.objectName
-						}
-
-						category.DataTypes = append(category.DataTypes, riskDatatype)
-					}
-
-					location.DataTypeCategories = append(location.DataTypeCategories, category)
-				}
-
-				locations = append(locations, location)
 			}
 
 		}
