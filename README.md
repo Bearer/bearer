@@ -193,9 +193,9 @@ WARNING: 6
 
 The security report is just one [report type](https://docs.bearer.com/explanations/reports) available in Bearer.
 
-Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://docs.bearer.com/reference/commands/#scan). 
+Ready for the next step? Additional options for using and configuring the `scan` command can be found in [configuring the scan command](https://docs.bearer.com/guides/configure-scan/).
 
-For additional guides and usage tips, [view the docs](https://docs.bearer.com/).
+For more guides and usage tips, [view the docs](https://docs.bearer.com/).
 
 ## :question: FAQs
 
