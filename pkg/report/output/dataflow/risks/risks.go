@@ -3,7 +3,6 @@ package risks
 import (
 	"bytes"
 	"encoding/json"
-	"sort"
 
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -18,79 +17,63 @@ import (
 )
 
 type Holder struct {
-	detectors  map[string]detectorHolder // group datatypeHolders by name
-	config     settings.Config
-	isInternal bool
+	detectors map[string]detectorHolder // group detections by detector name
+	config    settings.Config
 }
 
 type detectorHolder struct {
-	id        string
-	datatypes map[string]*datatypeHolder // group detectors by detectorName
-}
-
-type datatypeHolder struct {
-	name         string
-	uuid         string
-	categoryUUID string
-	files        map[string]map[int]*fileHolder // group files by filename
+	id    string
+	files map[string]fileHolder // group detectors by file name
 }
 
 type fileHolder struct {
-	name        string
-	lineNumber  int
+	name       string
+	lineNumber map[int]lineHolder // group detections by line number
+}
+
+type lineHolder struct {
+	lineNumber       int
+	dataTypeCategory map[string]dataTypeCategoryHolder // group detections by datatype category
+}
+
+type dataTypeCategoryHolder struct {
+	name       string
+	isPresence bool
+	dataType   map[string]dataTypeHolder
+}
+
+type dataTypeHolder struct {
 	parent      *schema.Parent
-	fieldName   string
-	objectName  string
+	content     *string
+	fieldName   *string
+	objectName  *string
 	subjectName *string
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
-		detectors:  make(map[string]detectorHolder),
-		config:     config,
-		isInternal: isInternal,
+		detectors: make(map[string]detectorHolder),
+		config:    config,
 	}
 }
 
 func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 	// create entry if it doesn't exist
 	ruleName := string(detection.DetectorType)
-	if _, exists := holder.detectors[ruleName]; !exists {
-		holder.detectors[ruleName] = detectorHolder{
-			id:        ruleName,
-			datatypes: make(map[string]*datatypeHolder),
-		}
-	}
-
-
-	detector := holder.detectors[ruleName]
-
-	if _, exists := detector[]
-
-	riskLocation := &types.RiskLocation{
-		Filename:   detection.Source.Filename,
-		LineNumber: *detection.Source.LineNumber,
-	}
-
-	// add parent information if possible
+	fileName := detection.Source.Filename
+	lineNumber := *detection.Source.LineNumber
+	// can be nil
 	parent := extractCustomRiskParent(detection.Value)
-	if parent != nil {
-		riskLocation.Parent = parent
-	}
+	var content string
 
 	if detection.DetectorType == detectors.DetectorGitleaks {
 		value := detection.Value.(map[string]interface{})["description"]
-
-		holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
-			RiskLocation: riskLocation,
-			Content:      value.(string),
-		})
+		content = value.(string)
 	} else {
-		holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
-			RiskLocation: riskLocation,
-			Content:      *detection.Source.Text,
-		})
+		content = *detection.Source.Text
 	}
+
+	holder.addDatatype(ruleName, &db.DataType{Name: content}, nil, fileName, lineNumber, schema.Schema{Parent: parent}, true)
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
@@ -112,6 +95,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 			detection.Source.Filename,
 			*detection.Source.LineNumber,
 			schema,
+			false,
 		)
 	}
 
@@ -119,7 +103,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjectName *string, fileName string, lineNumber int, schema schema.Schema) {
+func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjectName *string, fileName string, lineNumber int, schema schema.Schema, isPresence bool) {
 	if datatype == nil {
 		// FIXME: we end up with empty field Name and no datatype with the new code
 		// Might be related to the bug with the Unique Identifier classification
@@ -129,96 +113,124 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 	// create detector entry if it doesn't exist
 	if _, exists := holder.detectors[ruleName]; !exists {
 		holder.detectors[ruleName] = detectorHolder{
-			id:        ruleName,
-			datatypes: make(map[string]*datatypeHolder),
+			id:    ruleName,
+			files: make(map[string]fileHolder),
 		}
 	}
 
 	detector := holder.detectors[ruleName]
-	// create datatype entry if it doesn't exist
-	if _, exists := detector.datatypes[datatype.Name]; !exists {
-		if holder.isInternal {
-			detector.datatypes[datatype.Name] = &datatypeHolder{
-				name:         datatype.Name,
-				uuid:         datatype.UUID,
-				categoryUUID: datatype.CategoryUUID,
-				files:        make(map[string]map[int]*fileHolder),
-			}
-		} else {
-			detector.datatypes[datatype.Name] = &datatypeHolder{
-				name:  datatype.Name,
-				files: make(map[string]map[int]*fileHolder),
-			}
+	// create file entry if it doesn't exist
+	if _, exists := detector.files[fileName]; !exists {
+		detector.files[fileName] = fileHolder{
+			name:       fileName,
+			lineNumber: make(map[int]lineHolder),
 		}
 	}
 
-	detectorDatatype := detector.datatypes[datatype.Name]
-	// create file entry if it doesn't exist
-	if _, exists := detectorDatatype.files[fileName]; !exists {
-		detectorDatatype.files[fileName] = make(map[int]*fileHolder, 0)
+	file := detector.files[fileName]
+	// create line number entry if it doesn't exist
+	if _, exists := file.lineNumber[lineNumber]; !exists {
+		file.lineNumber[lineNumber] = lineHolder{
+			lineNumber:       lineNumber,
+			dataTypeCategory: make(map[string]dataTypeCategoryHolder),
+		}
 	}
 
-	detectorDatatype.files[fileName][lineNumber] = &fileHolder{
-		name:        fileName,
-		lineNumber:  lineNumber,
-		parent:      schema.Parent,
-		fieldName:   schema.FieldName,
-		objectName:  schema.ObjectName,
-		subjectName: subjectName,
+	line := file.lineNumber[lineNumber]
+	// create datatype category entry if it doesn't exist
+	if _, exists := line.dataTypeCategory[datatype.Name]; !exists {
+		line.dataTypeCategory[datatype.Name] = dataTypeCategoryHolder{
+			name:       datatype.Name,
+			isPresence: isPresence,
+			dataType:   make(map[string]dataTypeHolder),
+		}
+	}
+
+	if isPresence {
+		datatypeCategory := line.dataTypeCategory[datatype.Name]
+		if schema.Parent != nil {
+			datatypeKey := schema.Parent.Content
+			// create datatype if it doesn't exists
+			if _, exists := datatypeCategory.dataType[datatypeKey]; !exists {
+				datatypeCategory.dataType[datatypeKey] = dataTypeHolder{
+					content: &datatypeKey,
+				}
+			}
+		}
+	} else {
+		datatypeCategory := line.dataTypeCategory[datatype.Name]
+		datatypeKey := schema.FieldName + schema.ObjectName
+		// create datatype if it doesn't exists
+		if _, exists := datatypeCategory.dataType[datatypeKey]; !exists {
+			datatypeCategory.dataType[datatypeKey] = dataTypeHolder{
+				parent:      schema.Parent,
+				fieldName:   &schema.FieldName,
+				objectName:  &schema.ObjectName,
+				subjectName: subjectName,
+				content:     nil,
+			}
+		}
 	}
 }
 
 func (holder *Holder) ToDataFlow() []interface{} {
 	data := make([]interface{}, 0)
 
-	detectors := maputil.ToSortedSlice(holder.detectors)
+	for _, detector := range maputil.ToSortedSlice(holder.detectors) {
+		stored := false
+		if customDetector, isCustomDetector := holder.config.Rules[detector.id]; isCustomDetector {
+			stored = customDetector.Stored
+		}
 
-	for _, detector := range detectors {
 		constructedDetector := types.RiskDetector{
 			DetectorID: detector.id,
-			DataTypes:  make([]types.RiskDatatype, 0),
 		}
+		locations := []types.RiskLocation{}
 
-		datatypes := maputil.ToSortedSlice(detector.datatypes)
+		for _, file := range maputil.ToSortedSlice(detector.files) {
 
-		for _, datatype := range datatypes {
-			stored := false
-			if customDetector, isCustomDetector := holder.config.Rules[detector.id]; isCustomDetector {
-				stored = customDetector.Stored
-			}
-
-			constructedDatatype := types.RiskDatatype{
-				Name:         datatype.name,
-				UUID:         datatype.uuid,
-				CategoryUUID: datatype.categoryUUID,
-				Stored:       stored,
-				Locations:    make([]types.RiskLocation, 0),
-			}
-
-			files := maputil.ToSortedSlice(datatype.files)
-			for _, locations := range files {
-				sortedLocations := maputil.ToSortedSlice(locations)
-				for _, location := range sortedLocations {
-					constructedDatatype.Locations = append(constructedDatatype.Locations, types.RiskLocation{
-						Filename:    location.name,
-						LineNumber:  location.lineNumber,
-						Parent:      location.parent,
-						FieldName:   location.fieldName,
-						ObjectName:  location.objectName,
-						SubjectName: location.subjectName,
-					})
+			for _, line := range maputil.ToSortedSlice(file.lineNumber) {
+				location := types.RiskLocation{
+					Filename:   file.name,
+					LineNumber: line.lineNumber,
 				}
+
+				for _, dataTypeCategory := range maputil.ToSortedSlice(line.dataTypeCategory) {
+					category := types.RiskDatatypeCategory{
+						Name:       dataTypeCategory.name,
+						IsPresence: dataTypeCategory.isPresence,
+					}
+
+					for _, dataType := range maputil.ToSortedSlice(dataTypeCategory.dataType) {
+						riskDatatype := types.RiskDatatype{
+							Parent:      dataType.parent,
+							SubjectName: dataType.subjectName,
+							Stored:      stored,
+						}
+
+						if dataType.content != nil {
+							riskDatatype.Content = *dataType.content
+						}
+						if dataType.fieldName != nil {
+							riskDatatype.FieldName = *dataType.fieldName
+						}
+						if dataType.objectName != nil {
+							riskDatatype.ObjectName = *dataType.objectName
+						}
+
+						category.DataTypes = append(category.DataTypes, riskDatatype)
+					}
+
+					location.DataTypeCategories = append(location.DataTypeCategories, category)
+				}
+
+				locations = append(locations, location)
 			}
-			constructedDetector.DataTypes = append(constructedDetector.DataTypes, constructedDatatype)
+
 		}
+		constructedDetector.Locations = locations
 
 		data = append(data, constructedDetector)
-	}
-
-	sortedRisks := maputil.ToSortedSlice(holder.presentRisks)
-	for _, presentRisk := range sortedRisks {
-		sortLocations(presentRisk)
-		data = append(data, presentRisk)
 	}
 
 	return data
@@ -242,49 +254,4 @@ func extractCustomRiskParent(value interface{}) *schema.Parent {
 	}
 
 	return &parent
-}
-
-func sortLocations(risk *types.RiskDetection) {
-	sort.Slice(risk.Locations, func(i, j int) bool {
-		locationA := risk.Locations[i]
-		locationB := risk.Locations[j]
-
-		if locationA.Filename < locationB.Filename {
-			return true
-		}
-		if locationA.Filename > locationB.Filename {
-			return false
-		}
-
-		if locationA.LineNumber < locationB.LineNumber {
-			return true
-		}
-		if locationA.LineNumber > locationB.LineNumber {
-			return false
-		}
-
-		if locationA.Parent == nil && locationB.Parent != nil {
-			return true
-		}
-		if locationA.Parent != nil && locationB.Parent == nil {
-			return false
-		}
-		if locationA.Parent != nil {
-			if locationA.Parent.LineNumber < locationB.Parent.LineNumber {
-				return true
-			}
-			if locationA.Parent.LineNumber > locationB.Parent.LineNumber {
-				return false
-			}
-
-			if locationA.Parent.Content < locationB.Parent.Content {
-				return true
-			}
-			if locationA.Parent.Content > locationB.Parent.Content {
-				return false
-			}
-		}
-
-		return locationA.Content < locationB.Content
-	})
 }
