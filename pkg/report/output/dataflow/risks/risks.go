@@ -18,10 +18,9 @@ import (
 )
 
 type Holder struct {
-	detectors    map[string]detectorHolder // group datatypeHolders by name
-	config       settings.Config
-	isInternal   bool
-	presentRisks map[string]*types.RiskDetection
+	detectors  map[string]detectorHolder // group datatypeHolders by name
+	config     settings.Config
+	isInternal bool
 }
 
 type detectorHolder struct {
@@ -47,21 +46,26 @@ type fileHolder struct {
 
 func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
-		detectors:    make(map[string]detectorHolder),
-		config:       config,
-		isInternal:   isInternal,
-		presentRisks: make(map[string]*types.RiskDetection),
+		detectors:  make(map[string]detectorHolder),
+		config:     config,
+		isInternal: isInternal,
 	}
 }
 
 func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 	// create entry if it doesn't exist
 	ruleName := string(detection.DetectorType)
-	if _, exists := holder.presentRisks[ruleName]; !exists {
-		holder.presentRisks[ruleName] = &types.RiskDetection{
-			DetectorID: ruleName,
+	if _, exists := holder.detectors[ruleName]; !exists {
+		holder.detectors[ruleName] = detectorHolder{
+			id:        ruleName,
+			datatypes: make(map[string]*datatypeHolder),
 		}
 	}
+
+
+	detector := holder.detectors[ruleName]
+
+	if _, exists := detector[]
 
 	riskLocation := &types.RiskLocation{
 		Filename:   detection.Source.Filename,

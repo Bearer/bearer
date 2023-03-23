@@ -7,6 +7,11 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
+      $<VAR>.update()
+    filters:
+      - variable: VAR
+        detection: create_hash
+  - pattern: |
       CryptoJS.$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: METHOD
@@ -42,9 +47,7 @@ auxiliary:
               - createHmac
               - createHash
           - variable: ALGORITHM
-            values:
-              - '"md5"'
-              - '"sha1"'
+            regex: (?i)['"]sha1|md5["']
 skip_data_types:
   - "Unique Identifier"
   - "Passwords" # see javascript_weak_password_encryption
