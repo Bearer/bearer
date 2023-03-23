@@ -37,9 +37,10 @@ type lineHolder struct {
 }
 
 type dataTypeCategoryHolder struct {
-	name       string
-	isPresence bool
-	dataType   map[string]dataTypeHolder
+	name     string
+	category string
+	parent   *schema.Parent
+	dataType map[string]dataTypeHolder
 }
 
 type dataTypeHolder struct {
@@ -49,6 +50,9 @@ type dataTypeHolder struct {
 	objectName  *string
 	subjectName *string
 }
+
+var categoryPresence = "presence"
+var categoryDatatype = "datatype"
 
 func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
@@ -73,7 +77,7 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 		content = *detection.Source.Text
 	}
 
-	holder.addDatatype(ruleName, &db.DataType{Name: content}, nil, fileName, lineNumber, schema.Schema{Parent: parent}, true)
+	holder.addDatatype(ruleName, &db.DataType{Name: content}, nil, fileName, lineNumber, schema.Schema{Parent: parent}, categoryPresence)
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
@@ -95,7 +99,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 			detection.Source.Filename,
 			*detection.Source.LineNumber,
 			schema,
-			false,
+			categoryDatatype,
 		)
 	}
 
@@ -103,7 +107,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjectName *string, fileName string, lineNumber int, schema schema.Schema, isPresence bool) {
+func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjectName *string, fileName string, lineNumber int, schema schema.Schema, category string) {
 	if datatype == nil {
 		// FIXME: we end up with empty field Name and no datatype with the new code
 		// Might be related to the bug with the Unique Identifier classification
@@ -139,25 +143,20 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 	line := file.lineNumber[lineNumber]
 	// create datatype category entry if it doesn't exist
 	if _, exists := line.dataTypeCategory[datatype.Name]; !exists {
-		line.dataTypeCategory[datatype.Name] = dataTypeCategoryHolder{
-			name:       datatype.Name,
-			isPresence: isPresence,
-			dataType:   make(map[string]dataTypeHolder),
+		categoryToAdd := dataTypeCategoryHolder{
+			name:     datatype.Name,
+			category: category,
+			dataType: make(map[string]dataTypeHolder),
 		}
+
+		if category == "presence" {
+			categoryToAdd.parent = schema.Parent
+		}
+
+		line.dataTypeCategory[datatype.Name] = categoryToAdd
 	}
 
-	if isPresence {
-		datatypeCategory := line.dataTypeCategory[datatype.Name]
-		if schema.Parent != nil {
-			datatypeKey := schema.Parent.Content
-			// create datatype if it doesn't exists
-			if _, exists := datatypeCategory.dataType[datatypeKey]; !exists {
-				datatypeCategory.dataType[datatypeKey] = dataTypeHolder{
-					content: &datatypeKey,
-				}
-			}
-		}
-	} else {
+	if category == "datatype" {
 		datatypeCategory := line.dataTypeCategory[datatype.Name]
 		datatypeKey := schema.FieldName + schema.ObjectName
 		// create datatype if it doesn't exists
@@ -197,8 +196,13 @@ func (holder *Holder) ToDataFlow() []interface{} {
 
 				for _, dataTypeCategory := range maputil.ToSortedSlice(line.dataTypeCategory) {
 					category := types.RiskDatatypeCategory{
-						Name:       dataTypeCategory.name,
-						IsPresence: dataTypeCategory.isPresence,
+						Name:     dataTypeCategory.name,
+						Category: dataTypeCategory.category,
+					}
+
+					if category.Category == categoryPresence {
+						category.Parent = dataTypeCategory.parent
+						category.Stored = &stored
 					}
 
 					for _, dataType := range maputil.ToSortedSlice(dataTypeCategory.dataType) {
@@ -208,9 +212,6 @@ func (holder *Holder) ToDataFlow() []interface{} {
 							Stored:      stored,
 						}
 
-						if dataType.content != nil {
-							riskDatatype.Content = *dataType.content
-						}
 						if dataType.fieldName != nil {
 							riskDatatype.FieldName = *dataType.fieldName
 						}

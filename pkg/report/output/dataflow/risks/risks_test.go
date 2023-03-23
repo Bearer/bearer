@@ -45,8 +45,7 @@ func TestDataflowRisks(t *testing.T) {
 							LineNumber: 25,
 							DataTypeCategories: []types.RiskDatatypeCategory{
 								{
-									Name:       "Username",
-									IsPresence: false,
+									Name: "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",
@@ -79,8 +78,7 @@ func TestDataflowRisks(t *testing.T) {
 							LineNumber: 25,
 							DataTypeCategories: []types.RiskDatatypeCategory{
 								{
-									Name:       "Username",
-									IsPresence: false,
+									Name: "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",
@@ -106,8 +104,7 @@ func TestDataflowRisks(t *testing.T) {
 							LineNumber: 25,
 							DataTypeCategories: []types.RiskDatatypeCategory{
 								{
-									Name:       "Username",
-									IsPresence: false,
+									Name: "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											Stored:    true,
@@ -135,8 +132,7 @@ func TestDataflowRisks(t *testing.T) {
 							LineNumber: 25,
 							DataTypeCategories: []types.RiskDatatypeCategory{
 								{
-									Name:       "Username",
-									IsPresence: false,
+									Name: "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",
@@ -163,8 +159,7 @@ func TestDataflowRisks(t *testing.T) {
 							LineNumber: 25,
 							DataTypeCategories: []types.RiskDatatypeCategory{
 								{
-									Name:       "Physical Address",
-									IsPresence: false,
+									Name: "Physical Address",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "address",
@@ -172,8 +167,7 @@ func TestDataflowRisks(t *testing.T) {
 									},
 								},
 								{
-									Name:       "Username",
-									IsPresence: false,
+									Name: "Username",
 									DataTypes: []types.RiskDatatype{
 										{
 											FieldName: "User_name",
