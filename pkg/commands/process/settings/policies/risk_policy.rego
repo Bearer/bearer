@@ -26,6 +26,9 @@ presence_failures contains detector if {
 
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
+
+	some detector in input.dataflow.risks
+	detector.
 }
 
 # - data types detected within pattern ($<DATA_TYPE>)
