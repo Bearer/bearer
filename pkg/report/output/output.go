@@ -1,16 +1,25 @@
 package output
 
 import (
+	"compress/gzip"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"os"
+	"os/exec"
+	"strings"
 
+	"github.com/bearer/bearer/api"
+	"github.com/bearer/bearer/api/s3"
 	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
+	dataflowoutput "github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
 	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/gitsight/go-vcsurl"
 	"github.com/google/uuid"
 
 	"github.com/bearer/bearer/pkg/report/output/detectors"
@@ -142,33 +151,129 @@ func reportSecurity(
 	}
 
 	if config.Client != nil {
-		filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
-		files := []string{}
-		for _, file := range filesDiscovered {
-			files = append(files, file.FilePath)
+		meta, err := getMeta(config)
+		if err != nil {
+			log.Error().Msgf("couldn't get meta for repo %s", err)
 		}
 
-		content, _ := ReportJSON(&BearerReport{
-			Findings:   securityResults,
-			DataTypes:  &dataflow.Datatypes,
-			Components: &dataflow.Components,
-			Files:      files,
-			ScanInfo: ScanInfo{
-				Target: config.Scan.Target,
-			},
-		})
-		log.Error().Msg(*content)
+		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, dataflow)
+		if err != nil {
+			log.Error().Msgf("error creating report %s", err)
+		}
+
+		defer os.RemoveAll(*tmpDir)
+
+		err = sendReportToBearer(config.Client, meta, filename)
+
+		if err != nil {
+			log.Error().Msgf("error sending report to Bearer")
+		}
 	}
 
 	return
 }
 
-type ScanInfo struct {
-	Target string `json:"target" yaml:"target"`
+func sendReportToBearer(client *api.API, meta *Meta, filename *string) error {
+	fileUploadOffer, err := s3.UploadS3(&s3.UploadRequestS3{
+		Api:             client,
+		FilePath:        *filename,
+		FilePrefix:      "bearer_security_report",
+		ContentType:     "application/json",
+		ContentEncoding: "gzip",
+	})
+	if err != nil {
+		return err
+	}
+
+	meta.SignedID = fileUploadOffer.SignedID
+
+	err = client.ScanFinished(meta)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func createBearerGzipFileReport(
+	config settings.Config,
+	meta *Meta,
+	securityResults *security.Results,
+	dataflow *dataflow.DataFlow,
+) (*string, *string, error) {
+	tempDir, err := ioutil.TempDir("", "reports")
+	if err != nil {
+		return nil, nil, err
+	}
+
+	file, err := ioutil.TempFile(tempDir, "security-*.json.gz")
+	if err != nil {
+		return &tempDir, nil, err
+	}
+
+	filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
+	files := []string{}
+	for _, fileDiscovered := range filesDiscovered {
+		files = append(files, dataflowoutput.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
+	}
+
+	content, _ := ReportJSON(&BearerReport{
+		Findings:   securityResults,
+		DataTypes:  &dataflow.Datatypes,
+		Components: &dataflow.Components,
+		Files:      files,
+		Meta:       *meta,
+	})
+
+	gzWriter := gzip.NewWriter(file)
+	_, err = gzWriter.Write([]byte(*content))
+	if err != nil {
+		return nil, nil, err
+	}
+	gzWriter.Close()
+
+	filename := file.Name()
+
+	return &tempDir, &filename, nil
+}
+
+func getMeta(config settings.Config) (*Meta, error) {
+	output, err := exec.Command("git", "remote", "get-url", "origin").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
+	}
+
+	info, err := vcsurl.Parse(strings.TrimSuffix(string(output), "\n"))
+	if err != nil {
+		log.Error().Msgf("couldn't parse url %s", err)
+		return nil, err
+	}
+
+	return &Meta{
+		ID:       info.ID,
+		Host:     string(info.Host),
+		Username: info.Username,
+		Name:     info.Name,
+		FullName: info.FullName,
+		URL:      info.Raw,
+		Target:   config.Scan.Target,
+	}, nil
+}
+
+type Meta struct {
+	ID       string `json:"id" yaml:"id"`
+	Host     string `json:"host" yaml:"host"`
+	Username string `json:"username" yaml:"username"`
+	Name     string `json:"name" yaml:"name"`
+	URL      string `json:"url" yaml:"url"`
+	FullName string `json:"full_name" yaml:"full_name"`
+	Target   string `json:"target" yaml:"target"`
+	SignedID string `json:"signed_id,omitempty" yaml:"signed_id,omitempty"`
 }
 
 type BearerReport struct {
-	ScanInfo   ScanInfo                      `json:"scan_info" yaml:"scan_info"`
+	Meta       Meta                          `json:"meta" yaml:"meta"`
 	Findings   *map[string][]security.Result `json:"findings" yaml:"findings"`
 	DataTypes  *dataflow.DataTypes           `json:"data_types" yaml:"data_types"`
 	Components *dataflow.Components          `json:"components" yaml:"components"`

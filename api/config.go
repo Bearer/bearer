@@ -24,8 +24,8 @@ var Endpoints = APIEndpoints{
 		Route:      "/cloud/file_uploads",
 	},
 	ScanFinished: Endpoint{
-		HttpMethod: "PUT",
-		Route:      "/cloud/scans/{uuid}",
+		HttpMethod: "POST",
+		Route:      "/cloud/scans",
 	},
 	Hello: Endpoint{
 		HttpMethod: "POST",

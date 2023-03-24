@@ -95,7 +95,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		// add full path to filename
-		fullFilename := getFullFilename(config.Target, castDetection.Source.Filename)
+		fullFilename := GetFullFilename(config.Target, castDetection.Source.Filename)
 		castDetection.Source.Filename = fullFilename
 
 		switch detectionType {
@@ -188,7 +188,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	return dataflow, nil, nil, nil
 }
 
-func getFullFilename(path string, filename string) string {
+func GetFullFilename(path string, filename string) string {
 	path = strings.TrimSuffix(path, "/")
 	filename = strings.TrimPrefix(filename, "/")
 

@@ -5,17 +5,19 @@ import (
 )
 
 type RequestFileUpload struct {
-	Checksum    string `json:"checksum"`
-	ByteSize    int    `json:"byte_size"`
-	UUID        string `json:"uuid"`
-	Prefix      string `json:"prefix"`
-	ContentType string `json:"content_type"`
+	Checksum        string `json:"checksum"`
+	ByteSize        int    `json:"byte_size"`
+	UUID            string `json:"uuid"`
+	Prefix          string `json:"prefix"`
+	ContentType     string `json:"content_type"`
+	ContentEncoding string `json:"content_encoding"`
 }
 
 type ActiveStorageDirectUpload struct {
 	URL     string            `json:"url"`
 	Headers map[string]string `json:"headers"`
 }
+
 type FileUploadOffer struct {
 	SignedID     string                    `json:"signed_id"`
 	UUID         string                    `json:"uuid"`
@@ -29,12 +31,12 @@ func (api *API) RequestFileUpload(fileUpload RequestFileUpload, messageUuid Mess
 		return nil, err
 	}
 
-	var fileUPloadOffer FileUploadOffer
+	var fileUploadOffer FileUploadOffer
 
-	err = json.Unmarshal(bytes, &fileUPloadOffer)
+	err = json.Unmarshal(bytes, &fileUploadOffer)
 	if err != nil {
 		return nil, err
 	}
 
-	return &fileUPloadOffer, nil
+	return &fileUploadOffer, nil
 }
