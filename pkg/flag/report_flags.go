@@ -14,7 +14,7 @@ var (
 	ReportPrivacy   = "privacy"
 	ReportSecurity  = "security"
 	ReportDetectors = "detectors" // nodoc: internal report type
-	ReportDataFlow  = "dataflow"  // nodoc: internal report type
+	ReportDataFlow  = "dataflow"  
 	ReportStats     = "stats"     // nodoc: internal report type
 
 	DefaultSeverity = "critical,high,medium,low,warning"
@@ -36,7 +36,7 @@ var (
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportSecurity,
-		Usage:      "Specify the type of report (security, privacy).",
+		Usage:      "Specify the type of report (security, privacy, dataflow).",
 	}
 	OutputFlag = Flag{
 		Name:       "output",

@@ -69,8 +69,7 @@ type Result struct {
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"snippet,omitempty" yaml:"snippet,omitempty"`
 	Fingerprint      string   `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
-
-	DetailedContext string `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
 type Rule struct {
