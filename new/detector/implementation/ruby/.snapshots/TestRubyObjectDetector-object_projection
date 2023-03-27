@@ -3,28 +3,33 @@
   data:
     properties:
         - name: obj
+          node: {}
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: x
+                      node: {}
                       object:
                         detectortype: object
                         matchnode: {}
                         data:
                             properties:
                                 - name: a
+                                  node: {}
                                   object:
                                     detectortype: object
                                     matchnode: {}
                                     data:
                                         properties:
                                             - name: i
+                                              node: {}
                                               object: null
                                         isvirtual: false
                             isvirtual: false
                     - name: "y"
+                      node: {}
                       object: null
                 isvirtual: false
     isvirtual: true
@@ -33,12 +38,14 @@
   data:
     properties:
         - name: a
+          node: {}
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: i
+                      node: {}
                       object: null
                 isvirtual: false
     isvirtual: false
@@ -47,18 +54,21 @@
   data:
     properties:
         - name: x
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: a
+                      node: {}
                       object:
                         detectortype: object
                         matchnode: {}
                         data:
                             properties:
                                 - name: i
+                                  node: {}
                                   object: null
                             isvirtual: false
                 isvirtual: false
@@ -68,12 +78,14 @@
   data:
     properties:
         - name: obj
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: x
+                      node: null
                       object: null
                 isvirtual: true
     isvirtual: true
@@ -82,6 +94,7 @@
   data:
     properties:
         - name: i
+          node: {}
           object: null
     isvirtual: false
 - position: "5:1"
@@ -89,12 +102,14 @@
   data:
     properties:
         - name: a
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: i
+                      node: {}
                       object: null
                 isvirtual: false
     isvirtual: true
@@ -103,12 +118,14 @@
   data:
     properties:
         - name: x
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: a
+                      node: null
                       object: null
                 isvirtual: true
     isvirtual: true
@@ -117,12 +134,14 @@
   data:
     properties:
         - name: obj
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: z
+                      node: null
                       object: null
                 isvirtual: true
     isvirtual: true
@@ -131,12 +150,14 @@
   data:
     properties:
         - name: myvar
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: x
+                      node: null
                       object: null
                 isvirtual: true
     isvirtual: true
@@ -145,89 +166,14 @@
   data:
     properties:
         - name: myvar
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: w
-                      object: null
-                isvirtual: true
-    isvirtual: true
-- position: "13:1"
-  content: 'obj.x({ email: " " }, { first_name: "" })'
-  data:
-    properties:
-        - name: a
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: i
-                      object: null
-                isvirtual: false
-    isvirtual: false
-- position: "13:1"
-  content: 'obj.x({ email: " " }, { first_name: "" })'
-  data:
-    properties:
-        - name: x
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: a
-                      object:
-                        detectortype: object
-                        matchnode: {}
-                        data:
-                            properties:
-                                - name: i
-                                  object: null
-                            isvirtual: false
-                isvirtual: false
-    isvirtual: true
-- position: "13:1"
-  content: 'obj.x({ email: " " }, { first_name: "" })'
-  data:
-    properties:
-        - name: obj
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: x
-                      object: null
-                isvirtual: true
-    isvirtual: true
-- position: "13:1"
-  content: 'obj.x({ email: " " }, { first_name: "" })'
-  data:
-    properties:
-        - name: email
-          object: null
-    isvirtual: false
-- position: "13:1"
-  content: 'obj.x({ email: " " }, { first_name: "" })'
-  data:
-    properties:
-        - name: first_name
-          object: null
-    isvirtual: false
-- position: "14:1"
-  content: 'obj.x({ email: " " }, { first_name: "" }).a'
-  data:
-    properties:
-        - name: x
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: a
+                      node: null
                       object: null
                 isvirtual: true
     isvirtual: true

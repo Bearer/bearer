@@ -15,8 +15,9 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	hashPairQuery *tree.Query
-	classQuery    *tree.Query
+	hashPairQuery        *tree.Query
+	keywordArgumentQuery *tree.Query
+	classQuery           *tree.Query
 	// Naming
 	assignmentQuery *tree.Query
 	// Projection
@@ -26,9 +27,15 @@ type objectDetector struct {
 
 func New(lang languagetypes.Language) (types.Detector, error) {
 	// { first_name: ..., ... }
-	hashPairQuery, err := lang.CompileQuery(`(hash (pair key: (_) @key value: (_) @value)) @root`)
+	hashPairQuery, err := lang.CompileQuery(`(hash (pair key: (_) @key value: (_) @value) @pair) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling hash pair query: %s", err)
+	}
+
+	// call(first_name: ...)
+	keywordArgumentQuery, err := lang.CompileQuery(`(argument_list (pair key: (_) @key value: (_) @value) @match) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling keyword argument query: %s", err)
 	}
 
 	// user = <object>
@@ -68,6 +75,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 
 	return &objectDetector{
 		hashPairQuery:         hashPairQuery,
+		keywordArgumentQuery:  keywordArgumentQuery,
 		assignmentQuery:       assignmentQuery,
 		classQuery:            classQuery,
 		callsQuery:            callsQuery,
@@ -88,6 +96,11 @@ func (detector *objectDetector) DetectAt(
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	detections, err := detector.getHash(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
+	detections, err = detector.getKeywordArgument(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -116,12 +129,14 @@ func (detector *objectDetector) getHash(
 
 	var properties []generictypes.Property
 	for _, result := range results {
+		pairNode := result["pair"]
+
 		name := common.GetLiteralKey(result["key"])
 		if name == "" {
 			continue
 		}
 
-		propertyObjects, err := generic.GetNonVirtualObjects(evaluator, result["value"])
+		propertyObjects, err := evaluator.ForTree(result["value"], "object", true)
 		if err != nil {
 			return nil, err
 		}
@@ -129,6 +144,7 @@ func (detector *objectDetector) getHash(
 		if len(propertyObjects) == 0 {
 			properties = append(properties, generictypes.Property{
 				Name: name,
+				Node: pairNode,
 			})
 
 			continue
@@ -137,9 +153,49 @@ func (detector *objectDetector) getHash(
 		for _, propertyObject := range propertyObjects {
 			properties = append(properties, generictypes.Property{
 				Name:   name,
+				Node:   pairNode,
 				Object: propertyObject,
 			})
 		}
+	}
+
+	return []interface{}{generictypes.Object{Properties: properties}}, nil
+}
+
+func (detector *objectDetector) getKeywordArgument(
+	node *tree.Node,
+	evaluator types.Evaluator,
+) ([]interface{}, error) {
+	result, err := detector.keywordArgumentQuery.MatchOnceAt(node)
+	if result == nil || err != nil {
+		return nil, err
+	}
+
+	name := common.GetLiteralKey(result["key"])
+	if name == "" {
+		return nil, nil
+	}
+
+	propertyObjects, err := evaluator.ForTree(result["value"], "object", true)
+	if err != nil {
+		return nil, err
+	}
+
+	var properties []generictypes.Property
+
+	if len(propertyObjects) == 0 {
+		properties = append(properties, generictypes.Property{
+			Name: name,
+			Node: node,
+		})
+	}
+
+	for _, propertyObject := range propertyObjects {
+		properties = append(properties, generictypes.Property{
+			Name:   name,
+			Node:   node,
+			Object: propertyObject,
+		})
 	}
 
 	return []interface{}{generictypes.Object{Properties: properties}}, nil
@@ -165,6 +221,7 @@ func (detector *objectDetector) getAssignment(
 			IsVirtual: true,
 			Properties: []generictypes.Property{{
 				Name:   result["name"].Content(),
+				Node:   node,
 				Object: object,
 			}},
 		})
@@ -183,14 +240,18 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 
 	var properties []generictypes.Property
 	for _, result := range results {
-		name := result["name"].Content()
+		nameNode := result["name"]
+		name := nameNode.Content()
 
-		if result["name"].Type() == "simple_symbol" {
+		if nameNode.Type() == "simple_symbol" {
 			name = name[1:]
 		}
 
 		if name != "initialize" {
-			properties = append(properties, generictypes.Property{Name: name})
+			properties = append(properties, generictypes.Property{
+				Name: name,
+				Node: nameNode,
+			})
 		}
 	}
 
@@ -210,6 +271,7 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 
 func (detector *objectDetector) Close() {
 	detector.hashPairQuery.Close()
+	detector.keywordArgumentQuery.Close()
 	detector.assignmentQuery.Close()
 	detector.classQuery.Close()
 	detector.callsQuery.Close()

@@ -119,6 +119,8 @@ type Implementation interface {
 	//  if you want to get only identifier instead of required parameter ShouldSkipNode should return true
 	//  for required parameter
 	ShouldSkipNode(node *tree.Node) bool
+
+	PassthroughNested(node *tree.Node) bool
 }
 
 type Scope struct {

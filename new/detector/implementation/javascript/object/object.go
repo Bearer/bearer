@@ -55,16 +55,16 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	// class User {
-	//   constructor(name, surname)
-	//   GetName()
+	//   constructor(name, surname) {}
+	//   GetName() {}
 	// }
 	classQuery, err := lang.CompileQuery(`
 		(class_declaration
-			name: (identifier) @class_name
-			body: (class_body
-				(method_definition name: (property_identifier) @method_name (formal_parameters) @params)
-			)
-		) @root`)
+		  name: (type_identifier) @class_name
+      body: (class_body
+        (method_definition name: (property_identifier) @method_name (formal_parameters) @params)
+      )
+    ) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling class query: %s", err)
 	}
@@ -81,7 +81,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling subscript expression query %s", err)
 	}
 
-	callQuery, err := lang.CompileQuery(`(call_expression function: (_) @function arguments: (_) @arguments) @root`)
+	callQuery, err := lang.CompileQuery(`(call_expression function: (_) @function) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling call query: %s", err)
 	}
@@ -157,7 +157,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := generic.GetNonVirtualObjects(evaluator, result["value"])
+		propertyObjects, err := evaluator.ForTree(result["value"], "object", true)
 		if err != nil {
 			return nil, err
 		}

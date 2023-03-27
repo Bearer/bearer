@@ -22,12 +22,15 @@ import (
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/javascript/string"
 	detectorset "github.com/bearer/bearer/new/detector/set"
 	detectortypes "github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/implementation/javascript"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type Composition struct {
 	customDetectorTypes []string
 	detectorSet         detectortypes.DetectorSet
+	langImplementation  implementation.Implementation
 	lang                languagetypes.Language
 	closers             []func()
 }
@@ -39,7 +42,8 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	}
 
 	composition := &Composition{
-		lang: lang,
+		langImplementation: javascript.Get(),
+		lang:               lang,
 	}
 
 	staticDetectors := []struct {
@@ -174,7 +178,13 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
-	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
+	evaluator := evaluator.New(
+		composition.langImplementation,
+		composition.lang,
+		composition.detectorSet,
+		tree,
+		file.FileInfo.Name(),
+	)
 
 	var result []*detectortypes.Detection
 	for _, detectorType := range detectorTypes {

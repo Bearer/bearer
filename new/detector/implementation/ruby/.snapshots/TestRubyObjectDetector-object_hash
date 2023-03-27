@@ -7,14 +7,17 @@
   data:
     properties:
         - name: nested
+          node: {}
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: one
+                      node: {}
                       object: null
                     - name: two
+                      node: {}
                       object: null
                 isvirtual: false
     isvirtual: true
@@ -27,30 +30,58 @@
   data:
     properties:
         - name: x
+          node: {}
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: nested
+                                  node: {}
+                                  object:
+                                    detectortype: object
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: one
+                                              node: {}
+                                              object: null
+                                            - name: two
+                                              node: {}
+                                              object: null
+                                        isvirtual: false
+                            isvirtual: true
+                    - name: "n"
+                      node: {}
                       object:
                         detectortype: object
                         matchnode: {}
                         data:
                             properties:
                                 - name: one
+                                  node: {}
                                   object: null
                                 - name: two
+                                  node: {}
                                   object: null
                             isvirtual: false
                 isvirtual: false
         - name: "y"
+          node: {}
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
                     - name: b
+                      node: {}
                       object: null
                 isvirtual: false
     isvirtual: false

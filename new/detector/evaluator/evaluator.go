@@ -5,12 +5,14 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/implementation"
 	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"golang.org/x/exp/slices"
 )
 
 type evaluator struct {
+	langImplementation    implementation.Implementation
 	lang                  languagetypes.Language
 	detectorSet           types.DetectorSet
 	detectionCache        map[langtree.NodeID]map[string][]*types.Detection
@@ -20,6 +22,7 @@ type evaluator struct {
 }
 
 func New(
+	langImplementation implementation.Implementation,
 	lang languagetypes.Language,
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
@@ -28,6 +31,7 @@ func New(
 	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
 
 	return &evaluator{
+		langImplementation:    langImplementation,
 		lang:                  lang,
 		fileName:              fileName,
 		detectorSet:           detectorSet,
@@ -47,14 +51,17 @@ func (evaluator *evaluator) ForTree(
 	followFlow bool,
 ) ([]*types.Detection, error) {
 	var result []*types.Detection
+	var nestedMode bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
+		if nestedMode && !evaluator.langImplementation.PassthroughNested(node) {
+			return nil
+		}
+
 		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
 		}
-
-		result = append(result, detections...)
 
 		if followFlow {
 			for _, unifiedNode := range node.UnifiedNodes() {
@@ -63,9 +70,11 @@ func (evaluator *evaluator) ForTree(
 					return err
 				}
 
-				result = append(result, unifiedNodeDetections...)
+				detections = append(detections, unifiedNodeDetections...)
 			}
 		}
+
+		previousNestedMode := nestedMode
 
 		if len(detections) != 0 {
 			nestedDetections, err := evaluator.detectorSet.NestedDetections(detectorType)
@@ -74,11 +83,15 @@ func (evaluator *evaluator) ForTree(
 			}
 
 			if !nestedDetections {
-				return nil
+				nestedMode = true
 			}
 		}
 
-		return visitChildren()
+		result = append(result, detections...)
+
+		err = visitChildren()
+		nestedMode = previousNestedMode
+		return err
 	}); err != nil {
 		return nil, err
 	}

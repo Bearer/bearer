@@ -31,18 +31,6 @@ func (detector *objectDetector) getProjections(
 			return nil, err
 		}
 
-		arguments := result["root"].ChildByFieldName("arguments")
-		if arguments != nil {
-			objectDetections, err := evaluator.ForTree(arguments, "object", true)
-			if err != nil {
-				return nil, err
-			}
-
-			for _, detection := range objectDetections {
-				objects = append(objects, detection.Data)
-			}
-		}
-
 		return objects, nil
 	}
 

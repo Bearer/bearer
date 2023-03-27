@@ -17,6 +17,7 @@ type Data struct {
 
 type Property struct {
 	Name           string
+	Node           *tree.Node
 	Classification classificationschema.Classification
 	Datatype       *types.Detection
 }
@@ -70,7 +71,7 @@ func (detector *datatypeDetector) classifyObject(
 
 	classification := detector.classifier.Classify(buildClassificationRequest(filename, name, objectData))
 
-	var properties []Property
+	properties := make([]Property, len(objectData.Properties))
 
 	// NOTE: assumption is that classification will have all properties that detection has in same order
 	for i, property := range objectData.Properties {
@@ -81,11 +82,17 @@ func (detector *datatypeDetector) classifyObject(
 			classification.Properties[i].Classification,
 		)
 
-		properties = append(properties, Property{
+		node := property.Node
+		if node == nil {
+			node = detection.MatchNode
+		}
+
+		properties[i] = Property{
 			Datatype:       propertyDetection,
+			Node:           node,
 			Name:           property.Name,
 			Classification: propertyClassification,
-		})
+		}
 	}
 
 	return Data{Properties: properties}, classification.Classification

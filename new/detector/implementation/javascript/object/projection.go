@@ -2,6 +2,7 @@ package object
 
 import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
+	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/util/stringutil"
@@ -67,7 +68,7 @@ func (detector *objectDetector) getProjections(
 	}
 
 	if result != nil {
-		var objects []interface{}
+		var properties []generictypes.Property
 
 		functionDetections, err := evaluator.ForTree(result["function"], "object", true)
 		if err != nil {
@@ -75,19 +76,12 @@ func (detector *objectDetector) getProjections(
 		}
 
 		for _, detection := range functionDetections {
-			objects = append(objects, detection.Data)
+			properties = append(properties, generictypes.Property{Object: detection})
 		}
 
-		argumentDetections, err := evaluator.ForTree(result["arguments"], "object", true)
-		if err != nil {
-			return nil, err
+		if len(properties) != 0 {
+			return []interface{}{generictypes.Object{Properties: properties}}, nil
 		}
-
-		for _, detection := range argumentDetections {
-			objects = append(objects, detection.Data)
-		}
-
-		return objects, nil
 	}
 
 	return nil, nil

@@ -8,7 +8,3 @@ obj["x"].a
 obj.z
 @myvar.x
 @myvar["w"]
-
-# Call with arguments
-obj.x({ email: " " }, { first_name: "" })
-obj.x({ email: " " }, { first_name: "" }).a

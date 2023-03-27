@@ -114,6 +114,11 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				scope.Assign(node.Content(), node)
 
 			}
+
+			if parent.Type() == "arguments" {
+				callNode := parent.Parent()
+				callNode.UnifyWith(node)
+			}
 		case "property_identifier":
 			parent := node.Parent()
 			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
@@ -241,4 +246,20 @@ func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node
 
 func (implementation *javascriptImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
 	return content
+}
+
+func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {
+	// if node.Type() == "arguments_list" {
+	// 	callNode := node.Parent()
+	// 	receiverNode := callNode.ChildByFieldName("receiver")
+	// 	method := callNode.ChildByFieldName("method").Content()
+
+	// 	if receiverNode != nil && receiverNode.Type() == "identifier" {
+	// 		method = receiverNode.Content() + "." + method
+	// 	}
+
+	// 	return slices.Contains(passthroughMethods, method)
+	// }
+
+	return false
 }

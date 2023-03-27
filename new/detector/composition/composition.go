@@ -70,8 +70,8 @@ func reportDatatypeDetection(
 			source.New(
 				file,
 				file.Path,
-				datatypeDetection.MatchNode.LineNumber(),
-				datatypeDetection.MatchNode.ColumnNumber(),
+				property.Node.LineNumber(),
+				property.Node.ColumnNumber(),
 				"",
 			),
 			schema.Schema{
