@@ -55,7 +55,12 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, bu
 		return err
 	}
 
-	tmpfile.Seek(0, 0) // reset file pointer to start of file
+	// reset file pointer to start of file
+	_, err = tmpfile.Seek(0, 0)
+	if err != nil {
+		return err
+	}
+
 	gzr, err := gzip.NewReader(tmpfile)
 	if err != nil {
 		return err
