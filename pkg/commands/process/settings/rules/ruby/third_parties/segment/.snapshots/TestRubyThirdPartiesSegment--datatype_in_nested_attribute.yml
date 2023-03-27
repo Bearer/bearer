@@ -11,4 +11,5 @@ high:
         - Personal Data
       parent_line_number: 2
       snippet: 'analytics.track(user_id: user.id, event: "account sign in", context: { ip: user.ip_address })'
+      fingerprint: 5e2b8d06b60ff6c74abd9ff76ad870c8_0
 

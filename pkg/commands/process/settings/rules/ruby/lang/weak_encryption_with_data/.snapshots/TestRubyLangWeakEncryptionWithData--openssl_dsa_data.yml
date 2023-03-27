@@ -12,6 +12,7 @@ medium:
         - PII
       parent_line_number: 3
       snippet: dsa_encrypt.export(cipher, user.email)
+      fingerprint: 36150ac911827c0ea56639b200e86806_0
     - rule:
         cwe_ids:
             - "331"
@@ -25,6 +26,7 @@ medium:
         - PII
       parent_line_number: 5
       snippet: OpenSSL::PKey::DSA.new(2048).to_pem(cipher, user.first_name)
+      fingerprint: 36150ac911827c0ea56639b200e86806_1
     - rule:
         cwe_ids:
             - "326"
@@ -38,6 +40,7 @@ medium:
         - PII
       parent_line_number: 3
       snippet: dsa_encrypt.export(cipher, user.email)
+      fingerprint: 607962fcd21fb4f53e687ef5840b5ea0_0
     - rule:
         cwe_ids:
             - "326"
@@ -51,4 +54,5 @@ medium:
         - PII
       parent_line_number: 5
       snippet: OpenSSL::PKey::DSA.new(2048).to_pem(cipher, user.first_name)
+      fingerprint: 607962fcd21fb4f53e687ef5840b5ea0_1
 

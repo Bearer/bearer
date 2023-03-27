@@ -15,4 +15,5 @@ low:
           files = ftp.list('n*')
           ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
         end
+      fingerprint: b8e9482850ee7c7a95a458362e2f224d_0
 

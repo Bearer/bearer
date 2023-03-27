@@ -11,4 +11,5 @@ high:
         - PII
       parent_line_number: 7
       snippet: config.force_ssl = false
+      fingerprint: ea6b0d76dcceca2c13b5fcfde6687545_0
 

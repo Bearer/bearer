@@ -12,4 +12,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: 'a.puts "Hello, #{user.full_name}!"'
+      fingerprint: 76f934c16ac33c36f20bc09290f391db_0
 

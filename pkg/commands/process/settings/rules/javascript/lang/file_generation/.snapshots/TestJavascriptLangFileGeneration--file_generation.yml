@@ -15,6 +15,7 @@ medium:
           if (err) console.log(err)
           else console.log("Data saved")
         })
+      fingerprint: 7dc547c0485fb50177dd96e6cc520f43_0
     - rule:
         cwe_ids:
             - "313"
@@ -31,6 +32,7 @@ medium:
           if (err) console.log(err)
           else console.log("Data saved")
         })
+      fingerprint: 7dc547c0485fb50177dd96e6cc520f43_1
     - rule:
         cwe_ids:
             - "313"
@@ -47,4 +49,5 @@ medium:
           if (err) console.log(err)
           else console.log("Data saved")
         })
+      fingerprint: 7dc547c0485fb50177dd96e6cc520f43_2
 

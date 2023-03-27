@@ -14,4 +14,5 @@ medium:
         Sentry.captureException(
           new Error(`user ${current_user.email} couldn't log in!`)
         )
+      fingerprint: ccfe5be6347096dc61dca940fa92542d_0
 

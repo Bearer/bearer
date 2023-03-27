@@ -9,6 +9,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 2
       snippet: YAML.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_0
     - rule:
         cwe_ids:
             - "502"
@@ -19,6 +20,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 4
       snippet: Psych.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_1
     - rule:
         cwe_ids:
             - "502"
@@ -29,6 +31,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 6
       snippet: Syck.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_2
     - rule:
         cwe_ids:
             - "502"
@@ -39,6 +42,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 8
       snippet: JSON.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_3
     - rule:
         cwe_ids:
             - "502"
@@ -49,6 +53,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 10
       snippet: Oj.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_4
     - rule:
         cwe_ids:
             - "502"
@@ -61,6 +66,7 @@ high:
       snippet: |-
         Oj.object_load(event["oops"]) do |json|
           end
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_5
     - rule:
         cwe_ids:
             - "502"
@@ -71,6 +77,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 14
       snippet: Marshal.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_6
     - rule:
         cwe_ids:
             - "502"
@@ -81,4 +88,5 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 15
       snippet: Marshal.restore(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_7
 

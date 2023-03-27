@@ -14,6 +14,7 @@ medium:
         window.dataLayer.push({
         	email: user.email,
         })
+      fingerprint: 163d1d6557cf6be6e0f1a851cf46b2a6_0
     - rule:
         cwe_ids:
             - "201"
@@ -29,4 +30,5 @@ medium:
         window.dataLayer.push({
         	email: user.email,
         })
+      fingerprint: 163d1d6557cf6be6e0f1a851cf46b2a6_1
 

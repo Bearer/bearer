@@ -12,6 +12,7 @@ high:
         connection.query(
         		"SELECT * FROM `user` WHERE name = " + req.params.customer.name
         	)
+      fingerprint: 6ab447a0217cef645dfc88f86abb0c3a_0
     - rule:
         cwe_ids:
             - "89"
@@ -26,6 +27,7 @@ high:
         		"SELECT * FROM users WHERE name = " + req.params.user_name,
         		function () {}
         	)
+      fingerprint: 6ab447a0217cef645dfc88f86abb0c3a_1
     - rule:
         cwe_ids:
             - "89"
@@ -36,4 +38,5 @@ high:
       filename: mysql2_sql_injection.js
       parent_line_number: 23
       snippet: conn.query("SELECT * FROM users WHERE name = " + req.params.user_name, function () {})
+      fingerprint: 6ab447a0217cef645dfc88f86abb0c3a_2
 

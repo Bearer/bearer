@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 4
       snippet: myAlgolia.initIndex(company.bank_account_number)
+      fingerprint: 955a76f0b339af35908c18e474405f17_0
 

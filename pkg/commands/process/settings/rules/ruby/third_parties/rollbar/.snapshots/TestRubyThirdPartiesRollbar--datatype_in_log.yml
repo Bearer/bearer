@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'Rollbar.log("error", "oops #{user.email}")'
+      fingerprint: be9a13beb09e1e63bf2f94ec671dbed1_0
     - rule:
         cwe_ids:
             - "201"
@@ -23,6 +24,7 @@ medium:
         - PII
       parent_line_number: 2
       snippet: 'Rollbar.log("error", "oops", user: { email: "someone@example.com" })'
+      fingerprint: be9a13beb09e1e63bf2f94ec671dbed1_1
     - rule:
         cwe_ids:
             - "201"
@@ -35,4 +37,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: 'Rollbar.log("error", "oops", { user: { first_name: "someone" } })'
+      fingerprint: be9a13beb09e1e63bf2f94ec671dbed1_2
 

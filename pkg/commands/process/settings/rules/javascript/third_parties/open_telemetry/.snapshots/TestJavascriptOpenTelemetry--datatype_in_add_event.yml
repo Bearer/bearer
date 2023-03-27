@@ -14,4 +14,5 @@ medium:
         currentSpan.addEvent('my-event', {
           'event.metadata': customer.emailAddress
         })
+      fingerprint: c07461857f570fe7124dbbff054fcfc5_0
 

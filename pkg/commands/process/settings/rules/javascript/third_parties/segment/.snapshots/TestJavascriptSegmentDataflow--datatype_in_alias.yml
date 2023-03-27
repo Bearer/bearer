@@ -15,4 +15,5 @@ medium:
           previousId: user.email,
           userId: user.id,
         })
+      fingerprint: 4469f3ea642c622470aab0f8c20097a7_0
 

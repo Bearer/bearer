@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 6
       snippet: span.setAttribute("current-user", currentUser.emailAddress)
+      fingerprint: 8a07b30f80bef1b76aef3330ebe140e1_0
     - rule:
         cwe_ids:
             - "201"
@@ -23,4 +24,5 @@ medium:
         - PII
       parent_line_number: 11
       snippet: span.setAttribute("current-user", user.email)
+      fingerprint: 8a07b30f80bef1b76aef3330ebe140e1_1
 

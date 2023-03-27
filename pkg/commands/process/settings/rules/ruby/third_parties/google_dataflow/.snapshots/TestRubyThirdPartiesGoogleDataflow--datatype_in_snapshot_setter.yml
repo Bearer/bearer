@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 9
       snippet: 'snapshot.description = "Current user: #{user.email_address}"'
+      fingerprint: f4933197965089fa561b06dcb9e3f280_0
 

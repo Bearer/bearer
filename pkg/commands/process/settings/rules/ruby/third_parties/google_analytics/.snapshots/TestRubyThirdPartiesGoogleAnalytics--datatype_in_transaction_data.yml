@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'Google::Apis::AnalyticsreportingV4::TransactionData.update!(transaction_id: "user_"+user.bank_account_number)'
+      fingerprint: 4adf5342b4ccfd41b92579383a0439de_0
 

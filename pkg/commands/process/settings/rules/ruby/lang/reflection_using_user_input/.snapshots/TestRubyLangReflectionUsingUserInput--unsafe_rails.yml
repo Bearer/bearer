@@ -9,4 +9,5 @@ high:
       filename: unsafe_rails.rb
       parent_line_number: 1
       snippet: params[:class].constantize
+      fingerprint: 156357da0ed173828518abd1d8558374_0
 

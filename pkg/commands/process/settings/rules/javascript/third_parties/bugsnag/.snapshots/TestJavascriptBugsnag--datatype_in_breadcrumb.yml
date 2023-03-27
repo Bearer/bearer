@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: Bugsnag.leaveBreadcrumb(user.email)
+      fingerprint: 2eaef71de885a52be1cbf2dd3f951de2_0
 

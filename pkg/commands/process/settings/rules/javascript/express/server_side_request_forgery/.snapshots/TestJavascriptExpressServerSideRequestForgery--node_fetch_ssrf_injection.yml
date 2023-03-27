@@ -9,4 +9,5 @@ high:
       filename: node_fetch_ssrf_injection.js
       parent_line_number: 12
       snippet: fetch("https://" + req.query.path)
+      fingerprint: 26b9f4665fdfcaba8db99af878e8b501_0
 

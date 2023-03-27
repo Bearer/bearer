@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'exception.rollbar_context = { user: { email: "someone@example.com" } }'
+      fingerprint: 0fb0ea425477bece878e9c73baa4dc4b_0
 

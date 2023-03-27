@@ -14,6 +14,7 @@ high:
         Google::Apis::AnalyticsreportingV4::UserActivitySession.update!(
           session_id: DateTime.now + user.ip_address
         )
+      fingerprint: 2e7f04531d6a71956cae261704b576f8_1
 medium:
     - rule:
         cwe_ids:
@@ -27,4 +28,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'Google::Apis::AnalyticsreportingV4::User.new(user_id: user.email)'
+      fingerprint: 2e7f04531d6a71956cae261704b576f8_0
 

@@ -9,4 +9,5 @@ low:
       filename: uri_encode_form.rb
       parent_line_number: 1
       snippet: URI('http://my.api.com/users/search')
+      fingerprint: bbe07548be64ce691181b569676555bd_0
 

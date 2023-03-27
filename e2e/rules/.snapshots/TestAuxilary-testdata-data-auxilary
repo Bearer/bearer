@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 11
       snippet: client.event("user", "logged_in", {}, user)
+      fingerprint: 4d54a4b735da21fbdcb2d2662977b033_0
 
 
 --

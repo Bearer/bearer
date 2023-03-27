@@ -12,6 +12,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: cookies.signed[:info] = user.email
+      fingerprint: 0bc36f6fd36597f1a15e4e12cd6e6cc8_0
     - rule:
         cwe_ids:
             - "315"
@@ -25,4 +26,5 @@ medium:
         - PII
       parent_line_number: 2
       snippet: cookies.permanent.signed[:secret] = user.first_name
+      fingerprint: 0bc36f6fd36597f1a15e4e12cd6e6cc8_1
 

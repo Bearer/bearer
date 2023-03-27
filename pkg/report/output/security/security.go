@@ -1,6 +1,7 @@
 package security
 
 import (
+	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"sort"
@@ -67,8 +68,8 @@ type Result struct {
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"snippet,omitempty" yaml:"snippet,omitempty"`
-
-	DetailedContext string `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	Fingerprint      string   `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
+	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
 type Rule struct {
@@ -147,13 +148,16 @@ func evaluateRules(
 				return err
 			}
 
-			for _, output := range results["policy_failure"] {
+			for i, output := range results["policy_failure"] {
 				ruleSummary := &Rule{
 					Description:      rule.Description,
 					Id:               rule.Id,
 					CWEIDs:           rule.CWEIDs,
 					DocumentationUrl: rule.DocumentationUrl,
 				}
+
+				// FIXME: consider filename being renamed
+				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				result := Result{
 					Rule:             ruleSummary,
 					Filename:         output.Filename,
@@ -162,6 +166,7 @@ func evaluateRules(
 					ParentLineNumber: output.ParentLineNumber,
 					ParentContent:    output.ParentContent,
 					DetailedContext:  output.DetailedContext,
+					Fingerprint:      fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i),
 				}
 
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)

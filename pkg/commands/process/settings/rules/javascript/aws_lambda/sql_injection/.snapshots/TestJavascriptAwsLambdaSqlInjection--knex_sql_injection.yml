@@ -12,4 +12,5 @@ high:
         knex.select('user.cart_details')
             .from('users')
             .whereRaw('name = '+ event.user.name)
+      fingerprint: a6be1e7b4f812b3709823c952fd60b64_0
 

@@ -14,4 +14,5 @@ medium:
         def to_honeybadger_context
             { user: { id: id, email: email } }
           end
+      fingerprint: ef7694d62e7b884e3e3cb782b33a3fb2_0
 

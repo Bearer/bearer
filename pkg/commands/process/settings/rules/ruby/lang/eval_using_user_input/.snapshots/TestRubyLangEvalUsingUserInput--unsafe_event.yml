@@ -10,6 +10,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 2
       snippet: RubyVM::InstructionSequence.compile(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_0
     - rule:
         cwe_ids:
             - "94"
@@ -21,6 +22,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 4
       snippet: a.eval(event["oops"], "test")
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_1
     - rule:
         cwe_ids:
             - "94"
@@ -32,6 +34,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 6
       snippet: a.instance_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_2
     - rule:
         cwe_ids:
             - "94"
@@ -43,6 +46,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 8
       snippet: a.class_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_3
     - rule:
         cwe_ids:
             - "94"
@@ -54,6 +58,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 10
       snippet: a.module_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_4
     - rule:
         cwe_ids:
             - "94"
@@ -65,6 +70,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 12
       snippet: eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_5
     - rule:
         cwe_ids:
             - "94"
@@ -76,6 +82,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 14
       snippet: instance_eval(event["oops"], "test")
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_6
     - rule:
         cwe_ids:
             - "94"
@@ -87,6 +94,7 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 16
       snippet: class_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_7
     - rule:
         cwe_ids:
             - "94"
@@ -98,4 +106,5 @@ high:
       filename: unsafe_event.rb
       parent_line_number: 18
       snippet: module_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_8
 

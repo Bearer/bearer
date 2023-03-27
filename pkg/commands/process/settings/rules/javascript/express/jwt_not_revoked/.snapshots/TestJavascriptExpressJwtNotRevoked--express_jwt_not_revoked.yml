@@ -9,4 +9,5 @@ low:
       filename: express_jwt_not_revoked.js
       parent_line_number: 11
       snippet: 'expressjwt({ secret: config.secret, algorithms: ["HS256"] })'
+      fingerprint: cb3095d58d2370a77337a035ba6f7493_0
 

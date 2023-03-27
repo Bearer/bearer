@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'ScoutApm::Context.add({ user: { first_name: "someone" }})'
+      fingerprint: 66f1a9c771e9bd75144ddcc8338ecb65_0
 

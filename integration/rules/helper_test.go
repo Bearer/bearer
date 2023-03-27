@@ -120,11 +120,7 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 		},
 		runner.config,
 	)
-
-	report, _ := reportoutput.ReportYAML(
-		detections,
-		runner.config,
-	)
+	report, _ := reportoutput.ReportYAML(detections)
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
 	cupaloyCopy.SnapshotT(t, *report)

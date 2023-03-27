@@ -20,10 +20,13 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 )
 
+type DataTypes = []types.Datatype
+type Components = []types.Component
+
 type DataFlow struct {
-	Datatypes  []types.Datatype  `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks      []interface{}     `json:"risks,omitempty" yaml:"risks,omitempty"`
-	Components []types.Component `json:"components" yaml:"components"`
+	Datatypes  DataTypes     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	Risks      []interface{} `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Components Components    `json:"components" yaml:"components"`
 }
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{
@@ -92,7 +95,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		// add full path to filename
-		fullFilename := getFullFilename(config.Target, castDetection.Source.Filename)
+		fullFilename := GetFullFilename(config.Target, castDetection.Source.Filename)
 		castDetection.Source.Filename = fullFilename
 
 		switch detectionType {
@@ -185,7 +188,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	return dataflow, nil, nil, nil
 }
 
-func getFullFilename(path string, filename string) string {
+func GetFullFilename(path string, filename string) string {
 	path = strings.TrimSuffix(path, "/")
 	filename = strings.TrimPrefix(filename, "/")
 

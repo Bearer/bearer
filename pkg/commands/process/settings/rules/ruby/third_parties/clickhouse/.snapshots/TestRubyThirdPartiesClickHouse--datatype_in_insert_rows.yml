@@ -17,6 +17,7 @@ medium:
               customer.email,
               customer.address
             ]
+      fingerprint: febd3e36f1f248edf1d2960da47e9f7c_0
     - rule:
         cwe_ids:
             - "201"
@@ -35,4 +36,5 @@ medium:
               customer.email,
               customer.address
             ]
+      fingerprint: febd3e36f1f248edf1d2960da47e9f7c_1
 

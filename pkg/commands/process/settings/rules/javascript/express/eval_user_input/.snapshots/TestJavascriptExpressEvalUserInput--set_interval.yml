@@ -10,4 +10,5 @@ high:
       filename: set_interval.js
       parent_line_number: 11
       snippet: setInterval(command)
+      fingerprint: f21a44907bbf50441cfa9ee0cf591d8d_0
 

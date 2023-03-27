@@ -9,6 +9,7 @@ high:
       filename: send_file_with_external_input.js
       parent_line_number: 13
       snippet: path.resolve(file)
+      fingerprint: 0f96ceab826cffb4000a8469699f0a26_0
     - rule:
         cwe_ids:
             - "22"
@@ -19,6 +20,7 @@ high:
       filename: send_file_with_external_input.js
       parent_line_number: 15
       snippet: path.join(__dirname, req.params.root)
+      fingerprint: 0f96ceab826cffb4000a8469699f0a26_1
 low:
     - rule:
         cwe_ids:
@@ -30,6 +32,7 @@ low:
       filename: send_file_with_external_input.js
       parent_line_number: 12
       snippet: res.sendFile(file)
+      fingerprint: 594fb35e8692ca06ee83e8313e32ec58_0
     - rule:
         cwe_ids:
             - "73"
@@ -40,6 +43,7 @@ low:
       filename: send_file_with_external_input.js
       parent_line_number: 13
       snippet: res.sendFile(path.resolve(file))
+      fingerprint: 594fb35e8692ca06ee83e8313e32ec58_1
     - rule:
         cwe_ids:
             - "73"
@@ -50,6 +54,7 @@ low:
       filename: send_file_with_external_input.js
       parent_line_number: 14
       snippet: res.sendFile(req.params.file, {}, () => {})
+      fingerprint: 594fb35e8692ca06ee83e8313e32ec58_2
     - rule:
         cwe_ids:
             - "73"
@@ -60,4 +65,5 @@ low:
       filename: send_file_with_external_input.js
       parent_line_number: 15
       snippet: 'res.sendFile("file.txt", { root: path.join(__dirname, req.params.root) })'
+      fingerprint: 594fb35e8692ca06ee83e8313e32ec58_3
 

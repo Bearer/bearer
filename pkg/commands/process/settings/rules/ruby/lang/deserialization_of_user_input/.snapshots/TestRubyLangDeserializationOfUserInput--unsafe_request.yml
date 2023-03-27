@@ -9,6 +9,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 1
       snippet: YAML.load(request.env[:oops])
+      fingerprint: cac2c2a798f33f34857ab2445151310b_0
     - rule:
         cwe_ids:
             - "502"
@@ -19,6 +20,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 3
       snippet: Psych.load(request.env[:oops])
+      fingerprint: cac2c2a798f33f34857ab2445151310b_1
     - rule:
         cwe_ids:
             - "502"
@@ -29,6 +31,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 5
       snippet: Syck.load(request.env[:oops])
+      fingerprint: cac2c2a798f33f34857ab2445151310b_2
     - rule:
         cwe_ids:
             - "502"
@@ -39,6 +42,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 7
       snippet: JSON.load(request.env[:oops])
+      fingerprint: cac2c2a798f33f34857ab2445151310b_3
     - rule:
         cwe_ids:
             - "502"
@@ -49,6 +53,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 9
       snippet: Oj.load(request.env[:oops])
+      fingerprint: cac2c2a798f33f34857ab2445151310b_4
     - rule:
         cwe_ids:
             - "502"
@@ -61,6 +66,7 @@ high:
       snippet: |-
         Oj.object_load(request.env[:oops]) do |json|
         end
+      fingerprint: cac2c2a798f33f34857ab2445151310b_5
     - rule:
         cwe_ids:
             - "502"
@@ -71,6 +77,7 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 13
       snippet: Marshal.load(request.env[:oops])
+      fingerprint: cac2c2a798f33f34857ab2445151310b_6
     - rule:
         cwe_ids:
             - "502"
@@ -81,4 +88,5 @@ high:
       filename: unsafe_request.rb
       parent_line_number: 14
       snippet: Marshal.restore(request.env[:oops])
+      fingerprint: cac2c2a798f33f34857ab2445151310b_7
 

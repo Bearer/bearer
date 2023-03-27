@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 4
       snippet: bugSession.notify(user.email)
+      fingerprint: a3b7e2efe220ddd88ca70f09bfc62594_0
 

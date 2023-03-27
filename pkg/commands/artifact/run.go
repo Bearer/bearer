@@ -336,14 +336,14 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	switch config.Report.Format {
 	case flag.FormatEmpty, flag.FormatJSON:
 		// default report format for is JSON
-		content, err := reportoutput.ReportJSON(detections, config)
+		content, err := reportoutput.ReportJSON(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}
 
 		logger.Msg(*content)
 	case flag.FormatYAML:
-		content, err := reportoutput.ReportYAML(detections, config)
+		content, err := reportoutput.ReportYAML(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}

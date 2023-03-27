@@ -15,4 +15,5 @@ medium:
               code: opentelemetry.SpanStatusCode.ERROR,
               message: "Bad connection for " + currentUser.emailAddress
             })
+      fingerprint: 800b1e73e5b7dcbfe428e5119722f598_0
 

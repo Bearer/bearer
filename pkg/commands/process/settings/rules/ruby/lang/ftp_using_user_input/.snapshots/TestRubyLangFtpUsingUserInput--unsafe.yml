@@ -9,6 +9,7 @@ high:
       filename: unsafe.rb
       parent_line_number: 1
       snippet: Net::FTP.new(params[:oops])
+      fingerprint: 8227f94cd757037c8b11ea06e98c47ce_0
     - rule:
         cwe_ids:
             - "22"
@@ -22,6 +23,7 @@ high:
         Net::FTP.open("example.com", username: params[:user]) do
 
         end
+      fingerprint: 8227f94cd757037c8b11ea06e98c47ce_1
     - rule:
         cwe_ids:
             - "22"
@@ -32,6 +34,7 @@ high:
       filename: unsafe.rb
       parent_line_number: 9
       snippet: ftp.puttextfile("local.txt", event["filename"])
+      fingerprint: 8227f94cd757037c8b11ea06e98c47ce_2
 low:
     - rule:
         cwe_ids:
@@ -43,6 +46,7 @@ low:
       filename: unsafe.rb
       parent_line_number: 1
       snippet: Net::FTP.new(params[:oops])
+      fingerprint: 863474a5c4ef9934b5e020504475dd02_0
     - rule:
         cwe_ids:
             - "319"
@@ -56,6 +60,7 @@ low:
         Net::FTP.open("example.com", username: params[:user]) do
 
         end
+      fingerprint: 863474a5c4ef9934b5e020504475dd02_1
     - rule:
         cwe_ids:
             - "319"
@@ -66,4 +71,5 @@ low:
       filename: unsafe.rb
       parent_line_number: 8
       snippet: Net::FTP.open("example.com")
+      fingerprint: 863474a5c4ef9934b5e020504475dd02_2
 

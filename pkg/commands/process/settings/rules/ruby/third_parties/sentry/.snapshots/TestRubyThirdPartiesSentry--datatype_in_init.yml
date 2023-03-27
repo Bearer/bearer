@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 3
       snippet: 'breadcrumb.message = "Authenticated user #{current_user.email}"'
+      fingerprint: 8d1522133b035b9e059b46af3f885b77_0
 

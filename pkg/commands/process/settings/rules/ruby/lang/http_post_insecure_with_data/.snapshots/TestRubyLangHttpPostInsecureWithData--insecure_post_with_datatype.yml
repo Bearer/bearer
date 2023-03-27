@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
+      fingerprint: af7407290413bad61047495bd97d57e3_0
     - rule:
         cwe_ids:
             - "319"
@@ -23,4 +24,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
+      fingerprint: 5272c5e5d1d1a391129e0aa195cd8b17_0
 

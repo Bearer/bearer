@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 2
       snippet: scope.setTag("user_email", user.email)
+      fingerprint: 7152403c083c605ccab83ca16ae65240_0
 

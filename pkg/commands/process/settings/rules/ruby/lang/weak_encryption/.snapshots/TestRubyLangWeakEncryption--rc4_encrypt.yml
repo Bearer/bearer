@@ -10,6 +10,7 @@ low:
       filename: rc4_encrypt.rb
       parent_line_number: 1
       snippet: RC4.new("insecure").encrypt("hello world")
+      fingerprint: 4c772f8eb6a383e5bdca5ab61f4cbc4d_0
     - rule:
         cwe_ids:
             - "331"
@@ -21,4 +22,5 @@ low:
       filename: rc4_encrypt.rb
       parent_line_number: 4
       snippet: rc4_encrypt.encrypt!("hello world")
+      fingerprint: 4c772f8eb6a383e5bdca5ab61f4cbc4d_1
 

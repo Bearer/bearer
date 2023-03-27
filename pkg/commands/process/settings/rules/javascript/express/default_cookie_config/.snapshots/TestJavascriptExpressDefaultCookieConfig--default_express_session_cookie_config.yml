@@ -10,6 +10,7 @@ medium:
       filename: default_express_session_cookie_config.js
       parent_line_number: 11
       snippet: '{}'
+      fingerprint: e114698a3e3b46f2392d491f2869fe33_0
     - rule:
         cwe_ids:
             - "523"
@@ -28,6 +29,7 @@ medium:
               maxAge: 24 * 60 * 60 * 1000,
               path: "/some-path",
             }
+      fingerprint: e114698a3e3b46f2392d491f2869fe33_1
     - rule:
         cwe_ids:
             - "523"
@@ -45,6 +47,7 @@ medium:
               httpOnly: false,
               name: "my-custom-cookie-name",
             }
+      fingerprint: e114698a3e3b46f2392d491f2869fe33_2
     - rule:
         cwe_ids:
             - "523"
@@ -59,6 +62,7 @@ medium:
         {
             cookie: {},
           }
+      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_0
     - rule:
         cwe_ids:
             - "523"
@@ -79,4 +83,5 @@ medium:
               path: "/some-path",
             },
           }
+      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_1
 

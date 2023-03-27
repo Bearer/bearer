@@ -11,6 +11,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: 'Rollbar.scope!({ user: { email: "someone@example.com" }})'
+      fingerprint: 75627cf6d7aa4cbb44a28113f29e842f_0
     - rule:
         cwe_ids:
             - "201"
@@ -23,6 +24,7 @@ medium:
         - PII
       parent_line_number: 5
       snippet: Rollbar.scope(user)
+      fingerprint: 75627cf6d7aa4cbb44a28113f29e842f_1
     - rule:
         cwe_ids:
             - "201"
@@ -35,4 +37,5 @@ medium:
         - PII
       parent_line_number: 7
       snippet: 'notifier.scope(user: { first_name: "someone" })'
+      fingerprint: 75627cf6d7aa4cbb44a28113f29e842f_2
 

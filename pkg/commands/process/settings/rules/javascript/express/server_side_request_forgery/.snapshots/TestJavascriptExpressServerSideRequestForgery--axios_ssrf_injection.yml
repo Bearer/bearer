@@ -9,4 +9,5 @@ high:
       filename: axios_ssrf_injection.js
       parent_line_number: 10
       snippet: axios.get(req.query.path)
+      fingerprint: 662372a5481e8accee0a46239d4590e8_0
 

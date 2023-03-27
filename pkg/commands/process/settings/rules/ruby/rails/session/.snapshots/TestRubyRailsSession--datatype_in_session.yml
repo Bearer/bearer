@@ -11,4 +11,5 @@ medium:
         - PII
       parent_line_number: 1
       snippet: session[:current_user] = user.email
+      fingerprint: a5c0e825abde92e4fb94604f26340fa2_0
 

@@ -16,6 +16,7 @@ high:
           userId: user.id,
           userIpAddr: user.ip_address,
         })
+      fingerprint: 7962fdb50924228eb50532bd49443112_1
 medium:
     - rule:
         cwe_ids:
@@ -29,4 +30,5 @@ medium:
         - PII
       parent_line_number: 17
       snippet: browser.track(user.email)
+      fingerprint: 7962fdb50924228eb50532bd49443112_0
 

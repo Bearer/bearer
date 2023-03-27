@@ -9,4 +9,5 @@ low:
       filename: insecure_get.rb
       parent_line_number: 1
       snippet: Faraday.get("http://api.insecure.com")
+      fingerprint: 1a4b09e6cdc1a4e2a3dfbc0c5b0e21ea_0
 
