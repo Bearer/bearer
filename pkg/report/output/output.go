@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -201,12 +200,12 @@ func createBearerGzipFileReport(
 	securityResults *security.Results,
 	dataflow *dataflow.DataFlow,
 ) (*string, *string, error) {
-	tempDir, err := ioutil.TempDir("", "reports")
+	tempDir, err := os.MkdirTemp("", "reports")
 	if err != nil {
 		return nil, nil, err
 	}
 
-	file, err := ioutil.TempFile(tempDir, "security-*.json.gz")
+	file, err := os.CreateTemp(tempDir, "security-*.json.gz")
 	if err != nil {
 		return &tempDir, nil, err
 	}
