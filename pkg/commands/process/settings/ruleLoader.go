@@ -14,10 +14,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const LATEST_RELEASE_URL = "https://api.github.com/repos/bearer/bearer/releases/latest"
-
-// TODO: update this for bearer-rule structure
-const BASE_RULE_FOLDER = "pkg/commands/process/settings/rules/"
+const LATEST_RELEASE_URL = "https://api.github.com/repos/bearer/bearer-rules/releases/latest"
+const BASE_RULE_FOLDER = "/"
 
 func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, builtInRuleDefinitions map[string]RuleDefinition) error {
 	resp, err := http.Get(LATEST_RELEASE_URL)
