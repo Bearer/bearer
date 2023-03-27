@@ -8,18 +8,22 @@ contains(arr, elem) if {
 	arr[_] = elem
 }
 
+
 # - presence of pattern & data types required
 global_failures contains detector if {
 	input.rule.trigger.match_on == "presence"
-	input.rule.trigger.data_types_required
+	not input.rule.trigger.data_types_required
 
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
 
+	# must have a match datatype
+	detector.locations[_].matches[_].type == "datatype"
+
 	some data_type in data.bearer.common.global_data_types
 }
 
-# - presence of pattern & data types not required
+# - presence failures
 presence_failures contains detector if {
 	input.rule.trigger.match_on == "presence"
 	not input.rule.trigger.data_types_required
@@ -27,8 +31,32 @@ presence_failures contains detector if {
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
 
-	some presenceDetector in input.dataflow.risks
-	presenceDetector.locations[_].matches[_].type == "presence"
+	detector.locations[_].matches[_].type == "presence"
+}
+
+# - data types detected within pattern ($<DATA_TYPE>)
+local_data_types_failures contains datatype if {
+	some detector in input.dataflow.risks
+	detector.detector_id == input.rule.id
+
+	detector.locations[_].matches[_].type == "datatype"
+	
+}
+
+
+local_data_types contains data_type if {
+	not input.rule.only_data_types
+
+	some detector in presence_failures
+	data_type = detector.data_types[_]
+	not contains(input.rule.skip_data_types, data_type.name)
+}
+
+local_data_types contains data_type if {
+	not input.rule.skip_data_types
+
+	some detector in presence_failures
+	data_type = detector.data_types[_]
 }
 
 # - data types detected within pattern ($<DATA_TYPE>)
@@ -37,7 +65,7 @@ local_data_types contains data_type if {
 	not input.rule.only_data_types
 
 	some detector in presence_failures
-	data_type = detector.data_types[_]
+	data_type = detector.locations[_].data_types[_]
 }
 
 local_data_types contains data_type if {
@@ -88,9 +116,10 @@ policy_failure contains item if {
 }
 
 policy_failure contains item if {
-	some data_type in local_data_types
+	some data_type in local_data_types_failures
 
 	location = data_type.locations[_]
+	data_type = [location | match := location.matches[_]; match.type == "datatype"]
 	item := data.bearer.common.build_local_item(location, data_type)
 }
 
@@ -104,8 +133,8 @@ policy_failure contains item if {
 policy_failure contains item if {
 	# ignore the locations that have both datatype and presence (we take datatype as only match in those cases)
 	some location in presence_failures[_].locations
-    locationWithDatype := [location | match := location.matches[_]; match.type == "datatype"]
-    count(locationWithDatype) == 0
+    location_with_datatype := [location | match := location.matches[_]; match.type == "datatype"]
+    count(location_with_datatype) == 0
 
 	item := data.bearer.common.build_item(location)
 }
