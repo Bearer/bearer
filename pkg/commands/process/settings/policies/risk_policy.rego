@@ -27,8 +27,8 @@ presence_failures contains detector if {
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
 
-	some detector in input.dataflow.risks
-	detector.
+	some presenceDetector in input.dataflow.risks
+	presenceDetector.locations[_].matches[_].type == "presence"
 }
 
 # - data types detected within pattern ($<DATA_TYPE>)
@@ -102,10 +102,11 @@ policy_failure contains item if {
 }
 
 policy_failure contains item if {
-	some detector in presence_failures
-	count(local_data_types) == 0 # detector item already included (through local_data_types)
+	# ignore the locations that have both datatype and presence (we take datatype as only match in those cases)
+	some location in presence_failures[_].locations
+    locationWithDatype := [location | match := location.matches[_]; match.type == "datatype"]
+    count(locationWithDatype) == 0
 
-	location = detector.locations[_]
 	item := data.bearer.common.build_item(location)
 }
 
