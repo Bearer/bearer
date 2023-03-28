@@ -2,12 +2,23 @@ const { readFile, readdir } = require("node:fs/promises");
 const { statSync } = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
-const rulesPath = "../pkg/commands/process/settings/rules/";
 const cweList = require("./cweList.json");
+const gitly = require("gitly");
+const source = "bearer/bearer-rules";
+const rulesPath = "_tmp/rules-data";
 
 function isDirectory(dir) {
   const result = statSync(dir);
   return result.isDirectory();
+}
+
+async function fetchRelease() {
+  try {
+    let src = await gitly.download(source);
+    await gitly.extract(src, rulesPath);
+  } catch (e) {
+    throw console.error(e);
+  }
 }
 
 async function fetchData(location) {
@@ -79,5 +90,6 @@ async function fetchFile(location) {
 }
 
 module.exports = async function () {
-  return await fetchData("../pkg/commands/process/settings/rules/");
+  await fetchRelease();
+  return await fetchData(rulesPath);
 };
