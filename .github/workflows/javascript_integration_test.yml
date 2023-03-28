@@ -20,8 +20,22 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 1.19
+      - name: Get latest release of rules repo
+        id: latest_rules_release
+        run: |
+          echo "::set-output name=release_tag::$(curl -s https://api.github.com/repos/bearer/bearer-rules/releases/latest | jq '.tag_name' | sed 's/\"//g')"
+      - name: Confirm release tag
+        run: |
+          echo ${{ steps.latest_rules_release.outputs.release_tag }}
+      - name: Check out rules repo
+        uses: actions/checkout@v3
+        with:
+          repository: bearer/bearer-rules
+          ref: ${{ steps.latest_rules_release.outputs.release_tag }}
+          path: bearer-rules
       - name: Run tests
         run: go test -run ^TestJavascript ./integration/rules/... -p 5
         timeout-minutes: 15
         env:
           USE_BINARY: true
+          RULES_PATH: "../../bearer-rules"
