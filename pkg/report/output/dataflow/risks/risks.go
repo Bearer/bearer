@@ -37,12 +37,12 @@ type lineHolder struct {
 }
 
 type parentHolder struct {
-	name             string
-	parent           *schema.Parent
-	dataTypeCategory map[string]dataTypeCategoryHolder // group detections by datatype category
+	name    string
+	parent  *schema.Parent
+	matches map[string]matchCategoryHolder // group detections by datatype category
 }
 
-type dataTypeCategoryHolder struct {
+type matchCategoryHolder struct {
 	name     string
 	category string
 	dataType map[string]dataTypeHolder
@@ -153,26 +153,26 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 
 	if _, exists := line.parent[parentKey]; !exists {
 		line.parent[parentKey] = parentHolder{
-			name:             parentKey,
-			parent:           schema.Parent,
-			dataTypeCategory: make(map[string]dataTypeCategoryHolder),
+			name:    parentKey,
+			parent:  schema.Parent,
+			matches: make(map[string]matchCategoryHolder),
 		}
 	}
 
 	parent := line.parent[parentKey]
 	// create datatype category if it doesn't exist
-	if _, exists := parent.dataTypeCategory[datatype.Name]; !exists {
-		categoryToAdd := dataTypeCategoryHolder{
+	if _, exists := parent.matches[datatype.Name]; !exists {
+		categoryToAdd := matchCategoryHolder{
 			name:     datatype.Name,
 			category: category,
 			dataType: make(map[string]dataTypeHolder),
 		}
 
-		parent.dataTypeCategory[datatype.Name] = categoryToAdd
+		parent.matches[datatype.Name] = categoryToAdd
 	}
 
 	if category == "datatype" {
-		datatypeCategory := parent.dataTypeCategory[datatype.Name]
+		datatypeCategory := parent.matches[datatype.Name]
 		datatypeKey := schema.FieldName + schema.ObjectName
 		// create datatype if it doesn't exists
 		if _, exists := datatypeCategory.dataType[datatypeKey]; !exists {
@@ -190,10 +190,10 @@ func (holder *Holder) ToDataFlow() []interface{} {
 	data := make([]interface{}, 0)
 
 	for _, detector := range maputil.ToSortedSlice(holder.detectors) {
-		stored := false
-		if customDetector, isCustomDetector := holder.config.Rules[detector.id]; isCustomDetector {
-			stored = customDetector.Stored
-		}
+		// stored := false
+		// if customDetector, isCustomDetector := holder.config.Rules[detector.id]; isCustomDetector {
+		// 	stored = customDetector.Stored
+		// }
 
 		constructedDetector := types.RiskDetector{
 			DetectorID: detector.id,
@@ -212,33 +212,46 @@ func (holder *Holder) ToDataFlow() []interface{} {
 						Parent:     parent.parent,
 					}
 
-					for _, dataTypeCategory := range maputil.ToSortedSlice(parent.dataTypeCategory) {
-						match := types.RiskMatch{
-							Name:     dataTypeCategory.name,
-							Category: dataTypeCategory.category,
+					hasDatatype := false
+					matches := maputil.ToSortedSlice(parent.matches)
+					for _, dataType := range matches {
+						if dataType.category == categoryDatatype {
+							hasDatatype = true
+						}
+					}
+
+					for _, dataTypeCategory := range matches {
+						if dataTypeCategory.category == categoryPresence {
+							if hasDatatype {
+								continue
+							}
+
+							location.PresenceMatches = append(location.PresenceMatches, types.RiskPresence{
+								Name: dataTypeCategory.name,
+							})
+							continue
 						}
 
-						if match.Category == categoryPresence {
-							match.Stored = &stored
+						match := types.RiskDatatype{
+							Name: dataTypeCategory.name,
 						}
 
 						for _, dataType := range maputil.ToSortedSlice(dataTypeCategory.dataType) {
-							riskDatatype := types.RiskDatatype{
+							riskSchema := types.RiskSchema{
 								SubjectName: dataType.subjectName,
-								Stored:      stored,
 							}
 
 							if dataType.fieldName != nil {
-								riskDatatype.FieldName = *dataType.fieldName
+								riskSchema.FieldName = *dataType.fieldName
 							}
 							if dataType.objectName != nil {
-								riskDatatype.ObjectName = *dataType.objectName
+								riskSchema.ObjectName = *dataType.objectName
 							}
 
-							match.DataTypes = append(match.DataTypes, riskDatatype)
+							match.Schemas = append(match.Schemas, riskSchema)
 						}
 
-						location.Matches = append(location.Matches, match)
+						location.DataTypes = append(location.DataTypes, match)
 					}
 
 					locations = append(locations, location)
