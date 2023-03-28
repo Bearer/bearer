@@ -68,7 +68,7 @@ type DataType struct {
 	Name         string       `json:"name" yaml:"name"`
 	UUID         string       `json:"uuid" yaml:"uuid"`
 	CategoryUUID string       `json:"category_uuid" yaml:"category_uuid"`
-	Category     DataCategory `json:"-"`
+	Category     DataCategory `json:"category" yaml:"category"`
 }
 
 type DataCategory struct {
