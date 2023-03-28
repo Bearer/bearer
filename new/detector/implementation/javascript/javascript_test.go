@@ -7,10 +7,15 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/testhelper"
 )
 
+func TestJavascriptObjectDetector(t *testing.T) {
+	runTest(t, "object_class", "object", "testdata/object_class.js")
+	runTest(t, "object_object", "object", "testdata/object_object.js")
+	runTest(t, "object_projection", "object", "testdata/object_projection.js")
+}
+
 func TestJavascriptStringDetector(t *testing.T) {
 	runTest(t, "string_literal", "string", "testdata/string_literal.js")
 	runTest(t, "string_non_literal", "string", "testdata/string_non_literal.js")
-	runTest(t, "typed_object", "object", "testdata/typed_object.ts")
 }
 
 func TestJavascriptTypes(t *testing.T) {

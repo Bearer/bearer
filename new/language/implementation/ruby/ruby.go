@@ -30,6 +30,8 @@ var (
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 
 	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
+
+	passthroughMethods = []string{"JSON.parse", "JSON.parse!", "*.to_json"}
 )
 
 type rubyImplementation struct{}
@@ -81,6 +83,11 @@ func (*rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				(parent.Type() == "keyword_parameter" && node.Equal(parent.ChildByFieldName("name"))) ||
 				(parent.Type() == "optional_parameter" && node.Equal(parent.ChildByFieldName("name"))) {
 				scope.Assign(node.Content(), node)
+			}
+
+			if parent.Type() == "argument_list" {
+				callNode := parent.Parent()
+				callNode.UnifyWith(node)
 			}
 		case "block", "do_block":
 			previousScope := scope
@@ -260,4 +267,32 @@ func (*rubyImplementation) TranslatePatternContent(fromNodeType, toNodeType, con
 
 func (implementation *rubyImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
 	return true
+}
+
+func (*rubyImplementation) PassthroughNested(node *tree.Node) bool {
+	callNode := node.Parent()
+	if callNode.Type() != "call" {
+		return false
+	}
+
+	receiverNode := callNode.ChildByFieldName("receiver")
+
+	if node.Type() != "arguments_list" && (receiverNode == nil || !node.Equal(receiverNode)) {
+		return false
+	}
+
+	var receiverMethod string
+	var wildcardMethod string
+
+	if receiverNode != nil {
+		methodName := callNode.ChildByFieldName("method").Content()
+
+		if receiverNode.Type() == "identifier" {
+			receiverMethod = receiverNode.Content() + "." + methodName
+		}
+
+		wildcardMethod = "*." + methodName
+	}
+
+	return slices.Contains(passthroughMethods, receiverMethod) || slices.Contains(passthroughMethods, wildcardMethod)
 }

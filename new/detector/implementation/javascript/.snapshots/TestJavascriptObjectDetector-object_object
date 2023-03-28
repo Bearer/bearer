@@ -1,9 +1,5 @@
-- position: "1:1"
-  content: |-
-    nested = {
-      "one" => 42,
-      "two" => "hi"
-    }
+- position: "1:5"
+  content: 'nested = { "a": 123 }'
   data:
     properties:
         - name: nested
@@ -13,15 +9,12 @@
             matchnode: {}
             data:
                 properties:
-                    - name: one
-                      node: {}
-                      object: null
-                    - name: two
+                    - name: a
                       node: {}
                       object: null
                 isvirtual: false
     isvirtual: true
-- position: "6:6"
+- position: "3:6"
   content: |-
     {
       x: { n: nested },
@@ -50,10 +43,7 @@
                                     matchnode: {}
                                     data:
                                         properties:
-                                            - name: one
-                                              node: {}
-                                              object: null
-                                            - name: two
+                                            - name: a
                                               node: {}
                                               object: null
                                         isvirtual: false
@@ -65,10 +55,7 @@
                         matchnode: {}
                         data:
                             properties:
-                                - name: one
-                                  node: {}
-                                  object: null
-                                - name: two
+                                - name: a
                                   node: {}
                                   object: null
                             isvirtual: false

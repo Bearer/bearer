@@ -1,9 +1,0 @@
-type: "risk"
-languages:
-  - javascript
-patterns:
-  - pattern: |
-      $<DATA_TYPE>
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype

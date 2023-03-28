@@ -1,10 +1,17 @@
 - position: "1:7"
   content: 'user: { email: string } = { email: "jhon@gmail.com" }'
   data:
-    name: user
     properties:
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: email
+        - name: user
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: email
+                      node: {}
+                      object: null
+                isvirtual: false
+    isvirtual: true
 

@@ -8,17 +8,9 @@ import (
 )
 
 func TestRubyObjectDetector(t *testing.T) {
-	runTest(t, "object_assignment", "object", "testdata/object_assignment.rb")
-	runTest(t, "object_chain", "object", "testdata/object_chain.rb")
 	runTest(t, "object_class", "object", "testdata/object_class.rb")
 	runTest(t, "object_hash", "object", "testdata/object_hash.rb")
-	runTest(t, "object_parent_pair", "object", "testdata/object_parent_pair.rb")
-}
-
-func TestRubyPropertyDetector(t *testing.T) {
-	runTest(t, "property_accessor", "property", "testdata/property_accessor.rb")
-	runTest(t, "property_method", "property", "testdata/property_method.rb")
-	runTest(t, "property_pair", "property", "testdata/property_pair.rb")
+	runTest(t, "object_projection", "object", "testdata/object_projection.rb")
 }
 
 func TestRubyStringDetector(t *testing.T) {

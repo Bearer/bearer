@@ -1,7 +1,4 @@
-nested = {
-  "one" => 42,
-  "two" => "hi"
-}
+let nested = { "a": 123 }
 
 call({
   x: { n: nested },

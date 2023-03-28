@@ -1,41 +1,25 @@
 package datatype
 
 import (
+	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/report/detectors"
-	"github.com/bearer/bearer/pkg/report/schema"
-
-	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	classificationschema "github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/util/classify"
 )
 
 type Data struct {
-	Name           string
-	Classification classificationschema.Classification
-	Properties     []Property
-}
-
-func (data *Data) toClassifcationRequestDetection() *classificationschema.ClassificationRequestDetection {
-	req := &classificationschema.ClassificationRequestDetection{
-		Name:       data.Name,
-		SimpleType: schema.SimpleTypeUnknown,
-	}
-	for _, property := range data.Properties {
-		req.Properties = append(req.Properties, &classificationschema.ClassificationRequestDetection{
-			Name:       property.Name,
-			SimpleType: schema.SimpleTypeUnknown,
-			Properties: []*classificationschema.ClassificationRequestDetection{},
-		})
-	}
-	return req
+	Properties []Property
 }
 
 type Property struct {
 	Name           string
-	Detection      *types.Detection
+	Node           *tree.Node
 	Classification classificationschema.Classification
+	Datatype       *types.Detection
 }
 
 type datatypeDetector struct {
@@ -53,6 +37,10 @@ func (detector *datatypeDetector) Name() string {
 	return "datatype"
 }
 
+func (detector *datatypeDetector) NestedDetections() bool {
+	return false
+}
+
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
@@ -65,33 +53,7 @@ func (detector *datatypeDetector) DetectAt(
 	var result []interface{}
 
 	for _, object := range objectDetections {
-		var properties []Property
-
-		objectData := object.Data.(generictypes.Object)
-
-		for _, property := range objectData.Properties {
-			propertyData := property.Data.(generictypes.Property)
-			properties = append(properties, Property{
-				Detection: property,
-				Name:      propertyData.Name,
-			})
-		}
-
-		data := Data{
-			Name:       objectData.Name,
-			Properties: properties,
-		}
-
-		classificationReqDetection := data.toClassifcationRequestDetection()
-
-		classification := detector.classifier.Classify(classificationschema.ClassificationRequest{
-			Value:        classificationReqDetection,
-			DetectorType: detectors.DetectorRuby,
-			Filename:     evaluator.FileName(),
-		})
-
-		mergeClassification(&data, classification)
-
+		data, _ := detector.classifyObject(evaluator.FileName(), "", object)
 		result = append(result, data)
 	}
 
@@ -100,10 +62,86 @@ func (detector *datatypeDetector) DetectAt(
 
 func (detector *datatypeDetector) Close() {}
 
-// NOTE: presumption for mergeClassification is that classification will have all properties that detection has in same order
-func mergeClassification(detection *Data, classification *classificationschema.ClassifiedDatatype) {
-	detection.Classification = classification.Classification
-	for i := range detection.Properties {
-		detection.Properties[i].Classification = classification.Properties[i].Classification
+func (detector *datatypeDetector) classifyObject(
+	filename,
+	name string,
+	detection *types.Detection,
+) (Data, classificationschema.Classification) {
+	objectData := detection.Data.(generictypes.Object)
+
+	classification := detector.classifier.Classify(buildClassificationRequest(filename, name, objectData))
+
+	properties := make([]Property, len(objectData.Properties))
+
+	// NOTE: assumption is that classification will have all properties that detection has in same order
+	for i, property := range objectData.Properties {
+		propertyDetection, propertyClassification := detector.classifyProperty(
+			filename,
+			property.Name,
+			property.Object,
+			classification.Properties[i].Classification,
+		)
+
+		node := property.Node
+		if node == nil {
+			node = detection.MatchNode
+		}
+
+		properties[i] = Property{
+			Datatype:       propertyDetection,
+			Node:           node,
+			Name:           property.Name,
+			Classification: propertyClassification,
+		}
+	}
+
+	return Data{Properties: properties}, classification.Classification
+}
+
+func (detector *datatypeDetector) classifyProperty(
+	filename,
+	name string,
+	detection *types.Detection,
+	parentClassification classificationschema.Classification,
+) (*types.Detection, classificationschema.Classification) {
+	if detection == nil {
+		return nil, parentClassification
+	}
+
+	data, propertyClassification := detector.classifyObject(filename, name, detection)
+
+	propertyDetection := &types.Detection{
+		DetectorType: "datatype",
+		MatchNode:    detection.MatchNode,
+		Data:         data,
+	}
+
+	if parentClassification.Decision.State == classify.Valid ||
+		(parentClassification.Decision.State == classify.Potential && propertyClassification.Decision.State == classify.Invalid) ||
+		(parentClassification.Decision.State == classify.Invalid && propertyClassification.Decision.State == classify.Invalid) {
+		return propertyDetection, parentClassification
+	}
+
+	return propertyDetection, propertyClassification
+}
+
+func buildClassificationRequest(filename, name string, data generictypes.Object) classificationschema.ClassificationRequest {
+	var properties []*classificationschema.ClassificationRequestDetection
+
+	for _, property := range data.Properties {
+		properties = append(properties, &classificationschema.ClassificationRequestDetection{
+			Name:       property.Name,
+			SimpleType: schema.SimpleTypeUnknown,
+		})
+	}
+
+	return classificationschema.ClassificationRequest{
+		Value: &classificationschema.ClassificationRequestDetection{
+			Name:       name,
+			SimpleType: schema.SimpleTypeUnknown,
+			Properties: properties,
+		},
+		DetectorType: detectors.DetectorRuby,
+		Filename:     filename,
 	}
 }
