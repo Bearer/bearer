@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"strings"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
@@ -14,6 +13,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/risks"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/hhatto/gocloc"
 
@@ -95,7 +95,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		// add full path to filename
-		fullFilename := GetFullFilename(config.Target, castDetection.Source.Filename)
+		fullFilename := file.GetFullFilename(config.Target, castDetection.Source.Filename)
 		castDetection.Source.Filename = fullFilename
 
 		switch detectionType {
@@ -186,19 +186,4 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		Components: componentsHolder.ToDataFlow(),
 	}
 	return dataflow, nil, nil, nil
-}
-
-func GetFullFilename(path string, filename string) string {
-	path = strings.TrimSuffix(path, "/")
-	filename = strings.TrimPrefix(filename, "/")
-
-	if filename == "." {
-		return path
-	}
-
-	if path == "" || path == "." {
-		return filename
-	}
-
-	return path + "/" + filename
 }
