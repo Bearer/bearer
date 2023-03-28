@@ -3,24 +3,21 @@ patterns:
       expressjwt($<HASH_CONTENT>)
     filters:
       - variable: HASH_CONTENT
-        detection: javascript_express_jwt_not_revoked_secret_datatype
+        detection: javascript_express_jwt_not_revoked_secret
       - not:
           variable: HASH_CONTENT
           detection: javascript_express_jwt_not_revoked_is_revoked
 languages:
   - javascript
 auxiliary:
-  - id: javascript_express_jwt_not_revoked_secret_datatype
+  - id: javascript_express_jwt_not_revoked_secret
     patterns:
       - pattern: |
-          { $<...>secret: $<DATA_TYPE>$<...> }
-        filters:
-          - variable: DATA_TYPE
-            detection: datatype
+          { secret: $<_> }
   - id: javascript_express_jwt_not_revoked_is_revoked
     patterns:
       - pattern: |
-          { $<...>isRevoked: $<_>$<...> }
+          { isRevoked: $<_> }
 severity: low
 metadata:
   description: "Unrevoked JWT detected."
