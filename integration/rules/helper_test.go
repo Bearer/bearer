@@ -27,6 +27,10 @@ type Runner struct {
 	worker worker.Worker
 }
 
+type RuleTestCase struct {
+	ProjectPath string
+}
+
 func getRunner(t *testing.T) *Runner {
 	mu.Lock()
 	defer mu.Unlock()
@@ -79,10 +83,15 @@ func (runner *Runner) runTest(t *testing.T, projectPath string) {
 		t.Fatal("no scannable files found")
 	}
 
+	projectNames := strings.Split(projectPath, "/")
+	lenProjectNames := len(projectNames)
+	formattedProjectName := projectNames[lenProjectNames-2] + "_" + projectNames[lenProjectNames-1]
+
 	for _, file := range files {
 		myfile := file
 		ext := filepath.Ext(file.FilePath)
-		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
+
+		testName := formattedProjectName + "-" + strings.TrimSuffix(file.FilePath, ext) + ".yml"
 		t.Run(testName, func(t *testing.T) {
 			runner.ScanSingleFile(t, testDataPath, myfile, snapshotsPath)
 		})
