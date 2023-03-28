@@ -43,9 +43,10 @@ type parentHolder struct {
 }
 
 type matchCategoryHolder struct {
-	name     string
-	category string
-	dataType map[string]dataTypeHolder
+	name         string
+	categoryUUID *string
+	category     string
+	dataType     map[string]dataTypeHolder
 }
 
 type dataTypeHolder struct {
@@ -163,9 +164,10 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 	// create datatype category if it doesn't exist
 	if _, exists := parent.matches[datatype.Name]; !exists {
 		categoryToAdd := matchCategoryHolder{
-			name:     datatype.Name,
-			category: category,
-			dataType: make(map[string]dataTypeHolder),
+			name:         datatype.Name,
+			category:     category,
+			categoryUUID: &datatype.CategoryUUID,
+			dataType:     make(map[string]dataTypeHolder),
 		}
 
 		parent.matches[datatype.Name] = categoryToAdd
@@ -186,15 +188,10 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 	}
 }
 
-func (holder *Holder) ToDataFlow() []interface{} {
-	data := make([]interface{}, 0)
+func (holder *Holder) ToDataFlow() []types.RiskDetector {
+	data := make([]types.RiskDetector, 0)
 
 	for _, detector := range maputil.ToSortedSlice(holder.detectors) {
-		// stored := false
-		// if customDetector, isCustomDetector := holder.config.Rules[detector.id]; isCustomDetector {
-		// 	stored = customDetector.Stored
-		// }
-
 		constructedDetector := types.RiskDetector{
 			DetectorID: detector.id,
 		}
@@ -233,7 +230,8 @@ func (holder *Holder) ToDataFlow() []interface{} {
 						}
 
 						match := types.RiskDatatype{
-							Name: dataTypeCategory.name,
+							Name:         dataTypeCategory.name,
+							CategoryUUID: *dataTypeCategory.categoryUUID,
 						}
 
 						for _, dataType := range maputil.ToSortedSlice(dataTypeCategory.dataType) {
@@ -265,7 +263,45 @@ func (holder *Holder) ToDataFlow() []interface{} {
 		data = append(data, constructedDetector)
 	}
 
+	data = removeParentBasedDuplicates(data)
+
 	return data
+}
+
+// removeParentBasedDuplicates checks if there are 2 risk locations one with presence and one with datatype which have same parent line number and parentContent and if it finds such case it discards the presence one
+func removeParentBasedDuplicates(data []types.RiskDetector) []types.RiskDetector {
+	filteredData := []types.RiskDetector{}
+	for _, detector := range data {
+		newDetector := types.RiskDetector{
+			DetectorID: detector.DetectorID,
+		}
+		for _, location := range detector.Locations {
+			// presence matches are always alone per location
+			if len(location.PresenceMatches) > 0 && location.Parent != nil {
+				hasSameParentLocation := false
+
+				for _, otherLocation := range detector.Locations {
+					if len(otherLocation.DataTypes) > 0 &&
+						otherLocation.Filename == location.Filename &&
+						otherLocation.Parent != nil &&
+						otherLocation.Parent.Content == location.Parent.Content &&
+						otherLocation.Parent.LineNumber == location.Parent.LineNumber {
+
+						hasSameParentLocation = true
+					}
+				}
+
+				if hasSameParentLocation {
+					continue
+				}
+			}
+
+			newDetector.Locations = append(newDetector.Locations, location)
+		}
+		filteredData = append(filteredData, newDetector)
+	}
+
+	return filteredData
 }
 
 func extractCustomRiskParent(value interface{}) *schema.Parent {

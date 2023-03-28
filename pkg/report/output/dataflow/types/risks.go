@@ -16,8 +16,9 @@ type RiskLocation struct {
 }
 
 type RiskDatatype struct {
-	Name    string       `json:"name,omitempty" yaml:"name,omitempty"`
-	Schemas []RiskSchema `json:"schemas,omitempty" yaml:"schemas,omitempty"`
+	Name         string       `json:"name,omitempty" yaml:"name,omitempty"`
+	CategoryUUID string       `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
+	Schemas      []RiskSchema `json:"schemas,omitempty" yaml:"schemas,omitempty"`
 }
 
 type RiskSchema struct {

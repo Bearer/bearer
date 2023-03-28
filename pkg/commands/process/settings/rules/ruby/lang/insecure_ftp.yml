@@ -1,15 +1,15 @@
 patterns:
   - |
-    Net::FTP.new()
+    $<!>Net::FTP.new()
   - pattern: |
-      Net::FTP.open() do
+      $<!>Net::FTP.open() do
         $<DATA_TYPE>
       end
     filters:
       - variable: DATA_TYPE
         detection: datatype
   - |
-    Net::FTP.open()$<...>
+    $<!>Net::FTP.open()$<...>
 languages:
   - ruby
 severity: low

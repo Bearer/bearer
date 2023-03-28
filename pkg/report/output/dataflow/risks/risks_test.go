@@ -43,7 +43,7 @@ func TestDataflowRisks(t *testing.T) {
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							Matches: []types.RiskMatch{
+							DataTypes: []types.RiskMatch{
 								{
 									Category: "datatype",
 									Name:     "Username",

@@ -20,9 +20,9 @@ import (
 )
 
 type DataFlow struct {
-	Datatypes  []types.Datatype  `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks      []interface{}     `json:"risks,omitempty" yaml:"risks,omitempty"`
-	Components []types.Component `json:"components" yaml:"components"`
+	Datatypes  []types.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	Risks      []types.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Components []types.Component    `json:"components" yaml:"components"`
 }
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{
