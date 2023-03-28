@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	"runtime/debug"
 	"strconv"
 	"strings"
 	"time"
@@ -226,7 +225,7 @@ func (process *Process) doTask(task *Task) {
 func (process *Process) monitorMemory(pid int) {
 	recovery := func() {
 		if r := recover(); r != nil {
-			log.Debug().Msgf("error recovered %s %s", r, debug.Stack())
+			log.Debug().Msgf("error recovered %s", r)
 		}
 	}
 	defer recovery()
