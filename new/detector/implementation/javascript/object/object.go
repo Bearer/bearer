@@ -29,7 +29,7 @@ type objectDetector struct {
 
 func New(lang languagetypes.Language) (types.Detector, error) {
 	// { first_name: ..., ... }
-	objectPairQuery, err := lang.CompileQuery(`(object (pair key: (_) @key value: (_) @value)) @root`)
+	objectPairQuery, err := lang.CompileQuery(`(object (pair key: (_) @key value: (_) @value) @pair) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling object pair query: %s", err)
 	}
@@ -49,7 +49,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	// const { user } = <object>
 	// let { user } = <object>
 	// var { user } = <object>
-	objectDeconstructionQuery, err := lang.CompileQuery(`(variable_declarator name:(object_pattern (shorthand_property_identifier_pattern) @match ) value: (_) @value) @root`)
+	objectDeconstructionQuery, err := lang.CompileQuery(`(variable_declarator name: (object_pattern (shorthand_property_identifier_pattern) @match) value: (_) @value) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling object deconstruction query: %s", err)
 	}
@@ -119,11 +119,6 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getObjectDeconstruction(node, evaluator)
-	if len(detections) != 0 || err != nil {
-		return detections, err
-	}
-
 	detections, err = detector.getClass(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
@@ -162,9 +157,12 @@ func (detector *objectDetector) getObject(
 			return nil, err
 		}
 
+		pairNode := result["pair"]
+
 		if len(propertyObjects) == 0 {
 			properties = append(properties, generictypes.Property{
 				Name: name,
+				Node: pairNode,
 			})
 
 			continue
@@ -173,6 +171,7 @@ func (detector *objectDetector) getObject(
 		for _, propertyObject := range propertyObjects {
 			properties = append(properties, generictypes.Property{
 				Name:   name,
+				Node:   pairNode,
 				Object: propertyObject,
 			})
 		}
@@ -201,6 +200,7 @@ func (detector *objectDetector) getAssignment(
 			IsVirtual: true,
 			Properties: []generictypes.Property{{
 				Name:   result["name"].Content(),
+				Node:   node,
 				Object: object,
 			}},
 		})

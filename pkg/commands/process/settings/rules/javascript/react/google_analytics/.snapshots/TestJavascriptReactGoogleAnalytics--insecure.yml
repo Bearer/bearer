@@ -5,24 +5,6 @@ medium:
         id: javascript_react_google_analytics
         description: Sensitive data sent to Google Analytics detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_react_google_analytics
-      line_number: 1
-      filename: insecure.js
-      category_groups:
-        - PII
-      parent_line_number: 2
-      snippet: |-
-        ReactGA.event({
-        	category: "user",
-        	action: "logged_in",
-        	value: user.email,
-        })
-      fingerprint: 325d8627339fb8007772f3afafd6b47c_0
-    - rule:
-        cwe_ids:
-            - "201"
-        id: javascript_react_google_analytics
-        description: Sensitive data sent to Google Analytics detected.
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_react_google_analytics
       line_number: 5
       filename: insecure.js
       category_groups:
@@ -34,5 +16,5 @@ medium:
         	action: "logged_in",
         	value: user.email,
         })
-      fingerprint: 325d8627339fb8007772f3afafd6b47c_1
+      fingerprint: 325d8627339fb8007772f3afafd6b47c_0
 

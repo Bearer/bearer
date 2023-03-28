@@ -9,18 +9,17 @@
   data:
     properties:
         - name: User
+          node: null
           object:
             detectortype: object
             matchnode: {}
             data:
                 properties:
-                    - name: a
-                      object: null
-                    - name: b
-                      object: null
                     - name: x
+                      node: null
                       object: null
                     - name: "y"
+                      node: null
                       object: null
                 isvirtual: false
     isvirtual: false

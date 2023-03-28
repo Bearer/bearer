@@ -10,16 +10,19 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      $<CLIENT>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
+      $<CLIENT>.leaveBreadcrumb($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: CLIENT
         detection: javascript_third_parties_bugsnag_client
-      - variable: METHOD
-        values:
-          - start
-          - leaveBreadcrumb
       - variable: DATA_TYPE
         detection: datatype
+  - pattern: |
+      $<CLIENT>.start($<START_DATA_TYPE>)
+    filters:
+      - variable: CLIENT
+        detection: javascript_third_parties_bugsnag_client
+      - variable: START_DATA_TYPE
+        detection: javascript_third_parties_bugsnag_start_data_type
 languages:
   - javascript
 auxiliary:
@@ -33,6 +36,12 @@ auxiliary:
         filters:
           - variable: CLIENT
             detection: javascript_third_parties_bugsnag_client
+  - id: javascript_third_parties_bugsnag_start_data_type
+    patterns:
+      - pattern: $<_>.$<_>($<...>$<DATA_TYPE>$<...>)
+        filters:
+          - variable: DATA_TYPE
+            detection: datatype
 skip_data_types:
   - "Unique Identifier"
 metadata:

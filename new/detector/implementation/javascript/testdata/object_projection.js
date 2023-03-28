@@ -11,3 +11,6 @@ obj["w"]
 // Call
 obj.x({ email: " " }, { first_name: "" })
 obj.x({ email: " " }, { first_name: "" }).a
+
+// Deconstruction
+let { x } = obj

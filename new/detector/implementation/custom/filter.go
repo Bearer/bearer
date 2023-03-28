@@ -105,13 +105,10 @@ func matchDetectionFilter(
 	contains bool,
 ) (*bool, []*types.Detection, error) {
 	var evaluateDetections func(*tree.Node, string, bool) ([]*types.Detection, error)
-	var evaluateHasDetection func(*tree.Node, string) (bool, error)
 	if contains {
 		evaluateDetections = evaluator.ForTree
-		evaluateHasDetection = evaluator.TreeHas
 	} else {
 		evaluateDetections = evaluator.ForNode
-		evaluateHasDetection = evaluator.NodeHas
 	}
 
 	if detectorType == "datatype" {
@@ -120,8 +117,16 @@ func matchDetectionFilter(
 		return boolPointer(len(detections) != 0), detections, err
 	}
 
-	hasDetection, err := evaluateHasDetection(node, detectorType)
-	return boolPointer(hasDetection), nil, err
+	detections, err := evaluateDetections(node, detectorType, true)
+	var datatypeDetections []*types.Detection
+
+	for _, detection := range detections {
+		if data, ok := detection.Data.(Data); ok {
+			datatypeDetections = append(datatypeDetections, data.Datatypes...)
+		}
+	}
+
+	return boolPointer(len(detections) != 0), datatypeDetections, err
 }
 
 func matchContentFilter(filter settings.PatternFilter, content string) *bool {
