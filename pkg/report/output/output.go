@@ -60,6 +60,22 @@ func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result
 		return GetDataflow(report, config, false)
 	case flag.ReportSecurity:
 		return reportSecurity(report, config)
+	case flag.ReportSaaS:
+		securityResults, _, dataflow, err := reportSecurity(report, config)
+		if err != nil {
+			return nil, nil, nil, err
+		}
+
+		meta, _ := getMeta(config)
+		files := getDiscoveredFiles(config)
+
+		return BearerReport{
+			Findings:   securityResults,
+			DataTypes:  &dataflow.Datatypes,
+			Components: &dataflow.Components,
+			Files:      files,
+			Meta:       *meta,
+		}, nil, nil, nil
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
@@ -67,6 +83,16 @@ func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result
 	}
 
 	return nil, nil, nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+}
+
+func getDiscoveredFiles(config settings.Config) []string {
+	filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
+	files := []string{}
+	for _, fileDiscovered := range filesDiscovered {
+		files = append(files, dataflowoutput.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
+	}
+
+	return files
 }
 
 func GetPrivacyReportCSVOutput(report types.Report, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow, config settings.Config) (*string, error) {
@@ -210,11 +236,7 @@ func createBearerGzipFileReport(
 		return &tempDir, nil, err
 	}
 
-	filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
-	files := []string{}
-	for _, fileDiscovered := range filesDiscovered {
-		files = append(files, dataflowoutput.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
-	}
+	files := getDiscoveredFiles(config)
 
 	content, _ := ReportJSON(&BearerReport{
 		Findings:   securityResults,
@@ -237,6 +259,24 @@ func createBearerGzipFileReport(
 }
 
 func getMeta(config settings.Config) (*Meta, error) {
+	sha, err := exec.Command("git", "rev-parse", "HEAD").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
+	}
+
+	currentBranch, err := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
+	}
+
+	defaultBranch, err := exec.Command("git", "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
+	}
+
 	output, err := exec.Command("git", "remote", "get-url", "origin").Output()
 	if err != nil {
 		log.Error().Msgf("couldn't get git info %s", err)
@@ -250,25 +290,31 @@ func getMeta(config settings.Config) (*Meta, error) {
 	}
 
 	return &Meta{
-		ID:       info.ID,
-		Host:     string(info.Host),
-		Username: info.Username,
-		Name:     info.Name,
-		FullName: info.FullName,
-		URL:      info.Raw,
-		Target:   config.Scan.Target,
+		ID:            info.ID,
+		Host:          string(info.Host),
+		Username:      info.Username,
+		Name:          info.Name,
+		FullName:      info.FullName,
+		URL:           info.Raw,
+		Target:        config.Scan.Target,
+		SHA:           strings.TrimSuffix(string(sha), "\n"),
+		CurrentBranch: strings.TrimSuffix(string(currentBranch), "\n"),
+		DefaultBranch: strings.TrimPrefix(strings.TrimSuffix(string(defaultBranch), "\n"), "origin/"),
 	}, nil
 }
 
 type Meta struct {
-	ID       string `json:"id" yaml:"id"`
-	Host     string `json:"host" yaml:"host"`
-	Username string `json:"username" yaml:"username"`
-	Name     string `json:"name" yaml:"name"`
-	URL      string `json:"url" yaml:"url"`
-	FullName string `json:"full_name" yaml:"full_name"`
-	Target   string `json:"target" yaml:"target"`
-	SignedID string `json:"signed_id,omitempty" yaml:"signed_id,omitempty"`
+	ID            string `json:"id" yaml:"id"`
+	Host          string `json:"host" yaml:"host"`
+	Username      string `json:"username" yaml:"username"`
+	Name          string `json:"name" yaml:"name"`
+	URL           string `json:"url" yaml:"url"`
+	FullName      string `json:"full_name" yaml:"full_name"`
+	Target        string `json:"target" yaml:"target"`
+	SHA           string `json:"sha" yaml:"sha"`
+	CurrentBranch string `json:"current_branch" yaml:"current_branch"`
+	DefaultBranch string `json:"default_branch" yaml:"default_branch"`
+	SignedID      string `json:"signed_id,omitempty" yaml:"signed_id,omitempty"`
 }
 
 type BearerReport struct {

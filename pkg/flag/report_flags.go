@@ -13,8 +13,9 @@ var (
 
 	ReportPrivacy   = "privacy"
 	ReportSecurity  = "security"
+	ReportDataFlow  = "dataflow"
 	ReportDetectors = "detectors" // nodoc: internal report type
-	ReportDataFlow  = "dataflow"  
+	ReportSaaS      = "saas"      // nodoc: internal report type
 	ReportStats     = "stats"     // nodoc: internal report type
 
 	DefaultSeverity = "critical,high,medium,low,warning"
@@ -102,9 +103,10 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	switch report {
 	case ReportPrivacy:
 	case ReportSecurity:
+	case ReportDataFlow:
 	// hidden flags for development use
 	case ReportDetectors:
-	case ReportDataFlow:
+	case ReportSaaS:
 	case ReportStats:
 	default:
 		return ReportOptions{}, ErrInvalidReport
