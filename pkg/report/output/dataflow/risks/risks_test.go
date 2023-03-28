@@ -30,24 +30,25 @@ func TestDataflowRisks(t *testing.T) {
 		Name        string
 		Config      settings.Config
 		FileContent string
-		Want        []interface{}
+		Want        []types.RiskDetector
 	}{
 		{
 			Name:        "single detection",
 			Config:      config,
 			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []interface{}{
-				types.RiskDetector{
+			Want: []types.RiskDetector{
+				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							DataTypes: []types.RiskMatch{
+							DataTypes: []types.RiskDatatype{
 								{
-									Category: "datatype",
-									Name:     "Username",
-									DataTypes: []types.RiskDatatype{
+
+									Name:         "Username",
+									CategoryUUID: "456",
+									Schemas: []types.RiskSchema{
 										{
 											FieldName: "User_name",
 										},
@@ -63,25 +64,25 @@ func TestDataflowRisks(t *testing.T) {
 			Name:        "single detection - no classification",
 			Config:      config,
 			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name"}}`,
-			Want:        []interface{}{},
+			Want:        []types.RiskDetector{},
 		},
 		{
 			Name:   "single detection - duplicates",
 			Config: config,
 			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
 		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []interface{}{
-				types.RiskDetector{
+			Want: []types.RiskDetector{
+				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							Matches: []types.RiskMatch{
+							DataTypes: []types.RiskDatatype{
 								{
-									Category: "datatype",
-									Name:     "Username",
-									DataTypes: []types.RiskDatatype{
+									Name:         "Username",
+									CategoryUUID: "456",
+									Schemas: []types.RiskSchema{
 										{
 											FieldName: "User_name",
 										},
@@ -97,20 +98,19 @@ func TestDataflowRisks(t *testing.T) {
 			Name:        "single detection - stored",
 			Config:      config,
 			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"ruby_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []interface{}{
-				types.RiskDetector{
+			Want: []types.RiskDetector{
+				{
 					DetectorID: "ruby_leak",
 					Locations: []types.RiskLocation{
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							Matches: []types.RiskMatch{
+							DataTypes: []types.RiskDatatype{
 								{
-									Category: "datatype",
-									Name:     "Username",
-									DataTypes: []types.RiskDatatype{
+									Name:         "Username",
+									CategoryUUID: "456",
+									Schemas: []types.RiskSchema{
 										{
-											Stored:    true,
 											FieldName: "User_name",
 										},
 									},
@@ -126,18 +126,18 @@ func TestDataflowRisks(t *testing.T) {
 			Config: config,
 			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
 					{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []interface{}{
-				types.RiskDetector{
+			Want: []types.RiskDetector{
+				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							Matches: []types.RiskMatch{
+							DataTypes: []types.RiskDatatype{
 								{
-									Category: "datatype",
-									Name:     "Username",
-									DataTypes: []types.RiskDatatype{
+									Name:         "Username",
+									CategoryUUID: "456",
+									Schemas: []types.RiskSchema{
 										{
 											FieldName: "User_name",
 										},
@@ -154,27 +154,27 @@ func TestDataflowRisks(t *testing.T) {
 			Config: config,
 			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
 		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "address", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []interface{}{
-				types.RiskDetector{
+			Want: []types.RiskDetector{
+				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
 							Filename:   "./users.rb",
 							LineNumber: 25,
-							Matches: []types.RiskMatch{
+							DataTypes: []types.RiskDatatype{
 								{
-									Category: "datatype",
-									Name:     "Physical Address",
-									DataTypes: []types.RiskDatatype{
+									Name:         "Physical Address",
+									CategoryUUID: "456",
+									Schemas: []types.RiskSchema{
 										{
 											FieldName: "address",
 										},
 									},
 								},
 								{
-									Category: "datatype",
-									Name:     "Username",
-									DataTypes: []types.RiskDatatype{
+									Name:         "Username",
+									CategoryUUID: "456",
+									Schemas: []types.RiskSchema{
 										{
 											FieldName: "User_name",
 										},
