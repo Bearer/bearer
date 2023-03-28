@@ -1,257 +1,41 @@
 package integration_test
 
 import (
+	"os"
 	"testing"
 )
 
-const rubyRulesPath string = "../../pkg/commands/process/settings/rules/ruby/"
+func TestRuby(t *testing.T) {
+	rulesPath, _ := os.LookupEnv("RULES_PATH") // defaults to "" if not present
+	var rubyRulesPath string = rulesPath + "/ruby/"
 
-func TestRubyLangCookies(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/cookies")
-}
+	tests := []RuleTestCase{}
+	entries, err := os.ReadDir(rubyRulesPath)
+	if err != nil {
+		t.Fatalf("failed to read /ruby folder: %s", err)
+	}
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			continue
+		}
 
-func TestRubyLangDeserializationOfUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/deserialization_of_user_input")
-}
+		ruleDirs, err := os.ReadDir(rubyRulesPath + entry.Name())
+		if err != nil {
+			t.Fatalf("failed to read /ruby/%s folder: %s", rubyRulesPath+entry.Name(), err)
+		}
+		for _, ruleDir := range ruleDirs {
+			if !ruleDir.IsDir() {
+				continue
+			}
+			tests = append(tests, RuleTestCase{
+				ProjectPath: rubyRulesPath + entry.Name() + "/" + ruleDir.Name(),
+			})
+		}
+	}
 
-func TestRubyLangEvalUsingUserInput(t *testing.T) {
 	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/eval_using_user_input")
-}
-
-func TestRubyLangFileGeneration(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/file_generation")
-}
-
-func TestRubyLangFtpUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/ftp_using_user_input")
-}
-
-func TestRubyLangHardcodedSecret(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/hardcoded_secret")
-}
-
-func TestRubyLangHttpGetParams(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/http_get_params")
-}
-
-func TestRubyLangHttpInsecure(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/http_insecure")
-}
-
-func TestRubyLangHttpPostInsecureWithData(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/http_post_insecure_with_data")
-}
-
-func TestRubyLangHttpUrlUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/http_url_using_user_input")
-}
-
-func TestRubyLangInsecureFtp(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/insecure_ftp")
-}
-
-func TestRubyLangJwt(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/jwt")
-}
-
-func TestRubyLangLogger(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/logger")
-}
-
-func TestRubyLangException(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/exception")
-}
-
-func TestRubyLangExecUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/exec_using_user_input")
-}
-
-func TestRubyLangPathUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/path_using_user_input")
-}
-
-func TestRubyLangRegexUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/regex_using_user_input")
-}
-
-func TestRubyLangReflectionUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/reflection_using_user_input")
-}
-
-func TestRubyLangSslVerification(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/ssl_verification")
-}
-
-func TestRubyLangWeakEncryption(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption")
-}
-
-func TestRubyLangWeakEncryptionWithData(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption_with_data")
-}
-
-func TestRubyRailsHTTPVerbConfusion(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/http_verb_confusion")
-}
-
-func TestRubyRailsInsecureCommunication(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_communication")
-}
-
-func TestRubyRailsInsecureDisablingOfCallback(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_disabling_of_callback")
-}
-
-func TestRubyRailsInsecureHTTPPassowrd(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_http_password")
-}
-
-func TestRubyRailsInsecureSmtp(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/insecure_smtp")
-}
-
-func TestRubyRailsLogger(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/logger")
-}
-
-func TestRubyRailsPasswordLength(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/password_length")
-}
-
-func TestRubyRailsPermissiveRegexValidation(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/permissive_regex_validation")
-}
-
-func TestRubyRailsRenderUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/render_using_user_input")
-}
-
-func TestRubyRailsSession(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/session")
-}
-
-func TestRubyRailsSessionKeyUsingUserInput(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/session_key_using_user_input")
-}
-
-func TestRubyRailsOpenRedirect(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/open_redirect")
-}
-
-func TestRubyRailsSqlInjection(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"rails/sql_injection")
-}
-
-func TestRubyThirdPartiesAlgolia(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/algolia")
-}
-
-func TestRubyThirdPartiesBigQuery(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/bigquery")
-}
-
-func TestRubyThirdPartiesDatadog(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/datadog")
-}
-
-func TestRubyThirdPartiesElasticsearch(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/elasticsearch")
-}
-
-func TestRubyThirdPartiesNewRelic(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/new_relic")
-}
-
-func TestRubyThirdPartiesRollbar(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/rollbar")
-}
-
-func TestRubyThirdPartiesScoutAPM(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/scout_apm")
-}
-
-func TestRubyThirdPartiesSentry(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/sentry")
-}
-
-func TestRubyThirdPartiesBugsnag(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/bugsnag")
-}
-
-func TestRubyThirdPartiesHoneybadger(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/honeybadger")
-}
-
-func TestRubyThirdPartiesAirbrake(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/airbrake")
-}
-
-func TestRubyThirdPartiesOpenTelemetry(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/open_telemetry")
-}
-
-func TestRubyThirdPartiesSegment(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/segment")
-}
-
-func TestRubyThirdPartiesGoogleDataflow(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/google_dataflow")
-}
-
-func TestRubyThirdPartiesGoogleAnalytics(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/google_analytics")
-}
-
-func TestRubyThirdPartiesClickHouse(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"third_parties/clickhouse")
+	runner := getRunner(t)
+	for _, testCase := range tests {
+		runner.runTest(t, testCase.ProjectPath)
+	}
 }
