@@ -7,11 +7,10 @@ layout: layouts/doc.njk
 
 Bearer currently supports Ruby and JavaScript codebase.
 
-| Languages       | Supported |
-| --------------- | --------------  |
-| Ruby            | ✅              | 
-| JavaScript      | ✅              |
-| TypeScript      | *Coming soon*   |
+| Languages               | Supported |
+| ----------------------- | --------- |
+| Ruby                    | ✅         |
+| JavaScript / Typescript | ✅         |
 
 We are working on adding more languages in the coming months, especially PHP, Java, C#, Go, and Python.
 
