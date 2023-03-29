@@ -12,6 +12,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/google/go-github/github"
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
@@ -187,7 +188,6 @@ func (r *runner) scanFS(ctx context.Context, opts flag.Options) (types.Report, e
 }
 
 func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error) {
-
 	return r.scanArtifact(ctx, opts)
 }
 
@@ -217,6 +217,17 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
 	if !opts.Quiet {
 		output.StdErrLogger().Msg("Loading rules")
+	}
+
+	client := github.NewClient(nil)
+	release, _, err := client.Repositories.GetLatestRelease(ctx, "bearer", "bearer")
+	if err != nil {
+		log.Debug().Msgf("couldn't retrieve latest release from GitHub %s", err)
+	} else {
+		version := strings.TrimPrefix(*release.Name, "v")
+		if version != build.Version && build.Version != "dev" && !opts.Quiet {
+			output.StdErrLogger().Msgf("You are running an outdated version of bearer, %s is now available.", *release.Name)
+		}
 	}
 
 	scanSettings, err := settings.FromOptions(opts)
