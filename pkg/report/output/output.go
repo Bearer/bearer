@@ -20,7 +20,6 @@ import (
 
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
@@ -184,30 +183,31 @@ func reportStats(report types.Report, config settings.Config) (*stats.Stats, err
 }
 
 func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {
-	ruleLanguages := make(map[string]bool)
-	for _, rule := range config.Rules {
-		for _, language := range rule.Languages {
-			ruleLanguages[language] = true
-		}
-	}
+	return true, nil
+	// ruleLanguages := make(map[string]bool)
+	// for _, rule := range config.Rules {
+	// 	for _, language := range rule.Languages {
+	// 		ruleLanguages[language] = true
+	// 	}
+	// }
 
-	foundLanguages := make(map[string]bool)
-	for _, language := range inputgocloc.Languages {
-		foundLanguages[strings.ToLower(language.Name)] = true
-	}
+	// foundLanguages := make(map[string]bool)
+	// for _, language := range inputgocloc.Languages {
+	// 	foundLanguages[strings.ToLower(language.Name)] = true
+	// }
 
-	_, rubyPresent := foundLanguages["ruby"]
-	if rubyPresent {
-		return true, nil
-	}
+	// _, rubyPresent := foundLanguages["ruby"]
+	// if rubyPresent {
+	// 	return true, nil
+	// }
 
-	_, javascriptPresent := foundLanguages["javascript"]
-	if javascriptPresent {
-		return true, nil
-	}
+	// _, javascriptPresent := foundLanguages["javascript"]
+	// if javascriptPresent {
+	// 	return true, nil
+	// }
 
-	log.Debug().Msg("No language found for which rules are applicable")
-	return false, nil
+	// log.Debug().Msg("No language found for which rules are applicable")
+	// return false, nil
 }
 
 func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
