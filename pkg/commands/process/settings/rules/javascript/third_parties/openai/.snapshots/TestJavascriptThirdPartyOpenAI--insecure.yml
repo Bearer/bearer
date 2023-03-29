@@ -1,0 +1,19 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_openai
+        description: Sensitive data sent to OpenAI detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_openai
+      line_number: 10
+      filename: insecure.js
+      category_groups:
+        - PII
+      parent_line_number: 8
+      snippet: |-
+        openai.createCompletion({
+          model: "text-davinci-003",
+          prompt: `Hello world ${user.email}`,
+        })
+      fingerprint: c329804218c8c70b82b16047dd3025b2_0
+
