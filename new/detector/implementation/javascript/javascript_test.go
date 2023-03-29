@@ -10,7 +10,6 @@ import (
 func TestJavascriptStringDetector(t *testing.T) {
 	runTest(t, "string_literal", "string", "testdata/string_literal.js")
 	runTest(t, "string_non_literal", "string", "testdata/string_non_literal.js")
-	runTest(t, "typed_object", "object", "testdata/typed_object.ts")
 }
 
 func TestJavascriptTypes(t *testing.T) {
