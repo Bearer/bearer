@@ -171,6 +171,10 @@ func evaluateRules(
 		}
 	}
 
+	for _, resultsSlice := range summaryResults {
+		SortResult(resultsSlice)
+	}
+
 	return nil
 }
 
@@ -511,4 +515,45 @@ func iterativeDigitsCount(number int) int {
 	}
 
 	return count
+}
+
+func SortResult(data []Result) {
+	sort.Slice(data, func(i, j int) bool {
+		vulnerabilityA := data[i]
+		vulnerabilityB := data[j]
+
+		if vulnerabilityA.Rule.Id < vulnerabilityB.Rule.Id {
+			return true
+		}
+		if vulnerabilityA.Rule.Id > vulnerabilityB.Rule.Id {
+			return false
+		}
+
+		if vulnerabilityA.Filename < vulnerabilityB.Filename {
+			return true
+		}
+		if vulnerabilityA.Filename > vulnerabilityB.Filename {
+			return false
+		}
+
+		if vulnerabilityA.LineNumber < vulnerabilityB.LineNumber {
+			return true
+		}
+		if vulnerabilityA.LineNumber > vulnerabilityB.LineNumber {
+			return false
+		}
+
+		if vulnerabilityA.ParentLineNumber < vulnerabilityB.ParentLineNumber {
+			return true
+		}
+		if vulnerabilityA.ParentLineNumber > vulnerabilityB.ParentLineNumber {
+			return false
+		}
+
+		if vulnerabilityA.ParentContent < vulnerabilityB.ParentContent {
+			return true
+		}
+
+		return false
+	})
 }
