@@ -15,9 +15,9 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
-	dataflowoutput "github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
 	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/gitsight/go-vcsurl"
 	"github.com/google/uuid"
 
@@ -89,7 +89,7 @@ func getDiscoveredFiles(config settings.Config) []string {
 	filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
 	files := []string{}
 	for _, fileDiscovered := range filesDiscovered {
-		files = append(files, dataflowoutput.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
+		files = append(files, file.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
 	}
 
 	return files

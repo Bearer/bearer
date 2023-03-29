@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/artifact"
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -54,9 +55,17 @@ func NewScanCommand() *cobra.Command {
 			}
 
 			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
+			defaultConfigPath := file.GetFullFilename(args[0], configPath)
 
+			var loadFileMessage string
 			if err := readConfig(configPath); err != nil {
-				return err
+				if err := readConfig(defaultConfigPath); err != nil {
+					loadFileMessage = fmt.Sprintf("Couldn't find config file %s or %s", configPath, defaultConfigPath)
+				} else {
+					loadFileMessage = fmt.Sprintf("Loading default config file %s", defaultConfigPath)
+				}
+			} else {
+				loadFileMessage = fmt.Sprintf("Loading config file %s", configPath)
 			}
 
 			options, err := ScanFlags.ToOptions(args)
@@ -64,8 +73,8 @@ func NewScanCommand() *cobra.Command {
 				return xerrors.Errorf("flag error: %w", err)
 			}
 
-			if !options.Quiet && configPath != "" {
-				output.StdErrLogger().Msgf("Loaded %s configuration file", configPath)
+			if !options.Quiet {
+				output.StdErrLogger().Msgf(loadFileMessage)
 			}
 
 			output.Setup(cmd, options)

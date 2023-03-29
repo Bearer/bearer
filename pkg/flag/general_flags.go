@@ -25,7 +25,7 @@ var (
 	ConfigFileFlag = Flag{
 		Name:            "config-file",
 		ConfigName:      "config-file",
-		Value:           "",
+		Value:           "bearer.yml",
 		Usage:           "Load configuration from the specified path.",
 		DisableInConfig: true,
 	}
