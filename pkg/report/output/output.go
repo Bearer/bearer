@@ -66,7 +66,14 @@ func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result
 			return nil, nil, nil, err
 		}
 
-		meta, _ := getMeta(config)
+		var meta *Meta
+		meta, err = getMeta(config)
+		if err != nil {
+			meta = &Meta{
+				Target: config.Scan.Target,
+			}
+		}
+
 		files := getDiscoveredFiles(config)
 
 		return BearerReport{
@@ -176,9 +183,13 @@ func reportSecurity(
 	}
 
 	if config.Client != nil {
-		meta, err := getMeta(config)
+		var meta *Meta
+		meta, err = getMeta(config)
 		if err != nil {
 			log.Error().Msgf("couldn't get meta for repo %s", err)
+			meta = &Meta{
+				Target: config.Scan.Target,
+			}
 		}
 
 		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, dataflow)
@@ -259,25 +270,25 @@ func createBearerGzipFileReport(
 }
 
 func getMeta(config settings.Config) (*Meta, error) {
-	sha, err := exec.Command("git", "rev-parse", "HEAD").Output()
+	sha, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "HEAD").Output()
 	if err != nil {
 		log.Error().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	currentBranch, err := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD").Output()
+	currentBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "HEAD").Output()
 	if err != nil {
 		log.Error().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	defaultBranch, err := exec.Command("git", "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
+	defaultBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
 	if err != nil {
 		log.Error().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	output, err := exec.Command("git", "remote", "get-url", "origin").Output()
+	output, err := exec.Command("git", "-C", config.Scan.Target, "remote", "get-url", "origin").Output()
 	if err != nil {
 		log.Error().Msgf("couldn't get git info %s", err)
 		return nil, err
