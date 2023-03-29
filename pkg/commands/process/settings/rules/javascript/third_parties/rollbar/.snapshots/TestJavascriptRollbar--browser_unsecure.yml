@@ -11,5 +11,17 @@ medium:
         - PII
       parent_line_number: 3
       parent_content: Rollbar.critical("Connection error from remote Payments API", user)
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_rollbar
+        description: Sensitive data sent to Rollbar detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_rollbar
+      line_number: 1
+      filename: browser_unsecure.js
+      category_groups:
+        - PII
+      parent_line_number: 3
+      parent_content: Rollbar.critical("Connection error from remote Payments API", user)
 
 

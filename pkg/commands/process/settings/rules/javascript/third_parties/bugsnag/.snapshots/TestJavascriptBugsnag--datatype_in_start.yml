@@ -28,6 +28,29 @@ medium:
         id: javascript_third_parties_bugsnag
         description: Sensitive data sent to Bugsnag detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
+      line_number: 3
+      filename: datatype_in_start.js
+      category_groups:
+        - PII
+      parent_line_number: 1
+      parent_content: |-
+        Bugsnag.start({
+          onError: function (e) {
+            e.setUser(user.id, user.email, user.name)
+            e.addMetadata('user location', {
+              country: user.home_country,
+            })
+          },
+          onSession: function (session) {
+            session.setUser(user.email)
+          }
+        })
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_bugsnag
+        description: Sensitive data sent to Bugsnag detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_bugsnag
       line_number: 5
       filename: datatype_in_start.js
       category_groups:

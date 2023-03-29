@@ -11,5 +11,17 @@ medium:
         - PII
       parent_line_number: 11
       parent_content: client.event("user", "logged_in", {}, user)
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_datadog
+        description: Sensitive data sent to Datadog detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_datadog
+      line_number: 3
+      filename: unsecure.js
+      category_groups:
+        - PII
+      parent_line_number: 11
+      parent_content: client.event("user", "logged_in", {}, user)
 
 
