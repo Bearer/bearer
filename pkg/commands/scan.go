@@ -55,7 +55,10 @@ func NewScanCommand() *cobra.Command {
 			}
 
 			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
-			defaultConfigPath := file.GetFullFilename(args[0], configPath)
+			var defaultConfigPath = ""
+			if len(args) == 1 {
+				defaultConfigPath = file.GetFullFilename(args[0], configPath)
+			}
 
 			var loadFileMessage string
 			if err := readConfig(configPath); err != nil {
@@ -98,6 +101,10 @@ func NewScanCommand() *cobra.Command {
 }
 
 func readConfig(configFile string) error {
+	if configFile == "" {
+		return nil
+	}
+
 	viper.SetConfigType("yaml")
 	viper.SetConfigFile(configFile)
 	if err := viper.ReadInConfig(); err != nil {
