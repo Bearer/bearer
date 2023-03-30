@@ -3,7 +3,34 @@ high:
         cwe_ids:
             - "89"
         id: javascript_aws_lambda_sql_injection
-        description: SQL injection vulnerability detected.
+        title: SQL injection vulnerability detected.
+        description: |
+            ## Description
+            Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.
+
+
+            ## Remediations
+
+            Use safe sql libraries methods which sanitze user input
+
+            Sequelize example
+            ```javascript
+              const { Op } = require("sequelize");
+
+              module.exports= async function(event, context) {
+                await Post.findAll({
+                  where: {
+                    [Op.or]: [
+                      { authorId: event.authorID },
+                      { authorId: 13 }
+                    ]
+                  }
+                });
+              };
+            ```
+
+            ## Resources
+            - [OWASP sql injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
       line_number: 5
       filename: mysql2_sql_injection.js
@@ -17,7 +44,34 @@ high:
         cwe_ids:
             - "89"
         id: javascript_aws_lambda_sql_injection
-        description: SQL injection vulnerability detected.
+        title: SQL injection vulnerability detected.
+        description: |
+            ## Description
+            Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.
+
+
+            ## Remediations
+
+            Use safe sql libraries methods which sanitze user input
+
+            Sequelize example
+            ```javascript
+              const { Op } = require("sequelize");
+
+              module.exports= async function(event, context) {
+                await Post.findAll({
+                  where: {
+                    [Op.or]: [
+                      { authorId: event.authorID },
+                      { authorId: 13 }
+                    ]
+                  }
+                });
+              };
+            ```
+
+            ## Resources
+            - [OWASP sql injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
       line_number: 7
       filename: mysql2_sql_injection.js
@@ -31,7 +85,34 @@ high:
         cwe_ids:
             - "89"
         id: javascript_aws_lambda_sql_injection
-        description: SQL injection vulnerability detected.
+        title: SQL injection vulnerability detected.
+        description: |
+            ## Description
+            Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.
+
+
+            ## Remediations
+
+            Use safe sql libraries methods which sanitze user input
+
+            Sequelize example
+            ```javascript
+              const { Op } = require("sequelize");
+
+              module.exports= async function(event, context) {
+                await Post.findAll({
+                  where: {
+                    [Op.or]: [
+                      { authorId: event.authorID },
+                      { authorId: 13 }
+                    ]
+                  }
+                });
+              };
+            ```
+
+            ## Resources
+            - [OWASP sql injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
       line_number: 11
       filename: mysql2_sql_injection.js
@@ -48,7 +129,34 @@ high:
         cwe_ids:
             - "89"
         id: javascript_aws_lambda_sql_injection
-        description: SQL injection vulnerability detected.
+        title: SQL injection vulnerability detected.
+        description: |
+            ## Description
+            Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.
+
+
+            ## Remediations
+
+            Use safe sql libraries methods which sanitze user input
+
+            Sequelize example
+            ```javascript
+              const { Op } = require("sequelize");
+
+              module.exports= async function(event, context) {
+                await Post.findAll({
+                  where: {
+                    [Op.or]: [
+                      { authorId: event.authorID },
+                      { authorId: 13 }
+                    ]
+                  }
+                });
+              };
+            ```
+
+            ## Resources
+            - [OWASP sql injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
       line_number: 15
       filename: mysql2_sql_injection.js

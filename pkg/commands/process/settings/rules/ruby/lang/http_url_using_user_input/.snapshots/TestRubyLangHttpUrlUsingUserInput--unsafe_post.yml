@@ -3,7 +3,34 @@ high:
         cwe_ids:
             - "918"
         id: ruby_lang_http_url_using_user_input
-        description: HTTP communication with user-controlled destination detected.
+        title: HTTP communication with user-controlled destination detected.
+        description: |
+            ## Description
+
+            Applications should not connect to locations formed from user input.
+            This rule checks for URLs containing user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input in HTTP URLs:
+
+            ```ruby
+            Faraday.get("https://#{params[:host]}')
+            ```
+
+            ✅ Use user input indirectly to form a URL:
+
+            ```ruby
+            host =
+              case params[:host]
+              when "option1"
+                "api1.com"
+              when "option2"
+                "api2.com"
+              end
+
+            Faraday.get("https://#{host}')
+            ```
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
       line_number: 1
       filename: unsafe_post.rb

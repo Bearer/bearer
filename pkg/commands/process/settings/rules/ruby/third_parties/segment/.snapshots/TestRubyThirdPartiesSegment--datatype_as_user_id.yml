@@ -3,7 +3,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_segment
-        description: Sensitive data sent to Segment detected..
+        title: Sensitive data sent to Segment detected..
+        description: |
+            ## Description
+            Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Segment.
+
+            ## Remediations
+
+            When sending data to analytics libraries, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Segment docs](https://segment.com/docs/connections/sources/catalog/libraries/server/ruby/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_segment
       line_number: 2
       filename: datatype_as_user_id.rb

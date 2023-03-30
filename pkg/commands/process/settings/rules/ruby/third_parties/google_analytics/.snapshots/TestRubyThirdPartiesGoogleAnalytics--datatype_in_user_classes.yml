@@ -3,7 +3,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_google_analytics
-        description: Sensitive data sent to Google Analytics detected.
+        title: Sensitive data sent to Google Analytics detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Google Analytics.
+
+            ## Remediations
+
+            When sending data to analytics libraries, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Google Analytics docs](https://developers.google.com/analytics/devguides/reporting/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_analytics
       line_number: 1
       filename: datatype_in_user_classes.rb
@@ -17,7 +27,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_google_analytics
-        description: Sensitive data sent to Google Analytics detected.
+        title: Sensitive data sent to Google Analytics detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Google Analytics.
+
+            ## Remediations
+
+            When sending data to analytics libraries, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Google Analytics docs](https://developers.google.com/analytics/devguides/reporting/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_analytics
       line_number: 4
       filename: datatype_in_user_classes.rb

@@ -3,7 +3,17 @@ high:
         cwe_ids:
             - "201"
         id: javascript_third_parties_sentry
-        description: Sensitive data sent to Sentry detected.
+        title: Sensitive data sent to Sentry detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Sentry.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Sentry Docs](https://docs.sentry.io/)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_sentry
       line_number: 2
       filename: javascript_add_breadcrumb.js

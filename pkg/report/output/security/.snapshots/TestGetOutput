@@ -7,7 +7,8 @@
           (string) (len=3) "532"
         },
         Id: (string) (len=17) "ruby_rails_logger",
-        Description: (string) (len=46) "Sensitive data sent to Rails loggers detected.",
+        Title: (string) (len=46) "Sensitive data sent to Rails loggers detected.",
+        Description: (string) (len=608) "## Description\nLeaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to rails loggers.\n\n## Remediations\n❌ Avoid using sensitive data in logger messages:\n\n```ruby\nRails.logger.info('User is: #{user.email}')\n```\n\n✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:\n\n```ruby\nRails.logger.info('User is: #{user.uuid}')\n```\n\n## Resources\n- [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)\n",
         DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger"
       }),
       LineNumber: (int) 1,
@@ -30,7 +31,8 @@
           (string) (len=3) "295"
         },
         Id: (string) (len=26) "ruby_lang_ssl_verification",
-        Description: (string) (len=46) "Missing SSL certificate verification detected.",
+        Title: (string) (len=46) "Missing SSL certificate verification detected.",
+        Description: (string) (len=728) "## Description\n\nApplications processing sensitive data should use valid SSL certificates. This rule checks if SSL verification is enabled.\n\n## Remediations\n\n❌ By default Ruby check for SSL certificate verification but this can be bypassed when setting Open SSL verification mode to `VERIFY_NONE`:\n\n```clojure\nrequire \"net/https\"\nrequire \"uri\"\n\nuri = URI.parse(\"https://ssl-site.com/\")\nhttp = Net::HTTP.new(uri.host, uri.port)\nhttp.use_ssl = true\nhttp.verify_mode = OpenSSL::SSL::VERIFY_NONE\n```\n\n✅ To ensure that SSL verification always happens, make sure to use the following mode:\n\n```bash\nhttp.verify_mode = OpenSSL::SSL::VERIFY_PEER\n```\n\n## Resources\n- [Ruby OpenSSL module](https://ruby.github.io/openssl/OpenSSL.html)\n",
         DocumentationUrl: (string) (len=66) "https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification"
       }),
       LineNumber: (int) 2,

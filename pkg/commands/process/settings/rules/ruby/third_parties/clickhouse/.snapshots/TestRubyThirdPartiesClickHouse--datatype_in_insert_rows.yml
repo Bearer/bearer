@@ -3,7 +3,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_clickhouse
-        description: Sensitive data sent to ClickHouse detected.
+        title: Sensitive data sent to ClickHouse detected.
+        description: |
+            ## Description
+            Leaking sensitive data to a third-party service is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to ClickHouse.
+
+            ## Remediations
+
+            When sending data to third-party services, ensure all sensitive data is removed.
+
+            ## Resources
+            - [ClickHouse docs](https://clickhouse.com/docs/en/intro/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_clickhouse
       line_number: 6
       filename: datatype_in_insert_rows.rb
@@ -23,7 +33,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_clickhouse
-        description: Sensitive data sent to ClickHouse detected.
+        title: Sensitive data sent to ClickHouse detected.
+        description: |
+            ## Description
+            Leaking sensitive data to a third-party service is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to ClickHouse.
+
+            ## Remediations
+
+            When sending data to third-party services, ensure all sensitive data is removed.
+
+            ## Resources
+            - [ClickHouse docs](https://clickhouse.com/docs/en/intro/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_clickhouse
       line_number: 7
       filename: datatype_in_insert_rows.rb

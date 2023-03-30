@@ -4,7 +4,23 @@ low:
             - "352"
             - "668"
         id: javascript_express_static_asset_with_session
-        description: Static asset with active session detected.
+        title: Static asset with active session detected.
+        description: |
+            ## Description
+            Static assets are often cached by services in front of the application
+            (eg. CDNs). Serving static assets with sessions enabled may lead to
+            Cross-Site Request Forgery (CSRF) attacks that can hijack a user's session.
+
+            ## Remediations
+
+            ✅ Ensure static resources are handled prior to session initialization:
+
+            ```javascript
+              // static middleware should be added before session middleware
+              app.use(express.static(__dirname + "/public"))
+
+              app.use(session())
+            ```
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_static_asset_with_session
       line_number: 3
       filename: unsafe.js
@@ -17,7 +33,16 @@ medium:
             - "523"
             - "522"
         id: express_default_session_config
-        description: Session cookie with default config detected.
+        title: Session cookie with default config detected.
+        description: |
+            ## Description
+            To make sure session cookies don't open your application up to exploits or unauthorized access, don't use default cookie values.
+
+            ## Remediations
+            ✅ Instead of the default session name, use generic names.
+
+            ## Resources
+            - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)
         documentation_url: https://docs.bearer.com/reference/rules/express_default_session_config
       line_number: 1
       filename: unsafe.js

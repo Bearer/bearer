@@ -3,7 +3,40 @@ high:
         cwe_ids:
             - "22"
         id: javascript_express_path_traversal
-        description: Possible path traversal vulnerability detected.
+        title: Possible path traversal vulnerability detected.
+        description: |
+            ## Description
+            Allowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.
+
+            ## Remediations
+            ❌ Avoid wherever possible
+
+            ✅ Sanitize user input when resolving paths, for example:
+            - Use `replace()` to mitigate against unwanted patterns in the path (such as `\..\..`)
+            - Actively guard against paths that end in "%00" (poison NULL byte attacks)
+            - Use path concatenation to ensure the intended scope is respected
+
+            ```javascript
+            const path = require("path");
+
+            app.get("/", (req, res) => {
+              if (req.params.path.indexOf('\0')) !== -1 {
+                // prevent access
+              }
+
+              var folder = req.params.path.replace(/^(\.\.(\/|\\|$))+/, '')
+
+              var pathname = path.join("/public/", folder)
+              if pathname.indexOf("/public/") !== 0 {
+                // prevent access
+              }
+
+              path.resolve(pathname)
+            })
+            ```
+
+            ## Resources
+            - [OWASP path traversal](https://owasp.org/www-community/attacks/Path_Traversal)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_path_traversal
       line_number: 13
       filename: send_file_with_external_input.js
@@ -14,7 +47,40 @@ high:
         cwe_ids:
             - "22"
         id: javascript_express_path_traversal
-        description: Possible path traversal vulnerability detected.
+        title: Possible path traversal vulnerability detected.
+        description: |
+            ## Description
+            Allowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.
+
+            ## Remediations
+            ❌ Avoid wherever possible
+
+            ✅ Sanitize user input when resolving paths, for example:
+            - Use `replace()` to mitigate against unwanted patterns in the path (such as `\..\..`)
+            - Actively guard against paths that end in "%00" (poison NULL byte attacks)
+            - Use path concatenation to ensure the intended scope is respected
+
+            ```javascript
+            const path = require("path");
+
+            app.get("/", (req, res) => {
+              if (req.params.path.indexOf('\0')) !== -1 {
+                // prevent access
+              }
+
+              var folder = req.params.path.replace(/^(\.\.(\/|\\|$))+/, '')
+
+              var pathname = path.join("/public/", folder)
+              if pathname.indexOf("/public/") !== 0 {
+                // prevent access
+              }
+
+              path.resolve(pathname)
+            })
+            ```
+
+            ## Resources
+            - [OWASP path traversal](https://owasp.org/www-community/attacks/Path_Traversal)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_path_traversal
       line_number: 15
       filename: send_file_with_external_input.js
@@ -26,7 +92,25 @@ low:
         cwe_ids:
             - "73"
         id: javascript_express_external_file_upload
-        description: External control of filename or path detected.
+        title: External control of filename or path detected.
+        description: |
+            ## Description
+            Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.
+
+            ## Remediations
+            ✅ Set the root option to be an absolute path to a directory
+
+            ```javascript
+            app.post("/upload", (req, res) => {
+              var options = {
+                root: path.join(__dirname, "upload")
+              }
+              res.sendFile(req.params.filename, options)
+            }
+            ```
+
+            ## Resources
+            - [Express sendFile API reference](http://expressjs.com/en/5x/api.html#res.sendFile)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
       line_number: 12
       filename: send_file_with_external_input.js
@@ -37,7 +121,25 @@ low:
         cwe_ids:
             - "73"
         id: javascript_express_external_file_upload
-        description: External control of filename or path detected.
+        title: External control of filename or path detected.
+        description: |
+            ## Description
+            Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.
+
+            ## Remediations
+            ✅ Set the root option to be an absolute path to a directory
+
+            ```javascript
+            app.post("/upload", (req, res) => {
+              var options = {
+                root: path.join(__dirname, "upload")
+              }
+              res.sendFile(req.params.filename, options)
+            }
+            ```
+
+            ## Resources
+            - [Express sendFile API reference](http://expressjs.com/en/5x/api.html#res.sendFile)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
       line_number: 13
       filename: send_file_with_external_input.js
@@ -48,7 +150,25 @@ low:
         cwe_ids:
             - "73"
         id: javascript_express_external_file_upload
-        description: External control of filename or path detected.
+        title: External control of filename or path detected.
+        description: |
+            ## Description
+            Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.
+
+            ## Remediations
+            ✅ Set the root option to be an absolute path to a directory
+
+            ```javascript
+            app.post("/upload", (req, res) => {
+              var options = {
+                root: path.join(__dirname, "upload")
+              }
+              res.sendFile(req.params.filename, options)
+            }
+            ```
+
+            ## Resources
+            - [Express sendFile API reference](http://expressjs.com/en/5x/api.html#res.sendFile)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
       line_number: 14
       filename: send_file_with_external_input.js
@@ -59,7 +179,25 @@ low:
         cwe_ids:
             - "73"
         id: javascript_express_external_file_upload
-        description: External control of filename or path detected.
+        title: External control of filename or path detected.
+        description: |
+            ## Description
+            Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.
+
+            ## Remediations
+            ✅ Set the root option to be an absolute path to a directory
+
+            ```javascript
+            app.post("/upload", (req, res) => {
+              var options = {
+                root: path.join(__dirname, "upload")
+              }
+              res.sendFile(req.params.filename, options)
+            }
+            ```
+
+            ## Resources
+            - [Express sendFile API reference](http://expressjs.com/en/5x/api.html#res.sendFile)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_external_file_upload
       line_number: 15
       filename: send_file_with_external_input.js

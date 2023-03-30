@@ -3,7 +3,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 1
       filename: unsafe_params.rb
@@ -14,7 +35,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 3
       filename: unsafe_params.rb
@@ -25,7 +67,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 5
       filename: unsafe_params.rb
@@ -36,7 +99,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 7
       filename: unsafe_params.rb
@@ -47,7 +131,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 9
       filename: unsafe_params.rb
@@ -60,7 +165,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 11
       filename: unsafe_params.rb
@@ -71,7 +197,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 13
       filename: unsafe_params.rb
@@ -82,7 +229,28 @@ high:
         cwe_ids:
             - "502"
         id: ruby_lang_deserialization_of_user_input
-        description: User input detected in an unsafe deserialization method.
+        title: User input detected in an unsafe deserialization method.
+        description: |
+            ## Description
+            It is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              user_data = JSON.parse(params[:user])
+              # handle any parsing errors
+
+              JSON.load(user)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
       line_number: 14
       filename: unsafe_params.rb

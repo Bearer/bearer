@@ -3,7 +3,14 @@ high:
         cwe_ids:
             - "201"
         id: javascript_third_parties_openai
-        description: Sensitive data sent to OpenAI detected.
+        title: Sensitive data sent to OpenAI detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to OpenAI.
+
+            ## Remediations
+
+            When using a third-party, ensure all sensitive data is removed.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_openai
       line_number: 10
       filename: insecure.js

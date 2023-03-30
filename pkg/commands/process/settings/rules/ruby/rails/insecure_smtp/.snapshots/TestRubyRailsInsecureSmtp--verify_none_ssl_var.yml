@@ -3,7 +3,25 @@ low:
         cwe_ids:
             - "319"
         id: ruby_rails_insecure_smtp
-        description: Communication with an unsecure SMTP connection detected.
+        title: Communication with an unsecure SMTP connection detected.
+        description: |
+            ## Description
+
+            Secure connections using SMTP help prevent unauthorized actors from viewing transmitted data. This policy checks if SMTP mailer settings are set to only allow secure connections.
+
+            ## Remediations
+            ✅ When using the SMTP protocol, make sure to enable SSL encryption in ActionMailer configuration:
+
+            ```ruby
+            config.action_mailer.smtp_settings = {
+            	...
+            	ssl: true
+            }
+            ```
+
+            ## Resources
+            - [Ruby on Rails configuring Action Mailer](https://guides.rubyonrails.org/configuring.html#configuring-action-mailer)
+            - [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_insecure_smtp
       line_number: 3
       filename: verify_none_ssl_var.rb

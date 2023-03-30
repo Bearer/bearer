@@ -3,7 +3,25 @@ high:
         cwe_ids:
             - "502"
         id: javascript_express_unsafe_deserialization
-        description: Deserialization of untrusted data detected.
+        title: Deserialization of untrusted data detected.
+        description: |
+            ## Description
+            It is bad practice to deserialize (unmarshal) untrusted data, such as data direct from the request object.
+            Attackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.
+
+            ## Remediations
+            ❌ Do not deserialize untrusted data
+
+            ✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML
+
+            Avoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.
+
+            ```javascript
+              JSON.parse(req.params)
+            ```
+
+            ## Resources
+            - [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_unsafe_deserialization
       line_number: 5
       filename: node_serialize.js

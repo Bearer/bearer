@@ -3,7 +3,28 @@ high:
         cwe_ids:
             - "201"
         id: javascript_google_analytics
-        description: Sensitive data sent to Google Analytic detected.
+        title: Sensitive data sent to Google Analytic detected.
+        description: |
+            ## Description
+
+            Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Google Analytics.
+
+            ## Remediations
+
+            When sending data to analytics libraries, ensure all sensitive data is removed.
+
+            If you really need to identify users, use unique identifiers from the database.
+
+            ```javascript
+              gtag("event", "screen_view", {
+                user: {
+                  subscribed: true,
+                },
+              });
+            ```
+
+            ## Resources
+            - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_google_analytics
       line_number: 3
       filename: unsecure.js

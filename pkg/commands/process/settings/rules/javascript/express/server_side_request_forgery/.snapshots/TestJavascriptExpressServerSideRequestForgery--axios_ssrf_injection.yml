@@ -3,7 +3,33 @@ high:
         cwe_ids:
             - "918"
         id: javascript_express_server_side_request_forgery
-        description: Risk of server-side request forgery detected.
+        title: Risk of server-side request forgery detected.
+        description: |
+            ## Description
+            Using unsanitized URLs from the request object when retrieving data puts your application at risk of server-side request forgery (SSRF) attacks.
+            This rule checks for URLs containing user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input in URLs:
+
+            ```javascript
+            axios.get(`https://${req.params.host}`)
+            ```
+
+            ✅ Use user input indirectly to form a URL:
+
+            ```javascript
+            var host = "default-api.com"
+            if req.params.host == "something-else" {
+              host = "other-api.com"
+            }
+
+            axios.get(`https://${host}`)
+            ```
+
+            ## Resources
+            - [OWASP - Server-Side Request Forgery (SSRF) prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_server_side_request_forgery
       line_number: 10
       filename: axios_ssrf_injection.js

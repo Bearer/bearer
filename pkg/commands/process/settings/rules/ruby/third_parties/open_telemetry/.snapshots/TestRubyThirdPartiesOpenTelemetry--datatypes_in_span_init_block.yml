@@ -3,7 +3,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_open_telemetry
-        description: Sensitive data sent to Open Telemetry detected.
+        title: Sensitive data sent to Open Telemetry detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Open Telemetry.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Open Telemetry Docs](https://opentelemetry.io/docs/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
       line_number: 2
       filename: datatypes_in_span_init_block.rb
@@ -20,7 +30,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_open_telemetry
-        description: Sensitive data sent to Open Telemetry detected.
+        title: Sensitive data sent to Open Telemetry detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Open Telemetry.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Open Telemetry Docs](https://opentelemetry.io/docs/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
       line_number: 6
       filename: datatypes_in_span_init_block.rb
@@ -37,7 +57,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_open_telemetry
-        description: Sensitive data sent to Open Telemetry detected.
+        title: Sensitive data sent to Open Telemetry detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Open Telemetry.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Open Telemetry Docs](https://opentelemetry.io/docs/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
       line_number: 7
       filename: datatypes_in_span_init_block.rb
@@ -51,7 +81,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_open_telemetry
-        description: Sensitive data sent to Open Telemetry detected.
+        title: Sensitive data sent to Open Telemetry detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Open Telemetry.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Open Telemetry Docs](https://opentelemetry.io/docs/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
       line_number: 11
       filename: datatypes_in_span_init_block.rb

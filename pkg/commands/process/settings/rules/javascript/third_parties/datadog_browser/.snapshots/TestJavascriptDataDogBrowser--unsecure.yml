@@ -3,7 +3,18 @@ low:
         cwe_ids:
             - "201"
         id: javascript_third_parties_datadog_browser
-        description: Sensitive data sent to Datadog detected.
+        title: Sensitive data sent to Datadog detected.
+        description: |
+            ## Description
+            Sensitive and private data contained in your pages may be sent to datatdog to identify elements that a user interacted with.
+
+            ## Remediations
+
+            To control which information is sent to Datadog, manually set an action name, or implement a global scrubbing rule in the Datadog Browser SDK for RUM.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_datadog_browser
       line_number: 2
       filename: unsecure.js

@@ -3,7 +3,18 @@ low:
         cwe_ids:
             - "1336"
         id: javascript_express_insecure_template_rendering
-        description: Insecure template rendering detected.
+        title: Insecure template rendering detected.
+        description: |
+            ## Description
+            Do not include externally influenced or user-given input data in rendered templates. This is bad practice and can lead to code injection attacks.
+
+            ## Remediations
+            ✅ Always validate external data (for example, with a safe list) before rendering it in a template.
+
+            ✅ Sanitize external data before rendering it in a template to remove special characters that could introduce an injection attack.
+
+            ## Resources
+            - [OWASP Injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Injection_Prevention_Cheat_Sheet.html#injection-prevention-rules)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_insecure_template_rendering
       line_number: 12
       filename: insecure_eta_template.js

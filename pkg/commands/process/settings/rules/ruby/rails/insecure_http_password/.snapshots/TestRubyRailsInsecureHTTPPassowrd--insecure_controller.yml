@@ -3,7 +3,20 @@ high:
         cwe_ids:
             - "798"
         id: ruby_lang_hardcoded_secret
-        description: Hard-coded secret detected.
+        title: Hard-coded secret detected.
+        description: |
+            ## Description
+
+            Applications should store secret values securely and not as literal values
+            in the source code.
+
+            ## Remediations
+
+            ✅ Retrieve secrets from a secure location at runtime
+
+            ## Resources
+            - [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)
+            - [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret
       line_number: 2
       filename: insecure_controller.rb
@@ -14,7 +27,9 @@ low:
     - rule:
         cwe_ids: []
         id: ruby_rails_insecure_http_password
-        description: Insecure HTTP Password.
+        title: Insecure HTTP Password.
+        description: |
+            Coming soon
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_insecure_http_password
       line_number: 2
       filename: insecure_controller.rb

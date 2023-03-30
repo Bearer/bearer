@@ -3,7 +3,16 @@ high:
         cwe_ids:
             - "276"
         id: ruby_rails_session_key_using_user_input
-        description: User input detected in a session key.
+        title: User input detected in a session key.
+        description: |
+            ## Description
+            Using user-defined data in a session key is bad practice and can allow attackers to perform unsafe actions.
+
+            ## Remediations
+            ❌ Avoid using user-defined data in session keys
+
+            ## Resources
+            - [OWASP Session management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_session_key_using_user_input
       line_number: 1
       filename: unsafe.rb
@@ -14,7 +23,16 @@ high:
         cwe_ids:
             - "276"
         id: ruby_rails_session_key_using_user_input
-        description: User input detected in a session key.
+        title: User input detected in a session key.
+        description: |
+            ## Description
+            Using user-defined data in a session key is bad practice and can allow attackers to perform unsafe actions.
+
+            ## Remediations
+            ❌ Avoid using user-defined data in session keys
+
+            ## Resources
+            - [OWASP Session management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_session_key_using_user_input
       line_number: 3
       filename: unsafe.rb
@@ -25,7 +43,16 @@ high:
         cwe_ids:
             - "276"
         id: ruby_rails_session_key_using_user_input
-        description: User input detected in a session key.
+        title: User input detected in a session key.
+        description: |
+            ## Description
+            Using user-defined data in a session key is bad practice and can allow attackers to perform unsafe actions.
+
+            ## Remediations
+            ❌ Avoid using user-defined data in session keys
+
+            ## Resources
+            - [OWASP Session management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_session_key_using_user_input
       line_number: 5
       filename: unsafe.rb
