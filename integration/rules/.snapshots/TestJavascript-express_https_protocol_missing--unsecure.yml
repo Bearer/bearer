@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids:
+            - "693"
+        id: javascript_express_https_protocol_missing
+        description: Missing https protocol detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_https_protocol_missing
+      line_number: 1
+      filename: unsecure.js
+      parent_line_number: 1
+      snippet: http.createServer(app)
+      fingerprint: 9dbac220e51ce9ebb2d92d094a8767b0_0
+

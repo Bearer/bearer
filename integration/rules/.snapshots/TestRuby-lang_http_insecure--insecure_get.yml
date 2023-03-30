@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 1
+      filename: insecure_get.rb
+      parent_line_number: 1
+      snippet: Faraday.get("http://api.insecure.com")
+      fingerprint: 1a4b09e6cdc1a4e2a3dfbc0c5b0e21ea_0
+

@@ -1,0 +1,14 @@
+low:
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 1
+      filename: digest_sha1.rb
+      parent_line_number: 1
+      snippet: Digest::SHA1.hexidigest("hello world")
+      fingerprint: 8658542c01100b6e2dce9f3c77b063e9_0
+

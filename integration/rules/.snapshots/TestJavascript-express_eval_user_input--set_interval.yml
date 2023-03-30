@@ -1,0 +1,14 @@
+high:
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: javascript_express_eval_user_input
+        description: Dangerous use of eval with user input detected
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_eval_user_input
+      line_number: 11
+      filename: set_interval.js
+      parent_line_number: 11
+      snippet: setInterval(command)
+      fingerprint: f21a44907bbf50441cfa9ee0cf591d8d_0
+

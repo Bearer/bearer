@@ -1,0 +1,30 @@
+high:
+    - rule:
+        cwe_ids:
+            - "210"
+        id: javascript_lang_exception
+        description: Sensitive data in a exception message detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_exception
+      line_number: 5
+      filename: reject.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 7
+      snippet: reject("Error with user " + user)
+      fingerprint: be67cc902579d32f14f00a0d8a2027b2_0
+    - rule:
+        cwe_ids:
+            - "210"
+        id: javascript_lang_exception
+        description: Sensitive data in a exception message detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_exception
+      line_number: 14
+      filename: reject.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 16
+      snippet: reject("Error with user " + user)
+      fingerprint: be67cc902579d32f14f00a0d8a2027b2_1
+

@@ -1,0 +1,58 @@
+high:
+    - rule:
+        cwe_ids:
+            - "327"
+        id: javascript_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_weak_encryption
+      line_number: 5
+      filename: sha1.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: crypto.createHmac("sha1", key).update(user.email)
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_0
+    - rule:
+        cwe_ids:
+            - "327"
+        id: javascript_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_weak_encryption
+      line_number: 6
+      filename: sha1.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 6
+      snippet: crypto.createHash("sha1").update(user.email)
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_1
+    - rule:
+        cwe_ids:
+            - "327"
+        id: javascript_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_weak_encryption
+      line_number: 8
+      filename: sha1.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 8
+      snippet: CryptoJS.HmacSHA1(user.email, "Key")
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_2
+    - rule:
+        cwe_ids:
+            - "327"
+        id: javascript_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_weak_encryption
+      line_number: 9
+      filename: sha1.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 9
+      snippet: CryptoJS.SHA1(user.email)
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_3
+

@@ -1,0 +1,26 @@
+low:
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 1
+      filename: rc4_encrypt.rb
+      parent_line_number: 1
+      snippet: RC4.new("insecure").encrypt("hello world")
+      fingerprint: 4c772f8eb6a383e5bdca5ab61f4cbc4d_0
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 4
+      filename: rc4_encrypt.rb
+      parent_line_number: 4
+      snippet: rc4_encrypt.encrypt!("hello world")
+      fingerprint: 4c772f8eb6a383e5bdca5ab61f4cbc4d_1
+

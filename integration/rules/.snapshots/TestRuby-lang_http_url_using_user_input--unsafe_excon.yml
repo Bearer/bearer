@@ -1,0 +1,146 @@
+high:
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 1
+      filename: unsafe_excon.rb
+      parent_line_number: 1
+      snippet: 'Excon.new(params[:oops], foo: true)'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_0
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 2
+      filename: unsafe_excon.rb
+      parent_line_number: 2
+      snippet: 'Excon.new("http://example.com", path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_1
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 4
+      filename: unsafe_excon.rb
+      parent_line_number: 4
+      snippet: 'Excon::Connection.new(host: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_2
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 5
+      filename: unsafe_excon.rb
+      parent_line_number: 5
+      snippet: 'Excon::Connection.new(hostname: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_3
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 6
+      filename: unsafe_excon.rb
+      parent_line_number: 6
+      snippet: 'Excon::Connection.new(path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_4
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 7
+      filename: unsafe_excon.rb
+      parent_line_number: 7
+      snippet: 'Excon::Connection.new(port: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_5
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 9
+      filename: unsafe_excon.rb
+      parent_line_number: 9
+      snippet: 'connection.post(path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_6
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 11
+      filename: unsafe_excon.rb
+      parent_line_number: 11
+      snippet: 'connection2.request(path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_7
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 13
+      filename: unsafe_excon.rb
+      parent_line_number: 13
+      snippet: 'connection3.requests([{ :method => :get, path: params[:oops] }])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_8
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 15
+      filename: unsafe_excon.rb
+      parent_line_number: 15
+      snippet: Excon.get(params[:oops])
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_9
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 16
+      filename: unsafe_excon.rb
+      parent_line_number: 16
+      snippet: 'Excon.post("http://example.com", path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_10
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 2
+      filename: unsafe_excon.rb
+      parent_line_number: 2
+      snippet: 'Excon.new("http://example.com", path: params[:oops])'
+      fingerprint: 51826efb8873069dab7166379abc47d8_0
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 16
+      filename: unsafe_excon.rb
+      parent_line_number: 16
+      snippet: 'Excon.post("http://example.com", path: params[:oops])'
+      fingerprint: 51826efb8873069dab7166379abc47d8_1
+

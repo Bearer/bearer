@@ -1,0 +1,13 @@
+high:
+    - rule:
+        cwe_ids:
+            - "79"
+        id: javascript_express_cross_site_scripting
+        description: Cross-site scripting (XSS) vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
+      line_number: 10
+      filename: res_write_xss.js
+      parent_line_number: 10
+      snippet: res.write("<h3> Greetings " + customerName + "</h3>")
+      fingerprint: 2493e1cfdee1e9a4cdbb36280df10d25_0
+

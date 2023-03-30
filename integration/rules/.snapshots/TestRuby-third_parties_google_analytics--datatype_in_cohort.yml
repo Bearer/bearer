@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_analytics
+        description: Sensitive data sent to Google Analytics detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_analytics
+      line_number: 1
+      filename: datatype_in_cohort.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: 'Google::Apis::AnalyticsreportingV4::Cohort.new(name: user.zip_code)'
+      fingerprint: c9615be200b57cab74a98d8d7fa5396c_0
+

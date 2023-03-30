@@ -1,0 +1,14 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "523"
+            - "522"
+        id: express_default_session_config
+        description: Session cookie with default config detected.
+        documentation_url: https://docs.bearer.com/reference/rules/express_default_session_config
+      line_number: 9
+      filename: default_session_config.js
+      parent_line_number: 9
+      snippet: '{}'
+      fingerprint: 6e2d08aeb03d99a4665c6b2cd7f7531d_0
+

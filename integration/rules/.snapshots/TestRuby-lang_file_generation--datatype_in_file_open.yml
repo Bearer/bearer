@@ -1,0 +1,32 @@
+high:
+    - rule:
+        cwe_ids:
+            - "532"
+            - "313"
+        id: ruby_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
+      line_number: 1
+      filename: datatype_in_file_open.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: 'f.write "#{Time.now} - User #{user.email} logged in\n"'
+      fingerprint: f3ee7677b663766b10489daba5394225_0
+    - rule:
+        cwe_ids:
+            - "532"
+            - "313"
+        id: ruby_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
+      line_number: 5
+      filename: datatype_in_file_open.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: f.write "#{user.email},#{user.first_name},#{user.last_name}"
+      fingerprint: f3ee7677b663766b10489daba5394225_1
+

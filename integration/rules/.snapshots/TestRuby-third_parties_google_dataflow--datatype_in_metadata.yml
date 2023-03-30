@@ -1,0 +1,41 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_dataflow
+        description: Sensitive data sent to Google Dataflow detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
+      line_number: 2
+      filename: datatype_in_metadata.rb
+      category_groups:
+        - Personal Data
+      parent_line_number: 2
+      snippet: 'custom_metadata.value = "ip: #{customer.ip_address}"'
+      fingerprint: efa4879db1e57a6eb4d1c3657cca1513_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_dataflow
+        description: Sensitive data sent to Google Dataflow detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
+      line_number: 5
+      filename: datatype_in_metadata.rb
+      category_groups:
+        - Personal Data
+      parent_line_number: 5
+      snippet: 'template_metadata.description ="ip: #{customer.ip_address}"'
+      fingerprint: efa4879db1e57a6eb4d1c3657cca1513_1
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_dataflow
+        description: Sensitive data sent to Google Dataflow detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
+      line_number: 6
+      filename: datatype_in_metadata.rb
+      category_groups:
+        - Personal Data
+      parent_line_number: 6
+      snippet: 'template_metadata.name ="ip: #{customer.ip_address}"'
+      fingerprint: efa4879db1e57a6eb4d1c3657cca1513_2
+

@@ -1,0 +1,13 @@
+high:
+    - rule:
+        cwe_ids:
+            - "79"
+        id: javascript_react_dangerously_set_inner_html
+        description: React's dangerously set inner HTML detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_react_dangerously_set_inner_html
+      line_number: 2
+      filename: unsecure-raw_input.js
+      parent_line_number: 2
+      snippet: '{ __html: input }'
+      fingerprint: e59e2d6b1d61a146a43a7bc7a0f0769a_0
+

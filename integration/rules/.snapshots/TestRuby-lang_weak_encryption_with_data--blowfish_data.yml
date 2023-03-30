@@ -1,0 +1,105 @@
+high:
+    - rule:
+        cwe_ids:
+            - "326"
+            - "331"
+        id: ruby_lang_weak_encryption_with_data
+        description: Sensitive data encrypted with a weak encryption library detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
+      line_number: 2
+      filename: blowfish_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: |-
+        Crypt::Blowfish.new("insecure").encrypt_block { |user|
+          user.password
+        }
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_0
+    - rule:
+        cwe_ids:
+            - "326"
+            - "331"
+        id: ruby_lang_weak_encryption_with_data
+        description: Sensitive data encrypted with a weak encryption library detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
+      line_number: 6
+      filename: blowfish_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: |-
+        Crypt::Blowfish.new("insecure").encrypt_block do |user|
+          user.password
+        end
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_1
+    - rule:
+        cwe_ids:
+            - "326"
+            - "331"
+        id: ruby_lang_weak_encryption_with_data
+        description: Sensitive data encrypted with a weak encryption library detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
+      line_number: 9
+      filename: blowfish_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 9
+      snippet: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_2
+medium:
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 1
+      filename: blowfish_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: |-
+        Crypt::Blowfish.new("insecure").encrypt_block { |user|
+          user.password
+        }
+      fingerprint: 8854dcaeb9cce4c4cbd21356a8af8461_0
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 5
+      filename: blowfish_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: |-
+        Crypt::Blowfish.new("insecure").encrypt_block do |user|
+          user.password
+        end
+      fingerprint: 8854dcaeb9cce4c4cbd21356a8af8461_1
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 9
+      filename: blowfish_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 9
+      snippet: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+      fingerprint: 8854dcaeb9cce4c4cbd21356a8af8461_2
+

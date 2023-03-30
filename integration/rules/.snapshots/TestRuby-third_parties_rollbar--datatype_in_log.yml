@@ -1,0 +1,44 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_rollbar
+        description: Sensitive data sent to Rollbar detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_rollbar
+      line_number: 1
+      filename: datatype_in_log.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: 'Rollbar.log("error", "oops #{user.email}")'
+      fingerprint: be9a13beb09e1e63bf2f94ec671dbed1_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_rollbar
+        description: Sensitive data sent to Rollbar detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_rollbar
+      line_number: 2
+      filename: datatype_in_log.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 2
+      snippet: 'Rollbar.log("error", "oops", user: { email: "someone@example.com" })'
+      fingerprint: be9a13beb09e1e63bf2f94ec671dbed1_1
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_rollbar
+        description: Sensitive data sent to Rollbar detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_rollbar
+      line_number: 3
+      filename: datatype_in_log.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 3
+      snippet: 'Rollbar.log("error", "oops", { user: { first_name: "someone" } })'
+      fingerprint: be9a13beb09e1e63bf2f94ec671dbed1_2
+

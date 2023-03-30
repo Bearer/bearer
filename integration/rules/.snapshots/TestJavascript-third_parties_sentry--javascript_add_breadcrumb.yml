@@ -1,0 +1,20 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_sentry
+        description: Sensitive data sent to Sentry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_sentry
+      line_number: 2
+      filename: javascript_add_breadcrumb.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: |-
+        Sentry.addBreadcrumb({
+          message: `my message for ${user.email}`,
+          // ...
+        })
+      fingerprint: 51f5ec8e972ab1d8ac18a963406e1ff4_0
+

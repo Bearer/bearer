@@ -1,0 +1,13 @@
+high:
+    - rule:
+        cwe_ids:
+            - "89"
+        id: javascript_aws_lambda_sql_injection
+        description: SQL injection vulnerability detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_sql_injection
+      line_number: 8
+      filename: pg_sql_injection.js
+      parent_line_number: 8
+      snippet: client.query('SELECT * FROM users WHERE user.name = ' + event.user.name)
+      fingerprint: 1dc8804ee672f7b9a89fb07cd25ca6cf_0
+

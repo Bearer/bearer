@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_new_relic
+        description: Sensitive data sent to New Relic detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_new_relic
+      line_number: 3
+      filename: datatype_in_set_custom_attribute.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 3
+      snippet: newrelic.setCustomAttribute("user-id", customer.email)
+      fingerprint: 8103bc131e1f7ba4ffd808778772b56f_0
+

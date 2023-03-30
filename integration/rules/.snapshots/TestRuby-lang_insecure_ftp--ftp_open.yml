@@ -1,0 +1,19 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_insecure_ftp
+        description: Communication with an unsecure FTP server detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
+      line_number: 3
+      filename: ftp_open.rb
+      parent_line_number: 3
+      snippet: |-
+        Net::FTP.open("example.com") do |ftp|
+          ftp.login
+          files = ftp.chdir('pub/lang/ruby/contrib')
+          files = ftp.list('n*')
+          ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
+        end
+      fingerprint: b8e9482850ee7c7a95a458362e2f224d_0
+

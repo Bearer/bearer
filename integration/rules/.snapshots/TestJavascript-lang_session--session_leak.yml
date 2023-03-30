@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "312"
+        id: javascript_session
+        description: Sensitive data stored in HTML local storage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_session
+      line_number: 1
+      filename: session_leak.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 3
+      snippet: localStorage.setItem("user", user)
+      fingerprint: d081e8105d6ae2165d155f17906a1170_0
+

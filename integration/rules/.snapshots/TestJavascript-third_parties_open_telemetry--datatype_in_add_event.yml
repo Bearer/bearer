@@ -1,0 +1,19 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_open_telemetry
+        description: Sensitive data sent to Open Telemetry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_open_telemetry
+      line_number: 5
+      filename: datatype_in_add_event.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 4
+      snippet: |-
+        currentSpan.addEvent('my-event', {
+          'event.metadata': customer.emailAddress
+        })
+      fingerprint: c07461857f570fe7124dbbff054fcfc5_0
+

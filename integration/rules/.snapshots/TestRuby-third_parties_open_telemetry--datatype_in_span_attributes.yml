@@ -1,0 +1,34 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_open_telemetry
+        description: Sensitive data sent to Open Telemetry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
+      line_number: 7
+      filename: datatype_in_span_attributes.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: |-
+        current_span.add_attributes({
+            "user.id" => user.id,
+            "user.first_name" => user.first_name
+          })
+      fingerprint: 1c966169a2746b67eba375bd04ef080d_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_open_telemetry
+        description: Sensitive data sent to Open Telemetry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_open_telemetry
+      line_number: 13
+      filename: datatype_in_span_attributes.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 14
+      snippet: current_span.set_attribute("current_users", users)
+      fingerprint: 1c966169a2746b67eba375bd04ef080d_1
+

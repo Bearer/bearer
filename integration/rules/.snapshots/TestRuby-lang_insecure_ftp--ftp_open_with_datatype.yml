@@ -1,0 +1,27 @@
+high:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_insecure_ftp
+        description: Communication with an unsecure FTP server detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
+      line_number: 6
+      filename: ftp_open_with_datatype.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 3
+      snippet: |-
+        Net::FTP.open("ftp.site.com") do |ftp|
+          file = Tempfile.new("user_data")
+          begin
+            file << user.email
+            file.close
+
+            ftp.puttextfile(file.path, "/users/123.json")
+          ensure
+            file.close!
+          end
+        end
+      fingerprint: 9216dc42897b21b951350ad3b2eef2b1_0
+
