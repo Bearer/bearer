@@ -1,0 +1,30 @@
+patterns:
+  - pattern: |
+      $<OPENAI>.createCompletion($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: OPENAI
+        detection: javascript_third_parties_openai_scope
+auxiliary:
+  - id: javascript_third_parties_openai_scope
+    patterns:
+      - |
+        new OpenAIApi()
+languages:
+  - javascript
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Sensitive data sent to OpenAI detected."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to OpenAI.
+
+    ## Remediations
+
+    When using a third-party, ensure all sensitive data is removed.
+  cwe_id:
+    - 201
+  associated_recipe: OpenAI
+  id: javascript_third_parties_openai
