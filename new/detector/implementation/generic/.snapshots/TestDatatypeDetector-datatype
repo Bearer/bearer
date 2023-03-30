@@ -64,7 +64,7 @@
                                                                 name: PII
                                                                 uuid: 172d90e3-cb9a-46b6-90e5-dd7169c3af54
                                                             e1d3135b-3c0f-4b55-abce-19f27a26cbb3:
-                                                                name: PII
+                                                                name: Personal Data
                                                                 uuid: e1d3135b-3c0f-4b55-abce-19f27a26cbb3
                                                 decision:
                                                     state: valid
@@ -86,7 +86,7 @@
                                         name: PII
                                         uuid: 172d90e3-cb9a-46b6-90e5-dd7169c3af54
                                     e1d3135b-3c0f-4b55-abce-19f27a26cbb3:
-                                        name: PII
+                                        name: Personal Data
                                         uuid: e1d3135b-3c0f-4b55-abce-19f27a26cbb3
                         decision:
                             state: valid
