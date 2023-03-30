@@ -26,6 +26,7 @@ high:
       filename: honeybadger_context.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: |-
         Honeybadger.context({

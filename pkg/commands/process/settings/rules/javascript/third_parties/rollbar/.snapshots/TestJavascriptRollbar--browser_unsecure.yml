@@ -23,6 +23,7 @@ high:
       filename: browser_unsecure.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: Rollbar.critical("Connection error from remote Payments API", user)
       fingerprint: e23c84bd8b97113860affa0140b34b92_1

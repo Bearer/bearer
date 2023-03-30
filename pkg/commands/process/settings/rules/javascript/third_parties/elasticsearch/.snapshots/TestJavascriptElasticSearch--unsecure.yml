@@ -23,6 +23,7 @@ high:
       filename: unsecure.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: elasticsearch.index(user)
       fingerprint: 649fa9a91e3ae3230f484d183241de4c_1

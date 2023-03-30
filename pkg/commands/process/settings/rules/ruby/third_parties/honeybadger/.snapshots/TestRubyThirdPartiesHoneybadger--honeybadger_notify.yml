@@ -53,6 +53,7 @@ high:
       filename: honeybadger_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 28
       snippet: |-
         Honeybadger.notify(
