@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_tags.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: c.tags = user
       fingerprint: 92dc8eee1f673495e39efdc73d198cfb_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_tags.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: span.set_tag('user.email', user.email)
       fingerprint: 92dc8eee1f673495e39efdc73d198cfb_1
@@ -35,6 +37,7 @@ medium:
       filename: datatype_in_tags.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 9
       snippet: Datadog::Tracing.active_span&.set_tag('customer.id', user.email)
       fingerprint: 92dc8eee1f673495e39efdc73d198cfb_2
@@ -48,6 +51,7 @@ medium:
       filename: datatype_in_tags.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 10
       snippet: Datadog::Tracing.active_span.set_tag('customer.id', user.email)
       fingerprint: 92dc8eee1f673495e39efdc73d198cfb_3
@@ -61,6 +65,7 @@ medium:
       filename: datatype_in_tags.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 12
       snippet: |-
         Datadog::Tracing.trace("web.request", tags: { email: user.email }) do |span, trace|
@@ -77,6 +82,7 @@ medium:
       filename: datatype_in_tags.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 17
       snippet: span.set_tag('user.email', user.email)
       fingerprint: 92dc8eee1f673495e39efdc73d198cfb_5

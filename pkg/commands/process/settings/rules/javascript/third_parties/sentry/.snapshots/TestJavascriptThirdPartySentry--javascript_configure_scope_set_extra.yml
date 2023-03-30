@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: javascript_configure_scope_set_extra.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: scope.setExtra("email", user.email)
       fingerprint: a6fd582e471d3774ceb8dbda2fcf2175_0

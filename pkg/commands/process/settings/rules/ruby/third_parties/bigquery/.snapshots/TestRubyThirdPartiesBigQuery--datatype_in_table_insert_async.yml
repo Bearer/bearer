@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_table_insert_async.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 11
       snippet: inserter.insert(rows)
       fingerprint: 33fe1e1432d6dbb2db63221ba252b32e_0

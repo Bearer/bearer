@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: breadcrumb.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: Bugsnag.leave_breadcrumb('User logged in', metadata, Bugsnag::BreadcrumbType::USER)
       fingerprint: 978fafd9071537bd3ed1304507ca253e_0

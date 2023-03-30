@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_index.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 4
       snippet: myAlgolia.initIndex(company.bank_account_number)
       fingerprint: 955a76f0b339af35908c18e474405f17_0

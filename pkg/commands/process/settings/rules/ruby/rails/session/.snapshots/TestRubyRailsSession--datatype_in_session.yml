@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "315"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_session.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: session[:current_user] = user.email
       fingerprint: a5c0e825abde92e4fb94604f26340fa2_0

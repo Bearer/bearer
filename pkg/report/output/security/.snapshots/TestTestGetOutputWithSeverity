@@ -12,8 +12,9 @@
       }),
       LineNumber: (int) 1,
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
-      CategoryGroups: ([]string) (len=2) {
+      CategoryGroups: ([]string) (len=3) {
         (string) (len=3) "PII",
+        (string) (len=13) "Personal Data",
         (string) (len=25) "Personal Data (Sensitive)"
       },
       ParentLineNumber: (int) 1,

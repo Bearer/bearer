@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: fail_with_different_version.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: 'templates_client.create_job_from_template(project_id: "123", job_name: "my-job", parameters: { current_user: user.email })'
       fingerprint: f4bac1a3016c2c631fd2c4ec0eaa074f_0

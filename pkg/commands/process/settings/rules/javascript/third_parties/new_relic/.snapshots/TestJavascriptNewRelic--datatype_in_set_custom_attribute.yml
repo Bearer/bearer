@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_set_custom_attribute.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: newrelic.setCustomAttribute("user-id", customer.email)
       fingerprint: 8103bc131e1f7ba4ffd808778772b56f_0

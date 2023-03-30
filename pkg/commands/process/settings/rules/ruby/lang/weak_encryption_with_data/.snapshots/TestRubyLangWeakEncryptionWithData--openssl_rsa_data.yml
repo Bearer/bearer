@@ -10,6 +10,7 @@ medium:
       filename: openssl_rsa_data.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: rsa_encrypt.export(cipher, user.password)
       fingerprint: f7881251d777fec00daf7eac6b5d2ace_0
@@ -24,6 +25,7 @@ medium:
       filename: openssl_rsa_data.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: OpenSSL::PKey::RSA.new(1024).to_pem(cipher, user.first_name)
       fingerprint: f7881251d777fec00daf7eac6b5d2ace_1

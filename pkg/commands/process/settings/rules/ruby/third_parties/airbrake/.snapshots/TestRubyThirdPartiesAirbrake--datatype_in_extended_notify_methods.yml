@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: |-
         Airbrake.notify_request_sync(
@@ -28,6 +29,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: |-
         Airbrake.notify_request(
@@ -47,6 +49,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 15
       snippet: |-
         Airbrake.notify_request_sync(
@@ -66,6 +69,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 21
       snippet: |-
         Airbrake.notify_request(
@@ -85,6 +89,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 29
       snippet: |-
         Airbrake.notify_query_sync(
@@ -103,6 +108,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 34
       snippet: |-
         Airbrake.notify_query(
@@ -121,6 +127,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 41
       snippet: |-
         Airbrake.notify_query_sync(
@@ -140,6 +147,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 47
       snippet: |-
         Airbrake.notify_query(
@@ -159,6 +167,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 55
       snippet: |-
         Airbrake.notify_performance_breakdown_sync(
@@ -179,6 +188,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 62
       snippet: |-
         Airbrake.notify_performance_breakdown(
@@ -199,6 +209,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 71
       snippet: |-
         Airbrake.notify_performance_breakdown_sync(
@@ -218,6 +229,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 77
       snippet: |-
         Airbrake.notify_performance_breakdown(
@@ -237,6 +249,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 99
       snippet: |-
         Airbrake.notify_queue_sync(
@@ -256,6 +269,7 @@ medium:
       filename: datatype_in_extended_notify_methods.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 105
       snippet: |-
         Airbrake.notify_queue(

@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_set_context.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: 'Sentry.set_context(''email'', { email: user.email })'
       fingerprint: d53fb186fe83bfee688795c7530a28c6_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_set_context.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 4
       snippet: 'scope.set_context(''email'', { email: user.email })'
       fingerprint: d53fb186fe83bfee688795c7530a28c6_1
@@ -35,6 +37,7 @@ medium:
       filename: datatype_in_set_context.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 8
       snippet: 'scope.set_context(''email'', { email: user.email })'
       fingerprint: d53fb186fe83bfee688795c7530a28c6_2

@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_init.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: 'breadcrumb.message = "Authenticated user #{current_user.email}"'
       fingerprint: 8d1522133b035b9e059b46af3f885b77_0

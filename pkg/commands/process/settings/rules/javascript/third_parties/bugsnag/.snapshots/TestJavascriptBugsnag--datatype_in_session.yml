@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_session.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 4
       snippet: bugSession.notify(user.email)
       fingerprint: a3b7e2efe220ddd88ca70f09bfc62594_0

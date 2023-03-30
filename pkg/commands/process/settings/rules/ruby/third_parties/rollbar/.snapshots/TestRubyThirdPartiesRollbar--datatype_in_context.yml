@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_context.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: 'exception.rollbar_context = { user: { email: "someone@example.com" } }'
       fingerprint: 0fb0ea425477bece878e9c73baa4dc4b_0

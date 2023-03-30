@@ -5,6 +5,20 @@ high:
         id: javascript_third_parties_segment
         description: Sensitive data sent to Segment detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
+      line_number: 17
+      filename: datatype_in_track.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 17
+      snippet: browser.track(user.email)
+      fingerprint: 7962fdb50924228eb50532bd49443112_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_segment
+        description: Sensitive data sent to Segment detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
       line_number: 8
       filename: datatype_in_track.js
       category_groups:
@@ -17,18 +31,4 @@ high:
           userIpAddr: user.ip_address,
         })
       fingerprint: 7962fdb50924228eb50532bd49443112_1
-medium:
-    - rule:
-        cwe_ids:
-            - "201"
-        id: javascript_third_parties_segment
-        description: Sensitive data sent to Segment detected.
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
-      line_number: 17
-      filename: datatype_in_track.js
-      category_groups:
-        - PII
-      parent_line_number: 17
-      snippet: browser.track(user.email)
-      fingerprint: 7962fdb50924228eb50532bd49443112_0
 

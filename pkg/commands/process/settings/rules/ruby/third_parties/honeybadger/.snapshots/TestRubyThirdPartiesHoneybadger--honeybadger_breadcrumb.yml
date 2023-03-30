@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: honeybadger_breadcrumb.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: 'Honeybadger.add_breadcrumb("Email Sent", metadata: { user_email: current_user.email, message: message })'
       fingerprint: 4b5b56156abc4628eb657377754429a1_0
