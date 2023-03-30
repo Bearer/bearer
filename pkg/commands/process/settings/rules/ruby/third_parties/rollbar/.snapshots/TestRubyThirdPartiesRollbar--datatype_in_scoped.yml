@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_scoped.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: |-
         Rollbar.scoped(scope) do

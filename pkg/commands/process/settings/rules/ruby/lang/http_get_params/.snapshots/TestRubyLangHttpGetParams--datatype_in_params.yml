@@ -9,11 +9,12 @@ critical:
       filename: datatype_in_params.rb
       category_groups:
         - PII
+        - Personal Data
         - Personal Data (Sensitive)
       parent_line_number: 1
       snippet: URI("https://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
       fingerprint: f34fb10ce48303451898c1db1c78265d_1
-medium:
+high:
     - rule:
         cwe_ids:
             - "598"
@@ -24,6 +25,7 @@ medium:
       filename: datatype_in_params.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: RestClient.get("https://my.api.com/users/search?first_name=#{user.first_name}")
       fingerprint: f34fb10ce48303451898c1db1c78265d_0

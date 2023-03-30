@@ -9,6 +9,7 @@ warning:
       filename: e2e/rules/testdata/data/ruby_rails_default_encryption_structure_sql/db/structure.sql
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: |-
         CREATE TABLE public.users (

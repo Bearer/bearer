@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatypes_in_span_init_block.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: |-
         Tracer.in_span("data leaking", attributes: { "current_user" => user.email, "date" => DateTime.now }) do |span|
@@ -25,6 +26,7 @@ medium:
       filename: datatypes_in_span_init_block.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 6
       snippet: |-
         SomeOtherTracer.in_span("data leaking", attributes: { "current_user" => user.email, "date" => DateTime.now }) do |span|
@@ -41,6 +43,7 @@ medium:
       filename: datatypes_in_span_init_block.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: span.add_attributes(user.email)
       fingerprint: 97f3848384c820a585765b7b2911aa39_2
@@ -54,6 +57,7 @@ medium:
       filename: datatypes_in_span_init_block.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 11
       snippet: 'span.add_event("leaking data for #{user.email}")'
       fingerprint: 97f3848384c820a585765b7b2911aa39_3

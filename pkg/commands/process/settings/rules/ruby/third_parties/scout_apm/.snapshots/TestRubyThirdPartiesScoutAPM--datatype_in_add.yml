@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_add.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: 'ScoutApm::Context.add({ user: { first_name: "someone" }})'
       fingerprint: 66f1a9c771e9bd75144ddcc8338ecb65_0

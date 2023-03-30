@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_interaction_set_attribute.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: |-
         newrelic.interaction()
@@ -24,6 +25,7 @@ medium:
       filename: datatype_in_interaction_set_attribute.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: |-
         newrelic.interaction()
@@ -40,6 +42,7 @@ medium:
       filename: datatype_in_interaction_set_attribute.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 13
       snippet: interaction.setAttribute("email", user.email_address)
       fingerprint: 7a41ad36631310b51dcd7d9dbaa35032_0

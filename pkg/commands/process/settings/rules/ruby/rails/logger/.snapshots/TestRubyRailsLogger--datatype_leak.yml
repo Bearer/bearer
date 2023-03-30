@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "209"
@@ -10,6 +10,7 @@ medium:
       filename: datatype_leak.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: Rails.logger.info(user.email)
       fingerprint: aa37bad15a3bff32e905123a310a7f8e_0

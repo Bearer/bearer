@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "210"
@@ -9,6 +9,7 @@ medium:
       filename: promise_reject.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: Promise.reject(new PermissionDenied("fail" + user.email))
       fingerprint: a4a529dbfe643ed779f85fc181ca69d6_0

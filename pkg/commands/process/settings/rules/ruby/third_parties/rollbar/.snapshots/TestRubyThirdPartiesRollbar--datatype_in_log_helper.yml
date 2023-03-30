@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: 'Rollbar.critical("oops #{user.email}")'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: 'Rollbar.critical(e, "oops #{user.email}")'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_1
@@ -35,6 +37,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: 'Rollbar.critical(e, user: { email: "someone@example.com" })'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_2
@@ -48,6 +51,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 4
       snippet: 'Rollbar.critical(e, { user: { first_name: "someone" } })'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_7
@@ -61,6 +65,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 6
       snippet: 'Rollbar.error("oops #{user.email}")'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_3
@@ -74,6 +79,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 8
       snippet: 'Rollbar.debug("oops #{user.email}")'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_4
@@ -87,6 +93,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 10
       snippet: 'Rollbar.info("oops #{user.email}")'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_5
@@ -100,6 +107,7 @@ medium:
       filename: datatype_in_log_helper.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 12
       snippet: 'Rollbar.warning("oops #{user.email}")'
       fingerprint: bcb5532daddba2e75897ecc1c7efdfb3_6

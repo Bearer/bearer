@@ -9,6 +9,7 @@ medium:
       filename: e2e/rules/testdata/data/simple_ruby/unsecure.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: config.force_ssl = false
       fingerprint: 28ca51516a8b388cb7065c1f0df8b093_0

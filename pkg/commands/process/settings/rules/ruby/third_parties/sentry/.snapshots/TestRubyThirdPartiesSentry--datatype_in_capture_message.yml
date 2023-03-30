@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_capture_message.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: 'Sentry.capture_message("test: #{user.email}")'
       fingerprint: d0267fa12552c0ff008f5173fa08834e_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_capture_message.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: 'Sentry.capture_message("test", extra: { email: user.email })'
       fingerprint: d0267fa12552c0ff008f5173fa08834e_1
@@ -35,6 +37,7 @@ medium:
       filename: datatype_in_capture_message.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: 'Sentry.capture_message("test", tags: { email: user.email })'
       fingerprint: d0267fa12552c0ff008f5173fa08834e_2
@@ -48,6 +51,7 @@ medium:
       filename: datatype_in_capture_message.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 4
       snippet: 'Sentry.capture_message("test", user: { email: user.email })'
       fingerprint: d0267fa12552c0ff008f5173fa08834e_3

@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: Airbrake.notify(user.first_name)
       fingerprint: 4de3d14d1ba1cd8d0992953a4d5d20e6_2
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: |-
         Airbrake.notify('App crashed!', {
@@ -38,6 +40,7 @@ medium:
       filename: datatype_in_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: |-
         Airbrake.notify('App crashed') do |notice|

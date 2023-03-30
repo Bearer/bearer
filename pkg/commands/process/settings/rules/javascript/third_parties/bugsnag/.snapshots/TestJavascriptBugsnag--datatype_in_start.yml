@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_start.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: |-
         Bugsnag.start({
@@ -57,6 +58,7 @@ medium:
       filename: datatype_in_start.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: |-
         Bugsnag.start({
@@ -81,6 +83,7 @@ medium:
       filename: datatype_in_start.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: |-
         Bugsnag.start({

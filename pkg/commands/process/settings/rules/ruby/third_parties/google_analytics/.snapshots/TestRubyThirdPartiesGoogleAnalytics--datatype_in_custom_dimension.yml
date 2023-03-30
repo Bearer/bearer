@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_custom_dimension.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: |-
         Google::Apis::AnalyticsreportingV4::CustomDimension.new(

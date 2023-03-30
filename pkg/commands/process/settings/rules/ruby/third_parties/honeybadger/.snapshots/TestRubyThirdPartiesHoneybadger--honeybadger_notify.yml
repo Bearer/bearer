@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: honeybadger_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 28
       snippet: |-
         Honeybadger.notify(
@@ -30,6 +31,7 @@ medium:
       filename: honeybadger_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 28
       snippet: |-
         Honeybadger.notify(
@@ -72,6 +74,7 @@ medium:
       filename: honeybadger_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 28
       snippet: |-
         Honeybadger.notify(
@@ -93,6 +96,7 @@ medium:
       filename: honeybadger_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 28
       snippet: |-
         Honeybadger.notify(
@@ -114,6 +118,7 @@ medium:
       filename: honeybadger_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 28
       snippet: |-
         Honeybadger.notify(
@@ -135,6 +140,7 @@ medium:
       filename: honeybadger_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 28
       snippet: |-
         Honeybadger.notify(

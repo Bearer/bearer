@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: unsecure.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 11
       snippet: client.event("user", "logged_in", {}, user)
       fingerprint: 15317e7b0c29169d3b524d33116994d5_0

@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "312"
@@ -9,6 +9,7 @@ medium:
       filename: unsecure.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: |-
         jwt.sign(

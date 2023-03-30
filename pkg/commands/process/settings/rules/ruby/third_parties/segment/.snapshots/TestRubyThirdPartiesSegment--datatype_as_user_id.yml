@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_as_user_id.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: 'analytics.alias(user_id: user.email, previous_id: "some id")'
       fingerprint: 00bebf3ea9176e07dca95eab505fdc97_0

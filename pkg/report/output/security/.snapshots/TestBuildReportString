@@ -16,7 +16,7 @@ File: pkg/datatype_leak.rb:1
 
 
 
-MEDIUM: Missing SSL certificate verification detected. [CWE-295]
+HIGH: Missing SSL certificate verification detected. [CWE-295]
 https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification
 To skip this rule, use the flag --skip-rule=ruby_lang_ssl_verification
 
@@ -28,8 +28,8 @@ File: config/application.rb:2
 3 checks, 2 failures, 0 warnings
 
 CRITICAL: 1 (CWE-209, CWE-532)
-HIGH: 0
-MEDIUM: 1 (CWE-295)
+HIGH: 1 (CWE-295)
+MEDIUM: 0
 LOW: 0
 WARNING: 0
 

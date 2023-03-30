@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_bulk.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 10
       snippet: 'client.bulk(body: body)'
       fingerprint: 2c58e99bab53da01c39130a33b7b3bca_0

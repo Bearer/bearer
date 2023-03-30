@@ -9,6 +9,7 @@ medium:
       filename: ftp_new.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 8
       snippet: Net::FTP.new("ftp.ruby-lang.org")
       fingerprint: 062194ccfa9c06ad0d4e9904900e3877_0

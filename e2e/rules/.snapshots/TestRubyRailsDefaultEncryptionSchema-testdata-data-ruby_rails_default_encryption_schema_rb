@@ -9,6 +9,7 @@ warning:
       filename: e2e/rules/testdata/data/ruby_rails_default_encryption_schema_rb/db/schema.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: |-
         create_table "users", force: :cascade do |t|

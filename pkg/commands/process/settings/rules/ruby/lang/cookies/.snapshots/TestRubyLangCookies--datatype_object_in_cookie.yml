@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "315"
@@ -10,6 +10,7 @@ medium:
       filename: datatype_object_in_cookie.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: 'cookies[:login] = { value: user.to_json, expires: 1.hour, secure: true }'
       fingerprint: 81cd660fcd6ad1c761838375c978b235_0
@@ -24,6 +25,7 @@ medium:
       filename: datatype_object_in_cookie.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: 'cookies[:login] = { value: user.to_json, expires: 1.hour, secure: true }'
       fingerprint: 81cd660fcd6ad1c761838375c978b235_1

@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "319"
@@ -9,6 +9,7 @@ medium:
       filename: ftp_open_with_datatype.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: |-
         Net::FTP.open("ftp.site.com") do |ftp|

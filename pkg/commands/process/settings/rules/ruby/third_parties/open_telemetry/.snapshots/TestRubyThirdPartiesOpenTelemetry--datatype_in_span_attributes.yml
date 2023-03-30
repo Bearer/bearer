@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_span_attributes.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: |-
         current_span.add_attributes({
@@ -26,6 +27,7 @@ medium:
       filename: datatype_in_span_attributes.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 14
       snippet: current_span.set_attribute("current_users", users)
       fingerprint: 1c966169a2746b67eba375bd04ef080d_0
