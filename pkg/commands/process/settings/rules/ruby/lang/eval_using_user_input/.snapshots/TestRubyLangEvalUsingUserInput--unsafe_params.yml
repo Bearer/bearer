@@ -4,7 +4,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 1
       filename: unsafe_params.rb
@@ -16,7 +37,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 3
       filename: unsafe_params.rb
@@ -28,7 +70,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 5
       filename: unsafe_params.rb
@@ -40,7 +103,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 7
       filename: unsafe_params.rb
@@ -52,7 +136,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 9
       filename: unsafe_params.rb
@@ -64,7 +169,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 11
       filename: unsafe_params.rb
@@ -76,7 +202,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 13
       filename: unsafe_params.rb
@@ -88,7 +235,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 15
       filename: unsafe_params.rb
@@ -100,7 +268,28 @@ high:
             - "94"
             - "95"
         id: ruby_lang_eval_using_user_input
-        description: Potential command injection with user input detected.
+        title: Potential command injection with user input detected.
+        description: |
+            ## Description
+            It is dangerous to use eval with user input, or to compile code with user-supplied data. Such practices can lead to command injection.
+
+            ## Remediations
+            ❌ Avoid using code execution methods with unsanitized user input.
+
+            It might be possible to use dynamic hardcoded values, instead of user input directly.
+
+            ```ruby
+            get_total_str = if params["include_vat"]
+              "def dynamic(a,b,c); a + b + c; end"
+            else
+              "def dynamic(a,b); a + b; end"
+            end
+
+            get_total = eval(get_total_str)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
       line_number: 17
       filename: unsafe_params.rb

@@ -3,7 +3,21 @@ high:
         cwe_ids:
             - "79"
         id: javascript_express_cross_site_scripting
-        description: Cross-site scripting (XSS) vulnerability detected.
+        title: Cross-site scripting (XSS) vulnerability detected.
+        description: |
+            ## Description
+            Sending unsanitized user input in a response puts your application at risk of cross-site scripting attacks.
+
+
+            ## Remediations
+            ❌ Avoid including user input directly in a response:
+
+            ```javascript
+            res.send(req.body.data)
+            ```
+
+            ## Resources
+            - [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
       line_number: 9
       filename: res_send_xss.js
@@ -14,7 +28,21 @@ high:
         cwe_ids:
             - "79"
         id: javascript_express_cross_site_scripting
-        description: Cross-site scripting (XSS) vulnerability detected.
+        title: Cross-site scripting (XSS) vulnerability detected.
+        description: |
+            ## Description
+            Sending unsanitized user input in a response puts your application at risk of cross-site scripting attacks.
+
+
+            ## Remediations
+            ❌ Avoid including user input directly in a response:
+
+            ```javascript
+            res.send(req.body.data)
+            ```
+
+            ## Resources
+            - [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_cross_site_scripting
       line_number: 13
       filename: res_send_xss.js

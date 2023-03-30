@@ -3,7 +3,16 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_bigquery
-        description: Sensitive data sent to BigQuery detected.
+        title: Sensitive data sent to BigQuery detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party data tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to BigQuery.
+
+            ## Remediations
+            When sending data to third-party services, ensure all sensitive data is removed.
+
+            ## Resources
+            - [BigQuery docs](https://cloud.google.com/ruby/docs)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_bigquery
       line_number: 9
       filename: datatype_in_table_insert_async.rb

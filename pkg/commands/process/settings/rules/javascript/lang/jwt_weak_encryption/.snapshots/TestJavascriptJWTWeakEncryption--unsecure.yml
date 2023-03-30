@@ -3,7 +3,24 @@ low:
         cwe_ids:
             - "327"
         id: javascript_jwt_weak_encryption
-        description: Weak jwt encryption deceted
+        title: Weak jwt encryption deceted
+        description: |
+            ## Description
+
+            Use any default encryption algorithm jwt library provides
+
+            ## Remediations
+
+            Use the HS256 algorithm for JWT encryption
+
+            ```
+              jwt.sign({ "foo": "bar"}, process.env.JWT_SECRET, {
+                algorithm: "HS256"
+              })
+            ```
+
+            ## Resources
+            - [OWASP weak encryption](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_jwt_weak_encryption
       line_number: 3
       filename: unsecure.js

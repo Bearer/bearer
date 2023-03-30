@@ -9,31 +9,18 @@
 					"DetectorType": "datatype",
 					"MatchNode": {},
 					"Data": {
-						"Name": "",
-						"Classification": {
-							"name": "",
-							"decision": {
-								"state": "invalid",
-								"reason": "blank_object_name"
-							}
-						},
 						"Properties": [
 							{
 								"Name": "name",
-								"Detection": {
-									"DetectorType": "property",
-									"MatchNode": {},
-									"Data": {
-										"Name": "name"
-									}
-								},
+								"Node": {},
 								"Classification": {
 									"name": "name",
 									"decision": {
 										"state": "invalid",
 										"reason": "belongs_to_invalid_object"
 									}
-								}
+								},
+								"Datatype": null
 							}
 						]
 					}

@@ -3,7 +3,18 @@ high:
         cwe_ids:
             - "201"
         id: javascript_third_parties_segment
-        description: Sensitive data sent to Segment detected.
+        title: Sensitive data sent to Segment detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Segment.
+
+            ## Remediations
+
+            When sending data to analytics libraries, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Segment Node.js docs](https://segment.com/docs/connections/sources/catalog/libraries/server/node/)
+            - [Segment JavaScript docs](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
       line_number: 8
       filename: datatype_in_alias.js

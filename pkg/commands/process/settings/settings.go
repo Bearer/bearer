@@ -86,7 +86,7 @@ type RuleDefinitionTrigger struct {
 
 type RuleMetadata struct {
 	Description        string   `mapstructure:"description" json:"description" yaml:"description"`
-	RemediationMessage string   `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
+	RemediationMessage string   `mapstructure:"remediation_message" json:"remediation_message" yaml:"remediation_message"`
 	CWEIDs             []string `mapstructure:"cwe_id" json:"cwe_id" yaml:"cwe_id"`
 	AssociatedRecipe   string   `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
 	ID                 string   `mapstructure:"id" json:"id" yaml:"id"`

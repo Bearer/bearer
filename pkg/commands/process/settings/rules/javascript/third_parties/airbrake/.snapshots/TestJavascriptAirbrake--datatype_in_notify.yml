@@ -3,7 +3,27 @@ high:
         cwe_ids:
             - "201"
         id: javascript_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            If you really need to identify users, use unique identifiers from the database.
+
+            ```javascript
+            airbrake.notify({
+              error: err,
+              params: { user: user.uuid },
+            });
+            ```
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
+            - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_airbrake
       line_number: 9
       filename: datatype_in_notify.js
@@ -17,7 +37,27 @@ high:
         cwe_ids:
             - "201"
         id: javascript_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            If you really need to identify users, use unique identifiers from the database.
+
+            ```javascript
+            airbrake.notify({
+              error: err,
+              params: { user: user.uuid },
+            });
+            ```
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
+            - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_airbrake
       line_number: 18
       filename: datatype_in_notify.js

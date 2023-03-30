@@ -3,7 +3,37 @@ low:
         cwe_ids:
             - "625"
         id: ruby_rails_permissive_regex_validation
-        description: Validation using permissive regular expression detected.
+        title: Validation using permissive regular expression detected.
+        description: |
+            ## Description
+
+            Validations using regular expressions should use the start of text (\A) and
+            end of text (\z or \Z) boundaries.
+
+            ## Remediations
+
+            ❌ Avoid matching without start and end boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /foo/}
+            ```
+
+            ❌ Avoid using line-based boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /^foo$/}
+            ```
+
+            ✅ Use whole-text boundaries:
+
+            ```ruby
+            validates :attribute1, format: { with: "\Afoo\Z"}
+            validates :attribute2, format: { with: "\Afoo\z"}
+            ```
+            <!--
+            ## Resources
+            - [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)
+            -->
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_permissive_regex_validation
       line_number: 1
       filename: bad.rb
@@ -14,7 +44,37 @@ low:
         cwe_ids:
             - "625"
         id: ruby_rails_permissive_regex_validation
-        description: Validation using permissive regular expression detected.
+        title: Validation using permissive regular expression detected.
+        description: |
+            ## Description
+
+            Validations using regular expressions should use the start of text (\A) and
+            end of text (\z or \Z) boundaries.
+
+            ## Remediations
+
+            ❌ Avoid matching without start and end boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /foo/}
+            ```
+
+            ❌ Avoid using line-based boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /^foo$/}
+            ```
+
+            ✅ Use whole-text boundaries:
+
+            ```ruby
+            validates :attribute1, format: { with: "\Afoo\Z"}
+            validates :attribute2, format: { with: "\Afoo\z"}
+            ```
+            <!--
+            ## Resources
+            - [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)
+            -->
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_permissive_regex_validation
       line_number: 2
       filename: bad.rb
@@ -25,7 +85,37 @@ low:
         cwe_ids:
             - "625"
         id: ruby_rails_permissive_regex_validation
-        description: Validation using permissive regular expression detected.
+        title: Validation using permissive regular expression detected.
+        description: |
+            ## Description
+
+            Validations using regular expressions should use the start of text (\A) and
+            end of text (\z or \Z) boundaries.
+
+            ## Remediations
+
+            ❌ Avoid matching without start and end boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /foo/}
+            ```
+
+            ❌ Avoid using line-based boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /^foo$/}
+            ```
+
+            ✅ Use whole-text boundaries:
+
+            ```ruby
+            validates :attribute1, format: { with: "\Afoo\Z"}
+            validates :attribute2, format: { with: "\Afoo\z"}
+            ```
+            <!--
+            ## Resources
+            - [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)
+            -->
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_permissive_regex_validation
       line_number: 3
       filename: bad.rb
@@ -36,7 +126,37 @@ low:
         cwe_ids:
             - "625"
         id: ruby_rails_permissive_regex_validation
-        description: Validation using permissive regular expression detected.
+        title: Validation using permissive regular expression detected.
+        description: |
+            ## Description
+
+            Validations using regular expressions should use the start of text (\A) and
+            end of text (\z or \Z) boundaries.
+
+            ## Remediations
+
+            ❌ Avoid matching without start and end boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /foo/}
+            ```
+
+            ❌ Avoid using line-based boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /^foo$/}
+            ```
+
+            ✅ Use whole-text boundaries:
+
+            ```ruby
+            validates :attribute1, format: { with: "\Afoo\Z"}
+            validates :attribute2, format: { with: "\Afoo\z"}
+            ```
+            <!--
+            ## Resources
+            - [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)
+            -->
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_permissive_regex_validation
       line_number: 4
       filename: bad.rb
@@ -47,7 +167,37 @@ low:
         cwe_ids:
             - "625"
         id: ruby_rails_permissive_regex_validation
-        description: Validation using permissive regular expression detected.
+        title: Validation using permissive regular expression detected.
+        description: |
+            ## Description
+
+            Validations using regular expressions should use the start of text (\A) and
+            end of text (\z or \Z) boundaries.
+
+            ## Remediations
+
+            ❌ Avoid matching without start and end boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /foo/}
+            ```
+
+            ❌ Avoid using line-based boundaries:
+
+            ```ruby
+            validates :attribute, format: { with: /^foo$/}
+            ```
+
+            ✅ Use whole-text boundaries:
+
+            ```ruby
+            validates :attribute1, format: { with: "\Afoo\Z"}
+            validates :attribute2, format: { with: "\Afoo\z"}
+            ```
+            <!--
+            ## Resources
+            - [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)
+            -->
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_permissive_regex_validation
       line_number: 6
       filename: bad.rb

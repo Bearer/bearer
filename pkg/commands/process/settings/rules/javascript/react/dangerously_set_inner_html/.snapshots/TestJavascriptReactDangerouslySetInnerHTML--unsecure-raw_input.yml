@@ -3,7 +3,22 @@ high:
         cwe_ids:
             - "79"
         id: javascript_react_dangerously_set_inner_html
-        description: React's dangerously set inner HTML detected.
+        title: React's dangerously set inner HTML detected.
+        description: |
+            ## Description
+            There are Cross-Site Scripting (XSS) vulnerabilites when using React's dangerouslySetInnerHTML with unsanitized data.
+
+            ## Remediations
+            ✅ Sanitize data when using dangerouslySetInnerHTML
+
+            ```javascript
+              <div
+                dangerouslySetInnerHTML={{__html: sanitize(data)}}
+              />
+            ```
+
+            ## Resources
+            - [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_react_dangerously_set_inner_html
       line_number: 2
       filename: unsecure-raw_input.js

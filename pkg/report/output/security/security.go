@@ -76,6 +76,7 @@ type Result struct {
 type Rule struct {
 	CWEIDs           []string `json:"cwe_ids" yaml:"cwe_ids"`
 	Id               string   `json:"id" yaml:"id"`
+	Title            string   `json:"title" yaml:"title"`
 	Description      string   `json:"description" yaml:"description"`
 	DocumentationUrl string   `json:"documentation_url" yaml:"documentation_url"`
 }
@@ -151,7 +152,8 @@ func evaluateRules(
 
 			for i, output := range results["policy_failure"] {
 				ruleSummary := &Rule{
-					Description:      rule.Description,
+					Title:            rule.Description,
+					Description:      rule.RemediationMessage,
 					Id:               rule.Id,
 					CWEIDs:           rule.CWEIDs,
 					DocumentationUrl: rule.DocumentationUrl,
@@ -440,7 +442,7 @@ func checkAndWriteFailureSummaryToString(
 func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(severity))
-	reportStr.WriteString(result.Description)
+	reportStr.WriteString(result.Title)
 	cweCount := len(result.CWEIDs)
 	if cweCount > 0 {
 		var displayCWEList = []string{}
