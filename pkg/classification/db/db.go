@@ -242,7 +242,7 @@ func defaultDataCategories(context flag.Context) []DataCategory {
 			// add parent group if present
 			for _, parentUUID := range group.ParentUUIDs {
 				dataCategory.Groups[parentUUID] = DataCategoryGroup{
-					Name: group.Name,
+					Name: dataCategoryGrouping.Groups[parentUUID].Name,
 					UUID: parentUUID,
 				}
 			}
