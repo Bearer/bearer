@@ -22,6 +22,7 @@ medium:
             file.close!
           end
         end
+      fingerprint: 9216dc42897b21b951350ad3b2eef2b1_0
     - rule:
         cwe_ids:
             - "319"
@@ -33,7 +34,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Net::FTP.open("ftp.site.com") do |ftp|
           file = Tempfile.new("user_data")
           begin
@@ -45,5 +46,5 @@ medium:
             file.close!
           end
         end
-      fingerprint: 9216dc42897b21b951350ad3b2eef2b1_0
+      fingerprint: 9216dc42897b21b951350ad3b2eef2b1_1
 

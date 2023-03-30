@@ -294,13 +294,6 @@ func getMeta(config settings.Config) (*Meta, error) {
 		return nil, err
 	}
 
-	// typescript includes tsx, javascript includes jsx
-	supportedLanguages := []string{"ruby", "javascript", "typescript"}
-	for _, supportedLanguage := range supportedLanguages {
-		_, found := foundLanguages[supportedLanguage]
-		if found {
-			return true, nil
-		}
 	info, err := vcsurl.Parse(strings.TrimSuffix(string(output), "\n"))
 	if err != nil {
 		log.Error().Msgf("couldn't parse url %s", err)

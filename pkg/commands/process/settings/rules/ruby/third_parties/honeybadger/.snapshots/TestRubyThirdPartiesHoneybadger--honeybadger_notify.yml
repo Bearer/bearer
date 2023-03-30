@@ -19,7 +19,7 @@ medium:
           context: context,
           parameters: parameters,
         )
-      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_0
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_3
     - rule:
         cwe_ids:
             - "201"
@@ -52,7 +52,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 28
-      parent_content: |-
+      snippet: |-
         Honeybadger.notify(
           "Something is wrong here for " + user.gender,
           class_name: "MyError",
@@ -61,6 +61,7 @@ medium:
           context: context,
           parameters: parameters,
         )
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_5
     - rule:
         cwe_ids:
             - "201"
@@ -102,7 +103,7 @@ medium:
           context: context,
           parameters: parameters,
         )
-      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_3
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_6
     - rule:
         cwe_ids:
             - "201"
@@ -123,7 +124,7 @@ medium:
           context: context,
           parameters: parameters,
         )
-      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_4
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_0
     - rule:
         cwe_ids:
             - "201"
@@ -144,5 +145,5 @@ medium:
           context: context,
           parameters: parameters,
         )
-      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_5
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_4
 

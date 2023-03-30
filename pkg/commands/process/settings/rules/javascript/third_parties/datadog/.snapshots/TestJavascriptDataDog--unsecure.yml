@@ -10,7 +10,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 11
-      parent_content: client.event("user", "logged_in", {}, user)
+      snippet: client.event("user", "logged_in", {}, user)
+      fingerprint: 15317e7b0c29169d3b524d33116994d5_0
     - rule:
         cwe_ids:
             - "201"
@@ -22,5 +23,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 11
-      parent_content: client.event("user", "logged_in", {}, user)
+      snippet: client.event("user", "logged_in", {}, user)
+      fingerprint: 15317e7b0c29169d3b524d33116994d5_1
 

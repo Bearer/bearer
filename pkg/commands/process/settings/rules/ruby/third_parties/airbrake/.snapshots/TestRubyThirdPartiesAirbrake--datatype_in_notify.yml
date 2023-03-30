@@ -11,7 +11,7 @@ medium:
         - PII
       parent_line_number: 1
       snippet: Airbrake.notify(user.first_name)
-      fingerprint: 4de3d14d1ba1cd8d0992953a4d5d20e6_0
+      fingerprint: 4de3d14d1ba1cd8d0992953a4d5d20e6_2
     - rule:
         cwe_ids:
             - "201"
@@ -27,7 +27,7 @@ medium:
         Airbrake.notify('App crashed!', {
           current_user: user.email
         })
-      fingerprint: 4de3d14d1ba1cd8d0992953a4d5d20e6_1
+      fingerprint: 4de3d14d1ba1cd8d0992953a4d5d20e6_0
     - rule:
         cwe_ids:
             - "201"
@@ -43,5 +43,5 @@ medium:
         Airbrake.notify('App crashed') do |notice|
           notice[:params][:email] = customer.email
         end
-      fingerprint: 4de3d14d1ba1cd8d0992953a4d5d20e6_2
+      fingerprint: 4de3d14d1ba1cd8d0992953a4d5d20e6_1
 

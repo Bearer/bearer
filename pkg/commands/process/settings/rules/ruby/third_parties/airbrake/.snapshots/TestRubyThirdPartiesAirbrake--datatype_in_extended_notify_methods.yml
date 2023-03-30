@@ -17,7 +17,7 @@ medium:
           status_code: 200,
           timing: 123.45 # ms
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_0
+      fingerprint: 654d287d82e1a9f50507615518322598_8
     - rule:
         cwe_ids:
             - "201"
@@ -36,7 +36,7 @@ medium:
           status_code: 200,
           timing: 123.45 # ms
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_1
+      fingerprint: 654d287d82e1a9f50507615518322598_9
     - rule:
         cwe_ids:
             - "201"
@@ -55,7 +55,7 @@ medium:
           },
           request_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_2
+      fingerprint: 654d287d82e1a9f50507615518322598_0
     - rule:
         cwe_ids:
             - "201"
@@ -74,7 +74,7 @@ medium:
           },
           request_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_3
+      fingerprint: 654d287d82e1a9f50507615518322598_1
     - rule:
         cwe_ids:
             - "201"
@@ -92,7 +92,7 @@ medium:
           route: "/users/#{user.first_name}",
           query: 'SELECT * FROM foos'
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_4
+      fingerprint: 654d287d82e1a9f50507615518322598_10
     - rule:
         cwe_ids:
             - "201"
@@ -110,7 +110,7 @@ medium:
           route: "/users/#{user.first_name}",
           query: 'SELECT * FROM foos'
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_5
+      fingerprint: 654d287d82e1a9f50507615518322598_11
     - rule:
         cwe_ids:
             - "201"
@@ -129,7 +129,7 @@ medium:
           },
           request_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_6
+      fingerprint: 654d287d82e1a9f50507615518322598_2
     - rule:
         cwe_ids:
             - "201"
@@ -148,7 +148,7 @@ medium:
           },
           request_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_7
+      fingerprint: 654d287d82e1a9f50507615518322598_3
     - rule:
         cwe_ids:
             - "201"
@@ -168,7 +168,7 @@ medium:
           groups: { db: 24.0, view: 0.4 }, # ms
           timing: 123.45 # ms
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_8
+      fingerprint: 654d287d82e1a9f50507615518322598_12
     - rule:
         cwe_ids:
             - "201"
@@ -188,7 +188,7 @@ medium:
           groups: { db: 24.0, view: 0.4 }, # ms
           timing: 123.45 # ms
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_9
+      fingerprint: 654d287d82e1a9f50507615518322598_13
     - rule:
         cwe_ids:
             - "201"
@@ -207,7 +207,7 @@ medium:
           },
           request_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_10
+      fingerprint: 654d287d82e1a9f50507615518322598_4
     - rule:
         cwe_ids:
             - "201"
@@ -226,7 +226,7 @@ medium:
           },
           request_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_11
+      fingerprint: 654d287d82e1a9f50507615518322598_5
     - rule:
         cwe_ids:
             - "201"
@@ -245,7 +245,7 @@ medium:
           },
           job_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_12
+      fingerprint: 654d287d82e1a9f50507615518322598_6
     - rule:
         cwe_ids:
             - "201"
@@ -264,5 +264,5 @@ medium:
           },
           job_id: 123
         )
-      fingerprint: 654d287d82e1a9f50507615518322598_13
+      fingerprint: 654d287d82e1a9f50507615518322598_7
 
