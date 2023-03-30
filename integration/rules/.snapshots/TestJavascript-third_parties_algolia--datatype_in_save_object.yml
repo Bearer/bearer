@@ -1,0 +1,31 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_algolia
+        description: Sensitive data sent to Algolia detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_algolia
+      line_number: 12
+      filename: datatype_in_save_object.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 12
+      snippet: 'index.saveObjects([{ email: user.email }])'
+      fingerprint: f7cd3e6cc20d31411535c7bef6ba52cc_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_algolia
+        description: Sensitive data sent to Algolia detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_algolia
+      line_number: 7
+      filename: datatype_in_save_object.js
+      category_groups:
+        - Personal Data
+      parent_line_number: 8
+      snippet: |-
+        index
+          .saveObject(userObj, { autoGenerateObjectIDIfNotExist: true })
+      fingerprint: f7cd3e6cc20d31411535c7bef6ba52cc_1
+

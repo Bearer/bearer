@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "598"
+        id: ruby_lang_http_get_params
+        description: Sensitive data communicated through GET parameters detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_get_params
+      line_number: 1
+      filename: datatype_in_param_hash.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: 'HTTP.get("https://my.api.com/users/search", params: { user: { first_name: user.first_name } })'
+      fingerprint: 579a5de37607db8a47afc4385db02b1b_0
+

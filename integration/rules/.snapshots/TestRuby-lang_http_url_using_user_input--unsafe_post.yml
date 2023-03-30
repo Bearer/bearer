@@ -1,0 +1,13 @@
+high:
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 1
+      filename: unsafe_post.rb
+      parent_line_number: 1
+      snippet: Faraday.post(params[:oops])
+      fingerprint: 0fb264051314da6648d8c781340da923_0
+

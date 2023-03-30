@@ -1,0 +1,32 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_analytics
+        description: Sensitive data sent to Google Analytics detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_analytics
+      line_number: 1
+      filename: datatype_in_user_classes.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: 'Google::Apis::AnalyticsreportingV4::User.new(user_id: user.email)'
+      fingerprint: 2e7f04531d6a71956cae261704b576f8_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_analytics
+        description: Sensitive data sent to Google Analytics detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_analytics
+      line_number: 4
+      filename: datatype_in_user_classes.rb
+      category_groups:
+        - Personal Data
+      parent_line_number: 3
+      snippet: |-
+        Google::Apis::AnalyticsreportingV4::UserActivitySession.update!(
+          session_id: DateTime.now + user.ip_address
+        )
+      fingerprint: 2e7f04531d6a71956cae261704b576f8_1
+

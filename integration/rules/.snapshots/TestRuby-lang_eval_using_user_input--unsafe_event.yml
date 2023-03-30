@@ -1,0 +1,110 @@
+high:
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 2
+      filename: unsafe_event.rb
+      parent_line_number: 2
+      snippet: RubyVM::InstructionSequence.compile(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_0
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 4
+      filename: unsafe_event.rb
+      parent_line_number: 4
+      snippet: a.eval(event["oops"], "test")
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_1
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 6
+      filename: unsafe_event.rb
+      parent_line_number: 6
+      snippet: a.instance_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_2
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 8
+      filename: unsafe_event.rb
+      parent_line_number: 8
+      snippet: a.class_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_3
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 10
+      filename: unsafe_event.rb
+      parent_line_number: 10
+      snippet: a.module_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_4
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 12
+      filename: unsafe_event.rb
+      parent_line_number: 12
+      snippet: eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_5
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 14
+      filename: unsafe_event.rb
+      parent_line_number: 14
+      snippet: instance_eval(event["oops"], "test")
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_6
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 16
+      filename: unsafe_event.rb
+      parent_line_number: 16
+      snippet: class_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_7
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: ruby_lang_eval_using_user_input
+        description: Potential command injection with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_eval_using_user_input
+      line_number: 18
+      filename: unsafe_event.rb
+      parent_line_number: 18
+      snippet: module_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_8
+

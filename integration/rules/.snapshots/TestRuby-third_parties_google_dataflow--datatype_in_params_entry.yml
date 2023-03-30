@@ -1,0 +1,15 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_google_dataflow
+        description: Sensitive data sent to Google Dataflow detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_google_dataflow
+      line_number: 2
+      filename: datatype_in_params_entry.rb
+      category_groups:
+        - Personal Data
+      parent_line_number: 2
+      snippet: 'param.value = "ip: #{customer.ip_address}"'
+      fingerprint: 698ff376497f02ba27d50cf903561f6c_0
+

@@ -1,0 +1,17 @@
+high:
+    - rule:
+        cwe_ids:
+            - "502"
+        id: javascript_express_unsafe_deserialization
+        description: Deserialization of untrusted data detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_unsafe_deserialization
+      line_number: 4
+      filename: serialize_error.js
+      parent_line_number: 4
+      snippet: |-
+        deserializeError({
+            name: "MyCustomError",
+            message: req.params.error
+          })
+      fingerprint: 6a5dfee75fcbe696dcfb98d2c9f41309_0
+

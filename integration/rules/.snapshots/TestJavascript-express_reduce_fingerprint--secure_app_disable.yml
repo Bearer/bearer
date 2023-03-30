@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids:
+            - "693"
+        id: javascript_express_helmet_missing
+        description: Security misconfiguration detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_helmet_missing
+      line_number: 3
+      filename: secure_app_disable.js
+      parent_line_number: 3
+      snippet: express()
+      fingerprint: ed6ed8b54708fe870dd883878474bc75_0
+

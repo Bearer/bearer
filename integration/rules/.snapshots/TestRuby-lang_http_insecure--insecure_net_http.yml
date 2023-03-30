@@ -1,0 +1,37 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 3
+      filename: insecure_net_http.rb
+      parent_line_number: 3
+      snippet: Net::HTTP.post_form("http://my.api.com/users/search")
+      fingerprint: 3bf618c5f169740a6892f6784db0e242_0
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 5
+      filename: insecure_net_http.rb
+      parent_line_number: 5
+      snippet: |-
+        Net::HTTP.start("http://my.api.com/users/search") do
+        end
+      fingerprint: 3bf618c5f169740a6892f6784db0e242_1
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 8
+      filename: insecure_net_http.rb
+      parent_line_number: 8
+      snippet: 'Net::HTTP::Get.new("http://my.api.com/users/search", { "X-Test": 42 })'
+      fingerprint: 3bf618c5f169740a6892f6784db0e242_2
+

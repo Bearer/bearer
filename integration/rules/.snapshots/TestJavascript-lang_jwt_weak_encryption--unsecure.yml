@@ -1,0 +1,16 @@
+low:
+    - rule:
+        cwe_ids:
+            - "327"
+        id: javascript_jwt_weak_encryption
+        description: Weak jwt encryption deceted
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_jwt_weak_encryption
+      line_number: 3
+      filename: unsecure.js
+      parent_line_number: 3
+      snippet: |-
+        jwt.sign({ foo: "bar" }, process.env.JWT_SECRET, {
+        	algorithm: "none",
+        })
+      fingerprint: a9ee605621c71f1b5acba0c3b6d8feca_0
+

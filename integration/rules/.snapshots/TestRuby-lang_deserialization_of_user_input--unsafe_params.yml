@@ -1,0 +1,92 @@
+high:
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 1
+      filename: unsafe_params.rb
+      parent_line_number: 1
+      snippet: YAML.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_0
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 3
+      filename: unsafe_params.rb
+      parent_line_number: 3
+      snippet: Psych.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_1
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 5
+      filename: unsafe_params.rb
+      parent_line_number: 5
+      snippet: Syck.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_2
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 7
+      filename: unsafe_params.rb
+      parent_line_number: 7
+      snippet: JSON.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_3
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 9
+      filename: unsafe_params.rb
+      parent_line_number: 9
+      snippet: |-
+        Oj.load(params[:oops]) do |json|
+        end
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_4
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 11
+      filename: unsafe_params.rb
+      parent_line_number: 11
+      snippet: Oj.object_load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_5
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 13
+      filename: unsafe_params.rb
+      parent_line_number: 13
+      snippet: Marshal.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_6
+    - rule:
+        cwe_ids:
+            - "502"
+        id: ruby_lang_deserialization_of_user_input
+        description: User input detected in an unsafe deserialization method.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input
+      line_number: 14
+      filename: unsafe_params.rb
+      parent_line_number: 14
+      snippet: Marshal.restore(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_7
+

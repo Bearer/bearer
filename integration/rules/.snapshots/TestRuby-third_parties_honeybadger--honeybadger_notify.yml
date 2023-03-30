@@ -1,0 +1,134 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 2
+      filename: honeybadger_notify.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 28
+      snippet: |-
+        Honeybadger.notify(
+          "Something is wrong here for " + user.gender,
+          class_name: "MyError",
+          error_message: error_message,
+          tags: tags,
+          context: context,
+          parameters: parameters,
+        )
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 9
+      filename: honeybadger_notify.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 28
+      snippet: |-
+        Honeybadger.notify(
+          "Something is wrong here for " + user.gender,
+          class_name: "MyError",
+          error_message: error_message,
+          tags: tags,
+          context: context,
+          parameters: parameters,
+        )
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_1
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 13
+      filename: honeybadger_notify.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 28
+      snippet: |-
+        Honeybadger.notify(
+          "Something is wrong here for " + user.gender,
+          class_name: "MyError",
+          error_message: error_message,
+          tags: tags,
+          context: context,
+          parameters: parameters,
+        )
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_2
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 14
+      filename: honeybadger_notify.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 28
+      snippet: |-
+        Honeybadger.notify(
+          "Something is wrong here for " + user.gender,
+          class_name: "MyError",
+          error_message: error_message,
+          tags: tags,
+          context: context,
+          parameters: parameters,
+        )
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_3
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 22
+      filename: honeybadger_notify.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 28
+      snippet: |-
+        Honeybadger.notify(
+          "Something is wrong here for " + user.gender,
+          class_name: "MyError",
+          error_message: error_message,
+          tags: tags,
+          context: context,
+          parameters: parameters,
+        )
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_4
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 29
+      filename: honeybadger_notify.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 28
+      snippet: |-
+        Honeybadger.notify(
+          "Something is wrong here for " + user.gender,
+          class_name: "MyError",
+          error_message: error_message,
+          tags: tags,
+          context: context,
+          parameters: parameters,
+        )
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_5
+

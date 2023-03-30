@@ -1,0 +1,13 @@
+high:
+    - rule:
+        cwe_ids:
+            - "94"
+        id: ruby_lang_reflection_using_user_input
+        description: Use of reflection influenced by user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
+      line_number: 1
+      filename: unsafe_rails.rb
+      parent_line_number: 1
+      snippet: params[:class].constantize
+      fingerprint: 156357da0ed173828518abd1d8558374_0
+
