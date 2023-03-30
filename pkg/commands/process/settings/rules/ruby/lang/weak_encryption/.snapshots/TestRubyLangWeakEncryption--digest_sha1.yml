@@ -9,6 +9,6 @@ low:
       line_number: 1
       filename: digest_sha1.rb
       parent_line_number: 1
-      parent_content: Digest::SHA1.hexidigest("hello world")
-
+      snippet: Digest::SHA1.hexidigest("hello world")
+      fingerprint: 8658542c01100b6e2dce9f3c77b063e9_0
 

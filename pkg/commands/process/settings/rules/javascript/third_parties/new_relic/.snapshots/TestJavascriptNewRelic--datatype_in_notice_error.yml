@@ -10,6 +10,6 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 7
-      parent_content: newrelic.noticeError(err, customer.ip_address)
-
+      snippet: newrelic.noticeError(err, customer.ip_address)
+      fingerprint: 3d897530b17d000792263d6a75ce428c_0
 

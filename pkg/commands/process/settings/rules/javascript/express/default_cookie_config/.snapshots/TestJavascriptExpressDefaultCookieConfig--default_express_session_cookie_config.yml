@@ -9,7 +9,8 @@ medium:
       line_number: 11
       filename: default_express_session_cookie_config.js
       parent_line_number: 11
-      parent_content: '{}'
+      snippet: '{}'
+      fingerprint: e114698a3e3b46f2392d491f2869fe33_0
     - rule:
         cwe_ids:
             - "523"
@@ -20,7 +21,7 @@ medium:
       line_number: 17
       filename: default_express_session_cookie_config.js
       parent_line_number: 17
-      parent_content: |-
+      snippet: |-
         {
               domain: "example.com",
               secure: true,
@@ -28,6 +29,7 @@ medium:
               maxAge: 24 * 60 * 60 * 1000,
               path: "/some-path",
             }
+      fingerprint: e114698a3e3b46f2392d491f2869fe33_1
     - rule:
         cwe_ids:
             - "523"
@@ -38,13 +40,14 @@ medium:
       line_number: 29
       filename: default_express_session_cookie_config.js
       parent_line_number: 29
-      parent_content: |-
+      snippet: |-
         {
               domain: "example.com",
               secure: true,
               httpOnly: false,
               name: "my-custom-cookie-name",
             }
+      fingerprint: e114698a3e3b46f2392d491f2869fe33_2
     - rule:
         cwe_ids:
             - "523"
@@ -55,10 +58,11 @@ medium:
       line_number: 10
       filename: default_express_session_cookie_config.js
       parent_line_number: 10
-      parent_content: |-
+      snippet: |-
         {
             cookie: {},
           }
+      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_0
     - rule:
         cwe_ids:
             - "523"
@@ -69,7 +73,7 @@ medium:
       line_number: 16
       filename: default_express_session_cookie_config.js
       parent_line_number: 16
-      parent_content: |-
+      snippet: |-
         {
             cookie: {
               domain: "example.com",
@@ -79,5 +83,5 @@ medium:
               path: "/some-path",
             },
           }
-
+      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_1
 

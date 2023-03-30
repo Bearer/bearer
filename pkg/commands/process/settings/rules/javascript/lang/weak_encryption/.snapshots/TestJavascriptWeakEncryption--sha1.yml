@@ -10,7 +10,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: crypto.createHmac("sha1", key).update(user.email)
+      snippet: crypto.createHmac("sha1", key).update(user.email)
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_0
     - rule:
         cwe_ids:
             - "327"
@@ -22,7 +23,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: crypto.createHash("sha1").update(user.email)
+      snippet: crypto.createHash("sha1").update(user.email)
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_1
     - rule:
         cwe_ids:
             - "327"
@@ -34,7 +36,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 8
-      parent_content: CryptoJS.HmacSHA1(user.email, "Key")
+      snippet: CryptoJS.HmacSHA1(user.email, "Key")
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_2
     - rule:
         cwe_ids:
             - "327"
@@ -46,6 +49,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 9
-      parent_content: CryptoJS.SHA1(user.email)
-
+      snippet: CryptoJS.SHA1(user.email)
+      fingerprint: d7aa86e42256f21cde35fd7cc3788c79_3
 

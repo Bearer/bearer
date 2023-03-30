@@ -9,6 +9,6 @@ low:
       line_number: 13
       filename: http_only.js
       parent_line_number: 13
-      parent_content: 'httpOnly: true'
-
+      snippet: 'httpOnly: true'
+      fingerprint: 2c50605bef820829b7d58a87086381c9_0
 

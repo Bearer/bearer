@@ -11,10 +11,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block { |user|
           user.password
         }
+      fingerprint: 8854dcaeb9cce4c4cbd21356a8af8461_0
     - rule:
         cwe_ids:
             - "331"
@@ -27,10 +28,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block do |user|
           user.password
         end
+      fingerprint: 8854dcaeb9cce4c4cbd21356a8af8461_1
     - rule:
         cwe_ids:
             - "331"
@@ -43,7 +45,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 9
-      parent_content: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+      snippet: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+      fingerprint: 8854dcaeb9cce4c4cbd21356a8af8461_2
     - rule:
         cwe_ids:
             - "326"
@@ -56,10 +59,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block { |user|
           user.password
         }
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_0
     - rule:
         cwe_ids:
             - "326"
@@ -72,10 +76,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         Crypt::Blowfish.new("insecure").encrypt_block do |user|
           user.password
         end
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_1
     - rule:
         cwe_ids:
             - "326"
@@ -88,6 +93,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 9
-      parent_content: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
-
+      snippet: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_2
 

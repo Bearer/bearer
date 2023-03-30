@@ -1,9 +1,0 @@
-- position: "2:3"
-  content: attr_accessor :one, :two
-  data:
-    name: one
-- position: "2:3"
-  content: attr_accessor :one, :two
-  data:
-    name: two
-

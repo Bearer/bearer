@@ -8,6 +8,6 @@ high:
       line_number: 5
       filename: node_serialize.js
       parent_line_number: 5
-      parent_content: nodeSerialize.unserialize(userStr)
-
+      snippet: nodeSerialize.unserialize(userStr)
+      fingerprint: d3679cd2207e725d42e98cd097bd1ccb_0
 

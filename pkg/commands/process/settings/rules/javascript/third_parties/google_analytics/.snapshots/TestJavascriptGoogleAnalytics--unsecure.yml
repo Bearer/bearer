@@ -10,11 +10,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         gtag("event", "screen_view", {
         	user: {
         		email: "jhon@gmail.com",
         	},
         })
-
+      fingerprint: e9e519779eae41a91fc30ad3b62a84a3_0
 

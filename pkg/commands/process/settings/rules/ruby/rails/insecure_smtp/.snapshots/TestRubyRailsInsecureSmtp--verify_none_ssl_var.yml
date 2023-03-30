@@ -8,6 +8,6 @@ low:
       line_number: 3
       filename: verify_none_ssl_var.rb
       parent_line_number: 3
-      parent_content: :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE
-
+      snippet: :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE
+      fingerprint: ccb4631d61a23046811fc5c905dbf93c_0
 

@@ -8,6 +8,6 @@ high:
       line_number: 10
       filename: res_write_xss.js
       parent_line_number: 10
-      parent_content: res.write("<h3> Greetings " + customerName + "</h3>")
-
+      snippet: res.write("<h3> Greetings " + customerName + "</h3>")
+      fingerprint: 2493e1cfdee1e9a4cdbb36280df10d25_0
 

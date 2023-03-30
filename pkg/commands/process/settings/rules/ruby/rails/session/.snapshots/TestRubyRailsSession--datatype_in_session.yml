@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: session[:current_user] = user.email
-
+      snippet: session[:current_user] = user.email
+      fingerprint: a5c0e825abde92e4fb94604f26340fa2_0
 

@@ -9,6 +9,6 @@ high:
       line_number: 11
       filename: set_timeout.js
       parent_line_number: 11
-      parent_content: setTimeout(command)
-
+      snippet: setTimeout(command)
+      fingerprint: 5eef89bf95395a7573b889545a2c7f8e_0
 

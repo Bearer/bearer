@@ -10,13 +10,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         rows << [
               "123",
               2022,
               customer.email,
               customer.address
             ]
+      fingerprint: febd3e36f1f248edf1d2960da47e9f7c_0
     - rule:
         cwe_ids:
             - "201"
@@ -28,12 +29,12 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         rows << [
               "123",
               2022,
               customer.email,
               customer.address
             ]
-
+      fingerprint: febd3e36f1f248edf1d2960da47e9f7c_1
 

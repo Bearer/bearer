@@ -7,6 +7,7 @@ import (
 type Datatype struct {
 	UUID         string             `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 	CategoryUUID string             `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
+	CategoryName string             `json:"category_name,omitempty" yaml:"category_name,omitempty"`
 	Name         string             `json:"name" yaml:"name"`
 	Detectors    []DatatypeDetector `json:"detectors" yaml:"detectors"`
 }

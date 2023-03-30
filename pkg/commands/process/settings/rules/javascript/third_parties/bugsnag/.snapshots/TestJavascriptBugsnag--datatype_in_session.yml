@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: bugSession.notify(user.email)
-
+      snippet: bugSession.notify(user.email)
+      fingerprint: a3b7e2efe220ddd88ca70f09bfc62594_0
 

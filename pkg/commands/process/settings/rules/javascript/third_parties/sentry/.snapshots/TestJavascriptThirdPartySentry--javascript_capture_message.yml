@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: Sentry.captureMessage("User has successfully signed in " + current_user.email)
-
+      snippet: Sentry.captureMessage("User has successfully signed in " + current_user.email)
+      fingerprint: 2399e47bf32f23e338a8c98eb0985d5c_0
 

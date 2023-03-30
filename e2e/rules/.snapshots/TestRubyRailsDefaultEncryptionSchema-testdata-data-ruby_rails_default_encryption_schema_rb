@@ -10,7 +10,7 @@ warning:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: |-
+      snippet: |-
         create_table "users", force: :cascade do |t|
             t.string "email", null: false
             t.string "name"
@@ -18,6 +18,7 @@ warning:
             t.datetime "created_at", null: false
             t.datetime "updated_at", null: false
           end
+      fingerprint: 4b6d6e98ae7d9908efdf9a7984c7db05_0
 
 
 --

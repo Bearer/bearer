@@ -8,9 +8,9 @@ high:
       line_number: 6
       filename: knex_sql_injection.js
       parent_line_number: 6
-      parent_content: |-
+      snippet: |-
         knex.select('user.cart_details')
             .from('users')
             .whereRaw('name = '+ event.user.name)
-
+      fingerprint: a6be1e7b4f812b3709823c952fd60b64_0
 

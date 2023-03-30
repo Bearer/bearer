@@ -1,0 +1,35 @@
+{
+  "metadata": { "version": "1.0" },
+  "name": "OpenAI",
+  "type": "external_service",
+  "urls": ["https://api.openai.com"],
+  "packages": [
+    {
+      "name": "openai",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "openai",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "api",
+      "group": "com.theokanning.openai-gpt3-java",
+      "package_manager": "maven"
+    },
+    {
+      "name": "client",
+      "group": "com.theokanning.openai-gpt3-java",
+      "package_manager": "maven"
+    },
+    {
+      "name": "service",
+      "group": "com.theokanning.openai-gpt3-java",
+      "package_manager": "maven"
+    }
+  ],
+  "uuid": "e106eab4-f126-45c4-9cb8-620e6ae036b7",
+  "sub_type": "third_party"
+}

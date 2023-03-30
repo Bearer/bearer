@@ -10,7 +10,8 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 17
-      parent_content: 'current_span.record_exception(ex, attributes: { "user.ip" => user.ip_address })'
+      snippet: 'current_span.record_exception(ex, attributes: { "user.ip" => user.ip_address })'
+      fingerprint: 22fdada1a042c5a6b49b42fcaf14cc92_1
 medium:
     - rule:
         cwe_ids:
@@ -23,6 +24,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: 'current_span.status = OpenTelemetry::Trace::Status.error("error for user #{current_user.email}")'
-
+      snippet: 'current_span.status = OpenTelemetry::Trace::Status.error("error for user #{current_user.email}")'
+      fingerprint: 22fdada1a042c5a6b49b42fcaf14cc92_0
 

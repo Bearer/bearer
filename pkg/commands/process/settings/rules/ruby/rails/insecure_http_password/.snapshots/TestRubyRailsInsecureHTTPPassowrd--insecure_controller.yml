@@ -8,7 +8,8 @@ high:
       line_number: 2
       filename: insecure_controller.rb
       parent_line_number: 2
-      parent_content: 'password: "my-secret-password"'
+      snippet: 'password: "my-secret-password"'
+      fingerprint: 843db76e891266097ee7c7684c250d45_0
 low:
     - rule:
         cwe_ids: []
@@ -18,6 +19,6 @@ low:
       line_number: 2
       filename: insecure_controller.rb
       parent_line_number: 2
-      parent_content: my-secret-password
-
+      snippet: my-secret-password
+      fingerprint: 1e244c632c44ae7adb231308208cc3f7_0
 

@@ -8,7 +8,8 @@ low:
       line_number: 12
       filename: insecure_pug_template.js
       parent_line_number: 12
-      parent_content: pug.render(req.params.name, merge(options, locals))
+      snippet: pug.render(req.params.name, merge(options, locals))
+      fingerprint: 87443edd915dd8aa74d4cbefbd1706e2_0
     - rule:
         cwe_ids:
             - "1336"
@@ -18,6 +19,6 @@ low:
       line_number: 16
       filename: insecure_pug_template.js
       parent_line_number: 16
-      parent_content: pug.compile(req.params.name)
-
+      snippet: pug.compile(req.params.name)
+      fingerprint: 87443edd915dd8aa74d4cbefbd1706e2_1
 

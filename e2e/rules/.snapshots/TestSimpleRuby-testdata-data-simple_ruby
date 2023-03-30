@@ -10,7 +10,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: config.force_ssl = false
+      snippet: config.force_ssl = false
+      fingerprint: 28ca51516a8b388cb7065c1f0df8b093_0
 
 
 --

@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 11
-      parent_content: inserter.insert(rows)
-
+      snippet: inserter.insert(rows)
+      fingerprint: 33fe1e1432d6dbb2db63221ba252b32e_0
 

@@ -8,6 +8,6 @@ medium:
       line_number: 3
       filename: unsecure.rb
       parent_line_number: 3
-      parent_content: redirect_to(params[:id])
-
+      snippet: redirect_to(params[:id])
+      fingerprint: b9f5ea823f4390fff57372a450d14637_0
 

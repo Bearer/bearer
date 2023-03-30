@@ -24,4 +24,3 @@ medium:
       parent_line_number: 3
       parent_content: Rollbar.critical("Connection error from remote Payments API", user)
 
-

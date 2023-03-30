@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 10
-      parent_content: 'client.bulk(body: body)'
-
+      snippet: 'client.bulk(body: body)'
+      fingerprint: 2c58e99bab53da01c39130a33b7b3bca_0
 

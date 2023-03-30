@@ -8,6 +8,6 @@ low:
       line_number: 13
       filename: insecure_express_hbs_template.js
       parent_line_number: 13
-      parent_content: hbs.renderView(req.params.viewPath, options, (err) => {})
-
+      snippet: hbs.renderView(req.params.viewPath, options, (err) => {})
+      fingerprint: b81dcff685fe53ed72ee08efc5b4e328_0
 

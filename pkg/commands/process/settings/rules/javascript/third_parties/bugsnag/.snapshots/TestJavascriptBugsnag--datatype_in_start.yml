@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Bugsnag.start({
           onError: function (e) {
             e.setUser(user.id, user.email, user.name)
@@ -22,6 +22,7 @@ medium:
             session.setUser(user.email)
           }
         })
+      fingerprint: 4707cfda64a1837cb5fe6f9270a5a8a6_0
     - rule:
         cwe_ids:
             - "201"
@@ -56,7 +57,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Bugsnag.start({
           onError: function (e) {
             e.setUser(user.id, user.email, user.name)
@@ -68,6 +69,7 @@ medium:
             session.setUser(user.email)
           }
         })
+      fingerprint: 4707cfda64a1837cb5fe6f9270a5a8a6_1
     - rule:
         cwe_ids:
             - "201"
@@ -79,7 +81,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Bugsnag.start({
           onError: function (e) {
             e.setUser(user.id, user.email, user.name)
@@ -91,5 +93,5 @@ medium:
             session.setUser(user.email)
           }
         })
-
+      fingerprint: 4707cfda64a1837cb5fe6f9270a5a8a6_2
 

@@ -8,7 +8,8 @@ high:
       line_number: 1
       filename: unsafe_excon.rb
       parent_line_number: 1
-      parent_content: 'Excon.new(params[:oops], foo: true)'
+      snippet: 'Excon.new(params[:oops], foo: true)'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_0
     - rule:
         cwe_ids:
             - "918"
@@ -18,7 +19,8 @@ high:
       line_number: 2
       filename: unsafe_excon.rb
       parent_line_number: 2
-      parent_content: 'Excon.new("http://example.com", path: params[:oops])'
+      snippet: 'Excon.new("http://example.com", path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_1
     - rule:
         cwe_ids:
             - "918"
@@ -28,7 +30,8 @@ high:
       line_number: 4
       filename: unsafe_excon.rb
       parent_line_number: 4
-      parent_content: 'Excon::Connection.new(host: params[:oops])'
+      snippet: 'Excon::Connection.new(host: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_2
     - rule:
         cwe_ids:
             - "918"
@@ -38,7 +41,8 @@ high:
       line_number: 5
       filename: unsafe_excon.rb
       parent_line_number: 5
-      parent_content: 'Excon::Connection.new(hostname: params[:oops])'
+      snippet: 'Excon::Connection.new(hostname: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_3
     - rule:
         cwe_ids:
             - "918"
@@ -48,7 +52,8 @@ high:
       line_number: 6
       filename: unsafe_excon.rb
       parent_line_number: 6
-      parent_content: 'Excon::Connection.new(path: params[:oops])'
+      snippet: 'Excon::Connection.new(path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_4
     - rule:
         cwe_ids:
             - "918"
@@ -58,7 +63,8 @@ high:
       line_number: 7
       filename: unsafe_excon.rb
       parent_line_number: 7
-      parent_content: 'Excon::Connection.new(port: params[:oops])'
+      snippet: 'Excon::Connection.new(port: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_5
     - rule:
         cwe_ids:
             - "918"
@@ -68,7 +74,8 @@ high:
       line_number: 9
       filename: unsafe_excon.rb
       parent_line_number: 9
-      parent_content: 'connection.post(path: params[:oops])'
+      snippet: 'connection.post(path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_6
     - rule:
         cwe_ids:
             - "918"
@@ -78,7 +85,8 @@ high:
       line_number: 11
       filename: unsafe_excon.rb
       parent_line_number: 11
-      parent_content: 'connection2.request(path: params[:oops])'
+      snippet: 'connection2.request(path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_7
     - rule:
         cwe_ids:
             - "918"
@@ -88,7 +96,8 @@ high:
       line_number: 13
       filename: unsafe_excon.rb
       parent_line_number: 13
-      parent_content: 'connection3.requests([{ :method => :get, path: params[:oops] }])'
+      snippet: 'connection3.requests([{ :method => :get, path: params[:oops] }])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_8
     - rule:
         cwe_ids:
             - "918"
@@ -98,7 +107,8 @@ high:
       line_number: 15
       filename: unsafe_excon.rb
       parent_line_number: 15
-      parent_content: Excon.get(params[:oops])
+      snippet: Excon.get(params[:oops])
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_9
     - rule:
         cwe_ids:
             - "918"
@@ -108,7 +118,8 @@ high:
       line_number: 16
       filename: unsafe_excon.rb
       parent_line_number: 16
-      parent_content: 'Excon.post("http://example.com", path: params[:oops])'
+      snippet: 'Excon.post("http://example.com", path: params[:oops])'
+      fingerprint: 63bcfc0b3d24f39cb3ca63b8637c6162_10
 low:
     - rule:
         cwe_ids:
@@ -119,7 +130,8 @@ low:
       line_number: 2
       filename: unsafe_excon.rb
       parent_line_number: 2
-      parent_content: 'Excon.new("http://example.com", path: params[:oops])'
+      snippet: 'Excon.new("http://example.com", path: params[:oops])'
+      fingerprint: 51826efb8873069dab7166379abc47d8_0
     - rule:
         cwe_ids:
             - "319"
@@ -129,6 +141,6 @@ low:
       line_number: 16
       filename: unsafe_excon.rb
       parent_line_number: 16
-      parent_content: 'Excon.post("http://example.com", path: params[:oops])'
-
+      snippet: 'Excon.post("http://example.com", path: params[:oops])'
+      fingerprint: 51826efb8873069dab7166379abc47d8_1
 

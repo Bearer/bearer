@@ -10,12 +10,13 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         client.track({
           event: "some event name",
           userId: user.id,
           userIpAddr: user.ip_address,
         })
+      fingerprint: 7962fdb50924228eb50532bd49443112_1
 medium:
     - rule:
         cwe_ids:
@@ -28,6 +29,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 17
-      parent_content: browser.track(user.email)
-
+      snippet: browser.track(user.email)
+      fingerprint: 7962fdb50924228eb50532bd49443112_0
 

@@ -10,11 +10,12 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         current_span.add_attributes({
             "user.id" => user.id,
             "user.first_name" => user.first_name
           })
+      fingerprint: 1c966169a2746b67eba375bd04ef080d_0
     - rule:
         cwe_ids:
             - "201"
@@ -26,6 +27,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 14
-      parent_content: current_span.set_attribute("current_users", users)
-
+      snippet: current_span.set_attribute("current_users", users)
+      fingerprint: 1c966169a2746b67eba375bd04ef080d_1
 

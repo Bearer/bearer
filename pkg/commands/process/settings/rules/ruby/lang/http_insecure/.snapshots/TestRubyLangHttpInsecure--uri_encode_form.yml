@@ -8,6 +8,6 @@ low:
       line_number: 1
       filename: uri_encode_form.rb
       parent_line_number: 1
-      parent_content: URI('http://my.api.com/users/search')
-
+      snippet: URI('http://my.api.com/users/search')
+      fingerprint: bbe07548be64ce691181b569676555bd_0
 

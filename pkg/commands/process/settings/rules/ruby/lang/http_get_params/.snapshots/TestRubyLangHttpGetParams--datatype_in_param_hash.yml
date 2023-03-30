@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'HTTP.get("https://my.api.com/users/search", params: { user: { first_name: user.first_name } })'
-
+      snippet: 'HTTP.get("https://my.api.com/users/search", params: { user: { first_name: user.first_name } })'
+      fingerprint: 579a5de37607db8a47afc4385db02b1b_0
 

@@ -9,9 +9,9 @@ low:
       line_number: 2
       filename: blowfish.rb
       parent_line_number: 2
-      parent_content: |-
+      snippet: |-
         blowfish.encrypt_block do
           "hello world"
         end
-
+      fingerprint: c290db874048c71a3f2807bb4ef98936_0
 

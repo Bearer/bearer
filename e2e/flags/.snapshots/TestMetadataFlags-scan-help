@@ -12,7 +12,7 @@ Examples:
 Report Flags
   -f, --format string     Specify report format (json, yaml)
       --output string     Specify the output path for the report.
-      --report string     Specify the type of report (security, privacy). (default "security")
+      --report string     Specify the type of report (security, privacy, dataflow). (default "security")
       --severity string   Specify which severities are included in the report. (default "critical,high,medium,low,warning")
 
 Rule Flags
@@ -33,7 +33,7 @@ Scan Flags
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 
 General Flags
-      --config-file string   Load configuration from the specified path.
+      --config-file string   Load configuration from the specified path. (default "bearer.yml")
 
 
 --

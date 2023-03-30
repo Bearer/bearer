@@ -1,16 +1,24 @@
 package output
 
 import (
+	"compress/gzip"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
+	"os/exec"
 	"strings"
 
+	"github.com/bearer/bearer/api"
+	"github.com/bearer/bearer/api/s3"
+	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
 	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/gitsight/go-vcsurl"
 	"github.com/google/uuid"
 
 	"github.com/bearer/bearer/pkg/report/output/detectors"
@@ -19,147 +27,111 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/hhatto/gocloc"
-	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func ReportSecurity(report types.Report, output *zerolog.Event, config settings.Config) (reportPassed bool, err error) {
-	reportSupported := false
-	reportPassed = false
-	err = nil
-
-	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
-	if err != nil {
-		return
-	}
-
-	reportSupported, err = anySupportedLanguagesPresent(lineOfCodeOutput, config)
-	if err != nil {
-		return
-	}
-
-	if !reportSupported {
-		var placeholderStr *strings.Builder
-		placeholderStr, err = getPlaceholderOutput(report, config, lineOfCodeOutput)
-		if err != nil {
-			return
-		}
-
-		reportPassed = true
-		output.Msg(placeholderStr.String())
-		return
-	}
-
-	dataflow, err := getDataflow(report, config, true)
-	if err != nil {
-		return
-	}
-
-	securityResults, err := security.GetOutput(dataflow, config)
-	if err != nil {
-		return
-	}
-
-	reportStr, reportPassed := security.BuildReportString(config, securityResults, lineOfCodeOutput, dataflow)
-
-	output.Msg(reportStr.String())
-
-	return
-}
-
-func ReportCSV(report types.Report, output *zerolog.Event, config settings.Config) error {
-	switch config.Report.Report {
-	case flag.ReportPrivacy:
-		return getPrivacyReportCsvOutput(report, output, config)
-	}
-
-	return fmt.Errorf("csv not supported for report type: %s", config.Report.Report)
-}
-
-func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
-	outputDetections, err := getReportOutput(report, config)
-	if err != nil {
-		return err
-	}
-
+func ReportJSON(outputDetections any) (*string, error) {
 	jsonBytes, err := json.Marshal(&outputDetections)
 	if err != nil {
-		return fmt.Errorf("failed to json marshal detections: %w", err)
+		return nil, fmt.Errorf("failed to json marshal detections: %s", err)
 	}
 
-	output.Msg(string(jsonBytes))
-
-	return nil
+	content := string(jsonBytes)
+	return &content, nil
 }
 
-func ReportYAML(report types.Report, output *zerolog.Event, config settings.Config) error {
-	ouputDetections, err := getReportOutput(report, config)
+func ReportYAML(outputDetections any) (*string, error) {
+	yamlBytes, err := yaml.Marshal(&outputDetections)
 	if err != nil {
-		return err
+		return nil, fmt.Errorf("failed to yaml marshal detections: %s", err)
 	}
 
-	jsonBytes, err := yaml.Marshal(&ouputDetections)
-	if err != nil {
-		return fmt.Errorf("failed to json marshal detections: %w", err)
-	}
-
-	output.Msg(string(jsonBytes))
-
-	return nil
+	content := string(yamlBytes)
+	return &content, nil
 }
 
-func getReportOutput(report types.Report, config settings.Config) (any, error) {
-
+func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result, *dataflow.DataFlow, error) {
 	switch config.Report.Report {
 	case flag.ReportDetectors:
 		return detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
-		return getDataflow(report, config, false)
+		return GetDataflow(report, config, false)
 	case flag.ReportSecurity:
-		dataflow, err := getDataflow(report, config, true)
+		return reportSecurity(report, config)
+	case flag.ReportSaaS:
+		securityResults, _, dataflow, err := reportSecurity(report, config)
 		if err != nil {
-			return nil, err
+			return nil, nil, nil, err
 		}
-		return security.GetOutput(dataflow, config)
+
+		var meta *Meta
+		meta, err = getMeta(config)
+		if err != nil {
+			meta = &Meta{
+				Target: config.Scan.Target,
+			}
+		}
+
+		files := getDiscoveredFiles(config)
+
+		return BearerReport{
+			Findings:   securityResults,
+			DataTypes:  &dataflow.Datatypes,
+			Components: &dataflow.Components,
+			Files:      files,
+			Meta:       *meta,
+		}, nil, nil, nil
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
 		return reportStats(report, config)
 	}
 
-	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+	return nil, nil, nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
-func getPrivacyReportCsvOutput(report types.Report, output *zerolog.Event, config settings.Config) error {
-	dataflow, err := getDataflow(report, config, true)
-	if err != nil {
-		return err
+func getDiscoveredFiles(config settings.Config) []string {
+	filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
+	files := []string{}
+	for _, fileDiscovered := range filesDiscovered {
+		files = append(files, file.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
 	}
 
-	csvString, err := privacy.BuildCsvString(dataflow, config)
-	if err != nil {
-		return err
-	}
-
-	output.Msg(csvString.String())
-	return nil
+	return files
 }
 
-func getPrivacyReportOutput(report types.Report, config settings.Config) (*privacy.Report, error) {
-	dataflow, err := getDataflow(report, config, true)
+func GetPrivacyReportCSVOutput(report types.Report, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow, config settings.Config) (*string, error) {
+	csvString, err := privacy.BuildCsvString(dataflow, lineOfCodeOutput, config)
 	if err != nil {
 		return nil, err
 	}
 
-	return privacy.GetOutput(dataflow, config)
+	content := csvString.String()
+
+	return &content, nil
 }
 
-func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {
-	reportedDetections, err := detectors.GetOutput(report, config)
+func getPrivacyReportOutput(report types.Report, config settings.Config) (*privacy.Report, *gocloc.Result, *dataflow.DataFlow, error) {
+	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
 	if err != nil {
-		return nil, err
+		log.Error().Msgf("error in line of code output %s", err)
+		return nil, nil, nil, err
+	}
+
+	dataflow, _, _, err := GetDataflow(report, config, true)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+
+	return privacy.GetOutput(dataflow, lineOfCodeOutput, config)
+}
+
+func GetDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, *gocloc.Result, *dataflow.DataFlow, error) {
+	reportedDetections, _, _, err := detectors.GetOutput(report, config)
+	if err != nil {
+		return nil, nil, nil, err
 	}
 
 	for _, detection := range reportedDetections {
@@ -169,31 +141,157 @@ func getDataflow(report types.Report, config settings.Config, isInternal bool) (
 	return dataflow.GetOutput(reportedDetections, config, isInternal)
 }
 
-func reportStats(report types.Report, config settings.Config) (*stats.Stats, error) {
+func reportStats(report types.Report, config settings.Config) (*stats.Stats, *gocloc.Result, *dataflow.DataFlow, error) {
 	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
 	if err != nil {
-		return nil, err
+		return nil, nil, nil, err
 	}
 
-	dataflowOutput, err := getDataflow(report, config, true)
+	dataflowOutput, _, _, err := GetDataflow(report, config, true)
 	if err != nil {
-		return nil, err
+		return nil, nil, nil, err
 	}
 
 	return stats.GetOutput(lineOfCodeOutput, dataflowOutput, config)
 }
 
-func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {
-	ruleLanguages := make(map[string]bool)
-	for _, rule := range config.Rules {
-		for _, language := range rule.Languages {
-			ruleLanguages[language] = true
+func reportSecurity(
+	report types.Report,
+	config settings.Config,
+) (
+	securityResults *security.Results,
+	lineOfCodeOutput *gocloc.Result,
+	dataflow *dataflow.DataFlow,
+	err error,
+) {
+	lineOfCodeOutput, err = stats.GoclocDetectorOutput(config.Scan.Target)
+	if err != nil {
+		log.Error().Msgf("error in line of code output %s", err)
+		return
+	}
+
+	dataflow, _, _, err = GetDataflow(report, config, true)
+	if err != nil {
+		log.Error().Msgf("error in dataflow %s", err)
+		return
+	}
+
+	securityResults, err = security.GetOutput(dataflow, config)
+	if err != nil {
+		log.Error().Msgf("error in security %s", err)
+		return
+	}
+
+	if config.Client != nil {
+		var meta *Meta
+		meta, err = getMeta(config)
+		if err != nil {
+			log.Error().Msgf("couldn't get meta for repo %s", err)
+			meta = &Meta{
+				Target: config.Scan.Target,
+			}
+		}
+
+		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, dataflow)
+		if err != nil {
+			log.Error().Msgf("error creating report %s", err)
+		}
+
+		defer os.RemoveAll(*tmpDir)
+
+		err = sendReportToBearer(config.Client, meta, filename)
+
+		if err != nil {
+			log.Error().Msgf("error sending report to Bearer")
 		}
 	}
 
-	foundLanguages := make(map[string]bool)
-	for _, language := range inputgocloc.Languages {
-		foundLanguages[strings.ToLower(language.Name)] = true
+	return
+}
+
+func sendReportToBearer(client *api.API, meta *Meta, filename *string) error {
+	fileUploadOffer, err := s3.UploadS3(&s3.UploadRequestS3{
+		Api:             client,
+		FilePath:        *filename,
+		FilePrefix:      "bearer_security_report",
+		ContentType:     "application/json",
+		ContentEncoding: "gzip",
+	})
+	if err != nil {
+		return err
+	}
+
+	meta.SignedID = fileUploadOffer.SignedID
+
+	err = client.ScanFinished(meta)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func createBearerGzipFileReport(
+	config settings.Config,
+	meta *Meta,
+	securityResults *security.Results,
+	dataflow *dataflow.DataFlow,
+) (*string, *string, error) {
+	tempDir, err := os.MkdirTemp("", "reports")
+	if err != nil {
+		return nil, nil, err
+	}
+
+	file, err := os.CreateTemp(tempDir, "security-*.json.gz")
+	if err != nil {
+		return &tempDir, nil, err
+	}
+
+	files := getDiscoveredFiles(config)
+
+	content, _ := ReportJSON(&BearerReport{
+		Findings:   securityResults,
+		DataTypes:  &dataflow.Datatypes,
+		Components: &dataflow.Components,
+		Files:      files,
+		Meta:       *meta,
+	})
+
+	gzWriter := gzip.NewWriter(file)
+	_, err = gzWriter.Write([]byte(*content))
+	if err != nil {
+		return nil, nil, err
+	}
+	gzWriter.Close()
+
+	filename := file.Name()
+
+	return &tempDir, &filename, nil
+}
+
+func getMeta(config settings.Config) (*Meta, error) {
+	sha, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "HEAD").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
+	}
+
+	currentBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "HEAD").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
+	}
+
+	defaultBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
+	}
+
+	output, err := exec.Command("git", "-C", config.Scan.Target, "remote", "get-url", "origin").Output()
+	if err != nil {
+		log.Error().Msgf("couldn't get git info %s", err)
+		return nil, err
 	}
 
 	// typescript includes tsx, javascript includes jsx
@@ -203,17 +301,44 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		if found {
 			return true, nil
 		}
+	info, err := vcsurl.Parse(strings.TrimSuffix(string(output), "\n"))
+	if err != nil {
+		log.Error().Msgf("couldn't parse url %s", err)
+		return nil, err
 	}
 
-	log.Debug().Msgf("No language found for which rules are applicable, found languages %#v", foundLanguages)
-	return false, nil
+	return &Meta{
+		ID:            info.ID,
+		Host:          string(info.Host),
+		Username:      info.Username,
+		Name:          info.Name,
+		FullName:      info.FullName,
+		URL:           info.Raw,
+		Target:        config.Scan.Target,
+		SHA:           strings.TrimSuffix(string(sha), "\n"),
+		CurrentBranch: strings.TrimSuffix(string(currentBranch), "\n"),
+		DefaultBranch: strings.TrimPrefix(strings.TrimSuffix(string(defaultBranch), "\n"), "origin/"),
+	}, nil
 }
 
-func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
-	dataflowOutput, err := getDataflow(report, config, true)
-	if err != nil {
-		return
-	}
+type Meta struct {
+	ID            string `json:"id" yaml:"id"`
+	Host          string `json:"host" yaml:"host"`
+	Username      string `json:"username" yaml:"username"`
+	Name          string `json:"name" yaml:"name"`
+	URL           string `json:"url" yaml:"url"`
+	FullName      string `json:"full_name" yaml:"full_name"`
+	Target        string `json:"target" yaml:"target"`
+	SHA           string `json:"sha" yaml:"sha"`
+	CurrentBranch string `json:"current_branch" yaml:"current_branch"`
+	DefaultBranch string `json:"default_branch" yaml:"default_branch"`
+	SignedID      string `json:"signed_id,omitempty" yaml:"signed_id,omitempty"`
+}
 
-	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput, config)
+type BearerReport struct {
+	Meta       Meta                          `json:"meta" yaml:"meta"`
+	Findings   *map[string][]security.Result `json:"findings" yaml:"findings"`
+	DataTypes  *dataflow.DataTypes           `json:"data_types" yaml:"data_types"`
+	Components *dataflow.Components          `json:"components" yaml:"components"`
+	Files      []string                      `json:"files" yaml:"files"`
 }

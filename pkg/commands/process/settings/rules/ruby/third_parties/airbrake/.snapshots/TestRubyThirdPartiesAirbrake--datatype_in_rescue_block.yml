@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: Airbrake.notify_sync(current_user.first_name)
-
+      snippet: Airbrake.notify_sync(current_user.first_name)
+      fingerprint: 55ed772dba85c4d7f47d2a87f26fe57a_0
 

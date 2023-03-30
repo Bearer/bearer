@@ -8,9 +8,9 @@ low:
       line_number: 3
       filename: unsecure.js
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         jwt.sign({ foo: "bar" }, process.env.JWT_SECRET, {
         	algorithm: "none",
         })
-
+      fingerprint: a9ee605621c71f1b5acba0c3b6d8feca_0
 

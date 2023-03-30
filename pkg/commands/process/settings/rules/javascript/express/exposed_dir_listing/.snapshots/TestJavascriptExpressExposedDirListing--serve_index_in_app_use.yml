@@ -8,6 +8,6 @@ low:
       line_number: 9
       filename: serve_index_in_app_use.js
       parent_line_number: 9
-      parent_content: app.use("/public", serveIndex(__dirname + "files"))
-
+      snippet: app.use("/public", serveIndex(__dirname + "files"))
+      fingerprint: efd43e5683e7db7fda30a3a810ebcabb_0
 

@@ -8,11 +8,12 @@ medium:
       line_number: 1
       filename: unsafe.rb
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         if request.get?
         else
           change_state
         end
+      fingerprint: 321bd706c0672870ab92a7e6107bf90d_0
     - rule:
         cwe_ids:
             - "650"
@@ -22,7 +23,8 @@ medium:
       line_number: 6
       filename: unsafe.rb
       parent_line_number: 6
-      parent_content: change_state unless request.get?
+      snippet: change_state unless request.get?
+      fingerprint: 321bd706c0672870ab92a7e6107bf90d_1
     - rule:
         cwe_ids:
             - "650"
@@ -32,9 +34,9 @@ medium:
       line_number: 8
       filename: unsafe.rb
       parent_line_number: 8
-      parent_content: |-
+      snippet: |-
         unless request.get?
           change_state
         end
-
+      fingerprint: 321bd706c0672870ab92a7e6107bf90d_2
 

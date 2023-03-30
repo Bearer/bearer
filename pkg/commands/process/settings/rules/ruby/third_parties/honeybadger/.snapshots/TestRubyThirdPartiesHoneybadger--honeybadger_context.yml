@@ -10,10 +10,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Honeybadger.context({
           tags: tags
         })
+      fingerprint: 2a45f28c5674d44e38bfeec519c6ab39_0
     - rule:
         cwe_ids:
             - "201"
@@ -40,9 +41,9 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: |-
+      snippet: |-
         Honeybadger.context({
           my_data: current_user.email
         })
-
+      fingerprint: 2a45f28c5674d44e38bfeec519c6ab39_1
 

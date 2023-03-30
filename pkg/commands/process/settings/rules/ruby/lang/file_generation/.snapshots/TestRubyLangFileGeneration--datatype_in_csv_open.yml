@@ -11,12 +11,13 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: |-
+      snippet: |-
         csv << [
         			user.email,
         			user.first_name,
         			user.last_name
         		]
+      fingerprint: 8bd0e497c50734bec32b81e68648901d_0
     - rule:
         cwe_ids:
             - "532"
@@ -29,12 +30,13 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: |-
+      snippet: |-
         csv << [
         			user.email,
         			user.first_name,
         			user.last_name
         		]
+      fingerprint: 8bd0e497c50734bec32b81e68648901d_1
     - rule:
         cwe_ids:
             - "532"
@@ -47,11 +49,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: |-
+      snippet: |-
         csv << [
         			user.email,
         			user.first_name,
         			user.last_name
         		]
-
+      fingerprint: 8bd0e497c50734bec32b81e68648901d_2
 

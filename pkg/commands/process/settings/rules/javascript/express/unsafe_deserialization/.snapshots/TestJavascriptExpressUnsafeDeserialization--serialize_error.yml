@@ -8,10 +8,10 @@ high:
       line_number: 4
       filename: serialize_error.js
       parent_line_number: 4
-      parent_content: |-
+      snippet: |-
         deserializeError({
             name: "MyCustomError",
             message: req.params.error
           })
-
+      fingerprint: 6a5dfee75fcbe696dcfb98d2c9f41309_0
 

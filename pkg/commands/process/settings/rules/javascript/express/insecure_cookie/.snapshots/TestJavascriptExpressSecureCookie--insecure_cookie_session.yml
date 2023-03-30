@@ -9,6 +9,6 @@ low:
       line_number: 13
       filename: insecure_cookie_session.js
       parent_line_number: 13
-      parent_content: 'httpOnly: true'
-
+      snippet: 'httpOnly: true'
+      fingerprint: f1043a5d5d5062f66a3ce0d67fa3a9c8_0
 

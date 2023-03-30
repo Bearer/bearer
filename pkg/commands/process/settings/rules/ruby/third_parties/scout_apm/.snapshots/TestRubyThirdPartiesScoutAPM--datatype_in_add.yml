@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'ScoutApm::Context.add({ user: { first_name: "someone" }})'
-
+      snippet: 'ScoutApm::Context.add({ user: { first_name: "someone" }})'
+      fingerprint: 66f1a9c771e9bd75144ddcc8338ecb65_0
 

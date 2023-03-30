@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 8
-      parent_content: Net::FTP.new("ftp.ruby-lang.org")
-
+      snippet: Net::FTP.new("ftp.ruby-lang.org")
+      fingerprint: 062194ccfa9c06ad0d4e9904900e3877_0
 

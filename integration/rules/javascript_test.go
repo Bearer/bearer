@@ -206,6 +206,11 @@ func TestJavascriptThirdPartySentry(t *testing.T) {
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/sentry")
 }
 
+func TestJavascriptThirdPartyOpenAI(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/openai")
+}
+
 func TestJavascriptGTM(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/google_tag_manager")

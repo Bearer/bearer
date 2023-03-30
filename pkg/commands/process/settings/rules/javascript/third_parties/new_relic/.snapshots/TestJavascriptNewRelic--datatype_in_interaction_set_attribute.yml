@@ -10,9 +10,10 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         newrelic.interaction()
             .setAttribute("username", user.first_name)
+      fingerprint: 7a41ad36631310b51dcd7d9dbaa35032_0
     - rule:
         cwe_ids:
             - "201"
@@ -24,10 +25,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         newrelic.interaction()
             .setAttribute("username", user.first_name)
             .setAttribute("postal-code", user.post_code)
+      fingerprint: 7a41ad36631310b51dcd7d9dbaa35032_1
     - rule:
         cwe_ids:
             - "201"
@@ -39,6 +41,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 13
-      parent_content: interaction.setAttribute("email", user.email_address)
-
+      snippet: interaction.setAttribute("email", user.email_address)
+      fingerprint: 7a41ad36631310b51dcd7d9dbaa35032_2
 

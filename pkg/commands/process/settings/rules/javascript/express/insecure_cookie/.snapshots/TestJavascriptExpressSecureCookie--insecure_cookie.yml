@@ -9,6 +9,6 @@ low:
       line_number: 13
       filename: insecure_cookie.js
       parent_line_number: 13
-      parent_content: 'secure: false'
-
+      snippet: 'secure: false'
+      fingerprint: 3ac343dca7dba133306532aab2d23303_0
 

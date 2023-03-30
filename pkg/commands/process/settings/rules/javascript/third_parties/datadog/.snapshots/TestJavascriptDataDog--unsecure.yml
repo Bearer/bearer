@@ -24,4 +24,3 @@ medium:
       parent_line_number: 11
       parent_content: client.event("user", "logged_in", {}, user)
 
-

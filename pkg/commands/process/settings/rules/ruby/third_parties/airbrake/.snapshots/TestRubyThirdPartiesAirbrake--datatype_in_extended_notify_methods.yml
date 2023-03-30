@@ -10,13 +10,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_request_sync(
           method: 'GET',
           route: "/users/#{user.first_name}",
           status_code: 200,
           timing: 123.45 # ms
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_0
     - rule:
         cwe_ids:
             - "201"
@@ -28,13 +29,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_request(
           method: 'GET',
           route: "/users/#{user.first_name}",
           status_code: 200,
           timing: 123.45 # ms
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_1
     - rule:
         cwe_ids:
             - "201"
@@ -46,13 +48,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 15
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_request_sync(
           {
             current_user: current_user.email
           },
           request_id: 123
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_2
     - rule:
         cwe_ids:
             - "201"
@@ -64,13 +67,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 21
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_request(
           {
             current_user: current_user.email
           },
           request_id: 123
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_3
     - rule:
         cwe_ids:
             - "201"
@@ -82,12 +86,13 @@ medium:
       category_groups:
         - PII
       parent_line_number: 29
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_query_sync(
           method: 'GET',
           route: "/users/#{user.first_name}",
           query: 'SELECT * FROM foos'
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_4
     - rule:
         cwe_ids:
             - "201"
@@ -99,12 +104,13 @@ medium:
       category_groups:
         - PII
       parent_line_number: 34
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_query(
           method: 'GET',
           route: "/users/#{user.first_name}",
           query: 'SELECT * FROM foos'
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_5
     - rule:
         cwe_ids:
             - "201"
@@ -116,13 +122,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 41
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_query_sync(
           {
             user: user.email
           },
           request_id: 123
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_6
     - rule:
         cwe_ids:
             - "201"
@@ -134,13 +141,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 47
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_query(
           {
             user: user.email
           },
           request_id: 123
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_7
     - rule:
         cwe_ids:
             - "201"
@@ -152,7 +160,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 55
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_performance_breakdown_sync(
           method: 'GET',
           route: "/users/#{user.first_name}",
@@ -160,6 +168,7 @@ medium:
           groups: { db: 24.0, view: 0.4 }, # ms
           timing: 123.45 # ms
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_8
     - rule:
         cwe_ids:
             - "201"
@@ -171,7 +180,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 62
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_performance_breakdown(
           method: 'GET',
           route: "/users/#{user.first_name}",
@@ -179,6 +188,7 @@ medium:
           groups: { db: 24.0, view: 0.4 }, # ms
           timing: 123.45 # ms
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_9
     - rule:
         cwe_ids:
             - "201"
@@ -190,13 +200,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 71
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_performance_breakdown_sync(
           {
             user: user.email
           },
           request_id: 123
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_10
     - rule:
         cwe_ids:
             - "201"
@@ -208,13 +219,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 77
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_performance_breakdown(
           {
             user: user.email
           },
           request_id: 123
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_11
     - rule:
         cwe_ids:
             - "201"
@@ -226,13 +238,14 @@ medium:
       category_groups:
         - PII
       parent_line_number: 99
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_queue_sync(
           {
             user: user.email
           },
           job_id: 123
         )
+      fingerprint: 654d287d82e1a9f50507615518322598_12
     - rule:
         cwe_ids:
             - "201"
@@ -244,12 +257,12 @@ medium:
       category_groups:
         - PII
       parent_line_number: 105
-      parent_content: |-
+      snippet: |-
         Airbrake.notify_queue(
           {
             user: user.email
           },
           job_id: 123
         )
-
+      fingerprint: 654d287d82e1a9f50507615518322598_13
 

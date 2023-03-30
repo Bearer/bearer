@@ -10,7 +10,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: raise CustomException.new(current_user.email)
+      snippet: raise CustomException.new(current_user.email)
+      fingerprint: 02be5ec2c7eec8f0fc5d5702261840b7_0
     - rule:
         cwe_ids:
             - "201"
@@ -22,7 +23,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: |-
+      snippet: |-
         Bugsnag.notify(exception) do |event|
           # Adjust the severity of this error
           event.severity = "warning"
@@ -33,5 +34,5 @@ medium:
             paying_customer: true
           })
         end
-
+      fingerprint: 8f4bc0979b8968f60b68e22d090d8ae2_0
 

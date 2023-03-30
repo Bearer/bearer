@@ -10,10 +10,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: |-
+      snippet: |-
         Tracer.in_span("data leaking", attributes: { "current_user" => user.email, "date" => DateTime.now }) do |span|
           puts "in the span block"
         end
+      fingerprint: 97f3848384c820a585765b7b2911aa39_0
     - rule:
         cwe_ids:
             - "201"
@@ -25,10 +26,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: |-
+      snippet: |-
         SomeOtherTracer.in_span("data leaking", attributes: { "current_user" => user.email, "date" => DateTime.now }) do |span|
           span.add_attributes(user.email)
         end
+      fingerprint: 97f3848384c820a585765b7b2911aa39_1
     - rule:
         cwe_ids:
             - "201"
@@ -40,7 +42,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: span.add_attributes(user.email)
+      snippet: span.add_attributes(user.email)
+      fingerprint: 97f3848384c820a585765b7b2911aa39_2
     - rule:
         cwe_ids:
             - "201"
@@ -52,6 +55,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 11
-      parent_content: 'span.add_event("leaking data for #{user.email}")'
-
+      snippet: 'span.add_event("leaking data for #{user.email}")'
+      fingerprint: 97f3848384c820a585765b7b2911aa39_3
 

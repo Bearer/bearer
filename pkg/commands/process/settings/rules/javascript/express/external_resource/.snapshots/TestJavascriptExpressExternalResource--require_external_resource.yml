@@ -8,6 +8,6 @@ low:
       line_number: 10
       filename: require_external_resource.js
       parent_line_number: 10
-      parent_content: require(req.query.user.path)
-
+      snippet: require(req.query.user.path)
+      fingerprint: 243b0f1b2464343e18b09e3adb02d4fa_0
 

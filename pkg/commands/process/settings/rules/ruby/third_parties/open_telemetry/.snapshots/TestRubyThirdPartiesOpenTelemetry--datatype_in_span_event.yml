@@ -10,7 +10,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: 'span.add_event("Schedule job for user: #{current_user.email}")'
+      snippet: 'span.add_event("Schedule job for user: #{current_user.email}")'
+      fingerprint: 6ae11b1b1d090097d245e6960dc3df0a_0
     - rule:
         cwe_ids:
             - "201"
@@ -22,9 +23,9 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         span.add_event("Cancel job for user", attributes: {
           "current_user" => current_user.email
         })
-
+      fingerprint: 6ae11b1b1d090097d245e6960dc3df0a_1
 

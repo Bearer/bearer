@@ -10,9 +10,9 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Google::Apis::AnalyticsreportingV4::EventData.new(
           event_label: "Sign in #{customer.ip_address}"
         )
-
+      fingerprint: 075e7f22e62482f82cdd1e6e551c67b3_0
 

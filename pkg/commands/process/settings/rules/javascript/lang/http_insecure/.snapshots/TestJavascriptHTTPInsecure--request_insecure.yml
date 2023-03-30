@@ -8,6 +8,6 @@ low:
       line_number: 5
       filename: request_insecure.js
       parent_line_number: 5
-      parent_content: xhttp.open("GET", insecure_url, true)
-
+      snippet: xhttp.open("GET", insecure_url, true)
+      fingerprint: 9caf1c625e8510eae24dfdf3445f074a_0
 

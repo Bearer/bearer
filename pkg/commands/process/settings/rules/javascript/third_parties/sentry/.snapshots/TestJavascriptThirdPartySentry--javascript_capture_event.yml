@@ -10,12 +10,12 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: |-
+      snippet: |-
         Sentry.captureEvent({
           message: "user successfully logged in " + current_user.email,
           stacktrace: [
             // ...
           ],
         })
-
+      fingerprint: dbc1820c858ccc475532ff6c93ac1abe_0
 

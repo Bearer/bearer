@@ -8,6 +8,6 @@ low:
       line_number: 7
       filename: require_destructured_resource.js
       parent_line_number: 7
-      parent_content: require(path)
-
+      snippet: require(path)
+      fingerprint: 51966377a661b135eca899b43ac2c343_0
 

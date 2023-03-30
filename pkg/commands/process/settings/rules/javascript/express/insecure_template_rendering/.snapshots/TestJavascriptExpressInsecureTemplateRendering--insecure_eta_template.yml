@@ -8,6 +8,6 @@ low:
       line_number: 12
       filename: insecure_eta_template.js
       parent_line_number: 12
-      parent_content: 'Eta.render(req.params, { name: "insecure" })'
-
+      snippet: 'Eta.render(req.params, { name: "insecure" })'
+      fingerprint: c480cdfce4e8383eacfbe5e53bb95e0d_0
 

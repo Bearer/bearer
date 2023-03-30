@@ -8,10 +8,11 @@ high:
       line_number: 12
       filename: mysql2_sql_injection.js
       parent_line_number: 12
-      parent_content: |-
+      snippet: |-
         connection.query(
         		"SELECT * FROM `user` WHERE name = " + req.params.customer.name
         	)
+      fingerprint: 6ab447a0217cef645dfc88f86abb0c3a_0
     - rule:
         cwe_ids:
             - "89"
@@ -21,11 +22,12 @@ high:
       line_number: 18
       filename: mysql2_sql_injection.js
       parent_line_number: 18
-      parent_content: |-
+      snippet: |-
         pool.query(
         		"SELECT * FROM users WHERE name = " + req.params.user_name,
         		function () {}
         	)
+      fingerprint: 6ab447a0217cef645dfc88f86abb0c3a_1
     - rule:
         cwe_ids:
             - "89"
@@ -35,6 +37,6 @@ high:
       line_number: 23
       filename: mysql2_sql_injection.js
       parent_line_number: 23
-      parent_content: conn.query("SELECT * FROM users WHERE name = " + req.params.user_name, function () {})
-
+      snippet: conn.query("SELECT * FROM users WHERE name = " + req.params.user_name, function () {})
+      fingerprint: 6ab447a0217cef645dfc88f86abb0c3a_2
 

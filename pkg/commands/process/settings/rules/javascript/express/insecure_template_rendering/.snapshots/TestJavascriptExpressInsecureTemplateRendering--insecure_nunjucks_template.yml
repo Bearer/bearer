@@ -8,7 +8,8 @@ low:
       line_number: 11
       filename: insecure_nunjucks_template.js
       parent_line_number: 11
-      parent_content: nunjucks.render(req.params.body)
+      snippet: nunjucks.render(req.params.body)
+      fingerprint: ee737993ece149bb0dea94ff3b80bb5e_0
     - rule:
         cwe_ids:
             - "1336"
@@ -18,6 +19,6 @@ low:
       line_number: 12
       filename: insecure_nunjucks_template.js
       parent_line_number: 12
-      parent_content: nunjucks.renderString(req.params.body)
-
+      snippet: nunjucks.renderString(req.params.body)
+      fingerprint: ee737993ece149bb0dea94ff3b80bb5e_1
 

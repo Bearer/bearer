@@ -10,9 +10,9 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Rollbar.scoped(scope) do
           call
         end
-
+      fingerprint: f66c7d4bc87dc6e3563ce8b39e54722c_0
 

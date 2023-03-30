@@ -326,3 +326,18 @@ func ReadFileSingleLine(filePath string, lineNumber int) (string, error) {
 
 	return "", nil
 }
+
+func GetFullFilename(path string, filename string) string {
+	path = strings.TrimSuffix(path, "/")
+	filename = strings.TrimPrefix(filename, "/")
+
+	if filename == "." {
+		return path
+	}
+
+	if path == "" || path == "." {
+		return filename
+	}
+
+	return path + "/" + filename
+}

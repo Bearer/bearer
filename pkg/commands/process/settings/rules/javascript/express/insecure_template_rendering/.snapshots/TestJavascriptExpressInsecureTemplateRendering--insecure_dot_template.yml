@@ -8,6 +8,6 @@ low:
       line_number: 11
       filename: insecure_dot_template.js
       parent_line_number: 11
-      parent_content: doT.template(req.params.template)
-
+      snippet: doT.template(req.params.template)
+      fingerprint: 0f8f283606c409ca80b84f947751fc31_0
 

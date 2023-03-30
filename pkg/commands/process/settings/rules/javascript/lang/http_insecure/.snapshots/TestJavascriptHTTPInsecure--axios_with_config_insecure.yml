@@ -8,6 +8,6 @@ low:
       line_number: 7
       filename: axios_with_config_insecure.js
       parent_line_number: 7
-      parent_content: axios(config)
-
+      snippet: axios(config)
+      fingerprint: 1be5d457d984a1bd5304c976abece8e7_0
 

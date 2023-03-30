@@ -11,7 +11,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: console.log(user.name)
+      snippet: console.log(user.name)
+      fingerprint: 907f568d6d401d24176f4ad514eba094_0
     - rule:
         cwe_ids:
             - "1295"
@@ -24,6 +25,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: console.log("user email is", user.email)
-
+      snippet: console.log("user email is", user.email)
+      fingerprint: 907f568d6d401d24176f4ad514eba094_1
 

@@ -8,6 +8,6 @@ high:
       line_number: 6
       filename: sequelize_sql_injection.js
       parent_line_number: 6
-      parent_content: sqlite.query(customerQuery)
-
+      snippet: sqlite.query(customerQuery)
+      fingerprint: 75c54fdb8ef95220030c12d02f1f3220_0
 

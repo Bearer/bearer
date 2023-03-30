@@ -31,6 +31,7 @@ Ready to dive in? Bearer's [scanners](/explanations/scanners/) and [reports](/ex
 
 Guides help you make the most of Bearer so you can get up and running quickly.
 
+- [Configure the scan command](/guides/configure-scan/)
 - [GitHub action integration](/guides/github-action/)
 - [Create custom rule](/guides/custom-rule/)
 

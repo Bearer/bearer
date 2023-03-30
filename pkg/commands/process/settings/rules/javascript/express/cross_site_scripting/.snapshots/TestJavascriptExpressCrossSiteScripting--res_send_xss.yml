@@ -8,7 +8,8 @@ high:
       line_number: 9
       filename: res_send_xss.js
       parent_line_number: 9
-      parent_content: res.send("<p>" + req.body.customer.name + "</p>")
+      snippet: res.send("<p>" + req.body.customer.name + "</p>")
+      fingerprint: 3eb1f59479c43941dd36d28f3c33335b_0
     - rule:
         cwe_ids:
             - "79"
@@ -18,6 +19,6 @@ high:
       line_number: 13
       filename: res_send_xss.js
       parent_line_number: 13
-      parent_content: res.send("<p>" + req.body["user_id"] + "</p>")
-
+      snippet: res.send("<p>" + req.body["user_id"] + "</p>")
+      fingerprint: 3eb1f59479c43941dd36d28f3c33335b_1
 

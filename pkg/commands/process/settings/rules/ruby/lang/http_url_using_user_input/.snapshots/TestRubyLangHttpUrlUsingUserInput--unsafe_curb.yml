@@ -8,9 +8,10 @@ high:
       line_number: 3
       filename: unsafe_curb.rb
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Curl.http("GET", params[:oops], nil) do
         end
+      fingerprint: da818badaa39c626cb60c11f307ce208_0
     - rule:
         cwe_ids:
             - "918"
@@ -20,7 +21,8 @@ high:
       line_number: 6
       filename: unsafe_curb.rb
       parent_line_number: 6
-      parent_content: Curl.get(params[:oops]) {}
+      snippet: Curl.get(params[:oops]) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_1
     - rule:
         cwe_ids:
             - "918"
@@ -30,7 +32,8 @@ high:
       line_number: 8
       filename: unsafe_curb.rb
       parent_line_number: 8
-      parent_content: Curl::Easy.perform(params[:oops]) {}
+      snippet: Curl::Easy.perform(params[:oops]) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_2
     - rule:
         cwe_ids:
             - "918"
@@ -40,7 +43,8 @@ high:
       line_number: 10
       filename: unsafe_curb.rb
       parent_line_number: 10
-      parent_content: Curl::Easy.new(params[:oops]) {}
+      snippet: Curl::Easy.new(params[:oops]) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_3
     - rule:
         cwe_ids:
             - "918"
@@ -50,7 +54,8 @@ high:
       line_number: 11
       filename: unsafe_curb.rb
       parent_line_number: 11
-      parent_content: easy.url = params[:oops2]
+      snippet: easy.url = params[:oops2]
+      fingerprint: da818badaa39c626cb60c11f307ce208_4
     - rule:
         cwe_ids:
             - "918"
@@ -60,7 +65,8 @@ high:
       line_number: 14
       filename: unsafe_curb.rb
       parent_line_number: 14
-      parent_content: easy2.url = params[:oops]
+      snippet: easy2.url = params[:oops]
+      fingerprint: da818badaa39c626cb60c11f307ce208_5
     - rule:
         cwe_ids:
             - "918"
@@ -70,7 +76,8 @@ high:
       line_number: 16
       filename: unsafe_curb.rb
       parent_line_number: 16
-      parent_content: Curl::Multi.get(["https://my.api.com/secure", params[:oops]], {}) {}
+      snippet: Curl::Multi.get(["https://my.api.com/secure", params[:oops]], {}) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_6
     - rule:
         cwe_ids:
             - "918"
@@ -80,6 +87,6 @@ high:
       line_number: 18
       filename: unsafe_curb.rb
       parent_line_number: 18
-      parent_content: 'Curl::Multi.http([{ url: params[:oops], method: :post }]) {}'
-
+      snippet: 'Curl::Multi.http([{ url: params[:oops], method: :post }]) {}'
+      fingerprint: da818badaa39c626cb60c11f307ce208_7
 

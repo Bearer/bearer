@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: scope.setExtra("email", user.email)
-
+      snippet: scope.setExtra("email", user.email)
+      fingerprint: a6fd582e471d3774ceb8dbda2fcf2175_0
 

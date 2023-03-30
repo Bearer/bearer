@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: 'Google::Apis::AnalyticsreportingV4::Cohort.new(name: user.zip_code)'
-
+      snippet: 'Google::Apis::AnalyticsreportingV4::Cohort.new(name: user.zip_code)'
+      fingerprint: c9615be200b57cab74a98d8d7fa5396c_0
 

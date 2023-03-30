@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: |-
+      snippet: |-
         analytics.page({
           userId: customer.id,
           category: "Shopping Cart",
@@ -18,5 +18,5 @@ medium:
             path: "/cart/"+customer.bank_account_number
           },
         })
-
+      fingerprint: 3ff19e836f9a7304eb136ee1444282f4_0
 

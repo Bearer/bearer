@@ -10,9 +10,9 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Elasticsearch::Client
           .new
           .update(index: 'books', id: 42, body: user)
-
+      fingerprint: 14caa9419cabbc50d6978ba071e035b6_0
 

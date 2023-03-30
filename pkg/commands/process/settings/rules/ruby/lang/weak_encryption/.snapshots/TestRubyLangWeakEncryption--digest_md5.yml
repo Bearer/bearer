@@ -9,6 +9,6 @@ low:
       line_number: 1
       filename: digest_md5.rb
       parent_line_number: 1
-      parent_content: Digest::MD5.hexdigest("hello world")
-
+      snippet: Digest::MD5.hexdigest("hello world")
+      fingerprint: e9527c9be379afd118be1e43fdda5ae7_0
 

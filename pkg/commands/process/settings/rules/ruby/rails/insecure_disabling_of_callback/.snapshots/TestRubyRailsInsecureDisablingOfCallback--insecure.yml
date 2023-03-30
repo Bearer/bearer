@@ -8,6 +8,6 @@ low:
       line_number: 2
       filename: insecure.rb
       parent_line_number: 2
-      parent_content: 'skip_before_action :access_control, except: :secure'
-
+      snippet: 'skip_before_action :access_control, except: :secure'
+      fingerprint: 9c7d374d392582c919a7192ca9066db3_0
 

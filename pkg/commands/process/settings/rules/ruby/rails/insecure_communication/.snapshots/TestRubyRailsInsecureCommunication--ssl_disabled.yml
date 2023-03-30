@@ -10,6 +10,6 @@ high:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: config.force_ssl = false
-
+      snippet: config.force_ssl = false
+      fingerprint: ea6b0d76dcceca2c13b5fcfde6687545_0
 

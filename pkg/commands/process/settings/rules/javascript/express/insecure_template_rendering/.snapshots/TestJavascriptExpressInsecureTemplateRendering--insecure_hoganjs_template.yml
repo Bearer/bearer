@@ -8,6 +8,6 @@ low:
       line_number: 13
       filename: insecure_hoganjs_template.js
       parent_line_number: 13
-      parent_content: 'Hogan.compile(template, { name: "insecure" })'
-
+      snippet: 'Hogan.compile(template, { name: "insecure" })'
+      fingerprint: cfa6f91ee78560eda9ce58135d63419d_0
 

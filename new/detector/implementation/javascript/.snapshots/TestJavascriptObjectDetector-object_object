@@ -1,0 +1,75 @@
+- position: "1:5"
+  content: 'nested = { "a": 123 }'
+  data:
+    properties:
+        - name: nested
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+    isvirtual: true
+- position: "3:6"
+  content: |-
+    {
+      x: { n: nested },
+      y: { b: 4 }
+    }
+  data:
+    properties:
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: nested
+                                  node: {}
+                                  object:
+                                    detectortype: object
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: a
+                                              node: {}
+                                              object: null
+                                        isvirtual: false
+                            isvirtual: true
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+        - name: "y"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: b
+                      node: {}
+                      object: null
+                isvirtual: false
+    isvirtual: false
+

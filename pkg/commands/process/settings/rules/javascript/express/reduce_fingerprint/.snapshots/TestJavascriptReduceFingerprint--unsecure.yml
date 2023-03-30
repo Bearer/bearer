@@ -8,7 +8,8 @@ low:
       line_number: 4
       filename: unsecure.js
       parent_line_number: 4
-      parent_content: express()
+      snippet: express()
+      fingerprint: 11025b35d18975e9334681b65859fe26_0
     - rule:
         cwe_ids:
             - "693"
@@ -18,6 +19,6 @@ low:
       line_number: 4
       filename: unsecure.js
       parent_line_number: 4
-      parent_content: express()
-
+      snippet: express()
+      fingerprint: 2b159b374c0927680a0bff40b713473f_0
 

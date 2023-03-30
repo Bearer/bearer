@@ -10,7 +10,8 @@ high:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: connection.query("SELECT * FROM `user` WHERE name = " + event.customer.name)
+      snippet: connection.query("SELECT * FROM `user` WHERE name = " + event.customer.name)
+      fingerprint: 9f7eccaaec01b46a27078996b374cf28_0
     - rule:
         cwe_ids:
             - "89"
@@ -22,7 +23,8 @@ high:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: asyncConn.execute("SELECT * FROM `admin_users` WHERE ID = " + event.admin.id)
+      snippet: asyncConn.execute("SELECT * FROM `admin_users` WHERE ID = " + event.admin.id)
+      fingerprint: 9f7eccaaec01b46a27078996b374cf28_1
     - rule:
         cwe_ids:
             - "89"
@@ -34,10 +36,11 @@ high:
       category_groups:
         - PII
       parent_line_number: 11
-      parent_content: |-
+      snippet: |-
         pool.query("SELECT * FROM users WHERE name = " + event.user_name, function() {
             // do something
           })
+      fingerprint: 9f7eccaaec01b46a27078996b374cf28_2
     - rule:
         cwe_ids:
             - "89"
@@ -49,9 +52,9 @@ high:
       category_groups:
         - PII
       parent_line_number: 15
-      parent_content: |-
+      snippet: |-
         conn.query("SELECT * FROM users WHERE name = " + event.user_name, function() {
               // do something
             })
-
+      fingerprint: 9f7eccaaec01b46a27078996b374cf28_3
 

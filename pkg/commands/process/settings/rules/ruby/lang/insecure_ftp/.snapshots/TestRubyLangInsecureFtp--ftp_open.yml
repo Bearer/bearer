@@ -8,12 +8,12 @@ low:
       line_number: 3
       filename: ftp_open.rb
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Net::FTP.open("example.com") do |ftp|
           ftp.login
           files = ftp.chdir('pub/lang/ruby/contrib')
           files = ftp.list('n*')
           ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
         end
-
+      fingerprint: b8e9482850ee7c7a95a458362e2f224d_0
 

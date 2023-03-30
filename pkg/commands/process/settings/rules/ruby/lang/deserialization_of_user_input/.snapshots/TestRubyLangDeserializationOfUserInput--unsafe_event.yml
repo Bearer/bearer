@@ -8,7 +8,8 @@ high:
       line_number: 2
       filename: unsafe_event.rb
       parent_line_number: 2
-      parent_content: YAML.load(event["oops"])
+      snippet: YAML.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_0
     - rule:
         cwe_ids:
             - "502"
@@ -18,7 +19,8 @@ high:
       line_number: 4
       filename: unsafe_event.rb
       parent_line_number: 4
-      parent_content: Psych.load(event["oops"])
+      snippet: Psych.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_1
     - rule:
         cwe_ids:
             - "502"
@@ -28,7 +30,8 @@ high:
       line_number: 6
       filename: unsafe_event.rb
       parent_line_number: 6
-      parent_content: Syck.load(event["oops"])
+      snippet: Syck.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_2
     - rule:
         cwe_ids:
             - "502"
@@ -38,7 +41,8 @@ high:
       line_number: 8
       filename: unsafe_event.rb
       parent_line_number: 8
-      parent_content: JSON.load(event["oops"])
+      snippet: JSON.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_3
     - rule:
         cwe_ids:
             - "502"
@@ -48,7 +52,8 @@ high:
       line_number: 10
       filename: unsafe_event.rb
       parent_line_number: 10
-      parent_content: Oj.load(event["oops"])
+      snippet: Oj.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_4
     - rule:
         cwe_ids:
             - "502"
@@ -58,9 +63,10 @@ high:
       line_number: 11
       filename: unsafe_event.rb
       parent_line_number: 11
-      parent_content: |-
+      snippet: |-
         Oj.object_load(event["oops"]) do |json|
           end
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_5
     - rule:
         cwe_ids:
             - "502"
@@ -70,7 +76,8 @@ high:
       line_number: 14
       filename: unsafe_event.rb
       parent_line_number: 14
-      parent_content: Marshal.load(event["oops"])
+      snippet: Marshal.load(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_6
     - rule:
         cwe_ids:
             - "502"
@@ -80,6 +87,6 @@ high:
       line_number: 15
       filename: unsafe_event.rb
       parent_line_number: 15
-      parent_content: Marshal.restore(event["oops"])
-
+      snippet: Marshal.restore(event["oops"])
+      fingerprint: dbb27be331e8b9bdb9545f304d99c91f_7
 

@@ -10,6 +10,6 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 2
-      parent_content: 'msg.message_text = "Current user: #{user.ip_address}"'
-
+      snippet: 'msg.message_text = "Current user: #{user.ip_address}"'
+      fingerprint: 92ca3b9e39d089488a6b1ef23c30474f_0
 

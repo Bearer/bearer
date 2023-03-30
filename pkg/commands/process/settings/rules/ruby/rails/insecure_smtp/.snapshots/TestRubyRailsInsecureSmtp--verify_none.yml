@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 8
-      parent_content: 'openssl_verify_mode: "none"'
-
+      snippet: 'openssl_verify_mode: "none"'
+      fingerprint: 52686dc48c6602c724a86a7b5f88602e_0
 

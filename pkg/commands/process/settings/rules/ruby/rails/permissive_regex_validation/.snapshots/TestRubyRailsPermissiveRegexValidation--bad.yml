@@ -8,7 +8,8 @@ low:
       line_number: 1
       filename: bad.rb
       parent_line_number: 1
-      parent_content: 'validates :attr, format: { with: /^oops$/ }'
+      snippet: 'validates :attr, format: { with: /^oops$/ }'
+      fingerprint: b10eb35f3508bfdb6ca75d490a210426_0
     - rule:
         cwe_ids:
             - "625"
@@ -18,7 +19,8 @@ low:
       line_number: 2
       filename: bad.rb
       parent_line_number: 2
-      parent_content: 'validates :attr, format: { with: %r[oops] }'
+      snippet: 'validates :attr, format: { with: %r[oops] }'
+      fingerprint: b10eb35f3508bfdb6ca75d490a210426_1
     - rule:
         cwe_ids:
             - "625"
@@ -28,7 +30,8 @@ low:
       line_number: 3
       filename: bad.rb
       parent_line_number: 3
-      parent_content: 'validates :attr, format: { with: "\Aoops" }'
+      snippet: 'validates :attr, format: { with: "\Aoops" }'
+      fingerprint: b10eb35f3508bfdb6ca75d490a210426_2
     - rule:
         cwe_ids:
             - "625"
@@ -38,7 +41,8 @@ low:
       line_number: 4
       filename: bad.rb
       parent_line_number: 4
-      parent_content: 'validates :attr, format: { with: /oops\z/ }'
+      snippet: 'validates :attr, format: { with: /oops\z/ }'
+      fingerprint: b10eb35f3508bfdb6ca75d490a210426_3
     - rule:
         cwe_ids:
             - "625"
@@ -48,6 +52,6 @@ low:
       line_number: 6
       filename: bad.rb
       parent_line_number: 6
-      parent_content: 'validates_format_of :attr, with: ''^oops$'''
-
+      snippet: 'validates_format_of :attr, with: ''^oops$'''
+      fingerprint: b10eb35f3508bfdb6ca75d490a210426_4
 

@@ -10,7 +10,8 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 2
-      parent_content: 'custom_metadata.value = "ip: #{customer.ip_address}"'
+      snippet: 'custom_metadata.value = "ip: #{customer.ip_address}"'
+      fingerprint: efa4879db1e57a6eb4d1c3657cca1513_0
     - rule:
         cwe_ids:
             - "201"
@@ -22,7 +23,8 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 5
-      parent_content: 'template_metadata.description ="ip: #{customer.ip_address}"'
+      snippet: 'template_metadata.description ="ip: #{customer.ip_address}"'
+      fingerprint: efa4879db1e57a6eb4d1c3657cca1513_1
     - rule:
         cwe_ids:
             - "201"
@@ -34,6 +36,6 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 6
-      parent_content: 'template_metadata.name ="ip: #{customer.ip_address}"'
-
+      snippet: 'template_metadata.name ="ip: #{customer.ip_address}"'
+      fingerprint: efa4879db1e57a6eb4d1c3657cca1513_2
 

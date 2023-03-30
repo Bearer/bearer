@@ -8,7 +8,8 @@ low:
       line_number: 11
       filename: insecure_ejs_template.js
       parent_line_number: 11
-      parent_content: ejs.compile(req.body.user, options)
+      snippet: ejs.compile(req.body.user, options)
+      fingerprint: e77e3991805c5dddd3dbadf5173a120a_0
     - rule:
         cwe_ids:
             - "1336"
@@ -18,6 +19,6 @@ low:
       line_number: 16
       filename: insecure_ejs_template.js
       parent_line_number: 16
-      parent_content: ejs.render(req.params.name, data, options)
-
+      snippet: ejs.render(req.params.name, data, options)
+      fingerprint: e77e3991805c5dddd3dbadf5173a120a_1
 

@@ -8,7 +8,8 @@ medium:
       line_number: 4
       filename: insecure.js
       parent_line_number: 4
-      parent_content: window.location.href = myPath
+      snippet: window.location.href = myPath
+      fingerprint: 6e0ea50cad602d864fb0bd40211daba9_0
     - rule:
         cwe_ids:
             - "601"
@@ -18,6 +19,6 @@ medium:
       line_number: 5
       filename: insecure.js
       parent_line_number: 5
-      parent_content: location.href = myPath2
-
+      snippet: location.href = myPath2
+      fingerprint: 6e0ea50cad602d864fb0bd40211daba9_1
 

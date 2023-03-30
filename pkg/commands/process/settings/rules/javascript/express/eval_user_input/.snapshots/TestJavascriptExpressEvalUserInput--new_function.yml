@@ -9,6 +9,6 @@ high:
       line_number: 11
       filename: new_function.js
       parent_line_number: 11
-      parent_content: new Function(command)
-
+      snippet: new Function(command)
+      fingerprint: 1a3f60304bf0a691116875d6c12a647a_0
 

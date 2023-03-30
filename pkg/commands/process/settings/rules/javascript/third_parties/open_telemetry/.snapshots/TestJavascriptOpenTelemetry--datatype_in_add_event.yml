@@ -10,9 +10,9 @@ medium:
       category_groups:
         - PII
       parent_line_number: 4
-      parent_content: |-
+      snippet: |-
         currentSpan.addEvent('my-event', {
           'event.metadata': customer.emailAddress
         })
-
+      fingerprint: c07461857f570fe7124dbbff054fcfc5_0
 

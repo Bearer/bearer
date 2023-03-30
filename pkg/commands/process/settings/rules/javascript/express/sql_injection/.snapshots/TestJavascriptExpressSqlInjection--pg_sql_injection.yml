@@ -8,9 +8,9 @@ high:
       line_number: 8
       filename: pg_sql_injection.js
       parent_line_number: 8
-      parent_content: |-
+      snippet: |-
         client.query(
         		"SELECT * FROM users WHERE user.name = " + req.params.user.name
         	)
-
+      fingerprint: c586d90217bd23f25dd04b101a799cbd_0
 

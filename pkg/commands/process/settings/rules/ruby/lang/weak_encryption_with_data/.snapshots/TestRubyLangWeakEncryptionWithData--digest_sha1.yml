@@ -11,7 +11,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: Digest::SHA1.hexidigest(user.first_name)
+      snippet: Digest::SHA1.hexidigest(user.first_name)
+      fingerprint: 8658542c01100b6e2dce9f3c77b063e9_0
     - rule:
         cwe_ids:
             - "326"
@@ -24,6 +25,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: Digest::SHA1.hexidigest(user.first_name)
-
+      snippet: Digest::SHA1.hexidigest(user.first_name)
+      fingerprint: 8056e58f81bfa939820b2d79fbe3df34_0
 

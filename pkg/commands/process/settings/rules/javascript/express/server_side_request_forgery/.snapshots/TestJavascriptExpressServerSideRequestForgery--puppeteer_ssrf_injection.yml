@@ -8,7 +8,8 @@ high:
       line_number: 15
       filename: puppeteer_ssrf_injection.js
       parent_line_number: 15
-      parent_content: page.setContent(content)
+      snippet: page.setContent(content)
+      fingerprint: 318f87254f8f0e44e6139b5ef12abc3f_0
     - rule:
         cwe_ids:
             - "918"
@@ -18,6 +19,6 @@ high:
       line_number: 16
       filename: puppeteer_ssrf_injection.js
       parent_line_number: 16
-      parent_content: page.goto("https://" + req.query.path)
-
+      snippet: page.goto("https://" + req.query.path)
+      fingerprint: 318f87254f8f0e44e6139b5ef12abc3f_1
 

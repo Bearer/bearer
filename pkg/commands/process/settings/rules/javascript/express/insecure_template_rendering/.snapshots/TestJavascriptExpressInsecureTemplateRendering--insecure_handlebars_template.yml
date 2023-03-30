@@ -8,7 +8,8 @@ low:
       line_number: 12
       filename: insecure_handlebars_template.js
       parent_line_number: 12
-      parent_content: Handlebars.precompile(req.body.user, options)
+      snippet: Handlebars.precompile(req.body.user, options)
+      fingerprint: 4dfd8eaea7a8c770cafac211038919a1_0
     - rule:
         cwe_ids:
             - "1336"
@@ -18,6 +19,6 @@ low:
       line_number: 13
       filename: insecure_handlebars_template.js
       parent_line_number: 13
-      parent_content: Handlebars.compile(req.body.user, options)
-
+      snippet: Handlebars.compile(req.body.user, options)
+      fingerprint: 4dfd8eaea7a8c770cafac211038919a1_1
 

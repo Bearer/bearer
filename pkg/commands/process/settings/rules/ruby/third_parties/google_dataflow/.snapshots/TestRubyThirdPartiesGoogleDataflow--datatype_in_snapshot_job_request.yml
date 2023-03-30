@@ -10,6 +10,6 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 2
-      parent_content: 'req.description = "Current user: #{user.ip_address}"'
-
+      snippet: 'req.description = "Current user: #{user.ip_address}"'
+      fingerprint: e411b75c7351daa947f72bf14f7a63c1_0
 

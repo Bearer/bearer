@@ -8,6 +8,6 @@ low:
       line_number: 12
       filename: insecure_squirrelly_template.js
       parent_line_number: 12
-      parent_content: 'Sqrl.render(req.params.text, { name: "alvin" })'
-
+      snippet: 'Sqrl.render(req.params.text, { name: "alvin" })'
+      fingerprint: f631e641891b1191cfe28d07d6302b1a_0
 

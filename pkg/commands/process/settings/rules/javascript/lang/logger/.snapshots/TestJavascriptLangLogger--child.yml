@@ -11,6 +11,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: logger.child(ctx)
-
+      snippet: logger.child(ctx)
+      fingerprint: a272744c07360821d25042868f04ea5c_0
 

@@ -5,29 +5,14 @@ medium:
         id: javascript_google_tag_manager
         description: Sensitive data sent to Google Tag Manager detected.
         documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
-      line_number: 1
-      filename: unsecure.js
-      category_groups:
-        - PII
-      parent_line_number: 3
-      parent_content: |-
-        window.dataLayer.push({
-        	email: user.email,
-        })
-    - rule:
-        cwe_ids:
-            - "201"
-        id: javascript_google_tag_manager
-        description: Sensitive data sent to Google Tag Manager detected.
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_google_tag_manager
       line_number: 4
       filename: unsecure.js
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         window.dataLayer.push({
         	email: user.email,
         })
-
+      fingerprint: 163d1d6557cf6be6e0f1a851cf46b2a6_0
 

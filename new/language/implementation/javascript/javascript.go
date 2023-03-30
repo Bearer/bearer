@@ -36,6 +36,8 @@ var (
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 
 	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
+
+	passthroughMethods = []string{"JSON.parse", "JSON.stringify"}
 )
 
 type javascriptImplementation struct{}
@@ -113,6 +115,11 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 			if parent.Type() == "required_parameter" {
 				scope.Assign(node.Content(), node)
 
+			}
+
+			if parent.Type() == "arguments" {
+				callNode := parent.Parent()
+				callNode.UnifyWith(node)
 			}
 		case "property_identifier":
 			parent := node.Parent()
@@ -241,4 +248,33 @@ func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node
 
 func (implementation *javascriptImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
 	return content
+}
+
+func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {
+	if node.Type() != "arguments" {
+		return false
+	}
+
+	callNode := node.Parent()
+	if callNode.Type() != "call_expression" {
+		return false
+	}
+
+	functionNode := callNode.ChildByFieldName("function")
+
+	var method string
+	var wildcardMethod string
+	switch functionNode.Type() {
+	case "identifier":
+		return slices.Contains(passthroughMethods, functionNode.Content())
+	case "member_expression":
+		object := functionNode.ChildByFieldName("object")
+		if object.Type() == "identifier" {
+			property := functionNode.ChildByFieldName("property").Content()
+			method = object.Content() + "." + property
+			wildcardMethod = "*." + property
+		}
+	}
+
+	return slices.Contains(passthroughMethods, method) || slices.Contains(passthroughMethods, wildcardMethod)
 }

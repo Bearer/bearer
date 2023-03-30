@@ -1,0 +1,26 @@
+- position: "1:1"
+  content: |-
+    class User {
+      constructor (a, b) {}
+
+      x() {}
+      y() {}
+    }
+  data:
+    properties:
+        - name: User
+          node: null
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: x
+                      node: null
+                      object: null
+                    - name: "y"
+                      node: null
+                      object: null
+                isvirtual: false
+    isvirtual: false
+

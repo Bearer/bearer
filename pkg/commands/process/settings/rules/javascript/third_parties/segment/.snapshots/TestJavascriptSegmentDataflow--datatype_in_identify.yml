@@ -10,7 +10,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         analytics.identify({
           userId: user.id,
           traits: {
@@ -20,6 +20,7 @@ medium:
             friends: user.friendCount
           }
         })
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_0
     - rule:
         cwe_ids:
             - "201"
@@ -31,7 +32,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         analytics.identify({
           userId: user.id,
           traits: {
@@ -41,6 +42,7 @@ medium:
             friends: user.friendCount
           }
         })
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_1
     - rule:
         cwe_ids:
             - "201"
@@ -52,7 +54,7 @@ medium:
       category_groups:
         - PII
       parent_line_number: 5
-      parent_content: |-
+      snippet: |-
         analytics.identify({
           userId: user.id,
           traits: {
@@ -62,6 +64,7 @@ medium:
             friends: user.friendCount
           }
         })
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_2
     - rule:
         cwe_ids:
             - "201"
@@ -73,6 +76,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 18
-      parent_content: browser.identify(user.email)
-
+      snippet: browser.identify(user.email)
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_3
 

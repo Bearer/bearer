@@ -10,11 +10,11 @@ medium:
       category_groups:
         - PII
       parent_line_number: 6
-      parent_content: |-
+      snippet: |-
         analytics.group({
           userId: user.id,
           groupId: user.job_title,
           traits: {},
         })
-
+      fingerprint: e06b3627d5c7a61440e243b72dbcfb7f_0
 

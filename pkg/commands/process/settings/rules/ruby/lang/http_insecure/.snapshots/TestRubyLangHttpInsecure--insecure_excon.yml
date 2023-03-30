@@ -8,7 +8,8 @@ low:
       line_number: 1
       filename: insecure_excon.rb
       parent_line_number: 1
-      parent_content: 'Excon.new("http://my.api.com/insecure", foo: true)'
+      snippet: 'Excon.new("http://my.api.com/insecure", foo: true)'
+      fingerprint: 55c11a2725f21f0f542b7b0a88988395_0
     - rule:
         cwe_ids:
             - "319"
@@ -18,6 +19,6 @@ low:
       line_number: 3
       filename: insecure_excon.rb
       parent_line_number: 3
-      parent_content: 'Excon.get("http://my.api.com/insecure", foo: true)'
-
+      snippet: 'Excon.get("http://my.api.com/insecure", foo: true)'
+      fingerprint: 55c11a2725f21f0f542b7b0a88988395_1
 

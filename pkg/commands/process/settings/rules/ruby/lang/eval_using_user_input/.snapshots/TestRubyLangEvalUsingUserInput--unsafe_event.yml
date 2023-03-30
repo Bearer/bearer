@@ -9,7 +9,8 @@ high:
       line_number: 2
       filename: unsafe_event.rb
       parent_line_number: 2
-      parent_content: RubyVM::InstructionSequence.compile(event["oops"])
+      snippet: RubyVM::InstructionSequence.compile(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_0
     - rule:
         cwe_ids:
             - "94"
@@ -20,7 +21,8 @@ high:
       line_number: 4
       filename: unsafe_event.rb
       parent_line_number: 4
-      parent_content: a.eval(event["oops"], "test")
+      snippet: a.eval(event["oops"], "test")
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_1
     - rule:
         cwe_ids:
             - "94"
@@ -31,7 +33,8 @@ high:
       line_number: 6
       filename: unsafe_event.rb
       parent_line_number: 6
-      parent_content: a.instance_eval(event["oops"])
+      snippet: a.instance_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_2
     - rule:
         cwe_ids:
             - "94"
@@ -42,7 +45,8 @@ high:
       line_number: 8
       filename: unsafe_event.rb
       parent_line_number: 8
-      parent_content: a.class_eval(event["oops"])
+      snippet: a.class_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_3
     - rule:
         cwe_ids:
             - "94"
@@ -53,7 +57,8 @@ high:
       line_number: 10
       filename: unsafe_event.rb
       parent_line_number: 10
-      parent_content: a.module_eval(event["oops"])
+      snippet: a.module_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_4
     - rule:
         cwe_ids:
             - "94"
@@ -64,7 +69,8 @@ high:
       line_number: 12
       filename: unsafe_event.rb
       parent_line_number: 12
-      parent_content: eval(event["oops"])
+      snippet: eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_5
     - rule:
         cwe_ids:
             - "94"
@@ -75,7 +81,8 @@ high:
       line_number: 14
       filename: unsafe_event.rb
       parent_line_number: 14
-      parent_content: instance_eval(event["oops"], "test")
+      snippet: instance_eval(event["oops"], "test")
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_6
     - rule:
         cwe_ids:
             - "94"
@@ -86,7 +93,8 @@ high:
       line_number: 16
       filename: unsafe_event.rb
       parent_line_number: 16
-      parent_content: class_eval(event["oops"])
+      snippet: class_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_7
     - rule:
         cwe_ids:
             - "94"
@@ -97,6 +105,6 @@ high:
       line_number: 18
       filename: unsafe_event.rb
       parent_line_number: 18
-      parent_content: module_eval(event["oops"])
-
+      snippet: module_eval(event["oops"])
+      fingerprint: 3cb817bcd40bc677cc9e9d1d877c724d_8
 

@@ -11,7 +11,8 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: Digest::MD5.hexdigest(user.address)
+      snippet: Digest::MD5.hexdigest(user.address)
+      fingerprint: e9527c9be379afd118be1e43fdda5ae7_0
     - rule:
         cwe_ids:
             - "326"
@@ -24,6 +25,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: Digest::MD5.hexdigest(user.address)
-
+      snippet: Digest::MD5.hexdigest(user.address)
+      fingerprint: 8f355f345af0f6a3706725a5eb911103_0
 

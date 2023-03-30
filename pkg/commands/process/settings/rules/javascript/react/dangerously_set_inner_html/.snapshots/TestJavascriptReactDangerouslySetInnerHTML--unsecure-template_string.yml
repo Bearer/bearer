@@ -8,6 +8,6 @@ high:
       line_number: 4
       filename: unsecure-template_string.js
       parent_line_number: 4
-      parent_content: '{ __html: `<a href=${input}>home page</a>` }'
-
+      snippet: '{ __html: `<a href=${input}>home page</a>` }'
+      fingerprint: 4ee7f485a83185dc6514a0e95269298f_0
 

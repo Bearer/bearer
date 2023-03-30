@@ -65,9 +65,10 @@ var RecipeTypeDataStore = RecipeType("data_store")
 var RecipeTypeService = RecipeType("service")
 
 type DataType struct {
-	Name         string `json:"name" yaml:"name"`
-	UUID         string `json:"uuid" yaml:"uuid"`
-	CategoryUUID string `json:"category_uuid" yaml:"category_uuid"`
+	Name         string       `json:"name" yaml:"name"`
+	UUID         string       `json:"uuid" yaml:"uuid"`
+	CategoryUUID string       `json:"category_uuid" yaml:"category_uuid"`
+	Category     DataCategory `json:"category" yaml:"category"`
 }
 
 type DataCategory struct {
@@ -145,11 +146,17 @@ func DefaultWithContext(context flag.Context) DefaultDB {
 }
 
 func defaultDB(context flag.Context, subjectMappingPath string) DefaultDB {
-	dataTypes := defaultDataTypes()
+	dataCategories := defaultDataCategories(context)
+	categories := map[string]DataCategory{}
+	for _, category := range dataCategories {
+		categories[category.UUID] = category
+	}
+
+	dataTypes := defaultDataTypes(categories)
 	return DefaultDB{
 		Recipes:                        defaultRecipes(),
 		DataTypes:                      dataTypes,
-		DataCategories:                 defaultDataCategories(context),
+		DataCategories:                 dataCategories,
 		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(dataTypes),
 		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes, subjectMappingPath),
 	}
@@ -247,7 +254,9 @@ func defaultDataCategories(context flag.Context) []DataCategory {
 	return dataCategories
 }
 
-func defaultDataTypes() []DataType {
+func defaultDataTypes(
+	categories map[string]DataCategory,
+) []DataType {
 	dataTypes := []DataType{}
 
 	files, err := dataTypesDir.ReadDir("data_types")
@@ -267,6 +276,8 @@ func defaultDataTypes() []DataType {
 		if err != nil {
 			handleError(err)
 		}
+
+		dataType.Category = categories[dataType.CategoryUUID]
 
 		dataTypes = append(dataTypes, dataType)
 	}

@@ -8,6 +8,6 @@ low:
       line_number: 3
       filename: secure_app_disable.js
       parent_line_number: 3
-      parent_content: express()
-
+      snippet: express()
+      fingerprint: ed6ed8b54708fe870dd883878474bc75_0
 

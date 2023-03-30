@@ -8,7 +8,8 @@ high:
       line_number: 3
       filename: unsafe_stdlib.rb
       parent_line_number: 3
-      parent_content: Kernel.exec(params[:oops])
+      snippet: Kernel.exec(params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_0
     - rule:
         cwe_ids:
             - "78"
@@ -18,7 +19,8 @@ high:
       line_number: 5
       filename: unsafe_stdlib.rb
       parent_line_number: 5
-      parent_content: spawn(params[:oops])
+      snippet: spawn(params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_1
     - rule:
         cwe_ids:
             - "78"
@@ -28,7 +30,8 @@ high:
       line_number: 7
       filename: unsafe_stdlib.rb
       parent_line_number: 7
-      parent_content: IO.popen(params[:oops]) {}
+      snippet: IO.popen(params[:oops]) {}
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_2
     - rule:
         cwe_ids:
             - "78"
@@ -38,7 +41,8 @@ high:
       line_number: 9
       filename: unsafe_stdlib.rb
       parent_line_number: 9
-      parent_content: Process.exec(params[:oops])
+      snippet: Process.exec(params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_3
     - rule:
         cwe_ids:
             - "78"
@@ -48,7 +52,8 @@ high:
       line_number: 11
       filename: unsafe_stdlib.rb
       parent_line_number: 11
-      parent_content: Open3.popen3(["cmd", params[:oops]], "abc") {}
+      snippet: Open3.popen3(["cmd", params[:oops]], "abc") {}
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_4
     - rule:
         cwe_ids:
             - "78"
@@ -58,7 +63,8 @@ high:
       line_number: 13
       filename: unsafe_stdlib.rb
       parent_line_number: 13
-      parent_content: Gem::Util.silent_system(x, params[:oops])
+      snippet: Gem::Util.silent_system(x, params[:oops])
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_5
     - rule:
         cwe_ids:
             - "78"
@@ -68,7 +74,8 @@ high:
       line_number: 15
       filename: unsafe_stdlib.rb
       parent_line_number: 15
-      parent_content: PTY.spawn("/bin/#{params[:oops]}") {}
+      snippet: PTY.spawn("/bin/#{params[:oops]}") {}
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_6
     - rule:
         cwe_ids:
             - "78"
@@ -78,7 +85,8 @@ high:
       line_number: 17
       filename: unsafe_stdlib.rb
       parent_line_number: 17
-      parent_content: '%x{/bin/#{params[:oops]}}'
+      snippet: '%x{/bin/#{params[:oops]}}'
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_7
     - rule:
         cwe_ids:
             - "78"
@@ -88,6 +96,6 @@ high:
       line_number: 19
       filename: unsafe_stdlib.rb
       parent_line_number: 19
-      parent_content: '`/bin/#{params[:oops]}`'
-
+      snippet: '`/bin/#{params[:oops]}`'
+      fingerprint: 317e176e853b9f8a94cc0783303f5bdf_8
 

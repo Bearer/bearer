@@ -10,9 +10,10 @@ high:
       category_groups:
         - Personal Data
       parent_line_number: 8
-      parent_content: |-
+      snippet: |-
         index
           .saveObject(userObj, { autoGenerateObjectIDIfNotExist: true })
+      fingerprint: f7cd3e6cc20d31411535c7bef6ba52cc_1
 medium:
     - rule:
         cwe_ids:
@@ -25,6 +26,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 12
-      parent_content: 'index.saveObjects([{ email: user.email }])'
-
+      snippet: 'index.saveObjects([{ email: user.email }])'
+      fingerprint: f7cd3e6cc20d31411535c7bef6ba52cc_0
 

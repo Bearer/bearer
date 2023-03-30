@@ -8,7 +8,8 @@ high:
       line_number: 1
       filename: unsafe_params.rb
       parent_line_number: 1
-      parent_content: YAML.load(params[:oops])
+      snippet: YAML.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_0
     - rule:
         cwe_ids:
             - "502"
@@ -18,7 +19,8 @@ high:
       line_number: 3
       filename: unsafe_params.rb
       parent_line_number: 3
-      parent_content: Psych.load(params[:oops])
+      snippet: Psych.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_1
     - rule:
         cwe_ids:
             - "502"
@@ -28,7 +30,8 @@ high:
       line_number: 5
       filename: unsafe_params.rb
       parent_line_number: 5
-      parent_content: Syck.load(params[:oops])
+      snippet: Syck.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_2
     - rule:
         cwe_ids:
             - "502"
@@ -38,7 +41,8 @@ high:
       line_number: 7
       filename: unsafe_params.rb
       parent_line_number: 7
-      parent_content: JSON.load(params[:oops])
+      snippet: JSON.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_3
     - rule:
         cwe_ids:
             - "502"
@@ -48,9 +52,10 @@ high:
       line_number: 9
       filename: unsafe_params.rb
       parent_line_number: 9
-      parent_content: |-
+      snippet: |-
         Oj.load(params[:oops]) do |json|
         end
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_4
     - rule:
         cwe_ids:
             - "502"
@@ -60,7 +65,8 @@ high:
       line_number: 11
       filename: unsafe_params.rb
       parent_line_number: 11
-      parent_content: Oj.object_load(params[:oops])
+      snippet: Oj.object_load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_5
     - rule:
         cwe_ids:
             - "502"
@@ -70,7 +76,8 @@ high:
       line_number: 13
       filename: unsafe_params.rb
       parent_line_number: 13
-      parent_content: Marshal.load(params[:oops])
+      snippet: Marshal.load(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_6
     - rule:
         cwe_ids:
             - "502"
@@ -80,6 +87,6 @@ high:
       line_number: 14
       filename: unsafe_params.rb
       parent_line_number: 14
-      parent_content: Marshal.restore(params[:oops])
-
+      snippet: Marshal.restore(params[:oops])
+      fingerprint: 96a48cf9bfa9a6955f687c13537653a9_7
 

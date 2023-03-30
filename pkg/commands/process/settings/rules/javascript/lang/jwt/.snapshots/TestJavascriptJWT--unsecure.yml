@@ -10,10 +10,10 @@ medium:
       category_groups:
         - PII
       parent_line_number: 2
-      parent_content: |-
+      snippet: |-
         jwt.sign(
         	{ user: { email: "jhon@gmail.com" } },
         	process.env.JWT_SECRET
         )
-
+      fingerprint: 0d02d2bf09c4b783d7c32239f1af43fe_0
 

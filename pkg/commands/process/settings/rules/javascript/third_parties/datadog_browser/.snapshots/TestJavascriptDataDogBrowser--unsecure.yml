@@ -8,6 +8,6 @@ low:
       line_number: 2
       filename: unsecure.js
       parent_line_number: 2
-      parent_content: 'trackUserInteractions: true'
-
+      snippet: 'trackUserInteractions: true'
+      fingerprint: 1e4a758498c5f5f164616eeb341f7bd1_0
 

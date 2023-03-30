@@ -9,6 +9,6 @@ medium:
       line_number: 2
       filename: ok.js
       parent_line_number: 2
-      parent_content: '{}'
-
+      snippet: '{}'
+      fingerprint: 86893356122363645f8f0d0427a9704b_0
 

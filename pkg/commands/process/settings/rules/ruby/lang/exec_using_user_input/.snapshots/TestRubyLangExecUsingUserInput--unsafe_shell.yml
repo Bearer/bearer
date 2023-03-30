@@ -8,7 +8,8 @@ high:
       line_number: 3
       filename: unsafe_shell.rb
       parent_line_number: 3
-      parent_content: Shell.alias_command("foo", params[:oops]) {}
+      snippet: Shell.alias_command("foo", params[:oops]) {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_0
     - rule:
         cwe_ids:
             - "78"
@@ -18,7 +19,8 @@ high:
       line_number: 4
       filename: unsafe_shell.rb
       parent_line_number: 4
-      parent_content: Shell::CommandProcessor.alias_command(x, "/bin/#{params[:oops]}") {}
+      snippet: Shell::CommandProcessor.alias_command(x, "/bin/#{params[:oops]}") {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_1
     - rule:
         cwe_ids:
             - "78"
@@ -28,7 +30,8 @@ high:
       line_number: 6
       filename: unsafe_shell.rb
       parent_line_number: 6
-      parent_content: Shell.def_system_command("foo", "bar", params[:oops]) {}
+      snippet: Shell.def_system_command("foo", "bar", params[:oops]) {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_2
     - rule:
         cwe_ids:
             - "78"
@@ -38,7 +41,8 @@ high:
       line_number: 7
       filename: unsafe_shell.rb
       parent_line_number: 7
-      parent_content: Shell::CommandProcessor.def_system_command("foo", params[:oops]) {}
+      snippet: Shell::CommandProcessor.def_system_command("foo", params[:oops]) {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_3
     - rule:
         cwe_ids:
             - "78"
@@ -48,7 +52,8 @@ high:
       line_number: 12
       filename: unsafe_shell.rb
       parent_line_number: 12
-      parent_content: processor1.system(params[:oops])
+      snippet: processor1.system(params[:oops])
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_4
     - rule:
         cwe_ids:
             - "78"
@@ -58,6 +63,6 @@ high:
       line_number: 15
       filename: unsafe_shell.rb
       parent_line_number: 15
-      parent_content: processor2.system(x, params[:oops])
-
+      snippet: processor2.system(x, params[:oops])
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_5
 

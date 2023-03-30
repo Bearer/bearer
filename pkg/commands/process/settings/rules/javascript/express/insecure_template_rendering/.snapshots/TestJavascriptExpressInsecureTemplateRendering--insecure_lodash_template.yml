@@ -8,6 +8,6 @@ low:
       line_number: 11
       filename: insecure_lodash_template.js
       parent_line_number: 11
-      parent_content: _.template(req.params.body)
-
+      snippet: _.template(req.params.body)
+      fingerprint: dade516e6cf2d55d71e1f9510e39fc65_0
 

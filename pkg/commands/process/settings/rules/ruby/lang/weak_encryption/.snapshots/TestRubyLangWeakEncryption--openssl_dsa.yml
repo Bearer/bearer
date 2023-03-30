@@ -9,7 +9,8 @@ low:
       line_number: 3
       filename: openssl_dsa.rb
       parent_line_number: 3
-      parent_content: dsa_encrypt.export(cipher, "hello world")
+      snippet: dsa_encrypt.export(cipher, "hello world")
+      fingerprint: 3ac03435d3a94bdff430e93b27d81198_0
     - rule:
         cwe_ids:
             - "331"
@@ -20,6 +21,6 @@ low:
       line_number: 5
       filename: openssl_dsa.rb
       parent_line_number: 5
-      parent_content: OpenSSL::PKey::DSA.new(2048).to_pem(cipher, "hello world")
-
+      snippet: OpenSSL::PKey::DSA.new(2048).to_pem(cipher, "hello world")
+      fingerprint: 3ac03435d3a94bdff430e93b27d81198_1
 

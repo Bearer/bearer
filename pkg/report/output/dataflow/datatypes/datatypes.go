@@ -23,6 +23,7 @@ type datatypeHolder struct {
 	name         string
 	uuid         string
 	categoryUUID string
+	categoryName string
 	detectors    map[string]*detectorHolder // group detectors by detectorName
 }
 
@@ -86,8 +87,9 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[classification.Name]; !exists {
 		datatype := datatypeHolder{
-			name:      classification.Name,
-			detectors: make(map[string]*detectorHolder),
+			name:         classification.Name,
+			categoryName: classification.Category.Name,
+			detectors:    make(map[string]*detectorHolder),
 		}
 
 		if holder.isInternal {
@@ -161,6 +163,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 			Name:         datatype.name,
 			UUID:         datatype.uuid,
 			CategoryUUID: datatype.categoryUUID,
+			CategoryName: datatype.categoryName,
 		}
 
 		detectors := maputil.ToSortedSlice(datatype.detectors)

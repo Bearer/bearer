@@ -8,7 +8,8 @@ low:
       line_number: 1
       filename: ok_not_unsafe.rb
       parent_line_number: 1
-      parent_content: Net::FTP.new(x)
+      snippet: Net::FTP.new(x)
+      fingerprint: 109fb3f0c6318203ef1242e3e689294d_0
     - rule:
         cwe_ids:
             - "319"
@@ -18,10 +19,11 @@ low:
       line_number: 3
       filename: ok_not_unsafe.rb
       parent_line_number: 3
-      parent_content: |-
+      snippet: |-
         Net::FTP.open("example.com", username: "user") do
 
         end
+      fingerprint: 109fb3f0c6318203ef1242e3e689294d_1
     - rule:
         cwe_ids:
             - "319"
@@ -31,6 +33,6 @@ low:
       line_number: 8
       filename: ok_not_unsafe.rb
       parent_line_number: 8
-      parent_content: Net::FTP.open("example.com")
-
+      snippet: Net::FTP.open("example.com")
+      fingerprint: 109fb3f0c6318203ef1242e3e689294d_2
 

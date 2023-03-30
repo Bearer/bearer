@@ -8,7 +8,8 @@ high:
       line_number: 1
       filename: unsafe_stdlib.rb
       parent_line_number: 1
-      parent_content: Object.const_get(params[:class])
+      snippet: Object.const_get(params[:class])
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_0
     - rule:
         cwe_ids:
             - "94"
@@ -18,7 +19,8 @@ high:
       line_number: 2
       filename: unsafe_stdlib.rb
       parent_line_number: 2
-      parent_content: Object.const_set(params[:class], 42)
+      snippet: Object.const_set(params[:class], 42)
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_1
     - rule:
         cwe_ids:
             - "94"
@@ -28,7 +30,8 @@ high:
       line_number: 3
       filename: unsafe_stdlib.rb
       parent_line_number: 3
-      parent_content: Object.remove_const(params[:class])
+      snippet: Object.remove_const(params[:class])
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_2
     - rule:
         cwe_ids:
             - "94"
@@ -38,7 +41,8 @@ high:
       line_number: 5
       filename: unsafe_stdlib.rb
       parent_line_number: 5
-      parent_content: method(params[:method])
+      snippet: method(params[:method])
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_3
     - rule:
         cwe_ids:
             - "94"
@@ -48,7 +52,8 @@ high:
       line_number: 7
       filename: unsafe_stdlib.rb
       parent_line_number: 7
-      parent_content: x.define_method(params[:method]) {}
+      snippet: x.define_method(params[:method]) {}
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_4
     - rule:
         cwe_ids:
             - "94"
@@ -58,7 +63,8 @@ high:
       line_number: 9
       filename: unsafe_stdlib.rb
       parent_line_number: 9
-      parent_content: params[:method].to_sym.to_proc
+      snippet: params[:method].to_sym.to_proc
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_5
     - rule:
         cwe_ids:
             - "94"
@@ -68,7 +74,8 @@ high:
       line_number: 11
       filename: unsafe_stdlib.rb
       parent_line_number: 11
-      parent_content: bad_things(&params[:method].to_sym)
+      snippet: bad_things(&params[:method].to_sym)
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_6
     - rule:
         cwe_ids:
             - "94"
@@ -78,6 +85,6 @@ high:
       line_number: 12
       filename: unsafe_stdlib.rb
       parent_line_number: 12
-      parent_content: x.bad_things(&params[:method].to_sym)
-
+      snippet: x.bad_things(&params[:method].to_sym)
+      fingerprint: ee293268391c14ee59c7cd9e36e078c0_7
 

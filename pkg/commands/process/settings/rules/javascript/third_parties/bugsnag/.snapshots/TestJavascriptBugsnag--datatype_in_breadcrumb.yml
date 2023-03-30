@@ -10,6 +10,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: Bugsnag.leaveBreadcrumb(user.email)
-
+      snippet: Bugsnag.leaveBreadcrumb(user.email)
+      fingerprint: 2eaef71de885a52be1cbf2dd3f951de2_0
 

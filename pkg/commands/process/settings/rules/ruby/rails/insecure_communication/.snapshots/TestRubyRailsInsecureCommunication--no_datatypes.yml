@@ -8,6 +8,6 @@ high:
       line_number: 2
       filename: no_datatypes.rb
       parent_line_number: 2
-      parent_content: config.force_ssl = false
-
+      snippet: config.force_ssl = false
+      fingerprint: 8439d2ad437097a875e4c34456db47b2_0
 

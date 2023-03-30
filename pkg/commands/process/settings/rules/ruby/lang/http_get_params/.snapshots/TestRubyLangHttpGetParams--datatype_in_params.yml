@@ -11,7 +11,8 @@ critical:
         - PII
         - Personal Data (Sensitive)
       parent_line_number: 1
-      parent_content: URI("https://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
+      snippet: URI("https://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
+      fingerprint: f34fb10ce48303451898c1db1c78265d_1
 medium:
     - rule:
         cwe_ids:
@@ -24,6 +25,6 @@ medium:
       category_groups:
         - PII
       parent_line_number: 3
-      parent_content: RestClient.get("https://my.api.com/users/search?first_name=#{user.first_name}")
-
+      snippet: RestClient.get("https://my.api.com/users/search?first_name=#{user.first_name}")
+      fingerprint: f34fb10ce48303451898c1db1c78265d_0
 

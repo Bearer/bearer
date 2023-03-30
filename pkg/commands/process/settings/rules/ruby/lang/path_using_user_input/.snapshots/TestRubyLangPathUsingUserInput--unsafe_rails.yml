@@ -9,7 +9,8 @@ high:
       line_number: 1
       filename: unsafe_rails.rb
       parent_line_number: 1
-      parent_content: Rails.root.join(params[:oops])
+      snippet: Rails.root.join(params[:oops])
+      fingerprint: e16ead13c18a8b386d17acceb46fd0e2_0
     - rule:
         cwe_ids:
             - "22"
@@ -20,7 +21,8 @@ high:
       line_number: 3
       filename: unsafe_rails.rb
       parent_line_number: 3
-      parent_content: 'render(partial: params[:oops])'
+      snippet: 'render(partial: params[:oops])'
+      fingerprint: e16ead13c18a8b386d17acceb46fd0e2_1
     - rule:
         cwe_ids:
             - "22"
@@ -31,7 +33,8 @@ high:
       line_number: 4
       filename: unsafe_rails.rb
       parent_line_number: 4
-      parent_content: 'render_to_string({ file: "/templates/#{params[:oops]}" })'
+      snippet: 'render_to_string({ file: "/templates/#{params[:oops]}" })'
+      fingerprint: e16ead13c18a8b386d17acceb46fd0e2_2
     - rule:
         cwe_ids:
             - "22"
@@ -42,6 +45,6 @@ high:
       line_number: 6
       filename: unsafe_rails.rb
       parent_line_number: 6
-      parent_content: 'send_file params[:oops], type: "text/html"'
-
+      snippet: 'send_file params[:oops], type: "text/html"'
+      fingerprint: e16ead13c18a8b386d17acceb46fd0e2_3
 

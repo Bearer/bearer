@@ -8,6 +8,6 @@ low:
       line_number: 2
       filename: axios_insecure.js
       parent_line_number: 2
-      parent_content: axios.get(insecure_url)
-
+      snippet: axios.get(insecure_url)
+      fingerprint: 5667b49e84002c3b923f6c78e8943c6e_0
 

@@ -1,7 +1,7 @@
-(map[string][]security.Result) (len=2) {
+(*map[string][]security.Result)((len=2) {
   (string) (len=8) "critical": ([]security.Result) (len=1) {
     (security.Result) {
-      Rule: (*security.RuleResultSummary)({
+      Rule: (*security.Rule)({
         CWEIDs: ([]string) (len=2) {
           (string) (len=3) "209",
           (string) (len=3) "532"
@@ -18,12 +18,13 @@
       },
       ParentLineNumber: (int) 1,
       ParentContent: (string) (len=38) "Rails.logger.info(user.biometric_data)",
+      Fingerprint: (string) (len=34) "375d7c2e9977cf2ce5dbf04b04237bea_0",
       DetailedContext: (string) ""
     }
   },
   (string) (len=6) "medium": ([]security.Result) (len=1) {
     (security.Result) {
-      Rule: (*security.RuleResultSummary)({
+      Rule: (*security.Rule)({
         CWEIDs: ([]string) (len=1) {
           (string) (len=3) "295"
         },
@@ -38,7 +39,8 @@
       },
       ParentLineNumber: (int) 2,
       ParentContent: (string) (len=44) "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+      Fingerprint: (string) (len=34) "9005ef3db844b32c1a0317e032f4a16a_0",
       DetailedContext: (string) ""
     }
   }
-}
+})
