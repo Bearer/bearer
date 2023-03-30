@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/bearer/bearer/pkg/util/output"
+	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
@@ -106,7 +107,7 @@ func evaluateRules(
 ) error {
 	var bar *progressbar.ProgressBar
 	if !builtIn {
-		bar = output.GetProgressBar(len(rules), config, "rules")
+		bar = bearerprogressbar.GetProgressBar(len(rules), config, "rules")
 	}
 
 	for _, rule := range maputil.ToSortedSlice(rules) {
