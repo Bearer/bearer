@@ -74,7 +74,7 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 
 		_, err := client.Hello()
 		if err != nil {
-			log.Error().Msgf("couldn't initialize client -> %s", err.Error())
+			log.Debug().Msgf("couldn't initialize client -> %s", err.Error())
 		} else {
 			log.Debug().Msgf("Initialized client for report")
 			return GeneralOptions{

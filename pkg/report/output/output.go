@@ -20,6 +20,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/gitsight/go-vcsurl"
 	"github.com/google/uuid"
+	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/pkg/report/output/detectors"
 	"github.com/bearer/bearer/pkg/report/output/stats"
@@ -27,7 +28,6 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/hhatto/gocloc"
-	"github.com/rs/zerolog/log"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
@@ -116,7 +116,7 @@ func GetPrivacyReportCSVOutput(report types.Report, lineOfCodeOutput *gocloc.Res
 func getPrivacyReportOutput(report types.Report, config settings.Config) (*privacy.Report, *gocloc.Result, *dataflow.DataFlow, error) {
 	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
 	if err != nil {
-		log.Error().Msgf("error in line of code output %s", err)
+		log.Debug().Msgf("Error in line of code output %s", err)
 		return nil, nil, nil, err
 	}
 
@@ -166,19 +166,19 @@ func reportSecurity(
 ) {
 	lineOfCodeOutput, err = stats.GoclocDetectorOutput(config.Scan.Target)
 	if err != nil {
-		log.Error().Msgf("error in line of code output %s", err)
+		log.Debug().Msgf("error in line of code output %s", err)
 		return
 	}
 
 	dataflow, _, _, err = GetDataflow(report, config, true)
 	if err != nil {
-		log.Error().Msgf("error in dataflow %s", err)
+		log.Debug().Msgf("error in dataflow %s", err)
 		return
 	}
 
 	securityResults, err = security.GetOutput(dataflow, config)
 	if err != nil {
-		log.Error().Msgf("error in security %s", err)
+		log.Debug().Msgf("error in security %s", err)
 		return
 	}
 
@@ -186,7 +186,7 @@ func reportSecurity(
 		var meta *Meta
 		meta, err = getMeta(config)
 		if err != nil {
-			log.Error().Msgf("couldn't get meta for repo %s", err)
+			log.Debug().Msgf("couldn't get meta for repo %s", err)
 			meta = &Meta{
 				Target: config.Scan.Target,
 			}
@@ -194,15 +194,14 @@ func reportSecurity(
 
 		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, dataflow)
 		if err != nil {
-			log.Error().Msgf("error creating report %s", err)
+			log.Debug().Msgf("error creating report %s", err)
 		}
 
 		defer os.RemoveAll(*tmpDir)
 
 		err = sendReportToBearer(config.Client, meta, filename)
-
 		if err != nil {
-			log.Error().Msgf("error sending report to Bearer")
+			log.Debug().Msgf("error sending report to Bearer")
 		}
 	}
 
@@ -272,31 +271,31 @@ func createBearerGzipFileReport(
 func getMeta(config settings.Config) (*Meta, error) {
 	sha, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "HEAD").Output()
 	if err != nil {
-		log.Error().Msgf("couldn't get git info %s", err)
+		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
 	currentBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "HEAD").Output()
 	if err != nil {
-		log.Error().Msgf("couldn't get git info %s", err)
+		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
 	defaultBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
 	if err != nil {
-		log.Error().Msgf("couldn't get git info %s", err)
+		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	output, err := exec.Command("git", "-C", config.Scan.Target, "remote", "get-url", "origin").Output()
+	gitRemote, err := exec.Command("git", "-C", config.Scan.Target, "remote", "get-url", "origin").Output()
 	if err != nil {
-		log.Error().Msgf("couldn't get git info %s", err)
+		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	info, err := vcsurl.Parse(strings.TrimSuffix(string(output), "\n"))
+	info, err := vcsurl.Parse(strings.TrimSuffix(string(gitRemote), "\n"))
 	if err != nil {
-		log.Error().Msgf("couldn't parse url %s", err)
+		log.Debug().Msgf("couldn't parse url %s", err)
 		return nil, err
 	}
 

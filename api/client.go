@@ -78,7 +78,7 @@ func (api *API) makeRequest(route string, httpMethod string, data interface{}) (
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("fail reading response body %e %s", err, fullURL)
+		return nil, fmt.Errorf("fail reading response body %s %s", err, fullURL)
 	}
 
 	if resp.StatusCode == http.StatusUnauthorized {

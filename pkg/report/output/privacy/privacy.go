@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/hhatto/gocloc"
 	"golang.org/x/exp/maps"
@@ -133,7 +134,7 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
 
-	bar := output.GetProgressBar(len(config.Rules), config, "rules")
+	bar := progressbar.GetProgressBar(len(config.Rules), config, "rules")
 
 	subjectRuleFailures := make(map[string]RuleFailureSummary)
 	thirdPartyRuleFailures := make(map[string]map[string]RuleFailureSummary)

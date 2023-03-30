@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/output"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/xerrors"
@@ -54,6 +55,11 @@ func NewScanCommand() *cobra.Command {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
 
+			output.Setup(cmd, output.SetupRequest{
+				Debug: viper.GetBool(flag.DebugFlag.ConfigName),
+				Quiet: viper.GetBool(flag.QuietFlag.ConfigName),
+			})
+
 			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
 			var defaultConfigPath = ""
 			if len(args) == 1 {
@@ -76,11 +82,7 @@ func NewScanCommand() *cobra.Command {
 				return xerrors.Errorf("flag error: %w", err)
 			}
 
-			if !options.Quiet {
-				output.StdErrLogger().Msgf(loadFileMessage)
-			}
-
-			output.Setup(cmd, options)
+			log.Debug().Msgf(loadFileMessage)
 
 			if options.Target == "" {
 				return cmd.Help()
