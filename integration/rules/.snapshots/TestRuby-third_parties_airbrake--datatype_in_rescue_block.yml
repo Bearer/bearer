@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_airbrake
+        description: Sensitive data sent to Airbrake detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
+      line_number: 4
+      filename: datatype_in_rescue_block.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 4
+      snippet: Airbrake.notify_sync(current_user.first_name)
+      fingerprint: 55ed772dba85c4d7f47d2a87f26fe57a_0
+

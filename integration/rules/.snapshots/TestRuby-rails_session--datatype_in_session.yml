@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "315"
+        id: ruby_rails_session
+        description: Sensitive data stored in a session cookie detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_session
+      line_number: 1
+      filename: datatype_in_session.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: session[:current_user] = user.email
+      fingerprint: a5c0e825abde92e4fb94604f26340fa2_0
+

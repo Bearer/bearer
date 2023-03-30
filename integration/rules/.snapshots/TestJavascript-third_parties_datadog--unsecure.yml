@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_datadog
+        description: Sensitive data sent to Datadog detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_datadog
+      line_number: 3
+      filename: unsecure.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 11
+      snippet: client.event("user", "logged_in", {}, user)
+      fingerprint: 15317e7b0c29169d3b524d33116994d5_0
+

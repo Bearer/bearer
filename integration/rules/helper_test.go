@@ -72,8 +72,6 @@ func getRunner(t *testing.T) *Runner {
 
 func (runner *Runner) runTest(t *testing.T, projectPath string) {
 	testDataPath := projectPath + "/testdata/"
-	snapshotsPath := projectPath + "/.snapshots/"
-
 	files, err := filelist.Discover(testDataPath, runner.config)
 	if err != nil {
 		t.Fatalf("failed to discover files: %s", err)
@@ -93,12 +91,12 @@ func (runner *Runner) runTest(t *testing.T, projectPath string) {
 
 		testName := formattedProjectName + "-" + strings.TrimSuffix(file.FilePath, ext) + ".yml"
 		t.Run(testName, func(t *testing.T) {
-			runner.ScanSingleFile(t, testDataPath, myfile, snapshotsPath)
+			runner.ScanSingleFile(t, testDataPath, myfile)
 		})
 	}
 }
 
-func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRelativePath work.File, snapshotsPath string) {
+func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRelativePath work.File) {
 	detectorsReportFile, err := os.CreateTemp("", "report.jsonl")
 	if err != nil {
 		t.Fatalf("failed to create tmp report file: %s", err)
@@ -131,6 +129,5 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 	)
 	report, _ := reportoutput.ReportYAML(detections)
 
-	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
-	cupaloyCopy.SnapshotT(t, *report)
+	cupaloy.SnapshotT(t, *report)
 }

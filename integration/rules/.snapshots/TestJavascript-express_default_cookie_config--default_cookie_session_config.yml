@@ -1,0 +1,20 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "523"
+            - "522"
+        id: express_default_cookie_config
+        description: Cookie with default config detected.
+        documentation_url: https://docs.bearer.com/reference/rules/express_default_cookie_config
+      line_number: 11
+      filename: default_cookie_session_config.js
+      parent_line_number: 11
+      snippet: |-
+        {
+            domain: "example.com",
+            httpOnly: false,
+            secure: true,
+            maxAge: 24 * 60 * 60 * 1000,
+          }
+      fingerprint: 1ff98ac850681443899120830a7ed5c3_0
+

@@ -1,0 +1,14 @@
+high:
+    - rule:
+        cwe_ids:
+            - "94"
+            - "95"
+        id: javascript_express_eval_user_input
+        description: Dangerous use of eval with user input detected
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_express_eval_user_input
+      line_number: 11
+      filename: eval.js
+      parent_line_number: 11
+      snippet: eval(command)
+      fingerprint: 4356bf19d1f018abcf6dc272a98faf3f_0
+

@@ -1,0 +1,22 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_sentry
+        description: Sensitive data sent to Sentry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_sentry
+      line_number: 2
+      filename: javascript_capture_event.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: |-
+        Sentry.captureEvent({
+          message: "user successfully logged in " + current_user.email,
+          stacktrace: [
+            // ...
+          ],
+        })
+      fingerprint: dbc1820c858ccc475532ff6c93ac1abe_0
+

@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_segment
+        description: Sensitive data sent to Segment detected..
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_segment
+      line_number: 2
+      filename: datatype_as_user_id.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 2
+      snippet: 'analytics.alias(user_id: user.email, previous_id: "some id")'
+      fingerprint: 00bebf3ea9176e07dca95eab505fdc97_0
+

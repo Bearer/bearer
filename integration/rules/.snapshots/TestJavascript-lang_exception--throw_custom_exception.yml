@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "210"
+        id: javascript_lang_exception
+        description: Sensitive data in a exception message detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_exception
+      line_number: 5
+      filename: throw_custom_exception.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: throw new PermissionDenied(`Error with ${current_user.email}`)
+      fingerprint: f62dc1acaf83122fd9fa9769dcccdfe0_0
+

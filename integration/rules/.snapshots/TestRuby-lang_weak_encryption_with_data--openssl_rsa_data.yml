@@ -1,0 +1,32 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 5
+      filename: openssl_rsa_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: rsa_encrypt.export(cipher, user.password)
+      fingerprint: f7881251d777fec00daf7eac6b5d2ace_0
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        description: Weak encryption library usage detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 7
+      filename: openssl_rsa_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 7
+      snippet: OpenSSL::PKey::RSA.new(1024).to_pem(cipher, user.first_name)
+      fingerprint: f7881251d777fec00daf7eac6b5d2ace_1
+

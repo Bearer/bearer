@@ -1,0 +1,36 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 1
+      filename: honeybadger_context.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 3
+      snippet: |-
+        Honeybadger.context({
+          tags: tags
+        })
+      fingerprint: 2a45f28c5674d44e38bfeec519c6ab39_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_honeybadger
+        description: Sensitive data sent to Honeybadger detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
+      line_number: 8
+      filename: honeybadger_context.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 7
+      snippet: |-
+        Honeybadger.context({
+          my_data: current_user.email
+        })
+      fingerprint: 2a45f28c5674d44e38bfeec519c6ab39_1
+

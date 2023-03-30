@@ -1,0 +1,68 @@
+high:
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 3
+      filename: unsafe_shell.rb
+      parent_line_number: 3
+      snippet: Shell.alias_command("foo", params[:oops]) {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_0
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 4
+      filename: unsafe_shell.rb
+      parent_line_number: 4
+      snippet: Shell::CommandProcessor.alias_command(x, "/bin/#{params[:oops]}") {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_1
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 6
+      filename: unsafe_shell.rb
+      parent_line_number: 6
+      snippet: Shell.def_system_command("foo", "bar", params[:oops]) {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_2
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 7
+      filename: unsafe_shell.rb
+      parent_line_number: 7
+      snippet: Shell::CommandProcessor.def_system_command("foo", params[:oops]) {}
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_3
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 12
+      filename: unsafe_shell.rb
+      parent_line_number: 12
+      snippet: processor1.system(params[:oops])
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_4
+    - rule:
+        cwe_ids:
+            - "78"
+        id: ruby_lang_exec_using_user_input
+        description: Execution of OS command formed with user input detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_exec_using_user_input
+      line_number: 15
+      filename: unsafe_shell.rb
+      parent_line_number: 15
+      snippet: processor2.system(x, params[:oops])
+      fingerprint: ac21c2128e3565dd6a8c92bae6213b0e_5
+

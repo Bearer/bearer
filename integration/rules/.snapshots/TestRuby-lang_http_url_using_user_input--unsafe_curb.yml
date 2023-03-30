@@ -1,0 +1,92 @@
+high:
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 3
+      filename: unsafe_curb.rb
+      parent_line_number: 3
+      snippet: |-
+        Curl.http("GET", params[:oops], nil) do
+        end
+      fingerprint: da818badaa39c626cb60c11f307ce208_0
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 6
+      filename: unsafe_curb.rb
+      parent_line_number: 6
+      snippet: Curl.get(params[:oops]) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_1
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 8
+      filename: unsafe_curb.rb
+      parent_line_number: 8
+      snippet: Curl::Easy.perform(params[:oops]) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_2
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 10
+      filename: unsafe_curb.rb
+      parent_line_number: 10
+      snippet: Curl::Easy.new(params[:oops]) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_3
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 11
+      filename: unsafe_curb.rb
+      parent_line_number: 11
+      snippet: easy.url = params[:oops2]
+      fingerprint: da818badaa39c626cb60c11f307ce208_4
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 14
+      filename: unsafe_curb.rb
+      parent_line_number: 14
+      snippet: easy2.url = params[:oops]
+      fingerprint: da818badaa39c626cb60c11f307ce208_5
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 16
+      filename: unsafe_curb.rb
+      parent_line_number: 16
+      snippet: Curl::Multi.get(["https://my.api.com/secure", params[:oops]], {}) {}
+      fingerprint: da818badaa39c626cb60c11f307ce208_6
+    - rule:
+        cwe_ids:
+            - "918"
+        id: ruby_lang_http_url_using_user_input
+        description: HTTP communication with user-controlled destination detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_url_using_user_input
+      line_number: 18
+      filename: unsafe_curb.rb
+      parent_line_number: 18
+      snippet: 'Curl::Multi.http([{ url: params[:oops], method: :post }]) {}'
+      fingerprint: da818badaa39c626cb60c11f307ce208_7
+

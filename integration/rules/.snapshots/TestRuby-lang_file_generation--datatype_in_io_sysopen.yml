@@ -1,0 +1,17 @@
+high:
+    - rule:
+        cwe_ids:
+            - "532"
+            - "313"
+        id: ruby_lang_file_generation
+        description: Sensitive data detected as part of a dynamic file generation.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
+      line_number: 3
+      filename: datatype_in_io_sysopen.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 3
+      snippet: 'a.puts "Hello, #{user.full_name}!"'
+      fingerprint: 76f934c16ac33c36f20bc09290f391db_0
+

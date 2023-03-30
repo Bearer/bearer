@@ -1,0 +1,21 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_segment
+        description: Sensitive data sent to Segment detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_segment
+      line_number: 8
+      filename: datatype_in_group.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 6
+      snippet: |-
+        analytics.group({
+          userId: user.id,
+          groupId: user.job_title,
+          traits: {},
+        })
+      fingerprint: e06b3627d5c7a61440e243b72dbcfb7f_0
+

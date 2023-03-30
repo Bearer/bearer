@@ -1,0 +1,17 @@
+high:
+    - rule:
+        cwe_ids:
+            - "209"
+            - "532"
+        id: ruby_rails_logger
+        description: Sensitive data sent to Rails loggers detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_logger
+      line_number: 1
+      filename: datatype_leak.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: Rails.logger.info(user.email)
+      fingerprint: aa37bad15a3bff32e905123a310a7f8e_0
+

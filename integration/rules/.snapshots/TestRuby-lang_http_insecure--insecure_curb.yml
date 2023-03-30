@@ -1,0 +1,92 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 3
+      filename: insecure_curb.rb
+      parent_line_number: 3
+      snippet: |-
+        Curl.http("GET", "http://my.api.com/users/search", nil) do
+        end
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_0
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 6
+      filename: insecure_curb.rb
+      parent_line_number: 6
+      snippet: Curl.get("http://my.api.com/users/search") {}
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_1
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 8
+      filename: insecure_curb.rb
+      parent_line_number: 8
+      snippet: Curl::Easy.perform("http://my.api.com/users/search") {}
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_2
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 10
+      filename: insecure_curb.rb
+      parent_line_number: 10
+      snippet: Curl::Easy.new("http://my.api.com/users/search") {}
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_3
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 11
+      filename: insecure_curb.rb
+      parent_line_number: 11
+      snippet: easy.url = "http://my.api.com/customers"
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_4
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 14
+      filename: insecure_curb.rb
+      parent_line_number: 14
+      snippet: easy2.url = "http://my.api.com/users/search"
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_5
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 16
+      filename: insecure_curb.rb
+      parent_line_number: 16
+      snippet: Curl::Multi.get(["https://my.api.com/secure", "http://my.api.com/users/search"], {}) {}
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_6
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 18
+      filename: insecure_curb.rb
+      parent_line_number: 18
+      snippet: 'Curl::Multi.http([{ url: "http://my.api.com/users/search", method: :post }]) {}'
+      fingerprint: 2df37da4651da431f66aaf4af12f7223_7
+

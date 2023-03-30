@@ -1,0 +1,17 @@
+high:
+    - rule:
+        cwe_ids:
+            - "1295"
+            - "532"
+        id: javascript_lang_logger
+        description: Sensitive data in a logger message detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
+      line_number: 3
+      filename: child.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 7
+      snippet: logger.child(ctx)
+      fingerprint: a272744c07360821d25042868f04ea5c_0
+

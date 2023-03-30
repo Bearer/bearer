@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: javascript_third_parties_sentry
+        description: Sensitive data sent to Sentry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_sentry
+      line_number: 2
+      filename: javascript_configure_scope_set_tag.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 2
+      snippet: scope.setTag("user_email", user.email)
+      fingerprint: 7152403c083c605ccab83ca16ae65240_0
+

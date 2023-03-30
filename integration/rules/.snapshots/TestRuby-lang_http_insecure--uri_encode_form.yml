@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        description: Connection through an unsecure HTTP communication detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 1
+      filename: uri_encode_form.rb
+      parent_line_number: 1
+      snippet: URI('http://my.api.com/users/search')
+      fingerprint: bbe07548be64ce691181b569676555bd_0
+

@@ -1,0 +1,30 @@
+high:
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_sentry
+        description: Sensitive data sent to Sentry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_sentry
+      line_number: 2
+      filename: datatype_in_set_tag.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 2
+      snippet: scope.set_tag(:email, user.email)
+      fingerprint: 9049353f705fd0459051b95ae7862f56_0
+    - rule:
+        cwe_ids:
+            - "201"
+        id: ruby_third_parties_sentry
+        description: Sensitive data sent to Sentry detected.
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_sentry
+      line_number: 6
+      filename: datatype_in_set_tag.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 6
+      snippet: scope.set_tag(:email, user.email)
+      fingerprint: 9049353f705fd0459051b95ae7862f56_1
+
