@@ -4,6 +4,7 @@ report:
     report: security
     severity: critical,high,medium,low,warning
 rule:
+    disable-default-rules: false
     only-rule: []
     skip-rule: []
 scan:
