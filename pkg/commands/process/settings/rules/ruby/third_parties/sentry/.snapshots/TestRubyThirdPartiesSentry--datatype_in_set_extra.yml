@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_set_extra.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: scope.set_extra(:email, user.email)
       fingerprint: b3bb44fb228314f74b407bb1f5d88cca_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_set_extra.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 6
       snippet: scope.set_extra(:email, user.email)
       fingerprint: b3bb44fb228314f74b407bb1f5d88cca_1

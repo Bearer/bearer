@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "1295"
@@ -10,6 +10,7 @@ medium:
       filename: datatype_leak.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 1
       snippet: logger.info(user.email)
       fingerprint: e8d6e0071bfd061c79b1f4ee0a1474d9_0

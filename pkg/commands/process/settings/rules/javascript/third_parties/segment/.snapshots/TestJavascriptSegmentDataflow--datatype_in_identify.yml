@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_identify.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: |-
         analytics.identify({
@@ -31,6 +32,7 @@ medium:
       filename: datatype_in_identify.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: |-
         analytics.identify({
@@ -53,6 +55,7 @@ medium:
       filename: datatype_in_identify.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: |-
         analytics.identify({
@@ -75,6 +78,7 @@ medium:
       filename: datatype_in_identify.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 18
       snippet: browser.identify(user.email)
       fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_3

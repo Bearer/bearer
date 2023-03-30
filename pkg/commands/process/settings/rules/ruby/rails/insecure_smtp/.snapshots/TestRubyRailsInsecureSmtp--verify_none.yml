@@ -9,6 +9,7 @@ medium:
       filename: verify_none.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 8
       snippet: 'openssl_verify_mode: "none"'
       fingerprint: 52686dc48c6602c724a86a7b5f88602e_0

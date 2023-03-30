@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_add_custom_parameters.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: NewRelic::Agent.add_custom_parameters(user)
       fingerprint: 087d8e2c5c5e6c2e1b47b4bc97ad950a_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_add_custom_parameters.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 3
       snippet: 'NewRelic::Agent.add_custom_parameters(user: { email: "user@example.com" })'
       fingerprint: 087d8e2c5c5e6c2e1b47b4bc97ad950a_1

@@ -12,8 +12,9 @@
       }),
       LineNumber: (int) 1,
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
-      CategoryGroups: ([]string) (len=2) {
+      CategoryGroups: ([]string) (len=3) {
         (string) (len=3) "PII",
+        (string) (len=13) "Personal Data",
         (string) (len=25) "Personal Data (Sensitive)"
       },
       ParentLineNumber: (int) 1,
@@ -22,7 +23,7 @@
       DetailedContext: (string) ""
     }
   },
-  (string) (len=6) "medium": ([]security.Result) (len=1) {
+  (string) (len=4) "high": ([]security.Result) (len=1) {
     (security.Result) {
       Rule: (*security.Rule)({
         CWEIDs: ([]string) (len=1) {
@@ -34,8 +35,9 @@
       }),
       LineNumber: (int) 2,
       Filename: (string) (len=21) "config/application.rb",
-      CategoryGroups: ([]string) (len=1) {
-        (string) (len=3) "PII"
+      CategoryGroups: ([]string) (len=2) {
+        (string) (len=3) "PII",
+        (string) (len=13) "Personal Data"
       },
       ParentLineNumber: (int) 2,
       ParentContent: (string) (len=44) "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",

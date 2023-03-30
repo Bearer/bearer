@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_insert.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: |-
         dataset.insert("my_table", rows) do |result|

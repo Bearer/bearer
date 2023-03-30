@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_save_object.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 4
       snippet: 'index.save_object({ email: user.email }, { auto_generate_object_id_if_not_exist: true })'
       fingerprint: 3206b673fdc04fd0d9b98cbad520a287_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_save_object.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 6
       snippet: 'index.save_objects([{ email: user.email }], { auto_generate_object_id_if_not_exist: true })'
       fingerprint: 3206b673fdc04fd0d9b98cbad520a287_1

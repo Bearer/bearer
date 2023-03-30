@@ -9,6 +9,7 @@ high:
       filename: mysql2_sql_injection.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 5
       snippet: connection.query("SELECT * FROM `user` WHERE name = " + event.customer.name)
       fingerprint: 9f7eccaaec01b46a27078996b374cf28_0
@@ -22,6 +23,7 @@ high:
       filename: mysql2_sql_injection.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: asyncConn.execute("SELECT * FROM `admin_users` WHERE ID = " + event.admin.id)
       fingerprint: 9f7eccaaec01b46a27078996b374cf28_1
@@ -35,6 +37,7 @@ high:
       filename: mysql2_sql_injection.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 11
       snippet: |-
         pool.query("SELECT * FROM users WHERE name = " + event.user_name, function() {
@@ -51,6 +54,7 @@ high:
       filename: mysql2_sql_injection.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 15
       snippet: |-
         conn.query("SELECT * FROM users WHERE name = " + event.user_name, function() {

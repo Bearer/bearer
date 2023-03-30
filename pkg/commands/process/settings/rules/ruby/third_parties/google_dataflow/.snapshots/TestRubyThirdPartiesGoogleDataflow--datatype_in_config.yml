@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "201"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_in_config.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 8
       snippet: 'config.metadata = { current_user_id: current_user.email }'
       fingerprint: fb099f5471cad3cd03de3274fbd6d9d8_0
@@ -22,6 +23,7 @@ medium:
       filename: datatype_in_config.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 14
       snippet: 'client_config.metadata = { current_user_id: current_user.email }'
       fingerprint: fb099f5471cad3cd03de3274fbd6d9d8_1

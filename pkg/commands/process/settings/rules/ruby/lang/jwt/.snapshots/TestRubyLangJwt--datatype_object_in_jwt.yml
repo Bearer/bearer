@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "315"
@@ -9,6 +9,7 @@ medium:
       filename: datatype_object_in_jwt.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 6
       snippet: JWT.encode(payload, ENV.fetch("SECRET_KEY"))
       fingerprint: aca904d7e3ea640d8731a1c880d8d489_0

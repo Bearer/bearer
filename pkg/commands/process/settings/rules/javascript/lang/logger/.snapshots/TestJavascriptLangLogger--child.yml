@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "1295"
@@ -10,6 +10,7 @@ medium:
       filename: child.js
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: logger.child(ctx)
       fingerprint: a272744c07360821d25042868f04ea5c_0

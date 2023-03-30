@@ -1,4 +1,4 @@
-medium:
+high:
     - rule:
         cwe_ids:
             - "210"
@@ -9,9 +9,11 @@ medium:
       filename: bugsnag_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 2
       snippet: raise CustomException.new(current_user.email)
       fingerprint: 02be5ec2c7eec8f0fc5d5702261840b7_0
+medium:
     - rule:
         cwe_ids:
             - "201"
@@ -22,6 +24,7 @@ medium:
       filename: bugsnag_notify.rb
       category_groups:
         - PII
+        - Personal Data
       parent_line_number: 7
       snippet: |-
         Bugsnag.notify(exception) do |event|
