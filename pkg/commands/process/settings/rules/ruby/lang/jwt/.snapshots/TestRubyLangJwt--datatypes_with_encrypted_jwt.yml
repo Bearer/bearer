@@ -3,7 +3,27 @@ high:
         cwe_ids:
             - "315"
         id: ruby_lang_jwt
-        description: Sensitive data in a JWT detected.
+        title: Sensitive data in a JWT detected.
+        description: |
+            ## Description
+
+            JWTs are not a secure place to store sensitive data. This rule looks for any sensitive data types saved to a JWT.
+
+            ## Remediations
+
+            ❌ Avoid storing sensitive data in JWT:
+
+            ```ruby
+            payload = { data: 'data', email: user.email }
+            token = JWT.encode payload, hmac_secret, 'HS256'
+            ```
+
+            ✅ If you need to store user's information, use their unique database identifier instead of personal identifiable information:
+
+            ```ruby
+            payload = { data: 'data', user_id: user.uuid }
+            token = JWT.encode payload, hmac_secret, 'HS256'
+            ```
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_jwt
       line_number: 2
       filename: datatypes_with_encrypted_jwt.rb
@@ -17,7 +37,27 @@ high:
         cwe_ids:
             - "315"
         id: ruby_lang_jwt
-        description: Sensitive data in a JWT detected.
+        title: Sensitive data in a JWT detected.
+        description: |
+            ## Description
+
+            JWTs are not a secure place to store sensitive data. This rule looks for any sensitive data types saved to a JWT.
+
+            ## Remediations
+
+            ❌ Avoid storing sensitive data in JWT:
+
+            ```ruby
+            payload = { data: 'data', email: user.email }
+            token = JWT.encode payload, hmac_secret, 'HS256'
+            ```
+
+            ✅ If you need to store user's information, use their unique database identifier instead of personal identifiable information:
+
+            ```ruby
+            payload = { data: 'data', user_id: user.uuid }
+            token = JWT.encode payload, hmac_secret, 'HS256'
+            ```
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_jwt
       line_number: 4
       filename: datatypes_with_encrypted_jwt.rb
@@ -31,7 +71,27 @@ high:
         cwe_ids:
             - "315"
         id: ruby_lang_jwt
-        description: Sensitive data in a JWT detected.
+        title: Sensitive data in a JWT detected.
+        description: |
+            ## Description
+
+            JWTs are not a secure place to store sensitive data. This rule looks for any sensitive data types saved to a JWT.
+
+            ## Remediations
+
+            ❌ Avoid storing sensitive data in JWT:
+
+            ```ruby
+            payload = { data: 'data', email: user.email }
+            token = JWT.encode payload, hmac_secret, 'HS256'
+            ```
+
+            ✅ If you need to store user's information, use their unique database identifier instead of personal identifiable information:
+
+            ```ruby
+            payload = { data: 'data', user_id: user.uuid }
+            token = JWT.encode payload, hmac_secret, 'HS256'
+            ```
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_jwt
       line_number: 6
       filename: datatypes_with_encrypted_jwt.rb

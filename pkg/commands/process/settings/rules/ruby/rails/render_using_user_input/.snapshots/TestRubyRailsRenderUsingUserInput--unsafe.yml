@@ -3,7 +3,29 @@ high:
         cwe_ids:
             - "79"
         id: ruby_rails_render_using_user_input
-        description: Unsanitized user input detected in response.
+        title: Unsanitized user input detected in response.
+        description: |
+            ## Description
+
+            Applications should not include unsanitized user input in responses. This
+            can allow cross-site scripting (XSS) attacks.
+
+            ## Remediations
+
+            ❌ Avoid including user input directly in the response:
+
+            ```ruby
+            render html: "<h1>#{params[:title]}</h1>"
+            ```
+
+            ✅ Sanitize user input when including it in a response:
+
+            ```ruby
+            render html: "<h1>#{strip_tags(params[:title])}</h1>"
+            ```
+
+            ## Resources
+            - [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_render_using_user_input
       line_number: 1
       filename: unsafe.rb
@@ -14,7 +36,29 @@ high:
         cwe_ids:
             - "79"
         id: ruby_rails_render_using_user_input
-        description: Unsanitized user input detected in response.
+        title: Unsanitized user input detected in response.
+        description: |
+            ## Description
+
+            Applications should not include unsanitized user input in responses. This
+            can allow cross-site scripting (XSS) attacks.
+
+            ## Remediations
+
+            ❌ Avoid including user input directly in the response:
+
+            ```ruby
+            render html: "<h1>#{params[:title]}</h1>"
+            ```
+
+            ✅ Sanitize user input when including it in a response:
+
+            ```ruby
+            render html: "<h1>#{strip_tags(params[:title])}</h1>"
+            ```
+
+            ## Resources
+            - [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_render_using_user_input
       line_number: 2
       filename: unsafe.rb

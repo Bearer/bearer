@@ -3,7 +3,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 3
       filename: datatype_in_extended_notify_methods.rb
@@ -23,7 +33,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 9
       filename: datatype_in_extended_notify_methods.rb
@@ -43,7 +63,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 17
       filename: datatype_in_extended_notify_methods.rb
@@ -63,7 +93,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 23
       filename: datatype_in_extended_notify_methods.rb
@@ -83,7 +123,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 31
       filename: datatype_in_extended_notify_methods.rb
@@ -102,7 +152,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 36
       filename: datatype_in_extended_notify_methods.rb
@@ -121,7 +181,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 43
       filename: datatype_in_extended_notify_methods.rb
@@ -141,7 +211,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 49
       filename: datatype_in_extended_notify_methods.rb
@@ -161,7 +241,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 57
       filename: datatype_in_extended_notify_methods.rb
@@ -182,7 +272,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 64
       filename: datatype_in_extended_notify_methods.rb
@@ -203,7 +303,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 73
       filename: datatype_in_extended_notify_methods.rb
@@ -223,7 +333,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 79
       filename: datatype_in_extended_notify_methods.rb
@@ -243,7 +363,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 101
       filename: datatype_in_extended_notify_methods.rb
@@ -263,7 +393,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_airbrake
-        description: Sensitive data sent to Airbrake detected.
+        title: Sensitive data sent to Airbrake detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Airbrake Docs](https://docs.airbrake.io/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_airbrake
       line_number: 107
       filename: datatype_in_extended_notify_methods.rb

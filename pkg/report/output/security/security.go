@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/bearer/bearer/pkg/util/output"
+	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
@@ -75,6 +76,7 @@ type Result struct {
 type Rule struct {
 	CWEIDs           []string `json:"cwe_ids" yaml:"cwe_ids"`
 	Id               string   `json:"id" yaml:"id"`
+	Title            string   `json:"title" yaml:"title"`
 	Description      string   `json:"description" yaml:"description"`
 	DocumentationUrl string   `json:"documentation_url" yaml:"documentation_url"`
 }
@@ -106,7 +108,7 @@ func evaluateRules(
 ) error {
 	var bar *progressbar.ProgressBar
 	if !builtIn {
-		bar = output.GetProgressBar(len(rules), config, "rules")
+		bar = bearerprogressbar.GetProgressBar(len(rules), config, "rules")
 	}
 
 	for _, rule := range maputil.ToSortedSlice(rules) {
@@ -150,7 +152,8 @@ func evaluateRules(
 
 			for i, output := range results["policy_failure"] {
 				ruleSummary := &Rule{
-					Description:      rule.Description,
+					Title:            rule.Description,
+					Description:      rule.RemediationMessage,
 					Id:               rule.Id,
 					CWEIDs:           rule.CWEIDs,
 					DocumentationUrl: rule.DocumentationUrl,
@@ -443,7 +446,7 @@ func checkAndWriteFailureSummaryToString(
 func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(severity))
-	reportStr.WriteString(result.Description)
+	reportStr.WriteString(result.Title)
 	cweCount := len(result.CWEIDs)
 	if cweCount > 0 {
 		var displayCWEList = []string{}

@@ -3,7 +3,26 @@ high:
         cwe_ids:
             - "79"
         id: javascript_dom_purify
-        description: Unsecure use of DOMPurify detected.
+        title: Unsecure use of DOMPurify detected.
+        description: |
+            ## Description
+            There are XSS vulnerabilites when using DOMPurify's sanitize without proper configuration
+
+            ## Remediations
+
+            Specify a secure configuration option:
+            ```
+              DOMPurify.sanitize(htmlToSanitize, { RETURN_DOM_IMPORT:true })
+            ```
+
+            or:
+
+            ```
+              DOMPurify.sanitize(htmlToSanitize, { RETURN_DOM_FRAGMENT: true })
+            ```
+
+            ## Resources
+            - [Vulnerability explained](https://research.securitum.com/mutation-xss-via-mathml-mutation-dompurify-2-0-17-bypass)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_dom_purify
       line_number: 2
       filename: unsecure.js

@@ -4,7 +4,30 @@ high:
             - "315"
             - "539"
         id: ruby_lang_cookies
-        description: Sensitive data stored in a cookie detected.
+        title: Sensitive data stored in a cookie detected.
+        description: |
+            ## Description
+
+            Storing sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.
+
+            ## Remediations
+
+            ❌ Avoid storing sensitive data in unencrypted cookies messages:
+
+            ```ruby
+            cookies[:user_email] = "john@doe.com"
+            ```
+
+            ✅ To ensure cookie data stays safe, use encrypted cookies:
+
+            ```ruby
+            cookies.encrypted[:user_email] = "john@doe.com"
+            ```
+
+            ## Resources
+
+            - Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)
+            - [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_cookies
       line_number: 1
       filename: datatype_in_signed_cookies.rb
@@ -19,7 +42,30 @@ high:
             - "315"
             - "539"
         id: ruby_lang_cookies
-        description: Sensitive data stored in a cookie detected.
+        title: Sensitive data stored in a cookie detected.
+        description: |
+            ## Description
+
+            Storing sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.
+
+            ## Remediations
+
+            ❌ Avoid storing sensitive data in unencrypted cookies messages:
+
+            ```ruby
+            cookies[:user_email] = "john@doe.com"
+            ```
+
+            ✅ To ensure cookie data stays safe, use encrypted cookies:
+
+            ```ruby
+            cookies.encrypted[:user_email] = "john@doe.com"
+            ```
+
+            ## Resources
+
+            - Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)
+            - [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_cookies
       line_number: 2
       filename: datatype_in_signed_cookies.rb

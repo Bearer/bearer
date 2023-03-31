@@ -18,6 +18,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/detections"
 	"github.com/bearer/bearer/pkg/util/jsonlines"
 	"github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/tmpfile"
 )
 
@@ -89,7 +90,7 @@ func (worker *Worker) Start() {
 	if !worker.config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Scanning target %s", worker.config.Scan.Target)
 	}
-	bar := output.GetProgressBar(len(worker.FileList), worker.config, "files")
+	bar := progressbar.GetProgressBar(len(worker.FileList), worker.config, "files")
 
 	reportFile, err := os.Create(worker.task.Definition.ReportPath)
 	if err != nil {

@@ -3,7 +3,18 @@ high:
         cwe_ids:
             - "201"
         id: javascript_third_parties_datadog_test
-        description: Do not send sensitive data to Datadog.
+        title: Do not send sensitive data to Datadog.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: ""
       line_number: 3
       filename: e2e/rules/testdata/data/auxilary/unsecure.js

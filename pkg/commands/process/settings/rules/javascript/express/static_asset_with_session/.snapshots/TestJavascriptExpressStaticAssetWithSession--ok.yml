@@ -4,7 +4,16 @@ medium:
             - "523"
             - "522"
         id: express_default_session_config
-        description: Session cookie with default config detected.
+        title: Session cookie with default config detected.
+        description: |
+            ## Description
+            To make sure session cookies don't open your application up to exploits or unauthorized access, don't use default cookie values.
+
+            ## Remediations
+            ✅ Instead of the default session name, use generic names.
+
+            ## Resources
+            - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)
         documentation_url: https://docs.bearer.com/reference/rules/express_default_session_config
       line_number: 2
       filename: ok.js

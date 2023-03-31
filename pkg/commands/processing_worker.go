@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 func NewProcessingWorkerCommand() *cobra.Command {
@@ -24,12 +25,10 @@ func NewProcessingWorkerCommand() *cobra.Command {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			generalOptions, err := flags.ToOptions(args)
-			if err != nil {
-				return fmt.Errorf("options binding error: %w", err)
-			}
-
-			output.Setup(cmd, generalOptions)
+			output.Setup(cmd, output.SetupRequest{
+				Debug: viper.GetBool(flag.DebugFlag.ConfigName),
+				Quiet: viper.GetBool(flag.QuietFlag.ConfigName),
+			})
 
 			processOptions, err := flags.ProcessFlagGroup.ToOptions()
 			if err != nil {

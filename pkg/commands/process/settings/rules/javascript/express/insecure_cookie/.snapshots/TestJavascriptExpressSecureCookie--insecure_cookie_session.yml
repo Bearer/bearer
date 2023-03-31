@@ -4,7 +4,18 @@ low:
             - "1004"
             - "614"
         id: express_insecure_cookie
-        description: Missing secure options for cookie detected.
+        title: Missing secure options for cookie detected.
+        description: |
+            ## Description
+            To make sure cookies don't open your application up to exploits or unauthorized access, make sure to set security options appropriately.
+
+            ## Remediations
+            ✅ Set cookie security values to use HTTP(S) instead of client-side javascript.
+
+            ✅ Set `secure` values to `true` to force cookies to only send over HTTPS.
+
+            ## Resources
+            - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)
         documentation_url: https://docs.bearer.com/reference/rules/express_insecure_cookie
       line_number: 13
       filename: insecure_cookie_session.js

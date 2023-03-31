@@ -3,7 +3,18 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_datadog
-        description: Sensitive data sent to Datadog detected.
+        title: Sensitive data sent to Datadog detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 2
       filename: datatype_in_tags.rb
@@ -17,7 +28,18 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_datadog
-        description: Sensitive data sent to Datadog detected.
+        title: Sensitive data sent to Datadog detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 7
       filename: datatype_in_tags.rb
@@ -31,7 +53,18 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_datadog
-        description: Sensitive data sent to Datadog detected.
+        title: Sensitive data sent to Datadog detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 9
       filename: datatype_in_tags.rb
@@ -45,7 +78,18 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_datadog
-        description: Sensitive data sent to Datadog detected.
+        title: Sensitive data sent to Datadog detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 10
       filename: datatype_in_tags.rb
@@ -59,7 +103,18 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_datadog
-        description: Sensitive data sent to Datadog detected.
+        title: Sensitive data sent to Datadog detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 12
       filename: datatype_in_tags.rb
@@ -76,7 +131,18 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_datadog
-        description: Sensitive data sent to Datadog detected.
+        title: Sensitive data sent to Datadog detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Datadog docs](https://docs.datadoghq.com)
+            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_datadog
       line_number: 17
       filename: datatype_in_tags.rb

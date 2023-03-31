@@ -3,7 +3,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 1
       filename: unsafe_stdlib.rb
@@ -14,7 +43,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 2
       filename: unsafe_stdlib.rb
@@ -25,7 +83,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 3
       filename: unsafe_stdlib.rb
@@ -36,7 +123,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 5
       filename: unsafe_stdlib.rb
@@ -47,7 +163,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 7
       filename: unsafe_stdlib.rb
@@ -58,7 +203,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 9
       filename: unsafe_stdlib.rb
@@ -69,7 +243,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 11
       filename: unsafe_stdlib.rb
@@ -80,7 +283,36 @@ high:
         cwe_ids:
             - "94"
         id: ruby_lang_reflection_using_user_input
-        description: Use of reflection influenced by user input detected.
+        title: Use of reflection influenced by user input detected.
+        description: |
+            ## Description
+
+            Applications should not look up or manipulate code using user-supplied data.
+
+            ## Remediations
+
+            ❌ Avoid using user input when using reflection:
+
+            ```ruby
+            method(params[:method])
+            ```
+
+            ✅ Use user input indirectly when using reflection:
+
+            ```ruby
+            method_name =
+              case params[:action]
+              when "option1"
+                "method1"
+              when "option2"
+                "method2"
+              end
+
+            method(method_name)
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input
       line_number: 12
       filename: unsafe_stdlib.rb

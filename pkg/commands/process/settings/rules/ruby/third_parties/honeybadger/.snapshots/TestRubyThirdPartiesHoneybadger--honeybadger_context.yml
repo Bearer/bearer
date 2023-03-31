@@ -3,7 +3,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_honeybadger
-        description: Sensitive data sent to Honeybadger detected.
+        title: Sensitive data sent to Honeybadger detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Honeybadger.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 1
       filename: honeybadger_context.rb
@@ -37,7 +47,17 @@ high:
         cwe_ids:
             - "201"
         id: ruby_third_parties_honeybadger
-        description: Sensitive data sent to Honeybadger detected.
+        title: Sensitive data sent to Honeybadger detected.
+        description: |
+            ## Description
+            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Honeybadger.
+
+            ## Remediations
+
+            When logging errors or events, ensure all sensitive data is removed.
+
+            ## Resources
+            - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 8
       filename: honeybadger_context.rb

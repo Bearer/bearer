@@ -4,7 +4,6 @@ import (
 	"io"
 	"os"
 
-	"github.com/bearer/bearer/pkg/flag"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
@@ -12,8 +11,13 @@ import (
 
 var (
 	outputWriter io.Writer = os.Stdout
-	errorWriter  io.Writer = os.Stderr
+	ErrorWriter  io.Writer = os.Stderr
 )
+
+type SetupRequest struct {
+	Quiet bool
+	Debug bool
+}
 
 // DefaultLogger returns default output logger
 func StdOutLogger() *zerolog.Event {
@@ -21,7 +25,7 @@ func StdOutLogger() *zerolog.Event {
 }
 
 func StdErrLogger() *zerolog.Event {
-	return PlainLogger(errorWriter)
+	return PlainLogger(ErrorWriter)
 }
 
 func PlainLogger(out io.Writer) *zerolog.Event {
@@ -39,9 +43,9 @@ func PlainLogger(out io.Writer) *zerolog.Event {
 	return logger.Info()
 }
 
-func Setup(cmd *cobra.Command, options flag.Options) {
+func Setup(cmd *cobra.Command, options SetupRequest) {
 	outputWriter = cmd.OutOrStdout()
-	errorWriter = cmd.ErrOrStderr()
+	ErrorWriter = cmd.ErrOrStderr()
 
 	if options.Debug {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)

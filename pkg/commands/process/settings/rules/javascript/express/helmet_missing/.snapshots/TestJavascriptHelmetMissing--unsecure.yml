@@ -3,7 +3,24 @@ low:
         cwe_ids:
             - "693"
         id: javascript_express_helmet_missing
-        description: Security misconfiguration detected.
+        title: Security misconfiguration detected.
+        description: |
+            ## Description
+
+            Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
+
+            ## Remediations
+
+            ✅ Use Helmet middleware
+
+            ```javascript
+            const helmet = require("helmet")
+            app.use(helmet())
+            ```
+
+            ## Resources
+
+            - [Express Security Best Practices: Use Helmet](https://expressjs.com/en/advanced/best-practice-security.html#use-helmet)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_express_helmet_missing
       line_number: 4
       filename: unsecure.js

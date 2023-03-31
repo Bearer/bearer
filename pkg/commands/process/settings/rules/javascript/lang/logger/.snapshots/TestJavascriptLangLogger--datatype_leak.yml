@@ -4,7 +4,27 @@ high:
             - "1295"
             - "532"
         id: javascript_lang_logger
-        description: Sensitive data in a logger message detected.
+        title: Sensitive data in a logger message detected.
+        description: |
+            ## Description
+
+            Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to loggers.
+
+            ## Remediations
+
+            ❌ Avoid using sensitive data in logger messages:
+
+            ```javascript
+            logger.info(`User is: ${user.email}`)
+            ```
+
+            ✅ If you need to identify a user, use their unique identifier instead of their personal identifiable information:
+
+            ```javascript
+            logger.info(`User is: ${user.uuid}`)
+            ```
+            ## Resources
+            - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_lang_logger
       line_number: 1
       filename: datatype_leak.js

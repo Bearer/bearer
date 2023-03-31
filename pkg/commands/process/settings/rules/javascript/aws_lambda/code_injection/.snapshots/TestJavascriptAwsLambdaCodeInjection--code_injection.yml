@@ -4,7 +4,46 @@ high:
             - "94"
             - "95"
         id: javascript_aws_lambda_code_injection
-        description: Code injection detected.
+        title: Code injection detected.
+        description: |
+            ## Description
+            Running code that contains unsanitized data, such as user input or request data, makes your application vulnerable to injection attacks.
+
+            ## Remediations
+            Think twice if user input is really needed there.
+
+            It might be possible to use dynamic hardcoded values:
+
+            ```javascript
+              exports.handler = async (event) => {
+                  let myFunc = "(a, b) => a + b"
+
+                  if event["singleMember"] {
+                    myFunc = "(a) => a"
+                  }
+
+                  vm.compileFunction(myFunc);
+              };
+            ```
+
+            or pass user input to a compiled function, instead of compiling it with user input.
+
+            ```javascript
+              exports.handler = async (event) => {
+                  let myFunc = "(a, b) => a + b"
+
+                  if event["singleMember"] {
+                    myFunc = "(a) => a"
+                  }
+
+                  let compiledFunction = vm.compileFunction(myFunc);
+
+                  compiledFunction(event)
+              };
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_code_injection
       line_number: 5
       filename: code_injection.js
@@ -16,7 +55,46 @@ high:
             - "94"
             - "95"
         id: javascript_aws_lambda_code_injection
-        description: Code injection detected.
+        title: Code injection detected.
+        description: |
+            ## Description
+            Running code that contains unsanitized data, such as user input or request data, makes your application vulnerable to injection attacks.
+
+            ## Remediations
+            Think twice if user input is really needed there.
+
+            It might be possible to use dynamic hardcoded values:
+
+            ```javascript
+              exports.handler = async (event) => {
+                  let myFunc = "(a, b) => a + b"
+
+                  if event["singleMember"] {
+                    myFunc = "(a) => a"
+                  }
+
+                  vm.compileFunction(myFunc);
+              };
+            ```
+
+            or pass user input to a compiled function, instead of compiling it with user input.
+
+            ```javascript
+              exports.handler = async (event) => {
+                  let myFunc = "(a, b) => a + b"
+
+                  if event["singleMember"] {
+                    myFunc = "(a) => a"
+                  }
+
+                  let compiledFunction = vm.compileFunction(myFunc);
+
+                  compiledFunction(event)
+              };
+            ```
+
+            ## Resources
+            - [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)
         documentation_url: https://docs.bearer.com/reference/rules/javascript_aws_lambda_code_injection
       line_number: 7
       filename: code_injection.js
