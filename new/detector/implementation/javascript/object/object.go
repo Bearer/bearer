@@ -20,11 +20,11 @@ type objectDetector struct {
 	// Naming
 	assignmentQuery *tree.Query
 	// Projection
-	memberExpressionQuery    *tree.Query
-	subscriptExpressionQuery *tree.Query
-	callQuery                *tree.Query
-	// FIXME: what to do with this?
+	memberExpressionQuery     *tree.Query
+	subscriptExpressionQuery  *tree.Query
+	callQuery                 *tree.Query
 	objectDeconstructionQuery *tree.Query
+	spreadElementQuery        *tree.Query
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
@@ -52,6 +52,12 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	objectDeconstructionQuery, err := lang.CompileQuery(`(variable_declarator name: (object_pattern (shorthand_property_identifier_pattern) @match) value: (_) @value) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling object deconstruction query: %s", err)
+	}
+
+	// { ...user, foo: "bar" }
+	spreadElementQuery, err := lang.CompileQuery(`(object (spread_element (identifier) @identifier)) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling spreadElement query: %s", err)
 	}
 
 	// class User {
@@ -89,6 +95,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	return &objectDetector{
 		objectPairQuery:           objectPairQuery,
 		assignmentQuery:           assignmentQuery,
+		spreadElementQuery:        spreadElementQuery,
 		objectDeconstructionQuery: objectDeconstructionQuery,
 		classQuery:                classQuery,
 		memberExpressionQuery:     memberExpressionQuery,
@@ -131,12 +138,28 @@ func (detector *objectDetector) getObject(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
+	var properties []generictypes.Property
+	spreadResults, err := detector.spreadElementQuery.MatchAt(node)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, spreadResult := range spreadResults {
+		detections, err := evaluator.ForNode(spreadResult["identifier"], "object", true)
+
+		if err != nil {
+			return nil, err
+		}
+		for _, detection := range detections {
+			properties = append(properties, detection.Data.(generictypes.Object).Properties...)
+		}
+	}
+
 	results, err := detector.objectPairQuery.MatchAt(node)
 	if len(results) == 0 || err != nil {
 		return nil, err
 	}
 
-	var properties []generictypes.Property
 	for _, result := range results {
 		var name string
 		key := result["key"]
@@ -258,4 +281,5 @@ func (detector *objectDetector) Close() {
 	detector.memberExpressionQuery.Close()
 	detector.subscriptExpressionQuery.Close()
 	detector.callQuery.Close()
+	detector.spreadElementQuery.Close()
 }

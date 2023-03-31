@@ -64,7 +64,10 @@
 						]
 					}
 				}
-			]
+			],
+			"VariableNodes": {
+				"DATA_TYPE": {}
+			}
 		}
 	}
 ]
