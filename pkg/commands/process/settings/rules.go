@@ -21,18 +21,20 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
 
-	if err := loadRuleDefinitions(definitions, rulesFs); err != nil {
-		return nil, nil, fmt.Errorf("error loading default rules: %s", err)
-	}
-	// add default documentation urls for default rules
-	for id, definition := range definitions {
-		if definition.Metadata.DocumentationUrl == "" {
-			definitions[id].Metadata.DocumentationUrl = "https://docs.bearer.com/reference/rules/" + id
+	if !options.DisableDefaultRules {
+		if err := loadRuleDefinitions(definitions, rulesFs); err != nil {
+			return nil, nil, fmt.Errorf("error loading default rules: %s", err)
 		}
-	}
+		// add default documentation urls for default rules
+		for id, definition := range definitions {
+			if definition.Metadata.DocumentationUrl == "" {
+				definitions[id].Metadata.DocumentationUrl = "https://docs.bearer.com/reference/rules/" + id
+			}
+		}
 
-	if err := loadRuleDefinitions(builtInDefinitions, builtInRulesFs); err != nil {
-		return nil, nil, fmt.Errorf("error loading default built-in rules: %s", err)
+		if err := loadRuleDefinitions(builtInDefinitions, builtInRulesFs); err != nil {
+			return nil, nil, fmt.Errorf("error loading default built-in rules: %s", err)
+		}
 	}
 
 	for _, dir := range externalRuleDirs {

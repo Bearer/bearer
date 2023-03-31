@@ -13,6 +13,9 @@ options:
     - name: debug
       default_value: "false"
       usage: Enable debug logs
+    - name: disable-default-rules
+      default_value: "false"
+      usage: Disables all default and built-in rules.
     - name: disable-domain-resolution
       default_value: "true"
       usage: |

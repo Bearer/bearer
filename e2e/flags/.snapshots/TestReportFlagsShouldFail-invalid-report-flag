@@ -17,8 +17,9 @@ Report Flags
       --severity string   Specify which severities are included in the report. (default "critical,high,medium,low,warning")
 
 Rule Flags
-      --only-rule strings   Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
-      --skip-rule strings   Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
+      --disable-default-rules   Disables all default and built-in rules.
+      --only-rule strings       Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
+      --skip-rule strings       Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
 
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
