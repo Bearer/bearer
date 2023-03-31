@@ -36,7 +36,7 @@ rule.metadata %}
 
 {% endrenderTemplate %}
 
-{% if rule.metadata.cwe_id %}
+{% if rule.metadata.cwe_id | length %}
   <h2 id="associated-cwe">Associated CWE</h2>
   <ul>
     {% for id in rule.metadata.cwe_id %}
@@ -47,7 +47,7 @@ rule.metadata %}
       </li>
       {% endfor%}
     </ul>
-    {% if rule.owasp_ids %}
+    {% if rule.owasp_ids | length %}
       <h2 id="owasp-top10">OWASP Top 10</h2>
       <ul>
         {% for value in rule.owasp_ids %}
