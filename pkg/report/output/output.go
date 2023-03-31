@@ -22,6 +22,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 
+	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
+
 	"github.com/bearer/bearer/pkg/report/output/detectors"
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	"github.com/bearer/bearer/pkg/types"
@@ -78,8 +80,8 @@ func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result
 
 		return BearerReport{
 			Findings:   securityResults,
-			DataTypes:  &dataflow.Datatypes,
-			Components: &dataflow.Components,
+			DataTypes:  dataflow.Datatypes,
+			Components: dataflow.Components,
 			Files:      files,
 			Meta:       *meta,
 		}, nil, nil, nil
@@ -250,8 +252,8 @@ func createBearerGzipFileReport(
 
 	content, _ := ReportJSON(&BearerReport{
 		Findings:   securityResults,
-		DataTypes:  &dataflow.Datatypes,
-		Components: &dataflow.Components,
+		DataTypes:  dataflow.Datatypes,
+		Components: dataflow.Components,
 		Files:      files,
 		Meta:       *meta,
 	})
@@ -330,7 +332,7 @@ type Meta struct {
 type BearerReport struct {
 	Meta       Meta                          `json:"meta" yaml:"meta"`
 	Findings   *map[string][]security.Result `json:"findings" yaml:"findings"`
-	DataTypes  *dataflow.DataTypes           `json:"data_types" yaml:"data_types"`
-	Components *dataflow.Components          `json:"components" yaml:"components"`
+	DataTypes  []dataflowtypes.Datatype      `json:"data_types" yaml:"data_types"`
+	Components []dataflowtypes.Component     `json:"components" yaml:"components"`
 	Files      []string                      `json:"files" yaml:"files"`
 }

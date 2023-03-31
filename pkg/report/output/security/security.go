@@ -150,7 +150,7 @@ func evaluateRules(
 				return err
 			}
 
-			for i, output := range results["policy_failure"] {
+			for _, output := range results["policy_failure"] {
 				ruleSummary := &Rule{
 					Title:            rule.Description,
 					Description:      rule.RemediationMessage,
@@ -159,8 +159,6 @@ func evaluateRules(
 					DocumentationUrl: rule.DocumentationUrl,
 				}
 
-				// FIXME: consider filename being renamed
-				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				result := Result{
 					Rule:             ruleSummary,
 					Filename:         output.Filename,
@@ -169,7 +167,6 @@ func evaluateRules(
 					ParentLineNumber: output.ParentLineNumber,
 					ParentContent:    output.ParentContent,
 					DetailedContext:  output.DetailedContext,
-					Fingerprint:      fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i),
 				}
 
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
@@ -178,6 +175,17 @@ func evaluateRules(
 					summaryResults[severity] = append(summaryResults[severity], result)
 				}
 			}
+		}
+	}
+
+	for i, resultsSlice := range summaryResults {
+		SortResult(resultsSlice)
+
+		for j, result := range resultsSlice {
+			// FIXME: consider filename being renamed
+			fingerprintId := fmt.Sprintf("%s_%s", result.Rule.Id, result.Filename)
+			fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), j)
+			summaryResults[i][j].Fingerprint = fingerprint
 		}
 	}
 
@@ -524,4 +532,45 @@ func iterativeDigitsCount(number int) int {
 	}
 
 	return count
+}
+
+func SortResult(data []Result) {
+	sort.Slice(data, func(i, j int) bool {
+		vulnerabilityA := data[i]
+		vulnerabilityB := data[j]
+
+		if vulnerabilityA.Rule.Id < vulnerabilityB.Rule.Id {
+			return true
+		}
+		if vulnerabilityA.Rule.Id > vulnerabilityB.Rule.Id {
+			return false
+		}
+
+		if vulnerabilityA.Filename < vulnerabilityB.Filename {
+			return true
+		}
+		if vulnerabilityA.Filename > vulnerabilityB.Filename {
+			return false
+		}
+
+		if vulnerabilityA.LineNumber < vulnerabilityB.LineNumber {
+			return true
+		}
+		if vulnerabilityA.LineNumber > vulnerabilityB.LineNumber {
+			return false
+		}
+
+		if vulnerabilityA.ParentLineNumber < vulnerabilityB.ParentLineNumber {
+			return true
+		}
+		if vulnerabilityA.ParentLineNumber > vulnerabilityB.ParentLineNumber {
+			return false
+		}
+
+		if vulnerabilityA.ParentContent < vulnerabilityB.ParentContent {
+			return true
+		}
+
+		return false
+	})
 }

@@ -148,45 +148,45 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 
 func dummyDataflow() dataflow.DataFlow {
 	subject := "User"
-	riskLocation := types.RiskLocation{
-		Filename:    "config/application.rb",
-		LineNumber:  2,
-		FieldName:   "",
-		ObjectName:  "",
-		SubjectName: &subject,
-		Parent: &schema.Parent{
-			LineNumber: 2,
-			Content:    "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
-		},
-	}
-	lowRisk := types.RiskDetection{
+	lowRisk := types.RiskDetector{
 		DetectorID: "ruby_lang_ssl_verification",
-		Locations: []types.RiskDetectionLocation{
+		Locations: []types.RiskLocation{
 			{
-				Content:      "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
-				RiskLocation: &riskLocation,
+				Filename:   "config/application.rb",
+				LineNumber: 2,
+				Parent: &schema.Parent{
+					LineNumber: 2,
+					Content:    "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+				},
+				PresenceMatches: []types.RiskPresence{
+					{
+						Name: "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+					},
+				},
 			},
 		},
 	}
 
 	criticalRisk := types.RiskDetector{
 		DetectorID: "ruby_rails_logger",
-		DataTypes: []types.RiskDatatype{
+		Locations: []types.RiskLocation{
 			{
-				Name:         "Biometric Data",
-				Stored:       false,
-				UUID:         "85599b0c-37b6-4855-af54-5789edc27c00",
-				CategoryUUID: "35b94efa-9b67-49b2-abb9-29b6a759a030",
-				Locations: []types.RiskLocation{
+				Filename:   "pkg/datatype_leak.rb",
+				LineNumber: 1,
+				Parent: &schema.Parent{
+					LineNumber: 1,
+					Content:    "Rails.logger.info(user.biometric_data)",
+				},
+				DataTypes: []types.RiskDatatype{
 					{
-						Filename:    "pkg/datatype_leak.rb",
-						LineNumber:  1,
-						FieldName:   "biometric_data",
-						ObjectName:  "user",
-						SubjectName: &subject,
-						Parent: &schema.Parent{
-							LineNumber: 1,
-							Content:    "Rails.logger.info(user.biometric_data)",
+						Name:         "Biometric Data",
+						CategoryUUID: "35b94efa-9b67-49b2-abb9-29b6a759a030",
+						Schemas: []types.RiskSchema{
+							{
+								FieldName:   "",
+								ObjectName:  "",
+								SubjectName: &subject,
+							},
 						},
 					},
 				},
@@ -195,7 +195,7 @@ func dummyDataflow() dataflow.DataFlow {
 	}
 
 	// build risk []interface
-	risks := make([]interface{}, 2)
+	risks := make([]types.RiskDetector, 2)
 	risks[0] = criticalRisk
 	risks[1] = lowRisk
 
