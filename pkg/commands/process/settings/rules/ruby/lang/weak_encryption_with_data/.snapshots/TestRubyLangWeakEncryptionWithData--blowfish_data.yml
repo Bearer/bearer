@@ -43,7 +43,7 @@ high:
         Crypt::Blowfish.new("insecure").encrypt_block { |user|
           user.password
         }
-      fingerprint: bee4a5691ff5b71c49e0773b2447be42_1
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_0
     - rule:
         cwe_ids:
             - "326"
@@ -88,7 +88,7 @@ high:
         Crypt::Blowfish.new("insecure").encrypt_block do |user|
           user.password
         end
-      fingerprint: bee4a5691ff5b71c49e0773b2447be42_2
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_1
     - rule:
         cwe_ids:
             - "326"
@@ -130,7 +130,7 @@ high:
         - Personal Data
       parent_line_number: 9
       snippet: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
-      fingerprint: bee4a5691ff5b71c49e0773b2447be42_0
+      fingerprint: bee4a5691ff5b71c49e0773b2447be42_2
 medium:
     - rule:
         cwe_ids:

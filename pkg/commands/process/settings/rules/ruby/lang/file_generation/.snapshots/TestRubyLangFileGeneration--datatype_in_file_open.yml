@@ -72,7 +72,26 @@ high:
             - "532"
             - "313"
         id: ruby_lang_file_generation
-        description: Sensitive data detected as part of a dynamic file generation.
+        title: Sensitive data detected as part of a dynamic file generation.
+        description: |
+            ## Description
+
+            It is not uncommon to generate logs, backups, or data exports to static file formats. This rule checks if code exists to write sensitive data to static files.
+
+            ## Remediations
+
+            ❌ Avoid code like the following:
+
+            ```ruby
+            File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user.email} logged in\n" }
+            File.open("users.csv", "w") do |f|
+              users.each do |user|
+                f.write "#{user.email},#{user.first_name},#{user.last_name}"
+              end
+            end
+            ```
+
+            In instances where writing sensitive data is intentional, make sure to document its location according to your internal policies.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
       line_number: 5
       filename: datatype_in_file_open.rb
@@ -87,7 +106,26 @@ high:
             - "532"
             - "313"
         id: ruby_lang_file_generation
-        description: Sensitive data detected as part of a dynamic file generation.
+        title: Sensitive data detected as part of a dynamic file generation.
+        description: |
+            ## Description
+
+            It is not uncommon to generate logs, backups, or data exports to static file formats. This rule checks if code exists to write sensitive data to static files.
+
+            ## Remediations
+
+            ❌ Avoid code like the following:
+
+            ```ruby
+            File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user.email} logged in\n" }
+            File.open("users.csv", "w") do |f|
+              users.each do |user|
+                f.write "#{user.email},#{user.first_name},#{user.last_name}"
+              end
+            end
+            ```
+
+            In instances where writing sensitive data is intentional, make sure to document its location according to your internal policies.
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_file_generation
       line_number: 5
       filename: datatype_in_file_open.rb

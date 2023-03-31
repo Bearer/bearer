@@ -150,7 +150,7 @@ func evaluateRules(
 				return err
 			}
 
-			for i, output := range results["policy_failure"] {
+			for _, output := range results["policy_failure"] {
 				ruleSummary := &Rule{
 					Title:            rule.Description,
 					Description:      rule.RemediationMessage,
@@ -159,8 +159,6 @@ func evaluateRules(
 					DocumentationUrl: rule.DocumentationUrl,
 				}
 
-				// FIXME: consider filename being renamed
-				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				result := Result{
 					Rule:             ruleSummary,
 					Filename:         output.Filename,
@@ -169,7 +167,6 @@ func evaluateRules(
 					ParentLineNumber: output.ParentLineNumber,
 					ParentContent:    output.ParentContent,
 					DetailedContext:  output.DetailedContext,
-					Fingerprint:      fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i),
 				}
 
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
@@ -181,8 +178,15 @@ func evaluateRules(
 		}
 	}
 
-	for _, resultsSlice := range summaryResults {
+	for i, resultsSlice := range summaryResults {
 		SortResult(resultsSlice)
+
+		for j, result := range resultsSlice {
+			// FIXME: consider filename being renamed
+			fingerprintId := fmt.Sprintf("%s_%s", result.Rule.Id, result.Filename)
+			fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), j)
+			summaryResults[i][j].Fingerprint = fingerprint
+		}
 	}
 
 	return nil

@@ -32,7 +32,7 @@ high:
             friends: user.friendCount
           }
         })
-      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_3
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_0
     - rule:
         cwe_ids:
             - "201"
@@ -66,7 +66,7 @@ high:
             friends: user.friendCount
           }
         })
-      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_0
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_1
     - rule:
         cwe_ids:
             - "201"
@@ -125,5 +125,5 @@ high:
         - Personal Data
       parent_line_number: 18
       snippet: browser.identify(user.email)
-      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_1
+      fingerprint: 93814e8f0bfa77c3d3f784e7c9194d02_3
 

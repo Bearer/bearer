@@ -55,7 +55,7 @@ critical:
         - Personal Data (Sensitive)
       parent_line_number: 1
       snippet: URI("https://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
-      fingerprint: f34fb10ce48303451898c1db1c78265d_1
+      fingerprint: f34fb10ce48303451898c1db1c78265d_0
 high:
     - rule:
         cwe_ids:

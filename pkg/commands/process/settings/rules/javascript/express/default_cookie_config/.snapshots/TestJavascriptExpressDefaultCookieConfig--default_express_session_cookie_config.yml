@@ -104,7 +104,7 @@ medium:
         {
             cookie: {},
           }
-      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_0
+      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_3
     - rule:
         cwe_ids:
             - "523"
@@ -134,5 +134,5 @@ medium:
               path: "/some-path",
             },
           }
-      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_1
+      fingerprint: 13a07ed013ea7e6baa3a2a6dfe4a3d1c_4
 

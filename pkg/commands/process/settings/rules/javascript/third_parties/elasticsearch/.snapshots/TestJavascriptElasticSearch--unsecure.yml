@@ -28,7 +28,18 @@ high:
         cwe_ids:
             - "201"
         id: javascript_elasticsearch
-        description: Sensitive data sent to ElasticSearch detected.
+        title: Sensitive data sent to ElasticSearch detected.
+        description: |
+            ## Description
+
+            Leaking sensitive data to database is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to elasticsearch.
+
+            ## Remediations
+
+            <!--
+            ## Resources
+            Coming soon.
+            -->
         documentation_url: https://docs.bearer.com/reference/rules/javascript_elasticsearch
       line_number: 1
       filename: unsecure.js
