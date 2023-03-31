@@ -10,7 +10,7 @@ Bearer currently supports Ruby and JavaScript codebase.
 | Languages               | Supported |
 | ----------------------- | --------- |
 | Ruby                    | ✅         |
-| JavaScript / Typescript | ✅         |
+| JavaScript / TypeScript | ✅         |
 
 We are working on adding more languages in the coming months, especially PHP, Java, C#, Go, and Python.
 
