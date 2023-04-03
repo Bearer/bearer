@@ -112,7 +112,10 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 	variables := make(tree.QueryResult)
 
 	for paramName, node := range treeResult {
-		variables[query.paramToVariable[paramName]] = node
+		variableName := query.paramToVariable[paramName]
+		if variableName != "" {
+			variables[variableName] = node
+		}
 	}
 
 	return &languagetypes.PatternQueryResult{

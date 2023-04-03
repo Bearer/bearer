@@ -1,0 +1,90 @@
+high:
+    - rule:
+        cwe_ids:
+            - "89"
+        id: ruby_rails_sql_injection
+        title: Do not use unsanitized user input in SQL queries.
+        description: |
+            ## Description
+
+            TODO
+
+            ## Remediations
+            TODO
+            <!--
+            ## Resources
+            Coming soon.
+            -->
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
+      line_number: 1
+      filename: injected_params.rb
+      parent_line_number: 1
+      snippet: User.find_by(params[:oops])
+      fingerprint: 0ca873563d1d3aea85c0b052261a3f57_0
+    - rule:
+        cwe_ids:
+            - "89"
+        id: ruby_rails_sql_injection
+        title: Do not use unsanitized user input in SQL queries.
+        description: |
+            ## Description
+
+            TODO
+
+            ## Remediations
+            TODO
+            <!--
+            ## Resources
+            Coming soon.
+            -->
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
+      line_number: 2
+      filename: injected_params.rb
+      parent_line_number: 2
+      snippet: 'User.find_by!("oops #{params[:oops]}")'
+      fingerprint: 0ca873563d1d3aea85c0b052261a3f57_1
+    - rule:
+        cwe_ids:
+            - "89"
+        id: ruby_rails_sql_injection
+        title: Do not use unsanitized user input in SQL queries.
+        description: |
+            ## Description
+
+            TODO
+
+            ## Remediations
+            TODO
+            <!--
+            ## Resources
+            Coming soon.
+            -->
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
+      line_number: 3
+      filename: injected_params.rb
+      parent_line_number: 3
+      snippet: 'User.find_by_sql("oops #{params[:oops]}")'
+      fingerprint: 0ca873563d1d3aea85c0b052261a3f57_2
+    - rule:
+        cwe_ids:
+            - "89"
+        id: ruby_rails_sql_injection
+        title: Do not use unsanitized user input in SQL queries.
+        description: |
+            ## Description
+
+            TODO
+
+            ## Remediations
+            TODO
+            <!--
+            ## Resources
+            Coming soon.
+            -->
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
+      line_number: 4
+      filename: injected_params.rb
+      parent_line_number: 4
+      snippet: 'User.find_sole_by("oops #{params[:oops]}")'
+      fingerprint: 0ca873563d1d3aea85c0b052261a3f57_3
+

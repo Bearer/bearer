@@ -1,0 +1,130 @@
+patterns:
+  - pattern: |
+      $<INJECTION>
+    filters:
+      - variable: INJECTION
+        detection: ruby_rails_sql_injection_injection
+        contains: false
+      - not:
+          variable: INJECTION
+          detection: ruby_rails_sql_injection_safe_argument
+auxiliary:
+  - id: ruby_rails_sql_injection_injection
+    patterns:
+      - pattern: $<_>.$<METHOD>($<USER_INPUT_HEAD>$<...>)
+        filters:
+          - variable: METHOD
+            detection: ruby_rails_sql_injection_method
+            contains: false
+          - variable: USER_INPUT_HEAD
+            detection: ruby_rails_sql_injection_user_input_head
+          - not:
+              variable: USER_INPUT_HEAD
+              detection: ruby_rails_sql_injection_sanitized
+      - pattern: $<METHOD>($<USER_INPUT_HEAD>$<...>)
+        filters:
+          - variable: METHOD
+            detection: ruby_rails_sql_injection_method
+            contains: false
+          - variable: USER_INPUT_HEAD
+            detection: ruby_rails_sql_injection_user_input_head
+          - not:
+              variable: USER_INPUT_HEAD
+              detection: ruby_rails_sql_injection_sanitized
+  - id: ruby_rails_sql_injection_method
+    patterns:
+      - pattern: $<METHOD>
+        filters:
+          - variable: METHOD
+            values:
+              - find_by
+              - find_by!
+              - find_by_sql
+              - find_sole_by
+  - id: ruby_rails_sql_injection_user_input
+    patterns:
+      - params
+      - request
+      - cookies
+  - id: ruby_rails_sql_injection_user_input_head
+    patterns:
+      - pattern: $<USER_INPUT>
+        filters:
+          - variable: USER_INPUT
+            detection: ruby_rails_sql_injection_user_input
+            contains: false
+  - id: ruby_rails_sql_injection_safe_argument
+    patterns:
+      - pattern: | # ["attr = ?", params[:oops]]
+          [$<_>, $<...>$<SAFE>$<...>]
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: | # where("attr = ?", params[:oops])
+          $<_>($<_>, $<...>$<SAFE>$<...>)
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: | # User.where("attr = ?", params[:oops])
+          $<_>.$<_>($<_>, $<...>$<SAFE>$<...>)
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: | # where({ attr: params[:oops] })
+          { $<_>: $<SAFE> }
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: | # where(attr: params[:oops])
+          $<_>($<_>: $<SAFE>)
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: | # User.where(attr: params[:oops])
+          $<_>.$<_>($<_>: $<SAFE>)
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: |
+          $<SAFE>.to_i
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: |
+          $<SAFE>.to_f
+        filters:
+          - variable: SAFE
+            detection: ruby_rails_sql_injection_user_input_head
+  - id: ruby_rails_sql_injection_sanitized
+    patterns:
+      - pattern: ActiveRecord::Base.connection.quote($<SANITIZED>)
+        filters:
+          - variable: SANITIZED
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: connection.quote($<SANITIZED>)
+        filters:
+          - variable: SANITIZED
+            detection: ruby_rails_sql_injection_user_input_head
+      - pattern: sanitize_sql($<SANITIZED>)
+        filters:
+          - variable: SANITIZED
+            detection: ruby_rails_sql_injection_user_input_head
+languages:
+  - ruby
+severity: high
+metadata:
+  description: "Do not use unsanitized user input in SQL queries."
+  remediation_message: |
+    ## Description
+
+    TODO
+
+    ## Remediations
+    TODO
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  cwe_id:
+    - 89
+  id: ruby_rails_sql_injection

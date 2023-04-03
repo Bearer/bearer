@@ -1,0 +1,5 @@
+User.find_by(sanitize_sql(params[:oops]))
+# User.find_by!("oops #{params[:oops].to_i}")
+# User.find_by_sql("oops #{params[:oops].to_f}")
+# User.find_sole_by("oops #{ActiveRecord::Base.connection.quote(params[:oops])}")
+User.find_sole_by(connection.quote("ok #{params[:ok]}"))
