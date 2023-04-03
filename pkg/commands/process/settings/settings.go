@@ -195,6 +195,9 @@ type MetaVar struct {
 //go:embed policies.yml
 var defaultPolicies []byte
 
+//go:embed built_in_rules/*
+var buildInRulesFs embed.FS
+
 //go:embed policies/*
 var policiesFs embed.FS
 
