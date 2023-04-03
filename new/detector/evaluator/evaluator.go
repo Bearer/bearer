@@ -50,6 +50,10 @@ func (evaluator *evaluator) ForTree(
 	detectorType string,
 	followFlow bool,
 ) ([]*types.Detection, error) {
+	if rootNode == nil {
+		return nil, nil
+	}
+
 	var result []*types.Detection
 	var nestedMode bool
 
@@ -104,6 +108,10 @@ func (evaluator *evaluator) ForNode(
 	detectorType string,
 	followFlow bool,
 ) ([]*types.Detection, error) {
+	if node == nil {
+		return nil, nil
+	}
+
 	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 	if err != nil {
 		return nil, err
