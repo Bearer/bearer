@@ -128,36 +128,30 @@ func matchDetectionFilter(
 
 	detections, err := evaluateDetections(node, detectorType, true)
 
-	// detectionsYAML, _ := yaml.Marshal(detections)
-	// log.Error().Msgf("abc: %s %s:\n%s", detectorType, node.Content(), detectionsYAML)
-
 	var datatypeDetections []*types.Detection
 
 	foundDetection := false
 	for _, detection := range detections {
 		if data, ok := detection.Data.(Data); ok {
-			if !foundDetection { // FIXME: how to handle multiple matches?
-				variablesMatch := true
-				for name, node := range data.VariableNodes {
-					if existingNode, existing := variableNodes[name]; existing {
-						if !existingNode.Equal(node) {
-							variablesMatch = false
-							break
-						}
+			variablesMatch := true
+			for name, node := range data.VariableNodes {
+				if existingNode, existing := variableNodes[name]; existing {
+					if !existingNode.Equal(node) {
+						variablesMatch = false
+						break
 					}
-				}
-
-				if !variablesMatch {
-					continue
-				}
-
-				foundDetection = true
-				for name, node := range data.VariableNodes {
-					variableNodes[name] = node
 				}
 			}
 
-			// FIXME: this is added for all but might not match variables!
+			if !variablesMatch {
+				continue
+			}
+
+			foundDetection = true
+			for name, node := range data.VariableNodes {
+				variableNodes[name] = node
+			}
+
 			datatypeDetections = append(datatypeDetections, data.Datatypes...)
 		}
 	}

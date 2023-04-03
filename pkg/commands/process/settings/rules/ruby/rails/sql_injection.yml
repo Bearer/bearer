@@ -3,112 +3,213 @@ patterns:
       $<INJECTION>
     filters:
       - variable: INJECTION
-        detection: ruby_rails_sql_injection_injection
+        detection: ruby_rails_sql_injection_regular_injection
+        contains: false
+  - pattern: |
+      $<INJECTION>
+    filters:
+      - variable: INJECTION
+        detection: ruby_rails_sql_injection_special_arg_injection
         contains: false
       - not:
           variable: INJECTION
-          detection: ruby_rails_sql_injection_safe_argument
+          detection: ruby_rails_sql_injection_safe_special_arg
 auxiliary:
-  - id: ruby_rails_sql_injection_injection
-    patterns:
-      - pattern: $<_>.$<METHOD>($<USER_INPUT_HEAD>$<...>)
-        filters:
-          - variable: METHOD
-            detection: ruby_rails_sql_injection_method
-            contains: false
-          - variable: USER_INPUT_HEAD
-            detection: ruby_rails_sql_injection_user_input_head
-          - not:
-              variable: USER_INPUT_HEAD
-              detection: ruby_rails_sql_injection_sanitized
-      - pattern: $<METHOD>($<USER_INPUT_HEAD>$<...>)
-        filters:
-          - variable: METHOD
-            detection: ruby_rails_sql_injection_method
-            contains: false
-          - variable: USER_INPUT_HEAD
-            detection: ruby_rails_sql_injection_user_input_head
-          - not:
-              variable: USER_INPUT_HEAD
-              detection: ruby_rails_sql_injection_sanitized
-  - id: ruby_rails_sql_injection_method
+  - id: ruby_rails_sql_injection_regular_method
     patterns:
       - pattern: $<METHOD>
         filters:
           - variable: METHOD
             values:
+              - joins
+              - select
+              - reselect
+              - group
+              - having
+              - order
+              - reorder
+              - minimum
+              - maximum
+              - calculate
+              - count
+              - count_by_sql
+              - sum
+              - average
+  - id: ruby_rails_sql_injection_connection_method
+    patterns:
+      - pattern: $<CONN_METHOD>
+        filters:
+          - variable: CONN_METHOD
+            values:
+              - execute
+              - exec_delete
+              - exec_insert
+              - exec_query
+              - exec_update
+              - select_all
+              - select_one
+              - select_rows
+              - select_value
+              - select_values
+  - id: ruby_rails_sql_injection_special_arg_method
+    patterns:
+      - pattern: $<SPECIAL_METHOD>
+        filters:
+          - variable: SPECIAL_METHOD
+            values:
               - find_by
               - find_by!
               - find_by_sql
               - find_sole_by
-  - id: ruby_rails_sql_injection_user_input
+              - from
+              - where
+              - delete_by
+              - destroy_by
+              - update_all
+  - id: ruby_rails_sql_injection_user_input_source
     patterns:
       - params
       - request
       - cookies
-  - id: ruby_rails_sql_injection_user_input_head
-    patterns:
-      - pattern: $<USER_INPUT>
-        filters:
-          - variable: USER_INPUT
-            detection: ruby_rails_sql_injection_user_input
-            contains: false
-  - id: ruby_rails_sql_injection_safe_argument
+      - | # AWS lambda
+        def $<_>($<!>event:, context:)
+        end
+  - id: ruby_rails_sql_injection_safe_special_arg
     patterns:
       - pattern: | # ["attr = ?", params[:oops]]
           [$<_>, $<...>$<SAFE>$<...>]
         filters:
           - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
       - pattern: | # where("attr = ?", params[:oops])
           $<_>($<_>, $<...>$<SAFE>$<...>)
         filters:
           - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
       - pattern: | # User.where("attr = ?", params[:oops])
           $<_>.$<_>($<_>, $<...>$<SAFE>$<...>)
         filters:
           - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
       - pattern: | # where({ attr: params[:oops] })
           { $<_>: $<SAFE> }
         filters:
           - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
       - pattern: | # where(attr: params[:oops])
           $<_>($<_>: $<SAFE>)
         filters:
           - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
       - pattern: | # User.where(attr: params[:oops])
           $<_>.$<_>($<_>: $<SAFE>)
         filters:
           - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
-      - pattern: |
-          $<SAFE>.to_i
-        filters:
-          - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
-      - pattern: |
-          $<SAFE>.to_f
-        filters:
-          - variable: SAFE
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
   - id: ruby_rails_sql_injection_sanitized
     patterns:
       - pattern: ActiveRecord::Base.connection.quote($<SANITIZED>)
         filters:
           - variable: SANITIZED
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
       - pattern: connection.quote($<SANITIZED>)
         filters:
           - variable: SANITIZED
-            detection: ruby_rails_sql_injection_user_input_head
-      - pattern: sanitize_sql($<SANITIZED>)
+            detection: ruby_rails_sql_injection_user_input
+      - pattern: $<METHOD>($<SANITIZED>)
+        filters:
+          - variable: METHOD
+            values:
+              - sanitize_sql
+              - sanitize_sql_for_assignment
+              - sanitize_sql_for_conditions
+              - sanitize_conditions
+          - variable: SANITIZED
+            detection: ruby_rails_sql_injection_user_input
+      - pattern: |
+          $<SANITIZED>.to_i
         filters:
           - variable: SANITIZED
-            detection: ruby_rails_sql_injection_user_input_head
+            detection: ruby_rails_sql_injection_user_input
+      - pattern: |
+          $<SANITIZED>.to_f
+        filters:
+          - variable: SANITIZED
+            detection: ruby_rails_sql_injection_user_input
+  - id: ruby_rails_sql_injection_regular_injection
+    patterns:
+      - pattern: $<_>.$<METHOD>($<...>$<USER_INPUT>$<...>)
+        filters:
+          - variable: METHOD
+            detection: ruby_rails_sql_injection_regular_method
+            contains: false
+          - variable: USER_INPUT
+            detection: ruby_rails_sql_injection_user_input
+          - not:
+              variable: USER_INPUT
+              detection: ruby_rails_sql_injection_sanitized
+      - pattern: $<METHOD>($<USER_INPUT>$<...>)
+        filters:
+          - variable: METHOD
+            detection: ruby_rails_sql_injection_regular_method
+            contains: false
+          - variable: USER_INPUT
+            detection: ruby_rails_sql_injection_user_input
+          - not:
+              variable: USER_INPUT
+              detection: ruby_rails_sql_injection_sanitized
+      - pattern: ActiveRecord::Base.connection.$<CONN_METHOD>($<USER_INPUT>$<...>)
+        filters:
+          - variable: CONN_METHOD
+            detection: ruby_rails_sql_injection_connection_method
+            contains: false
+          - variable: USER_INPUT
+            detection: ruby_rails_sql_injection_user_input
+          - not:
+              variable: USER_INPUT
+              detection: ruby_rails_sql_injection_sanitized
+      - pattern: connection.$<CONN_METHOD>($<USER_INPUT>$<...>)
+        filters:
+          - variable: CONN_METHOD
+            detection: ruby_rails_sql_injection_connection_method
+            contains: false
+          - variable: USER_INPUT
+            detection: ruby_rails_sql_injection_user_input
+          - not:
+              variable: USER_INPUT
+              detection: ruby_rails_sql_injection_sanitized
+  - id: ruby_rails_sql_injection_special_arg_injection
+    patterns:
+      - pattern: $<_>.$<SPECIAL_METHOD>($<USER_INPUT>$<...>)
+        filters:
+          - variable: SPECIAL_METHOD
+            detection: ruby_rails_sql_injection_special_arg_method
+            contains: false
+          - variable: USER_INPUT
+            detection: ruby_rails_sql_injection_user_input
+          - not:
+              variable: USER_INPUT
+              detection: ruby_rails_sql_injection_sanitized
+      - pattern: $<SPECIAL_METHOD>($<USER_INPUT>$<...>)
+        filters:
+          - variable: SPECIAL_METHOD
+            detection: ruby_rails_sql_injection_special_arg_method
+            contains: false
+          - variable: USER_INPUT
+            detection: ruby_rails_sql_injection_user_input
+          - not:
+              variable: USER_INPUT
+              detection: ruby_rails_sql_injection_sanitized
+  # Sets MATCHED_USER_INPUT to the match from the input source rule. As this
+  # rule is used by filters in multiple other parts of the main rule, it will
+  # ensure those all match against the same node
+  - id: ruby_rails_sql_injection_user_input
+    patterns:
+      - pattern: $<MATCHED_USER_INPUT>
+        filters:
+          - variable: MATCHED_USER_INPUT
+            detection: ruby_rails_sql_injection_user_input_source
+            contains: false
 languages:
   - ruby
 severity: high
