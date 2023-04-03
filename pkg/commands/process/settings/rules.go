@@ -22,7 +22,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 	builtInDefinitions := make(map[string]RuleDefinition)
 
 	if !options.DisableDefaultRules {
-		if err := LoadRuleDefinitionsFromGitHub(definitions, builtInDefinitions); err != nil {
+		if err := LoadRuleDefinitionsFromGitHub(definitions); err != nil {
 			return nil, nil, fmt.Errorf("error loading rules: %s", err)
 		}
 
@@ -34,13 +34,17 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 		}
 	}
 
+	if err := loadRuleDefinitionsFromDir(builtInDefinitions, buildInRulesFs); err != nil {
+		return nil, nil, fmt.Errorf("error loading built-in rules: %w", err)
+	}
+
 	for _, dir := range externalRuleDirs {
 		if strings.HasPrefix(dir, "~/") {
 			dirname, _ := os.UserHomeDir()
 			dir = filepath.Join(dirname, dir[2:])
 		}
 		log.Debug().Msgf("loading external rules from: %s", dir)
-		if err := loadExternalRuleDefinitions(definitions, os.DirFS(dir)); err != nil {
+		if err := loadRuleDefinitionsFromDir(definitions, os.DirFS(dir)); err != nil {
 			return nil, nil, fmt.Errorf("error loading external rules from %s: %w", dir, err)
 		}
 	}
@@ -55,7 +59,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 	return buildRules(builtInDefinitions, builtInRules), buildRules(definitions, enabledRules), nil
 }
 
-func loadExternalRuleDefinitions(definitions map[string]RuleDefinition, dir fs.FS) error {
+func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {
 	return fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
 		if err != nil {
 			return err
