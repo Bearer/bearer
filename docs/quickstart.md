@@ -81,4 +81,7 @@ WARNING: 6
 
 The security report is just one [report type](/explanations/reports/) available in Bearer.
 
+## The workflow
+![bearer-workflow](/assets/img/Bearer-workflow.png)
+
 Ready for the next step? Additional options for using and configuring the `scan` command can be found in [configuring the scan command](/guides/configure-scan/).
