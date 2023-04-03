@@ -3,18 +3,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 1
       filename: injected_params.rb
@@ -25,18 +50,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 2
       filename: injected_params.rb
@@ -47,18 +97,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 3
       filename: injected_params.rb
@@ -69,18 +144,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 4
       filename: injected_params.rb
@@ -91,18 +191,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 7
       filename: injected_params.rb
@@ -115,18 +240,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 7
       filename: injected_params.rb
@@ -140,18 +290,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 11
       filename: injected_params.rb
@@ -162,18 +337,43 @@ high:
         cwe_ids:
             - "89"
         id: ruby_rails_sql_injection
-        title: Do not use unsanitized user input in SQL queries.
+        title: Unsanitized user input in SQL query detected.
         description: |
             ## Description
 
-            TODO
+            Including unsanitized data, such as user input or request data, in raw SQL
+            queries makes your application vulnerable to SQL injection attacks.
 
             ## Remediations
-            TODO
-            <!--
+
+            ❌ Avoid raw queries, especially those that contain unsanitized user input:
+
+            ```ruby
+            User.where("user.email = #{params[:email]}")
+            ```
+
+            ✅ Use the ActiveRecord API wherever possible:
+
+            ```ruby
+            User.where(email: params[:email])
+            ```
+
+            ✅ Use bind variables:
+
+            ```ruby
+            User.where("user.email = ?", [params[:email]])
+            ```
+
+            ✅ Santize the value manually:
+
+            ```ruby
+            User.where(sanitize_sql(["user.email = ?", params[:email]]))
+            ```
+
             ## Resources
-            Coming soon.
-            -->
+            - [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)
+            - [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+            - [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_sql_injection
       line_number: 13
       filename: injected_params.rb
