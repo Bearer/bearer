@@ -17,7 +17,7 @@ import (
 const LATEST_RELEASE_URL = "https://api.github.com/repos/bearer/bearer-rules/releases/latest"
 const BASE_RULE_FOLDER = "/"
 
-func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, builtInRuleDefinitions map[string]RuleDefinition) error {
+func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition) error {
 	resp, err := http.Get(LATEST_RELEASE_URL)
 	if err != nil {
 		return err
@@ -94,15 +94,9 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, bu
 		}
 
 		id := ruleDefinition.Metadata.ID
-		_, builtInRuleExists := builtInRuleDefinitions[id]
 		_, ruleExists := ruleDefinitions[id]
-		if builtInRuleExists || ruleExists {
+		if ruleExists {
 			return fmt.Errorf("duplicate built-in rule ID %s", id)
-		}
-
-		if strings.Contains(header.Name, "built_in_rules") {
-			builtInRuleDefinitions[id] = ruleDefinition
-			continue
 		}
 
 		ruleDefinitions[id] = ruleDefinition
