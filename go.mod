@@ -3,14 +3,16 @@ module github.com/bearer/bearer
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.229
+	github.com/aws/aws-sdk-go v1.44.234
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/fatih/color v1.15.0
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/ghodss/yaml v1.0.0
+	github.com/gitsight/go-vcsurl v1.0.1
 	github.com/go-enry/go-enry/v2 v2.8.4
 	github.com/go-git/go-billy/v5 v5.4.1
 	github.com/go-git/go-git/v5 v5.6.1
+	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.3.0
 	github.com/hhatto/gocloc v0.4.3
 	github.com/jessevdk/go-flags v1.5.0
@@ -77,9 +79,7 @@ require (
 	github.com/cloudflare/circl v1.3.2 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
-	github.com/gitsight/go-vcsurl v1.0.1 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
-	github.com/google/go-github v17.0.0+incompatible // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
