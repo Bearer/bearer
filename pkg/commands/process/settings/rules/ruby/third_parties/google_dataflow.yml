@@ -53,9 +53,9 @@ auxiliary:
       - |
         Google::Cloud::Dataflow::$<_>::$<_>::Client.new
       - pattern: |
-          Google::Cloud::Dataflow.$<METHOD>
+          Google::Cloud::Dataflow.$<INIT_METHOD>
         filters:
-          - variable: METHOD
+          - variable: INIT_METHOD
             values:
               - messages
               - templates_service
@@ -66,14 +66,14 @@ auxiliary:
   - id: google_dataflow_config
     patterns:
       - pattern: |
-          $<VAR>.configure
+          $<CLIENT>.configure
         filters:
-          - variable: VAR
+          - variable: CLIENT
             detection: google_dataflow_client_init
       - pattern: |
-          $<VAR>.configure { |$<!>$<_:identifier>| }
+          $<CLIENT>.configure { |$<!>$<_:identifier>| }
         filters:
-          - variable: VAR
+          - variable: CLIENT
             detection: google_dataflow_client_init
   - id: google_dataflow_message_text_classes
     patterns:
@@ -92,9 +92,9 @@ auxiliary:
       - |
         Google::Cloud::Dataflow::$<_>::SnapshotJobRequest.new
       - pattern: |
-          $<VAR>.get_snapshot
+          $<CLIENT>.get_snapshot
         fitlers:
-          - variable: VAR
+          - variable: CLIENT
             detection: google_dataflow_snapshots_client_init
   - id: google_dataflow_value_classes
     patterns:

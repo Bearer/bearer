@@ -10,8 +10,9 @@ import (
 )
 
 type Data struct {
-	Pattern   string
-	Datatypes []*types.Detection
+	Pattern       string
+	Datatypes     []*types.Detection
+	VariableNodes map[string]*tree.Node
 }
 
 type Pattern struct {
@@ -65,7 +66,7 @@ func (detector *customDetector) DetectAt(
 		}
 
 		for _, result := range results {
-			filtersMatch, datatypeDetections, err := matchAllFilters(result, evaluator, pattern.Filters)
+			filtersMatch, datatypeDetections, variableNodes, err := matchAllFilters(result, evaluator, pattern.Filters)
 			if err != nil {
 				return nil, err
 			}
@@ -75,8 +76,9 @@ func (detector *customDetector) DetectAt(
 			}
 
 			detectionsData = append(detectionsData, Data{
-				Pattern:   pattern.Pattern,
-				Datatypes: datatypeDetections,
+				Pattern:       pattern.Pattern,
+				Datatypes:     datatypeDetections,
+				VariableNodes: variableNodes,
 			})
 		}
 	}

@@ -171,6 +171,11 @@ func TestRubyRailsOpenRedirect(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"rails/open_redirect")
 }
 
+func TestRubyRailsSqlInjection(t *testing.T) {
+	t.Parallel()
+	getRunner(t).runTest(t, rubyRulesPath+"rails/sql_injection")
+}
+
 func TestRubyThirdPartiesAlgolia(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"third_parties/algolia")

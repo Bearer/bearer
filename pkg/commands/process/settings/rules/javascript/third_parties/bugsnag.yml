@@ -1,11 +1,11 @@
 patterns:
   - pattern: |
-      $<CLIENT>.notify($<...>$<DATA_TYPE>$<...>)
+      $<INSTANCE>.notify($<...>$<DATA_TYPE>$<...>)
     filters:
       - either:
-          - variable: CLIENT
+          - variable: INSTANCE
             detection: javascript_third_parties_bugsnag_client
-          - variable: CLIENT
+          - variable: INSTANCE
             detection: javascript_third_parties_bugsnag_session
       - variable: DATA_TYPE
         detection: datatype

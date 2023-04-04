@@ -12,18 +12,18 @@ patterns:
 auxiliary:
   - id: javascript_express_static_asset_with_session_session
     patterns:
-      - pattern: app.use($<MIDDLEWARE>)
+      - pattern: app.use($<SESSION_MIDDLEWARE>)
         filters:
-          - variable: MIDDLEWARE
+          - variable: SESSION_MIDDLEWARE
             detection: javascript_express_static_asset_with_session_session_init
   - id: javascript_express_static_asset_with_session_session_init
     patterns:
       - session()
   - id: javascript_express_static_asset_with_session_static
     patterns:
-      - pattern: app.use($<MIDDLEWARE>)
+      - pattern: app.use($<STATIC_MIDDLEWARE>)
         filters:
-          - variable: MIDDLEWARE
+          - variable: STATIC_MIDDLEWARE
             detection: javascript_express_static_asset_with_session_static_init
   - id: javascript_express_static_asset_with_session_static_init
     patterns:
