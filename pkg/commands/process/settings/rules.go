@@ -17,13 +17,47 @@ var (
 	defaultAuxiliaryRuleType = "verifier"
 )
 
-func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string) (map[string]*Rule, map[string]*Rule, error) {
+func RefreshRules(config Config, externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string) (err error) {
+	builtInRules, rules, _, err := loadRules(externalRuleDirs, options, foundLanguages, true)
+	config.BuiltInRules = builtInRules
+	config.Rules = rules
+
+	return
+}
+
+func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string, force bool) (map[string]*Rule, map[string]*Rule, bool, error) {
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
 
+	cacheUsed := false
 	if !options.DisableDefaultRules {
-		if err := LoadRuleDefinitionsFromGitHub(definitions, foundLanguages); err != nil {
-			return nil, nil, fmt.Errorf("error loading rules: %s", err)
+		bearerRulesDir := bearerRulesDir()
+		if !force && cachedRulesExist(bearerRulesDir) {
+			cacheUsed = true
+			err := filepath.WalkDir(bearerRulesDir, func(filePath string, d fs.DirEntry, err error) error {
+				if !d.IsDir() {
+					file, err := os.Open(bearerRulesDir + d.Name())
+					if err != nil {
+						return err
+					}
+					if err := ReadRuleDefinitions(definitions, file); err != nil {
+						return err
+					}
+				}
+				return nil
+			})
+
+			if err != nil {
+				return nil, nil, cacheUsed, fmt.Errorf("error loading rules from cache: %s", err)
+			}
+		} else {
+			if err := cleanupRuleDirFiles(bearerRulesDir); err != nil {
+				return nil, nil, cacheUsed, fmt.Errorf("error cleaning rules cache: %s", err)
+			}
+
+			if err := LoadRuleDefinitionsFromGitHub(definitions, foundLanguages); err != nil {
+				return nil, nil, cacheUsed, fmt.Errorf("error loading rules: %s", err)
+			}
 		}
 
 		// add default documentation urls for default rules
@@ -35,7 +69,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 	}
 
 	if err := loadRuleDefinitionsFromDir(builtInDefinitions, buildInRulesFs); err != nil {
-		return nil, nil, fmt.Errorf("error loading built-in rules: %w", err)
+		return nil, nil, cacheUsed, fmt.Errorf("error loading built-in rules: %w", err)
 	}
 
 	for _, dir := range externalRuleDirs {
@@ -45,18 +79,18 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 		}
 		log.Debug().Msgf("loading external rules from: %s", dir)
 		if err := loadRuleDefinitionsFromDir(definitions, os.DirFS(dir)); err != nil {
-			return nil, nil, fmt.Errorf("error loading external rules from %s: %w", dir, err)
+			return nil, nil, cacheUsed, fmt.Errorf("error loading external rules from %s: %w", dir, err)
 		}
 	}
 
 	if err := validateRuleOptionIDs(options, definitions, builtInDefinitions); err != nil {
-		return nil, nil, err
+		return nil, nil, cacheUsed, err
 	}
 
 	enabledRules := getEnabledRules(options, definitions, nil)
 	builtInRules := getEnabledRules(options, builtInDefinitions, enabledRules)
 
-	return buildRules(builtInDefinitions, builtInRules), buildRules(definitions, enabledRules), nil
+	return buildRules(builtInDefinitions, builtInRules), buildRules(definitions, enabledRules), cacheUsed, nil
 }
 
 func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {
@@ -245,4 +279,18 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 	}
 
 	return rules
+}
+
+func cachedRulesExist(bearerRulesDir string) bool {
+	_, err := os.Stat(bearerRulesDir)
+	return err == nil
+}
+
+func cleanupRuleDirFiles(bearerRulesDir string) error {
+	os.RemoveAll(bearerRulesDir)
+	return nil
+}
+
+func bearerRulesDir() string {
+	return os.TempDir() + "bearer-rules/"
 }

@@ -4,6 +4,7 @@ import (
 	"archive/tar"
 	"compress/gzip"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -38,6 +39,14 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 		return err
 	}
 
+	bearerRulesDir := bearerRulesDir()
+	if _, err := os.Stat(bearerRulesDir); errors.Is(err, os.ErrNotExist) {
+		err := os.Mkdir(bearerRulesDir, 0700)
+		if err != nil {
+			return fmt.Errorf("could not create bearer-rules directory: %s", err)
+		}
+	}
+
 	// loop assets and download tarballs for found languages
 	for _, asset := range release.Assets {
 		// we aren't expecting many found languages per repo
@@ -52,65 +61,76 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 			}
 			defer resp.Body.Close()
 
-			// Create a temporary file
-			tmpfile, err := os.CreateTemp("", "source-"+language+"*.tar.gz")
+			// Create file in rules dir
+			filepath, err := filepath.Abs(bearerRulesDir + "source-" + language + ".tar.gz")
 			if err != nil {
 				return err
 			}
-			defer os.Remove(tmpfile.Name())
-			defer tmpfile.Close()
+			file, err := os.Create(filepath)
+			if err != nil {
+				return err
+			}
+			defer file.Close()
 
 			// Copy the contents of the downloaded archive to the temporary file
-			if _, err := io.Copy(tmpfile, resp.Body); err != nil {
+			if _, err := io.Copy(file, resp.Body); err != nil {
 				return err
 			}
 
 			// reset file pointer to start of file
-			_, err = tmpfile.Seek(0, 0)
+			_, err = file.Seek(0, 0)
 			if err != nil {
 				return err
 			}
 
-			gzr, err := gzip.NewReader(tmpfile)
-			if err != nil {
+			if err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
 				return err
-			}
-			defer gzr.Close()
-
-			tr := tar.NewReader(gzr)
-			for {
-				header, err := tr.Next()
-				if err == io.EOF {
-					break
-				} else if err != nil {
-					return err
-				}
-
-				if !isRuleFile(header.Name) {
-					continue
-				}
-
-				data := make([]byte, header.Size)
-				_, err = io.ReadFull(tr, data)
-				if err != nil {
-					return fmt.Errorf("failed to read file %s: %w", header.Name, err)
-				}
-
-				var ruleDefinition RuleDefinition
-				err = yaml.Unmarshal(data, &ruleDefinition)
-				if err != nil {
-					return fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
-				}
-
-				id := ruleDefinition.Metadata.ID
-				_, ruleExists := ruleDefinitions[id]
-				if ruleExists {
-					return fmt.Errorf("duplicate built-in rule ID %s", id)
-				}
-
-				ruleDefinitions[id] = ruleDefinition
 			}
 		}
+	}
+
+	return nil
+}
+
+func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) error {
+	gzr, err := gzip.NewReader(file)
+	if err != nil {
+		return err
+	}
+	defer gzr.Close()
+
+	tr := tar.NewReader(gzr)
+	for {
+		header, err := tr.Next()
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			return err
+		}
+
+		if !isRuleFile(header.Name) {
+			continue
+		}
+
+		data := make([]byte, header.Size)
+		_, err = io.ReadFull(tr, data)
+		if err != nil {
+			return fmt.Errorf("failed to read file %s: %w", header.Name, err)
+		}
+
+		var ruleDefinition RuleDefinition
+		err = yaml.Unmarshal(data, &ruleDefinition)
+		if err != nil {
+			return fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
+		}
+
+		id := ruleDefinition.Metadata.ID
+		_, ruleExists := ruleDefinitions[id]
+		if ruleExists {
+			return fmt.Errorf("duplicate built-in rule ID %s", id)
+		}
+
+		ruleDefinitions[id] = ruleDefinition
 	}
 
 	return nil
