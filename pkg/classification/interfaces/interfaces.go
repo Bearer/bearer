@@ -22,6 +22,7 @@ type Classification struct {
 	RecipeMatch   bool                            `json:"recipe_match" yaml:"recipe_match"`
 	RecipeName    string                          `json:"recipe_name,omitempty"`
 	RecipeUUID    string                          `json:"recipe_uuid,omitempty"`
+	RecipeType    string                          `json:"recipe_type,omitempty"`
 	RecipeSubType string                          `json:"recipe_sub_type,omitempty"`
 	Decision      classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
@@ -222,6 +223,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 				RecipeMatch:   true,
 				RecipeUUID:    recipeMatch.RecipeUUID,
 				RecipeName:    recipeMatch.RecipeName,
+				RecipeType:    "",
 				RecipeSubType: recipeMatch.RecipeSubType,
 			},
 		}

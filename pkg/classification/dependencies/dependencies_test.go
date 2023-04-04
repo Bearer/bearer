@@ -13,7 +13,7 @@ import (
 )
 
 func TestDependencies(t *testing.T) {
-	tests := []struct{
+	tests := []struct {
 		Name          string
 		Input         detections.Detection
 		Want          *dependencies.Classification
@@ -31,10 +31,11 @@ func TestDependencies(t *testing.T) {
 				Type: detections.TypeDependency,
 			},
 			Want: &dependencies.Classification{
-				RecipeMatch: true,
-				RecipeName:  "Stripe",
+				RecipeMatch:   true,
+				RecipeName:    "Stripe",
+				RecipeType:    "external_service",
 				RecipeSubType: "third_party",
-				RecipeUUID:  "c24b836a-d035-49dc-808f-1912f16f690d",
+				RecipeUUID:    "c24b836a-d035-49dc-808f-1912f16f690d",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
@@ -54,10 +55,11 @@ func TestDependencies(t *testing.T) {
 				Type: detections.TypeDependency,
 			},
 			Want: &dependencies.Classification{
-				RecipeMatch: true,
-				RecipeName:  "PostgreSQL",
+				RecipeMatch:   true,
+				RecipeName:    "PostgreSQL",
+				RecipeType:    "data_store",
 				RecipeSubType: "database",
-				RecipeUUID:  "428ff7dd-22ea-4e80-8755-84c70cf460db",
+				RecipeUUID:    "428ff7dd-22ea-4e80-8755-84c70cf460db",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
@@ -76,7 +78,7 @@ func TestDependencies(t *testing.T) {
 				},
 				Type: detections.TypeDependency,
 			},
-			Want: nil,
+			Want:          nil,
 			ShouldSucceed: true,
 		},
 		{
@@ -93,16 +95,16 @@ func TestDependencies(t *testing.T) {
 				},
 				Type: detections.TypeDependency,
 			},
-			Want: nil,
+			Want:          nil,
 			ShouldSucceed: true,
 		},
 		{
 			Name: "Non-dependency detection",
 			Input: detections.Detection{
 				Value: 12345,
-				Type: detections.TypeDependency,
+				Type:  detections.TypeDependency,
 			},
-			Want: nil,
+			Want:          nil,
 			ShouldSucceed: false,
 		},
 	}

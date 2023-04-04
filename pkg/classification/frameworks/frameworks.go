@@ -8,7 +8,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/classify"
 )
 
-type classifiableFramework interface{
+type classifiableFramework interface {
 	GetTechnologyKey() string
 }
 
@@ -21,6 +21,7 @@ type Classification struct {
 	RecipeMatch   bool                            `json:"recipe_match" yaml:"recipe_match"`
 	RecipeName    string                          `json:"recipe_name,omitempty"`
 	RecipeUUID    string                          `json:"recipe_uuid,omitempty"`
+	RecipeType    string                          `json:"recipe_type,omitempty"`
 	RecipeSubType string                          `json:"recipe_sub_type,omitempty"`
 	Decision      classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
@@ -80,8 +81,9 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedFr
 				classification = &Classification{
 					RecipeUUID:    recipe.UUID,
 					RecipeName:    recipe.Name,
+					RecipeType:    recipe.Type,
 					RecipeSubType: recipe.SubType,
-					RecipeMatch: true,
+					RecipeMatch:   true,
 					Decision: classify.ClassificationDecision{
 						State:  classify.Valid,
 						Reason: "recipe_match",

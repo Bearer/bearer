@@ -1,8 +1,6 @@
 package components
 
 import (
-	"strings"
-
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 
 	dependenciesclassification "github.com/bearer/bearer/pkg/classification/dependencies"
@@ -42,16 +40,12 @@ func New(isInternal bool) *Holder {
 	}
 }
 
-func getComponentType(classificationReason string) string {
-	if strings.HasPrefix(classificationReason, "internal_domain_") {
+func getComponentType(recipeType string) string {
+	if recipeType == "" {
 		return "internal_service"
+	} else {
+		return recipeType
 	}
-
-	if strings.HasPrefix(classificationReason, "recipe_match") {
-		return "external_service"
-	}
-
-	return ""
 }
 
 func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.ClassifiedInterface) error {
@@ -59,7 +53,7 @@ func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.C
 		return nil
 	}
 
-	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+	componentType := getComponentType(classifiedDetection.Classification.RecipeType)
 	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	componentUUID := classifiedDetection.Classification.RecipeUUID
@@ -87,7 +81,7 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 		return nil
 	}
 
-	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+	componentType := getComponentType(classifiedDetection.Classification.RecipeType)
 	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
