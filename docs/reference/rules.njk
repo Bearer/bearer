@@ -45,6 +45,9 @@ Bearer's built-in rules aim to keep you protected from the most cirtical securit
           {% for id in rule.metadata.cwe_id %}
             <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">CWE-{{id}}</li>
           {% endfor %}
+          {% for id in rule.owasp_ids %}
+            <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">{{id}}</li>
+          {% endfor %}
         </ul>
       </div>
     </li>
