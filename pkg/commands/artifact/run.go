@@ -252,6 +252,16 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	r := NewRunner(ctx, scanSettings)
 	defer r.Close(ctx)
 
+	if !r.CacheUsed() && scanSettings.CacheUsed {
+		// re-cache rules
+		if opts.ScanOptions.Force && !opts.ScanOptions.Quiet {
+			outputhandler.StdOutLogger().Msgf("Caching rules")
+		}
+		if err = settings.RefreshRules(scanSettings, opts.ExternalRuleDir, opts.RuleOptions, formatFoundLanguages(inputgocloc.Languages)); err != nil {
+			return err
+		}
+	}
+
 	var report types.Report
 	switch targetKind {
 	case TargetFilesystem:
