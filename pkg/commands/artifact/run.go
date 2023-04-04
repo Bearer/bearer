@@ -230,7 +230,12 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}
 
-	scanSettings, err := settings.FromOptions(opts)
+	inputgocloc, err := stats.GoclocDetectorOutput(opts.ScanOptions.Target)
+	if err != nil {
+		log.Debug().Msgf("Error in line of code output %s", err)
+		return err
+	}
+	scanSettings, err := settings.FromOptions(opts, formatFoundLanguages(inputgocloc.Languages))
 	scanSettings.Target = opts.Target
 	if err != nil {
 		return err
@@ -261,7 +266,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 			return xerrors.Errorf("filesystem scan error: %w", err)
 		}
 	}
-
+	report.Inputgocloc = inputgocloc
 	reportPassed, err := r.Report(scanSettings, report)
 	if err != nil {
 		return xerrors.Errorf("report error: %w", err)
@@ -301,19 +306,19 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		outputhandler.StdErrLogger().Msg("Using cached data")
 	}
 
-	detections, lineOfCodeOutput, dataflow, err := reportoutput.GetOutput(report, config)
+	detections, dataflow, err := reportoutput.GetOutput(report, config)
 	if err != nil {
 		return false, err
 	}
 
-	reportSupported, err := anySupportedLanguagesPresent(lineOfCodeOutput, config)
+	reportSupported, err := anySupportedLanguagesPresent(report.Inputgocloc, config)
 	if err != nil {
 		return false, err
 	}
 
 	if !reportSupported && config.Report.Report != flag.ReportPrivacy {
 		var placeholderStr *strings.Builder
-		placeholderStr, err = getPlaceholderOutput(report, config, lineOfCodeOutput)
+		placeholderStr, err = getPlaceholderOutput(report, config, report.Inputgocloc)
 		if err != nil {
 			return false, err
 		}
@@ -325,15 +330,15 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	if config.Report.Format == flag.FormatEmpty {
 		if config.Report.Report == flag.ReportSecurity {
 			// for security report, default report format is Table
-			report := detections.(*security.Results)
-			reportStr, reportPassed := security.BuildReportString(config, report, lineOfCodeOutput, dataflow)
+			detectionReport := detections.(*security.Results)
+			reportStr, reportPassed := security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
 
 			output.StdOutLogger().Msg(reportStr.String())
 
 			return reportPassed, nil
 		} else if config.Report.Report == flag.ReportPrivacy {
 			// for privacy report, default report format is CSV
-			content, err := reportoutput.GetPrivacyReportCSVOutput(report, lineOfCodeOutput, dataflow, config)
+			content, err := reportoutput.GetPrivacyReportCSVOutput(report, dataflow, config)
 			if err != nil {
 				return false, fmt.Errorf("error generating report %s", err)
 			}
@@ -406,10 +411,18 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 }
 
 func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
-	dataflowOutput, _, _, err := reportoutput.GetDataflow(report, config, true)
+	dataflowOutput, _, err := reportoutput.GetDataflow(report, config, true)
 	if err != nil {
 		return
 	}
 
 	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput, config)
+}
+
+func formatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages []string) {
+	for _, language := range languages {
+		foundLanguages = append(foundLanguages, strings.ToLower(language.Name))
+	}
+
+	return foundLanguages
 }

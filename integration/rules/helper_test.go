@@ -51,7 +51,7 @@ func getRunner(t *testing.T) *Runner {
 	configFlags.Report = flag.ReportSecurity
 	configFlags.Quiet = true
 
-	config, err := settings.FromOptions(configFlags)
+	config, err := settings.FromOptions(configFlags, []string{"ruby", "javascript"})
 	if err != nil {
 		t.Fatalf("failed to generate default scan settings: %s", err)
 	}
@@ -121,7 +121,7 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 	}
 
 	runner.config.Scan.Target = testDataPath
-	detections, _, _, _ := output.GetOutput(
+	detections, _, _ := output.GetOutput(
 		types.Report{
 			Path: detectorsReportPath,
 		},
