@@ -129,8 +129,9 @@ func matchDetectionFilter(
 	detections, err := evaluateDetections(node, detectorType, true)
 
 	var datatypeDetections []*types.Detection
-
+	ignoredVariables := getIgnoredVariables(detections)
 	foundDetection := false
+
 	for _, detection := range detections {
 		data, ok := detection.Data.(Data)
 		if !ok { // Built-in detector
@@ -154,7 +155,9 @@ func matchDetectionFilter(
 
 		foundDetection = true
 		for name, node := range data.VariableNodes {
-			variableNodes[name] = node
+			if _, ignored := ignoredVariables[name]; !ignored {
+				variableNodes[name] = node
+			}
 		}
 
 		datatypeDetections = append(datatypeDetections, data.Datatypes...)
@@ -221,4 +224,27 @@ func matchContentFilter(filter settings.PatternFilter, content string) *bool {
 
 func boolPointer(value bool) *bool {
 	return &value
+}
+
+func getIgnoredVariables(detections []*types.Detection) map[string]struct{} {
+	ignoredVariables := make(map[string]struct{})
+	seenNodes := make(map[string]*tree.Node)
+
+	for _, detection := range detections {
+		data, ok := detection.Data.(Data)
+		if !ok {
+			continue
+		}
+
+		for name, node := range data.VariableNodes {
+			seenNode := seenNodes[name]
+			if seenNode != nil && !seenNode.Equal(node) {
+				ignoredVariables[name] = struct{}{}
+			}
+
+			seenNodes[name] = node
+		}
+	}
+
+	return ignoredVariables
 }
