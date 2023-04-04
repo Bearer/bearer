@@ -27,7 +27,6 @@ import (
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
-	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
 	"github.com/bearer/bearer/pkg/types"
@@ -216,7 +215,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
 	if !opts.Quiet {
-		output.StdErrLogger().Msg("Loading rules")
+		outputhandler.StdErrLogger().Msg("Loading rules")
 	}
 
 	client := github.NewClient(nil)
@@ -226,7 +225,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	} else {
 		version := strings.TrimPrefix(*release.Name, "v")
 		if version != build.Version && build.Version != "dev" && !opts.Quiet {
-			output.StdErrLogger().Msgf("You are running an outdated version of bearer, %s is now available.", *release.Name)
+			outputhandler.StdErrLogger().Msgf("You are running an outdated version of bearer, %s is now available.", *release.Name)
 		}
 	}
 
@@ -323,7 +322,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, err
 		}
 
-		output.StdOutLogger().Msg(placeholderStr.String())
+		outputhandler.StdOutLogger().Msg(placeholderStr.String())
 		return true, nil
 	}
 
@@ -333,7 +332,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			detectionReport := detections.(*security.Results)
 			reportStr, reportPassed := security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
 
-			output.StdOutLogger().Msg(reportStr.String())
+			outputhandler.StdOutLogger().Msg(reportStr.String())
 
 			return reportPassed, nil
 		} else if config.Report.Report == flag.ReportPrivacy {
@@ -343,7 +342,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 				return false, fmt.Errorf("error generating report %s", err)
 			}
 
-			output.StdOutLogger().Msg(*content)
+			outputhandler.StdOutLogger().Msg(*content)
 
 			return true, nil
 		}
