@@ -1,11 +1,13 @@
 const { readFile, readdir } = require("node:fs/promises");
 const { statSync } = require("fs");
+const fetch = require("node-fetch");
 const path = require("path");
 const yaml = require("js-yaml");
 const cweList = require("./cweList.json");
 const gitly = require("gitly");
 const source = "bearer/bearer-rules";
 const rulesPath = "_tmp/rules-data";
+const languageDirectories = ["ruby", "javascript"];
 
 function isDirectory(dir) {
   const result = statSync(dir);
@@ -13,8 +15,15 @@ function isDirectory(dir) {
 }
 
 async function fetchRelease() {
+  const latest = await fetch(
+    `https://api.github.com/repos/${source}/releases/latest`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data.tag_name;
+    });
   try {
-    let src = await gitly.download(source);
+    let src = await gitly.download(`${source}#${latest}`);
     await gitly.extract(src, rulesPath);
   } catch (e) {
     throw console.error(e);
@@ -29,7 +38,7 @@ async function fetchData(location) {
     // ex: looping through rules [ruby, gitleaks, sql]
     dirs.forEach(async (dir) => {
       const dirPath = path.join(rulesPath, dir);
-      if (isDirectory(dirPath)) {
+      if (isDirectory(dirPath) && languageDirectories.includes(dir)) {
         const dirData = {
           name: dir,
           children: [],
