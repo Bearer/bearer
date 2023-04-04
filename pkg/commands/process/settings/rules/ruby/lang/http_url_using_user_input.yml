@@ -250,9 +250,9 @@ auxiliary:
       - |
         Net::HTTP.start($<_>$<...>) { |$<!>$<_:identifier>| }
       - pattern: |
-          Net::HTTP.$<METHOD>($<_>$<...>)
+          Net::HTTP.$<NEW_METHOD>($<_>$<...>)
         filters:
-          - variable: METHOD
+          - variable: NEW_METHOD
             values:
               - new
               - newobj

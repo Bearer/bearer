@@ -28,9 +28,9 @@ auxiliary:
   - id: javascript_express_cross_site_scripting_string_interpolation
     patterns:
       - pattern: |
-          { $<...>$<_>: $<USER_INPUT>$<...> }
+          { $<...>$<_>: $<REQ_OBJ>$<...> }
         filters:
-          - variable: USER_INPUT
+          - variable: REQ_OBJ
             detection: javascript_express_cross_site_scripting_request_obj
 severity: high
 metadata:
