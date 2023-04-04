@@ -244,7 +244,12 @@ func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
 	workerOptions := defaultWorkerOptions()
 
-	builtInRules, rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions)
+	builtInRules, rules, err := loadRules(
+		opts.ExternalRuleDir,
+		opts.RuleOptions,
+		opts.ScanOptions.Force,
+		opts.ScanOptions.Quiet,
+	)
 	if err != nil {
 		return Config{}, err
 	}

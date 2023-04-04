@@ -17,12 +17,12 @@ var (
 	defaultAuxiliaryRuleType = "verifier"
 )
 
-func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]*Rule, map[string]*Rule, error) {
+func loadRules(externalRuleDirs []string, options flag.RuleOptions, force bool, quiet bool) (map[string]*Rule, map[string]*Rule, error) {
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
 
 	if !options.DisableDefaultRules {
-		if err := LoadRuleDefinitionsFromGitHub(definitions); err != nil {
+		if err := LoadRuleDefinitionsFromGitHub(definitions, force, quiet); err != nil {
 			return nil, nil, fmt.Errorf("error loading rules: %s", err)
 		}
 
