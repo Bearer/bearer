@@ -132,28 +132,32 @@ func matchDetectionFilter(
 
 	foundDetection := false
 	for _, detection := range detections {
-		if data, ok := detection.Data.(Data); ok {
-			variablesMatch := true
-			for name, node := range data.VariableNodes {
-				if existingNode, existing := variableNodes[name]; existing {
-					if !existingNode.Equal(node) {
-						variablesMatch = false
-						break
-					}
+		data, ok := detection.Data.(Data)
+		if !ok { // Built-in detector
+			foundDetection = true
+			continue
+		}
+
+		variablesMatch := true
+		for name, node := range data.VariableNodes {
+			if existingNode, existing := variableNodes[name]; existing {
+				if !existingNode.Equal(node) {
+					variablesMatch = false
+					break
 				}
 			}
-
-			if !variablesMatch {
-				continue
-			}
-
-			foundDetection = true
-			for name, node := range data.VariableNodes {
-				variableNodes[name] = node
-			}
-
-			datatypeDetections = append(datatypeDetections, data.Datatypes...)
 		}
+
+		if !variablesMatch {
+			continue
+		}
+
+		foundDetection = true
+		for name, node := range data.VariableNodes {
+			variableNodes[name] = node
+		}
+
+		datatypeDetections = append(datatypeDetections, data.Datatypes...)
 	}
 
 	return boolPointer(foundDetection), datatypeDetections, err
