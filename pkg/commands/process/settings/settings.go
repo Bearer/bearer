@@ -240,11 +240,10 @@ func defaultWorkerOptions() WorkerOptions {
 	}
 }
 
-func FromOptions(opts flag.Options) (Config, error) {
+func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 	policies := DefaultPolicies()
 	workerOptions := defaultWorkerOptions()
-
-	builtInRules, rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions)
+	builtInRules, rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions, foundLanguages)
 	if err != nil {
 		return Config{}, err
 	}
