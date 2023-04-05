@@ -1,1 +1,0 @@
-Digest::SHA1.hexidigest("hello world")
