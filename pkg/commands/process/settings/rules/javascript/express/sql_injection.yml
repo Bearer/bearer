@@ -22,6 +22,11 @@ patterns:
       - variable: USER_INPUT
         detection: javascript_express_sql_injection_request_input
   - pattern: |
+      $<_>.sequelize.query($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: javascript_express_sql_injection_request_input
+  - pattern: |
       $<SEQUELIZE>.query($<USER_INPUT>)
     filters:
       - variable: SEQUELIZE

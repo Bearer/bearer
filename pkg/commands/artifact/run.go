@@ -401,6 +401,11 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		return true, nil
 	}
 
+	_, typescriptPresent := foundLanguages["typescript"]
+	if typescriptPresent {
+		return true, nil
+	}
+
 	log.Debug().Msg("No language found for which rules are applicable")
 	return false, nil
 }
