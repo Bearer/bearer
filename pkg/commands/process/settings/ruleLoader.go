@@ -62,7 +62,7 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 			defer resp.Body.Close()
 
 			// Create file in rules dir
-			filepath, err := filepath.Abs(bearerRulesDir + "source-" + language + ".tar.gz")
+			filepath, err := filepath.Abs(filepath.Join(bearerRulesDir, "source-"+language+".tar.gz"))
 			if err != nil {
 				return err
 			}
@@ -72,7 +72,7 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 			}
 			defer file.Close()
 
-			// Copy the contents of the downloaded archive to the temporary file
+			// Copy the contents of the downloaded archive to the file
 			if _, err := io.Copy(file, resp.Body); err != nil {
 				return err
 			}

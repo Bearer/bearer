@@ -36,7 +36,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 			cacheUsed = true
 			err := filepath.WalkDir(bearerRulesDir, func(filePath string, d fs.DirEntry, err error) error {
 				if !d.IsDir() {
-					file, err := os.Open(bearerRulesDir + d.Name())
+					file, err := os.Open(filepath.Join(bearerRulesDir, d.Name()))
 					if err != nil {
 						return err
 					}
@@ -287,8 +287,7 @@ func cachedRulesExist(bearerRulesDir string) bool {
 }
 
 func cleanupRuleDirFiles(bearerRulesDir string) error {
-	os.RemoveAll(bearerRulesDir)
-	return nil
+	return os.RemoveAll(bearerRulesDir)
 }
 
 func bearerRulesDir() string {
