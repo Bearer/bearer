@@ -8,7 +8,8 @@ permalink: "/"
 
 Welcome to the Bearer documentation. Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your [data flows](/explanations/discovery-and-classification) to discover, filter and prioritize security risks and vulnerabilities leading to [sensitive data](/reference/datatypes/) exposures (PII, PHI, PD).
 
-We provides [built-in rules](/reference/rules) against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/). Here are some practical examples of what those rules look for:
+The CLI provides [built-in rules](/reference/rules) that check against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/). Here are some practical examples of what those rules look for:
+
 - Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
 - Usage of weak encryption libraries or misusage of encryption algorithms.
 - Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive information.
@@ -17,7 +18,7 @@ We provides [built-in rules](/reference/rules) against a common set of security 
 
 And [many more](/reference/rules).
 
-Bearer currently supports **JavaScript** and **Ruby** stacks, more will follow.
+Bearer currently supports **JavaScript / TypeScript** and **Ruby** stacks, and more will follow.
 
 Want a quick rundown? Here's a minute and a half of what you can expect from Bearer CLI:
 
