@@ -557,8 +557,8 @@ func removeDuplicates(data map[string][]Result) map[string][]Result {
 
 	// filter duplicates
 	for _, severity := range orderedSeverityLevels {
-		resultsSlice, ok := data[severity]
-		if !ok {
+		resultsSlice, hasSeverity := data[severity]
+		if !hasSeverity {
 			continue
 		}
 
