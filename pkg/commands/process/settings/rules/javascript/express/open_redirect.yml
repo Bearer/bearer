@@ -1,27 +1,50 @@
 patterns:
   - pattern: |
-      res.redirect($<USER_INPUT>$<...>)
+      res.redirect($<DATA>$<...>)
     filters:
-      - variable: USER_INPUT
-        detection: javascript_express_open_redirect_req_object
+      - variable: DATA
+        detection: javascript_express_open_redirect_data
+        contains: false
 auxiliary:
-  - id: javascript_express_open_redirect_req_object
+  - id: javascript_express_open_redirect_data
     patterns:
-      - pattern: $<DATA>
+      - pattern: $<USER_INPUT>
         filters:
-          - variable: DATA
+          - variable: USER_INPUT
             detection: javascript_express_open_redirect_user_input
-      - pattern: const { $<!>$<_> } = $<DATA>
+          - not:
+              variable: USER_INPUT
+              detection: javascript_express_open_redirect_sanitized
+      - pattern: const { $<!>$<_> } = $<USER_INPUT>
         filters:
-          - variable: DATA
+          - variable: USER_INPUT
             detection: javascript_express_open_redirect_user_input
-  - id: javascript_express_open_redirect_user_input
+          - not:
+              variable: USER_INPUT
+              detection: javascript_express_open_redirect_sanitized
+  - id: javascript_express_open_redirect_user_input_source
     patterns:
       - req.params
       - req.query
       - req.body
       - req.cookies
       - req.headers
+  - id: javascript_express_open_redirect_sanitized
+    patterns:
+      - pattern: |
+          !$<SANITIZED>
+        filters:
+          - variable: SANITIZED
+            detection: javascript_express_open_redirect_user_input
+  # MATCHED_USER_INPUT ensures that the main rule and the sanitized rule refer
+  # to the same input source node
+  - id: javascript_express_open_redirect_user_input
+    patterns:
+      - pattern: $<MATCHED_USER_INPUT>
+        filters:
+          - variable: MATCHED_USER_INPUT
+            detection: javascript_express_open_redirect_user_input_source
+            contains: false
 languages:
   - javascript
 severity: medium
