@@ -116,9 +116,9 @@ auxiliary:
         filters:
           - variable: SANITIZED
             detection: ruby_rails_sql_injection_user_input
-      - pattern: $<METHOD>($<SANITIZED>)
+      - pattern: $<SANITIZE_METHOD>($<SANITIZED>)
         filters:
-          - variable: METHOD
+          - variable: SANITIZE_METHOD
             values:
               - sanitize_sql
               - sanitize_sql_for_assignment
