@@ -545,18 +545,6 @@ func iterativeDigitsCount(number int) int {
 
 // removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection
 func removeDuplicates(data map[string][]Result) map[string][]Result {
-
-	orderedData := [][]Result{}
-	// build a slice instead of map so we can guarantee order
-	for _, severityLevel := range orderedSeverityLevels {
-		_, ok := data[severityLevel]
-		if ok {
-			orderedData = append(orderedData, data[severityLevel])
-		} else {
-			orderedData = append(orderedData, []Result{})
-		}
-	}
-
 	filteredData := map[string][]Result{}
 
 	type Key struct {
@@ -568,8 +556,12 @@ func removeDuplicates(data map[string][]Result) map[string][]Result {
 	reportedDetections := set.Set[Key]{}
 
 	// filter duplicates
-	for severityIndex, resultsSlice := range orderedData {
-		severity := orderedSeverityLevels[severityIndex]
+	for _, severity := range orderedSeverityLevels {
+		resultsSlice, ok := data[severity]
+		if !ok {
+			continue
+		}
+
 		for _, result := range resultsSlice {
 			key := Key{
 				LineNumber: result.LineNumber,
