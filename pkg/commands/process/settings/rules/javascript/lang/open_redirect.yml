@@ -14,13 +14,13 @@ languages:
 auxiliary:
   - id: javascript_lang_open_redirect_url
     patterns:
-      - pattern: new $<METHOD>($<USER_INPUT>)
+      - pattern: new $<METHOD>($<URL_USER_INPUT>)
         filters:
           - variable: METHOD
             values:
               - URL
               - URLSearchParams
-          - variable: USER_INPUT
+          - variable: URL_USER_INPUT
             detection: javascript_lang_open_redirect_user_input
   - id: javascript_lang_open_redirect_user_input
     patterns:

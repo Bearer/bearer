@@ -25,13 +25,13 @@ auxiliary:
       - cookies
   - id: ruby_rails_render_using_user_input_sanitized
     patterns:
-      - pattern: $<METHOD>($<USER_INPUT>)
+      - pattern: $<METHOD>($<SANITIZED_USER_INPUT>)
         filters:
           - variable: METHOD
             values:
               - sanitize
               - strip_tags
-          - variable: USER_INPUT
+          - variable: SANITIZED_USER_INPUT
             detection: ruby_rails_render_using_user_input_user_input
 severity: high
 metadata:

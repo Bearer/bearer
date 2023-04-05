@@ -86,6 +86,11 @@ func loadRuleDefinitions(definitions map[string]RuleDefinition, dir fs.FS) error
 			return fmt.Errorf("failed to unmarshal rule %s: %w", path, err)
 		}
 
+		if ruleDefinition.Metadata == nil {
+			log.Debug().Msgf("Rule file has invalid metadata %s", path)
+			return nil
+		}
+
 		id := ruleDefinition.Metadata.ID
 
 		if _, exists := definitions[id]; exists {

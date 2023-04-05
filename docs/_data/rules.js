@@ -3,6 +3,7 @@ const { statSync } = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 const rulesPath = "../pkg/commands/process/settings/rules/";
+const cweList = require("./cweList.json");
 
 function isDirectory(dir) {
   const result = statSync(dir);
@@ -60,10 +61,18 @@ async function fetchAllFiles(directory, files) {
 async function fetchFile(location) {
   return readFile(location, { encoding: "utf8" }).then((file) => {
     let out = yaml.load(file);
-
+    let owasps = new Set();
+    if (out.metadata.cwe_id) {
+      out.metadata.cwe_id.forEach((i) => {
+        if (cweList[i].owasp) {
+          owasps.add(cweList[i].owasp.id);
+        }
+      });
+    }
     return {
       name: path.basename(location, ".yml"),
       location: location.substring(2),
+      owasp_ids: [...owasps].sort(),
       ...out,
     };
   });

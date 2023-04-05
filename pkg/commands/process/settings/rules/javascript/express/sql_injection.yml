@@ -76,7 +76,7 @@ auxiliary:
       - mysql.createPool()
   - id: javascript_express_sql_injection_pool_conn
     patterns:
-      - pattern: $<MYSQL_POOL>.getConnection(function($<_>, $<!>$<CONN:identifier>) {})
+      - pattern: $<MYSQL_POOL>.getConnection(function($<_>, $<!>$<_>) {})
         filters:
           - variable: MYSQL_POOL
             detection: javascript_express_sql_injection_mysql_pool

@@ -41,9 +41,9 @@ auxiliary:
       - | # AWS lambda
         def $<_>($<!>event:, context:)
         end
-      - pattern: $<USER_INPUT>
+      - pattern: $<INNER_USER_INPUT>
         filters:
-          - variable: USER_INPUT
+          - variable: INNER_USER_INPUT
             values:
               - params
               - request

@@ -28,7 +28,7 @@ auxiliary:
       - |
         Datadog::Tracing.active_span
       - |
-        Datadog::Tracing.trace() { |$<!>$<SPAN:identifier>$<...>| }
+        Datadog::Tracing.trace() { |$<!>$<_:identifier>$<...>| }
 skip_data_types:
   - "Unique Identifier"
 metadata:

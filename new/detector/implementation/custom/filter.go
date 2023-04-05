@@ -14,10 +14,11 @@ import (
 func matchFilter(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
+	variableNodes map[string]*tree.Node,
 	filter settings.PatternFilter,
 ) (*bool, []*types.Detection, error) {
 	if filter.Not != nil {
-		match, _, err := matchFilter(result, evaluator, *filter.Not)
+		match, _, err := matchFilter(result, evaluator, variableNodes, *filter.Not)
 		if match == nil {
 			return nil, nil, err
 		}
@@ -25,7 +26,7 @@ func matchFilter(
 	}
 
 	if len(filter.Either) != 0 {
-		return matchEitherFilters(result, evaluator, filter.Either)
+		return matchEitherFilters(result, evaluator, variableNodes, filter.Either)
 	}
 
 	node, ok := result.Variables[filter.Variable]
@@ -38,6 +39,7 @@ func matchFilter(
 		return matchDetectionFilter(
 			result,
 			evaluator,
+			variableNodes,
 			node,
 			filter.Detection,
 			filter.Contains == nil || *filter.Contains,
@@ -51,24 +53,30 @@ func matchAllFilters(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	filters []settings.PatternFilter,
-) (bool, []*types.Detection, error) {
+) (bool, []*types.Detection, map[string]*tree.Node, error) {
 	var datatypeDetections []*types.Detection
 
+	variableNodes := make(map[string]*tree.Node)
+	for name, node := range result.Variables {
+		variableNodes[name] = node
+	}
+
 	for _, filter := range filters {
-		matched, subDataTypeDetections, err := matchFilter(result, evaluator, filter)
+		matched, subDataTypeDetections, err := matchFilter(result, evaluator, variableNodes, filter)
 		if matched == nil || !*matched || err != nil {
-			return false, nil, err
+			return false, nil, nil, err
 		}
 
 		datatypeDetections = append(datatypeDetections, subDataTypeDetections...)
 	}
 
-	return true, datatypeDetections, nil
+	return true, datatypeDetections, variableNodes, nil
 }
 
 func matchEitherFilters(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
+	variableNodes map[string]*tree.Node,
 	filters []settings.PatternFilter,
 ) (*bool, []*types.Detection, error) {
 	var datatypeDetections []*types.Detection
@@ -76,7 +84,7 @@ func matchEitherFilters(
 	oneNotMatched := false
 
 	for _, subFilter := range filters {
-		subMatch, subDatatypeDetections, err := matchFilter(result, evaluator, subFilter)
+		subMatch, subDatatypeDetections, err := matchFilter(result, evaluator, variableNodes, subFilter)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -100,6 +108,7 @@ func matchEitherFilters(
 func matchDetectionFilter(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
+	variableNodes map[string]*tree.Node,
 	node *tree.Node,
 	detectorType string,
 	contains bool,
@@ -118,15 +127,43 @@ func matchDetectionFilter(
 	}
 
 	detections, err := evaluateDetections(node, detectorType, true)
+
 	var datatypeDetections []*types.Detection
+	ignoredVariables := getIgnoredVariables(detections)
+	foundDetection := false
 
 	for _, detection := range detections {
-		if data, ok := detection.Data.(Data); ok {
-			datatypeDetections = append(datatypeDetections, data.Datatypes...)
+		data, ok := detection.Data.(Data)
+		if !ok { // Built-in detector
+			foundDetection = true
+			continue
 		}
+
+		variablesMatch := true
+		for name, node := range data.VariableNodes {
+			if existingNode, existing := variableNodes[name]; existing {
+				if !existingNode.Equal(node) {
+					variablesMatch = false
+					break
+				}
+			}
+		}
+
+		if !variablesMatch {
+			continue
+		}
+
+		foundDetection = true
+		for name, node := range data.VariableNodes {
+			if _, ignored := ignoredVariables[name]; !ignored {
+				variableNodes[name] = node
+			}
+		}
+
+		datatypeDetections = append(datatypeDetections, data.Datatypes...)
 	}
 
-	return boolPointer(len(detections) != 0), datatypeDetections, err
+	return boolPointer(foundDetection), datatypeDetections, err
 }
 
 func matchContentFilter(filter settings.PatternFilter, content string) *bool {
@@ -187,4 +224,27 @@ func matchContentFilter(filter settings.PatternFilter, content string) *bool {
 
 func boolPointer(value bool) *bool {
 	return &value
+}
+
+func getIgnoredVariables(detections []*types.Detection) map[string]struct{} {
+	ignoredVariables := make(map[string]struct{})
+	seenNodes := make(map[string]*tree.Node)
+
+	for _, detection := range detections {
+		data, ok := detection.Data.(Data)
+		if !ok {
+			continue
+		}
+
+		for name, node := range data.VariableNodes {
+			seenNode := seenNodes[name]
+			if seenNode != nil && !seenNode.Equal(node) {
+				ignoredVariables[name] = struct{}{}
+			}
+
+			seenNodes[name] = node
+		}
+	}
+
+	return ignoredVariables
 }
