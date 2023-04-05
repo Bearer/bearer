@@ -30,35 +30,4 @@ high:
       parent_line_number: 3
       snippet: Rollbar.critical("Connection error from remote Payments API", user)
       fingerprint: e23c84bd8b97113860affa0140b34b92_0
-    - rule:
-        cwe_ids:
-            - "201"
-        id: javascript_rollbar
-        title: Sensitive data sent to Rollbar detected.
-        description: |
-            ## Description
-
-            Leaking sensitive data to third-party error logging tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Rollbar.
-
-            ## Remediations
-
-            When sending data to logging libraries, ensure all sensitive data is removed.
-
-            If you really need to identify users, use unique identifiers from the database.
-
-            ```javascript
-              Rollbar.critical("Connection error from remote Payments API", user.uuid);
-            ```
-
-            ## Resources
-            - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_rollbar
-      line_number: 1
-      filename: browser_unsecure.js
-      category_groups:
-        - PII
-        - Personal Data
-      parent_line_number: 3
-      snippet: Rollbar.critical("Connection error from remote Payments API", user)
-      fingerprint: e23c84bd8b97113860affa0140b34b92_1
 

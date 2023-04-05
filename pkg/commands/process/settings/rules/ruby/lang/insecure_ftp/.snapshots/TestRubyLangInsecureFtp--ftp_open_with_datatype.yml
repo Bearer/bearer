@@ -42,47 +42,4 @@ high:
           end
         end
       fingerprint: 9216dc42897b21b951350ad3b2eef2b1_0
-    - rule:
-        cwe_ids:
-            - "319"
-        id: ruby_lang_insecure_ftp
-        title: Communication with an unsecure FTP server detected.
-        description: |
-            ## Description
-
-            Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This rule checks if all FTP connections are made using SFTP.
-
-            ## Remediations
-
-            ✅ To ensure secure FTP connections are made, [use the `Net::SFTP` library](https://github.com/net-ssh/net-sftp) instead of `Net::FTP`:
-
-            ```ruby
-            require 'net/sftp'
-            Net::SFTP.start('host', 'username', password: ENV['password') do |sftp|
-            	...
-            end
-            ```
-
-            ## Resources
-            - [net-sftp](https://github.com/net-ssh/net-sftp)
-        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_insecure_ftp
-      line_number: 6
-      filename: ftp_open_with_datatype.rb
-      category_groups:
-        - PII
-        - Personal Data
-      parent_line_number: 3
-      snippet: |-
-        Net::FTP.open("ftp.site.com") do |ftp|
-          file = Tempfile.new("user_data")
-          begin
-            file << [user.email, user.gender]
-            file.close
-
-            ftp.puttextfile(file.path, "/users/123.json")
-          ensure
-            file.close!
-          end
-        end
-      fingerprint: 9216dc42897b21b951350ad3b2eef2b1_1
 

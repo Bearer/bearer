@@ -34,7 +34,7 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	types.LevelLow:      color.New(color.FgBlue).SprintFunc(),
 	types.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
-var orderedSeverityLevels = [5]string{
+var orderedSeverityLevels = []string{
 	types.LevelCritical,
 	types.LevelHigh,
 	types.LevelMedium,
@@ -106,6 +106,8 @@ func evaluateRules(
 	dataflow *dataflow.DataFlow,
 	builtIn bool,
 ) error {
+	outputResults := map[string][]Result{}
+
 	var bar *progressbar.ProgressBar
 	if !builtIn {
 		bar = bearerprogressbar.GetProgressBar(len(rules), config, "rules")
@@ -172,21 +174,27 @@ func evaluateRules(
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
 
 				if config.Report.Severity[severity] {
-					summaryResults[severity] = append(summaryResults[severity], result)
+					outputResults[severity] = append(outputResults[severity], result)
 				}
 			}
 		}
 	}
 
-	for i, resultsSlice := range summaryResults {
-		SortResult(resultsSlice)
+	outputResults = removeDuplicates(outputResults)
+
+	for i, resultsSlice := range outputResults {
+		sortResult(resultsSlice)
 
 		for j, result := range resultsSlice {
 			// FIXME: consider filename being renamed
 			fingerprintId := fmt.Sprintf("%s_%s", result.Rule.Id, result.Filename)
 			fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), j)
-			summaryResults[i][j].Fingerprint = fingerprint
+			outputResults[i][j].Fingerprint = fingerprint
 		}
+	}
+
+	for severity, resultSlice := range outputResults {
+		summaryResults[severity] = append(summaryResults[severity], resultSlice...)
 	}
 
 	return nil
@@ -534,7 +542,92 @@ func iterativeDigitsCount(number int) int {
 	return count
 }
 
-func SortResult(data []Result) {
+// removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection
+func removeDuplicates(data map[string][]Result) map[string][]Result {
+	filteredOrderedData := [][]Result{}
+	orderedData := [][]Result{}
+	// build a slice instead of map so we can guarantee order
+	for _, severityLevel := range orderedSeverityLevels {
+		_, ok := data[severityLevel]
+		if ok {
+			orderedData = append(orderedData, data[severityLevel])
+			filteredOrderedData = append(filteredOrderedData, []Result{})
+		} else {
+			orderedData = append(orderedData, []Result{})
+			filteredOrderedData = append(filteredOrderedData, []Result{})
+		}
+	}
+
+	// filter duplicates
+	for severityIndex, resultsSlice := range orderedData {
+		for resultIndex, result := range resultsSlice {
+			hasSameSeverityDuplicate := false
+			// forward check for same severity duplicates
+			for _, comparisonResult := range resultsSlice[resultIndex+1:] {
+				_, sameSeverityDuplicateFound := isDuplicate(severityIndex, result, severityIndex, comparisonResult)
+				if sameSeverityDuplicateFound {
+					hasSameSeverityDuplicate = true
+				}
+			}
+
+			if hasSameSeverityDuplicate {
+				continue
+			}
+
+			hasHigherSeverityDuplicate := false
+			// forward check higher severity duplicates
+			for comparisonSeverityIndex, comparisonResultsSlice := range orderedData[severityIndex+1:] {
+				for _, comparisonResult := range comparisonResultsSlice {
+					higherSeverityDuplicateFound, _ := isDuplicate(severityIndex, result, comparisonSeverityIndex, comparisonResult)
+					if higherSeverityDuplicateFound {
+						hasHigherSeverityDuplicate = true
+					}
+				}
+			}
+
+			if hasHigherSeverityDuplicate {
+				continue
+			}
+
+			filteredOrderedData[severityIndex] = append(filteredOrderedData[severityIndex], result)
+		}
+	}
+
+	// rebuild the data map with filtered results
+	filteredData := map[string][]Result{}
+	for severityIndex, results := range filteredOrderedData {
+		if len(results) == 0 {
+			continue
+		}
+
+		filteredData[orderedSeverityLevels[severityIndex]] = results
+	}
+
+	return filteredData
+}
+
+// isDuplicate compares 2 results and returns if comparison result is a duplicate of higher severity (isHigherSeverityDuplicate) and if it is a duplicate of sameSeverity
+func isDuplicate(severityIndex int, result Result, comparisonSeverityIndex int, comparisonResult Result) (isHigherSeverityDuplicate bool, isSameSeverityDuplicate bool) {
+	isHigherSeverityDuplicate = false
+	isSameSeverityDuplicate = false
+
+	if result.Rule != nil && comparisonResult.Rule != nil && result.Rule.Id == comparisonResult.Rule.Id {
+		if result.Filename == comparisonResult.Filename && result.LineNumber == comparisonResult.LineNumber {
+			// if severity is higher
+			if comparisonSeverityIndex > severityIndex {
+				isHigherSeverityDuplicate = true
+			}
+
+			if comparisonSeverityIndex == severityIndex {
+				isSameSeverityDuplicate = true
+			}
+		}
+	}
+
+	return isHigherSeverityDuplicate, isSameSeverityDuplicate
+}
+
+func sortResult(data []Result) {
 	sort.Slice(data, func(i, j int) bool {
 		vulnerabilityA := data[i]
 		vulnerabilityB := data[j]
