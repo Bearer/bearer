@@ -41,7 +41,7 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 
 	bearerRulesDir := bearerRulesDir()
 	if _, err := os.Stat(bearerRulesDir); errors.Is(err, os.ErrNotExist) {
-		err := os.Mkdir(bearerRulesDir, 0700)
+		err := os.Mkdir(bearerRulesDir, os.ModePerm)
 		if err != nil {
 			return fmt.Errorf("could not create bearer-rules directory: %s", err)
 		}
