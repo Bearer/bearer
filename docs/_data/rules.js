@@ -7,7 +7,7 @@ const cweList = require("./cweList.json");
 const gitly = require("gitly");
 const source = "bearer/bearer-rules";
 const rulesPath = "_tmp/rules-data";
-const languageDirectories = ["ruby", "javascript"];
+const excludeDirectories = [".github", "scripts"];
 
 function isDirectory(dir) {
   const result = statSync(dir);
@@ -42,7 +42,7 @@ async function fetchData(location) {
     // ex: looping through rules [ruby, gitleaks, sql]
     dirs.forEach(async (dir) => {
       const dirPath = path.join(rulesPath, dir);
-      if (isDirectory(dirPath) && languageDirectories.includes(dir)) {
+      if (isDirectory(dirPath) && !excludeDirectories.includes(dir)) {
         const subDirs = await readdir(dirPath);
         // ex. looping through rules/ruby [lang, rails]
         subDirs.forEach(async (subDir) => {
