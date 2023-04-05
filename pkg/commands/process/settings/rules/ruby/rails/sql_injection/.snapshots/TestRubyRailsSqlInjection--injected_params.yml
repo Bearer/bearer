@@ -235,7 +235,6 @@ high:
       snippet: |-
         User
           .where("oops #{params[:one]}")
-          .count("#{params[:two]}")
       fingerprint: 0ca873563d1d3aea85c0b052261a3f57_4
     - rule:
         cwe_ids:

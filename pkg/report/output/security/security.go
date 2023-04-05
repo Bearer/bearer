@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/output"
 	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
+	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
 	"github.com/schollz/progressbar/v3"
@@ -544,87 +545,44 @@ func iterativeDigitsCount(number int) int {
 
 // removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection
 func removeDuplicates(data map[string][]Result) map[string][]Result {
-	filteredOrderedData := [][]Result{}
+
 	orderedData := [][]Result{}
 	// build a slice instead of map so we can guarantee order
 	for _, severityLevel := range orderedSeverityLevels {
 		_, ok := data[severityLevel]
 		if ok {
 			orderedData = append(orderedData, data[severityLevel])
-			filteredOrderedData = append(filteredOrderedData, []Result{})
 		} else {
 			orderedData = append(orderedData, []Result{})
-			filteredOrderedData = append(filteredOrderedData, []Result{})
 		}
 	}
+
+	filteredData := map[string][]Result{}
+
+	type Key struct {
+		LineNumber int
+		FileName   string
+		Detector   string
+	}
+
+	reportedDetections := set.Set[Key]{}
 
 	// filter duplicates
 	for severityIndex, resultsSlice := range orderedData {
-		for resultIndex, result := range resultsSlice {
-			hasSameSeverityDuplicate := false
-			// forward check for same severity duplicates
-			for _, comparisonResult := range resultsSlice[resultIndex+1:] {
-				_, sameSeverityDuplicateFound := isDuplicate(severityIndex, result, severityIndex, comparisonResult)
-				if sameSeverityDuplicateFound {
-					hasSameSeverityDuplicate = true
-				}
+		severity := orderedSeverityLevels[severityIndex]
+		for _, result := range resultsSlice {
+			key := Key{
+				LineNumber: result.LineNumber,
+				FileName:   result.Filename,
+				Detector:   result.Rule.Id,
 			}
-
-			if hasSameSeverityDuplicate {
-				continue
+			if reportedDetections.Add(key) {
+				filteredData[severity] = append(filteredData[severity], result)
 			}
-
-			hasHigherSeverityDuplicate := false
-			// forward check higher severity duplicates
-			for comparisonSeverityIndex, comparisonResultsSlice := range orderedData[severityIndex+1:] {
-				for _, comparisonResult := range comparisonResultsSlice {
-					higherSeverityDuplicateFound, _ := isDuplicate(severityIndex, result, comparisonSeverityIndex, comparisonResult)
-					if higherSeverityDuplicateFound {
-						hasHigherSeverityDuplicate = true
-					}
-				}
-			}
-
-			if hasHigherSeverityDuplicate {
-				continue
-			}
-
-			filteredOrderedData[severityIndex] = append(filteredOrderedData[severityIndex], result)
 		}
-	}
-
-	// rebuild the data map with filtered results
-	filteredData := map[string][]Result{}
-	for severityIndex, results := range filteredOrderedData {
-		if len(results) == 0 {
-			continue
-		}
-
-		filteredData[orderedSeverityLevels[severityIndex]] = results
 	}
 
 	return filteredData
-}
-
-// isDuplicate compares 2 results and returns if comparison result is a duplicate of higher severity (isHigherSeverityDuplicate) and if it is a duplicate of sameSeverity
-func isDuplicate(severityIndex int, result Result, comparisonSeverityIndex int, comparisonResult Result) (isHigherSeverityDuplicate bool, isSameSeverityDuplicate bool) {
-	isHigherSeverityDuplicate = false
-	isSameSeverityDuplicate = false
-
-	if result.Rule != nil && comparisonResult.Rule != nil && result.Rule.Id == comparisonResult.Rule.Id {
-		if result.Filename == comparisonResult.Filename && result.LineNumber == comparisonResult.LineNumber {
-			// if severity is higher
-			if comparisonSeverityIndex > severityIndex {
-				isHigherSeverityDuplicate = true
-			}
-
-			if comparisonSeverityIndex == severityIndex {
-				isSameSeverityDuplicate = true
-			}
-		}
-	}
-
-	return isHigherSeverityDuplicate, isSameSeverityDuplicate
 }
 
 func sortResult(data []Result) {
