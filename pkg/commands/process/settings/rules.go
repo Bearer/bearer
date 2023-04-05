@@ -292,9 +292,5 @@ func cleanupRuleDirFiles(bearerRulesDir string) error {
 }
 
 func bearerRulesDir() string {
-	tmpDir := os.TempDir()
-	if tmpDir == "/tmp" {
-		return "/tmp/bearer-rules/"
-	}
-	return tmpDir + "bearer-rules"
+	return os.TempDir() + "bearer-rules"
 }
