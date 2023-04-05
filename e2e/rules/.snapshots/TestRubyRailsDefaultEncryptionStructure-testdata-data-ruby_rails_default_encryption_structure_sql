@@ -13,7 +13,7 @@ warning:
 
             ## Resources
             - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
-        documentation_url: https://docs.bearer.com/reference/rules/ruby_rails_default_encryption
+        documentation_url: ""
       line_number: 3
       filename: e2e/rules/testdata/data/ruby_rails_default_encryption_structure_sql/db/structure.sql
       category_groups:
