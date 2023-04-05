@@ -292,5 +292,5 @@ func cleanupRuleDirFiles(bearerRulesDir string) error {
 }
 
 func bearerRulesDir() string {
-	return os.TempDir() + "bearer-rules"
+	return filepath.Join(os.TempDir(), "bearer-rules")
 }
