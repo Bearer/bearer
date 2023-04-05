@@ -25,8 +25,7 @@
 ## Code security scanner that natively filters and prioritizes security risks using sensitive data flow analysis.
 <hr/>
 
-<iframe style="display:block; width: 100%; aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/WeyPmYyP5Nc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+https://user-images.githubusercontent.com/1649672/230208878-9fefaa19-8e88-46fb-82a2-5236c310c91f.mp4
 
 Bearer provides built-in rules against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/). Here are some practical examples of what those rules look for:
 * Non-filtered user input.
