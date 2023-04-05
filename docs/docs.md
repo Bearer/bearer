@@ -19,7 +19,9 @@ And [many more](/reference/rules).
 
 Bearer currently supports **JavaScript** and **Ruby** stacks, more will follow.
 
-![bearer security scanner gif](/assets/img/Bearer-security-OSS.gif)
+Want a quick rundown? Here's a minute and a half of what you can expect from Bearer CLI:
+
+<iframe class="w-full aspect-video" src="https://www.youtube.com/embed/WeyPmYyP5Nc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Getting started
 
