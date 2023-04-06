@@ -1,4 +1,3 @@
-type: risk
 patterns:
   - pattern: |
       jwt.sign($<...>$<DATA_TYPE>$<...>)
