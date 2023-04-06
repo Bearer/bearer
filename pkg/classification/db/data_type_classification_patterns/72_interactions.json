@@ -6,7 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Interactions",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b(interactions?)\\b",
+  "include_regexp": "\\b(interactions?)\\z",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

@@ -4,5 +4,5 @@
   "act_as_identifier": true,
   "category": "Client",
   "include_regexp": "\\b.*client.*\\b",
-  "exclude_regexp": "\\bconfig\\b"
+  "exclude_regexp": "\\b(config|auth(entication)?)\\b"
 }

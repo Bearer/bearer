@@ -7,7 +7,7 @@ import (
 
 var (
 	normalizeCaseRegexp      = regexp.MustCompile(`[A-Z][A-Z][a-z]|[a-z][A-Z]`) // Matches "AP(INa)me" or "firs(tN)ame"
-	normalizeSeparatorRegexp = regexp.MustCompile(`[_\-.,\s:]+`)
+	normalizeSeparatorRegexp = regexp.MustCompile(`[_\-.,\s:0-9]+`)
 )
 
 func Normalize(key string) string {

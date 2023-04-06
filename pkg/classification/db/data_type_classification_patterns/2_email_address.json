@@ -6,7 +6,7 @@
   "exclude_types": ["boolean", "date", "number"],
   "friendly_name": "Email Address",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b(.*email\\s?(address)?)\\b",
+  "include_regexp": "\\b.*email(\\s?address)?\\z",
   "match_column": true,
   "match_object": false,
   "object_type": ["unknown"]

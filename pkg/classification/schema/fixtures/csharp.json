@@ -10071,11 +10071,7 @@
       },
       {
         "name": "Language",
-        "type": "string",
-        "data_type_info": "Spoken Languages",
-        "state": "valid",
-        "reason": "known_pattern",
-        "false_positive": false
+        "type": "string"
       }
     ],
     "state": "valid"
