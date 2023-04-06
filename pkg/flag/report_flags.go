@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	FormatSarif = "sarif"
 	FormatJSON  = "json"
 	FormatYAML  = "yaml"
 	FormatEmpty = ""
@@ -21,7 +22,7 @@ var (
 	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
-var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
+var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml, sarif")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: security, privacy")
 var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 
@@ -31,7 +32,7 @@ var (
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatEmpty,
-		Usage:      "Specify report format (json, yaml)",
+		Usage:      "Specify report format (json, yaml, sarif)",
 	}
 	ReportFlag = Flag{
 		Name:       "report",
@@ -90,15 +91,6 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 }
 
 func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
-	format := getString(f.Format)
-	switch format {
-	case FormatYAML:
-	case FormatJSON:
-	case FormatEmpty:
-	default:
-		return ReportOptions{}, ErrInvalidFormat
-	}
-
 	report := getString(f.Report)
 	switch report {
 	case ReportPrivacy:
@@ -110,6 +102,19 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	case ReportStats:
 	default:
 		return ReportOptions{}, ErrInvalidReport
+	}
+
+	format := getString(f.Format)
+	switch format {
+	case FormatYAML:
+	case FormatJSON:
+	case FormatEmpty:
+	case FormatSarif:
+		if report != ReportSecurity {
+			return ReportOptions{}, ErrInvalidFormat
+		}
+	default:
+		return ReportOptions{}, ErrInvalidFormat
 	}
 
 	severity := getStringSlice(f.Severity)
