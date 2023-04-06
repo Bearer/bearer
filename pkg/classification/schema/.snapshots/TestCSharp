@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=64) {
+([]testhelper.ClassificationResult) (len=63) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=18) "EditForumPostModel",
     Decision: (classify.ClassificationDecision) {
@@ -1494,7 +1494,7 @@
         Name: (string) (len=10) "EmailMatch",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=21) "valid_unknown_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -2778,7 +2778,7 @@
     Name: (string) (len=27) "AssociatedExternalAuthModel",
     Decision: (classify.ClassificationDecision) {
       State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=34) "valid_object_with_valid_properties"
+      Reason: (string) (len=36) "invalid_object_with_valid_properties"
     },
     Properties: (map[string]testhelper.ClassificationResult) (len=3) {
       (string) (len=14) "AuthMethodName": (testhelper.ClassificationResult) {
@@ -2793,7 +2793,7 @@
         Name: (string) (len=5) "Email",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -5134,8 +5134,8 @@
       (string) (len=20) "Home2TelephoneNumber": (testhelper.ClassificationResult) {
         Name: (string) (len=20) "Home2TelephoneNumber",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=13) "known_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -5966,8 +5966,8 @@
       (string) (len=11) "TelexNumber": (testhelper.ClassificationResult) {
         Name: (string) (len=11) "TelexNumber",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -6371,47 +6371,6 @@
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
           Reason: (string) (len=25) "known_database_identifier"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
-    Name: (string) (len=25) "WeiboAuthorizationRequest",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=34) "valid_object_with_valid_properties"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=4) {
-      (string) (len=7) "Display": (testhelper.ClassificationResult) {
-        Name: (string) (len=7) "Display",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=10) "Forcelogin": (testhelper.ClassificationResult) {
-        Name: (string) (len=10) "Forcelogin",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=8) "Language": (testhelper.ClassificationResult) {
-        Name: (string) (len=8) "Language",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=5) "Scope": (testhelper.ClassificationResult) {
-        Name: (string) (len=5) "Scope",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       }
@@ -9054,7 +9013,7 @@
         Name: (string) (len=13) "emailNotExist",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=21) "valid_unknown_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -13246,7 +13205,7 @@
         Name: (string) (len=19) "userWithEmailExists",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=21) "valid_unknown_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -13927,8 +13886,8 @@
       (string) (len=24) "InteractionStartDateTime": (testhelper.ClassificationResult) {
         Name: (string) (len=24) "InteractionStartDateTime",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=22) "valid_extended_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },

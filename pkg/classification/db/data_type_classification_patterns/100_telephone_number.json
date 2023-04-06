@@ -6,7 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Telephone Number",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b((sender)?(tele|mobile|contact|phone|(billing\\s?phone))\\s?(number)?)|(primary\\s?phone\\s?(number)?)\\b",
+  "include_regexp": "\\b((sender)?(telephone|mobile|contact|phone|(billing\\s?phone))\\s?(number)?)|(primary\\s?phone\\s?(number)?)\\b",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

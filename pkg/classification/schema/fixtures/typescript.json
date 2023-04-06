@@ -214,5 +214,38 @@
       }
     ],
     "state": "valid"
+  },
+  {
+    "name": "BrowserAuthError",
+    "filename": "lib/msal-react/src/hooks/useMsalAuthentication.ts",
+    "detector_type": "JavaScript",
+    "properties": [
+      {
+        "name": "createInteractionInProgressError",
+        "type": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "GitEmailPolicy",
+    "filename": "lib/msal-react/src/hooks/useMsalAuthentication.ts",
+    "detector_type": "JavaScript",
+    "properties": [
+      {
+        "name": "getEmailExampleLines",
+        "type": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "ClientConfigurationError",
+    "filename": "lib/msal-core/src/UserAgentApplication.ts",
+    "detector_type": "JavaScript",
+    "properties": [
+      {
+        "name": "createTelemetryConfigError",
+        "type": "unknown"
+      }
+    ]
   }
 ]
