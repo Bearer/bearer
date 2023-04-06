@@ -153,6 +153,30 @@ patterns:
           - Typhoeus
       - variable: INSECURE_URL
         detection: insecure_url
+  - pattern: |
+      Net::HTTP.post_form($<INSECURE_URL>, $<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<CLIENT>.post($<INSECURE_URL>, $<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+      - variable: INSECURE_URL
+        detection: insecure_url
+      - variable: DATA_TYPE
+        detection: datatype
 auxiliary:
   - id: ruby_lang_http_insecure_curb
     patterns:

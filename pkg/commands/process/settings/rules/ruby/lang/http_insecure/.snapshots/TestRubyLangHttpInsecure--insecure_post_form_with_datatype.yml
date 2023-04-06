@@ -1,0 +1,37 @@
+high:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_lang_http_insecure
+        title: Connection through an unsecure HTTP communication detected.
+        description: |
+            ## Description
+
+            Applications should only connect to API using HTTPS connections. This rule checks that all HTTP connections use HTTPS.
+
+            ## Remediations
+
+            ❌ Avoid using unsecured outgoing HTTP communication, especially in the context of API calls:
+
+            ```ruby
+            response = HTTParty.get('http://insecure-api.com')
+            ```
+
+            ✅ Ensure to always connect though HTTPS:
+
+            ```ruby
+            response = HTTParty.get('https://secure-api.com')
+            ```
+
+            ## Resources
+            - [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_http_insecure
+      line_number: 1
+      filename: insecure_post_form_with_datatype.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: 'Net::HTTP.post_form("http://my.api.com/users/search", email: user.email)'
+      fingerprint: 77b5d28f826f72f969f4cb7b2d6e9897_0
+
