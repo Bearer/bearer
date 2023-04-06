@@ -101,11 +101,6 @@ func TestRubyLangWeakEncryption(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption")
 }
 
-func TestRubyLangWeakEncryptionWithData(t *testing.T) {
-	t.Parallel()
-	getRunner(t).runTest(t, rubyRulesPath+"lang/weak_encryption_with_data")
-}
-
 func TestRubyRailsHTTPVerbConfusion(t *testing.T) {
 	t.Parallel()
 	getRunner(t).runTest(t, rubyRulesPath+"rails/http_verb_confusion")

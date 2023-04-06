@@ -1,0 +1,44 @@
+high:
+    - rule:
+        cwe_ids:
+            - "331"
+            - "326"
+        id: ruby_lang_weak_encryption
+        title: Weak encryption library usage detected.
+        description: |
+            ## Description
+
+            A weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.
+
+            ## Remediations
+            According to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.
+
+            ❌ Avoid libraries and algorithms with known weaknesses:
+
+            ```ruby
+            Digest::SHA1.hexdigest 'weak password encryption'
+            Crypt::Blowfish.new("weak password encryption")
+            RC4.new("weak password encryption")
+            OpenSSL::PKey::RSA.new 1024
+            OpenSSL::PKey::DSA.new 1024
+            Digest::MD5.hexdigest 'unsecure string'
+            ```
+
+            ✅ Instead, we recommend using bcrypt:
+
+            ```ruby
+            BCrypt::Password.create('iLOVEdogs123')
+            ```
+
+            ## Resources
+            - [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 1
+      filename: digest_md5_data.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: Digest::MD5.hexdigest(user.address)
+      fingerprint: 78bf91deee3e38f26ee014dec3ed9181_0
+
