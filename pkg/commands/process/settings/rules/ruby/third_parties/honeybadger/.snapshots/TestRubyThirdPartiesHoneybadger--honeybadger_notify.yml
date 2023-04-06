@@ -79,7 +79,7 @@ high:
             ## Resources
             - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
-      line_number: 9
+      line_number: 13
       filename: honeybadger_notify.rb
       category_groups:
         - PII
@@ -111,7 +111,7 @@ high:
             ## Resources
             - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
-      line_number: 13
+      line_number: 14
       filename: honeybadger_notify.rb
       category_groups:
         - PII
@@ -143,7 +143,7 @@ high:
             ## Resources
             - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
-      line_number: 14
+      line_number: 22
       filename: honeybadger_notify.rb
       category_groups:
         - PII
@@ -175,38 +175,6 @@ high:
             ## Resources
             - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
-      line_number: 22
-      filename: honeybadger_notify.rb
-      category_groups:
-        - PII
-        - Personal Data
-      parent_line_number: 28
-      snippet: |-
-        Honeybadger.notify(
-          "Something is wrong here for " + user.gender,
-          class_name: "MyError",
-          error_message: error_message,
-          tags: tags,
-          context: context,
-          parameters: parameters,
-        )
-      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_5
-    - rule:
-        cwe_ids:
-            - "201"
-        id: ruby_third_parties_honeybadger
-        title: Sensitive data sent to Honeybadger detected.
-        description: |
-            ## Description
-            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Honeybadger.
-
-            ## Remediations
-
-            When logging errors or events, ensure all sensitive data is removed.
-
-            ## Resources
-            - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
-        documentation_url: https://docs.bearer.com/reference/rules/ruby_third_parties_honeybadger
       line_number: 29
       filename: honeybadger_notify.rb
       category_groups:
@@ -222,5 +190,5 @@ high:
           context: context,
           parameters: parameters,
         )
-      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_6
+      fingerprint: 4f6f5c90afda3bdd7438ef6b9ea73bfd_5
 

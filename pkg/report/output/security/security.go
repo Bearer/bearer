@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/output"
 	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
+	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
 	"github.com/schollz/progressbar/v3"
@@ -34,7 +35,7 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	types.LevelLow:      color.New(color.FgBlue).SprintFunc(),
 	types.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
-var orderedSeverityLevels = [5]string{
+var orderedSeverityLevels = []string{
 	types.LevelCritical,
 	types.LevelHigh,
 	types.LevelMedium,
@@ -106,6 +107,8 @@ func evaluateRules(
 	dataflow *dataflow.DataFlow,
 	builtIn bool,
 ) error {
+	outputResults := map[string][]Result{}
+
 	var bar *progressbar.ProgressBar
 	if !builtIn {
 		bar = bearerprogressbar.GetProgressBar(len(rules), config, "rules")
@@ -172,21 +175,27 @@ func evaluateRules(
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
 
 				if config.Report.Severity[severity] {
-					summaryResults[severity] = append(summaryResults[severity], result)
+					outputResults[severity] = append(outputResults[severity], result)
 				}
 			}
 		}
 	}
 
-	for i, resultsSlice := range summaryResults {
-		SortResult(resultsSlice)
+	outputResults = removeDuplicates(outputResults)
+
+	for i, resultsSlice := range outputResults {
+		sortResult(resultsSlice)
 
 		for j, result := range resultsSlice {
 			// FIXME: consider filename being renamed
 			fingerprintId := fmt.Sprintf("%s_%s", result.Rule.Id, result.Filename)
 			fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), j)
-			summaryResults[i][j].Fingerprint = fingerprint
+			outputResults[i][j].Fingerprint = fingerprint
 		}
+	}
+
+	for severity, resultSlice := range outputResults {
+		summaryResults[severity] = append(summaryResults[severity], resultSlice...)
 	}
 
 	return nil
@@ -534,7 +543,41 @@ func iterativeDigitsCount(number int) int {
 	return count
 }
 
-func SortResult(data []Result) {
+// removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection
+func removeDuplicates(data map[string][]Result) map[string][]Result {
+	filteredData := map[string][]Result{}
+
+	type Key struct {
+		LineNumber int
+		FileName   string
+		Detector   string
+	}
+
+	reportedDetections := set.Set[Key]{}
+
+	// filter duplicates
+	for _, severity := range orderedSeverityLevels {
+		resultsSlice, hasSeverity := data[severity]
+		if !hasSeverity {
+			continue
+		}
+
+		for _, result := range resultsSlice {
+			key := Key{
+				LineNumber: result.LineNumber,
+				FileName:   result.Filename,
+				Detector:   result.Rule.Id,
+			}
+			if reportedDetections.Add(key) {
+				filteredData[severity] = append(filteredData[severity], result)
+			}
+		}
+	}
+
+	return filteredData
+}
+
+func sortResult(data []Result) {
 	sort.Slice(data, func(i, j int) bool {
 		vulnerabilityA := data[i]
 		vulnerabilityB := data[j]

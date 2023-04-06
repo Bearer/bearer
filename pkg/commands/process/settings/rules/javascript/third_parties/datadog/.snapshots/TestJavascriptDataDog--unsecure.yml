@@ -38,43 +38,4 @@ high:
       parent_line_number: 11
       snippet: client.event("user", "logged_in", {}, user)
       fingerprint: 15317e7b0c29169d3b524d33116994d5_0
-    - rule:
-        cwe_ids:
-            - "201"
-        id: javascript_third_parties_datadog
-        title: Sensitive data sent to Datadog detected.
-        description: |
-            ## Description
-            Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
-
-            ## Remediations
-
-            When logging errors or events, ensure all sensitive data is removed.
-
-            If you really need to identify users, use unique identifiers from the database.
-
-            ```javascript
-              const StatsD = require("hot-shots");
-              const client = new StatsD({
-                port: 8020,
-                globalTags: { env: process.env.NODE_ENV },
-                errorHandler: errorHandler,
-              });
-
-              client.event(user.uuid, "logged_in", {});
-            ```
-
-            ## Resources
-            - [Datadog docs](https://docs.datadoghq.com)
-            - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
-            - [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
-        documentation_url: https://docs.bearer.com/reference/rules/javascript_third_parties_datadog
-      line_number: 3
-      filename: unsecure.js
-      category_groups:
-        - PII
-        - Personal Data
-      parent_line_number: 11
-      snippet: client.event("user", "logged_in", {}, user)
-      fingerprint: 15317e7b0c29169d3b524d33116994d5_1
 
