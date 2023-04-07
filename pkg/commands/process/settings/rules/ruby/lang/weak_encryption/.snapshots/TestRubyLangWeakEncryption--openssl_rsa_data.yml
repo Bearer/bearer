@@ -1,14 +1,14 @@
 high:
     - rule:
         cwe_ids:
-            - "326"
             - "331"
-        id: ruby_lang_weak_encryption_with_data
-        title: Sensitive data encrypted with a weak encryption library detected.
+            - "326"
+        id: ruby_lang_weak_encryption
+        title: Weak encryption library usage detected.
         description: |
             ## Description
 
-            A weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks if weak encryption techniques are used on sensitive data.
+            A weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.
 
             ## Remediations
             According to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.
@@ -32,16 +32,15 @@ high:
 
             ## Resources
             - [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)
-        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption_with_data
-      line_number: 1
-      filename: digest_md5.rb
+        documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
+      line_number: 5
+      filename: openssl_rsa_data.rb
       category_groups:
         - PII
         - Personal Data
-      parent_line_number: 1
-      snippet: Digest::MD5.hexdigest(user.address)
-      fingerprint: 8f355f345af0f6a3706725a5eb911103_0
-medium:
+      parent_line_number: 5
+      snippet: rsa_encrypt.export(cipher, user.password)
+      fingerprint: f7881251d777fec00daf7eac6b5d2ace_0
     - rule:
         cwe_ids:
             - "331"
@@ -76,12 +75,12 @@ medium:
             ## Resources
             - [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)
         documentation_url: https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption
-      line_number: 1
-      filename: digest_md5.rb
+      line_number: 7
+      filename: openssl_rsa_data.rb
       category_groups:
         - PII
         - Personal Data
-      parent_line_number: 1
-      snippet: Digest::MD5.hexdigest(user.address)
-      fingerprint: e9527c9be379afd118be1e43fdda5ae7_0
+      parent_line_number: 7
+      snippet: OpenSSL::PKey::RSA.new(1024).to_pem(cipher, user.first_name)
+      fingerprint: f7881251d777fec00daf7eac6b5d2ace_1
 
