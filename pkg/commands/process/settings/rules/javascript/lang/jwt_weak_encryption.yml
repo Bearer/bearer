@@ -1,4 +1,3 @@
-type: risk
 patterns:
   - pattern: |
       jwt.sign($<_>, $<_>, {
@@ -26,7 +25,6 @@ metadata:
     ## Resources
     - [OWASP weak encryption](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption)
 
-  dsr_id: "DSR-5"
   cwe_id:
     - 327
   id: "javascript_jwt_weak_encryption"

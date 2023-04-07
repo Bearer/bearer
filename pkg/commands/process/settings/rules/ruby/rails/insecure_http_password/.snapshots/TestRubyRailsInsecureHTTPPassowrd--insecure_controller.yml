@@ -25,7 +25,9 @@ high:
       fingerprint: 843db76e891266097ee7c7684c250d45_0
 low:
     - rule:
-        cwe_ids: []
+        cwe_ids:
+            - "798"
+            - "522"
         id: ruby_rails_insecure_http_password
         title: Insecure HTTP Password.
         description: |
