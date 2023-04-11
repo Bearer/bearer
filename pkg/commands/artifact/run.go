@@ -226,7 +226,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	} else {
 		version := strings.TrimPrefix(*release.Name, "v")
 		if version != build.Version && build.Version != "dev" && !opts.Quiet {
-			outputhandler.StdErrLogger().Msgf("You are running an outdated version of bearer, %s is now available. You can find update instructions at https://docs.bearer.com/reference/installation/#updating-bearer", *release.Name)
+			outputhandler.StdErrLogger().Msgf("You are running an outdated version of Bearer CLI, %s is now available. You can find update instructions at https://docs.bearer.com/reference/installation/#updating-bearer", *release.Name)
 		}
 	}
 
