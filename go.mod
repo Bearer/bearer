@@ -29,7 +29,7 @@ require (
 	github.com/weppos/publicsuffix-go v0.30.0
 	github.com/zricethezav/gitleaks/v8 v8.16.2
 	golang.org/x/exp v0.0.0-20230304125523-9ff063c70017
-	golang.org/x/mod v0.9.0
+	golang.org/x/mod v0.10.0
 	golang.org/x/net v0.9.0
 )
 
