@@ -1,1 +1,0 @@
-Digest::MD5.hexdigest(user.address)

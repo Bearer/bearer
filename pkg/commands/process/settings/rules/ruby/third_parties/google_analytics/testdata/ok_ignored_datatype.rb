@@ -1,1 +1,0 @@
-Google::Apis::AnalyticsreportingV4::User.new(user_id: user.id)

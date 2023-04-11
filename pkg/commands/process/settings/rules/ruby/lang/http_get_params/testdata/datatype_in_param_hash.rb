@@ -1,1 +1,0 @@
-HTTP.get("https://my.api.com/users/search", params: { user: { first_name: user.first_name } })
