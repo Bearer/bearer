@@ -77,17 +77,17 @@ _Note: These examples use JSON for readability, but the default format for the p
     "subject_name": "User",
     "name": "Telephone Number",
     "detection_count": 14,
-    "critical_risk_failure_count": 0,
-    "high_risk_failure_count": 0,
-    "medium_risk_failure_count": 0,
-    "low_risk_failure_count": 0,
+    "critical_risk_finding_count": 0,
+    "high_risk_finding_count": 0,
+    "medium_risk_finding_count": 0,
+    "low_risk_finding_count": 0,
     "rules_passed_count": 11
   }
 ]
 ```
 
 
-The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has failed associated with this data point.
+The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has triggered associated with this data point.
 
 ```json
 "ThirdParty": [
@@ -97,10 +97,10 @@ The third parties portion displays data subjects and data types that are sent to
     "data_types": [
       "Email Address"
     ],
-    "critical_risk_failure_count": 1,
-    "high_risk_failure_count": 0,
-    "medium_risk_failure_count": 0,
-    "low_risk_failure_count": 0,
+    "critical_risk_finding_count": 1,
+    "high_risk_finding_count": 0,
+    "medium_risk_finding_count": 0,
+    "low_risk_finding_count": 0,
     "rules_passed_count": 0
   }
 ]
