@@ -35,7 +35,7 @@ File: /bear-publishing/lib/jwt.rb:6
 
 =====================================
 
-24 checks, 18 failures, 0 warnings
+24 checks, 18 findings
 
 CRITICAL: 15
 HIGH: 0

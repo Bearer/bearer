@@ -69,7 +69,7 @@ File: bear-publishing/app/services/marketing_export.rb:34
 
 =====================================
 
-56 checks, 10 failures, 6 warnings
+56 checks, 16 findings
 
 CRITICAL: 7
 HIGH: 0
