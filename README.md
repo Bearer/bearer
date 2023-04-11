@@ -10,7 +10,8 @@
   <br /><br />
   Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security risks and vulnerabilities leading to sensitive data exposures (PII, PHI, PD).
   <br /><br />
-  Currently supporting <strong>JavaScript</strong> and <strong>Ruby</strong> stacks.
+  Currently supporting <strong>JavaScript</strong>, <strong>TypeScript</strong> and <strong>Ruby</strong> stacks.<br />
+  🚧 <strong>Java</strong> support is under active development.
   <br /><br />
 
   [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
@@ -222,7 +223,8 @@ In addition, running Bearer on a scheduled job is a great way to keep track of y
 
 ### Supported Language
 
-Bearer currently supports JavaScript and Ruby and their associated most used frameworks and libraries. More languages will follow.
+Bearer currently supports JavaScript, TypeScript and Ruby and their associated most used frameworks and libraries. 
+Java support is under active development, more languages will follow.
 
 ### What makes Bearer different from any other SAST tools?
 
