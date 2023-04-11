@@ -7,6 +7,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
@@ -212,15 +213,16 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 						TriggeredRules:           make(map[string]bool),
 					}
 				}
+
 				// count severity
 				switch ruleSeverity {
-				case "critical":
+				case types.LevelCritical:
 					subjectRuleFailure.CriticalRiskFailureCount += 1
-				case "high":
+				case types.LevelHigh:
 					subjectRuleFailure.HighRiskFailureCount += 1
-				case "medium":
+				case types.LevelMedium:
 					subjectRuleFailure.MediumRiskFailureCount += 1
-				case "low":
+				case types.LevelLow:
 					subjectRuleFailure.LowRiskFailureCount += 1
 				}
 
@@ -254,13 +256,13 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 
 				// count severity
 				switch ruleSeverity {
-				case "critical":
+				case types.LevelCritical:
 					thirdPartyDataSubject.CriticalRiskFailureCount += 1
-				case "high":
+				case types.LevelHigh:
 					thirdPartyDataSubject.HighRiskFailureCount += 1
-				case "medium":
+				case types.LevelMedium:
 					thirdPartyDataSubject.MediumRiskFailureCount += 1
-				case "low":
+				case types.LevelLow:
 					thirdPartyDataSubject.LowRiskFailureCount += 1
 				}
 
