@@ -67,7 +67,7 @@ To run your first security report, run `bearer scan .` on your project directory
 
 The privacy report provides useful information about how your codebase uses sensitive data, with an emphasis on [data subjects](https://ico.org.uk/for-organisations/sme-web-hub/key-data-protection-terms-you-need-to-know/#datasubject) and third parties services.
 
-The data subjects portion displays information about each detected subject and any data types associated with it. It also provides statistics on total detections and any counts of rule failures associated with the data type. In the example below, the report detects 14 instances of user telephone numbers with no rule failures.
+The data subjects portion displays information about each detected subject and any data types associated with it. It also provides statistics on total detections and any counts of rule findings associated with the data type. In the example below, the report detects 14 instances of user telephone numbers with no rule findings.
 
 _Note: These examples use JSON for readability, but the default format for the privacy report is CSV._
 

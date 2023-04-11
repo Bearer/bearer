@@ -18,15 +18,15 @@ To better understand the structure of a rule file, let’s look at each key:
 
 - `patterns`: See the section below for the Pattern Syntax.
 - `languages`: An array of the languages the rule applies to. Available values are: `ruby`, `javascript`
-- `trigger`: Defines under which conditions the rule should raise a failure. Optional.
+- `trigger`: Defines under which conditions the rule should raise a result. Optional.
   - `match_on`: Refers to the rule's pattern matches.
     - `presence`: Triggers if the rule's pattern is detected. (Default)
     - `absence`: Rule triggers on the absence of a pattern, but the presence of a `required_detection`. Examples include best practices such as missing configuration like forcing SSL communication. Note: rules that match on `absence` need a `required_detection` to be set.
-  - `required_detection`:  Used with the `match_on: absence` trigger. Indicates which rule is required to activate the failure on the absence of the main rule.
+  - `required_detection`:  Used with the `match_on: absence` trigger. Indicates which rule is required to activate the result on the absence of the main rule.
   - `data_types_required`: Sometimes we may want a rule to trigger only for applications that process sensitive data. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
     - `false`: Default. Rule triggers whether or not any data types have been detected in the application.
     - `true`: Rule only triggers if at least one data type is detected in the application.
-- `severity`: This sets the lowest severity level of the rule, by default at `low`. The severity level can automatically increase based on the data type categories (PHI, PD, PDS, PII) detected depending on the rule `trigger` type. A severity level of `warning`, however, will never increase. Bearer groups rule failures by severity, and you can configure the summary report to only fail on specific severity thresholds. Severity is set for each data type group, each of which takes a severity level of `warning`, `low`, `medium`, `high`, or `critical`. A severity level of `warning` won’t cause CI to fail.
+- `severity`: This sets the lowest severity level of the rule, by default at `low`. The severity level can automatically increase based on the data type categories (PHI, PD, PDS, PII) detected depending on the rule `trigger` type. A severity level of `warning`, however, will never increase. Bearer groups rule findings by severity, and you can configure the summary report to only fail on specific severity thresholds. Severity is set for each data type group, each of which takes a severity level of `warning`, `low`, `medium`, `high`, or `critical`. A severity level of `warning` won’t cause CI to fail.
 - `metadata`: Rule metadata is used for output to the summary report, and documentation for the internal rules.
   - `id`: A unique identifier. Internal rules are named `lang_framework_rule_name`. For rules targeting the language core, `lang` is used instead of a framework name. For example `ruby_lang_logger` and `ruby_rails_logger`. For custom rules, you may consider appending your org name.
   - `description`: A brief, one-sentence description of the rule. The best practice is to make this an actionable “rule” phrase, such as “Do X” or “Do not do X in Y”.
@@ -217,7 +217,7 @@ external-rule-dir: /path/to/rules/
 
 ## Rule best practices
 
-1. Matching patterns in a rule cause *rule failures*. Depending on the severity level, failures can cause CI to exit and will display in the summary report. Keep this in mind when writing patterns so you don’t match a best practice condition and trigger a failed scan.
+1. Matching patterns in a rule cause *rule findings*. Depending on the severity level, findings can cause CI to exit and will display in the summary report. Keep this in mind when writing patterns so you don’t match a best practice condition and trigger a failed scan.
 2. Lean on the built-in resources, like the data type detectors and recipes before creating complex rules.
 
 ## Rule starter
