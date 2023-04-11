@@ -1,0 +1,20 @@
+---
+title: Recipes
+layout: layouts/doc.njk
+---
+
+{% renderTemplate "liquid,md",
+recipes %}
+# Recipes
+Bearer CLI uses recipes to make connections between your code an other sources. These are things like data stores, APIs, and internal services. For information on contributing to the recipes database, see the [contribute new recipes](/contributing/recipe/) doc.
+
+The following is a list of currently supported recipes:
+{% endrenderTemplate %}
+
+<ul>
+  {% for recipe in recipes %}
+    <li>
+      <a href="/reference/recipes/{{recipe.id}}/">{{recipe.name}}</a>
+    </li>
+  {% endfor %}
+</ul>

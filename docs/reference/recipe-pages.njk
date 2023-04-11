@@ -1,0 +1,49 @@
+---
+pagination:
+  data: recipes
+  size: 1
+  alias: recipe
+  addAllPagesToCollections: true
+permalink: "reference/recipes/{{ recipe.id | slug }}/"
+layout: layouts/doc.njk
+breadcrumbs:
+  - name: Recipes
+    path: /reference/recipes/
+eleventyComputed:
+  title: "Recipe - {{ recipe.name }}"
+---
+
+<h1>{{recipe.name}}</h1>
+<ul class="not-prose list-none m-0 p-0">
+  <li>
+    <strong>Recipe ID:</strong>
+    {{recipe.id}}</li>
+  <li>
+    <strong>Type:</strong>
+    {{recipe.type}}</li>
+  <li>
+    <strong>Source:</strong>
+    <a class=" text-main dark:text-main-300 hover:underline" href="{{meta.sourcePath}}/blob/main/{{recipe.source}}">{{recipe.id}}.json</a>
+  </li>
+
+</ul>
+{% if recipe.urls %}
+  <h2>URLs</h2>
+  <p>The {{recipe.name}} recipe uses the following URLs to aid in detections:</p>
+  <ul>
+    {% for url in recipe.urls%}
+      <li>{{url}}</li>
+    {% endfor %}
+  </ul>
+</li>
+{% endif %}
+{% if recipe.packages %}
+<h2>Packages</h2>
+<p>The {{recipe.name}} uses the following packages to aid in detections:</p>
+<ul>
+  {% for package in recipe.packages%}
+    <li>{{package.name}} ({{package.package_manager}})</li>
+  {% endfor %}
+</ul>
+</li>
+{% endif %}
