@@ -1,0 +1,7 @@
+
+Subject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed
+User,Email Address,1,0,1,0,0,0
+
+Third Party,Subject,Data Types,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed
+Sentry,User,"Email Address",0,1,0,0,0
+
