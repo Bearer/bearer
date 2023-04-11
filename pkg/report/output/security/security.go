@@ -318,7 +318,7 @@ func writeStatsToString(
 	lineOfCodeOutput *gocloc.Result,
 	dataflow *dataflow.DataFlow,
 ) {
-	statistics, _, _, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
+	statistics, _, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
 	if err != nil {
 		return
 	}

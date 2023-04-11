@@ -1,1 +1,0 @@
-HTTParty.post("http://my.api.com/users/search", body: user.email)

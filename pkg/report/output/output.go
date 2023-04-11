@@ -28,8 +28,6 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	"github.com/bearer/bearer/pkg/types"
 	"gopkg.in/yaml.v3"
-
-	"github.com/hhatto/gocloc"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
@@ -54,7 +52,7 @@ func ReportYAML(outputDetections any) (*string, error) {
 	return &content, nil
 }
 
-func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result, *dataflow.DataFlow, error) {
+func GetOutput(report types.Report, config settings.Config) (any, *dataflow.DataFlow, error) {
 	switch config.Report.Report {
 	case flag.ReportDetectors:
 		return detectors.GetOutput(report, config)
@@ -63,9 +61,9 @@ func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result
 	case flag.ReportSecurity:
 		return reportSecurity(report, config)
 	case flag.ReportSaaS:
-		securityResults, _, dataflow, err := reportSecurity(report, config)
+		securityResults, dataflow, err := reportSecurity(report, config)
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
 
 		var meta *Meta
@@ -84,14 +82,14 @@ func GetOutput(report types.Report, config settings.Config) (any, *gocloc.Result
 			Components: dataflow.Components,
 			Files:      files,
 			Meta:       *meta,
-		}, nil, nil, nil
+		}, nil, nil
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
 		return reportStats(report, config)
 	}
 
-	return nil, nil, nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+	return nil, nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
 func getDiscoveredFiles(config settings.Config) []string {
@@ -104,8 +102,8 @@ func getDiscoveredFiles(config settings.Config) []string {
 	return files
 }
 
-func GetPrivacyReportCSVOutput(report types.Report, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow, config settings.Config) (*string, error) {
-	csvString, err := privacy.BuildCsvString(dataflow, lineOfCodeOutput, config)
+func GetPrivacyReportCSVOutput(report types.Report, dataflow *dataflow.DataFlow, config settings.Config) (*string, error) {
+	csvString, err := privacy.BuildCsvString(dataflow, config)
 	if err != nil {
 		return nil, err
 	}
@@ -115,25 +113,19 @@ func GetPrivacyReportCSVOutput(report types.Report, lineOfCodeOutput *gocloc.Res
 	return &content, nil
 }
 
-func getPrivacyReportOutput(report types.Report, config settings.Config) (*privacy.Report, *gocloc.Result, *dataflow.DataFlow, error) {
-	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
+func getPrivacyReportOutput(report types.Report, config settings.Config) (*privacy.Report, *dataflow.DataFlow, error) {
+	dataflow, _, err := GetDataflow(report, config, true)
 	if err != nil {
-		log.Debug().Msgf("Error in line of code output %s", err)
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 
-	dataflow, _, _, err := GetDataflow(report, config, true)
-	if err != nil {
-		return nil, nil, nil, err
-	}
-
-	return privacy.GetOutput(dataflow, lineOfCodeOutput, config)
+	return privacy.GetOutput(dataflow, config)
 }
 
-func GetDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, *gocloc.Result, *dataflow.DataFlow, error) {
-	reportedDetections, _, _, err := detectors.GetOutput(report, config)
+func GetDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, *dataflow.DataFlow, error) {
+	reportedDetections, _, err := detectors.GetOutput(report, config)
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 
 	for _, detection := range reportedDetections {
@@ -143,18 +135,13 @@ func GetDataflow(report types.Report, config settings.Config, isInternal bool) (
 	return dataflow.GetOutput(reportedDetections, config, isInternal)
 }
 
-func reportStats(report types.Report, config settings.Config) (*stats.Stats, *gocloc.Result, *dataflow.DataFlow, error) {
-	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
+func reportStats(report types.Report, config settings.Config) (*stats.Stats, *dataflow.DataFlow, error) {
+	dataflowOutput, _, err := GetDataflow(report, config, true)
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 
-	dataflowOutput, _, _, err := GetDataflow(report, config, true)
-	if err != nil {
-		return nil, nil, nil, err
-	}
-
-	return stats.GetOutput(lineOfCodeOutput, dataflowOutput, config)
+	return stats.GetOutput(report.Inputgocloc, dataflowOutput, config)
 }
 
 func reportSecurity(
@@ -162,17 +149,10 @@ func reportSecurity(
 	config settings.Config,
 ) (
 	securityResults *security.Results,
-	lineOfCodeOutput *gocloc.Result,
 	dataflow *dataflow.DataFlow,
 	err error,
 ) {
-	lineOfCodeOutput, err = stats.GoclocDetectorOutput(config.Scan.Target)
-	if err != nil {
-		log.Debug().Msgf("error in line of code output %s", err)
-		return
-	}
-
-	dataflow, _, _, err = GetDataflow(report, config, true)
+	dataflow, _, err = GetDataflow(report, config, true)
 	if err != nil {
 		log.Debug().Msgf("error in dataflow %s", err)
 		return

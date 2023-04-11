@@ -48,6 +48,7 @@ type Config struct {
 	Target       string             `mapstructure:"target" json:"target" yaml:"target"`
 	Rules        map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
 	BuiltInRules map[string]*Rule   `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
+	CacheUsed    bool               `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
 }
 
 type Modules []*PolicyModule
@@ -195,11 +196,8 @@ type MetaVar struct {
 //go:embed policies.yml
 var defaultPolicies []byte
 
-//go:embed rules/*
-var rulesFs embed.FS
-
 //go:embed built_in_rules/*
-var builtInRulesFs embed.FS
+var buildInRulesFs embed.FS
 
 //go:embed policies/*
 var policiesFs embed.FS
@@ -243,11 +241,15 @@ func defaultWorkerOptions() WorkerOptions {
 	}
 }
 
-func FromOptions(opts flag.Options) (Config, error) {
+func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 	policies := DefaultPolicies()
 	workerOptions := defaultWorkerOptions()
-
-	builtInRules, rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions)
+	builtInRules, rules, cacheUsed, err := loadRules(
+		opts.ExternalRuleDir,
+		opts.RuleOptions,
+		foundLanguages,
+		opts.ScanOptions.Force,
+	)
 	if err != nil {
 		return Config{}, err
 	}
@@ -274,6 +276,7 @@ func FromOptions(opts flag.Options) (Config, error) {
 		Policies:     policies,
 		Rules:        rules,
 		BuiltInRules: builtInRules,
+		CacheUsed:    cacheUsed,
 	}
 
 	return config, nil

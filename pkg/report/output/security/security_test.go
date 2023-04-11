@@ -143,7 +143,7 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 		GeneralOptions: flag.GeneralOptions{},
 	}
 
-	return settings.FromOptions(opts)
+	return settings.FromOptions(opts, []string{"ruby"})
 }
 
 func dummyDataflow() dataflow.DataFlow {

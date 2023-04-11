@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "eleventy --serve --watch --incremental & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
     "debug": "DEBUG=Eleventy* eleventy --serve & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
-    "build": "ELEVENTY_PRODUCTION=true eleventy && NODE_ENV=production npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --minify"
+    "build": "ELEVENTY_PRODUCTION=true eleventy && NODE_ENV=production npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --minify",
+    "clean": "rm -rf _site _tmp"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
     "@tailwindcss/typography": "^0.5.7",
     "eleventy-plugin-toc": "^1.1.5",
+    "gitly": "^2.4.1",
     "js-yaml": "^4.1.0",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.5",

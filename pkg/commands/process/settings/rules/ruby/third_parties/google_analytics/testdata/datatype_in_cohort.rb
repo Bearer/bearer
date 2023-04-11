@@ -1,1 +1,0 @@
-Google::Apis::AnalyticsreportingV4::Cohort.new(name: user.zip_code)
