@@ -25,7 +25,7 @@ File: config/application.rb:2
 
 =====================================
 
-3 checks, 2 failures, 0 warnings
+3 checks, 2 findings
 
 CRITICAL: 1 (CWE-209, CWE-532)
 HIGH: 1 (CWE-295)

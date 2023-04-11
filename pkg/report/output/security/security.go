@@ -427,12 +427,7 @@ func checkAndWriteFailureSummaryToString(
 	}
 
 	reportStr.WriteString("\n\n")
-	if failureCount == 0 {
-		// only warnings
-		reportStr.WriteString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(warningCount) + " warnings\n\n")
-	} else {
-		reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount) + " failures, " + fmt.Sprint(warningCount) + " warnings\n\n"))
-	}
+	reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount+warningCount) + " findings\n\n"))
 
 	for i, severityLevel := range orderedSeverityLevels {
 		if !severityForFailure[severityLevel] {
