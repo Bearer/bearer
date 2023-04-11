@@ -41,7 +41,7 @@ eleventyComputed:
 {% endif %}
 {% if recipe.packages | length %}
 <h2>Packages</h2>
-<p>The {{recipe.name}} uses the following packages to aid in detections:</p>
+<p>The {{recipe.name}} recipe uses the following packages to aid in detections:</p>
 <ul>
   {% for package in recipe.packages%}
     <li>
