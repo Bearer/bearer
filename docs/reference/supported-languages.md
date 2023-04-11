@@ -16,4 +16,4 @@ Bearer currently supports Ruby and JavaScript codebase.
 
 We are working on adding more languages in the coming months, especially PHP, C#, Go, and Python.
 
-[Let us](https://discord.com/invite/eaHZBJUXRF) know which language you'd like to see coming first.   
+Let us know [on Discord](https://discord.com/invite/eaHZBJUXRF) which language you'd like to see next.   
