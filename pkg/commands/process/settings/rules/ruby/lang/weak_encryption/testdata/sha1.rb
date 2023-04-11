@@ -1,0 +1,1 @@
+Digest::SHA1.hexdigest(aaaa.bbbb)

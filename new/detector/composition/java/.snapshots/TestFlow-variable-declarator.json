@@ -1,0 +1,90 @@
+[
+	{
+		"DetectorType": "logger",
+		"MatchNode": {},
+		"Data": {
+			"Pattern": "console.log($\u003cDATA_TYPE\u003e)\n",
+			"Datatypes": [
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Properties": [
+							{
+								"Name": "user",
+								"Node": {},
+								"Classification": {
+									"name": "user",
+									"decision": {
+										"state": "valid",
+										"reason": "valid_object_with_valid_properties"
+									}
+								},
+								"Datatype": {
+									"DetectorType": "datatype",
+									"MatchNode": {},
+									"Data": {
+										"Properties": [
+											{
+												"Name": "name",
+												"Node": {},
+												"Classification": {
+													"name": "name",
+													"subject_name": "User",
+													"data_type": {
+														"name": "Fullname",
+														"uuid": "1617291b-bc22-4267-ad5e-8054b2505958",
+														"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e",
+														"category": {
+															"name": "Identification",
+															"uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e",
+															"groups": {
+																"172d90e3-cb9a-46b6-90e5-dd7169c3af54": {
+																	"name": "PII",
+																	"uuid": "172d90e3-cb9a-46b6-90e5-dd7169c3af54"
+																},
+																"e1d3135b-3c0f-4b55-abce-19f27a26cbb3": {
+																	"name": "Personal Data",
+																	"uuid": "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+																}
+															}
+														}
+													},
+													"decision": {
+														"state": "valid",
+														"reason": "known_pattern"
+													}
+												},
+												"Datatype": null
+											}
+										]
+									}
+								}
+							}
+						]
+					}
+				},
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Properties": [
+							{
+								"Name": "name",
+								"Node": {},
+								"Classification": {
+									"name": "name",
+									"decision": {
+										"state": "invalid",
+										"reason": "belongs_to_invalid_object"
+									}
+								},
+								"Datatype": null
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]
