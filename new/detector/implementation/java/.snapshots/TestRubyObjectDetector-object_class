@@ -1,0 +1,35 @@
+- position: "1:1"
+  content: |-
+    class A
+      attr_accessor :one, :two
+
+      def three
+      end
+
+      def four(a, b)
+      end
+    end
+  data:
+    properties:
+        - name: A
+          node: null
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: one
+                      node: {}
+                      object: null
+                    - name: two
+                      node: {}
+                      object: null
+                    - name: three
+                      node: {}
+                      object: null
+                    - name: four
+                      node: {}
+                      object: null
+                isvirtual: false
+    isvirtual: false
+
