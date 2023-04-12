@@ -4,10 +4,10 @@
       DataSubject: (string) (len=4) "User",
       DataType: (string) (len=13) "Email Address",
       DetectionCount: (int) 1,
-      CriticalRiskFailureCount: (int) 0,
-      HighRiskFailureCount: (int) 1,
-      MediumRiskFailureCount: (int) 0,
-      LowRiskFailureCount: (int) 0,
+      CriticalRiskFindingCount: (int) 0,
+      HighRiskFindingCount: (int) 1,
+      MediumRiskFindingCount: (int) 0,
+      LowRiskFindingCount: (int) 0,
       RulesPassedCount: (int) 0
     }
   },
@@ -18,10 +18,10 @@
       DataTypes: ([]string) (len=1) {
         (string) (len=13) "Email Address"
       },
-      CriticalRiskFailureCount: (int) 0,
-      HighRiskFailureCount: (int) 1,
-      MediumRiskFailureCount: (int) 0,
-      LowRiskFailureCount: (int) 0,
+      CriticalRiskFindingCount: (int) 0,
+      HighRiskFindingCount: (int) 1,
+      MediumRiskFindingCount: (int) 0,
+      LowRiskFindingCount: (int) 0,
       RulesPassedCount: (int) 0
     }
   }
