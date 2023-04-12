@@ -62,6 +62,12 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```bash
   brew install bearer/tap/bearer
   ```
+
+  Update an existing installation with the following:
+  
+  ```bash
+  brew update && brew update bearer/tap/bearer
+  ```
 </details>
 
 <details>
@@ -72,6 +78,12 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   $ echo "deb [trusted=yes] https://apt.fury.io/bearer/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
   $ sudo apt-get update
   $ sudo apt-get install bearer
+  ```
+
+  Update an existing installation with the following:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install bearer
   ```
 </details>
 
@@ -92,6 +104,11 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```shell
     $ sudo yum -y update
     $ sudo yum -y install bearer
+  ```
+
+  Update an existing installation with the following:
+  ```bash
+  sudo yum -y update bearer
   ```
 </details>
 
@@ -123,6 +140,8 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```bash
   docker compose run bearer scan /tmp/scan --debug
   ```
+
+  The Docker configurations above will always use the latest release.
 </details>
 
 <details>
@@ -131,6 +150,8 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/bearer/releases/latest/).
 
   Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute.
+
+  To update Bearer when using the binary, download the latest release and overwrite your existing installation location.
 </details>
 <br/>
 
