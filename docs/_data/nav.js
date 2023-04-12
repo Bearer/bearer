@@ -39,6 +39,7 @@ module.exports = [
       { name: "Commands", url: "/reference/commands/" },
       { name: "Rules", url: "/reference/rules/" },
       { name: "Data Types", url: "/reference/datatypes/" },
+      { name: "Recipes", url: "/reference/recipes/" },
       { name: "Supported Languages", url: "/reference/supported-languages/" },
     ],
   },

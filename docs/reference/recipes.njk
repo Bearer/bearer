@@ -1,0 +1,64 @@
+---
+title: Recipes
+layout: layouts/doc.njk
+---
+
+{% renderTemplate "liquid,md",
+recipes %}
+# Recipes
+Bearer CLI uses recipes to make connections between your code and other sources. These are things like data stores, APIs, and internal services. For information on contributing to the recipes database, see the [contribute new recipes](/contributing/recipe/) doc.
+{% endrenderTemplate %}
+
+<form action="" id="recipe-search">
+  <label for="search-input" class="font-bold">Search</label>
+  <input class="block w-full px-4 py-2 border-neutral-300 border-2 rounded dark:text-neutral-500" type="search" name="" id="search-input" placeholder="Try searching common services and APIs like Google, AWS, etc.">
+</form>
+
+<ul>
+  {% for recipe in recipes %}
+    <li class="js-recipe">
+      <a href="/reference/recipes/{{recipe.id}}/">{{recipe.name}}</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<script>
+  function compare(item, query) {
+    let source = item
+      .innerHTML
+      .toLowerCase();
+    if (source.includes(query)) {
+      return true
+    }
+    return false
+  }
+
+  function filterResults() {
+    const rules = document.querySelectorAll('.js-recipe')
+    const query = document
+      .getElementById('search-input')
+      .value;
+    rules.forEach(rule => {
+      if (compare(rule, query.toLowerCase())) {
+        rule
+          .classList
+          .remove('hidden')
+      } else {
+        rule
+          .classList
+          .add('hidden')
+      }
+    })
+  };
+  const input = document.getElementById('search-input')
+  const form = document.getElementById('recipe-search')
+  let timer;
+  const delay = 300;
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+  })
+  input.addEventListener('keyup', (e) => {
+    clearTimeout(timer)
+    timer = setTimeout(filterResults, delay)
+  })
+</script>
