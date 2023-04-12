@@ -35,7 +35,7 @@ File: /bear-publishing/lib/jwt.rb:6
 
 =====================================
 
-24 checks, 18 failures, 0 warnings
+24 checks, 18 findings
 
 CRITICAL: 15
 HIGH: 0
@@ -67,7 +67,7 @@ To run your first security report, run `bearer scan .` on your project directory
 
 The privacy report provides useful information about how your codebase uses sensitive data, with an emphasis on [data subjects](https://ico.org.uk/for-organisations/sme-web-hub/key-data-protection-terms-you-need-to-know/#datasubject) and third parties services.
 
-The data subjects portion displays information about each detected subject and any data types associated with it. It also provides statistics on total detections and any counts of rule failures associated with the data type. In the example below, the report detects 14 instances of user telephone numbers with no rule failures.
+The data subjects portion displays information about each detected subject and any data types associated with it. It also provides statistics on total detections and any counts of rule findings associated with the data type. In the example below, the report detects 14 instances of user telephone numbers with no rule findings.
 
 _Note: These examples use JSON for readability, but the default format for the privacy report is CSV._
 
@@ -77,17 +77,17 @@ _Note: These examples use JSON for readability, but the default format for the p
     "subject_name": "User",
     "name": "Telephone Number",
     "detection_count": 14,
-    "critical_risk_failure_count": 0,
-    "high_risk_failure_count": 0,
-    "medium_risk_failure_count": 0,
-    "low_risk_failure_count": 0,
+    "critical_risk_finding_count": 0,
+    "high_risk_finding_count": 0,
+    "medium_risk_finding_count": 0,
+    "low_risk_finding_count": 0,
     "rules_passed_count": 11
   }
 ]
 ```
 
 
-The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has failed associated with this data point.
+The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has triggered associated with this data point.
 
 ```json
 "ThirdParty": [
@@ -97,10 +97,10 @@ The third parties portion displays data subjects and data types that are sent to
     "data_types": [
       "Email Address"
     ],
-    "critical_risk_failure_count": 1,
-    "high_risk_failure_count": 0,
-    "medium_risk_failure_count": 0,
-    "low_risk_failure_count": 0,
+    "critical_risk_finding_count": 1,
+    "high_risk_finding_count": 0,
+    "medium_risk_finding_count": 0,
+    "low_risk_finding_count": 0,
     "rules_passed_count": 0
   }
 ]

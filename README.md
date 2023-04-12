@@ -150,7 +150,7 @@ bearer scan bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output a security report with details of any rule failures, as well as where in the codebase the infractions happened and why.
+Once the scan is complete, Bearer will output a security report with details of any rule findings, as well as where in the codebase the infractions happened and why.
 
 By default the `scan` command use the SAST scanner, other [scanner types](https://docs.bearer.com/explanations/scanners) are available.
 
@@ -159,10 +159,10 @@ By default the `scan` command use the SAST scanner, other [scanner types](https:
 The security report is an easily digestible view of the security issues detected by Bearer. A report is made up of:
 
 - The list of [rules](https://docs.bearer.com/reference/rules/) run against your code.
-- Each detected failure, containing the file location and lines that triggered the rule failure.
-- A stat section with a summary of rules checks, failures and warnings.
+- Each detected finding, containing the file location and lines that triggered the rule finding.
+- A stat section with a summary of rules checks, findings and warnings.
 
-The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output:
+The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule findings and output a full report. Here's a section of the output:
 
 ```text
 ...
@@ -181,7 +181,7 @@ File: bear-publishing/app/services/marketing_export.rb:34
 
 =====================================
 
-56 checks, 10 failures, 6 warnings
+56 checks, 16 findings
 
 CRITICAL: 7
 HIGH: 0
