@@ -17,6 +17,7 @@ import (
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
+	"golang.org/x/exp/maps"
 	"golang.org/x/xerrors"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
@@ -234,7 +235,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		log.Debug().Msgf("Error in line of code output %s", err)
 		return err
 	}
-	scanSettings, err := settings.FromOptions(opts, formatFoundLanguages(inputgocloc.Languages))
+	scanSettings, err := settings.FromOptions(opts, FormatFoundLanguages(inputgocloc.Languages))
 	scanSettings.Target = opts.Target
 	if err != nil {
 		return err
@@ -257,7 +258,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		if opts.ScanOptions.Force && !opts.ScanOptions.Quiet {
 			outputhandler.StdOutLogger().Msgf("Caching rules")
 		}
-		if err = settings.RefreshRules(scanSettings, opts.ExternalRuleDir, opts.RuleOptions, formatFoundLanguages(inputgocloc.Languages)); err != nil {
+		if err = settings.RefreshRules(scanSettings, opts.ExternalRuleDir, opts.RuleOptions, FormatFoundLanguages(inputgocloc.Languages)); err != nil {
 			return err
 		}
 	}
@@ -415,6 +416,11 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		return true, nil
 	}
 
+	_, typescriptPresent := foundLanguages["typescript"]
+	if typescriptPresent {
+		return true, nil
+	}
+
 	log.Debug().Msg("No language found for which rules are applicable")
 	return false, nil
 }
@@ -428,10 +434,19 @@ func getPlaceholderOutput(report types.Report, config settings.Config, inputgocl
 	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput, config)
 }
 
-func formatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages []string) {
+func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages []string) {
+	var foundLanguagesMap = make(map[string]bool, len(languages))
+
 	for _, language := range languages {
-		foundLanguages = append(foundLanguages, strings.ToLower(language.Name))
+		if language.Name == "TypeScript" {
+			foundLanguagesMap["javascript"] = true
+		} else {
+			foundLanguagesMap[strings.ToLower(language.Name)] = true
+		}
 	}
 
-	return foundLanguages
+	keys := maps.Keys(foundLanguagesMap)
+	sort.Strings(keys)
+
+	return keys
 }

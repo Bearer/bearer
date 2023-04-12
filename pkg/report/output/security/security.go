@@ -371,8 +371,12 @@ func countRules(
 
 		if rule.Language() == "secret" {
 			shouldCount = slice.Contains(config.Scan.Scanner, "secrets")
-		} else {
-			shouldCount = languages[rule.Language()] != nil && slice.Contains(config.Scan.Scanner, "sast")
+		} else if slice.Contains(config.Scan.Scanner, "sast") {
+			if rule.Language() == "JavaScript" {
+				shouldCount = languages["JavaScript"] != nil || languages["TypeScript"] != nil
+			} else {
+				shouldCount = languages[rule.Language()] != nil
+			}
 		}
 
 		if !shouldCount {
