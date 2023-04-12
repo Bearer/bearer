@@ -24,6 +24,7 @@ var (
 		"binary_expression",
 		"template_substitution",
 		"array",
+		"spread_element",
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
@@ -134,7 +135,6 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 	})
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
@@ -178,17 +178,14 @@ func produceDummyValue(i int, nodeType string) string {
 	return "CurioVar" + fmt.Sprint(i)
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) FindPatternMatchNode(input []byte) [][]int {
 	return matchNodeRegex.FindAllIndex(input, -1)
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }

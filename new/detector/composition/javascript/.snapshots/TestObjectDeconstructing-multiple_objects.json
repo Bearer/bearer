@@ -4,7 +4,8 @@
 		"MatchNode": {},
 		"Data": {
 			"Pattern": "const { $\u003c!\u003e$\u003c_\u003e } = req.params\n",
-			"Datatypes": null
+			"Datatypes": null,
+			"VariableNodes": {}
 		}
 	},
 	{
@@ -12,7 +13,8 @@
 		"MatchNode": {},
 		"Data": {
 			"Pattern": "const { $\u003c!\u003e$\u003c_\u003e } = req.params\n",
-			"Datatypes": null
+			"Datatypes": null,
+			"VariableNodes": {}
 		}
 	}
 ]
