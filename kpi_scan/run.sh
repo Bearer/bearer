@@ -23,4 +23,4 @@ git clone "$REPOSITORY_URL" /tmp/repository
 
 echo
 echo "Scanning"
-/tmp/bearer scan --host=my.staging.bearer.sh --api-key "$API_KEY" /tmp/repository
+/tmp/bearer scan "--host=$API_HOST" --api-key "$API_KEY" /tmp/repository
