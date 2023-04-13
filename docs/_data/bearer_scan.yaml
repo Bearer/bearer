@@ -38,6 +38,10 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for scan
+    - name: include_metadata
+      default_value: "false"
+      usage: |
+        When true, include metadata (like Bearer version) in the report.
     - name: internal-domains
       default_value: '[]'
       usage: |

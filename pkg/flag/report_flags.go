@@ -51,28 +51,37 @@ var (
 		Value:      DefaultSeverity,
 		Usage:      "Specify which severities are included in the report.",
 	}
+	IncludeMetadataFlag = Flag{
+		Name:       "include_metadata",
+		ConfigName: "report.include_metadata",
+		Value:      false,
+		Usage:      "When true, include metadata (like Bearer version) in the report.",
+	}
 )
 
 type ReportFlagGroup struct {
-	Format   *Flag
-	Report   *Flag
-	Output   *Flag
-	Severity *Flag
+	Format          *Flag
+	Report          *Flag
+	Output          *Flag
+	Severity        *Flag
+	IncludeMetadata *Flag
 }
 
 type ReportOptions struct {
-	Format   string          `mapstructure:"format" json:"format" yaml:"format"`
-	Report   string          `mapstructure:"report" json:"report" yaml:"report"`
-	Output   string          `mapstructure:"output" json:"output" yaml:"output"`
-	Severity map[string]bool `mapstructure:"severity" json:"severity" yaml:"severity"`
+	Format          string          `mapstructure:"format" json:"format" yaml:"format"`
+	Report          string          `mapstructure:"report" json:"report" yaml:"report"`
+	Output          string          `mapstructure:"output" json:"output" yaml:"output"`
+	Severity        map[string]bool `mapstructure:"severity" json:"severity" yaml:"severity"`
+	IncludeMetadata bool            `mapstructure:"include_metadata" json:"include_metadata" yaml:"include_metadata"`
 }
 
 func NewReportFlagGroup() *ReportFlagGroup {
 	return &ReportFlagGroup{
-		Format:   &FormatFlag,
-		Report:   &ReportFlag,
-		Output:   &OutputFlag,
-		Severity: &SeverityFlag,
+		Format:          &FormatFlag,
+		Report:          &ReportFlag,
+		Output:          &OutputFlag,
+		Severity:        &SeverityFlag,
+		IncludeMetadata: &IncludeMetadataFlag,
 	}
 }
 
@@ -86,6 +95,7 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 		f.Report,
 		f.Output,
 		f.Severity,
+		f.IncludeMetadata,
 	}
 }
 
@@ -133,9 +143,10 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	}
 
 	return ReportOptions{
-		Format:   format,
-		Report:   report,
-		Output:   getString(f.Output),
-		Severity: severityMapping,
+		Format:          format,
+		Report:          report,
+		Output:          getString(f.Output),
+		Severity:        severityMapping,
+		IncludeMetadata: getBool(f.IncludeMetadata),
 	}, nil
 }
