@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/new/detector/composition"
+	"github.com/bearer/bearer/new/detector/composition/java"
 	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition/ruby"
 	"github.com/bearer/bearer/new/detector/types"
@@ -40,6 +41,10 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 		{
 			constructor: javascript.New,
 			name:        "javascript",
+		},
+		{
+			constructor: java.New,
+			name:        "java",
 		},
 	}
 

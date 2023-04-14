@@ -33,7 +33,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	//
 	// }
 	classNameQuery, err := lang.CompileQuery(`
-		(class_declaration name: (constant) @class_name
+		(class_declaration name: (identifier) @class_name
 			(class_body) @class_body
 		) @root`)
 	if err != nil {
