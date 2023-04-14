@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=2) {
+([]testhelper.ClassificationResult) (len=3) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=4) "user",
     Decision: (classify.ClassificationDecision) {
@@ -289,6 +289,47 @@
     Properties: (map[string]testhelper.ClassificationResult) (len=2) {
       (string) (len=8) "recycles": (testhelper.ClassificationResult) {
         Name: (string) (len=8) "recycles",
+        Decision: (classify.ClassificationDecision) {
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
+        },
+        Properties: (map[string]testhelper.ClassificationResult) <nil>
+      },
+      (string) (len=9) "userEmail": (testhelper.ClassificationResult) {
+        Name: (string) (len=9) "userEmail",
+        Decision: (classify.ClassificationDecision) {
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=21) "valid_unknown_pattern"
+        },
+        Properties: (map[string]testhelper.ClassificationResult) <nil>
+      }
+    }
+  },
+  (testhelper.ClassificationResult) {
+    Name: (string) (len=15) "NavbarComponent",
+    Decision: (classify.ClassificationDecision) {
+      State: (classify.ValidationState) (len=5) "valid",
+      Reason: (string) (len=36) "invalid_object_with_valid_properties"
+    },
+    Properties: (map[string]testhelper.ClassificationResult) (len=4) {
+      (string) (len=14) "changeLanguage": (testhelper.ClassificationResult) {
+        Name: (string) (len=14) "changeLanguage",
+        Decision: (classify.ClassificationDecision) {
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
+        },
+        Properties: (map[string]testhelper.ClassificationResult) <nil>
+      },
+      (string) (len=13) "checkLanguage": (testhelper.ClassificationResult) {
+        Name: (string) (len=13) "checkLanguage",
+        Decision: (classify.ClassificationDecision) {
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
+        },
+        Properties: (map[string]testhelper.ClassificationResult) <nil>
+      },
+      (string) (len=16) "selectedLanguage": (testhelper.ClassificationResult) {
+        Name: (string) (len=16) "selectedLanguage",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=7) "invalid",
           Reason: (string) (len=16) "invalid_property"

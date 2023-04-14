@@ -262,5 +262,28 @@
         "type": "unknown"
       }
     ]
+  },
+  {
+    "name": "NavbarComponent",
+    "filename": "juice-shop/frontend/src/app/navbar/navbar.component.ts",
+    "detector_type": "TypeScript",
+    "properties": [
+      {
+        "name": "userEmail",
+        "type": "unknown"
+      },
+      {
+        "name": "selectedLanguage",
+        "type": "unknown"
+      },
+      {
+        "name": "checkLanguage",
+        "type": "unknown"
+      },
+      {
+        "name": "changeLanguage",
+        "type": "unknown"
+      }
+    ]
   }
 ]
