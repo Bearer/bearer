@@ -1665,8 +1665,8 @@
       (string) (len=8) "Language": (testhelper.ClassificationResult) {
         Name: (string) (len=8) "Language",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=22) "valid_extended_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },

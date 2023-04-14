@@ -9,5 +9,5 @@
   "include_regexp": "\\b(spoken.*languages?|language)$",
   "match_column": true,
   "match_object": false,
-  "object_type": ["known", "unknown_extended"]
+  "object_type": ["known"]
 }
