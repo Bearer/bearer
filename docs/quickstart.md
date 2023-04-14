@@ -25,16 +25,16 @@ If you need more control or another way to install Bearer, we offer more [instal
 
 ## Scan your project
 
-The easiest way to try out Bearer is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common security flaws. Clone or download it to a convenient location to get started.
+The easiest way to try out Bearer is with our example project, [OWASP Juice Shop](https://github.com/juice-shop/juice-shop). It simulates a realistic Ruby application with common security flaws. Clone or download it to a convenient location to get started.
 
 ```bash
-git clone https://github.com/Bearer/bear-publishing.git
+git clone https://github.com/juice-shop/juice-shop.git
 ```
 
 Now, run the scan command with `bearer scan` on the project directory:
 
 ```bash
-bearer scan bear-publishing
+bearer scan juice-shop
 ```
 
 A progress bar will display the status of the scan.
@@ -51,32 +51,28 @@ The security report is an easily digestible view of the security problems detect
 - Each detected finding, containing the file location and lines that triggered the rules finding.
 - A stat section with a summary of rules checks, findings and warnings.
 
-The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule findings and output a full report. Here's a section of the output containing a finding snippet and the final summary:
+The [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) example application will trigger rule findings and output a full report. Here's a section of the output containing a finding snippet and the final summary:
 
 ```text
-CRITICAL: Only communicate using SFTP connections.
-https://docs.bearer.sh/reference/rules/ruby_lang_insecure_ftp
+...
+HIGH: Sensitive data stored in HTML local storage detected. [CWE-312]
+https://docs.bearer.com/reference/rules/javascript_lang_session
+To skip this rule, use the flag --skip-rule=javascript_lang_session
 
-File: bear-publishing/app/services/marketing_export.rb:34
+File: juice-shop/frontend/src/app/login/login.component.ts:102
 
- 34     Net::FTP.open(
- 35       'marketing.example.com',
- 36       'marketing',
- 37       'password123'
-  	...
- 41     end
+ 102       localStorage.setItem('email', this.user.email)
 
 
 =====================================
 
-56 checks, 16 findings
+58 checks, 38 findings
 
-CRITICAL: 7
-HIGH: 0
+CRITICAL: 15 (CWE-22, CWE-798, CWE-89)
+HIGH: 23 (CWE-312, CWE-327, CWE-548)
 MEDIUM: 0
-LOW: 3
-WARNING: 6
-
+LOW: 0
+WARNING: 0
 ```
 
 The security report is just one [report type](/explanations/reports/) available in Bearer.
