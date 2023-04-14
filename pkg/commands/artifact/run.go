@@ -17,6 +17,7 @@ import (
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
+	"golang.org/x/exp/maps"
 	"golang.org/x/xerrors"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
@@ -27,7 +28,6 @@ import (
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
-	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
 	"github.com/bearer/bearer/pkg/types"
@@ -216,7 +216,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
 	if !opts.Quiet {
-		output.StdErrLogger().Msg("Loading rules")
+		outputhandler.StdErrLogger().Msg("Loading rules")
 	}
 
 	client := github.NewClient(nil)
@@ -226,11 +226,16 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	} else {
 		version := strings.TrimPrefix(*release.Name, "v")
 		if version != build.Version && build.Version != "dev" && !opts.Quiet {
-			output.StdErrLogger().Msgf("You are running an outdated version of bearer, %s is now available.", *release.Name)
+			outputhandler.StdErrLogger().Msgf("You are running an outdated version of Bearer CLI, %s is now available. You can find update instructions at https://docs.bearer.com/reference/installation/#updating-bearer", *release.Name)
 		}
 	}
 
-	scanSettings, err := settings.FromOptions(opts)
+	inputgocloc, err := stats.GoclocDetectorOutput(opts.ScanOptions.Target)
+	if err != nil {
+		log.Debug().Msgf("Error in line of code output %s", err)
+		return err
+	}
+	scanSettings, err := settings.FromOptions(opts, FormatFoundLanguages(inputgocloc.Languages))
 	scanSettings.Target = opts.Target
 	if err != nil {
 		return err
@@ -248,6 +253,16 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	r := NewRunner(ctx, scanSettings)
 	defer r.Close(ctx)
 
+	if !r.CacheUsed() && scanSettings.CacheUsed {
+		// re-cache rules
+		if opts.ScanOptions.Force && !opts.ScanOptions.Quiet {
+			outputhandler.StdOutLogger().Msgf("Caching rules")
+		}
+		if err = settings.RefreshRules(scanSettings, opts.ExternalRuleDir, opts.RuleOptions, FormatFoundLanguages(inputgocloc.Languages)); err != nil {
+			return err
+		}
+	}
+
 	var report types.Report
 	switch targetKind {
 	case TargetFilesystem:
@@ -261,7 +276,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 			return xerrors.Errorf("filesystem scan error: %w", err)
 		}
 	}
-
+	report.Inputgocloc = inputgocloc
 	reportPassed, err := r.Report(scanSettings, report)
 	if err != nil {
 		return xerrors.Errorf("report error: %w", err)
@@ -301,44 +316,44 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		outputhandler.StdErrLogger().Msg("Using cached data")
 	}
 
-	detections, lineOfCodeOutput, dataflow, err := reportoutput.GetOutput(report, config)
+	detections, dataflow, err := reportoutput.GetOutput(report, config)
 	if err != nil {
 		return false, err
 	}
 
-	reportSupported, err := anySupportedLanguagesPresent(lineOfCodeOutput, config)
+	reportSupported, err := anySupportedLanguagesPresent(report.Inputgocloc, config)
 	if err != nil {
 		return false, err
 	}
 
 	if !reportSupported && config.Report.Report != flag.ReportPrivacy {
 		var placeholderStr *strings.Builder
-		placeholderStr, err = getPlaceholderOutput(report, config, lineOfCodeOutput)
+		placeholderStr, err = getPlaceholderOutput(report, config, report.Inputgocloc)
 		if err != nil {
 			return false, err
 		}
 
-		output.StdOutLogger().Msg(placeholderStr.String())
+		outputhandler.StdOutLogger().Msg(placeholderStr.String())
 		return true, nil
 	}
 
 	if config.Report.Format == flag.FormatEmpty {
 		if config.Report.Report == flag.ReportSecurity {
 			// for security report, default report format is Table
-			report := detections.(*security.Results)
-			reportStr, reportPassed := security.BuildReportString(config, report, lineOfCodeOutput, dataflow)
+			detectionReport := detections.(*security.Results)
+			reportStr, reportPassed := security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
 
-			output.StdOutLogger().Msg(reportStr.String())
+			outputhandler.StdOutLogger().Msg(reportStr.String())
 
 			return reportPassed, nil
 		} else if config.Report.Report == flag.ReportPrivacy {
 			// for privacy report, default report format is CSV
-			content, err := reportoutput.GetPrivacyReportCSVOutput(report, lineOfCodeOutput, dataflow, config)
+			content, err := reportoutput.GetPrivacyReportCSVOutput(report, dataflow, config)
 			if err != nil {
 				return false, fmt.Errorf("error generating report %s", err)
 			}
 
-			output.StdOutLogger().Msg(*content)
+			outputhandler.StdOutLogger().Msg(*content)
 
 			return true, nil
 		}
@@ -401,15 +416,37 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		return true, nil
 	}
 
+	_, typescriptPresent := foundLanguages["typescript"]
+	if typescriptPresent {
+		return true, nil
+	}
+
 	log.Debug().Msg("No language found for which rules are applicable")
 	return false, nil
 }
 
 func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
-	dataflowOutput, _, _, err := reportoutput.GetDataflow(report, config, true)
+	dataflowOutput, _, err := reportoutput.GetDataflow(report, config, true)
 	if err != nil {
 		return
 	}
 
 	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput, config)
+}
+
+func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages []string) {
+	var foundLanguagesMap = make(map[string]bool, len(languages))
+
+	for _, language := range languages {
+		if language.Name == "TypeScript" {
+			foundLanguagesMap["javascript"] = true
+		} else {
+			foundLanguagesMap[strings.ToLower(language.Name)] = true
+		}
+	}
+
+	keys := maps.Keys(foundLanguagesMap)
+	sort.Strings(keys)
+
+	return keys
 }

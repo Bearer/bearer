@@ -8,6 +8,7 @@ Reference documents are where you'll find detailed information about each comman
 
 - [Built-in Rules](/reference/rules/)
 - [Supported Data Types](/reference/datatypes/)
+- [Recipes](/reference/recipes/)
 - [Commands](/reference/commands/)
 - [Supported Languages](/reference/supported-languages/)
 - [Configuration](/reference/config/)

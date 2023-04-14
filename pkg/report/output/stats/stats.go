@@ -31,7 +31,7 @@ type Stats struct {
 	DataGroups           []string         `json:"-" yaml:"-"`
 }
 
-func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (*Stats, *gocloc.Result, *dataflow.DataFlow, error) {
+func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (*Stats, *dataflow.DataFlow, error) {
 	numberOfDataTypesFound := len(inputDataflow.Datatypes)
 	data_types := []DataType{}
 
@@ -92,7 +92,7 @@ func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, con
 		NumberOfInternalAPIs: numberOfInternalAPIs,
 		Languages:            languages,
 		DataGroups:           dataGroupNames,
-	}, nil, nil, nil
+	}, nil, nil
 }
 
 func getDataGroupNames(config settings.Config, dataTypes []DataType) []string {
@@ -162,7 +162,7 @@ func WriteStatsToString(outputStr *strings.Builder, statistics *Stats) {
 
 func GetPlaceholderOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (outputStr *strings.Builder, err error) {
 	outputStr = &strings.Builder{}
-	statistics, _, _, err := GetOutput(inputgocloc, inputDataflow, config)
+	statistics, _, err := GetOutput(inputgocloc, inputDataflow, config)
 
 	supportURL := "https://docs.bearer.com/explanations/reports/"
 	outputStr.WriteString(fmt.Sprintf(`

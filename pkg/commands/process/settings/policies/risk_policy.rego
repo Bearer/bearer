@@ -145,11 +145,12 @@ local_rule_failure contains item if {
 	some detector in presence_failures
 	some location in detector.locations
 	some data_type in location.data_types
+	some schema in data_type.schemas
 
 	item := {
 		"name": data_type.name,
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
-		"subject_name": location.subject_name,
+		"subject_name": schema.subject_name,
 		"line_number": location.line_number,
 		"rule_id": input.rule.id,
 		"third_party": input.rule.associated_recipe,

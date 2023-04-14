@@ -25,7 +25,10 @@
 						]
 					}
 				}
-			]
+			],
+			"VariableNodes": {
+				"DATA_TYPE": {}
+			}
 		}
 	}
 ]

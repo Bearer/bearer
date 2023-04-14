@@ -1,0 +1,28 @@
+(*privacy.Report)({
+  Subjects: ([]privacy.Subject) (len=1) {
+    (privacy.Subject) {
+      DataSubject: (string) (len=4) "User",
+      DataType: (string) (len=13) "Email Address",
+      DetectionCount: (int) 1,
+      CriticalRiskFindingCount: (int) 0,
+      HighRiskFindingCount: (int) 1,
+      MediumRiskFindingCount: (int) 0,
+      LowRiskFindingCount: (int) 0,
+      RulesPassedCount: (int) 0
+    }
+  },
+  ThirdParty: ([]privacy.ThirdParty) (len=1) {
+    (privacy.ThirdParty) {
+      ThirdParty: (string) (len=6) "Sentry",
+      DataSubject: (string) (len=4) "User",
+      DataTypes: ([]string) (len=1) {
+        (string) (len=13) "Email Address"
+      },
+      CriticalRiskFindingCount: (int) 0,
+      HighRiskFindingCount: (int) 1,
+      MediumRiskFindingCount: (int) 0,
+      LowRiskFindingCount: (int) 0,
+      RulesPassedCount: (int) 0
+    }
+  }
+})

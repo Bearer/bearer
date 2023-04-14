@@ -3,7 +3,7 @@ module github.com/bearer/bearer
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.234
+	github.com/aws/aws-sdk-go v1.44.239
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/fatih/color v1.15.0
 	github.com/gertd/go-pluralize v0.2.1
@@ -29,12 +29,12 @@ require (
 	github.com/weppos/publicsuffix-go v0.30.0
 	github.com/zricethezav/gitleaks/v8 v8.16.2
 	golang.org/x/exp v0.0.0-20230304125523-9ff063c70017
-	golang.org/x/mod v0.9.0
-	golang.org/x/net v0.8.0
+	golang.org/x/mod v0.10.0
+	golang.org/x/net v0.9.0
 )
 
 require (
-	cloud.google.com/go/compute v1.18.0 // indirect
+	cloud.google.com/go/compute v1.19.0 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/OneOfOne/xxhash v1.2.8 // indirect
 	github.com/agnivade/levenshtein v1.1.1 // indirect
@@ -48,7 +48,7 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.3 // indirect
-	github.com/googleapis/gax-go/v2 v2.7.1 // indirect
+	github.com/googleapis/gax-go/v2 v2.8.0 // indirect
 	github.com/h2non/filetype v1.1.3 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
@@ -68,7 +68,7 @@ require (
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/yashtewari/glob-intersection v0.1.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/term v0.6.0 // indirect
+	golang.org/x/term v0.7.0 // indirect
 )
 
 require (
@@ -95,9 +95,9 @@ require (
 	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/tools v0.6.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect
+	google.golang.org/genproto v0.0.0-20230331144136-dcfb400f0633 // indirect
 	google.golang.org/grpc v1.54.0 // indirect
-	google.golang.org/protobuf v1.29.1 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
 
@@ -110,16 +110,16 @@ require (
 	github.com/pelletier/go-toml/v2 v2.0.7 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
-	github.com/spf13/cobra v1.6.1
+	github.com/spf13/cobra v1.7.0
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.15.0
 	github.com/subosito/gotenv v1.4.2 // indirect
-	golang.org/x/oauth2 v0.6.0
-	golang.org/x/sys v0.6.0 // indirect
-	golang.org/x/text v0.8.0 // indirect
+	golang.org/x/oauth2 v0.7.0
+	golang.org/x/sys v0.7.0 // indirect
+	golang.org/x/text v0.9.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2
-	google.golang.org/api v0.114.0
+	google.golang.org/api v0.116.0
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 	gopkg.in/yaml.v3 v3.0.1

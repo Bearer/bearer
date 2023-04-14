@@ -34,11 +34,17 @@ brews:
 dockers:
   - image_templates:
       - "docker.io/bearer/bearer:{{ .Tag }}-amd64"
+      - "docker.io/bearer/bearer:{{ .Tag }}"
       - "docker.io/bearer/bearer:{{ .Version }}-amd64"
+      - "docker.io/bearer/bearer:{{ .Version }}"      
       - "docker.io/bearer/bearer:latest-amd64"
+      - "docker.io/bearer/bearer:latest"      
       - "ghcr.io/bearer/bearer:{{ .Tag }}-amd64"
+      - "ghcr.io/bearer/bearer:{{ .Tag }}"      
       - "ghcr.io/bearer/bearer:{{ .Version }}-amd64"
+      - "ghcr.io/bearer/bearer:{{ .Version }}"     
       - "ghcr.io/bearer/bearer:latest-amd64"
+      - "ghcr.io/bearer/bearer:latest"      
     use: buildx
     goos: linux
     goarch: amd64

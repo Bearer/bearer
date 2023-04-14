@@ -1,0 +1,42 @@
+name: KPI Scans
+on:
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  build:
+    name: Run KPI scans
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repository_url:
+          - https://github.com/juice-shop/juice-shop
+          - https://github.com/OWASP/railsgoat
+          - https://github.com/OWASP/NodeGoat
+          - https://github.com/WebGoat/WebGoat
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-session-name: github-action-battle-test
+          aws-region: eu-west-1
+          role-skip-session-tagging: true
+          role-duration-seconds: 3600
+
+      - name: Run task
+        run: |
+          aws ecs run-task \
+              --cluster ${{ secrets.CLUSTER }} \
+              --count 1 \
+              --tags key=service,value=${TASK_DEFINITION} \
+              --network-configuration "awsvpcConfiguration={subnets=['${{ secrets.SUBNET }}'],securityGroups=['${{ secrets.SECURITY_GROUP }}'],assignPublicIp=ENABLED}" \
+              --launch-type FARGATE \
+              --region eu-west-1 \
+              --task-definition ${TASK_DEFINITION} \
+              --overrides '{ "containerOverrides": [ { "name": "kpi-scan", "environment": [ { "name": "REPOSITORY_URL", "value": "${{ matrix.repository_url }}" }, { "name": "API_KEY", "value": "${{ secrets.KPI_SCAN_API_KEY }}" }, { "name": "API_HOST", "value": "${{ secrets.KPI_SCAN_HOST }}" } ] } ] }'
+        env:
+          TASK_DEFINITION: kpi-scan:1

@@ -7,10 +7,10 @@ import (
 
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
-	"github.com/hhatto/gocloc"
 	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
@@ -36,10 +36,10 @@ type RuleOutput struct {
 type RuleFailureSummary struct {
 	DataSubject              string          `json:"subject_name,omitempty" yaml:"subject_name"`
 	DataTypes                map[string]bool `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	CriticalRiskFailureCount int             `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
-	HighRiskFailureCount     int             `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
-	MediumRiskFailureCount   int             `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
-	LowRiskFailureCount      int             `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+	CriticalRiskFindingCount int             `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
+	HighRiskFindingCount     int             `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
+	MediumRiskFindingCount   int             `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
+	LowRiskFindingCount      int             `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
 	TriggeredRules           map[string]bool `json:"triggered_rules" yaml:"triggered_rules"`
 }
 
@@ -58,10 +58,10 @@ type Subject struct {
 	DataSubject              string `json:"subject_name,omitempty" yaml:"subject_name"`
 	DataType                 string `json:"name,omitempty" yaml:"name"`
 	DetectionCount           int    `json:"detection_count" yaml:"detection_count"`
-	CriticalRiskFailureCount int    `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
-	HighRiskFailureCount     int    `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
-	MediumRiskFailureCount   int    `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
-	LowRiskFailureCount      int    `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+	CriticalRiskFindingCount int    `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
+	HighRiskFindingCount     int    `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
+	MediumRiskFindingCount   int    `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
+	LowRiskFindingCount      int    `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
 	RulesPassedCount         int    `json:"rules_passed_count" yaml:"rules_passed_count"`
 }
 
@@ -75,10 +75,10 @@ type ThirdParty struct {
 	ThirdParty               string   `json:"third_party,omitempty" yaml:"third_party"`
 	DataSubject              string   `json:"subject_name,omitempty" yaml:"subject_name"`
 	DataTypes                []string `json:"data_types,omitempty" yaml:"data_types"`
-	CriticalRiskFailureCount int      `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
-	HighRiskFailureCount     int      `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
-	MediumRiskFailureCount   int      `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
-	LowRiskFailureCount      int      `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+	CriticalRiskFindingCount int      `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
+	HighRiskFindingCount     int      `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
+	MediumRiskFindingCount   int      `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
+	LowRiskFindingCount      int      `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
 	RulesPassedCount         int      `json:"rules_passed_count" yaml:"rules_passed_count"`
 }
 
@@ -87,10 +87,10 @@ type Report struct {
 	ThirdParty []ThirdParty `json:"third_party,omitempty" yaml:"third_party"`
 }
 
-func BuildCsvString(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, config settings.Config) (*strings.Builder, error) {
+func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
-	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed\n")
-	result, _, _, err := GetOutput(dataflow, lineOfCodeOutput, config)
+	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
+	result, _, err := GetOutput(dataflow, config)
 	if err != nil {
 		return csvStr, err
 	}
@@ -100,27 +100,27 @@ func BuildCsvString(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result
 			subject.DataSubject,
 			subject.DataType,
 			fmt.Sprint(subject.DetectionCount),
-			fmt.Sprint(subject.CriticalRiskFailureCount),
-			fmt.Sprint(subject.HighRiskFailureCount),
-			fmt.Sprint(subject.MediumRiskFailureCount),
-			fmt.Sprint(subject.LowRiskFailureCount),
+			fmt.Sprint(subject.CriticalRiskFindingCount),
+			fmt.Sprint(subject.HighRiskFindingCount),
+			fmt.Sprint(subject.MediumRiskFindingCount),
+			fmt.Sprint(subject.LowRiskFindingCount),
 			fmt.Sprint(subject.RulesPassedCount),
 		}
 		csvStr.WriteString(strings.Join(subjectArr, ",") + "\n")
 	}
 
 	csvStr.WriteString("\n")
-	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed\n")
+	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
 
 	for _, thirdParty := range result.ThirdParty {
 		thirdPartyArr := []string{
 			thirdParty.ThirdParty,
 			thirdParty.DataSubject,
 			"\"" + strings.Join(thirdParty.DataTypes, ",") + "\"",
-			fmt.Sprint(thirdParty.CriticalRiskFailureCount),
-			fmt.Sprint(thirdParty.HighRiskFailureCount),
-			fmt.Sprint(thirdParty.MediumRiskFailureCount),
-			fmt.Sprint(thirdParty.LowRiskFailureCount),
+			fmt.Sprint(thirdParty.CriticalRiskFindingCount),
+			fmt.Sprint(thirdParty.HighRiskFindingCount),
+			fmt.Sprint(thirdParty.MediumRiskFindingCount),
+			fmt.Sprint(thirdParty.LowRiskFindingCount),
 			fmt.Sprint(thirdParty.RulesPassedCount),
 		}
 		csvStr.WriteString(strings.Join(thirdPartyArr, ",") + "\n")
@@ -129,7 +129,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result
 	return csvStr, nil
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, config settings.Config) (*Report, *gocloc.Result, *dataflow.DataFlow, error) {
+func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *dataflow.DataFlow, error) {
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
@@ -183,19 +183,19 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 			},
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return nil, nil, nil, err
+				return nil, nil, err
 			}
 
 			var ruleOutput map[string][]RuleOutput
 			err = json.Unmarshal(jsonRes, &ruleOutput)
 			if err != nil {
-				return nil, nil, nil, err
+				return nil, nil, err
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
@@ -206,23 +206,24 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 				if !ok {
 					// key not found; create a new failure obj
 					subjectRuleFailure = RuleFailureSummary{
-						CriticalRiskFailureCount: 0,
-						HighRiskFailureCount:     0,
-						MediumRiskFailureCount:   0,
-						LowRiskFailureCount:      0,
+						CriticalRiskFindingCount: 0,
+						HighRiskFindingCount:     0,
+						MediumRiskFindingCount:   0,
+						LowRiskFindingCount:      0,
 						TriggeredRules:           make(map[string]bool),
 					}
 				}
+
 				// count severity
 				switch ruleSeverity {
-				case "critical":
-					subjectRuleFailure.CriticalRiskFailureCount += 1
-				case "high":
-					subjectRuleFailure.HighRiskFailureCount += 1
-				case "medium":
-					subjectRuleFailure.MediumRiskFailureCount += 1
-				case "low":
-					subjectRuleFailure.LowRiskFailureCount += 1
+				case types.LevelCritical:
+					subjectRuleFailure.CriticalRiskFindingCount += 1
+				case types.LevelHigh:
+					subjectRuleFailure.HighRiskFindingCount += 1
+				case types.LevelMedium:
+					subjectRuleFailure.MediumRiskFindingCount += 1
+				case types.LevelLow:
+					subjectRuleFailure.LowRiskFindingCount += 1
 				}
 
 				subjectRuleFailure.TriggeredRules[ruleOutputFailure.RuleId] = true
@@ -246,23 +247,23 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 					thirdPartyDataSubject = RuleFailureSummary{
 						DataSubject:              ruleOutputFailure.DataSubject,
 						DataTypes:                make(map[string]bool),
-						CriticalRiskFailureCount: 0,
-						HighRiskFailureCount:     0,
-						MediumRiskFailureCount:   0,
-						LowRiskFailureCount:      0,
+						CriticalRiskFindingCount: 0,
+						HighRiskFindingCount:     0,
+						MediumRiskFindingCount:   0,
+						LowRiskFindingCount:      0,
 					}
 				}
 
 				// count severity
 				switch ruleSeverity {
-				case "critical":
-					thirdPartyDataSubject.CriticalRiskFailureCount += 1
-				case "high":
-					thirdPartyDataSubject.HighRiskFailureCount += 1
-				case "medium":
-					thirdPartyDataSubject.MediumRiskFailureCount += 1
-				case "low":
-					thirdPartyDataSubject.LowRiskFailureCount += 1
+				case types.LevelCritical:
+					thirdPartyDataSubject.CriticalRiskFindingCount += 1
+				case types.LevelHigh:
+					thirdPartyDataSubject.HighRiskFindingCount += 1
+				case types.LevelMedium:
+					thirdPartyDataSubject.MediumRiskFindingCount += 1
+				case types.LevelLow:
+					thirdPartyDataSubject.LowRiskFindingCount += 1
 				}
 
 				// add data type to map
@@ -297,19 +298,19 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 	)
 
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 
 	if len(rs) > 0 {
 		jsonRes, err := json.Marshal(rs)
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
 
 		var outputItems map[string][]Output
 		err = json.Unmarshal(jsonRes, &outputItems)
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
 
 		for _, outputItem := range outputItems["items"] {
@@ -321,10 +322,10 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 				subject = Subject{
 					DataSubject:              outputItem.DataSubject,
 					DataType:                 outputItem.DataType,
-					CriticalRiskFailureCount: ruleFailure.CriticalRiskFailureCount,
-					HighRiskFailureCount:     ruleFailure.HighRiskFailureCount,
-					MediumRiskFailureCount:   ruleFailure.MediumRiskFailureCount,
-					LowRiskFailureCount:      ruleFailure.LowRiskFailureCount,
+					CriticalRiskFindingCount: ruleFailure.CriticalRiskFindingCount,
+					HighRiskFindingCount:     ruleFailure.HighRiskFindingCount,
+					MediumRiskFindingCount:   ruleFailure.MediumRiskFindingCount,
+					LowRiskFindingCount:      ruleFailure.LowRiskFindingCount,
 					RulesPassedCount:         localRuleCounter - len(ruleFailure.TriggeredRules),
 				}
 			}
@@ -346,10 +347,10 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 				ThirdParty:               component.Name,
 				DataSubject:              "Unknown",
 				DataTypes:                []string{"Unknown"},
-				CriticalRiskFailureCount: 0,
-				HighRiskFailureCount:     0,
-				MediumRiskFailureCount:   0,
-				LowRiskFailureCount:      0,
+				CriticalRiskFindingCount: 0,
+				HighRiskFindingCount:     0,
+				MediumRiskFindingCount:   0,
+				LowRiskFindingCount:      0,
 				RulesPassedCount:         0,
 			})
 		}
@@ -359,10 +360,10 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 				ThirdParty:               component.Name,
 				DataSubject:              ruleFailure.DataSubject,
 				DataTypes:                maps.Keys(ruleFailure.DataTypes),
-				CriticalRiskFailureCount: ruleFailure.CriticalRiskFailureCount,
-				HighRiskFailureCount:     ruleFailure.HighRiskFailureCount,
-				MediumRiskFailureCount:   ruleFailure.MediumRiskFailureCount,
-				LowRiskFailureCount:      ruleFailure.LowRiskFailureCount,
+				CriticalRiskFindingCount: ruleFailure.CriticalRiskFindingCount,
+				HighRiskFindingCount:     ruleFailure.HighRiskFindingCount,
+				MediumRiskFindingCount:   ruleFailure.MediumRiskFindingCount,
+				LowRiskFindingCount:      ruleFailure.LowRiskFindingCount,
 				RulesPassedCount:         thirdPartyRulesCounter[component.Name].Count - len(thirdPartyRulesCounter[component.Name].SubjectFailures[ruleFailure.DataSubject]),
 			})
 		}
@@ -371,7 +372,7 @@ func GetOutput(dataflow *dataflow.DataFlow, lineOfCodeOutput *gocloc.Result, con
 	return &Report{
 		Subjects:   maps.Values(subjectInventory),
 		ThirdParty: thirdPartyInventory,
-	}, lineOfCodeOutput, dataflow, nil
+	}, dataflow, nil
 }
 
 func buildKey(dataSubject string, dataType string) string {

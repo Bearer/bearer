@@ -318,7 +318,7 @@ func writeStatsToString(
 	lineOfCodeOutput *gocloc.Result,
 	dataflow *dataflow.DataFlow,
 ) {
-	statistics, _, _, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
+	statistics, _, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
 	if err != nil {
 		return
 	}
@@ -371,8 +371,12 @@ func countRules(
 
 		if rule.Language() == "secret" {
 			shouldCount = slice.Contains(config.Scan.Scanner, "secrets")
-		} else {
-			shouldCount = languages[rule.Language()] != nil && slice.Contains(config.Scan.Scanner, "sast")
+		} else if slice.Contains(config.Scan.Scanner, "sast") {
+			if rule.Language() == "JavaScript" {
+				shouldCount = languages["JavaScript"] != nil || languages["TypeScript"] != nil
+			} else {
+				shouldCount = languages[rule.Language()] != nil
+			}
 		}
 
 		if !shouldCount {
@@ -427,12 +431,7 @@ func checkAndWriteFailureSummaryToString(
 	}
 
 	reportStr.WriteString("\n\n")
-	if failureCount == 0 {
-		// only warnings
-		reportStr.WriteString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(warningCount) + " warnings\n\n")
-	} else {
-		reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount) + " failures, " + fmt.Sprint(warningCount) + " warnings\n\n"))
-	}
+	reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount+warningCount) + " findings\n\n"))
 
 	for i, severityLevel := range orderedSeverityLevels {
 		if !severityForFailure[severityLevel] {

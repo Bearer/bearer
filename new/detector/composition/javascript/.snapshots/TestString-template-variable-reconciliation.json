@@ -64,7 +64,11 @@
 						]
 					}
 				}
-			]
+			],
+			"VariableNodes": {
+				"DATA_TYPE": {},
+				"INSECURE_URL": {}
+			}
 		}
 	}
 ]

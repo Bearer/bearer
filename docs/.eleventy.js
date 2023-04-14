@@ -64,6 +64,27 @@ module.exports = function (eleventyConfig) {
     return result;
   });
 
+  eleventyConfig.addNunjucksFilter("packageMap", (name, manager, group) => {
+    switch (manager) {
+      case "rubygems":
+        return `https://rubygems.org/gems/${name}`;
+      case "packagist":
+        return `https://packagist.org/packages/${name}`;
+      case "go":
+        return `https://${name}`;
+      case "npm":
+        return `https://www.npmjs.com/package/${name}`;
+      case "pypi":
+        return `https://pypi.org/project/${name}`;
+      case "maven":
+        return `https://mvnrepository.com/artifact/${group}/${name}`;
+      case "nuget":
+        return `https://www.nuget.org/packages/${name}`;
+      default:
+        return "/";
+    }
+  });
+
   eleventyConfig.addNunjucksGlobal("navHighlight", (parent, child) => {
     const target = parent.split(path.sep).slice(1, -1);
     const check = child.split(path.sep).slice(1, -1);

@@ -10,6 +10,7 @@ import (
 func TestJavascriptObjectDetector(t *testing.T) {
 	runTest(t, "object_class", "object", "testdata/object_class.js")
 	runTest(t, "object_object", "object", "testdata/object_object.js")
+	runTest(t, "object_spread", "object", "testdata/object_spread.js")
 	runTest(t, "object_projection", "object", "testdata/object_projection.js")
 }
 

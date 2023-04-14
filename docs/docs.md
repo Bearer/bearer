@@ -54,6 +54,7 @@ Reference documents are where you'll find detailed information about each comman
 - [Commands](/reference/commands/)
 - [Built-in Rules](/reference/rules/)
 - [Supported Data Types](/reference/datatypes/)
+- [Recipes](/reference/recipes/)
 - [Supported Languages](/reference/supported-languages/)
 
 ## Contributing

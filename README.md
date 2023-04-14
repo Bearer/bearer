@@ -10,7 +10,8 @@
   <br /><br />
   Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security risks and vulnerabilities leading to sensitive data exposures (PII, PHI, PD).
   <br /><br />
-  Currently supporting <strong>JavaScript</strong> and <strong>Ruby</strong> stacks.
+  Currently supporting <strong>JavaScript</strong>, <strong>TypeScript</strong> and <strong>Ruby</strong> stacks.<br />
+  🚧 <strong>Java</strong> support is under active development.
   <br /><br />
 
   [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
@@ -61,6 +62,12 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```bash
   brew install bearer/tap/bearer
   ```
+
+  Update an existing installation with the following:
+  
+  ```bash
+  brew update && brew update bearer/tap/bearer
+  ```
 </details>
 
 <details>
@@ -71,6 +78,12 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   $ echo "deb [trusted=yes] https://apt.fury.io/bearer/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
   $ sudo apt-get update
   $ sudo apt-get install bearer
+  ```
+
+  Update an existing installation with the following:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install bearer
   ```
 </details>
 
@@ -91,6 +104,11 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```shell
     $ sudo yum -y update
     $ sudo yum -y install bearer
+  ```
+
+  Update an existing installation with the following:
+  ```bash
+  sudo yum -y update bearer
   ```
 </details>
 
@@ -122,6 +140,8 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```bash
   docker compose run bearer scan /tmp/scan --debug
   ```
+
+  The Docker configurations above will always use the latest release.
 </details>
 
 <details>
@@ -130,6 +150,8 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/bearer/releases/latest/).
 
   Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute.
+
+  To update Bearer when using the binary, download the latest release and overwrite your existing installation location.
 </details>
 <br/>
 
@@ -149,7 +171,7 @@ bearer scan bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output a security report with details of any rule failures, as well as where in the codebase the infractions happened and why.
+Once the scan is complete, Bearer will output a security report with details of any rule findings, as well as where in the codebase the infractions happened and why.
 
 By default the `scan` command use the SAST scanner, other [scanner types](https://docs.bearer.com/explanations/scanners) are available.
 
@@ -158,10 +180,10 @@ By default the `scan` command use the SAST scanner, other [scanner types](https:
 The security report is an easily digestible view of the security issues detected by Bearer. A report is made up of:
 
 - The list of [rules](https://docs.bearer.com/reference/rules/) run against your code.
-- Each detected failure, containing the file location and lines that triggered the rule failure.
-- A stat section with a summary of rules checks, failures and warnings.
+- Each detected finding, containing the file location and lines that triggered the rule finding.
+- A stat section with a summary of rules checks, findings and warnings.
 
-The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output:
+The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule findings and output a full report. Here's a section of the output:
 
 ```text
 ...
@@ -180,7 +202,7 @@ File: bear-publishing/app/services/marketing_export.rb:34
 
 =====================================
 
-56 checks, 10 failures, 6 warnings
+56 checks, 16 findings
 
 CRITICAL: 7
 HIGH: 0
@@ -222,7 +244,8 @@ In addition, running Bearer on a scheduled job is a great way to keep track of y
 
 ### Supported Language
 
-Bearer currently supports JavaScript and Ruby and their associated most used frameworks and libraries. More languages will follow.
+Bearer currently supports JavaScript, TypeScript and Ruby and their associated most used frameworks and libraries. 
+Java support is under active development, more languages will follow.
 
 ### What makes Bearer different from any other SAST tools?
 
