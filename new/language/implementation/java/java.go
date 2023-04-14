@@ -1,11 +1,10 @@
-package javascript
+package java
 
 import (
 	"fmt"
 	"regexp"
 	"strings"
 
-	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/new/language/implementation"
@@ -33,7 +32,7 @@ var (
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
 
 	// todo: see if it is ok to replace typescripts `member_expression` with javas `field_access` and `method_invocation`
-	allowedPatternQueryTypes  = []string{"identifier", "type_identifier", "_", "field_access", "method_invocation" , "string_literal"}
+	allowedPatternQueryTypes = []string{"identifier", "type_identifier", "_", "field_access", "method_invocation", "string_literal"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 
@@ -42,17 +41,17 @@ var (
 	passthroughMethods = []string{"JSON.parse", "JSON.stringify"}
 )
 
-type javascriptImplementation struct{}
+type javaImplementation struct{}
 
 func Get() implementation.Implementation {
-	return &javascriptImplementation{}
+	return &javaImplementation{}
 }
 
-func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {
+func (implementation *javaImplementation) SitterLanguage() *sitter.Language {
 	return java.GetLanguage()
 }
 
-func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
+func (*javaImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 	scope := implementation.NewScope(nil)
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
@@ -131,22 +130,22 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 			if parent.Type() == "arguments_list" {
 				scope.Assign(node.Content(), node)
 			}
-		// todo: see what this is
-		// case "property_identifier":
-		// 	parent := node.Parent()
-		// 	if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
-		// 		if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-		// 			node.UnifyWith(scopedNode)
-		// 		}
-		// 	}
-		// }
-
+			// todo: see what this is
+			// case "property_identifier":
+			// 	parent := node.Parent()
+			// 	if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
+			// 		if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
+			// 			node.UnifyWith(scopedNode)
+			// 		}
+			// 	}
+			// }
+		}
 		return visitChildren()
 	})
 }
 
 // TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
+func (implementation *javaImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
 	i := 0
@@ -190,29 +189,29 @@ func produceDummyValue(i int, nodeType string) string {
 }
 
 // TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) AnonymousPatternNodeParentTypes() []string {
+func (implementation *javaImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
 // TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) FindPatternMatchNode(input []byte) [][]int {
+func (implementation *javaImplementation) FindPatternMatchNode(input []byte) [][]int {
 	return matchNodeRegex.FindAllIndex(input, -1)
 }
 
 // TODO: See if anything needs to be added here
-func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
+func (implementation *javaImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
-func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
+func (implementation *javaImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
-func (javascriptImplementation *javascriptImplementation) ShouldSkipNode(node *tree.Node) bool {
+func (javaImplementation *javaImplementation) ShouldSkipNode(node *tree.Node) bool {
 	return false
 }
 
-func (*javascriptImplementation) PatternLeafContentTypes() []string {
+func (*javaImplementation) PatternLeafContentTypes() []string {
 	return []string{
 		// todo: see if type identifier should be removed from here (User user) `User` is type
 		// todo see if `modifier` should be here it's a single token containing `string public final static`
@@ -226,7 +225,7 @@ func (*javascriptImplementation) PatternLeafContentTypes() []string {
 	}
 }
 
-func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
+func (implementation *javaImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 	parent := node.Parent()
 	if parent == nil {
 		return true, true
@@ -241,11 +240,11 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	return isUnanchored, isUnanchored
 }
 
-func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
+func (implementation *javaImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
 	return !(node.Type() == "expression_statement")
 }
 
-func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node) []string {
+func (implementation *javaImplementation) PatternNodeTypes(node *tree.Node) []string {
 	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
 		if node.NamedChildCount() == 0 {
 			return []string{"object"}
@@ -257,11 +256,11 @@ func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node
 	return []string{node.Type()}
 }
 
-func (implementation *javascriptImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
+func (implementation *javaImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
 	return content
 }
 
-func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {
+func (*javaImplementation) PassthroughNested(node *tree.Node) bool {
 	if node.Type() != "arguments" {
 		return false
 	}

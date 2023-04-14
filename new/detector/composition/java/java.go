@@ -1,4 +1,4 @@
-package javascript
+package java
 
 import (
 	"fmt"
@@ -16,14 +16,14 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
 	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
-	"github.com/bearer/bearer/new/detector/implementation/javascript/object"
+	"github.com/bearer/bearer/new/detector/implementation/java/object"
 	"github.com/bearer/bearer/new/language"
 
-	stringdetector "github.com/bearer/bearer/new/detector/implementation/javascript/string"
+	stringdetector "github.com/bearer/bearer/new/detector/implementation/java/string"
 	detectorset "github.com/bearer/bearer/new/detector/set"
 	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
-	"github.com/bearer/bearer/new/language/implementation/javascript"
+	java "github.com/bearer/bearer/new/language/implementation/java"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
@@ -36,13 +36,13 @@ type Composition struct {
 }
 
 func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
-	lang, err := language.Get("javascript")
+	lang, err := language.Get("java")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
 	}
 
 	composition := &Composition{
-		langImplementation: javascript.Get(),
+		langImplementation: java.Get(),
 		lang:               lang,
 	}
 
@@ -68,10 +68,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		},
 	}
 
-	// instantiate custom javascript detectors
+	// instantiate custom java detectors
 	jsRules := map[string]*settings.Rule{}
 	for ruleName, rule := range rules {
-		if !slices.Contains(rule.Languages, "javascript") {
+		if !slices.Contains(rule.Languages, "java") {
 			continue
 		}
 		jsRules[ruleName] = rule
@@ -164,7 +164,7 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detector
 }
 
 func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
-	if file.Language != "JavaScript" && file.Language != "TypeScript" && file.Language != "TSX" {
+	if file.Language != "java" {
 		return nil, nil
 	}
 
