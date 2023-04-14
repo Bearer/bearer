@@ -83,7 +83,7 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 				return err
 			}
 
-			if err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
+			if _, err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
 				return err
 			}
 		}
@@ -92,10 +92,12 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 	return nil
 }
 
-func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) error {
+func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) (map[string]bool, error) {
+	ruleLanguages := make(map[string]bool)
+
 	gzr, err := gzip.NewReader(file)
 	if err != nil {
-		return err
+		return ruleLanguages, err
 	}
 	defer gzr.Close()
 
@@ -105,7 +107,7 @@ func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.Fil
 		if err == io.EOF {
 			break
 		} else if err != nil {
-			return err
+			return ruleLanguages, err
 		}
 
 		if !isRuleFile(header.Name) {
@@ -115,25 +117,29 @@ func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.Fil
 		data := make([]byte, header.Size)
 		_, err = io.ReadFull(tr, data)
 		if err != nil {
-			return fmt.Errorf("failed to read file %s: %w", header.Name, err)
+			return ruleLanguages, fmt.Errorf("failed to read file %s: %w", header.Name, err)
 		}
 
 		var ruleDefinition RuleDefinition
 		err = yaml.Unmarshal(data, &ruleDefinition)
 		if err != nil {
-			return fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
+			return ruleLanguages, fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
 		}
 
 		id := ruleDefinition.Metadata.ID
 		_, ruleExists := ruleDefinitions[id]
 		if ruleExists {
-			return fmt.Errorf("duplicate built-in rule ID %s", id)
+			return ruleLanguages, fmt.Errorf("duplicate built-in rule ID %s", id)
+		}
+
+		for _, lang := range ruleDefinition.Languages {
+			ruleLanguages[lang] = true
 		}
 
 		ruleDefinitions[id] = ruleDefinition
 	}
 
-	return nil
+	return ruleLanguages, nil
 }
 
 func isRuleFile(headerName string) bool {

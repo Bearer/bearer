@@ -28,6 +28,7 @@ func RefreshRules(config Config, externalRuleDirs []string, options flag.RuleOpt
 func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string, force bool) (map[string]*Rule, map[string]*Rule, bool, error) {
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
+	ruleLanguages := make(map[string]bool)
 
 	cacheUsed := false
 	if !options.DisableDefaultRules {
@@ -40,7 +41,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 					if err != nil {
 						return err
 					}
-					if err := ReadRuleDefinitions(definitions, file); err != nil {
+					if ruleLanguages, err = ReadRuleDefinitions(definitions, file); err != nil {
 						return err
 					}
 				}
@@ -50,7 +51,16 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 			if err != nil {
 				return nil, nil, cacheUsed, fmt.Errorf("error loading rules from cache: %s", err)
 			}
-		} else {
+
+			for _, foundLang := range foundLanguages {
+				if !ruleLanguages[foundLang] {
+					definitions = make(map[string]RuleDefinition)
+					cacheUsed = false // re-cache rules
+				}
+			}
+		}
+
+		if !cacheUsed {
 			if err := cleanupRuleDirFiles(bearerRulesDir); err != nil {
 				return nil, nil, cacheUsed, fmt.Errorf("error cleaning rules cache: %s", err)
 			}
