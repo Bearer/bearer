@@ -34,7 +34,7 @@ To better understand the structure of a rule file, let’s look at each key:
   - `associated_recipe`: Links the rule to a [recipe]({{meta.sourcePath}}/tree/main/pkg/classification/db/recipes). Useful for associating a rule with a third party. Example: “Sentry” (Optional)
   - `remediation_message`: Used for internal rules, this builds the documentation page for a rule. (Optional)
   - `documentation_url`: Used to pass custom documentation URL for the summary report. This can be useful for linking to your own internal documentation or policies. By default, all rules in the main repo will automatically generate a link to the rule on [docs.bearer.com](/). (Optional)
-- `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) rule for examples. (Optional)
+- `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) rule for examples. In addition, see our advice on how to avoid [variable joining](#variable-joining) in auxiliary rules. (Optional)
 - `skip_data_types`: Allows you to prevent the specified data types from triggering this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 - `only_data_types`: Allows you to limit the specified data types that trigger this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 
@@ -235,6 +235,81 @@ metadata:
   id: custom_rule_name
   description: "This is an example rule created based on the tutorial."
 ```
+
+## Variable joining
+
+When a rule relies on another rule as part of its `filter` declaration, the variables are treated as a single set when matching against the code. Variables with the same name will identify as the same AST node. This can cause problems where the wrong AST nodes are used in the detection, leading to unexpected scan results. Let's look at an example.
+
+We'll start with the code we want to target:
+
+```ruby
+# We want to match this:
+sql_query("SELECT * FROM #{user_input}")
+
+# but not this:
+sql_query("SELECT * FROM #{sanitize(user_input)}")
+```
+
+The goal is to target the lack of `sanitize` in SQL queries. Now let's look at a rule that can handle this use case. Don't worry, we'll break down each part after the code.
+
+```yml
+# Rule 0
+patterns:
+  - pattern: |
+      sql_query($<QUERY>)
+    filters:
+      - variable: QUERY
+        detection: my_rule_user_input
+      - not:
+          variable: QUERY
+          detection: my_rule_sanitized
+auxiliary:
+# Rule 1
+  - id: my_rule_sanitized
+    patterns:
+      - pattern: sanitize($<SANITIZED>)
+        filters:
+          - variable: SANITIZED
+            detection: my_rule_user_input
+# Rule 2
+  - id: my_rule_user_input_source
+    patterns:
+      - user_input
+# Rule 3
+  - id: my_rule_user_input
+    patterns:
+      - pattern: $<USER_INPUT>
+        filters:
+          - variable: USER_INPUT
+            detection: my_rule_user_input_source
+            contains: false
+languages:
+  - ruby
+severity: medium
+metadata:
+  description: "Variable joining example"
+  remediation_message: ""
+  cwe_id:
+    - 601
+  id: "my_rule"
+```
+
+The `patterns` portion at the beginning should look familiar. The only difference compared to most rules is that it references `detection` types that are auxiliary rules. The main pattern looks for `sql_query`, and then uses filters to tell Bearer CLI to apply each detection to any code it finds in `$<QUERY>`. In this case, it wants to trigger the rule using `my_rule_user_input` but NOT `my_rule_sanitized`. I've labeled the core rule/pattern combo as rule 0, then each Aux rule as rules 1, 2, and 3 to make them easier to follow.
+
+Let's start with Rule 0's positive case and follow the detection:
+- **Rule 0**'s positive filter calls on `my_rule_user_input`, **Rule 3**, to handle the detection.
+- **Rule 3** uses the `my_rule_user_input_source` detection, which belongs to **Rule 2**. _It sets `contains: false`, but we'll come back to that._
+- **Rule 2** is a simple pattern that looks for `user_input`. This is from our initial code target example. Think of it as a variable that was passed to `sql_query`.
+
+That chain of detections will result in a match for the non-sanitized code. Now let's look at the the negative, `not` filter case and see if we notice any overlap.
+- **Rule 0**'s negative filter calls on `my_rule_sanitized`, which is **Rule 1**.
+- **Rule 1** sets up its own pattern to look for the `sanitize` function, then calls on `my_rule_user_input`, **Rule 3**, to handle the detection.
+- **Rule 3**, as we saw before, bounces the detection over to **Rule 2** to handle the code portion.
+- **Rule 2** uses its simple pattern to detect the `user_input` variable in the code.
+
+This seems like it would all work fine, but because both rules rely on `my_rule_user_input` we could end up in a situation where both occurrences refer to the same AST node. That's where `contains: false` comes into play. It ensures that the `USER_INPUT` from `$<USER_INPUT>` will always match the specific AST node, and not a parent of it. Without it, the sanitize call would exist inside `USER_INPUT` and Rule 1 would never match.
+
+We recommend using unique variable names in rules that refer to each other when you don't intend them to match the same code locations. If your use case doesn't rely on reusing an input source across multiple, differing patterns, it may be easier to duplicate the detection logic with unique names. Otherwise, make use of `contains: false` to prevent the variable joining.
 
 ## Syntax updates
 ### v1.1 Trigger changes
