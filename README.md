@@ -91,7 +91,7 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   sudo apt-get install bearer
   ```
 
-  **Known issues**
+  :warning: **Known issues**
 
   - We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which would prevent Bearer to run correctly. If you encounter this bug, we recommend following the Docker installation instructions.
 
