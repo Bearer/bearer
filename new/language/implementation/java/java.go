@@ -19,7 +19,7 @@ import (
 
 var (
 	variableLookupParents = []string{
-		"formal_parameters",
+		"argument_list",
 		"binary_expression",
 		"array_access",
 	}
