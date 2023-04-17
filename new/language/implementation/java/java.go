@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/util/regex"
+	"github.com/ssoroka/slice"
 
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	sitter "github.com/smacker/go-tree-sitter"
@@ -18,11 +19,9 @@ import (
 
 var (
 	variableLookupParents = []string{
-		"pair",
-		"arguments",
+		"formal_parameters",
 		"binary_expression",
-		"template_substitution",
-		"array",
+		"array_access",
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
@@ -115,7 +114,8 @@ func (*javaImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 			// a = user
 			// user["name"] = name;
 			// todo: new expression
-			if (parent.Type() == "scoped_type_identifier" && node.Equal(parent.Child(0))) ||
+			if slice.Contains(variableLookupParents, parent.Type()) ||
+				(parent.Type() == "scoped_type_identifier" && node.Equal(parent.Child(0))) ||
 				(parent.Type() == "method_invocation" && node.Equal(parent.ChildByFieldName("object"))) ||
 				(parent.Type() == "field_access" && node.Equal(parent.ChildByFieldName("object"))) ||
 				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
@@ -266,7 +266,7 @@ func (*javaImplementation) PassthroughNested(node *tree.Node) bool {
 	}
 
 	callNode := node.Parent()
-	if callNode.Type() != "call_expression" {
+	if callNode.Type() != "field_access" {
 		return false
 	}
 

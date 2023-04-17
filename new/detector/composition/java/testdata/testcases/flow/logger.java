@@ -1,2 +1,3 @@
 User user;
-logger.error(user.name);
+smth = user.name;
+logger.error(smth);
