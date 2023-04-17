@@ -44,6 +44,10 @@ sudo apt-get update
 sudo apt-get install bearer
 ```
 
+:warning: **Known issues**
+
+- We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which could prevent Bearer running correctly. If you encounter this bug, we recommend following the Docker installation instructions.
+
 ### RHEL/CentOS
 
 Add repository setting:
@@ -132,6 +136,7 @@ sudo yum -y update bearer
 ```
 
 ### Docker
+
 The Docker configurations above uses the latest release, but you may need to tell Docker to explicitly retrieve the latest image:
 
 ```bash
