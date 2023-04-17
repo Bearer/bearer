@@ -23,12 +23,14 @@
 
 </div>
 
-## Code security scanner that natively filters and prioritizes security risks using sensitive data flow analysis.
+## Code security scanner that natively filters and prioritizes security risks using sensitive data flow analysis
+
 <hr/>
 
-https://user-images.githubusercontent.com/1649672/230438696-9bb0fd35-2aa9-4273-9970-733189d01ff1.mp4
+<https://user-images.githubusercontent.com/1649672/230438696-9bb0fd35-2aa9-4273-9970-733189d01ff1.mp4>
 
 Bearer provides built-in rules against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/). Here are some practical examples of what those rules look for:
+
 * Non-filtered user input.
 * Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
 * Usage of weak encryption libraries or misusage of encryption algorithms.
@@ -54,6 +56,7 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 ```
 
 #### Other install options
+
 <details>
   <summary>Homebrew</summary>
 
@@ -64,33 +67,41 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```
 
   Update an existing installation with the following:
-  
+
   ```bash
   brew update && brew update bearer/tap/bearer
   ```
+
 </details>
 
 <details>
   <summary>Debian/Ubuntu</summary>
 
   ```shell
-  $ sudo apt-get install apt-transport-https
-  $ echo "deb [trusted=yes] https://apt.fury.io/bearer/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
-  $ sudo apt-get update
-  $ sudo apt-get install bearer
+  sudo apt-get install apt-transport-https
+  echo "deb [trusted=yes] https://apt.fury.io/bearer/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
+  sudo apt-get update
+  sudo apt-get install bearer
   ```
 
   Update an existing installation with the following:
+
   ```bash
   sudo apt-get update
   sudo apt-get install bearer
   ```
+
+  **Known issues**
+
+  - We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which would prevent Bearer to run correctly. If you encounter this bug, we recommend following the Docker installation instructions.
+
 </details>
 
 <details>
   <summary>RHEL/CentOS</summary>
 
   Add repository setting:
+
   ```shell
   $ sudo vim /etc/yum.repos.d/fury.repo
   [fury]
@@ -101,15 +112,18 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   ```
 
   Then install with yum:
+
   ```shell
-    $ sudo yum -y update
-    $ sudo yum -y install bearer
+    sudo yum -y update
+    sudo yum -y install bearer
   ```
 
   Update an existing installation with the following:
+
   ```bash
   sudo yum -y update bearer
   ```
+
 </details>
 
 <details>
@@ -179,9 +193,9 @@ By default the `scan` command use the SAST scanner, other [scanner types](https:
 
 The security report is an easily digestible view of the security issues detected by Bearer. A report is made up of:
 
-- The list of [rules](https://docs.bearer.com/reference/rules/) run against your code.
-- Each detected finding, containing the file location and lines that triggered the rule finding.
-- A stat section with a summary of rules checks, findings and warnings.
+* The list of [rules](https://docs.bearer.com/reference/rules/) run against your code.
+* Each detected finding, containing the file location and lines that triggered the rule finding.
+* A stat section with a summary of rules checks, findings and warnings.
 
 The [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) example application will trigger rule findings and output a full report. Here's a section of the output:
 
@@ -206,7 +220,6 @@ MEDIUM: 0
 LOW: 0
 WARNING: 0
 ```
-
 
 The security report is just one [report type](https://docs.bearer.com/explanations/reports) available in Bearer.
 
@@ -240,7 +253,7 @@ In addition, running Bearer on a scheduled job is a great way to keep track of y
 
 ### Supported Language
 
-Bearer currently supports JavaScript, TypeScript and Ruby and their associated most used frameworks and libraries. 
+Bearer currently supports JavaScript, TypeScript and Ruby and their associated most used frameworks and libraries.
 Java support is under active development, more languages will follow.
 
 ### What makes Bearer different from any other SAST tools?
@@ -269,11 +282,11 @@ By using the most modern static code analysis techniques and providing a native 
 
 Thanks for using Bearer. Still have questions?
 
-- Start with the [documentation](https://docs.bearer.com).
-- Have a question or need some help? Find the Bearer team on [Discord][discord].
-- Got a feature request or found a bug? [Open a new issue](https://github.com/Bearer/bearer/issues/new/choose).
-- Found a security issue? Check out our [Security Policy](https://github.com/Bearer/bearer/security/policy) for reporting details.
-- Find out more at [Bearer.com](https://www.bearer.com)
+* Start with the [documentation](https://docs.bearer.com).
+* Have a question or need some help? Find the Bearer team on [Discord][discord].
+* Got a feature request or found a bug? [Open a new issue](https://github.com/Bearer/bearer/issues/new/choose).
+* Found a security issue? Check out our [Security Policy](https://github.com/Bearer/bearer/security/policy) for reporting details.
+* Find out more at [Bearer.com](https://www.bearer.com)
 
 ## :handshake: Contributing
 
@@ -299,5 +312,4 @@ You are not allowed to provide Bearer to third parties as a hosted or managed se
 [test-img]: https://github.com/Bearer/bearer/actions/workflows/test.yml/badge.svg
 [release]: https://github.com/Bearer/bearer/releases
 [release-img]: https://img.shields.io/github/release/Bearer/bearer.svg?logo=github
-[github-all-releases-img]: https://img.shields.io/github/downloads/Bearer/bearer/total?logo=github
 [discord]: https://discord.gg/eaHZBJUXRF
