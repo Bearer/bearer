@@ -74,6 +74,13 @@ const (
 	STORED_DATA_TYPES MatchOn = "stored_data_types"
 )
 
+type LoadRulesResult struct {
+	BuiltInRules       map[string]*Rule
+	Rules              map[string]*Rule
+	CacheUsed          bool
+	BearerRulesVersion string
+}
+
 type RuleTrigger struct {
 	MatchOn           MatchOn `mapstructure:"match_on" json:"match_on" yaml:"match_on"`
 	DataTypesRequired bool    `mapstructure:"data_types_required" json:"data_types_required" yaml:"data_types_required"`
@@ -245,7 +252,7 @@ func defaultWorkerOptions() WorkerOptions {
 func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 	policies := DefaultPolicies()
 	workerOptions := defaultWorkerOptions()
-	builtInRules, rules, cacheUsed, bearerRulesVersion, err := loadRules(
+	result, err := loadRules(
 		opts.ExternalRuleDir,
 		opts.RuleOptions,
 		foundLanguages,
@@ -275,10 +282,10 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		Scan:               opts.ScanOptions,
 		Report:             opts.ReportOptions,
 		Policies:           policies,
-		Rules:              rules,
-		BuiltInRules:       builtInRules,
-		CacheUsed:          cacheUsed,
-		BearerRulesVersion: bearerRulesVersion,
+		Rules:              result.Rules,
+		BuiltInRules:       result.BuiltInRules,
+		CacheUsed:          result.CacheUsed,
+		BearerRulesVersion: result.BearerRulesVersion,
 	}
 
 	return config, nil
