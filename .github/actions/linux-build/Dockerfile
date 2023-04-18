@@ -1,7 +1,11 @@
 FROM ubuntu:14.04
 
 RUN apt-get update && \
-    apt-get install -y ca-certificates gcc-multilib g++-multilib git wget && \
+    apt-get install -y ca-certificates gcc-multilib g++-multilib software-properties-common wget && \
+    \
+    add-apt-repository ppa:git-core/ppa && \
+    apt-get update && \
+    apt-get install -y git && \
     \
     wget --output-document=/tmp/go.tar.gz https://go.dev/dl/go1.19.8.linux-amd64.tar.gz && \
     tar --extract --gunzip --file=/tmp/go.tar.gz --directory=/usr/local && \
