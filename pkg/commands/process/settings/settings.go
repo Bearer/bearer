@@ -40,15 +40,16 @@ type WorkerOptions struct {
 }
 
 type Config struct {
-	Client       *api.API
-	Worker       WorkerOptions      `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan         flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report       flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
-	Policies     map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
-	Target       string             `mapstructure:"target" json:"target" yaml:"target"`
-	Rules        map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
-	BuiltInRules map[string]*Rule   `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
-	CacheUsed    bool               `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
+	Client             *api.API
+	Worker             WorkerOptions      `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Scan               flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report             flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
+	Policies           map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
+	Target             string             `mapstructure:"target" json:"target" yaml:"target"`
+	Rules              map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
+	BuiltInRules       map[string]*Rule   `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
+	CacheUsed          bool               `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
+	BearerRulesVersion string             `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
 }
 
 type Modules []*PolicyModule
@@ -72,6 +73,13 @@ const (
 	ABSENCE           MatchOn = "absence"
 	STORED_DATA_TYPES MatchOn = "stored_data_types"
 )
+
+type LoadRulesResult struct {
+	BuiltInRules       map[string]*Rule
+	Rules              map[string]*Rule
+	CacheUsed          bool
+	BearerRulesVersion string
+}
 
 type RuleTrigger struct {
 	MatchOn           MatchOn `mapstructure:"match_on" json:"match_on" yaml:"match_on"`
@@ -244,7 +252,7 @@ func defaultWorkerOptions() WorkerOptions {
 func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 	policies := DefaultPolicies()
 	workerOptions := defaultWorkerOptions()
-	builtInRules, rules, cacheUsed, err := loadRules(
+	result, err := loadRules(
 		opts.ExternalRuleDir,
 		opts.RuleOptions,
 		foundLanguages,
@@ -269,14 +277,15 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 	}
 
 	config := Config{
-		Client:       opts.Client,
-		Worker:       workerOptions,
-		Scan:         opts.ScanOptions,
-		Report:       opts.ReportOptions,
-		Policies:     policies,
-		Rules:        rules,
-		BuiltInRules: builtInRules,
-		CacheUsed:    cacheUsed,
+		Client:             opts.Client,
+		Worker:             workerOptions,
+		Scan:               opts.ScanOptions,
+		Report:             opts.ReportOptions,
+		Policies:           policies,
+		Rules:              result.Rules,
+		BuiltInRules:       result.BuiltInRules,
+		CacheUsed:          result.CacheUsed,
+		BearerRulesVersion: result.BearerRulesVersion,
 	}
 
 	return config, nil

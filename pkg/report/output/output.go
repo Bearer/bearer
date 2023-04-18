@@ -11,6 +11,7 @@ import (
 
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/api/s3"
+	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
@@ -282,31 +283,35 @@ func getMeta(config settings.Config) (*Meta, error) {
 	}
 
 	return &Meta{
-		ID:            info.ID,
-		Host:          string(info.Host),
-		Username:      info.Username,
-		Name:          info.Name,
-		FullName:      info.FullName,
-		URL:           info.Raw,
-		Target:        config.Scan.Target,
-		SHA:           strings.TrimSuffix(string(sha), "\n"),
-		CurrentBranch: strings.TrimSuffix(string(currentBranch), "\n"),
-		DefaultBranch: strings.TrimPrefix(strings.TrimSuffix(string(defaultBranch), "\n"), "origin/"),
+		ID:                 info.ID,
+		Host:               string(info.Host),
+		Username:           info.Username,
+		Name:               info.Name,
+		FullName:           info.FullName,
+		URL:                info.Raw,
+		Target:             config.Scan.Target,
+		SHA:                strings.TrimSuffix(string(sha), "\n"),
+		CurrentBranch:      strings.TrimSuffix(string(currentBranch), "\n"),
+		DefaultBranch:      strings.TrimPrefix(strings.TrimSuffix(string(defaultBranch), "\n"), "origin/"),
+		BearerRulesVersion: config.BearerRulesVersion,
+		BearerVersion:      build.Version,
 	}, nil
 }
 
 type Meta struct {
-	ID            string `json:"id" yaml:"id"`
-	Host          string `json:"host" yaml:"host"`
-	Username      string `json:"username" yaml:"username"`
-	Name          string `json:"name" yaml:"name"`
-	URL           string `json:"url" yaml:"url"`
-	FullName      string `json:"full_name" yaml:"full_name"`
-	Target        string `json:"target" yaml:"target"`
-	SHA           string `json:"sha" yaml:"sha"`
-	CurrentBranch string `json:"current_branch" yaml:"current_branch"`
-	DefaultBranch string `json:"default_branch" yaml:"default_branch"`
-	SignedID      string `json:"signed_id,omitempty" yaml:"signed_id,omitempty"`
+	ID                 string `json:"id" yaml:"id"`
+	Host               string `json:"host" yaml:"host"`
+	Username           string `json:"username" yaml:"username"`
+	Name               string `json:"name" yaml:"name"`
+	URL                string `json:"url" yaml:"url"`
+	FullName           string `json:"full_name" yaml:"full_name"`
+	Target             string `json:"target" yaml:"target"`
+	SHA                string `json:"sha" yaml:"sha"`
+	CurrentBranch      string `json:"current_branch" yaml:"current_branch"`
+	DefaultBranch      string `json:"default_branch" yaml:"default_branch"`
+	SignedID           string `json:"signed_id,omitempty" yaml:"signed_id,omitempty"`
+	BearerRulesVersion string `json:"bearer_rules_version,omitempty" yaml:"bearer_rules_version,omitempty"`
+	BearerVersion      string `json:"bearer_version,omitempty" yaml:"bearer_version,omitempty"`
 }
 
 type BearerReport struct {
