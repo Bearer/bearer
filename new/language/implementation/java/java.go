@@ -37,7 +37,7 @@ var (
 
 	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
 
-	passthroughMethods = []string{"JSON.parse", "JSON.stringify"}
+	passthroughMethods = []string{}
 )
 
 type javaImplementation struct{}
@@ -216,7 +216,7 @@ func (*javaImplementation) PatternLeafContentTypes() []string {
 		// todo: see if type identifier should be removed from here (User user) `User` is type
 		// todo see if `modifier` should be here it's a single token containing `string public final static`
 		// identifiers
-		"identifier", "type_identifier",
+		"identifier",
 		// types
 		// int user, User user, void user function,
 		"integral_type", "type_identifier", "void_type",
