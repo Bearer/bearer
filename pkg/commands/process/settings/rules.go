@@ -17,6 +17,14 @@ var (
 	defaultAuxiliaryRuleType = "verifier"
 )
 
+func GetSupportedRuleLanguages() map[string]bool {
+	return map[string]bool{
+		"ruby":       true,
+		"javascript": true,
+		"typescript": true,
+	}
+}
+
 func RefreshRules(config Config, externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string) (err error) {
 	result, err := loadRules(externalRuleDirs, options, foundLanguages, true)
 	config.BuiltInRules = result.BuiltInRules
@@ -59,7 +67,13 @@ func loadRules(
 				return result, fmt.Errorf("error loading rules from cache: %s", err)
 			}
 
+			supportedLanguages := GetSupportedRuleLanguages()
 			for _, foundLang := range foundLanguages {
+				if !supportedLanguages[foundLang] {
+					// no rule support for this language e.g. CSS, plain text
+					continue
+				}
+
 				if !ruleLanguages[foundLang] {
 					definitions = make(map[string]RuleDefinition)
 					result.CacheUsed = false // re-cache rules
