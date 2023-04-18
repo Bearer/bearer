@@ -421,6 +421,11 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		return true, nil
 	}
 
+	_, javaPresent := foundLanguages["java"]
+	if javaPresent {
+		return true, nil
+	}
+
 	log.Debug().Msg("No language found for which rules are applicable")
 	return false, nil
 }
