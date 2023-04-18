@@ -9,6 +9,10 @@ Installing Bearer can be done though multiple methods referenced below. To updat
 
 ## Installation options
 
+:warning: **Known issues**
+
+* We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which could prevent Bearer running correctly. If you encounter this bug, we recommend following the Docker installation instructions.
+
 ### Install Script
 
 The most common way to install Bearer is with the install script. It will auto-select the best build for your architecture. Defaults installation to ./bin and to the latest release version:
@@ -43,10 +47,6 @@ echo "deb [trusted=yes] https://apt.fury.io/bearer/ /" | sudo tee -a /etc/apt/so
 sudo apt-get update
 sudo apt-get install bearer
 ```
-
-:warning: **Known issues**
-
-- We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which could prevent Bearer running correctly. If you encounter this bug, we recommend following the Docker installation instructions.
 
 ### RHEL/CentOS
 

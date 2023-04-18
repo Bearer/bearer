@@ -57,6 +57,10 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 
 #### Other install options
 
+:warning: **Known issues**
+
+* We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which could prevent Bearer running correctly. If you encounter this bug, we recommend following the Docker installation instructions.
+
 <details>
   <summary>Homebrew</summary>
 
@@ -90,10 +94,6 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
   sudo apt-get update
   sudo apt-get install bearer
   ```
-
-  :warning: **Known issues**
-
-  - We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which could prevent Bearer running correctly. If you encounter this bug, we recommend following the Docker installation instructions.
 
 </details>
 
