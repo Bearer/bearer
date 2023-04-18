@@ -18,18 +18,30 @@ var (
 )
 
 func RefreshRules(config Config, externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string) (err error) {
-	builtInRules, rules, _, err := loadRules(externalRuleDirs, options, foundLanguages, true)
+	builtInRules, rules, _, bearerRulesVersion, err := loadRules(externalRuleDirs, options, foundLanguages, true)
 	config.BuiltInRules = builtInRules
 	config.Rules = rules
+	config.BearerRulesVersion = bearerRulesVersion
 
 	return
 }
 
-func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string, force bool) (map[string]*Rule, map[string]*Rule, bool, error) {
+func loadRules(
+	externalRuleDirs []string,
+	options flag.RuleOptions,
+	foundLanguages []string,
+	force bool) (
+	map[string]*Rule,
+	map[string]*Rule,
+	bool,
+	string,
+	error,
+) {
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
 	ruleLanguages := make(map[string]bool)
 
+	var bearerRulesVersion string
 	cacheUsed := false
 	if !options.DisableDefaultRules {
 		bearerRulesDir := bearerRulesDir()
@@ -49,7 +61,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 			})
 
 			if err != nil {
-				return nil, nil, cacheUsed, fmt.Errorf("error loading rules from cache: %s", err)
+				return nil, nil, cacheUsed, bearerRulesVersion, fmt.Errorf("error loading rules from cache: %s", err)
 			}
 
 			for _, foundLang := range foundLanguages {
@@ -62,12 +74,15 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 
 		if !cacheUsed {
 			if err := cleanupRuleDirFiles(bearerRulesDir); err != nil {
-				return nil, nil, cacheUsed, fmt.Errorf("error cleaning rules cache: %s", err)
+				return nil, nil, cacheUsed, bearerRulesVersion, fmt.Errorf("error cleaning rules cache: %s", err)
 			}
 
-			if err := LoadRuleDefinitionsFromGitHub(definitions, foundLanguages); err != nil {
-				return nil, nil, cacheUsed, fmt.Errorf("error loading rules: %s", err)
+			tagVersion, err := LoadRuleDefinitionsFromGitHub(definitions, foundLanguages)
+			if err != nil {
+				return nil, nil, cacheUsed, bearerRulesVersion, fmt.Errorf("error loading rules: %s", err)
 			}
+
+			bearerRulesVersion = tagVersion
 		}
 
 		// add default documentation urls for default rules
@@ -79,7 +94,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 	}
 
 	if err := loadRuleDefinitionsFromDir(builtInDefinitions, buildInRulesFs); err != nil {
-		return nil, nil, cacheUsed, fmt.Errorf("error loading built-in rules: %w", err)
+		return nil, nil, cacheUsed, bearerRulesVersion, fmt.Errorf("error loading built-in rules: %w", err)
 	}
 
 	for _, dir := range externalRuleDirs {
@@ -89,18 +104,18 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 		}
 		log.Debug().Msgf("loading external rules from: %s", dir)
 		if err := loadRuleDefinitionsFromDir(definitions, os.DirFS(dir)); err != nil {
-			return nil, nil, cacheUsed, fmt.Errorf("error loading external rules from %s: %w", dir, err)
+			return nil, nil, cacheUsed, bearerRulesVersion, fmt.Errorf("error loading external rules from %s: %w", dir, err)
 		}
 	}
 
 	if err := validateRuleOptionIDs(options, definitions, builtInDefinitions); err != nil {
-		return nil, nil, cacheUsed, err
+		return nil, nil, cacheUsed, bearerRulesVersion, err
 	}
 
 	enabledRules := getEnabledRules(options, definitions, nil)
 	builtInRules := getEnabledRules(options, builtInDefinitions, enabledRules)
 
-	return buildRules(builtInDefinitions, builtInRules), buildRules(definitions, enabledRules), cacheUsed, nil
+	return buildRules(builtInDefinitions, builtInRules), buildRules(definitions, enabledRules), cacheUsed, bearerRulesVersion, nil
 }
 
 func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {
