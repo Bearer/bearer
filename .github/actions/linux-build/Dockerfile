@@ -1,11 +1,22 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 RUN apt-get update && \
     apt-get install -y ca-certificates gcc-multilib g++-multilib software-properties-common wget && \
     \
     add-apt-repository ppa:git-core/ppa && \
+    \
+    install -m 0755 -d /etc/apt/keyrings && \
+    (wget --output-document=- https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg) && \
+    chmod a+r /etc/apt/keyrings/docker.gpg && \
+    ( \
+      echo \
+        "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" \
+        > /etc/apt/sources.list.d/docker.list \
+    ) && \
+    \
     apt-get update && \
-    apt-get install -y git && \
+    apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin git && \
     \
     wget --output-document=/tmp/go.tar.gz https://go.dev/dl/go1.19.8.linux-amd64.tar.gz && \
     tar --extract --gunzip --file=/tmp/go.tar.gz --directory=/usr/local && \
@@ -14,4 +25,5 @@ RUN apt-get update && \
     wget --output-document=/tmp/goreleaser.deb https://github.com/goreleaser/goreleaser-pro/releases/download/v1.17.2-pro/goreleaser-pro_1.17.2.pro_amd64.deb && \
     dpkg --install /tmp/goreleaser.deb
 
-ENTRYPOINT ["/usr/bin/goreleaser"]
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
