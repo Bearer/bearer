@@ -19,6 +19,7 @@ import (
 
 var (
 	variableLookupParents = []string{
+		"field_declaration",
 		"argument_list",
 		"binary_expression",
 		"array_access",
@@ -55,6 +56,12 @@ func (*javaImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
 		switch node.Type() {
+		case "class_body":
+			previousScope := scope
+			scope = implementation.NewScope(previousScope)
+			err := visitChildren()
+			scope = previousScope
+			return err
 		// public class Main {
 		//	// method declaration
 		//	static void myMethod() {
