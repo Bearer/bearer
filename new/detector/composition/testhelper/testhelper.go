@@ -7,7 +7,6 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/pkg/commands"
 	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -15,6 +14,8 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output"
+	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/types"
 	"github.com/bradleyjkemp/cupaloy"
 )
 
@@ -113,7 +114,7 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 	}
 
 	runner.config.Scan.Target = testDataPath
-	detections, _, _, _ := output.GetOutput(
+	detections, _, _ := output.GetOutput(
 		types.Report{
 			Path: detectorsReportPath,
 		},
