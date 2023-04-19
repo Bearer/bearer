@@ -15,6 +15,69 @@
       "package_manager": "npm"
     },
     {
+      "name": "openai-api",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "openai-api-node",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "gpt-x",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "gpt3",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "gpts",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@dalenguyen/openai",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@tectalic/openai",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "orhanerday/open-ai",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "tectalic/openai",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "openai-php/client",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "chronological",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "openai",
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "ruby-openai",
+      "package_manager": "rubygems"
+    },
+    {
       "name": "api",
       "group": "com.theokanning.openai-gpt3-java",
       "package_manager": "maven"
@@ -25,9 +88,31 @@
       "package_manager": "maven"
     },
     {
+      "name": "openai-client",
+      "group": "com.aallam.openai",
+      "package_manager": "maven"
+    },
+    {
       "name": "service",
       "group": "com.theokanning.openai-gpt3-java",
       "package_manager": "maven"
+    },
+    {
+      "name": "github.com/sashabaranov/go-openai",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "Betalgo.OpenAI.GPT3",
+      "package_manager": "nuget"
+    },
+    {
+      "name": "OpenAI",
+      "package_manager": "nuget"
+    },
+    {
+      "name": "OpenAI-DotNet",
+      "package_manager": "nuget"
     }
   ],
   "uuid": "e106eab4-f126-45c4-9cb8-620e6ae036b7",
