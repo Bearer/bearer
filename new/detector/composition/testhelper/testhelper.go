@@ -4,7 +4,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands"
@@ -19,21 +18,12 @@ import (
 	"github.com/bradleyjkemp/cupaloy"
 )
 
-var runner *Runner
-var mu sync.Mutex
-
 type Runner struct {
 	config settings.Config
 	worker worker.Worker
 }
 
-func getRunner(t *testing.T) *Runner {
-	mu.Lock()
-	defer mu.Unlock()
-	if runner != nil {
-		return runner
-	}
-
+func GetRunner(t *testing.T, rule []byte) *Runner {
 	err := commands.ScanFlags.BindForConfigInit(commands.NewScanCommand())
 	if err != nil {
 		t.Fatalf("failed to bind flags: %s", err)
@@ -58,7 +48,7 @@ func getRunner(t *testing.T) *Runner {
 		t.Fatalf("failed to setup scan worker: %s", err)
 	}
 
-	runner = &Runner{
+	runner := &Runner{
 		worker: worker,
 		config: config,
 	}
@@ -66,7 +56,7 @@ func getRunner(t *testing.T) *Runner {
 	return runner
 }
 
-func (runner *Runner) runTest(t *testing.T, projectPath string) {
+func (runner *Runner) RunTest(t *testing.T, projectPath string) {
 	testDataPath := projectPath + "/testdata/"
 	snapshotsPath := projectPath + "/.snapshots/"
 
@@ -84,12 +74,12 @@ func (runner *Runner) runTest(t *testing.T, projectPath string) {
 		ext := filepath.Ext(file.FilePath)
 		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
 		t.Run(testName, func(t *testing.T) {
-			runner.ScanSingleFile(t, testDataPath, myfile, snapshotsPath)
+			runner.scanSingleFile(t, testDataPath, myfile, snapshotsPath)
 		})
 	}
 }
 
-func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRelativePath work.File, snapshotsPath string) {
+func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRelativePath work.File, snapshotsPath string) {
 	detectorsReportFile, err := os.CreateTemp("", "report.jsonl")
 	if err != nil {
 		t.Fatalf("failed to create tmp report file: %s", err)
