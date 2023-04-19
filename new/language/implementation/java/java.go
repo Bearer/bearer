@@ -56,13 +56,16 @@ func (*javaImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
 		switch node.Type() {
+		// public class Main {
+		//
+		// }
 		case "class_body":
 			previousScope := scope
 			scope = implementation.NewScope(previousScope)
 			err := visitChildren()
 			scope = previousScope
 			return err
-		// public class Main {
+			// public class Main {
 		//	// method declaration
 		//	static void myMethod() {
 		//
@@ -89,6 +92,14 @@ func (*javaImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				node.UnifyWith(right)
 
 				return err
+			}
+		case "field_declaration":
+			declarator := node.ChildByFieldName("declarator")
+			if declarator != nil {
+				name := declarator.ChildByFieldName("name")
+				value := declarator.ChildByFieldName("value")
+				scope.Assign(name.Content(), value)
+				node.UnifyWith(value)
 			}
 		// String user = "John";
 		case "local_variable_declaration":
