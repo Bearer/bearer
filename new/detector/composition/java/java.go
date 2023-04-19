@@ -9,7 +9,6 @@ import (
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/composition/types"
 	"github.com/bearer/bearer/new/detector/evaluator"
@@ -178,8 +177,6 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
-
-	log.Debug().Msgf("document is %s", tree.RootNode().Debug())
 
 	evaluator := evaluator.New(
 		composition.langImplementation,
