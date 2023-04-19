@@ -2,7 +2,7 @@ FROM alpine:latest
 
 RUN apk update
 RUN apk upgrade
-RUN apk add --no-cache git
+RUN apk add --no-cache git libc6-compat libgcc libstdc++
 
 COPY bearer /usr/local/bin/
 
