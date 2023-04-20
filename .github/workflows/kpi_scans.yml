@@ -14,6 +14,16 @@ jobs:
           - https://github.com/OWASP/railsgoat
           - https://github.com/OWASP/NodeGoat
           - https://github.com/WebGoat/WebGoat
+          - https://github.com/forem/forem
+          - https://github.com/freeCodeCamp/chapter
+          - https://github.com/mastodon/mastodon
+          - https://github.com/frab/frab
+          - https://github.com/discourse/discourse
+          - https://github.com/diaspora/diaspora
+          - https://github.com/TryGhost/Ghost
+          - https://github.com/wekan/wekan
+          - https://gitlab.com/gitlab-org/gitlab
+          - https://github.com/grafana/grafana
 
     steps:
       - name: Configure AWS credentials
