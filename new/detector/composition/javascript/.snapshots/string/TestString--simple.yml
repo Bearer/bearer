@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: javascript_insecure_url_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: simple.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: console.log("http://", user.name)
+      fingerprint: 971b852ae8266c6d2b25437584017e2c_0
+

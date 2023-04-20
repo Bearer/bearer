@@ -12,5 +12,5 @@ var loggerRule []byte
 
 func TestRuby(t *testing.T) {
 	t.Parallel()
-	testhelper.GetRunner(t, loggerRule).RunTest(t, javascriptRulesPath+"lang/jwt_hardcoded_secret")
+	testhelper.GetRunner(t, loggerRule, "Ruby").RunTest(t, "./testdata/testcases", ".snapshots/")
 }

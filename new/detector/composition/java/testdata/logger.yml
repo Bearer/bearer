@@ -7,3 +7,5 @@ patterns:
     filters:
       - variable: DATA_TYPE
         detection: datatype
+metadata:
+  id: java_rule_logger_test

@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: javascript_insecure_url_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 3
+      filename: template-variable-reconciliation.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 3
+      snippet: console.log(`h${path}${config.domain}`, user.name)
+      fingerprint: bbac16a148474689a2cb1b5e2d40ada2_0
+

@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: java_rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: same-line.java
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 1
+      snippet: logger.error(user.name)
+      fingerprint: b000c2a9a82d59a1e826bc709cca9307_0
+

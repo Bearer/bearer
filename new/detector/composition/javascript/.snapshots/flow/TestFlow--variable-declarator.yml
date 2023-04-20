@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: javascript_test_datatype_rule
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: variable-declarator.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 2
+      snippet: console.log(user)
+      fingerprint: 5d86ec557137111caf0eca9a7d304c91_0
+

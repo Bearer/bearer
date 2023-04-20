@@ -9,3 +9,5 @@ patterns:
         detection: insecure_url
       - variable: DATA_TYPE
         detection: datatype
+metadata:
+  id: javascript_insecure_url_test

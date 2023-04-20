@@ -4,7 +4,6 @@ import (
 	_ "embed"
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition/testhelper"
 )
 
@@ -18,19 +17,16 @@ var datatypeRule []byte
 var deconstructingRule []byte
 
 func TestFlow(t *testing.T) {
-	testhelper.RunTest(t, map[string][]byte{
-		"logger": datatypeRule,
-	}, "testdata/testcases/flow", javascript.New)
+	t.Parallel()
+	testhelper.GetRunner(t, datatypeRule, "Javascript").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestObjectDeconstructing(t *testing.T) {
-	testhelper.RunTest(t, map[string][]byte{
-		"logger": deconstructingRule,
-	}, "testdata/testcases/object-deconstructing", javascript.New)
+	t.Parallel()
+	testhelper.GetRunner(t, deconstructingRule, "Javascript").RunTest(t, "./testdata/testcases/object-deconstructing", ".snapshots/object-deconstructing/")
 }
 
 func TestString(t *testing.T) {
-	testhelper.RunTest(t, map[string][]byte{
-		"logger": insecureURLRule,
-	}, "testdata/testcases/string", javascript.New)
+	t.Parallel()
+	testhelper.GetRunner(t, insecureURLRule, "Javascript").RunTest(t, "./testdata/testcases/string", ".snapshots/string/")
 }

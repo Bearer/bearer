@@ -90,7 +90,7 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions, foundLanguag
 	enabledRules := getEnabledRules(options, definitions, nil)
 	builtInRules := getEnabledRules(options, builtInDefinitions, enabledRules)
 
-	return buildRules(builtInDefinitions, builtInRules), buildRules(definitions, enabledRules), cacheUsed, nil
+	return BuildRules(builtInDefinitions, builtInRules), BuildRules(definitions, enabledRules), cacheUsed, nil
 }
 
 func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {
@@ -203,7 +203,7 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 	return enabledRules
 }
 
-func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]struct{}) map[string]*Rule {
+func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]struct{}) map[string]*Rule {
 	rules := make(map[string]*Rule)
 
 	for _, definition := range definitions {

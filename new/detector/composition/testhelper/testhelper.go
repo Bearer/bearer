@@ -16,6 +16,7 @@ import (
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/types"
 	"github.com/bradleyjkemp/cupaloy"
+	"gopkg.in/yaml.v3"
 )
 
 type Runner struct {
@@ -23,7 +24,7 @@ type Runner struct {
 	worker worker.Worker
 }
 
-func GetRunner(t *testing.T, rule []byte) *Runner {
+func GetRunner(t *testing.T, ruleBytes []byte, lang string) *Runner {
 	err := commands.ScanFlags.BindForConfigInit(commands.NewScanCommand())
 	if err != nil {
 		t.Fatalf("failed to bind flags: %s", err)
@@ -37,10 +38,12 @@ func GetRunner(t *testing.T, rule []byte) *Runner {
 	configFlags.Report = flag.ReportSecurity
 	configFlags.Quiet = true
 
-	config, err := settings.FromOptions(configFlags, []string{"javascript", "ruby", "java"})
+	config, err := settings.FromOptions(configFlags, []string{lang})
 	if err != nil {
 		t.Fatalf("failed to generate default scan settings: %s", err)
 	}
+
+	config.Rules = getRulesFromYaml(t, ruleBytes)
 
 	worker := worker.Worker{}
 	err = worker.Setup(config)
@@ -56,11 +59,25 @@ func GetRunner(t *testing.T, rule []byte) *Runner {
 	return runner
 }
 
-func (runner *Runner) RunTest(t *testing.T, projectPath string) {
-	testDataPath := projectPath + "/testdata/"
-	snapshotsPath := projectPath + "/.snapshots/"
+func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*settings.Rule {
+	var ruleDefinition settings.RuleDefinition
+	err := yaml.Unmarshal(ruleBytes, &ruleDefinition)
+	if err != nil {
+		t.Fatalf("failed to unmarshal rule %s", err)
+	}
 
-	files, err := filelist.Discover(testDataPath, runner.config)
+	rules := map[string]settings.RuleDefinition{
+		ruleDefinition.Metadata.ID: ruleDefinition,
+	}
+	enabledRules := map[string]struct{}{
+		ruleDefinition.Metadata.ID: struct{}{},
+	}
+
+	return settings.BuildRules(rules, enabledRules)
+}
+
+func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath string) {
+	files, err := filelist.Discover(testdataPath, runner.config)
 	if err != nil {
 		t.Fatalf("failed to discover files: %s", err)
 	}
@@ -74,7 +91,7 @@ func (runner *Runner) RunTest(t *testing.T, projectPath string) {
 		ext := filepath.Ext(file.FilePath)
 		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
 		t.Run(testName, func(t *testing.T) {
-			runner.scanSingleFile(t, testDataPath, myfile, snapshotsPath)
+			runner.scanSingleFile(t, testdataPath, myfile, snapshotPath)
 		})
 	}
 }

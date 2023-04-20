@@ -4,7 +4,6 @@ import (
 	_ "embed"
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/composition/java"
 	"github.com/bearer/bearer/new/detector/composition/testhelper"
 )
 
@@ -12,7 +11,6 @@ import (
 var loggerRule []byte
 
 func TestFlow(t *testing.T) {
-	testhelper.RunTest(t, map[string][]byte{
-		"logger": loggerRule,
-	}, "testdata/testcases/flow", java.New)
+	t.Parallel()
+	testhelper.GetRunner(t, loggerRule, "Javascript").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }

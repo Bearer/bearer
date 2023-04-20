@@ -1,0 +1,16 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: javascript_test_datatype_rule
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: assigment-expression.js
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 2
+      snippet: console.log(user)
+      fingerprint: 3c919e47299fa396f901d19edaad859c_0
+
