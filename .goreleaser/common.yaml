@@ -44,19 +44,20 @@ builds:
           EOF
           '
         - "gon -log-level DEBUG 'dist/darwin/darwin_{{.Target}}/gon.hcl'"
+
   - id: linux
     main: ./cmd/bearer
     binary: bearer
     env:
       - CGO_ENABLED=1
+      - CGO_CFLAGS=-std=c99 -D_GNU_SOURCE
     goos:
       - linux
     goarch:
       - 386
       - amd64
     ldflags:
-      - -s -w
-      - -extldflags "-static"
+      - -w
       - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
       - -X "github.com/bearer/bearer/cmd/bearer/build.CommitSHA={{.Commit}}"
 
@@ -70,3 +71,18 @@ changelog:
       - "^docs:"
       - "^test:"
       - "^ci:"
+
+nfpms:
+  -
+    formats:
+      - deb
+      - rpm
+      - archlinux
+    vendor: Bearer
+    homepage: "https://bearer.com"
+    maintainer: "Bearer <dev@bearer.sh>"
+    description: "A data-first security scanner that finds risks and vulnerabilities in your code so you can protect sensitive data (PHI, PD, PII)."
+    license: "Elastic License 2.0"
+    file_name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+    dependencies:
+      - git
