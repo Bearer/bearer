@@ -2,19 +2,24 @@ name: KPI Scans
 on:
   schedule:
     - cron: '0 6 * * *'
-
 jobs:
+  load_repo_list:
+    name: Load KPI repo list
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.load_json.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: load_json
+        run : |
+          content=$(cat ./kpi_scan/kpi_repo_list.json | jq -c)
+          echo "matrix=$content" >> $GITHUB_OUTPUT
   build:
+    needs: load_repo_list
     name: Run KPI scans
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        repository_url:
-          - https://github.com/juice-shop/juice-shop
-          - https://github.com/OWASP/railsgoat
-          - https://github.com/OWASP/NodeGoat
-          - https://github.com/WebGoat/WebGoat
-
+      matrix: ${{fromJson(needs.load_repo_list.outputs.matrix)}}
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
