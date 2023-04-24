@@ -20,6 +20,9 @@ options:
       default_value: "true"
       usage: |
         Do not attempt to resolve detected domains during classification
+    - name: disable-version-check
+      default_value: "false"
+      usage: Disable Bearer version checking
     - name: domain-resolution-timeout
       default_value: 3s
       usage: |
