@@ -25,7 +25,7 @@ If you need more control or another way to install Bearer, we offer more [instal
 
 ## Scan your project
 
-The easiest way to try out Bearer is with our example project, [OWASP Juice Shop](https://github.com/juice-shop/juice-shop). It simulates a realistic Ruby application with common security flaws. Clone or download it to a convenient location to get started.
+The easiest way to try out Bearer is with the OWASP [Juice Shop](https://github.com/juice-shop/juice-shop) example project. Clone or download it to a convenient location to get started.
 
 ```bash
 git clone https://github.com/juice-shop/juice-shop.git
@@ -66,15 +66,16 @@ File: juice-shop/frontend/src/app/login/login.component.ts:102
 
 =====================================
 
-58 checks, 38 findings
+59 checks, 40 findings
 
-CRITICAL: 15 (CWE-22, CWE-798, CWE-89)
-HIGH: 23 (CWE-312, CWE-327, CWE-548)
-MEDIUM: 0
+CRITICAL: 0
+HIGH: 16 (CWE-22, CWE-312, CWE-798, CWE-89)
+MEDIUM: 24 (CWE-327, CWE-548, CWE-79)
 LOW: 0
 WARNING: 0
 ```
 
-The security report is just one [report type](/explanations/reports/) available in Bearer.
+In addition of the security report, you can also run a [privacy report](/explanations/reports/#privacy-report).
+
 
 Ready for the next step? Additional options for using and configuring the `scan` command can be found in [configuring the scan command](/guides/configure-scan/).
