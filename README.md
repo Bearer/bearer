@@ -180,7 +180,7 @@ bearer scan juice-shop
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output by default a security report with details of any rule findings, as well as where in the codebase the infractions happened and why.
+Once the scan is complete, Bearer will output, by default, a security report with details of any rule findings, as well as where in the codebase the infractions happened and why.
 
 By default the `scan` command use the SAST scanner, other [scanner types](https://docs.bearer.com/explanations/scanners) are available.
 
