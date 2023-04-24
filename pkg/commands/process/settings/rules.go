@@ -124,8 +124,8 @@ func loadRules(
 	enabledRules := getEnabledRules(options, definitions, nil)
 	builtInRules := getEnabledRules(options, builtInDefinitions, enabledRules)
 
-	result.Rules = buildRules(definitions, enabledRules)
-	result.BuiltInRules = buildRules(builtInDefinitions, builtInRules)
+	result.Rules = BuildRules(definitions, enabledRules)
+	result.BuiltInRules = BuildRules(builtInDefinitions, builtInRules)
 
 	return result, nil
 }
