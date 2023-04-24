@@ -55,6 +55,7 @@ jobs:
           args: release --clean --split
         env:
           GOOS: linux
+          GITHUB_USER: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
