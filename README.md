@@ -238,7 +238,7 @@ In addition, by being Open Source, extendable by design, and built with a great 
 
 In adition of detecting security flaws in your code, Bearer allows you to automate the evidence gathering process needed to generate a privacy report for your compliance team. 
 
-When you run Bearer on your codebase, it discovers and classifies data by identifying patterns in the source code. Specifically, it looks for data types and matches against them. Most importantly, it never views the actual values (it just can’t)—but only the code itself. If you want to learn more, here is the [longer explanation](https://docs.bearer.com/explanations/discovery-and-classification/).
+When you run Bearer on your codebase, it discovers and classifies data by identifying patterns in the source code. Specifically, it looks for data types and matches against them. Most importantly, it never views the actual values—it just can’t—but only the code itself. If you want to learn more, here is the [longer explanation](https://docs.bearer.com/explanations/discovery-and-classification/).
 
 Specifically, Bearer is able to identify over 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.com/reference/datatypes/).
 
