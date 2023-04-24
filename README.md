@@ -240,7 +240,7 @@ In adition of detecting security flaws in your code, Bearer allows you to automa
 
 When you run Bearer on your codebase, it discovers and classifies data by identifying patterns in the source code. Specifically, it looks for data types and matches against them. Most importantly, it never views the actual values—it just can’t—but only the code itself. If you want to learn more, here is the [longer explanation](https://docs.bearer.com/explanations/discovery-and-classification/).
 
-Specifically, Bearer is able to identify over 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.com/reference/datatypes/).
+Bearer is able to identify over 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.com/reference/datatypes/).
 
 FInally, Bearer also allows you to detect component storing and processing sensitive data, as databases, internal APIs and third-party APIs. See the [recipe list](https://docs.bearer.com/reference/recipes/).
 
