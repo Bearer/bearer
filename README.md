@@ -263,7 +263,7 @@ By using the most modern static code analysis techniques and providing a native 
 
 ### When and where to use Bearer?
 
-We recommend running Bearer in your CI to check new PR automatically for security issues, so your development team has a direct feedback loop to fix issues immediately.
+We recommend running Bearer in your CI to check new PRs automatically for security issues, so your development team has a direct feedback loop to fix issues immediately.
 
 You can also integrate Bearer in your CD, though we recommend setting it to only fail on high criticality issues, as the impact for your organization might be important.
 
