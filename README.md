@@ -265,7 +265,7 @@ By using the most modern static code analysis techniques and providing a native 
 
 We recommend running Bearer in your CI to check new PR automatically for security issues, so your development team has a direct feedback loop to fix issues immediately.
 
-You can also integrate Bearer in your CD, though we recommend to only make it fail on high criticality issues only, as the impact for your organization might be important.
+You can also integrate Bearer in your CD, though we recommend setting it to only fail on high criticality issues, as the impact for your organization might be important.
 
 In addition, running Bearer on a scheduled job is a great way to keep track of your security posture and make sure new security issues are found even in projects with low activity.
 
