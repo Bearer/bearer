@@ -242,7 +242,7 @@ When you run Bearer on your codebase, it discovers and classifies data by identi
 
 Bearer is able to identify over 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.com/reference/datatypes/).
 
-FInally, Bearer also allows you to detect component storing and processing sensitive data, as databases, internal APIs and third-party APIs. See the [recipe list](https://docs.bearer.com/reference/recipes/).
+Finally, Bearer also lets you detect components storing and processing sensitive data such as databases, internal APIs, and third-party APIs. See the [recipe list](https://docs.bearer.com/reference/recipes/) for a complete list of components.
 
 ### Supported Language
 
