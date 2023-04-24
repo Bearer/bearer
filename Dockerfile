@@ -1,14 +1,14 @@
-FROM alpine:latest
+FROM ubuntu:23.04
 
-RUN apk update
-RUN apk upgrade
-RUN apk add --no-cache git libc6-compat libgcc libstdc++
+RUN apt-get update && \
+    apt-get install -y git && \
+    \
+    git config --global --add safe.directory '*' && \
+    \
+    adduser --system --group runuser
 
 COPY bearer /usr/local/bin/
 
-RUN addgroup -S rungroup && adduser -S runuser -G rungroup
 USER runuser
-
-RUN git config --global --add safe.directory '*'
 
 ENTRYPOINT ["bearer"]
