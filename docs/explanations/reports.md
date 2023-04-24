@@ -10,37 +10,28 @@ Bearer can generate various types of reports about your codebase, all from the s
 
 The security report allows you to quickly see security risks and vulnerabilities found in your codebase using a security [scanner type](/explanations/scanners) (SAST by default). 
 
-For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the security report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
+For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the security report run on the [OWASP Juice Shop app](https://github.com/juice-shop/juice-shop):
 
 ```txt
 $ bearer scan .
 ...
-CRITICAL: Sensitive data stored in a JWT detected.
-https://docs.bearer.com/reference/rules/ruby_lang_jwt
-To skip this rule, use the flag --skip-rule=ruby_lang_jwt
+HIGH: Sensitive data stored in HTML local storage detected. [CWE-312]
+https://docs.bearer.com/reference/rules/javascript_lang_session
+To skip this rule, use the flag --skip-rule=javascript_lang_session
 
-File: /bear-publishing/lib/jwt.rb:6
+File: juice-shop/frontend/src/app/login/login.component.ts:102
 
- 3     JWT.encode(
- 4       {
- 5         id: user.id,
- 6         email: user.email,
- 7         class: user.class,
- 8       },
- 9       nil,
- 	...
- 11     )
+ 102       localStorage.setItem('email', this.user.email)
 
-...
 
 =====================================
 
-24 checks, 18 findings
+58 checks, 38 findings
 
-CRITICAL: 15
-HIGH: 0
+CRITICAL: 15 (CWE-22, CWE-798, CWE-89)
+HIGH: 23 (CWE-312, CWE-327, CWE-548)
 MEDIUM: 0
-LOW: 3
+LOW: 0
 WARNING: 0
 
 exit status 1
@@ -124,7 +115,7 @@ The custom map file should follow the format used by [subject_mapping.json]({{me
 
 The data flow report breaks down the data types and associated components detected in your code. It highlights areas in your code that process personal and sensitive data and where this data may be exposed to third parties and databases.
 
-You can use this to gain more detailed insights beyond what the Privacy report offers, and build additional documentation like data catalogs. In the following example, we can see all the places an `Email Address` is processed by our [example application](https://github.com/Bearer/bear-publishing):
+You can use this to gain more detailed insights beyond what the Privacy report offers, and build additional documentation like data catalogs. In the following example, we can see all the places an `Email Address` is processed by the [Bear Publishing](https://github.com/Bearer/bear-publishing) example app:
 
 ```json
 {

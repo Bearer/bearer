@@ -62,14 +62,14 @@ func NewScanCommand() *cobra.Command {
 
 			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
 			var defaultConfigPath = ""
-			if len(args) == 1 {
+			if len(args) > 0 {
 				defaultConfigPath = file.GetFullFilename(args[0], configPath)
 			}
 
 			var loadFileMessage string
 			if err := readConfig(configPath); err != nil {
 				if err := readConfig(defaultConfigPath); err != nil {
-					loadFileMessage = fmt.Sprintf("Couldn't find config file %s or %s", configPath, defaultConfigPath)
+					loadFileMessage = "Couldn't find any config file"
 				} else {
 					loadFileMessage = fmt.Sprintf("Loading default config file %s", defaultConfigPath)
 				}
@@ -79,13 +79,15 @@ func NewScanCommand() *cobra.Command {
 
 			options, err := ScanFlags.ToOptions(args)
 			if err != nil {
-				return xerrors.Errorf("flag error: %w", err)
+				return xerrors.Errorf("flag error: %s", err)
 			}
 
 			log.Debug().Msgf(loadFileMessage)
 
-			if options.Target == "" {
+			if len(args) == 0 {
 				return cmd.Help()
+			} else {
+				options.Target = args[0]
 			}
 
 			cmd.SilenceUsage = true
@@ -103,18 +105,10 @@ func NewScanCommand() *cobra.Command {
 }
 
 func readConfig(configFile string) error {
-	if configFile == "" {
-		return nil
-	}
-
 	viper.SetConfigType("yaml")
 	viper.SetConfigFile(configFile)
 	if err := viper.ReadInConfig(); err != nil {
-		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			return nil
-		}
-
-		return fmt.Errorf("config file %q loading error: %s", configFile, err)
+		return err
 	}
 
 	return nil

@@ -406,19 +406,12 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		foundLanguages[strings.ToLower(language.Name)] = true
 	}
 
-	_, rubyPresent := foundLanguages["ruby"]
-	if rubyPresent {
-		return true, nil
-	}
+	for _, supportedLanguage := range maps.Keys(settings.GetSupportedRuleLanguages()) {
+		_, supportedLangPresent := foundLanguages[supportedLanguage]
 
-	_, javascriptPresent := foundLanguages["javascript"]
-	if javascriptPresent {
-		return true, nil
-	}
-
-	_, typescriptPresent := foundLanguages["typescript"]
-	if typescriptPresent {
-		return true, nil
+		if supportedLangPresent {
+			return true, nil
+		}
 	}
 
 	_, javaPresent := foundLanguages["java"]

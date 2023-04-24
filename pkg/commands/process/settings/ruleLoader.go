@@ -18,10 +18,10 @@ import (
 const LATEST_RELEASE_URL = "https://api.github.com/repos/bearer/bearer-rules/releases/latest"
 const BASE_RULE_FOLDER = "/"
 
-func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, foundLanguages []string) error {
+func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, foundLanguages []string) (tagName string, err error) {
 	resp, err := http.Get(LATEST_RELEASE_URL)
 	if err != nil {
-		return err
+		return tagName, err
 	}
 	defer resp.Body.Close()
 
@@ -31,19 +31,20 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 		Name               string `json:"name"`
 	}
 	var release struct {
-		Id     int     `json:"id"`
-		Assets []Asset `json:"assets"`
+		Id      int     `json:"id"`
+		TagName string  `json:"tag_name"`
+		Assets  []Asset `json:"assets"`
 	}
 
 	if err := json.NewDecoder(resp.Body).Decode(&release); err != nil {
-		return err
+		return tagName, err
 	}
 
 	bearerRulesDir := bearerRulesDir()
 	if _, err := os.Stat(bearerRulesDir); errors.Is(err, os.ErrNotExist) {
 		err := os.Mkdir(bearerRulesDir, os.ModePerm)
 		if err != nil {
-			return fmt.Errorf("could not create bearer-rules directory: %s", err)
+			return tagName, fmt.Errorf("could not create bearer-rules directory: %s", err)
 		}
 	}
 
@@ -57,45 +58,47 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 
 			resp, err = http.Get(asset.BrowserDownloadUrl)
 			if err != nil {
-				return err
+				return tagName, err
 			}
 			defer resp.Body.Close()
 
 			// Create file in rules dir
 			filepath, err := filepath.Abs(filepath.Join(bearerRulesDir, "source-"+language+".tar.gz"))
 			if err != nil {
-				return err
+				return tagName, err
 			}
 			file, err := os.Create(filepath)
 			if err != nil {
-				return err
+				return tagName, err
 			}
 			defer file.Close()
 
 			// Copy the contents of the downloaded archive to the file
 			if _, err := io.Copy(file, resp.Body); err != nil {
-				return err
+				return tagName, err
 			}
 
 			// reset file pointer to start of file
 			_, err = file.Seek(0, 0)
 			if err != nil {
-				return err
+				return tagName, err
 			}
 
-			if err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
-				return err
+			if _, err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
+				return tagName, err
 			}
 		}
 	}
 
-	return nil
+	return release.TagName, nil
 }
 
-func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) error {
+func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) (map[string]bool, error) {
+	ruleLanguages := make(map[string]bool)
+
 	gzr, err := gzip.NewReader(file)
 	if err != nil {
-		return err
+		return ruleLanguages, err
 	}
 	defer gzr.Close()
 
@@ -105,7 +108,7 @@ func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.Fil
 		if err == io.EOF {
 			break
 		} else if err != nil {
-			return err
+			return ruleLanguages, err
 		}
 
 		if !isRuleFile(header.Name) {
@@ -115,25 +118,29 @@ func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.Fil
 		data := make([]byte, header.Size)
 		_, err = io.ReadFull(tr, data)
 		if err != nil {
-			return fmt.Errorf("failed to read file %s: %w", header.Name, err)
+			return ruleLanguages, fmt.Errorf("failed to read file %s: %w", header.Name, err)
 		}
 
 		var ruleDefinition RuleDefinition
 		err = yaml.Unmarshal(data, &ruleDefinition)
 		if err != nil {
-			return fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
+			return ruleLanguages, fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
 		}
 
 		id := ruleDefinition.Metadata.ID
 		_, ruleExists := ruleDefinitions[id]
 		if ruleExists {
-			return fmt.Errorf("duplicate built-in rule ID %s", id)
+			return ruleLanguages, fmt.Errorf("duplicate built-in rule ID %s", id)
+		}
+
+		for _, lang := range ruleDefinition.Languages {
+			ruleLanguages[lang] = true
 		}
 
 		ruleDefinitions[id] = ruleDefinition
 	}
 
-	return nil
+	return ruleLanguages, nil
 }
 
 func isRuleFile(headerName string) bool {
