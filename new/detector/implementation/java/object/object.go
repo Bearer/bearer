@@ -141,7 +141,7 @@ func (detector *objectDetector) getClassName(node *tree.Node, evaluator types.Ev
 
 	className := result["class_name"].Content()
 
-	properties, err := generic.GetNonVirtualObjects(evaluator, result["right"])
+	properties, err := generic.GetNonVirtualObjects(evaluator, result["class_body"])
 	if err != nil {
 		return nil, err
 	}
