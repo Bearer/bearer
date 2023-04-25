@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids: []
+        id: javascript_deconstructing
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: deconstructing.js
+      parent_line_number: 1
+      snippet: user
+      fingerprint: 391f0431340399f3f30398341feeb70a_0
+

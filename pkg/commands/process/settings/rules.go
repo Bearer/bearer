@@ -124,8 +124,8 @@ func loadRules(
 	enabledRules := getEnabledRules(options, definitions, nil)
 	builtInRules := getEnabledRules(options, builtInDefinitions, enabledRules)
 
-	result.Rules = buildRules(definitions, enabledRules)
-	result.BuiltInRules = buildRules(builtInDefinitions, builtInRules)
+	result.Rules = BuildRules(definitions, enabledRules)
+	result.BuiltInRules = BuildRules(builtInDefinitions, builtInRules)
 
 	return result, nil
 }
@@ -240,7 +240,7 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 	return enabledRules
 }
 
-func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]struct{}) map[string]*Rule {
+func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]struct{}) map[string]*Rule {
 	rules := make(map[string]*Rule)
 
 	for _, definition := range definitions {

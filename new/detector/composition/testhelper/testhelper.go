@@ -1,103 +1,134 @@
 package testhelper
 
 import (
-	"encoding/json"
-	"io/fs"
+	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands"
+	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/worker"
+	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/report/output"
+	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/types"
 	"github.com/bradleyjkemp/cupaloy"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
-func RunTest(t *testing.T,
-	rules map[string][]byte,
-	testCasesPath string,
-	compositionInstantiator func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)) {
-	rulesConfig := make(map[string]*settings.Rule)
+type Runner struct {
+	config settings.Config
+	worker worker.Worker
+}
 
-	for ruleName, ruleContent := range rules {
-		var parsedRule settings.Rule
-		err := yaml.Unmarshal(ruleContent, &parsedRule)
-		if err != nil {
-			t.Fatal(err)
-		}
-		rulesConfig[ruleName] = &parsedRule
-	}
-
-	classifier, err := classification.NewClassifier(&classification.Config{
-		Config: settings.Config{
-			Scan: flag.ScanOptions{
-				DisableDomainResolution: true,
-				DomainResolutionTimeout: 0,
-				Context:                 flag.Context(flag.Empty),
-			},
-		},
-	})
+func GetRunner(t *testing.T, ruleBytes []byte, lang string) *Runner {
+	err := commands.ScanFlags.BindForConfigInit(commands.NewScanCommand())
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("failed to bind flags: %s", err)
 	}
 
-	composition, err := compositionInstantiator(rulesConfig, classifier)
+	configFlags, err := commands.ScanFlags.ToOptions([]string{})
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("failed to generate default flags: %s", err)
 	}
+	configFlags.Format = flag.FormatYAML
+	configFlags.Report = flag.ReportSecurity
+	configFlags.Quiet = true
 
-	files := []string{}
-	err = filepath.WalkDir(testCasesPath, func(path string, d fs.DirEntry, walkDirErr error) error {
-		if d.IsDir() {
-			return nil
-		}
-
-		files = append(files, strings.TrimPrefix(path, testCasesPath))
-		return nil
-	})
+	config, err := settings.FromOptions(configFlags, []string{lang})
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("failed to generate default scan settings: %s", err)
 	}
 
-	fileInfos := []*file.FileInfo{}
+	config.Rules = getRulesFromYaml(t, ruleBytes)
 
-	err = file.IterateFilesList(
-		testCasesPath,
-		files,
-		func(dir *file.Path) (bool, error) {
-			return true, nil
-		},
-		func(file *file.FileInfo) error {
-			fileInfos = append(fileInfos, file)
-			return nil
-		},
-	)
-
+	worker := worker.Worker{}
+	err = worker.Setup(config)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("failed to setup scan worker: %s", err)
 	}
 
-	for _, testCase := range fileInfos {
-		ext := filepath.Ext(testCase.RelativePath)
-		testName := strings.TrimSuffix(testCase.RelativePath, ext) + ".json"
+	runner := &Runner{
+		worker: worker,
+		config: config,
+	}
 
+	return runner
+}
+
+func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*settings.Rule {
+	var ruleDefinition settings.RuleDefinition
+	err := yaml.Unmarshal(ruleBytes, &ruleDefinition)
+	if err != nil {
+		t.Fatalf("failed to unmarshal rule %s", err)
+	}
+
+	rules := map[string]settings.RuleDefinition{
+		ruleDefinition.Metadata.ID: ruleDefinition,
+	}
+	enabledRules := map[string]struct{}{
+		ruleDefinition.Metadata.ID: struct{}{},
+	}
+
+	return settings.BuildRules(rules, enabledRules)
+}
+
+func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath string) {
+	files, err := filelist.Discover(testdataPath, runner.config)
+	if err != nil {
+		t.Fatalf("failed to discover files: %s", err)
+	}
+
+	if len(files) == 0 {
+		t.Fatal("no scannable files found")
+	}
+
+	for _, file := range files {
+		myfile := file
+		ext := filepath.Ext(file.FilePath)
+		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
 		t.Run(testName, func(t *testing.T) {
-			customDetections, err := composition.DetectFromFile(testCase)
-			if err != nil {
-				t.Fatal(err)
-			}
-
-			bytes, err := json.MarshalIndent(customDetections, "", "\t")
-			if err != nil {
-				t.Fatal(err)
-			}
-
-			cupaloy.SnapshotT(t, string(bytes))
+			runner.scanSingleFile(t, testdataPath, myfile, snapshotPath)
 		})
 	}
+}
 
-	composition.Close()
+func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRelativePath work.File, snapshotsPath string) {
+	detectorsReportFile, err := os.CreateTemp("", "report.jsonl")
+	if err != nil {
+		t.Fatalf("failed to create tmp report file: %s", err)
+	}
+	defer detectorsReportFile.Close()
+
+	detectorsReportPath := detectorsReportFile.Name()
+	if err != nil {
+		t.Fatalf("failed to get absolute path of report file: %s", err)
+	}
+
+	err = runner.worker.Scan(work.ProcessRequest{
+		Files:      []work.File{fileRelativePath},
+		ReportPath: detectorsReportPath,
+		Repository: work.Repository{
+			Dir: testDataPath,
+		},
+	})
+
+	if err != nil {
+		t.Fatalf("failed to do scan %s", err)
+	}
+
+	runner.config.Scan.Target = testDataPath
+	detections, _, _ := output.GetOutput(
+		types.Report{
+			Path: detectorsReportPath,
+		},
+		runner.config,
+	)
+	report, _ := reportoutput.ReportYAML(detections)
+
+	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
+	cupaloyCopy.SnapshotT(t, *report)
 }

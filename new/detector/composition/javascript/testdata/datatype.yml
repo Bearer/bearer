@@ -7,3 +7,5 @@ patterns:
     filters:
       - variable: DATA_TYPE
         detection: datatype
+metadata:
+  id: "javascript_test_datatype_rule"

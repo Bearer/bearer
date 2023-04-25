@@ -1,0 +1,13 @@
+low:
+    - rule:
+        cwe_ids: []
+        id: javascript_deconstructing
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: multiple_objects.js
+      parent_line_number: 1
+      snippet: admin
+      fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
+
