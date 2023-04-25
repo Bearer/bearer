@@ -1,5 +1,5 @@
 (*privacy.Report)({
-  Subjects: ([]privacy.Subject) (len=1) {
+  Subjects: ([]privacy.Subject) (len=2) {
     (privacy.Subject) {
       DataSubject: (string) (len=4) "User",
       DataType: (string) (len=13) "Email Address",
@@ -9,6 +9,16 @@
       MediumRiskFindingCount: (int) 0,
       LowRiskFindingCount: (int) 0,
       RulesPassedCount: (int) 0
+    },
+    (privacy.Subject) {
+      DataSubject: (string) (len=3) "n/a",
+      DataType: (string) (len=7) "Country",
+      DetectionCount: (int) 1,
+      CriticalRiskFindingCount: (int) 0,
+      HighRiskFindingCount: (int) 0,
+      MediumRiskFindingCount: (int) 0,
+      LowRiskFindingCount: (int) 0,
+      RulesPassedCount: (int) 1
     }
   },
   ThirdParty: ([]privacy.ThirdParty) (len=1) {
