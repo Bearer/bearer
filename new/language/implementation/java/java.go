@@ -65,7 +65,7 @@ func (*javaImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 			err := visitChildren()
 			scope = previousScope
 			return err
-			// public class Main {
+		// public class Main {
 		//	// method declaration
 		//	static void myMethod() {
 		//
@@ -232,9 +232,8 @@ func (javaImplementation *javaImplementation) ShouldSkipNode(node *tree.Node) bo
 func (*javaImplementation) PatternLeafContentTypes() []string {
 	return []string{
 		// todo: see if type identifier should be removed from here (User user) `User` is type
-		// todo see if `modifier` should be here it's a single token containing `string public final static`
 		// identifiers
-		"identifier",
+		"identifier", "modifier",
 		// types
 		// int user, User user, void user function,
 		"integral_type", "type_identifier", "void_type",

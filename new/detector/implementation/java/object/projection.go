@@ -4,15 +4,13 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/rs/zerolog/log"
 )
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	log.Debug().Msgf("projection node is %s", node.Debug())
-	result, err := detector.fieldAcessQuery.MatchOnceAt(node)
+	result, err := detector.fieldAccessQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
 	}

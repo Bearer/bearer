@@ -20,7 +20,7 @@ type objectDetector struct {
 	// Naming
 	assignmentQuery *tree.Query
 	// Projection
-	fieldAcessQuery *tree.Query
+	fieldAccessQuery *tree.Query
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
@@ -57,7 +57,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	// user.name
-	fieldAcessQuery, err := lang.CompileQuery(`(field_access object: (_) @object field: (identifier) @field) @root`)
+	fieldAccessQuery, err := lang.CompileQuery(`(field_access object: (_) @object field: (identifier) @field) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling call query: %s", err)
 	}
@@ -66,7 +66,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		assignmentQuery:    assignmentQuery,
 		classNameQuery:     classNameQuery,
 		classPropertyQuery: classPropertyQuery,
-		fieldAcessQuery:    fieldAcessQuery,
+		fieldAccessQuery:   fieldAccessQuery,
 	}, nil
 }
 
@@ -190,5 +190,5 @@ func (detector *objectDetector) Close() {
 	detector.classNameQuery.Close()
 	detector.classPropertyQuery.Close()
 	detector.assignmentQuery.Close()
-	detector.fieldAcessQuery.Close()
+	detector.fieldAccessQuery.Close()
 }
