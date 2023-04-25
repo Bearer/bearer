@@ -1,3 +1,4 @@
+disable-version-check: false
 report:
     format: ""
     output: ""
