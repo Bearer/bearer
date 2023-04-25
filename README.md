@@ -6,9 +6,9 @@
 
   <br />
   <hr/>
-    Discover, filter, and prioritize security risks and vulnerabilities impacting your code.
+    Scan your source code against top <strong>security</strong> and <strong>privacy</strong> risks.
   <br /><br />
-  Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security risks and vulnerabilities leading to sensitive data exposures (PII, PHI, PD).
+  Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security and privacy risks.
   <br /><br />
   Currently supporting <strong>JavaScript</strong>, <strong>TypeScript</strong> and <strong>Ruby</strong> stacks.<br />
   🚧 <strong>Java</strong> support is under active development.
@@ -23,18 +23,17 @@
 
 </div>
 
-## Code security scanner that natively filters and prioritizes security risks using sensitive data flow analysis
+## Developer friendly static code analysis for security and privacy
 
 <hr/>
 
 <https://user-images.githubusercontent.com/1649672/230438696-9bb0fd35-2aa9-4273-9970-733189d01ff1.mp4>
 
-Bearer provides built-in rules against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/). Here are some practical examples of what those rules look for:
-
-* Non-filtered user input.
+Bearer provides built-in rules against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/), and privacy risks. Here are some practical examples of what those rules look for:
+* Non-filtered user input (sql injection, path traversal, etc.)
 * Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
 * Usage of weak encryption libraries or misusage of encryption algorithms.
-* Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive information.
+* Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive data.
 * Hard-coded secrets and tokens.
 
 And many [more](https://docs.bearer.com/reference/rules/).
@@ -45,7 +44,7 @@ Bearer also powers our commercial offering, [Bearer Cloud](https://www.bearer.co
 
 ## :rocket: Getting started
 
-Discover your most critical security risks and vulnerabilities in only a few minutes. In this guide, you will install Bearer, run a scan on a local project, and view the results. Let's get started!
+Discover your most critical security risks and vulnerabilities in only a few minutes. In this guide, you will install Bearer, run a security scan on a local project, and view the results. Let's get started!
 
 ### Install Bearer
 
@@ -56,10 +55,6 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 ```
 
 #### Other install options
-
-:warning: **Known issues**
-
-* We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which could prevent Bearer running correctly. If you encounter this bug, we recommend following the Docker installation instructions.
 
 <details>
   <summary>Homebrew</summary>
@@ -171,7 +166,7 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 
 ### Scan your project
 
-The easiest way to try out Bearer is with our example project, [OWASP Juice Shop](https://github.com/juice-shop/juice-shop). It simulates a realistic Ruby application with common security flaws. Clone or download it to a convenient location to get started.
+The easiest way to try out Bearer is with the OWASP [Juice Shop](https://github.com/juice-shop/juice-shop) example project. It simulates a realistic JavaScript application with common security flaws. Clone or download it to a convenient location to get started.
 
 ```bash
 git clone https://github.com/juice-shop/juice-shop.git
@@ -185,7 +180,7 @@ bearer scan juice-shop
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output a security report with details of any rule findings, as well as where in the codebase the infractions happened and why.
+Once the scan is complete, Bearer will output, by default, a security report with details of any rule findings, as well as where in the codebase the infractions happened and why.
 
 By default the `scan` command use the SAST scanner, other [scanner types](https://docs.bearer.com/explanations/scanners) are available.
 
@@ -212,16 +207,16 @@ File: juice-shop/frontend/src/app/login/login.component.ts:102
 
 =====================================
 
-58 checks, 38 findings
+59 checks, 40 findings
 
-CRITICAL: 15 (CWE-22, CWE-798, CWE-89)
-HIGH: 23 (CWE-312, CWE-327, CWE-548)
-MEDIUM: 0
+CRITICAL: 0
+HIGH: 16 (CWE-22, CWE-312, CWE-798, CWE-89)
+MEDIUM: 24 (CWE-327, CWE-548, CWE-79)
 LOW: 0
 WARNING: 0
 ```
 
-The security report is just one [report type](https://docs.bearer.com/explanations/reports) available in Bearer.
+In addition of the security report, you can also run a [privacy report](https://docs.bearer.com/explanations/reports/#privacy-report).
 
 Ready for the next step? Additional options for using and configuring the `scan` command can be found in [configuring the scan command](https://docs.bearer.com/guides/configure-scan/).
 
@@ -229,42 +224,30 @@ For more guides and usage tips, [view the docs](https://docs.bearer.com/).
 
 ## :question: FAQs
 
-### How do you detect sensitive data flows from the code?
+### What makes Bearer different from any other SAST tools?
 
-When you run Bearer on your codebase, it discovers and classifies data by identifying patterns in the source code. Specifically, it looks for data types and matches against them. Most importantly, it never views the actual values (it just can’t)—but only the code itself.
+SAST tools are known to bury security teams and developers under hundreds of issues with little context and no sense of priority, often requiring security analysts to triage issues manually.
 
-Bearer assesses 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.com/reference/datatypes/).
+The most vulnerable asset today is sensitive data, so we start there and [prioritize](https://github.com/Bearer/bearer/issues/728) findings by assessing sensitive data flows to highlight what is more critical, and what is not. This unique ability allows us to provide you with a privacy scanner too.
 
-In a nutshell, our static code analysis is performed on two levels:
-Analyzing class names, methods, functions, variables, properties, and attributes. It then ties those together to detected data structures. It does variable reconciliation etc.
-Analyzing data structure definitions files such as OpenAPI, SQL, GraphQL, and Protobuf.
+We believe that by linking security issues with a clear business impact and risk of a data breach, or data leak, we can build better and more robust software, at no extra cost.
 
-Bearer then passes this over to the classification engine we built to support this very particular discovery process.
+In addition, by being Open Source, extendable by design, and built with a great developer UX in mind, we bet you will see the difference for yourself.
 
-If you want to learn more, here is the [longer explanation](https://docs.bearer.com/explanations/discovery-and-classification/).
+### What is the privacy scanner? 
 
-### When and where to use Bearer?
+In adition of detecting security flaws in your code, Bearer allows you to automate the evidence gathering process needed to generate a privacy report for your compliance team. 
 
-We recommend running Bearer in your CI to check new PR automatically for security issues, so your development team has a direct feedback loop to fix issues immediately.
+When you run Bearer on your codebase, it discovers and classifies data by identifying patterns in the source code. Specifically, it looks for data types and matches against them. Most importantly, it never views the actual values—it just can’t—but only the code itself. If you want to learn more, here is the [longer explanation](https://docs.bearer.com/explanations/discovery-and-classification/).
 
-You can also integrate Bearer in your CD, though we recommend to only make it fail on high criticality issues only, as the impact for your organization might be important.
+Bearer is able to identify over 120+ data types from sensitive data categories such as Personal Data (PD), Sensitive PD, Personally identifiable information (PII), and Personal Health Information (PHI). You can view the full list in the [supported data types documentation](https://docs.bearer.com/reference/datatypes/).
 
-In addition, running Bearer on a scheduled job is a great way to keep track of your security posture and make sure new security issues are found even in projects with low activity.
+Finally, Bearer also lets you detect components storing and processing sensitive data such as databases, internal APIs, and third-party APIs. See the [recipe list](https://docs.bearer.com/reference/recipes/) for a complete list of components.
 
 ### Supported Language
 
 Bearer currently supports JavaScript, TypeScript and Ruby and their associated most used frameworks and libraries.
 Java support is under active development, more languages will follow.
-
-### What makes Bearer different from any other SAST tools?
-
-SAST tools are known to bury security teams and developers under hundreds of issues with little context and no sense of priority, often requiring security analysts to triage issues. Not Bearer.
-
-The most vulnerable asset today is sensitive data, so we start there and prioritize application security risks and vulnerabilities by assessing sensitive data flows in your code to highlight what is urgent, and what is not.
-
-We believe that by linking security issues with a clear business impact and risk of a data breach, or data leak, we can build better and more robust software, at no extra cost.
-
-In addition, by being Open Source, extendable by design, and built with a great developer UX in mind, we bet you will see the difference for yourself.
 
 ### How long does it take to scan my code? Is it fast?
 
@@ -274,9 +257,17 @@ Running Bearer should not take more time than running your test suite.
 
 ### What about false positives?
 
-If you’re familiar with other SAST tools, false positives are always a possibility.
+If you’re familiar with SAST tools, false positives are always a possibility.
 
 By using the most modern static code analysis techniques and providing a native filtering and prioritizing solution on the most important issues, we believe this problem won’t be a concern when using Bearer.
+
+### When and where to use Bearer?
+
+We recommend running Bearer in your CI to check new PRs automatically for security issues, so your development team has a direct feedback loop to fix issues immediately.
+
+You can also integrate Bearer in your CD, though we recommend setting it to only fail on high criticality issues, as the impact for your organization might be important.
+
+In addition, running Bearer on a scheduled job is a great way to keep track of your security posture and make sure new security issues are found even in projects with low activity.
 
 ## :raised_hand: Get in touch
 
