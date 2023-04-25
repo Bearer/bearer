@@ -132,12 +132,10 @@ func (detector *objectDetector) getAssignment(
 }
 
 func (detector *objectDetector) getClassName(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
-	results, err := detector.classNameQuery.MatchAt(node)
-	if len(results) == 0 || err != nil {
+	result, err := detector.classNameQuery.MatchOnceAt(node)
+	if err != nil {
 		return nil, err
 	}
-
-	result := results[0]
 
 	className := result["class_name"].Content()
 
