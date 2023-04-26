@@ -1,7 +1,7 @@
 
 Subject,Data Types,Detection Count,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed
 User,Email Address,1,0,1,0,0,0
-n/a,Country,1,0,0,0,0,1
+Unknown,Country,1,0,0,0,0,1
 
 Third Party,Subject,Data Types,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed
 Sentry,User,"Email Address",0,1,0,0,0

@@ -3,6 +3,7 @@ package privacy
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/bearer/bearer/pkg/classification/db"
@@ -87,6 +88,8 @@ type Report struct {
 	ThirdParty []ThirdParty `json:"third_party,omitempty" yaml:"third_party"`
 }
 
+const PLACEHOLDER_VALUE = "Unknown"
+
 func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
 	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
@@ -95,6 +98,19 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 		return csvStr, err
 	}
 
+	sort.Slice(result.Subjects, func(i, j int) bool {
+		if result.Subjects[i].DataSubject != result.Subjects[j].DataSubject {
+			// order placeholder subjects last of the list
+			if result.Subjects[i].DataSubject == PLACEHOLDER_VALUE {
+				return false
+			}
+			if result.Subjects[j].DataSubject == PLACEHOLDER_VALUE {
+				return true
+			}
+			return result.Subjects[i].DataSubject < result.Subjects[j].DataSubject
+		}
+		return result.Subjects[i].DataType < result.Subjects[j].DataType
+	})
 	for _, subject := range result.Subjects {
 		subjectArr := []string{
 			subject.DataSubject,
@@ -112,6 +128,12 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	csvStr.WriteString("\n")
 	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
 
+	sort.Slice(result.ThirdParty, func(i, j int) bool {
+		if result.ThirdParty[i].ThirdParty != result.ThirdParty[j].ThirdParty {
+			return result.ThirdParty[i].ThirdParty < result.ThirdParty[j].ThirdParty
+		}
+		return result.ThirdParty[i].DataSubject < result.ThirdParty[j].DataSubject
+	})
 	for _, thirdParty := range result.ThirdParty {
 		thirdPartyArr := []string{
 			thirdParty.ThirdParty,
@@ -318,6 +340,9 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 			subject, ok := subjectInventory[key]
 			if !ok {
 				// key not found, add a new item
+				if outputItem.DataSubject == "" {
+					outputItem.DataSubject = PLACEHOLDER_VALUE
+				}
 				ruleFailure := subjectRuleFailures[key]
 				subject = Subject{
 					DataSubject:              outputItem.DataSubject,
@@ -345,8 +370,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 			// no failures, therefore no associated data subjects
 			thirdPartyInventory = append(thirdPartyInventory, ThirdParty{
 				ThirdParty:               component.Name,
-				DataSubject:              "Unknown",
-				DataTypes:                []string{"Unknown"},
+				DataSubject:              PLACEHOLDER_VALUE,
+				DataTypes:                []string{PLACEHOLDER_VALUE},
 				CriticalRiskFindingCount: 0,
 				HighRiskFindingCount:     0,
 				MediumRiskFindingCount:   0,

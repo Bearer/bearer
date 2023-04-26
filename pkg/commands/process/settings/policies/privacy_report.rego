@@ -42,7 +42,7 @@ items contains item if {
 
   item := {
     "name": data_type.name,
-    "subject_name": "n/a",
+    "subject_name": "",
     "line_number": location.line_number
   }
 }

@@ -11,7 +11,7 @@
       RulesPassedCount: (int) 0
     },
     (privacy.Subject) {
-      DataSubject: (string) (len=3) "n/a",
+      DataSubject: (string) (len=7) "Unknown",
       DataType: (string) (len=7) "Country",
       DetectionCount: (int) 1,
       CriticalRiskFindingCount: (int) 0,
