@@ -2,9 +2,9 @@
 title: Contributing to documentation
 ---
 
-# Contribute to Bearer's documentation
+# Contribute to Bearer CLI's documentation
 
-If you're interested in contributing to Bearer's documentation, this guide will help you do it. If you haven't already, review the [contributing overview](/contributing/) for different ways you can contribute.
+If you're interested in contributing to Bearer CLI's documentation, this guide will help you do it. If you haven't already, review the [contributing overview](/contributing/) for different ways you can contribute.
 
 ## Contribute directly on GitHub
 

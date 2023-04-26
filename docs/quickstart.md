@@ -5,27 +5,27 @@ layout: layouts/doc.njk
 
 # Quick Start
 
-Discover your application security risks and vulnerabilities in only a few minutes. In this guide you will install Bearer, run the [SAST scanner](/explanations/scanners) on a local project, and view the results of a [security report](/explanations/reports/#security-report). Let's get started!
+Discover your application security risks and vulnerabilities in only a few minutes. In this guide you will install Bearer CLI, run the [SAST scanner](/explanations/scanners) on a local project, and view the results of a [security report](/explanations/reports/#security-report). Let's get started!
 
 ## Installation
 
-The quickest way to install Bearer is with the install script. It will auto-select the best build for your architecture. _Defaults installation to `./bin` and to the latest release version_:
+The quickest way to install Bearer CLI is with the install script. It will auto-select the best build for your architecture. _Defaults installation to `./bin` and to the latest release version_:
 
 ```bash
 curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh
 ```
 
-Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Bearer's official Homebrew tap](https://github.com/Bearer/homebrew-tap):
+Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Bearer CLI's official Homebrew tap](https://github.com/Bearer/homebrew-tap):
 
 ```bash
 brew install Bearer/tap/bearer
 ```
 
-If you need more control or another way to install Bearer, we offer more [installation options](/reference/installation).
+If you need more control or another way to install Bearer CLI, we offer more [installation options](/reference/installation).
 
 ## Scan your project
 
-The easiest way to try out Bearer is with the OWASP [Juice Shop](https://github.com/juice-shop/juice-shop) example project. Clone or download it to a convenient location to get started.
+The easiest way to try out Bearer CLI is with the OWASP [Juice Shop](https://github.com/juice-shop/juice-shop) example project. Clone or download it to a convenient location to get started.
 
 ```bash
 git clone https://github.com/juice-shop/juice-shop.git
@@ -39,13 +39,13 @@ bearer scan juice-shop
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Bearer will output a security report with details of any rules findings, as well as where in the codebase the infractions happened.
+Once the scan is complete, Bearer CLI will output a security report with details of any rules findings, as well as where in the codebase the infractions happened.
 
 By default the `scan` command uses the SAST scanner; other [scanner types](/explanations/scanners) are also available.
 
 ## Analyze the report
 
-The security report is an easily digestible view of the security problems detected by Bearer. A report is made up of:
+The security report is an easily digestible view of the security findings detected by Bearer CLI. A report is made up of:
 
 - The list of [rules](/reference/rules/) run against your code.
 - Each detected finding, containing the file location and lines that triggered the rules finding.

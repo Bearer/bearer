@@ -4,7 +4,7 @@ title: Report Types
 
 # Report Types
 
-Bearer can generate various types of reports about your codebase, all from the same underlying scan.
+Bearer CLI can generate various types of reports about your codebase, all from the same underlying scan.
 
 ## Security Report
 
@@ -78,7 +78,7 @@ _Note: These examples use JSON for readability, but the default format for the p
 ```
 
 
-The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has triggered associated with this data point.
+The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer CLI detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has triggered associated with this data point.
 
 ```json
 "ThirdParty": [
@@ -103,13 +103,13 @@ To run the privacy report, run `bearer scan` with the `--report privacy` flag. B
 
 ### Customizing data subjects
 
-By default, Bearer maps all subjects to “User”, but you can override this by supplying Bearer with custom mappings. This is done by passing the path to a JSON file with the `--data-subject-mapping` flag when you run the privacy report. For example:
+By default, Bearer CLI maps all subjects to “User”, but you can override this by supplying Bearer CLI with custom mappings. This is done by passing the path to a JSON file with the `--data-subject-mapping` flag when you run the privacy report. For example:
 
 ```bash
 bearer scan . --report=privacy --data-subject-mapping=/path/to/mappings.json
 ```
 
-The custom map file should follow the format used by [subject_mapping.json]({{meta.sourcePath}}/blob/main/pkg/classification/db/subject_mapping.json). Replace a key’s value with the higher-level subject you’d like to associate it with. Some examples might include Customer, Employee, Client, Patient, etc. Bearer will use your replacement file instead of the default, so make sure to include any and all subjects you want reported.
+The custom map file should follow the format used by [subject_mapping.json]({{meta.sourcePath}}/blob/main/pkg/classification/db/subject_mapping.json). Replace a key’s value with the higher-level subject you’d like to associate it with. Some examples might include Customer, Employee, Client, Patient, etc. Bearer CLI will use your replacement file instead of the default, so make sure to include any and all subjects you want reported.
 
 ## Data Flow Report
 

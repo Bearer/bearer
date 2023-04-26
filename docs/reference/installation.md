@@ -3,19 +3,15 @@ title: Installation
 layout: layouts/doc.njk
 ---
 
-# Installing Bearer
+# Installing Bearer CLI
 
-Installing Bearer can be done though multiple methods referenced below. To update Bearer, follow the update instructions for your install method.
+Installing Bearer CLI can be done though multiple methods referenced below. To update Bearer CLI, follow the update instructions for your install method.
 
 ## Installation options
 
-:warning: **Known issues**
-
-* We are currently investigating an [issue](https://github.com/Bearer/bearer/issues/899) which could prevent Bearer running correctly. If you encounter this bug, we recommend following the Docker installation instructions.
-
 ### Install Script
 
-The most common way to install Bearer is with the install script. It will auto-select the best build for your architecture. Defaults installation to ./bin and to the latest release version:
+The most common way to install Bearer CLI is with the install script. It will auto-select the best build for your architecture. Defaults installation to ./bin and to the latest release version:
 
 ```bash
 curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh
@@ -33,7 +29,7 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 
 ### Homebrew
 
-Using Bearer's official [Homebrew tap](https://github.com/Bearer/homebrew-tap):
+Using Bearer CLI's official [Homebrew tap](https://github.com/Bearer/homebrew-tap):
 
 ```bash
 brew install bearer/tap/bearer
@@ -70,7 +66,7 @@ sudo yum -y install bearer
 
 ### Docker
 
-Bearer is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/bearer) and [ghcr.io](https://github.com/Bearer/bearer/pkgs/container/bearer).
+Bearer CLI is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/bearer) and [ghcr.io](https://github.com/Bearer/bearer/pkgs/container/bearer).
 
 With docker installed, you can run the following command with the appropriate paths in place of the examples.
 
@@ -90,7 +86,7 @@ services:
       - /path/to/repo:/tmp/scan
 ```
 
-Then, run the docker compose run command to run Bearer with any specified flags:
+Then, run the docker compose run command to run Bearer CLI with any specified flags:
 
 ```bash
 docker compose run bearer scan /tmp/scan --debug
@@ -102,9 +98,9 @@ Download the archive file for your operating system/architecture from here.
 
 Unpack the archive, and put the binary somewhere in your `$PATH` (on UNIX-y systems, `/usr/local/bin` or the like). Make sure it has permission to execute.
 
-## Updating Bearer
+## Updating Bearer CLI
 
-Updating Bearer provides you with the latest fixes and features. You can see an overview of the latest release on the [releases page](https://github.com/Bearer/bearer/releases/latest/).
+Updating Bearer CLI provides you with the latest fixes and features. You can see an overview of the latest release on the [releases page](https://github.com/Bearer/bearer/releases/latest/).
 
 ### Install Script
 
@@ -116,7 +112,7 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 
 ### Homebrew
 
-Update brew and upgrade Bearer
+Update brew and upgrade Bearer CLI
 
 ```bash
 brew update && brew upgrade bearer/tap/bearer
@@ -145,4 +141,4 @@ docker image pull bearer/bearer:latest-amd64
 
 ### Binary
 
-To update Bearer when using the binary, download the latest release and overwrite your existing installation location.
+To update Bearer CLI when using the binary, download the latest release and overwrite your existing installation location.
