@@ -29,6 +29,10 @@ module.exports = [
         name: "Sensitive data flow",
         url: "/explanations/discovery-and-classification/",
       },
+      {
+        name: "Dynamic severity levels",
+        url: "/explanations/severity/",
+      },
     ],
   },
   {
