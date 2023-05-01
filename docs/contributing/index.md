@@ -12,7 +12,7 @@ You can contribute in a variety of ways:
 - [File a new issue]({{meta.sourcePath}}/issues/new/choose) on GitHub.
 - [Browse the issues]({{meta.links.issues}}) and fix a bug by [contributing code](/contributing/code/).
 - Improve this [documentation](/contributing/docs/).
-- [Add a new recipe](/contributing/recipes/) to the recipes database to help Bearer identify more third-parties.
+- [Add a new recipe](/contributing/recipes/) to the recipes database to help Bearer CLI identify more third-parties.
 - Help others in the [Community Discord]({{meta.links.discord}})
 
 All contributions and interactions with the community must adhere to our [contributor code of conduct]({{meta.sourcePath}}/blob/main/CODE_OF_CONDUCT.md).

@@ -5,14 +5,14 @@ layout: layouts/doc.njk
 
 # Supported languages
 
-Bearer currently supports Ruby and JavaScript codebase.
+Bearer CLI currently supports Ruby and JavaScript codebase.
 
-| Languages               | Supported |
-| ----------------------- | --------- |
-| Ruby                    | ✅         |
-| JavaScript              | ✅         |
-| TypeScript              | ✅         |
-| Java                    | 🚧 *Under active development*         |
+| Languages  | Supported                    |
+| ---------- | ---------------------------- |
+| Ruby       | ✅                            |
+| JavaScript | ✅                            |
+| TypeScript | ✅                            |
+| Java       | 🚧 *Under active development* |
 
 We are working on adding more languages in the coming months, especially PHP, C#, Go, and Python.
 

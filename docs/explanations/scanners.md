@@ -4,7 +4,7 @@ title: Scanner Types
 
 # Scanner Types
 
-Bearer comes with two types of security scanners, SAST (default) and Secrets. 
+Bearer CLI comes with two types of security scanners, SAST (default) and Secrets. 
 
 ## SAST Scanner
 

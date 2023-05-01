@@ -3,9 +3,9 @@ title: Configuration
 layout: layouts/doc.njk
 ---
 
-# Configuring Bearer
+# Configuring Bearer CLI
 
-Configuration of Bearer can be done with [flags on the `scan` command](/reference/commands/#scan), or by using a `bearer.yml` file in the project directory.
+Configuration of Bearer CLI can be done with [flags on the `scan` command](/reference/commands/#scan), or by using a `bearer.yml` file in the project directory.
 
 To initialize the config file, run the following from your project directory:
 
@@ -66,4 +66,4 @@ scan:
 
 ## Utilizing a custom config
 
-By default, Bearer will look for a `bearer.yml` file in the project directory where the scan is run. Alternatively, you can use the `--config-file` flag with the scan command to reference a config file that is outside the project directory.
+By default, Bearer CLI will look for a `bearer.yml` file in the project directory where the scan is run. Alternatively, you can use the `--config-file` flag with the scan command to reference a config file that is outside the project directory.

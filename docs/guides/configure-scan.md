@@ -4,11 +4,11 @@ title: Configure the scan command
 
 # Configure the scan to meet your needs
 
-Bearer offers a variety of ways to configure the core `scan` command to best meet your needs. Here are some common situations. For a full list of options, see the [commands reference](/reference/commands/). For many of the command flags listed below, you can also define them in your `bearer.yml` [config file](/reference/config/).
+Bearer CLI offers a variety of ways to configure the core `scan` command to best meet your needs. Here are some common situations. For a full list of options, see the [commands reference](/reference/commands/). For many of the command flags listed below, you can also define them in your `bearer.yml` [config file](/reference/config/).
 
 ## Select a report type
 
-There are a variety of [report types](/explanations/reports/) to choose from. Bearer defaults to the Security report, but you can select any other type with the `--report` flag.
+There are a variety of [report types](/explanations/reports/) to choose from. Bearer CLI defaults to the Security report, but you can select any other type with the `--report` flag.
 
 ```bash
 bearer scan . --report privacy
@@ -16,7 +16,7 @@ bearer scan . --report privacy
 
 ## Select a scanner type
 
-Did you know that Bearer can also detect hard-coded secrets in your code? In addition to the default SAST scanner, there's a built-in secrets scanner. Use the `--scanner` flag to change [scanner types](/explanations/scanners/).
+Did you know that Bearer CLI can also detect hard-coded secrets in your code? In addition to the default SAST scanner, there's a built-in secrets scanner. Use the `--scanner` flag to change [scanner types](/explanations/scanners/).
 
 ```bash
 bearer scan . --scanner secrets
@@ -49,7 +49,7 @@ rule:
 
 ### Skip rules for individual code blocks
 
-Bearer supports comment-based rule skipping using the `bearer:disable` comment. To ignore a block of code, place the comment immediately before the block.
+Bearer CLI supports comment-based rule skipping using the `bearer:disable` comment. To ignore a block of code, place the comment immediately before the block.
 
 In ruby:
 
@@ -113,7 +113,7 @@ bearer scan . --report dataflow --output dataflow.json
 
 ## Limit severity levels
 
-Depending on how you're using Bearer, you may want to limit the severity levels that show up in the report. This can be useful for triaging only the most critical issues. Use the `--severity` flag to define which levels to include from the list of critical, high, medium, low, and warning.
+Depending on how you're using Bearer CLI, you may want to limit the severity levels that show up in the report. This can be useful for triaging only the most critical issues. Use the `--severity` flag to define which levels to include from the list of critical, high, medium, low, and warning.
 
 ```bash
 bearer scan . --severity critical,high

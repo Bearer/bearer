@@ -4,9 +4,9 @@ layout: "layouts/doc"
 permalink: "/"
 ---
 
-# Bearer
+# Bearer CLI
 
-Welcome to the Bearer documentation. Bearer is a static application security testing (SAST) tool that scans your source code and analyzes your [data flows](/explanations/discovery-and-classification) to discover, filter and prioritize security and privacy risks.
+Welcome to the Bearer CLI documentation. Bearer CLI is a static application security testing (SAST) tool that scans your source code and analyzes your [data flows](/explanations/discovery-and-classification) to discover, filter and prioritize security and privacy risks.
 
 The CLI provides [built-in rules](/reference/rules) that check against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/), and privacy risks. Here are some practical examples of what those rules look for:
 
@@ -18,7 +18,7 @@ The CLI provides [built-in rules](/reference/rules) that check against a common 
 
 And [many more](/reference/rules).
 
-Bearer currently supports **JavaScript / TypeScript** and **Ruby** stacks, and more will follow.
+Bearer CLI currently supports **JavaScript / TypeScript** and **Ruby** stacks, and more will follow.
 
 Want a quick rundown? Here's a minute and a half of what you can expect from Bearer CLI:
 
@@ -26,13 +26,13 @@ Want a quick rundown? Here's a minute and a half of what you can expect from Bea
 
 ## Getting started
 
-New to Bearer? Check out the [quickstart](/quickstart/) to scan your first project. 
+New to Bearer CLI? Check out the [quickstart](/quickstart/) to scan your first project. 
 
-Ready to dive in? Bearer's [scanners](/explanations/scanners/) and [reports](/explanations/reports/) are your path to analyzing security risks and vulnerabilities in your application. Check the [command reference](/reference/commands/) to configure Bearer to your needs.
+Ready to dive in? Bearer CLI's [scanners](/explanations/scanners/) and [reports](/explanations/reports/) are your path to analyzing security risks and vulnerabilities in your application. Check the [command reference](/reference/commands/) to configure Bearer CLI to your needs.
 
 ## Guides
 
-Guides help you make the most of Bearer so you can get up and running quickly.
+Guides help you make the most of Bearer CLI so you can get up and running quickly.
 
 - [Configure the scan command](/guides/configure-scan/)
 - [GitHub action integration](/guides/github-action/)
@@ -40,10 +40,10 @@ Guides help you make the most of Bearer so you can get up and running quickly.
 
 ## Explanations
 
-Explanations dive into the rational behind Bearer and explain some of its heavier concepts.
-- [Bearer's scanner types](/explanations/scanners/)
-- [Bearer's report types](/explanations/reports/)
-- [How Bearer discovers and classifies data](/explanations/discovery-and-classification/)
+Explanations dive into the rational behind Bearer CLI and explain some of its heavier concepts.
+- [Bearer CLI's scanner types](/explanations/scanners/)
+- [Bearer CLI's report types](/explanations/reports/)
+- [How Bearer CLI discovers and classifies data](/explanations/discovery-and-classification/)
 - [How Bearer CLI sets severity levels](/explanations/severity/)
 
 ## Reference
@@ -60,11 +60,11 @@ Reference documents are where you'll find detailed information about each comman
 
 ## Contributing
 
-We'd love to see the impact you can bring to Bearer. Our contributing documentation will help get you started, whether you want to dive deep into the code or simply fix a typo.
+We'd love to see the impact you can bring to Bearer CLI. Our contributing documentation will help get you started, whether you want to dive deep into the code or simply fix a typo.
 
-- [Get started contributing to Bearer](/contributing/)
-- [Set up Bearer locally to contribute code](/contributing/code/)
+- [Get started contributing to Bearer CLI](/contributing/)
+- [Set up Bearer CLI locally to contribute code](/contributing/code/)
 - [Help improve and apply fixes to the documentation](/contributing/docs/)
-- [Add new recipes to Bearer's database](/contributing/recipes/)
+- [Add new recipes to Bearer CLI's database](/contributing/recipes/)
   
 ![Sunglasses Bear](/assets/img/contribute-bearer.png)

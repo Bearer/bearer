@@ -1,10 +1,10 @@
-# Bearer Documentation
+# Bearer CLI Documentation
 
-Welcome to the Bearer docs. To view the full documentation, visit the [official docs site](https://docs.bearer.com).
+Welcome to the Bearer CLI docs. To view the full documentation, visit the [official docs site](https://docs.bearer.com).
 
 ## Contributing
 
-Thanks for your interest in contributing to the docs! It's a great way to participate in the project without diving head-first into Bearer's source. Check our [contributing guide](https://github.com/Bearer/bearer/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/Bearer/bearer/blob/main/CODE_OF_CONDUCT.md) for general details on contributing.
+Thanks for your interest in contributing to the docs! It's a great way to participate in the project without diving head-first into Bearer CLI's source. Check our [contributing guide](https://github.com/Bearer/bearer/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/Bearer/bearer/blob/main/CODE_OF_CONDUCT.md) for general details on contributing.
 
 You can make changes to the documentation without setting up and running the docs site by editing markdown files directly. If you want to add a more advanced change, see the development details below.
 
@@ -12,7 +12,7 @@ You can make changes to the documentation without setting up and running the doc
 
 The documentation is with on [eleventy](https://www.11ty.dev) and [tailwindcss](https://tailwindcss.com/), and written in markdown. To get started, you'll need NodeJS 12 or newer.
 
-Navigate to the docs directory in the Bearer repo, and `npm install` to bootstrap the dependencies.
+Navigate to the docs directory in the Bearer CLI repo, and `npm install` to bootstrap the dependencies.
 
 ```bash
 # github.com/bearer/bearer/docs
