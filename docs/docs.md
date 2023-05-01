@@ -44,6 +44,7 @@ Explanations dive into the rational behind Bearer and explain some of its heavie
 - [Bearer's scanner types](/explanations/scanners/)
 - [Bearer's report types](/explanations/reports/)
 - [How Bearer discovers and classifies data](/explanations/discovery-and-classification/)
+- [How Bearer CLI sets severity levels](/explanations/severity/)
 
 ## Reference
 
