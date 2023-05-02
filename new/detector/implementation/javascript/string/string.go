@@ -88,7 +88,7 @@ func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interfa
 			return err
 		}
 
-		if childValue == "" {
+		if childValue == "" && !childIsLiteral {
 			childValue = "*"
 		}
 
