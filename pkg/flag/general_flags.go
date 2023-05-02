@@ -29,25 +29,34 @@ var (
 		Usage:           "Load configuration from the specified path.",
 		DisableInConfig: true,
 	}
+	DisableVersionCheckFlag = Flag{
+		Name:       "disable-version-check",
+		ConfigName: "disable-version-check",
+		Value:      false,
+		Usage:      "Disable Bearer version checking",
+	}
 )
 
 type GeneralFlagGroup struct {
-	ConfigFile *Flag
-	APIKey     *Flag
-	Host       *Flag
+	ConfigFile          *Flag
+	APIKey              *Flag
+	Host                *Flag
+	DisableVersionCheck *Flag
 }
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
 type GeneralOptions struct {
-	ConfigFile string `json:"config_file" yaml:"config_file"`
-	Client     *api.API
+	ConfigFile          string `json:"config_file" yaml:"config_file"`
+	Client              *api.API
+	DisableVersionCheck bool
 }
 
 func NewGeneralFlagGroup() *GeneralFlagGroup {
 	return &GeneralFlagGroup{
-		ConfigFile: &ConfigFileFlag,
-		APIKey:     &APIKeyFlag,
-		Host:       &HostFlag,
+		ConfigFile:          &ConfigFileFlag,
+		APIKey:              &APIKeyFlag,
+		Host:                &HostFlag,
+		DisableVersionCheck: &DisableVersionCheckFlag,
 	}
 }
 
@@ -60,6 +69,7 @@ func (f *GeneralFlagGroup) Flags() []*Flag {
 		f.ConfigFile,
 		f.APIKey,
 		f.Host,
+		f.DisableVersionCheck,
 	}
 }
 
@@ -77,14 +87,17 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 			log.Debug().Msgf("couldn't initialize client -> %s", err.Error())
 		} else {
 			log.Debug().Msgf("Initialized client for report")
+			log.Error().Msgf("Flag: %#v", f.DisableVersionCheck)
 			return GeneralOptions{
-				ConfigFile: getString(f.ConfigFile),
-				Client:     client,
+				Client:              client,
+				ConfigFile:          getString(f.ConfigFile),
+				DisableVersionCheck: getBool(f.DisableVersionCheck),
 			}
 		}
 	}
 
 	return GeneralOptions{
-		ConfigFile: getString(f.ConfigFile),
+		ConfigFile:          getString(f.ConfigFile),
+		DisableVersionCheck: getBool(f.DisableVersionCheck),
 	}
 }
