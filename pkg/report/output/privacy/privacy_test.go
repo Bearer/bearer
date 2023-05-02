@@ -114,6 +114,23 @@ func dummyDataflow() dataflow.DataFlow {
 					},
 				},
 			},
+			{
+				Name:         "Country",
+				CategoryName: "Location",
+				Detectors: []types.DatatypeDetector{
+					{
+						Name: "ruby",
+						Locations: []types.DatatypeLocation{
+							{
+								Filename:   "/app/models/location.rb",
+								LineNumber: 112,
+								FieldName:  "country",
+								ObjectName: "Address",
+							},
+						},
+					},
+				},
+			},
 		},
 		Risks: risks,
 		Components: []types.Component{
