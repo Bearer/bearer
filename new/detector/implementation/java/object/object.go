@@ -133,7 +133,7 @@ func (detector *objectDetector) getAssignment(
 
 func (detector *objectDetector) getClassName(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	result, err := detector.classNameQuery.MatchOnceAt(node)
-	if err != nil {
+	if result == nil || err != nil {
 		return nil, err
 	}
 
