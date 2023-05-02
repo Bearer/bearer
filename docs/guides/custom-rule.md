@@ -133,6 +133,7 @@ patterns:
 - `variable`: The name of the variable. This is required, even in patterns that contain a single variable. (Required)
 - Comparison keys: Use these on their own with or nested inside `either`.
   - `values`: Provide an array of values to match a variable against. Useful for specific method names and known options.
+  - `length_less_than`: Compare the length of the (string) variable to the number provided with a **less than** statement.
   - `less_than`: Compare the variable to the number provided with a **less than** statement.
   - `less_than_or_equal`: Compare the variable to the number provided with a *less than or equal* statement.
   - `greater_than`: Compare the variable to the number provided with a *greater than* statement.
