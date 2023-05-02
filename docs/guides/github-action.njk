@@ -32,16 +32,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Report
         id: report
-        uses: bearer/bearer-action@v1.0
-      - id: summary
-        name: Display Summary
-        uses: actions/github-script@v6
-        with:
-          script: |
-            // github does not support multiline outputs so report is encoded
-            const report = decodeURIComponent(`${{ steps.report.outputs.rule_breaches }}`);
-            const passed = `${{ steps.report.outputs.exit_code }}` == "0";
-            if(!passed){ core.setFailed(report); }
+        uses: bearer/bearer-action@v2
 ```
 
 This will run the [security report](/explanations/reports), display the results to the action summary screen within GitHub, and flag the action as pass or fail based on whether Bearer's default rules pass or fail.
@@ -54,7 +45,7 @@ Just as with the CLI app, you can configure the action to meet the needs of your
 steps:
   - uses: actions/checkout@v3
   - name: Bearer
-    uses: bearer/bearer-action@v1.0
+    uses: bearer/bearer-action@v2
     with:
       config-file: '/some/path/bearer.yml'
       only-rule: 'ruby_lang_cookies,ruby_lang_http_post_insecure_with_data'
