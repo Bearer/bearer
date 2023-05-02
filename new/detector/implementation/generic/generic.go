@@ -1,6 +1,8 @@
 package generic
 
 import (
+	"fmt"
+
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
@@ -79,4 +81,22 @@ func ProjectObject(
 	}
 
 	return result, nil
+}
+
+func GetStringValue(node *tree.Node, evaluator types.Evaluator) (string, bool, error) {
+	detections, err := evaluator.ForNode(node, "string", true)
+	if err != nil {
+		return "", false, err
+	}
+
+	switch len(detections) {
+	case 0:
+		return "", false, nil
+	case 1:
+		childString := detections[0].Data.(generictypes.String)
+
+		return childString.Value, childString.IsLiteral, nil
+	default:
+		return "", false, fmt.Errorf("expected single string detection but got %d", len(detections))
+	}
 }
