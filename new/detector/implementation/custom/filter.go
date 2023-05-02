@@ -175,6 +175,12 @@ func matchContentFilter(filter settings.PatternFilter, content string) *bool {
 		return boolPointer(filter.Regex.MatchString(content))
 	}
 
+	if filter.LengthLessThan != nil {
+		if len(content) >= *filter.LengthLessThan {
+			return boolPointer(false)
+		}
+	}
+
 	if filter.LessThan != nil {
 		value, err := strconv.Atoi(content)
 		if err != nil {

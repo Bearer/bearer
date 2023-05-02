@@ -179,6 +179,7 @@ type PatternFilter struct {
 	Contains           *bool           `mapstructure:"contains" json:"contains" yaml:"contains"`
 	Regex              *Regexp         `mapstructure:"regex" json:"regex" yaml:"regex"`
 	Values             []string        `mapstructure:"values" json:"values" yaml:"values"`
+	LengthLessThan     *int            `mapstructure:"length_less_than" json:"length_less_than" yaml:"length_less_than"`
 	LessThan           *int            `mapstructure:"less_than" json:"less_than" yaml:"less_than"`
 	LessThanOrEqual    *int            `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
 	GreaterThan        *int            `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
