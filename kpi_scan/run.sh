@@ -20,7 +20,8 @@ tar --extract --gunzip --file /tmp/bearer.tar.gz --directory /tmp/
 echo
 echo "Cloning $REPOSITORY_URL"
 git clone "$REPOSITORY_URL" /tmp/repository
+cd /tmp/repository
 
 echo
 echo "Scanning"
-/tmp/bearer scan "--host=$API_HOST" --api-key "$API_KEY" /tmp/repository
+/tmp/bearer scan . "--host=$API_HOST" --api-key "$API_KEY"
