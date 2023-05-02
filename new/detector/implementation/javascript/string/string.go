@@ -58,7 +58,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 			return nil, err
 		}
 
-		if childValue == "" {
+		if childValue == "" && !childIsLiteral {
 			childValue = "*"
 		}
 
