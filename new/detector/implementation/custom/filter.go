@@ -5,6 +5,7 @@ import (
 
 	"golang.org/x/exp/slices"
 
+	"github.com/bearer/bearer/new/detector/implementation/generic"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -46,7 +47,7 @@ func matchFilter(
 		)
 	}
 
-	return matchContentFilter(filter, node.Content()), nil, nil
+	return matchContentFilter(filter, evaluator, node), nil, nil
 }
 
 func matchAllFilters(
@@ -166,7 +167,9 @@ func matchDetectionFilter(
 	return boolPointer(foundDetection), datatypeDetections, err
 }
 
-func matchContentFilter(filter settings.PatternFilter, content string) *bool {
+func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator, node *tree.Node) *bool {
+	content := node.Content()
+
 	if len(filter.Values) != 0 && !slices.Contains(filter.Values, content) {
 		return boolPointer(false)
 	}
@@ -176,7 +179,12 @@ func matchContentFilter(filter settings.PatternFilter, content string) *bool {
 	}
 
 	if filter.LengthLessThan != nil {
-		if len(content) >= *filter.LengthLessThan {
+		strValue, _, err := generic.GetStringValue(node, evaluator)
+		if err != nil || strValue == "" {
+			return nil
+		}
+
+		if len(strValue) >= *filter.LengthLessThan {
 			return boolPointer(false)
 		}
 	}
