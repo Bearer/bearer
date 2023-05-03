@@ -15,8 +15,7 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	classNameQuery     *tree.Query
-	classPropertyQuery *tree.Query
+	classQuery *tree.Query
 	// Naming
 	assignmentQuery *tree.Query
 	// Projection
@@ -31,29 +30,20 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	// class User {
-	//
-	// }
-	classNameQuery, err := lang.CompileQuery(`
-		(class_declaration name: (identifier) @class_name
-			(class_body) @class_body
-		) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling class name query: %s", err)
-	}
-
-	// class User {
 	//    String name
 	//	  String getLevel(){}
 	// }
-	classPropertyQuery, err := lang.CompileQuery(
-		`(class_body
-			[
-			  (field_declaration (variable_declarator name: (identifier) @name))
-			  (method_declaration name: (identifier) @name)
-			]
-		)@root`)
+	classQuery, err := lang.CompileQuery(`
+		(class_declaration name: (identifier) @class_name
+			(class_body
+				[
+					(field_declaration (variable_declarator name: (identifier) @name))
+					(method_declaration name: (identifier) @name)
+				]
+			)
+		) @root`)
 	if err != nil {
-		return nil, fmt.Errorf("error compiling class property query: %s", err)
+		return nil, fmt.Errorf("error compiling class query: %s", err)
 	}
 
 	// user.name
@@ -63,10 +53,9 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	return &objectDetector{
-		assignmentQuery:    assignmentQuery,
-		classNameQuery:     classNameQuery,
-		classPropertyQuery: classPropertyQuery,
-		fieldAccessQuery:   fieldAccessQuery,
+		assignmentQuery:  assignmentQuery,
+		classQuery:       classQuery,
+		fieldAccessQuery: fieldAccessQuery,
 	}, nil
 }
 
@@ -89,12 +78,7 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getClassName(node, evaluator)
-	if len(detections) != 0 || err != nil {
-		return detections, err
-	}
-
-	detections, err = detector.getClassProperties(node, evaluator)
+	detections, err = detector.getClass(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -131,66 +115,40 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClassName(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
-	result, err := detector.classNameQuery.MatchOnceAt(node)
-	if result == nil || err != nil {
-		return nil, err
-	}
-
-	className := result["class_name"].Content()
-
-	properties, err := generic.GetNonVirtualObjects(evaluator, result["class_body"])
-	if err != nil {
-		return nil, err
-	}
-
-	if len(properties) == 0 {
-		return nil, nil
-	}
-
-	object := generictypes.Object{
-		IsVirtual: false,
-	}
-
-	for _, property := range properties {
-		object.Properties = append(object.Properties, generictypes.Property{
-			Name:   className,
-			Node:   node,
-			Object: property,
-		})
-	}
-
-	return []interface{}{object}, nil
-}
-
-func (detector *objectDetector) getClassProperties(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
-	results, err := detector.classPropertyQuery.MatchAt(node)
+func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
+	results, err := detector.classQuery.MatchAt(node)
 	if len(results) == 0 || err != nil {
 		return nil, err
 	}
 
-	var objects []interface{}
+	className := results[0]["class_name"].Content()
 
+	var properties []generictypes.Property
 	for _, result := range results {
-		objects = append(objects, generictypes.Object{
-			IsVirtual: false,
-			Properties: []generictypes.Property{{
-				Name: result["name"].Content(),
-				Node: node,
-				Object: &types.Detection{
-					DetectorType: "object",
-					MatchNode:    result["name"],
-				},
-			}},
+		nameNode := result["name"]
+
+		properties = append(properties, generictypes.Property{
+			Name: nameNode.Content(),
+			Node: nameNode,
 		})
 	}
 
-	return objects, nil
+	return []interface{}{generictypes.Object{
+		Properties: []generictypes.Property{{
+			Name: className,
+			Object: &types.Detection{
+				DetectorType: "object",
+				MatchNode:    node,
+				Data: generictypes.Object{
+					Properties: properties,
+				},
+			},
+		}},
+	}}, nil
 }
 
 func (detector *objectDetector) Close() {
-	detector.classNameQuery.Close()
-	detector.classPropertyQuery.Close()
+	detector.classQuery.Close()
 	detector.assignmentQuery.Close()
 	detector.fieldAccessQuery.Close()
 }
