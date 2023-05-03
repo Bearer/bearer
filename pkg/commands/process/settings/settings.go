@@ -184,6 +184,7 @@ type PatternFilter struct {
 	LessThanOrEqual    *int            `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
 	GreaterThan        *int            `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
 	GreaterThanOrEqual *int            `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
+	StringRegex        *Regexp         `mapstructure:"string_regex" json:"string_regex" yaml:"string_regex"`
 }
 
 type RulePattern struct {

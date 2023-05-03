@@ -47,7 +47,8 @@ func matchFilter(
 		)
 	}
 
-	return matchContentFilter(filter, evaluator, node), nil, nil
+	matched, err := matchContentFilter(filter, evaluator, node)
+	return matched, nil, err
 }
 
 func matchAllFilters(
@@ -167,73 +168,82 @@ func matchDetectionFilter(
 	return boolPointer(foundDetection), datatypeDetections, err
 }
 
-func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator, node *tree.Node) *bool {
+func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator, node *tree.Node) (*bool, error) {
 	content := node.Content()
 
 	if len(filter.Values) != 0 && !slices.Contains(filter.Values, content) {
-		return boolPointer(false)
+		return boolPointer(false), nil
 	}
 
 	if filter.Regex != nil {
-		return boolPointer(filter.Regex.MatchString(content))
+		return boolPointer(filter.Regex.MatchString(content)), nil
 	}
 
 	if filter.LengthLessThan != nil {
 		strValue, _, err := generic.GetStringValue(node, evaluator)
 		if err != nil || strValue == "" {
-			return nil
+			return nil, err
 		}
 
 		if len(strValue) >= *filter.LengthLessThan {
-			return boolPointer(false)
+			return boolPointer(false), nil
 		}
+	}
+
+	if filter.StringRegex != nil {
+		value, _, err := generic.GetStringValue(node, evaluator)
+		if err != nil || value == "" {
+			return nil, err
+		}
+
+		return boolPointer(filter.StringRegex.MatchString(value)), nil
 	}
 
 	if filter.LessThan != nil {
 		value, err := strconv.Atoi(content)
 		if err != nil {
-			return nil
+			return nil, nil
 		}
 
 		if value >= *filter.LessThan {
-			return boolPointer(false)
+			return boolPointer(false), nil
 		}
 	}
 
 	if filter.LessThanOrEqual != nil {
 		value, err := strconv.Atoi(content)
 		if err != nil {
-			return nil
+			return nil, nil
 		}
 
 		if value > *filter.LessThanOrEqual {
-			return boolPointer(false)
+			return boolPointer(false), nil
 		}
 	}
 
 	if filter.GreaterThan != nil {
 		value, err := strconv.Atoi(content)
 		if err != nil {
-			return nil
+			return nil, nil
 		}
 
 		if value <= *filter.GreaterThan {
-			return boolPointer(false)
+			return boolPointer(false), nil
 		}
 	}
 
 	if filter.GreaterThanOrEqual != nil {
 		value, err := strconv.Atoi(content)
 		if err != nil {
-			return nil
+			return nil, nil
 		}
 
 		if value < *filter.GreaterThanOrEqual {
-			return boolPointer(false)
+			return boolPointer(false), nil
 		}
 	}
 
-	return boolPointer(true)
+	return boolPointer(true), nil
 }
 
 func boolPointer(value bool) *bool {
