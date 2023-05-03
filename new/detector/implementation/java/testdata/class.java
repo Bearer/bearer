@@ -1,6 +1,6 @@
 public class User
 {
-    public String name
+    public String name;
 
     public String LowercaseName()
     {
