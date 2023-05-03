@@ -12,7 +12,7 @@
   data:
     properties:
         - name: User
-          node: {}
+          node: null
           object:
             detectortype: object
             matchnode: {}
@@ -20,24 +20,10 @@
                 properties:
                     - name: name
                       node: {}
-                      object:
-                        detectortype: object
-                        matchnode: {}
-                        data: null
-                isvirtual: false
-        - name: User
-          node: {}
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
+                      object: null
                     - name: LowercaseName
                       node: {}
-                      object:
-                        detectortype: object
-                        matchnode: {}
-                        data: null
+                      object: null
                 isvirtual: false
     isvirtual: false
 
