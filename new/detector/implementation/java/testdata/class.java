@@ -4,6 +4,6 @@ public class User
 
     public String LowercaseName()
     {
-        return name.toLowerCase()
+        return name.toLowerCase();
     }
 }
