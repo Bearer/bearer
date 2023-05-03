@@ -134,11 +134,12 @@ patterns:
 - Comparison keys: Use these on their own with or nested inside `either`.
   - `values`: Provide an array of values to match a variable against. Useful for specific method names and known options.
   - `length_less_than`: Compare the length of the (string) variable to the number provided with a **less than** statement.
+  - `string_regex`: Applies a regular expression test against the string value of the linked variable. This uses the [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
   - `less_than`: Compare the variable to the number provided with a **less than** statement.
   - `less_than_or_equal`: Compare the variable to the number provided with a *less than or equal* statement.
   - `greater_than`: Compare the variable to the number provided with a *greater than* statement.
   - `greater_than_or_equal`: Compare the variable to the number provided with a *greater than or equal* statement.
-  - `regex`: Applies a regular expression test against the linked variable. This uses the [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
+  - `regex`: Applies a regular expression test against the code content of the linked variable. This uses the [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
 - `not`: Inverts the results of another filter. Can be used with a single comparison key by nesting the key below `not`, or with an `either` block by nesting the block below `not`.
 - `either`: Allows for multiple conditional checks. It behaves like an OR condition. You can nest any filter inside of `either`, such as `values`, `detection`, etc.
 - `detection`: Detection filters rely on existing filter types, so they handle much of the logic for you.
