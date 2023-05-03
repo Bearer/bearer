@@ -133,7 +133,7 @@ func (detector *objectDetector) getAssignment(
 
 func (detector *objectDetector) getClassName(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	result, err := detector.classNameQuery.MatchOnceAt(node)
-	if err != nil {
+	if result == nil || err != nil {
 		return nil, err
 	}
 
@@ -144,19 +144,23 @@ func (detector *objectDetector) getClassName(node *tree.Node, evaluator types.Ev
 		return nil, err
 	}
 
-	var objects []interface{}
-	for _, object := range properties {
-		objects = append(objects, generictypes.Object{
-			IsVirtual: false,
-			Properties: []generictypes.Property{{
-				Name:   className,
-				Node:   node,
-				Object: object,
-			}},
+	if len(properties) == 0 {
+		return nil, nil
+	}
+
+	object := generictypes.Object{
+		IsVirtual: false,
+	}
+
+	for _, property := range properties {
+		object.Properties = append(object.Properties, generictypes.Property{
+			Name:   className,
+			Node:   node,
+			Object: property,
 		})
 	}
 
-	return objects, nil
+	return []interface{}{object}, nil
 }
 
 func (detector *objectDetector) getClassProperties(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {

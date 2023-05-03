@@ -1,0 +1,17 @@
+- position: "1:1"
+  content: user.name
+  data:
+    properties:
+        - name: user
+          node: null
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+
