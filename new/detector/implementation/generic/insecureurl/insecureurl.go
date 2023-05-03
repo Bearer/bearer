@@ -15,6 +15,7 @@ type insecureURLDetector struct {
 }
 
 var insecureUrlPattern = regexp.MustCompile(`^http:`)
+var localhostInsecureUrlPattern = regexp.MustCompile(`^http://(localhost|127.0.0.1)`)
 
 func New(lang languagetypes.Language) (types.Detector, error) {
 	return &insecureURLDetector{}, nil
@@ -35,8 +36,12 @@ func (detector *insecureURLDetector) DetectAt(
 
 	for _, detection := range detections {
 		value := detection.Data.(generictypes.String).Value
-
 		if insecureUrlPattern.MatchString(value) {
+			if localhostInsecureUrlPattern.MatchString(value) {
+				// ignore insecure local URLs
+				continue
+			}
+
 			return []interface{}{nil}, nil
 		}
 	}

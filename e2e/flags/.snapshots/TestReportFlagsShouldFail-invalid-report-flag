@@ -35,7 +35,8 @@ Scan Flags
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 
 General Flags
-      --config-file string   Load configuration from the specified path. (default "bearer.yml")
+      --config-file string      Load configuration from the specified path. (default "bearer.yml")
+      --disable-version-check   Disable Bearer version checking
 
 
 flag error: report flags error: invalid report argument; supported values: security, privacy

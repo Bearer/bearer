@@ -98,19 +98,6 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 		return csvStr, err
 	}
 
-	sort.Slice(result.Subjects, func(i, j int) bool {
-		if result.Subjects[i].DataSubject != result.Subjects[j].DataSubject {
-			// order placeholder subjects last of the list
-			if result.Subjects[i].DataSubject == PLACEHOLDER_VALUE {
-				return false
-			}
-			if result.Subjects[j].DataSubject == PLACEHOLDER_VALUE {
-				return true
-			}
-			return result.Subjects[i].DataSubject < result.Subjects[j].DataSubject
-		}
-		return result.Subjects[i].DataType < result.Subjects[j].DataType
-	})
 	for _, subject := range result.Subjects {
 		subjectArr := []string{
 			subject.DataSubject,
@@ -128,12 +115,6 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	csvStr.WriteString("\n")
 	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
 
-	sort.Slice(result.ThirdParty, func(i, j int) bool {
-		if result.ThirdParty[i].ThirdParty != result.ThirdParty[j].ThirdParty {
-			return result.ThirdParty[i].ThirdParty < result.ThirdParty[j].ThirdParty
-		}
-		return result.ThirdParty[i].DataSubject < result.ThirdParty[j].DataSubject
-	})
 	for _, thirdParty := range result.ThirdParty {
 		thirdPartyArr := []string{
 			thirdParty.ThirdParty,
@@ -394,10 +375,38 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 		}
 	}
 
+	subjects := maps.Values(subjectInventory)
+	sortInventory(subjects, thirdPartyInventory)
+
 	return &Report{
-		Subjects:   maps.Values(subjectInventory),
+		Subjects:   subjects,
 		ThirdParty: thirdPartyInventory,
 	}, dataflow, nil
+}
+
+func sortInventory(subjectInventory []Subject, thirdPartyInventory []ThirdParty) {
+	// sort subject
+	sort.Slice(subjectInventory, func(i, j int) bool {
+		if subjectInventory[i].DataSubject != subjectInventory[j].DataSubject {
+			// order placeholder subjects last of the list
+			if subjectInventory[i].DataSubject == PLACEHOLDER_VALUE {
+				return false
+			}
+			if subjectInventory[j].DataSubject == PLACEHOLDER_VALUE {
+				return true
+			}
+			return subjectInventory[i].DataSubject < subjectInventory[j].DataSubject
+		}
+		return subjectInventory[i].DataType < subjectInventory[j].DataType
+	})
+
+	// sort third party
+	sort.Slice(thirdPartyInventory, func(i, j int) bool {
+		if thirdPartyInventory[i].ThirdParty != thirdPartyInventory[j].ThirdParty {
+			return thirdPartyInventory[i].ThirdParty < thirdPartyInventory[j].ThirdParty
+		}
+		return thirdPartyInventory[i].DataSubject < thirdPartyInventory[j].DataSubject
+	})
 }
 
 func buildKey(dataSubject string, dataType string) string {

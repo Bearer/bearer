@@ -12,7 +12,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/google/go-github/github"
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
@@ -25,6 +24,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/github_api"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
@@ -219,16 +219,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		outputhandler.StdErrLogger().Msg("Loading rules")
 	}
 
-	client := github.NewClient(nil)
-	release, _, err := client.Repositories.GetLatestRelease(ctx, "bearer", "bearer")
-	if err != nil {
-		log.Debug().Msgf("couldn't retrieve latest release from GitHub %s", err)
-	} else {
-		version := strings.TrimPrefix(*release.Name, "v")
-		if version != build.Version && build.Version != "dev" && !opts.Quiet {
-			outputhandler.StdErrLogger().Msgf("You are running an outdated version of Bearer CLI, %s is now available. You can find update instructions at https://docs.bearer.com/reference/installation/#updating-bearer", *release.Name)
-		}
-	}
+	github_api.VersionCheck(ctx, opts.GeneralOptions.DisableVersionCheck, opts.ScanOptions.Quiet)
 
 	inputgocloc, err := stats.GoclocDetectorOutput(opts.ScanOptions.Target)
 	if err != nil {

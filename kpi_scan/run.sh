@@ -19,7 +19,7 @@ tar --extract --gunzip --file /tmp/bearer.tar.gz --directory /tmp/
 
 echo
 echo "Cloning $REPOSITORY_URL"
-git clone "$REPOSITORY_URL" /tmp/repository
+git clone --depth=1 "$REPOSITORY_URL" /tmp/repository
 cd /tmp/repository
 
 echo
