@@ -2,11 +2,11 @@
   content: |-
     public class User
     {
-        public String name
+        public String name;
 
         public String LowercaseName()
         {
-            return name.toLowerCase()
+            return name.toLowerCase();
         }
     }
   data:
@@ -30,11 +30,11 @@
   content: |-
     public class User
     {
-        public String name
+        public String name;
 
         public String LowercaseName()
         {
-            return name.toLowerCase()
+            return name.toLowerCase();
         }
     }
   data:
