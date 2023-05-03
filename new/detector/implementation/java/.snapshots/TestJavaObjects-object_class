@@ -25,20 +25,6 @@
                         matchnode: {}
                         data: null
                 isvirtual: false
-    isvirtual: false
-- position: "1:1"
-  content: |-
-    public class User
-    {
-        public String name;
-
-        public String LowercaseName()
-        {
-            return name.toLowerCase();
-        }
-    }
-  data:
-    properties:
         - name: User
           node: {}
           object:
