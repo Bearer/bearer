@@ -478,10 +478,8 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	}
 	reportStr.WriteString(color.HiBlueString("File: " + underline(result.Filename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
-	if result.DetailedContext == "" {
-		reportStr.WriteString("\n")
-		reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.ParentLineNumber, result.ParentContent))
-	}
+	reportStr.WriteString("\n")
+	reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.ParentLineNumber, result.ParentContent))
 }
 
 func formatSeverity(severity string) string {

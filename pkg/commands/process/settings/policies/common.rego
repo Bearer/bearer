@@ -4,12 +4,13 @@ import future.keywords
 
 build_item(location) := {
 	"filename": location.filename,
-	"parent_line_number": location.line_number,
+	"parent_line_number": location.parent.line_number,
+	"parent_content": location.parent.content,
 	"line_number": location.line_number,
-	"detailed_context": location.content,
+	"detailed_context": location.presence_matches[0].name,
 } if {
 	# FIXME: This is only for secret detections. Should be more explicit
-	input.rule.omit_parent_content == true
+	input.rule.has_detailed_context == true
 }
 
 cat_groups := data.bearer.common.groups_for_datatypes(input.dataflow.data_types) if {
@@ -29,7 +30,7 @@ build_local_item(location, data_type) := {
 	"parent_content": location.parent.content,
 	"datatype_name": data_type.name
 } if {
-	not input.rule.omit_parent_content == true
+	not input.rule.has_detailed_context == true
 }
 
 build_item(location) := {
@@ -39,7 +40,7 @@ build_item(location) := {
 	"parent_line_number": location.parent.line_number,
 	"parent_content": location.parent.content,
 } if {
-	not input.rule.omit_parent_content == true
+	not input.rule.has_detailed_context == true
 }
 
 global_data_types contains data_type if {

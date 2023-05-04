@@ -57,6 +57,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 			Filename:     file.Path.RelativePath,
 			LineNumber:   &finding.StartLine,
 			ColumnNumber: &finding.StartColumn,
+			Text:         &finding.Line,
 		})
 	}
 
