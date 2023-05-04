@@ -71,14 +71,20 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 	ruleName := string(detection.DetectorType)
 	fileName := detection.Source.Filename
 	lineNumber := *detection.Source.LineNumber
-	// can be nil
-	parent := extractCustomRiskParent(detection.Value)
+
+	var parent *schema.Parent
 	var content string
 
 	if detection.DetectorType == detectors.DetectorGitleaks {
 		value := detection.Value.(map[string]interface{})["description"]
 		content = value.(string)
+		parent = &schema.Parent{
+			LineNumber: *detection.Source.LineNumber,
+			Content:    *detection.Source.Text,
+		}
 	} else {
+		// parent can be nil
+		parent = extractCustomRiskParent(detection.Value)
 		content = *detection.Source.Text
 	}
 

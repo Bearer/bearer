@@ -3,6 +3,7 @@ package gitleaks
 import (
 	_ "embed"
 	"log"
+	"strings"
 
 	"github.com/bearer/bearer/pkg/detectors/types"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
@@ -51,12 +52,14 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	}
 
 	for _, finding := range findings {
+		text := strings.TrimPrefix(finding.Line, "\n")
 		report.AddSecretLeak(secret.Secret{
 			Description: finding.Description,
 		}, source.Source{
 			Filename:     file.Path.RelativePath,
 			LineNumber:   &finding.StartLine,
 			ColumnNumber: &finding.StartColumn,
+			Text:         &text,
 		})
 	}
 

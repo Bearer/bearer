@@ -300,7 +300,7 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			ParamParenting:     definition.ParamParenting,
 			Patterns:           definition.Patterns,
 			DocumentationUrl:   definition.Metadata.DocumentationUrl,
-			OmitParentContent:  definition.OmitParentContent,
+			HasDetailedContext: definition.HasDetailedContext,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {

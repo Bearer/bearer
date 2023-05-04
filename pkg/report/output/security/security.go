@@ -474,14 +474,12 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.Id + "\n"))
 	reportStr.WriteString("\n")
 	if result.DetailedContext != "" {
-		reportStr.WriteString("Detected: " + result.DetailedContext + "\n")
+		reportStr.WriteString("Detected: " + result.DetailedContext + "\n\n")
 	}
 	reportStr.WriteString(color.HiBlueString("File: " + underline(result.Filename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
-	if result.DetailedContext == "" {
-		reportStr.WriteString("\n")
-		reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.ParentLineNumber, result.ParentContent))
-	}
+	reportStr.WriteString("\n")
+	reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.ParentLineNumber, result.ParentContent))
 }
 
 func formatSeverity(severity string) string {
