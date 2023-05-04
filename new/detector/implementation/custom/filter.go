@@ -30,6 +30,10 @@ func matchFilter(
 		return matchEitherFilters(result, evaluator, variableNodes, filter.Either)
 	}
 
+	if filter.FilenameRegex != nil {
+		return boolPointer(filter.FilenameRegex.MatchString(evaluator.FileName())), nil, nil
+	}
+
 	node, ok := result.Variables[filter.Variable]
 	// shouldn't happen if filters are validated against pattern
 	if !ok {
