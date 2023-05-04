@@ -59,4 +59,4 @@ jobs:
               --task-definition ${TASK_DEFINITION} \
               --overrides '{ "containerOverrides": [ { "name": "kpi-scan", "environment": [ { "name": "REPOSITORY_URL", "value": "${{ matrix.repository_url }}" }, { "name": "API_KEY", "value": "${{ secrets.KPI_SCAN_API_KEY }}" }, { "name": "API_HOST", "value": "${{ secrets.KPI_SCAN_HOST }}" } ] } ] }'
         env:
-          TASK_DEFINITION: kpi-scan:1
+          TASK_DEFINITION: kpi-scan:3
