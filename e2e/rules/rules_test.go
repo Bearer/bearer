@@ -1,8 +1,32 @@
 package rules_test
 
 import (
+	"path/filepath"
 	"testing"
+
+	"github.com/bearer/bearer/e2e/internal/testhelper"
 )
+
+func TestSecrets(t *testing.T) {
+	t.Parallel()
+
+	testCases := []testhelper.TestCase{
+		testhelper.NewTestCase(
+			"secrets",
+			[]string{
+				"scan",
+				filepath.Join("e2e", "rules", "testdata/data/secrets"),
+				"--scanner=secrets",
+				"--only-rule=gitleaks",
+				"--format=yaml",
+				"--disable-default-rules",
+			},
+			testhelper.TestCaseOptions{},
+		),
+	}
+
+	testhelper.RunTestsWithSnapshotSubdirectory(t, testCases, ".snapshots")
+}
 
 func TestAuxilary(t *testing.T) {
 	t.Parallel()
