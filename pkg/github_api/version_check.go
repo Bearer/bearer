@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/bearer/bearer/battle_tests/build"
+	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/google/go-github/github"
 	"github.com/rs/zerolog/log"
