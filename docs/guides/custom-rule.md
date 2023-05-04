@@ -132,6 +132,7 @@ patterns:
 
 - `variable`: The name of the variable. This is required, even in patterns that contain a single variable. (Required)
 - Comparison keys: Use these on their own with or nested inside `either`.
+  - `filename_regex`: Applies a regular expression test against the filename. This uses the [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
   - `values`: Provide an array of values to match a variable against. Useful for specific method names and known options.
   - `length_less_than`: Compare the length of the (string) variable to the number provided with a **less than** statement.
   - `string_regex`: Applies a regular expression test against the string value of the linked variable. This uses the [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
