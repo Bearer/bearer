@@ -1,0 +1,36 @@
+---
+title: How the CLI works
+mermaid: true
+---
+
+# How Bearer CLI works
+
+At a high level, Bearer CLI scans the files in a project, creates an AST representation of the code using [tree sitter](http://tree-sitter.github.io/tree-sitter/), performs [data discovery and classifications](/explanations/discovery-and-classification/) and updates the tree, and generates an internal detectors report that each report type can use. For example, the [security report](/explanations/reports#security-report) checks that report against a set of [rules](/reference/rules/).
+
+When you run a scan for the first time with the default settings, the application flow looks like the following diagram:
+
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'stepAfter' } } }%%
+flowchart TB
+    
+    direction TB
+    loadrule(Load rules) --> evalrule
+    scan(Start scan) --> parse(Enumerate and\n parse files)
+    parse --> AST
+    AST --> DNC
+    DNC --> df(Generate underlying \ndetection report)
+    df --> evalrule(Match and evaluate \nrules)
+    evalrule --> E(Generate report)
+    
+    subgraph AST[Generate AST]
+    direction LR
+    AST1(Tree sitter) --> |Processes source| AST2(AST)
+    end
+    
+
+    subgraph DNC[Detection Engine]
+    direction LR
+    dd(Detect data types) --> cd(Classify data types)
+    end
+    
+```

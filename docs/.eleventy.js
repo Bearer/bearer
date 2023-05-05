@@ -8,8 +8,10 @@ const markdownIt = require("markdown-it");
 const markdownItEmoji = require("markdown-it-emoji");
 const markdownItAnchor = require("markdown-it-anchor");
 const pluginTOC = require("eleventy-plugin-toc");
+const htmlencode = require("htmlencode");
 const now = String(Date.now());
 const path = require("path");
+const mermaid = require("./_src/_plugins/mermaid");
 
 const mdSetup = markdownIt({ html: true })
   .use(markdownItEmoji)
@@ -45,6 +47,20 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  // mermaid rendering
+  eleventyConfig.addPlugin(mermaid, {
+    themeVariables: {
+      darkMode: true,
+      primaryColor: "#d4bcf8",
+      mainBkg: "#1f2020",
+      lineColor: "#fff",
+      fontSize: "1rem",
+      clusterBkg: "transparent",
+      secondaryColor: "hsl(243,27%,35%)",
+    },
+  });
+
   eleventyConfig.addPlugin(pluginTOC, {
     wrapper: "nav",
   });

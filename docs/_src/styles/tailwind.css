@@ -75,6 +75,10 @@
     max-width: 100%;
   }
 
+  .mermaid {
+    background-color: theme("colors.code");
+  }
+
   /* ToC */
 
   .toc {
