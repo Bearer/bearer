@@ -87,7 +87,6 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 			log.Debug().Msgf("couldn't initialize client -> %s", err.Error())
 		} else {
 			log.Debug().Msgf("Initialized client for report")
-			log.Error().Msgf("Flag: %#v", f.DisableVersionCheck)
 			return GeneralOptions{
 				Client:              client,
 				ConfigFile:          getString(f.ConfigFile),
