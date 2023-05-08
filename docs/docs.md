@@ -36,6 +36,7 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 
 - [Configure the scan command](/guides/configure-scan/)
 - [GitHub action integration](/guides/github-action/)
+- [Set up CI/CD](/guides/ci-setup/)
 - [Create custom rule](/guides/custom-rule/)
 
 ## Explanations
