@@ -30,7 +30,7 @@ module.exports = {
     },
     extend: {
       spacing: {
-        "heading-offset": "7rem",
+        "heading-offset": "6rem",
       },
       typography: (theme) => ({
         DEFAULT: {
