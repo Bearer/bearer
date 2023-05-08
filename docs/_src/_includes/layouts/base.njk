@@ -16,6 +16,9 @@
   <body class="bg-white dark:bg-neutral-600">
     {% include "nav.njk" %}
     {{ content | safe }}
+    <script src="/app.js"></script>
+    {% if mermaid %}
+      {% mermaid_js %}
+    {% endif %}
   </body>
-  <script src="/app.js"></script>
 </html>

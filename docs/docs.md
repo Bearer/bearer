@@ -41,6 +41,7 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 ## Explanations
 
 Explanations dive into the rational behind Bearer CLI and explain some of its heavier concepts.
+- [How Bearer CLI works](/explanations/workflow/)
 - [Bearer CLI's scanner types](/explanations/scanners/)
 - [Bearer CLI's report types](/explanations/reports/)
 - [How Bearer CLI discovers and classifies data](/explanations/discovery-and-classification/)
