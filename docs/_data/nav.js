@@ -18,6 +18,10 @@ module.exports = [
     name: "Explanations",
     items: [
       {
+        name: "How Bearer CLI works",
+        url: "/explanations/workflow/",
+      },
+      {
         name: "Scanner types",
         url: "/explanations/scanners/",
       },

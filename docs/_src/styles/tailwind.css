@@ -79,6 +79,10 @@
     background-color: theme("colors.code");
   }
 
+  .mermaid svg {
+    margin: 0 auto;
+  }
+
   /* ToC */
 
   .toc {

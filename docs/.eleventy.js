@@ -53,8 +53,11 @@ module.exports = function (eleventyConfig) {
     themeVariables: {
       darkMode: true,
       primaryColor: "#d4bcf8",
-      mainBkg: "#1f2020",
-      lineColor: "#fff",
+      mainBkg: "#1E065F",
+      clusterBorder: "#d4bcf8",
+      lineColor: "#d4bcf8",
+      titleColor: "#fff",
+      edgeLabelBackground: "hsl(243,27%,35%)",
       fontSize: "1rem",
       clusterBkg: "transparent",
       secondaryColor: "hsl(243,27%,35%)",

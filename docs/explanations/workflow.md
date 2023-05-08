@@ -34,3 +34,9 @@ flowchart TB
     end
     
 ```
+
+With the exception of loading rules from the [bearer-rules](https://github.com/bearer/bearer-rules) repo and checking the latest version, everything happens locally in your environment.
+
+While there is some variation for each report type, the files to AST to detection report process is the core of each Bearer CLI scan. Learn more by reviewing explanations of the [sensitive data flow process](/explanations/discovery-and-classification/) and [dynamic severity system](/explanations/severity).
+
+Want to know more about inner workings of Bearer CLI? Let us know on the [community Discord]({{meta.links.discord}}) or on [GitHub]({{meta.links.issues}}).
