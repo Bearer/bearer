@@ -4,7 +4,19 @@ title: Set up CI/CD
 
 # Set up CI/CD for Bearer CLI
 
-Using Bearer CLI in your CI/CD pipeline works similarly to most other integrations. If you're using GitHub, the easiest method is with the [GitHub Action](/guides/github-action/). If you rely on another setup, see the guides below.
+Using Bearer CLI in your CI/CD pipeline works similarly to most other integrations. You can choose to run scans as part of the native CI/CD workflows of GitHub or GitLab, or roll your own support for additional third party services.
+
+## GitHub
+
+Bearer offers an official [GitHub Action](https://github.com/marketplace/actions/bearer-security) to connect directly with your repository. To enable it with the default settings, create a `bearer.yml` file in your `.github/workflows` directory and include the following:
+
+```yml
+steps:
+  - uses: actions/checkout@v3
+  - uses: bearer/bearer-action@v2
+```
+
+For more details and additional configuration, see our [guide to using the GitHub action](/guides/github-action/).
 
 ## GitLab
 
