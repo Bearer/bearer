@@ -26,26 +26,32 @@ layout: layouts/base.njk
 			{% endif %}
 			{{ content | safe }}
 		</article>
-		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1 md:max-h-[80vh] md:top-heading-offset overflow-y-scroll dark:text-neutral-200 md:block md:sticky text-sm border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
-			<div class="flex justify-between relative p-4">
-				<h2 class="font-bold text-md">On this page</h2>
-				<button id="js-toggle-toc" class="md:hidden absolute top-0 left-0 right-0 bottom-0 text-right flex justify-end items-center pr-3">
-					<span class="sr-only">Toggle menu</span>
-					<div class="">{% include 'icon-chevron.njk'%}</div>
-				</button>
+		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1  md:top-heading-offset  dark:text-neutral-200 md:flex md:flex-col md:sticky text-sm gap-4 justify-between md:mb-4 ">
+			<div class=" border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
+				<div class="flex justify-between relative p-4">
+					<h2 class="font-bold text-md">On this page</h2>
+					<button id="js-toggle-toc" class="md:hidden absolute top-0 left-0 right-0 bottom-0 text-right flex justify-end items-center pr-3">
+						<span class="sr-only">Toggle menu</span>
+						<div class="">{% include 'icon-chevron.njk'%}</div>
+					</button>
+				</div>
+				<div id="toc-container" class="hidden md:block px-4 pb-4 overflow-y-scroll md:max-h-[50vh]">
+					<a href="#" class="hover:underline">Overview</a>
+					{{ content | toc | safe }}
+					<h2 class="mt-2 font-bold text-md">Contribute</h2>
+					<ul>
+						<li>
+							<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
+						</li>
+						<li>
+							<a href="{{meta.sourcePath}}/issues/new/choose" class="hover:underline">Leave feedback</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div id="toc-container" class="hidden md:block px-4 pb-4">
-				<a href="#" class="hover:underline">Overview</a>
-				{{ content | toc | safe }}
-				<h2 class="mt-2 font-bold text-md">Contribute</h2>
-				<ul>
-					<li>
-						<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
-					</li>
-					<li>
-						<a href="{{meta.sourcePath}}/issues/new/choose" class="hover:underline">Leave feedback</a>
-					</li>
-				</ul>
+			<div class="hidden md:block p-4 border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
+				<p>Ready to take the next step? <a class="text-main dark:text-main-300 hover:underline" href="http://www.bearer.com">Join the Bearer Cloud waitlist.</a>
+				</p>
 			</div>
 		</aside>
 	</div>
