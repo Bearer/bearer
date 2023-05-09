@@ -7,11 +7,11 @@ module.exports = [
     name: "Guides",
     items: [
       { name: "Configure the scan", url: "/guides/configure-scan/" },
-      { name: "Using the GitHub action", url: "/guides/github-action/" },
       {
         name: "Set up CI/CD",
         url: "/guides/ci-setup/",
       },
+      { name: "Using the GitHub action", url: "/guides/github-action/" },
       {
         name: "Create a custom rule",
         url: "/guides/custom-rule/",
