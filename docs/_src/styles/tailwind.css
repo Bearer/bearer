@@ -141,6 +141,10 @@
     border-left: 0.3em solid theme("colors.neutral.400");
   }
 
+  .min-content-height {
+    min-height: calc(100vh - theme("spacing.heading-offset"));
+  }
+
   /* checkboxes */
 
   .filter-toggle {
