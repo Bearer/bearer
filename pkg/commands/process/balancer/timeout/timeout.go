@@ -17,7 +17,7 @@ func Assign(d fs.DirEntry, config settings.Config) time.Duration {
 
 	timeout = config.Worker.TimeoutFileMinimum
 
-	timeoutFileSize := time.Duration(fileInfo.Size() / int64(config.Worker.TimeoutFileSecondPerBytes) * int64(time.Second))
+	timeoutFileSize := time.Duration(fileInfo.Size() / int64(config.Worker.TimeoutFileBytesPerSecond) * int64(time.Second))
 	if timeoutFileSize > timeout {
 		if timeoutFileSize > config.Worker.TimeoutFileMaximum {
 			timeout = config.Worker.TimeoutFileMaximum
