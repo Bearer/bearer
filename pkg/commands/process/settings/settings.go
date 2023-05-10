@@ -18,9 +18,9 @@ var (
 	Timeout                   = 10 * time.Minute  // "The maximum time alloted to complete the scan
 	TimeoutFileMinimum        = 5 * time.Second   // Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
 	TimeoutFileMaximum        = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
-	TimeoutFileSecondPerBytes = 10 * 1000         // 10kb/s number of file size bytes producing a second of timeout assigned to scanning a file
+	TimeoutFileBytesPerSecond = 1 * 1000          // 1 Kb/s minimum number of bytes per second allowed to scan a file
 	TimeoutWorkerOnline       = 60 * time.Second  // Maximum time to wait for a worker process to come online
-	FileSizeMaximum           = 2 * 1000 * 1000   // 2MB Ignore files larger than the specified value
+	FileSizeMaximum           = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
 	FilesToBatch              = 1                 // Specify the number of files to batch per worker
 	MemoryMaximum             = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
 	ExistingWorker            = ""                // Specify the URL of an existing worker
@@ -31,7 +31,7 @@ type WorkerOptions struct {
 	Timeout                   time.Duration `mapstructure:"timeout" json:"timeout" yaml:"timeout"`
 	TimeoutFileMinimum        time.Duration `mapstructure:"timeout-file-min" json:"timeout-file-min" yaml:"timeout-file-min"`
 	TimeoutFileMaximum        time.Duration `mapstructure:"timeout-file-max"  json:"timeout-file-max" yaml:"timeout-file-max"`
-	TimeoutFileSecondPerBytes int           `mapstructure:"timeout-file-second-per-bytes" json:"timeout-file-second-per-bytes" yaml:"timeout-file-second-per-bytes"`
+	TimeoutFileBytesPerSecond int           `mapstructure:"timeout-file-bytes-per-second" json:"timeout-file-bytes-per-second" yaml:"timeout-file-bytes-per-second"`
 	TimeoutWorkerOnline       time.Duration `mapstructure:"timeout-worker-online" json:"timeout-worker-online" yaml:"timeout-worker-online"`
 	FileSizeMaximum           int           `mapstructure:"file-size-max" json:"file-size-max" yaml:"file-size-max"`
 	FilesToBatch              int           `mapstructure:"files-to-batch" json:"files-to-batch" yaml:"files-to-batch"`
@@ -243,7 +243,7 @@ func defaultWorkerOptions() WorkerOptions {
 		Timeout:                   Timeout,
 		TimeoutFileMinimum:        TimeoutFileMinimum,
 		TimeoutFileMaximum:        TimeoutFileMaximum,
-		TimeoutFileSecondPerBytes: TimeoutFileSecondPerBytes,
+		TimeoutFileBytesPerSecond: TimeoutFileBytesPerSecond,
 		TimeoutWorkerOnline:       TimeoutWorkerOnline,
 		FilesToBatch:              FilesToBatch,
 		FileSizeMaximum:           FileSizeMaximum,

@@ -32,7 +32,7 @@ func TestFileList(t *testing.T) {
 				config: settings.Config{
 					Worker: settings.WorkerOptions{
 						FileSizeMaximum:           100000,
-						TimeoutFileSecondPerBytes: 1,
+						TimeoutFileBytesPerSecond: 1,
 					},
 				},
 			},
@@ -53,7 +53,7 @@ func TestFileList(t *testing.T) {
 					},
 					Worker: settings.WorkerOptions{
 						FileSizeMaximum:           100000,
-						TimeoutFileSecondPerBytes: 1,
+						TimeoutFileBytesPerSecond: 1,
 					},
 				},
 			},
@@ -74,7 +74,7 @@ func TestFileList(t *testing.T) {
 					},
 					Worker: settings.WorkerOptions{
 						FileSizeMaximum:           100000,
-						TimeoutFileSecondPerBytes: 1,
+						TimeoutFileBytesPerSecond: 1,
 					},
 				},
 			},
