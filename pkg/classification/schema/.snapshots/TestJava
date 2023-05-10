@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=38) {
+([]testhelper.ClassificationResult) (len=37) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=25) "RepositorySystemHookEvent",
     Decision: (classify.ClassificationDecision) {
@@ -138,23 +138,6 @@
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
           Reason: (string) (len=13) "known_pattern"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
-    Name: (string) (len=16) "SaveSliceInfoDef",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=36) "invalid_object_with_valid_properties"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=1) {
-      (string) (len=22) "FULL_NAME_FIELD_NUMBER": (testhelper.ClassificationResult) {
-        Name: (string) (len=22) "FULL_NAME_FIELD_NUMBER",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       }

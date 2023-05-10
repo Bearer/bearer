@@ -6,7 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Fullname",
   "health_context_data_type_uuid": null,
-  "include_regexp": "^(.?(full|cardholder|customer|client|player|mentor|winner|author|person|sender|recipient)\\s?(full)?\\s?name)\\b",
+  "include_regexp": "^(.?(cardholder|customer|client|player|mentor|winner|author|person|sender|recipient)\\s?name)\\b",
   "match_column": true,
   "match_object": false,
   "object_type": ["unknown"]
