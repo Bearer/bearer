@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/report"
 	"github.com/bearer/bearer/pkg/util/file"
 )
@@ -31,7 +32,7 @@ func (scanner scannerType) Close() {
 
 func Setup(config *settings.Config, classifier *classification.Classifier) (err error) {
 	var toInstantiate = []struct {
-		constructor func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)
+		constructor func(map[string]*rules.Rule, *classification.Classifier) (types.Composition, error)
 		name        string
 	}{
 		{

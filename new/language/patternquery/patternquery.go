@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/bearer/new/language/patternquery/builder"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/rs/zerolog/log"
 )
 
@@ -67,6 +68,16 @@ func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryRes
 	}
 
 	return query.matchAndTranslateTreeResult(treeResult, node), nil
+}
+
+func (query *Query) Variables() []string {
+	variables := set.New[string]()
+
+	for _, variable := range query.paramToVariable {
+		variables.Add(variable)
+	}
+
+	return variables.Items()
 }
 
 func (query *Query) Close() {

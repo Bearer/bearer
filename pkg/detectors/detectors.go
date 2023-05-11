@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/bearer/bearer/new/scanner"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/detectors/beego"
 	"github.com/bearer/bearer/pkg/detectors/csharp"
 	"github.com/bearer/bearer/pkg/detectors/custom"
@@ -56,7 +56,7 @@ type activeDetector struct {
 
 var customDetector = InitializedDetector{reportdetectors.DetectorCustom, custom.New(&nodeid.UUIDGenerator{})}
 
-func SetupLegacyDetector(config map[string]*settings.Rule) error {
+func SetupLegacyDetector(config map[string]*rules.Rule) error {
 	detector := customDetector.Detector.(*custom.Detector)
 
 	return detector.CompileRules(config)

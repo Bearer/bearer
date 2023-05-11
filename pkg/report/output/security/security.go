@@ -9,6 +9,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/maputil"
@@ -47,7 +48,7 @@ type Results = map[string][]Result
 
 type Input struct {
 	RuleId         string             `json:"rule_id" yaml:"rule_id"`
-	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
+	Rule           *rules.Rule        `json:"rule" yaml:"rule"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
@@ -102,7 +103,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Results, e
 
 func evaluateRules(
 	summaryResults Results,
-	rules map[string]*settings.Rule,
+	rules map[string]*rules.Rule,
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
 	builtIn bool,
@@ -329,8 +330,8 @@ func writeStatsToString(
 
 func writeRuleListToString(
 	reportStr *strings.Builder,
-	rules map[string]*settings.Rule,
-	builtInRules map[string]*settings.Rule,
+	rules map[string]*rules.Rule,
+	builtInRules map[string]*rules.Rule,
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 ) int {
@@ -351,7 +352,7 @@ func writeRuleListToString(
 }
 
 func countRules(
-	rules map[string]*settings.Rule,
+	rules map[string]*rules.Rule,
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 	builtIn bool,

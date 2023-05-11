@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -10,8 +10,8 @@ type CompiledRule struct {
 	Tree            string
 	Query           *sitter.Query
 	Params          []Param
-	Metavars        map[string]settings.MetaVar
-	Filters         []settings.PatternFilter
+	Metavars        map[string]rules.MetaVar
+	Filters         []rules.PatternFilter
 	ParamParenting  bool
 	RootSingularize bool
 	RootLowercase   bool

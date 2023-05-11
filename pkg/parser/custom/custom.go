@@ -1,7 +1,7 @@
 package custom
 
 import (
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/detectors/custom/config"
 	"github.com/bearer/bearer/pkg/parser"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
@@ -10,7 +10,7 @@ import (
 
 type Detector interface {
 	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*datatype.DataType, error)
-	CompilePattern(rulePattern settings.RulePattern, idGenerator nodeid.Generator) (config.CompiledRule, error)
+	CompilePattern(rulePattern rules.RulePattern, idGenerator nodeid.Generator) (config.CompiledRule, error)
 	IsParam(node *parser.Node) (bool, bool, *config.Param)
 	Annotate(tree *parser.Tree) error
 }

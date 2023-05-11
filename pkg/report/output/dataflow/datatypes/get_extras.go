@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/report/detections"
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
@@ -14,9 +15,9 @@ import (
 )
 
 type processorInput struct {
-	Rule             *settings.Rule `json:"rule"`
-	AllDetections    []interface{}  `json:"all_detections"`
-	TargetDetections []interface{}  `json:"target_detections"`
+	Rule             *rules.Rule   `json:"rule"`
+	AllDetections    []interface{} `json:"all_detections"`
+	TargetDetections []interface{} `json:"target_detections"`
 }
 
 type ExtraFields struct {
@@ -214,7 +215,7 @@ func runExtrasQuery(
 	query string,
 	modules []regohelper.Module,
 	detections, targetDetections []interface{},
-	rule *settings.Rule,
+	rule *rules.Rule,
 ) (map[string]*ExtraFields, error) {
 	data := make(map[string]*ExtraFields)
 
@@ -306,7 +307,7 @@ func runProcessor(
 	processorName string,
 	detections []any,
 	targetDetections []any,
-	rule *settings.Rule,
+	rule *rules.Rule,
 ) (data map[string]*ExtraFields, err error) {
 	modules, err := processorModules(processorName)
 	if err != nil {

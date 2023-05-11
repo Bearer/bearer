@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/detectors/custom/config"
 	sqldetector "github.com/bearer/bearer/pkg/detectors/sql/custom_detector"
 	"github.com/bearer/bearer/pkg/detectors/types"
@@ -60,7 +60,7 @@ func (detector *Detector) AcceptDir(dir *file.Path) (bool, error) {
 	return true, nil
 }
 
-func (detector *Detector) CompileRules(rulesConfig map[string]*settings.Rule) error {
+func (detector *Detector) CompileRules(rulesConfig map[string]*rules.Rule) error {
 	detector.rulesGroupedByLang = make(map[string][]config.CompiledRule)
 
 	for ruleName, rule := range rulesConfig {
@@ -149,7 +149,7 @@ func (detector *Detector) forLanguage(lang string) (language.Detector, error) {
 }
 
 func (detector *Detector) compileRule(
-	rulePattern settings.RulePattern,
+	rulePattern rules.RulePattern,
 	lang string,
 	idGenerator nodeid.Generator,
 ) (config.CompiledRule, error) {

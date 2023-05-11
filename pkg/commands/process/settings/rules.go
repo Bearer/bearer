@@ -7,6 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/bearer/bearer/new/language"
+	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
@@ -42,8 +45,8 @@ func loadRules(
 	result LoadRulesResult,
 	err error,
 ) {
-	definitions := make(map[string]RuleDefinition)
-	builtInDefinitions := make(map[string]RuleDefinition)
+	definitions := make(map[string]rules.RuleDefinition)
+	builtInDefinitions := make(map[string]rules.RuleDefinition)
 	ruleLanguages := make(map[string]bool)
 
 	if !options.DisableDefaultRules {
@@ -75,7 +78,7 @@ func loadRules(
 				}
 
 				if !ruleLanguages[foundLang] {
-					definitions = make(map[string]RuleDefinition)
+					definitions = make(map[string]rules.RuleDefinition)
 					result.CacheUsed = false // re-cache rules
 				}
 			}
@@ -124,13 +127,20 @@ func loadRules(
 	enabledRules := getEnabledRules(options, definitions, nil)
 	builtInRules := getEnabledRules(options, builtInDefinitions, enabledRules)
 
-	result.Rules = BuildRules(definitions, enabledRules)
-	result.BuiltInRules = BuildRules(builtInDefinitions, builtInRules)
+	result.Rules, err = BuildRules(definitions, enabledRules)
+	if err != nil {
+		return result, err
+	}
+
+	result.BuiltInRules, err = BuildRules(builtInDefinitions, builtInRules)
+	if err != nil {
+		return result, err
+	}
 
 	return result, nil
 }
 
-func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {
+func loadRuleDefinitionsFromDir(definitions map[string]rules.RuleDefinition, dir fs.FS) error {
 	return fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -152,7 +162,7 @@ func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS
 			return fmt.Errorf("failed to read file %s: %w", path, err)
 		}
 
-		var ruleDefinition RuleDefinition
+		var ruleDefinition rules.RuleDefinition
 		err = yaml.Unmarshal(entry, &ruleDefinition)
 		if err != nil {
 			return fmt.Errorf("failed to unmarshal rule %s: %w", path, err)
@@ -177,8 +187,8 @@ func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS
 
 func validateRuleOptionIDs(
 	options flag.RuleOptions,
-	definitions map[string]RuleDefinition,
-	builtInDefinitions map[string]RuleDefinition,
+	definitions map[string]rules.RuleDefinition,
+	builtInDefinitions map[string]rules.RuleDefinition,
 ) error {
 	var invalidRuleIDs []string
 
@@ -207,7 +217,7 @@ func validateRuleOptionIDs(
 	return nil
 }
 
-func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefinition, rules map[string]struct{}) map[string]struct{} {
+func getEnabledRules(options flag.RuleOptions, definitions map[string]rules.RuleDefinition, rules map[string]struct{}) map[string]struct{} {
 	enabledRules := make(map[string]struct{})
 
 	for _, definition := range definitions {
@@ -240,8 +250,8 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 	return enabledRules
 }
 
-func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]struct{}) map[string]*Rule {
-	rules := make(map[string]*Rule)
+func BuildRules(definitions map[string]rules.RuleDefinition, enabledRules map[string]struct{}) (map[string]*rules.Rule, error) {
+	result := make(map[string]*rules.Rule)
 
 	for _, definition := range definitions {
 		id := definition.Metadata.ID
@@ -256,8 +266,8 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 		}
 
 		// build rule trigger
-		ruleTrigger := RuleTrigger{
-			MatchOn:           PRESENCE,
+		ruleTrigger := rules.RuleTrigger{
+			MatchOn:           rules.PRESENCE,
 			DataTypesRequired: false,
 		}
 		if definition.Trigger != nil {
@@ -280,7 +290,17 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			}
 		}
 
-		rules[id] = &Rule{
+		lang, err := language.Get(definition.Languages[0])
+		if err != nil {
+			return nil, fmt.Errorf("error loading rule %s: %w", id, err)
+		}
+
+		patterns, err := compilePatterns(lang, definition.Patterns)
+		if err != nil {
+			return nil, fmt.Errorf("error loading rule %s: %w", id, err)
+		}
+
+		result[id] = &rules.Rule{
 			Id:                 id,
 			Type:               ruleType,
 			AssociatedRecipe:   definition.Metadata.AssociatedRecipe,
@@ -298,24 +318,29 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			CWEIDs:             definition.Metadata.CWEIDs,
 			Languages:          definition.Languages,
 			ParamParenting:     definition.ParamParenting,
-			Patterns:           definition.Patterns,
+			Patterns:           patterns,
 			DocumentationUrl:   definition.Metadata.DocumentationUrl,
 			HasDetailedContext: definition.HasDetailedContext,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {
-			rules[auxiliaryDefinition.Id] = &Rule{
+			auxPatterns, err := compilePatterns(lang, auxiliaryDefinition.Patterns)
+			if err != nil {
+				return nil, fmt.Errorf("error loading rule %s: %w", id, err)
+			}
+
+			result[auxiliaryDefinition.Id] = &rules.Rule{
 				Type:           defaultAuxiliaryRuleType,
 				Languages:      definition.Languages,
 				ParamParenting: auxiliaryDefinition.ParamParenting,
-				Patterns:       auxiliaryDefinition.Patterns,
+				Patterns:       auxPatterns,
 				Stored:         auxiliaryDefinition.Stored,
 				IsAuxilary:     true,
 			}
 		}
 	}
 
-	return rules
+	return result, nil
 }
 
 func cachedRulesExist(bearerRulesDir string) bool {
@@ -329,4 +354,23 @@ func cleanupRuleDirFiles(bearerRulesDir string) error {
 
 func bearerRulesDir() string {
 	return filepath.Join(os.TempDir(), "bearer-rules")
+}
+
+func compilePatterns(lang languagetypes.Language, sourcePatterns []rules.RuleDefinitionPattern) ([]rules.RulePattern, error) {
+	patterns := make([]rules.RulePattern, len(sourcePatterns))
+
+	for i, sourcePattern := range sourcePatterns {
+		query, err := lang.CompilePatternQuery(sourcePattern.Pattern)
+		if err != nil {
+			return nil, fmt.Errorf("error compiling pattern %s: %s", sourcePattern.Pattern, err)
+		}
+
+		patterns[i] = rules.RulePattern{
+			Pattern: sourcePattern.Pattern,
+			Filters: sourcePattern.Filters,
+			Query:   query,
+		}
+	}
+
+	return patterns, nil
 }

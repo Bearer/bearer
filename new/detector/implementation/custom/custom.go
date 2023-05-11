@@ -1,12 +1,10 @@
 package custom
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 )
 
 type Data struct {
@@ -15,37 +13,16 @@ type Data struct {
 	VariableNodes map[string]*tree.Node
 }
 
-type Pattern struct {
-	Pattern string
-	Query   languagetypes.PatternQuery
-	Filters []settings.PatternFilter
-}
-
 type customDetector struct {
 	types.DetectorBase
 	detectorType string
-	patterns     []Pattern
+	patterns     []rules.RulePattern
 }
 
-func New(lang languagetypes.Language, detectorType string, patterns []settings.RulePattern) (types.Detector, error) {
-	var compiledPatterns []Pattern
-	for _, pattern := range patterns {
-		patternQuery, err := lang.CompilePatternQuery(pattern.Pattern)
-		if err != nil {
-			return nil, fmt.Errorf("error compiling pattern: %s", err)
-		}
-		compiledPatterns = append(compiledPatterns, Pattern{
-			Pattern: pattern.Pattern,
-			Query:   patternQuery,
-			Filters: pattern.Filters,
-		})
-
-		// TODO: validate filters against pattern
-	}
-
+func New(lang languagetypes.Language, detectorType string, patterns []rules.RulePattern) (types.Detector, error) {
 	return &customDetector{
 		detectorType: detectorType,
-		patterns:     compiledPatterns,
+		patterns:     patterns,
 	}, nil
 }
 

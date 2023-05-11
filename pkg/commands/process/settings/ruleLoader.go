@@ -12,13 +12,14 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"gopkg.in/yaml.v3"
 )
 
 const LATEST_RELEASE_URL = "https://api.github.com/repos/bearer/bearer-rules/releases/latest"
 const BASE_RULE_FOLDER = "/"
 
-func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, foundLanguages []string) (tagName string, err error) {
+func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]rules.RuleDefinition, foundLanguages []string) (tagName string, err error) {
 	resp, err := http.Get(LATEST_RELEASE_URL)
 	if err != nil {
 		return tagName, err
@@ -93,7 +94,7 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 	return release.TagName, nil
 }
 
-func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) (map[string]bool, error) {
+func ReadRuleDefinitions(ruleDefinitions map[string]rules.RuleDefinition, file *os.File) (map[string]bool, error) {
 	ruleLanguages := make(map[string]bool)
 
 	gzr, err := gzip.NewReader(file)
@@ -121,7 +122,7 @@ func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.Fil
 			return ruleLanguages, fmt.Errorf("failed to read file %s: %w", header.Name, err)
 		}
 
-		var ruleDefinition RuleDefinition
+		var ruleDefinition rules.RuleDefinition
 		err = yaml.Unmarshal(data, &ruleDefinition)
 		if err != nil {
 			return ruleLanguages, fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)

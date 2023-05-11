@@ -8,6 +8,7 @@ type PatternQueryResult struct {
 }
 
 type PatternQuery interface {
+	Variables() []string
 	MatchAt(node *tree.Node) ([]*PatternQueryResult, error)
 	MatchOnceAt(node *tree.Node) (*PatternQueryResult, error)
 	Close()

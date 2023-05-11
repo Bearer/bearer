@@ -8,6 +8,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/progressbar"
@@ -20,7 +21,7 @@ import (
 
 type RuleInput struct {
 	RuleId         string             `json:"rule_id" yaml:"rule_id"`
-	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
+	Rule           *rules.Rule        `json:"rule" yaml:"rule"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }

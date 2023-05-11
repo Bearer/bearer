@@ -16,7 +16,7 @@ import (
 	"github.com/bearer/bearer/new/language"
 
 	"github.com/bearer/bearer/pkg/classification"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	settingsrules "github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/util/file"
 
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/ruby/string"
@@ -35,7 +35,7 @@ type Composition struct {
 	closers             []func()
 }
 
-func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
+func New(rules map[string]*settingsrules.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
 	lang, err := language.Get("ruby")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
@@ -69,7 +69,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	}
 
 	// instantiate custom ruby detectors
-	rubyRules := map[string]*settings.Rule{}
+	rubyRules := map[string]*settingsrules.Rule{}
 	for ruleName, rule := range rules {
 		if !slices.Contains(rule.Languages, "ruby") {
 			continue

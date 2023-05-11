@@ -3,7 +3,7 @@ package customdetector
 import (
 	"regexp"
 
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/detectors/custom/config"
 	"github.com/bearer/bearer/pkg/parser"
 	"github.com/bearer/bearer/pkg/parser/custom"
@@ -18,7 +18,7 @@ var scriptRegex = regexp.MustCompile(`\$SCRIPT`)
 var anythingRegex = regexp.MustCompile(`\$ANTYHING`)
 
 func (detector *Detector) CompilePattern(
-	rulePattern settings.RulePattern,
+	rulePattern rules.RulePattern,
 	idGenerator nodeid.Generator,
 ) (config.CompiledRule, error) {
 	reworkedRule := tableNameRegex.ReplaceAllLiteral(

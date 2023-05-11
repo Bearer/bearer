@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands"
 	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/commands/process/worker"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
@@ -59,21 +60,26 @@ func GetRunner(t *testing.T, ruleBytes []byte, lang string) *Runner {
 	return runner
 }
 
-func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*settings.Rule {
-	var ruleDefinition settings.RuleDefinition
+func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*rules.Rule {
+	var ruleDefinition rules.RuleDefinition
 	err := yaml.Unmarshal(ruleBytes, &ruleDefinition)
 	if err != nil {
 		t.Fatalf("failed to unmarshal rule %s", err)
 	}
 
-	rules := map[string]settings.RuleDefinition{
+	definitions := map[string]rules.RuleDefinition{
 		ruleDefinition.Metadata.ID: ruleDefinition,
 	}
 	enabledRules := map[string]struct{}{
-		ruleDefinition.Metadata.ID: struct{}{},
+		ruleDefinition.Metadata.ID: {},
 	}
 
-	return settings.BuildRules(rules, enabledRules)
+	rules, err := settings.BuildRules(definitions, enabledRules)
+	if err != nil {
+		t.Fatalf("failed to build rules %s", err)
+	}
+
+	return rules
 }
 
 func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath string) {

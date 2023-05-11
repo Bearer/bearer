@@ -9,14 +9,14 @@ import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 )
 
 func matchFilter(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
-	filter settings.PatternFilter,
+	filter rules.PatternFilter,
 ) (*bool, []*types.Detection, error) {
 	if filter.Not != nil {
 		match, _, err := matchFilter(result, evaluator, variableNodes, *filter.Not)
@@ -58,7 +58,7 @@ func matchFilter(
 func matchAllFilters(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
-	filters []settings.PatternFilter,
+	filters []rules.PatternFilter,
 ) (bool, []*types.Detection, map[string]*tree.Node, error) {
 	var datatypeDetections []*types.Detection
 
@@ -83,7 +83,7 @@ func matchEitherFilters(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
-	filters []settings.PatternFilter,
+	filters []rules.PatternFilter,
 ) (*bool, []*types.Detection, error) {
 	var datatypeDetections []*types.Detection
 	oneMatched := false
@@ -172,7 +172,7 @@ func matchDetectionFilter(
 	return boolPointer(foundDetection), datatypeDetections, err
 }
 
-func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator, node *tree.Node) (*bool, error) {
+func matchContentFilter(filter rules.PatternFilter, evaluator types.Evaluator, node *tree.Node) (*bool, error) {
 	content := node.Content()
 
 	if len(filter.Values) != 0 && !slices.Contains(filter.Values, content) {

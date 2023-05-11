@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
@@ -26,7 +27,7 @@ func TestBuildReportString(t *testing.T) {
 	})
 
 	// new rules are added
-	customRule := &settings.Rule{
+	customRule := &rules.Rule{
 		Id:          "custom_test_rule",
 		Description: "Its a test!",
 		CWEIDs:      []string{},
@@ -37,7 +38,7 @@ func TestBuildReportString(t *testing.T) {
 	}
 
 	// limit rules so that test doesn't fail just because
-	config.Rules = map[string]*settings.Rule{
+	config.Rules = map[string]*rules.Rule{
 		"ruby_lang_ssl_verification": config.Rules["ruby_lang_ssl_verification"],
 		"ruby_rails_logger":          config.Rules["ruby_rails_logger"],
 		"custom_test_rule":           customRule,

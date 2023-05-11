@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/detectors"
@@ -14,7 +15,7 @@ import (
 
 func TestDataflowDataType(t *testing.T) {
 	config := settings.Config{
-		Rules: map[string]*settings.Rule{
+		Rules: map[string]*rules.Rule{
 			"logger_leak": {
 				Stored: true,
 			},

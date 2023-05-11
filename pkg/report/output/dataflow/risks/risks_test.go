@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
@@ -15,7 +16,7 @@ import (
 
 func TestDataflowRisks(t *testing.T) {
 	config := settings.Config{
-		Rules: map[string]*settings.Rule{
+		Rules: map[string]*rules.Rule{
 			"detect_ruby_logger": {
 				Stored: false,
 				Type:   customdetectors.TypeRisk,
