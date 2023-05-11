@@ -152,13 +152,20 @@
   }
 
   .toggle-label {
-    @apply rounded px-4 py-2 bg-neutral-200 text-neutral-400 border-2 border-solid border-transparent;
+    @apply text-sm block rounded px-2 py-2 bg-neutral-200 text-neutral-400 border-2 border-solid border-transparent dark:bg-code dark:text-neutral-100;
   }
   .filter-toggle:checked + .toggle-label {
     @apply bg-main-400 dark:bg-main-300 text-neutral-100 border-main-400 dark:border-main-300;
   }
   .filter-toggle:focus + .toggle-label {
     @apply border-neutral-300;
+  }
+
+  .filter-open .js-filter-list {
+    @apply flex max-w-sm flex-col gap-2 absolute bg-white dark:bg-black mt-2 p-2 right-0 w-max rounded border-main dark:border-code border-2;
+  }
+  .filter-open .js-filter-button {
+    @apply border-main dark:border-code;
   }
 }
 
