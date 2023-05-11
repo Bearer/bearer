@@ -3,5 +3,5 @@
   "id": 23,
   "act_as_identifier": true,
   "category": "Customer",
-  "include_regexp": "\\b.*customer.*\\b"
+  "include_regexp": "\\bcustomers?\\b"
 }

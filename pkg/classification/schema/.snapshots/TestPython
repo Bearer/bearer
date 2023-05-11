@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=23) {
+([]testhelper.ClassificationResult) (len=18) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=6) "writer",
     Decision: (classify.ClassificationDecision) {
@@ -50,7 +50,7 @@
         Name: (string) (len=8) "fullName",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=21) "valid_unknown_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -859,7 +859,7 @@
     Name: (string) (len=11) "wx_corpuser",
     Decision: (classify.ClassificationDecision) {
       State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=34) "valid_object_with_valid_properties"
+      Reason: (string) (len=36) "invalid_object_with_valid_properties"
     },
     Properties: (map[string]testhelper.ClassificationResult) (len=30) {
       (string) (len=12) "_description": (testhelper.ClassificationResult) {
@@ -874,7 +874,7 @@
         Name: (string) (len=5) "_name",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -890,7 +890,7 @@
         Name: (string) (len=6) "avatar",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -914,7 +914,7 @@
         Name: (string) (len=5) "email",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -938,7 +938,7 @@
         Name: (string) (len=6) "gender",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -946,7 +946,7 @@
         Name: (string) (len=10) "ip_address",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -962,7 +962,7 @@
         Name: (string) (len=6) "mobile",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -970,7 +970,7 @@
         Name: (string) (len=4) "name",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -978,7 +978,7 @@
         Name: (string) (len=19) "national_identifier",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -986,15 +986,15 @@
         Name: (string) (len=15) "national_origin",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
       (string) (len=7) "payroll": (testhelper.ClassificationResult) {
         Name: (string) (len=7) "payroll",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1018,7 +1018,7 @@
         Name: (string) (len=4) "race",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1026,7 +1026,7 @@
         Name: (string) (len=16) "religious_belief",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1042,7 +1042,7 @@
         Name: (string) (len=14) "sexual_history",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1050,15 +1050,15 @@
         Name: (string) (len=18) "sexual_preferences",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
       (string) (len=9) "signature": (testhelper.ClassificationResult) {
         Name: (string) (len=9) "signature",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1081,8 +1081,8 @@
       (string) (len=6) "userid": (testhelper.ClassificationResult) {
         Name: (string) (len=6) "userid",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=25) "known_database_identifier"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1090,7 +1090,7 @@
         Name: (string) (len=12) "work_history",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1237,8 +1237,8 @@
       (string) (len=6) "credit": (testhelper.ClassificationResult) {
         Name: (string) (len=6) "credit",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=22) "valid_extended_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1463,31 +1463,6 @@
     }
   },
   (testhelper.ClassificationResult) {
-    Name: (string) (len=6) "rating",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=17) "known_data_object"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=2) {
-      (string) (len=3) "all": (testhelper.ClassificationResult) {
-        Name: (string) (len=3) "all",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=6) "userid": (testhelper.ClassificationResult) {
-        Name: (string) (len=6) "userid",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=25) "known_database_identifier"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
     Name: (string) (len=12) "subscription",
     Decision: (classify.ClassificationDecision) {
       State: (classify.ValidationState) (len=5) "valid",
@@ -1504,31 +1479,6 @@
       },
       (string) (len=13) "subscriber_id": (testhelper.ClassificationResult) {
         Name: (string) (len=13) "subscriber_id",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=25) "known_database_identifier"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
-    Name: (string) (len=8) "tracking",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=17) "known_data_object"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=2) {
-      (string) (len=6) "extend": (testhelper.ClassificationResult) {
-        Name: (string) (len=6) "extend",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=6) "userid": (testhelper.ClassificationResult) {
-        Name: (string) (len=6) "userid",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
           Reason: (string) (len=25) "known_database_identifier"
@@ -1563,31 +1513,6 @@
     }
   },
   (testhelper.ClassificationResult) {
-    Name: (string) (len=7) "payment",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=7) "invalid",
-      Reason: (string) (len=19) "unknown_data_object"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=2) {
-      (string) (len=10) "customerid": (testhelper.ClassificationResult) {
-        Name: (string) (len=10) "customerid",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=25) "known_database_identifier"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=8) "resource": (testhelper.ClassificationResult) {
-        Name: (string) (len=8) "resource",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
     Name: (string) (len=5) "order",
     Decision: (classify.ClassificationDecision) {
       State: (classify.ValidationState) (len=5) "valid",
@@ -1607,56 +1532,6 @@
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=7) "invalid",
           Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
-    Name: (string) (len=7) "message",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=17) "known_data_object"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=2) {
-      (string) (len=17) "iter_entry_points": (testhelper.ClassificationResult) {
-        Name: (string) (len=17) "iter_entry_points",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=6) "userid": (testhelper.ClassificationResult) {
-        Name: (string) (len=6) "userid",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=25) "known_database_identifier"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
-    Name: (string) (len=8) "feedback",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=17) "known_data_object"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=2) {
-      (string) (len=5) "lower": (testhelper.ClassificationResult) {
-        Name: (string) (len=5) "lower",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=6) "userid": (testhelper.ClassificationResult) {
-        Name: (string) (len=6) "userid",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=25) "known_database_identifier"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       }

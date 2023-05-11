@@ -2,7 +2,7 @@
   "metadata": { "version": "1.0" },
   "id": 6,
   "data_type_uuid": "f38aab1a-1551-43dc-9a90-59abf2c9f08c",
-  "exclude_regexp": "\\b.*gift.*\\b",
+  "exclude_regexp": "(\\b.*gift.*\\b)|\\bat$",
   "exclude_types": ["boolean"],
   "friendly_name": "Credit Card Number",
   "health_context_data_type_uuid": null,

@@ -829,6 +829,54 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 		},
+		{
+			Name: "full name in unknown object - case 1",
+			Input: schema.ClassificationRequest{
+				Filename:     "lib/api/validations/validators/absence.rb",
+				DetectorType: detectors.DetectorRuby,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "@scope",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "full_name",
+							SimpleType: reportschema.SimpleTypeString,
+						},
+					},
+				},
+			},
+			Want: schema.Classification{
+				Name: "@scope",
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
+					Reason: "unknown_data_object",
+				},
+			},
+		},
+		{
+			Name: "full name in unknown object - case 1",
+			Input: schema.ClassificationRequest{
+				Filename:     "lib/gitlab/bitbucket_import/importer.rb",
+				DetectorType: detectors.DetectorRuby,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "project",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "full_name",
+							SimpleType: reportschema.SimpleTypeString,
+						},
+					},
+				},
+			},
+			Want: schema.Classification{
+				Name: "project",
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
+					Reason: "unknown_data_object",
+				},
+			},
+		},
 	}
 	classifier := schema.New(
 		schema.Config{
