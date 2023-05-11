@@ -28,7 +28,7 @@ build_local_item(location, data_type) := {
 	"line_number": location.line_number,
 	"parent_line_number": location.parent.line_number,
 	"parent_content": location.parent.content,
-	"datatype_name": data_type.name
+	"datatype_name": data_type.name,
 } if {
 	not input.rule.has_detailed_context == true
 }

@@ -854,7 +854,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 		},
 		{
-			Name: "full name in unknown object - case 2",
+			Name: "full name in unknown object - case 1",
 			Input: schema.ClassificationRequest{
 				Filename:     "lib/gitlab/bitbucket_import/importer.rb",
 				DetectorType: detectors.DetectorRuby,

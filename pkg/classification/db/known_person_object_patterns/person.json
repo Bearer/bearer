@@ -3,5 +3,5 @@
   "id": 54,
   "act_as_identifier": true,
   "category": "Person",
-  "include_regexp": "\\b.*person.*\\b"
+  "include_regexp": "\\bperson\\b"
 }

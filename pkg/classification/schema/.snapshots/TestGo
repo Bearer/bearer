@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=33) {
+([]testhelper.ClassificationResult) (len=32) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=19) "walletServiceClient",
     Decision: (classify.ClassificationDecision) {
@@ -1490,31 +1490,6 @@
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
           Reason: (string) (len=25) "known_database_identifier"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
-    Name: (string) (len=13) "reviewRequest",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=17) "known_data_object"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=2) {
-      (string) (len=9) "profileId": (testhelper.ClassificationResult) {
-        Name: (string) (len=9) "profileId",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=25) "known_database_identifier"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=17) "validateModifySet": (testhelper.ClassificationResult) {
-        Name: (string) (len=17) "validateModifySet",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       }

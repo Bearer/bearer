@@ -3,5 +3,5 @@
   "id": 56,
   "act_as_identifier": true,
   "category": "Profile",
-  "include_regexp": "\\b.*profile.*\\b"
+  "include_regexp": "\\busers?\\bprofiles?\\b"
 }

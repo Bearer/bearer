@@ -45,8 +45,11 @@ func ConvertToSimpleType(value string) string {
 		}
 	}
 
-	if simplified == "bool" {
-		return schema.SimpleTypeBool
+	booleanMap := []string{"bool", "boolean"}
+	for _, typeValue := range booleanMap {
+		if strings.Contains(simplified, typeValue) {
+			return schema.SimpleTypeBool
+		}
 	}
 
 	return schema.SimpleTypeObject
