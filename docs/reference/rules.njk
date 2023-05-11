@@ -16,17 +16,43 @@ The built-in rules aim to keep you protected from the most cirtical security ris
   <input class="block w-full px-4 py-2 border-neutral-300 border-2 rounded dark:text-neutral-500" type="search" name="" id="search-input" placeholder="Try searching for CWE-201, encryption, rails, etc.">
 
   <div class="flex gap-2 mt-4">
-    <div>
-      <input type="checkbox" name="lang-ruby" id="lang-ruby" class='filter-toggle' value="ruby">
-      <label for="lang-ruby" class="toggle-label">Ruby</label>
+    <div id="lang-filters">
+      <button>Languages</button>
+      <ul class="list-none p-0 not-prose flex flex-col gap-4">
+        <li>
+          <input type="checkbox" name="lang-ruby" id="lang-ruby" class='filter-toggle' value="ruby">
+          <label for="lang-ruby" class="toggle-label">Ruby</label>
+        </li>
+        <li>
+          <input type="checkbox" name="lang-jsts" id="lang-jsts" class='filter-toggle' value="javascript">
+          <label for="lang-jsts" class="toggle-label">JS / TS</label>
+        </li>
+        <li>
+          <input type="checkbox" name="lang-java" id="lang-java" class='filter-toggle' value="java_">
+          <label for="lang-java" class="toggle-label">Java</label>
+        </li>
+      </ul>
     </div>
     <div>
-      <input type="checkbox" name="lang-jsts" id="lang-jsts" class='filter-toggle' value="javascript">
-      <label for="lang-jsts" class="toggle-label">JS / TS</label>
-    </div>
-    <div>
-      <input type="checkbox" name="lang-java" id="lang-java" class='filter-toggle' value="java_">
-      <label for="lang-java" class="toggle-label">Java</label>
+      <button>OWASP</button>
+      <ul class="list-none p-0 not-prose flex flex-col gap-4" id="owasp-filters">
+        <li>
+          <input type="checkbox" name="owasp-01" id="owasp-01" class='filter-toggle' value="A01:2021">
+          <label for="owasp-01" class="toggle-label">OWASP A01:2021</label>
+        </li>
+        <li>
+          <input type="checkbox" name="owasp-02" id="owasp-02" class='filter-toggle' value="A02:2021">
+          <label for="owasp-02" class="toggle-label">OWASP A02:2021</label>
+        </li>
+        <li>
+          <input type="checkbox" name="owasp-03" id="owasp-03" class='filter-toggle' value="A03:2021">
+          <label for="owasp-03" class="toggle-label">OWASP A03:2021</label>
+        </li>
+        <li>
+          <input type="checkbox" name="owasp-04" id="owasp-04" class='filter-toggle' value="A04:2021">
+          <label for="owasp-04" class="toggle-label">OWASP A04:2021</label>
+        </li>
+      </ul>
     </div>
   </div>
 </form>
@@ -62,10 +88,10 @@ The built-in rules aim to keep you protected from the most cirtical security ris
     let source = item
       .innerHTML
       .toLowerCase();
-    let filtersActive = filters.length == 0
+    let filtersActive = filters.length === 0
       ? false
-      : true
-    let matchFilters = false
+      : true;
+
     let found = false
     if (filtersActive) {
       filters.forEach(f => {
@@ -86,19 +112,23 @@ The built-in rules aim to keep you protected from the most cirtical security ris
 
   function filterResults() {
     const rules = document.querySelectorAll('.js-rule')
-    const filters = document.querySelectorAll('.filter-toggle:checked')
+    const langs = document.querySelectorAll('#lang-filters .filter-toggle:checked')
+    const owasp = document.querySelectorAll('#owasp-filters .filter-toggle:checked')
     const query = document
       .getElementById('search-input')
-      .value;
+      .value
+      .toLowerCase();
     rules.forEach(rule => {
-      if (compare(rule, query.toLowerCase(), filters)) {
+      if (compare(rule, query, langs) && compare(rule, query, owasp)) {
         rule
           .classList
           .remove('hidden')
       } else {
-        rule
-          .classList
-          .add('hidden')
+        if (!rule.classList.contains('hidden')) {
+          rule
+            .classList
+            .add('hidden')
+        }
       }
     })
   };
