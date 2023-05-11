@@ -94,7 +94,7 @@ docker compose run bearer scan /tmp/scan --debug
 
 ### Binary
 
-Download the archive file for your operating system/architecture from here.
+Download the archive file for your operating system/architecture from the [release page](https://github.com/bearer/bearer/releases).
 
 Unpack the archive, and put the binary somewhere in your `$PATH` (on UNIX-y systems, `/usr/local/bin` or the like). Make sure it has permission to execute.
 
