@@ -201,7 +201,7 @@ func (javascriptImplementation *javascriptImplementation) ShouldSkipNode(node *t
 func (*javascriptImplementation) PatternLeafContentTypes() []string {
 	return []string{
 		// identifiers
-		"identifier", "property_identifier", "shorthand_property_identifier",
+		"identifier", "property_identifier", "shorthand_property_identifier", "type_identifier",
 		// datatypes/literals
 		"template_string", "string_fragment", "number", "null", "true", "false",
 	}
