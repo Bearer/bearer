@@ -55,7 +55,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 		report.Dependencies = append(report.Dependencies, depsbase.Dependency{
 			Name:    stringutil.StripQuotes(capture["param_name"].Content()),
 			Version: stringutil.StripQuotes(capture["param_version"].Content()),
-			Line:    int64(capture["param_name"].LineNumber()),
+			Line:    int64(capture["param_name"].StartLineNumber()),
 			Column:  int64(capture["param_name"].Column()),
 		})
 	}

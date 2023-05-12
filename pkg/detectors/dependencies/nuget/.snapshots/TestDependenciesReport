@@ -7,8 +7,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -45,8 +49,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(17),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(17),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(17),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -64,8 +70,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(29),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(29),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(29),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -83,8 +91,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(37),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(37),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(37),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -102,8 +112,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(45),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(45),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(45),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -121,8 +133,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(54),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(54),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(54),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -140,8 +154,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(68),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(68),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(68),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -159,8 +175,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(77),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(77),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(77),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -178,8 +196,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(86),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(86),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(86),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -197,8 +217,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(96),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(96),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(96),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -216,8 +238,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(110),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(110),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(110),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -235,8 +259,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(119),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(119),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(119),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -254,8 +280,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(129),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(129),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(129),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -273,8 +301,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(134),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(134),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(134),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -292,8 +322,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(139),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(139),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(139),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -311,8 +343,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(148),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(148),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(148),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -330,8 +364,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(156),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(156),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(156),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -349,8 +385,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(164),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(164),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(164),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -368,8 +406,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(176),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(176),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(176),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -387,8 +427,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(188),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(188),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(188),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -406,8 +448,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(196),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(196),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(196),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -425,8 +469,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(201),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(201),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(201),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -444,8 +490,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(209),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(209),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(209),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -463,8 +511,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(219),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(219),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(219),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -482,8 +532,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(224),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(224),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(224),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -501,8 +553,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(234),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(234),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(234),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -520,8 +574,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(239),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(239),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(239),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -539,8 +595,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(248),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(248),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(248),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -558,8 +616,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(259),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(259),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(259),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -577,8 +637,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(267),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(267),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(267),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -596,8 +658,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(272),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(272),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(272),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -615,8 +679,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(281),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(281),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(281),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -634,8 +700,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(286),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(286),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(286),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -653,8 +721,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(291),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(291),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(291),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -672,8 +742,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(303),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(303),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(303),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -691,8 +763,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(308),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(308),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(308),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -710,8 +784,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(313),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(313),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(313),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -729,8 +805,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(323),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(323),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(323),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -748,8 +826,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(332),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(332),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(332),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -767,8 +847,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(345),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(345),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(345),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -786,8 +868,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(350),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(350),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(350),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -805,8 +889,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(367),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(367),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(367),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -824,8 +910,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(372),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(372),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(372),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -843,8 +931,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(384),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(384),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(384),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -862,8 +952,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(392),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(392),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(392),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -881,8 +973,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(400),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(400),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(400),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -900,8 +994,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(405),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(405),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(405),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -919,8 +1015,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(415),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(415),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(415),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -938,8 +1036,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(427),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(427),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(427),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -957,8 +1057,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(435),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(435),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(435),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -976,8 +1078,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(444),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(444),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(444),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -995,8 +1099,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(449),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(449),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(449),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1014,8 +1120,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(454),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(454),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(454),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1033,8 +1141,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(463),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(463),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(463),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1052,8 +1162,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(474),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(474),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(474),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1071,8 +1183,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(479),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(479),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(479),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1090,8 +1204,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(484),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(484),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(484),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1109,8 +1225,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(496),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(496),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(496),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1128,8 +1246,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(501),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(501),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(501),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1147,8 +1267,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(511),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(511),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(511),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1166,8 +1288,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(523),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(523),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(523),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1185,8 +1309,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(532),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(532),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(532),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1204,8 +1330,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(537),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(537),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(537),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1223,8 +1351,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(546),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(546),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(546),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1242,8 +1372,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(551),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(551),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(551),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1261,8 +1393,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(556),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(556),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(556),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1280,8 +1414,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(566),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(566),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(566),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1299,8 +1435,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(574),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(574),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(574),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1318,8 +1456,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(583),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(583),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(583),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1337,8 +1477,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(588),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(588),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(588),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1356,8 +1498,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(598),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(598),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(598),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1375,8 +1519,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(644),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(644),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(644),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1394,8 +1540,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(649),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(649),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(649),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1413,8 +1561,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(654),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(654),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(654),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1432,8 +1582,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(659),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(659),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(659),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1451,8 +1603,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(664),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(664),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(664),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1470,8 +1624,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(669),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(669),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(669),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1489,8 +1645,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(677),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(677),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(677),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1508,8 +1666,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(682),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(682),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(682),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1527,8 +1687,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(687),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(687),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(687),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1546,8 +1708,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(692),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(692),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(692),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1565,8 +1729,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(697),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(697),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(697),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1584,8 +1750,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(706),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(706),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(706),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1603,8 +1771,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(716),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(716),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(716),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1622,8 +1792,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(757),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(757),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(757),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1641,8 +1813,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(814),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(814),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(814),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1660,8 +1834,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(825),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(825),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(825),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1679,8 +1855,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2027),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2027),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2027),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1698,8 +1876,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1717,8 +1897,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(34),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(34),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(34),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1736,8 +1918,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(50),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(50),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(50),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1755,8 +1939,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(51),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(51),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(51),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1774,8 +1960,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(59),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(59),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(59),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1793,8 +1981,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(63),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(63),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(63),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1812,8 +2002,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(73),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(73),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(73),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1831,8 +2023,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(245),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(245),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(245),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1850,8 +2044,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(253),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(253),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(253),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1869,8 +2065,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(254),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(254),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(254),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1888,8 +2086,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(277),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(277),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(277),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1907,8 +2107,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(300),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(300),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(300),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1926,8 +2128,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(318),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(318),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(318),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1945,8 +2149,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(328),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(328),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(328),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1964,8 +2170,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(329),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(329),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(329),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1983,8 +2191,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(340),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(340),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(340),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2002,8 +2212,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(342),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(342),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(342),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2021,8 +2233,10 @@
       Filename: (string) (len=18) "packages.lock.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(361),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(361),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(361),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

@@ -7,8 +7,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(6),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(8),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(28),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -132,8 +142,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(6),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -157,8 +169,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(8),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -182,8 +196,10 @@
       Filename: (string) (len=11) "datatype.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(7),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {

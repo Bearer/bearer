@@ -122,7 +122,7 @@ func extractScripts(report report.Report, tree *parser.Tree, file *file.FileInfo
 		}
 
 		if typeValue == "" || typeValue == "text/javascript" {
-			offset := captures["raw"].LineNumber() - 1
+			offset := captures["raw"].StartLineNumber() - 1
 			_, err := javascript.ProcessRaw(
 				captures["raw"].Content(),
 				report,

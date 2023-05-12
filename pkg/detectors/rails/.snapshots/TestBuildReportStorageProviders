@@ -8,8 +8,10 @@
       Filename: (string) (len=18) "config/storage.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (rails.Storage) {
@@ -27,8 +29,10 @@
       Filename: (string) (len=18) "config/storage.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (rails.Storage) {
@@ -46,8 +50,10 @@
       Filename: (string) (len=18) "config/storage.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(1),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (rails.Storage) {

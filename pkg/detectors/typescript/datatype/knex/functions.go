@@ -73,8 +73,8 @@ func detectFunctionTypes(report report.Report, tree *parser.Tree, language *sitt
 	}
 
 	sort.Slice(sortedTypes, func(i, j int) bool {
-		lineNumberA := sortedTypes[i].node.Source(false).LineNumber
-		lineNumberB := sortedTypes[j].node.Source(false).LineNumber
+		lineNumberA := sortedTypes[i].node.Source(false).StartLineNumber
+		lineNumberB := sortedTypes[j].node.Source(false).StartLineNumber
 		return *lineNumberA < *lineNumberB
 	})
 

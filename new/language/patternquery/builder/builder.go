@@ -118,8 +118,8 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 	if node.IsError() {
 		return fmt.Errorf(
 			"error parsing pattern at %d:%d: %s",
-			node.LineNumber(),
-			node.ColumnNumber(),
+			node.StartLineNumber(),
+			node.StartColumnNumber(),
 			node.Content(),
 		)
 	}

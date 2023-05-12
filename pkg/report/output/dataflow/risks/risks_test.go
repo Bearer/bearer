@@ -41,8 +41,8 @@ func TestDataflowRisks(t *testing.T) {
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:   "./users.rb",
-							LineNumber: 25,
+							Filename:        "./users.rb",
+							StartLineNumber: 25,
 							DataTypes: []types.RiskDatatype{
 								{
 
@@ -76,8 +76,8 @@ func TestDataflowRisks(t *testing.T) {
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:   "./users.rb",
-							LineNumber: 25,
+							Filename:        "./users.rb",
+							StartLineNumber: 25,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Username",
@@ -103,8 +103,8 @@ func TestDataflowRisks(t *testing.T) {
 					DetectorID: "ruby_leak",
 					Locations: []types.RiskLocation{
 						{
-							Filename:   "./users.rb",
-							LineNumber: 25,
+							Filename:        "./users.rb",
+							StartLineNumber: 25,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Username",
@@ -131,8 +131,8 @@ func TestDataflowRisks(t *testing.T) {
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:   "./users.rb",
-							LineNumber: 25,
+							Filename:        "./users.rb",
+							StartLineNumber: 25,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Username",
@@ -159,8 +159,8 @@ func TestDataflowRisks(t *testing.T) {
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:   "./users.rb",
-							LineNumber: 25,
+							Filename:        "./users.rb",
+							StartLineNumber: 25,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Physical Address",

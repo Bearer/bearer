@@ -38,14 +38,16 @@ type fileHolder struct {
 }
 
 type lineNumberHolder struct {
-	lineNumber  int
-	encrypted   *bool
-	verifiedBy  []types.DatatypeVerifiedBy
-	stored      *bool
-	parent      *schema.Parent
-	fieldName   string
-	objectName  string
-	subjectName *string
+	startLineNumber   int
+	startColumnNumber int
+	endColumnNumber   int
+	encrypted         *bool
+	verifiedBy        []types.DatatypeVerifiedBy
+	stored            *bool
+	parent            *schema.Parent
+	fieldName         string
+	objectName        string
+	subjectName       *string
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
@@ -72,7 +74,9 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *ExtraFie
 			classification.DataType,
 			string(detection.DetectorType),
 			detection.Source.Filename,
-			*detection.Source.LineNumber,
+			*detection.Source.StartLineNumber,
+			*detection.Source.StartColumnNumber,
+			*detection.Source.EndColumnNumber,
 			classification.SubjectName,
 			extras,
 			schema,
@@ -83,7 +87,17 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *ExtraFie
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, subjectName *string, extras *ExtraFields, schema schema.Schema) {
+func (holder *Holder) addDatatype(
+	classification *db.DataType,
+	detectorName string,
+	fileName string,
+	lineNumber int,
+	startColumnNumber int,
+	endColumnNumber int,
+	subjectName *string,
+	extras *ExtraFields,
+	schema schema.Schema,
+) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[classification.Name]; !exists {
 		datatype := datatypeHolder{
@@ -122,11 +136,13 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 	// create line number entry if it doesn't exist
 	if _, exists := file.lineNumbers[lineNumber]; !exists {
 		file.lineNumbers[lineNumber] = &lineNumberHolder{
-			lineNumber:  lineNumber,
-			fieldName:   schema.FieldName,
-			objectName:  schema.ObjectName,
-			subjectName: subjectName,
-			parent:      schema.Parent,
+			startLineNumber:   lineNumber,
+			startColumnNumber: startColumnNumber,
+			endColumnNumber:   endColumnNumber,
+			fieldName:         schema.FieldName,
+			objectName:        schema.ObjectName,
+			subjectName:       subjectName,
+			parent:            schema.Parent,
 		}
 	}
 
@@ -177,15 +193,17 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 			for _, fileHolder := range maputil.ToSortedSlice(detectorHolder.files) {
 				for _, lineNumber := range maputil.ToSortedSlice(fileHolder.lineNumbers) {
 					location := types.DatatypeLocation{
-						Filename:    fileHolder.name,
-						LineNumber:  lineNumber.lineNumber,
-						Encrypted:   lineNumber.encrypted,
-						VerifiedBy:  lineNumber.verifiedBy,
-						Stored:      lineNumber.stored,
-						Parent:      lineNumber.parent,
-						FieldName:   lineNumber.fieldName,
-						ObjectName:  lineNumber.objectName,
-						SubjectName: lineNumber.subjectName,
+						Filename:          fileHolder.name,
+						StartLineNumber:   lineNumber.startLineNumber,
+						StartColumnNumber: lineNumber.startColumnNumber,
+						EndColumnNumber:   lineNumber.endColumnNumber,
+						Encrypted:         lineNumber.encrypted,
+						VerifiedBy:        lineNumber.verifiedBy,
+						Stored:            lineNumber.stored,
+						Parent:            lineNumber.parent,
+						FieldName:         lineNumber.fieldName,
+						ObjectName:        lineNumber.objectName,
+						SubjectName:       lineNumber.subjectName,
 					}
 					constructedDetector.Locations = append(constructedDetector.Locations, location)
 				}

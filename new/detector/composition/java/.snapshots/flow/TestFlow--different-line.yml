@@ -10,6 +10,10 @@ high:
       category_groups:
         - PII
         - Personal Data
+      parent:
+        start: 3
+        end: 3
+        content: logger.error(name)
       parent_line_number: 3
       snippet: logger.error(name)
       fingerprint: b08f2b317021ef0197dc9286477e251d_0

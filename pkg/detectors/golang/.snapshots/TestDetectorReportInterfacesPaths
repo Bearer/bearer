@@ -7,8 +7,10 @@
       Filename: (string) (len=8) "paths.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(14),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(14),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(14),
+      EndColumnNumber: (*int)(8),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=8) "paths.go",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=15) "\"something.com\"")
     },
     Value: (interfaces.Interface) {

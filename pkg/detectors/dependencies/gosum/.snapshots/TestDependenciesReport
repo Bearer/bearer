@@ -7,8 +7,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(1),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(1),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -45,8 +49,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -64,8 +70,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -83,8 +91,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -102,8 +112,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -121,8 +133,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -140,8 +154,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(14),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(14),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(14),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -159,8 +175,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -178,8 +196,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(18),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(18),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(18),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -197,8 +217,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -216,8 +238,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -235,8 +259,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -254,8 +280,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -273,8 +301,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(26),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(26),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(26),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -292,8 +322,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -311,8 +343,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(29),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(29),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(29),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -330,8 +364,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -349,8 +385,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(32),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(32),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(32),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -368,8 +406,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(34),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(34),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(34),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -387,8 +427,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(35),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(35),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(35),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -406,8 +448,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(37),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(37),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(37),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -425,8 +469,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(38),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(38),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(38),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -444,8 +490,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(40),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(40),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(40),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -463,8 +511,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(42),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(42),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(42),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -482,8 +532,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(44),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(44),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(44),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -501,8 +553,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(46),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(46),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(46),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -520,8 +574,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(47),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(47),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(47),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -539,8 +595,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(48),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(48),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(48),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -558,8 +616,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(49),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(49),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(49),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -577,8 +637,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(50),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(50),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(50),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -596,8 +658,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(51),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(51),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(51),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -615,8 +679,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(53),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(53),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(53),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -634,8 +700,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(54),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(54),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(54),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -653,8 +721,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(55),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(55),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(55),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -672,8 +742,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(56),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(56),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(56),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -691,8 +763,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(57),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(57),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(57),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -710,8 +784,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(59),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(59),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(59),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -729,8 +805,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(61),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(61),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(61),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -748,8 +826,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(62),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(62),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(62),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -767,8 +847,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(63),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(63),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(63),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -786,8 +868,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(64),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(64),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(64),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -805,8 +889,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(66),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(66),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(66),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -824,8 +910,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(67),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(67),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(67),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -843,8 +931,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(68),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(68),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(68),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -862,8 +952,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(69),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(69),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(69),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -881,8 +973,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(70),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(70),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(70),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -900,8 +994,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(71),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(71),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(71),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -919,8 +1015,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(72),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(72),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(72),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -938,8 +1036,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(73),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(73),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(73),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -957,8 +1057,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(74),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(74),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(74),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -976,8 +1078,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(75),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(75),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(75),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -995,8 +1099,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(76),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(76),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(76),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1014,8 +1120,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(77),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(77),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(77),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1033,8 +1141,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(79),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(79),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(79),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1052,8 +1162,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(80),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(80),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(80),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1071,8 +1183,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(81),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(81),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(81),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1090,8 +1204,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(83),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(83),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(83),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1109,8 +1225,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(84),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(84),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(84),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1128,8 +1246,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(85),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(85),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(85),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1147,8 +1267,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(86),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(86),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(86),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1166,8 +1288,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(88),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(88),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(88),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1185,8 +1309,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(90),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(90),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(90),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1204,8 +1330,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(91),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(91),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(91),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1223,8 +1351,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(92),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(92),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(92),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1242,8 +1372,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(94),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(94),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(94),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1261,8 +1393,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(96),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(96),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(96),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1280,8 +1414,10 @@
       Filename: (string) (len=6) "go.sum",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(98),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(98),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(98),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

@@ -7,8 +7,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(48),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(48),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(48),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=5) "\"id1\"")
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(53),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(53),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(53),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=5) "\"id2\"")
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(104),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(104),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(104),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "\"status\"")
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(141),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(141),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(141),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=6) "\"tags\"")
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(173),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(173),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(173),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -132,8 +142,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(202),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(202),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(202),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -157,8 +169,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(208),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(208),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(208),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=6) "\"name\"")
     },
     Value: (schema.Schema) {
@@ -182,8 +196,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(213),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(213),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(213),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "\"status\"")
     },
     Value: (schema.Schema) {
@@ -207,8 +223,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(235),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(235),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(235),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=9) "\"api_key\"")
     },
     Value: (schema.Schema) {
@@ -232,8 +250,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(239),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(239),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(239),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -257,8 +277,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(264),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(264),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(264),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -282,8 +304,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(270),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(270),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(270),
+      EndColumnNumber: (*int)(37),
       Text: (*string)((len=20) "\"additionalMetadata\"")
     },
     Value: (schema.Schema) {
@@ -307,8 +331,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(275),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(275),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(275),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=6) "\"file\"")
     },
     Value: (schema.Schema) {
@@ -332,8 +358,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(344),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(344),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(344),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=9) "\"orderId\"")
     },
     Value: (schema.Schema) {
@@ -357,8 +385,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(371),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(371),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(371),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=9) "\"orderId\"")
     },
     Value: (schema.Schema) {
@@ -382,8 +412,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(377),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(377),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(377),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "\"email\"")
     },
     Value: (schema.Schema) {
@@ -407,8 +439,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(461),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(461),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(461),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -432,8 +466,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(466),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(466),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(466),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=10) "\"password\"")
     },
     Value: (schema.Schema) {
@@ -457,8 +493,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(512),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(512),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(512),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -482,8 +520,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(536),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(536),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(536),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -507,8 +547,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(562),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(562),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(562),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -532,8 +574,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(588),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(588),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(588),
+      EndColumnNumber: (*int)(9),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -557,8 +601,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(591),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(591),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(591),
+      EndColumnNumber: (*int)(12),
       Text: (*string)((len=5) "petId")
     },
     Value: (schema.Schema) {
@@ -582,8 +628,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(594),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(594),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(594),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=8) "quantity")
     },
     Value: (schema.Schema) {
@@ -607,8 +655,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(597),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(597),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(597),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=8) "shipDate")
     },
     Value: (schema.Schema) {
@@ -632,8 +682,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(600),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(600),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(600),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=6) "status")
     },
     Value: (schema.Schema) {
@@ -657,8 +709,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(607),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(607),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(607),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=8) "complete")
     },
     Value: (schema.Schema) {
@@ -682,8 +736,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(615),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(615),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(615),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=4) "name")
     },
     Value: (schema.Schema) {
@@ -707,8 +763,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(620),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(620),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(620),
+      EndColumnNumber: (*int)(9),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -732,8 +790,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(623),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(623),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(623),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=3) "id1")
     },
     Value: (schema.Schema) {
@@ -757,8 +817,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(625),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(625),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(625),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=3) "id2")
     },
     Value: (schema.Schema) {
@@ -782,8 +844,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(627),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(627),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(627),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=8) "username")
     },
     Value: (schema.Schema) {
@@ -807,8 +871,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(629),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(629),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(629),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=9) "firstName")
     },
     Value: (schema.Schema) {
@@ -832,8 +898,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(631),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(631),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(631),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=8) "lastName")
     },
     Value: (schema.Schema) {
@@ -857,8 +925,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(633),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(633),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(633),
+      EndColumnNumber: (*int)(12),
       Text: (*string)((len=5) "email")
     },
     Value: (schema.Schema) {
@@ -882,8 +952,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(635),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(635),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(635),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=8) "password")
     },
     Value: (schema.Schema) {
@@ -907,8 +979,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(637),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(637),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(637),
+      EndColumnNumber: (*int)(12),
       Text: (*string)((len=5) "phone")
     },
     Value: (schema.Schema) {
@@ -932,8 +1006,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(639),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(639),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(639),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=10) "userStatus")
     },
     Value: (schema.Schema) {
@@ -957,8 +1033,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(648),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(648),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(648),
+      EndColumnNumber: (*int)(9),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -982,8 +1060,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(651),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(651),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(651),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=4) "name")
     },
     Value: (schema.Schema) {
@@ -1007,8 +1087,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(658),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(658),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(658),
+      EndColumnNumber: (*int)(9),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -1032,8 +1114,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(661),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(661),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(661),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=4) "name")
     },
     Value: (schema.Schema) {
@@ -1057,8 +1141,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(670),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(670),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(670),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=4) "code")
     },
     Value: (schema.Schema) {
@@ -1082,8 +1168,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(673),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(673),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(673),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=4) "type")
     },
     Value: (schema.Schema) {
@@ -1107,8 +1195,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(675),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(675),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(675),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=7) "message")
     },
     Value: (schema.Schema) {
@@ -1132,8 +1222,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(677),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(677),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(677),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=4) "test")
     },
     Value: (schema.Schema) {
@@ -1157,8 +1249,10 @@
       Filename: (string) (len=21) "petstore-swagger.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(680),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(680),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(680),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=12) "testproperty")
     },
     Value: (schema.Schema) {

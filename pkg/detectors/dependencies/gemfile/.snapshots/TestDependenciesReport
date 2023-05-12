@@ -7,8 +7,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -45,8 +49,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -64,8 +70,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -83,8 +91,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -102,8 +112,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(17),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(17),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(17),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -121,8 +133,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -140,8 +154,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -159,8 +175,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -178,8 +196,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -197,8 +217,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -216,8 +238,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(28),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -235,8 +259,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(29),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(29),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(29),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -254,8 +280,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(33),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(33),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(33),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -273,8 +301,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(34),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(34),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(34),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -292,8 +322,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(35),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(35),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(35),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -311,8 +343,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -330,8 +364,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(37),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(37),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(37),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -349,8 +385,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(81),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(81),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(81),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -368,8 +406,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(87),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(87),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(87),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -387,8 +427,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(90),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(90),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(90),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -406,8 +448,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(91),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(91),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(91),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -425,8 +469,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(93),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(93),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(93),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -444,8 +490,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(106),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(106),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(106),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -463,8 +511,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(108),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(108),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(108),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -482,8 +532,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(111),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(111),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(111),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -501,8 +553,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(114),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(114),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(114),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -520,8 +574,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(118),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(118),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(118),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -539,8 +595,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(120),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(120),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(120),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -558,8 +616,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(122),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(122),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(122),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -577,8 +637,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(124),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(124),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(124),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -596,8 +658,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(127),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(127),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(127),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -615,8 +679,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(130),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(130),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(130),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -634,8 +700,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(132),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(132),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(132),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -653,8 +721,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(133),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(133),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(133),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -672,8 +742,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(135),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(135),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(135),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -691,8 +763,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(137),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(137),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(137),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -710,8 +784,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(139),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(139),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(139),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -729,8 +805,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(144),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(144),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(144),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -748,8 +826,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(146),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(146),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(146),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -767,8 +847,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(148),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(148),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(148),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -786,8 +868,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(150),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(150),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(150),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -805,8 +889,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(151),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(151),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(151),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -824,8 +910,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(154),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(154),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(154),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -843,8 +931,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(157),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(157),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(157),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -862,8 +952,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(160),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(160),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(160),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -881,8 +973,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(163),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(163),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(163),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -900,8 +994,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(166),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(166),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(166),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -919,8 +1015,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(169),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(169),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(169),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -938,8 +1036,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(172),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(172),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(172),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -957,8 +1057,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(175),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(175),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(175),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -976,8 +1078,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(178),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(178),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(178),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -995,8 +1099,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(182),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(182),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(182),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1014,8 +1120,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(185),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(185),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(185),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1033,8 +1141,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(188),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(188),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(188),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1052,8 +1162,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(191),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(191),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(191),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1071,8 +1183,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(193),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(193),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(193),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1090,8 +1204,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(195),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(195),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(195),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1109,8 +1225,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(199),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(199),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(199),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1128,8 +1246,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(201),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(201),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(201),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1147,8 +1267,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(203),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(203),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(203),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1166,8 +1288,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(204),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(204),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(204),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1185,8 +1309,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(207),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(207),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(207),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1204,8 +1330,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(208),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(208),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(208),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1223,8 +1351,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(209),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(209),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(209),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1242,8 +1372,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(213),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(213),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(213),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1261,8 +1393,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(214),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(214),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(214),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1280,8 +1414,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(215),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(215),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(215),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1299,8 +1435,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(218),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(218),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(218),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1318,8 +1456,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(221),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(221),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(221),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1337,8 +1477,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(223),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(223),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(223),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1356,8 +1498,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(224),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(224),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(224),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1375,8 +1519,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(225),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(225),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(225),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1394,8 +1540,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(226),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(226),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(226),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1413,8 +1561,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(228),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(228),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(228),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1432,8 +1582,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(229),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(229),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(229),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1451,8 +1603,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(230),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(230),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(230),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1470,8 +1624,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(232),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(232),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(232),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1489,8 +1645,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(233),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(233),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(233),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1508,8 +1666,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(234),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(234),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(234),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1527,8 +1687,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(235),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(235),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(235),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1546,8 +1708,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(237),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(237),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(237),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1565,8 +1729,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(240),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(240),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(240),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1584,8 +1750,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(243),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(243),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(243),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1603,8 +1771,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(245),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(245),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(245),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1622,8 +1792,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(247),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(247),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(247),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1641,8 +1813,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(248),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(248),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(248),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1660,8 +1834,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(250),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(250),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(250),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1679,8 +1855,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(252),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(252),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(252),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1698,8 +1876,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(254),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(254),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(254),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1717,8 +1897,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(255),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(255),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(255),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1736,8 +1918,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(256),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(256),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(256),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1755,8 +1939,10 @@
       Filename: (string) (len=12) "Gemfile.lock",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(257),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(257),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(257),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

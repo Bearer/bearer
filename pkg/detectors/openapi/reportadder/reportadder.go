@@ -27,8 +27,8 @@ func (s SortableSchemaList) Swap(i, j int) {
 	s[i], s[j] = s[j], s[i]
 }
 func (s SortableSchemaList) Less(i, j int) bool {
-	lineNumberA := s[i].Value.Source.LineNumber
-	lineNumberB := s[j].Value.Source.LineNumber
+	lineNumberA := s[i].Value.Source.StartLineNumber
+	lineNumberB := s[j].Value.Source.StartLineNumber
 	return *lineNumberA < *lineNumberB
 }
 

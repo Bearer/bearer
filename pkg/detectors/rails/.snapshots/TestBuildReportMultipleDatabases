@@ -8,8 +8,10 @@
       Filename: (string) (len=19) "config/database.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(100),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(100),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (rails.Database) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=19) "config/database.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(107),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(107),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (rails.Database) {

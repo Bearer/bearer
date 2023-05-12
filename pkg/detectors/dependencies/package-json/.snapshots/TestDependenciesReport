@@ -7,8 +7,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -45,8 +49,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -64,8 +70,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(26),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(26),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(26),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -83,8 +91,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -102,8 +112,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(28),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -121,8 +133,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(29),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(29),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(29),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -140,8 +154,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(30),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(30),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(30),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -159,8 +175,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -178,8 +196,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(32),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(32),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(32),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -197,8 +217,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(33),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(33),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(33),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -216,8 +238,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(34),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(34),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(34),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -235,8 +259,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(35),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(35),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(35),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -254,8 +280,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -273,8 +301,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(37),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(37),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(37),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -292,8 +322,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(38),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(38),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(38),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -311,8 +343,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(39),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(39),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(39),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -330,8 +364,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(40),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(40),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(40),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -349,8 +385,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(41),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(41),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(41),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -368,8 +406,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(42),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(42),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(42),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -387,8 +427,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(43),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(43),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(43),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -406,8 +448,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(44),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(44),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(44),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -425,8 +469,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(45),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(45),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(45),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -444,8 +490,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(46),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(46),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(46),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -463,8 +511,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(47),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(47),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(47),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -482,8 +532,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(48),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(48),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(48),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -501,8 +553,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(49),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(49),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(49),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -520,8 +574,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(50),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(50),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(50),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -539,8 +595,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(51),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(51),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(51),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -558,8 +616,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(52),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(52),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(52),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -577,8 +637,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(53),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(53),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(53),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -596,8 +658,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(54),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(54),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(54),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -615,8 +679,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(55),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(55),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(55),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -634,8 +700,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(56),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(56),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(56),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -653,8 +721,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(57),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(57),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(57),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -672,8 +742,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(58),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(58),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(58),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -691,8 +763,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(59),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(59),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(59),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -710,8 +784,10 @@
       Filename: (string) (len=12) "package.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(60),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(60),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(60),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

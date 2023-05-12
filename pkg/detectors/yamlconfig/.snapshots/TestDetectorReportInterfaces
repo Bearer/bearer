@@ -7,8 +7,10 @@
       Filename: (string) (len=24) "config/parameters.yml.j2",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(95),
       Text: (*string)((len=86) "http.ms.messenger.google.com.host: 'http://{{ udata_assets.ms_messenger_appli.host }}'")
     },
     Value: (interfaces.Interface) {
@@ -39,8 +41,10 @@
       Filename: (string) (len=24) "config/parameters.yml.j2",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(111),
       Text: (*string)((len=102) "http.ms.shipment-tracking.google.com.host: 'http://{{ udata_assets.ms_shipment_tracking_appli.host }}'")
     },
     Value: (interfaces.Interface) {
@@ -71,8 +75,10 @@
       Filename: (string) (len=24) "config/parameters.yml.j2",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(101),
       Text: (*string)((len=92) "http.ms.seller-order.google.com.host: 'http://{{ udata_assets.ms_seller_order_appli.host }}'")
     },
     Value: (interfaces.Interface) {
@@ -103,8 +109,10 @@
       Filename: (string) (len=24) "config/parameters.yml.j2",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(93),
       Text: (*string)((len=84) "http.ms.customer.google.com.host: 'http://{{ udata_assets.ms_customer_appli.host }}'")
     },
     Value: (interfaces.Interface) {
@@ -135,8 +143,10 @@
       Filename: (string) (len=24) "config/parameters.yml.j2",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(87),
       Text: (*string)((len=78) "http.ms.order.google.com.host: 'http://{{ udata_assets.ms_order_appli.host }}'")
     },
     Value: (interfaces.Interface) {
@@ -167,8 +177,10 @@
       Filename: (string) (len=24) "config/parameters.yml.j2",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(89),
       Text: (*string)((len=80) "http.ms.seller.google.com.host: 'http://{{ udata_assets.ms_seller_appli.host }}'")
     },
     Value: (interfaces.Interface) {
@@ -199,8 +211,10 @@
       Filename: (string) (len=22) "docker-compose.yml.tpl",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(55),
       Text: (*string)((len=46) "DD_APM_DD_URL=https://trace.agent.datadoghq.eu")
     },
     Value: (interfaces.Interface) {
@@ -224,8 +238,10 @@
       Filename: (string) (len=22) "docker-compose.yml.tpl",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=17) "image: $IMAGE_URL")
     },
     Value: (interfaces.Interface) {
@@ -252,8 +268,10 @@
       Filename: (string) (len=22) "docker-compose.yml.tpl",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(41),
       Text: (*string)((len=32) "BASE_DOMAIN=$PRODUCTIBASE_DOMAIN")
     },
     Value: (interfaces.Interface) {
@@ -280,8 +298,10 @@
       Filename: (string) (len=22) "docker-compose.yml.tpl",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(32),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(32),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(32),
+      EndColumnNumber: (*int)(47),
       Text: (*string)((len=38) "BEARER_ASSETS_HOST=$BEARER_ASSETS_HOST")
     },
     Value: (interfaces.Interface) {
@@ -308,8 +328,10 @@
       Filename: (string) (len=22) "docker-compose.yml.tpl",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(33),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(33),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(33),
+      EndColumnNumber: (*int)(53),
       Text: (*string)((len=44) "WEBHOOKS_ADDRESS=http://example.com/webhooks")
     },
     Value: (interfaces.Interface) {

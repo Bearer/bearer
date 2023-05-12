@@ -34,6 +34,164 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
+type Description struct {
+	Text string `json:"text"`
+}
+
+type Configuration struct {
+	Level string `json:"level"`
+}
+
+type Properties struct {
+	Tags      []string `json:"tags"`
+	Precision string   `json:"precision"`
+}
+
+type Help struct {
+	Markdown string `json:"markdown"`
+}
+
+type SarifRule struct {
+	Id                   string        `json:"id"`
+	Name                 string        `json:"name"`
+	Kind                 string        `json:"kind"`
+	ShortDescription     Description   `json:"shortDescription"`
+	FullDescription      Description   `json:"fullDescription"`
+	DefaultConfiguration Configuration `json:"defaultConfiguration"`
+	Properties           Properties    `json:"properties"`
+	Help                 Help          `json:"help"`
+}
+
+type SarifDriver struct {
+	Name       string      `json:"name"`
+	SarifRules []SarifRule `json:"rules"`
+}
+
+type SarifTool struct {
+	Driver SarifDriver `json:"driver"`
+}
+
+type Message struct {
+	Text string `json:"text"`
+}
+
+type ArtifactLocation struct {
+	URI string `json:"uri"`
+}
+
+type PhysicalLocation struct {
+	ArtifactLocation ArtifactLocation `json:"artifactLocation"`
+}
+
+type Region struct {
+	StartLine   int `json:"startLine"`
+	StartColumn int `json:"startColumn"`
+	EndColumn   int `json:"endColumn"`
+	EndLine     int `json:"endLine"`
+}
+
+type Location struct {
+	PhysicalLocation PhysicalLocation `json:"physicalLocation"`
+	Region           Region           `json:"region"`
+}
+
+type PartialFingerprints struct {
+	PrimaryLocationLineHash               string `json:"primaryLocationLineHash,omitempty"`
+	PrimaryLocationStartColumnFingerprint string `json:"primaryLocationStartColumnFingerprint,omitempty"`
+}
+
+type Result struct {
+	RuleId              string               `json:"ruleId"`
+	RuleIndex           int                  `json:"ruleIndex"`
+	Message             Message              `json:"message"`
+	Locations           []Location           `json:"locations"`
+	PartialFingerprints *PartialFingerprints `json:"partialFingerprints,omitempty"`
+}
+
+type SarifRun struct {
+	Tool    SarifTool `json:"tool"`
+	Results []Result  `json:"results"`
+}
+
+type SarifOutput struct {
+	Schema  string     `json:"$schema"`
+	Version string     `json:"version"`
+	Runs    []SarifRun `json:"runs"`
+}
+
+func ReportSarif(outputDetections *map[string][]security.Result) (*string, error) {
+	// log.Error().Msgf("detections: %#v", outputDetections)
+
+	output := SarifOutput{
+		Schema:  "https://json.schemastore.org/sarif-2.1.0.json",
+		Version: "2.1.0",
+		Runs: []SarifRun{
+			{
+				Tool: SarifTool{
+					Driver: SarifDriver{
+						Name: "Bearer",
+						SarifRules: []SarifRule{
+							{
+								Id:   "R01",
+								Kind: "path-problem",
+								Name: "js/unused-local-variable",
+								ShortDescription: Description{
+									Text: "Unused variable, import, function or class",
+								},
+								FullDescription: Description{
+									Text: "Unused variables, imports, functions or classes may be a symptom of a bug and should be examined carefully.",
+								},
+								DefaultConfiguration: Configuration{
+									Level: "note",
+								},
+								Help: Help{
+									Markdown: "",
+								},
+								Properties: Properties{
+									Tags:      []string{"maintainability"},
+									Precision: "very-high",
+								},
+							},
+						},
+					},
+				},
+				Results: []Result{
+					{
+						RuleId:    "3f292041e51d22005ce48f39df3585d44ce1b0ad",
+						RuleIndex: 0,
+						Message: Message{
+							Text: "Unused variable foo.",
+						},
+						Locations: []Location{
+							{
+								PhysicalLocation: PhysicalLocation{
+									ArtifactLocation: ArtifactLocation{
+										URI: "main.js",
+									},
+								},
+								Region: Region{
+									StartLine:   2,
+									StartColumn: 7,
+									EndColumn:   10,
+								},
+							},
+						},
+						// If you are uploading third-party SARIF files with the upload-action, the action will create partialFingerprints for you when they are not included in the SARIF file
+						// PartialFingerprints: PartialFingerprints{
+						// 	PrimaryLocationLineHash:               "123",
+						// 	PrimaryLocationStartColumnFingerprint: "1234",
+						// },
+					},
+				},
+			},
+		},
+	}
+
+	content, _ := ReportJSON(output)
+
+	return content, nil
+}
+
 func ReportJSON(outputDetections any) (*string, error) {
 	jsonBytes, err := json.Marshal(&outputDetections)
 	if err != nil {

@@ -7,8 +7,10 @@
       Filename: (string) (len=19) "variables/config.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(33),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(33),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(65),
       Text: (*string)((len=32) "process.ENV['ORDER_SERVICE_URL']")
     },
     Value: (interfaces.Interface) {
@@ -35,8 +37,10 @@
       Filename: (string) (len=19) "variables/config.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(31),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(31),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(60),
       Text: (*string)((len=29) "process.ENV.USER_SERVICE_HOST")
     },
     Value: (interfaces.Interface) {
@@ -63,8 +67,10 @@
       Filename: (string) (len=19) "variables/config.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(28),
       Text: (*string)((len=19) "PRODUCT_SERVICE_URL")
     },
     Value: (interfaces.Interface) {
@@ -91,8 +97,10 @@
       Filename: (string) (len=19) "variables/config.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(30),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(30),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(41),
       Text: (*string)((len=11) "AUTH_DOMAIN")
     },
     Value: (interfaces.Interface) {
@@ -119,8 +127,10 @@
       Filename: (string) (len=19) "variables/config.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(78),
       Text: (*string)((len=55) "`http://${process.ENV.CUSTOMER_HOST}/path/${accountId}`")
     },
     Value: (interfaces.Interface) {
@@ -162,8 +172,10 @@
       Filename: (string) (len=19) "variables/config.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(81),
       Text: (*string)((len=65) "'http://' + process.ENV.CUSTOMER_HOST + \"/\" + \"path/\" + accountId")
     },
     Value: (interfaces.Interface) {

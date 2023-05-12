@@ -38,7 +38,13 @@ func TestDataflowDataType(t *testing.T) {
 						{
 							Name: "ruby",
 							Locations: []types.DatatypeLocation{
-								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
+								{
+									Filename:          "./users.rb",
+									StartLineNumber:   25,
+									StartColumnNumber: 10,
+									EndColumnNumber:   17,
+									FieldName:         "User_name",
+								},
 							},
 						},
 					},
@@ -63,7 +69,13 @@ func TestDataflowDataType(t *testing.T) {
 						{
 							Name: "ruby",
 							Locations: []types.DatatypeLocation{
-								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
+								{
+									Filename:          "./users.rb",
+									StartLineNumber:   25,
+									StartColumnNumber: 10,
+									EndColumnNumber:   17,
+									FieldName:         "User_name",
+								},
 							},
 						},
 					},
@@ -82,7 +94,13 @@ func TestDataflowDataType(t *testing.T) {
 						{
 							Name: "ruby",
 							Locations: []types.DatatypeLocation{
-								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
+								{
+									Filename:          "./users.rb",
+									StartLineNumber:   25,
+									StartColumnNumber: 10,
+									EndColumnNumber:   17,
+									FieldName:         "User_name",
+								},
 							},
 						},
 					},
@@ -101,13 +119,25 @@ func TestDataflowDataType(t *testing.T) {
 						{
 							Name: "csharp",
 							Locations: []types.DatatypeLocation{
-								{Filename: "./users.cs", LineNumber: 12, FieldName: "User_name"},
+								{
+									Filename:          "./users.cs",
+									StartLineNumber:   25,
+									StartColumnNumber: 10,
+									EndColumnNumber:   17,
+									FieldName:         "User_name",
+								},
 							},
 						},
 						{
 							Name: "ruby",
 							Locations: []types.DatatypeLocation{
-								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
+								{
+									Filename:          "./users.rb",
+									StartLineNumber:   25,
+									StartColumnNumber: 10,
+									EndColumnNumber:   17,
+									FieldName:         "User_name",
+								},
 							},
 						},
 					},
@@ -126,7 +156,13 @@ func TestDataflowDataType(t *testing.T) {
 						{
 							Name: "csharp",
 							Locations: []types.DatatypeLocation{
-								{Filename: "./users.cs", LineNumber: 12, FieldName: "address"},
+								{
+									Filename:          "./users.cs",
+									StartLineNumber:   25,
+									StartColumnNumber: 10,
+									EndColumnNumber:   17,
+									FieldName:         "address",
+								},
 							},
 						},
 					},
@@ -137,7 +173,13 @@ func TestDataflowDataType(t *testing.T) {
 						{
 							Name: "ruby",
 							Locations: []types.DatatypeLocation{
-								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
+								{
+									Filename:          "./users.rb",
+									StartLineNumber:   25,
+									StartColumnNumber: 10,
+									EndColumnNumber:   17,
+									FieldName:         "User_name",
+								},
 							},
 						},
 					},

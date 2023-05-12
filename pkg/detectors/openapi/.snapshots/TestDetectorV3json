@@ -7,8 +7,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(188),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(188),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(188),
+      EndColumnNumber: (*int)(29),
       Text: (*string)((len=8) "\"status\"")
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(250),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(250),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(250),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=6) "\"tags\"")
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(309),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(309),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(309),
+      EndColumnNumber: (*int)(29),
       Text: (*string)((len=8) "\"petId1\"")
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(319),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(319),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(319),
+      EndColumnNumber: (*int)(29),
       Text: (*string)((len=8) "\"petId2\"")
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(373),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(373),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(373),
+      EndColumnNumber: (*int)(28),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -132,8 +142,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(383),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(383),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(383),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=6) "\"name\"")
     },
     Value: (schema.Schema) {
@@ -157,8 +169,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(391),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(391),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(391),
+      EndColumnNumber: (*int)(29),
       Text: (*string)((len=8) "\"status\"")
     },
     Value: (schema.Schema) {
@@ -182,8 +196,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(422),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(422),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(422),
+      EndColumnNumber: (*int)(30),
       Text: (*string)((len=9) "\"api_key\"")
     },
     Value: (schema.Schema) {
@@ -207,8 +223,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(431),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(431),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(431),
+      EndColumnNumber: (*int)(28),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -232,8 +250,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(466),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(466),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(466),
+      EndColumnNumber: (*int)(28),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -257,8 +277,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(476),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(476),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(476),
+      EndColumnNumber: (*int)(41),
       Text: (*string)((len=20) "\"additionalMetadata\"")
     },
     Value: (schema.Schema) {
@@ -282,8 +304,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(602),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(602),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(602),
+      EndColumnNumber: (*int)(30),
       Text: (*string)((len=9) "\"orderId\"")
     },
     Value: (schema.Schema) {
@@ -307,8 +331,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(645),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(645),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(645),
+      EndColumnNumber: (*int)(30),
       Text: (*string)((len=9) "\"orderId\"")
     },
     Value: (schema.Schema) {
@@ -332,8 +358,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(764),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(764),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(764),
+      EndColumnNumber: (*int)(31),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -357,8 +385,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(773),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(773),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(773),
+      EndColumnNumber: (*int)(31),
       Text: (*string)((len=10) "\"password\"")
     },
     Value: (schema.Schema) {
@@ -382,8 +412,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(846),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(846),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(846),
+      EndColumnNumber: (*int)(31),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -407,8 +439,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(888),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(888),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(888),
+      EndColumnNumber: (*int)(31),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -432,8 +466,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(932),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(932),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(932),
+      EndColumnNumber: (*int)(31),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -457,8 +493,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(957),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(957),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(957),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=4) "\"id\"")
     },
     Value: (schema.Schema) {
@@ -482,8 +520,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(962),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(962),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(962),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -507,8 +547,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(967),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(967),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(967),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"quantity\"")
     },
     Value: (schema.Schema) {
@@ -532,8 +574,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(972),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(972),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(972),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"shipDate\"")
     },
     Value: (schema.Schema) {
@@ -557,8 +601,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(976),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(976),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(976),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=8) "\"status\"")
     },
     Value: (schema.Schema) {
@@ -582,8 +628,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(986),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(986),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(986),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"complete\"")
     },
     Value: (schema.Schema) {
@@ -607,8 +655,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(997),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(997),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(997),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=4) "\"id\"")
     },
     Value: (schema.Schema) {
@@ -632,8 +682,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1002),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1002),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1002),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -657,8 +709,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1006),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1006),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1006),
+      EndColumnNumber: (*int)(20),
       Text: (*string)((len=9) "\"address\"")
     },
     Value: (schema.Schema) {
@@ -682,8 +736,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1024),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1024),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1024),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=8) "\"street\"")
     },
     Value: (schema.Schema) {
@@ -707,8 +763,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1028),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1028),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1028),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=6) "\"city\"")
     },
     Value: (schema.Schema) {
@@ -732,8 +790,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1032),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1032),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1032),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=7) "\"state\"")
     },
     Value: (schema.Schema) {
@@ -757,8 +817,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1036),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1036),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1036),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=5) "\"zip\"")
     },
     Value: (schema.Schema) {
@@ -782,8 +844,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1048),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1048),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1048),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=4) "\"id\"")
     },
     Value: (schema.Schema) {
@@ -807,8 +871,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1051),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(1051),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(1051),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=10) "\"childId1\"")
     },
     Value: (schema.Schema) {
@@ -832,8 +898,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1055),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(1055),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(1055),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=10) "\"childId2\"")
     },
     Value: (schema.Schema) {
@@ -857,8 +925,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1061),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1061),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1061),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=6) "\"name\"")
     },
     Value: (schema.Schema) {
@@ -882,8 +952,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1073),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1073),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1073),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=4) "\"id\"")
     },
     Value: (schema.Schema) {
@@ -907,8 +979,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1078),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1078),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1078),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"username\"")
     },
     Value: (schema.Schema) {
@@ -932,8 +1006,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1082),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1082),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1082),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=11) "\"firstName\"")
     },
     Value: (schema.Schema) {
@@ -957,8 +1033,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1086),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1086),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1086),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"lastName\"")
     },
     Value: (schema.Schema) {
@@ -982,8 +1060,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1090),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1090),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1090),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=7) "\"email\"")
     },
     Value: (schema.Schema) {
@@ -1007,8 +1087,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1094),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1094),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1094),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"password\"")
     },
     Value: (schema.Schema) {
@@ -1032,8 +1114,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1098),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1098),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1098),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=7) "\"phone\"")
     },
     Value: (schema.Schema) {
@@ -1057,8 +1141,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1102),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1102),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1102),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=12) "\"userStatus\"")
     },
     Value: (schema.Schema) {
@@ -1082,8 +1168,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1116),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1116),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1116),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=4) "\"id\"")
     },
     Value: (schema.Schema) {
@@ -1107,8 +1195,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1120),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1120),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1120),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=6) "\"name\"")
     },
     Value: (schema.Schema) {
@@ -1132,8 +1222,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1135),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1135),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1135),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=4) "\"id\"")
     },
     Value: (schema.Schema) {
@@ -1157,8 +1249,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1140),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1140),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1140),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=6) "\"name\"")
     },
     Value: (schema.Schema) {
@@ -1182,8 +1276,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1144),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1144),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1144),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=10) "\"category\"")
     },
     Value: (schema.Schema) {
@@ -1207,8 +1303,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1147),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1147),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1147),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=11) "\"photoUrls\"")
     },
     Value: (schema.Schema) {
@@ -1232,8 +1330,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1159),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1159),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1159),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=6) "\"tags\"")
     },
     Value: (schema.Schema) {
@@ -1257,8 +1357,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1168),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1168),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1168),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=8) "\"status\"")
     },
     Value: (schema.Schema) {
@@ -1282,8 +1384,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1185),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1185),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1185),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=6) "\"code\"")
     },
     Value: (schema.Schema) {
@@ -1307,8 +1411,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1189),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1189),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1189),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=6) "\"type\"")
     },
     Value: (schema.Schema) {
@@ -1332,8 +1438,10 @@
       Filename: (string) (len=21) "petstore-openapi.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1192),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(1192),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(1192),
+      EndColumnNumber: (*int)(20),
       Text: (*string)((len=9) "\"message\"")
     },
     Value: (schema.Schema) {

@@ -1,2 +1,20 @@
-{}
+high:
+    - rule:
+        cwe_ids: []
+        id: logger_test_rule
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: object-variable-reconciliation.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent:
+        start: 2
+        end: 2
+        content: logger.info(user)
+      parent_line_number: 2
+      snippet: logger.info(user)
+      fingerprint: 50cde2c647d72172d49858483ecb0b57_0
 

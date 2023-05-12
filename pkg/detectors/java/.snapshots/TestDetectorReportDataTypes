@@ -7,8 +7,10 @@
       Filename: (string) (len=13) "datatype.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=13) "datatype.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=13) "datatype.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=13) "datatype.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(6),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {

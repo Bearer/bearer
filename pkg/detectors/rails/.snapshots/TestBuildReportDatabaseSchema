@@ -7,8 +7,10 @@
       Filename: (string) (len=12) "db/schema.rb",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=12) "db/schema.rb",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(27),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=12) "db/schema.rb",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(25),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=12) "db/schema.rb",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=12) "db/schema.rb",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {

@@ -25,15 +25,15 @@ func (scope *Scope) toSortedDatatypes() [][]datatype.DataTypable {
 	}
 
 	sort.Slice(sortedDatatypes, func(i, j int) bool {
-		lineNumberA := sortedDatatypes[i][0].GetNode().Source(false).LineNumber
-		lineNumberB := sortedDatatypes[j][0].GetNode().Source(false).LineNumber
+		lineNumberA := sortedDatatypes[i][0].GetNode().Source(false).StartLineNumber
+		lineNumberB := sortedDatatypes[j][0].GetNode().Source(false).StartLineNumber
 
 		if *lineNumberA != *lineNumberB {
 			return *lineNumberA < *lineNumberB
 		}
 
-		columnNumberA := sortedDatatypes[i][0].GetNode().Source(false).ColumnNumber
-		columnNumberB := sortedDatatypes[j][0].GetNode().Source(false).ColumnNumber
+		columnNumberA := sortedDatatypes[i][0].GetNode().Source(false).StartColumnNumber
+		columnNumberB := sortedDatatypes[j][0].GetNode().Source(false).StartColumnNumber
 
 		return *columnNumberA < *columnNumberB
 	})
@@ -147,15 +147,15 @@ func UnifyUUID(datatypes []datatype.DataTypable, idGenerator nodeid.Generator) {
 
 func SortScopes(input []*Scope) {
 	sort.Slice(input, func(i, j int) bool {
-		lineNumberA := input[i].Node.Source(false).LineNumber
-		lineNumberB := input[j].Node.Source(false).LineNumber
+		lineNumberA := input[i].Node.Source(false).StartLineNumber
+		lineNumberB := input[j].Node.Source(false).StartLineNumber
 
 		if *lineNumberA != *lineNumberB {
 			return *lineNumberA < *lineNumberB
 		}
 
-		columnNumberA := input[i].Node.Source(false).ColumnNumber
-		columnNumberB := input[j].Node.Source(false).ColumnNumber
+		columnNumberA := input[i].Node.Source(false).StartColumnNumber
+		columnNumberB := input[j].Node.Source(false).StartColumnNumber
 
 		return *columnNumberA < *columnNumberB
 	})

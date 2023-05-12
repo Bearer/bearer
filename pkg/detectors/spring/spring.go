@@ -138,11 +138,11 @@ func extractDataStoresFromProperties(file *file.FileInfo, report report.Report) 
 	report.AddFramework(detectors.DetectorSpring, spring.TypeDatabase, spring.DataStore{
 		Driver: getDriver(driverClass1.value, driverClass2.value, url.value),
 	}, source.Source{
-		Language:     file.Language,
-		LanguageType: file.LanguageTypeString(),
-		Filename:     file.RelativePath,
-		LineNumber:   &property.lineNumber,
-		Text:         &property.text,
+		Language:        file.Language,
+		LanguageType:    file.LanguageTypeString(),
+		Filename:        file.RelativePath,
+		StartLineNumber: &property.lineNumber,
+		Text:            &property.text,
 	})
 
 	return nil
@@ -189,10 +189,10 @@ func extractDataStoresFromYAML(file *file.FileInfo, report report.Report) error 
 	report.AddFramework(detectors.DetectorSpring, spring.TypeDatabase, spring.DataStore{
 		Driver: getDriver(dataSource.DriverClass1, dataSource.DriverClass2, dataSource.URL),
 	}, source.Source{
-		Language:     file.Language,
-		LanguageType: file.LanguageTypeString(),
-		Filename:     file.RelativePath,
-		LineNumber:   pointers.Int(dataSourceNode.Line - 1),
+		Language:        file.Language,
+		LanguageType:    file.LanguageTypeString(),
+		Filename:        file.RelativePath,
+		StartLineNumber: pointers.Int(dataSourceNode.Line - 1),
 	})
 
 	return nil

@@ -43,12 +43,20 @@ func (node *Node) EndByte() int {
 	return int(node.sitterNode.EndByte())
 }
 
-func (node *Node) LineNumber() int {
+func (node *Node) StartLineNumber() int {
 	return int(node.sitterNode.StartPoint().Row + 1)
 }
 
-func (node *Node) ColumnNumber() int {
+func (node *Node) EndLineNumber() int {
+	return int(node.sitterNode.EndPoint().Row + 1)
+}
+
+func (node *Node) StartColumnNumber() int {
 	return int(node.sitterNode.StartPoint().Column + 1)
+}
+
+func (node *Node) EndColumnNumber() int {
+	return int(node.sitterNode.EndPoint().Column + 1)
 }
 
 func (node *Node) Parent() *Node {

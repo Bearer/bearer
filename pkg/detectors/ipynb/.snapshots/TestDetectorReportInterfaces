@@ -7,8 +7,10 @@
       Filename: (string) (len=11) "small.ipynb",
       Language: (string) (len=16) "Jupyter Notebook",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(39),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(39),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(39),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=22) "\"variable.example.com\"")
     },
     Value: (interfaces.Interface) {

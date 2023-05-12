@@ -28,13 +28,18 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 				source.New(
 					file,
 					file.Path,
-					detection.MatchNode.LineNumber(),
-					detection.MatchNode.ColumnNumber(),
+					detection.MatchNode.StartLineNumber(),
+					detection.MatchNode.StartColumnNumber(),
+					detection.MatchNode.EndLineNumber(),
+					detection.MatchNode.EndColumnNumber(),
 					data.Pattern,
 				),
 				schema.Parent{
-					LineNumber: detection.MatchNode.LineNumber(),
-					Content:    detection.MatchNode.Content(),
+					StartLineNumber:   detection.MatchNode.StartLineNumber(),
+					EndLineNumber:     detection.MatchNode.EndLineNumber(),
+					StartColumnNumber: detection.MatchNode.StartColumnNumber(),
+					EndColumnNumber:   detection.MatchNode.EndColumnNumber(),
+					Content:           detection.MatchNode.Content(),
 				})
 		}
 
@@ -70,8 +75,10 @@ func reportDatatypeDetection(
 			source.New(
 				file,
 				file.Path,
-				property.Node.LineNumber(),
-				property.Node.ColumnNumber(),
+				property.Node.StartLineNumber(),
+				property.Node.StartColumnNumber(),
+				property.Node.EndLineNumber(),
+				property.Node.EndColumnNumber(),
 				"",
 			),
 			schema.Schema{
@@ -81,8 +88,11 @@ func reportDatatypeDetection(
 				NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
 				Classification:       property.Classification,
 				Parent: &schema.Parent{
-					LineNumber: detection.MatchNode.LineNumber(),
-					Content:    detection.MatchNode.Content(),
+					StartLineNumber:   detection.MatchNode.StartLineNumber(),
+					EndLineNumber:     detection.MatchNode.EndLineNumber(),
+					StartColumnNumber: detection.MatchNode.StartColumnNumber(),
+					EndColumnNumber:   detection.MatchNode.EndColumnNumber(),
+					Content:           detection.MatchNode.Content(),
 				},
 			},
 		)

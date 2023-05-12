@@ -207,8 +207,11 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 
 		if parent != nil {
 			parentSchema = &schema.Parent{
-				Content:    parent.Content(),
-				LineNumber: parent.LineNumber(),
+				Content:           parent.Content(),
+				StartLineNumber:   parent.StartLineNumber(),
+				StartColumnNumber: parent.StartColumnNumber(),
+				EndLineNumber:     parent.EndLineNumber(),
+				EndColumnNumber:   parent.EndColumnNumber(),
 			}
 		}
 		normalizedObjectName := ""
@@ -217,7 +220,10 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 		normalizedObjectName = pluralizer.Singular(strings.ToLower(parentName))
 		normalizedFieldName = pluralizer.Singular(strings.ToLower(selfName))
 
-		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
+		report.AddDetection(
+			detectionType,
+			detectorType,
+			dataType.GetNode().Source(false),
 			schema.Schema{
 				ObjectName:           parentName,
 				FieldName:            selfName,
@@ -258,15 +264,15 @@ func SortParserMap[D DataTypable](input map[parser.NodeID]D) []D {
 
 func SortSlice[D DataTypable](input []D) []D {
 	sort.Slice(input, func(i, j int) bool {
-		lineNumberA := input[i].GetNode().Source(false).LineNumber
-		lineNumberB := input[j].GetNode().Source(false).LineNumber
+		lineNumberA := input[i].GetNode().Source(false).StartLineNumber
+		lineNumberB := input[j].GetNode().Source(false).StartLineNumber
 
 		if *lineNumberA != *lineNumberB {
 			return *lineNumberA < *lineNumberB
 		}
 
-		columnNumberA := input[i].GetNode().Source(false).ColumnNumber
-		columnNumberB := input[j].GetNode().Source(false).ColumnNumber
+		columnNumberA := input[i].GetNode().Source(false).StartColumnNumber
+		columnNumberB := input[j].GetNode().Source(false).StartColumnNumber
 
 		if *columnNumberA != *columnNumberB {
 			return *columnNumberA < *columnNumberB

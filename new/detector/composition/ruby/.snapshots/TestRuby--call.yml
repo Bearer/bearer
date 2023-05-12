@@ -1,2 +1,20 @@
-{}
+high:
+    - rule:
+        cwe_ids: []
+        id: logger_test_rule
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      filename: call.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent:
+        start: 1
+        end: 1
+        content: logger.info(user.name)
+      parent_line_number: 1
+      snippet: logger.info(user.name)
+      fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
 

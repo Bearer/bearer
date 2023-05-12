@@ -7,8 +7,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(38),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(38),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -132,8 +142,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(16),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -157,8 +169,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(18),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(18),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(18),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -182,8 +196,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -207,8 +223,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(38),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -232,8 +250,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(26),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(26),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(26),
+      EndColumnNumber: (*int)(16),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -257,8 +277,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(66),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(66),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(69),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -282,8 +304,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(30),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(30),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(30),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -307,8 +331,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -332,8 +358,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(38),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -357,8 +385,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(38),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(38),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(38),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -382,8 +412,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(38),
-      ColumnNumber: (*int)(36),
+      StartLineNumber: (*int)(38),
+      StartColumnNumber: (*int)(36),
+      EndLineNumber: (*int)(38),
+      EndColumnNumber: (*int)(56),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -407,8 +439,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(41),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(41),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(41),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -432,8 +466,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(47),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(47),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(47),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -457,8 +493,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(47),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(47),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(47),
+      EndColumnNumber: (*int)(38),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -482,8 +520,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(49),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(49),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(49),
+      EndColumnNumber: (*int)(18),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -507,8 +547,10 @@
       Filename: (string) (len=7) "main.py",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(52),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(52),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(52),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {

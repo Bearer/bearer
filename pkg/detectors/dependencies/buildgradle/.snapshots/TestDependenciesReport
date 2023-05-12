@@ -7,8 +7,10 @@
       Filename: (string) (len=12) "build.gradle",
       Language: (string) (len=6) "Gradle",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(30),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(30),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(30),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=12) "build.gradle",
       Language: (string) (len=6) "Gradle",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

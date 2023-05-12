@@ -115,10 +115,10 @@ func extractDatabasesFromConfig(file *file.FileInfo, report report.Report) error
 			Name:   name,
 			Driver: driver,
 		}, source.Source{
-			Language:     file.Language,
-			LanguageType: file.LanguageTypeString(),
-			Filename:     file.RelativePath,
-			LineNumber:   pointers.Int(connectionNode.Line - 1),
+			Language:        file.Language,
+			LanguageType:    file.LanguageTypeString(),
+			Filename:        file.RelativePath,
+			StartLineNumber: pointers.Int(connectionNode.Line - 1),
 		})
 	}
 

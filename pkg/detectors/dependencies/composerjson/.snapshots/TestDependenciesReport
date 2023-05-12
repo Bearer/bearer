@@ -7,8 +7,10 @@
       Filename: (string) (len=13) "composer.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=13) "composer.json",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

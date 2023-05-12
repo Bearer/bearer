@@ -4,9 +4,16 @@ import future.keywords
 
 build_item(location) := {
 	"filename": location.filename,
-	"parent_line_number": location.parent.line_number,
-	"parent_content": location.parent.content,
-	"line_number": location.line_number,
+	"parent": {
+		"start": location.parent.start_line_number,
+		"end": location.parent.end_line_number,
+		"content": location.parent.content,
+	},
+	"column": {
+		"start": location.start_column_number,
+		"end": location.end_column_number,
+	},
+	"line_number": location.start_line_number,
 	"detailed_context": location.presence_matches[0].name,
 } if {
 	# FIXME: This is only for secret detections. Should be more explicit
@@ -25,9 +32,16 @@ build_local_item(location, data_type) := {
 	"is_local": true,
 	"category_groups": groups_for_datatype(data_type),
 	"filename": location.filename,
-	"line_number": location.line_number,
-	"parent_line_number": location.parent.line_number,
-	"parent_content": location.parent.content,
+	"parent": {
+		"start": location.parent.start_line_number,
+		"end": location.parent.end_line_number,
+		"content": location.parent.content,
+	},
+	"column": {
+		"start": location.start_column_number,
+		"end": location.end_column_number,
+	},
+	"line_number": location.start_line_number,
 	"datatype_name": data_type.name,
 } if {
 	not input.rule.has_detailed_context == true
@@ -36,9 +50,16 @@ build_local_item(location, data_type) := {
 build_item(location) := {
 	"category_groups": cat_groups,
 	"filename": location.filename,
-	"line_number": location.line_number,
-	"parent_line_number": location.parent.line_number,
-	"parent_content": location.parent.content,
+	"parent": {
+		"start": location.parent.start_line_number,
+		"end": location.parent.end_line_number,
+		"content": location.parent.content,
+	},
+	"column": {
+		"start": location.start_column_number,
+		"end": location.end_column_number,
+	},
+	"line_number": location.start_line_number,
 } if {
 	not input.rule.has_detailed_context == true
 }

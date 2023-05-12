@@ -316,13 +316,19 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			if !rule.OmitParent {
 				parentSource = capture["rule"].Source(true)
 				parent = &schema.Parent{
-					LineNumber: *parentSource.LineNumber,
-					Content:    *parentSource.Text,
+					StartLineNumber:   *parentSource.StartLineNumber,
+					EndLineNumber:     *parentSource.EndLineNumber,
+					StartColumnNumber: *parentSource.StartColumnNumber,
+					EndColumnNumber:   *parentSource.EndColumnNumber,
+					Content:           *parentSource.Text,
 				}
 			} else {
 				parentSource = capture["rule"].Source(false)
 				parent = &schema.Parent{
-					LineNumber: *parentSource.LineNumber,
+					StartLineNumber:   *parentSource.StartLineNumber,
+					StartColumnNumber: *parentSource.StartColumnNumber,
+					EndLineNumber:     *parentSource.EndLineNumber,
+					EndColumnNumber:   *parentSource.EndColumnNumber,
 				}
 			}
 

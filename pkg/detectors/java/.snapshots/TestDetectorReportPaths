@@ -7,8 +7,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(78),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(38),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(45),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -132,8 +142,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(47),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(47),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(70),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -157,8 +169,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(72),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(72),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(96),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -182,8 +196,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(98),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(98),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(121),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -207,8 +223,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(123),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(123),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(146),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -232,8 +250,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(101),
-      ColumnNumber: (*int)(25),
+      StartLineNumber: (*int)(101),
+      StartColumnNumber: (*int)(25),
+      EndLineNumber: (*int)(101),
+      EndColumnNumber: (*int)(56),
       Text: (*string)((len=31) "System.getenv(\"CUSTOMERS_HOST\")")
     },
     Value: (interfaces.Interface) {
@@ -260,8 +280,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(101),
-      ColumnNumber: (*int)(77),
+      StartLineNumber: (*int)(101),
+      StartColumnNumber: (*int)(77),
+      EndLineNumber: (*int)(101),
+      EndColumnNumber: (*int)(112),
       Text: (*string)((len=35) "System.getenv(\"CUSTOMER_HOST_PORT\")")
     },
     Value: (interfaces.Interface) {

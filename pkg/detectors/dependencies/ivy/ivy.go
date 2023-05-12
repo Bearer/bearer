@@ -116,7 +116,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 			Name:    formattedName(moduleName),
 			Group:   organisationName,
 			Version: version,
-			Line:    int64(capture["param_module_name"].LineNumber()),
+			Line:    int64(capture["param_module_name"].StartLineNumber()),
 			Column:  int64(capture["param_module_name"].Column()),
 		})
 	}

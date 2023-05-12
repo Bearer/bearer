@@ -7,8 +7,10 @@
       Filename: (string) (len=16) "requirements.txt",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=16) "requirements.txt",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -45,8 +49,10 @@
       Filename: (string) (len=16) "requirements.txt",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -64,8 +70,10 @@
       Filename: (string) (len=16) "requirements.txt",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

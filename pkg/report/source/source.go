@@ -6,23 +6,43 @@ import (
 
 // Source represents a part of a source file that is referenced in the scan report.
 type Source struct {
-	Filename     string  `json:"filename" yaml:"filename"`
-	Language     string  `json:"language" yaml:"language"`
-	LanguageType string  `json:"language_type" yaml:"language_type"`
-	LineNumber   *int    `json:"line_number" yaml:"line_number"`
-	ColumnNumber *int    `json:"column_number" yaml:"column_number"`
-	Text         *string `json:"text" yaml:"text"`
+	Filename          string  `json:"filename" yaml:"filename"`
+	Language          string  `json:"language" yaml:"language"`
+	LanguageType      string  `json:"language_type" yaml:"language_type"`
+	StartLineNumber   *int    `json:"start_line_number" yaml:"start_line_number"`
+	StartColumnNumber *int    `json:"start_column_number" yaml:"start_column_number"`
+	EndLineNumber     *int    `json:"end_line_number" yaml:"end_line_number"`
+	EndColumnNumber   *int    `json:"end_column_number" yaml:"end_column_number"`
+	Text              *string `json:"text" yaml:"text"`
 }
 
-func New(fileInfo *file.FileInfo, file *file.Path, lineNumber, columnNumber int, text string) Source {
-	var sourceLineNumber *int
-	if lineNumber != 0 {
-		sourceLineNumber = &lineNumber
+func New(
+	fileInfo *file.FileInfo,
+	file *file.Path,
+	startLineNumber,
+	startColumnNumber int,
+	endLineNumber,
+	endColumnNumber int,
+	text string,
+) Source {
+	var sourceStartLineNumber *int
+	if startLineNumber != 0 {
+		sourceStartLineNumber = &startLineNumber
 	}
 
-	var sourceColumnNumber *int
-	if columnNumber != 0 {
-		sourceColumnNumber = &columnNumber
+	var sourceStartColumnNumber *int
+	if startColumnNumber != 0 {
+		sourceStartColumnNumber = &startColumnNumber
+	}
+
+	var sourceEndLineNumber *int
+	if startLineNumber != 0 {
+		sourceEndLineNumber = &endLineNumber
+	}
+
+	var sourceEndColumnNumber *int
+	if startColumnNumber != 0 {
+		sourceEndColumnNumber = &endColumnNumber
 	}
 
 	var sourceText *string
@@ -38,11 +58,13 @@ func New(fileInfo *file.FileInfo, file *file.Path, lineNumber, columnNumber int,
 	}
 
 	return Source{
-		Filename:     file.RelativePath,
-		Language:     language,
-		LanguageType: languageType,
-		LineNumber:   sourceLineNumber,
-		ColumnNumber: sourceColumnNumber,
-		Text:         sourceText,
+		Filename:          file.RelativePath,
+		Language:          language,
+		LanguageType:      languageType,
+		StartLineNumber:   sourceStartLineNumber,
+		StartColumnNumber: sourceStartColumnNumber,
+		EndLineNumber:     sourceEndLineNumber,
+		EndColumnNumber:   sourceEndColumnNumber,
+		Text:              sourceText,
 	}
 }

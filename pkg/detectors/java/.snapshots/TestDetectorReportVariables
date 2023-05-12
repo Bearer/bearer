@@ -7,8 +7,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(14),
+      EndColumnNumber: (*int)(6),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=11) "config.java",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(32),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(32),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(91),
       Text: (*string)((len=59) "System.getenv(\"ORDER_SERVICE_URL\") + \"/path?x=\" + accountId")
     },
     Value: (interfaces.Interface) {

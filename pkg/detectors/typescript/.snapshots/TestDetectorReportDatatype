@@ -7,8 +7,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(9),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(8),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(12),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(26),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -132,8 +142,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(36),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(36),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(47),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -157,8 +169,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(7),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -182,8 +196,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(28),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -207,8 +223,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(33),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(33),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(33),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -232,8 +250,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(34),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(34),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(34),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -257,8 +277,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(35),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(35),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(35),
+      EndColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -282,8 +304,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -307,8 +331,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(42),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(42),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(42),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -332,8 +358,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(43),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(43),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(43),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -357,8 +385,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(44),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(44),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(44),
+      EndColumnNumber: (*int)(7),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -382,8 +412,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(46),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(46),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(46),
+      EndColumnNumber: (*int)(12),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -407,8 +439,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(47),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(47),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(47),
+      EndColumnNumber: (*int)(8),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -432,8 +466,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(48),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(48),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(48),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -457,8 +493,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(56),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(56),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(56),
+      EndColumnNumber: (*int)(12),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -482,8 +520,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(59),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(59),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(70),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -507,8 +547,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(73),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(73),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(74),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -532,8 +574,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(65),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(65),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(65),
+      EndColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -557,8 +601,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(66),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(66),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(66),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -582,8 +628,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(67),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(67),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(67),
+      EndColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -607,8 +655,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(68),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(68),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(68),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -632,8 +682,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(79),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(79),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(79),
+      EndColumnNumber: (*int)(7),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -657,8 +709,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(80),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(80),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(82),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -682,8 +736,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(88),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(88),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(88),
+      EndColumnNumber: (*int)(7),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -707,8 +763,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(93),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(93),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(93),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -732,8 +790,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(95),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(95),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(97),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -757,8 +817,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(99),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(99),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(99),
+      EndColumnNumber: (*int)(47),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -782,8 +844,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(99),
-      ColumnNumber: (*int)(20),
+      StartLineNumber: (*int)(99),
+      StartColumnNumber: (*int)(20),
+      EndLineNumber: (*int)(99),
+      EndColumnNumber: (*int)(26),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -807,8 +871,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(99),
-      ColumnNumber: (*int)(28),
+      StartLineNumber: (*int)(99),
+      StartColumnNumber: (*int)(28),
+      EndLineNumber: (*int)(99),
+      EndColumnNumber: (*int)(34),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -832,8 +898,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(104),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(104),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(104),
+      EndColumnNumber: (*int)(22),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -857,8 +925,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(105),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(105),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(105),
+      EndColumnNumber: (*int)(32),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -882,8 +952,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(106),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(106),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(106),
+      EndColumnNumber: (*int)(26),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -907,8 +979,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(107),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(107),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(107),
+      EndColumnNumber: (*int)(31),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -932,8 +1006,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(108),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(108),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(108),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -957,8 +1033,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(111),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(111),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(112),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -982,8 +1060,10 @@
       Filename: (string) (len=9) "schema.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(115),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(115),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(116),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {

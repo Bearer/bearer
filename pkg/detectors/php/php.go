@@ -102,7 +102,7 @@ func parseEmbedHtml(file *file.FileInfo, report reporttypes.Report, tree *parser
 	captures := tree.QueryMustPass(queryText)
 
 	for _, capture := range captures {
-		_, err := html.ProcessRaw(file, report, []byte(capture["param_text"].Content()), capture["param_text"].LineNumber(), idGenerator)
+		_, err := html.ProcessRaw(file, report, []byte(capture["param_text"].Content()), capture["param_text"].StartLineNumber(), idGenerator)
 
 		if err != nil {
 			return err

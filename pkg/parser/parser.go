@@ -228,8 +228,20 @@ func (node *Node) Debug() string {
 	return node.sitter.String()
 }
 
-func (node *Node) LineNumber() int {
+func (node *Node) EndLineNumber() int {
+	return int(node.sitter.EndPoint().Row+1) + node.tree.lineOffset
+}
+
+func (node *Node) StartLineNumber() int {
 	return int(node.sitter.StartPoint().Row+1) + node.tree.lineOffset
+}
+
+func (node *Node) StartColumnNumber() int {
+	return int(node.sitter.StartPoint().Column + 1)
+}
+
+func (node *Node) EndColumnNumber() int {
+	return int(node.sitter.EndPoint().Column + 1)
 }
 
 func (node *Node) Source(includeText bool) source.Source {
@@ -241,8 +253,10 @@ func (node *Node) Source(includeText bool) source.Source {
 	return source.New(
 		node.tree.fileInfo,
 		node.tree.File(),
-		node.LineNumber(),
-		int(node.sitter.StartPoint().Column+1),
+		node.StartLineNumber(),
+		node.StartColumnNumber(),
+		node.EndLineNumber(),
+		node.EndColumnNumber(),
 		text,
 	)
 }

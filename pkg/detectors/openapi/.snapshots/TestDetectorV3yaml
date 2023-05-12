@@ -7,8 +7,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(137),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(137),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(137),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "\"status\"")
     },
     Value: (schema.Schema) {
@@ -32,8 +34,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(179),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(179),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(179),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=4) "tags")
     },
     Value: (schema.Schema) {
@@ -57,8 +61,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(216),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(216),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(216),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=6) "petId1")
     },
     Value: (schema.Schema) {
@@ -82,8 +88,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(223),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(223),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(223),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=6) "petId2")
     },
     Value: (schema.Schema) {
@@ -107,8 +115,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(256),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(256),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(256),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=5) "petId")
     },
     Value: (schema.Schema) {
@@ -132,8 +142,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(263),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(263),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(263),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=4) "name")
     },
     Value: (schema.Schema) {
@@ -157,8 +169,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(268),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(268),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(268),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=6) "status")
     },
     Value: (schema.Schema) {
@@ -182,8 +196,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(287),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(287),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(287),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "api_key")
     },
     Value: (schema.Schema) {
@@ -207,8 +223,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(293),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(293),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(293),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=5) "petId")
     },
     Value: (schema.Schema) {
@@ -232,8 +250,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(315),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(315),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(315),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=5) "petId")
     },
     Value: (schema.Schema) {
@@ -257,8 +277,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(322),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(322),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(322),
+      EndColumnNumber: (*int)(35),
       Text: (*string)((len=18) "additionalMetadata")
     },
     Value: (schema.Schema) {
@@ -282,8 +304,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(404),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(404),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(404),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "orderId")
     },
     Value: (schema.Schema) {
@@ -307,8 +331,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(435),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(435),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(435),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=7) "orderId")
     },
     Value: (schema.Schema) {
@@ -332,8 +358,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(511),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(511),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(511),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "username")
     },
     Value: (schema.Schema) {
@@ -357,8 +385,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(517),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(517),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(517),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "password")
     },
     Value: (schema.Schema) {
@@ -382,8 +412,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(565),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(565),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(565),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "username")
     },
     Value: (schema.Schema) {
@@ -407,8 +439,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(593),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(593),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(593),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "username")
     },
     Value: (schema.Schema) {
@@ -432,8 +466,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(621),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(621),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(621),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=8) "username")
     },
     Value: (schema.Schema) {
@@ -457,8 +493,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(642),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(642),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(642),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -482,8 +520,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(646),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(646),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(646),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=5) "petId")
     },
     Value: (schema.Schema) {
@@ -507,8 +547,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(650),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(650),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(650),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "quantity")
     },
     Value: (schema.Schema) {
@@ -532,8 +574,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(654),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(654),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(654),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "shipDate")
     },
     Value: (schema.Schema) {
@@ -557,8 +601,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(657),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(657),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(657),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=6) "status")
     },
     Value: (schema.Schema) {
@@ -582,8 +628,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(665),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(665),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(665),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "complete")
     },
     Value: (schema.Schema) {
@@ -607,8 +655,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(672),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(672),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(672),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -632,8 +682,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(676),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(676),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(676),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "username")
     },
     Value: (schema.Schema) {
@@ -657,8 +709,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(679),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(679),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(679),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=7) "address")
     },
     Value: (schema.Schema) {
@@ -682,8 +736,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(691),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(691),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(691),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=6) "street")
     },
     Value: (schema.Schema) {
@@ -707,8 +763,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(694),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(694),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(694),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=4) "city")
     },
     Value: (schema.Schema) {
@@ -732,8 +790,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(697),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(697),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(697),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=5) "state")
     },
     Value: (schema.Schema) {
@@ -757,8 +817,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(700),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(700),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(700),
+      EndColumnNumber: (*int)(12),
       Text: (*string)((len=3) "zip")
     },
     Value: (schema.Schema) {
@@ -782,8 +844,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(709),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(709),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(709),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -807,8 +871,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(713),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(713),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(713),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=4) "name")
     },
     Value: (schema.Schema) {
@@ -832,8 +898,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(722),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(722),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(722),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -857,8 +925,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(725),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(725),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(725),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=3) "id1")
     },
     Value: (schema.Schema) {
@@ -882,8 +952,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(728),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(728),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(728),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=3) "id2")
     },
     Value: (schema.Schema) {
@@ -907,8 +979,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(731),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(731),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(731),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "username")
     },
     Value: (schema.Schema) {
@@ -932,8 +1006,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(734),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(734),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(734),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=9) "firstName")
     },
     Value: (schema.Schema) {
@@ -957,8 +1033,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(737),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(737),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(737),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "lastName")
     },
     Value: (schema.Schema) {
@@ -982,8 +1060,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(740),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(740),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(740),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=5) "email")
     },
     Value: (schema.Schema) {
@@ -1007,8 +1087,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(743),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(743),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(743),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "password")
     },
     Value: (schema.Schema) {
@@ -1032,8 +1114,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(746),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(746),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(746),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=5) "phone")
     },
     Value: (schema.Schema) {
@@ -1057,8 +1141,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(749),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(749),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(749),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=10) "userStatus")
     },
     Value: (schema.Schema) {
@@ -1082,8 +1168,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(760),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(760),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(760),
+      EndColumnNumber: (*int)(11),
       Text: (*string)((len=2) "id")
     },
     Value: (schema.Schema) {
@@ -1107,8 +1195,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(763),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(763),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(763),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=4) "name")
     },
     Value: (schema.Schema) {
@@ -1132,8 +1222,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(770),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(770),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(770),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=4) "code")
     },
     Value: (schema.Schema) {
@@ -1157,8 +1249,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(773),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(773),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(773),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=4) "type")
     },
     Value: (schema.Schema) {
@@ -1182,8 +1276,10 @@
       Filename: (string) (len=21) "petstore-openapi.yaml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(775),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(775),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(775),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=7) "message")
     },
     Value: (schema.Schema) {

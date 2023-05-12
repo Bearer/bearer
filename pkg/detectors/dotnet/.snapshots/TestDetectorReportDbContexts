@@ -8,8 +8,10 @@
       Filename: (string) (len=10) "Startup.cs",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(22),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(22),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(34),
       Text: (*string)(<nil>)
     },
     Value: (dotnet.DBContext) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=17) "nested/Startup.cs",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(35),
-      ColumnNumber: (*int)(22),
+      StartLineNumber: (*int)(35),
+      StartColumnNumber: (*int)(22),
+      EndLineNumber: (*int)(35),
+      EndColumnNumber: (*int)(34),
       Text: (*string)(<nil>)
     },
     Value: (dotnet.DBContext) {
@@ -44,8 +48,10 @@
       Filename: (string) (len=17) "nested/Startup.cs",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(22),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(22),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(34),
       Text: (*string)(<nil>)
     },
     Value: (dotnet.DBContext) {

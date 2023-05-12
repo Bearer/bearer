@@ -7,8 +7,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -26,8 +28,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -45,8 +49,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -64,8 +70,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(29),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(29),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(29),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -83,8 +91,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(41),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(41),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(41),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -102,8 +112,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(49),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(49),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(49),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -121,8 +133,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(60),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(60),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(60),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -140,8 +154,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(68),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(68),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(68),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -159,8 +175,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(80),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(80),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(80),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -178,8 +196,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(93),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(93),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(93),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -197,8 +217,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(101),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(101),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(101),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -216,8 +238,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(109),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(109),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(109),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -235,8 +259,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(132),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(132),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(132),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -254,8 +280,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(140),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(140),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(140),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -273,8 +301,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(148),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(148),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(148),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -292,8 +322,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(156),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(156),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(156),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -311,8 +343,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(164),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(164),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(164),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -330,8 +364,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(172),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(172),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(172),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -349,8 +385,10 @@
       Filename: (string) (len=11) "poetry.lock",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(180),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(180),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(180),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

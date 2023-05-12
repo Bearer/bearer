@@ -8,8 +8,10 @@
       Filename: (string) (len=41) "src/main/resources/application.properties",
       Language: (string) (len=3) "INI",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)((len=33) "spring.datasource.url=jdbc:h2:dev")
     },
     Value: (spring.DataStore) {
@@ -25,8 +27,10 @@
       Filename: (string) (len=34) "src/main/resources/application.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {
@@ -42,8 +46,10 @@
       Filename: (string) (len=42) "src/main/resources2/application.properties",
       Language: (string) (len=3) "INI",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)((len=57) "spring.datasource.driver-class-name=com.mysql.jdbc.Driver")
     },
     Value: (spring.DataStore) {
@@ -59,8 +65,10 @@
       Filename: (string) (len=35) "src/main/resources2/application.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {
@@ -76,8 +84,10 @@
       Filename: (string) (len=42) "src/main/resources3/application.properties",
       Language: (string) (len=3) "INI",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)((len=60) "spring.datasource.driverClassName=com.postgresql.jdbc.Driver")
     },
     Value: (spring.DataStore) {
@@ -93,8 +103,10 @@
       Filename: (string) (len=35) "src/main/resources3/application.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {
@@ -110,8 +122,10 @@
       Filename: (string) (len=42) "src/main/resources4/application.properties",
       Language: (string) (len=3) "INI",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)((len=31) "spring.datasource.url=${DB_URL}")
     },
     Value: (spring.DataStore) {
@@ -127,8 +141,10 @@
       Filename: (string) (len=35) "src/main/resources4/application.yml",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {

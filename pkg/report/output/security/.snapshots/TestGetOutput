@@ -18,6 +18,15 @@
         (string) (len=13) "Personal Data",
         (string) (len=25) "Personal Data (Sensitive)"
       },
+      Parent: (security.Parent) {
+        Start: (int) 1,
+        End: (int) 2,
+        Content: (string) (len=38) "Rails.logger.info(user.biometric_data)"
+      },
+      Column: (security.Column) {
+        Start: (int) 0,
+        End: (int) 0
+      },
       ParentLineNumber: (int) 1,
       ParentContent: (string) (len=38) "Rails.logger.info(user.biometric_data)",
       Fingerprint: (string) (len=34) "375d7c2e9977cf2ce5dbf04b04237bea_0",
@@ -40,6 +49,15 @@
       CategoryGroups: ([]string) (len=2) {
         (string) (len=3) "PII",
         (string) (len=13) "Personal Data"
+      },
+      Parent: (security.Parent) {
+        Start: (int) 2,
+        End: (int) 2,
+        Content: (string) (len=44) "http.verify_mode = OpenSSL::SSL::VERIFY_NONE"
+      },
+      Column: (security.Column) {
+        Start: (int) 0,
+        End: (int) 0
       },
       ParentLineNumber: (int) 2,
       ParentContent: (string) (len=44) "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",

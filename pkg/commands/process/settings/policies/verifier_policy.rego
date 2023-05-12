@@ -28,9 +28,16 @@ policy_failure contains item if {
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content,
+		"parent": {
+			"start": location.parent.start_line_number,
+			"end": location.parent.end_line_number,
+			"content": location.parent.content,
+		},
+		"column": {
+			"start": location.start_column_number,
+			"end": location.end_column_number,
+		},
+		"line_number": location.start_line_number,
 	}
 }
 
@@ -55,8 +62,15 @@ policy_failure contains item if {
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content,
+		"parent": {
+			"start": location.parent.start_line_number,
+			"end": location.parent.end_line_number,
+			"content": location.parent.content,
+		},
+		"column": {
+			"start": location.start_column_number,
+			"end": location.end_column_number,
+		},
+		"line_number": location.start_line_number,
 	}
 }

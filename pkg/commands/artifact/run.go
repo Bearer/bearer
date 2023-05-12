@@ -352,70 +352,13 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 
 	switch config.Report.Format {
 	case flag.FormatSarif:
-		content := `
-{
-	"$schema": "https://json.schemastore.org/sarif-2.1.0.json",
-	"version": "2.1.0",
-	"runs": [
-		{
-			"tool": {
-				"driver": {
-					"name": "Bearer",
-					"rules": [
-						{
-							"id": "R01",
-							"name": "js/unused-local-variable",
-							"shortDescription": {
-								"text": "Unused variable, import, function or class"
-							},
-							"fullDescription": {
-								"text": "Unused variables, imports, functions or classes may be a symptom of a bug and should be examined carefully."
-							},
-							"defaultConfiguration": {
-								"level": "note"
-							},
-							"properties": {
-								"tags": ["maintainability"],
-								"precision": "very-high"
-							}
-						}
-					]
-				}
-			},
-			"results": [
-				{
-					"ruleId": "3f292041e51d22005ce48f39df3585d44ce1b0ad",
-					"ruleIndex": 0,
-					"message": {
-						"text": "Unused variable foo."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "main.js",
-									"uriBaseId": "%SRCROOT%"
-								},
-								"region": {
-									"startLine": 2,
-									"startColumn": 7,
-									"endColumn": 10
-								}
-							}
-						}
-					],
-					"partialFingerprints": {
-						"primaryLocationLineHash": "39fa2ee980eb94b0:1",
-						"primaryLocationStartColumnFingerprint": "4"
-					}
-				}
-			]
+		content, err := reportoutput.ReportSarif(detections.(*map[string][]security.Result))
+		if err != nil {
+			return false, fmt.Errorf("error generating report %s", err)
 		}
-	]
-}`
-		logger.Msg(content)
+
+		logger.Msg(*content)
 	case flag.FormatEmpty, flag.FormatJSON:
-		// default report format for is JSON
 		content, err := reportoutput.ReportJSON(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)

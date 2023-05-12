@@ -69,7 +69,7 @@ func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.C
 			componentUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
-			*classifiedDetection.Source.LineNumber,
+			*classifiedDetection.Source.StartLineNumber,
 		)
 	}
 
@@ -92,7 +92,7 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
-			*classifiedDetection.Source.LineNumber,
+			*classifiedDetection.Source.StartLineNumber,
 		)
 	}
 
@@ -115,7 +115,7 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
-			*classifiedDetection.Source.LineNumber,
+			*classifiedDetection.Source.StartLineNumber,
 		)
 	}
 

@@ -8,8 +8,10 @@
       Filename: (string) (len=16) "datatype_knex.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(1),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(1),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(39),
       Text: (*string)(<nil>)
     },
     Value: (knex.Function) {
@@ -25,8 +27,10 @@
       Filename: (string) (len=16) "datatype_knex.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(1),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(1),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(6),
       Text: (*string)(<nil>)
     },
     Value: (knex.Function) {
@@ -42,8 +46,10 @@
       Filename: (string) (len=16) "datatype_knex.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(18),
       Text: (*string)(<nil>)
     },
     Value: (knex.Schema) {
@@ -60,8 +66,10 @@
       Filename: (string) (len=16) "datatype_knex.ts",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(8),
       Text: (*string)(<nil>)
     },
     Value: (knex.Schema) {
