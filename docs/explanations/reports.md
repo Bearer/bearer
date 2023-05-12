@@ -8,6 +8,9 @@ Bearer CLI can generate various types of reports about your codebase, all from t
 
 ## Security Report
 
+- Usage: `bearer scan . --report security`
+- Default format: `json`
+
 The security report allows you to quickly see security risks and vulnerabilities found in your codebase using a security [scanner type](/explanations/scanners) (SAST by default). 
 
 For each violation, the report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the security report run on the [OWASP Juice Shop app](https://github.com/juice-shop/juice-shop):
@@ -52,9 +55,10 @@ WARNING: 2
 
 The security report is [currently available](/reference/supported-languages/) for Ruby and JavaScript projects, more languages to follow.
 
-To run your first security report, run `bearer scan .` on your project directory. By default, the security report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
-
 ## Privacy Report
+
+- Usage: `bearer scan . --report privacy`
+- Default format: `csv`
 
 The privacy report provides useful information about how your codebase uses sensitive data, with an emphasis on [data subjects](https://ico.org.uk/for-organisations/sme-web-hub/key-data-protection-terms-you-need-to-know/#datasubject) and third parties services.
 
@@ -99,8 +103,6 @@ The third parties portion displays data subjects and data types that are sent to
 
 The detection of third-party services is performed through an internal database knowns as Recipes. You can easily [contribute to new recipes](/contributing/recipes/).
 
-To run the privacy report, run `bearer scan` with the `--report privacy` flag. By default, the privacy report is output in CSV format. To format as JSON, use the `--format json` flag.
-
 ### Customizing data subjects
 
 By default, Bearer CLI maps all subjects to “User”, but you can override this by supplying Bearer CLI with custom mappings. This is done by passing the path to a JSON file with the `--data-subject-mapping` flag when you run the privacy report. For example:
@@ -113,9 +115,12 @@ The custom map file should follow the format used by [subject_mapping.json]({{me
 
 ## Data Flow Report
 
+- Usage: `bearer scan . --report dataflow`
+- Default format: `json`
+
 The data flow report breaks down the data types and associated components detected in your code. It highlights areas in your code that process personal and sensitive data and where this data may be exposed to third parties and databases.
 
-You can use this to gain more detailed insights beyond what the Privacy report offers, and build additional documentation like data catalogs. In the following example, we can see all the places an `Email Address` is processed by the [Bear Publishing](https://github.com/Bearer/bear-publishing) example app:
+You can use this to gain more detailed insights beyond what the Privacy report offers, and build additional documentation like data catalogs. In the following example, we can see all of the places the [Bear Publishing](https://github.com/Bearer/bear-publishing) app processes `Email Address`:
 
 ```json
 {
@@ -178,4 +183,6 @@ If we look at the `db/schema.rb` file mentioned in the report, we can see that e
   end
 ```
 
-To run your first data flow report, run `curio scan` with the `--report dataflow` flag. By default, the data flow report is output in JSON format. To format as YAML, use the `--format yaml` flag.
+## Next steps
+
+For additional options on generating reports, selecting format types, and writing the output to a file, see the [command reference](/reference/commands/) documentation.
