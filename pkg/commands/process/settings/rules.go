@@ -330,6 +330,7 @@ func BuildRules(definitions map[string]rules.RuleDefinition, enabledRules map[st
 			}
 
 			result[auxiliaryDefinition.Id] = &rules.Rule{
+				Id:             auxiliaryDefinition.Id,
 				Type:           defaultAuxiliaryRuleType,
 				Languages:      definition.Languages,
 				ParamParenting: auxiliaryDefinition.ParamParenting,
