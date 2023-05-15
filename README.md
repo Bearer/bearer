@@ -21,6 +21,7 @@
   [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
   [![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
 
+  ☁️ Bearer Cloud is coming soon. [Sign up for the waitlist](https://www.bearer.com) to be the first to try it. ☁️
 </div>
 
 ## Developer friendly static code analysis for security and privacy
