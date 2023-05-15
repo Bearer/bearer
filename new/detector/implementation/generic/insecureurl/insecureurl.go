@@ -26,7 +26,7 @@ func (detector *insecureURLDetector) Name() string {
 }
 
 func (detector *insecureURLDetector) DetectAt(
-	node *tree.Node,
+	rootNode, node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	detections, err := evaluator.ForNode(node, "string", false)

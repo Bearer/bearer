@@ -23,11 +23,17 @@ type Pattern struct {
 
 type customDetector struct {
 	types.DetectorBase
-	detectorType string
-	patterns     []Pattern
+	detectorType    string
+	patterns        []Pattern
+	sanitizerRuleID string
 }
 
-func New(lang languagetypes.Language, detectorType string, patterns []settings.RulePattern) (types.Detector, error) {
+func New(
+	lang languagetypes.Language,
+	detectorType string,
+	patterns []settings.RulePattern,
+	sanitizerRuleID string,
+) (types.Detector, error) {
 	var compiledPatterns []Pattern
 	for _, pattern := range patterns {
 		patternQuery, err := lang.CompilePatternQuery(pattern.Pattern)
@@ -44,8 +50,9 @@ func New(lang languagetypes.Language, detectorType string, patterns []settings.R
 	}
 
 	return &customDetector{
-		detectorType: detectorType,
-		patterns:     compiledPatterns,
+		detectorType:    detectorType,
+		patterns:        compiledPatterns,
+		sanitizerRuleID: sanitizerRuleID,
 	}, nil
 }
 
@@ -54,9 +61,19 @@ func (detector *customDetector) Name() string {
 }
 
 func (detector *customDetector) DetectAt(
+	rootNode *tree.Node,
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
+	sanitized, err := detector.isSanitized(rootNode, node, evaluator)
+	if err != nil {
+		return nil, fmt.Errorf("error running sanitizer: %w", err)
+	}
+
+	if sanitized {
+		return nil, nil
+	}
+
 	var detectionsData []interface{}
 
 	for _, pattern := range detector.patterns {
@@ -84,6 +101,25 @@ func (detector *customDetector) DetectAt(
 	}
 
 	return detectionsData, nil
+}
+
+func (detector *customDetector) isSanitized(rootNode, node *tree.Node, evaluator types.Evaluator) (bool, error) {
+	if detector.sanitizerRuleID == "" {
+		return false, nil
+	}
+
+	for ancestor := node; !ancestor.Equal(rootNode); ancestor = ancestor.Parent() {
+		sanitized, err := evaluator.NodeHas(ancestor, detector.sanitizerRuleID)
+		if err != nil {
+			return false, err
+		}
+
+		if sanitized {
+			return true, nil
+		}
+	}
+
+	return false, nil
 }
 
 func (detector *customDetector) Close() {

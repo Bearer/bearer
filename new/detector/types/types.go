@@ -22,7 +22,7 @@ type Evaluator interface {
 type DetectorSet interface {
 	NestedDetections(detectorType string) (bool, error)
 	DetectAt(
-		node *tree.Node,
+		rootNode, node *tree.Node,
 		detectorType string,
 		evaluator Evaluator,
 	) ([]*Detection, error)
@@ -30,7 +30,7 @@ type DetectorSet interface {
 
 type Detector interface {
 	Name() string
-	DetectAt(node *tree.Node, evaluator Evaluator) ([]interface{}, error)
+	DetectAt(rootNode, node *tree.Node, evaluator Evaluator) ([]interface{}, error)
 	NestedDetections() bool
 	Close()
 }

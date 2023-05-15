@@ -68,7 +68,7 @@ func (detector *objectDetector) NestedDetections() bool {
 }
 
 func (detector *objectDetector) DetectAt(
-	node *tree.Node,
+	rootNode, node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	log.Debug().Msgf("node is %s", node.Debug())
