@@ -25,6 +25,10 @@ layout: layouts/base.njk
 				{% include 'breadcrumbs.njk' %}
 			{% endif %}
 			{{ content | safe }}
+			<div class="md:hidden p-4 border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
+				<p>Ready to take the next step? <a class="text-main dark:text-main-300 hover:underline plausible-event-name--DocsCloudSignup plausible-event-location--mobile" href="https://www.bearer.com">Join the Bearer Cloud waitlist.</a>
+				</p>
+			</div>
 		</article>
 		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1  md:top-heading-offset  dark:text-neutral-200 md:flex md:flex-col md:sticky text-sm gap-4 justify-between md:mb-4 ">
 			<div class=" border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
@@ -50,7 +54,7 @@ layout: layouts/base.njk
 				</div>
 			</div>
 			<div class="hidden md:block p-4 border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
-				<p>Ready to take the next step? <a class="text-main dark:text-main-300 hover:underline" href="http://www.bearer.com">Join the Bearer Cloud waitlist.</a>
+				<p>Ready to take the next step? <a class="text-main dark:text-main-300 hover:underline plausible-event-name--DocsCloudSignup plausible-event-location--sidebar" href="https://www.bearer.com">Join the Bearer Cloud waitlist.</a>
 				</p>
 			</div>
 		</aside>
