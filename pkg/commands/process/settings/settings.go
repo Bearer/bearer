@@ -11,7 +11,6 @@ import (
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/regorule"
 	"github.com/bearer/bearer/pkg/util/rego"
 )
 
@@ -134,11 +133,6 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		}
 	}
 
-	_, err = regorule.Compile(result.Rules)
-	if err != nil {
-		return Config{}, fmt.Errorf("error compiling rules to rego: %w", err)
-	}
-
 	config := Config{
 		Client:             opts.Client,
 		Worker:             workerOptions,
@@ -149,7 +143,6 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		BuiltInRules:       result.BuiltInRules,
 		CacheUsed:          result.CacheUsed,
 		BearerRulesVersion: result.BearerRulesVersion,
-		// RegoRules:          rego,
 	}
 
 	return config, nil

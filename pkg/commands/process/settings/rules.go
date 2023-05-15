@@ -361,15 +361,17 @@ func compilePatterns(lang languagetypes.Language, sourcePatterns []rules.RuleDef
 	patterns := make([]rules.RulePattern, len(sourcePatterns))
 
 	for i, sourcePattern := range sourcePatterns {
-		query, err := lang.CompilePatternQuery(sourcePattern.Pattern)
-		if err != nil {
-			return nil, fmt.Errorf("error compiling pattern %s: %s", sourcePattern.Pattern, err)
-		}
+		// query, err := lang.CompilePatternQuery(sourcePattern.Pattern)
+		// if err != nil {
+		// 	return nil, fmt.Errorf("error compiling pattern %s: %s", sourcePattern.Pattern, err)
+		// }
+
+		// log.Error().Msgf("Q: %#v", query)
 
 		patterns[i] = rules.RulePattern{
 			Pattern: sourcePattern.Pattern,
 			Filters: sourcePattern.Filters,
-			Query:   query,
+			// Query:   query,
 		}
 	}
 

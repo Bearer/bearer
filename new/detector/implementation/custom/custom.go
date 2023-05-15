@@ -1,6 +1,8 @@
 package custom
 
 import (
+	"log"
+
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -37,6 +39,7 @@ func (detector *customDetector) DetectAt(
 	var detectionsData []interface{}
 
 	for _, pattern := range detector.patterns {
+		log.Printf("%#v", pattern)
 		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
 			return nil, err

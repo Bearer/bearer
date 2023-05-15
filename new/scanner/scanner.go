@@ -8,9 +8,12 @@ import (
 	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition/ruby"
 	"github.com/bearer/bearer/new/detector/types"
+	languagepkg "github.com/bearer/bearer/new/language"
+	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
+	"github.com/bearer/bearer/pkg/regorule"
 	"github.com/bearer/bearer/pkg/report"
 	"github.com/bearer/bearer/pkg/util/file"
 )
@@ -31,6 +34,34 @@ func (scanner scannerType) Close() {
 }
 
 func Setup(config *settings.Config, classifier *classification.Classifier) (err error) {
+	languages := make(map[string]languagetypes.Language)
+	for _, name := range []string{"ruby", "javascript", "java"} {
+		lang, err := languagepkg.Get(name)
+		if err != nil {
+			return err
+		}
+
+		languages[name] = lang
+	}
+
+	for _, rule := range config.Rules {
+		lang := languages[rule.Languages[0]]
+
+		for i, pattern := range rule.Patterns {
+			query, err := lang.CompilePatternQuery(pattern.Pattern)
+			if err != nil {
+				return fmt.Errorf("error compiling pattern %s[%d]: %w", rule.Id, i, err)
+			}
+
+			rule.Patterns[i].Query = query
+		}
+	}
+
+	_, err = regorule.Compile(config.Rules)
+	if err != nil {
+		return fmt.Errorf("error compiling rules to rego: %w", err)
+	}
+
 	var toInstantiate = []struct {
 		constructor func(map[string]*rules.Rule, *classification.Classifier) (types.Composition, error)
 		name        string
