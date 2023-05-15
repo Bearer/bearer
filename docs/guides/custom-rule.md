@@ -12,7 +12,7 @@ Before you begin, you’ll want to have Bearer CLI installed, and have run it su
 
 ## The rule configuration file
 
-Each rule is a unique `yml` file. Custom rules share the same format as internal rules, so it can be helpful when creating rules to reference similar concepts in the [rules directory on GitHub]({{meta.sourcePath}}/tree/main/pkg/commands/process/settings/rules).
+Each rule is a unique `yml` file. Custom rules share the same format as internal rules, so it can be helpful when creating rules to reference similar concepts in the [rules repo on GitHub](https://github.com/Bearer/bearer-rules).
 
 To better understand the structure of a rule file, let’s look at each key:
 
@@ -34,7 +34,7 @@ To better understand the structure of a rule file, let’s look at each key:
   - `associated_recipe`: Links the rule to a [recipe]({{meta.sourcePath}}/tree/main/pkg/classification/db/recipes). Useful for associating a rule with a third party. Example: “Sentry” (Optional)
   - `remediation_message`: Used for internal rules, this builds the documentation page for a rule. (Optional)
   - `documentation_url`: Used to pass custom documentation URL for the summary report. This can be useful for linking to your own internal documentation or policies. By default, all rules in the main repo will automatically generate a link to the rule on [docs.bearer.com](/). (Optional)
-- `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) rule for examples. In addition, see our advice on how to avoid [variable joining](#variable-joining) in auxiliary rules. (Optional)
+- `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption](https://github.com/Bearer/bearer-rules/blob/main/ruby/lang/weak_encryption.yml) rule for examples. In addition, see our advice on how to avoid [variable joining](#variable-joining) in auxiliary rules. (Optional)
 - `skip_data_types`: Allows you to prevent the specified data types from triggering this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 - `only_data_types`: Allows you to limit the specified data types that trigger this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 
@@ -146,7 +146,7 @@ patterns:
 - `detection`: Detection filters rely on existing filter types, so they handle much of the logic for you.
   - `datatype`: This is the detection type you’ll most often see. It uses Bearer CLI's scan to match any data type.
   - `insecure_url`: Useful for instances where you want to prevent unsecured HTTP requests. It explicitly matches `http://`.
-  - `<auxiliary-detection-id>`: This allows you to link external and custom detection types by their id. See the `auxiliary` description in the rule config at the top of this page for more details, and the [weak_encryption rule]({{meta.sourcePath}}/blob/a55ff8cf6334a541300b0e7dc3903d022987afb6/pkg/commands/process/settings/rules/ruby/lang/weak_encryption.yml) for an example.
+  - `<auxiliary-detection-id>`: This allows you to link external and custom detection types by their id. See the `auxiliary` description in the rule config at the top of this page for more details, and the [weak_encryption rule](https://github.com/Bearer/bearer-rules/blob/main/ruby/lang/weak_encryption.yml) for an example.
 
 To better understand how filters and variables interact, see the pattern examples below.
 
