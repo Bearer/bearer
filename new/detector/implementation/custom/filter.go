@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/rs/zerolog/log"
 )
 
 func matchFilter(
@@ -175,8 +176,8 @@ func matchDetectionFilter(
 func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator, node *tree.Node) (*bool, error) {
 	content := node.Content()
 
-	if len(filter.Values) != 0 && !slices.Contains(filter.Values, content) {
-		return boolPointer(false), nil
+	if len(filter.Values) != 0 {
+		return boolPointer(slices.Contains(filter.Values, content)), nil
 	}
 
 	if filter.Regex != nil {
@@ -192,6 +193,8 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 		if len(strValue) >= *filter.LengthLessThan {
 			return boolPointer(false), nil
 		}
+
+		return boolPointer(true), nil
 	}
 
 	if filter.StringRegex != nil {
@@ -212,6 +215,8 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 		if value >= *filter.LessThan {
 			return boolPointer(false), nil
 		}
+
+		return boolPointer(true), nil
 	}
 
 	if filter.LessThanOrEqual != nil {
@@ -223,6 +228,8 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 		if value > *filter.LessThanOrEqual {
 			return boolPointer(false), nil
 		}
+
+		return boolPointer(true), nil
 	}
 
 	if filter.GreaterThan != nil {
@@ -234,6 +241,8 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 		if value <= *filter.GreaterThan {
 			return boolPointer(false), nil
 		}
+
+		return boolPointer(true), nil
 	}
 
 	if filter.GreaterThanOrEqual != nil {
@@ -245,9 +254,12 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 		if value < *filter.GreaterThanOrEqual {
 			return boolPointer(false), nil
 		}
+
+		return boolPointer(true), nil
 	}
 
-	return boolPointer(true), nil
+	log.Debug().Msgf("unknown filter: %#v", filter)
+	return nil, nil
 }
 
 func boolPointer(value bool) *bool {
