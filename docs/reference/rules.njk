@@ -98,15 +98,15 @@ The built-in rules aim to keep you protected from the most cirtical security ris
         </p>
       </a>
       <div>
-        <ul class="flex gap-2 justify-end">
+        <ul class="flex flex-wrap gap-2 justify-end">
           {% if rule.languages %}
-            <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">{{rule.languages | join(", ") | upper }}</li>
+            <li class="text-xs py-1 px-2 rounded-full bg-neutral-200 dark:bg-code">{{rule.languages | join(", ") | upper }}</li>
           {% endif %}
           {% for id in rule.metadata.cwe_id %}
-            <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">CWE-{{id}}</li>
+            <li class="text-xs py-1 px-2 rounded-full bg-neutral-200 dark:bg-code">CWE-{{id}}</li>
           {% endfor %}
           {% for id in rule.owasp_ids %}
-            <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">{{id}}</li>
+            <li class="text-xs py-1 px-2 rounded-full bg-neutral-200 dark:bg-code">{{id}}</li>
           {% endfor %}
         </ul>
       </div>
