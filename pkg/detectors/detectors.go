@@ -3,6 +3,7 @@ package detectors
 import (
 	"fmt"
 	"path/filepath"
+	"runtime/debug"
 
 	"github.com/bearer/bearer/new/scanner"
 	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
@@ -176,6 +177,7 @@ func ExtractWithDetectors(
 			recovery := func() {
 				if r := recover(); r != nil {
 					log.Printf("file %s -> error recovered %s", file.AbsolutePath, r)
+					log.Print(string(debug.Stack()))
 					report.AddError(file.Path.RelativePath, fmt.Errorf("skipping file: due to panic %s", r))
 				}
 			}
