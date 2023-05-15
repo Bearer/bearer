@@ -108,6 +108,7 @@ type RuleDefinition struct {
 	Languages          []string               `mapstructure:"languages" json:"languages" yaml:"languages"`
 	ParamParenting     bool                   `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
 	Patterns           []RulePattern          `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	SanitizerRuleID    string                 `mapstructure:"sanitizer" json:"sanitizer" yaml:"sanitizer"`
 	Stored             bool                   `mapstructure:"stored" json:"stored" yaml:"stored"`
 	Detectors          []string               `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
 	Processors         []string               `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
@@ -123,10 +124,11 @@ type RuleDefinition struct {
 }
 
 type Auxiliary struct {
-	Id        string        `mapstructure:"id" json:"id" yaml:"id"`
-	Type      string        `mapstructure:"type" json:"type" yaml:"type"`
-	Languages []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
-	Patterns  []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	Id              string        `mapstructure:"id" json:"id" yaml:"id"`
+	Type            string        `mapstructure:"type" json:"type" yaml:"type"`
+	Languages       []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
+	Patterns        []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	SanitizerRuleID string        `mapstructure:"sanitizer" json:"sanitizer" yaml:"sanitizer"`
 
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
@@ -161,6 +163,7 @@ type Rule struct {
 	CWEIDs             []string      `mapstructure:"cwe_ids" json:"cwe_ids" yaml:"cwe_ids"`
 	Languages          []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
 	Patterns           []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	SanitizerRuleID    string        `mapstructure:"sanitizer" json:"sanitizer" yaml:"sanitizer"`
 	DocumentationUrl   string        `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
 	IsAuxilary         bool          `mapstructure:"is_auxilary" json:"is_auxilary" yaml:"is_auxilary"`
 

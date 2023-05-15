@@ -299,18 +299,20 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Languages:          definition.Languages,
 			ParamParenting:     definition.ParamParenting,
 			Patterns:           definition.Patterns,
+			SanitizerRuleID:    definition.SanitizerRuleID,
 			DocumentationUrl:   definition.Metadata.DocumentationUrl,
 			HasDetailedContext: definition.HasDetailedContext,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {
 			rules[auxiliaryDefinition.Id] = &Rule{
-				Type:           defaultAuxiliaryRuleType,
-				Languages:      definition.Languages,
-				ParamParenting: auxiliaryDefinition.ParamParenting,
-				Patterns:       auxiliaryDefinition.Patterns,
-				Stored:         auxiliaryDefinition.Stored,
-				IsAuxilary:     true,
+				Type:            defaultAuxiliaryRuleType,
+				Languages:       definition.Languages,
+				ParamParenting:  auxiliaryDefinition.ParamParenting,
+				Patterns:        auxiliaryDefinition.Patterns,
+				SanitizerRuleID: auxiliaryDefinition.SanitizerRuleID,
+				Stored:          auxiliaryDefinition.Stored,
+				IsAuxilary:      true,
 			}
 		}
 	}

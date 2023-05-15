@@ -23,7 +23,7 @@ func (detector *stringDetector) Name() string {
 }
 
 func (detector *stringDetector) DetectAt(
-	node *tree.Node,
+	rootNode, node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	switch node.Type() {

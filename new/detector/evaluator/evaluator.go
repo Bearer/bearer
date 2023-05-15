@@ -62,7 +62,7 @@ func (evaluator *evaluator) ForTree(
 			return nil
 		}
 
-		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
+		detections, err := evaluator.nonUnifiedNodeDetections(rootNode, node, detectorType)
 		if err != nil {
 			return err
 		}
@@ -112,7 +112,7 @@ func (evaluator *evaluator) ForNode(
 		return nil, nil
 	}
 
-	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
+	detections, err := evaluator.nonUnifiedNodeDetections(node, node, detectorType)
 	if err != nil {
 		return nil, err
 	}
@@ -198,12 +198,12 @@ func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Nod
 }
 
 func (evaluator *evaluator) nonUnifiedNodeDetections(
-	node *langtree.Node,
+	rootNode, node *langtree.Node,
 	detectorType string,
 ) ([]*types.Detection, error) {
 	nodeDetections, ok := evaluator.detectionCache[node.ID()]
 	if !ok {
-		err := evaluator.detectAtNode(node, detectorType)
+		err := evaluator.detectAtNode(rootNode, node, detectorType)
 		if err != nil {
 			return nil, err
 		}
@@ -215,7 +215,7 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 		return detections, nil
 	}
 
-	err := evaluator.detectAtNode(node, detectorType)
+	err := evaluator.detectAtNode(rootNode, node, detectorType)
 	if err != nil {
 		return nil, err
 	}
@@ -227,7 +227,7 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 	var result bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
+		detections, err := evaluator.nonUnifiedNodeDetections(rootNode, node, detectorType)
 		if err != nil {
 			return err
 		}
@@ -266,13 +266,13 @@ func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType string) (b
 	return len(detections) != 0, nil
 }
 
-func (evaluator *evaluator) detectAtNode(node *langtree.Node, detectorType string) error {
+func (evaluator *evaluator) detectAtNode(rootNode, node *langtree.Node, detectorType string) error {
 	if evaluator.ruleDisabledForNode(detectorType, node) {
 		return nil
 	}
 
 	return evaluator.withCycleProtection(node, detectorType, func() error {
-		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, evaluator)
+		detections, err := evaluator.detectorSet.DetectAt(rootNode, node, detectorType, evaluator)
 		if err != nil {
 			return err
 		}

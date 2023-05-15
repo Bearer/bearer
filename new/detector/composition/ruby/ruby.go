@@ -111,6 +111,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 
 	for ruleName, rule := range rubyRules {
 		patterns := rule.Patterns
+		sanitizerRuleID := rule.SanitizerRuleID
 		localRuleName := ruleName
 
 		if !rule.IsAuxilary || presenceRules[ruleName] {
@@ -122,6 +123,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 				lang,
 				localRuleName,
 				patterns,
+				sanitizerRuleID,
 			)
 
 			receiver <- types.DetectorInitResult{
