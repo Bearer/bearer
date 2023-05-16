@@ -23,7 +23,7 @@ func (detector *stringDetector) Name() string {
 }
 
 func (detector *stringDetector) DetectAt(
-	rootNode, node *tree.Node,
+	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	switch node.Type() {
@@ -53,7 +53,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 			continue
 		}
 
-		detections, err := evaluator.ForNode(child, "string", true)
+		detections, err := evaluator.ForNode(child, "string", "", true)
 		if err != nil {
 			return nil, err
 		}

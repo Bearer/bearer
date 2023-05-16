@@ -12,17 +12,17 @@ type Detection struct {
 }
 
 type Evaluator interface {
-	ForTree(rootNode *tree.Node, detectorType string, followFlow bool) ([]*Detection, error)
-	ForNode(node *tree.Node, detectorType string, followFlow bool) ([]*Detection, error)
-	TreeHas(rootNode *tree.Node, detectorType string) (bool, error)
-	NodeHas(node *tree.Node, detectorType string) (bool, error)
+	ForTree(rootNode *tree.Node, detectorType, sanitizerDetectorType string, followFlow bool) ([]*Detection, error)
+	ForNode(node *tree.Node, detectorType, sanitizerDetectorType string, followFlow bool) ([]*Detection, error)
+	TreeHas(rootNode *tree.Node, detectorType, sanitizerDetectorType string) (bool, error)
+	NodeHas(node *tree.Node, detectorType, sanitizerDetectorType string) (bool, error)
 	FileName() string
 }
 
 type DetectorSet interface {
 	NestedDetections(detectorType string) (bool, error)
 	DetectAt(
-		rootNode, node *tree.Node,
+		node *tree.Node,
 		detectorType string,
 		evaluator Evaluator,
 	) ([]*Detection, error)
@@ -30,7 +30,7 @@ type DetectorSet interface {
 
 type Detector interface {
 	Name() string
-	DetectAt(rootNode, node *tree.Node, evaluator Evaluator) ([]interface{}, error)
+	DetectAt(node *tree.Node, evaluator Evaluator) ([]interface{}, error)
 	NestedDetections() bool
 	Close()
 }

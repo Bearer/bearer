@@ -1,0 +1,35 @@
+critical:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: sanitizer_test
+        title: Test sanitizer
+        description: Test sanitizer
+        documentation_url: ""
+      line_number: 1
+      filename: e2e/rules/testdata/data/sanitizer/sanitizer.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 5
+      snippet: log("abc" + x)
+      fingerprint: d2e829ba86a33c5a52844641617ad8a7_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: sanitizer_test
+        title: Test sanitizer
+        description: Test sanitizer
+        documentation_url: ""
+      line_number: 4
+      filename: e2e/rules/testdata/data/sanitizer/sanitizer.rb
+      category_groups:
+        - PII
+        - Personal Data
+      parent_line_number: 4
+      snippet: log("abc" + user.email)
+      fingerprint: d2e829ba86a33c5a52844641617ad8a7_2
+
+
+--
+

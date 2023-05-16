@@ -9,7 +9,7 @@ import (
 )
 
 func GetNonVirtualObjects(evaluator types.Evaluator, node *tree.Node) ([]*types.Detection, error) {
-	detections, err := evaluator.ForNode(node, "object", true)
+	detections, err := evaluator.ForNode(node, "object", "", true)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func ProjectObject(
 }
 
 func GetStringValue(node *tree.Node, evaluator types.Evaluator) (string, bool, error) {
-	detections, err := evaluator.ForNode(node, "string", true)
+	detections, err := evaluator.ForNode(node, "string", "", true)
 	if err != nil {
 		return "", false, err
 	}

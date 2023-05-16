@@ -47,7 +47,7 @@ func (evaluator *evaluator) FileName() string {
 
 func (evaluator *evaluator) ForTree(
 	rootNode *langtree.Node,
-	detectorType string,
+	detectorType, sanitizerDetectorType string,
 	followFlow bool,
 ) ([]*types.Detection, error) {
 	if rootNode == nil {
@@ -62,14 +62,14 @@ func (evaluator *evaluator) ForTree(
 			return nil
 		}
 
-		detections, err := evaluator.nonUnifiedNodeDetections(rootNode, node, detectorType)
-		if err != nil {
+		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType)
+		if sanitized || err != nil {
 			return err
 		}
 
 		if followFlow {
 			for _, unifiedNode := range node.UnifiedNodes() {
-				unifiedNodeDetections, err := evaluator.ForTree(unifiedNode, detectorType, true)
+				unifiedNodeDetections, err := evaluator.ForTree(unifiedNode, detectorType, sanitizerDetectorType, true)
 				if err != nil {
 					return err
 				}
@@ -105,21 +105,21 @@ func (evaluator *evaluator) ForTree(
 
 func (evaluator *evaluator) ForNode(
 	node *langtree.Node,
-	detectorType string,
+	detectorType, sanitizerDetectorType string,
 	followFlow bool,
 ) ([]*types.Detection, error) {
 	if node == nil {
 		return nil, nil
 	}
 
-	detections, err := evaluator.nonUnifiedNodeDetections(node, node, detectorType)
-	if err != nil {
+	detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType)
+	if sanitized || err != nil {
 		return nil, err
 	}
 
 	if followFlow {
 		for _, unifiedNode := range node.UnifiedNodes() {
-			unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType, true)
+			unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType, sanitizerDetectorType, true)
 			if err != nil {
 				return nil, err
 			}
@@ -197,13 +197,28 @@ func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Nod
 	return res
 }
 
+func (evaluator *evaluator) sanitizedNodeDetections(
+	node *langtree.Node,
+	detectorType, sanitizerDetectorType string,
+) ([]*types.Detection, bool, error) {
+	if sanitizerDetectorType != "" {
+		sanitizerDetections, err := evaluator.nonUnifiedNodeDetections(node, sanitizerDetectorType)
+		if len(sanitizerDetections) != 0 || err != nil {
+			return nil, true, err
+		}
+	}
+
+	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
+	return detections, false, err
+}
+
 func (evaluator *evaluator) nonUnifiedNodeDetections(
-	rootNode, node *langtree.Node,
+	node *langtree.Node,
 	detectorType string,
 ) ([]*types.Detection, error) {
 	nodeDetections, ok := evaluator.detectionCache[node.ID()]
 	if !ok {
-		err := evaluator.detectAtNode(rootNode, node, detectorType)
+		err := evaluator.detectAtNode(node, detectorType)
 		if err != nil {
 			return nil, err
 		}
@@ -215,7 +230,7 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 		return detections, nil
 	}
 
-	err := evaluator.detectAtNode(rootNode, node, detectorType)
+	err := evaluator.detectAtNode(node, detectorType)
 	if err != nil {
 		return nil, err
 	}
@@ -223,12 +238,16 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 	return nodeDetections[detectorType], nil
 }
 
-func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string) (bool, error) {
+func (evaluator *evaluator) TreeHas(
+	rootNode *langtree.Node,
+	detectorType,
+	sanitizerDetectorType string,
+) (bool, error) {
 	var result bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		detections, err := evaluator.nonUnifiedNodeDetections(rootNode, node, detectorType)
-		if err != nil {
+		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType)
+		if sanitized || err != nil {
 			return err
 		}
 
@@ -238,7 +257,7 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 		}
 
 		for _, unifiedNode := range node.UnifiedNodes() {
-			hasDetection, err := evaluator.TreeHas(unifiedNode, detectorType)
+			hasDetection, err := evaluator.TreeHas(unifiedNode, detectorType, sanitizerDetectorType)
 			if err != nil {
 				return err
 			}
@@ -257,8 +276,8 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 	return result, nil
 }
 
-func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType string) (bool, error) {
-	detections, err := evaluator.ForNode(node, detectorType, true)
+func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType, sanitizerDetectorType string) (bool, error) {
+	detections, err := evaluator.ForNode(node, detectorType, sanitizerDetectorType, true)
 	if err != nil {
 		return false, err
 	}
@@ -266,13 +285,13 @@ func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType string) (b
 	return len(detections) != 0, nil
 }
 
-func (evaluator *evaluator) detectAtNode(rootNode, node *langtree.Node, detectorType string) error {
+func (evaluator *evaluator) detectAtNode(node *langtree.Node, detectorType string) error {
 	if evaluator.ruleDisabledForNode(detectorType, node) {
 		return nil
 	}
 
 	return evaluator.withCycleProtection(node, detectorType, func() error {
-		detections, err := evaluator.detectorSet.DetectAt(rootNode, node, detectorType, evaluator)
+		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, evaluator)
 		if err != nil {
 			return err
 		}

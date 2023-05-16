@@ -1,0 +1,27 @@
+languages:
+  - ruby
+patterns:
+  - pattern: |
+      log($<DATA>)
+    filters:
+      - variable: DATA
+        detection: sanitizer_test_data
+auxiliary:
+  - id: sanitizer_test_data
+    sanitizer: sanitizer_test_sanitizer
+    patterns:
+      - pattern: $<DATA_TYPE>
+        filters:
+          - variable: DATA_TYPE
+            detection: datatype
+            contains: false
+  - id: sanitizer_test_sanitizer
+    patterns:
+      - hash($<!>$<_>)
+severity: high
+metadata:
+  description: Test sanitizer
+  remediation_message: Test sanitizer
+  cwe_id:
+    - 42
+  id: sanitizer_test

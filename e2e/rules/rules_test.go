@@ -33,6 +33,11 @@ func TestAuxilary(t *testing.T) {
 	runRulesTest("auxilary", "javascript_third_parties_datadog_test", t)
 }
 
+func TestSanitizer(t *testing.T) {
+	t.Parallel()
+	runRulesTest("sanitizer", "sanitizer_test", t)
+}
+
 func TestSimpleRuby(t *testing.T) {
 	t.Parallel()
 	runRulesTest("simple_ruby", "ruby_rails_insecure_communication_test", t)

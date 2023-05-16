@@ -21,10 +21,10 @@ func (detector *stringLiteralDetector) Name() string {
 }
 
 func (detector *stringLiteralDetector) DetectAt(
-	rootNode, node *tree.Node,
+	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	detections, err := evaluator.ForNode(node, "string", false)
+	detections, err := evaluator.ForNode(node, "string", "", false)
 	if err != nil {
 		return nil, err
 	}

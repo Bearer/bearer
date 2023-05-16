@@ -42,10 +42,10 @@ func (detector *datatypeDetector) NestedDetections() bool {
 }
 
 func (detector *datatypeDetector) DetectAt(
-	rootNode, node *tree.Node,
+	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	objectDetections, err := evaluator.ForNode(node, "object", false)
+	objectDetections, err := evaluator.ForNode(node, "object", "", false)
 	if err != nil {
 		return nil, err
 	}

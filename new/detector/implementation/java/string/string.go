@@ -21,7 +21,7 @@ func (detector *stringDetector) Name() string {
 }
 
 func (detector *stringDetector) DetectAt(
-	rootNode, node *tree.Node,
+	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	if node.Type() == "string_literal" {

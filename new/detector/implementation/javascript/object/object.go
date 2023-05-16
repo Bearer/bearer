@@ -113,7 +113,7 @@ func (detector *objectDetector) NestedDetections() bool {
 }
 
 func (detector *objectDetector) DetectAt(
-	rootNode, node *tree.Node,
+	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	detections, err := detector.getObject(node, evaluator)
@@ -145,7 +145,7 @@ func (detector *objectDetector) getObject(
 	}
 
 	for _, spreadResult := range spreadResults {
-		detections, err := evaluator.ForNode(spreadResult["identifier"], "object", true)
+		detections, err := evaluator.ForNode(spreadResult["identifier"], "object", "", true)
 
 		if err != nil {
 			return nil, err
@@ -175,7 +175,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := evaluator.ForTree(result["value"], "object", true)
+		propertyObjects, err := evaluator.ForTree(result["value"], "object", "", true)
 		if err != nil {
 			return nil, err
 		}

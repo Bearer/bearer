@@ -39,7 +39,7 @@ func (set *set) NestedDetections(detectorType string) (bool, error) {
 }
 
 func (set *set) DetectAt(
-	rootNode, node *tree.Node,
+	node *tree.Node,
 	detectorType string,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
@@ -48,7 +48,7 @@ func (set *set) DetectAt(
 		return nil, err
 	}
 
-	detectionsData, err := detector.DetectAt(rootNode, node, evaluator)
+	detectionsData, err := detector.DetectAt(node, evaluator)
 	if err != nil {
 		return nil, err
 	}

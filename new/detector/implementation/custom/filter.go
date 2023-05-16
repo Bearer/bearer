@@ -18,9 +18,10 @@ func matchFilter(
 	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
 	filter settings.PatternFilter,
+	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
 	if filter.Not != nil {
-		match, _, err := matchFilter(result, evaluator, variableNodes, *filter.Not)
+		match, _, err := matchFilter(result, evaluator, variableNodes, *filter.Not, rules)
 		if match == nil {
 			return nil, nil, err
 		}
@@ -28,7 +29,7 @@ func matchFilter(
 	}
 
 	if len(filter.Either) != 0 {
-		return matchEitherFilters(result, evaluator, variableNodes, filter.Either)
+		return matchEitherFilters(result, evaluator, variableNodes, filter.Either, rules)
 	}
 
 	if filter.FilenameRegex != nil {
@@ -49,6 +50,7 @@ func matchFilter(
 			node,
 			filter.Detection,
 			filter.Contains == nil || *filter.Contains,
+			rules,
 		)
 	}
 
@@ -60,6 +62,7 @@ func matchAllFilters(
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	filters []settings.PatternFilter,
+	rules map[string]*settings.Rule,
 ) (bool, []*types.Detection, map[string]*tree.Node, error) {
 	var datatypeDetections []*types.Detection
 
@@ -69,7 +72,7 @@ func matchAllFilters(
 	}
 
 	for _, filter := range filters {
-		matched, subDataTypeDetections, err := matchFilter(result, evaluator, variableNodes, filter)
+		matched, subDataTypeDetections, err := matchFilter(result, evaluator, variableNodes, filter, rules)
 		if matched == nil || !*matched || err != nil {
 			return false, nil, nil, err
 		}
@@ -85,13 +88,14 @@ func matchEitherFilters(
 	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
 	filters []settings.PatternFilter,
+	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
 	var datatypeDetections []*types.Detection
 	oneMatched := false
 	oneNotMatched := false
 
 	for _, subFilter := range filters {
-		subMatch, subDatatypeDetections, err := matchFilter(result, evaluator, variableNodes, subFilter)
+		subMatch, subDatatypeDetections, err := matchFilter(result, evaluator, variableNodes, subFilter, rules)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -119,21 +123,27 @@ func matchDetectionFilter(
 	node *tree.Node,
 	detectorType string,
 	contains bool,
+	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
-	var evaluateDetections func(*tree.Node, string, bool) ([]*types.Detection, error)
+	var evaluateDetections func(*tree.Node, string, string, bool) ([]*types.Detection, error)
 	if contains {
 		evaluateDetections = evaluator.ForTree
 	} else {
 		evaluateDetections = evaluator.ForNode
 	}
 
+	sanitizerRuleID := ""
+	if rule, ok := rules[detectorType]; ok {
+		sanitizerRuleID = rule.SanitizerRuleID
+	}
+
 	if detectorType == "datatype" {
-		detections, err := evaluateDetections(node, "datatype", true)
+		detections, err := evaluateDetections(node, "datatype", sanitizerRuleID, true)
 
 		return boolPointer(len(detections) != 0), detections, err
 	}
 
-	detections, err := evaluateDetections(node, detectorType, true)
+	detections, err := evaluateDetections(node, detectorType, sanitizerRuleID, true)
 
 	var datatypeDetections []*types.Detection
 	ignoredVariables := getIgnoredVariables(detections)
