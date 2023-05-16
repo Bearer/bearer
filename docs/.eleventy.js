@@ -34,6 +34,9 @@ module.exports = function (eleventyConfig) {
     "./_src/styles/prism-theme.css": "./prism-theme.css",
   });
   eleventyConfig.addPassthroughCopy({ "./_src/js/app.js": "./app.js" });
+  eleventyConfig.addPassthroughCopy({
+    "./_src/js/rule-search.js": "./rule-search.js",
+  });
   eleventyConfig.addPassthroughCopy({ "./_tmp/style.css": "./style.css" });
   eleventyConfig.addPassthroughCopy({ "./robots.txt": "./robots.txt" });
   eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
