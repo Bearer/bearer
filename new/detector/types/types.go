@@ -1,6 +1,8 @@
 package types
 
 import (
+	"crypto/sha256"
+
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/util/file"
 )
@@ -9,6 +11,28 @@ type Detection struct {
 	DetectorType string
 	MatchNode    *tree.Node
 	Data         interface{}
+}
+
+type EvaluationContext []EvaluationScope
+
+func (context EvaluationContext) Cursor() *tree.Node {
+	return context[len(context)-1].Cursor
+}
+
+func (context EvaluationContext) CursorKey() string {
+	hash := sha256.New()
+
+	for _, scope := range context {
+		hash.Write([]byte(scope.Cursor.IDString()))
+		hash.Write([]byte(","))
+	}
+
+	return string(hash.Sum(nil))
+}
+
+type EvaluationScope struct {
+	Root   *tree.Node
+	Cursor *tree.Node
 }
 
 type Evaluator interface {
@@ -22,7 +46,7 @@ type Evaluator interface {
 type DetectorSet interface {
 	NestedDetections(detectorType string) (bool, error)
 	DetectAt(
-		rootNode, node *tree.Node,
+		evaluationContext EvaluationContext,
 		detectorType string,
 		evaluator Evaluator,
 	) ([]*Detection, error)
@@ -30,7 +54,7 @@ type DetectorSet interface {
 
 type Detector interface {
 	Name() string
-	DetectAt(rootNode, node *tree.Node, evaluator Evaluator) ([]interface{}, error)
+	DetectAt(evaluationContext EvaluationContext, evaluator Evaluator) ([]interface{}, error)
 	NestedDetections() bool
 	Close()
 }

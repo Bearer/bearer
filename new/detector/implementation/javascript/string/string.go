@@ -23,9 +23,11 @@ func (detector *stringDetector) Name() string {
 }
 
 func (detector *stringDetector) DetectAt(
-	rootNode, node *tree.Node,
+	evaluationContext types.EvaluationContext,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
+	node := evaluationContext.Cursor()
+
 	switch node.Type() {
 	case "string":
 		return []interface{}{generictypes.String{

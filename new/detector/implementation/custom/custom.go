@@ -61,13 +61,12 @@ func (detector *customDetector) Name() string {
 }
 
 func (detector *customDetector) DetectAt(
-	rootNode *tree.Node,
-	node *tree.Node,
+	evaluationContext types.EvaluationContext,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	sanitized, err := detector.isSanitized(rootNode, node, evaluator)
+	sanitized, err := detector.isSanitized(evaluationContext, evaluator)
 	if err != nil {
-		return nil, fmt.Errorf("error running sanitizer: %w", err)
+		return nil, fmt.Errorf("error evaluating sanitizer rule: %w", err)
 	}
 
 	if sanitized {
@@ -76,6 +75,7 @@ func (detector *customDetector) DetectAt(
 
 	var detectionsData []interface{}
 
+	node := evaluationContext.Cursor()
 	for _, pattern := range detector.patterns {
 		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
@@ -103,19 +103,24 @@ func (detector *customDetector) DetectAt(
 	return detectionsData, nil
 }
 
-func (detector *customDetector) isSanitized(rootNode, node *tree.Node, evaluator types.Evaluator) (bool, error) {
+func (detector *customDetector) isSanitized(
+	evaluationContext types.EvaluationContext,
+	evaluator types.Evaluator,
+) (bool, error) {
 	if detector.sanitizerRuleID == "" {
 		return false, nil
 	}
 
-	for ancestor := node; !ancestor.Equal(rootNode); ancestor = ancestor.Parent() {
-		sanitized, err := evaluator.NodeHas(ancestor, detector.sanitizerRuleID)
-		if err != nil {
-			return false, err
-		}
+	for _, scope := range evaluationContext {
+		for ancestor := scope.Cursor; !ancestor.Equal(scope.Root); ancestor = ancestor.Parent() {
+			sanitized, err := evaluator.NodeHas(ancestor, detector.sanitizerRuleID)
+			if err != nil {
+				return false, err
+			}
 
-		if sanitized {
-			return true, nil
+			if sanitized {
+				return true, nil
+			}
 		}
 	}
 

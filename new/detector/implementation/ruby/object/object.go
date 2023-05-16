@@ -92,9 +92,11 @@ func (detector *objectDetector) NestedDetections() bool {
 }
 
 func (detector *objectDetector) DetectAt(
-	rootNode, node *tree.Node,
+	evaluationContext types.EvaluationContext,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
+	node := evaluationContext.Cursor()
+
 	detections, err := detector.getHash(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err

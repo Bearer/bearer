@@ -15,7 +15,7 @@ type evaluator struct {
 	langImplementation    implementation.Implementation
 	lang                  languagetypes.Language
 	detectorSet           types.DetectorSet
-	detectionCache        map[langtree.NodeID]map[string][]*types.Detection
+	detectionCache        map[string]map[string][]*types.Detection
 	executingDetectors    map[langtree.NodeID][]string
 	fileName              string
 	rulesDisabledForNodes map[string][]*langtree.Node
@@ -28,7 +28,7 @@ func New(
 	tree *langtree.Tree,
 	fileName string,
 ) types.Evaluator {
-	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
+	detectionCache := make(map[string]map[string][]*types.Detection)
 
 	return &evaluator{
 		langImplementation:    langImplementation,
@@ -50,6 +50,15 @@ func (evaluator *evaluator) ForTree(
 	detectorType string,
 	followFlow bool,
 ) ([]*types.Detection, error) {
+	return evaluator.doForTree(rootNode, detectorType, followFlow, nil)
+}
+
+func (evaluator *evaluator) doForTree(
+	rootNode *langtree.Node,
+	detectorType string,
+	followFlow bool,
+	evaluationContext types.EvaluationContext,
+) ([]*types.Detection, error) {
 	if rootNode == nil {
 		return nil, nil
 	}
@@ -62,14 +71,21 @@ func (evaluator *evaluator) ForTree(
 			return nil
 		}
 
-		detections, err := evaluator.nonUnifiedNodeDetections(rootNode, node, detectorType)
+		newEvaluationContext := append(evaluationContext, types.EvaluationScope{Root: rootNode, Cursor: node})
+
+		detections, err := evaluator.nonUnifiedNodeDetections(newEvaluationContext, detectorType)
 		if err != nil {
 			return err
 		}
 
 		if followFlow {
 			for _, unifiedNode := range node.UnifiedNodes() {
-				unifiedNodeDetections, err := evaluator.ForTree(unifiedNode, detectorType, true)
+				unifiedNodeDetections, err := evaluator.doForTree(
+					unifiedNode,
+					detectorType,
+					true,
+					newEvaluationContext,
+				)
 				if err != nil {
 					return err
 				}
@@ -108,18 +124,34 @@ func (evaluator *evaluator) ForNode(
 	detectorType string,
 	followFlow bool,
 ) ([]*types.Detection, error) {
+	return evaluator.doForNode(node, detectorType, followFlow, nil)
+}
+
+func (evaluator *evaluator) doForNode(
+	node *langtree.Node,
+	detectorType string,
+	followFlow bool,
+	evaluationContext types.EvaluationContext,
+) ([]*types.Detection, error) {
 	if node == nil {
 		return nil, nil
 	}
 
-	detections, err := evaluator.nonUnifiedNodeDetections(node, node, detectorType)
+	newEvaluationContext := append(evaluationContext, types.EvaluationScope{Root: node, Cursor: node})
+
+	detections, err := evaluator.nonUnifiedNodeDetections(newEvaluationContext, detectorType)
 	if err != nil {
 		return nil, err
 	}
 
 	if followFlow {
 		for _, unifiedNode := range node.UnifiedNodes() {
-			unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType, true)
+			unifiedNodeDetections, err := evaluator.doForNode(
+				unifiedNode,
+				detectorType,
+				true,
+				newEvaluationContext,
+			)
 			if err != nil {
 				return nil, err
 			}
@@ -198,24 +230,24 @@ func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Nod
 }
 
 func (evaluator *evaluator) nonUnifiedNodeDetections(
-	rootNode, node *langtree.Node,
+	evaluationContext types.EvaluationContext,
 	detectorType string,
 ) ([]*types.Detection, error) {
-	nodeDetections, ok := evaluator.detectionCache[node.ID()]
+	nodeDetections, ok := evaluator.detectionCache[evaluationContext.CursorKey()]
 	if !ok {
-		err := evaluator.detectAtNode(rootNode, node, detectorType)
+		err := evaluator.detectAtNode(evaluationContext, detectorType)
 		if err != nil {
 			return nil, err
 		}
 
-		nodeDetections = evaluator.detectionCache[node.ID()]
+		nodeDetections = evaluator.detectionCache[evaluationContext.CursorKey()]
 	}
 
 	if detections, ok := nodeDetections[detectorType]; ok {
 		return detections, nil
 	}
 
-	err := evaluator.detectAtNode(rootNode, node, detectorType)
+	err := evaluator.detectAtNode(evaluationContext, detectorType)
 	if err != nil {
 		return nil, err
 	}
@@ -224,10 +256,20 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 }
 
 func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string) (bool, error) {
+	return evaluator.doTreeHas(rootNode, detectorType, nil)
+}
+
+func (evaluator *evaluator) doTreeHas(
+	rootNode *langtree.Node,
+	detectorType string,
+	evaluationContext types.EvaluationContext,
+) (bool, error) {
 	var result bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		detections, err := evaluator.nonUnifiedNodeDetections(rootNode, node, detectorType)
+		newEvaluationContext := append(evaluationContext, types.EvaluationScope{Root: rootNode, Cursor: node})
+
+		detections, err := evaluator.nonUnifiedNodeDetections(newEvaluationContext, detectorType)
 		if err != nil {
 			return err
 		}
@@ -238,7 +280,7 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 		}
 
 		for _, unifiedNode := range node.UnifiedNodes() {
-			hasDetection, err := evaluator.TreeHas(unifiedNode, detectorType)
+			hasDetection, err := evaluator.doTreeHas(unifiedNode, detectorType, newEvaluationContext)
 			if err != nil {
 				return err
 			}
@@ -266,21 +308,27 @@ func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType string) (b
 	return len(detections) != 0, nil
 }
 
-func (evaluator *evaluator) detectAtNode(rootNode, node *langtree.Node, detectorType string) error {
+func (evaluator *evaluator) detectAtNode(
+	evaluationContext types.EvaluationContext,
+	detectorType string,
+) error {
+	node := evaluationContext.Cursor()
+
 	if evaluator.ruleDisabledForNode(detectorType, node) {
 		return nil
 	}
 
 	return evaluator.withCycleProtection(node, detectorType, func() error {
-		detections, err := evaluator.detectorSet.DetectAt(rootNode, node, detectorType, evaluator)
+		detections, err := evaluator.detectorSet.DetectAt(evaluationContext, detectorType, evaluator)
 		if err != nil {
 			return err
 		}
 
-		nodeDetections, ok := evaluator.detectionCache[node.ID()]
+		cursorKey := evaluationContext.CursorKey()
+		nodeDetections, ok := evaluator.detectionCache[cursorKey]
 		if !ok {
 			nodeDetections = make(map[string][]*types.Detection)
-			evaluator.detectionCache[node.ID()] = nodeDetections
+			evaluator.detectionCache[cursorKey] = nodeDetections
 		}
 
 		nodeDetections[detectorType] = detections

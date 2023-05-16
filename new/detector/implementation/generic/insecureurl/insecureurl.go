@@ -4,7 +4,6 @@ import (
 	"regexp"
 
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -26,10 +25,10 @@ func (detector *insecureURLDetector) Name() string {
 }
 
 func (detector *insecureURLDetector) DetectAt(
-	rootNode, node *tree.Node,
+	evaluationContext types.EvaluationContext,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	detections, err := evaluator.ForNode(node, "string", false)
+	detections, err := evaluator.ForNode(evaluationContext.Cursor(), "string", false)
 	if err != nil {
 		return nil, err
 	}

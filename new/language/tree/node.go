@@ -1,22 +1,29 @@
 package tree
 
 import (
+	"strconv"
+
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
 type Node struct {
+	id         int
 	tree       *Tree
 	sitterNode *sitter.Node
 }
 
-type NodeID *sitter.Node
+type NodeID int
 
 func (node *Node) Debug() string {
 	return node.sitterNode.String()
 }
 
 func (node *Node) ID() NodeID {
-	return node.sitterNode
+	return NodeID(node.id)
+}
+
+func (node *Node) IDString() string {
+	return strconv.Itoa(node.id)
 }
 
 func (node *Node) Equal(other *Node) bool {

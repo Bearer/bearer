@@ -5,7 +5,6 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
@@ -68,10 +67,10 @@ func (detector *objectDetector) NestedDetections() bool {
 }
 
 func (detector *objectDetector) DetectAt(
-	rootNode, node *tree.Node,
+	evaluationContext types.EvaluationContext,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	log.Debug().Msgf("node is %s", node.Debug())
+	node := evaluationContext.Cursor()
 
 	detections, err := detector.getAssignment(node, evaluator)
 	if len(detections) != 0 || err != nil {
