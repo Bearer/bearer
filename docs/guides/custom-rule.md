@@ -17,6 +17,9 @@ Each rule is a unique `yml` file. Custom rules share the same format as internal
 To better understand the structure of a rule file, let’s look at each key:
 
 - `patterns`: See the section below for the Pattern Syntax.
+- `sanitizer`: The id of an auxiliary rule which is used to restrict the
+main rule. If the sanitizer rule matches then the main rule is disabled inside
+the matched code.
 - `languages`: An array of the languages the rule applies to. Available values are: `ruby`, `javascript`, `java`
 - `trigger`: Defines under which conditions the rule should raise a result. Optional.
   - `match_on`: Refers to the rule's pattern matches.
