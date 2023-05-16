@@ -10,10 +10,21 @@ high:
       category_groups:
         - PII
         - Personal Data
-      parent:
-        start: 1
-        end: 1
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 24
         content: logger.error(user.name)
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 14
+                end: 23
       parent_line_number: 1
       snippet: logger.error(user.name)
       fingerprint: b000c2a9a82d59a1e826bc709cca9307_0

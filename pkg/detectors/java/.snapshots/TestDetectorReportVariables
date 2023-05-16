@@ -21,7 +21,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "env",
       NormalizedFieldName: (string) (len=4) "main"
     }

@@ -7,6 +7,21 @@ low:
         documentation_url: ""
       line_number: 1
       filename: deconstructing.js
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 9
+                end: 13
+        content: user
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 9
+                end: 13
       parent_line_number: 1
       snippet: user
       fingerprint: 391f0431340399f3f30398341feeb70a_0

@@ -21,7 +21,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) (len=14) "boolean | null",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=3) "bol"
     }
@@ -75,7 +75,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=8) "lastname"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "testuser",
       NormalizedFieldName: (string) (len=7) "test_id"
     }
@@ -129,7 +129,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "cat",
       NormalizedFieldName: (string) (len=5) "breed"
     }
@@ -156,7 +156,7 @@
       FieldType: (string) (len=6) "number",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "cat",
       NormalizedFieldName: (string) (len=11) "yearofbirth"
     }
@@ -183,7 +183,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "complex",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -210,7 +210,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "complex",
       NormalizedFieldName: (string) (len=7) "surname"
     }
@@ -237,7 +237,7 @@
       FieldType: (string) (len=13) "string | null",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=21) "cloudinaryimageformat",
       NormalizedFieldName: (string) (len=10) "prettyname"
     }
@@ -264,7 +264,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=21) "cloudinaryimageformat",
       NormalizedFieldName: (string) (len=8) "roominfo"
     }
@@ -291,7 +291,7 @@
       FieldType: (string) (len=6) "number",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "roominfo",
       NormalizedFieldName: (string) (len=7) "room_id"
     }
@@ -318,7 +318,7 @@
       FieldType: (string) (len=6) "number",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "roominfo",
       NormalizedFieldName: (string) (len=8) "short_id"
     }
@@ -345,7 +345,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "addressable",
       NormalizedFieldName: (string) (len=7) "address"
     }
@@ -372,7 +372,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "addressable",
       NormalizedFieldName: (string) (len=8) "address2"
     }
@@ -399,7 +399,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "addressable",
       NormalizedFieldName: (string) (len=4) "item"
     }
@@ -426,7 +426,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "item",
       NormalizedFieldName: (string) (len=7) "channel"
     }
@@ -453,7 +453,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "item",
       NormalizedFieldName: (string) (len=3) "zip"
     }
@@ -480,7 +480,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "zip",
       NormalizedFieldName: (string) (len=4) "code"
     }
@@ -507,7 +507,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=17) "cloudinaryadapter",
       NormalizedFieldName: (string) (len=9) "cloudname"
     }
@@ -534,7 +534,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=17) "cloudinaryadapter",
       NormalizedFieldName: (string) (len=11) "constructor"
     }
@@ -561,7 +561,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=17) "cloudinaryadapter",
       NormalizedFieldName: (string) (len=4) "save"
     }
@@ -588,7 +588,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
       NormalizedFieldName: (string) (len=9) "cloudname"
     }
@@ -615,7 +615,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
       NormalizedFieldName: (string) (len=6) "apikey"
     }
@@ -642,7 +642,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
       NormalizedFieldName: (string) (len=9) "apisecret"
     }
@@ -669,7 +669,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
       NormalizedFieldName: (string) (len=6) "folder"
     }
@@ -696,7 +696,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "base",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -723,7 +723,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "base",
       NormalizedFieldName: (string) (len=11) "constructor"
     }
@@ -750,7 +750,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "derived",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -777,7 +777,7 @@
       FieldType: (string) (len=4) "Type",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "box",
       NormalizedFieldName: (string) (len=7) "content"
     }
@@ -804,7 +804,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "box",
       NormalizedFieldName: (string) (len=11) "constructor"
     }
@@ -831,7 +831,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "box",
       NormalizedFieldName: (string) (len=4) "save"
     }
@@ -858,7 +858,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "something",
       NormalizedFieldName: (string) (len=6) "parent"
     }
@@ -885,7 +885,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "parent",
       NormalizedFieldName: (string) (len=6) "nested"
     }
@@ -912,7 +912,7 @@
       FieldType: (string) (len=12) "NativeModule",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "eventmanager",
       NormalizedFieldName: (string) (len=11) "rnonesignal"
     }
@@ -939,7 +939,7 @@
       FieldType: (string) (len=18) "NativeEventEmitter",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "eventmanager",
       NormalizedFieldName: (string) (len=21) "onesignaleventemitter"
     }
@@ -966,7 +966,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "eventmanager",
       NormalizedFieldName: (string) (len=15) "eventhandlermap"
     }
@@ -993,7 +993,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "eventmanager",
       NormalizedFieldName: (string) (len=20) "eventhandlerarraymap"
     }
@@ -1020,7 +1020,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "eventmanager",
       NormalizedFieldName: (string) (len=8) "listener"
     }
@@ -1047,7 +1047,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "eventmanager",
       NormalizedFieldName: (string) (len=6) "gettag"
     }
@@ -1074,7 +1074,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "eventmanager",
       NormalizedFieldName: (string) (len=12) "setsmsnumber"
     }

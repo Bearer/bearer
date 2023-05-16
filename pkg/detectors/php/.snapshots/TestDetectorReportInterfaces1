@@ -21,7 +21,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=6) "client"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "client",
       NormalizedFieldName: (string) (len=7) "request"
     }
@@ -75,7 +75,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=10) "serializer"
     }
@@ -129,7 +129,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "serializer",
       NormalizedFieldName: (string) (len=11) "deserialize"
     }
@@ -156,7 +156,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=10) "getcontent"
     }
@@ -183,7 +183,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=15) "deliverymessage",
       NormalizedFieldName: (string) (len=8) "platform"
     }
@@ -210,7 +210,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=6) "client"
     }
@@ -237,7 +237,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "client",
       NormalizedFieldName: (string) (len=7) "request"
     }
@@ -264,7 +264,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=3) "foo"
     }
@@ -291,7 +291,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "platform",
       NormalizedFieldName: (string) (len=3) "bar"
     }
@@ -318,7 +318,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
@@ -345,7 +345,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=10) "serializer"
     }
@@ -372,7 +372,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "serializer",
       NormalizedFieldName: (string) (len=11) "deserialize"
     }
@@ -399,7 +399,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=10) "getcontent"
     }
@@ -426,7 +426,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=15) "deliverymessage",
       NormalizedFieldName: (string) (len=8) "platform"
     }
@@ -453,7 +453,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=6) "client"
     }
@@ -480,7 +480,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "client",
       NormalizedFieldName: (string) (len=7) "request"
     }
@@ -507,7 +507,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
@@ -534,7 +534,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=10) "serializer"
     }
@@ -561,7 +561,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "serializer",
       NormalizedFieldName: (string) (len=11) "deserialize"
     }
@@ -588,7 +588,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=10) "getcontent"
     }
@@ -615,7 +615,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=15) "deliverymessage",
       NormalizedFieldName: (string) (len=8) "platform"
     }
@@ -642,7 +642,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=6) "client"
     }
@@ -669,7 +669,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "client",
       NormalizedFieldName: (string) (len=7) "request"
     }
@@ -696,7 +696,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
@@ -723,7 +723,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=10) "serializer"
     }
@@ -750,7 +750,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "serializer",
       NormalizedFieldName: (string) (len=11) "deserialize"
     }
@@ -777,7 +777,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=10) "getcontent"
     }
@@ -804,7 +804,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=15) "deliverymessage",
       NormalizedFieldName: (string) (len=8) "platform"
     }
@@ -831,7 +831,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=6) "client"
     }
@@ -858,7 +858,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "client",
       NormalizedFieldName: (string) (len=7) "request"
     }
@@ -885,7 +885,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
@@ -912,7 +912,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=10) "serializer"
     }
@@ -939,7 +939,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "serializer",
       NormalizedFieldName: (string) (len=11) "deserialize"
     }
@@ -966,7 +966,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=10) "getcontent"
     }
@@ -993,7 +993,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=15) "deliverymessage",
       NormalizedFieldName: (string) (len=8) "platform"
     }

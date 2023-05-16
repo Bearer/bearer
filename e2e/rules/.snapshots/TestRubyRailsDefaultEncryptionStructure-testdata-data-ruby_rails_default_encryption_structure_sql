@@ -19,6 +19,29 @@ warning:
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 1
+            end: 8
+            column:
+                start: 1
+                end: 2
+        content: |-
+            CREATE TABLE public.users (
+              id bigint NOT NULL,
+              name character varying,
+              password character varying,
+              created_at timestamp(6) without time zone NOT NULL,
+              updated_at timestamp(6) without time zone NOT NULL,
+              email character varying DEFAULT ''::character varying NOT NULL
+            )
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 3
+                end: 7
       parent_line_number: 1
       snippet: |-
         CREATE TABLE public.users (

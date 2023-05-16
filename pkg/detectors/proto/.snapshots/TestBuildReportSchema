@@ -21,7 +21,7 @@
       FieldType: (string) (len=15) "MemberAddresses",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "addressesbatch",
       NormalizedFieldName: (string) (len=14) "member_address"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) (len=6) "Member",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "membersbatch",
       NormalizedFieldName: (string) (len=6) "member"
     }
@@ -75,7 +75,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "importreply",
       NormalizedFieldName: (string) (len=6) "status"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "memberphone",
       NormalizedFieldName: (string) (len=5) "phone"
     }
@@ -129,7 +129,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "memberphone",
       NormalizedFieldName: (string) (len=10) "phone_type"
     }
@@ -156,7 +156,7 @@
       FieldType: (string) (len=5) "int32",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "socialaccount",
       NormalizedFieldName: (string) (len=14) "social_type_id"
     }
@@ -183,7 +183,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "socialaccount",
       NormalizedFieldName: (string) (len=14) "social_user_id"
     }
@@ -210,7 +210,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "loyaltyprogram",
       NormalizedFieldName: (string) (len=21) "member_premium_status"
     }
@@ -237,7 +237,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "loyaltyprogram",
       NormalizedFieldName: (string) (len=10) "start_date"
     }
@@ -264,7 +264,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "loyaltyprogram",
       NormalizedFieldName: (string) (len=8) "end_date"
     }
@@ -291,7 +291,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "marketingitem",
       NormalizedFieldName: (string) (len=12) "segmentation"
     }
@@ -318,7 +318,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "member_id"
     }
@@ -345,7 +345,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "firstname"
     }
@@ -372,7 +372,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=8) "lastname"
     }
@@ -399,7 +399,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=6) "gender"
     }
@@ -426,7 +426,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=16) "external_user_id"
     }
@@ -453,7 +453,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "birthdate"
     }
@@ -480,7 +480,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=17) "modification_date"
     }
@@ -507,7 +507,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "shop_name"
     }
@@ -534,7 +534,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=6) "status"
     }
@@ -561,7 +561,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=17) "registration_date"
     }
@@ -588,7 +588,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=5) "email"
     }
@@ -615,7 +615,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=8) "password"
     }
@@ -642,7 +642,7 @@
       FieldType: (string) (len=11) "MemberPhone",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=10) "phone_list"
     }
@@ -669,7 +669,7 @@
       FieldType: (string) (len=13) "SocialAccount",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=14) "social_account"
     }
@@ -696,7 +696,7 @@
       FieldType: (string) (len=14) "LoyaltyProgram",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=15) "loyalty_program"
     }
@@ -723,7 +723,7 @@
       FieldType: (string) (len=13) "MarketingItem",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=14) "marketing_item"
     }
@@ -750,7 +750,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=19) "communication_model"
     }
@@ -777,7 +777,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=21) "communication_channel"
     }
@@ -804,7 +804,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=15) "autologin_token"
     }
@@ -831,7 +831,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=11) "is_employee"
     }
@@ -858,7 +858,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "godfather"
     }
@@ -885,7 +885,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=11) "has_ordered"
     }
@@ -912,7 +912,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "memberaddress",
       NormalizedFieldName: (string) (len=9) "member_id"
     }
@@ -939,7 +939,7 @@
       FieldType: (string) (len=7) "Address",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "memberaddress",
       NormalizedFieldName: (string) (len=7) "address"
     }
@@ -966,7 +966,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=9) "firstname"
     }
@@ -993,7 +993,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=8) "lastname"
     }
@@ -1020,7 +1020,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=14) "address_detail"
     }
@@ -1047,7 +1047,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=8) "zip_code"
     }
@@ -1074,7 +1074,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=4) "city"
     }
@@ -1101,7 +1101,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=5) "phone"
     }
@@ -1128,7 +1128,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=13) "creation_date"
     }
@@ -1155,7 +1155,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=20) "is_last_used_address"
     }
@@ -1182,7 +1182,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=7) "company"
     }

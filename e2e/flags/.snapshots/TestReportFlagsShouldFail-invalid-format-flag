@@ -1,6 +1,6 @@
 
 --
-Error: flag error: report flags error: invalid format argument; supported values: json, yaml
+Error: flag error: report flags error: invalid format argument; supported values: json, yaml, sarif
 Usage:
    scan [flags] <path>
 Aliases:
@@ -11,7 +11,7 @@ Examples:
 
 
 Report Flags
-  -f, --format string     Specify report format (json, yaml)
+  -f, --format string     Specify report format (json, yaml, sarif)
       --output string     Specify the output path for the report.
       --report string     Specify the type of report (security, privacy, dataflow). (default "security")
       --severity string   Specify which severities are included in the report. (default "critical,high,medium,low,warning")
@@ -39,5 +39,6 @@ General Flags
       --disable-version-check   Disable Bearer version checking
 
 
-flag error: report flags error: invalid format argument; supported values: json, yaml
+flag error: report flags error: invalid format argument; supported values: json, yaml, sarif
+exit status 1
 

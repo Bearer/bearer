@@ -21,7 +21,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "this",
       NormalizedFieldName: (string) (len=10) "testmember"
     }
@@ -75,7 +75,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=10) "testmember"
     }
@@ -129,7 +129,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=11) "amemberfunc"
     }
@@ -156,7 +156,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=11) "__construct"
     }
@@ -183,7 +183,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -210,7 +210,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=10) "testmember"
     }
@@ -237,7 +237,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -264,7 +264,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=10) "testmember"
     }
@@ -291,7 +291,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=4) "name"
     }

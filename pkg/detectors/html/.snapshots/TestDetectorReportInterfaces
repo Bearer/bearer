@@ -21,7 +21,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=5) "datum"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "console",
       NormalizedFieldName: (string) (len=3) "log"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "document",
       NormalizedFieldName: (string) (len=16) "addeventlistener"
     }
@@ -129,7 +129,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "option",
       NormalizedFieldName: (string) (len=6) "detail"
     }
@@ -156,7 +156,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "detail",
       NormalizedFieldName: (string) (len=5) "kimai"
     }
@@ -183,7 +183,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "kimai",
       NormalizedFieldName: (string) (len=9) "getplugin"
     }
@@ -210,7 +210,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=7) "session"
     }
@@ -237,7 +237,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "session",
       NormalizedFieldName: (string) (len=8) "flashbag"
     }
@@ -264,7 +264,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "flashbag",
       NormalizedFieldName: (string) (len=3) "all"
     }
@@ -291,7 +291,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "alert",
       NormalizedFieldName: (string) (len=5) "error"
     }
@@ -318,7 +318,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "alert",
       NormalizedFieldName: (string) (len=7) "warning"
     }
@@ -345,7 +345,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=16) "addeventlistener"
     }
@@ -372,7 +372,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=4) "user"
     }
@@ -399,7 +399,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=14) "firstdayofweek"
     }
@@ -426,7 +426,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=8) "is24hour"
     }
@@ -453,7 +453,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=4) "user"
     }
@@ -480,7 +480,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=15) "preferencevalue"
     }
@@ -507,7 +507,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=5) "kimai"
     }
@@ -534,7 +534,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "loader",
       NormalizedFieldName: (string) (len=8) "getkimai"
     }
@@ -561,7 +561,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=9) "datalayer"
     }
@@ -588,7 +588,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=9) "datalayer"
     }
@@ -615,7 +615,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "datalayer",
       NormalizedFieldName: (string) (len=4) "push"
     }
@@ -642,7 +642,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=16) "is_authenticated"
     }
@@ -669,7 +669,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "gtag",
       NormalizedFieldName: (string) (len=9) "'user_id'"
     }

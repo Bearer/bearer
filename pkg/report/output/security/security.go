@@ -18,6 +18,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
+	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/maps"
@@ -545,11 +546,13 @@ func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumbe
 			}
 		}
 
+		log.Error().Msgf("%#v\n%#v", record.Sink, record.Source)
+
 		if index == targetIndex {
 			result += color.MagentaString(fmt.Sprintf(" %d ", extractStartLineNumber+index))
 			for i, char := range line {
 				if i >= record.Sink.Start-1 && i <= record.Sink.End-1 {
-					result += color.HiBlackString(fmt.Sprintf("%c", char))
+					result += color.BlueString(fmt.Sprintf("%c", char))
 				} else {
 					result += color.MagentaString(fmt.Sprintf("%c", char))
 				}

@@ -21,7 +21,7 @@
       FieldType: (string) (len=6) "Client",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=6) "client"
     }

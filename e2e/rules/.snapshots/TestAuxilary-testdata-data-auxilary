@@ -21,6 +21,21 @@ high:
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 44
+        content: client.event("user", "logged_in", {}, user)
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 16
+                end: 28
       parent_line_number: 11
       snippet: client.event("user", "logged_in", {}, user)
       fingerprint: 4d54a4b735da21fbdcb2d2662977b033_0

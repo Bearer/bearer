@@ -21,7 +21,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) (len=6) "person",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=6) "person"
     }
@@ -75,7 +75,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "save"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "load"
     }
@@ -129,7 +129,7 @@
       FieldType: (string) (len=8) "function",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=5) "store"
     }
@@ -156,7 +156,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "person",
       NormalizedFieldName: (string) (len=4) "city"
     }
@@ -183,7 +183,7 @@
       FieldType: (string) (len=3) "int",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "bodystat",
       NormalizedFieldName: (string) (len=6) "height"
     }
@@ -210,7 +210,7 @@
       FieldType: (string) (len=3) "int",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "bodystat",
       NormalizedFieldName: (string) (len=5) "width"
     }

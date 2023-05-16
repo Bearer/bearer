@@ -21,7 +21,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=11) "record_type"
     }
@@ -75,7 +75,7 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=9) "record_id"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=7) "blob_id"
     }
@@ -129,7 +129,7 @@
       FieldType: (string) (len=8) "datetime",
       SimpleFieldType: (string) (len=4) "date",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=10) "created_at"
     }

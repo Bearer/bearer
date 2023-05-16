@@ -21,7 +21,7 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "env",
       NormalizedFieldName: (string) (len=4) "main"
     }
@@ -108,7 +108,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "csharptest",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -135,7 +135,7 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "csharptest",
       NormalizedFieldName: (string) (len=3) "get"
     }
@@ -162,7 +162,7 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "csharptest",
       NormalizedFieldName: (string) (len=9) "something"
     }

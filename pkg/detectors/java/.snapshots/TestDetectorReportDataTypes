@@ -21,7 +21,7 @@
       FieldType: (string) (len=3) "int",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "main",
       NormalizedFieldName: (string) (len=6) "assign"
     }
@@ -48,7 +48,7 @@
       FieldType: (string) (len=3) "int",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "main",
       NormalizedFieldName: (string) (len=7) "declare"
     }
@@ -75,7 +75,7 @@
       FieldType: (string) (len=4) "User",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "main",
       NormalizedFieldName: (string) (len=8) "imported"
     }
@@ -102,7 +102,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "main",
       NormalizedFieldName: (string) (len=8) "domethod"
     }

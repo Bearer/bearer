@@ -7,7 +7,22 @@ low:
         documentation_url: ""
       line_number: 1
       filename: multiple_objects.js
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 9
+                end: 13
+        content: user
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 9
+                end: 13
       parent_line_number: 1
-      snippet: admin
+      snippet: user
       fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
 

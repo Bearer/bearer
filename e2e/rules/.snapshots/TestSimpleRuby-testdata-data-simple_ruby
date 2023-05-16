@@ -27,6 +27,21 @@ medium:
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 5
+                end: 29
+        content: config.force_ssl = false
+      sink:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 5
+                end: 29
       parent_line_number: 7
       snippet: config.force_ssl = false
       fingerprint: 28ca51516a8b388cb7065c1f0df8b093_0
