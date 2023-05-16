@@ -68,5 +68,3 @@ We'd love to see the impact you can bring to Bearer CLI. Our contributing docume
 - [Set up Bearer CLI locally to contribute code](/contributing/code/)
 - [Help improve and apply fixes to the documentation](/contributing/docs/)
 - [Add new recipes to Bearer CLI's database](/contributing/recipes/)
-  
-![Sunglasses Bear](/assets/img/contribute-bearer.png)
