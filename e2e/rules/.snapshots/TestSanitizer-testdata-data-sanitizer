@@ -11,6 +11,21 @@ critical:
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 5
+            end: 5
+            column:
+                start: 1
+                end: 15
+        content: log("abc" + x)
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 5
+                end: 15
       parent_line_number: 5
       snippet: log("abc" + x)
       fingerprint: d2e829ba86a33c5a52844641617ad8a7_0
@@ -26,6 +41,21 @@ critical:
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 1
+                end: 24
+        content: log("abc" + user.email)
+      sink:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 13
+                end: 23
       parent_line_number: 4
       snippet: log("abc" + user.email)
       fingerprint: d2e829ba86a33c5a52844641617ad8a7_2

@@ -9,7 +9,7 @@ type Configuration struct {
 }
 
 type Properties struct {
-	Tags      []string `json:"tags"`
+	Tags      []string `json:"tags"` // Could add Data Types as Tags!
 	Precision string   `json:"precision"`
 }
 

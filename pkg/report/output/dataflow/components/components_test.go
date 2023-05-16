@@ -20,7 +20,7 @@ func TestDataflowComponents(t *testing.T) {
 	}{
 		{
 			Name:        "single detection - dependency",
-			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}`,
+			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258, "start_line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}`,
 			Want: []types.Component{
 				{
 					Name:    "Stripe",
@@ -38,12 +38,12 @@ func TestDataflowComponents(t *testing.T) {
 		},
 		{
 			Name:        "single detection - dependency - no classification",
-			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}}`,
+			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258, "start_line_number": 258}}`,
 			Want:        []types.Component{},
 		},
 		{
 			Name:        "single detection - interface",
-			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}`,
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2, "start_line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}`,
 			Want: []types.Component{
 				{
 					Name:    "Stripe",
@@ -61,13 +61,13 @@ func TestDataflowComponents(t *testing.T) {
 		},
 		{
 			Name:        "single detection - interface - no classification",
-			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}}`,
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2, "start_line_number": 2}}`,
 			Want:        []types.Component{},
 		},
 		{
 			Name: "single detection - duplicates",
-			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}
-{ "detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}`,
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2, "start_line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}
+{ "detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2, "start_line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true, "recipe_type": "external_service", "recipe_sub_type": "third_party"}}`,
 			Want: []types.Component{
 				{
 					Name:    "Stripe",
@@ -85,8 +85,8 @@ func TestDataflowComponents(t *testing.T) {
 		},
 		{
 			Name: "multiple detections - deterministic output",
-			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_type": "external_service", "recipe_sub_type": "third_party", "recipe_uuid": "123-abc", "recipe_match": true}}
-{"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_type": "external_service", "recipe_sub_type": "third_party", "recipe_uuid": "123-abc", "recipe_match": true}}`,
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2, "start_line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_type": "external_service", "recipe_sub_type": "third_party", "recipe_uuid": "123-abc", "recipe_match": true}}
+{"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258, "start_line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_type": "external_service", "recipe_sub_type": "third_party", "recipe_uuid": "123-abc", "recipe_match": true}}`,
 			Want: []types.Component{
 				{
 					Name:    "Stripe",
