@@ -97,7 +97,7 @@ func (detector *objectDetector) getCallProjections(
 
 	var properties []generictypes.Property
 
-	functionDetections, err := evaluator.ForTree(result["function"], "object", true)
+	functionDetections, err := evaluator.ForTree(result["function"], "object", "", true)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}

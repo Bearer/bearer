@@ -23,16 +23,16 @@ type Pattern struct {
 
 type customDetector struct {
 	types.DetectorBase
-	detectorType    string
-	patterns        []Pattern
-	sanitizerRuleID string
+	detectorType string
+	patterns     []Pattern
+	rules        map[string]*settings.Rule
 }
 
 func New(
 	lang languagetypes.Language,
 	detectorType string,
 	patterns []settings.RulePattern,
-	sanitizerRuleID string,
+	rules map[string]*settings.Rule,
 ) (types.Detector, error) {
 	var compiledPatterns []Pattern
 	for _, pattern := range patterns {
@@ -50,9 +50,9 @@ func New(
 	}
 
 	return &customDetector{
-		detectorType:    detectorType,
-		patterns:        compiledPatterns,
-		sanitizerRuleID: sanitizerRuleID,
+		detectorType: detectorType,
+		patterns:     compiledPatterns,
+		rules:        rules,
 	}, nil
 }
 
@@ -61,21 +61,11 @@ func (detector *customDetector) Name() string {
 }
 
 func (detector *customDetector) DetectAt(
-	evaluationContext types.EvaluationContext,
+	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	sanitized, err := detector.isSanitized(evaluationContext, evaluator)
-	if err != nil {
-		return nil, fmt.Errorf("error evaluating sanitizer rule: %w", err)
-	}
-
-	if sanitized {
-		return nil, nil
-	}
-
 	var detectionsData []interface{}
 
-	node := evaluationContext.Cursor()
 	for _, pattern := range detector.patterns {
 		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
@@ -83,7 +73,12 @@ func (detector *customDetector) DetectAt(
 		}
 
 		for _, result := range results {
-			filtersMatch, datatypeDetections, variableNodes, err := matchAllFilters(result, evaluator, pattern.Filters)
+			filtersMatch, datatypeDetections, variableNodes, err := matchAllFilters(
+				result,
+				evaluator,
+				pattern.Filters,
+				detector.rules,
+			)
 			if err != nil {
 				return nil, err
 			}
@@ -101,30 +96,6 @@ func (detector *customDetector) DetectAt(
 	}
 
 	return detectionsData, nil
-}
-
-func (detector *customDetector) isSanitized(
-	evaluationContext types.EvaluationContext,
-	evaluator types.Evaluator,
-) (bool, error) {
-	if detector.sanitizerRuleID == "" {
-		return false, nil
-	}
-
-	for _, scope := range evaluationContext {
-		for ancestor := scope.Cursor; !ancestor.Equal(scope.Root); ancestor = ancestor.Parent() {
-			sanitized, err := evaluator.NodeHas(ancestor, detector.sanitizerRuleID)
-			if err != nil {
-				return false, err
-			}
-
-			if sanitized {
-				return true, nil
-			}
-		}
-	}
-
-	return false, nil
 }
 
 func (detector *customDetector) Close() {

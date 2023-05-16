@@ -10,8 +10,6 @@ type Tree struct {
 	input        []byte
 	sitterTree   *sitter.Tree
 	unifiedNodes map[NodeID][]*Node
-	nextNodeId   int
-	nodeCache    map[*sitter.Node]*Node
 	queryCache   map[int]map[NodeID][]QueryResult
 }
 
@@ -32,7 +30,6 @@ func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
 		input:        inputBytes,
 		sitterTree:   sitterTree,
 		unifiedNodes: make(map[NodeID][]*Node),
-		nodeCache:    make(map[*sitter.Node]*Node),
 		queryCache:   make(map[int]map[NodeID][]QueryResult),
 	}, nil
 }
@@ -50,14 +47,7 @@ func (tree *Tree) wrap(sitterNode *sitter.Node) *Node {
 		return nil
 	}
 
-	if node, cached := tree.nodeCache[sitterNode]; cached {
-		return node
-	}
-
-	node := &Node{tree: tree, sitterNode: sitterNode, id: tree.nextNodeId}
-	tree.nodeCache[sitterNode] = node
-	tree.nextNodeId++
-	return node
+	return &Node{tree: tree, sitterNode: sitterNode}
 }
 
 func (tree *Tree) unifyNodes(laterNode *Node, earlierNode *Node) {

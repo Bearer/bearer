@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/tree"
 )
 
 type set struct {
@@ -38,7 +39,7 @@ func (set *set) NestedDetections(detectorType string) (bool, error) {
 }
 
 func (set *set) DetectAt(
-	evaluationContext types.EvaluationContext,
+	node *tree.Node,
 	detectorType string,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
@@ -47,7 +48,7 @@ func (set *set) DetectAt(
 		return nil, err
 	}
 
-	detectionsData, err := detector.DetectAt(evaluationContext, evaluator)
+	detectionsData, err := detector.DetectAt(node, evaluator)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +57,7 @@ func (set *set) DetectAt(
 	for i, data := range detectionsData {
 		detections[i] = &types.Detection{
 			DetectorType: detectorType,
-			MatchNode:    evaluationContext.Cursor(),
+			MatchNode:    node,
 			Data:         data,
 		}
 	}

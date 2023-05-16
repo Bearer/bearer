@@ -33,6 +33,7 @@ type Composition struct {
 	langImplementation  implementation.Implementation
 	lang                languagetypes.Language
 	closers             []func()
+	rules               map[string]*settings.Rule
 }
 
 func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
@@ -77,6 +78,8 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		jsRules[ruleName] = rule
 	}
 
+	composition.rules = jsRules
+
 	detectorsLen := len(jsRules) + len(staticDetectors)
 	receiver := make(chan types.DetectorInitResult, detectorsLen)
 
@@ -112,7 +115,6 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 
 	for ruleName, rule := range jsRules {
 		patterns := rule.Patterns
-		sanitizerRuleID := rule.SanitizerRuleID
 		localRuleName := ruleName
 
 		if !rule.IsAuxilary || presenceRules[ruleName] {
@@ -124,7 +126,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 				lang,
 				localRuleName,
 				patterns,
-				sanitizerRuleID,
+				jsRules,
 			)
 
 			receiver <- types.DetectorInitResult{
@@ -190,7 +192,8 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 
 	var result []*detectortypes.Detection
 	for _, detectorType := range detectorTypes {
-		detections, err := evaluator.ForTree(tree.RootNode(), detectorType, false)
+		rule := composition.rules[detectorType]
+		detections, err := evaluator.ForTree(tree.RootNode(), detectorType, rule.SanitizerRuleID, false)
 		if err != nil {
 			return nil, err
 		}

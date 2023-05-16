@@ -92,11 +92,9 @@ func (detector *objectDetector) NestedDetections() bool {
 }
 
 func (detector *objectDetector) DetectAt(
-	evaluationContext types.EvaluationContext,
+	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	node := evaluationContext.Cursor()
-
 	detections, err := detector.getHash(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
@@ -138,7 +136,7 @@ func (detector *objectDetector) getHash(
 			continue
 		}
 
-		propertyObjects, err := evaluator.ForTree(result["value"], "object", true)
+		propertyObjects, err := evaluator.ForTree(result["value"], "object", "", true)
 		if err != nil {
 			return nil, err
 		}
@@ -178,7 +176,7 @@ func (detector *objectDetector) getKeywordArgument(
 		return nil, nil
 	}
 
-	propertyObjects, err := evaluator.ForTree(result["value"], "object", true)
+	propertyObjects, err := evaluator.ForTree(result["value"], "object", "", true)
 	if err != nil {
 		return nil, err
 	}
