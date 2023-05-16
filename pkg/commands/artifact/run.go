@@ -352,7 +352,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 
 	switch config.Report.Format {
 	case flag.FormatSarif:
-		content, err := reportoutput.ReportSarif(detections.(*map[string][]security.Result))
+		content, err := reportoutput.ReportSarif(detections.(*map[string][]security.Result), config.Rules)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}

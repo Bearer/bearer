@@ -52,9 +52,14 @@ type Input struct {
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
 
-type Parent struct {
-	Start   int    `json:"start" yaml:"start"`
-	End     int    `json:"end" yaml:"end"`
+type Location struct {
+	Start  int    `json:"start" yaml:"start"`
+	End    int    `json:"end" yaml:"end"`
+	Column Column `json:"column" yaml:"column"`
+}
+
+type Source struct {
+	*Location
 	Content string `json:"content" yaml:"content"`
 }
 
@@ -63,10 +68,14 @@ type Column struct {
 	End   int `json:"end" yaml:"end"`
 }
 
+type Sink struct {
+	*Location
+}
+
 type Output struct {
 	IsLocal         *bool    `json:"is_local,omitempty" yaml:"is_local,omitempty"`
-	Parent          Parent   `json:"parent,omitempty" yaml:"parent,omitempty"`
-	Column          Column   `json:"column,omitempty" yaml:"column,omitempty"`
+	Source          Source   `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink            Sink     `json:"sink,omitempty" yaml:"sink,omitempty"`
 	LineNumber      int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename        string   `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroups  []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
@@ -79,8 +88,8 @@ type Result struct {
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	Parent           Parent   `json:"parent,omitempty" yaml:"parent,omitempty"`
-	Column           Column   `json:"column,omitempty" yaml:"column,omitempty"`
+	Source           Source   `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink             Sink     `json:"sink,omitempty" yaml:"sink,omitempty"`
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"snippet,omitempty" yaml:"snippet,omitempty"`
 	Fingerprint      string   `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
@@ -184,10 +193,10 @@ func evaluateRules(
 					Filename:         output.Filename,
 					LineNumber:       output.LineNumber,
 					CategoryGroups:   output.CategoryGroups,
-					Parent:           output.Parent,
-					Column:           output.Column,
-					ParentLineNumber: output.Parent.Start,
-					ParentContent:    output.Parent.Content,
+					Source:           output.Source,
+					Sink:             output.Sink,
+					ParentLineNumber: output.Source.Start,
+					ParentContent:    output.Source.Content,
 					DetailedContext:  output.DetailedContext,
 					Fingerprint:      fingerprint,
 				}
@@ -509,7 +518,7 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	reportStr.WriteString(color.HiBlueString("File: " + underline(result.Filename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.Parent.Start, result.Parent.Content, result))
+	reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.Source.Start, result.Source.Content, result))
 }
 
 func formatSeverity(severity string) string {
@@ -539,8 +548,8 @@ func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumbe
 		if index == targetIndex {
 			result += color.MagentaString(fmt.Sprintf(" %d ", extractStartLineNumber+index))
 			for i, char := range line {
-				if i >= record.Column.Start-1 && i <= record.Column.End-1 {
-					result += color.BlueString(fmt.Sprintf("%c", char))
+				if i >= record.Sink.Start-1 && i <= record.Sink.End-1 {
+					result += color.HiBlackString(fmt.Sprintf("%c", char))
 				} else {
 					result += color.MagentaString(fmt.Sprintf("%c", char))
 				}

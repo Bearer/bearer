@@ -203,10 +203,10 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	selfName := dataType.GetName()
 
 	if shouldExport {
-		var parentSchema *schema.Parent
+		var sourceSchema *schema.Source
 
 		if parent != nil {
-			parentSchema = &schema.Parent{
+			sourceSchema = &schema.Source{
 				Content:           parent.Content(),
 				StartLineNumber:   parent.StartLineNumber(),
 				StartColumnNumber: parent.StartColumnNumber(),
@@ -232,7 +232,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				FieldType:            dataType.GetTextType(),
 				SimpleFieldType:      dataType.GetType(),
 				Classification:       dataType.GetClassification(),
-				Parent:               parentSchema,
+				Source:               sourceSchema,
 				NormalizedObjectName: normalizedObjectName,
 				NormalizedFieldName:  normalizedFieldName,
 			},

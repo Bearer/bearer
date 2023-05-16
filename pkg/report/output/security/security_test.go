@@ -154,7 +154,7 @@ func dummyDataflow() dataflow.DataFlow {
 			{
 				Filename:        "config/application.rb",
 				StartLineNumber: 2,
-				Parent: &schema.Parent{
+				Source: &schema.Source{
 					StartLineNumber:   2,
 					StartColumnNumber: 10,
 					EndLineNumber:     2,
@@ -176,7 +176,7 @@ func dummyDataflow() dataflow.DataFlow {
 			{
 				Filename:        "pkg/datatype_leak.rb",
 				StartLineNumber: 1,
-				Parent: &schema.Parent{
+				Source: &schema.Source{
 					StartLineNumber:   1,
 					StartColumnNumber: 10,
 					EndLineNumber:     2,

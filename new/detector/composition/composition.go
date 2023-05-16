@@ -23,6 +23,7 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 		data := detection.Data.(custom.Data)
 
 		if len(data.Datatypes) == 0 {
+			// log.Error().Msgf("%s %s %d %d", file.Path, detection.MatchNode.Content(), detection.MatchNode.StartLineNumber(), detection.MatchNode.StartColumnNumber())
 			report.AddDetection(reportdetections.TypeCustomRisk,
 				detectorType,
 				source.New(
@@ -34,7 +35,7 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 					detection.MatchNode.EndColumnNumber(),
 					data.Pattern,
 				),
-				schema.Parent{
+				schema.Source{
 					StartLineNumber:   detection.MatchNode.StartLineNumber(),
 					EndLineNumber:     detection.MatchNode.EndLineNumber(),
 					StartColumnNumber: detection.MatchNode.StartColumnNumber(),
@@ -87,7 +88,7 @@ func reportDatatypeDetection(
 				FieldName:            property.Name,
 				NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
 				Classification:       property.Classification,
-				Parent: &schema.Parent{
+				Source: &schema.Source{
 					StartLineNumber:   detection.MatchNode.StartLineNumber(),
 					EndLineNumber:     detection.MatchNode.EndLineNumber(),
 					StartColumnNumber: detection.MatchNode.StartColumnNumber(),

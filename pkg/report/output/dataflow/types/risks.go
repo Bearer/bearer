@@ -13,7 +13,7 @@ type RiskLocation struct {
 	StartColumnNumber int            `json:"start_column_number" yaml:"start_column_number"`
 	EndLineNumber     int            `json:"end_line_number" yaml:"end_line_number"`
 	EndColumnNumber   int            `json:"end_column_number" yaml:"end_column_number"`
-	Parent            *schema.Parent `json:"parent,omitempty" yaml:"parent,omitempty"`
+	Source            *schema.Source `json:"source,omitempty" yaml:"source,omitempty"`
 	DataTypes         []RiskDatatype `json:"data_types,omitempty" yaml:"data_types,omitempty"`
 	PresenceMatches   []RiskPresence `json:"presence_matches,omitempty" yaml:"presence_matches,omitempty"`
 }

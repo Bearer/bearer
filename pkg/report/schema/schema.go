@@ -26,12 +26,12 @@ type Schema struct {
 	FieldType            string      `json:"field_type" yaml:"field_type"`
 	SimpleFieldType      string      `json:"field_type_simple" yaml:"field_type_simple"`
 	Classification       interface{} `json:"classification,omitempty" yaml:"classification,omitempty"`
-	Parent               *Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
+	Source               *Source     `json:"source,omitempty" yaml:"source,omitempty"`
 	NormalizedObjectName string      `json:"normalized_object_name,omitempty" yaml:"normalized_object_name,omitempty"`
 	NormalizedFieldName  string      `json:"normalized_field_name,omitempty" yaml:"normalized_field_name,omitempty"`
 }
 
-type Parent struct {
+type Source struct {
 	// This is the starting line number, the very beginning of what's used by the custom detection
 	StartLineNumber   int    `json:"start_line_number,omitempty" yaml:"start_line_number,omitempty"`
 	StartColumnNumber int    `json:"start_column_number,omitempty" yaml:"start_column_number,omitempty"`

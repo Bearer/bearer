@@ -4,14 +4,22 @@ import future.keywords
 
 build_item(location) := {
 	"filename": location.filename,
-	"parent": {
-		"start": location.parent.start_line_number,
-		"end": location.parent.end_line_number,
-		"content": location.parent.content,
+	"source": {
+		"start": location.source.start_line_number,
+		"end": location.source.end_line_number,
+		"content": location.source.content,
+		"column": {
+			"start": location.source.start_column_number,
+			"end": location.source.end_column_number,
+		},
 	},
-	"column": {
-		"start": location.start_column_number,
-		"end": location.end_column_number,
+	"sink": {
+		"start": location.start_line_number,
+		"end": location.end_line_number,
+		"column": {
+			"start": location.start_column_number,
+			"end": location.end_column_number,
+		},
 	},
 	"line_number": location.start_line_number,
 	"detailed_context": location.presence_matches[0].name,
@@ -32,14 +40,22 @@ build_local_item(location, data_type) := {
 	"is_local": true,
 	"category_groups": groups_for_datatype(data_type),
 	"filename": location.filename,
-	"parent": {
-		"start": location.parent.start_line_number,
-		"end": location.parent.end_line_number,
-		"content": location.parent.content,
+	"source": {
+		"start": location.source.start_line_number,
+		"end": location.source.end_line_number,
+		"content": location.source.content,
+		"column": {
+			"start": location.source.start_column_number,
+			"end": location.source.end_column_number,
+		},
 	},
-	"column": {
-		"start": location.start_column_number,
-		"end": location.end_column_number,
+	"sink": {
+		"start": location.start_line_number,
+		"end": location.end_line_number,
+		"column": {
+			"start": location.start_column_number,
+			"end": location.end_column_number,
+		},
 	},
 	"line_number": location.start_line_number,
 	"datatype_name": data_type.name,
@@ -50,14 +66,22 @@ build_local_item(location, data_type) := {
 build_item(location) := {
 	"category_groups": cat_groups,
 	"filename": location.filename,
-	"parent": {
-		"start": location.parent.start_line_number,
-		"end": location.parent.end_line_number,
-		"content": location.parent.content,
+	"source": {
+		"start": location.source.start_line_number,
+		"end": location.source.end_line_number,
+		"content": location.source.content,
+		"column": {
+			"start": location.source.start_column_number,
+			"end": location.source.end_column_number,
+		},
 	},
-	"column": {
-		"start": location.start_column_number,
-		"end": location.end_column_number,
+	"sink": {
+		"start": location.start_line_number,
+		"end": location.end_line_number,
+		"column": {
+			"start": location.start_column_number,
+			"end": location.end_column_number,
+		},
 	},
 	"line_number": location.start_line_number,
 } if {

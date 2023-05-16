@@ -69,7 +69,7 @@ func dummyDataflow() dataflow.DataFlow {
 			{
 				Filename:        "/app/controllers/application_controller.rb",
 				StartLineNumber: 39,
-				Parent: &schema.Parent{
+				Source: &schema.Source{
 					StartLineNumber:   38,
 					StartColumnNumber: 10,
 					EndLineNumber:     38,

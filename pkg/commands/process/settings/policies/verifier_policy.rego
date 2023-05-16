@@ -28,14 +28,22 @@ policy_failure contains item if {
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"filename": location.filename,
-		"parent": {
-			"start": location.parent.start_line_number,
-			"end": location.parent.end_line_number,
-			"content": location.parent.content,
+		"source": {
+			"start": location.source.start_line_number,
+			"end": location.source.end_line_number,
+			"content": location.source.content,
+			"column": {
+				"start": location.source.start_column_number,
+				"end": location.source.end_column_number,
+			},
 		},
-		"column": {
-			"start": location.start_column_number,
-			"end": location.end_column_number,
+		"sink": {
+			"start": location.start_line_number,
+			"end": location.end_line_number,
+			"column": {
+				"start": location.start_column_number,
+				"end": location.end_column_number,
+			},
 		},
 		"line_number": location.start_line_number,
 	}
@@ -62,14 +70,22 @@ policy_failure contains item if {
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"filename": location.filename,
-		"parent": {
-			"start": location.parent.start_line_number,
-			"end": location.parent.end_line_number,
-			"content": location.parent.content,
+		"source": {
+			"start": location.source.start_line_number,
+			"end": location.source.end_line_number,
+			"content": location.source.content,
+			"column": {
+				"start": location.source.start_column_number,
+				"end": location.source.end_column_number,
+			},
 		},
-		"column": {
-			"start": location.start_column_number,
-			"end": location.end_column_number,
+		"sink": {
+			"start": location.start_line_number,
+			"end": location.end_line_number,
+			"column": {
+				"start": location.start_column_number,
+				"end": location.end_column_number,
+			},
 		},
 		"line_number": location.start_line_number,
 	}

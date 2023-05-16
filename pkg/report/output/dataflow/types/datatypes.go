@@ -15,7 +15,7 @@ type Datatype struct {
 type DatatypeDetector struct {
 	Name      string             `json:"name" yaml:"name"`
 	Locations []DatatypeLocation `json:"locations" yaml:"locations"`
-	Parent    *schema.Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
+	Source    *schema.Source     `json:"source,omitempty" yaml:"source,omitempty"`
 }
 
 type DatatypeLocation struct {
@@ -26,7 +26,7 @@ type DatatypeLocation struct {
 	Encrypted         *bool                `json:"encrypted,omitempty" yaml:"encrypted,omitempty"`
 	VerifiedBy        []DatatypeVerifiedBy `json:"verified_by,omitempty" yaml:"verified_by,omitempty"`
 	Stored            *bool                `json:"stored,omitempty" yaml:"stored,omitempty"`
-	Parent            *schema.Parent       `json:"parent,omitempty" yaml:"parent,omitempty"`
+	Source            *schema.Source       `json:"source,omitempty" yaml:"source,omitempty"`
 	FieldName         string               `json:"field_name,omitempty" yaml:"field_name,omitempty"`
 	ObjectName        string               `json:"object_name,omitempty" yaml:"object_name,omitempty"`
 	SubjectName       *string              `json:"subject_name,omitempty" yaml:"subject_name,omitempty"`

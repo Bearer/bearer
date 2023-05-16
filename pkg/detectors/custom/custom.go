@@ -311,28 +311,28 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			content := capture["rule"].Source(false)
 			content.Text = &rule.Pattern
 
-			var parent *schema.Parent
-			var parentSource source.Source
+			var schemaSource *schema.Source
+			var source source.Source
 			if !rule.OmitParent {
-				parentSource = capture["rule"].Source(true)
-				parent = &schema.Parent{
-					StartLineNumber:   *parentSource.StartLineNumber,
-					EndLineNumber:     *parentSource.EndLineNumber,
-					StartColumnNumber: *parentSource.StartColumnNumber,
-					EndColumnNumber:   *parentSource.EndColumnNumber,
-					Content:           *parentSource.Text,
+				source = capture["rule"].Source(true)
+				schemaSource = &schema.Source{
+					StartLineNumber:   *source.StartLineNumber,
+					EndLineNumber:     *source.EndLineNumber,
+					StartColumnNumber: *source.StartColumnNumber,
+					EndColumnNumber:   *source.EndColumnNumber,
+					Content:           *source.Text,
 				}
 			} else {
-				parentSource = capture["rule"].Source(false)
-				parent = &schema.Parent{
-					StartLineNumber:   *parentSource.StartLineNumber,
-					StartColumnNumber: *parentSource.StartColumnNumber,
-					EndLineNumber:     *parentSource.EndLineNumber,
-					EndColumnNumber:   *parentSource.EndColumnNumber,
+				source = capture["rule"].Source(false)
+				schemaSource = &schema.Source{
+					StartLineNumber:   *source.StartLineNumber,
+					StartColumnNumber: *source.StartColumnNumber,
+					EndLineNumber:     *source.EndLineNumber,
+					EndColumnNumber:   *source.EndColumnNumber,
 				}
 			}
 
-			report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, parent)
+			report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, schemaSource)
 
 			continue
 		}

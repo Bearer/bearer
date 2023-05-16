@@ -44,7 +44,7 @@ type lineNumberHolder struct {
 	encrypted         *bool
 	verifiedBy        []types.DatatypeVerifiedBy
 	stored            *bool
-	parent            *schema.Parent
+	source            *schema.Source
 	fieldName         string
 	objectName        string
 	subjectName       *string
@@ -142,7 +142,7 @@ func (holder *Holder) addDatatype(
 			fieldName:         schema.FieldName,
 			objectName:        schema.ObjectName,
 			subjectName:       subjectName,
-			parent:            schema.Parent,
+			source:            schema.Source,
 		}
 	}
 
@@ -200,7 +200,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 						Encrypted:         lineNumber.encrypted,
 						VerifiedBy:        lineNumber.verifiedBy,
 						Stored:            lineNumber.stored,
-						Parent:            lineNumber.parent,
+						Source:            lineNumber.source,
 						FieldName:         lineNumber.fieldName,
 						ObjectName:        lineNumber.objectName,
 						SubjectName:       lineNumber.subjectName,
