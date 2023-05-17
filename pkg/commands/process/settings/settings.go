@@ -106,6 +106,7 @@ type RuleDefinition struct {
 	Disabled           bool                   `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
 	Type               string                 `mapstructure:"type" json:"type" yaml:"type"`
 	Languages          []string               `mapstructure:"languages" json:"languages" yaml:"languages"`
+	Imports            []string               `mapstructure:"imports" json:"imports" yaml:"imports"`
 	ParamParenting     bool                   `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
 	Patterns           []RulePattern          `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
 	SanitizerRuleID    string                 `mapstructure:"sanitizer" json:"sanitizer" yaml:"sanitizer"`

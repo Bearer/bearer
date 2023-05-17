@@ -8,13 +8,23 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/report/customdetectors"
+	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
 )
 
+const (
+	defaultRuleType          = customdetectors.TypeRisk
+	defaultAuxiliaryRuleType = customdetectors.TypeVerifier
+)
+
 var (
-	defaultRuleType          = "risk"
-	defaultAuxiliaryRuleType = "verifier"
+	builtinRuleIDs = []string{
+		"datatype",
+		"insecure_url",
+		"string_literal",
+	}
 )
 
 func GetSupportedRuleLanguages() map[string]bool {
@@ -131,7 +141,9 @@ func loadRules(
 }
 
 func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {
-	return fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
+	loadedDefinitions := make(map[string]RuleDefinition)
+
+	if err := fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -159,20 +171,156 @@ func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS
 		}
 
 		if ruleDefinition.Metadata == nil {
-			log.Debug().Msgf("Rule file has invalid metadata %s", path)
+			log.Debug().Msgf("rule file has invalid metadata %s", path)
 			return nil
 		}
 
 		id := ruleDefinition.Metadata.ID
+		if id == "" {
+			log.Debug().Msgf("rule file missing metadata.id %s", path)
+			return nil
+		}
 
-		if _, exists := definitions[id]; exists {
+		if _, exists := loadedDefinitions[id]; exists {
 			return fmt.Errorf("duplicate rule ID %s", id)
 		}
 
-		definitions[id] = ruleDefinition
+		loadedDefinitions[id] = ruleDefinition
 
 		return nil
-	})
+	}); err != nil {
+		return err
+	}
+
+	for id, definition := range loadedDefinitions {
+		if validateRuleDefinition(loadedDefinitions, &definition) {
+			definitions[id] = definition
+		}
+	}
+
+	return nil
+}
+
+func validateRuleDefinition(allDefinitions map[string]RuleDefinition, definition *RuleDefinition) bool {
+	metadata := definition.Metadata
+
+	valid := true
+	fail := func(message string) {
+		valid = false
+		log.Debug().Msgf("%s: %s", metadata.ID, message)
+	}
+
+	visibleRuleIDs := set.New[string]()
+	visibleRuleIDs.AddAll(builtinRuleIDs)
+
+	for _, importedID := range definition.Imports {
+		visibleRuleIDs.Add(importedID)
+
+		importedDefinition, exists := allDefinitions[importedID]
+
+		if !exists {
+			fail(fmt.Sprintf("import of unknown rule '%s'", importedID))
+			continue
+		}
+
+		if importedDefinition.Type != customdetectors.TypeShared {
+			fail(fmt.Sprintf("imported rule '%s' is not of type 'shared'", importedID))
+		}
+	}
+
+	for _, auxiliaryDefinition := range definition.Auxiliary {
+		visibleRuleIDs.Add(auxiliaryDefinition.Id)
+	}
+
+	for _, filterRuleID := range getFilterRuleReferences(definition).Items() {
+		if !visibleRuleIDs.Has(filterRuleID) {
+			fail(fmt.Sprintf("filter references invalid or non-imported rule '%s'", filterRuleID))
+		}
+	}
+
+	for _, sanitizerRuleID := range getSanitizers(definition).Items() {
+		if !visibleRuleIDs.Has(sanitizerRuleID) {
+			fail(fmt.Sprintf("sanitizer references invalid or non-imported rule '%s'", sanitizerRuleID))
+		}
+	}
+
+	if metadata.ID == "" {
+		fail("metadata.id must be specified")
+	}
+
+	if definition.Type == customdetectors.TypeShared {
+		metadata := definition.Metadata
+		if metadata != nil {
+			if metadata.CWEIDs != nil {
+				fail("cwe ids cannot be specified for a shared rule")
+			}
+
+			if metadata.RemediationMessage != "" {
+				fail("remediation message cannot be specified for a shared rule")
+			}
+		}
+
+		if definition.Severity != "" {
+			fail("severity cannot be specified for a shared rule")
+		}
+	}
+
+	if !valid {
+		log.Debug().Msgf("%s ignored due to validation errors", metadata.ID)
+	}
+
+	return valid
+}
+
+func getFilterRuleReferences(definition *RuleDefinition) set.Set[string] {
+	result := set.New[string]()
+
+	var addFilter func(filter PatternFilter)
+
+	addPatterns := func(patterns []RulePattern) {
+		for _, pattern := range patterns {
+			for _, filter := range pattern.Filters {
+				addFilter(filter)
+			}
+		}
+	}
+
+	addFilter = func(filter PatternFilter) {
+		if filter.Detection != "" {
+			result.Add(filter.Detection)
+		}
+
+		if filter.Not != nil {
+			addFilter(*filter.Not)
+		}
+
+		for _, subFilter := range filter.Either {
+			addFilter(subFilter)
+		}
+	}
+
+	addPatterns(definition.Patterns)
+	for _, auxiliaryDefinition := range definition.Auxiliary {
+		addPatterns(auxiliaryDefinition.Patterns)
+	}
+
+	return result
+}
+
+func getSanitizers(definition *RuleDefinition) set.Set[string] {
+	result := set.New[string]()
+
+	if definition.SanitizerRuleID != "" {
+		result.Add(definition.SanitizerRuleID)
+	}
+
+	for _, auxiliaryDefinition := range definition.Auxiliary {
+		if auxiliaryDefinition.SanitizerRuleID != "" {
+			result.Add(auxiliaryDefinition.SanitizerRuleID)
+		}
+	}
+
+	return result
 }
 
 func validateRuleOptionIDs(
@@ -210,16 +358,35 @@ func validateRuleOptionIDs(
 func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefinition, rules map[string]struct{}) map[string]struct{} {
 	enabledRules := make(map[string]struct{})
 
-	for _, definition := range definitions {
+	for ruleId := range rules {
+		enabledRules[ruleId] = struct{}{}
+	}
+
+	var enableRule func(definition RuleDefinition)
+	enableRule = func(definition RuleDefinition) {
+		if definition.Disabled {
+			return
+		}
+
 		id := definition.Metadata.ID
 
-		if definition.Disabled {
-			continue
+		if _, alreadyEnabled := enabledRules[id]; alreadyEnabled {
+			return
 		}
 
-		for ruleId := range rules {
-			enabledRules[ruleId] = struct{}{}
+		enabledRules[id] = struct{}{}
+
+		for _, dependencyID := range definition.Detectors {
+			enabledRules[dependencyID] = struct{}{}
 		}
+
+		for _, importedRuleID := range definition.Imports {
+			enableRule(definitions[importedRuleID])
+		}
+	}
+
+	for _, definition := range definitions {
+		id := definition.Metadata.ID
 
 		if len(options.OnlyRule) > 0 && !options.OnlyRule[id] {
 			continue
@@ -229,12 +396,7 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 			continue
 		}
 
-		enabledRules[id] = struct{}{}
-
-		for _, dependencyID := range definition.Detectors {
-			enabledRules[dependencyID] = struct{}{}
-		}
-
+		enableRule(definition)
 	}
 
 	return enabledRules
