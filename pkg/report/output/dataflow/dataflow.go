@@ -119,6 +119,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 			switch customDetector.Type {
 			case customdetectors.TypeVerifier:
+			case customdetectors.TypeShared:
 				continue
 			case customdetectors.TypeRisk:
 				err := risksHolder.AddSchema(castDetection)
