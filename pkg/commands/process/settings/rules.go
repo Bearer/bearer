@@ -211,6 +211,7 @@ func validateRuleDefinition(allDefinitions map[string]RuleDefinition, definition
 	}
 
 	visibleRuleIDs := set.New[string]()
+	visibleRuleIDs.Add(metadata.ID)
 	visibleRuleIDs.AddAll(builtinRuleIDs)
 
 	for _, importedID := range definition.Imports {
@@ -381,7 +382,9 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 		}
 
 		for _, importedRuleID := range definition.Imports {
-			enableRule(definitions[importedRuleID])
+			if importedDefinition, exists := definitions[importedRuleID]; exists {
+				enableRule(importedDefinition)
+			}
 		}
 	}
 
