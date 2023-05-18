@@ -381,7 +381,9 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 		}
 
 		for _, importedRuleID := range definition.Imports {
-			enableRule(definitions[importedRuleID])
+			if importedDefinition, exists := definitions[importedRuleID]; exists {
+				enableRule(importedDefinition)
+			}
 		}
 	}
 
