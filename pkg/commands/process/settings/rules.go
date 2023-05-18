@@ -211,6 +211,7 @@ func validateRuleDefinition(allDefinitions map[string]RuleDefinition, definition
 	}
 
 	visibleRuleIDs := set.New[string]()
+	visibleRuleIDs.Add(metadata.ID)
 	visibleRuleIDs.AddAll(builtinRuleIDs)
 
 	for _, importedID := range definition.Imports {
