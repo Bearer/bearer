@@ -840,5 +840,6 @@ keywords = [
 description = "global allow lists"
 paths = [
     '''gitleaks.toml''',
-    '''(.*?)(jpg|gif|doc|pdf|bin|svg|socket)$'''
+    '''(.*?)(jpg|gif|doc|pdf|bin|svg|socket)$''',
+    '''(\A|/|\\)doc(?s)(/|\\)(.*).md\z'''
 ]
