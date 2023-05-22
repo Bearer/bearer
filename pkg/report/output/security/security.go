@@ -257,6 +257,8 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 		writeStatsToString(reportStr, config, lineOfCodeOutput, dataflow)
 	}
 
+	writeApiClientResultToString(reportStr, config)
+
 	reportStr.WriteString("\nNeed help or want to discuss the output? Join the Community https://discord.gg/eaHZBJUXRF\n")
 
 	color.NoColor = initialColorSetting
@@ -348,6 +350,19 @@ func writeRuleListToString(
 	}
 
 	return defaultRuleCount + customRuleCount
+}
+
+func writeApiClientResultToString(
+	reportStr *strings.Builder,
+	config settings.Config,
+) {
+	if config.Client != nil {
+		if config.Client.Error == nil {
+			reportStr.WriteString("\nData successfully sent to Bearer Cloud.\n")
+		} else {
+			reportStr.WriteString(fmt.Sprintf("\nFailed to send data to Bearer Cloud. %s \n", *config.Client.Error))
+		}
+	}
 }
 
 func countRules(

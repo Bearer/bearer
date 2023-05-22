@@ -19,6 +19,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/privacy"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/util/file"
+	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/gitsight/go-vcsurl"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
@@ -165,11 +166,12 @@ func reportSecurity(
 		return
 	}
 
-	if config.Client != nil {
+	if config.Client != nil && config.Client.Error == nil {
 		var meta *Meta
 		meta, err = getMeta(config)
 		if err != nil {
 			log.Debug().Msgf("couldn't get meta for repo %s", err)
+			config.Client.Error = pointer.String("Could not extract git metadata.")
 			meta = &Meta{
 				Target: config.Scan.Target,
 			}
@@ -177,6 +179,7 @@ func reportSecurity(
 
 		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, dataflow)
 		if err != nil {
+			config.Client.Error = pointer.String("Could not compress report.")
 			log.Debug().Msgf("error creating report %s", err)
 		}
 
@@ -184,7 +187,8 @@ func reportSecurity(
 
 		err = sendReportToBearer(config.Client, meta, filename)
 		if err != nil {
-			log.Debug().Msgf("error sending report to Bearer")
+			config.Client.Error = pointer.String("Report upload failed.")
+			log.Debug().Msgf("error sending report to Bearer cloud: %s", err)
 		}
 	}
 
