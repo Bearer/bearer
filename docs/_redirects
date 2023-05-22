@@ -1,0 +1,10 @@
+# Add moved or removed pages here. Redirects netlify requests.
+
+/reference/rules/javascript_hardcoded_secret /reference/rules/javascript_lang_hardcoded_secret
+/reference/rules/javascript_aws_lambda_code_injection /reference/rules/javascript_lang_eval_user_input
+/reference/rules/javascript_express_eval_user_input /reference/rules/javascript_lang_eval_user_input
+/reference/rules/javascript_aws_lambda_sql_injection /reference/rules/javascript_lang_sql_injection
+/reference/rules/javascript_express_sql_injection /reference/rules/javascript_lang_sql_injection
+/reference/rules/javascript_express_insecure_template_rendering /reference/rules/javascript_lang_raw_html_using_user_input
+/reference/rules/javascript_aws_lambda_os_command_injection /reference/rules/javascript_lang_os_command_injection
+/reference/rules/javascript_aws_lambda_query_injection /reference/rules/javascript_third_parties_dynamodb_query_injection
