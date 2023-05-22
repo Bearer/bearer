@@ -321,7 +321,7 @@ We recommend using unique variable names in rules that refer to each other when 
 
 You can use shared rules to avoid duplication of auxiliary rules between different rule files. To use one rule from another, it must be of type `shared` and must be imported by the rule that uses it.
 
-As shared rules are only used by other rules and do not result in and findings, they have no associated CWE, severity, etc.
+As shared rules are only used by other rules and do not result in any findings, they have no associated CWE, severity, etc.
 
 ### Example
 
