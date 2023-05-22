@@ -317,6 +317,48 @@ This seems like it would all work fine, but because both rules rely on `my_rule_
 
 We recommend using unique variable names in rules that refer to each other when you don't intend them to match the same code locations. If your use case doesn't rely on reusing an input source across multiple, differing patterns, it may be easier to duplicate the detection logic with unique names. Otherwise, make use of `contains: false` to prevent the variable joining.
 
+## Shared rules
+
+You can use shared rules to avoid duplication of auxiliary rules between different rule files. To use one rule from another, it must be of type `shared` and must be imported by the rule that uses it.
+
+As shared rules are only used by other rules and do not result in any findings, they have no associated CWE, severity, etc.
+
+### Example
+
+Shared rule:
+
+```yaml
+languages:
+  - ruby
+type: shared
+patterns:
+  - params[$<_>]
+metadata:
+  description: "Ruby user input"
+  id: ruby_shared_user_input
+```
+
+Main rule:
+
+```yaml
+languages:
+  - ruby
+imports:
+  - ruby_shared_user_input
+patterns:
+  - pattern: unsafe($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_shared_user_input
+severity: high
+metadata:
+  description: "Unsafe user input detected."
+  remediation_message: "..."
+  cwe_id:
+    - 601
+  id: ruby_lang_unsafe_user_input
+```
+
 ## Syntax updates
 ### v1.1 Trigger changes
 If you have created a custom rule before v1.1 you will need to make the some small changes
