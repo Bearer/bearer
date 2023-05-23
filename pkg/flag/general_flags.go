@@ -1,7 +1,10 @@
 package flag
 
 import (
+	"fmt"
+
 	"github.com/bearer/bearer/api"
+	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/rs/zerolog/log"
 )
 
@@ -85,17 +88,14 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		_, err := client.Hello()
 		if err != nil {
 			log.Debug().Msgf("couldn't initialize client -> %s", err.Error())
+			client.Error = pointer.String(fmt.Sprintf("API key does not appear to be valid for %s.", client.Host))
 		} else {
 			log.Debug().Msgf("Initialized client for report")
-			return GeneralOptions{
-				Client:              client,
-				ConfigFile:          getString(f.ConfigFile),
-				DisableVersionCheck: getBool(f.DisableVersionCheck),
-			}
 		}
 	}
 
 	return GeneralOptions{
+		Client:              client,
 		ConfigFile:          getString(f.ConfigFile),
 		DisableVersionCheck: getBool(f.DisableVersionCheck),
 	}

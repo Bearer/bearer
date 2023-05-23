@@ -15,6 +15,7 @@ type API struct {
 	client *http.Client
 	Host   string
 	Token  string
+	Error  *string
 }
 
 type MessageType string
@@ -36,6 +37,7 @@ func New(config API) *API {
 		client: &http.Client{},
 		Token:  config.Token,
 		Host:   config.Host,
+		Error:  nil,
 	}
 }
 
