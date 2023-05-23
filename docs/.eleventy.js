@@ -39,6 +39,7 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.addPassthroughCopy({ "./_tmp/style.css": "./style.css" });
   eleventyConfig.addPassthroughCopy({ "./robots.txt": "./robots.txt" });
+  eleventyConfig.addPassthroughCopy({ "./_redirects": "./_redirects" });
   eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
   eleventyConfig.addShortcode("version", function () {
     return now;
