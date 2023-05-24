@@ -17,7 +17,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
-	"github.com/bearer/bearer/pkg/report/output/sarif"
+	sarif "github.com/bearer/bearer/pkg/report/output/sarif/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/util/file"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
@@ -36,8 +36,6 @@ import (
 var ErrUndefinedFormat = errors.New("undefined output format")
 
 func ReportSarif(outputDetections *map[string][]security.Result, rules map[string]*settings.Rule) (*string, error) {
-	// log.Error().Msgf("detections: %#v", outputDetections)
-
 	var sarifRules []sarif.Rule
 
 	for _, rule := range rules {
