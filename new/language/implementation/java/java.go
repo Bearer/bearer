@@ -306,6 +306,31 @@ func (*javaImplementation) PassthroughNested(node *tree.Node) bool {
 	return slices.Contains(passthroughMethods, method) || slices.Contains(passthroughMethods, wildcardMethod)
 }
 
-func (*javaImplementation) ContributesToValue(node *tree.Node) bool {
+func (*javaImplementation) ContributesToResult(node *tree.Node) bool {
+	// Statements don't have results
+	if strings.HasSuffix(node.Type(), "_statement") {
+		return false
+	}
+
+	// Switch case
+	if node.Type() == "switch_label" {
+		return false
+	}
+
+	parent := node.Parent()
+	if parent == nil {
+		return true
+	}
+
+	// Must not be a ternary/switch condition
+	if node.Equal(parent.ChildByFieldName("condition")) {
+		return false
+	}
+
+	// Must be the arguments of calls
+	if parent.Type() == "method_invocation" && !node.Equal(parent.ChildByFieldName("arguments")) {
+		return false
+	}
+
 	return true
 }

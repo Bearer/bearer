@@ -122,7 +122,7 @@ type Implementation interface {
 
 	PassthroughNested(node *tree.Node) bool
 
-	ContributesToValue(node *tree.Node) bool
+	ContributesToResult(node *tree.Node) bool
 }
 
 type Scope struct {

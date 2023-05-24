@@ -177,7 +177,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := evaluator.Evaluate(result["value"], "object", "", settings.CONTAINS_SCOPE, true)
+		propertyObjects, err := evaluator.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
 		if err != nil {
 			return nil, err
 		}

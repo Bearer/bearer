@@ -297,7 +297,7 @@ func (*rubyImplementation) PassthroughNested(node *tree.Node) bool {
 	return slices.Contains(passthroughMethods, receiverMethod) || slices.Contains(passthroughMethods, wildcardMethod)
 }
 
-func (*rubyImplementation) ContributesToValue(node *tree.Node) bool {
+func (*rubyImplementation) ContributesToResult(node *tree.Node) bool {
 	parent := node.Parent()
 	if parent == nil {
 		return true
@@ -305,6 +305,16 @@ func (*rubyImplementation) ContributesToValue(node *tree.Node) bool {
 
 	// Must not be a condition
 	if node.Equal(parent.ChildByFieldName("condition")) {
+		return false
+	}
+
+	// Must not be a case value
+	if parent.Type() == "case" && node.Equal(parent.ChildByFieldName("value")) {
+		return false
+	}
+
+	// Must not be a case-when pattern
+	if parent.Type() == "when" && node.Equal(parent.ChildByFieldName("pattern")) {
 		return false
 	}
 

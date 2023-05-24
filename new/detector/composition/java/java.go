@@ -197,7 +197,7 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 			tree.RootNode(),
 			detectorType,
 			rule.SanitizerRuleID,
-			settings.CONTAINS_SCOPE,
+			settings.NESTED_SCOPE,
 			false,
 		)
 		if err != nil {

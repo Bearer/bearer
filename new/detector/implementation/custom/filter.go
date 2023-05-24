@@ -45,8 +45,8 @@ func matchFilter(
 
 	if filter.Detection != "" {
 		effectiveScope := filter.Scope
-		if scope == settings.VALUE_SCOPE {
-			effectiveScope = settings.VALUE_SCOPE
+		if scope == settings.RESULT_SCOPE {
+			effectiveScope = settings.RESULT_SCOPE
 		}
 
 		return matchDetectionFilter(

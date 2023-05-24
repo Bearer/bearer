@@ -77,9 +77,9 @@ const (
 type RuleReferenceScope string
 
 const (
-	CURSOR_SCOPE   RuleReferenceScope = "cursor"
-	CONTAINS_SCOPE RuleReferenceScope = "contains"
-	VALUE_SCOPE    RuleReferenceScope = "value"
+	CURSOR_SCOPE RuleReferenceScope = "cursor"
+	NESTED_SCOPE RuleReferenceScope = "nested"
+	RESULT_SCOPE RuleReferenceScope = "result"
 )
 
 type LoadRulesResult struct {
@@ -339,7 +339,7 @@ func (filter *PatternFilter) UnmarshalYAML(unmarshal func(interface{}) error) er
 			}
 		}
 		if filter.Scope == "" {
-			filter.Scope = CONTAINS_SCOPE
+			filter.Scope = NESTED_SCOPE
 		}
 	}
 

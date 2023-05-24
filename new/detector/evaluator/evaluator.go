@@ -56,19 +56,24 @@ func (evaluator *evaluator) Evaluate(
 		return nil, nil
 	}
 
+	nestedDetections, err := evaluator.detectorSet.NestedDetections(detectorType)
+	if err != nil {
+		return nil, err
+	}
+
 	var result []*types.Detection
-	var foundDetections bool
+	var nestedMode bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		if scope == settings.VALUE_SCOPE && !evaluator.langImplementation.ContributesToValue(node) {
+		if scope == settings.RESULT_SCOPE && !evaluator.langImplementation.ContributesToResult(node) {
 			return nil
 		}
 
-		if foundDetections && !evaluator.langImplementation.PassthroughNested(node) {
+		if nestedMode && !evaluator.langImplementation.PassthroughNested(node) {
 			return nil
 		}
 
-		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, settings.VALUE_SCOPE)
+		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, scope)
 		if sanitized || err != nil {
 			return err
 		}
@@ -87,13 +92,14 @@ func (evaluator *evaluator) Evaluate(
 		result = append(result, detections...)
 
 		if scope != settings.CURSOR_SCOPE {
-			parentFoundDetections := foundDetections
-			if len(detections) != 0 {
-				foundDetections = true
+			parentNestedMode := nestedMode
+
+			if len(detections) != 0 && nestedDetections {
+				nestedMode = true
 			}
 
 			err = visitChildren()
-			foundDetections = parentFoundDetections
+			nestedMode = parentNestedMode
 		}
 
 		return err
@@ -173,27 +179,27 @@ func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Nod
 func (evaluator *evaluator) sanitizedNodeDetections(
 	node *langtree.Node,
 	detectorType, sanitizerDetectorType string,
-	ruleReferenceType settings.RuleReferenceScope,
+	scope settings.RuleReferenceScope,
 ) ([]*types.Detection, bool, error) {
 	if sanitizerDetectorType != "" {
-		sanitizerDetections, err := evaluator.nonUnifiedNodeDetections(node, sanitizerDetectorType, ruleReferenceType)
+		sanitizerDetections, err := evaluator.nonUnifiedNodeDetections(node, sanitizerDetectorType, scope)
 		if len(sanitizerDetections) != 0 || err != nil {
 			return nil, true, err
 		}
 	}
 
-	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType, ruleReferenceType)
+	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType, scope)
 	return detections, false, err
 }
 
 func (evaluator *evaluator) nonUnifiedNodeDetections(
 	node *langtree.Node,
 	detectorType string,
-	ruleReferenceType settings.RuleReferenceScope,
+	scope settings.RuleReferenceScope,
 ) ([]*types.Detection, error) {
 	nodeDetections, ok := evaluator.detectionCache[node.ID()]
 	if !ok {
-		err := evaluator.detectAtNode(node, detectorType, ruleReferenceType)
+		err := evaluator.detectAtNode(node, detectorType, scope)
 		if err != nil {
 			return nil, err
 		}
@@ -205,7 +211,7 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 		return detections, nil
 	}
 
-	err := evaluator.detectAtNode(node, detectorType, ruleReferenceType)
+	err := evaluator.detectAtNode(node, detectorType, scope)
 	if err != nil {
 		return nil, err
 	}
@@ -216,14 +222,14 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 func (evaluator *evaluator) detectAtNode(
 	node *langtree.Node,
 	detectorType string,
-	ruleReferenceType settings.RuleReferenceScope,
+	scope settings.RuleReferenceScope,
 ) error {
 	if evaluator.ruleDisabledForNode(detectorType, node) {
 		return nil
 	}
 
 	return evaluator.withCycleProtection(node, detectorType, func() error {
-		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, ruleReferenceType, evaluator)
+		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, scope, evaluator)
 		if err != nil {
 			return err
 		}

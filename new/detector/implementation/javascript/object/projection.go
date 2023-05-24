@@ -98,7 +98,7 @@ func (detector *objectDetector) getCallProjections(
 
 	var properties []generictypes.Property
 
-	functionDetections, err := evaluator.Evaluate(result["function"], "object", "", settings.CONTAINS_SCOPE, true)
+	functionDetections, err := evaluator.Evaluate(result["function"], "object", "", settings.NESTED_SCOPE, true)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}
