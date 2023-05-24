@@ -2,6 +2,7 @@ package types
 
 import (
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
 )
 
@@ -13,6 +14,7 @@ type Detection struct {
 
 type Evaluator interface {
 	ForTree(rootNode *tree.Node, detectorType, sanitizerDetectorType string, followFlow bool) ([]*Detection, error)
+	ForSource(rootNode *tree.Node, detectorType, sanitizerDetectorType string) ([]*Detection, error)
 	ForNode(node *tree.Node, detectorType, sanitizerDetectorType string, followFlow bool) ([]*Detection, error)
 	TreeHas(rootNode *tree.Node, detectorType, sanitizerDetectorType string) (bool, error)
 	NodeHas(node *tree.Node, detectorType, sanitizerDetectorType string) (bool, error)
@@ -24,13 +26,18 @@ type DetectorSet interface {
 	DetectAt(
 		node *tree.Node,
 		detectorType string,
+		ruleReferenceType settings.RuleReferenceType,
 		evaluator Evaluator,
 	) ([]*Detection, error)
 }
 
 type Detector interface {
 	Name() string
-	DetectAt(node *tree.Node, evaluator Evaluator) ([]interface{}, error)
+	DetectAt(
+		node *tree.Node,
+		ruleReferenceType settings.RuleReferenceType,
+		evaluator Evaluator,
+	) ([]interface{}, error)
 	NestedDetections() bool
 	Close()
 }

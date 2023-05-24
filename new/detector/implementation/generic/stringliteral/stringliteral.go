@@ -3,6 +3,7 @@ package stringliteral
 import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -22,6 +23,7 @@ func (detector *stringLiteralDetector) Name() string {
 
 func (detector *stringLiteralDetector) DetectAt(
 	node *tree.Node,
+	ruleReferenceType settings.RuleReferenceType,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	detections, err := evaluator.ForNode(node, "string", "", false)

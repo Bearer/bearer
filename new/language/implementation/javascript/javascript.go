@@ -275,3 +275,7 @@ func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {
 
 	return slices.Contains(passthroughMethods, method) || slices.Contains(passthroughMethods, wildcardMethod)
 }
+
+func (*javascriptImplementation) IsDataFor(rootNode, node *tree.Node) bool {
+	return true
+}

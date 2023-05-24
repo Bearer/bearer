@@ -6,6 +6,7 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	classificationschema "github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/util/classify"
@@ -43,6 +44,7 @@ func (detector *datatypeDetector) NestedDetections() bool {
 
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
+	ruleReferenceType settings.RuleReferenceType,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	objectDetections, err := evaluator.ForNode(node, "object", "", false)

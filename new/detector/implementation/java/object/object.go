@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -69,6 +70,7 @@ func (detector *objectDetector) NestedDetections() bool {
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
+	ruleReferenceType settings.RuleReferenceType,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	log.Debug().Msgf("node is %s", node.Debug())

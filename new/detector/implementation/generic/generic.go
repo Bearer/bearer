@@ -8,7 +8,10 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 )
 
-func GetNonVirtualObjects(evaluator types.Evaluator, node *tree.Node) ([]*types.Detection, error) {
+func GetNonVirtualObjects(
+	evaluator types.Evaluator,
+	node *tree.Node,
+) ([]*types.Detection, error) {
 	detections, err := evaluator.ForNode(node, "object", "", true)
 	if err != nil {
 		return nil, err
