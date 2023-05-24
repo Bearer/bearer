@@ -27,6 +27,7 @@ policy_failure contains item if {
 
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
+		"relative_path": location.relative_path,
 		"filename": location.filename,
 		"source": {
 			"start": location.source.start_line_number,
@@ -69,6 +70,7 @@ policy_failure contains item if {
 
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
+		"full_filename": location.full_filename,
 		"filename": location.filename,
 		"source": {
 			"start": location.source.start_line_number,

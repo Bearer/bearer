@@ -34,6 +34,7 @@ type detectorHolder struct {
 
 type fileHolder struct {
 	name        string
+	fullName    string
 	lineNumbers map[int]*lineNumberHolder
 }
 
@@ -74,6 +75,7 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *ExtraFie
 			classification.DataType,
 			string(detection.DetectorType),
 			detection.Source.Filename,
+			detection.Source.FullFilename,
 			*detection.Source.StartLineNumber,
 			*detection.Source.StartColumnNumber,
 			*detection.Source.EndColumnNumber,
@@ -91,6 +93,7 @@ func (holder *Holder) addDatatype(
 	classification *db.DataType,
 	detectorName string,
 	fileName string,
+	fullFileName string,
 	lineNumber int,
 	startColumnNumber int,
 	endColumnNumber int,
@@ -128,6 +131,7 @@ func (holder *Holder) addDatatype(
 	if _, exists := detector.files[fileName]; !exists {
 		detector.files[fileName] = &fileHolder{
 			name:        fileName,
+			fullName:    fullFileName,
 			lineNumbers: make(map[int]*lineNumberHolder),
 		}
 	}
@@ -194,6 +198,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 				for _, lineNumber := range maputil.ToSortedSlice(fileHolder.lineNumbers) {
 					location := types.DatatypeLocation{
 						Filename:          fileHolder.name,
+						FullFilename:      fileHolder.fullName,
 						StartLineNumber:   lineNumber.startLineNumber,
 						StartColumnNumber: lineNumber.startColumnNumber,
 						EndColumnNumber:   lineNumber.endColumnNumber,

@@ -78,6 +78,7 @@ type Output struct {
 	Sink            Sink     `json:"sink,omitempty" yaml:"sink,omitempty"`
 	LineNumber      int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename        string   `json:"filename,omitempty" yaml:"filename,omitempty"`
+	FullFilename    string   `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
 	CategoryGroups  []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	Severity        string   `json:"severity,omitempty" yaml:"severity,omitempty"`
 	DetailedContext string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
@@ -86,6 +87,7 @@ type Output struct {
 type Result struct {
 	*Rule
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	FullFilename     string   `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
 	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	Source           Source   `json:"source,omitempty" yaml:"source,omitempty"`
@@ -184,12 +186,12 @@ func evaluateRules(
 					DocumentationUrl: rule.DocumentationUrl,
 				}
 
-				// FIXME: consider filename being renamed
 				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i)
 
 				result := Result{
 					Rule:             ruleSummary,
+					FullFilename:     output.FullFilename,
 					Filename:         output.Filename,
 					LineNumber:       output.LineNumber,
 					CategoryGroups:   output.CategoryGroups,
@@ -515,10 +517,10 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	if result.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + result.DetailedContext + "\n\n")
 	}
-	reportStr.WriteString(color.HiBlueString("File: " + underline(result.Filename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
+	reportStr.WriteString(color.HiBlueString("File: " + underline(result.FullFilename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.Source.Start, result.Source.Content, result))
+	reportStr.WriteString(highlightCodeExtract(result.FullFilename, result.LineNumber, result.Source.Start, result.Source.Content, result))
 }
 
 func formatSeverity(severity string) string {

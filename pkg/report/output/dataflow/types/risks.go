@@ -8,6 +8,7 @@ type RiskDetector struct {
 }
 
 type RiskLocation struct {
+	FullFilename      string         `json:"full_filename" yaml:"full_filename"`
 	Filename          string         `json:"filename" yaml:"filename"`
 	StartLineNumber   int            `json:"start_line_number" yaml:"start_line_number"`
 	StartColumnNumber int            `json:"start_column_number" yaml:"start_column_number"`

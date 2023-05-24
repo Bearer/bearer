@@ -4,6 +4,7 @@ import future.keywords
 
 build_item(location) := {
 	"filename": location.filename,
+	"full_filename": location.full_filename,
 	"source": {
 		"start": location.source.start_line_number,
 		"end": location.source.end_line_number,
@@ -39,6 +40,7 @@ cat_groups := set() if {
 build_local_item(location, data_type) := {
 	"is_local": true,
 	"category_groups": groups_for_datatype(data_type),
+	"full_filename": location.full_filename,
 	"filename": location.filename,
 	"source": {
 		"start": location.source.start_line_number,
@@ -65,6 +67,7 @@ build_local_item(location, data_type) := {
 
 build_item(location) := {
 	"category_groups": cat_groups,
+	"full_filename": location.full_filename,
 	"filename": location.filename,
 	"source": {
 		"start": location.source.start_line_number,

@@ -7,6 +7,7 @@ import (
 // Source represents a part of a source file that is referenced in the scan report.
 type Source struct {
 	Filename          string  `json:"filename" yaml:"filename"`
+	FullFilename      string  `json:"full_filename" yaml:"full_filename"`
 	Language          string  `json:"language" yaml:"language"`
 	LanguageType      string  `json:"language_type" yaml:"language_type"`
 	StartLineNumber   *int    `json:"start_line_number" yaml:"start_line_number"`

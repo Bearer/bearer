@@ -20,6 +20,7 @@ type DatatypeDetector struct {
 
 type DatatypeLocation struct {
 	Filename          string               `json:"filename" yaml:"filename"`
+	FullFilename      string               `json:"full_filename" yaml:"full_filename"`
 	StartLineNumber   int                  `json:"start_line_number" yaml:"start_line_number"`
 	StartColumnNumber int                  `json:"start_column_number" yaml:"start_column_number"`
 	EndColumnNumber   int                  `json:"end_column_number" yaml:"end_column_number"`

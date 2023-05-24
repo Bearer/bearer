@@ -133,6 +133,7 @@ policy_failure contains item if {
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"filename": location.filename,
+		"full_filename": location.full_filename,
 		"source": {
 			"start": location.source.start_line_number,
 			"end": location.source.end_line_number,

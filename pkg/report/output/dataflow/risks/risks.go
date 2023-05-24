@@ -28,6 +28,7 @@ type detectorHolder struct {
 
 type fileHolder struct {
 	name            string
+	fullName        string
 	startLineNumber map[int]lineHolder // group detections by line number
 }
 
@@ -72,11 +73,6 @@ func New(config settings.Config, isInternal bool) *Holder {
 func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 	// create entry if it doesn't exist
 	ruleName := string(detection.DetectorType)
-	fileName := detection.Source.Filename
-	startLineNumber := *detection.Source.StartLineNumber
-	startColumnNumber := *detection.Source.StartColumnNumber
-	endLineNumber := *detection.Source.EndLineNumber
-	endColumnNumber := *detection.Source.EndColumnNumber
 
 	var source *schema.Source
 	var content string
@@ -103,11 +99,12 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 			Name: content,
 		},
 		nil,
-		fileName,
-		startLineNumber,
-		startColumnNumber,
-		endLineNumber,
-		endColumnNumber,
+		detection.Source.Filename,
+		detection.Source.FullFilename,
+		*detection.Source.StartLineNumber,
+		*detection.Source.StartColumnNumber,
+		*detection.Source.EndLineNumber,
+		*detection.Source.EndColumnNumber,
 		schema.Schema{
 			Source: source,
 		},
@@ -132,6 +129,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 			classification.DataType,
 			classification.SubjectName,
 			detection.Source.Filename,
+			detection.Source.FullFilename,
 			*detection.Source.StartLineNumber,
 			*detection.Source.StartColumnNumber,
 			*detection.Source.EndLineNumber,
@@ -150,6 +148,7 @@ func (holder *Holder) addDatatype(
 	datatype *db.DataType,
 	subjectName *string,
 	fileName string,
+	fullFileName string,
 	startLineNumber int,
 	startColumnNumber int,
 	endLineNumber int,
@@ -176,6 +175,7 @@ func (holder *Holder) addDatatype(
 	if _, exists := detector.files[fileName]; !exists {
 		detector.files[fileName] = fileHolder{
 			name:            fileName,
+			fullName:        fullFileName,
 			startLineNumber: make(map[int]lineHolder),
 		}
 	}
@@ -251,6 +251,7 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 				for _, source := range maputil.ToSortedSlice(line.source) {
 					location := types.RiskLocation{
 						Filename:          file.name,
+						FullFilename:      file.fullName,
 						StartLineNumber:   line.startLineNumber,
 						StartColumnNumber: line.startColumnNumber,
 						EndColumnNumber:   line.endColumnNumber,

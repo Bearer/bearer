@@ -1,12 +1,9 @@
 package sarif
 
 import (
-	"strings"
-
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	sarif "github.com/bearer/bearer/pkg/report/output/sarif/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
-	"github.com/rs/zerolog/log"
 )
 
 func ReportSarif(outputDetections *map[string][]security.Result, rules map[string]*settings.Rule) (sarif.SarifOutput, error) {
@@ -15,10 +12,6 @@ func ReportSarif(outputDetections *map[string][]security.Result, rules map[strin
 	for _, rule := range rules {
 		if !rule.PolicyType() {
 			continue
-		}
-
-		if rule.Id == "" {
-			log.Error().Msgf("rule: %#v", rule)
 		}
 
 		sarifRules = append(sarifRules, sarif.Rule{
@@ -58,7 +51,7 @@ func ReportSarif(outputDetections *map[string][]security.Result, rules map[strin
 						{
 							PhysicalLocation: sarif.PhysicalLocation{
 								ArtifactLocation: sarif.ArtifactLocation{
-									URI: strings.TrimPrefix(finding.Filename, "../../OWASP/juice-shop/"),
+									URI: finding.Filename,
 								},
 								Region: sarif.Region{
 									StartLine:   finding.Source.Start,
