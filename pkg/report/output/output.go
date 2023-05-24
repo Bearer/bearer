@@ -170,11 +170,10 @@ func reportSecurity(
 		var meta *Meta
 		meta, err = getMeta(config)
 		if err != nil {
-			log.Debug().Msgf("couldn't get meta for repo %s", err)
-			config.Client.Error = pointer.String("Could not extract git metadata.")
-			meta = &Meta{
-				Target: config.Scan.Target,
-			}
+			errorMessage := fmt.Sprintf("Unable to calculate Metadata. %s", err)
+			log.Debug().Msgf(errorMessage)
+			config.Client.Error = &errorMessage
+			return
 		}
 
 		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, dataflow)
@@ -255,34 +254,82 @@ func createBearerGzipFileReport(
 	return &tempDir, &filename, nil
 }
 
+func getSha(target string) (*string, error) {
+	env := os.Getenv("SHA")
+	if env != "" {
+		return pointer.String(env), nil
+	}
+	bytes, err := exec.Command("git", "-C", target, "rev-parse", "HEAD").Output()
+	if err != nil {
+		log.Debug().Msg("Couldn't extract git info for commit sha please set 'SHA' environment variable.")
+		return nil, err
+	}
+	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
+}
+
+func getCurrentBranch(target string) (*string, error) {
+	env := os.Getenv("CURRENT_BRANCH")
+	if env != "" {
+		return pointer.String(env), nil
+	}
+	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "HEAD").Output()
+	if err != nil {
+		log.Debug().Msg("Couldn't extract git info for current branch please set 'CURRENT_BRANCH' environment variable.")
+		return nil, err
+	}
+	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
+}
+
+func getDefaultBranch(target string) (*string, error) {
+	env := os.Getenv("DEFAULT_BRANCH")
+	if env != "" {
+		return pointer.String(env), nil
+	}
+	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
+	if err != nil {
+		log.Debug().Msg("Couldn't extract the default branch of this repository please set 'DEFAULT_BRANCH' environment variable.")
+		return nil, err
+	}
+	return pointer.String(strings.TrimPrefix(strings.TrimSuffix(string(bytes), "\n"), "origin/")), nil
+}
+
+func getRemote(target string) (*string, error) {
+	env := os.Getenv("ORIGIN_URL")
+	if env != "" {
+		return pointer.String(env), nil
+	}
+	bytes, err := exec.Command("git", "-C", target, "remote", "get-url", "origin").Output()
+	if err != nil {
+		log.Debug().Msg("Couldn't extract git info for origin url please set 'ORIGIN_URL' environment variable.")
+		return nil, err
+	}
+	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
+}
+
 func getMeta(config settings.Config) (*Meta, error) {
-	sha, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "HEAD").Output()
+	sha, err := getSha(config.Scan.Target)
 	if err != nil {
-		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	currentBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "HEAD").Output()
+	currentBranch, err := getCurrentBranch(config.Scan.Target)
 	if err != nil {
-		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	defaultBranch, err := exec.Command("git", "-C", config.Scan.Target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
+	defaultBranch, err := getDefaultBranch(config.Scan.Target)
 	if err != nil {
-		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	gitRemote, err := exec.Command("git", "-C", config.Scan.Target, "remote", "get-url", "origin").Output()
+	gitRemote, err := getRemote(config.Scan.Target)
 	if err != nil {
-		log.Debug().Msgf("couldn't get git info %s", err)
 		return nil, err
 	}
 
-	info, err := vcsurl.Parse(strings.TrimSuffix(string(gitRemote), "\n"))
+	info, err := vcsurl.Parse(*gitRemote)
 	if err != nil {
-		log.Debug().Msgf("couldn't parse url %s", err)
+		log.Debug().Msgf("couldn't parse origin url %s", err)
 		return nil, err
 	}
 
@@ -294,9 +341,9 @@ func getMeta(config settings.Config) (*Meta, error) {
 		FullName:           info.FullName,
 		URL:                info.Raw,
 		Target:             config.Scan.Target,
-		SHA:                strings.TrimSuffix(string(sha), "\n"),
-		CurrentBranch:      strings.TrimSuffix(string(currentBranch), "\n"),
-		DefaultBranch:      strings.TrimPrefix(strings.TrimSuffix(string(defaultBranch), "\n"), "origin/"),
+		SHA:                *sha,
+		CurrentBranch:      *currentBranch,
+		DefaultBranch:      *defaultBranch,
 		BearerRulesVersion: config.BearerRulesVersion,
 		BearerVersion:      build.Version,
 	}, nil
