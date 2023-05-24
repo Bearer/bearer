@@ -52,16 +52,21 @@ func TestJuiceShopSarif(t *testing.T) {
 		OmitParent:         false,
 	}
 
-	res, err := output.ReportSarif(&securityResults, rules)
+	res, err := ReportSarif(&securityResults, rules)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
+	}
+
+	sarifOutput, err := output.ReportJSON(res)
+	if err != nil {
+		t.Fatalf("failed to generate JSON output, err: %s", err)
 	}
 
 	// Works!!
 	// cupaloy.SnapshotT(t, *res)
 
 	var prettyJSON bytes.Buffer
-	err = json.Indent(&prettyJSON, []byte(*res), "", "\t")
+	err = json.Indent(&prettyJSON, []byte(*sarifOutput), "", "\t")
 	if err != nil {
 		t.Fatalf("error indenting output, err: %s", err)
 	}

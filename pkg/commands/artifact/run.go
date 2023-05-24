@@ -26,6 +26,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/github_api"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
@@ -352,9 +353,13 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 
 	switch config.Report.Format {
 	case flag.FormatSarif:
-		content, err := reportoutput.ReportSarif(detections.(*map[string][]security.Result), config.Rules)
+		sarifContent, err := sarif.ReportSarif(detections.(*map[string][]security.Result), config.Rules)
 		if err != nil {
-			return false, fmt.Errorf("error generating report %s", err)
+			return false, fmt.Errorf("error generating sarif report %s", err)
+		}
+		content, err := reportoutput.ReportJSON(sarifContent)
+		if err != nil {
+			return false, fmt.Errorf("error generating JSON report %s", err)
 		}
 
 		logger.Msg(*content)
