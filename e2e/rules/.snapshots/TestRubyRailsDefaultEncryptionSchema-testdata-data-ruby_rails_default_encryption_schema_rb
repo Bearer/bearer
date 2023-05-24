@@ -52,6 +52,7 @@ warning:
             t.datetime "updated_at", null: false
           end
       fingerprint: a6e77c6d42db8f03ffbe5acae290f72c_0
+      old_fingerprint: 4b6d6e98ae7d9908efdf9a7984c7db05_0
 
 
 --

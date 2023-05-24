@@ -54,6 +54,7 @@ warning:
           email character varying DEFAULT ''::character varying NOT NULL
         )
       fingerprint: e5e17cede9a731da09a639c9c78af007_0
+      old_fingerprint: 86b02d158d5ef7e6b68f6979f4f789aa_0
 
 
 --

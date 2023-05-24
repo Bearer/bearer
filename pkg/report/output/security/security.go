@@ -95,6 +95,7 @@ type Result struct {
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"snippet,omitempty" yaml:"snippet,omitempty"`
 	Fingerprint      string   `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
+	OldFingerprint   string   `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
 	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
@@ -187,7 +188,9 @@ func evaluateRules(
 				}
 
 				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
+				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i)
+				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
 
 				result := Result{
 					Rule:             ruleSummary,
@@ -201,6 +204,7 @@ func evaluateRules(
 					ParentContent:    output.Source.Content,
 					DetailedContext:  output.DetailedContext,
 					Fingerprint:      fingerprint,
+					OldFingerprint:   oldFingerprint,
 				}
 
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)

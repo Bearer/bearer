@@ -30,6 +30,7 @@ critical:
       parent_line_number: 5
       snippet: log("abc" + x)
       fingerprint: 6c505050fabde2c4ed17380d19fab254_0
+      old_fingerprint: d2e829ba86a33c5a52844641617ad8a7_0
     - rule:
         cwe_ids:
             - "42"
@@ -61,6 +62,7 @@ critical:
       parent_line_number: 4
       snippet: log("abc" + user.email)
       fingerprint: 6c505050fabde2c4ed17380d19fab254_2
+      old_fingerprint: d2e829ba86a33c5a52844641617ad8a7_2
 
 
 --
