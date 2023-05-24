@@ -44,10 +44,10 @@ func (detector *datatypeDetector) NestedDetections() bool {
 
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceType,
+	_ settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	objectDetections, err := evaluator.ForNode(node, "object", "", false)
+	objectDetections, err := evaluator.Evaluate(node, "object", "", settings.CURSOR_SCOPE, false)
 	if err != nil {
 		return nil, err
 	}

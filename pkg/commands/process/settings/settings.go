@@ -74,10 +74,12 @@ const (
 	STORED_DATA_TYPES MatchOn = "stored_data_types"
 )
 
-type RuleReferenceType string
+type RuleReferenceScope string
 
 const (
-	SOURCE_RULE_REFERENCE RuleReferenceType = "source"
+	CURSOR_SCOPE   RuleReferenceScope = "cursor"
+	CONTAINS_SCOPE RuleReferenceScope = "contains"
+	VALUE_SCOPE    RuleReferenceScope = "value"
 )
 
 type LoadRulesResult struct {
@@ -182,21 +184,22 @@ type Rule struct {
 }
 
 type PatternFilter struct {
-	Not                *PatternFilter    `mapstructure:"not" json:"not" yaml:"not"`
-	Either             []PatternFilter   `mapstructure:"either" json:"either" yaml:"either"`
-	Variable           string            `mapstructure:"variable" json:"variable" yaml:"variable"`
-	Detection          string            `mapstructure:"detection" json:"detection" yaml:"detection"`
-	RuleType           RuleReferenceType `mapstructure:"rule_type" json:"rule_type" yaml:"rule_type"`
-	Contains           *bool             `mapstructure:"contains" json:"contains" yaml:"contains"`
-	Regex              *Regexp           `mapstructure:"regex" json:"regex" yaml:"regex"`
-	Values             []string          `mapstructure:"values" json:"values" yaml:"values"`
-	LengthLessThan     *int              `mapstructure:"length_less_than" json:"length_less_than" yaml:"length_less_than"`
-	LessThan           *int              `mapstructure:"less_than" json:"less_than" yaml:"less_than"`
-	LessThanOrEqual    *int              `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
-	GreaterThan        *int              `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
-	GreaterThanOrEqual *int              `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
-	StringRegex        *Regexp           `mapstructure:"string_regex" json:"string_regex" yaml:"string_regex"`
-	FilenameRegex      *Regexp           `mapstructure:"filename_regex" json:"filename_regex" yaml:"filename_regex"`
+	Not       *PatternFilter     `mapstructure:"not" json:"not" yaml:"not"`
+	Either    []PatternFilter    `mapstructure:"either" json:"either" yaml:"either"`
+	Variable  string             `mapstructure:"variable" json:"variable" yaml:"variable"`
+	Detection string             `mapstructure:"detection" json:"detection" yaml:"detection"`
+	Scope     RuleReferenceScope `mapstructure:"scope" json:"scope" yaml:"scope"`
+	// Contains is deprecated in favour of Scope
+	Contains           *bool    `mapstructure:"contains" json:"contains" yaml:"contains"`
+	Regex              *Regexp  `mapstructure:"regex" json:"regex" yaml:"regex"`
+	Values             []string `mapstructure:"values" json:"values" yaml:"values"`
+	LengthLessThan     *int     `mapstructure:"length_less_than" json:"length_less_than" yaml:"length_less_than"`
+	LessThan           *int     `mapstructure:"less_than" json:"less_than" yaml:"less_than"`
+	LessThanOrEqual    *int     `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
+	GreaterThan        *int     `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
+	GreaterThanOrEqual *int     `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
+	StringRegex        *Regexp  `mapstructure:"string_regex" json:"string_regex" yaml:"string_regex"`
+	FilenameRegex      *Regexp  `mapstructure:"filename_regex" json:"filename_regex" yaml:"filename_regex"`
 }
 
 type RulePattern struct {
@@ -316,6 +319,31 @@ func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error)
 	// Wasn't a string so it must be the structured format
 	type rawRulePattern RulePattern
 	return unmarshal((*rawRulePattern)(rulePattern))
+}
+
+func (filter *PatternFilter) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	type wrapper PatternFilter
+	var wrapped wrapper
+	if err := unmarshal(&wrapped); err != nil {
+		return err
+	}
+
+	*filter = PatternFilter(wrapped)
+
+	// Default Scope to "contains" and maintain backwards compatibility with rules
+	// using the `contains` flag
+	if filter.Detection != "" {
+		if filter.Contains != nil {
+			if !*filter.Contains {
+				filter.Scope = CURSOR_SCOPE
+			}
+		}
+		if filter.Scope == "" {
+			filter.Scope = CONTAINS_SCOPE
+		}
+	}
+
+	return nil
 }
 
 func DefaultPolicies() map[string]*Policy {

@@ -115,7 +115,7 @@ func (detector *objectDetector) NestedDetections() bool {
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceType,
+	_ settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	detections, err := detector.getObject(node, evaluator)
@@ -147,7 +147,7 @@ func (detector *objectDetector) getObject(
 	}
 
 	for _, spreadResult := range spreadResults {
-		detections, err := evaluator.ForNode(spreadResult["identifier"], "object", "", true)
+		detections, err := evaluator.Evaluate(spreadResult["identifier"], "object", "", settings.CURSOR_SCOPE, true)
 
 		if err != nil {
 			return nil, err
@@ -177,7 +177,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := evaluator.ForTree(result["value"], "object", "", true)
+		propertyObjects, err := evaluator.Evaluate(result["value"], "object", "", settings.CONTAINS_SCOPE, true)
 		if err != nil {
 			return nil, err
 		}

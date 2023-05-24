@@ -23,7 +23,7 @@ func (detector *stringDetector) Name() string {
 
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceType,
+	ruleReferenceType settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	if node.Type() == "string_literal" {

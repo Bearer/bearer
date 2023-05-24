@@ -46,67 +46,11 @@ func (evaluator *evaluator) FileName() string {
 	return evaluator.fileName
 }
 
-func (evaluator *evaluator) ForTree(
+func (evaluator *evaluator) Evaluate(
 	rootNode *langtree.Node,
 	detectorType, sanitizerDetectorType string,
+	scope settings.RuleReferenceScope,
 	followFlow bool,
-) ([]*types.Detection, error) {
-	if rootNode == nil {
-		return nil, nil
-	}
-
-	var result []*types.Detection
-	var nestedMode bool
-
-	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		if nestedMode && !evaluator.langImplementation.PassthroughNested(node) {
-			return nil
-		}
-
-		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, "")
-		if sanitized || err != nil {
-			return err
-		}
-
-		if followFlow {
-			for _, unifiedNode := range node.UnifiedNodes() {
-				unifiedNodeDetections, err := evaluator.ForTree(unifiedNode, detectorType, sanitizerDetectorType, true)
-				if err != nil {
-					return err
-				}
-
-				detections = append(detections, unifiedNodeDetections...)
-			}
-		}
-
-		previousNestedMode := nestedMode
-
-		if len(detections) != 0 {
-			nestedDetections, err := evaluator.detectorSet.NestedDetections(detectorType)
-			if err != nil {
-				return err
-			}
-
-			if !nestedDetections {
-				nestedMode = true
-			}
-		}
-
-		result = append(result, detections...)
-
-		err = visitChildren()
-		nestedMode = previousNestedMode
-		return err
-	}); err != nil {
-		return nil, err
-	}
-
-	return result, nil
-}
-
-func (evaluator *evaluator) ForSource(
-	rootNode *langtree.Node,
-	detectorType, sanitizerDetectorType string,
 ) ([]*types.Detection, error) {
 	if rootNode == nil {
 		return nil, nil
@@ -116,7 +60,7 @@ func (evaluator *evaluator) ForSource(
 	var foundDetections bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		if !evaluator.langImplementation.IsDataFor(rootNode, node) {
+		if scope == settings.VALUE_SCOPE && !evaluator.langImplementation.ContributesToValue(node) {
 			return nil
 		}
 
@@ -124,64 +68,40 @@ func (evaluator *evaluator) ForSource(
 			return nil
 		}
 
-		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, settings.SOURCE_RULE_REFERENCE)
+		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, settings.VALUE_SCOPE)
 		if sanitized || err != nil {
 			return err
 		}
 
-		for _, unifiedNode := range node.UnifiedNodes() {
-			unifiedNodeDetections, err := evaluator.ForSource(unifiedNode, detectorType, sanitizerDetectorType)
-			if err != nil {
-				return err
+		if followFlow {
+			for _, unifiedNode := range node.UnifiedNodes() {
+				unifiedNodeDetections, err := evaluator.Evaluate(unifiedNode, detectorType, sanitizerDetectorType, scope, true)
+				if err != nil {
+					return err
+				}
+
+				detections = append(detections, unifiedNodeDetections...)
 			}
-
-			detections = append(detections, unifiedNodeDetections...)
-		}
-
-		parentFoundDetections := foundDetections
-
-		if len(detections) != 0 {
-			foundDetections = true
 		}
 
 		result = append(result, detections...)
 
-		err = visitChildren()
-		foundDetections = parentFoundDetections
+		if scope != settings.CURSOR_SCOPE {
+			parentFoundDetections := foundDetections
+			if len(detections) != 0 {
+				foundDetections = true
+			}
+
+			err = visitChildren()
+			foundDetections = parentFoundDetections
+		}
+
 		return err
 	}); err != nil {
 		return nil, err
 	}
 
 	return result, nil
-}
-
-func (evaluator *evaluator) ForNode(
-	node *langtree.Node,
-	detectorType, sanitizerDetectorType string,
-	followFlow bool,
-) ([]*types.Detection, error) {
-	if node == nil {
-		return nil, nil
-	}
-
-	detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, "")
-	if sanitized || err != nil {
-		return nil, err
-	}
-
-	if followFlow {
-		for _, unifiedNode := range node.UnifiedNodes() {
-			unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType, sanitizerDetectorType, true)
-			if err != nil {
-				return nil, err
-			}
-
-			detections = append(detections, unifiedNodeDetections...)
-		}
-	}
-
-	return detections, nil
 }
 
 func (evaluator *evaluator) ruleDisabledForNode(ruleId string, node *langtree.Node) bool {
@@ -253,7 +173,7 @@ func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Nod
 func (evaluator *evaluator) sanitizedNodeDetections(
 	node *langtree.Node,
 	detectorType, sanitizerDetectorType string,
-	ruleReferenceType settings.RuleReferenceType,
+	ruleReferenceType settings.RuleReferenceScope,
 ) ([]*types.Detection, bool, error) {
 	if sanitizerDetectorType != "" {
 		sanitizerDetections, err := evaluator.nonUnifiedNodeDetections(node, sanitizerDetectorType, ruleReferenceType)
@@ -269,7 +189,7 @@ func (evaluator *evaluator) sanitizedNodeDetections(
 func (evaluator *evaluator) nonUnifiedNodeDetections(
 	node *langtree.Node,
 	detectorType string,
-	ruleReferenceType settings.RuleReferenceType,
+	ruleReferenceType settings.RuleReferenceScope,
 ) ([]*types.Detection, error) {
 	nodeDetections, ok := evaluator.detectionCache[node.ID()]
 	if !ok {
@@ -293,57 +213,10 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 	return nodeDetections[detectorType], nil
 }
 
-func (evaluator *evaluator) TreeHas(
-	rootNode *langtree.Node,
-	detectorType,
-	sanitizerDetectorType string,
-) (bool, error) {
-	var result bool
-
-	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, "")
-		if sanitized || err != nil {
-			return err
-		}
-
-		if len(detections) != 0 {
-			result = true
-			return nil
-		}
-
-		for _, unifiedNode := range node.UnifiedNodes() {
-			hasDetection, err := evaluator.TreeHas(unifiedNode, detectorType, sanitizerDetectorType)
-			if err != nil {
-				return err
-			}
-
-			if hasDetection {
-				result = true
-				return nil
-			}
-		}
-
-		return visitChildren()
-	}); err != nil {
-		return false, err
-	}
-
-	return result, nil
-}
-
-func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType, sanitizerDetectorType string) (bool, error) {
-	detections, err := evaluator.ForNode(node, detectorType, sanitizerDetectorType, true)
-	if err != nil {
-		return false, err
-	}
-
-	return len(detections) != 0, nil
-}
-
 func (evaluator *evaluator) detectAtNode(
 	node *langtree.Node,
 	detectorType string,
-	ruleReferenceType settings.RuleReferenceType,
+	ruleReferenceType settings.RuleReferenceScope,
 ) error {
 	if evaluator.ruleDisabledForNode(detectorType, node) {
 		return nil

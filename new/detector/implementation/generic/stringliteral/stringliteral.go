@@ -23,10 +23,10 @@ func (detector *stringLiteralDetector) Name() string {
 
 func (detector *stringLiteralDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceType,
+	_ settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	detections, err := evaluator.ForNode(node, "string", "", false)
+	detections, err := evaluator.Evaluate(node, "string", "", settings.CURSOR_SCOPE, false)
 	if err != nil {
 		return nil, err
 	}

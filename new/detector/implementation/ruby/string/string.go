@@ -25,7 +25,7 @@ func (detector *stringDetector) Name() string {
 
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceType,
+	_ settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	switch node.Type() {
@@ -55,7 +55,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 			continue
 		}
 
-		detections, err := evaluator.ForNode(child, "string", "", true)
+		detections, err := evaluator.Evaluate(child, "string", "", settings.CURSOR_SCOPE, true)
 		if err != nil {
 			return nil, err
 		}

@@ -42,7 +42,7 @@ func (set *set) NestedDetections(detectorType string) (bool, error) {
 func (set *set) DetectAt(
 	node *tree.Node,
 	detectorType string,
-	ruleReferenceType settings.RuleReferenceType,
+	ruleReferenceType settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
 	detector, err := set.lookupDetector(detectorType)

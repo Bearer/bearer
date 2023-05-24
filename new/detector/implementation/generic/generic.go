@@ -6,13 +6,14 @@ import (
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
 
 func GetNonVirtualObjects(
 	evaluator types.Evaluator,
 	node *tree.Node,
 ) ([]*types.Detection, error) {
-	detections, err := evaluator.ForNode(node, "object", "", true)
+	detections, err := evaluator.Evaluate(node, "object", "", settings.CURSOR_SCOPE, true)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +88,7 @@ func ProjectObject(
 }
 
 func GetStringValue(node *tree.Node, evaluator types.Evaluator) (string, bool, error) {
-	detections, err := evaluator.ForNode(node, "string", "", true)
+	detections, err := evaluator.Evaluate(node, "string", "", settings.CURSOR_SCOPE, true)
 	if err != nil {
 		return "", false, err
 	}

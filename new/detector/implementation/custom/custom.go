@@ -62,7 +62,7 @@ func (detector *customDetector) Name() string {
 
 func (detector *customDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceType,
+	ruleReferenceType settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	var detectionsData []interface{}

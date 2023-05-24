@@ -297,7 +297,7 @@ func (*rubyImplementation) PassthroughNested(node *tree.Node) bool {
 	return slices.Contains(passthroughMethods, receiverMethod) || slices.Contains(passthroughMethods, wildcardMethod)
 }
 
-func (*rubyImplementation) IsDataFor(rootNode, node *tree.Node) bool {
+func (*rubyImplementation) ContributesToValue(node *tree.Node) bool {
 	parent := node.Parent()
 	if parent == nil {
 		return true
