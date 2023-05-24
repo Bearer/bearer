@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(4),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(12),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(21),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(29),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(41),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(49),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(60),
@@ -152,6 +159,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(68),
@@ -173,6 +181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(80),
@@ -194,6 +203,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(93),
@@ -215,6 +225,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(101),
@@ -236,6 +247,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(109),
@@ -257,6 +269,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(132),
@@ -278,6 +291,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(140),
@@ -299,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(148),
@@ -320,6 +335,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(156),
@@ -341,6 +357,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(164),
@@ -362,6 +379,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(172),
@@ -383,6 +401,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(180),

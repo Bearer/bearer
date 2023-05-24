@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(48),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(53),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(104),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(141),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(173),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(202),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(208),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(213),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(235),
@@ -248,6 +257,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(239),
@@ -275,6 +285,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(264),
@@ -302,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(270),
@@ -329,6 +341,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(275),
@@ -356,6 +369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(344),
@@ -383,6 +397,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(371),
@@ -410,6 +425,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(377),
@@ -437,6 +453,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(461),
@@ -464,6 +481,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(466),
@@ -491,6 +509,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(512),
@@ -518,6 +537,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(536),
@@ -545,6 +565,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(562),
@@ -572,6 +593,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(588),
@@ -599,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(591),
@@ -626,6 +649,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(594),
@@ -653,6 +677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(597),
@@ -680,6 +705,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(600),
@@ -707,6 +733,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(607),
@@ -734,6 +761,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(615),
@@ -761,6 +789,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(620),
@@ -788,6 +817,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(623),
@@ -815,6 +845,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(625),
@@ -842,6 +873,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(627),
@@ -869,6 +901,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(629),
@@ -896,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(631),
@@ -923,6 +957,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(633),
@@ -950,6 +985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(635),
@@ -977,6 +1013,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(637),
@@ -1004,6 +1041,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(639),
@@ -1031,6 +1069,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(648),
@@ -1058,6 +1097,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(651),
@@ -1085,6 +1125,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(658),
@@ -1112,6 +1153,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(661),
@@ -1139,6 +1181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(670),
@@ -1166,6 +1209,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(673),
@@ -1193,6 +1237,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(675),
@@ -1220,6 +1265,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(677),
@@ -1247,6 +1293,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(680),

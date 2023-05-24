@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(436),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(444),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(450),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(455),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(460),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(465),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(470),
@@ -152,6 +159,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(475),
@@ -173,6 +181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(480),
@@ -194,6 +203,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(486),
@@ -215,6 +225,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(492),
@@ -236,6 +247,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(497),
@@ -257,6 +269,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(502),
@@ -278,6 +291,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(507),
@@ -299,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(512),
@@ -320,6 +335,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(517),
@@ -341,6 +357,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(522),
@@ -362,6 +379,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(537),
@@ -383,6 +401,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(544),
@@ -404,6 +423,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(550),
@@ -425,6 +445,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(555),
@@ -446,6 +467,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(561),
@@ -467,6 +489,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(566),
@@ -488,6 +511,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(572),
@@ -509,6 +533,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(577),
@@ -530,6 +555,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(583),
@@ -551,6 +577,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(588),
@@ -572,6 +599,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(593),
@@ -593,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(598),
@@ -614,6 +643,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(603),
@@ -635,6 +665,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(608),
@@ -656,6 +687,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(613),
@@ -677,6 +709,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(619),
@@ -698,6 +731,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(624),
@@ -719,6 +753,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(630),
@@ -740,6 +775,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(636),
@@ -761,6 +797,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(641),
@@ -782,6 +819,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(646),
@@ -803,6 +841,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(651),
@@ -824,6 +863,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(656),
@@ -845,6 +885,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(661),
@@ -866,6 +907,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(666),
@@ -887,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(671),
@@ -908,6 +951,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(676),
@@ -929,6 +973,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(681),
@@ -950,6 +995,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(686),
@@ -971,6 +1017,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(691),
@@ -992,6 +1039,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(696),
@@ -1013,6 +1061,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(701),
@@ -1034,6 +1083,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(706),
@@ -1055,6 +1105,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(711),
@@ -1076,6 +1127,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(716),
@@ -1097,6 +1149,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(722),
@@ -1118,6 +1171,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(727),
@@ -1139,6 +1193,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(732),
@@ -1160,6 +1215,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(737),
@@ -1181,6 +1237,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(742),
@@ -1202,6 +1259,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(747),
@@ -1223,6 +1281,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(752),
@@ -1244,6 +1303,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(757),
@@ -1265,6 +1325,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(762),
@@ -1286,6 +1347,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(768),
@@ -1307,6 +1369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(774),
@@ -1328,6 +1391,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(779),
@@ -1349,6 +1413,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(785),
@@ -1370,6 +1435,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(792),
@@ -1391,6 +1457,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(798),
@@ -1412,6 +1479,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(803),
@@ -1433,6 +1501,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(808),
@@ -1454,6 +1523,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(814),
@@ -1475,6 +1545,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(820),
@@ -1496,6 +1567,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(826),
@@ -1517,6 +1589,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(831),
@@ -1538,6 +1611,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(837),
@@ -1559,6 +1633,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(842),
@@ -1580,6 +1655,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(847),
@@ -1601,6 +1677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(852),
@@ -1622,6 +1699,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(857),
@@ -1643,6 +1721,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(864),
@@ -1664,6 +1743,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(869),
@@ -1685,6 +1765,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(874),
@@ -1706,6 +1787,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(880),
@@ -1727,6 +1809,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(886),
@@ -1748,6 +1831,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(892),
@@ -1769,6 +1853,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(899),
@@ -1790,6 +1875,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(905),
@@ -1811,6 +1897,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(911),
@@ -1832,6 +1919,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(917),
@@ -1853,6 +1941,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(923),
@@ -1874,6 +1963,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(929),
@@ -1895,6 +1985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(934),
@@ -1916,6 +2007,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(939),
@@ -1937,6 +2029,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(944),
@@ -1958,6 +2051,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(949),
@@ -1979,6 +2073,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(954),
@@ -2000,6 +2095,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(959),
@@ -2021,6 +2117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(964),
@@ -2042,6 +2139,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(970),
@@ -2063,6 +2161,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(976),
@@ -2084,6 +2183,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(983),
@@ -2105,6 +2205,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(988),
@@ -2126,6 +2227,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(999),
@@ -2147,6 +2249,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1010),
@@ -2168,6 +2271,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1015),
@@ -2189,6 +2293,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1020),
@@ -2210,6 +2315,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1025),
@@ -2231,6 +2337,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1031),
@@ -2252,6 +2359,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1036),
@@ -2273,6 +2381,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1041),
@@ -2294,6 +2403,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1046),
@@ -2315,6 +2425,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1051),
@@ -2336,6 +2447,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1057),
@@ -2357,6 +2469,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1062),
@@ -2378,6 +2491,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1067),
@@ -2399,6 +2513,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1073),
@@ -2420,6 +2535,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1078),
@@ -2441,6 +2557,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1085),
@@ -2462,6 +2579,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1090),
@@ -2483,6 +2601,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1097),
@@ -2504,6 +2623,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1102),
@@ -2525,6 +2645,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1109),
@@ -2546,6 +2667,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1116),
@@ -2567,6 +2689,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1121),
@@ -2588,6 +2711,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1126),
@@ -2609,6 +2733,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1133),
@@ -2630,6 +2755,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1139),
@@ -2651,6 +2777,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1146),
@@ -2672,6 +2799,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1151),
@@ -2693,6 +2821,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1158),
@@ -2714,6 +2843,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1165),
@@ -2735,6 +2865,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1172),
@@ -2756,6 +2887,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1178),
@@ -2777,6 +2909,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1185),
@@ -2798,6 +2931,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1192),
@@ -2819,6 +2953,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1199),
@@ -2840,6 +2975,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1206),
@@ -2861,6 +2997,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1211),
@@ -2882,6 +3019,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1217),
@@ -2903,6 +3041,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1222),
@@ -2924,6 +3063,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1227),
@@ -2945,6 +3085,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1232),
@@ -2966,6 +3107,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1239),
@@ -2987,6 +3129,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1244),
@@ -3008,6 +3151,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1249),
@@ -3029,6 +3173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1254),
@@ -3050,6 +3195,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1259),
@@ -3071,6 +3217,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1265),
@@ -3092,6 +3239,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1272),
@@ -3113,6 +3261,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1279),
@@ -3134,6 +3283,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1286),
@@ -3155,6 +3305,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1293),
@@ -3176,6 +3327,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1298),
@@ -3197,6 +3349,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1305),
@@ -3218,6 +3371,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1312),
@@ -3239,6 +3393,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1319),
@@ -3260,6 +3415,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1326),
@@ -3281,6 +3437,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1332),
@@ -3302,6 +3459,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1338),
@@ -3323,6 +3481,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1345),
@@ -3344,6 +3503,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1351),
@@ -3365,6 +3525,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1356),
@@ -3386,6 +3547,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1362),
@@ -3407,6 +3569,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1367),
@@ -3428,6 +3591,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1373),
@@ -3449,6 +3613,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1379),
@@ -3470,6 +3635,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1386),
@@ -3491,6 +3657,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1392),
@@ -3512,6 +3679,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1398),
@@ -3533,6 +3701,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1403),
@@ -3554,6 +3723,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1410),
@@ -3575,6 +3745,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1415),
@@ -3596,6 +3767,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1420),
@@ -3617,6 +3789,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1425),
@@ -3638,6 +3811,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1431),
@@ -3659,6 +3833,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1437),
@@ -3680,6 +3855,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1443),
@@ -3701,6 +3877,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1448),
@@ -3722,6 +3899,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1453),
@@ -3743,6 +3921,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1458),
@@ -3764,6 +3943,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1465),
@@ -3785,6 +3965,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1470),
@@ -3806,6 +3987,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1475),
@@ -3827,6 +4009,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1480),
@@ -3848,6 +4031,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1486),
@@ -3869,6 +4053,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1491),
@@ -3890,6 +4075,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1496),
@@ -3911,6 +4097,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1503),
@@ -3932,6 +4119,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1508),
@@ -3953,6 +4141,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1514),
@@ -3974,6 +4163,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1520),
@@ -3995,6 +4185,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1526),
@@ -4016,6 +4207,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1532),
@@ -4037,6 +4229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1538),
@@ -4058,6 +4251,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1544),
@@ -4079,6 +4273,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1549),
@@ -4100,6 +4295,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1554),
@@ -4121,6 +4317,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1559),
@@ -4142,6 +4339,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1564),
@@ -4163,6 +4361,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1569),
@@ -4184,6 +4383,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1575),
@@ -4205,6 +4405,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1580),
@@ -4226,6 +4427,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1587),
@@ -4247,6 +4449,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1593),
@@ -4268,6 +4471,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1599),
@@ -4289,6 +4493,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1605),
@@ -4310,6 +4515,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1611),
@@ -4331,6 +4537,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1617),
@@ -4352,6 +4559,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1623),
@@ -4373,6 +4581,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1629),
@@ -4394,6 +4603,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1634),
@@ -4415,6 +4625,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1640),
@@ -4436,6 +4647,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1645),
@@ -4457,6 +4669,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1650),
@@ -4478,6 +4691,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1656),
@@ -4499,6 +4713,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1662),
@@ -4520,6 +4735,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1668),
@@ -4541,6 +4757,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1674),
@@ -4562,6 +4779,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1680),
@@ -4583,6 +4801,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1686),
@@ -4604,6 +4823,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1692),
@@ -4625,6 +4845,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1706),
@@ -4646,6 +4867,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1712),
@@ -4667,6 +4889,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1718),
@@ -4688,6 +4911,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1724),
@@ -4709,6 +4933,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1730),
@@ -4730,6 +4955,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1736),
@@ -4751,6 +4977,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1742),
@@ -4772,6 +4999,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1748),
@@ -4793,6 +5021,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1754),
@@ -4814,6 +5043,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1760),
@@ -4835,6 +5065,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1765),
@@ -4856,6 +5087,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1770),
@@ -4877,6 +5109,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1775),
@@ -4898,6 +5131,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1780),
@@ -4919,6 +5153,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1785),
@@ -4940,6 +5175,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1790),
@@ -4961,6 +5197,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1795),
@@ -4982,6 +5219,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1801),
@@ -5003,6 +5241,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1806),
@@ -5024,6 +5263,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1811),
@@ -5045,6 +5285,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1816),
@@ -5066,6 +5307,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1821),
@@ -5087,6 +5329,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1826),
@@ -5108,6 +5351,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1831),
@@ -5129,6 +5373,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1837),
@@ -5150,6 +5395,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1842),
@@ -5171,6 +5417,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1848),
@@ -5192,6 +5439,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1853),
@@ -5213,6 +5461,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1858),
@@ -5234,6 +5483,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1863),
@@ -5255,6 +5505,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1868),
@@ -5276,6 +5527,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1873),
@@ -5297,6 +5549,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1878),
@@ -5318,6 +5571,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1883),
@@ -5339,6 +5593,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1888),
@@ -5360,6 +5615,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1893),
@@ -5381,6 +5637,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1898),
@@ -5402,6 +5659,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1903),
@@ -5423,6 +5681,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1908),
@@ -5444,6 +5703,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1913),
@@ -5465,6 +5725,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1918),
@@ -5486,6 +5747,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1923),
@@ -5507,6 +5769,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1928),
@@ -5528,6 +5791,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1933),
@@ -5549,6 +5813,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1938),
@@ -5570,6 +5835,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1943),
@@ -5591,6 +5857,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1948),
@@ -5612,6 +5879,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1953),
@@ -5633,6 +5901,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1958),
@@ -5654,6 +5923,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1964),
@@ -5675,6 +5945,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1970),
@@ -5696,6 +5967,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1975),
@@ -5717,6 +5989,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1984),
@@ -5738,6 +6011,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1989),
@@ -5759,6 +6033,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1994),
@@ -5780,6 +6055,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1999),
@@ -5801,6 +6077,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2004),
@@ -5822,6 +6099,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2009),
@@ -5843,6 +6121,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2014),
@@ -5864,6 +6143,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2019),
@@ -5885,6 +6165,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2023),
@@ -5906,6 +6187,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2028),
@@ -5927,6 +6209,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2066),
@@ -5948,6 +6231,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2085),
@@ -5969,6 +6253,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2146),
@@ -5990,6 +6275,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2151),
@@ -6011,6 +6297,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2156),
@@ -6032,6 +6319,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2241),
@@ -6053,6 +6341,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2246),
@@ -6074,6 +6363,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2251),
@@ -6095,6 +6385,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2256),
@@ -6116,6 +6407,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2327),
@@ -6137,6 +6429,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2332),
@@ -6158,6 +6451,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2910),
@@ -6179,6 +6473,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(3170),
@@ -6200,6 +6495,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(3175),
@@ -6221,6 +6517,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(3186),
@@ -6242,6 +6539,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(95),
@@ -6263,6 +6561,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(101),
@@ -6284,6 +6583,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(106),
@@ -6305,6 +6605,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(111),
@@ -6326,6 +6627,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(116),
@@ -6347,6 +6649,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(121),
@@ -6368,6 +6671,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(126),
@@ -6389,6 +6693,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(131),
@@ -6410,6 +6715,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(136),
@@ -6431,6 +6737,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(142),
@@ -6452,6 +6759,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(147),
@@ -6473,6 +6781,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(80),
@@ -6494,6 +6803,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(85),
@@ -6515,6 +6825,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(90),
@@ -6536,6 +6847,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(95),
@@ -6557,6 +6869,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(100),
@@ -6578,6 +6891,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(105),
@@ -6599,6 +6913,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(110),
@@ -6620,6 +6935,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(115),
@@ -6641,6 +6957,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(120),
@@ -6662,6 +6979,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(125),
@@ -6683,6 +7001,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(132),
@@ -6704,6 +7023,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(198),
@@ -6725,6 +7045,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(80),
@@ -6746,6 +7067,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(85),
@@ -6767,6 +7089,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(90),
@@ -6788,6 +7111,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(95),
@@ -6809,6 +7133,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(100),
@@ -6830,6 +7155,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(105),
@@ -6851,6 +7177,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(110),
@@ -6872,6 +7199,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(115),
@@ -6893,6 +7221,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(120),
@@ -6914,6 +7243,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(125),
@@ -6935,6 +7265,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(132),
@@ -6956,6 +7287,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(198),

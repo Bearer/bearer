@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(8),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(9),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(10),

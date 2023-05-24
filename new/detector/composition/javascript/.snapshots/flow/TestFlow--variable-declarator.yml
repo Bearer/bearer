@@ -6,6 +6,7 @@ high:
         description: ""
         documentation_url: ""
       line_number: 1
+      full_filename: variable-declarator.js
       filename: variable-declarator.js
       category_groups:
         - PII

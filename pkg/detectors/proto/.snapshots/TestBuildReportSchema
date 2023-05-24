@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(16),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(20),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(24),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(28),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(29),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(33),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(34),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(38),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(39),
@@ -248,6 +257,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(40),
@@ -275,6 +285,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(44),
@@ -302,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(49),
@@ -329,6 +341,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(50),
@@ -356,6 +369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(51),
@@ -383,6 +397,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(52),
@@ -410,6 +425,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(53),
@@ -437,6 +453,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(54),
@@ -464,6 +481,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(55),
@@ -491,6 +509,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(56),
@@ -518,6 +537,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(57),
@@ -545,6 +565,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(58),
@@ -572,6 +593,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(59),
@@ -599,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(60),
@@ -626,6 +649,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(61),
@@ -653,6 +677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(62),
@@ -680,6 +705,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(63),
@@ -707,6 +733,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(64),
@@ -734,6 +761,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(65),
@@ -761,6 +789,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(66),
@@ -788,6 +817,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(67),
@@ -815,6 +845,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(68),
@@ -842,6 +873,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(69),
@@ -869,6 +901,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(70),
@@ -896,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(75),
@@ -923,6 +957,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(76),
@@ -950,6 +985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(80),
@@ -977,6 +1013,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(81),
@@ -1004,6 +1041,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(82),
@@ -1031,6 +1069,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(83),
@@ -1058,6 +1097,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(84),
@@ -1085,6 +1125,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(85),
@@ -1112,6 +1153,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(86),
@@ -1139,6 +1181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(87),
@@ -1166,6 +1209,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(88),

@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(23),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(24),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(25),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(26),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(27),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(28),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(29),
@@ -152,6 +159,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(30),
@@ -173,6 +181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(31),
@@ -194,6 +203,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(32),
@@ -215,6 +225,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(33),
@@ -236,6 +247,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(34),
@@ -257,6 +269,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(35),
@@ -278,6 +291,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(36),
@@ -299,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(37),
@@ -320,6 +335,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(38),
@@ -341,6 +357,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(39),
@@ -362,6 +379,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(40),
@@ -383,6 +401,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(41),
@@ -404,6 +423,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(42),
@@ -425,6 +445,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(43),
@@ -446,6 +467,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(44),
@@ -467,6 +489,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(45),
@@ -488,6 +511,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(46),
@@ -509,6 +533,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(47),
@@ -530,6 +555,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(48),
@@ -551,6 +577,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(49),
@@ -572,6 +599,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(50),
@@ -593,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(51),
@@ -614,6 +643,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(52),
@@ -635,6 +665,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(53),
@@ -656,6 +687,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(54),
@@ -677,6 +709,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(55),
@@ -698,6 +731,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(56),
@@ -719,6 +753,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(57),
@@ -740,6 +775,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(58),
@@ -761,6 +797,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(59),
@@ -782,6 +819,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(60),

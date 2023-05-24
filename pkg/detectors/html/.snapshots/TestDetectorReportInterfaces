@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "app.vue",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(18),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "app.vue",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(20),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "app.vue",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(15),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(23),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(24),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(24),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(24),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(25),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(25),
@@ -248,6 +257,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(25),
@@ -275,6 +285,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(28),
@@ -302,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(30),
@@ -329,6 +341,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(292),
@@ -356,6 +369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(298),
@@ -383,6 +397,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(298),
@@ -410,6 +425,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(299),
@@ -437,6 +453,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(302),
@@ -464,6 +481,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(302),
@@ -491,6 +509,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(310),
@@ -518,6 +537,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(310),
@@ -545,6 +565,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -572,6 +593,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -599,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -626,6 +649,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),
@@ -653,6 +677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -680,6 +705,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.cshtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(9),
@@ -707,6 +733,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.cshtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(13),
@@ -734,6 +761,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.cshtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -761,6 +789,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=3) "EJS",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(3),
@@ -788,6 +817,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -815,6 +845,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(9),
@@ -842,6 +873,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(12),
@@ -869,6 +901,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "Handlebars",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(3),
@@ -896,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -923,6 +957,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -950,6 +985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -977,6 +1013,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=4) "HTML",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(3),
@@ -1004,6 +1041,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -1031,6 +1069,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -1058,6 +1097,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -1085,6 +1125,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.html.erb",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -1112,6 +1153,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.html.erb",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(13),
@@ -1139,6 +1181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.html.erb",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -1166,6 +1209,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Twig",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(3),
@@ -1193,6 +1237,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -1220,6 +1265,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -1247,6 +1293,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -1274,6 +1321,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.jinja",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),
@@ -1301,6 +1349,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.jinja",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(13),
@@ -1328,6 +1377,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.jinja",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -1355,6 +1405,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Liquid",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(3),
@@ -1382,6 +1433,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -1409,6 +1461,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -1436,6 +1489,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -1463,6 +1517,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=8) "Mustache",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(3),
@@ -1490,6 +1545,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -1517,6 +1573,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -1544,6 +1601,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -1571,6 +1629,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.phtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),
@@ -1598,6 +1657,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.phtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(13),
@@ -1625,6 +1685,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.phtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),

@@ -12,6 +12,7 @@
         DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger"
       }),
       LineNumber: (int) 1,
+      FullFilename: (string) "",
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
       CategoryGroups: ([]string) (len=3) {
         (string) (len=3) "PII",
@@ -57,6 +58,7 @@
         DocumentationUrl: (string) (len=66) "https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification"
       }),
       LineNumber: (int) 2,
+      FullFilename: (string) "",
       Filename: (string) (len=21) "config/application.rb",
       CategoryGroups: ([]string) (len=2) {
         (string) (len=3) "PII",

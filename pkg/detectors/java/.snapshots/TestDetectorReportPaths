@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(5),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(21),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(25),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(47),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(72),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(98),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(123),
@@ -248,6 +257,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(101),
@@ -278,6 +288,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(101),

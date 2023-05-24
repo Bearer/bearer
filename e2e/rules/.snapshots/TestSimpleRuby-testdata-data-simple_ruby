@@ -23,7 +23,8 @@ medium:
             - [Configuring Rails Applications - Ruby on Rails Guides](https://guides.rubyonrails.org/configuring.html#config-force-ssl)
         documentation_url: ""
       line_number: 7
-      filename: e2e/rules/testdata/data/simple_ruby/unsecure.rb
+      full_filename: e2e/rules/testdata/data/simple_ruby/unsecure.rb
+      filename: unsecure.rb
       category_groups:
         - PII
         - Personal Data
@@ -44,7 +45,7 @@ medium:
                 end: 29
       parent_line_number: 7
       snippet: config.force_ssl = false
-      fingerprint: 28ca51516a8b388cb7065c1f0df8b093_0
+      fingerprint: 52ee98cc601d1c1bd772ff548ee32425_0
 
 
 --

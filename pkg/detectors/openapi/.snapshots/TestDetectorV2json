@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(23),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(31),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(82),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(118),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(121),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(123),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(126),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(136),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(140),

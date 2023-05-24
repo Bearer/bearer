@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(1),
@@ -43,6 +44,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(2),
@@ -81,6 +83,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(3),
@@ -111,6 +114,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),

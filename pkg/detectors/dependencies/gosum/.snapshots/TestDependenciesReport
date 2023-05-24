@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(3),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(5),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(6),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(8),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(10),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(12),
@@ -152,6 +159,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(14),
@@ -173,6 +181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(16),
@@ -194,6 +203,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(18),
@@ -215,6 +225,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(20),
@@ -236,6 +247,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(22),
@@ -257,6 +269,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(23),
@@ -278,6 +291,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(24),
@@ -299,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(26),
@@ -320,6 +335,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(27),
@@ -341,6 +357,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(29),
@@ -362,6 +379,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(31),
@@ -383,6 +401,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(32),
@@ -404,6 +423,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(34),
@@ -425,6 +445,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(35),
@@ -446,6 +467,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(37),
@@ -467,6 +489,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(38),
@@ -488,6 +511,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(40),
@@ -509,6 +533,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(42),
@@ -530,6 +555,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(44),
@@ -551,6 +577,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(46),
@@ -572,6 +599,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(47),
@@ -593,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(48),
@@ -614,6 +643,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(49),
@@ -635,6 +665,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(50),
@@ -656,6 +687,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(51),
@@ -677,6 +709,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(53),
@@ -698,6 +731,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(54),
@@ -719,6 +753,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(55),
@@ -740,6 +775,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(56),
@@ -761,6 +797,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(57),
@@ -782,6 +819,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(59),
@@ -803,6 +841,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(61),
@@ -824,6 +863,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(62),
@@ -845,6 +885,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(63),
@@ -866,6 +907,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(64),
@@ -887,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(66),
@@ -908,6 +951,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(67),
@@ -929,6 +973,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(68),
@@ -950,6 +995,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(69),
@@ -971,6 +1017,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(70),
@@ -992,6 +1039,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(71),
@@ -1013,6 +1061,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(72),
@@ -1034,6 +1083,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(73),
@@ -1055,6 +1105,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(74),
@@ -1076,6 +1127,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(75),
@@ -1097,6 +1149,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(76),
@@ -1118,6 +1171,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(77),
@@ -1139,6 +1193,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(79),
@@ -1160,6 +1215,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(80),
@@ -1181,6 +1237,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(81),
@@ -1202,6 +1259,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(83),
@@ -1223,6 +1281,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(84),
@@ -1244,6 +1303,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(85),
@@ -1265,6 +1325,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(86),
@@ -1286,6 +1347,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(88),
@@ -1307,6 +1369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(90),
@@ -1328,6 +1391,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(91),
@@ -1349,6 +1413,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(92),
@@ -1370,6 +1435,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(94),
@@ -1391,6 +1457,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(96),
@@ -1412,6 +1479,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Go Checksums",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(98),

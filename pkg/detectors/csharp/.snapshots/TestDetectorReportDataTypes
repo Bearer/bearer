@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(12),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(22),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(25),

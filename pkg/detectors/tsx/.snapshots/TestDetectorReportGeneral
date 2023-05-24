@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(1),
@@ -35,6 +36,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(2),
@@ -65,6 +67,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -95,6 +98,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -125,6 +129,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(9),
@@ -170,6 +175,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),

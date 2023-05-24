@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=24) "config/parameters.yml.j2",
+      FullFilename: (string) "",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(20),
@@ -39,6 +40,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=24) "config/parameters.yml.j2",
+      FullFilename: (string) "",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(21),
@@ -73,6 +75,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=24) "config/parameters.yml.j2",
+      FullFilename: (string) "",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(22),
@@ -107,6 +110,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=24) "config/parameters.yml.j2",
+      FullFilename: (string) "",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(23),
@@ -141,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=24) "config/parameters.yml.j2",
+      FullFilename: (string) "",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(24),
@@ -175,6 +180,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=24) "config/parameters.yml.j2",
+      FullFilename: (string) "",
       Language: (string) (len=5) "Jinja",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(25),
@@ -209,6 +215,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=22) "docker-compose.yml.tpl",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -236,6 +243,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=22) "docker-compose.yml.tpl",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(21),
@@ -266,6 +274,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=22) "docker-compose.yml.tpl",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(31),
@@ -296,6 +305,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=22) "docker-compose.yml.tpl",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(32),
@@ -326,6 +336,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=22) "docker-compose.yml.tpl",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Smarty",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(33),

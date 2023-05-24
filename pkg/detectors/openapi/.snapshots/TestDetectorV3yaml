@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(137),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(179),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(216),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(223),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(256),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(263),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(268),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(287),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(293),
@@ -248,6 +257,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(315),
@@ -275,6 +285,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(322),
@@ -302,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(404),
@@ -329,6 +341,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(435),
@@ -356,6 +369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(511),
@@ -383,6 +397,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(517),
@@ -410,6 +425,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(565),
@@ -437,6 +453,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(593),
@@ -464,6 +481,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(621),
@@ -491,6 +509,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(642),
@@ -518,6 +537,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(646),
@@ -545,6 +565,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(650),
@@ -572,6 +593,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(654),
@@ -599,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(657),
@@ -626,6 +649,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(665),
@@ -653,6 +677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(672),
@@ -680,6 +705,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(676),
@@ -707,6 +733,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(679),
@@ -734,6 +761,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(691),
@@ -761,6 +789,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(694),
@@ -788,6 +817,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(697),
@@ -815,6 +845,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(700),
@@ -842,6 +873,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(709),
@@ -869,6 +901,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(713),
@@ -896,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(722),
@@ -923,6 +957,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(725),
@@ -950,6 +985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(728),
@@ -977,6 +1013,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(731),
@@ -1004,6 +1041,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(734),
@@ -1031,6 +1069,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(737),
@@ -1058,6 +1097,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(740),
@@ -1085,6 +1125,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(743),
@@ -1112,6 +1153,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(746),
@@ -1139,6 +1181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(749),
@@ -1166,6 +1209,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(760),
@@ -1193,6 +1237,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(763),
@@ -1220,6 +1265,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(770),
@@ -1247,6 +1293,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(773),
@@ -1274,6 +1321,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(775),

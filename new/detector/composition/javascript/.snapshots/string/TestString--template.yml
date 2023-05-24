@@ -6,6 +6,7 @@ high:
         description: ""
         documentation_url: ""
       line_number: 1
+      full_filename: template.js
       filename: template.js
       category_groups:
         - PII

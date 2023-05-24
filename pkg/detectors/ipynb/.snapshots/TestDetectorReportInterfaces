@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "small.ipynb",
+      FullFilename: (string) "",
       Language: (string) (len=16) "Jupyter Notebook",
       LanguageType: (string) (len=6) "markup",
       StartLineNumber: (*int)(39),

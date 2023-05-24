@@ -6,6 +6,7 @@ low:
         description: ""
         documentation_url: ""
       line_number: 1
+      full_filename: multiple_objects.js
       filename: multiple_objects.js
       source:
         location:

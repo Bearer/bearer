@@ -6,6 +6,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=17) "myapp/settings.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(84),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=17) "myapp/settings.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(90),

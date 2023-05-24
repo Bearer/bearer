@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(10),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(59),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(107),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(151),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(202),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(320),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(365),

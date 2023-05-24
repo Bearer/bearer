@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(4),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(5),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(6),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(11),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(12),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(15),

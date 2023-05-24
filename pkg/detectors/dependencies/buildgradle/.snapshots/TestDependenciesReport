@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "build.gradle",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Gradle",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(30),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "build.gradle",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Gradle",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(31),

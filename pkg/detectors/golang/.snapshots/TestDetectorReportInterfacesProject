@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(9),
@@ -43,6 +44,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),
@@ -73,6 +75,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(12),
@@ -103,6 +106,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(13),
@@ -133,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(15),
@@ -163,6 +168,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -193,6 +199,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(19),
@@ -223,6 +230,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -250,6 +258,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(15),
@@ -277,6 +286,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(18),
@@ -304,6 +314,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(28),

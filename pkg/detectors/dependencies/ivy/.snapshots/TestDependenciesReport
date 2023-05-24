@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(15),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(33),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(51),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(73),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(85),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(103),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(142),
@@ -152,6 +159,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(157),
@@ -173,6 +181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(178),
@@ -194,6 +203,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(193),
@@ -215,6 +225,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(205),
@@ -236,6 +247,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(223),
@@ -257,6 +269,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(235),
@@ -278,6 +291,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(253),
@@ -299,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(272),
@@ -320,6 +335,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(287),

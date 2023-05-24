@@ -6,6 +6,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "app/config/config.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(43),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=28) "config/packages/doctrine.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(11),
@@ -46,6 +48,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=28) "config/packages/doctrine.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(6),
@@ -66,6 +69,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=28) "config/packages/doctrine.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(8),

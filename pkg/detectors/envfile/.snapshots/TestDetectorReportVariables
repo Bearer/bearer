@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) ".envrc.example",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(7),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) ".envrc.example",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
       StartLineNumber: (*int)(8),

@@ -6,6 +6,7 @@ high:
         description: ""
         documentation_url: ""
       line_number: 2
+      full_filename: different-line.java
       filename: different-line.java
       category_groups:
         - PII

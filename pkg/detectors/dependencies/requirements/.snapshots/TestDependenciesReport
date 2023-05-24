@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
       StartLineNumber: (*int)(2),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
       StartLineNumber: (*int)(3),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
       StartLineNumber: (*int)(4),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Text",
       LanguageType: (string) (len=5) "prose",
       StartLineNumber: (*int)(5),

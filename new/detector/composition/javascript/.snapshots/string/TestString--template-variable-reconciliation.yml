@@ -6,6 +6,7 @@ high:
         description: ""
         documentation_url: ""
       line_number: 3
+      full_filename: template-variable-reconciliation.js
       filename: template-variable-reconciliation.js
       category_groups:
         - PII

@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(5),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(11),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(17),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(29),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(37),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(45),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(54),
@@ -152,6 +159,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(68),
@@ -173,6 +181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(77),
@@ -194,6 +203,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(86),
@@ -215,6 +225,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(96),
@@ -236,6 +247,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(110),
@@ -257,6 +269,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(119),
@@ -278,6 +291,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(129),
@@ -299,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(134),
@@ -320,6 +335,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(139),
@@ -341,6 +357,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(148),
@@ -362,6 +379,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(156),
@@ -383,6 +401,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(164),
@@ -404,6 +423,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(176),
@@ -425,6 +445,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(188),
@@ -446,6 +467,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(196),
@@ -467,6 +489,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(201),
@@ -488,6 +511,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(209),
@@ -509,6 +533,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(219),
@@ -530,6 +555,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(224),
@@ -551,6 +577,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(234),
@@ -572,6 +599,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(239),
@@ -593,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(248),
@@ -614,6 +643,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(259),
@@ -635,6 +665,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(267),
@@ -656,6 +687,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(272),
@@ -677,6 +709,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(281),
@@ -698,6 +731,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(286),
@@ -719,6 +753,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(291),
@@ -740,6 +775,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(303),
@@ -761,6 +797,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(308),
@@ -782,6 +819,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(313),
@@ -803,6 +841,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(323),
@@ -824,6 +863,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(332),
@@ -845,6 +885,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(345),
@@ -866,6 +907,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(350),
@@ -887,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(367),
@@ -908,6 +951,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(372),
@@ -929,6 +973,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(384),
@@ -950,6 +995,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(392),
@@ -971,6 +1017,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(400),
@@ -992,6 +1039,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(405),
@@ -1013,6 +1061,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(415),
@@ -1034,6 +1083,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(427),
@@ -1055,6 +1105,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(435),
@@ -1076,6 +1127,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(444),
@@ -1097,6 +1149,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(449),
@@ -1118,6 +1171,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(454),
@@ -1139,6 +1193,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(463),
@@ -1160,6 +1215,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(474),
@@ -1181,6 +1237,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(479),
@@ -1202,6 +1259,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(484),
@@ -1223,6 +1281,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(496),
@@ -1244,6 +1303,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(501),
@@ -1265,6 +1325,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(511),
@@ -1286,6 +1347,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(523),
@@ -1307,6 +1369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(532),
@@ -1328,6 +1391,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(537),
@@ -1349,6 +1413,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(546),
@@ -1370,6 +1435,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(551),
@@ -1391,6 +1457,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(556),
@@ -1412,6 +1479,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(566),
@@ -1433,6 +1501,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(574),
@@ -1454,6 +1523,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(583),
@@ -1475,6 +1545,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(588),
@@ -1496,6 +1567,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(598),
@@ -1517,6 +1589,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(644),
@@ -1538,6 +1611,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(649),
@@ -1559,6 +1633,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(654),
@@ -1580,6 +1655,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(659),
@@ -1601,6 +1677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(664),
@@ -1622,6 +1699,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(669),
@@ -1643,6 +1721,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(677),
@@ -1664,6 +1743,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(682),
@@ -1685,6 +1765,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(687),
@@ -1706,6 +1787,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(692),
@@ -1727,6 +1809,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(697),
@@ -1748,6 +1831,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(706),
@@ -1769,6 +1853,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(716),
@@ -1790,6 +1875,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(757),
@@ -1811,6 +1897,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(814),
@@ -1832,6 +1919,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(825),
@@ -1853,6 +1941,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2027),
@@ -1874,6 +1963,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(23),
@@ -1895,6 +1985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(34),
@@ -1916,6 +2007,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(50),
@@ -1937,6 +2029,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(51),
@@ -1958,6 +2051,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(59),
@@ -1979,6 +2073,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(63),
@@ -2000,6 +2095,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(73),
@@ -2021,6 +2117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(245),
@@ -2042,6 +2139,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(253),
@@ -2063,6 +2161,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(254),
@@ -2084,6 +2183,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(277),
@@ -2105,6 +2205,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(300),
@@ -2126,6 +2227,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(318),
@@ -2147,6 +2249,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(328),
@@ -2168,6 +2271,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(329),
@@ -2189,6 +2293,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(340),
@@ -2210,6 +2315,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(342),
@@ -2231,6 +2337,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(361),

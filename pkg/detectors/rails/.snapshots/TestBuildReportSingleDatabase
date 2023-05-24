@@ -6,6 +6,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "config/database.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(26),

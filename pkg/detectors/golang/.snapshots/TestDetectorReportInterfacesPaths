@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=8) "paths.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(14),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=8) "paths.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),

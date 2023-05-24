@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "paths/main.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(24),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(3),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(8),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -248,6 +257,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(12),
@@ -275,6 +285,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(12),
@@ -302,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(3),
@@ -332,6 +344,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -362,6 +375,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -392,6 +406,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -422,6 +437,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -467,6 +483,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(12),

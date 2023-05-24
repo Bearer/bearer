@@ -6,6 +6,7 @@ high:
         description: ""
         documentation_url: ""
       line_number: 1
+      full_filename: call.rb
       filename: call.rb
       category_groups:
         - PII

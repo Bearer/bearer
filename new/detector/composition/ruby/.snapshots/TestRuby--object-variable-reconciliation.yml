@@ -6,6 +6,7 @@ high:
         description: ""
         documentation_url: ""
       line_number: 1
+      full_filename: object-variable-reconciliation.rb
       filename: object-variable-reconciliation.rb
       category_groups:
         - PII

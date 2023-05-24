@@ -15,7 +15,8 @@ warning:
             - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
         documentation_url: ""
       line_number: 4
-      filename: e2e/rules/testdata/data/ruby_rails_default_encryption_schema_rb/db/schema.rb
+      full_filename: e2e/rules/testdata/data/ruby_rails_default_encryption_schema_rb/db/schema.rb
+      filename: db/schema.rb
       category_groups:
         - PII
         - Personal Data
@@ -50,7 +51,7 @@ warning:
             t.datetime "created_at", null: false
             t.datetime "updated_at", null: false
           end
-      fingerprint: 4b6d6e98ae7d9908efdf9a7984c7db05_0
+      fingerprint: a6e77c6d42db8f03ffbe5acae290f72c_0
 
 
 --

@@ -6,6 +6,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "Startup.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(36),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=17) "nested/Startup.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(35),
@@ -46,6 +48,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=17) "nested/Startup.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(36),

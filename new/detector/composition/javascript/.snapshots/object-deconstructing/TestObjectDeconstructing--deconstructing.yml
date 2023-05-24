@@ -6,6 +6,7 @@ low:
         description: ""
         documentation_url: ""
       line_number: 1
+      full_filename: deconstructing.js
       filename: deconstructing.js
       source:
         location:

@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Java",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),

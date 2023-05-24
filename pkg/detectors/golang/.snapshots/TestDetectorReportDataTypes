@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(6),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(19),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(24),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(28),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(11),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(15),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),

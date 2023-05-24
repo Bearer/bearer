@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(4),
@@ -26,6 +27,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(10),
@@ -47,6 +49,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(12),
@@ -68,6 +71,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(15),
@@ -89,6 +93,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(16),
@@ -110,6 +115,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(17),
@@ -131,6 +137,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(19),
@@ -152,6 +159,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(20),
@@ -173,6 +181,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(22),
@@ -194,6 +203,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(25),
@@ -215,6 +225,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(27),
@@ -236,6 +247,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(28),
@@ -257,6 +269,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(29),
@@ -278,6 +291,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(33),
@@ -299,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(34),
@@ -320,6 +335,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(35),
@@ -341,6 +357,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(36),
@@ -362,6 +379,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(37),
@@ -383,6 +401,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(81),
@@ -404,6 +423,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(87),
@@ -425,6 +445,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(90),
@@ -446,6 +467,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(91),
@@ -467,6 +489,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(93),
@@ -488,6 +511,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(106),
@@ -509,6 +533,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(108),
@@ -530,6 +555,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(111),
@@ -551,6 +577,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(114),
@@ -572,6 +599,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(118),
@@ -593,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(120),
@@ -614,6 +643,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(122),
@@ -635,6 +665,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(124),
@@ -656,6 +687,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(127),
@@ -677,6 +709,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(130),
@@ -698,6 +731,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(132),
@@ -719,6 +753,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(133),
@@ -740,6 +775,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(135),
@@ -761,6 +797,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(137),
@@ -782,6 +819,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(139),
@@ -803,6 +841,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(144),
@@ -824,6 +863,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(146),
@@ -845,6 +885,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(148),
@@ -866,6 +907,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(150),
@@ -887,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(151),
@@ -908,6 +951,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(154),
@@ -929,6 +973,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(157),
@@ -950,6 +995,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(160),
@@ -971,6 +1017,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(163),
@@ -992,6 +1039,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(166),
@@ -1013,6 +1061,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(169),
@@ -1034,6 +1083,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(172),
@@ -1055,6 +1105,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(175),
@@ -1076,6 +1127,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(178),
@@ -1097,6 +1149,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(182),
@@ -1118,6 +1171,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(185),
@@ -1139,6 +1193,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(188),
@@ -1160,6 +1215,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(191),
@@ -1181,6 +1237,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(193),
@@ -1202,6 +1259,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(195),
@@ -1223,6 +1281,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(199),
@@ -1244,6 +1303,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(201),
@@ -1265,6 +1325,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(203),
@@ -1286,6 +1347,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(204),
@@ -1307,6 +1369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(207),
@@ -1328,6 +1391,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(208),
@@ -1349,6 +1413,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(209),
@@ -1370,6 +1435,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(213),
@@ -1391,6 +1457,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(214),
@@ -1412,6 +1479,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(215),
@@ -1433,6 +1501,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(218),
@@ -1454,6 +1523,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(221),
@@ -1475,6 +1545,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(223),
@@ -1496,6 +1567,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(224),
@@ -1517,6 +1589,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(225),
@@ -1538,6 +1611,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(226),
@@ -1559,6 +1633,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(228),
@@ -1580,6 +1655,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(229),
@@ -1601,6 +1677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(230),
@@ -1622,6 +1699,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(232),
@@ -1643,6 +1721,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(233),
@@ -1664,6 +1743,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(234),
@@ -1685,6 +1765,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(235),
@@ -1706,6 +1787,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(237),
@@ -1727,6 +1809,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(240),
@@ -1748,6 +1831,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(243),
@@ -1769,6 +1853,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(245),
@@ -1790,6 +1875,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(247),
@@ -1811,6 +1897,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(248),
@@ -1832,6 +1919,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(250),
@@ -1853,6 +1941,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(252),
@@ -1874,6 +1963,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(254),
@@ -1895,6 +1985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(255),
@@ -1916,6 +2007,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(256),
@@ -1937,6 +2029,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=12) "Gemfile.lock",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(257),

@@ -5,6 +5,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(2),
@@ -32,6 +33,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(3),
@@ -59,6 +61,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -86,6 +89,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(5),
@@ -113,6 +117,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(5),
@@ -140,6 +145,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -167,6 +173,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -194,6 +201,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -221,6 +229,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(7),
@@ -248,6 +257,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),
@@ -275,6 +285,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(10),
@@ -302,6 +313,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -329,6 +341,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -356,6 +369,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(16),
@@ -383,6 +397,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(19),
@@ -410,6 +425,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(20),
@@ -437,6 +453,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(21),
@@ -464,6 +481,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(22),
@@ -491,6 +509,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(23),
@@ -518,6 +537,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(34),
@@ -545,6 +565,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(42),
@@ -572,6 +593,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(43),
@@ -599,6 +621,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(47),
@@ -626,6 +649,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(48),
@@ -653,6 +677,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(53),
@@ -680,6 +705,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(54),
@@ -707,6 +733,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(60),
@@ -734,6 +761,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(61),
@@ -761,6 +789,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(66),
@@ -788,6 +817,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(76),
@@ -815,6 +845,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(81),
@@ -842,6 +873,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(84),
@@ -869,6 +901,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(86),
@@ -896,6 +929,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(88),
@@ -923,6 +957,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(90),
@@ -950,6 +985,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(92),

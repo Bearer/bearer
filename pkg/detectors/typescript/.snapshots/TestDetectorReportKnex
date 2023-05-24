@@ -6,6 +6,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "datatype_knex.ts",
+      FullFilename: (string) "",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(4),
@@ -25,6 +26,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "datatype_knex.ts",
+      FullFilename: (string) "",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(5),
@@ -44,6 +46,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "datatype_knex.ts",
+      FullFilename: (string) "",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(20),
@@ -64,6 +67,7 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "datatype_knex.ts",
+      FullFilename: (string) "",
       Language: (string) (len=10) "TypeScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(21),
