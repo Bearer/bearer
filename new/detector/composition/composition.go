@@ -23,7 +23,6 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 		data := detection.Data.(custom.Data)
 
 		if len(data.Datatypes) == 0 {
-			// log.Error().Msgf("%s %s %d %d", file.Path, detection.MatchNode.Content(), detection.MatchNode.StartLineNumber(), detection.MatchNode.StartColumnNumber())
 			report.AddDetection(reportdetections.TypeCustomRisk,
 				detectorType,
 				source.New(
