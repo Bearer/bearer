@@ -11,7 +11,7 @@ Examples:
 
 
 Report Flags
-  -f, --format string     Specify report format (json, yaml, sarif)
+  -f, --format string     Specify report format (json, yaml, sarif, gitlab-sast)
       --output string     Specify the output path for the report.
       --report string     Specify the type of report (security, privacy, dataflow). (default "security")
       --severity string   Specify which severities are included in the report. (default "critical,high,medium,low,warning")
