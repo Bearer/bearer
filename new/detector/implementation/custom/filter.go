@@ -14,6 +14,7 @@ import (
 )
 
 func matchFilter(
+	scope settings.RuleReferenceScope,
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
@@ -21,7 +22,7 @@ func matchFilter(
 	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
 	if filter.Not != nil {
-		match, _, err := matchFilter(result, evaluator, variableNodes, *filter.Not, rules)
+		match, _, err := matchFilter(scope, result, evaluator, variableNodes, *filter.Not, rules)
 		if match == nil {
 			return nil, nil, err
 		}
@@ -29,7 +30,7 @@ func matchFilter(
 	}
 
 	if len(filter.Either) != 0 {
-		return matchEitherFilters(result, evaluator, variableNodes, filter.Either, rules)
+		return matchEitherFilters(scope, result, evaluator, variableNodes, filter.Either, rules)
 	}
 
 	if filter.FilenameRegex != nil {
@@ -43,12 +44,18 @@ func matchFilter(
 	}
 
 	if filter.Detection != "" {
+		effectiveScope := filter.Scope
+		if scope == settings.RESULT_SCOPE {
+			effectiveScope = settings.RESULT_SCOPE
+		}
+
 		return matchDetectionFilter(
 			result,
 			evaluator,
 			variableNodes,
 			node,
 			filter.Detection,
+			effectiveScope,
 			filter.Contains == nil || *filter.Contains,
 			rules,
 		)
@@ -59,6 +66,7 @@ func matchFilter(
 }
 
 func matchAllFilters(
+	scope settings.RuleReferenceScope,
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	filters []settings.PatternFilter,
@@ -72,7 +80,7 @@ func matchAllFilters(
 	}
 
 	for _, filter := range filters {
-		matched, subDataTypeDetections, err := matchFilter(result, evaluator, variableNodes, filter, rules)
+		matched, subDataTypeDetections, err := matchFilter(scope, result, evaluator, variableNodes, filter, rules)
 		if matched == nil || !*matched || err != nil {
 			return false, nil, nil, err
 		}
@@ -84,6 +92,7 @@ func matchAllFilters(
 }
 
 func matchEitherFilters(
+	scope settings.RuleReferenceScope,
 	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
@@ -95,7 +104,7 @@ func matchEitherFilters(
 	oneNotMatched := false
 
 	for _, subFilter := range filters {
-		subMatch, subDatatypeDetections, err := matchFilter(result, evaluator, variableNodes, subFilter, rules)
+		subMatch, subDatatypeDetections, err := matchFilter(scope, result, evaluator, variableNodes, subFilter, rules)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -122,28 +131,22 @@ func matchDetectionFilter(
 	variableNodes map[string]*tree.Node,
 	node *tree.Node,
 	detectorType string,
+	scope settings.RuleReferenceScope,
 	contains bool,
 	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
-	var evaluateDetections func(*tree.Node, string, string, bool) ([]*types.Detection, error)
-	if contains {
-		evaluateDetections = evaluator.ForTree
-	} else {
-		evaluateDetections = evaluator.ForNode
-	}
-
 	sanitizerRuleID := ""
 	if rule, ok := rules[detectorType]; ok {
 		sanitizerRuleID = rule.SanitizerRuleID
 	}
 
 	if detectorType == "datatype" {
-		detections, err := evaluateDetections(node, "datatype", sanitizerRuleID, true)
+		detections, err := evaluator.Evaluate(node, "datatype", sanitizerRuleID, scope, true)
 
 		return boolPointer(len(detections) != 0), detections, err
 	}
 
-	detections, err := evaluateDetections(node, detectorType, sanitizerRuleID, true)
+	detections, err := evaluator.Evaluate(node, detectorType, sanitizerRuleID, scope, true)
 
 	var datatypeDetections []*types.Detection
 	ignoredVariables := getIgnoredVariables(detections)

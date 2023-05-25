@@ -296,3 +296,39 @@ func (*rubyImplementation) PassthroughNested(node *tree.Node) bool {
 
 	return slices.Contains(passthroughMethods, receiverMethod) || slices.Contains(passthroughMethods, wildcardMethod)
 }
+
+func (*rubyImplementation) ContributesToResult(node *tree.Node) bool {
+	parent := node.Parent()
+	if parent == nil {
+		return true
+	}
+
+	// Must not be a condition
+	if node.Equal(parent.ChildByFieldName("condition")) {
+		return false
+	}
+
+	// Must not be a case value
+	if parent.Type() == "case" && node.Equal(parent.ChildByFieldName("value")) {
+		return false
+	}
+
+	// Must not be a case-when pattern
+	if parent.Type() == "when" && node.Equal(parent.ChildByFieldName("pattern")) {
+		return false
+	}
+
+	// Must be the last expression in an expression block
+	if slices.Contains([]string{"then", "else"}, parent.Type()) {
+		if !node.Equal(parent.Child(parent.ChildCount() - 1)) {
+			return false
+		}
+	}
+
+	// Must be the arguments of calls
+	if parent.Type() == "call" && !node.Equal(parent.ChildByFieldName("arguments")) {
+		return false
+	}
+
+	return true
+}

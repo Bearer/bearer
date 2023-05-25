@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -114,6 +115,7 @@ func (detector *objectDetector) NestedDetections() bool {
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
+	_ settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	detections, err := detector.getObject(node, evaluator)
@@ -145,7 +147,7 @@ func (detector *objectDetector) getObject(
 	}
 
 	for _, spreadResult := range spreadResults {
-		detections, err := evaluator.ForNode(spreadResult["identifier"], "object", "", true)
+		detections, err := evaluator.Evaluate(spreadResult["identifier"], "object", "", settings.CURSOR_SCOPE, true)
 
 		if err != nil {
 			return nil, err
@@ -175,7 +177,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := evaluator.ForTree(result["value"], "object", "", true)
+		propertyObjects, err := evaluator.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
 		if err != nil {
 			return nil, err
 		}

@@ -3,6 +3,7 @@ package string
 import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -24,6 +25,7 @@ func (detector *stringDetector) Name() string {
 
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
+	ruleReferenceType settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	switch node.Type() {

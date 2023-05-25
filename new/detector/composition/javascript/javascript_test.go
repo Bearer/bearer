@@ -16,6 +16,9 @@ var datatypeRule []byte
 //go:embed testdata/deconstructing.yml
 var deconstructingRule []byte
 
+//go:embed testdata/scope_rule.yml
+var scopeRule []byte
+
 func TestFlow(t *testing.T) {
 	t.Parallel()
 	testhelper.GetRunner(t, datatypeRule, "Javascript").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
@@ -29,4 +32,9 @@ func TestObjectDeconstructing(t *testing.T) {
 func TestString(t *testing.T) {
 	t.Parallel()
 	testhelper.GetRunner(t, insecureURLRule, "Javascript").RunTest(t, "./testdata/testcases/string", ".snapshots/string/")
+}
+
+func TestScope(t *testing.T) {
+	t.Parallel()
+	testhelper.GetRunner(t, scopeRule, "Javascript").RunTest(t, "./testdata/scope", ".snapshots/")
 }

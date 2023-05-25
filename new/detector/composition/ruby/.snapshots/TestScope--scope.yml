@@ -1,0 +1,74 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 1
+      filename: scope.rb
+      parent_line_number: 1
+      snippet: scope_cursor(params[:oops])
+      fingerprint: 23e17866f80f43957a84e824da9ce255_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 5
+      filename: scope.rb
+      parent_line_number: 5
+      snippet: scope_nested(params[:oops])
+      fingerprint: 23e17866f80f43957a84e824da9ce255_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 6
+      filename: scope.rb
+      parent_line_number: 6
+      snippet: 'scope_nested(x ? params[:oops] : y)'
+      fingerprint: 23e17866f80f43957a84e824da9ce255_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 7
+      filename: scope.rb
+      parent_line_number: 7
+      snippet: 'scope_nested(params[:oops] ? x : y)'
+      fingerprint: 23e17866f80f43957a84e824da9ce255_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 9
+      filename: scope.rb
+      parent_line_number: 9
+      snippet: scope_result(params[:oops])
+      fingerprint: 23e17866f80f43957a84e824da9ce255_4
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 10
+      filename: scope.rb
+      parent_line_number: 10
+      snippet: 'scope_result(x ? params[:oops] : y)'
+      fingerprint: 23e17866f80f43957a84e824da9ce255_5
+

@@ -121,6 +121,8 @@ type Implementation interface {
 	ShouldSkipNode(node *tree.Node) bool
 
 	PassthroughNested(node *tree.Node) bool
+
+	ContributesToResult(node *tree.Node) bool
 }
 
 type Scope struct {

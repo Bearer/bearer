@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -27,9 +28,10 @@ func (detector *insecureURLDetector) Name() string {
 
 func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
+	_ settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	detections, err := evaluator.ForNode(node, "string", "", false)
+	detections, err := evaluator.Evaluate(node, "string", "", settings.CURSOR_SCOPE, false)
 	if err != nil {
 		return nil, err
 	}

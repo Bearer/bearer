@@ -5,6 +5,7 @@ import (
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 )
 
@@ -97,7 +98,7 @@ func (detector *objectDetector) getCallProjections(
 
 	var properties []generictypes.Property
 
-	functionDetections, err := evaluator.ForTree(result["function"], "object", "", true)
+	functionDetections, err := evaluator.Evaluate(result["function"], "object", "", settings.NESTED_SCOPE, true)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}

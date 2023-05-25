@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
@@ -93,6 +94,7 @@ func (detector *objectDetector) NestedDetections() bool {
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
+	_ settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	detections, err := detector.getHash(node, evaluator)
@@ -136,7 +138,7 @@ func (detector *objectDetector) getHash(
 			continue
 		}
 
-		propertyObjects, err := evaluator.ForTree(result["value"], "object", "", true)
+		propertyObjects, err := evaluator.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
 		if err != nil {
 			return nil, err
 		}
@@ -176,7 +178,7 @@ func (detector *objectDetector) getKeywordArgument(
 		return nil, nil
 	}
 
-	propertyObjects, err := evaluator.ForTree(result["value"], "object", "", true)
+	propertyObjects, err := evaluator.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
 	if err != nil {
 		return nil, err
 	}
