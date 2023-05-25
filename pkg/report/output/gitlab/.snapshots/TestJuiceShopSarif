@@ -1,0 +1,1230 @@
+{
+	"$schema": "https://gitlab.com/gitlab-org/security-products/security-report-schemas/-/raw/master/dist/sast-report-format.json",
+	"version": "15.0.4",
+	"vulnerabilities": [
+		{
+			"id": "c8834e53c5f03d10b653f1bfc909a713_0",
+			"category": "sast",
+			"name": "Possible path traversal vulnerability detected.",
+			"message": "## Description\nAllowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.\n\n## Remediations\n❌ Avoid wherever possible\n\n✅ Sanitize user input when resolving paths, for example:\n- Use `replace()` to mitigate against unwanted patterns in the path (such as `\\..\\..`)\n- Actively guard against paths that end in \"%00\" (poison NULL byte attacks)\n- Use path concatenation to ensure the intended scope is respected\n\n```javascript\nconst path = require(\"path\");\n\napp.get(\"/\", (req, res) =\u003e {\n  if (req.params.path.indexOf('\\0')) !== -1 {\n    // prevent access\n  }\n\n  var folder = req.params.path.replace(/^(\\.\\.(\\/|\\\\|$))+/, '')\n\n  var pathname = path.join(\"/public/\", folder)\n  if pathname.indexOf(\"/public/\") !== 0 {\n    // prevent access\n  }\n\n  path.resolve(pathname)\n})\n```\n\n## Resources\n- [OWASP path traversal](https://owasp.org/www-community/attacks/Path_Traversal)\n",
+			"description": "## Description\nAllowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.\n\n## Remediations\n❌ Avoid wherever possible\n\n✅ Sanitize user input when resolving paths, for example:\n- Use `replace()` to mitigate against unwanted patterns in the path (such as `\\..\\..`)\n- Actively guard against paths that end in \"%00\" (poison NULL byte attacks)\n- Use path concatenation to ensure the intended scope is respected\n\n```javascript\nconst path = require(\"path\");\n\napp.get(\"/\", (req, res) =\u003e {\n  if (req.params.path.indexOf('\\0')) !== -1 {\n    // prevent access\n  }\n\n  var folder = req.params.path.replace(/^(\\.\\.(\\/|\\\\|$))+/, '')\n\n  var pathname = path.join(\"/public/\", folder)\n  if pathname.indexOf(\"/public/\") !== 0 {\n    // prevent access\n  }\n\n  path.resolve(pathname)\n})\n```\n\n## Resources\n- [OWASP path traversal](https://owasp.org/www-community/attacks/Path_Traversal)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "path.resolve(req.body.layout)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/routes/dataErasure.ts",
+				"start_line": 69
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_path_traversal",
+					"name": "Possible path traversal vulnerability detected.",
+					"value": "Possible path traversal vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "0772cb0e576662d692d2cf5b7c6d88e0_0",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(\"SELECT * FROM Products WHERE ((name LIKE '%\"+criteria+\"%' OR description LIKE '%\"+criteria+\"%') AND deletedAt IS NULL) ORDER BY name\")",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/dbSchemaChallenge_1.ts",
+				"start_line": 5
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "13f172f15135fed5c2e06b55311a3e56_1",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Products WHERE ((name LIKE '%${criteria}%' OR description LIKE '%${criteria}%') AND deletedAt IS NULL) ORDER BY name`)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/dbSchemaChallenge_3.ts",
+				"start_line": 11
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "60260dc8ef02171ab32fefdaa50c7298_2",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: models.User, plain: true })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/loginAdminChallenge_1.ts",
+				"start_line": 20
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "defa576ac2dc7b00f7d7329f6eb99772_3",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = $1 AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`,\n      { bind: [ req.body.email ], model: models.User, plain: true })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/loginAdminChallenge_2.ts",
+				"start_line": 17
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "35b34e7b805ad2153153fc35ca2b733f_4",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: models.User, plain: true })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/loginBenderChallenge_1.ts",
+				"start_line": 20
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "7f1ea8644296ae27e0e5cbc87347a738_5",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = :mail AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`,\n      { replacements: { mail: req.body.email }, model: models.User, plain: true })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/loginBenderChallenge_3.ts",
+				"start_line": 17
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "10945c4348972b7a7efbe860364c8c3c_6",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: models.User, plain: false })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/loginBenderChallenge_4.ts",
+				"start_line": 17
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "ea47976b9f8573315c010a96cd5370de_7",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: models.User, plain: false })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/loginJimChallenge_2.ts",
+				"start_line": 17
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "ca587251d87c8307741117bd1c1d0399_8",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: models.User, plain: true })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/loginJimChallenge_4.ts",
+				"start_line": 20
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "69af648770e73fdf0dcfbfa94b994a42_9",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Products WHERE ((name LIKE '%${criteria}%' OR description LIKE '%${criteria}%') AND deletedAt IS NULL) ORDER BY name`)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/unionSqlInjectionChallenge_1.ts",
+				"start_line": 6
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "8f83f245ddf61e2e35798ec2c7eb1122_10",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Products WHERE ((name LIKE '%${criteria}%' OR description LIKE '%${criteria}%') AND deletedAt IS NULL) ORDER BY name`)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/unionSqlInjectionChallenge_3.ts",
+				"start_line": 10
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "fdc59d77b961f54862ba664236d065d1_11",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: UserModel, plain: true })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/routes/login.ts",
+				"start_line": 36
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "0c72d348abcf5eec00f42269b66e3b20_12",
+			"category": "sast",
+			"name": "SQL injection vulnerability detected.",
+			"message": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"description": "## Description\nIncluding unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input\n\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\"SELECT * FROM users WHERE ID = \" + req.params.userId);\n```\n\nInstead, consider the following approaches when writing SQL queries\n\n✅ Validate query input wherever possible\n\n```javascript\n  var rawId = req.params.userId\n  if !(/[0-9]+/.test(rawId)) {\n    // input is unexpected; don't make the query\n  }\n```\n\n✅ Use prepared (or parameterized) statements when querying\n\nSequelize example -\n```javascript\n  var sqlite = new Sequelize(\"sqlite::memory:\");\n  sqlite.query(\n    \"SELECT * FROM users WHERE ID = ?\",\n    { replacements: [req.params.userId] },\n    type: sequelize.QueryTypes.SELECT\n  )\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "models.sequelize.query(`SELECT * FROM Products WHERE ((name LIKE '%${criteria}%' OR description LIKE '%${criteria}%') AND deletedAt IS NULL) ORDER BY name`)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/routes/search.ts",
+				"start_line": 23
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_sql_injection",
+					"name": "SQL injection vulnerability detected.",
+					"value": "SQL injection vulnerability detected."
+				}
+			]
+		},
+		{
+			"id": "5360ec921edb3edf577227ba65bf0c91_0",
+			"category": "sast",
+			"name": "Hardcoded secret detected",
+			"message": "## Description\n\nCode is not a safe place to store secrets, use environment variables instead.\n\n## Remediations\n```javascript\n  passport.use(new OAuth2Strategy({\n      authorizationURL: 'https://www.example.com/oauth2/authorize',\n      tokenURL: 'https://www.example.com/oauth2/token',\n      clientID:  process.env.CLIENT_ID,\n      clientSecret: process.env.CLIENT_SECRET,\n      callbackURL: \"http://localhost:3000/auth/example/callback\"\n    },\n    function(accessToken, refreshToken, profile, cb) {\n      User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n        return cb(err, user);\n      });\n    }\n  ));\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+			"description": "## Description\n\nCode is not a safe place to store secrets, use environment variables instead.\n\n## Remediations\n```javascript\n  passport.use(new OAuth2Strategy({\n      authorizationURL: 'https://www.example.com/oauth2/authorize',\n      tokenURL: 'https://www.example.com/oauth2/token',\n      clientID:  process.env.CLIENT_ID,\n      clientSecret: process.env.CLIENT_SECRET,\n      callbackURL: \"http://localhost:3000/auth/example/callback\"\n    },\n    function(accessToken, refreshToken, profile, cb) {\n      User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n        return cb(err, user);\n      });\n    }\n  ));\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "crypto.createHmac('sha256', 'pa4qacea4VK9t9nGv7yZtwmj')",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/lib/insecurity.ts",
+				"start_line": 43
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_hardcoded_secret",
+					"name": "Hardcoded secret detected",
+					"value": "Hardcoded secret detected"
+				}
+			]
+		},
+		{
+			"id": "5360ec921edb3edf577227ba65bf0c91_1",
+			"category": "sast",
+			"name": "Hardcoded secret detected",
+			"message": "## Description\n\nCode is not a safe place to store secrets, use environment variables instead.\n\n## Remediations\n```javascript\n  passport.use(new OAuth2Strategy({\n      authorizationURL: 'https://www.example.com/oauth2/authorize',\n      tokenURL: 'https://www.example.com/oauth2/token',\n      clientID:  process.env.CLIENT_ID,\n      clientSecret: process.env.CLIENT_SECRET,\n      callbackURL: \"http://localhost:3000/auth/example/callback\"\n    },\n    function(accessToken, refreshToken, profile, cb) {\n      User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n        return cb(err, user);\n      });\n    }\n  ));\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+			"description": "## Description\n\nCode is not a safe place to store secrets, use environment variables instead.\n\n## Remediations\n```javascript\n  passport.use(new OAuth2Strategy({\n      authorizationURL: 'https://www.example.com/oauth2/authorize',\n      tokenURL: 'https://www.example.com/oauth2/token',\n      clientID:  process.env.CLIENT_ID,\n      clientSecret: process.env.CLIENT_SECRET,\n      callbackURL: \"http://localhost:3000/auth/example/callback\"\n    },\n    function(accessToken, refreshToken, profile, cb) {\n      User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n        return cb(err, user);\n      });\n    }\n  ));\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "crypto.createHmac('sha256', privateKey)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/lib/insecurity.ts",
+				"start_line": 166
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_hardcoded_secret",
+					"name": "Hardcoded secret detected",
+					"value": "Hardcoded secret detected"
+				}
+			]
+		},
+		{
+			"id": "0dbd334b5374976b65f4265d6cef3285_0",
+			"category": "sast",
+			"name": "HTTP communication with user-controlled destination detected.",
+			"message": "## Description\n\nApplications should not connect to locations formed from user input.\nThis rule checks for URLs containing user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input in HTTP URLs:\n\n```javascript\nconst response = axios.get(`https://${req.params.host}`)\n```\n\n✅ Use user input indirectly to form a URL:\n\n```javascript\nconst hosts = new Map([\n  [\"option1\", \"api1.com\"],\n  [\"option2\", \"api2.com\"]\n])\n\nconst host = hosts.get(req.params.host)\nconst response = axois.get(`https://${host}`)\n```\n",
+			"description": "## Description\n\nApplications should not connect to locations formed from user input.\nThis rule checks for URLs containing user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input in HTTP URLs:\n\n```javascript\nconst response = axios.get(`https://${req.params.host}`)\n```\n\n✅ Use user input indirectly to form a URL:\n\n```javascript\nconst hosts = new Map([\n  [\"option1\", \"api1.com\"],\n  [\"option2\", \"api2.com\"]\n])\n\nconst host = hosts.get(req.params.host)\nconst response = axois.get(`https://${host}`)\n```\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "request\n          .get(url)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/routes/profileImageUrlUpload.ts",
+				"start_line": 22
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_http_url_using_user_input",
+					"name": "HTTP communication with user-controlled destination detected.",
+					"value": "HTTP communication with user-controlled destination detected."
+				}
+			]
+		},
+		{
+			"id": "5699016e68262977ce1ba4f2c3ff4a85_0",
+			"category": "sast",
+			"name": "Hardcoded JWT secret detected",
+			"message": "## Description\n\nCode is not a secure place to store secrets, use environment variables instead.\n\n## Remediations\n\nUse environment variables\n\n```javascript\n  var jwt = require(\"jsonwebtoken\");\n\n  var token = jwt.sign({ foo: \"bar\" }, process.env.JWT_SECRET);\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+			"description": "## Description\n\nCode is not a secure place to store secrets, use environment variables instead.\n\n## Remediations\n\nUse environment variables\n\n```javascript\n  var jwt = require(\"jsonwebtoken\");\n\n  var token = jwt.sign({ foo: \"bar\" }, process.env.JWT_SECRET);\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "jwt.sign(user, privateKey, { expiresInMinutes: 60 * 5, algorithm: 'RS256' })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/lib/insecurity.ts",
+				"start_line": 55
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_jwt_hardcoded_secret",
+					"name": "Hardcoded JWT secret detected",
+					"value": "Hardcoded JWT secret detected"
+				}
+			]
+		},
+		{
+			"id": "1d5a13f70c21f4bf10f01719b2e46b8f_0",
+			"category": "sast",
+			"name": "Sensitive data stored in HTML local storage detected.",
+			"message": "## Description\n\nSensitive data should not be stored in a `localStorage` session. This policy looks for any sensitive data stored within the localstorage.\n\n## Remediations\n\nIt's best to avoid storing sensitive data in `localStorage` whenever possible. To keep session data safe, use a server-based session storage solution instead.\n\n❌ If you do need do store data in `localStorage`, avoid including sensitive data:\n\n```javascript\nlocalStorage.setItem('user', email)\n```\n\n✅ Instead, use a unique identifier:\n\n```javascript\nlocalStorage.setItem('user', user.uuid)\n```\n\n## Resources\n  - [OWASP sensitive data exposure](https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure)\n",
+			"description": "## Description\n\nSensitive data should not be stored in a `localStorage` session. This policy looks for any sensitive data stored within the localstorage.\n\n## Remediations\n\nIt's best to avoid storing sensitive data in `localStorage` whenever possible. To keep session data safe, use a server-based session storage solution instead.\n\n❌ If you do need do store data in `localStorage`, avoid including sensitive data:\n\n```javascript\nlocalStorage.setItem('user', email)\n```\n\n✅ Instead, use a unique identifier:\n\n```javascript\nlocalStorage.setItem('user', user.uuid)\n```\n\n## Resources\n  - [OWASP sensitive data exposure](https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure)\n",
+			"severity": "High",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "localStorage.setItem('email', this.user.email)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/frontend/src/app/login/login.component.ts",
+				"start_line": 102
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_session",
+					"name": "Sensitive data stored in HTML local storage detected.",
+					"value": "Sensitive data stored in HTML local storage detected."
+				}
+			]
+		},
+		{
+			"id": "e4cfbe874ab73766cf152580663fb345_0",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts",
+				"start_line": 2
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "e4cfbe874ab73766cf152580663fb345_1",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts",
+				"start_line": 7
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "4540941b15c51e90ae3fa7d166695a41_2",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_2.ts",
+				"start_line": 2
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "4540941b15c51e90ae3fa7d166695a41_3",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_2.ts",
+				"start_line": 7
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "4540941b15c51e90ae3fa7d166695a41_4",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/support/logs', serveIndexMiddleware, serveIndex('logs', { icons: true }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_2.ts",
+				"start_line": 11
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "6bdb66b88a3688f0e9154109eba93cba_5",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_3.ts",
+				"start_line": 2
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "6bdb66b88a3688f0e9154109eba93cba_6",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_3.ts",
+				"start_line": 7
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "6bdb66b88a3688f0e9154109eba93cba_7",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/support/logs', serveIndexMiddleware, serveIndex('logs', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_3.ts",
+				"start_line": 11
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "47566a797ef343d6d46a2b9a74b932f1_8",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_4.ts",
+				"start_line": 2
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "47566a797ef343d6d46a2b9a74b932f1_9",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_4.ts",
+				"start_line": 7
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "1f52678cda4e029b5d72ee720b68553d_10",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_1_correct.ts",
+				"start_line": 2
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "1f52678cda4e029b5d72ee720b68553d_11",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/support/logs', serveIndexMiddleware, serveIndex('logs', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_1_correct.ts",
+				"start_line": 6
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "960a68589ae8111a69c92d17217464b0_12",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_2.ts",
+				"start_line": 6
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "960a68589ae8111a69c92d17217464b0_13",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/support/logs', serveIndexMiddleware, serveIndex('logs', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_2.ts",
+				"start_line": 10
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "54f308469bb6cf2f971cb6aded691f22_14",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_3.ts",
+				"start_line": 2
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "54f308469bb6cf2f971cb6aded691f22_15",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_3.ts",
+				"start_line": 5
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "54f308469bb6cf2f971cb6aded691f22_16",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/support/logs', serveIndexMiddleware, serveIndex('logs', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_3.ts",
+				"start_line": 9
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "f8cf1dda0d57229f6b5dbd546ff272dd_17",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: false }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_4.ts",
+				"start_line": 2
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "f8cf1dda0d57229f6b5dbd546ff272dd_18",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_4.ts",
+				"start_line": 7
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "f8cf1dda0d57229f6b5dbd546ff272dd_19",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/support/logs', serveIndexMiddleware, serveIndex('logs', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_4.ts",
+				"start_line": 11
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "ae0c0007046764e2cd223ae08579cd0f_20",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/server.ts",
+				"start_line": 241
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "ae0c0007046764e2cd223ae08579cd0f_21",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/encryptionkeys', serveIndexMiddleware, serveIndex('encryptionkeys', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/server.ts",
+				"start_line": 246
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "ae0c0007046764e2cd223ae08579cd0f_22",
+			"category": "sast",
+			"name": "Missing access restriction to directory listing detected.",
+			"message": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"description": "## Description\nInappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.\n\n## Remediations\n✅ Restrict access to sensitive directories and files\n\n## Resources\n- [Express Serve index middleware](https://expressjs.com/en/resources/middleware/serve-index.html)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "app.use('/support/logs', serveIndexMiddleware, serveIndex('logs', { icons: true, view: 'details' }))",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/server.ts",
+				"start_line": 250
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_exposed_dir_listing",
+					"name": "Missing access restriction to directory listing detected.",
+					"value": "Missing access restriction to directory listing detected."
+				}
+			]
+		},
+		{
+			"id": "35ecf6a72e7c7fb3ec56529a7e29fd36_0",
+			"category": "sast",
+			"name": "Unrevoked JWT detected.",
+			"message": "## Description\nThe best practice caching policy is to revoke JWTs especially when these contain senstitive information.\n\n## Remediations\n✅ Ensure JWTs are short-lived by revoking them\n\n```javascript\nexpressjwt({\n  ...\n  isRevoked: this.customRevokeCall(),\n  ...\n})\n```\n\n## Resources\n- [ExpressJWT documentation on revoking tokens](https://github.com/auth0/express-jwt#revoked-tokens)\n",
+			"description": "## Description\nThe best practice caching policy is to revoke JWTs especially when these contain senstitive information.\n\n## Remediations\n✅ Ensure JWTs are short-lived by revoking them\n\n```javascript\nexpressjwt({\n  ...\n  isRevoked: this.customRevokeCall(),\n  ...\n})\n```\n\n## Resources\n- [ExpressJWT documentation on revoking tokens](https://github.com/auth0/express-jwt#revoked-tokens)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "expressJwt({ secret: publicKey })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/lib/insecurity.ts",
+				"start_line": 53
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_jwt_not_revoked",
+					"name": "Unrevoked JWT detected.",
+					"value": "Unrevoked JWT detected."
+				}
+			]
+		},
+		{
+			"id": "35ecf6a72e7c7fb3ec56529a7e29fd36_1",
+			"category": "sast",
+			"name": "Unrevoked JWT detected.",
+			"message": "## Description\nThe best practice caching policy is to revoke JWTs especially when these contain senstitive information.\n\n## Remediations\n✅ Ensure JWTs are short-lived by revoking them\n\n```javascript\nexpressjwt({\n  ...\n  isRevoked: this.customRevokeCall(),\n  ...\n})\n```\n\n## Resources\n- [ExpressJWT documentation on revoking tokens](https://github.com/auth0/express-jwt#revoked-tokens)\n",
+			"description": "## Description\nThe best practice caching policy is to revoke JWTs especially when these contain senstitive information.\n\n## Remediations\n✅ Ensure JWTs are short-lived by revoking them\n\n```javascript\nexpressjwt({\n  ...\n  isRevoked: this.customRevokeCall(),\n  ...\n})\n```\n\n## Resources\n- [ExpressJWT documentation on revoking tokens](https://github.com/auth0/express-jwt#revoked-tokens)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "expressJwt({ secret: '' + Math.random() })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/lib/insecurity.ts",
+				"start_line": 54
+			},
+			"identifiers": [
+				{
+					"type": "javascript_express_jwt_not_revoked",
+					"name": "Unrevoked JWT detected.",
+					"value": "Unrevoked JWT detected."
+				}
+			]
+		},
+		{
+			"id": "2233586b742b94cd1d7d513ea5f76a62_0",
+			"category": "sast",
+			"name": "Manual HTML sanitization detected.",
+			"message": "## Description\nSanitizing HTML manually is error prone and can lead to Cross Site\nScripting (XSS) vulnerabilities.\n\n## Remediations\n\n❌ Avoid manually escaping HTML:\n\n```javascript\nconst sanitizedUserInput = user.Input\n  .replaceAll('\u003c', '\u0026lt;')\n  .replaceAll('\u003e', '\u0026gt;');\nconst html = `\u003cstrong\u003e${sanitizedUserInput}\u003c/strong\u003e`;\n```\n\n✅ Use a HTML sanitization library:\n\n```javascript\nimport sanitizeHtml from 'sanitize-html';\n\nconst html = sanitizeHtml(`\u003cstrong\u003e${user.Input}\u003c/strong\u003e`);\n```\n\n## Resources\n- [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)\n",
+			"description": "## Description\nSanitizing HTML manually is error prone and can lead to Cross Site\nScripting (XSS) vulnerabilities.\n\n## Remediations\n\n❌ Avoid manually escaping HTML:\n\n```javascript\nconst sanitizedUserInput = user.Input\n  .replaceAll('\u003c', '\u0026lt;')\n  .replaceAll('\u003e', '\u0026gt;');\nconst html = `\u003cstrong\u003e${sanitizedUserInput}\u003c/strong\u003e`;\n```\n\n✅ Use a HTML sanitization library:\n\n```javascript\nimport sanitizeHtml from 'sanitize-html';\n\nconst html = sanitizeHtml(`\u003cstrong\u003e${user.Input}\u003c/strong\u003e`);\n```\n\n## Resources\n- [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "str.replace(/[\u0026\u003c\u003e'\"]/g,\n    tag =\u003e {\n      return ({\n        '\u0026': '\u0026amp;',\n        '\u003c': '\u0026lt;',\n        '\u003e': '\u0026gt;',\n        \"'\": '\u0026#39;',\n        '\"': '\u0026quot;'\n      }[tag])\n    })",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/redirectChallenge_3.ts",
+				"start_line": 22
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_manual_html_sanitization",
+					"name": "Manual HTML sanitization detected.",
+					"value": "Manual HTML sanitization detected."
+				}
+			]
+		},
+		{
+			"id": "0e64d5a83385809b11eed7987eabb53b_1",
+			"category": "sast",
+			"name": "Manual HTML sanitization detected.",
+			"message": "## Description\nSanitizing HTML manually is error prone and can lead to Cross Site\nScripting (XSS) vulnerabilities.\n\n## Remediations\n\n❌ Avoid manually escaping HTML:\n\n```javascript\nconst sanitizedUserInput = user.Input\n  .replaceAll('\u003c', '\u0026lt;')\n  .replaceAll('\u003e', '\u0026gt;');\nconst html = `\u003cstrong\u003e${sanitizedUserInput}\u003c/strong\u003e`;\n```\n\n✅ Use a HTML sanitization library:\n\n```javascript\nimport sanitizeHtml from 'sanitize-html';\n\nconst html = sanitizeHtml(`\u003cstrong\u003e${user.Input}\u003c/strong\u003e`);\n```\n\n## Resources\n- [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)\n",
+			"description": "## Description\nSanitizing HTML manually is error prone and can lead to Cross Site\nScripting (XSS) vulnerabilities.\n\n## Remediations\n\n❌ Avoid manually escaping HTML:\n\n```javascript\nconst sanitizedUserInput = user.Input\n  .replaceAll('\u003c', '\u0026lt;')\n  .replaceAll('\u003e', '\u0026gt;');\nconst html = `\u003cstrong\u003e${sanitizedUserInput}\u003c/strong\u003e`;\n```\n\n✅ Use a HTML sanitization library:\n\n```javascript\nimport sanitizeHtml from 'sanitize-html';\n\nconst html = sanitizeHtml(`\u003cstrong\u003e${user.Input}\u003c/strong\u003e`);\n```\n\n## Resources\n- [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "tableData[i].description.replaceAll('\u003c', '\u0026lt;')",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/data/static/codefixes/restfulXssChallenge_2.ts",
+				"start_line": 59
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_manual_html_sanitization",
+					"name": "Manual HTML sanitization detected.",
+					"value": "Manual HTML sanitization detected."
+				}
+			]
+		},
+		{
+			"id": "c033c95cf2c5d8b0443048bb744f51a1_0",
+			"category": "sast",
+			"name": "Weak encryption library usage detected.",
+			"message": "## Description\n\nSensitive data should be encrypted with strong encryption algorithms like aes-256-cbc\n\n## Remediations\n\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefore shouldn't be used.\n\n✅ Use stronger encryption algorithms when storing data.\n\n```javascript\nconst crypto = require(\"crypto\");\n\nconst key = \"secret key\";\nconst encrypted = crypto.createHmac(\"es-256-cbc\", key).update(user.password);\n```\n\n## Resources\n- [NodeJS Crypto Module](https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options)\n",
+			"description": "## Description\n\nSensitive data should be encrypted with strong encryption algorithms like aes-256-cbc\n\n## Remediations\n\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefore shouldn't be used.\n\n✅ Use stronger encryption algorithms when storing data.\n\n```javascript\nconst crypto = require(\"crypto\");\n\nconst key = \"secret key\";\nconst encrypted = crypto.createHmac(\"es-256-cbc\", key).update(user.password);\n```\n\n## Resources\n- [NodeJS Crypto Module](https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "md5.update(buffer)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/Gruntfile.js",
+				"start_line": 74
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_weak_encryption",
+					"name": "Weak encryption library usage detected.",
+					"value": "Weak encryption library usage detected."
+				}
+			]
+		},
+		{
+			"id": "2a815ec5bcadb6e1fbf97994929a305e_1",
+			"category": "sast",
+			"name": "Weak encryption library usage detected.",
+			"message": "## Description\n\nSensitive data should be encrypted with strong encryption algorithms like aes-256-cbc\n\n## Remediations\n\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefore shouldn't be used.\n\n✅ Use stronger encryption algorithms when storing data.\n\n```javascript\nconst crypto = require(\"crypto\");\n\nconst key = \"secret key\";\nconst encrypted = crypto.createHmac(\"es-256-cbc\", key).update(user.password);\n```\n\n## Resources\n- [NodeJS Crypto Module](https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options)\n",
+			"description": "## Description\n\nSensitive data should be encrypted with strong encryption algorithms like aes-256-cbc\n\n## Remediations\n\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefore shouldn't be used.\n\n✅ Use stronger encryption algorithms when storing data.\n\n```javascript\nconst crypto = require(\"crypto\");\n\nconst key = \"secret key\";\nconst encrypted = crypto.createHmac(\"es-256-cbc\", key).update(user.password);\n```\n\n## Resources\n- [NodeJS Crypto Module](https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options)\n",
+			"severity": "Medium",
+			"confidence": "Unknown",
+			"raw_source_code_extract": "crypto.createHash('md5').update(data)",
+			"scanner": {
+				"id": "bearer",
+				"name": "Bearer"
+			},
+			"location": {
+				"file": "../../OWASP/juice-shop/lib/insecurity.ts",
+				"start_line": 42
+			},
+			"identifiers": [
+				{
+					"type": "javascript_lang_weak_encryption",
+					"name": "Weak encryption library usage detected.",
+					"value": "Weak encryption library usage detected."
+				}
+			]
+		}
+	],
+	"scan": {
+		"analyzer": {
+			"id": "bearer-sast",
+			"name": "Bearer SAST",
+			"url": "https://github.com/bearer/bearer",
+			"vendor": {
+				"name": "Bearer"
+			},
+			"version": "dev"
+		},
+		"scanner": {
+			"id": "bearer",
+			"name": "Bearer",
+			"url": "https://github.com/bearer/bearer",
+			"vendor": {
+				"name": "Bearer"
+			},
+			"version": "dev"
+		},
+		"type": "sast",
+		"start_time": "2006-01-02T15:04:05",
+		"end_time": "2006-01-02T15:05:05",
+		"status": "failure"
+	}
+}

@@ -7,10 +7,11 @@ import (
 )
 
 var (
-	FormatSarif = "sarif"
-	FormatJSON  = "json"
-	FormatYAML  = "yaml"
-	FormatEmpty = ""
+	FormatGitLabSast = "gitlab-sast"
+	FormatSarif      = "sarif"
+	FormatJSON       = "json"
+	FormatYAML       = "yaml"
+	FormatEmpty      = ""
 
 	ReportPrivacy   = "privacy"
 	ReportSecurity  = "security"
@@ -32,7 +33,7 @@ var (
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatEmpty,
-		Usage:      "Specify report format (json, yaml, sarif)",
+		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast)",
 	}
 	ReportFlag = Flag{
 		Name:       "report",
@@ -109,7 +110,7 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	case FormatYAML:
 	case FormatJSON:
 	case FormatEmpty:
-	case FormatSarif:
+	case FormatSarif, FormatGitLabSast:
 		if report != ReportSecurity {
 			return ReportOptions{}, ErrInvalidFormat
 		}

@@ -62,9 +62,6 @@ func TestJuiceShopSarif(t *testing.T) {
 		t.Fatalf("failed to generate JSON output, err: %s", err)
 	}
 
-	// Works!!
-	// cupaloy.SnapshotT(t, *res)
-
 	var prettyJSON bytes.Buffer
 	err = json.Indent(&prettyJSON, []byte(*sarifOutput), "", "\t")
 	if err != nil {
