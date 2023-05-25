@@ -1,0 +1,29 @@
+languages:
+  - ruby
+patterns:
+  - pattern: scope_cursor($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: cursor
+  - pattern: scope_nested($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: nested
+  - pattern: scope_result($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: result
+auxiliary:
+  - id: scope_test_user_input
+    patterns:
+      - params[$<_>]
+severity: high
+metadata:
+  description: Test detection filter scopes
+  remediation_message: Test detection filter scopes
+  cwe_id:
+    - 42
+  id: scope_test
