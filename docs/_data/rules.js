@@ -47,7 +47,7 @@ async function fetchData(location) {
         // ex. looping through rules/ruby [lang, rails]
         subDirs.forEach(async (subDir) => {
           const subDirPath = path.join(dirPath, subDir);
-          if (isDirectory(subDirPath)) {
+          if (isDirectory(subDirPath) && subDir !== "shared") {
             const files = await readdir(subDirPath);
             const children = await fetchAllFiles(
               subDirPath,
