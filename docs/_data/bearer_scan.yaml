@@ -2,7 +2,10 @@ name: ' scan'
 synopsis: Scan a directory or file
 usage: ' scan [flags] <path>'
 options:
+    - name: api-key
+      usage: Use your Bearer API Key to send the report to Bearer.
     - name: config-file
+      default_value: bearer.yml
       usage: Load configuration from the specified path.
     - name: context
       usage: |
@@ -36,11 +39,14 @@ options:
       usage: Disable the cache and runs the detections again
     - name: format
       shorthand: f
-      usage: Specify report format (json, yaml)
+      usage: Specify report format (json, yaml, sarif, gitlab-sast)
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for scan
+    - name: host
+      default_value: my.bearer.sh
+      usage: Specify the Host for sending the report.
     - name: internal-domains
       default_value: '[]'
       usage: |
