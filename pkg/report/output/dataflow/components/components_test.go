@@ -28,9 +28,10 @@ func TestDataflowComponents(t *testing.T) {
 					SubType: "third_party",
 					Locations: []types.ComponentLocation{
 						{
-							Detector:   "gemfile-lock",
-							Filename:   "Gemfile.lock",
-							LineNumber: 258,
+							Detector:     "gemfile-lock",
+							FullFilename: "Gemfile.lock",
+							Filename:     "Gemfile.lock",
+							LineNumber:   258,
 						},
 					},
 				},
@@ -51,9 +52,10 @@ func TestDataflowComponents(t *testing.T) {
 					SubType: "third_party",
 					Locations: []types.ComponentLocation{
 						{
-							Detector:   "ruby",
-							Filename:   "billing.rb",
-							LineNumber: 2,
+							Detector:     "ruby",
+							FullFilename: "billing.rb",
+							Filename:     "billing.rb",
+							LineNumber:   2,
 						},
 					},
 				},
@@ -75,9 +77,10 @@ func TestDataflowComponents(t *testing.T) {
 					SubType: "third_party",
 					Locations: []types.ComponentLocation{
 						{
-							Detector:   "ruby",
-							Filename:   "billing.rb",
-							LineNumber: 2,
+							Detector:     "ruby",
+							Filename:     "billing.rb",
+							FullFilename: "billing.rb",
+							LineNumber:   2,
 						},
 					},
 				},
@@ -94,14 +97,16 @@ func TestDataflowComponents(t *testing.T) {
 					SubType: "third_party",
 					Locations: []types.ComponentLocation{
 						{
-							Detector:   "gemfile-lock",
-							Filename:   "Gemfile.lock",
-							LineNumber: 258,
+							Detector:     "gemfile-lock",
+							FullFilename: "Gemfile.lock",
+							Filename:     "Gemfile.lock",
+							LineNumber:   258,
 						},
 						{
-							Detector:   "ruby",
-							Filename:   "billing.rb",
-							LineNumber: 2,
+							Detector:     "ruby",
+							FullFilename: "billing.rb",
+							Filename:     "billing.rb",
+							LineNumber:   2,
 						},
 					},
 				},

@@ -35,14 +35,18 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:        "single detection",
 			Config:      config,
-			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:        "./users.rb",
-							StartLineNumber: 25,
+							Filename:          "./users.rb",
+							FullFilename:      "./users.rb",
+							StartLineNumber:   25,
+							EndLineNumber:     25,
+							StartColumnNumber: 20,
+							EndColumnNumber:   30,
 							DataTypes: []types.RiskDatatype{
 								{
 
@@ -63,21 +67,25 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:        "single detection - no classification",
 			Config:      config,
-			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name"}}`,
+			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name"}}`,
 			Want:        []types.RiskDetector{},
 		},
 		{
 			Name:   "single detection - duplicates",
 			Config: config,
-			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
-		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
+		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:        "./users.rb",
-							StartLineNumber: 25,
+							Filename:          "./users.rb",
+							FullFilename:      "./users.rb",
+							StartLineNumber:   25,
+							EndLineNumber:     25,
+							StartColumnNumber: 20,
+							EndColumnNumber:   30,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Username",
@@ -97,14 +105,18 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:        "single detection - stored",
 			Config:      config,
-			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"ruby_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"ruby_leak", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
 					DetectorID: "ruby_leak",
 					Locations: []types.RiskLocation{
 						{
-							Filename:        "./users.rb",
-							StartLineNumber: 25,
+							Filename:          "./users.rb",
+							FullFilename:      "./users.rb",
+							StartLineNumber:   25,
+							EndLineNumber:     25,
+							StartColumnNumber: 20,
+							EndColumnNumber:   30,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Username",
@@ -124,15 +136,19 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:   "single detection - multiple occurences - deterministic output",
 			Config: config,
-			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
-					{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
+					{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:        "./users.rb",
-							StartLineNumber: 25,
+							Filename:          "./users.rb",
+							FullFilename:      "./users.rb",
+							StartLineNumber:   25,
+							EndLineNumber:     25,
+							StartColumnNumber: 20,
+							EndColumnNumber:   30,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Username",
@@ -152,15 +168,19 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:   "multiple detections - same detector - deterministic output",
 			Config: config,
-			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
-		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "address", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
+		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25, "end_line_number": 25, "start_column_number": 20, "end_column_number": 30, "start_line_number": 25}, "value": {"field_name": "address", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
 					DetectorID: "detect_ruby_logger",
 					Locations: []types.RiskLocation{
 						{
-							Filename:        "./users.rb",
-							StartLineNumber: 25,
+							Filename:          "./users.rb",
+							FullFilename:      "./users.rb",
+							StartLineNumber:   25,
+							EndLineNumber:     25,
+							StartColumnNumber: 20,
+							EndColumnNumber:   30,
 							DataTypes: []types.RiskDatatype{
 								{
 									Name:         "Physical Address",
