@@ -38,6 +38,7 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 - [GitHub action integration](/guides/github-action/)
 - [Set up CI/CD](/guides/ci-setup/)
 - [Create custom rule](/guides/custom-rule/)
+- [Run a privacy report](/guides/privacy/)
 
 ## Explanations
 
