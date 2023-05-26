@@ -327,10 +327,5 @@ func (*javaImplementation) ContributesToResult(node *tree.Node) bool {
 		return false
 	}
 
-	// Must be the arguments of calls
-	if parent.Type() == "method_invocation" && !node.Equal(parent.ChildByFieldName("arguments")) {
-		return false
-	}
-
 	return true
 }

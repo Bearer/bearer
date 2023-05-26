@@ -325,10 +325,5 @@ func (*rubyImplementation) ContributesToResult(node *tree.Node) bool {
 		}
 	}
 
-	// Must be the arguments of calls
-	if parent.Type() == "call" && !node.Equal(parent.ChildByFieldName("arguments")) {
-		return false
-	}
-
 	return true
 }
