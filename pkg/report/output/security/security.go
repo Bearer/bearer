@@ -52,25 +52,50 @@ type Input struct {
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
 
+type Location struct {
+	Start  int    `json:"start" yaml:"start"`
+	End    int    `json:"end" yaml:"end"`
+	Column Column `json:"column" yaml:"column"`
+}
+
+type Source struct {
+	*Location
+}
+
+type Column struct {
+	Start int `json:"start" yaml:"start"`
+	End   int `json:"end" yaml:"end"`
+}
+
+type Sink struct {
+	*Location
+	Content string `json:"content" yaml:"content"`
+}
+
 type Output struct {
-	IsLocal          *bool    `json:"is_local,omitempty" yaml:"is_local,omitempty"`
-	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent    string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
-	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	Severity         string   `json:"severity,omitempty" yaml:"severity,omitempty"`
-	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	IsLocal         *bool    `json:"is_local,omitempty" yaml:"is_local,omitempty"`
+	Source          Source   `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink            Sink     `json:"sink,omitempty" yaml:"sink,omitempty"`
+	LineNumber      int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename        string   `json:"filename,omitempty" yaml:"filename,omitempty"`
+	FullFilename    string   `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
+	CategoryGroups  []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	Severity        string   `json:"severity,omitempty" yaml:"severity,omitempty"`
+	DetailedContext string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
 type Result struct {
 	*Rule
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	FullFilename     string   `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
 	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	Source           Source   `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink             Sink     `json:"sink,omitempty" yaml:"sink,omitempty"`
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"snippet,omitempty" yaml:"snippet,omitempty"`
 	Fingerprint      string   `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
+	OldFingerprint   string   `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
 	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
@@ -162,19 +187,24 @@ func evaluateRules(
 					DocumentationUrl: rule.DocumentationUrl,
 				}
 
-				// FIXME: consider filename being renamed
 				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
+				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i)
+				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
 
 				result := Result{
 					Rule:             ruleSummary,
+					FullFilename:     output.FullFilename,
 					Filename:         output.Filename,
 					LineNumber:       output.LineNumber,
 					CategoryGroups:   output.CategoryGroups,
-					ParentLineNumber: output.ParentLineNumber,
-					ParentContent:    output.ParentContent,
+					Source:           output.Source,
+					Sink:             output.Sink,
+					ParentLineNumber: output.Sink.Start,
+					ParentContent:    output.Sink.Content,
 					DetailedContext:  output.DetailedContext,
 					Fingerprint:      fingerprint,
+					OldFingerprint:   oldFingerprint,
 				}
 
 				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
@@ -491,10 +521,10 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	if result.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + result.DetailedContext + "\n\n")
 	}
-	reportStr.WriteString(color.HiBlueString("File: " + underline(result.Filename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
+	reportStr.WriteString(color.HiBlueString("File: " + underline(result.FullFilename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.ParentLineNumber, result.ParentContent))
+	reportStr.WriteString(highlightCodeExtract(result.FullFilename, result.LineNumber, result.Sink.Start, result.Sink.Content, result))
 }
 
 func formatSeverity(severity string) string {
@@ -505,7 +535,7 @@ func formatSeverity(severity string) string {
 	return severityColorFn(strings.ToUpper(severity + ": "))
 }
 
-func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string) string {
+func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string, record Result) string {
 	result := ""
 	targetIndex := lineNumber - extractStartLineNumber
 	beforeOrAfterDetectionLinesAllowed := 3
@@ -523,7 +553,14 @@ func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumbe
 
 		if index == targetIndex {
 			result += color.MagentaString(fmt.Sprintf(" %d ", extractStartLineNumber+index))
-			result += color.MagentaString(line) + "\n"
+			for i, char := range line {
+				if i >= record.Source.Column.Start-1 && i < record.Source.Column.End-1 {
+					result += color.BlueString(fmt.Sprintf("%c", char))
+				} else {
+					result += color.MagentaString(fmt.Sprintf("%c", char))
+				}
+			}
+			result += "\n"
 		} else if index == 0 || len(items)-1 == index {
 			result += fmt.Sprintf(" %d ", extractStartLineNumber+index)
 			result += fmt.Sprintf("%s\n", line)

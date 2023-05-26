@@ -12,15 +12,38 @@
         DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger"
       }),
       LineNumber: (int) 1,
+      FullFilename: (string) "",
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
       CategoryGroups: ([]string) (len=3) {
         (string) (len=3) "PII",
         (string) (len=13) "Personal Data",
         (string) (len=25) "Personal Data (Sensitive)"
       },
+      Source: (security.Source) {
+        Location: (*security.Location)({
+          Start: (int) 1,
+          End: (int) 0,
+          Column: (security.Column) {
+            Start: (int) 0,
+            End: (int) 0
+          }
+        })
+      },
+      Sink: (security.Sink) {
+        Location: (*security.Location)({
+          Start: (int) 1,
+          End: (int) 2,
+          Column: (security.Column) {
+            Start: (int) 10,
+            End: (int) 28
+          }
+        }),
+        Content: (string) (len=38) "Rails.logger.info(user.biometric_data)"
+      },
       ParentLineNumber: (int) 1,
       ParentContent: (string) (len=38) "Rails.logger.info(user.biometric_data)",
       Fingerprint: (string) (len=34) "375d7c2e9977cf2ce5dbf04b04237bea_0",
+      OldFingerprint: (string) (len=34) "80ce0185374c0975a9b2a71e9d11a4f0_0",
       DetailedContext: (string) ""
     }
   },
@@ -36,14 +59,37 @@
         DocumentationUrl: (string) (len=66) "https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification"
       }),
       LineNumber: (int) 2,
+      FullFilename: (string) "",
       Filename: (string) (len=21) "config/application.rb",
       CategoryGroups: ([]string) (len=2) {
         (string) (len=3) "PII",
         (string) (len=13) "Personal Data"
       },
+      Source: (security.Source) {
+        Location: (*security.Location)({
+          Start: (int) 2,
+          End: (int) 0,
+          Column: (security.Column) {
+            Start: (int) 0,
+            End: (int) 0
+          }
+        })
+      },
+      Sink: (security.Sink) {
+        Location: (*security.Location)({
+          Start: (int) 2,
+          End: (int) 2,
+          Column: (security.Column) {
+            Start: (int) 10,
+            End: (int) 28
+          }
+        }),
+        Content: (string) (len=44) "http.verify_mode = OpenSSL::SSL::VERIFY_NONE"
+      },
       ParentLineNumber: (int) 2,
       ParentContent: (string) (len=44) "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
       Fingerprint: (string) (len=34) "9005ef3db844b32c1a0317e032f4a16a_0",
+      OldFingerprint: (string) (len=34) "dcc50aebb6a6da7f0a8cb06e071f2af2_0",
       DetailedContext: (string) ""
     }
   }

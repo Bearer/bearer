@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) ".envrc.example",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(60),
       Text: (*string)((len=52) "AGENT_REPORT_HOST=\"https://agent.staging.google.com\"")
     },
     Value: (interfaces.Interface) {
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) ".envrc.example",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(83),
       Text: (*string)((len=75) "WEBHOOKS_ADDRESS=\"https://webhooks.staging.google.com/webhook/webhook/v1/t\"")
     },
     Value: (interfaces.Interface) {

@@ -15,19 +15,22 @@ type Datatype struct {
 type DatatypeDetector struct {
 	Name      string             `json:"name" yaml:"name"`
 	Locations []DatatypeLocation `json:"locations" yaml:"locations"`
-	Parent    *schema.Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
+	Source    *schema.Source     `json:"source,omitempty" yaml:"source,omitempty"`
 }
 
 type DatatypeLocation struct {
-	Filename    string               `json:"filename" yaml:"filename"`
-	LineNumber  int                  `json:"line_number" yaml:"line_number"`
-	Encrypted   *bool                `json:"encrypted,omitempty" yaml:"encrypted,omitempty"`
-	VerifiedBy  []DatatypeVerifiedBy `json:"verified_by,omitempty" yaml:"verified_by,omitempty"`
-	Stored      *bool                `json:"stored,omitempty" yaml:"stored,omitempty"`
-	Parent      *schema.Parent       `json:"parent,omitempty" yaml:"parent,omitempty"`
-	FieldName   string               `json:"field_name,omitempty" yaml:"field_name,omitempty"`
-	ObjectName  string               `json:"object_name,omitempty" yaml:"object_name,omitempty"`
-	SubjectName *string              `json:"subject_name,omitempty" yaml:"subject_name,omitempty"`
+	Filename          string               `json:"filename" yaml:"filename"`
+	FullFilename      string               `json:"full_filename" yaml:"full_filename"`
+	StartLineNumber   int                  `json:"start_line_number" yaml:"start_line_number"`
+	StartColumnNumber int                  `json:"start_column_number" yaml:"start_column_number"`
+	EndColumnNumber   int                  `json:"end_column_number" yaml:"end_column_number"`
+	Encrypted         *bool                `json:"encrypted,omitempty" yaml:"encrypted,omitempty"`
+	VerifiedBy        []DatatypeVerifiedBy `json:"verified_by,omitempty" yaml:"verified_by,omitempty"`
+	Stored            *bool                `json:"stored,omitempty" yaml:"stored,omitempty"`
+	Source            *schema.Source       `json:"source,omitempty" yaml:"source,omitempty"`
+	FieldName         string               `json:"field_name,omitempty" yaml:"field_name,omitempty"`
+	ObjectName        string               `json:"object_name,omitempty" yaml:"object_name,omitempty"`
+	SubjectName       *string              `json:"subject_name,omitempty" yaml:"subject_name,omitempty"`
 }
 
 type DatatypeVerifiedBy struct {

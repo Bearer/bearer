@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(24),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(24),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "env",
       NormalizedFieldName: (string) (len=4) "main"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(29),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(29),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(84),
       Text: (*string)((len=55) "Environment.GetEnvironmentVariable(\"ORDER_SERVICE_URL\")")
     },
     Value: (interfaces.Interface) {
@@ -58,10 +64,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(33),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(33),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(135),
       Text: (*string)((len=102) "System.Environment.GetEnvironmentVariable(@\"CUSTOMER_SERVICE_HOST\", EnvironmentVariableTarget.Process)")
     },
     Value: (interfaces.Interface) {
@@ -86,10 +95,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(21),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -100,7 +112,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "csharptest",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -111,10 +123,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(40),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(40),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(40),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -125,7 +140,7 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "csharptest",
       NormalizedFieldName: (string) (len=3) "get"
     }
@@ -136,10 +151,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(43),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(43),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(43),
+      EndColumnNumber: (*int)(25),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -150,7 +168,7 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=10) "csharptest",
       NormalizedFieldName: (string) (len=9) "something"
     }
@@ -161,10 +179,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(28),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(28),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(48),
       Text: (*string)((len=20) "\"string.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -186,10 +207,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(29),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(29),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(49),
       Text: (*string)((len=20) "$\"a.{s}.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -219,10 +243,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(33),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(33),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(69),
       Text: (*string)((len=36) "$@\"{s}.interpolated-raw.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -248,10 +275,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(29),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(29),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(61),
       Text: (*string)((len=32) "\"other-dict-literal.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -273,10 +303,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(37),
-      ColumnNumber: (*int)(35),
+      StartLineNumber: (*int)(37),
+      StartColumnNumber: (*int)(35),
+      EndLineNumber: (*int)(37),
+      EndColumnNumber: (*int)(53),
       Text: (*string)((len=18) "\"prop.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -298,10 +331,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(48),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(48),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(48),
+      EndColumnNumber: (*int)(33),
       Text: (*string)((len=21) "\".concat.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -323,10 +359,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(50),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(50),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(50),
+      EndColumnNumber: (*int)(47),
       Text: (*string)((len=32) "\"simple\" + \".concat.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -348,10 +387,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(60),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(60),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(60),
+      EndColumnNumber: (*int)(30),
       Text: (*string)((len=25) "\"list-string.example.com\"")
     },
     Value: (interfaces.Interface) {

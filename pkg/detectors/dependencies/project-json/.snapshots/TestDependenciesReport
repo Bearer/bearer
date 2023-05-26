@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "project.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "project.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -43,10 +49,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "project.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

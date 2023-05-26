@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "packages.config",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "packages.config",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

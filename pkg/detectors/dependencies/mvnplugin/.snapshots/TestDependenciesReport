@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=23) "maven-dependencies.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=23) "maven-dependencies.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

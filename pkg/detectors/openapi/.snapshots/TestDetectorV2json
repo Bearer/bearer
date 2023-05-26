@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=5) "\"id1\"")
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) (len=7) "integer",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=5) "\"id2\"")
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(82),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(82),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(82),
+      EndColumnNumber: (*int)(28),
       Text: (*string)((len=7) "\"petId\"")
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(118),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(118),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(118),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=6) "\"name\"")
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(121),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(121),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(121),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=4) "\"id\"")
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -130,10 +145,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(123),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(123),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(123),
+      EndColumnNumber: (*int)(20),
       Text: (*string)((len=5) "\"id1\"")
     },
     Value: (schema.Schema) {
@@ -144,7 +162,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -155,10 +173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(126),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(126),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(126),
+      EndColumnNumber: (*int)(20),
       Text: (*string)((len=5) "\"id2\"")
     },
     Value: (schema.Schema) {
@@ -169,7 +190,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -180,10 +201,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(136),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(136),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(136),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=6) "\"code\"")
     },
     Value: (schema.Schema) {
@@ -194,7 +218,7 @@
       FieldType: (string) (len=7) "integer",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }
@@ -205,10 +229,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(140),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(140),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(140),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=9) "\"message\"")
     },
     Value: (schema.Schema) {
@@ -219,7 +246,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) "",
       NormalizedFieldName: (string) ""
     }

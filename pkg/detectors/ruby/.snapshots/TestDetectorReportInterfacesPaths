@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "main.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(38),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(38),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(38),
+      EndColumnNumber: (*int)(120),
       Text: (*string)((len=115) "\"#{ENV['CUSTOMERS_HOST']}:#{ENV['CUSTOMER_HOST_PORT']}/api/delivery-messages?num_page=#{page}&filters[]=#{filters}\"")
     },
     Value: (interfaces.Interface) {
@@ -66,10 +69,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "main.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(66),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(66),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(69),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -80,7 +86,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "platform",
       NormalizedFieldName: (string) (len=3) "foo"
     }
@@ -91,10 +97,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "main.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(65),
-      ColumnNumber: (*int)(40),
+      StartLineNumber: (*int)(65),
+      StartColumnNumber: (*int)(40),
+      EndLineNumber: (*int)(65),
+      EndColumnNumber: (*int)(44),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -105,7 +114,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "now",
       NormalizedFieldName: (string) (len=4) "to_i"
     }
@@ -116,10 +125,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "main.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(65),
-      ColumnNumber: (*int)(78),
+      StartLineNumber: (*int)(65),
+      StartColumnNumber: (*int)(78),
+      EndLineNumber: (*int)(65),
+      EndColumnNumber: (*int)(87),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -130,7 +142,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "current",
       NormalizedFieldName: (string) (len=9) "object_id"
     }
@@ -141,10 +153,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "main.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(69),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(69),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(69),
+      EndColumnNumber: (*int)(22),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -155,7 +170,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "logger",
       NormalizedFieldName: (string) (len=9) "formatter"
     }
@@ -166,10 +181,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "main.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(71),
-      ColumnNumber: (*int)(32),
+      StartLineNumber: (*int)(71),
+      StartColumnNumber: (*int)(32),
+      EndLineNumber: (*int)(71),
+      EndColumnNumber: (*int)(40),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -180,7 +198,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "datetime",
       NormalizedFieldName: (string) (len=8) "strftime"
     }

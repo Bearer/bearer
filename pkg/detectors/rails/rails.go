@@ -147,10 +147,10 @@ func getAdapterDatabase(file *file.FileInfo, node yaml.Node, name string) (*rail
 					Name:    name,
 					Adapter: adapter,
 				}, &source.Source{
-					Language:     file.Language,
-					LanguageType: file.LanguageTypeString(),
-					Filename:     file.RelativePath,
-					LineNumber:   &node.Line,
+					Language:        file.Language,
+					LanguageType:    file.LanguageTypeString(),
+					Filename:        file.RelativePath,
+					StartLineNumber: &node.Line,
 				}, nil
 		}
 	}
@@ -189,10 +189,10 @@ func extractStorage(file *file.FileInfo, report report.Report) error {
 				Encryption: encryption,
 			},
 			source.Source{
-				Language:     file.Language,
-				LanguageType: file.LanguageTypeString(),
-				Filename:     file.RelativePath,
-				LineNumber:   pointers.Int(storageNode.Line - 1),
+				Language:        file.Language,
+				LanguageType:    file.LanguageTypeString(),
+				Filename:        file.RelativePath,
+				StartLineNumber: pointers.Int(storageNode.Line - 1),
 			})
 	}
 

@@ -17,13 +17,30 @@ high:
             - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: ""
       line_number: 3
-      filename: e2e/rules/testdata/data/auxilary/unsecure.js
+      full_filename: e2e/rules/testdata/data/auxilary/unsecure.js
+      filename: unsecure.js
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 16
+                end: 28
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 44
+        content: client.event("user", "logged_in", {}, user)
       parent_line_number: 11
       snippet: client.event("user", "logged_in", {}, user)
-      fingerprint: 4d54a4b735da21fbdcb2d2662977b033_0
+      fingerprint: 68427732321c4df53052a341ac8da647_0
+      old_fingerprint: 4d54a4b735da21fbdcb2d2662977b033_0
 
 
 --

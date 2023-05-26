@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "fred",
       NormalizedFieldName: (string) (len=7) "environ"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(37),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "environ",
       NormalizedFieldName: (string) (len=3) "get"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(29),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(29),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(32),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "environ",
       NormalizedFieldName: (string) (len=3) "pop"
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(24),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(24),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(58),
       Text: (*string)((len=34) "os.environ[\"ORDER_SERVICE_DOMAIN\"]")
     },
     Value: (interfaces.Interface) {
@@ -108,10 +120,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(58),
       Text: (*string)((len=37) "fred.environ.get('ORDER_SERVICE_URL')")
     },
     Value: (interfaces.Interface) {
@@ -136,10 +151,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(53),
       Text: (*string)((len=32) "environ.pop(\"USER_SERVICE_HOST\")")
     },
     Value: (interfaces.Interface) {
@@ -164,10 +182,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(29),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(29),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(29),
+      EndColumnNumber: (*int)(42),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -178,7 +199,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "config",
       NormalizedFieldName: (string) (len=17) "ignore.domain.com"
     }
@@ -189,10 +210,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(42),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(42),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(42),
+      EndColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -203,7 +227,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=4) "task"
     }
@@ -214,10 +238,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(44),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(44),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(44),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -228,7 +255,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=7) "backend"
     }
@@ -239,10 +266,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(44),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(44),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(44),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -253,7 +283,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "backend",
       NormalizedFieldName: (string) (len=7) "cleanup"
     }
@@ -264,10 +294,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(50),
       Text: (*string)((len=24) "\"string-key.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -289,10 +322,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=22) "\"variable.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -314,10 +350,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(41),
       Text: (*string)((len=25) "\"concat\" + \".example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -339,10 +378,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(56),
       Text: (*string)((len=40) "f'a.{user_id}.interpolation.example.com'")
     },
     Value: (interfaces.Interface) {
@@ -375,10 +417,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(34),
       Text: (*string)((len=18) "r\"raw.example.com\"")
     },
     Value: (interfaces.Interface) {

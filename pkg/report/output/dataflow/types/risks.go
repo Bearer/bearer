@@ -8,11 +8,15 @@ type RiskDetector struct {
 }
 
 type RiskLocation struct {
-	Filename        string         `json:"filename" yaml:"filename"`
-	LineNumber      int            `json:"line_number" yaml:"line_number"`
-	Parent          *schema.Parent `json:"parent,omitempty" yaml:"parent,omitempty"`
-	DataTypes       []RiskDatatype `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	PresenceMatches []RiskPresence `json:"presence_matches,omitempty" yaml:"presence_matches,omitempty"`
+	FullFilename      string         `json:"full_filename" yaml:"full_filename"`
+	Filename          string         `json:"filename" yaml:"filename"`
+	StartLineNumber   int            `json:"start_line_number" yaml:"start_line_number"`
+	StartColumnNumber int            `json:"start_column_number" yaml:"start_column_number"`
+	EndLineNumber     int            `json:"end_line_number" yaml:"end_line_number"`
+	EndColumnNumber   int            `json:"end_column_number" yaml:"end_column_number"`
+	Source            *schema.Source `json:"source,omitempty" yaml:"source,omitempty"`
+	DataTypes         []RiskDatatype `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	PresenceMatches   []RiskPresence `json:"presence_matches,omitempty" yaml:"presence_matches,omitempty"`
 }
 
 type RiskDatatype struct {

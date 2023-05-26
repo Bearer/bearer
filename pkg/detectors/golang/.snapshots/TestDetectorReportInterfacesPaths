@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=8) "paths.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(14),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(14),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(14),
+      EndColumnNumber: (*int)(8),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) (len=6) "Client",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=6) "client"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=8) "paths.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=15) "\"something.com\"")
     },
     Value: (interfaces.Interface) {

@@ -6,11 +6,28 @@ high:
         description: ""
         documentation_url: ""
       line_number: 2
+      full_filename: single-quotes.js
       filename: single-quotes.js
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 24
+                end: 33
+      sink:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 34
+        content: console.log('http://', user.name)
       parent_line_number: 2
       snippet: console.log('http://', user.name)
       fingerprint: d85fed5722eb11c71ff861517e929da1_0
+      old_fingerprint: d85fed5722eb11c71ff861517e929da1_0
 

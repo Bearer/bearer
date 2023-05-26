@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(1),
-      ColumnNumber: (*int)(33),
+      StartLineNumber: (*int)(1),
+      StartColumnNumber: (*int)(33),
+      EndLineNumber: (*int)(1),
+      EndColumnNumber: (*int)(65),
       Text: (*string)((len=32) "process.ENV['ORDER_SERVICE_URL']")
     },
     Value: (interfaces.Interface) {
@@ -33,10 +36,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(31),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(31),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(60),
       Text: (*string)((len=29) "process.ENV.USER_SERVICE_HOST")
     },
     Value: (interfaces.Interface) {
@@ -61,10 +67,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(28),
       Text: (*string)((len=19) "PRODUCT_SERVICE_URL")
     },
     Value: (interfaces.Interface) {
@@ -89,10 +98,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(30),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(30),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(41),
       Text: (*string)((len=11) "AUTH_DOMAIN")
     },
     Value: (interfaces.Interface) {
@@ -117,10 +129,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(78),
       Text: (*string)((len=55) "`http://${process.ENV.CUSTOMER_HOST}/path/${accountId}`")
     },
     Value: (interfaces.Interface) {
@@ -160,10 +175,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
+      FullFilename: (string) "",
       Language: (string) (len=3) "TSX",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(81),
       Text: (*string)((len=65) "'http://' + process.ENV.CUSTOMER_HOST + \"/\" + \"path/\" + accountId")
     },
     Value: (interfaces.Interface) {

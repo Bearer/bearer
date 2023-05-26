@@ -92,7 +92,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 		// add full path to filename
 		fullFilename := file.GetFullFilename(config.Target, castDetection.Source.Filename)
-		castDetection.Source.Filename = fullFilename
+		castDetection.Source.FullFilename = fullFilename
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
@@ -145,7 +145,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				return nil, nil, err
 			}
 
-			classifiedDetection.Source.Filename = fullFilename
+			classifiedDetection.Source.FullFilename = fullFilename
 			err = componentsHolder.AddDependency(classifiedDetection)
 			if err != nil {
 				return nil, nil, err
@@ -156,7 +156,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				return nil, nil, err
 			}
 
-			classifiedDetection.Source.Filename = fullFilename
+			classifiedDetection.Source.FullFilename = fullFilename
 			err = componentsHolder.AddInterface(classifiedDetection)
 			if err != nil {
 				return nil, nil, err
@@ -166,7 +166,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			if err != nil {
 				return nil, nil, err
 			}
-			classifiedDetection.Source.Filename = fullFilename
+			classifiedDetection.Source.FullFilename = fullFilename
 			err = componentsHolder.AddFramework(classifiedDetection)
 			if err != nil {
 				return nil, nil, err

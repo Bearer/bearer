@@ -55,7 +55,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 			Name:    stringutil.StripQuotes(capture["param_dependency"].Content()),
 			Group:   stringutil.StripQuotes(capture["param_group_id"].Content()),
 			Version: stringutil.StripQuotes(capture["param_version"].Content()),
-			Line:    int64(capture["param_dependency"].LineNumber()),
+			Line:    int64(capture["param_dependency"].StartLineNumber()),
 			Column:  int64(capture["param_dependency"].Column()),
 		})
 	}

@@ -56,10 +56,12 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		report.AddSecretLeak(secret.Secret{
 			Description: finding.Description,
 		}, source.Source{
-			Filename:     file.Path.RelativePath,
-			LineNumber:   &finding.StartLine,
-			ColumnNumber: &finding.StartColumn,
-			Text:         &text,
+			Filename:          file.Path.RelativePath,
+			StartLineNumber:   &finding.StartLine,
+			StartColumnNumber: &finding.StartColumn,
+			EndLineNumber:     &finding.EndLine,
+			EndColumnNumber:   &finding.EndColumn,
+			Text:              &text,
 		})
 	}
 

@@ -152,11 +152,14 @@ func dummyDataflow() dataflow.DataFlow {
 		DetectorID: "ruby_lang_ssl_verification",
 		Locations: []types.RiskLocation{
 			{
-				Filename:   "config/application.rb",
-				LineNumber: 2,
-				Parent: &schema.Parent{
-					LineNumber: 2,
-					Content:    "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+				Filename:        "config/application.rb",
+				StartLineNumber: 2,
+				Source: &schema.Source{
+					StartLineNumber:   2,
+					StartColumnNumber: 10,
+					EndLineNumber:     2,
+					EndColumnNumber:   28,
+					Content:           "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
 				},
 				PresenceMatches: []types.RiskPresence{
 					{
@@ -171,11 +174,14 @@ func dummyDataflow() dataflow.DataFlow {
 		DetectorID: "ruby_rails_logger",
 		Locations: []types.RiskLocation{
 			{
-				Filename:   "pkg/datatype_leak.rb",
-				LineNumber: 1,
-				Parent: &schema.Parent{
-					LineNumber: 1,
-					Content:    "Rails.logger.info(user.biometric_data)",
+				Filename:        "pkg/datatype_leak.rb",
+				StartLineNumber: 1,
+				Source: &schema.Source{
+					StartLineNumber:   1,
+					StartColumnNumber: 10,
+					EndLineNumber:     2,
+					EndColumnNumber:   28,
+					Content:           "Rails.logger.info(user.biometric_data)",
 				},
 				DataTypes: []types.RiskDatatype{
 					{
@@ -210,11 +216,13 @@ func dummyDataflow() dataflow.DataFlow {
 						Name: "ruby",
 						Locations: []types.DatatypeLocation{
 							{
-								Filename:    "app/model/user.rb",
-								LineNumber:  1,
-								FieldName:   "email",
-								ObjectName:  "user",
-								SubjectName: &subject,
+								Filename:          "app/model/user.rb",
+								StartLineNumber:   1,
+								StartColumnNumber: 10,
+								EndColumnNumber:   17,
+								FieldName:         "email",
+								ObjectName:        "user",
+								SubjectName:       &subject,
 							},
 						},
 					},

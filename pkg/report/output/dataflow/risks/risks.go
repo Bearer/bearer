@@ -27,18 +27,22 @@ type detectorHolder struct {
 }
 
 type fileHolder struct {
-	name       string
-	lineNumber map[int]lineHolder // group detections by line number
+	name            string
+	fullName        string
+	startLineNumber map[int]lineHolder // group detections by line number
 }
 
 type lineHolder struct {
-	lineNumber int
-	parent     map[string]parentHolder // group detections by parent
+	startLineNumber   int
+	startColumnNumber int
+	endLineNumber     int
+	endColumnNumber   int
+	source            map[string]sourceHolder // group detections by source
 }
 
-type parentHolder struct {
+type sourceHolder struct {
 	name    string
-	parent  *schema.Parent
+	source  *schema.Source
 	matches map[string]matchCategoryHolder // group detections by datatype category
 }
 
@@ -69,26 +73,43 @@ func New(config settings.Config, isInternal bool) *Holder {
 func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 	// create entry if it doesn't exist
 	ruleName := string(detection.DetectorType)
-	fileName := detection.Source.Filename
-	lineNumber := *detection.Source.LineNumber
 
-	var parent *schema.Parent
+	var source *schema.Source
 	var content string
 
 	if detection.DetectorType == detectors.DetectorGitleaks {
 		value := detection.Value.(map[string]interface{})["description"]
 		content = value.(string)
-		parent = &schema.Parent{
-			LineNumber: *detection.Source.LineNumber,
-			Content:    *detection.Source.Text,
+		source = &schema.Source{
+			StartLineNumber:   *detection.Source.StartLineNumber,
+			StartColumnNumber: *detection.Source.StartColumnNumber,
+			EndLineNumber:     *detection.Source.EndLineNumber,
+			EndColumnNumber:   *detection.Source.EndColumnNumber,
+			Content:           *detection.Source.Text,
 		}
 	} else {
 		// parent can be nil
-		parent = extractCustomRiskParent(detection.Value)
+		source = extractCustomRiskParent(detection.Value)
 		content = *detection.Source.Text
 	}
 
-	holder.addDatatype(ruleName, &db.DataType{Name: content}, nil, fileName, lineNumber, schema.Schema{Parent: parent}, categoryPresence)
+	holder.addDatatype(
+		ruleName,
+		&db.DataType{
+			Name: content,
+		},
+		nil,
+		detection.Source.Filename,
+		detection.Source.FullFilename,
+		*detection.Source.StartLineNumber,
+		*detection.Source.StartColumnNumber,
+		*detection.Source.EndLineNumber,
+		*detection.Source.EndColumnNumber,
+		schema.Schema{
+			Source: source,
+		},
+		categoryPresence,
+	)
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
@@ -108,7 +129,11 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 			classification.DataType,
 			classification.SubjectName,
 			detection.Source.Filename,
-			*detection.Source.LineNumber,
+			detection.Source.FullFilename,
+			*detection.Source.StartLineNumber,
+			*detection.Source.StartColumnNumber,
+			*detection.Source.EndLineNumber,
+			*detection.Source.EndColumnNumber,
 			schema,
 			categoryDatatype,
 		)
@@ -118,7 +143,19 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjectName *string, fileName string, lineNumber int, schema schema.Schema, category string) {
+func (holder *Holder) addDatatype(
+	ruleName string,
+	datatype *db.DataType,
+	subjectName *string,
+	fileName string,
+	fullFileName string,
+	startLineNumber int,
+	startColumnNumber int,
+	endLineNumber int,
+	endColumnNumber int,
+	schema schema.Schema,
+	category string,
+) {
 	if datatype == nil {
 		// FIXME: we end up with empty field Name and no datatype with the new code
 		// Might be related to the bug with the Unique Identifier classification
@@ -137,38 +174,42 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 	// create file entry if it doesn't exist
 	if _, exists := detector.files[fileName]; !exists {
 		detector.files[fileName] = fileHolder{
-			name:       fileName,
-			lineNumber: make(map[int]lineHolder),
+			name:            fileName,
+			fullName:        fullFileName,
+			startLineNumber: make(map[int]lineHolder),
 		}
 	}
 
 	file := detector.files[fileName]
 	// create line number entry if it doesn't exist
-	if _, exists := file.lineNumber[lineNumber]; !exists {
-		file.lineNumber[lineNumber] = lineHolder{
-			lineNumber: lineNumber,
-			parent:     make(map[string]parentHolder),
+	if _, exists := file.startLineNumber[startLineNumber]; !exists {
+		file.startLineNumber[startLineNumber] = lineHolder{
+			startLineNumber:   startLineNumber,
+			startColumnNumber: startColumnNumber,
+			endLineNumber:     endLineNumber,
+			endColumnNumber:   endColumnNumber,
+			source:            make(map[string]sourceHolder),
 		}
 	}
 
-	line := file.lineNumber[lineNumber]
-	// create datatype parent entry if it doesn't exist
-	parentKey := "undefined_parent"
-	if schema.Parent != nil {
-		parentKey = schema.Parent.Content
+	line := file.startLineNumber[startLineNumber]
+	// create datatype source entry if it doesn't exist
+	sourceKey := "undefined_source"
+	if schema.Source != nil {
+		sourceKey = schema.Source.Content
 	}
 
-	if _, exists := line.parent[parentKey]; !exists {
-		line.parent[parentKey] = parentHolder{
-			name:    parentKey,
-			parent:  schema.Parent,
+	if _, exists := line.source[sourceKey]; !exists {
+		line.source[sourceKey] = sourceHolder{
+			name:    sourceKey,
+			source:  schema.Source,
 			matches: make(map[string]matchCategoryHolder),
 		}
 	}
 
-	parent := line.parent[parentKey]
+	source := line.source[sourceKey]
 	// create datatype category if it doesn't exist
-	if _, exists := parent.matches[datatype.Name]; !exists {
+	if _, exists := source.matches[datatype.Name]; !exists {
 		categoryToAdd := matchCategoryHolder{
 			name:         datatype.Name,
 			category:     category,
@@ -176,11 +217,11 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjec
 			dataType:     make(map[string]dataTypeHolder),
 		}
 
-		parent.matches[datatype.Name] = categoryToAdd
+		source.matches[datatype.Name] = categoryToAdd
 	}
 
 	if category == "datatype" {
-		datatypeCategory := parent.matches[datatype.Name]
+		datatypeCategory := source.matches[datatype.Name]
 		datatypeKey := schema.FieldName + schema.ObjectName
 		// create datatype if it doesn't exists
 		if _, exists := datatypeCategory.dataType[datatypeKey]; !exists {
@@ -205,18 +246,21 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 
 		for _, file := range maputil.ToSortedSlice(detector.files) {
 
-			for _, line := range maputil.ToSortedSlice(file.lineNumber) {
+			for _, line := range maputil.ToSortedSlice(file.startLineNumber) {
 
-				for _, parent := range maputil.ToSortedSlice(line.parent) {
-
+				for _, source := range maputil.ToSortedSlice(line.source) {
 					location := types.RiskLocation{
-						Filename:   file.name,
-						LineNumber: line.lineNumber,
-						Parent:     parent.parent,
+						Filename:          file.name,
+						FullFilename:      file.fullName,
+						StartLineNumber:   line.startLineNumber,
+						StartColumnNumber: line.startColumnNumber,
+						EndColumnNumber:   line.endColumnNumber,
+						EndLineNumber:     line.endLineNumber,
+						Source:            source.source,
 					}
 
 					hasDatatype := false
-					matches := maputil.ToSortedSlice(parent.matches)
+					matches := maputil.ToSortedSlice(source.matches)
 					for _, dataType := range matches {
 						if dataType.category == categoryDatatype {
 							hasDatatype = true
@@ -283,15 +327,15 @@ func removeParentBasedDuplicates(data []types.RiskDetector) []types.RiskDetector
 		}
 		for _, location := range detector.Locations {
 			// presence matches are always alone per location
-			if len(location.PresenceMatches) > 0 && location.Parent != nil {
+			if len(location.PresenceMatches) > 0 && location.Source != nil {
 				hasSameParentLocation := false
 
 				for _, otherLocation := range detector.Locations {
 					if len(otherLocation.DataTypes) > 0 &&
 						otherLocation.Filename == location.Filename &&
-						otherLocation.Parent != nil &&
-						otherLocation.Parent.Content == location.Parent.Content &&
-						otherLocation.Parent.LineNumber == location.Parent.LineNumber {
+						otherLocation.Source != nil &&
+						otherLocation.Source.Content == location.Source.Content &&
+						otherLocation.Source.StartLineNumber == location.Source.StartLineNumber {
 
 						hasSameParentLocation = true
 					}
@@ -310,12 +354,12 @@ func removeParentBasedDuplicates(data []types.RiskDetector) []types.RiskDetector
 	return filteredData
 }
 
-func extractCustomRiskParent(value interface{}) *schema.Parent {
+func extractCustomRiskParent(value interface{}) *schema.Source {
 	if value == nil {
 		return nil
 	}
 
-	var parent schema.Parent
+	var parent schema.Source
 	buf := bytes.NewBuffer(nil)
 	err := json.NewEncoder(buf).Encode(value)
 	if err != nil {

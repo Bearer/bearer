@@ -100,17 +100,16 @@ func extractURLs(fileInfo *file.FileInfo, line string, lineNumber int, report re
 		value.AppendString(url)
 
 		if interfaceType, isInterface := interfaces.GetType(value, false); isInterface {
-
 			report.AddInterface(detectors.DetectorSimple, interfacestype.Interface{
 				Value: value,
 				Type:  interfaceType,
 			}, source.Source{
-				Filename:     fileInfo.RelativePath,
-				Language:     fileInfo.Language,
-				LanguageType: fileInfo.LanguageTypeString(),
-				LineNumber:   &lineNumber,
-				ColumnNumber: pointers.Int(globalOffset + startOffset),
-				Text:         &url,
+				Filename:          fileInfo.RelativePath,
+				Language:          fileInfo.Language,
+				LanguageType:      fileInfo.LanguageTypeString(),
+				StartLineNumber:   &lineNumber,
+				StartColumnNumber: pointers.Int(globalOffset + startOffset),
+				Text:              &url,
 			})
 		}
 

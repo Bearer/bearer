@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(22),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) (len=4) "User",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(27),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=7) "address"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(30),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) (len=11) "List<Order>",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=5) "order"
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(63),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=14) "consumerkeykey"
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) (len=3) "int",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=3) "age"
     }
@@ -130,10 +145,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(21),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -144,7 +162,7 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -155,10 +173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.cs",
+      FullFilename: (string) "",
       Language: (string) (len=2) "C#",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(37),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -169,7 +190,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "customer",
       NormalizedFieldName: (string) (len=11) "dosomething"
     }

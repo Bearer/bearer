@@ -203,12 +203,15 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	selfName := dataType.GetName()
 
 	if shouldExport {
-		var parentSchema *schema.Parent
+		var sourceSchema *schema.Source
 
 		if parent != nil {
-			parentSchema = &schema.Parent{
-				Content:    parent.Content(),
-				LineNumber: parent.LineNumber(),
+			sourceSchema = &schema.Source{
+				Content:           parent.Content(),
+				StartLineNumber:   parent.StartLineNumber(),
+				StartColumnNumber: parent.StartColumnNumber(),
+				EndLineNumber:     parent.EndLineNumber(),
+				EndColumnNumber:   parent.EndColumnNumber(),
 			}
 		}
 		normalizedObjectName := ""
@@ -217,7 +220,10 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 		normalizedObjectName = pluralizer.Singular(strings.ToLower(parentName))
 		normalizedFieldName = pluralizer.Singular(strings.ToLower(selfName))
 
-		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
+		report.AddDetection(
+			detectionType,
+			detectorType,
+			dataType.GetNode().Source(false),
 			schema.Schema{
 				ObjectName:           parentName,
 				FieldName:            selfName,
@@ -226,7 +232,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				FieldType:            dataType.GetTextType(),
 				SimpleFieldType:      dataType.GetType(),
 				Classification:       dataType.GetClassification(),
-				Parent:               parentSchema,
+				Source:               sourceSchema,
 				NormalizedObjectName: normalizedObjectName,
 				NormalizedFieldName:  normalizedFieldName,
 			},
@@ -258,15 +264,15 @@ func SortParserMap[D DataTypable](input map[parser.NodeID]D) []D {
 
 func SortSlice[D DataTypable](input []D) []D {
 	sort.Slice(input, func(i, j int) bool {
-		lineNumberA := input[i].GetNode().Source(false).LineNumber
-		lineNumberB := input[j].GetNode().Source(false).LineNumber
+		lineNumberA := input[i].GetNode().Source(false).StartLineNumber
+		lineNumberB := input[j].GetNode().Source(false).StartLineNumber
 
 		if *lineNumberA != *lineNumberB {
 			return *lineNumberA < *lineNumberB
 		}
 
-		columnNumberA := input[i].GetNode().Source(false).ColumnNumber
-		columnNumberB := input[j].GetNode().Source(false).ColumnNumber
+		columnNumberA := input[i].GetNode().Source(false).StartColumnNumber
+		columnNumberB := input[j].GetNode().Source(false).StartColumnNumber
 
 		if *columnNumberA != *columnNumberB {
 			return *columnNumberA < *columnNumberB

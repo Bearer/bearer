@@ -60,8 +60,8 @@ func (report *Detectors) AddInterface(
 		return
 	}
 
-	if classifiedDetection.Source.LineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
+	if classifiedDetection.Source.StartLineNumber != nil {
+		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
 	}
 
 	classifiedDetection.Type = detections.TypeInterfaceClassified
@@ -177,8 +177,8 @@ func (report *Detectors) AddDetection(detectionType detections.DetectionType, de
 		Value:        value,
 	}
 
-	if data.Source.LineNumber != nil {
-		data.CommitSHA = report.Blamer.SHAForLine(data.Source.Filename, *data.Source.LineNumber)
+	if data.Source.StartLineNumber != nil {
+		data.CommitSHA = report.Blamer.SHAForLine(data.Source.Filename, *data.Source.StartLineNumber)
 	}
 
 	report.Add(data)
@@ -197,8 +197,8 @@ func (report *Detectors) AddDependency(
 		return
 	}
 
-	if classifiedDetection.Source.LineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
+	if classifiedDetection.Source.StartLineNumber != nil {
+		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
 	}
 
 	classifiedDetection.Type = detections.TypeDependencyClassified
@@ -218,8 +218,8 @@ func (report *Detectors) AddFramework(
 		return
 	}
 
-	if classifiedDetection.Source.LineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
+	if classifiedDetection.Source.StartLineNumber != nil {
+		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
 	}
 
 	classifiedDetection.Type = detections.TypeFrameworkClassified

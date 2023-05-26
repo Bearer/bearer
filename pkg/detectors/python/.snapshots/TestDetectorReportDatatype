@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(1),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(1),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(1),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(1),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(1),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(1),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -130,10 +145,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -144,7 +162,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -155,10 +173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(28),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(28),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -169,7 +190,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -180,10 +201,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(42),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -194,7 +218,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -205,10 +229,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -219,7 +246,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -230,10 +257,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(25),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -244,7 +274,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -255,10 +285,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -269,7 +302,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -280,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(25),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -294,7 +330,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -305,10 +341,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -319,7 +358,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -330,10 +369,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -344,7 +386,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -355,10 +397,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -369,7 +414,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -380,10 +425,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(22),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -394,7 +442,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -405,10 +453,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -419,7 +470,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -430,10 +481,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(15),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(15),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -444,7 +498,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -455,10 +509,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(34),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(34),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(41),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -469,7 +526,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -480,10 +537,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(43),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(43),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(51),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -494,7 +554,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -505,10 +565,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -519,7 +582,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -530,10 +593,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(22),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -544,7 +610,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -555,10 +621,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(31),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(31),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(36),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -569,7 +638,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -580,10 +649,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(37),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(37),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(47),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -594,7 +666,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -605,10 +677,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -619,7 +694,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -630,10 +705,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(14),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(14),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(14),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -644,7 +722,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -655,10 +733,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(14),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(14),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(14),
+      EndColumnNumber: (*int)(24),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -669,7 +750,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -680,10 +761,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(17),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(17),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(17),
+      EndColumnNumber: (*int)(9),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -694,7 +778,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -705,10 +789,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(18),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(18),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(18),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -719,7 +806,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=12) "userproperty"
     }
@@ -730,10 +817,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -744,7 +834,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=11) "dosomething"
     }
@@ -755,10 +845,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -769,7 +862,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -780,10 +873,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -794,7 +890,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -805,10 +901,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(20),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(20),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -819,7 +918,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -830,10 +929,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(18),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -844,7 +946,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -855,10 +957,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(24),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -869,7 +974,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -880,10 +985,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "datatype.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(25),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(25),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -894,7 +1002,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=8) "subchild"
     }

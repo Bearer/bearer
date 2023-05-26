@@ -6,10 +6,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=17) "myapp/settings.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(84),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(84),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(84),
+      EndColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (django.Database) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=17) "myapp/settings.py",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Python",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(90),
-      ColumnNumber: (*int)(5),
+      StartLineNumber: (*int)(90),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(90),
+      EndColumnNumber: (*int)(12),
       Text: (*string)(<nil>)
     },
     Value: (django.Database) {

@@ -42,7 +42,9 @@ verified_by contains [detection, verifications] if {
 		verification := {
 			"detector": input.rule.id,
 			"filename": encrypted_detection.filename,
-			"line_number": encrypted_detection.line_number,
+			"start_line_number": encrypted_detection.start_line_number,
+			"start_column_number": encrypted_detection.start_column_number,
+			"end_column_number": encrypted_detection.end_column_number,
 		}
 	]
 

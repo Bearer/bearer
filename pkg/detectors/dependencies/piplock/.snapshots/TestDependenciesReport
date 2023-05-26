@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(17),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(17),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(17),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -43,10 +49,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(35),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(35),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(35),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -62,10 +71,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(42),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(42),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(42),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

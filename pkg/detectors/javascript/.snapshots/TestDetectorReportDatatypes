@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(2),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "save"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(18),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=7) "surname"
     }
@@ -130,10 +145,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -144,7 +162,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -155,10 +173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -169,7 +190,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -180,10 +201,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -194,7 +218,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=7) "surname"
     }
@@ -205,10 +229,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(24),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(24),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -219,7 +246,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "surname",
       NormalizedFieldName: (string) (len=4) "save"
     }
@@ -230,10 +257,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -244,7 +274,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -255,10 +285,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(24),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(24),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(31),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -269,7 +302,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "name",
       NormalizedFieldName: (string) (len=7) "surname"
     }
@@ -280,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(10),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -294,7 +330,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -305,10 +341,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(35),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -319,7 +358,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=9) "something"
     }
@@ -330,10 +369,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(42),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(42),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(46),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -344,7 +386,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "todo",
       NormalizedFieldName: (string) (len=4) "list"
     }
@@ -355,10 +397,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(3),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -369,7 +414,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=7) "address"
     }
@@ -380,10 +425,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(7),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -394,7 +442,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=4) "city"
     }
@@ -405,10 +453,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(4),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -419,7 +470,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=6) "street"
     }
@@ -430,10 +481,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(11),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -444,7 +498,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "street",
       NormalizedFieldName: (string) (len=6) "letter"
     }
@@ -455,10 +509,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(9),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -469,7 +526,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "street",
       NormalizedFieldName: (string) (len=5) "numer"
     }
@@ -480,10 +537,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(34),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(34),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(34),
+      EndColumnNumber: (*int)(18),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -494,7 +554,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "path",
       NormalizedFieldName: (string) (len=4) "join"
     }
@@ -505,10 +565,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(42),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(42),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(42),
+      EndColumnNumber: (*int)(16),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -519,7 +582,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "myobject",
       NormalizedFieldName: (string) (len=6) "method"
     }
@@ -530,10 +593,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(43),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(43),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(43),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -544,7 +610,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "myobject",
       NormalizedFieldName: (string) (len=7) "method1"
     }
@@ -555,10 +621,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(47),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(47),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(47),
+      EndColumnNumber: (*int)(18),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -569,7 +638,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "myobject1",
       NormalizedFieldName: (string) (len=6) "method"
     }
@@ -580,10 +649,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(48),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(48),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(48),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -594,7 +666,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "myobject1",
       NormalizedFieldName: (string) (len=7) "method1"
     }
@@ -605,10 +677,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(53),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(53),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(53),
+      EndColumnNumber: (*int)(18),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -619,7 +694,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "myobject2",
       NormalizedFieldName: (string) (len=6) "method"
     }
@@ -630,10 +705,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(54),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(54),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(54),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -644,7 +722,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "myobject2",
       NormalizedFieldName: (string) (len=7) "method1"
     }
@@ -655,10 +733,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(60),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(60),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(60),
+      EndColumnNumber: (*int)(19),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -669,7 +750,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "myobject3",
       NormalizedFieldName: (string) (len=6) "method"
     }
@@ -680,10 +761,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(61),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(61),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(61),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -694,7 +778,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "myobject3",
       NormalizedFieldName: (string) (len=7) "method1"
     }
@@ -705,10 +789,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(66),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(66),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(66),
+      EndColumnNumber: (*int)(6),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -719,7 +806,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "something",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -730,10 +817,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(76),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(76),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(76),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -744,7 +834,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -755,10 +845,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(81),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(81),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(81),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -769,7 +862,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -780,10 +873,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(84),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(84),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(84),
+      EndColumnNumber: (*int)(27),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -794,7 +890,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -805,10 +901,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(86),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(86),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(86),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -819,7 +918,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -830,10 +929,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(88),
-      ColumnNumber: (*int)(22),
+      StartLineNumber: (*int)(88),
+      StartColumnNumber: (*int)(22),
+      EndLineNumber: (*int)(88),
+      EndColumnNumber: (*int)(26),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -844,7 +946,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -855,10 +957,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(90),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(90),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(90),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -869,7 +974,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "module",
       NormalizedFieldName: (string) (len=6) "export"
     }
@@ -880,10 +985,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatypes.js",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(92),
-      ColumnNumber: (*int)(3),
+      StartLineNumber: (*int)(92),
+      StartColumnNumber: (*int)(3),
+      EndLineNumber: (*int)(92),
+      EndColumnNumber: (*int)(7),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -894,7 +1002,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "export",
       NormalizedFieldName: (string) (len=4) "path"
     }

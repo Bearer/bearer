@@ -67,11 +67,14 @@ func dummyDataflow() dataflow.DataFlow {
 		DetectorID: "ruby_third_parties_sentry",
 		Locations: []types.RiskLocation{
 			{
-				Filename:   "/app/controllers/application_controller.rb",
-				LineNumber: 39,
-				Parent: &schema.Parent{
-					LineNumber: 38,
-					Content:    "Sentry.set_user(email: current_user.email)",
+				Filename:        "/app/controllers/application_controller.rb",
+				StartLineNumber: 39,
+				Source: &schema.Source{
+					StartLineNumber:   38,
+					StartColumnNumber: 10,
+					EndLineNumber:     38,
+					EndColumnNumber:   28,
+					Content:           "Sentry.set_user(email: current_user.email)",
 				},
 				DataTypes: []types.RiskDatatype{
 					{
@@ -104,11 +107,13 @@ func dummyDataflow() dataflow.DataFlow {
 						Name: "ruby",
 						Locations: []types.DatatypeLocation{
 							{
-								Filename:    "/app/controllers/application_controller.rb",
-								LineNumber:  39,
-								FieldName:   "email",
-								ObjectName:  "current_user",
-								SubjectName: &subject,
+								Filename:          "/app/controllers/application_controller.rb",
+								StartLineNumber:   39,
+								StartColumnNumber: 10,
+								EndColumnNumber:   17,
+								FieldName:         "email",
+								ObjectName:        "current_user",
+								SubjectName:       &subject,
 							},
 						},
 					},
@@ -122,10 +127,12 @@ func dummyDataflow() dataflow.DataFlow {
 						Name: "ruby",
 						Locations: []types.DatatypeLocation{
 							{
-								Filename:   "/app/models/location.rb",
-								LineNumber: 112,
-								FieldName:  "country",
-								ObjectName: "Address",
+								Filename:          "/app/models/location.rb",
+								StartLineNumber:   112,
+								StartColumnNumber: 10,
+								EndColumnNumber:   17,
+								FieldName:         "country",
+								ObjectName:        "Address",
 							},
 						},
 					},

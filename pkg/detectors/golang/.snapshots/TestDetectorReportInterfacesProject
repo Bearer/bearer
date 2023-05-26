@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(70),
       Text: (*string)((len=59) "\"http://\" + os.Getenv(\"ORDER_SERVICE_DOMAIN\") + \"/whatever\"")
     },
     Value: (interfaces.Interface) {
@@ -41,10 +44,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(53),
       Text: (*string)((len=30) "os.Getenv(\"ORDER_SERVICE_URL\")")
     },
     Value: (interfaces.Interface) {
@@ -69,10 +75,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(54),
       Text: (*string)((len=31) "os.Getenv(\"ORDER_SERVICE_ADDR\")")
     },
     Value: (interfaces.Interface) {
@@ -97,10 +106,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(53),
       Text: (*string)((len=30) "os.Getenv(\"ORDER_SERVICE_SVC\")")
     },
     Value: (interfaces.Interface) {
@@ -125,10 +137,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(1),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(1),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(71),
       Text: (*string)((len=70) "MustMapEnv(&svc.productCatalogSvcAddr, \"PRODUCT_CATALOG_SERVICE_ADDR\")")
     },
     Value: (interfaces.Interface) {
@@ -153,10 +168,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(1),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(1),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=35) "MustGetEnv(\"CURRENCY_SERVICE_ADDR\")")
     },
     Value: (interfaces.Interface) {
@@ -181,10 +199,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(63),
       Text: (*string)((len=37) "sneeky.LookupEnv(`USER_SERVICE_HOST`)")
     },
     Value: (interfaces.Interface) {
@@ -209,10 +230,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(24),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(24),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(44),
       Text: (*string)((len=20) "\"string.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -234,10 +258,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(34),
       Text: (*string)((len=25) "\"http://find.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -259,10 +286,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(18),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(18),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(18),
+      EndColumnNumber: (*int)(54),
       Text: (*string)((len=44) "\"http://\" + \"simple.\" + \"concat.example.com\"")
     },
     Value: (interfaces.Interface) {
@@ -284,10 +314,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
+      FullFilename: (string) "",
       Language: (string) (len=2) "Go",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(33),
+      EndColumnNumber: (*int)(3),
       Text: (*string)((len=128) "fmt.Sprintf(\n\t\t\"https://%s.example.com/%s\"+\"/api/shop/supplier/%d/%%5B\",\n\t\tos.Getenv(\"DOMAIN_PREFIX\"),\n\t\t\"path\",\n\t\tsupplierId\n\t)")
     },
     Value: (interfaces.Interface) {

@@ -100,7 +100,7 @@ func (detector *detector) extractScripts(report report.Report, tree *parser.Tree
 			pythonScript += stringLineParsed
 		}
 
-		_, err := python.ProcessRaw(file, report, []byte(pythonScript), input.LineNumber(), detector.idGenerator)
+		_, err := python.ProcessRaw(file, report, []byte(pythonScript), input.StartLineNumber(), detector.idGenerator)
 
 		if err != nil {
 			return err

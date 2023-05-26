@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -43,10 +49,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "TOML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

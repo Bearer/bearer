@@ -8,8 +8,7 @@ contains(arr, elem) if {
 	arr[_] = elem
 }
 
-has_key(x, k) { _ = x[k] }
-
+has_key(x, k) if _ = x[k]
 
 # - presence of pattern & data types required
 global_failures contains detector if {
@@ -21,7 +20,6 @@ global_failures contains detector if {
 
 	some data_type in data.bearer.common.global_data_types
 }
-
 
 # - presence of pattern & data types not required
 presence_failures contains detector if {
@@ -72,7 +70,7 @@ policy_failure contains item if {
 	some data_type_location in detector.locations
 	some data_type in data_type_location.data_types
 
-	item := data.bearer.common.build_local_item(data_type_location,data_type)
+	item := data.bearer.common.build_local_item(data_type_location, data_type)
 }
 
 policy_failure contains item if {
@@ -83,7 +81,7 @@ policy_failure contains item if {
 	some data_type in data_type_location.data_types
 	contains(input.rule.only_data_types, data_type.name)
 
-	item := data.bearer.common.build_local_item(data_type_location,data_type)
+	item := data.bearer.common.build_local_item(data_type_location, data_type)
 }
 
 policy_failure contains item if {
@@ -94,11 +92,12 @@ policy_failure contains item if {
 	some data_type in data_type_location.data_types
 	not contains(input.rule.skip_data_types, data_type.name)
 
-	item := data.bearer.common.build_local_item(data_type_location,data_type)
+	item := data.bearer.common.build_local_item(data_type_location, data_type)
 }
+
 # end datatyped detection
 
-# policies for global failures 
+# policies for global failures
 policy_failure contains item if {
 	some detector in global_failures
 
@@ -134,9 +133,25 @@ policy_failure contains item if {
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content,
+		"full_filename": location.full_filename,
+		"sink": {
+			"start": location.source.start_line_number,
+			"end": location.source.end_line_number,
+			"content": location.source.content,
+			"column": {
+				"start": location.source.start_column_number,
+				"end": location.source.end_column_number,
+			},
+		},
+		"source": {
+			"start": location.start_line_number,
+			"end": location.start_line_number,
+			"column": {
+				"start": location.start_column_number,
+				"end": location.end_column_number,
+			},
+		},
+		"line_number": location.start_line_number,
 	}
 }
 
@@ -151,7 +166,7 @@ local_rule_failure contains item if {
 		"name": data_type.name,
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"subject_name": schema.subject_name,
-		"line_number": location.line_number,
+		"line_number": location.start_line_number,
 		"rule_id": input.rule.id,
 		"third_party": input.rule.associated_recipe,
 	}

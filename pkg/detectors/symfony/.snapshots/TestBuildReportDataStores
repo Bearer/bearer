@@ -6,10 +6,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "app/config/config.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(43),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(43),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (symfony.Database) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=28) "config/packages/doctrine.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (symfony.Database) {
@@ -42,10 +48,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=28) "config/packages/doctrine.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (symfony.Database) {
@@ -60,10 +69,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=28) "config/packages/doctrine.yml",
+      FullFilename: (string) "",
       Language: (string) (len=4) "YAML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(<nil>),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(<nil>),
+      EndLineNumber: (*int)(<nil>),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (symfony.Database) {

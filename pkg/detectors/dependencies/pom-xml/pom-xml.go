@@ -73,7 +73,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 			Name:    artifactId,
 			Group:   groupId,
 			Version: stringutil.StripQuotes(version),
-			Line:    int64(capture["param_dependency"].LineNumber()),
+			Line:    int64(capture["param_dependency"].StartLineNumber()),
 			Column:  int64(capture["param_dependency"].Column()),
 		})
 	}

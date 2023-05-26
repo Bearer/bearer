@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -43,10 +49,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -62,10 +71,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -81,10 +93,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(40),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(40),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(40),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -100,10 +115,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(46),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(46),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(46),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -119,10 +137,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(52),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(52),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(52),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -138,10 +159,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(60),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(60),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(60),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -157,10 +181,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(68),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(68),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(68),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -176,10 +203,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(77),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(77),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(77),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -195,10 +225,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(83),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(83),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(83),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -214,10 +247,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(89),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(89),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(89),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -233,10 +269,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(98),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(98),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(98),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -252,10 +291,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(104),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(104),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(104),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -271,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(112),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(112),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(112),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -290,10 +335,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(121),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(121),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(121),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -309,10 +357,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(127),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(127),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(127),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -328,10 +379,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(133),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(133),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(133),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -347,10 +401,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(141),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(141),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(141),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -366,10 +423,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(149),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(149),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(149),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -385,10 +445,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(157),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(157),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(157),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -404,10 +467,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(165),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(165),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(165),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -423,10 +489,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(173),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(173),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(173),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -442,10 +511,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(181),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(181),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(181),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -461,10 +533,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(189),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(189),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(189),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -480,10 +555,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(197),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(197),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(197),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -499,10 +577,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(205),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(205),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(205),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -518,10 +599,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(214),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(214),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(214),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -537,10 +621,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(220),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(220),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(220),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -556,10 +643,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(226),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(226),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(226),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -575,10 +665,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(235),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(235),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(235),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -594,10 +687,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
+      FullFilename: (string) "",
       Language: (string) (len=4) "JSON",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(241),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(241),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(241),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

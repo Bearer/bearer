@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(436),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(436),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(436),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(444),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(444),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(444),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -43,10 +49,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(450),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(450),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(450),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -62,10 +71,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(455),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(455),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(455),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -81,10 +93,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(460),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(460),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(460),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -100,10 +115,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(465),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(465),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(465),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -119,10 +137,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(470),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(470),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(470),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -138,10 +159,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(475),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(475),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(475),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -157,10 +181,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(480),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(480),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(480),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -176,10 +203,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(486),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(486),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(486),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -195,10 +225,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(492),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(492),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(492),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -214,10 +247,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(497),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(497),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(497),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -233,10 +269,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(502),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(502),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(502),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -252,10 +291,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(507),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(507),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(507),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -271,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(512),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(512),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(512),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -290,10 +335,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(517),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(517),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(517),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -309,10 +357,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(522),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(522),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(522),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -328,10 +379,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(537),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(537),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(537),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -347,10 +401,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(544),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(544),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(544),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -366,10 +423,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(550),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(550),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(550),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -385,10 +445,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(555),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(555),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(555),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -404,10 +467,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(561),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(561),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(561),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -423,10 +489,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(566),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(566),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(566),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -442,10 +511,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(572),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(572),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(572),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -461,10 +533,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(577),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(577),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(577),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -480,10 +555,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(583),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(583),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(583),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -499,10 +577,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(588),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(588),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(588),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -518,10 +599,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(593),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(593),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(593),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -537,10 +621,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(598),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(598),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(598),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -556,10 +643,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(603),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(603),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(603),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -575,10 +665,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(608),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(608),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(608),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -594,10 +687,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(613),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(613),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(613),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -613,10 +709,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(619),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(619),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(619),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -632,10 +731,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(624),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(624),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(624),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -651,10 +753,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(630),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(630),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(630),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -670,10 +775,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(636),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(636),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(636),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -689,10 +797,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(641),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(641),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(641),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -708,10 +819,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(646),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(646),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(646),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -727,10 +841,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(651),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(651),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(651),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -746,10 +863,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(656),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(656),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(656),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -765,10 +885,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(661),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(661),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(661),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -784,10 +907,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(666),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(666),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(666),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -803,10 +929,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(671),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(671),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(671),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -822,10 +951,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(676),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(676),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(676),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -841,10 +973,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(681),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(681),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(681),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -860,10 +995,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(686),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(686),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(686),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -879,10 +1017,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(691),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(691),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(691),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -898,10 +1039,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(696),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(696),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(696),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -917,10 +1061,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(701),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(701),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(701),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -936,10 +1083,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(706),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(706),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(706),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -955,10 +1105,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(711),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(711),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(711),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -974,10 +1127,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(716),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(716),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(716),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -993,10 +1149,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(722),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(722),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(722),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1012,10 +1171,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(727),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(727),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(727),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1031,10 +1193,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(732),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(732),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(732),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1050,10 +1215,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(737),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(737),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(737),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1069,10 +1237,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(742),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(742),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(742),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1088,10 +1259,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(747),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(747),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(747),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1107,10 +1281,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(752),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(752),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(752),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1126,10 +1303,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(757),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(757),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(757),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1145,10 +1325,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(762),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(762),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(762),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1164,10 +1347,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(768),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(768),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(768),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1183,10 +1369,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(774),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(774),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(774),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1202,10 +1391,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(779),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(779),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(779),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1221,10 +1413,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(785),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(785),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(785),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1240,10 +1435,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(792),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(792),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(792),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1259,10 +1457,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(798),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(798),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(798),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1278,10 +1479,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(803),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(803),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(803),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1297,10 +1501,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(808),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(808),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(808),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1316,10 +1523,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(814),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(814),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(814),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1335,10 +1545,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(820),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(820),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(820),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1354,10 +1567,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(826),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(826),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(826),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1373,10 +1589,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(831),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(831),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(831),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1392,10 +1611,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(837),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(837),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(837),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1411,10 +1633,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(842),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(842),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(842),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1430,10 +1655,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(847),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(847),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(847),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1449,10 +1677,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(852),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(852),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(852),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1468,10 +1699,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(857),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(857),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(857),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1487,10 +1721,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(864),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(864),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(864),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1506,10 +1743,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(869),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(869),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(869),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1525,10 +1765,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(874),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(874),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(874),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1544,10 +1787,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(880),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(880),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(880),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1563,10 +1809,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(886),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(886),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(886),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1582,10 +1831,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(892),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(892),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(892),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1601,10 +1853,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(899),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(899),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(899),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1620,10 +1875,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(905),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(905),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(905),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1639,10 +1897,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(911),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(911),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(911),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1658,10 +1919,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(917),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(917),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(917),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1677,10 +1941,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(923),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(923),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(923),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1696,10 +1963,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(929),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(929),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(929),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1715,10 +1985,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(934),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(934),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(934),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1734,10 +2007,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(939),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(939),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(939),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1753,10 +2029,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(944),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(944),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(944),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1772,10 +2051,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(949),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(949),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(949),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1791,10 +2073,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(954),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(954),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(954),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1810,10 +2095,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(959),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(959),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(959),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1829,10 +2117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(964),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(964),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(964),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1848,10 +2139,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(970),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(970),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(970),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1867,10 +2161,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(976),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(976),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(976),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1886,10 +2183,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(983),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(983),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(983),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1905,10 +2205,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(988),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(988),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(988),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1924,10 +2227,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(999),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(999),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(999),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1943,10 +2249,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1010),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1010),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1010),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1962,10 +2271,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1015),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1015),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1015),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -1981,10 +2293,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1020),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1020),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1020),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2000,10 +2315,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1025),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1025),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1025),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2019,10 +2337,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1031),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1031),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1031),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2038,10 +2359,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1036),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1036),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1036),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2057,10 +2381,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1041),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1041),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1041),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2076,10 +2403,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1046),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1046),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1046),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2095,10 +2425,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1051),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1051),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1051),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2114,10 +2447,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1057),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1057),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1057),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2133,10 +2469,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1062),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1062),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1062),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2152,10 +2491,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1067),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1067),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1067),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2171,10 +2513,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1073),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1073),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1073),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2190,10 +2535,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1078),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1078),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1078),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2209,10 +2557,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1085),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1085),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1085),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2228,10 +2579,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1090),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1090),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1090),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2247,10 +2601,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1097),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1097),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1097),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2266,10 +2623,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1102),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1102),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1102),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2285,10 +2645,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1109),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1109),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1109),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2304,10 +2667,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1116),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1116),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1116),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2323,10 +2689,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1121),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1121),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1121),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2342,10 +2711,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1126),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1126),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1126),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2361,10 +2733,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1133),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1133),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1133),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2380,10 +2755,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1139),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1139),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1139),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2399,10 +2777,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1146),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1146),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1146),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2418,10 +2799,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1151),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1151),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1151),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2437,10 +2821,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1158),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1158),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1158),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2456,10 +2843,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1165),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1165),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1165),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2475,10 +2865,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1172),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1172),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1172),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2494,10 +2887,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1178),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1178),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1178),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2513,10 +2909,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1185),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1185),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1185),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2532,10 +2931,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1192),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1192),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1192),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2551,10 +2953,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1199),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1199),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1199),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2570,10 +2975,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1206),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1206),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1206),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2589,10 +2997,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1211),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1211),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1211),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2608,10 +3019,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1217),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1217),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1217),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2627,10 +3041,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1222),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1222),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1222),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2646,10 +3063,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1227),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1227),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1227),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2665,10 +3085,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1232),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1232),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1232),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2684,10 +3107,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1239),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1239),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1239),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2703,10 +3129,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1244),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1244),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1244),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2722,10 +3151,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1249),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1249),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1249),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2741,10 +3173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1254),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1254),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1254),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2760,10 +3195,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1259),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1259),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1259),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2779,10 +3217,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1265),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1265),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1265),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2798,10 +3239,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1272),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1272),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1272),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2817,10 +3261,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1279),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1279),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1279),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2836,10 +3283,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1286),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1286),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1286),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2855,10 +3305,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1293),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1293),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1293),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2874,10 +3327,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1298),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1298),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1298),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2893,10 +3349,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1305),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1305),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1305),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2912,10 +3371,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1312),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1312),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1312),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2931,10 +3393,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1319),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1319),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1319),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2950,10 +3415,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1326),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1326),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1326),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2969,10 +3437,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1332),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1332),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1332),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -2988,10 +3459,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1338),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1338),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1338),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3007,10 +3481,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1345),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1345),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1345),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3026,10 +3503,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1351),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1351),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1351),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3045,10 +3525,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1356),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1356),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1356),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3064,10 +3547,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1362),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1362),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1362),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3083,10 +3569,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1367),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1367),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1367),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3102,10 +3591,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1373),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1373),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1373),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3121,10 +3613,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1379),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1379),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1379),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3140,10 +3635,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1386),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1386),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1386),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3159,10 +3657,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1392),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1392),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1392),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3178,10 +3679,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1398),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1398),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1398),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3197,10 +3701,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1403),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1403),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1403),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3216,10 +3723,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1410),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1410),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1410),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3235,10 +3745,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1415),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1415),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1415),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3254,10 +3767,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1420),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1420),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1420),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3273,10 +3789,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1425),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1425),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1425),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3292,10 +3811,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1431),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1431),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1431),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3311,10 +3833,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1437),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1437),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1437),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3330,10 +3855,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1443),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1443),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1443),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3349,10 +3877,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1448),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1448),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1448),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3368,10 +3899,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1453),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1453),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1453),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3387,10 +3921,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1458),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1458),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1458),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3406,10 +3943,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1465),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1465),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1465),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3425,10 +3965,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1470),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1470),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1470),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3444,10 +3987,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1475),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1475),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1475),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3463,10 +4009,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1480),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1480),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1480),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3482,10 +4031,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1486),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1486),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1486),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3501,10 +4053,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1491),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1491),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1491),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3520,10 +4075,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1496),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1496),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1496),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3539,10 +4097,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1503),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1503),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1503),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3558,10 +4119,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1508),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1508),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1508),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3577,10 +4141,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1514),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1514),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1514),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3596,10 +4163,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1520),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1520),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1520),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3615,10 +4185,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1526),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1526),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1526),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3634,10 +4207,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1532),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1532),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1532),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3653,10 +4229,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1538),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1538),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1538),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3672,10 +4251,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1544),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1544),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1544),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3691,10 +4273,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1549),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1549),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1549),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3710,10 +4295,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1554),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1554),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1554),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3729,10 +4317,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1559),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1559),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1559),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3748,10 +4339,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1564),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1564),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1564),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3767,10 +4361,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1569),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1569),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1569),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3786,10 +4383,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1575),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1575),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1575),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3805,10 +4405,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1580),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1580),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1580),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3824,10 +4427,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1587),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1587),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1587),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3843,10 +4449,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1593),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1593),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1593),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3862,10 +4471,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1599),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1599),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1599),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3881,10 +4493,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1605),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1605),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1605),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3900,10 +4515,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1611),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1611),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1611),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3919,10 +4537,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1617),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1617),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1617),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3938,10 +4559,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1623),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1623),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1623),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3957,10 +4581,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1629),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1629),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1629),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3976,10 +4603,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1634),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1634),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1634),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -3995,10 +4625,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1640),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1640),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1640),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4014,10 +4647,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1645),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1645),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1645),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4033,10 +4669,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1650),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1650),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1650),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4052,10 +4691,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1656),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1656),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1656),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4071,10 +4713,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1662),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1662),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1662),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4090,10 +4735,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1668),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1668),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1668),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4109,10 +4757,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1674),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1674),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1674),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4128,10 +4779,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1680),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1680),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1680),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4147,10 +4801,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1686),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1686),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1686),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4166,10 +4823,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1692),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1692),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1692),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4185,10 +4845,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1706),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1706),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1706),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4204,10 +4867,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1712),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1712),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1712),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4223,10 +4889,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1718),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1718),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1718),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4242,10 +4911,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1724),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1724),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1724),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4261,10 +4933,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1730),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1730),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1730),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4280,10 +4955,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1736),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1736),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1736),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4299,10 +4977,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1742),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1742),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1742),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4318,10 +4999,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1748),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1748),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1748),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4337,10 +5021,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1754),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1754),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1754),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4356,10 +5043,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1760),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1760),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1760),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4375,10 +5065,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1765),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1765),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1765),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4394,10 +5087,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1770),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1770),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1770),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4413,10 +5109,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1775),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1775),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1775),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4432,10 +5131,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1780),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1780),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1780),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4451,10 +5153,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1785),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1785),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1785),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4470,10 +5175,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1790),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1790),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1790),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4489,10 +5197,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1795),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1795),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1795),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4508,10 +5219,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1801),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1801),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1801),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4527,10 +5241,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1806),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1806),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1806),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4546,10 +5263,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1811),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1811),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1811),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4565,10 +5285,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1816),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1816),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1816),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4584,10 +5307,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1821),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1821),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1821),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4603,10 +5329,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1826),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1826),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1826),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4622,10 +5351,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1831),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1831),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1831),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4641,10 +5373,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1837),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1837),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1837),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4660,10 +5395,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1842),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1842),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1842),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4679,10 +5417,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1848),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1848),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1848),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4698,10 +5439,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1853),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1853),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1853),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4717,10 +5461,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1858),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1858),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1858),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4736,10 +5483,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1863),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1863),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1863),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4755,10 +5505,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1868),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1868),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1868),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4774,10 +5527,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1873),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1873),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1873),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4793,10 +5549,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1878),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1878),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1878),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4812,10 +5571,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1883),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1883),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1883),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4831,10 +5593,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1888),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1888),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1888),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4850,10 +5615,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1893),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1893),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1893),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4869,10 +5637,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1898),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1898),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1898),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4888,10 +5659,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1903),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1903),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1903),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4907,10 +5681,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1908),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1908),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1908),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4926,10 +5703,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1913),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1913),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1913),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4945,10 +5725,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1918),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1918),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1918),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4964,10 +5747,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1923),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1923),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1923),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -4983,10 +5769,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1928),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1928),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1928),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5002,10 +5791,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1933),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1933),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1933),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5021,10 +5813,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1938),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1938),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1938),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5040,10 +5835,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1943),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1943),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1943),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5059,10 +5857,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1948),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1948),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1948),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5078,10 +5879,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1953),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1953),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1953),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5097,10 +5901,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1958),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1958),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1958),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5116,10 +5923,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1964),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1964),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1964),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5135,10 +5945,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1970),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1970),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1970),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5154,10 +5967,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1975),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(1975),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(1975),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5173,10 +5989,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1984),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(1984),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(1984),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5192,10 +6011,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1989),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(1989),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(1989),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5211,10 +6033,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1994),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(1994),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(1994),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5230,10 +6055,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(1999),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(1999),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(1999),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5249,10 +6077,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2004),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2004),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2004),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5268,10 +6099,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2009),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2009),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2009),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5287,10 +6121,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2014),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2014),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2014),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5306,10 +6143,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2019),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2019),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2019),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5325,10 +6165,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2023),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2023),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2023),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5344,10 +6187,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2028),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(2028),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(2028),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5363,10 +6209,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2066),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2066),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2066),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5382,10 +6231,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2085),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2085),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2085),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5401,10 +6253,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2146),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2146),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2146),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5420,10 +6275,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2151),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2151),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2151),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5439,10 +6297,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2156),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2156),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2156),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5458,10 +6319,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2241),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2241),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2241),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5477,10 +6341,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2246),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2246),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2246),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5496,10 +6363,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2251),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2251),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2251),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5515,10 +6385,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2256),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2256),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2256),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5534,10 +6407,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2327),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2327),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2327),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5553,10 +6429,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2332),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(2332),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(2332),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5572,10 +6451,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(2910),
-      ColumnNumber: (*int)(12),
+      StartLineNumber: (*int)(2910),
+      StartColumnNumber: (*int)(12),
+      EndLineNumber: (*int)(2910),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5591,10 +6473,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(3170),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(3170),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(3170),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5610,10 +6495,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(3175),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(3175),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(3175),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5629,10 +6517,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(3186),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(3186),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(3186),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5648,10 +6539,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(95),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(95),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(95),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5667,10 +6561,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(101),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(101),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(101),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5686,10 +6583,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(106),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(106),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(106),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5705,10 +6605,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(111),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(111),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(111),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5724,10 +6627,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(116),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(116),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(116),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5743,10 +6649,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(121),
-      ColumnNumber: (*int)(4),
+      StartLineNumber: (*int)(121),
+      StartColumnNumber: (*int)(4),
+      EndLineNumber: (*int)(121),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5762,10 +6671,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(126),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(126),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(126),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5781,10 +6693,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(131),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(131),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(131),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5800,10 +6715,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(136),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(136),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(136),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5819,10 +6737,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(142),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(142),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(142),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5838,10 +6759,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(147),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(147),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(147),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5857,10 +6781,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(80),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(80),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(80),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5876,10 +6803,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(85),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(85),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(85),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5895,10 +6825,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(90),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(90),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(90),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5914,10 +6847,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(95),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(95),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(95),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5933,10 +6869,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(100),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(100),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(100),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5952,10 +6891,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(105),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(105),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(105),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5971,10 +6913,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(110),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(110),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(110),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -5990,10 +6935,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(115),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(115),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(115),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6009,10 +6957,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(120),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(120),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(120),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6028,10 +6979,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(125),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(125),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(125),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6047,10 +7001,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(132),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(132),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(132),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6066,10 +7023,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(198),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(198),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(198),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6085,10 +7045,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(80),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(80),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(80),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6104,10 +7067,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(85),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(85),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(85),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6123,10 +7089,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(90),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(90),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(90),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6142,10 +7111,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(95),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(95),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(95),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6161,10 +7133,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(100),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(100),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(100),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6180,10 +7155,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(105),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(105),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(105),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6199,10 +7177,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(110),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(110),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(110),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6218,10 +7199,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(115),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(115),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(115),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6237,10 +7221,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(120),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(120),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(120),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6256,10 +7243,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(125),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(125),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(125),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6275,10 +7265,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(132),
-      ColumnNumber: (*int)(6),
+      StartLineNumber: (*int)(132),
+      StartColumnNumber: (*int)(6),
+      EndLineNumber: (*int)(132),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -6294,10 +7287,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
+      FullFilename: (string) "",
       Language: (string) (len=9) "Maven POM",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(198),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(198),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(198),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

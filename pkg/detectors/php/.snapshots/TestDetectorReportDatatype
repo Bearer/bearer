@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=10) "amembervar"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(25),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=11) "amemberfunc"
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(22),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(22),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(29),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=7) "subtest"
     }
@@ -130,10 +145,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(21),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -144,7 +162,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "foo",
       NormalizedFieldName: (string) (len=5) "test2"
     }
@@ -155,10 +173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(23),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(23),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(31),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -169,7 +190,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test2",
       NormalizedFieldName: (string) (len=8) "subtest2"
     }
@@ -180,10 +201,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(17),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(17),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(17),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -194,7 +218,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "parent",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -205,10 +229,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(18),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(18),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(18),
+      EndColumnNumber: (*int)(21),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -219,7 +246,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "parent",
       NormalizedFieldName: (string) (len=11) "childmethod"
     }
@@ -230,10 +257,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(16),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -244,7 +274,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "parent",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -255,10 +285,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(19),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(19),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(19),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -269,7 +302,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=10) "grandchild"
     }
@@ -280,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -294,7 +330,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "parent",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -305,10 +341,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -319,7 +358,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=16) "grandchildmethod"
     }
@@ -330,10 +369,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(21),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -344,7 +386,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "parent",
       NormalizedFieldName: (string) (len=11) "childmethod"
     }
@@ -355,10 +397,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(36),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(36),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(50),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -369,7 +414,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "subparent",
       NormalizedFieldName: (string) (len=14) "subchildmethod"
     }
@@ -380,10 +425,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(15),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -394,7 +442,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "parent",
       NormalizedFieldName: (string) (len=5) "child"
     }
@@ -405,10 +453,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(33),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -419,7 +470,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "child",
       NormalizedFieldName: (string) (len=16) "grandchildmethod"
     }
@@ -430,10 +481,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(48),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(48),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(56),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -444,7 +498,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "subparent",
       NormalizedFieldName: (string) (len=8) "subchild"
     }
@@ -455,10 +509,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(58),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(58),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(77),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -469,7 +526,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "subchild",
       NormalizedFieldName: (string) (len=19) "subgrandchildmethod"
     }
@@ -480,10 +537,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(27),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(27),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(27),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -494,7 +554,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -505,10 +565,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(28),
+      EndColumnNumber: (*int)(13),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -519,7 +582,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -530,10 +593,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(31),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(31),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(31),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -544,7 +610,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -555,10 +621,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(32),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(32),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(32),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -569,7 +638,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -580,10 +649,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(36),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(36),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -594,7 +666,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -605,10 +677,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(37),
-      ColumnNumber: (*int)(13),
+      StartLineNumber: (*int)(37),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(37),
+      EndColumnNumber: (*int)(17),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -619,7 +694,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -630,10 +705,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(41),
-      ColumnNumber: (*int)(21),
+      StartLineNumber: (*int)(41),
+      StartColumnNumber: (*int)(21),
+      EndLineNumber: (*int)(41),
+      EndColumnNumber: (*int)(27),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -644,7 +722,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "test",
       NormalizedFieldName: (string) (len=6) "method"
     }
@@ -655,10 +733,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(42),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(42),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(42),
+      EndColumnNumber: (*int)(21),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -669,7 +750,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }
@@ -680,10 +761,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "datatype.php",
+      FullFilename: (string) "",
       Language: (string) (len=3) "PHP",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(43),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(43),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(43),
+      EndColumnNumber: (*int)(21),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -694,7 +778,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "test1",
       NormalizedFieldName: (string) (len=4) "test"
     }

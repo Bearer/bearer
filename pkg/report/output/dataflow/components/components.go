@@ -30,6 +30,7 @@ type detector struct {
 
 type fileHolder struct {
 	name        string
+	fullName    string
 	lineNumbers map[int]int //group lines by linenumber
 }
 
@@ -69,7 +70,8 @@ func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.C
 			componentUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
-			*classifiedDetection.Source.LineNumber,
+			classifiedDetection.Source.FullFilename,
+			*classifiedDetection.Source.StartLineNumber,
 		)
 	}
 
@@ -92,7 +94,8 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
-			*classifiedDetection.Source.LineNumber,
+			classifiedDetection.Source.FullFilename,
+			*classifiedDetection.Source.StartLineNumber,
 		)
 	}
 
@@ -115,7 +118,8 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
-			*classifiedDetection.Source.LineNumber,
+			classifiedDetection.Source.FullFilename,
+			*classifiedDetection.Source.StartLineNumber,
 		)
 	}
 
@@ -123,7 +127,7 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 }
 
 // addComponent adds component to hash list and at the same time blocks duplicates
-func (holder *Holder) addComponent(componentName string, componentType string, componentSubType string, componentUUID string, detectorName string, fileName string, lineNumber int) {
+func (holder *Holder) addComponent(componentName string, componentType string, componentSubType string, componentUUID string, detectorName string, fileName string, fullFilename string, lineNumber int) {
 	// create component entry if it doesn't exist
 	if _, exists := holder.components[componentUUID]; !exists {
 		var uuid string
@@ -153,6 +157,7 @@ func (holder *Holder) addComponent(componentName string, componentType string, c
 	if _, exists := targetDetector.files[fileName]; !exists {
 		targetDetector.files[fileName] = &fileHolder{
 			name:        fileName,
+			fullName:    fullFilename,
 			lineNumbers: make(map[int]int),
 		}
 	}
@@ -179,9 +184,10 @@ func (holder *Holder) ToDataFlow() []types.Component {
 			for _, targetFile := range maputil.ToSortedSlice(targetDetector.files) {
 				for _, targetLineNumber := range maputil.ToSortedSlice(targetFile.lineNumbers) {
 					constructedComponent.Locations = append(constructedComponent.Locations, types.ComponentLocation{
-						Filename:   targetFile.name,
-						LineNumber: targetLineNumber,
-						Detector:   targetDetector.name,
+						Filename:     targetFile.name,
+						FullFilename: targetFile.fullName,
+						LineNumber:   targetLineNumber,
+						Detector:     targetDetector.name,
 					})
 				}
 			}

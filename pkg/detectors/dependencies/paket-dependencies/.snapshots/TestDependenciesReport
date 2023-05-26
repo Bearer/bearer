@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(4),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(5),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -43,10 +49,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -62,10 +71,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -81,10 +93,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -100,10 +115,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
+      FullFilename: (string) "",
       Language: (string) "",
       LanguageType: (string) "",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(0),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(0),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

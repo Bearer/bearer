@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(63),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(63),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -24,10 +27,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(33),
-      ColumnNumber: (*int)(51),
+      StartLineNumber: (*int)(33),
+      StartColumnNumber: (*int)(51),
+      EndLineNumber: (*int)(33),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -43,10 +49,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(51),
-      ColumnNumber: (*int)(47),
+      StartLineNumber: (*int)(51),
+      StartColumnNumber: (*int)(47),
+      EndLineNumber: (*int)(51),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -62,10 +71,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(73),
-      ColumnNumber: (*int)(53),
+      StartLineNumber: (*int)(73),
+      StartColumnNumber: (*int)(53),
+      EndLineNumber: (*int)(73),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -81,10 +93,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(85),
-      ColumnNumber: (*int)(47),
+      StartLineNumber: (*int)(85),
+      StartColumnNumber: (*int)(47),
+      EndLineNumber: (*int)(85),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -100,10 +115,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(103),
-      ColumnNumber: (*int)(56),
+      StartLineNumber: (*int)(103),
+      StartColumnNumber: (*int)(56),
+      EndLineNumber: (*int)(103),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -119,10 +137,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(142),
-      ColumnNumber: (*int)(52),
+      StartLineNumber: (*int)(142),
+      StartColumnNumber: (*int)(52),
+      EndLineNumber: (*int)(142),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -138,10 +159,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(157),
-      ColumnNumber: (*int)(46),
+      StartLineNumber: (*int)(157),
+      StartColumnNumber: (*int)(46),
+      EndLineNumber: (*int)(157),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -157,10 +181,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(178),
-      ColumnNumber: (*int)(53),
+      StartLineNumber: (*int)(178),
+      StartColumnNumber: (*int)(53),
+      EndLineNumber: (*int)(178),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -176,10 +203,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(193),
-      ColumnNumber: (*int)(56),
+      StartLineNumber: (*int)(193),
+      StartColumnNumber: (*int)(56),
+      EndLineNumber: (*int)(193),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -195,10 +225,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(205),
-      ColumnNumber: (*int)(55),
+      StartLineNumber: (*int)(205),
+      StartColumnNumber: (*int)(55),
+      EndLineNumber: (*int)(205),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -214,10 +247,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(223),
-      ColumnNumber: (*int)(55),
+      StartLineNumber: (*int)(223),
+      StartColumnNumber: (*int)(55),
+      EndLineNumber: (*int)(223),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -233,10 +269,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(235),
-      ColumnNumber: (*int)(55),
+      StartLineNumber: (*int)(235),
+      StartColumnNumber: (*int)(55),
+      EndLineNumber: (*int)(235),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -252,10 +291,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(253),
-      ColumnNumber: (*int)(55),
+      StartLineNumber: (*int)(253),
+      StartColumnNumber: (*int)(55),
+      EndLineNumber: (*int)(253),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -271,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(272),
-      ColumnNumber: (*int)(51),
+      StartLineNumber: (*int)(272),
+      StartColumnNumber: (*int)(51),
+      EndLineNumber: (*int)(272),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
@@ -290,10 +335,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
+      FullFilename: (string) "",
       Language: (string) (len=3) "XML",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(287),
-      ColumnNumber: (*int)(50),
+      StartLineNumber: (*int)(287),
+      StartColumnNumber: (*int)(50),
+      EndLineNumber: (*int)(287),
+      EndColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {

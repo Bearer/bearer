@@ -6,10 +6,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "config/application.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(43),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(43),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(43),
+      EndColumnNumber: (*int)(39),
       Text: (*string)(<nil>)
     },
     Value: (rails.Cache) {
@@ -23,10 +26,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "config/application.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(44),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(44),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(44),
+      EndColumnNumber: (*int)(37),
       Text: (*string)(<nil>)
     },
     Value: (rails.Cache) {
@@ -40,10 +46,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "config/application.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(45),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(45),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(45),
+      EndColumnNumber: (*int)(42),
       Text: (*string)(<nil>)
     },
     Value: (rails.Cache) {
@@ -57,10 +66,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "config/application.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(46),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(46),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(46),
+      EndColumnNumber: (*int)(44),
       Text: (*string)(<nil>)
     },
     Value: (rails.Cache) {
@@ -74,10 +86,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=33) "config/environments/production.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(58),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(58),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(58),
+      EndColumnNumber: (*int)(44),
       Text: (*string)(<nil>)
     },
     Value: (rails.Cache) {

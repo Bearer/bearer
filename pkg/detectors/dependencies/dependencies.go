@@ -95,7 +95,7 @@ func discoverDependency(report report.Report, file *file.FileInfo, discover func
 	}
 
 	for _, dep := range result.Dependencies {
-		columnNumber := int(dep.Column)
+		startColumnNumber := int(dep.Column)
 		lineNumber := int(dep.Line)
 		report.AddDependency(detectors.Type(result.Provider), dependencies.Dependency{
 			Group:          dep.Group,
@@ -103,11 +103,12 @@ func discoverDependency(report report.Report, file *file.FileInfo, discover func
 			Version:        dep.Version,
 			PackageManager: result.PackageManager,
 		}, source.Source{
-			Language:     file.Language,
-			LanguageType: file.LanguageTypeString(),
-			Filename:     file.RelativePath,
-			ColumnNumber: &columnNumber,
-			LineNumber:   &lineNumber,
+			Language:          file.Language,
+			LanguageType:      file.LanguageTypeString(),
+			Filename:          file.RelativePath,
+			StartColumnNumber: &startColumnNumber,
+			StartLineNumber:   &lineNumber,
+			EndLineNumber:     &lineNumber,
 		})
 	}
 

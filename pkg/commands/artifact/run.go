@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
@@ -26,6 +27,8 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/github_api"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/report/output/gitlab"
+	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
@@ -291,6 +294,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 }
 
 func (r *runner) Report(config settings.Config, report types.Report) (bool, error) {
+	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLogger()
@@ -311,6 +315,8 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	if err != nil {
 		return false, err
 	}
+
+	endTime := time.Now()
 
 	reportSupported, err := anySupportedLanguagesPresent(report.Inputgocloc, config)
 	if err != nil {
@@ -351,8 +357,30 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	}
 
 	switch config.Report.Format {
+	case flag.FormatSarif:
+		sarifContent, err := sarif.ReportSarif(detections.(*map[string][]security.Result), config.Rules)
+		if err != nil {
+			return false, fmt.Errorf("error generating sarif report %s", err)
+		}
+		content, err := reportoutput.ReportJSON(sarifContent)
+		if err != nil {
+			return false, fmt.Errorf("error generating JSON report %s", err)
+		}
+
+		logger.Msg(*content)
+	case flag.FormatGitLabSast:
+
+		sastContent, err := gitlab.ReportGitLab(detections.(*map[string][]security.Result), startTime, endTime)
+		if err != nil {
+			return false, fmt.Errorf("error generating gitlab-sast report %s", err)
+		}
+		content, err := reportoutput.ReportJSON(sastContent)
+		if err != nil {
+			return false, fmt.Errorf("error generating JSON report %s", err)
+		}
+
+		logger.Msg(*content)
 	case flag.FormatEmpty, flag.FormatJSON:
-		// default report format for is JSON
 		content, err := reportoutput.ReportJSON(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)

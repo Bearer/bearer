@@ -6,11 +6,28 @@ high:
         description: ""
         documentation_url: ""
       line_number: 2
+      full_filename: different-line.java
       filename: different-line.java
       category_groups:
         - PII
         - Personal Data
+      source:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 15
+                end: 24
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 19
+        content: logger.error(name)
       parent_line_number: 3
       snippet: logger.error(name)
       fingerprint: b08f2b317021ef0197dc9286477e251d_0
+      old_fingerprint: b08f2b317021ef0197dc9286477e251d_0
 

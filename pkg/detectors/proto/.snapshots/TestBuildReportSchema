@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(27),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(27),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(43),
       Text: (*string)((len=16) "member_addresses")
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) (len=15) "MemberAddresses",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "addressesbatch",
       NormalizedFieldName: (string) (len=14) "member_address"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=7) "members")
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) (len=6) "Member",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=12) "membersbatch",
       NormalizedFieldName: (string) (len=6) "member"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=6) "status")
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "importreply",
       NormalizedFieldName: (string) (len=6) "status"
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(28),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=5) "phone")
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "memberphone",
       NormalizedFieldName: (string) (len=5) "phone"
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(29),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(29),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(29),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=10) "phone_type")
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=11) "memberphone",
       NormalizedFieldName: (string) (len=10) "phone_type"
     }
@@ -130,10 +145,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(33),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(33),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(33),
+      EndColumnNumber: (*int)(22),
       Text: (*string)((len=14) "social_type_id")
     },
     Value: (schema.Schema) {
@@ -144,7 +162,7 @@
       FieldType: (string) (len=5) "int32",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "socialaccount",
       NormalizedFieldName: (string) (len=14) "social_type_id"
     }
@@ -155,10 +173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(34),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(34),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(34),
+      EndColumnNumber: (*int)(23),
       Text: (*string)((len=14) "social_user_id")
     },
     Value: (schema.Schema) {
@@ -169,7 +190,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "socialaccount",
       NormalizedFieldName: (string) (len=14) "social_user_id"
     }
@@ -180,10 +201,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(38),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(38),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(38),
+      EndColumnNumber: (*int)(30),
       Text: (*string)((len=21) "member_premium_status")
     },
     Value: (schema.Schema) {
@@ -194,7 +218,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "loyaltyprogram",
       NormalizedFieldName: (string) (len=21) "member_premium_status"
     }
@@ -205,10 +229,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(39),
-      ColumnNumber: (*int)(28),
+      StartLineNumber: (*int)(39),
+      StartColumnNumber: (*int)(28),
+      EndLineNumber: (*int)(39),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=10) "start_date")
     },
     Value: (schema.Schema) {
@@ -219,7 +246,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "loyaltyprogram",
       NormalizedFieldName: (string) (len=10) "start_date"
     }
@@ -230,10 +257,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(40),
-      ColumnNumber: (*int)(28),
+      StartLineNumber: (*int)(40),
+      StartColumnNumber: (*int)(28),
+      EndLineNumber: (*int)(40),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=8) "end_date")
     },
     Value: (schema.Schema) {
@@ -244,7 +274,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=14) "loyaltyprogram",
       NormalizedFieldName: (string) (len=8) "end_date"
     }
@@ -255,10 +285,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(44),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(44),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(44),
+      EndColumnNumber: (*int)(21),
       Text: (*string)((len=12) "segmentation")
     },
     Value: (schema.Schema) {
@@ -269,7 +302,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "marketingitem",
       NormalizedFieldName: (string) (len=12) "segmentation"
     }
@@ -280,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(49),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(49),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(49),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=9) "member_id")
     },
     Value: (schema.Schema) {
@@ -294,7 +330,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "member_id"
     }
@@ -305,10 +341,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(50),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(50),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(50),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=9) "firstname")
     },
     Value: (schema.Schema) {
@@ -319,7 +358,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "firstname"
     }
@@ -330,10 +369,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(51),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(51),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(51),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=8) "lastname")
     },
     Value: (schema.Schema) {
@@ -344,7 +386,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=8) "lastname"
     }
@@ -355,10 +397,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(52),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(52),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(52),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=6) "gender")
     },
     Value: (schema.Schema) {
@@ -369,7 +414,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=6) "gender"
     }
@@ -380,10 +425,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(53),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(53),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(53),
+      EndColumnNumber: (*int)(26),
       Text: (*string)((len=16) "external_user_id")
     },
     Value: (schema.Schema) {
@@ -394,7 +442,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=16) "external_user_id"
     }
@@ -405,10 +453,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(54),
-      ColumnNumber: (*int)(29),
+      StartLineNumber: (*int)(54),
+      StartColumnNumber: (*int)(29),
+      EndLineNumber: (*int)(54),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=9) "birthdate")
     },
     Value: (schema.Schema) {
@@ -419,7 +470,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "birthdate"
     }
@@ -430,10 +481,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(55),
-      ColumnNumber: (*int)(29),
+      StartLineNumber: (*int)(55),
+      StartColumnNumber: (*int)(29),
+      EndLineNumber: (*int)(55),
+      EndColumnNumber: (*int)(46),
       Text: (*string)((len=17) "modification_date")
     },
     Value: (schema.Schema) {
@@ -444,7 +498,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=17) "modification_date"
     }
@@ -455,10 +509,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(56),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(56),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(56),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=9) "shop_name")
     },
     Value: (schema.Schema) {
@@ -469,7 +526,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "shop_name"
     }
@@ -480,10 +537,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(57),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(57),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(57),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=6) "status")
     },
     Value: (schema.Schema) {
@@ -494,7 +554,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=6) "status"
     }
@@ -505,10 +565,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(58),
-      ColumnNumber: (*int)(29),
+      StartLineNumber: (*int)(58),
+      StartColumnNumber: (*int)(29),
+      EndLineNumber: (*int)(58),
+      EndColumnNumber: (*int)(46),
       Text: (*string)((len=17) "registration_date")
     },
     Value: (schema.Schema) {
@@ -519,7 +582,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=17) "registration_date"
     }
@@ -530,10 +593,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(59),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(59),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(59),
+      EndColumnNumber: (*int)(15),
       Text: (*string)((len=5) "email")
     },
     Value: (schema.Schema) {
@@ -544,7 +610,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=5) "email"
     }
@@ -555,10 +621,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(60),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(60),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(60),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=8) "password")
     },
     Value: (schema.Schema) {
@@ -569,7 +638,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=8) "password"
     }
@@ -580,10 +649,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(61),
-      ColumnNumber: (*int)(24),
+      StartLineNumber: (*int)(61),
+      StartColumnNumber: (*int)(24),
+      EndLineNumber: (*int)(61),
+      EndColumnNumber: (*int)(34),
       Text: (*string)((len=10) "phone_list")
     },
     Value: (schema.Schema) {
@@ -594,7 +666,7 @@
       FieldType: (string) (len=11) "MemberPhone",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=10) "phone_list"
     }
@@ -605,10 +677,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(62),
-      ColumnNumber: (*int)(26),
+      StartLineNumber: (*int)(62),
+      StartColumnNumber: (*int)(26),
+      EndLineNumber: (*int)(62),
+      EndColumnNumber: (*int)(41),
       Text: (*string)((len=15) "social_accounts")
     },
     Value: (schema.Schema) {
@@ -619,7 +694,7 @@
       FieldType: (string) (len=13) "SocialAccount",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=14) "social_account"
     }
@@ -630,10 +705,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(63),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(63),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(63),
+      EndColumnNumber: (*int)(33),
       Text: (*string)((len=15) "loyalty_program")
     },
     Value: (schema.Schema) {
@@ -644,7 +722,7 @@
       FieldType: (string) (len=14) "LoyaltyProgram",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=15) "loyalty_program"
     }
@@ -655,10 +733,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(64),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(64),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(64),
+      EndColumnNumber: (*int)(31),
       Text: (*string)((len=14) "marketing_item")
     },
     Value: (schema.Schema) {
@@ -669,7 +750,7 @@
       FieldType: (string) (len=13) "MarketingItem",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=14) "marketing_item"
     }
@@ -680,10 +761,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(65),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(65),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(65),
+      EndColumnNumber: (*int)(29),
       Text: (*string)((len=19) "communication_model")
     },
     Value: (schema.Schema) {
@@ -694,7 +778,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=19) "communication_model"
     }
@@ -705,10 +789,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(66),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(66),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(66),
+      EndColumnNumber: (*int)(31),
       Text: (*string)((len=21) "communication_channel")
     },
     Value: (schema.Schema) {
@@ -719,7 +806,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=21) "communication_channel"
     }
@@ -730,10 +817,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(67),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(67),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(67),
+      EndColumnNumber: (*int)(25),
       Text: (*string)((len=15) "autologin_token")
     },
     Value: (schema.Schema) {
@@ -744,7 +834,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=15) "autologin_token"
     }
@@ -755,10 +845,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(68),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(68),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(68),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=11) "is_employee")
     },
     Value: (schema.Schema) {
@@ -769,7 +862,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=11) "is_employee"
     }
@@ -780,10 +873,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(69),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(69),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(69),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=9) "godfather")
     },
     Value: (schema.Schema) {
@@ -794,7 +890,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=9) "godfather"
     }
@@ -805,10 +901,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(70),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(70),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(70),
+      EndColumnNumber: (*int)(19),
       Text: (*string)((len=11) "has_ordered")
     },
     Value: (schema.Schema) {
@@ -819,7 +918,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "member",
       NormalizedFieldName: (string) (len=11) "has_ordered"
     }
@@ -830,10 +929,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(75),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(75),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(75),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=9) "member_id")
     },
     Value: (schema.Schema) {
@@ -844,7 +946,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "memberaddress",
       NormalizedFieldName: (string) (len=9) "member_id"
     }
@@ -855,10 +957,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(76),
-      ColumnNumber: (*int)(19),
+      StartLineNumber: (*int)(76),
+      StartColumnNumber: (*int)(19),
+      EndLineNumber: (*int)(76),
+      EndColumnNumber: (*int)(28),
       Text: (*string)((len=9) "addresses")
     },
     Value: (schema.Schema) {
@@ -869,7 +974,7 @@
       FieldType: (string) (len=7) "Address",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=13) "memberaddress",
       NormalizedFieldName: (string) (len=7) "address"
     }
@@ -880,10 +985,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(80),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(80),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(80),
+      EndColumnNumber: (*int)(18),
       Text: (*string)((len=9) "firstname")
     },
     Value: (schema.Schema) {
@@ -894,7 +1002,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=9) "firstname"
     }
@@ -905,10 +1013,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(81),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(81),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(81),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "lastname")
     },
     Value: (schema.Schema) {
@@ -919,7 +1030,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=8) "lastname"
     }
@@ -930,10 +1041,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(82),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(82),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(82),
+      EndColumnNumber: (*int)(24),
       Text: (*string)((len=15) "address_details")
     },
     Value: (schema.Schema) {
@@ -944,7 +1058,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=14) "address_detail"
     }
@@ -955,10 +1069,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(83),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(83),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(83),
+      EndColumnNumber: (*int)(17),
       Text: (*string)((len=8) "zip_code")
     },
     Value: (schema.Schema) {
@@ -969,7 +1086,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=8) "zip_code"
     }
@@ -980,10 +1097,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(84),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(84),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(84),
+      EndColumnNumber: (*int)(13),
       Text: (*string)((len=4) "city")
     },
     Value: (schema.Schema) {
@@ -994,7 +1114,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=4) "city"
     }
@@ -1005,10 +1125,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(85),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(85),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(85),
+      EndColumnNumber: (*int)(14),
       Text: (*string)((len=5) "phone")
     },
     Value: (schema.Schema) {
@@ -1019,7 +1142,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=5) "phone"
     }
@@ -1030,10 +1153,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(86),
-      ColumnNumber: (*int)(28),
+      StartLineNumber: (*int)(86),
+      StartColumnNumber: (*int)(28),
+      EndLineNumber: (*int)(86),
+      EndColumnNumber: (*int)(41),
       Text: (*string)((len=13) "creation_date")
     },
     Value: (schema.Schema) {
@@ -1044,7 +1170,7 @@
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=13) "creation_date"
     }
@@ -1055,10 +1181,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(87),
-      ColumnNumber: (*int)(7),
+      StartLineNumber: (*int)(87),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(87),
+      EndColumnNumber: (*int)(27),
       Text: (*string)((len=20) "is_last_used_address")
     },
     Value: (schema.Schema) {
@@ -1069,7 +1198,7 @@
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=20) "is_last_used_address"
     }
@@ -1080,10 +1209,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "schema.proto",
+      FullFilename: (string) "",
       Language: (string) (len=15) "Protocol Buffer",
       LanguageType: (string) (len=4) "data",
-      LineNumber: (*int)(88),
-      ColumnNumber: (*int)(9),
+      StartLineNumber: (*int)(88),
+      StartColumnNumber: (*int)(9),
+      EndLineNumber: (*int)(88),
+      EndColumnNumber: (*int)(16),
       Text: (*string)((len=7) "company")
     },
     Value: (schema.Schema) {
@@ -1094,7 +1226,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "address",
       NormalizedFieldName: (string) (len=7) "company"
     }

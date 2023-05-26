@@ -198,10 +198,6 @@ func (worker *Worker) Start() {
 		if shouldBreak {
 			err := reportFile.Close()
 			if err != nil {
-				log.Debug().Msgf("worker %s failed to close gzipwriter", worker.uuid)
-			}
-			err = reportFile.Close()
-			if err != nil {
 				log.Debug().Msgf("worker %s failed to close reportfile", worker.uuid)
 			}
 			worker.task.Done <- &workertype.ProcessResponse{
@@ -219,10 +215,6 @@ func (worker *Worker) Start() {
 
 			log.Printf("worker %s closing due to work done", worker.uuid)
 			err := reportFile.Close()
-			if err != nil {
-				log.Debug().Msgf("worker %s failed to close gzipwriter", worker.uuid)
-			}
-			err = reportFile.Close()
 			if err != nil {
 				log.Debug().Msgf("worker %s failed to close reportfile", worker.uuid)
 			}

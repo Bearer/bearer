@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "app.vue",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(18),
-      ColumnNumber: (*int)(31),
+      StartLineNumber: (*int)(18),
+      StartColumnNumber: (*int)(31),
+      EndLineNumber: (*int)(18),
+      EndColumnNumber: (*int)(35),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "response",
       NormalizedFieldName: (string) (len=5) "datum"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "app.vue",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(17),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(17),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "console",
       NormalizedFieldName: (string) (len=3) "log"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "app.vue",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(15),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(15),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(15),
+      EndColumnNumber: (*int)(54),
       Text: (*string)((len=43) "\"http://jsonplaceholder.typicode.com/posts\"")
     },
     Value: (interfaces.Interface) {
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(10),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(10),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(26),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "document",
       NormalizedFieldName: (string) (len=16) "addeventlistener"
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(37),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(37),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(43),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "option",
       NormalizedFieldName: (string) (len=6) "detail"
     }
@@ -130,10 +145,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(44),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(44),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(49),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -144,7 +162,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "detail",
       NormalizedFieldName: (string) (len=5) "kimai"
     }
@@ -155,10 +173,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(50),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(50),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(59),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -169,7 +190,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "kimai",
       NormalizedFieldName: (string) (len=9) "getplugin"
     }
@@ -180,10 +201,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(46),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(46),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(53),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -194,7 +218,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=7) "session"
     }
@@ -205,10 +229,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(54),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(54),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(62),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -219,7 +246,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=7) "session",
       NormalizedFieldName: (string) (len=8) "flashbag"
     }
@@ -230,10 +257,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(25),
-      ColumnNumber: (*int)(63),
+      StartLineNumber: (*int)(25),
+      StartColumnNumber: (*int)(63),
+      EndLineNumber: (*int)(25),
+      EndColumnNumber: (*int)(66),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -244,7 +274,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=8) "flashbag",
       NormalizedFieldName: (string) (len=3) "all"
     }
@@ -255,10 +285,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(28),
-      ColumnNumber: (*int)(35),
+      StartLineNumber: (*int)(28),
+      StartColumnNumber: (*int)(35),
+      EndLineNumber: (*int)(28),
+      EndColumnNumber: (*int)(40),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -269,7 +302,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "alert",
       NormalizedFieldName: (string) (len=5) "error"
     }
@@ -280,10 +313,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(30),
-      ColumnNumber: (*int)(35),
+      StartLineNumber: (*int)(30),
+      StartColumnNumber: (*int)(35),
+      EndLineNumber: (*int)(30),
+      EndColumnNumber: (*int)(42),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -294,7 +330,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=5) "alert",
       NormalizedFieldName: (string) (len=7) "warning"
     }
@@ -305,10 +341,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(292),
-      ColumnNumber: (*int)(8),
+      StartLineNumber: (*int)(292),
+      StartColumnNumber: (*int)(8),
+      EndLineNumber: (*int)(292),
+      EndColumnNumber: (*int)(24),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -319,7 +358,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=16) "addeventlistener"
     }
@@ -330,10 +369,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(298),
-      ColumnNumber: (*int)(59),
+      StartLineNumber: (*int)(298),
+      StartColumnNumber: (*int)(59),
+      EndLineNumber: (*int)(298),
+      EndColumnNumber: (*int)(63),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -344,7 +386,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=4) "user"
     }
@@ -355,10 +397,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(298),
-      ColumnNumber: (*int)(64),
+      StartLineNumber: (*int)(298),
+      StartColumnNumber: (*int)(64),
+      EndLineNumber: (*int)(298),
+      EndColumnNumber: (*int)(78),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -369,7 +414,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=14) "firstdayofweek"
     }
@@ -380,10 +425,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(299),
-      ColumnNumber: (*int)(50),
+      StartLineNumber: (*int)(299),
+      StartColumnNumber: (*int)(50),
+      EndLineNumber: (*int)(299),
+      EndColumnNumber: (*int)(58),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -394,7 +442,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=8) "is24hour"
     }
@@ -405,10 +453,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(302),
-      ColumnNumber: (*int)(51),
+      StartLineNumber: (*int)(302),
+      StartColumnNumber: (*int)(51),
+      EndLineNumber: (*int)(302),
+      EndColumnNumber: (*int)(55),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -419,7 +470,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=3) "app",
       NormalizedFieldName: (string) (len=4) "user"
     }
@@ -430,10 +481,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(302),
-      ColumnNumber: (*int)(56),
+      StartLineNumber: (*int)(302),
+      StartColumnNumber: (*int)(56),
+      EndLineNumber: (*int)(302),
+      EndColumnNumber: (*int)(71),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -444,7 +498,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=15) "preferencevalue"
     }
@@ -455,10 +509,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(310),
-      ColumnNumber: (*int)(20),
+      StartLineNumber: (*int)(310),
+      StartColumnNumber: (*int)(20),
+      EndLineNumber: (*int)(310),
+      EndColumnNumber: (*int)(25),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -469,7 +526,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=5) "kimai"
     }
@@ -480,10 +537,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "base.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(310),
-      ColumnNumber: (*int)(35),
+      StartLineNumber: (*int)(310),
+      StartColumnNumber: (*int)(35),
+      EndLineNumber: (*int)(310),
+      EndColumnNumber: (*int)(43),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -494,7 +554,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "loader",
       NormalizedFieldName: (string) (len=8) "getkimai"
     }
@@ -505,10 +565,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -519,7 +582,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=9) "datalayer"
     }
@@ -530,10 +593,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(33),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(33),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(42),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -544,7 +610,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=6) "window",
       NormalizedFieldName: (string) (len=9) "datalayer"
     }
@@ -555,10 +621,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(33),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(33),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(37),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -569,7 +638,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=9) "datalayer",
       NormalizedFieldName: (string) (len=4) "push"
     }
@@ -580,10 +649,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(18),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(18),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(34),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -594,7 +666,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "user",
       NormalizedFieldName: (string) (len=16) "is_authenticated"
     }
@@ -605,10 +677,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "google_analytics.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(55),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(55),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(64),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -619,7 +694,7 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=4) "gtag",
       NormalizedFieldName: (string) (len=9) "'user_id'"
     }
@@ -630,10 +705,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.cshtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -655,10 +733,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.cshtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -680,10 +761,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.cshtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -705,10 +789,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=3) "EJS",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(39),
       Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
     },
     Value: (interfaces.Interface) {
@@ -730,10 +817,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(7),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(7),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(7),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -755,10 +845,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(9),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -780,10 +873,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "index.ejs",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(12),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(12),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(12),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -805,10 +901,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "Handlebars",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(39),
       Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
     },
     Value: (interfaces.Interface) {
@@ -830,10 +929,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -855,10 +957,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -880,10 +985,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "index.handlebars",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -905,10 +1013,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=4) "HTML",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(39),
       Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
     },
     Value: (interfaces.Interface) {
@@ -930,10 +1041,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -955,10 +1069,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -980,10 +1097,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "index.html",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1005,10 +1125,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.html.erb",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1030,10 +1153,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.html.erb",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1055,10 +1181,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.html.erb",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1080,10 +1209,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Twig",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(39),
       Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
     },
     Value: (interfaces.Interface) {
@@ -1105,10 +1237,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1130,10 +1265,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1155,10 +1293,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "index.html.twig",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1180,10 +1321,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.jinja",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1205,10 +1349,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.jinja",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1230,10 +1377,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.jinja",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1255,10 +1405,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=6) "Liquid",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(39),
       Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
     },
     Value: (interfaces.Interface) {
@@ -1280,10 +1433,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1305,10 +1461,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1330,10 +1489,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "index.liquid",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1355,10 +1517,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=8) "Mustache",
       LanguageType: (string) (len=6) "markup",
-      LineNumber: (*int)(3),
-      ColumnNumber: (*int)(2),
+      StartLineNumber: (*int)(3),
+      StartColumnNumber: (*int)(2),
+      EndLineNumber: (*int)(3),
+      EndColumnNumber: (*int)(39),
       Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
     },
     Value: (interfaces.Interface) {
@@ -1380,10 +1545,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(6),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(6),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(6),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1405,10 +1573,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(8),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(8),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(8),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1430,10 +1601,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "index.mustache",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(11),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(11),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(11),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1455,10 +1629,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.phtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(10),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(10),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(10),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=27) "\"https://inline.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1480,10 +1657,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.phtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(13),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(13),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(13),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -1505,10 +1685,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "index.phtml",
+      FullFilename: (string) "",
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(16),
-      ColumnNumber: (*int)(11),
+      StartLineNumber: (*int)(16),
+      StartColumnNumber: (*int)(11),
+      EndLineNumber: (*int)(16),
+      EndColumnNumber: (*int)(36),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {

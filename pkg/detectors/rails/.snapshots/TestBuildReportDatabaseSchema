@@ -5,10 +5,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(20),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(20),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(20),
+      EndColumnNumber: (*int)(20),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -19,7 +22,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=4) "name"
     }
@@ -30,10 +33,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(21),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(21),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(21),
+      EndColumnNumber: (*int)(27),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -44,7 +50,7 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=11) "record_type"
     }
@@ -55,10 +61,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(22),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(22),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(22),
+      EndColumnNumber: (*int)(25),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -69,7 +78,7 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=9) "record_id"
     }
@@ -80,10 +89,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(23),
-      ColumnNumber: (*int)(14),
+      StartLineNumber: (*int)(23),
+      StartColumnNumber: (*int)(14),
+      EndLineNumber: (*int)(23),
+      EndColumnNumber: (*int)(23),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -94,7 +106,7 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=7) "blob_id"
     }
@@ -105,10 +117,13 @@
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
+      FullFilename: (string) "",
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
-      LineNumber: (*int)(24),
-      ColumnNumber: (*int)(16),
+      StartLineNumber: (*int)(24),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(24),
+      EndColumnNumber: (*int)(28),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -119,7 +134,7 @@
       FieldType: (string) (len=8) "datetime",
       SimpleFieldType: (string) (len=4) "date",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>),
+      Source: (*schema.Source)(<nil>),
       NormalizedObjectName: (string) (len=25) "active_storage_attachment",
       NormalizedFieldName: (string) (len=10) "created_at"
     }
