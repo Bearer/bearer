@@ -1,6 +1,6 @@
 
 --
-Error: flag error: report flags error: invalid format argument; supported values: json, yaml, sarif
+Error: flag error: report flags error: invalid format argument; supported values: json, yaml, sarif, gitlab-sast
 Usage:
    scan [flags] <path>
 Aliases:
@@ -39,5 +39,5 @@ General Flags
       --disable-version-check   Disable Bearer version checking
 
 
-flag error: report flags error: invalid format argument; supported values: json, yaml, sarif
+flag error: report flags error: invalid format argument; supported values: json, yaml, sarif, gitlab-sast
 

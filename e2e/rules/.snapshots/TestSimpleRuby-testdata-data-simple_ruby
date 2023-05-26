@@ -35,7 +35,6 @@ medium:
             column:
                 start: 5
                 end: 29
-        content: config.force_ssl = false
       sink:
         location:
             start: 7
@@ -43,6 +42,7 @@ medium:
             column:
                 start: 5
                 end: 29
+        content: config.force_ssl = false
       parent_line_number: 7
       snippet: config.force_ssl = false
       fingerprint: 52ee98cc601d1c1bd772ff548ee32425_0

@@ -16,16 +16,16 @@ high:
             start: 3
             end: 3
             column:
-                start: 1
-                end: 51
-        content: console.log(`h${path}${config.domain}`, user.name)
+                start: 41
+                end: 50
       sink:
         location:
             start: 3
             end: 3
             column:
-                start: 41
-                end: 50
+                start: 1
+                end: 51
+        content: console.log(`h${path}${config.domain}`, user.name)
       parent_line_number: 3
       snippet: console.log(`h${path}${config.domain}`, user.name)
       fingerprint: bbac16a148474689a2cb1b5e2d40ada2_0

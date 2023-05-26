@@ -13,19 +13,19 @@ high:
         - Personal Data
       source:
         location:
+            start: 1
+            end: 1
+            column:
+                start: 10
+                end: 22
+      sink:
+        location:
             start: 2
             end: 2
             column:
                 start: 1
                 end: 18
         content: logger.info(user)
-      sink:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 10
-                end: 22
       parent_line_number: 2
       snippet: logger.info(user)
       fingerprint: 50cde2c647d72172d49858483ecb0b57_0

@@ -13,19 +13,19 @@ high:
         - Personal Data
       source:
         location:
+            start: 1
+            end: 1
+            column:
+                start: 16
+                end: 28
+      sink:
+        location:
             start: 2
             end: 2
             column:
                 start: 1
                 end: 18
         content: console.log(user)
-      sink:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 16
-                end: 28
       parent_line_number: 2
       snippet: console.log(user)
       fingerprint: 3c919e47299fa396f901d19edaad859c_0

@@ -16,16 +16,16 @@ high:
             start: 1
             end: 1
             column:
-                start: 1
-                end: 24
-        content: logger.error(user.name)
+                start: 14
+                end: 23
       sink:
         location:
             start: 1
             end: 1
             column:
-                start: 14
-                end: 23
+                start: 1
+                end: 24
+        content: logger.error(user.name)
       parent_line_number: 1
       snippet: logger.error(user.name)
       fingerprint: b000c2a9a82d59a1e826bc709cca9307_0

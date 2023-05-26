@@ -14,19 +14,19 @@ critical:
         - Personal Data
       source:
         location:
+            start: 1
+            end: 1
+            column:
+                start: 5
+                end: 15
+      sink:
+        location:
             start: 5
             end: 5
             column:
                 start: 1
                 end: 15
         content: log("abc" + x)
-      sink:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 5
-                end: 15
       parent_line_number: 5
       snippet: log("abc" + x)
       fingerprint: 6c505050fabde2c4ed17380d19fab254_0
@@ -49,16 +49,16 @@ critical:
             start: 4
             end: 4
             column:
-                start: 1
-                end: 24
-        content: log("abc" + user.email)
+                start: 13
+                end: 23
       sink:
         location:
             start: 4
             end: 4
             column:
-                start: 13
-                end: 23
+                start: 1
+                end: 24
+        content: log("abc" + user.email)
       parent_line_number: 4
       snippet: log("abc" + user.email)
       fingerprint: 6c505050fabde2c4ed17380d19fab254_2

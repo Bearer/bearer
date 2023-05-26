@@ -15,7 +15,6 @@ low:
             column:
                 start: 9
                 end: 13
-        content: user
       sink:
         location:
             start: 1
@@ -23,6 +22,7 @@ low:
             column:
                 start: 9
                 end: 13
+        content: user
       parent_line_number: 1
       snippet: user
       fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0

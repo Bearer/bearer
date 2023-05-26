@@ -23,7 +23,7 @@ var (
 	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
-var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml, sarif")
+var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml, sarif, gitlab-sast")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: security, privacy")
 var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 

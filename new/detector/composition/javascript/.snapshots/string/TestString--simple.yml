@@ -16,16 +16,16 @@ high:
             start: 1
             end: 1
             column:
-                start: 1
-                end: 34
-        content: console.log("http://", user.name)
+                start: 24
+                end: 33
       sink:
         location:
             start: 1
             end: 1
             column:
-                start: 24
-                end: 33
+                start: 1
+                end: 34
+        content: console.log("http://", user.name)
       parent_line_number: 1
       snippet: console.log("http://", user.name)
       fingerprint: 971b852ae8266c6d2b25437584017e2c_0
