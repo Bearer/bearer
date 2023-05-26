@@ -60,7 +60,6 @@ type Location struct {
 
 type Source struct {
 	*Location
-	Content string `json:"content" yaml:"content"`
 }
 
 type Column struct {
@@ -70,6 +69,7 @@ type Column struct {
 
 type Sink struct {
 	*Location
+	Content string `json:"content" yaml:"content"`
 }
 
 type Output struct {
@@ -200,8 +200,8 @@ func evaluateRules(
 					CategoryGroups:   output.CategoryGroups,
 					Source:           output.Source,
 					Sink:             output.Sink,
-					ParentLineNumber: output.Source.Start,
-					ParentContent:    output.Source.Content,
+					ParentLineNumber: output.Sink.Start,
+					ParentContent:    output.Sink.Content,
 					DetailedContext:  output.DetailedContext,
 					Fingerprint:      fingerprint,
 					OldFingerprint:   oldFingerprint,
@@ -524,7 +524,7 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	reportStr.WriteString(color.HiBlueString("File: " + underline(result.FullFilename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(highlightCodeExtract(result.FullFilename, result.LineNumber, result.Source.Start, result.Source.Content, result))
+	reportStr.WriteString(highlightCodeExtract(result.FullFilename, result.LineNumber, result.Sink.Start, result.Sink.Content, result))
 }
 
 func formatSeverity(severity string) string {
@@ -554,7 +554,7 @@ func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumbe
 		if index == targetIndex {
 			result += color.MagentaString(fmt.Sprintf(" %d ", extractStartLineNumber+index))
 			for i, char := range line {
-				if i >= record.Sink.Column.Start-1 && i < record.Sink.Column.End-1 {
+				if i >= record.Source.Column.Start-1 && i < record.Source.Column.End-1 {
 					result += color.BlueString(fmt.Sprintf("%c", char))
 				} else {
 					result += color.MagentaString(fmt.Sprintf("%c", char))

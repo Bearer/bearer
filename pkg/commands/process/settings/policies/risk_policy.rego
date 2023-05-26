@@ -134,7 +134,7 @@ policy_failure contains item if {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
 		"filename": location.filename,
 		"full_filename": location.full_filename,
-		"source": {
+		"sink": {
 			"start": location.source.start_line_number,
 			"end": location.source.end_line_number,
 			"content": location.source.content,
@@ -143,7 +143,7 @@ policy_failure contains item if {
 				"end": location.source.end_column_number,
 			},
 		},
-		"sink": {
+		"source": {
 			"start": location.start_line_number,
 			"end": location.start_line_number,
 			"column": {

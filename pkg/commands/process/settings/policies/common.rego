@@ -5,7 +5,7 @@ import future.keywords
 build_item(location) := {
 	"filename": location.filename,
 	"full_filename": location.full_filename,
-	"source": {
+	"sink": {
 		"start": location.source.start_line_number,
 		"end": location.source.end_line_number,
 		"content": location.source.content,
@@ -14,7 +14,7 @@ build_item(location) := {
 			"end": location.source.end_column_number,
 		},
 	},
-	"sink": {
+	"source": {
 		"start": location.start_line_number,
 		"end": location.end_line_number,
 		"column": {
@@ -42,7 +42,7 @@ build_local_item(location, data_type) := {
 	"category_groups": groups_for_datatype(data_type),
 	"full_filename": location.full_filename,
 	"filename": location.filename,
-	"source": {
+	"sink": {
 		"start": location.source.start_line_number,
 		"end": location.source.end_line_number,
 		"content": location.source.content,
@@ -51,7 +51,7 @@ build_local_item(location, data_type) := {
 			"end": location.source.end_column_number,
 		},
 	},
-	"sink": {
+	"source": {
 		"start": location.start_line_number,
 		"end": location.end_line_number,
 		"column": {
@@ -69,7 +69,7 @@ build_item(location) := {
 	"category_groups": cat_groups,
 	"full_filename": location.full_filename,
 	"filename": location.filename,
-	"source": {
+	"sink": {
 		"start": location.source.start_line_number,
 		"end": location.source.end_line_number,
 		"content": location.source.content,
@@ -78,7 +78,7 @@ build_item(location) := {
 			"end": location.source.end_column_number,
 		},
 	},
-	"sink": {
+	"source": {
 		"start": location.start_line_number,
 		"end": location.end_line_number,
 		"column": {

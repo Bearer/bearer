@@ -27,14 +27,14 @@ func ReportGitLab(
 					// CVE:                  "",
 					Severity:             formatSeverity(level), // level,
 					Confidence:           "Unknown",
-					RawSourceCodeExtract: finding.Source.Content,
+					RawSourceCodeExtract: finding.Sink.Content,
 					Scanner: gitlab.VulnerabilityScanner{
 						Id:   "bearer",
 						Name: "Bearer",
 					},
 					Location: gitlab.Location{
 						File:      finding.Filename,
-						Startline: finding.Source.Start,
+						Startline: finding.Sink.Start,
 					},
 					Identifiers: []gitlab.Identifier{
 						{

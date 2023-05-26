@@ -37,7 +37,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/routes/dataErasure.ts"
+									"uri": "routes/dataErasure.ts"
 								},
 								"region": {
 									"startLine": 69,
@@ -50,273 +50,63 @@
 					]
 				},
 				{
-					"ruleId": "javascript_express_sql_injection",
+					"ruleId": "javascript_express_path_traversal",
 					"message": {
-						"text": "SQL injection vulnerability detected."
+						"text": "Possible path traversal vulnerability detected."
 					},
 					"locations": [
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/dbSchemaChallenge_1.ts"
+									"uri": "routes/keyServer.ts"
 								},
 								"region": {
-									"startLine": 5,
-									"startColumn": 5,
-									"endColumn": 163,
-									"endLine": 5
+									"startLine": 14,
+									"startColumn": 20,
+									"endColumn": 57,
+									"endLine": 14
 								}
 							}
 						}
 					]
 				},
 				{
-					"ruleId": "javascript_express_sql_injection",
+					"ruleId": "javascript_express_path_traversal",
 					"message": {
-						"text": "SQL injection vulnerability detected."
+						"text": "Possible path traversal vulnerability detected."
 					},
 					"locations": [
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/dbSchemaChallenge_3.ts"
+									"uri": "routes/logfileServer.ts"
 								},
 								"region": {
-									"startLine": 11,
-									"startColumn": 5,
-									"endColumn": 161,
-									"endLine": 11
+									"startLine": 14,
+									"startColumn": 20,
+									"endColumn": 47,
+									"endLine": 14
 								}
 							}
 						}
 					]
 				},
 				{
-					"ruleId": "javascript_express_sql_injection",
+					"ruleId": "javascript_express_path_traversal",
 					"message": {
-						"text": "SQL injection vulnerability detected."
+						"text": "Possible path traversal vulnerability detected."
 					},
 					"locations": [
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/loginAdminChallenge_1.ts"
+									"uri": "routes/quarantineServer.ts"
 								},
 								"region": {
-									"startLine": 20,
-									"startColumn": 5,
-									"endColumn": 208,
-									"endLine": 20
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/loginAdminChallenge_2.ts"
-								},
-								"region": {
-									"startLine": 17,
-									"startColumn": 5,
-									"endColumn": 69,
-									"endLine": 18
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/loginBenderChallenge_1.ts"
-								},
-								"region": {
-									"startLine": 20,
-									"startColumn": 5,
-									"endColumn": 208,
-									"endLine": 20
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/loginBenderChallenge_3.ts"
-								},
-								"region": {
-									"startLine": 17,
-									"startColumn": 5,
-									"endColumn": 83,
-									"endLine": 18
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/loginBenderChallenge_4.ts"
-								},
-								"region": {
-									"startLine": 17,
-									"startColumn": 5,
-									"endColumn": 209,
-									"endLine": 17
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/loginJimChallenge_2.ts"
-								},
-								"region": {
-									"startLine": 17,
-									"startColumn": 5,
-									"endColumn": 209,
-									"endLine": 17
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/loginJimChallenge_4.ts"
-								},
-								"region": {
-									"startLine": 20,
-									"startColumn": 5,
-									"endColumn": 208,
-									"endLine": 20
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/unionSqlInjectionChallenge_1.ts"
-								},
-								"region": {
-									"startLine": 6,
-									"startColumn": 5,
-									"endColumn": 161,
-									"endLine": 6
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/unionSqlInjectionChallenge_3.ts"
-								},
-								"region": {
-									"startLine": 10,
-									"startColumn": 5,
-									"endColumn": 161,
-									"endLine": 10
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/routes/login.ts"
-								},
-								"region": {
-									"startLine": 36,
-									"startColumn": 5,
-									"endColumn": 206,
-									"endLine": 36
-								}
-							}
-						}
-					]
-				},
-				{
-					"ruleId": "javascript_express_sql_injection",
-					"message": {
-						"text": "SQL injection vulnerability detected."
-					},
-					"locations": [
-						{
-							"physicalLocation": {
-								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/routes/search.ts"
-								},
-								"region": {
-									"startLine": 23,
-									"startColumn": 5,
-									"endColumn": 161,
-									"endLine": 23
+									"startLine": 14,
+									"startColumn": 20,
+									"endColumn": 57,
+									"endLine": 14
 								}
 							}
 						}
@@ -331,7 +121,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/lib/insecurity.ts"
+									"uri": "lib/insecurity.ts"
 								},
 								"region": {
 									"startLine": 43,
@@ -352,7 +142,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/lib/insecurity.ts"
+									"uri": "lib/insecurity.ts"
 								},
 								"region": {
 									"startLine": 166,
@@ -373,7 +163,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/routes/profileImageUrlUpload.ts"
+									"uri": "routes/profileImageUrlUpload.ts"
 								},
 								"region": {
 									"startLine": 22,
@@ -394,7 +184,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/lib/insecurity.ts"
+									"uri": "lib/insecurity.ts"
 								},
 								"region": {
 									"startLine": 55,
@@ -415,7 +205,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/frontend/src/app/login/login.component.ts"
+									"uri": "frontend/src/app/login/login.component.ts"
 								},
 								"region": {
 									"startLine": 102,
@@ -428,6 +218,237 @@
 					]
 				},
 				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/dbSchemaChallenge_1.ts"
+								},
+								"region": {
+									"startLine": 5,
+									"startColumn": 5,
+									"endColumn": 163,
+									"endLine": 5
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/dbSchemaChallenge_3.ts"
+								},
+								"region": {
+									"startLine": 11,
+									"startColumn": 5,
+									"endColumn": 161,
+									"endLine": 11
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/loginAdminChallenge_1.ts"
+								},
+								"region": {
+									"startLine": 20,
+									"startColumn": 5,
+									"endColumn": 208,
+									"endLine": 20
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/loginBenderChallenge_1.ts"
+								},
+								"region": {
+									"startLine": 20,
+									"startColumn": 5,
+									"endColumn": 208,
+									"endLine": 20
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/loginBenderChallenge_4.ts"
+								},
+								"region": {
+									"startLine": 17,
+									"startColumn": 5,
+									"endColumn": 209,
+									"endLine": 17
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/loginJimChallenge_2.ts"
+								},
+								"region": {
+									"startLine": 17,
+									"startColumn": 5,
+									"endColumn": 209,
+									"endLine": 17
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/loginJimChallenge_4.ts"
+								},
+								"region": {
+									"startLine": 20,
+									"startColumn": 5,
+									"endColumn": 208,
+									"endLine": 20
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/unionSqlInjectionChallenge_1.ts"
+								},
+								"region": {
+									"startLine": 6,
+									"startColumn": 5,
+									"endColumn": 161,
+									"endLine": 6
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "data/static/codefixes/unionSqlInjectionChallenge_3.ts"
+								},
+								"region": {
+									"startLine": 10,
+									"startColumn": 5,
+									"endColumn": 161,
+									"endLine": 10
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "routes/login.ts"
+								},
+								"region": {
+									"startLine": 36,
+									"startColumn": 5,
+									"endColumn": 206,
+									"endLine": 36
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_lang_sql_injection",
+					"message": {
+						"text": "SQL injection vulnerability detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "routes/search.ts"
+								},
+								"region": {
+									"startLine": 23,
+									"startColumn": 5,
+									"endColumn": 161,
+									"endLine": 23
+								}
+							}
+						}
+					]
+				},
+				{
 					"ruleId": "javascript_express_exposed_dir_listing",
 					"message": {
 						"text": "Missing access restriction to directory listing detected."
@@ -436,7 +457,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts"
 								},
 								"region": {
 									"startLine": 2,
@@ -457,7 +478,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts"
 								},
 								"region": {
 									"startLine": 7,
@@ -478,7 +499,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_2.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_2.ts"
 								},
 								"region": {
 									"startLine": 2,
@@ -499,7 +520,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_2.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_2.ts"
 								},
 								"region": {
 									"startLine": 7,
@@ -520,7 +541,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_2.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_2.ts"
 								},
 								"region": {
 									"startLine": 11,
@@ -541,7 +562,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_3.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_3.ts"
 								},
 								"region": {
 									"startLine": 2,
@@ -562,7 +583,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_3.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_3.ts"
 								},
 								"region": {
 									"startLine": 7,
@@ -583,7 +604,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_3.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_3.ts"
 								},
 								"region": {
 									"startLine": 11,
@@ -604,7 +625,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_4.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_4.ts"
 								},
 								"region": {
 									"startLine": 2,
@@ -625,7 +646,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/accessLogDisclosureChallenge_4.ts"
+									"uri": "data/static/codefixes/accessLogDisclosureChallenge_4.ts"
 								},
 								"region": {
 									"startLine": 7,
@@ -646,7 +667,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_1_correct.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_1_correct.ts"
 								},
 								"region": {
 									"startLine": 2,
@@ -667,7 +688,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_1_correct.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_1_correct.ts"
 								},
 								"region": {
 									"startLine": 6,
@@ -688,7 +709,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_2.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_2.ts"
 								},
 								"region": {
 									"startLine": 6,
@@ -709,7 +730,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_2.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_2.ts"
 								},
 								"region": {
 									"startLine": 10,
@@ -730,7 +751,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_3.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_3.ts"
 								},
 								"region": {
 									"startLine": 2,
@@ -751,7 +772,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_3.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_3.ts"
 								},
 								"region": {
 									"startLine": 5,
@@ -772,7 +793,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_3.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_3.ts"
 								},
 								"region": {
 									"startLine": 9,
@@ -793,7 +814,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_4.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_4.ts"
 								},
 								"region": {
 									"startLine": 2,
@@ -814,7 +835,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_4.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_4.ts"
 								},
 								"region": {
 									"startLine": 7,
@@ -835,7 +856,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/directoryListingChallenge_4.ts"
+									"uri": "data/static/codefixes/directoryListingChallenge_4.ts"
 								},
 								"region": {
 									"startLine": 11,
@@ -856,7 +877,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/server.ts"
+									"uri": "server.ts"
 								},
 								"region": {
 									"startLine": 241,
@@ -877,7 +898,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/server.ts"
+									"uri": "server.ts"
 								},
 								"region": {
 									"startLine": 246,
@@ -898,13 +919,76 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/server.ts"
+									"uri": "server.ts"
 								},
 								"region": {
 									"startLine": 250,
 									"startColumn": 3,
 									"endColumn": 103,
 									"endLine": 250
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_express_external_file_upload",
+					"message": {
+						"text": "External control of filename or path detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "routes/keyServer.ts"
+								},
+								"region": {
+									"startLine": 14,
+									"startColumn": 7,
+									"endColumn": 58,
+									"endLine": 14
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_express_external_file_upload",
+					"message": {
+						"text": "External control of filename or path detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "routes/logfileServer.ts"
+								},
+								"region": {
+									"startLine": 14,
+									"startColumn": 7,
+									"endColumn": 48,
+									"endLine": 14
+								}
+							}
+						}
+					]
+				},
+				{
+					"ruleId": "javascript_express_external_file_upload",
+					"message": {
+						"text": "External control of filename or path detected."
+					},
+					"locations": [
+						{
+							"physicalLocation": {
+								"artifactLocation": {
+									"uri": "routes/quarantineServer.ts"
+								},
+								"region": {
+									"startLine": 14,
+									"startColumn": 7,
+									"endColumn": 58,
+									"endLine": 14
 								}
 							}
 						}
@@ -919,7 +1003,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/lib/insecurity.ts"
+									"uri": "lib/insecurity.ts"
 								},
 								"region": {
 									"startLine": 53,
@@ -940,7 +1024,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/lib/insecurity.ts"
+									"uri": "lib/insecurity.ts"
 								},
 								"region": {
 									"startLine": 54,
@@ -961,7 +1045,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/redirectChallenge_3.ts"
+									"uri": "data/static/codefixes/redirectChallenge_3.ts"
 								},
 								"region": {
 									"startLine": 22,
@@ -982,7 +1066,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/data/static/codefixes/restfulXssChallenge_2.ts"
+									"uri": "data/static/codefixes/restfulXssChallenge_2.ts"
 								},
 								"region": {
 									"startLine": 59,
@@ -1003,7 +1087,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/Gruntfile.js"
+									"uri": "Gruntfile.js"
 								},
 								"region": {
 									"startLine": 74,
@@ -1024,7 +1108,7 @@
 						{
 							"physicalLocation": {
 								"artifactLocation": {
-									"uri": "../../OWASP/juice-shop/lib/insecurity.ts"
+									"uri": "lib/insecurity.ts"
 								},
 								"region": {
 									"startLine": 42,

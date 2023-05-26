@@ -22,6 +22,16 @@
       Source: (security.Source) {
         Location: (*security.Location)({
           Start: (int) 1,
+          End: (int) 0,
+          Column: (security.Column) {
+            Start: (int) 0,
+            End: (int) 0
+          }
+        })
+      },
+      Sink: (security.Sink) {
+        Location: (*security.Location)({
+          Start: (int) 1,
           End: (int) 2,
           Column: (security.Column) {
             Start: (int) 10,
@@ -29,16 +39,6 @@
           }
         }),
         Content: (string) (len=38) "Rails.logger.info(user.biometric_data)"
-      },
-      Sink: (security.Sink) {
-        Location: (*security.Location)({
-          Start: (int) 1,
-          End: (int) 0,
-          Column: (security.Column) {
-            Start: (int) 0,
-            End: (int) 0
-          }
-        })
       },
       ParentLineNumber: (int) 1,
       ParentContent: (string) (len=38) "Rails.logger.info(user.biometric_data)",
