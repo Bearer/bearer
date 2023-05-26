@@ -292,10 +292,5 @@ func (*javascriptImplementation) ContributesToResult(node *tree.Node) bool {
 		return false
 	}
 
-	// Must be the arguments of calls
-	if parent.Type() == "call_expression" && !node.Equal(parent.ChildByFieldName("arguments")) {
-		return false
-	}
-
 	return true
 }
