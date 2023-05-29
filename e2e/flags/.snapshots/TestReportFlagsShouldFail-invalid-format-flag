@@ -37,6 +37,7 @@ Scan Flags
 General Flags
       --config-file string      Load configuration from the specified path. (default "bearer.yml")
       --disable-version-check   Disable Bearer version checking
+      --no-color                Disable color in output
 
 
 flag error: report flags error: invalid format argument; supported values: json, yaml, sarif, gitlab-sast
