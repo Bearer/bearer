@@ -38,6 +38,12 @@ var (
 		Value:      false,
 		Usage:      "Disable Bearer version checking",
 	}
+	NoColorFlag = Flag{
+		Name:       "no-color",
+		ConfigName: "report.no-color",
+		Value:      false,
+		Usage:      "Disable color in output",
+	}
 )
 
 type GeneralFlagGroup struct {
@@ -45,6 +51,7 @@ type GeneralFlagGroup struct {
 	APIKey              *Flag
 	Host                *Flag
 	DisableVersionCheck *Flag
+	NoColor             *Flag
 }
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
@@ -52,6 +59,7 @@ type GeneralOptions struct {
 	ConfigFile          string `json:"config_file" yaml:"config_file"`
 	Client              *api.API
 	DisableVersionCheck bool
+	NoColor             bool `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
 }
 
 func NewGeneralFlagGroup() *GeneralFlagGroup {
@@ -60,6 +68,7 @@ func NewGeneralFlagGroup() *GeneralFlagGroup {
 		APIKey:              &APIKeyFlag,
 		Host:                &HostFlag,
 		DisableVersionCheck: &DisableVersionCheckFlag,
+		NoColor:             &NoColorFlag,
 	}
 }
 
@@ -73,6 +82,7 @@ func (f *GeneralFlagGroup) Flags() []*Flag {
 		f.APIKey,
 		f.Host,
 		f.DisableVersionCheck,
+		f.NoColor,
 	}
 }
 
@@ -98,5 +108,6 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		Client:              client,
 		ConfigFile:          getString(f.ConfigFile),
 		DisableVersionCheck: getBool(f.DisableVersionCheck),
+		NoColor:             getBool(f.NoColor),
 	}
 }

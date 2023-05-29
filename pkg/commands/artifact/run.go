@@ -330,7 +330,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, err
 		}
 
-		outputhandler.StdOutLogger().Msg(placeholderStr.String())
+		logger.Msg(placeholderStr.String())
 		return true, nil
 	}
 
@@ -340,7 +340,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			detectionReport := detections.(*security.Results)
 			reportStr, reportPassed := security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
 
-			outputhandler.StdOutLogger().Msg(reportStr.String())
+			logger.Msg(reportStr.String())
 
 			return reportPassed, nil
 		} else if config.Report.Report == flag.ReportPrivacy {
@@ -350,7 +350,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 				return false, fmt.Errorf("error generating report %s", err)
 			}
 
-			outputhandler.StdOutLogger().Msg(*content)
+			logger.Msg(*content)
 
 			return true, nil
 		}

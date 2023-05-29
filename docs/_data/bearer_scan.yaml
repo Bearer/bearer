@@ -51,6 +51,9 @@ options:
       default_value: '[]'
       usage: |
         Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
+    - name: no-color
+      default_value: "false"
+      usage: Disable color in output
     - name: only-rule
       default_value: '[]'
       usage: |

@@ -1,6 +1,7 @@
 disable-version-check: false
 report:
     format: ""
+    no-color: false
     output: ""
     report: security
     severity: critical,high,medium,low,warning
