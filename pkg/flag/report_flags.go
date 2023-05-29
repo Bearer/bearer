@@ -53,28 +53,37 @@ var (
 		Value:      DefaultSeverity,
 		Usage:      "Specify which severities are included in the report.",
 	}
+	ExcludeFingerprintsFlag = Flag{
+		Name:       "exclude-fingerprints",
+		ConfigName: "report.exclude-fingerprints",
+		Value:      []string{},
+		Usage:      "Specify the comma-separated fingerprints of the findings you would like to exclude from the report.",
+	}
 )
 
 type ReportFlagGroup struct {
-	Format   *Flag
-	Report   *Flag
-	Output   *Flag
-	Severity *Flag
+	Format              *Flag
+	Report              *Flag
+	Output              *Flag
+	Severity            *Flag
+	ExcludeFingerprints *Flag
 }
 
 type ReportOptions struct {
-	Format   string          `mapstructure:"format" json:"format" yaml:"format"`
-	Report   string          `mapstructure:"report" json:"report" yaml:"report"`
-	Output   string          `mapstructure:"output" json:"output" yaml:"output"`
-	Severity map[string]bool `mapstructure:"severity" json:"severity" yaml:"severity"`
+	Format              string          `mapstructure:"format" json:"format" yaml:"format"`
+	Report              string          `mapstructure:"report" json:"report" yaml:"report"`
+	Output              string          `mapstructure:"output" json:"output" yaml:"output"`
+	Severity            map[string]bool `mapstructure:"severity" json:"severity" yaml:"severity"`
+	ExcludeFingerprints map[string]bool `mapstructure:"exclude_fingerprints" json:"exclude_fingerprints" yaml:"exclude_fingerprints"`
 }
 
 func NewReportFlagGroup() *ReportFlagGroup {
 	return &ReportFlagGroup{
-		Format:   &FormatFlag,
-		Report:   &ReportFlag,
-		Output:   &OutputFlag,
-		Severity: &SeverityFlag,
+		Format:              &FormatFlag,
+		Report:              &ReportFlag,
+		Output:              &OutputFlag,
+		Severity:            &SeverityFlag,
+		ExcludeFingerprints: &ExcludeFingerprintsFlag,
 	}
 }
 
@@ -88,6 +97,7 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 		f.Report,
 		f.Output,
 		f.Severity,
+		f.ExcludeFingerprints,
 	}
 }
 
@@ -138,10 +148,18 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 		}
 	}
 
+	// turn string slice into map for ease of access
+	excludeFingerprints := getStringSlice(f.ExcludeFingerprints)
+	excludeFingerprintsMapping := make(map[string]bool)
+	for _, fingerprint := range excludeFingerprints {
+		excludeFingerprintsMapping[fingerprint] = true
+	}
+
 	return ReportOptions{
-		Format:   format,
-		Report:   report,
-		Output:   getString(f.Output),
-		Severity: severityMapping,
+		Format:              format,
+		Report:              report,
+		Output:              getString(f.Output),
+		Severity:            severityMapping,
+		ExcludeFingerprints: excludeFingerprintsMapping,
 	}, nil
 }
