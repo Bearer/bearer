@@ -230,7 +230,6 @@ func evaluateRules(
 }
 
 func BuildReportString(config settings.Config, results *Results, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
-	withoutColor := config.Report.Output != ""
 	severityForFailure := config.Report.Severity
 	reportStr := &strings.Builder{}
 
@@ -238,7 +237,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 	reportStr.WriteString("\n=====================================")
 
 	initialColorSetting := color.NoColor
-	if withoutColor && !initialColorSetting {
+	if config.NoColor && !initialColorSetting {
 		color.NoColor = true
 	}
 
