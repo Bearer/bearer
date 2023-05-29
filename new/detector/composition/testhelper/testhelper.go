@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands"
-	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
@@ -109,7 +109,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 	}
 
 	err = runner.worker.Scan(work.ProcessRequest{
-		Files:      []work.File{fileRelativePath},
+		File:       fileRelativePath,
 		ReportPath: detectorsReportPath,
 		Repository: work.Repository{
 			Dir: testDataPath,

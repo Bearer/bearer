@@ -14,7 +14,6 @@ import (
 )
 
 var (
-	Workers                   = 1                 // The number of processing workers to spawn
 	Timeout                   = 10 * time.Minute  // "The maximum time alloted to complete the scan
 	TimeoutFileMinimum        = 5 * time.Second   // Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
 	TimeoutFileMaximum        = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
@@ -27,7 +26,6 @@ var (
 )
 
 type WorkerOptions struct {
-	Workers                   int           `mapstructure:"workers" json:"workers" yaml:"workers"`
 	Timeout                   time.Duration `mapstructure:"timeout" json:"timeout" yaml:"timeout"`
 	TimeoutFileMinimum        time.Duration `mapstructure:"timeout-file-min" json:"timeout-file-min" yaml:"timeout-file-min"`
 	TimeoutFileMaximum        time.Duration `mapstructure:"timeout-file-max"  json:"timeout-file-max" yaml:"timeout-file-max"`
@@ -254,7 +252,6 @@ func (rule *Rule) Language() string {
 
 func defaultWorkerOptions() WorkerOptions {
 	return WorkerOptions{
-		Workers:                   Workers,
 		Timeout:                   Timeout,
 		TimeoutFileMinimum:        TimeoutFileMinimum,
 		TimeoutFileMaximum:        TimeoutFileMaximum,

@@ -26,8 +26,9 @@ func NewProcessingWorkerCommand() *cobra.Command {
 			}
 
 			output.Setup(cmd, output.SetupRequest{
-				Debug: viper.GetBool(flag.DebugFlag.ConfigName),
-				Quiet: viper.GetBool(flag.QuietFlag.ConfigName),
+				Debug:     viper.GetBool(flag.DebugFlag.ConfigName),
+				Quiet:     viper.GetBool(flag.QuietFlag.ConfigName),
+				ProcessID: viper.GetString(flag.WorkerIDFlag.ConfigName),
 			})
 
 			processOptions, err := flags.ProcessFlagGroup.ToOptions()
@@ -35,7 +36,6 @@ func NewProcessingWorkerCommand() *cobra.Command {
 				return fmt.Errorf("options binding error: %w", err)
 			}
 
-			log.Debug().Msgf("started scan processing")
 			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
 
 			return worker.Start(processOptions.Port)

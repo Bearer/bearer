@@ -4,13 +4,12 @@ import (
 	"time"
 )
 
-type StatusResponse struct {
-	ClassifierError     string
-	CustomDetectorError string
+type InitializeResponse struct {
+	Error string
 }
 
 type ProcessResponse struct {
-	Error error
+	Error string
 }
 
 type Repository struct {
@@ -21,7 +20,7 @@ type Repository struct {
 
 type ProcessRequest struct {
 	Repository
-	Files                  []File
+	File                   File
 	ReportPath             string
 	BlameRevisionsFilePath string
 }
@@ -31,5 +30,5 @@ type File struct {
 	FilePath string
 }
 
-var RouteStatus = "/status"
+var RouteInitialize = "/initialize"
 var RouteProcess = "/process"

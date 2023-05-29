@@ -15,8 +15,9 @@ var (
 )
 
 type SetupRequest struct {
-	Quiet bool
-	Debug bool
+	Quiet     bool
+	Debug     bool
+	ProcessID string
 }
 
 // DefaultLogger returns default output logger
@@ -38,6 +39,7 @@ func PlainLogger(out io.Writer) *zerolog.Event {
 		FormatLevel: func(i interface{}) string {
 			return ""
 		},
+		FieldsExclude: []string{"process"},
 	})
 
 	return logger.Info()
@@ -46,6 +48,8 @@ func PlainLogger(out io.Writer) *zerolog.Event {
 func Setup(cmd *cobra.Command, options SetupRequest) {
 	outputWriter = cmd.OutOrStdout()
 	ErrorWriter = cmd.ErrOrStderr()
+
+	log.Logger = log.With().Str("process", options.ProcessID).Logger()
 
 	if options.Debug {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)

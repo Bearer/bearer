@@ -56,8 +56,9 @@ func NewScanCommand() *cobra.Command {
 			}
 
 			output.Setup(cmd, output.SetupRequest{
-				Debug: viper.GetBool(flag.DebugFlag.ConfigName),
-				Quiet: viper.GetBool(flag.QuietFlag.ConfigName),
+				Debug:     viper.GetBool(flag.DebugFlag.ConfigName),
+				Quiet:     viper.GetBool(flag.QuietFlag.ConfigName),
+				ProcessID: "main",
 			})
 
 			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)

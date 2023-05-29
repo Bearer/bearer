@@ -49,12 +49,14 @@ func (worker *Worker) Setup(config config.Config) error {
 func (worker *Worker) Scan(scanRequest work.ProcessRequest) error {
 	blamer := blamer.New(scanRequest.Dir, scanRequest.BlameRevisionsFilePath, scanRequest.PreviousCommitSHA)
 
-	var filesList []string
-	for _, file := range scanRequest.Files {
-		filesList = append(filesList, file.FilePath)
-	}
-
-	return scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.ReportPath, worker.classifer, worker.scanners)
+	return scanner.Scan(
+		scanRequest.Dir,
+		[]string{scanRequest.File.FilePath},
+		blamer,
+		scanRequest.ReportPath,
+		worker.classifer,
+		worker.scanners,
+	)
 }
 
 func Start(port string) error {
@@ -64,15 +66,15 @@ func Start(port string) error {
 		defer r.Body.Close() //golint:all,errcheck
 
 		switch r.URL.Path {
-		case work.RouteStatus:
+		case work.RouteInitialize:
 			var config config.Config
 			json.NewDecoder(r.Body).Decode(&config) //nolint:all,errcheck
 
-			response := work.StatusResponse{}
+			response := work.InitializeResponse{}
 
 			err := worker.Setup(config)
 			if err != nil {
-				response.ClassifierError = err.Error()
+				response.Error = err.Error()
 			}
 
 			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
@@ -85,7 +87,7 @@ func Start(port string) error {
 
 			err := worker.Scan(scanRequest)
 			if err != nil {
-				response.Error = err
+				response.Error = err.Error()
 			}
 
 			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck

@@ -9,8 +9,8 @@ import (
 
 var ErrCreateFailed = errors.New("failed to create file")
 
-func Create(tmpDir string, ext string) string {
-	outputFile, err := os.CreateTemp(tmpDir, "*"+ext)
+func Create(ext string) string {
+	outputFile, err := os.CreateTemp("", "*"+ext)
 	if err != nil {
 		log.Fatal().Msgf("got create fail error %s %s", err, ErrCreateFailed)
 	}

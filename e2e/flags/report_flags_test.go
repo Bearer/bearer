@@ -42,7 +42,7 @@ func TestReportFlagsShouldFail(t *testing.T) {
 
 func TestOuputFlag(t *testing.T) {
 	t.Parallel()
-	outputPath := tmpfile.Create("", "test_output.jsonl")
+	outputPath := tmpfile.Create("test_output.jsonl")
 	defer func() {
 		err := os.Remove(outputPath)
 		if err != nil {

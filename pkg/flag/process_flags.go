@@ -8,19 +8,29 @@ var (
 		Value:      "",
 		Usage:      "Set the server's listening port.",
 	}
+
+	WorkerIDFlag = Flag{
+		Name:       "worker-id",
+		ConfigName: "process.worker-id",
+		Value:      "",
+		Usage:      "Set the worker's identifier.",
+	}
 )
 
 type ProcessFlagGroup struct {
-	PortFlag *Flag
+	PortFlag     *Flag
+	WorkerIDFlag *Flag
 }
 
 type ProcessOptions struct {
-	Port string `mapstructure:"port" json:"port" yaml:"port"`
+	WorkerID string `mapstructure:"worker-id" json:"worker-id" yaml:"worker-id"`
+	Port     string `mapstructure:"port" json:"port" yaml:"port"`
 }
 
 func NewProcessGroup() *ProcessFlagGroup {
 	return &ProcessFlagGroup{
-		PortFlag: &PortFlag,
+		PortFlag:     &PortFlag,
+		WorkerIDFlag: &WorkerIDFlag,
 	}
 }
 
@@ -31,13 +41,16 @@ func (f *ProcessFlagGroup) Name() string {
 func (f *ProcessFlagGroup) Flags() []*Flag {
 	return []*Flag{
 		f.PortFlag,
+		f.WorkerIDFlag,
 	}
 }
 
 func (f *ProcessFlagGroup) ToOptions() (ProcessOptions, error) {
 	port := getString(f.PortFlag)
+	workerID := getString(f.WorkerIDFlag)
 
 	return ProcessOptions{
-		Port: port,
+		Port:     port,
+		WorkerID: workerID,
 	}, nil
 }
