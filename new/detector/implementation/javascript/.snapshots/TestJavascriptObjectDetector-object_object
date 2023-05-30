@@ -14,6 +14,14 @@
                       object: null
                 isvirtual: false
     isvirtual: true
+- position: "1:14"
+  content: '{ "a": 123 }'
+  data:
+    properties:
+        - name: a
+          node: {}
+          object: null
+    isvirtual: false
 - position: "3:6"
   content: |-
     {
@@ -59,6 +67,58 @@
                                   node: {}
                                   object: null
                             isvirtual: false
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: nested
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
                 isvirtual: false
         - name: "y"
           node: {}
@@ -71,5 +131,59 @@
                       node: {}
                       object: null
                 isvirtual: false
+    isvirtual: false
+- position: "4:6"
+  content: '{ n: nested }'
+  data:
+    properties:
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: nested
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- position: "5:6"
+  content: '{ b: 4 }'
+  data:
+    properties:
+        - name: b
+          node: {}
+          object: null
     isvirtual: false
 

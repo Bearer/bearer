@@ -8,3 +8,7 @@ obj["x"].a
 obj.z
 @myvar.x
 @myvar["w"]
+
+# Multiple index
+foo = [:a, :b, :c, :d, :e]
+foo[0, 2]
