@@ -16,7 +16,7 @@ steps:
   - uses: bearer/bearer-action@v2
 ```
 
-For more details and additional configuration, see our [guide to using the GitHub action](/guides/github-action/).
+For more details and additional configuration, see our [guide to using the GitHub action](/guides/github-action/). To hook directly into GitHub's code scanning feature, check the [configure GitHub code scanning](/guides/github-action/#configure-github-code-scanning) section of the doc.
 
 ## GitLab
 
@@ -34,6 +34,26 @@ bearer:
 This tells GitLab to use the `bearer/bearer` docker image. You can adjust the `script` key to [customize the scan](/guides/configure-scan/) with flags the same way as a local installation. An example of this file is available in [our example GitLab repo](https://gitlab.com/cfabianski/bear-publishing/-/tree/main).
 
 GitLab's guide on [Running CI/CD jobs in Docker containers](https://docs.gitlab.com/ee/ci/docker/using_docker_images.html) provides additional context on configuring the CI in this way.
+
+### Enable GitLab security scanning integration
+
+GitLab offers an integrated security scanner that can take results from Bearer CLI's scan and add them to your repository's Security and Compliance page. To take advantage of this, you'll need a GitLab plan that supports it. Then, you can configure your `.gitlab-ci.yml` file with Bearer CLI's special format type.
+
+```yml
+image:
+  name: bearer/bearer
+  entrypoint: [ "" ]
+
+bearer:   
+  script:     
+    - bearer scan . --format gitlab-sast --output gl-sast-report.json    
+  
+  artifacts:    
+    reports:       
+      sast: gl-sast-report.json
+```
+
+These changes set the format to `gitlab-sast` and write an artifact that GitLab can use.
 
 ## Universal setup
 

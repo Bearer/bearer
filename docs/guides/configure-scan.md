@@ -118,3 +118,13 @@ Depending on how you're using Bearer CLI, you may want to limit the severity lev
 ```bash
 bearer scan . --severity critical,high
 ```
+
+## Generate a SARIF report
+
+Bearer CLI offers SARIF output for tools that make use of the standard. To generate a security report in SARIF and write it to disk, use the `--format` and `--output` flags.
+
+```bash
+bearer scan . --format sarif --output sarif-report-sarif
+```
+
+If you're using GitHub or GitLab, you can use our [integrations](/guides/ci-setup/) to send SARIF reports directly to those services.
