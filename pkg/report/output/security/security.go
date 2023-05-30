@@ -18,8 +18,10 @@ import (
 	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
+	log "github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
+
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
@@ -191,6 +193,12 @@ func evaluateRules(
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i)
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
+
+				if config.Report.ExcludeFingerprints[fingerprint] {
+					// skip finding - fingerprint is in exclude list
+					log.Debug().Msgf("Excluding finding with fingerprint %s", fingerprint)
+					continue
+				}
 
 				result := Result{
 					Rule:             ruleSummary,
