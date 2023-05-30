@@ -51,6 +51,7 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 
 	timer := time.NewTimer(TestTimeout)
 	commandFinished := make(chan struct{}, 1)
+	combinedOutput := func() string { return buffOut.String() + "\n--\n" + buffErr.String() }
 
 	go func() {
 		err = cmd.Start()
@@ -67,14 +68,12 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	select {
 	case <-timer.C:
 		cancel()
-		t.Fatalf("command failed to complete on time 'bearer %s'", strings.Join(arguments, " "))
+		t.Fatalf("command failed to complete on time 'bearer %s':\n%s", strings.Join(arguments, " "), combinedOutput())
 	case <-commandFinished:
 		cancel()
 	}
 
-	combinedOutput := buffOut.String() + "\n--\n" + buffErr.String()
-
-	return combinedOutput, err
+	return combinedOutput(), err
 }
 
 func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
