@@ -114,7 +114,7 @@ func (process *Process) monitorCommand() {
 			}
 			return
 		case <-ended:
-			process.reportError(ErrorCrashed)
+			process.errorChannel <- ErrorCrashed
 			return
 		}
 	}()
@@ -140,7 +140,7 @@ func (process *Process) monitorMemory(maxMemoryBytes int) {
 			}
 
 			if stats.Memory > float64(maxMemoryBytes) {
-				process.reportError(ErrorOutOfMemory)
+				process.errorChannel <- ErrorOutOfMemory
 				return
 			}
 		}
@@ -191,11 +191,6 @@ func (process *Process) initialize(config settings.Config) error {
 	}
 }
 
-func (process *Process) reportError(err error) {
-	process.errorChannel <- err
-	process.Close()
-}
-
 func (process *Process) Scan(scanRequest work.ProcessRequest) (*work.ProcessResponse, error) {
 	scanComplete := make(chan *work.ProcessResponse)
 
@@ -230,10 +225,11 @@ func (process *Process) Scan(scanRequest work.ProcessRequest) (*work.ProcessResp
 
 	timeout := time.NewTimer(scanRequest.File.Timeout)
 	select {
-	case err := <-process.errorChannel:
-		return nil, err
 	case response := <-scanComplete:
 		return response, nil
+	case err := <-process.errorChannel:
+		process.Close()
+		return nil, err
 	case <-timeout.C:
 		process.Close()
 		return nil, ErrorTimeoutReached
