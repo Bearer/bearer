@@ -171,6 +171,7 @@ func Scan(repository work.Repository, config settings.Config, reportPath string)
 		return err
 	}
 
-	defer orchestrator.Close()
-	return orchestrator.Scan()
+	err = orchestrator.Scan()
+	orchestrator.Close()
+	return err
 }

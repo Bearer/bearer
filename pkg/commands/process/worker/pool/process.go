@@ -152,26 +152,22 @@ func (process *Process) initialize(config settings.Config) error {
 	start := time.Now()
 	killTime := time.Now().Add(config.Worker.TimeoutWorkerOnline)
 
-	for {
-		select {
-		case <-process.context.Done():
-			return nil
-		default:
-		}
+	marshalledConfig, err := json.Marshal(config)
+	if err != nil {
+		log.Fatal().Err(fmt.Errorf("couldn't marshal config %w", err)).Send()
+	}
 
+	request, err := process.buildRequest(work.RouteInitialize, bytes.NewBuffer(marshalledConfig))
+	if err != nil {
+		log.Fatal().Msgf("%s failed to build initialization request %s", process.id, err)
+	}
+
+	for {
+		if process.context.Err() != nil {
+			return process.context.Err()
+		}
 		if time.Now().After(killTime) {
 			return ErrorNotSpawned
-		}
-
-		marshalledConfig, err := json.Marshal(config)
-		if err != nil {
-			log.Fatal().Err(fmt.Errorf("couldn't marshal config %w", err)).Send()
-		}
-
-		request, err := process.buildRequest(work.RouteInitialize, bytes.NewBuffer(marshalledConfig))
-		if err != nil {
-			log.Debug().Msgf("%s failed to build initialization request %s", process.id, err)
-			continue
 		}
 
 		response, err := process.client.Do(request)
