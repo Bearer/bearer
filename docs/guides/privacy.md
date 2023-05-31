@@ -4,13 +4,13 @@ title: Run a privacy report
 
 # Run a privacy report
 
-Bearer CLI's [privacy report type](/explanations/reports/#privacy-report) allows anyone on your team to generate information about the data types processed by your app, as well as any third-party libraries or APIs that receive data. This enables you to do things like:
+Bearer CLI's [privacy report type](/explanations/reports/#privacy-report) allows you to collect information (sensitive data, data subjects, internal and third-party components processing sensitive data) that are required to comply with numerous privacy laws. This enables you to do things like:
 
-- Automate evidence collection to fulfill compliance requirements, such as a record of processing activities (ROPA) for GDPR.
+- Create a record of processing activities (ROPA) for GDPR.
 - Create snapshots of data processing over time.
-- Compare processing across applications.
-- Identify third parties that receive sensitive data.
-- Spot unexpected sensitive data use, like PII or HPI, in code that isn't expected to contain it.
+- Compare sensitive data processing across multiple applications.
+- Identify existing and new third parties that process sensitive data.
+- Detect oversharing of sensitive data.
 
 ## Getting started
 
