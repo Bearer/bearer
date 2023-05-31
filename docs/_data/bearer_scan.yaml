@@ -30,7 +30,8 @@ options:
       default_value: 3s
       usage: |
         Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s
-    - name: exclude-fingerprints
+    - name: exclude-fingerprint
+      default_value: '[]'
       usage: |
         Specify the comma-separated fingerprints of the findings you would like to exclude from the report.
     - name: external-rule-dir

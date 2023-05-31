@@ -194,7 +194,7 @@ func evaluateRules(
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i)
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
 
-				if config.Report.ExcludeFingerprints[fingerprint] {
+				if config.Report.ExcludeFingerprint[fingerprint] {
 					// skip finding - fingerprint is in exclude list
 					log.Debug().Msgf("Excluding finding with fingerprint %s", fingerprint)
 					continue
