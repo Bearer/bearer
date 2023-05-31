@@ -34,6 +34,7 @@ type orchestrator struct {
 	pool                *pool.Pool
 	progressBar         *progressbar.ProgressBar
 	waitGroup           sync.WaitGroup
+	reportMutex         sync.Mutex
 }
 
 func newOrchestrator(
@@ -139,7 +140,12 @@ func (orchestrator *orchestrator) writeFileResult(reportPath string) {
 		return
 	}
 
-	orchestrator.reportFile.Write(reportBytes) //nolint:all,errcheck
+	orchestrator.reportMutex.Lock()
+	_, err = orchestrator.reportFile.Write(reportBytes)
+	if err != nil {
+		log.Error().Msgf("failed to write tmp report into main report file %s: %s", reportPath, err)
+	}
+	orchestrator.reportMutex.Unlock()
 }
 
 func (orchestrator *orchestrator) writeFileError(file work.File, fileErr error) {
@@ -158,9 +164,11 @@ func (orchestrator *orchestrator) writeFileError(file work.File, fileErr error) 
 		Error:    fileErr.Error(),
 	}}
 
+	orchestrator.reportMutex.Lock()
 	if err := jsonlines.Encode(orchestrator.reportFile, &detections); err != nil {
 		log.Error().Msgf("failed to encode error for %s: %s", fullPath, err)
 	}
+	orchestrator.reportMutex.Unlock()
 }
 
 func Scan(repository work.Repository, config settings.Config, reportPath string) error {
