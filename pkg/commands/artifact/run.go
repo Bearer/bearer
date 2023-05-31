@@ -21,7 +21,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
-	"github.com/bearer/bearer/pkg/commands/process/balancer"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
@@ -63,16 +63,14 @@ type Runner interface {
 }
 
 type runner struct {
-	balancer       *balancer.Monitor
 	reportPath     string
 	reuseDetection bool
+	scanSettings   settings.Config
 }
 
 // NewRunner initializes Runner that provides scanning functionalities.
 func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
-	r := &runner{}
-
-	r.balancer = balancer.New(scanSettings)
+	r := &runner{scanSettings: scanSettings}
 
 	scanID, err := buildScanID(scanSettings)
 	if err != nil {
@@ -196,18 +194,16 @@ func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.R
 
 func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Report, error) {
 	if !r.reuseDetection {
-		task := r.balancer.ScheduleTask(work.ProcessRequest{
-			Repository: work.Repository{
+		if err := orchestrator.Scan(
+			work.Repository{
 				Dir:               opts.Target,
 				PreviousCommitSHA: "",
 				CommitSHA:         "",
 			},
-			ReportPath: r.reportPath,
-		})
-		result := <-task.Done
-
-		if result.Error != nil {
-			return types.Report{}, result.Error
+			r.scanSettings,
+			r.reportPath,
+		); err != nil {
+			return types.Report{}, err
 		}
 	}
 
@@ -261,8 +257,8 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	switch targetKind {
 	case TargetFilesystem:
 		if report, err = r.ScanFilesystem(ctx, opts); err != nil {
-			if errors.Is(err, balancer.ErrFileListEmpty) {
-				outputhandler.StdOutLogger().Msgf("directory empty: %s", err)
+			if errors.Is(err, orchestrator.ErrFileListEmpty) {
+				outputhandler.StdOutLogger().Msgf(err.Error())
 				os.Exit(0)
 				return
 			}

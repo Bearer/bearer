@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/bearer/bearer/pkg/commands/process/balancer/fileignore"
-	"github.com/bearer/bearer/pkg/commands/process/balancer/timeout"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/fileignore"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/timeout"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/util/gitutil"

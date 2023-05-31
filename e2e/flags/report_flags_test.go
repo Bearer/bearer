@@ -11,12 +11,16 @@ import (
 )
 
 func newScanTest(name string, arguments []string) testhelper.TestCase {
-	arguments = append([]string{"scan", filepath.Join("e2e", "flags", "testdata", "simple")}, arguments...)
+	arguments = append([]string{
+		"scan",
+		"--disable-version-check",
+		filepath.Join("e2e", "flags", "testdata", "simple")},
+		arguments...,
+	)
 	return testhelper.NewTestCase(name, arguments, testhelper.TestCaseOptions{})
 }
 
 func TestReportFlags(t *testing.T) {
-	t.Parallel()
 	tests := []testhelper.TestCase{
 		newScanTest("report-dataflow", []string{"--report=dataflow"}),
 	}
@@ -41,8 +45,7 @@ func TestReportFlagsShouldFail(t *testing.T) {
 }
 
 func TestOuputFlag(t *testing.T) {
-	t.Parallel()
-	outputPath := tmpfile.Create("", "test_output.jsonl")
+	outputPath := tmpfile.Create("test_output.jsonl")
 	defer func() {
 		err := os.Remove(outputPath)
 		if err != nil {

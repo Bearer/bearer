@@ -2,8 +2,12 @@ package flag
 
 import (
 	"errors"
+	"math"
+	"runtime"
 	"strings"
 	"time"
+
+	"github.com/spf13/viper"
 )
 
 type Context string
@@ -86,6 +90,12 @@ var (
 		Value:      []string{ScannerSAST},
 		Usage:      "Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast",
 	}
+	ParallelFlag = Flag{
+		Name:       "parallel",
+		ConfigName: "scan.parallel",
+		Value:      int(math.Min(float64(runtime.NumCPU()), 4)),
+		Usage:      "Specify the amount of parallelism to use during the scan",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -100,6 +110,7 @@ type ScanFlagGroup struct {
 	QuietFlag                   *Flag
 	ForceFlag                   *Flag
 	ExternalRuleDirFlag         *Flag
+	ParallelFlag                *Flag
 }
 
 type ScanOptions struct {
@@ -115,6 +126,7 @@ type ScanOptions struct {
 	Force                   bool          `mapstructure:"force" json:"force" yaml:"force"`
 	ExternalRuleDir         []string      `mapstructure:"external-rule-dir" json:"external-rule-dir" yaml:"external-rule-dir"`
 	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
+	Parallel                int           `mapstructure:"parallel" json:"parallel" yaml:"parallel"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -130,6 +142,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		ForceFlag:                   &ForceFlag,
 		ExternalRuleDirFlag:         &ExternalRuleDirFlag,
 		ScannerFlag:                 &ScannerFlag,
+		ParallelFlag:                &ParallelFlag,
 	}
 }
 
@@ -150,6 +163,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.ForceFlag,
 		f.ExternalRuleDirFlag,
 		f.ScannerFlag,
+		f.ParallelFlag,
 	}
 }
 
@@ -189,6 +203,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Target:                  target,
 		ExternalRuleDir:         getStringSlice(f.ExternalRuleDirFlag),
 		Scanner:                 scanners,
+		Parallel:                viper.GetInt(f.ParallelFlag.ConfigName),
 	}, nil
 }
 

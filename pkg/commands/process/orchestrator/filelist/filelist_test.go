@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/bearer/bearer/pkg/commands/process/balancer/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
