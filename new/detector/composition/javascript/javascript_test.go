@@ -20,21 +20,17 @@ var deconstructingRule []byte
 var scopeRule []byte
 
 func TestFlow(t *testing.T) {
-	t.Parallel()
 	testhelper.GetRunner(t, datatypeRule, "Javascript").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestObjectDeconstructing(t *testing.T) {
-	t.Parallel()
 	testhelper.GetRunner(t, deconstructingRule, "Javascript").RunTest(t, "./testdata/testcases/object-deconstructing", ".snapshots/object-deconstructing/")
 }
 
 func TestString(t *testing.T) {
-	t.Parallel()
 	testhelper.GetRunner(t, insecureURLRule, "Javascript").RunTest(t, "./testdata/testcases/string", ".snapshots/string/")
 }
 
 func TestScope(t *testing.T) {
-	t.Parallel()
 	testhelper.GetRunner(t, scopeRule, "Javascript").RunTest(t, "./testdata/scope", ".snapshots/")
 }
