@@ -37,7 +37,11 @@ GitLab's guide on [Running CI/CD jobs in Docker containers](https://docs.gitlab.
 
 ### Enable GitLab security scanning integration
 
-GitLab offers an integrated security scanner that can take results from Bearer CLI's scan and add them to your repository's Security and Compliance page. To take advantage of this, you'll need a GitLab plan that supports it. Then, you can configure your `.gitlab-ci.yml` file with Bearer CLI's special format type.
+GitLab offers an integrated security scanner that can take results from Bearer CLI's scan and add them to your repository's Security and Compliance page. 
+
+![Bearer CLI security report in GitLab security results](/assets/img/gitlab-code-scanning.jpg)
+
+To take advantage of this, you'll need a GitLab plan that supports it. Then, you can configure your `.gitlab-ci.yml` file with Bearer CLI's special format type.
 
 ```yml
 image:
@@ -53,7 +57,7 @@ bearer:
       sast: gl-sast-report.json
 ```
 
-These changes set the format to `gitlab-sast` and write an artifact that GitLab can use.
+These changes set the format to `gitlab-sast` and write an artifact that GitLab can use. Once run, the results of the security scan will display in the Security and Compliance section of the repository.
 
 ## Universal setup
 

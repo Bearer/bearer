@@ -84,6 +84,8 @@ The following are a list of available inputs and outputs:
 ## Configure GitHub code scanning
 Bearer CLI supports [GitHub code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning). By using the SARIF output format, you can display [security report](/explanations/reports/#security-report) findings directly in the Security tab of your repository.
 
+![Bearer CLI results in GitHub security tab](/assets/img/gh-code-scanning.jpg)
+
 To enable this feature, update your action configuration to include new permissions, new format and outputs, and an additional step. Here's an example configuration:
 
 ```diff-yml
