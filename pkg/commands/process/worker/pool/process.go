@@ -35,6 +35,7 @@ type Process struct {
 	context       context.Context
 	cancelContext context.CancelFunc
 	errorChannel  chan error
+	exitChannel   chan struct{}
 	client        *http.Client
 	baseURL       string
 }
@@ -66,6 +67,7 @@ func newProcess(options *ProcessOptions, id string) (*Process, error) {
 		context:       context,
 		cancelContext: cancelContext,
 		errorChannel:  make(chan error, 1),
+		exitChannel:   make(chan struct{}),
 		client:        &http.Client{Timeout: 0},
 		baseURL:       fmt.Sprintf("http://localhost:%d", port),
 	}
@@ -103,8 +105,6 @@ func (process *Process) start(config settings.Config) error {
 }
 
 func (process *Process) monitorCommand() {
-	ended := make(chan struct{})
-
 	go func() {
 		select {
 		case <-process.context.Done():
@@ -112,15 +112,14 @@ func (process *Process) monitorCommand() {
 			if err := process.command.Process.Kill(); err != nil {
 				log.Debug().Msgf("%s failed killing process: %s", process.id, err)
 			}
-			return
-		case <-ended:
+		case <-process.exitChannel:
 			process.errorChannel <- ErrorCrashed
 			return
 		}
 	}()
 
-	process.command.Wait() //nolint:all,errcheck
-	close(ended)
+	process.command.Wait()
+	close(process.exitChannel)
 }
 
 func (process *Process) monitorMemory(maxMemoryBytes int) {
@@ -266,6 +265,7 @@ func (process *Process) initializationResponse(response *http.Response) (bool, e
 
 func (process *Process) Close() {
 	process.cancelContext()
+	<-process.exitChannel
 }
 
 func allocatePort() int {

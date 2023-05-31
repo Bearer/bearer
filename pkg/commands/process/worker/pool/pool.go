@@ -16,6 +16,7 @@ type Pool struct {
 	processOptions ProcessOptions
 	mutex          sync.Mutex
 	nextId         int
+	closed         bool
 	available      []*Process
 }
 
@@ -64,6 +65,12 @@ func (pool *Pool) Scan(request work.ProcessRequest) error {
 
 func (pool *Pool) get() (*Process, error) {
 	pool.mutex.Lock()
+
+	if pool.closed {
+		pool.mutex.Unlock()
+		return nil, errors.New("pool closed")
+	}
+
 	if len(pool.available) != 0 {
 		process := pool.available[len(pool.available)-1]
 		pool.available = pool.available[:len(pool.available)-1]
@@ -85,7 +92,23 @@ func (pool *Pool) get() (*Process, error) {
 }
 
 func (pool *Pool) Close() {
-	for _, process := range pool.available {
-		process.Close()
+	pool.mutex.Lock()
+	defer pool.mutex.Unlock()
+
+	if pool.closed {
+		return
 	}
+
+	var waitGroup sync.WaitGroup
+	waitGroup.Add(len(pool.available))
+
+	for _, process := range pool.available {
+		go func(process *Process) {
+			process.Close()
+			waitGroup.Done()
+		}(process)
+	}
+
+	waitGroup.Wait()
+	pool.closed = true
 }
