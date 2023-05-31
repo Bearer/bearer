@@ -59,5 +59,18 @@ rule.metadata %}
         {% endfor %}
       </ul>
     {% endif %}
-
   {% endif %}
+
+{% renderTemplate "liquid,md", rule.metadata %}
+  ## Configuration
+
+  To skip this rule during a scan, use the following flag
+  ```shell
+  bearer scan /path/to/your-project/ --skip-rule={{id}}
+  ```
+
+  To run _only_ this rule during a scan, use the following flag
+  ```shell
+  bearer scan /path/to/your-project/ --only-rule={{id}}
+  ```
+{% endrenderTemplate %}
