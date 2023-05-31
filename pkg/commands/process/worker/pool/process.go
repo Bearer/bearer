@@ -118,7 +118,7 @@ func (process *Process) monitorCommand() {
 		}
 	}()
 
-	process.command.Wait()
+	process.command.Wait() //nolint:errcheck
 	close(process.exitChannel)
 }
 
