@@ -79,6 +79,8 @@ const (
 	CURSOR_SCOPE RuleReferenceScope = "cursor"
 	NESTED_SCOPE RuleReferenceScope = "nested"
 	RESULT_SCOPE RuleReferenceScope = "result"
+
+	DefaultScope = NESTED_SCOPE
 )
 
 type LoadRulesResult struct {

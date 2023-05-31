@@ -182,7 +182,7 @@ func (evaluator *evaluator) sanitizedNodeDetections(
 	scope settings.RuleReferenceScope,
 ) ([]*types.Detection, bool, error) {
 	if sanitizerDetectorType != "" {
-		sanitizerDetections, err := evaluator.nonUnifiedNodeDetections(node, sanitizerDetectorType, scope)
+		sanitizerDetections, err := evaluator.nonUnifiedNodeDetections(node, sanitizerDetectorType, settings.DefaultScope)
 		if len(sanitizerDetections) != 0 || err != nil {
 			return nil, true, err
 		}

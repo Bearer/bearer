@@ -62,7 +62,7 @@ func (detector *customDetector) Name() string {
 
 func (detector *customDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceScope,
+	scope settings.RuleReferenceScope,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
 	var detectionsData []interface{}
@@ -75,7 +75,7 @@ func (detector *customDetector) DetectAt(
 
 		for _, result := range results {
 			filtersMatch, datatypeDetections, variableNodes, err := matchAllFilters(
-				ruleReferenceType,
+				scope,
 				result,
 				evaluator,
 				pattern.Filters,
