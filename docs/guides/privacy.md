@@ -4,13 +4,19 @@ title: Run a privacy report
 
 # Run a privacy report
 
-Bearer CLI's [privacy report type](/explanations/reports/#privacy-report) allows anyone on your team to generative information about the data types processed by your app, as well as any third-party libraries or APIs that receive data.
+Bearer CLI's [privacy report type](/explanations/reports/#privacy-report) allows anyone on your team to generate information about the data types processed by your app, as well as any third-party libraries or APIs that receive data. This enables you to do things like:
+
+- Automate evidence collection to fulfill compliance requirements, such as a record of processing activities (ROPA) for GDPR.
+- Create snapshots of data processing over time.
+- Compare processing across applications.
+- Identify third parties that receive sensitive data.
+- Spot unexpected sensitive data use, like PII or HPI, in code that isn't expected to contain it.
 
 ## Getting started
 
 If you haven't already, install Bearer CLI using the instructions on the [installation page](/reference/installation/) or the [quick start](/quickstart/). 
 
-To run your first privacy report, navigate to your project root and use the `bearer scan` command with the `--report privacy` flag:
+To run your first privacy report, navigate to the project root and use the `bearer scan` command with the `--report privacy` flag:
 
 ```bash
 bearer scan . --report privacy
@@ -18,19 +24,19 @@ bearer scan . --report privacy
 
 ## Privacy report output
 
-To get a better sense of what's included in the report, lets look at the output from the `juice-shop` example project. We've set the `--format` flag to `json` to make it more readable. If you're following along, you can run the following command.
+To get a better sense of what's included in the report, lets look at the output from the `juice-shop` example project. We've set the `--format` flag to `json` to make it more readable. If you're following along, run the following command.
 
 ```bash
 bearer scan . --report privacy --format json
 ```
 
-If you have [jq](https://stedolan.github.io/jq/) installed, the following command will format the output for your to make it easier to browse.
+If you have [jq](https://stedolan.github.io/jq/) installed, it can format the output for your to make it easier to browse.
 
 ```bash
 bearer scan . --report privacy --format json | jq
 ```
 
-Here's a portion of the output. Notice that it's broken down into two main sets: *subjects* and *third_party*.
+Here's a portion of the output. Notice that it is broken down into two main sets: *subjects* and *third_party*.
 
 ```json
 {
@@ -104,7 +110,7 @@ This will allow team members to import the report into spreadsheets or their pre
 
 ## Subject mapping
 
-Bearer CLI uses "User" as the default data subject. To override this, you can copy the [subject_mapping.json](https://github.com/bearer/bearer/blob/main/pkg/classification/db/subject_mapping.json) and customize it to your needs. Then, use the `--data-subject-mapping` flag to use your mappings instead.
+Bearer CLI uses "User" as the default data subject. To override this, you can copy the [subject_mapping.json](https://github.com/bearer/bearer/blob/main/pkg/classification/db/subject_mapping.json) and customize it to your needs. Then, use the `--data-subject-mapping` flag to use your mappings instead. This will use your supplied mapping file instead of the default.
 
 ```bash
 bearer scan . --report privacy --data-subject-mapping /path/to/mappings.json
