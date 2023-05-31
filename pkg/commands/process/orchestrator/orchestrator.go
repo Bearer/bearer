@@ -48,11 +48,13 @@ func newOrchestrator(
 
 	files, err := filelist.Discover(config.Scan.Target, config)
 	if err != nil {
+		reportFile.Close()
 		return nil, err
 	}
 
 	if len(files) == 0 {
-		return nil, err
+		reportFile.Close()
+		return nil, ErrFileListEmpty
 	}
 
 	return &orchestrator{
