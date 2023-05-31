@@ -523,7 +523,7 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 		reportStr.WriteString(color.HiBlackString(result.DocumentationUrl + "\n"))
 	}
 
-	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.Id + "\n"))
+	reportStr.WriteString(color.HiBlackString("To exclude this finding, use the flag --exclude-fingerprint=" + result.Fingerprint + "\n"))
 	reportStr.WriteString("\n")
 	if result.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + result.DetailedContext + "\n\n")
