@@ -21,7 +21,6 @@ func newScanTest(name string, arguments []string) testhelper.TestCase {
 }
 
 func TestReportFlags(t *testing.T) {
-	t.Parallel()
 	tests := []testhelper.TestCase{
 		newScanTest("report-dataflow", []string{"--report=dataflow"}),
 	}
@@ -46,7 +45,6 @@ func TestReportFlagsShouldFail(t *testing.T) {
 }
 
 func TestOuputFlag(t *testing.T) {
-	t.Parallel()
 	outputPath := tmpfile.Create("test_output.jsonl")
 	defer func() {
 		err := os.Remove(outputPath)
