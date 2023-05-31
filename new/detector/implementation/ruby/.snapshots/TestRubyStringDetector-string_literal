@@ -3,43 +3,13 @@
   data:
     value: ab
     isliteral: true
-- position: "1:2"
-  content: ab
-  data:
-    value: ab
-    isliteral: true
 - position: "3:1"
   content: '"a" + "b"'
   data:
     value: ab
     isliteral: true
-- position: "3:1"
-  content: '"a"'
-  data:
-    value: a
-    isliteral: true
-- position: "3:2"
-  content: a
-  data:
-    value: a
-    isliteral: true
-- position: "3:7"
-  content: '"b"'
-  data:
-    value: b
-    isliteral: true
-- position: "3:8"
-  content: b
-  data:
-    value: b
-    isliteral: true
 - position: "5:5"
   content: '"a"'
-  data:
-    value: a
-    isliteral: true
-- position: "5:6"
-  content: a
   data:
     value: a
     isliteral: true
@@ -47,15 +17,5 @@
   content: '"#{x} b"'
   data:
     value: a b
-    isliteral: true
-- position: "6:2"
-  content: '#{x}'
-  data:
-    value: a
-    isliteral: true
-- position: "6:6"
-  content: ' b'
-  data:
-    value: ' b'
     isliteral: true
 

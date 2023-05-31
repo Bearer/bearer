@@ -14,4 +14,12 @@
                       object: null
                 isvirtual: false
     isvirtual: true
+- position: "1:31"
+  content: '{ email: "jhon@gmail.com" }'
+  data:
+    properties:
+        - name: email
+          node: {}
+          object: null
+    isvirtual: false
 

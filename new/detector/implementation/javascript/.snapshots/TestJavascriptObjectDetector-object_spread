@@ -14,6 +14,14 @@
                       object: null
                 isvirtual: false
     isvirtual: true
+- position: "1:12"
+  content: '{ a: 123 }'
+  data:
+    properties:
+        - name: a
+          node: {}
+          object: null
+    isvirtual: false
 - position: "2:5"
   content: 'nested = { ...user, b: 456 }'
   data:
@@ -44,6 +52,28 @@
                       object: null
                 isvirtual: false
     isvirtual: true
+- position: "2:14"
+  content: '{ ...user, b: 456 }'
+  data:
+    properties:
+        - name: user
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: a
+          node: {}
+          object: null
+        - name: b
+          node: {}
+          object: null
+    isvirtual: false
 - position: "4:6"
   content: |-
     {
@@ -117,6 +147,278 @@
                                   node: {}
                                   object: null
                             isvirtual: false
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: user
+                                  node: {}
+                                  object:
+                                    detectortype: object
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: a
+                                              node: {}
+                                              object: null
+                                        isvirtual: false
+                            isvirtual: true
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: user
+                                  node: {}
+                                  object:
+                                    detectortype: object
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: a
+                                              node: {}
+                                              object: null
+                                        isvirtual: false
+                                - name: a
+                                  node: {}
+                                  object: null
+                                - name: b
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: user
+                                  node: {}
+                                  object:
+                                    detectortype: object
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: a
+                                              node: {}
+                                              object: null
+                                        isvirtual: false
+                            isvirtual: true
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: "n"
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: nested
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: user
+                                  node: {}
+                                  object:
+                                    detectortype: object
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: a
+                                              node: {}
+                                              object: null
+                                        isvirtual: false
+                                - name: a
+                                  node: {}
+                                  object: null
+                                - name: b
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: a
+                      node: {}
+                      object: null
+                    - name: b
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: a
+                      node: {}
+                      object: null
+                    - name: b
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: x
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
                 isvirtual: false
         - name: "y"
           node: {}
@@ -129,5 +431,183 @@
                       node: {}
                       object: null
                 isvirtual: false
+    isvirtual: false
+- position: "5:6"
+  content: '{ n: nested }'
+  data:
+    properties:
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: nested
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: user
+                                  node: {}
+                                  object:
+                                    detectortype: object
+                                    matchnode: {}
+                                    data:
+                                        properties:
+                                            - name: a
+                                              node: {}
+                                              object: null
+                                        isvirtual: false
+                                - name: a
+                                  node: {}
+                                  object: null
+                                - name: b
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: a
+                      node: {}
+                      object: null
+                    - name: b
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                    - name: a
+                      node: {}
+                      object: null
+                    - name: b
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: user
+                      node: {}
+                      object:
+                        detectortype: object
+                        matchnode: {}
+                        data:
+                            properties:
+                                - name: a
+                                  node: {}
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+        - name: "n"
+          node: {}
+          object:
+            detectortype: object
+            matchnode: {}
+            data:
+                properties:
+                    - name: a
+                      node: {}
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- position: "6:6"
+  content: '{ c: 4 }'
+  data:
+    properties:
+        - name: c
+          node: {}
+          object: null
     isvirtual: false
 

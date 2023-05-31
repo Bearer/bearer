@@ -13,7 +13,6 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output"
-	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/types"
 	"github.com/bradleyjkemp/cupaloy"
 	"gopkg.in/yaml.v3"
@@ -70,7 +69,7 @@ func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*settings.Rule 
 		ruleDefinition.Metadata.ID: ruleDefinition,
 	}
 	enabledRules := map[string]struct{}{
-		ruleDefinition.Metadata.ID: struct{}{},
+		ruleDefinition.Metadata.ID: {},
 	}
 
 	return settings.BuildRules(rules, enabledRules)
@@ -127,7 +126,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		},
 		runner.config,
 	)
-	report, _ := reportoutput.ReportYAML(detections)
+	report, _ := output.ReportYAML(detections)
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
 	cupaloyCopy.SnapshotT(t, *report)

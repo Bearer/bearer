@@ -192,10 +192,14 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 	var result []*detectortypes.Detection
 	for _, detectorType := range detectorTypes {
 		rule := composition.rules[detectorType]
+		sanitizerRuleID := ""
+		if rule != nil {
+			sanitizerRuleID = rule.SanitizerRuleID
+		}
 		detections, err := evaluator.Evaluate(
 			tree.RootNode(),
 			detectorType,
-			rule.SanitizerRuleID,
+			sanitizerRuleID,
 			settings.NESTED_SCOPE,
 			false,
 		)

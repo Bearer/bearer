@@ -69,7 +69,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	// user[:name]
-	elementReferenceQuery, err := lang.CompileQuery(`(element_reference object: (_) @object (_) @key) @root`)
+	elementReferenceQuery, err := lang.CompileQuery(`(element_reference object: (_) @object . (_) @key . ) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling element reference query %s", err)
 	}
