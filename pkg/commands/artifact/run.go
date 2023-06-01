@@ -65,12 +65,13 @@ type Runner interface {
 type runner struct {
 	reportPath     string
 	reuseDetection bool
+	goclocResult   *gocloc.Result
 	scanSettings   settings.Config
 }
 
 // NewRunner initializes Runner that provides scanning functionalities.
-func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
-	r := &runner{scanSettings: scanSettings}
+func NewRunner(ctx context.Context, scanSettings settings.Config, goclocResult *gocloc.Result) Runner {
+	r := &runner{scanSettings: scanSettings, goclocResult: goclocResult}
 
 	scanID, err := buildScanID(scanSettings)
 	if err != nil {
@@ -201,6 +202,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 				CommitSHA:         "",
 			},
 			r.scanSettings,
+			r.goclocResult,
 			r.reportPath,
 		); err != nil {
 			return types.Report{}, err
@@ -240,7 +242,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}()
 
-	r := NewRunner(ctx, scanSettings)
+	r := NewRunner(ctx, scanSettings, inputgocloc)
 	defer r.Close(ctx)
 
 	if !r.CacheUsed() && scanSettings.CacheUsed {

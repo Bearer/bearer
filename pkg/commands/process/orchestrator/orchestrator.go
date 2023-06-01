@@ -7,6 +7,7 @@ import (
 	"path"
 	"sync"
 
+	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 
@@ -40,6 +41,7 @@ type orchestrator struct {
 func newOrchestrator(
 	repository work.Repository,
 	config settings.Config,
+	goclocResult *gocloc.Result,
 	reportPath string,
 ) (*orchestrator, error) {
 	reportFile, err := os.Create(reportPath)
@@ -47,7 +49,7 @@ func newOrchestrator(
 		return nil, err
 	}
 
-	files, err := filelist.Discover(config.Scan.Target, config)
+	files, err := filelist.Discover(config.Scan.Target, goclocResult, config)
 	if err != nil {
 		reportFile.Close()
 		return nil, err
@@ -171,12 +173,12 @@ func (orchestrator *orchestrator) writeFileError(file work.File, fileErr error) 
 	orchestrator.reportMutex.Unlock()
 }
 
-func Scan(repository work.Repository, config settings.Config, reportPath string) error {
+func Scan(repository work.Repository, config settings.Config, goclogResult *gocloc.Result, reportPath string) error {
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Scanning target %s", config.Scan.Target)
 	}
 
-	orchestrator, err := newOrchestrator(repository, config, reportPath)
+	orchestrator, err := newOrchestrator(repository, config, goclogResult, reportPath)
 	if err != nil {
 		return err
 	}

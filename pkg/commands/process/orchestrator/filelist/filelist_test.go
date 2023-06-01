@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/hhatto/gocloc"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -80,11 +81,39 @@ func TestFileList(t *testing.T) {
 			},
 			Want: nil,
 		},
+		{
+			Name: "Find files - skip - dir - happy path",
+			Input: input{
+				projectPath: filepath.Join("testdata", "happy_path", "skip"),
+				config: settings.Config{
+					Scan: flag.ScanOptions{
+						SkipPath: []string{"users"},
+					},
+					Worker: settings.WorkerOptions{
+						FileSizeMaximum:           100000,
+						TimeoutFileBytesPerSecond: 1,
+					},
+				},
+			},
+			Want: nil,
+		},
 	}
 
 	for _, testCase := range tests {
+		dummyGoclocLanguage := gocloc.Language{}
+		dummyGoclocResult := gocloc.Result{
+			Total: &dummyGoclocLanguage,
+			Files: map[string]*gocloc.ClocFile{
+				"minifiedJs.min.js": {Code: 2},
+				"users.go":          {Code: 6},
+				"user.go":           {Code: 0},
+				"admin.go":          {Code: 6},
+			},
+			Languages:     map[string]*gocloc.Language{},
+			MaxPathLength: 0,
+		}
 		t.Run(testCase.Name, func(t *testing.T) {
-			output, err := filelist.Discover(testCase.Input.projectPath, testCase.Input.config)
+			output, err := filelist.Discover(testCase.Input.projectPath, &dummyGoclocResult, testCase.Input.config)
 
 			if testCase.WantError {
 				if err == nil {
