@@ -18,7 +18,7 @@ This creates a config file in your current directory. Below is an annotated vers
 ```yml
 # Report settings
 report:
-    # Specify report format (json, yaml)
+    # Specify report format (json, yaml, sarif, gitlab-sast)
     format: ""
     # Specify the output path for the report.
     output: ""

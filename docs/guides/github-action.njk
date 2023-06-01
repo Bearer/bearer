@@ -81,6 +81,47 @@ The following are a list of available inputs and outputs:
 {% endfor %}
 
 {% renderTemplate "md" %}
+## Configure GitHub code scanning
+Bearer CLI supports [GitHub code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning). By using the SARIF output format, you can display [security report](/explanations/reports/#security-report) findings directly in the Security tab of your repository.
+
+![Bearer CLI results in GitHub security tab](/assets/img/gh-code-scanning.jpg)
+
+To enable this feature, update your action configuration to include new permissions, new format and outputs, and an additional step. Here's an example configuration:
+
+```diff-yml
+name: Bearer
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
++ # Add the security-events permission 
+  security-events: write
+
+jobs:
+  rule_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Report
+        id: report
+        uses: bearer/bearer-action@v2
+        with: 
++         # Include these two options
+          format: sarif
+          output: results.sarif
++       # Add a new step to upload the SARIF file
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: results.sarif
+```
+
+By setting the format and output path, and adding a new upload step, the action will upload SARIF-formatted findings to GitHub's code scanner.
+
 ## Make the most of Bearer
 
 For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/).
