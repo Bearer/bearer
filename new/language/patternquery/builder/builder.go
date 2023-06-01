@@ -275,7 +275,7 @@ func (builder *builder) getVariableFor(node *tree.Node) *types.Variable {
 			continue
 		}
 
-		if node.Content() == variable.DummyValue {
+		if node.ChildCount() == 0 && node.Content() == variable.DummyValue {
 			return &variable
 		}
 	}

@@ -92,7 +92,8 @@ func (process *Process) start(config settings.Config) error {
 		var result = strings.Split(err.Error(), "failed to create detector customDetector:")
 		if len(result) > 1 {
 			// custom detector issue ; assume custom rule parse issue
-			var ruleName = strings.Split(result[1], ":")[0]
+			var ruleName = strings.TrimSpace(strings.Split(result[1], ":")[0])
+			log.Debug().Msgf(err.Error())
 			log.Fatal().Msgf("could not parse rule %s. Is this a custom rule? See documentation on rule patterns and format https://docs.bearer.com/guides/custom-rule/", ruleName)
 		} else {
 			log.Fatal().Msgf("failed to start bearer, error with your configuration %s", err)
