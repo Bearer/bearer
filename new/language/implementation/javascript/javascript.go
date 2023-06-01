@@ -28,7 +28,7 @@ var (
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
-	patternMatchNodeContainerTypes  = []string{"required_parameter"}
+	patternMatchNodeContainerTypes  = []string{"import_clause", "required_parameter"}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
@@ -110,17 +110,24 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
 				}
+
+				break
 			}
 
 			// typescript: different type of identifier
 			if parent.Type() == "required_parameter" {
 				scope.Assign(node.Content(), node)
-
+				break
 			}
 
 			if parent.Type() == "arguments" {
 				callNode := parent.Parent()
 				callNode.UnifyWith(node)
+				break
+			}
+
+			if isImportedIdentifier(node) {
+				scope.Assign(node.Content(), node)
 			}
 		case "property_identifier":
 			parent := node.Parent()
@@ -221,7 +228,7 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	// arrow functions statement_block
 	// function statement_block
 	// method statement_block
-	unAnchored := []string{"statement_block", "class_body", "object_pattern"}
+	unAnchored := []string{"statement_block", "class_body", "object_pattern", "named_imports"}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
@@ -293,4 +300,37 @@ func (*javascriptImplementation) ContributesToResult(node *tree.Node) bool {
 	}
 
 	return true
+}
+
+func isImportedIdentifier(node *tree.Node) bool {
+	parent := node.Parent()
+	if parent == nil {
+		return false
+	}
+
+	// import x from "library"
+	if parent.Type() == "import_clause" {
+		return true
+	}
+
+	// import * as x from "library"
+	if parent.Type() == "namespace_import" {
+		return true
+	}
+
+	if parent.Type() != "import_specifier" {
+		return false
+	}
+
+	// import { x } from "library"
+	if parent.ChildByFieldName("alias") == nil {
+		return true
+	}
+
+	// import { a as x } from "library"
+	if node.Equal(parent.ChildByFieldName("alias")) {
+		return true
+	}
+
+	return false
 }
