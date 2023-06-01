@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/types"
 	"github.com/bradleyjkemp/cupaloy"
+	"github.com/hhatto/gocloc"
 	"gopkg.in/yaml.v3"
 )
 
@@ -76,7 +77,16 @@ func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*settings.Rule 
 }
 
 func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath string) {
-	files, err := filelist.Discover(testdataPath, runner.config)
+	dummyGoclocLanguage := gocloc.Language{}
+	dummyGoclocResult := gocloc.Result{
+		Total: &dummyGoclocLanguage,
+		Files: map[string]*gocloc.ClocFile{
+			testdataPath: {Code: 10},
+		},
+		Languages:     map[string]*gocloc.Language{},
+		MaxPathLength: 0,
+	}
+	files, err := filelist.Discover(testdataPath, &dummyGoclocResult, runner.config)
 	if err != nil {
 		t.Fatalf("failed to discover files: %s", err)
 	}

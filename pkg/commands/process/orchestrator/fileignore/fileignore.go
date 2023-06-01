@@ -2,11 +2,13 @@ package fileignore
 
 import (
 	"bytes"
+	"fmt"
 	"io/fs"
 	"os"
 	"strings"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/hhatto/gocloc"
 	"github.com/monochromegane/go-gitignore"
 	"github.com/rs/zerolog/log"
 )
@@ -25,7 +27,7 @@ func New(projectPath string, config settings.Config) *FileIgnore {
 	}
 }
 
-func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, d fs.DirEntry) bool {
+func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, goclocResult *gocloc.Result, d fs.DirEntry) bool {
 	relativePath := strings.TrimPrefix(filePath, projectPath)
 	trimmedPath := strings.TrimPrefix(relativePath, "/")
 
@@ -49,6 +51,32 @@ func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, d fs.D
 	if !fileInfo.IsDir() {
 		if fileInfo.Size() > int64(fileignore.config.Worker.FileSizeMaximum) {
 			log.Debug().Msgf("skipping file due to size: %s %s", projectPath, relativePath)
+			return true
+		}
+		if isMinified(fmt.Sprintf("%s%s", projectPath, filePath), fileInfo.Size(), goclocResult) {
+			log.Debug().Msgf("skipping file (suspected minified JS): %s%s", projectPath, filePath)
+			return true
+		}
+	}
+
+	return false
+}
+
+func isMinified(fullPath string, size int64, goclocResult *gocloc.Result) bool {
+	if strings.HasSuffix(fullPath, ".min.js") {
+		return true
+	}
+
+	if strings.HasSuffix(fullPath, ".js") {
+		goclocFileResult := goclocResult.Files[fullPath]
+
+		if goclocFileResult == nil {
+			// couldn't find file
+			return false
+		}
+
+		if goclocFileResult.Blanks == 0 && goclocFileResult.Comments == 0 && size > int64(5000) {
+			// > 5KB JS file with no blank lines or comments -> assume minified
 			return true
 		}
 	}

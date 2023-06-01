@@ -22,6 +22,7 @@ import (
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/gitsight/go-vcsurl"
 	"github.com/google/uuid"
+	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
@@ -76,7 +77,7 @@ func GetOutput(report types.Report, config settings.Config) (any, *dataflow.Data
 			}
 		}
 
-		files := getDiscoveredFiles(config)
+		files := getDiscoveredFiles(config, report.Inputgocloc)
 
 		return BearerReport{
 			Findings:   securityResults,
@@ -94,8 +95,8 @@ func GetOutput(report types.Report, config settings.Config) (any, *dataflow.Data
 	return nil, nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
-func getDiscoveredFiles(config settings.Config) []string {
-	filesDiscovered, _ := filelist.Discover(config.Scan.Target, config)
+func getDiscoveredFiles(config settings.Config, goclocResult *gocloc.Result) []string {
+	filesDiscovered, _ := filelist.Discover(config.Scan.Target, goclocResult, config)
 	files := []string{}
 	for _, fileDiscovered := range filesDiscovered {
 		files = append(files, file.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
@@ -176,7 +177,7 @@ func reportSecurity(
 			return
 		}
 
-		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, dataflow)
+		tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityResults, report.Inputgocloc, dataflow)
 		if err != nil {
 			config.Client.Error = pointer.String("Could not compress report.")
 			log.Debug().Msgf("error creating report %s", err)
@@ -220,6 +221,7 @@ func createBearerGzipFileReport(
 	config settings.Config,
 	meta *Meta,
 	securityResults *security.Results,
+	goclocResult *gocloc.Result,
 	dataflow *dataflow.DataFlow,
 ) (*string, *string, error) {
 	tempDir, err := os.MkdirTemp("", "reports")
@@ -232,7 +234,7 @@ func createBearerGzipFileReport(
 		return &tempDir, nil, err
 	}
 
-	files := getDiscoveredFiles(config)
+	files := getDiscoveredFiles(config, goclocResult)
 
 	content, _ := ReportJSON(&BearerReport{
 		Findings:   securityResults,

@@ -11,11 +11,12 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/util/gitutil"
+	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 )
 
 // Discover searches directory for files to scan, skipping the ones specified by skip config and assigning timeout speficfied by timeout config
-func Discover(projectPath string, config settings.Config) ([]work.File, error) {
+func Discover(projectPath string, goclocResult *gocloc.Result, config settings.Config) ([]work.File, error) {
 	var files []work.File
 
 	haveDir, statErr := isDir(projectPath)
@@ -52,7 +53,7 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 				continue
 			}
 			fileEntry := fs.FileInfoToDirEntry(fileInfo)
-			if ignore.Ignore(projectPath, pathFromGit, fileEntry) {
+			if ignore.Ignore(projectPath, pathFromGit, goclocResult, fileEntry) {
 				log.Debug().Msgf("Skipping file: %s", pathFromGit)
 				continue
 			}
@@ -65,7 +66,7 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 			}
 			dirEntry := fs.FileInfoToDirEntry(dirInfo)
 			dirRelativePath := filepath.Dir(pathFromGit)
-			if ignore.Ignore(projectPath, dirRelativePath, dirEntry) {
+			if ignore.Ignore(projectPath, dirRelativePath, goclocResult, dirEntry) {
 				log.Debug().Msgf("Skipping parent directory: %s", dirRelativePath)
 				continue
 			}
@@ -92,7 +93,7 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 		}
 
 		if d.IsDir() {
-			if ignore.Ignore(projectPath, filePath, d) {
+			if ignore.Ignore(projectPath, filePath, goclocResult, d) {
 				return filepath.SkipDir
 			}
 
@@ -102,7 +103,7 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 		relativePath := strings.TrimPrefix(filePath, projectPath)
 		relativePath = "/" + relativePath
 
-		if ignore.Ignore(projectPath, filePath, d) {
+		if ignore.Ignore(projectPath, filePath, goclocResult, d) {
 			log.Debug().Msgf("skipping file due to file skip rules: %s", relativePath)
 
 			return nil
