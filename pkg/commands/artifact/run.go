@@ -360,7 +360,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		if err != nil {
 			return false, fmt.Errorf("error generating sarif report %s", err)
 		}
-		content, err := reportoutput.ReportJSON(sarifContent)
+		content, err := outputhandler.ReportJSON(sarifContent)
 		if err != nil {
 			return false, fmt.Errorf("error generating JSON report %s", err)
 		}
@@ -372,21 +372,21 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		if err != nil {
 			return false, fmt.Errorf("error generating gitlab-sast report %s", err)
 		}
-		content, err := reportoutput.ReportJSON(sastContent)
+		content, err := outputhandler.ReportJSON(sastContent)
 		if err != nil {
 			return false, fmt.Errorf("error generating JSON report %s", err)
 		}
 
 		logger.Msg(*content)
 	case flag.FormatEmpty, flag.FormatJSON:
-		content, err := reportoutput.ReportJSON(detections)
+		content, err := outputhandler.ReportJSON(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}
 
 		logger.Msg(*content)
 	case flag.FormatYAML:
-		content, err := reportoutput.ReportYAML(detections)
+		content, err := outputhandler.ReportYAML(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}

@@ -1,12 +1,15 @@
 package output
 
 import (
+	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
 )
 
 var (
@@ -56,4 +59,24 @@ func Setup(cmd *cobra.Command, options SetupRequest) {
 	} else {
 		zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	}
+}
+
+func ReportJSON(outputDetections any) (*string, error) {
+	jsonBytes, err := json.Marshal(&outputDetections)
+	if err != nil {
+		return nil, fmt.Errorf("failed to json marshal detections: %s", err)
+	}
+
+	content := string(jsonBytes)
+	return &content, nil
+}
+
+func ReportYAML(outputDetections any) (*string, error) {
+	yamlBytes, err := yaml.Marshal(&outputDetections)
+	if err != nil {
+		return nil, fmt.Errorf("failed to yaml marshal detections: %s", err)
+	}
+
+	content := string(yamlBytes)
+	return &content, nil
 }

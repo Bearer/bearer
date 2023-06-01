@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/security"
+	util "github.com/bearer/bearer/pkg/util/output"
 	"github.com/bradleyjkemp/cupaloy"
 )
 
@@ -57,7 +57,7 @@ func TestJuiceShopSarif(t *testing.T) {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}
 
-	sarifOutput, err := output.ReportJSON(res)
+	sarifOutput, err := util.ReportJSON(res)
 	if err != nil {
 		t.Fatalf("failed to generate JSON output, err: %s", err)
 	}
