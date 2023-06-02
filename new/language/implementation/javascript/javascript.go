@@ -28,7 +28,7 @@ var (
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
-	patternMatchNodeContainerTypes  = []string{"import_clause", "required_parameter"}
+	patternMatchNodeContainerTypes  = []string{"import_clause", "import_specifier", "required_parameter"}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)

@@ -7,6 +7,9 @@ import (
 	"github.com/bearer/bearer/new/detector/composition/testhelper"
 )
 
+//go:embed testdata/import_rule.yml
+var importRule []byte
+
 //go:embed testdata/insecureURL.yml
 var insecureURLRule []byte
 
@@ -25,6 +28,10 @@ func TestFlow(t *testing.T) {
 
 func TestObjectDeconstructing(t *testing.T) {
 	testhelper.GetRunner(t, deconstructingRule, "Javascript").RunTest(t, "./testdata/testcases/object-deconstructing", ".snapshots/object-deconstructing/")
+}
+
+func TestImport(t *testing.T) {
+	testhelper.GetRunner(t, importRule, "Javascript").RunTest(t, "./testdata/import", ".snapshots/import/")
 }
 
 func TestString(t *testing.T) {
