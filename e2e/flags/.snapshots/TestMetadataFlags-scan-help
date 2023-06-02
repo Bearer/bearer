@@ -30,7 +30,7 @@ Scan Flags
       --external-rule-dir strings            Specify directories paths that contain .yaml files with external rules configuration
       --force                                Disable the cache and runs the detections again
       --internal-domains strings             Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
-      --parallel int                         Specify the amount of parallelism to use during the scan (default 2)
+      --parallel int                         Specify the amount of parallelism to use during the scan (default 4)
       --quiet                                Suppress non-essential messages
       --scanner strings                      Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast (default [sast])
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
