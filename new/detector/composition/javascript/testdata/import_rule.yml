@@ -1,0 +1,41 @@
+languages:
+  - javascript
+patterns:
+  - pattern: $<FUNCTION>()
+    filters:
+      - variable: FUNCTION
+        detection: import_test_function
+        scope: cursor
+auxiliary:
+  - id: import_test_library
+    patterns:
+      - import $<!>$<_>$<...> from "library"
+      - pattern: $<METHOD>($<NAME>)
+        filters:
+          - variable: METHOD
+            values:
+              - require
+              - import
+          - variable: NAME
+            string_regex: \Alibrary\z
+  - id: import_test_function
+    patterns:
+      - pattern: $<LIBRARY>.f
+        filters:
+          - variable: LIBRARY
+            detection: import_test_library
+            scope: cursor
+      - pattern: const { $<!>f } = $<LIBRARY>
+        filters:
+          - variable: LIBRARY
+            detection: import_test_library
+            scope: cursor
+      - import $<...>{ $<!>f } from "library"
+      - import $<...>{ f as $<!>$<_> } from "library"
+severity: high
+metadata:
+  description: Test imports
+  remediation_message: Test imports
+  cwe_id:
+    - 42
+  id: import_test
