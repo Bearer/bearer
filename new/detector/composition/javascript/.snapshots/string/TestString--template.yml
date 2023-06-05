@@ -1,33 +1,36 @@
 high:
-    - rule:
-        cwe_ids: []
-        id: javascript_insecure_url_test
-        title: ""
-        description: ""
-        documentation_url: ""
-      line_number: 1
-      full_filename: template.js
-      filename: template.js
-      category_groups:
-        - PII
-        - Personal Data
-      source:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 40
-                end: 49
-      sink:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 1
-                end: 50
-        content: console.log(`http://${config.domain}`, user.name)
-      parent_line_number: 1
-      snippet: console.log(`http://${config.domain}`, user.name)
-      fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
-      old_fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
+- rule:
+    cwe_ids: []
+    id: javascript_insecure_url_test
+    title: ""
+    description: ""
+    documentation_url: ""
+  line_number: 1
+  full_filename: template.js
+  filename: template.js
+  data_type:
+    category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+    name: Fullname
+  category_groups:
+  - PII
+  - Personal Data
+  source:
+    location:
+      start: 1
+      end: 1
+      column:
+        start: 40
+        end: 49
+  sink:
+    location:
+      start: 1
+      end: 1
+      column:
+        start: 1
+        end: 50
+    content: console.log(`http://${config.domain}`, user.name)
+  parent_line_number: 1
+  snippet: console.log(`http://${config.domain}`, user.name)
+  fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
+  old_fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
 
