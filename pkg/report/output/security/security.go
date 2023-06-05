@@ -75,30 +75,37 @@ type Sink struct {
 }
 
 type Output struct {
-	IsLocal         *bool    `json:"is_local,omitempty" yaml:"is_local,omitempty"`
-	Source          Source   `json:"source,omitempty" yaml:"source,omitempty"`
-	Sink            Sink     `json:"sink,omitempty" yaml:"sink,omitempty"`
-	LineNumber      int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename        string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	FullFilename    string   `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
-	CategoryGroups  []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	Severity        string   `json:"severity,omitempty" yaml:"severity,omitempty"`
-	DetailedContext string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	IsLocal         *bool     `json:"is_local,omitempty" yaml:"is_local,omitempty"`
+	Source          Source    `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink            Sink      `json:"sink,omitempty" yaml:"sink,omitempty"`
+	LineNumber      int       `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename        string    `json:"filename,omitempty" yaml:"filename,omitempty"`
+	FullFilename    string    `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
+	CategoryGroups  []string  `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	DataType        *DataType `json:"data_type,omitempty" yaml:"data_type,omitempty"`
+	Severity        string    `json:"severity,omitempty" yaml:"severity,omitempty"`
+	DetailedContext string    `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+}
+
+type DataType struct {
+	CategoryUUID string `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
+	Name         string `json:"name,omitempty" yaml:"name,omitempty"`
 }
 
 type Result struct {
 	*Rule
-	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	FullFilename     string   `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
-	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	Source           Source   `json:"source,omitempty" yaml:"source,omitempty"`
-	Sink             Sink     `json:"sink,omitempty" yaml:"sink,omitempty"`
-	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent    string   `json:"snippet,omitempty" yaml:"snippet,omitempty"`
-	Fingerprint      string   `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
-	OldFingerprint   string   `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
-	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	LineNumber       int       `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	FullFilename     string    `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
+	Filename         string    `json:"filename,omitempty" yaml:"filename,omitempty"`
+	DataType         *DataType `json:"data_type,omitempty" yaml:"data_type,omitempty"`
+	CategoryGroups   []string  `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	Source           Source    `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink             Sink      `json:"sink,omitempty" yaml:"sink,omitempty"`
+	ParentLineNumber int       `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent    string    `json:"snippet,omitempty" yaml:"snippet,omitempty"`
+	Fingerprint      string    `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
+	OldFingerprint   string    `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
+	DetailedContext  string    `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
 type Rule struct {
@@ -206,6 +213,7 @@ func evaluateRules(
 					Filename:         output.Filename,
 					LineNumber:       output.LineNumber,
 					CategoryGroups:   output.CategoryGroups,
+					DataType:         output.DataType,
 					Source:           output.Source,
 					Sink:             output.Sink,
 					ParentLineNumber: output.Sink.Start,

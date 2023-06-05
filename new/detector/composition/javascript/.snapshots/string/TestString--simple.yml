@@ -1,33 +1,36 @@
 high:
-    - rule:
-        cwe_ids: []
-        id: javascript_insecure_url_test
-        title: ""
-        description: ""
-        documentation_url: ""
-      line_number: 1
-      full_filename: simple.js
-      filename: simple.js
-      category_groups:
-        - PII
-        - Personal Data
-      source:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 24
-                end: 33
-      sink:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 1
-                end: 34
-        content: console.log("http://", user.name)
-      parent_line_number: 1
-      snippet: console.log("http://", user.name)
-      fingerprint: 971b852ae8266c6d2b25437584017e2c_0
-      old_fingerprint: 971b852ae8266c6d2b25437584017e2c_0
+- rule:
+    cwe_ids: []
+    id: javascript_insecure_url_test
+    title: ""
+    description: ""
+    documentation_url: ""
+  line_number: 1
+  full_filename: simple.js
+  filename: simple.js
+  data_type:
+    category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+    name: Fullname
+  category_groups:
+  - PII
+  - Personal Data
+  source:
+    location:
+      start: 1
+      end: 1
+      column:
+        start: 24
+        end: 33
+  sink:
+    location:
+      start: 1
+      end: 1
+      column:
+        start: 1
+        end: 34
+    content: console.log("http://", user.name)
+  parent_line_number: 1
+  snippet: console.log("http://", user.name)
+  fingerprint: 971b852ae8266c6d2b25437584017e2c_0
+  old_fingerprint: 971b852ae8266c6d2b25437584017e2c_0
 

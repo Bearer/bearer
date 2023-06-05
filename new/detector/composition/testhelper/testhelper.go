@@ -14,6 +14,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/types"
+	util "github.com/bearer/bearer/pkg/util/output"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/hhatto/gocloc"
 	"gopkg.in/yaml.v3"
@@ -136,7 +137,8 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		},
 		runner.config,
 	)
-	report, _ := output.ReportYAML(detections)
+
+	report, _ := util.ReportYAML(detections)
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
 	cupaloyCopy.SnapshotT(t, *report)

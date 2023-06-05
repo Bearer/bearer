@@ -106,6 +106,18 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				return nil, nil, err
 			}
 		case detections.TypeCustomRisk:
+			ruleName := string(castDetection.DetectorType)
+			customDetector, ok := config.Rules[ruleName]
+			if !ok {
+				customDetector, ok = config.BuiltInRules[ruleName]
+				if !ok {
+					return nil, nil, fmt.Errorf("custom detector not in config %s", ruleName)
+				}
+			}
+			if customDetector.Type == customdetectors.TypeShared {
+				continue
+			}
+
 			risksHolder.AddRiskPresence(castDetection)
 		case detections.TypeCustomClassified:
 			ruleName := string(castDetection.DetectorType)

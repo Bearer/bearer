@@ -1,30 +1,30 @@
 low:
-    - rule:
-        cwe_ids: []
-        id: javascript_deconstructing
-        title: ""
-        description: ""
-        documentation_url: ""
-      line_number: 1
-      full_filename: multiple_objects.js
-      filename: multiple_objects.js
-      source:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 9
-                end: 13
-      sink:
-        location:
-            start: 1
-            end: 1
-            column:
-                start: 9
-                end: 13
-        content: user
-      parent_line_number: 1
-      snippet: user
-      fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
-      old_fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
+- rule:
+    cwe_ids: []
+    id: javascript_deconstructing
+    title: ""
+    description: ""
+    documentation_url: ""
+  line_number: 1
+  full_filename: multiple_objects.js
+  filename: multiple_objects.js
+  source:
+    location:
+      start: 1
+      end: 1
+      column:
+        start: 9
+        end: 13
+  sink:
+    location:
+      start: 1
+      end: 1
+      column:
+        start: 9
+        end: 13
+    content: user
+  parent_line_number: 1
+  snippet: user
+  fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
+  old_fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
 

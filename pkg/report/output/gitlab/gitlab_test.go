@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/security"
+	util "github.com/bearer/bearer/pkg/util/output"
 	"github.com/bradleyjkemp/cupaloy"
 )
 
@@ -32,7 +32,7 @@ func TestJuiceShopSarif(t *testing.T) {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}
 
-	output, err := output.ReportJSON(res)
+	output, err := util.ReportJSON(res)
 	if err != nil {
 		t.Fatalf("failed to generate JSON output, err: %s", err)
 	}
