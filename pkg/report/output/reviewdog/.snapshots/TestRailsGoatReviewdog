@@ -5,7 +5,7 @@
 	},
 	"diagnostics": [
 		{
-			"message": "# Hardcoded secret detected\n## Description\n\nCode is not a safe place to store secrets, use environment variables instead.\n\n## Remediations\n```javascript\n  passport.use(new OAuth2Strategy({\n      authorizationURL: 'https://www.example.com/oauth2/authorize',\n      tokenURL: 'https://www.example.com/oauth2/token',\n      clientID:  process.env.CLIENT_ID,\n      clientSecret: process.env.CLIENT_SECRET,\n      callbackURL: \"http://localhost:3000/auth/example/callback\"\n    },\n    function(accessToken, refreshToken, profile, cb) {\n      User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n        return cb(err, user);\n      });\n    }\n  ));\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+			"message": "\n# Hardcoded secret detected\n## Description\n\nCode is not a safe place to store secrets, use environment variables instead.\n\n## Remediations\n```javascript\n  passport.use(new OAuth2Strategy({\n      authorizationURL: 'https://www.example.com/oauth2/authorize',\n      tokenURL: 'https://www.example.com/oauth2/token',\n      clientID:  process.env.CLIENT_ID,\n      clientSecret: process.env.CLIENT_SECRET,\n      callbackURL: \"http://localhost:3000/auth/example/callback\"\n    },\n    function(accessToken, refreshToken, profile, cb) {\n      User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n        return cb(err, user);\n      });\n    }\n  ));\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
 			"location": {
 				"path": "app/assets/javascripts/jsapi.js",
 				"range": {
@@ -27,7 +27,7 @@
 			}
 		},
 		{
-			"message": "# Sensitive data stored in a cookie detected.\n## Description\n\nStoring sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.\n\n## Remediations\n\n❌ Avoid storing sensitive data in unencrypted cookies messages:\n\n```ruby\ncookies[:user_email] = \"john@doe.com\"\n```\n\n✅ To ensure cookie data stays safe, use encrypted cookies:\n\n```ruby\ncookies.encrypted[:user_email] = \"john@doe.com\"\n```\n\n## Resources\n\n- Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)\n- [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)\n",
+			"message": "\n# Sensitive data stored in a cookie detected.\n## Description\n\nStoring sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.\n\n## Remediations\n\n❌ Avoid storing sensitive data in unencrypted cookies messages:\n\n```ruby\ncookies[:user_email] = \"john@doe.com\"\n```\n\n✅ To ensure cookie data stays safe, use encrypted cookies:\n\n```ruby\ncookies.encrypted[:user_email] = \"john@doe.com\"\n```\n\n## Resources\n\n- Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)\n- [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)\n",
 			"location": {
 				"path": "app/controllers/sessions_controller.rb",
 				"range": {
@@ -49,7 +49,7 @@
 			}
 		},
 		{
-			"message": "# Sensitive data stored in a cookie detected.\n## Description\n\nStoring sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.\n\n## Remediations\n\n❌ Avoid storing sensitive data in unencrypted cookies messages:\n\n```ruby\ncookies[:user_email] = \"john@doe.com\"\n```\n\n✅ To ensure cookie data stays safe, use encrypted cookies:\n\n```ruby\ncookies.encrypted[:user_email] = \"john@doe.com\"\n```\n\n## Resources\n\n- Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)\n- [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)\n",
+			"message": "\n# Sensitive data stored in a cookie detected.\n## Description\n\nStoring sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.\n\n## Remediations\n\n❌ Avoid storing sensitive data in unencrypted cookies messages:\n\n```ruby\ncookies[:user_email] = \"john@doe.com\"\n```\n\n✅ To ensure cookie data stays safe, use encrypted cookies:\n\n```ruby\ncookies.encrypted[:user_email] = \"john@doe.com\"\n```\n\n## Resources\n\n- Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)\n- [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)\n",
 			"location": {
 				"path": "app/controllers/sessions_controller.rb",
 				"range": {
@@ -71,7 +71,7 @@
 			}
 		},
 		{
-			"message": "# User input detected in an unsafe deserialization method.\n## Description\nIt is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.\nAttackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.\n\n## Remediations\n❌ Do not deserialize untrusted data\n\n✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML\n\nAvoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.\n\n```javascript\n  user_data = JSON.parse(params[:user])\n  # handle any parsing errors\n\n  JSON.load(user)\n```\n\n## Resources\n- [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)\n",
+			"message": "\n# User input detected in an unsafe deserialization method.\n## Description\nIt is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.\nAttackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.\n\n## Remediations\n❌ Do not deserialize untrusted data\n\n✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML\n\nAvoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.\n\n```javascript\n  user_data = JSON.parse(params[:user])\n  # handle any parsing errors\n\n  JSON.load(user)\n```\n\n## Resources\n- [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)\n",
 			"location": {
 				"path": "app/controllers/password_resets_controller.rb",
 				"range": {
@@ -93,7 +93,7 @@
 			}
 		},
 		{
-			"message": "# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+			"message": "\n# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
 			"location": {
 				"path": "db/seeds.rb",
 				"range": {
@@ -115,7 +115,7 @@
 			}
 		},
 		{
-			"message": "# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+			"message": "\n# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
 			"location": {
 				"path": "db/seeds.rb",
 				"range": {
@@ -137,7 +137,7 @@
 			}
 		},
 		{
-			"message": "# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+			"message": "\n# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
 			"location": {
 				"path": "db/seeds.rb",
 				"range": {
@@ -159,7 +159,7 @@
 			}
 		},
 		{
-			"message": "# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+			"message": "\n# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
 			"location": {
 				"path": "db/seeds.rb",
 				"range": {
@@ -181,7 +181,7 @@
 			}
 		},
 		{
-			"message": "# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+			"message": "\n# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
 			"location": {
 				"path": "db/seeds.rb",
 				"range": {
@@ -203,7 +203,7 @@
 			}
 		},
 		{
-			"message": "# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+			"message": "\n# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
 			"location": {
 				"path": "db/seeds.rb",
 				"range": {
@@ -225,7 +225,7 @@
 			}
 		},
 		{
-			"message": "# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+			"message": "\n# Hard-coded secret detected.\n## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
 			"location": {
 				"path": "db/seeds.rb",
 				"range": {
@@ -247,7 +247,7 @@
 			}
 		},
 		{
-			"message": "# Do not use user input to form file paths.\n## Description\nUsing raw unsanitized input when forming filenames or file paths is bad practice.\nIt can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.\n\n## Remediations\n❌ Avoid wherever possible\n\n✅ Validate expected file paths using `File` methods\n\n```ruby\n  path = File.expand(\"/home/\" + params[:resource_name])\n  if path.starts_with?(\"/home/\")\n    Dir.chdir(path)\n  else\n    # path is unexpected\n  end\n```\n\n## Resources\n- [OWASP path traversal attack](https://owasp.org/www-community/attacks/Path_Traversal)\n",
+			"message": "\n# Do not use user input to form file paths.\n## Description\nUsing raw unsanitized input when forming filenames or file paths is bad practice.\nIt can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.\n\n## Remediations\n❌ Avoid wherever possible\n\n✅ Validate expected file paths using `File` methods\n\n```ruby\n  path = File.expand(\"/home/\" + params[:resource_name])\n  if path.starts_with?(\"/home/\")\n    Dir.chdir(path)\n  else\n    # path is unexpected\n  end\n```\n\n## Resources\n- [OWASP path traversal attack](https://owasp.org/www-community/attacks/Path_Traversal)\n",
 			"location": {
 				"path": "app/controllers/benefit_forms_controller.rb",
 				"range": {
@@ -269,7 +269,7 @@
 			}
 		},
 		{
-			"message": "# Unsanitized user input detected in raw HTML string.\n## Description\n\nApplications should not include unsanitized user input in HTML. This\ncan allow cross-site scripting (XSS) attacks.\n\n## Remediations\n\n❌ Avoid including user input directly in HTML strings:\n\n```ruby\nhtml = \"\u003ch1\u003e#{params[:title]}\u003c/h1\u003e\"\n```\n\n✅ Use a templating language such as ERB, and place the template in a separate file.\n\n✅ When HTML strings must be used, sanitize user input:\n\n```ruby\nhtml = \"\u003ch1\u003e#{strip_tags(params[:title])}\u003c/h1\u003e\"\n```\n\n## Resources\n- [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n",
+			"message": "\n# Unsanitized user input detected in raw HTML string.\n## Description\n\nApplications should not include unsanitized user input in HTML. This\ncan allow cross-site scripting (XSS) attacks.\n\n## Remediations\n\n❌ Avoid including user input directly in HTML strings:\n\n```ruby\nhtml = \"\u003ch1\u003e#{params[:title]}\u003c/h1\u003e\"\n```\n\n✅ Use a templating language such as ERB, and place the template in a separate file.\n\n✅ When HTML strings must be used, sanitize user input:\n\n```ruby\nhtml = \"\u003ch1\u003e#{strip_tags(params[:title])}\u003c/h1\u003e\"\n```\n\n## Resources\n- [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n",
 			"location": {
 				"path": "app/controllers/password_resets_controller.rb",
 				"range": {
@@ -291,7 +291,7 @@
 			}
 		},
 		{
-			"message": "# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+			"message": "\n# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
 			"location": {
 				"path": "app/controllers/api/v1/mobile_controller.rb",
 				"range": {
@@ -313,7 +313,7 @@
 			}
 		},
 		{
-			"message": "# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+			"message": "\n# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
 			"location": {
 				"path": "app/controllers/api/v1/mobile_controller.rb",
 				"range": {
@@ -335,7 +335,7 @@
 			}
 		},
 		{
-			"message": "# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+			"message": "\n# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
 			"location": {
 				"path": "app/controllers/benefit_forms_controller.rb",
 				"range": {
@@ -357,7 +357,7 @@
 			}
 		},
 		{
-			"message": "# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+			"message": "\n# Use of reflection influenced by user input detected.\n## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
 			"location": {
 				"path": "app/controllers/dashboard_controller.rb",
 				"range": {
@@ -379,7 +379,7 @@
 			}
 		},
 		{
-			"message": "# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+			"message": "\n# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
 			"location": {
 				"path": "app/controllers/password_resets_controller.rb",
 				"range": {
@@ -401,7 +401,7 @@
 			}
 		},
 		{
-			"message": "# Open redirect detected\n## Description\nA web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.\n",
+			"message": "\n# Open redirect detected\n## Description\nA web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.\n",
 			"location": {
 				"path": "app/controllers/application_controller.rb",
 				"range": {
@@ -423,7 +423,7 @@
 			}
 		},
 		{
-			"message": "# Open redirect detected\n## Description\nA web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.\n",
+			"message": "\n# Open redirect detected\n## Description\nA web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.\n",
 			"location": {
 				"path": "app/controllers/sessions_controller.rb",
 				"range": {
@@ -445,7 +445,7 @@
 			}
 		},
 		{
-			"message": "# Overly permissive request parameters detected.\n## Description\n\nBeing overly permissive with request parameters can allow an attacker to\nupdate arbitrary model attributes.\n\n## Remediations\n\n❌ Avoid blanket permitting of parameters:\n\n```ruby\nparams.permit!\n```\n\n✅ Only permit parameters the user should be able to update:\n\n```ruby\nparams.permit(:name, :email)\n```\n",
+			"message": "\n# Overly permissive request parameters detected.\n## Description\n\nBeing overly permissive with request parameters can allow an attacker to\nupdate arbitrary model attributes.\n\n## Remediations\n\n❌ Avoid blanket permitting of parameters:\n\n```ruby\nparams.permit!\n```\n\n✅ Only permit parameters the user should be able to update:\n\n```ruby\nparams.permit(:name, :email)\n```\n",
 			"location": {
 				"path": "app/controllers/users_controller.rb",
 				"range": {
@@ -467,7 +467,7 @@
 			}
 		},
 		{
-			"message": "# Sensitive data stored in a session cookie detected.\n## Description\n\nSensitive data should not be stored in session cookies. This policy looks for any sensitive data stored within the session cookies.\n\n## Remediations\nBy default, [Rails uses a Cookie based session store](https://guides.rubyonrails.org/security.html#session-storage). This makes it unsafe if you use it to store sensitive data in addition of making invalidating cookies difficult as they are stored on the client.\n\n✅ To ensure session's data stays safe, ensure to use a database-based session storage, which is easily done though Rails configuration:\n\n```ruby\nRails.application.config.session_store :active_record_store\n```\n\n## Resources\n- [Rails guide on configuring Rails applications](https://guides.rubyonrails.org/configuring.html)\n",
+			"message": "\n# Sensitive data stored in a session cookie detected.\n## Description\n\nSensitive data should not be stored in session cookies. This policy looks for any sensitive data stored within the session cookies.\n\n## Remediations\nBy default, [Rails uses a Cookie based session store](https://guides.rubyonrails.org/security.html#session-storage). This makes it unsafe if you use it to store sensitive data in addition of making invalidating cookies difficult as they are stored on the client.\n\n✅ To ensure session's data stays safe, ensure to use a database-based session storage, which is easily done though Rails configuration:\n\n```ruby\nRails.application.config.session_store :active_record_store\n```\n\n## Resources\n- [Rails guide on configuring Rails applications](https://guides.rubyonrails.org/configuring.html)\n",
 			"location": {
 				"path": "app/controllers/sessions_controller.rb",
 				"range": {
@@ -489,7 +489,7 @@
 			}
 		},
 		{
-			"message": "# Unsanitized user input in SQL query detected.\n## Description\n\nIncluding unsanitized data, such as user input or request data, in raw SQL\nqueries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input:\n\n```ruby\nUser.where(\"user.email = #{params[:email]}\")\n```\n\n✅ Use the ActiveRecord API wherever possible:\n\n```ruby\nUser.where(email: params[:email])\n```\n\n✅ Use bind variables:\n\n```ruby\nUser.where(\"user.email = ?\", [params[:email]])\n```\n\n✅ Santize the value manually:\n\n```ruby\nUser.where(sanitize_sql([\"user.email = ?\", params[:email]]))\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)\n",
+			"message": "\n# Unsanitized user input in SQL query detected.\n## Description\n\nIncluding unsanitized data, such as user input or request data, in raw SQL\nqueries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input:\n\n```ruby\nUser.where(\"user.email = #{params[:email]}\")\n```\n\n✅ Use the ActiveRecord API wherever possible:\n\n```ruby\nUser.where(email: params[:email])\n```\n\n✅ Use bind variables:\n\n```ruby\nUser.where(\"user.email = ?\", [params[:email]])\n```\n\n✅ Santize the value manually:\n\n```ruby\nUser.where(sanitize_sql([\"user.email = ?\", params[:email]]))\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)\n",
 			"location": {
 				"path": "app/controllers/users_controller.rb",
 				"range": {
@@ -511,7 +511,7 @@
 			}
 		},
 		{
-			"message": "# Manual HTML sanitization detected.\n## Description\nSanitizing HTML manually is error prone and can lead to Cross Site\nScripting (XSS) vulnerabilities.\n\n## Remediations\n\n❌ Avoid manually escaping HTML:\n\n```javascript\nconst sanitizedUserInput = user.Input\n  .replaceAll('\u003c', '\u0026lt;')\n  .replaceAll('\u003e', '\u0026gt;');\nconst html = `\u003cstrong\u003e${sanitizedUserInput}\u003c/strong\u003e`;\n```\n\n✅ Use a HTML sanitization library:\n\n```javascript\nimport sanitizeHtml from 'sanitize-html';\n\nconst html = sanitizeHtml(`\u003cstrong\u003e${user.Input}\u003c/strong\u003e`);\n```\n\n## Resources\n- [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)\n",
+			"message": "\n# Manual HTML sanitization detected.\n## Description\nSanitizing HTML manually is error prone and can lead to Cross Site\nScripting (XSS) vulnerabilities.\n\n## Remediations\n\n❌ Avoid manually escaping HTML:\n\n```javascript\nconst sanitizedUserInput = user.Input\n  .replaceAll('\u003c', '\u0026lt;')\n  .replaceAll('\u003e', '\u0026gt;');\nconst html = `\u003cstrong\u003e${sanitizedUserInput}\u003c/strong\u003e`;\n```\n\n✅ Use a HTML sanitization library:\n\n```javascript\nimport sanitizeHtml from 'sanitize-html';\n\nconst html = sanitizeHtml(`\u003cstrong\u003e${user.Input}\u003c/strong\u003e`);\n```\n\n## Resources\n- [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)\n",
 			"location": {
 				"path": "app/assets/javascripts/application.js",
 				"range": {
@@ -533,7 +533,7 @@
 			}
 		},
 		{
-			"message": "# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+			"message": "\n# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
 			"location": {
 				"path": "app/controllers/password_resets_controller.rb",
 				"range": {
@@ -555,7 +555,7 @@
 			}
 		},
 		{
-			"message": "# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+			"message": "\n# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
 			"location": {
 				"path": "app/models/user.rb",
 				"range": {
@@ -577,7 +577,7 @@
 			}
 		},
 		{
-			"message": "# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+			"message": "\n# Weak encryption library usage detected.\n## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
 			"location": {
 				"path": "app/models/user.rb",
 				"range": {
@@ -599,7 +599,7 @@
 			}
 		},
 		{
-			"message": "# Detailed error reporting detected.\n## Description\n\nReturning detailed error messages to users could reveal sensitive\ninformation. This could lead to\n\n## Remediations\n\n❌ Don't configure your application to return details for every error:\n\n```ruby\nconfig.consider_all_requests_local = false\n```\n\n❌ Don't use `show_detailed_exceptions?` in controllers:\n\n```ruby\nclass MyController \u003c ApplicationController\n  def show_detailed_exceptions?\n    ...\n  end\nend\n```\n",
+			"message": "\n# Detailed error reporting detected.\n## Description\n\nReturning detailed error messages to users could reveal sensitive\ninformation. This could lead to\n\n## Remediations\n\n❌ Don't configure your application to return details for every error:\n\n```ruby\nconfig.consider_all_requests_local = false\n```\n\n❌ Don't use `show_detailed_exceptions?` in controllers:\n\n```ruby\nclass MyController \u003c ApplicationController\n  def show_detailed_exceptions?\n    ...\n  end\nend\n```\n",
 			"location": {
 				"path": "config/environments/mysql.rb",
 				"range": {
@@ -621,7 +621,7 @@
 			}
 		},
 		{
-			"message": "# Detailed error reporting detected.\n## Description\n\nReturning detailed error messages to users could reveal sensitive\ninformation. This could lead to\n\n## Remediations\n\n❌ Don't configure your application to return details for every error:\n\n```ruby\nconfig.consider_all_requests_local = false\n```\n\n❌ Don't use `show_detailed_exceptions?` in controllers:\n\n```ruby\nclass MyController \u003c ApplicationController\n  def show_detailed_exceptions?\n    ...\n  end\nend\n```\n",
+			"message": "\n# Detailed error reporting detected.\n## Description\n\nReturning detailed error messages to users could reveal sensitive\ninformation. This could lead to\n\n## Remediations\n\n❌ Don't configure your application to return details for every error:\n\n```ruby\nconfig.consider_all_requests_local = false\n```\n\n❌ Don't use `show_detailed_exceptions?` in controllers:\n\n```ruby\nclass MyController \u003c ApplicationController\n  def show_detailed_exceptions?\n    ...\n  end\nend\n```\n",
 			"location": {
 				"path": "config/environments/openshift.rb",
 				"range": {
@@ -643,7 +643,7 @@
 			}
 		},
 		{
-			"message": "# Validation using permissive regular expression detected.\n## Description\n\nValidations using regular expressions should use the start of text (\\A) and\nend of text (\\z or \\Z) boundaries.\n\n## Remediations\n\n❌ Avoid matching without start and end boundaries:\n\n```ruby\nvalidates :attribute, format: { with: /foo/}\n```\n\n❌ Avoid using line-based boundaries:\n\n```ruby\nvalidates :attribute, format: { with: /^foo$/}\n```\n\n✅ Use whole-text boundaries:\n\n```ruby\nvalidates :attribute1, format: { with: \"\\Afoo\\Z\"}\nvalidates :attribute2, format: { with: \"\\Afoo\\z\"}\n```\n\u003c!--\n## Resources\n- [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)\n--\u003e\n",
+			"message": "\n# Validation using permissive regular expression detected.\n## Description\n\nValidations using regular expressions should use the start of text (\\A) and\nend of text (\\z or \\Z) boundaries.\n\n## Remediations\n\n❌ Avoid matching without start and end boundaries:\n\n```ruby\nvalidates :attribute, format: { with: /foo/}\n```\n\n❌ Avoid using line-based boundaries:\n\n```ruby\nvalidates :attribute, format: { with: /^foo$/}\n```\n\n✅ Use whole-text boundaries:\n\n```ruby\nvalidates :attribute1, format: { with: \"\\Afoo\\Z\"}\nvalidates :attribute2, format: { with: \"\\Afoo\\z\"}\n```\n\u003c!--\n## Resources\n- [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)\n--\u003e\n",
 			"location": {
 				"path": "app/models/user.rb",
 				"range": {
@@ -665,7 +665,7 @@
 			}
 		},
 		{
-			"message": "# Session store with HttpOnly set to false detected.\n## Description\nTo mitigate against Cross-Site Scripting attacks, we should avoid accessing session cookies using JavaScript.\nBy default, Rails avoids this by setting the HttpOnly flag to true on session cookies. Setting this flag to false puts our application at risk of Cross-Site Scripting attacks.\n\n## Remediations\n❌ Do not disable httponly flag if configuring Rails session_store\n\n```\nRails.application.config.session_store :cookie_store, key: \"some_key\", httponly: false\n```\n\n## Resources\n- [OWASP HttpOnly](https://owasp.org/www-community/HttpOnly)\n",
+			"message": "\n# Session store with HttpOnly set to false detected.\n## Description\nTo mitigate against Cross-Site Scripting attacks, we should avoid accessing session cookies using JavaScript.\nBy default, Rails avoids this by setting the HttpOnly flag to true on session cookies. Setting this flag to false puts our application at risk of Cross-Site Scripting attacks.\n\n## Remediations\n❌ Do not disable httponly flag if configuring Rails session_store\n\n```\nRails.application.config.session_store :cookie_store, key: \"some_key\", httponly: false\n```\n\n## Resources\n- [OWASP HttpOnly](https://owasp.org/www-community/HttpOnly)\n",
 			"location": {
 				"path": "config/initializers/session_store.rb",
 				"range": {
@@ -687,7 +687,7 @@
 			}
 		},
 		{
-			"message": "# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+			"message": "\n# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
 			"location": {
 				"path": "db/schema.rb",
 				"range": {
@@ -709,7 +709,7 @@
 			}
 		},
 		{
-			"message": "# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+			"message": "\n# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
 			"location": {
 				"path": "db/schema.rb",
 				"range": {
@@ -731,7 +731,7 @@
 			}
 		},
 		{
-			"message": "# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+			"message": "\n# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
 			"location": {
 				"path": "db/schema.rb",
 				"range": {
@@ -753,7 +753,7 @@
 			}
 		},
 		{
-			"message": "# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+			"message": "\n# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
 			"location": {
 				"path": "db/schema.rb",
 				"range": {
@@ -775,7 +775,7 @@
 			}
 		},
 		{
-			"message": "# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+			"message": "\n# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
 			"location": {
 				"path": "db/schema.rb",
 				"range": {
@@ -797,7 +797,7 @@
 			}
 		},
 		{
-			"message": "# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+			"message": "\n# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
 			"location": {
 				"path": "db/schema.rb",
 				"range": {
@@ -819,7 +819,7 @@
 			}
 		},
 		{
-			"message": "# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+			"message": "\n# Missing application-level encryption of sensitive data detected.\n## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
 			"location": {
 				"path": "db/schema.rb",
 				"range": {
@@ -841,7 +841,7 @@
 			}
 		},
 		{
-			"message": "# Possibly dangerous permitted parameter key detected.\n## Description\nSafe-listing high-risk param keys makes Rails applications open to mass assignment vulnerability.\n\nIn Rails, mass assignment is when we use a hash to assign attributes all at once rather than individually. For example:\n\n```\nuser_attributes = { name: \"Mish\", email: \"mish@bearer.com\" }\nUser.new(user_attributes)\n```\n\nWhen used with an untrusted hash (for example, the `params` hash in a controller), mass assignment is open to attack because any attribute on the record that corresponds to a key in the hash will be automatically assigned the value in the hash. An attacker could exploit this vulnerability to change their role and permissions or to assign themselves as an admin.\n\nBy default, Rails' strong parameters protect against mass assignment vulnerability; however, we must take care when safe-listing high-risk param keys.\n\n## Remediations\n❌ Where possible, avoid safe-listed high-risk param keys such as :admin or :role\n\n```ruby\nuser_params = params(:user).permit!(:name, :email, :admin)\n```\n\n## Resources\n- [OWASP Mass Assignment Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html)\n- [Ruby on Rails security guide on mass assignment](https://guides.rubyonrails.org/v3.2.9/security.html#mass-assignment)\n",
+			"message": "\n# Possibly dangerous permitted parameter key detected.\n## Description\nSafe-listing high-risk param keys makes Rails applications open to mass assignment vulnerability.\n\nIn Rails, mass assignment is when we use a hash to assign attributes all at once rather than individually. For example:\n\n```\nuser_attributes = { name: \"Mish\", email: \"mish@bearer.com\" }\nUser.new(user_attributes)\n```\n\nWhen used with an untrusted hash (for example, the `params` hash in a controller), mass assignment is open to attack because any attribute on the record that corresponds to a key in the hash will be automatically assigned the value in the hash. An attacker could exploit this vulnerability to change their role and permissions or to assign themselves as an admin.\n\nBy default, Rails' strong parameters protect against mass assignment vulnerability; however, we must take care when safe-listing high-risk param keys.\n\n## Remediations\n❌ Where possible, avoid safe-listed high-risk param keys such as :admin or :role\n\n```ruby\nuser_params = params(:user).permit!(:name, :email, :admin)\n```\n\n## Resources\n- [OWASP Mass Assignment Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html)\n- [Ruby on Rails security guide on mass assignment](https://guides.rubyonrails.org/v3.2.9/security.html#mass-assignment)\n",
 			"location": {
 				"path": "app/controllers/users_controller.rb",
 				"range": {

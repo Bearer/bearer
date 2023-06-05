@@ -18,7 +18,7 @@ func ReportReviewdog(outputDetections *map[string][]security.Result) (reviewdog.
 					severity = "ERROR"
 				}
 
-				message := "# " + finding.Rule.Title + "\n" + finding.Rule.Description
+				message := "\n# " + finding.Rule.Title + "\n" + finding.Rule.Description
 
 				reviewdogDiagnostics = append(reviewdogDiagnostics, reviewdog.Diagnostic{
 					Message:  message,
