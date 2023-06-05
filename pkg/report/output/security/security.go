@@ -88,8 +88,8 @@ type Output struct {
 }
 
 type DataType struct {
-	CategoryUUID string `json:"category_uuid,omitempty" yaml:"category_uuid,omit_empty"`
-	Name         string `json:"name,omitempty" yaml:"name,omit_empty"`
+	CategoryUUID string `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
+	Name         string `json:"name,omitempty" yaml:"name,omitempty"`
 }
 
 type Result struct {
