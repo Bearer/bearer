@@ -28,6 +28,7 @@ import (
 	"github.com/bearer/bearer/pkg/github_api"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/gitlab"
+	rdo "github.com/bearer/bearer/pkg/report/output/reviewdog"
 	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
@@ -361,6 +362,17 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, fmt.Errorf("error generating sarif report %s", err)
 		}
 		content, err := outputhandler.ReportJSON(sarifContent)
+		if err != nil {
+			return false, fmt.Errorf("error generating JSON report %s", err)
+		}
+
+		logger.Msg(*content)
+	case flag.FormatReviewDog:
+		sastContent, err := rdo.ReportReviewdog(detections.(*map[string][]security.Result))
+		if err != nil {
+			return false, fmt.Errorf("error generating reviewdog report %s", err)
+		}
+		content, err := reportoutput.ReportJSON(sastContent)
 		if err != nil {
 			return false, fmt.Errorf("error generating JSON report %s", err)
 		}

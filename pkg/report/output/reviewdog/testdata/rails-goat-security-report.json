@@ -1,0 +1,1458 @@
+{
+  "high": [
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "javascript_lang_hardcoded_secret",
+      "title": "Hardcoded secret detected",
+      "description": "## Description\n\nCode is not a safe place to store secrets, use environment variables instead.\n\n## Remediations\n```javascript\n  passport.use(new OAuth2Strategy({\n      authorizationURL: 'https://www.example.com/oauth2/authorize',\n      tokenURL: 'https://www.example.com/oauth2/token',\n      clientID:  process.env.CLIENT_ID,\n      clientSecret: process.env.CLIENT_SECRET,\n      callbackURL: \"http://localhost:3000/auth/example/callback\"\n    },\n    function(accessToken, refreshToken, profile, cb) {\n      User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n        return cb(err, user);\n      });\n    }\n  ));\n```\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/javascript_lang_hardcoded_secret",
+      "line_number": 8,
+      "full_filename": "bearer/railsgoat/app/assets/javascripts/jsapi.js",
+      "filename": "app/assets/javascripts/jsapi.js",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 8,
+        "end": 8,
+        "column": {
+          "start": 1,
+          "end": 37
+        }
+      },
+      "sink": {
+        "start": 8,
+        "end": 8,
+        "column": {
+          "start": 1,
+          "end": 37
+        },
+        "content": "google.loader.ApiKey = 'notsupplied'"
+      },
+      "parent_line_number": 8,
+      "snippet": "google.loader.ApiKey = 'notsupplied'",
+      "fingerprint": "a4f300559bc6d6bc9828c798d934d577_0",
+      "old_fingerprint": "be2f72cc70f642baab7c690bbdb82a0a_0"
+    },
+    {
+      "cwe_ids": [
+        "315",
+        "539"
+      ],
+      "id": "ruby_lang_cookies",
+      "title": "Sensitive data stored in a cookie detected.",
+      "description": "## Description\n\nStoring sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.\n\n## Remediations\n\n❌ Avoid storing sensitive data in unencrypted cookies messages:\n\n```ruby\ncookies[:user_email] = \"john@doe.com\"\n```\n\n✅ To ensure cookie data stays safe, use encrypted cookies:\n\n```ruby\ncookies.encrypted[:user_email] = \"john@doe.com\"\n```\n\n## Resources\n\n- Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)\n- [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_cookies",
+      "line_number": 15,
+      "full_filename": "bearer/railsgoat/app/controllers/sessions_controller.rb",
+      "filename": "app/controllers/sessions_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 15,
+        "end": 15,
+        "column": {
+          "start": 32,
+          "end": 46
+        }
+      },
+      "sink": {
+        "start": 22,
+        "end": 22,
+        "column": {
+          "start": 9,
+          "end": 57
+        },
+        "content": "cookies.permanent[:auth_token] = user.auth_token"
+      },
+      "parent_line_number": 22,
+      "snippet": "cookies.permanent[:auth_token] = user.auth_token",
+      "fingerprint": "94c4f4457d14fe2faba36ed520efd610_0",
+      "old_fingerprint": "c39be7181f0cda6501dd6087034a625f_0"
+    },
+    {
+      "cwe_ids": [
+        "315",
+        "539"
+      ],
+      "id": "ruby_lang_cookies",
+      "title": "Sensitive data stored in a cookie detected.",
+      "description": "## Description\n\nStoring sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.\n\n## Remediations\n\n❌ Avoid storing sensitive data in unencrypted cookies messages:\n\n```ruby\ncookies[:user_email] = \"john@doe.com\"\n```\n\n✅ To ensure cookie data stays safe, use encrypted cookies:\n\n```ruby\ncookies.encrypted[:user_email] = \"john@doe.com\"\n```\n\n## Resources\n\n- Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)\n- [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_cookies",
+      "line_number": 22,
+      "full_filename": "bearer/railsgoat/app/controllers/sessions_controller.rb",
+      "filename": "app/controllers/sessions_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 22,
+        "end": 22,
+        "column": {
+          "start": 42,
+          "end": 57
+        }
+      },
+      "sink": {
+        "start": 22,
+        "end": 22,
+        "column": {
+          "start": 9,
+          "end": 57
+        },
+        "content": "cookies.permanent[:auth_token] = user.auth_token"
+      },
+      "parent_line_number": 22,
+      "snippet": "cookies.permanent[:auth_token] = user.auth_token",
+      "fingerprint": "94c4f4457d14fe2faba36ed520efd610_1",
+      "old_fingerprint": "c39be7181f0cda6501dd6087034a625f_1"
+    },
+    {
+      "cwe_ids": [
+        "502"
+      ],
+      "id": "ruby_lang_deserialization_of_user_input",
+      "title": "User input detected in an unsafe deserialization method.",
+      "description": "## Description\nIt is bad practice to deserialize untrusted data, such as data that comes from params or cookies, without sufficient verification.\nAttackers can transfer payloads or malicious code via serialized data, and deserializing such data puts your application at risk.\n\n## Remediations\n❌ Do not deserialize untrusted data\n\n✅ Prefer pure (data-only) and language-agnostic (de)serialization formats such as JSON or XML\n\nAvoiding language-specific (de)serialization formats reduces the risk of attackers manipulating the deserialization process for malicious purposes.\n\n```javascript\n  user_data = JSON.parse(params[:user])\n  # handle any parsing errors\n\n  JSON.load(user)\n```\n\n## Resources\n- [OWASP Deserialization cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_deserialization_of_user_input",
+      "line_number": 6,
+      "full_filename": "bearer/railsgoat/app/controllers/password_resets_controller.rb",
+      "filename": "app/controllers/password_resets_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 6,
+        "end": 6,
+        "column": {
+          "start": 12,
+          "end": 56
+        }
+      },
+      "sink": {
+        "start": 6,
+        "end": 6,
+        "column": {
+          "start": 12,
+          "end": 56
+        },
+        "content": "Marshal.load(Base64.decode64(params[:user]))"
+      },
+      "parent_line_number": 6,
+      "snippet": "Marshal.load(Base64.decode64(params[:user]))",
+      "fingerprint": "454e98373ac3a7e736bcfa38cda88ec7_0",
+      "old_fingerprint": "a8e720e60bc769e7cbaa8f9d9a2e6c7d_0"
+    },
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "ruby_lang_hardcoded_secret",
+      "title": "Hard-coded secret detected.",
+      "description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+      "line_number": 10,
+      "full_filename": "bearer/railsgoat/db/seeds.rb",
+      "filename": "db/seeds.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 10,
+        "end": 10,
+        "column": {
+          "start": 5,
+          "end": 26
+        }
+      },
+      "sink": {
+        "start": 10,
+        "end": 10,
+        "column": {
+          "start": 5,
+          "end": 26
+        },
+        "content": "password: \"admin1234\""
+      },
+      "parent_line_number": 10,
+      "snippet": "password: \"admin1234\"",
+      "fingerprint": "eeb73f5386dd7ab9b7913a0ec78ff433_0",
+      "old_fingerprint": "c40a9a78fdae9bb9a29e66dbf1eb0905_0"
+    },
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "ruby_lang_hardcoded_secret",
+      "title": "Hard-coded secret detected.",
+      "description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+      "line_number": 19,
+      "full_filename": "bearer/railsgoat/db/seeds.rb",
+      "filename": "db/seeds.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 19,
+        "end": 19,
+        "column": {
+          "start": 5,
+          "end": 27
+        }
+      },
+      "sink": {
+        "start": 19,
+        "end": 19,
+        "column": {
+          "start": 5,
+          "end": 27
+        },
+        "content": "password: \"railsgoat!\""
+      },
+      "parent_line_number": 19,
+      "snippet": "password: \"railsgoat!\"",
+      "fingerprint": "eeb73f5386dd7ab9b7913a0ec78ff433_1",
+      "old_fingerprint": "c40a9a78fdae9bb9a29e66dbf1eb0905_1"
+    },
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "ruby_lang_hardcoded_secret",
+      "title": "Hard-coded secret detected.",
+      "description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+      "line_number": 28,
+      "full_filename": "bearer/railsgoat/db/seeds.rb",
+      "filename": "db/seeds.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 28,
+        "end": 28,
+        "column": {
+          "start": 5,
+          "end": 28
+        }
+      },
+      "sink": {
+        "start": 28,
+        "end": 28,
+        "column": {
+          "start": 5,
+          "end": 28
+        },
+        "content": "password: \"yankeessuck\""
+      },
+      "parent_line_number": 28,
+      "snippet": "password: \"yankeessuck\"",
+      "fingerprint": "eeb73f5386dd7ab9b7913a0ec78ff433_2",
+      "old_fingerprint": "c40a9a78fdae9bb9a29e66dbf1eb0905_2"
+    },
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "ruby_lang_hardcoded_secret",
+      "title": "Hard-coded secret detected.",
+      "description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+      "line_number": 37,
+      "full_filename": "bearer/railsgoat/db/seeds.rb",
+      "filename": "db/seeds.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 37,
+        "end": 37,
+        "column": {
+          "start": 5,
+          "end": 27
+        }
+      },
+      "sink": {
+        "start": 37,
+        "end": 37,
+        "column": {
+          "start": 5,
+          "end": 27
+        },
+        "content": "password: \"alohaowasp\""
+      },
+      "parent_line_number": 37,
+      "snippet": "password: \"alohaowasp\"",
+      "fingerprint": "eeb73f5386dd7ab9b7913a0ec78ff433_3",
+      "old_fingerprint": "c40a9a78fdae9bb9a29e66dbf1eb0905_3"
+    },
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "ruby_lang_hardcoded_secret",
+      "title": "Hard-coded secret detected.",
+      "description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+      "line_number": 46,
+      "full_filename": "bearer/railsgoat/db/seeds.rb",
+      "filename": "db/seeds.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 46,
+        "end": 46,
+        "column": {
+          "start": 5,
+          "end": 30
+        }
+      },
+      "sink": {
+        "start": 46,
+        "end": 46,
+        "column": {
+          "start": 5,
+          "end": 30
+        },
+        "content": "password: \"motocross1445\""
+      },
+      "parent_line_number": 46,
+      "snippet": "password: \"motocross1445\"",
+      "fingerprint": "eeb73f5386dd7ab9b7913a0ec78ff433_4",
+      "old_fingerprint": "c40a9a78fdae9bb9a29e66dbf1eb0905_4"
+    },
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "ruby_lang_hardcoded_secret",
+      "title": "Hard-coded secret detected.",
+      "description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+      "line_number": 55,
+      "full_filename": "bearer/railsgoat/db/seeds.rb",
+      "filename": "db/seeds.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 55,
+        "end": 55,
+        "column": {
+          "start": 5,
+          "end": 28
+        }
+      },
+      "sink": {
+        "start": 55,
+        "end": 55,
+        "column": {
+          "start": 5,
+          "end": 28
+        },
+        "content": "password: \"citrusblend\""
+      },
+      "parent_line_number": 55,
+      "snippet": "password: \"citrusblend\"",
+      "fingerprint": "eeb73f5386dd7ab9b7913a0ec78ff433_5",
+      "old_fingerprint": "c40a9a78fdae9bb9a29e66dbf1eb0905_5"
+    },
+    {
+      "cwe_ids": [
+        "798"
+      ],
+      "id": "ruby_lang_hardcoded_secret",
+      "title": "Hard-coded secret detected.",
+      "description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+      "line_number": 64,
+      "full_filename": "bearer/railsgoat/db/seeds.rb",
+      "filename": "db/seeds.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 64,
+        "end": 64,
+        "column": {
+          "start": 5,
+          "end": 27
+        }
+      },
+      "sink": {
+        "start": 64,
+        "end": 64,
+        "column": {
+          "start": 5,
+          "end": 27
+        },
+        "content": "password: \"adminadmin\""
+      },
+      "parent_line_number": 64,
+      "snippet": "password: \"adminadmin\"",
+      "fingerprint": "eeb73f5386dd7ab9b7913a0ec78ff433_6",
+      "old_fingerprint": "c40a9a78fdae9bb9a29e66dbf1eb0905_6"
+    },
+    {
+      "cwe_ids": [
+        "22",
+        "73"
+      ],
+      "id": "ruby_lang_path_using_user_input",
+      "title": "Do not use user input to form file paths.",
+      "description": "## Description\nUsing raw unsanitized input when forming filenames or file paths is bad practice.\nIt can lead to path manipulation, by which attackers can gain access to resources outside of the intended scope.\n\n## Remediations\n❌ Avoid wherever possible\n\n✅ Validate expected file paths using `File` methods\n\n```ruby\n  path = File.expand(\"/home/\" + params[:resource_name])\n  if path.starts_with?(\"/home/\")\n    Dir.chdir(path)\n  else\n    # path is unexpected\n  end\n```\n\n## Resources\n- [OWASP path traversal attack](https://owasp.org/www-community/attacks/Path_Traversal)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_path_using_user_input",
+      "line_number": 12,
+      "full_filename": "bearer/railsgoat/app/controllers/benefit_forms_controller.rb",
+      "filename": "app/controllers/benefit_forms_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 12,
+        "end": 12,
+        "column": {
+          "start": 6,
+          "end": 47
+        }
+      },
+      "sink": {
+        "start": 12,
+        "end": 12,
+        "column": {
+          "start": 6,
+          "end": 47
+        },
+        "content": "send_file file, disposition: \"attachment\""
+      },
+      "parent_line_number": 12,
+      "snippet": "send_file file, disposition: \"attachment\"",
+      "fingerprint": "9e4df88511ffb370091c70b10b2a7e64_0",
+      "old_fingerprint": "6125f3157a249a8c51a4c111301ff4a1_0"
+    },
+    {
+      "cwe_ids": [
+        "79"
+      ],
+      "id": "ruby_lang_raw_html_using_user_input",
+      "title": "Unsanitized user input detected in raw HTML string.",
+      "description": "## Description\n\nApplications should not include unsanitized user input in HTML. This\ncan allow cross-site scripting (XSS) attacks.\n\n## Remediations\n\n❌ Avoid including user input directly in HTML strings:\n\n```ruby\nhtml = \"\u003ch1\u003e#{params[:title]}\u003c/h1\u003e\"\n```\n\n✅ Use a templating language such as ERB, and place the template in a separate file.\n\n✅ When HTML strings must be used, sanitize user input:\n\n```ruby\nhtml = \"\u003ch1\u003e#{strip_tags(params[:title])}\u003c/h1\u003e\"\n```\n\n## Resources\n- [OWASP Cross-Site Scripting (XSS) Cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_raw_html_using_user_input",
+      "line_number": 36,
+      "full_filename": "bearer/railsgoat/app/controllers/password_resets_controller.rb",
+      "filename": "app/controllers/password_resets_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 36,
+        "end": 36,
+        "column": {
+          "start": 23,
+          "end": 103
+        }
+      },
+      "sink": {
+        "start": 36,
+        "end": 36,
+        "column": {
+          "start": 23,
+          "end": 103
+        },
+        "content": "\"There was an issue sending password reset email to #{params[:email]}\".html_safe"
+      },
+      "parent_line_number": 36,
+      "snippet": "\"There was an issue sending password reset email to #{params[:email]}\".html_safe",
+      "fingerprint": "ceb34d84b256e645257d96e912bc753d_0",
+      "old_fingerprint": "b89f88b603e9744110e8bd9ef82808f1_0"
+    },
+    {
+      "cwe_ids": [
+        "94"
+      ],
+      "id": "ruby_lang_reflection_using_user_input",
+      "title": "Use of reflection influenced by user input detected.",
+      "description": "## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input",
+      "line_number": 10,
+      "full_filename": "bearer/railsgoat/app/controllers/api/v1/mobile_controller.rb",
+      "filename": "app/controllers/api/v1/mobile_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 10,
+        "end": 10,
+        "column": {
+          "start": 15,
+          "end": 50
+        }
+      },
+      "sink": {
+        "start": 10,
+        "end": 10,
+        "column": {
+          "start": 15,
+          "end": 50
+        },
+        "content": "params[:class].classify.constantize"
+      },
+      "parent_line_number": 10,
+      "snippet": "params[:class].classify.constantize",
+      "fingerprint": "a9089e770fd40c304424d0535a28606e_0",
+      "old_fingerprint": "9a5b2cde16ff92da7c87bcd7ce3961ce_0"
+    },
+    {
+      "cwe_ids": [
+        "94"
+      ],
+      "id": "ruby_lang_reflection_using_user_input",
+      "title": "Use of reflection influenced by user input detected.",
+      "description": "## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input",
+      "line_number": 17,
+      "full_filename": "bearer/railsgoat/app/controllers/api/v1/mobile_controller.rb",
+      "filename": "app/controllers/api/v1/mobile_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 17,
+        "end": 17,
+        "column": {
+          "start": 15,
+          "end": 50
+        }
+      },
+      "sink": {
+        "start": 17,
+        "end": 17,
+        "column": {
+          "start": 15,
+          "end": 50
+        },
+        "content": "params[:class].classify.constantize"
+      },
+      "parent_line_number": 17,
+      "snippet": "params[:class].classify.constantize",
+      "fingerprint": "a9089e770fd40c304424d0535a28606e_1",
+      "old_fingerprint": "9a5b2cde16ff92da7c87bcd7ce3961ce_1"
+    },
+    {
+      "cwe_ids": [
+        "94"
+      ],
+      "id": "ruby_lang_reflection_using_user_input",
+      "title": "Use of reflection influenced by user input detected.",
+      "description": "## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input",
+      "line_number": 11,
+      "full_filename": "bearer/railsgoat/app/controllers/benefit_forms_controller.rb",
+      "filename": "app/controllers/benefit_forms_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 11,
+        "end": 11,
+        "column": {
+          "start": 13,
+          "end": 38
+        }
+      },
+      "sink": {
+        "start": 11,
+        "end": 11,
+        "column": {
+          "start": 13,
+          "end": 38
+        },
+        "content": "params[:type].constantize"
+      },
+      "parent_line_number": 11,
+      "snippet": "params[:type].constantize",
+      "fingerprint": "3437ea665f495fbbb3f3eaaccc33cec9_2",
+      "old_fingerprint": "12eafd5b08895eeea3b924d7370a9bec_2"
+    },
+    {
+      "cwe_ids": [
+        "94"
+      ],
+      "id": "ruby_lang_reflection_using_user_input",
+      "title": "Use of reflection influenced by user input detected.",
+      "description": "## Description\n\nApplications should not look up or manipulate code using user-supplied data.\n\n## Remediations\n\n❌ Avoid using user input when using reflection:\n\n```ruby\nmethod(params[:method])\n```\n\n✅ Use user input indirectly when using reflection:\n\n```ruby\nmethod_name =\n  case params[:action]\n  when \"option1\"\n    \"method1\"\n  when \"option2\"\n    \"method2\"\n  end\n\nmethod(method_name)\n```\n\n## Resources\n- [OWASP Code injection explained](https://owasp.org/www-community/attacks/Code_Injection)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_reflection_using_user_input",
+      "line_number": 16,
+      "full_filename": "bearer/railsgoat/app/controllers/dashboard_controller.rb",
+      "filename": "app/controllers/dashboard_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 16,
+        "end": 16,
+        "column": {
+          "start": 5,
+          "end": 29
+        }
+      },
+      "sink": {
+        "start": 16,
+        "end": 16,
+        "column": {
+          "start": 5,
+          "end": 29
+        },
+        "content": "self.try(params[:graph])"
+      },
+      "parent_line_number": 16,
+      "snippet": "self.try(params[:graph])",
+      "fingerprint": "37e72b3605d3baeadf2a879d2681a39e_3",
+      "old_fingerprint": "818d6cdf8794bc9b4b2ad89a9cfb3645_3"
+    },
+    {
+      "cwe_ids": [
+        "331",
+        "326"
+      ],
+      "id": "ruby_lang_weak_encryption",
+      "title": "Weak encryption library usage detected.",
+      "description": "## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption",
+      "line_number": 57,
+      "full_filename": "bearer/railsgoat/app/controllers/password_resets_controller.rb",
+      "filename": "app/controllers/password_resets_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 57,
+        "end": 57,
+        "column": {
+          "start": 15,
+          "end": 49
+        }
+      },
+      "sink": {
+        "start": 57,
+        "end": 57,
+        "column": {
+          "start": 15,
+          "end": 49
+        },
+        "content": "Digest::MD5.hexdigest(@user.email)"
+      },
+      "parent_line_number": 57,
+      "snippet": "Digest::MD5.hexdigest(@user.email)",
+      "fingerprint": "fd12f798a7e48d1a85a018b61193b35b_0",
+      "old_fingerprint": "87ddb2b159b9dc251bc0d6cde805304a_0"
+    },
+    {
+      "cwe_ids": [
+        "601"
+      ],
+      "id": "ruby_rails_open_redirect",
+      "title": "Open redirect detected",
+      "description": "## Description\nA web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_open_redirect",
+      "line_number": 27,
+      "full_filename": "bearer/railsgoat/app/controllers/application_controller.rb",
+      "filename": "app/controllers/application_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 27,
+        "end": 27,
+        "column": {
+          "start": 6,
+          "end": 22
+        }
+      },
+      "sink": {
+        "start": 27,
+        "end": 27,
+        "column": {
+          "start": 6,
+          "end": 22
+        },
+        "content": "redirect_to path"
+      },
+      "parent_line_number": 27,
+      "snippet": "redirect_to path",
+      "fingerprint": "0b5a5aac7ff18ae4f7e2217e4065acca_0",
+      "old_fingerprint": "8725e9cde398f3bfaf05d5a0abca46c2_0"
+    },
+    {
+      "cwe_ids": [
+        "601"
+      ],
+      "id": "ruby_rails_open_redirect",
+      "title": "Open redirect detected",
+      "description": "## Description\nA web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_open_redirect",
+      "line_number": 26,
+      "full_filename": "bearer/railsgoat/app/controllers/sessions_controller.rb",
+      "filename": "app/controllers/sessions_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 26,
+        "end": 26,
+        "column": {
+          "start": 7,
+          "end": 23
+        }
+      },
+      "sink": {
+        "start": 26,
+        "end": 26,
+        "column": {
+          "start": 7,
+          "end": 23
+        },
+        "content": "redirect_to path"
+      },
+      "parent_line_number": 26,
+      "snippet": "redirect_to path",
+      "fingerprint": "e04dba9990249d18c1f3a8168e57cf74_1",
+      "old_fingerprint": "2302479b3be126efc9fdb2436fd48ad2_1"
+    },
+    {
+      "cwe_ids": [
+        "915"
+      ],
+      "id": "ruby_rails_permissive_parameters",
+      "title": "Overly permissive request parameters detected.",
+      "description": "## Description\n\nBeing overly permissive with request parameters can allow an attacker to\nupdate arbitrary model attributes.\n\n## Remediations\n\n❌ Avoid blanket permitting of parameters:\n\n```ruby\nparams.permit!\n```\n\n✅ Only permit parameters the user should be able to update:\n\n```ruby\nparams.permit(:name, :email)\n```\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_permissive_parameters",
+      "line_number": 50,
+      "full_filename": "bearer/railsgoat/app/controllers/users_controller.rb",
+      "filename": "app/controllers/users_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 50,
+        "end": 50,
+        "column": {
+          "start": 5,
+          "end": 34
+        }
+      },
+      "sink": {
+        "start": 50,
+        "end": 50,
+        "column": {
+          "start": 5,
+          "end": 34
+        },
+        "content": "params.require(:user).permit!"
+      },
+      "parent_line_number": 50,
+      "snippet": "params.require(:user).permit!",
+      "fingerprint": "629055624bc6c6c181807fa2e6655fe2_0",
+      "old_fingerprint": "4fac8023b32c5fb0bb1d9fcc08b0bec1_0"
+    },
+    {
+      "cwe_ids": [
+        "315"
+      ],
+      "id": "ruby_rails_session",
+      "title": "Sensitive data stored in a session cookie detected.",
+      "description": "## Description\n\nSensitive data should not be stored in session cookies. This policy looks for any sensitive data stored within the session cookies.\n\n## Remediations\nBy default, [Rails uses a Cookie based session store](https://guides.rubyonrails.org/security.html#session-storage). This makes it unsafe if you use it to store sensitive data in addition of making invalidating cookies difficult as they are stored on the client.\n\n✅ To ensure session's data stays safe, ensure to use a database-based session storage, which is easily done though Rails configuration:\n\n```ruby\nRails.application.config.session_store :active_record_store\n```\n\n## Resources\n- [Rails guide on configuring Rails applications](https://guides.rubyonrails.org/configuring.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_session",
+      "line_number": 15,
+      "full_filename": "bearer/railsgoat/app/controllers/sessions_controller.rb",
+      "filename": "app/controllers/sessions_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 15,
+        "end": 15,
+        "column": {
+          "start": 32,
+          "end": 46
+        }
+      },
+      "sink": {
+        "start": 24,
+        "end": 24,
+        "column": {
+          "start": 9,
+          "end": 36
+        },
+        "content": "session[:user_id] = user.id"
+      },
+      "parent_line_number": 24,
+      "snippet": "session[:user_id] = user.id",
+      "fingerprint": "79858413f6f43d294db8704a01245af5_0",
+      "old_fingerprint": "3a29e745b6c397cb54a274f71c762e47_0"
+    },
+    {
+      "cwe_ids": [
+        "89"
+      ],
+      "id": "ruby_rails_sql_injection",
+      "title": "Unsanitized user input in SQL query detected.",
+      "description": "## Description\n\nIncluding unsanitized data, such as user input or request data, in raw SQL\nqueries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input:\n\n```ruby\nUser.where(\"user.email = #{params[:email]}\")\n```\n\n✅ Use the ActiveRecord API wherever possible:\n\n```ruby\nUser.where(email: params[:email])\n```\n\n✅ Use bind variables:\n\n```ruby\nUser.where(\"user.email = ?\", [params[:email]])\n```\n\n✅ Santize the value manually:\n\n```ruby\nUser.where(sanitize_sql([\"user.email = ?\", params[:email]]))\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_sql_injection",
+      "line_number": 29,
+      "full_filename": "bearer/railsgoat/app/controllers/users_controller.rb",
+      "filename": "app/controllers/users_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 29,
+        "end": 29,
+        "column": {
+          "start": 12,
+          "end": 54
+        }
+      },
+      "sink": {
+        "start": 29,
+        "end": 29,
+        "column": {
+          "start": 12,
+          "end": 54
+        },
+        "content": "User.where(\"id = '#{params[:user][:id]}'\")"
+      },
+      "parent_line_number": 29,
+      "snippet": "User.where(\"id = '#{params[:user][:id]}'\")",
+      "fingerprint": "77e0b7637ef5ed331715af60cf1ddf57_0",
+      "old_fingerprint": "6a2eaf1aea5078094609e7a980398dea_0"
+    }
+  ],
+  "medium": [
+    {
+      "cwe_ids": [
+        "79"
+      ],
+      "id": "javascript_lang_manual_html_sanitization",
+      "title": "Manual HTML sanitization detected.",
+      "description": "## Description\nSanitizing HTML manually is error prone and can lead to Cross Site\nScripting (XSS) vulnerabilities.\n\n## Remediations\n\n❌ Avoid manually escaping HTML:\n\n```javascript\nconst sanitizedUserInput = user.Input\n  .replaceAll('\u003c', '\u0026lt;')\n  .replaceAll('\u003e', '\u0026gt;');\nconst html = `\u003cstrong\u003e${sanitizedUserInput}\u003c/strong\u003e`;\n```\n\n✅ Use a HTML sanitization library:\n\n```javascript\nimport sanitizeHtml from 'sanitize-html';\n\nconst html = sanitizeHtml(`\u003cstrong\u003e${user.Input}\u003c/strong\u003e`);\n```\n\n## Resources\n- [OWASP XSS explained](https://owasp.org/www-community/attacks/xss/)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/javascript_lang_manual_html_sanitization",
+      "line_number": 69,
+      "full_filename": "bearer/railsgoat/app/assets/javascripts/application.js",
+      "filename": "app/assets/javascripts/application.js",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 69,
+        "end": 74,
+        "column": {
+          "start": 7,
+          "end": 34
+        }
+      },
+      "sink": {
+        "start": 69,
+        "end": 74,
+        "column": {
+          "start": 7,
+          "end": 34
+        },
+        "content": "str\n        .replace(rAmp, '\u0026amp;')\n        .replace(rLt, '\u0026lt;')\n        .replace(rGt, '\u0026gt;')\n        .replace(rApos, '\u0026#39;')\n        .replace(rQuot, '\u0026quot;')"
+      },
+      "parent_line_number": 69,
+      "snippet": "str\n        .replace(rAmp, '\u0026amp;')\n        .replace(rLt, '\u0026lt;')\n        .replace(rGt, '\u0026gt;')\n        .replace(rApos, '\u0026#39;')\n        .replace(rQuot, '\u0026quot;')",
+      "fingerprint": "26fff61cf2e5e410c86b5852ebe90b03_0",
+      "old_fingerprint": "d7751e286b84678666e470f5c86dea8b_0"
+    },
+    {
+      "cwe_ids": [
+        "331",
+        "326"
+      ],
+      "id": "ruby_lang_weak_encryption",
+      "title": "Weak encryption library usage detected.",
+      "description": "## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption",
+      "line_number": 48,
+      "full_filename": "bearer/railsgoat/app/controllers/password_resets_controller.rb",
+      "filename": "app/controllers/password_resets_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 48,
+        "end": 48,
+        "column": {
+          "start": 12,
+          "end": 40
+        }
+      },
+      "sink": {
+        "start": 48,
+        "end": 48,
+        "column": {
+          "start": 12,
+          "end": 40
+        },
+        "content": "Digest::MD5.hexdigest(email)"
+      },
+      "parent_line_number": 48,
+      "snippet": "Digest::MD5.hexdigest(email)",
+      "fingerprint": "fd12f798a7e48d1a85a018b61193b35b_1",
+      "old_fingerprint": "87ddb2b159b9dc251bc0d6cde805304a_1"
+    },
+    {
+      "cwe_ids": [
+        "331",
+        "326"
+      ],
+      "id": "ruby_lang_weak_encryption",
+      "title": "Weak encryption library usage detected.",
+      "description": "## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption",
+      "line_number": 45,
+      "full_filename": "bearer/railsgoat/app/models/user.rb",
+      "filename": "app/models/user.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 45,
+        "end": 45,
+        "column": {
+          "start": 25,
+          "end": 56
+        }
+      },
+      "sink": {
+        "start": 45,
+        "end": 45,
+        "column": {
+          "start": 25,
+          "end": 56
+        },
+        "content": "Digest::MD5.hexdigest(password)"
+      },
+      "parent_line_number": 45,
+      "snippet": "Digest::MD5.hexdigest(password)",
+      "fingerprint": "6056e84f2258c3c64efb76f0f86c5921_2",
+      "old_fingerprint": "a1842d27655c721b206069c06afe4ddd_2"
+    },
+    {
+      "cwe_ids": [
+        "331",
+        "326"
+      ],
+      "id": "ruby_lang_weak_encryption",
+      "title": "Weak encryption library usage detected.",
+      "description": "## Description\n\nA weak encryption or hashing library can lead to data breaches and greater security risk. This rule checks for the use of weak encryption and hashing libraries or algorithms.\n\n## Remediations\nAccording to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.\n\n❌ Avoid libraries and algorithms with known weaknesses:\n\n```ruby\nDigest::SHA1.hexdigest 'weak password encryption'\nCrypt::Blowfish.new(\"weak password encryption\")\nRC4.new(\"weak password encryption\")\nOpenSSL::PKey::RSA.new 1024\nOpenSSL::PKey::DSA.new 1024\nDigest::MD5.hexdigest 'unsecure string'\n```\n\n✅ Instead, we recommend using bcrypt:\n\n```ruby\nBCrypt::Password.create('iLOVEdogs123')\n```\n\n## Resources\n- [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_weak_encryption",
+      "line_number": 55,
+      "full_filename": "bearer/railsgoat/app/models/user.rb",
+      "filename": "app/models/user.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 55,
+        "end": 55,
+        "column": {
+          "start": 23,
+          "end": 59
+        }
+      },
+      "sink": {
+        "start": 55,
+        "end": 55,
+        "column": {
+          "start": 23,
+          "end": 59
+        },
+        "content": "Digest::MD5.hexdigest(self.password)"
+      },
+      "parent_line_number": 55,
+      "snippet": "Digest::MD5.hexdigest(self.password)",
+      "fingerprint": "6056e84f2258c3c64efb76f0f86c5921_3",
+      "old_fingerprint": "a1842d27655c721b206069c06afe4ddd_3"
+    },
+    {
+      "cwe_ids": [
+        "209"
+      ],
+      "id": "ruby_rails_detailed_exceptions",
+      "title": "Detailed error reporting detected.",
+      "description": "## Description\n\nReturning detailed error messages to users could reveal sensitive\ninformation. This could lead to\n\n## Remediations\n\n❌ Don't configure your application to return details for every error:\n\n```ruby\nconfig.consider_all_requests_local = false\n```\n\n❌ Don't use `show_detailed_exceptions?` in controllers:\n\n```ruby\nclass MyController \u003c ApplicationController\n  def show_detailed_exceptions?\n    ...\n  end\nend\n```\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_detailed_exceptions",
+      "line_number": 11,
+      "full_filename": "bearer/railsgoat/config/environments/mysql.rb",
+      "filename": "config/environments/mysql.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 11,
+        "end": 11,
+        "column": {
+          "start": 3,
+          "end": 50
+        }
+      },
+      "sink": {
+        "start": 11,
+        "end": 11,
+        "column": {
+          "start": 3,
+          "end": 50
+        },
+        "content": "config.consider_all_requests_local       = true"
+      },
+      "parent_line_number": 11,
+      "snippet": "config.consider_all_requests_local       = true",
+      "fingerprint": "871fe87396d4449aa57458a6f69121fd_0",
+      "old_fingerprint": "5229ad5b9772842ebf1ecb96dc2d139e_0"
+    },
+    {
+      "cwe_ids": [
+        "209"
+      ],
+      "id": "ruby_rails_detailed_exceptions",
+      "title": "Detailed error reporting detected.",
+      "description": "## Description\n\nReturning detailed error messages to users could reveal sensitive\ninformation. This could lead to\n\n## Remediations\n\n❌ Don't configure your application to return details for every error:\n\n```ruby\nconfig.consider_all_requests_local = false\n```\n\n❌ Don't use `show_detailed_exceptions?` in controllers:\n\n```ruby\nclass MyController \u003c ApplicationController\n  def show_detailed_exceptions?\n    ...\n  end\nend\n```\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_detailed_exceptions",
+      "line_number": 11,
+      "full_filename": "bearer/railsgoat/config/environments/openshift.rb",
+      "filename": "config/environments/openshift.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 11,
+        "end": 11,
+        "column": {
+          "start": 3,
+          "end": 50
+        }
+      },
+      "sink": {
+        "start": 11,
+        "end": 11,
+        "column": {
+          "start": 3,
+          "end": 50
+        },
+        "content": "config.consider_all_requests_local       = true"
+      },
+      "parent_line_number": 11,
+      "snippet": "config.consider_all_requests_local       = true",
+      "fingerprint": "d62ca0bdbeaff73bf4d526121f1a1415_1",
+      "old_fingerprint": "83696810697b4b8acf95564707043dfe_1"
+    },
+    {
+      "cwe_ids": [
+        "625"
+      ],
+      "id": "ruby_rails_permissive_regex_validation",
+      "title": "Validation using permissive regular expression detected.",
+      "description": "## Description\n\nValidations using regular expressions should use the start of text (\\A) and\nend of text (\\z or \\Z) boundaries.\n\n## Remediations\n\n❌ Avoid matching without start and end boundaries:\n\n```ruby\nvalidates :attribute, format: { with: /foo/}\n```\n\n❌ Avoid using line-based boundaries:\n\n```ruby\nvalidates :attribute, format: { with: /^foo$/}\n```\n\n✅ Use whole-text boundaries:\n\n```ruby\nvalidates :attribute1, format: { with: \"\\Afoo\\Z\"}\nvalidates :attribute2, format: { with: \"\\Afoo\\z\"}\n```\n\u003c!--\n## Resources\n- [Active Record format validation](https://guides.rubyonrails.org/active_record_validations.html#format)\n--\u003e\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_permissive_regex_validation",
+      "line_number": 13,
+      "full_filename": "bearer/railsgoat/app/models/user.rb",
+      "filename": "app/models/user.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 13,
+        "end": 13,
+        "column": {
+          "start": 3,
+          "end": 49
+        }
+      },
+      "sink": {
+        "start": 13,
+        "end": 13,
+        "column": {
+          "start": 3,
+          "end": 49
+        },
+        "content": "validates_format_of :email, with: /.+@.+\\..+/i"
+      },
+      "parent_line_number": 13,
+      "snippet": "validates_format_of :email, with: /.+@.+\\..+/i",
+      "fingerprint": "7e083853d9863347713f573f44d7a883_0",
+      "old_fingerprint": "4f68c6b363a82c39b91a21f470fdab41_0"
+    },
+    {
+      "cwe_ids": [
+        "1004"
+      ],
+      "id": "ruby_rails_session_with_httponly_disabled",
+      "title": "Session store with HttpOnly set to false detected.",
+      "description": "## Description\nTo mitigate against Cross-Site Scripting attacks, we should avoid accessing session cookies using JavaScript.\nBy default, Rails avoids this by setting the HttpOnly flag to true on session cookies. Setting this flag to false puts our application at risk of Cross-Site Scripting attacks.\n\n## Remediations\n❌ Do not disable httponly flag if configuring Rails session_store\n\n```\nRails.application.config.session_store :cookie_store, key: \"some_key\", httponly: false\n```\n\n## Resources\n- [OWASP HttpOnly](https://owasp.org/www-community/HttpOnly)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_session_with_httponly_disabled",
+      "line_number": 4,
+      "full_filename": "bearer/railsgoat/config/initializers/session_store.rb",
+      "filename": "config/initializers/session_store.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 4,
+        "end": 4,
+        "column": {
+          "start": 1,
+          "end": 102
+        }
+      },
+      "sink": {
+        "start": 4,
+        "end": 4,
+        "column": {
+          "start": 1,
+          "end": 102
+        },
+        "content": "Railsgoat::Application.config.session_store :cookie_store, key: \"_railsgoat_session\", httponly: false"
+      },
+      "parent_line_number": 4,
+      "snippet": "Railsgoat::Application.config.session_store :cookie_store, key: \"_railsgoat_session\", httponly: false",
+      "fingerprint": "742ed13ad9018057c3f1533ff8a2d08f_0",
+      "old_fingerprint": "59af24789460f6415a0417b7f9acdff7_0"
+    }
+  ],
+  "warning": [
+    {
+      "cwe_ids": [
+        "312"
+      ],
+      "id": "ruby_rails_default_encryption",
+      "title": "Missing application-level encryption of sensitive data detected.",
+      "description": "## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_default_encryption",
+      "line_number": 39,
+      "full_filename": "bearer/railsgoat/db/schema.rb",
+      "filename": "db/schema.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 39,
+        "end": 39,
+        "column": {
+          "start": 12,
+          "end": 21
+        }
+      },
+      "sink": {
+        "start": 36,
+        "end": 43,
+        "column": {
+          "start": 3,
+          "end": 6
+        },
+        "content": "create_table \"messages\", force: :cascade do |t|\n    t.integer \"creator_id\"\n    t.integer \"receiver_id\"\n    t.text \"message\"\n    t.boolean \"read\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n  end"
+      },
+      "parent_line_number": 36,
+      "snippet": "create_table \"messages\", force: :cascade do |t|\n    t.integer \"creator_id\"\n    t.integer \"receiver_id\"\n    t.text \"message\"\n    t.boolean \"read\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n  end",
+      "fingerprint": "a6e77c6d42db8f03ffbe5acae290f72c_0",
+      "old_fingerprint": "f274d59c5d4a807e94d10d5095ab6f5d_0"
+    },
+    {
+      "cwe_ids": [
+        "312"
+      ],
+      "id": "ruby_rails_default_encryption",
+      "title": "Missing application-level encryption of sensitive data detected.",
+      "description": "## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_default_encryption",
+      "line_number": 57,
+      "full_filename": "bearer/railsgoat/db/schema.rb",
+      "filename": "db/schema.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 57,
+        "end": 57,
+        "column": {
+          "start": 14,
+          "end": 32
+        }
+      },
+      "sink": {
+        "start": 55,
+        "end": 62,
+        "column": {
+          "start": 3,
+          "end": 6
+        },
+        "content": "create_table \"pays\", force: :cascade do |t|\n    t.integer \"user_id\"\n    t.string \"bank_account_num\"\n    t.string \"bank_routing_num\"\n    t.integer \"percent_of_deposit\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n  end"
+      },
+      "parent_line_number": 55,
+      "snippet": "create_table \"pays\", force: :cascade do |t|\n    t.integer \"user_id\"\n    t.string \"bank_account_num\"\n    t.string \"bank_routing_num\"\n    t.integer \"percent_of_deposit\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n  end",
+      "fingerprint": "a6e77c6d42db8f03ffbe5acae290f72c_1",
+      "old_fingerprint": "f274d59c5d4a807e94d10d5095ab6f5d_1"
+    },
+    {
+      "cwe_ids": [
+        "312"
+      ],
+      "id": "ruby_rails_default_encryption",
+      "title": "Missing application-level encryption of sensitive data detected.",
+      "description": "## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_default_encryption",
+      "line_number": 95,
+      "full_filename": "bearer/railsgoat/db/schema.rb",
+      "filename": "db/schema.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 95,
+        "end": 95,
+        "column": {
+          "start": 14,
+          "end": 21
+        }
+      },
+      "sink": {
+        "start": 94,
+        "end": 103,
+        "column": {
+          "start": 3,
+          "end": 6
+        },
+        "content": "create_table \"users\", force: :cascade do |t|\n    t.string \"email\"\n    t.string \"password\"\n    t.boolean \"admin\"\n    t.string \"first_name\"\n    t.string \"last_name\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.string \"auth_token\"\n  end"
+      },
+      "parent_line_number": 94,
+      "snippet": "create_table \"users\", force: :cascade do |t|\n    t.string \"email\"\n    t.string \"password\"\n    t.boolean \"admin\"\n    t.string \"first_name\"\n    t.string \"last_name\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.string \"auth_token\"\n  end",
+      "fingerprint": "a6e77c6d42db8f03ffbe5acae290f72c_2",
+      "old_fingerprint": "f274d59c5d4a807e94d10d5095ab6f5d_2"
+    },
+    {
+      "cwe_ids": [
+        "312"
+      ],
+      "id": "ruby_rails_default_encryption",
+      "title": "Missing application-level encryption of sensitive data detected.",
+      "description": "## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_default_encryption",
+      "line_number": 98,
+      "full_filename": "bearer/railsgoat/db/schema.rb",
+      "filename": "db/schema.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 98,
+        "end": 98,
+        "column": {
+          "start": 14,
+          "end": 26
+        }
+      },
+      "sink": {
+        "start": 94,
+        "end": 103,
+        "column": {
+          "start": 3,
+          "end": 6
+        },
+        "content": "create_table \"users\", force: :cascade do |t|\n    t.string \"email\"\n    t.string \"password\"\n    t.boolean \"admin\"\n    t.string \"first_name\"\n    t.string \"last_name\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.string \"auth_token\"\n  end"
+      },
+      "parent_line_number": 94,
+      "snippet": "create_table \"users\", force: :cascade do |t|\n    t.string \"email\"\n    t.string \"password\"\n    t.boolean \"admin\"\n    t.string \"first_name\"\n    t.string \"last_name\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.string \"auth_token\"\n  end",
+      "fingerprint": "a6e77c6d42db8f03ffbe5acae290f72c_3",
+      "old_fingerprint": "f274d59c5d4a807e94d10d5095ab6f5d_3"
+    },
+    {
+      "cwe_ids": [
+        "312"
+      ],
+      "id": "ruby_rails_default_encryption",
+      "title": "Missing application-level encryption of sensitive data detected.",
+      "description": "## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_default_encryption",
+      "line_number": 99,
+      "full_filename": "bearer/railsgoat/db/schema.rb",
+      "filename": "db/schema.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 99,
+        "end": 99,
+        "column": {
+          "start": 14,
+          "end": 25
+        }
+      },
+      "sink": {
+        "start": 94,
+        "end": 103,
+        "column": {
+          "start": 3,
+          "end": 6
+        },
+        "content": "create_table \"users\", force: :cascade do |t|\n    t.string \"email\"\n    t.string \"password\"\n    t.boolean \"admin\"\n    t.string \"first_name\"\n    t.string \"last_name\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.string \"auth_token\"\n  end"
+      },
+      "parent_line_number": 94,
+      "snippet": "create_table \"users\", force: :cascade do |t|\n    t.string \"email\"\n    t.string \"password\"\n    t.boolean \"admin\"\n    t.string \"first_name\"\n    t.string \"last_name\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.string \"auth_token\"\n  end",
+      "fingerprint": "a6e77c6d42db8f03ffbe5acae290f72c_4",
+      "old_fingerprint": "f274d59c5d4a807e94d10d5095ab6f5d_4"
+    },
+    {
+      "cwe_ids": [
+        "312"
+      ],
+      "id": "ruby_rails_default_encryption",
+      "title": "Missing application-level encryption of sensitive data detected.",
+      "description": "## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_default_encryption",
+      "line_number": 107,
+      "full_filename": "bearer/railsgoat/db/schema.rb",
+      "filename": "db/schema.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 107,
+        "end": 107,
+        "column": {
+          "start": 14,
+          "end": 22
+        }
+      },
+      "sink": {
+        "start": 105,
+        "end": 115,
+        "column": {
+          "start": 3,
+          "end": 6
+        },
+        "content": "create_table \"work_infos\", force: :cascade do |t|\n    t.integer \"user_id\"\n    t.string \"income\"\n    t.string \"bonuses\"\n    t.integer \"years_worked\"\n    t.string \"SSN\"\n    t.date \"DoB\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.binary \"encrypted_ssn\"\n  end"
+      },
+      "parent_line_number": 105,
+      "snippet": "create_table \"work_infos\", force: :cascade do |t|\n    t.integer \"user_id\"\n    t.string \"income\"\n    t.string \"bonuses\"\n    t.integer \"years_worked\"\n    t.string \"SSN\"\n    t.date \"DoB\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.binary \"encrypted_ssn\"\n  end",
+      "fingerprint": "a6e77c6d42db8f03ffbe5acae290f72c_5",
+      "old_fingerprint": "f274d59c5d4a807e94d10d5095ab6f5d_5"
+    },
+    {
+      "cwe_ids": [
+        "312"
+      ],
+      "id": "ruby_rails_default_encryption",
+      "title": "Missing application-level encryption of sensitive data detected.",
+      "description": "## Description\nApplication-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.\n\n## Remediations\nWhenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.\n\n## Resources\n- [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_default_encryption",
+      "line_number": 110,
+      "full_filename": "bearer/railsgoat/db/schema.rb",
+      "filename": "db/schema.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 110,
+        "end": 110,
+        "column": {
+          "start": 14,
+          "end": 19
+        }
+      },
+      "sink": {
+        "start": 105,
+        "end": 115,
+        "column": {
+          "start": 3,
+          "end": 6
+        },
+        "content": "create_table \"work_infos\", force: :cascade do |t|\n    t.integer \"user_id\"\n    t.string \"income\"\n    t.string \"bonuses\"\n    t.integer \"years_worked\"\n    t.string \"SSN\"\n    t.date \"DoB\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.binary \"encrypted_ssn\"\n  end"
+      },
+      "parent_line_number": 105,
+      "snippet": "create_table \"work_infos\", force: :cascade do |t|\n    t.integer \"user_id\"\n    t.string \"income\"\n    t.string \"bonuses\"\n    t.integer \"years_worked\"\n    t.string \"SSN\"\n    t.date \"DoB\"\n    t.datetime \"created_at\"\n    t.datetime \"updated_at\"\n    t.binary \"encrypted_ssn\"\n  end",
+      "fingerprint": "a6e77c6d42db8f03ffbe5acae290f72c_6",
+      "old_fingerprint": "f274d59c5d4a807e94d10d5095ab6f5d_6"
+    },
+    {
+      "cwe_ids": [
+        "915"
+      ],
+      "id": "ruby_rails_unsafe_mass_assignment",
+      "title": "Possibly dangerous permitted parameter key detected.",
+      "description": "## Description\nSafe-listing high-risk param keys makes Rails applications open to mass assignment vulnerability.\n\nIn Rails, mass assignment is when we use a hash to assign attributes all at once rather than individually. For example:\n\n```\nuser_attributes = { name: \"Mish\", email: \"mish@bearer.com\" }\nUser.new(user_attributes)\n```\n\nWhen used with an untrusted hash (for example, the `params` hash in a controller), mass assignment is open to attack because any attribute on the record that corresponds to a key in the hash will be automatically assigned the value in the hash. An attacker could exploit this vulnerability to change their role and permissions or to assign themselves as an admin.\n\nBy default, Rails' strong parameters protect against mass assignment vulnerability; however, we must take care when safe-listing high-risk param keys.\n\n## Remediations\n❌ Where possible, avoid safe-listed high-risk param keys such as :admin or :role\n\n```ruby\nuser_params = params(:user).permit!(:name, :email, :admin)\n```\n\n## Resources\n- [OWASP Mass Assignment Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html)\n- [Ruby on Rails security guide on mass assignment](https://guides.rubyonrails.org/v3.2.9/security.html#mass-assignment)\n",
+      "documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_unsafe_mass_assignment",
+      "line_number": 55,
+      "full_filename": "bearer/railsgoat/app/controllers/users_controller.rb",
+      "filename": "app/controllers/users_controller.rb",
+      "category_groups": [
+        "PII",
+        "Personal Data"
+      ],
+      "source": {
+        "start": 55,
+        "end": 55,
+        "column": {
+          "start": 5,
+          "end": 74
+        }
+      },
+      "sink": {
+        "start": 55,
+        "end": 55,
+        "column": {
+          "start": 5,
+          "end": 74
+        },
+        "content": "params.require(:user).permit(:email, :admin, :first_name, :last_name)"
+      },
+      "parent_line_number": 55,
+      "snippet": "params.require(:user).permit(:email, :admin, :first_name, :last_name)",
+      "fingerprint": "055d9b07c9c575259b79e91db62c6a59_0",
+      "old_fingerprint": "c272ebff98a42586a35919aa086ee287_0"
+    }
+  ]
+}

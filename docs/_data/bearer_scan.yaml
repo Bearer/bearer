@@ -43,7 +43,8 @@ options:
       usage: Disable the cache and runs the detections again
     - name: format
       shorthand: f
-      usage: Specify report format (json, yaml, sarif, gitlab-sast)
+      usage: |
+        Specify report format (json, yaml, sarif, gitlab-sast, rdjson)
     - name: help
       shorthand: h
       default_value: "false"
@@ -64,6 +65,9 @@ options:
         Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
     - name: output
       usage: Specify the output path for the report.
+    - name: parallel
+      default_value: "4"
+      usage: Specify the amount of parallelism to use during the scan
     - name: quiet
       default_value: "false"
       usage: Suppress non-essential messages

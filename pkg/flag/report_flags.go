@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	FormatReviewDog  = "rdjson"
 	FormatGitLabSast = "gitlab-sast"
 	FormatSarif      = "sarif"
 	FormatJSON       = "json"
@@ -23,7 +24,7 @@ var (
 	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
-var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml, sarif, gitlab-sast")
+var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml, sarif, gitlab-sast, rdjson")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: security, privacy")
 var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 
@@ -33,7 +34,7 @@ var (
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatEmpty,
-		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast)",
+		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast, rdjson)",
 	}
 	ReportFlag = Flag{
 		Name:       "report",
@@ -120,7 +121,7 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	case FormatYAML:
 	case FormatJSON:
 	case FormatEmpty:
-	case FormatSarif, FormatGitLabSast:
+	case FormatSarif, FormatGitLabSast, FormatReviewDog:
 		if report != ReportSecurity {
 			return ReportOptions{}, ErrInvalidFormat
 		}
