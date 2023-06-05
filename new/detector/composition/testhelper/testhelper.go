@@ -137,6 +137,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		},
 		runner.config,
 	)
+
 	report, _ := util.ReportYAML(detections)
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))

@@ -1,33 +1,33 @@
 high:
-- rule:
-    cwe_ids: []
-    id: javascript_test_datatype_rule
-    title: ""
-    description: ""
-    documentation_url: ""
-  line_number: 1
-  full_filename: assigment-expression.js
-  filename: assigment-expression.js
-  category_groups:
-  - PII
-  - Personal Data
-  source:
-    location:
-      start: 1
-      end: 1
-      column:
-        start: 16
-        end: 28
-  sink:
-    location:
-      start: 2
-      end: 2
-      column:
-        start: 1
-        end: 18
-    content: console.log(user)
-  parent_line_number: 2
-  snippet: console.log(user)
-  fingerprint: 3c919e47299fa396f901d19edaad859c_0
-  old_fingerprint: 3c919e47299fa396f901d19edaad859c_0
+    - rule:
+        cwe_ids: []
+        id: javascript_test_datatype_rule
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      full_filename: assigment-expression.js
+      filename: assigment-expression.js
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 16
+                end: 28
+      sink:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 18
+        content: console.log(user)
+      parent_line_number: 2
+      snippet: console.log(user)
+      fingerprint: 3c919e47299fa396f901d19edaad859c_0
+      old_fingerprint: 3c919e47299fa396f901d19edaad859c_0
 
