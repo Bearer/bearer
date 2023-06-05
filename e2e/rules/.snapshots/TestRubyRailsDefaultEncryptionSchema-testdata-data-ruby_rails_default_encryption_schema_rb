@@ -1,58 +1,58 @@
 warning:
-- rule:
-    cwe_ids:
-    - "312"
-    id: ruby_rails_default_encryption
-    title: Missing application-level encryption of sensitive data detected.
-    description: |
-      ## Description
-      Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.
+    - rule:
+        cwe_ids:
+            - "312"
+        id: ruby_rails_default_encryption
+        title: Missing application-level encryption of sensitive data detected.
+        description: |
+            ## Description
+            Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.
 
-      ## Remediations
-      Whenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.
+            ## Remediations
+            Whenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.
 
-      ## Resources
-      - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
-    documentation_url: ""
-  line_number: 4
-  full_filename: e2e/rules/testdata/data/ruby_rails_default_encryption_schema_rb/db/schema.rb
-  filename: db/schema.rb
-  category_groups:
-  - PII
-  - Personal Data
-  source:
-    location:
-      start: 4
-      end: 4
-      column:
-        start: 14
-        end: 20
-  sink:
-    location:
-      start: 2
-      end: 8
-      column:
-        start: 3
-        end: 6
-    content: |-
-      create_table "users", force: :cascade do |t|
-          t.string "email", null: false
-          t.string "name"
-          t.string "encrypted_password", null: false
-          t.datetime "created_at", null: false
-          t.datetime "updated_at", null: false
-        end
-  parent_line_number: 2
-  snippet: |-
-    create_table "users", force: :cascade do |t|
-        t.string "email", null: false
-        t.string "name"
-        t.string "encrypted_password", null: false
-        t.datetime "created_at", null: false
-        t.datetime "updated_at", null: false
-      end
-  fingerprint: a6e77c6d42db8f03ffbe5acae290f72c_0
-  old_fingerprint: 4b6d6e98ae7d9908efdf9a7984c7db05_0
+            ## Resources
+            - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
+        documentation_url: ""
+      line_number: 4
+      full_filename: e2e/rules/testdata/data/ruby_rails_default_encryption_schema_rb/db/schema.rb
+      filename: db/schema.rb
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 14
+                end: 20
+      sink:
+        location:
+            start: 2
+            end: 8
+            column:
+                start: 3
+                end: 6
+        content: |-
+            create_table "users", force: :cascade do |t|
+                t.string "email", null: false
+                t.string "name"
+                t.string "encrypted_password", null: false
+                t.datetime "created_at", null: false
+                t.datetime "updated_at", null: false
+              end
+      parent_line_number: 2
+      snippet: |-
+        create_table "users", force: :cascade do |t|
+            t.string "email", null: false
+            t.string "name"
+            t.string "encrypted_password", null: false
+            t.datetime "created_at", null: false
+            t.datetime "updated_at", null: false
+          end
+      fingerprint: a6e77c6d42db8f03ffbe5acae290f72c_0
+      old_fingerprint: 4b6d6e98ae7d9908efdf9a7984c7db05_0
 
 
 --
