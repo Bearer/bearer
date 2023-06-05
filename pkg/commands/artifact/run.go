@@ -372,7 +372,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		if err != nil {
 			return false, fmt.Errorf("error generating reviewdog report %s", err)
 		}
-		content, err := reportoutput.ReportJSON(sastContent)
+		content, err := outputhandler.ReportJSON(sastContent)
 		if err != nil {
 			return false, fmt.Errorf("error generating JSON report %s", err)
 		}
