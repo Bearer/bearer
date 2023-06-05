@@ -1,36 +1,36 @@
 high:
-- rule:
-    cwe_ids: []
-    id: logger_test_rule
-    title: ""
-    description: ""
-    documentation_url: ""
-  line_number: 1
-  full_filename: call.rb
-  filename: call.rb
-  data_type:
-    category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
-    name: Fullname
-  category_groups:
-  - PII
-  - Personal Data
-  source:
-    location:
-      start: 1
-      end: 1
-      column:
-        start: 13
-        end: 22
-  sink:
-    location:
-      start: 1
-      end: 1
-      column:
-        start: 1
-        end: 23
-    content: logger.info(user.name)
-  parent_line_number: 1
-  snippet: logger.info(user.name)
-  fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
-  old_fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
+    - rule:
+        cwe_ids: []
+        id: logger_test_rule
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      full_filename: call.rb
+      filename: call.rb
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 13
+                end: 22
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 23
+        content: logger.info(user.name)
+      parent_line_number: 1
+      snippet: logger.info(user.name)
+      fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
+      old_fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
 

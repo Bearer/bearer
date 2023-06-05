@@ -1,52 +1,52 @@
 medium:
-- rule:
-    cwe_ids:
-    - "319"
-    id: ruby_rails_insecure_communication_test
-    title: Force all incoming communication through SSL.
-    description: |
-      ## Description
-      When applications process sensitive data, they should default to always use SSL when available. This rule checks if force SSL is enabled at the application level.
+    - rule:
+        cwe_ids:
+            - "319"
+        id: ruby_rails_insecure_communication_test
+        title: Force all incoming communication through SSL.
+        description: |
+            ## Description
+            When applications process sensitive data, they should default to always use SSL when available. This rule checks if force SSL is enabled at the application level.
 
-      ### Remediations
-      This helps avoid attacks like [session hijacking](https://guides.rubyonrails.org/security.html#session-hijacking). More importantly, unencrypted HTTP communication sends all requests as plain text, meaning anyone listening in can see all the traffic and extract user data.
+            ### Remediations
+            This helps avoid attacks like [session hijacking](https://guides.rubyonrails.org/security.html#session-hijacking). More importantly, unencrypted HTTP communication sends all requests as plain text, meaning anyone listening in can see all the traffic and extract user data.
 
-      While you want to avoid sending sensitive data whenever possible, it's unavoidable so protecting the connection is an important method of improving your rails application data security.
+            While you want to avoid sending sensitive data whenever possible, it's unavoidable so protecting the connection is an important method of improving your rails application data security.
 
-      ✅ To force all traffic to your application to be encrypted though SSL, use the following Rails configuration option:
+            ✅ To force all traffic to your application to be encrypted though SSL, use the following Rails configuration option:
 
-      ```ruby
-      config.force_ssl = true
-      ```
+            ```ruby
+            config.force_ssl = true
+            ```
 
-      ## Resources
-      - [Configuring Rails Applications - Ruby on Rails Guides](https://guides.rubyonrails.org/configuring.html#config-force-ssl)
-    documentation_url: ""
-  line_number: 7
-  full_filename: e2e/rules/testdata/data/simple_ruby/unsecure.rb
-  filename: unsecure.rb
-  category_groups:
-  - PII
-  - Personal Data
-  source:
-    location:
-      start: 7
-      end: 7
-      column:
-        start: 5
-        end: 29
-  sink:
-    location:
-      start: 7
-      end: 7
-      column:
-        start: 5
-        end: 29
-    content: config.force_ssl = false
-  parent_line_number: 7
-  snippet: config.force_ssl = false
-  fingerprint: 52ee98cc601d1c1bd772ff548ee32425_0
-  old_fingerprint: 28ca51516a8b388cb7065c1f0df8b093_0
+            ## Resources
+            - [Configuring Rails Applications - Ruby on Rails Guides](https://guides.rubyonrails.org/configuring.html#config-force-ssl)
+        documentation_url: ""
+      line_number: 7
+      full_filename: e2e/rules/testdata/data/simple_ruby/unsecure.rb
+      filename: unsecure.rb
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 5
+                end: 29
+      sink:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 5
+                end: 29
+        content: config.force_ssl = false
+      parent_line_number: 7
+      snippet: config.force_ssl = false
+      fingerprint: 52ee98cc601d1c1bd772ff548ee32425_0
+      old_fingerprint: 28ca51516a8b388cb7065c1f0df8b093_0
 
 
 --

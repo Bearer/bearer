@@ -1,30 +1,30 @@
 low:
-- rule:
-    cwe_ids: []
-    id: javascript_deconstructing
-    title: ""
-    description: ""
-    documentation_url: ""
-  line_number: 1
-  full_filename: deconstructing.js
-  filename: deconstructing.js
-  source:
-    location:
-      start: 1
-      end: 1
-      column:
-        start: 9
-        end: 13
-  sink:
-    location:
-      start: 1
-      end: 1
-      column:
-        start: 9
-        end: 13
-    content: user
-  parent_line_number: 1
-  snippet: user
-  fingerprint: 391f0431340399f3f30398341feeb70a_0
-  old_fingerprint: 391f0431340399f3f30398341feeb70a_0
+    - rule:
+        cwe_ids: []
+        id: javascript_deconstructing
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      full_filename: deconstructing.js
+      filename: deconstructing.js
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 9
+                end: 13
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 9
+                end: 13
+        content: user
+      parent_line_number: 1
+      snippet: user
+      fingerprint: 391f0431340399f3f30398341feeb70a_0
+      old_fingerprint: 391f0431340399f3f30398341feeb70a_0
 
