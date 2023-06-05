@@ -7,7 +7,7 @@ bearer-build
 .DS_Store
 
 # binaries
-# bearer
+bearer
 
 temp/
 

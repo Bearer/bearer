@@ -6,9 +6,9 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/report/output/bearer"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
+	"github.com/bearer/bearer/pkg/report/output/saas"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
@@ -34,7 +34,7 @@ func GetOutput(report types.Report, config settings.Config) (any, *dataflow.Data
 			return nil, nil, err
 		}
 
-		return bearer.GetReport(config, securityResults, dataflow, report.Inputgocloc)
+		return saas.GetReport(config, securityResults, dataflow, report.Inputgocloc)
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
@@ -107,7 +107,7 @@ func reportSecurity(
 	}
 
 	if config.Client != nil && config.Client.Error == nil {
-		bearer.SendReport(config, securityResults, report.Inputgocloc, dataflow)
+		saas.SendReport(config, securityResults, report.Inputgocloc, dataflow)
 	}
 
 	return

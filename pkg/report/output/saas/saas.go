@@ -1,4 +1,4 @@
-package bearer
+package saas
 
 import (
 	"compress/gzip"
@@ -12,8 +12,8 @@ import (
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	bearer "github.com/bearer/bearer/pkg/report/output/bearer/types"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
+	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/util/file"
 	util "github.com/bearer/bearer/pkg/util/output"
@@ -28,18 +28,18 @@ func GetReport(
 	securityResults *map[string][]security.Result,
 	dataflow *dataflow.DataFlow,
 	goclocResult *gocloc.Result,
-) (bearer.BearerReport, *dataflow.DataFlow, error) {
-	var meta *bearer.Meta
+) (saas.BearerReport, *dataflow.DataFlow, error) {
+	var meta *saas.Meta
 	meta, err := getMeta(config)
 	if err != nil {
-		meta = &bearer.Meta{
+		meta = &saas.Meta{
 			Target: config.Scan.Target,
 		}
 	}
 
 	files := getDiscoveredFiles(config, goclocResult)
 
-	return bearer.BearerReport{
+	return saas.BearerReport{
 		Findings:   securityResults,
 		DataTypes:  dataflow.Datatypes,
 		Components: dataflow.Components,
@@ -48,7 +48,7 @@ func GetReport(
 	}, dataflow, nil
 }
 
-func getMeta(config settings.Config) (*bearer.Meta, error) {
+func getMeta(config settings.Config) (*saas.Meta, error) {
 	sha, err := getSha(config.Scan.Target)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func getMeta(config settings.Config) (*bearer.Meta, error) {
 		return nil, err
 	}
 
-	return &bearer.Meta{
+	return &saas.Meta{
 		ID:                 info.ID,
 		Host:               string(info.Host),
 		Username:           info.Username,
@@ -97,7 +97,7 @@ func SendReport(
 	goclocResult *gocloc.Result,
 	dataflow *dataflow.DataFlow,
 ) {
-	var meta *bearer.Meta
+	var meta *saas.Meta
 	meta, err := getMeta(config)
 	if err != nil {
 		errorMessage := fmt.Sprintf("Unable to calculate Metadata. %s", err)
@@ -121,7 +121,7 @@ func SendReport(
 	}
 }
 
-func sendReportToBearer(client *api.API, meta *bearer.Meta, filename *string) error {
+func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) error {
 	fileUploadOffer, err := s3.UploadS3(&s3.UploadRequestS3{
 		Api:             client,
 		FilePath:        *filename,
@@ -155,7 +155,7 @@ func getDiscoveredFiles(config settings.Config, goclocResult *gocloc.Result) []s
 
 func createBearerGzipFileReport(
 	config settings.Config,
-	meta *bearer.Meta,
+	meta *saas.Meta,
 	securityResults *security.Results,
 	goclocResult *gocloc.Result,
 	dataflow *dataflow.DataFlow,
@@ -172,7 +172,7 @@ func createBearerGzipFileReport(
 
 	files := getDiscoveredFiles(config, goclocResult)
 
-	content, _ := util.ReportJSON(&bearer.BearerReport{
+	content, _ := util.ReportJSON(&saas.BearerReport{
 		Findings:   securityResults,
 		DataTypes:  dataflow.Datatypes,
 		Components: dataflow.Components,
