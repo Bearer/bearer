@@ -14,6 +14,10 @@
       LineNumber: (int) 1,
       FullFilename: (string) "",
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
+      DataType: (*security.DataType)({
+        CategoryUUID: (string) (len=36) "35b94efa-9b67-49b2-abb9-29b6a759a030",
+        Name: (string) (len=14) "Biometric Data"
+      }),
       CategoryGroups: ([]string) (len=3) {
         (string) (len=3) "PII",
         (string) (len=13) "Personal Data",
@@ -61,6 +65,7 @@
       LineNumber: (int) 2,
       FullFilename: (string) "",
       Filename: (string) (len=21) "config/application.rb",
+      DataType: (*security.DataType)(<nil>),
       CategoryGroups: ([]string) (len=2) {
         (string) (len=3) "PII",
         (string) (len=13) "Personal Data"
