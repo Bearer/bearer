@@ -6,9 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/bearer/bearer/pkg/report/output"
-	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bradleyjkemp/cupaloy"
+
+	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/util/output"
 )
 
 func TestRailsGoatReviewdog(t *testing.T) {
