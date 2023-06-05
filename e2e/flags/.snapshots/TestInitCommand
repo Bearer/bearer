@@ -19,7 +19,7 @@ scan:
     external-rule-dir: []
     force: false
     internal-domains: []
-    parallel: 4
+    parallel: 2
     quiet: false
     scanner:
         - sast
