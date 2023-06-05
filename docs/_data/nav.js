@@ -16,6 +16,10 @@ module.exports = [
         name: "Create a custom rule",
         url: "/guides/custom-rule/",
       },
+      {
+        name: "Run a privacy report",
+        url: "/guides/privacy/",
+      },
     ],
   },
   {
