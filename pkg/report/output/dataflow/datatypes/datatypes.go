@@ -20,11 +20,12 @@ type Holder struct {
 }
 
 type datatypeHolder struct {
-	name         string
-	uuid         string
-	categoryUUID string
-	categoryName string
-	detectors    map[string]*detectorHolder // group detectors by detectorName
+	name           string
+	uuid           string
+	categoryUUID   string
+	categoryName   string
+	categoryGroups []string
+	detectors      map[string]*detectorHolder // group detectors by detectorName
 }
 
 type detectorHolder struct {
@@ -103,10 +104,16 @@ func (holder *Holder) addDatatype(
 ) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[classification.Name]; !exists {
+		var categoryGroups []string
+		for _, group := range classification.Category.Groups {
+			categoryGroups = append(categoryGroups, group.Name)
+		}
+
 		datatype := datatypeHolder{
-			name:         classification.Name,
-			categoryName: classification.Category.Name,
-			detectors:    make(map[string]*detectorHolder),
+			name:           classification.Name,
+			categoryName:   classification.Category.Name,
+			categoryGroups: categoryGroups,
+			detectors:      make(map[string]*detectorHolder),
 		}
 
 		if holder.isInternal {
@@ -180,10 +187,11 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 
 	for _, datatype := range datatypes {
 		constructedDatatype := types.Datatype{
-			Name:         datatype.name,
-			UUID:         datatype.uuid,
-			CategoryUUID: datatype.categoryUUID,
-			CategoryName: datatype.categoryName,
+			Name:           datatype.name,
+			UUID:           datatype.uuid,
+			CategoryUUID:   datatype.categoryUUID,
+			CategoryName:   datatype.categoryName,
+			CategoryGroups: datatype.categoryGroups,
 		}
 
 		detectors := maputil.ToSortedSlice(datatype.detectors)

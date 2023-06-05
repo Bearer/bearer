@@ -40,6 +40,10 @@ cat_groups := set() if {
 build_local_item(location, data_type) := {
 	"is_local": true,
 	"category_groups": groups_for_datatype(data_type),
+	"data_type": {
+		"category_uuid": data_type.category_uuid,
+		"name": data_type.name,
+	},
 	"full_filename": location.full_filename,
 	"filename": location.filename,
 	"sink": {
@@ -60,7 +64,6 @@ build_local_item(location, data_type) := {
 		},
 	},
 	"line_number": location.start_line_number,
-	"datatype_name": data_type.name,
 } if {
 	not input.rule.has_detailed_context == true
 }
