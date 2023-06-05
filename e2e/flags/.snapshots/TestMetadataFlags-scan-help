@@ -11,7 +11,7 @@ Examples:
 
 Report Flags
       --exclude-fingerprint strings   Specify the comma-separated fingerprints of the findings you would like to exclude from the report.
-  -f, --format string                 Specify report format (json, yaml, sarif, gitlab-sast)
+  -f, --format string                 Specify report format (json, yaml, sarif, gitlab-sast, rdjson)
       --output string                 Specify the output path for the report.
       --report string                 Specify the type of report (security, privacy, dataflow). (default "security")
       --severity string               Specify which severities are included in the report. (default "critical,high,medium,low,warning")
