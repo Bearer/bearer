@@ -1,6 +1,8 @@
 package datatypes
 
 import (
+	"sort"
+
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/detectors"
@@ -108,6 +110,8 @@ func (holder *Holder) addDatatype(
 		for _, group := range classification.Category.Groups {
 			categoryGroups = append(categoryGroups, group.Name)
 		}
+
+		sort.Strings(categoryGroups)
 
 		datatype := datatypeHolder{
 			name:           classification.Name,

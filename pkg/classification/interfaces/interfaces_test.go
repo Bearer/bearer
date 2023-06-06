@@ -44,6 +44,7 @@ func TestInterface(t *testing.T) {
 			Want: &interfaces.Classification{
 				URL:           "https://api.stripe.com",
 				RecipeName:    "Stripe",
+				RecipeType:    "external_service",
 				RecipeSubType: "third_party",
 				RecipeUUID:    "c24b836a-d035-49dc-808f-1912f16f690d",
 				RecipeMatch:   true,
@@ -129,6 +130,7 @@ func TestInterface(t *testing.T) {
 			Want: &interfaces.Classification{
 				URL:           "http://*.stripe.com",
 				RecipeName:    "Stripe",
+				RecipeType:    "external_service",
 				RecipeSubType: "third_party",
 				RecipeUUID:    "c24b836a-d035-49dc-808f-1912f16f690d",
 				RecipeMatch:   true,
@@ -160,6 +162,7 @@ func TestInterface(t *testing.T) {
 			Want: &interfaces.Classification{
 				URL:           "https://googleapis.com/auth/spreadsheets",
 				RecipeName:    "Google Spreadsheets",
+				RecipeType:    "external_service",
 				RecipeSubType: "third_party",
 				RecipeUUID:    "ebe2e05e-bc56-4204-9329-d9b8d3cf1837",
 				RecipeMatch:   true,
