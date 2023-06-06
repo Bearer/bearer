@@ -58,6 +58,7 @@ type RecipeURLMatch struct {
 	RecipeURL        string
 	RecipeUUID       string
 	RecipeName       string
+	RecipeType       string
 	RecipeSubType    string
 	ExcludedURL      bool
 }
@@ -223,7 +224,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 				RecipeMatch:   true,
 				RecipeUUID:    recipeMatch.RecipeUUID,
 				RecipeName:    recipeMatch.RecipeName,
-				RecipeType:    "",
+				RecipeType:    recipeMatch.RecipeType,
 				RecipeSubType: recipeMatch.RecipeSubType,
 			},
 		}
@@ -301,6 +302,7 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 				RecipeURL:        recipeURL.URL,
 				RecipeUUID:       recipe.UUID,
 				RecipeName:       recipe.Name,
+				RecipeType:       recipe.Type,
 				RecipeSubType:    recipe.SubType,
 			}
 		}
