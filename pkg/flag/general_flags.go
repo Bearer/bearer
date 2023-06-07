@@ -45,11 +45,12 @@ var (
 		Usage:      "Disable color in output",
 	}
 	DebugProfileFlag = Flag{
-		Name:       "debug-profile",
-		ConfigName: "debug-profile",
-		Value:      false,
-		Usage:      "Generate profiling data for debugging",
-		Hide:       true,
+		Name:            "debug-profile",
+		ConfigName:      "debug-profile",
+		Value:           false,
+		Usage:           "Generate profiling data for debugging",
+		Hide:            true,
+		DisableInConfig: true,
 	}
 )
 

@@ -1,7 +1,11 @@
 package worker
 
 import (
+	"context"
 	"encoding/json"
+	"net"
+	"os"
+	"os/signal"
 
 	"net/http"
 	"runtime"
@@ -13,6 +17,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/detectors"
 	"github.com/bearer/bearer/pkg/scanner"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 )
 
@@ -62,39 +67,64 @@ func (worker *Worker) Scan(scanRequest work.ProcessRequest) error {
 func Start(port string) error {
 	worker := Worker{}
 
-	err := http.ListenAndServe(`localhost:`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		defer r.Body.Close() //golint:all,errcheck
+	ctx, _ := signal.NotifyContext(context.Background(), os.Interrupt)
 
-		switch r.URL.Path {
-		case work.RouteInitialize:
-			var config config.Config
-			json.NewDecoder(r.Body).Decode(&config) //nolint:all,errcheck
+	server := &http.Server{
+		Addr: `localhost:` + port,
+		BaseContext: func(listener net.Listener) context.Context {
+			return ctx
+		},
+		Handler: http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+			defer r.Body.Close() //golint:all,errcheck
 
-			response := work.InitializeResponse{}
+			switch r.URL.Path {
+			case work.RouteInitialize:
+				var config config.Config
+				json.NewDecoder(r.Body).Decode(&config) //nolint:all,errcheck
 
-			err := worker.Setup(config)
-			if err != nil {
-				response.Error = err.Error()
+				response := work.InitializeResponse{}
+
+				err := worker.Setup(config)
+				if err != nil {
+					response.Error = err.Error()
+				}
+
+				json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
+			case work.RouteProcess:
+				runtime.GC()
+				var scanRequest work.ProcessRequest
+				json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
+
+				response := work.ProcessResponse{}
+
+				err := worker.Scan(scanRequest)
+				if err != nil {
+					response.Error = err.Error()
+				}
+
+				json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
+			default:
+				rw.WriteHeader(http.StatusNotFound)
 			}
+		}),
+	}
 
-			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
-		case work.RouteProcess:
-			runtime.GC()
-			var scanRequest work.ProcessRequest
-			json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
+	done := make(chan struct{})
+	go func() {
+		<-ctx.Done()
 
-			response := work.ProcessResponse{}
-
-			err := worker.Scan(scanRequest)
-			if err != nil {
-				response.Error = err.Error()
-			}
-
-			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
-		default:
-			rw.WriteHeader(http.StatusNotFound)
+		if err := server.Shutdown(context.Background()); err != nil {
+			log.Debug().Msgf("error shutting down server: %s", err)
 		}
-	}))
 
-	return err
+		close(done)
+	}()
+
+	err := server.ListenAndServe()
+	if err != http.ErrServerClosed {
+		return err
+	}
+
+	<-done
+	return nil
 }

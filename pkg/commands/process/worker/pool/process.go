@@ -109,9 +109,21 @@ func (process *Process) monitorCommand() {
 	go func() {
 		select {
 		case <-process.context.Done():
-			log.Debug().Msgf("%s terminating process", process.id)
-			if err := process.command.Process.Kill(); err != nil {
-				log.Debug().Msgf("%s failed killing process: %s", process.id, err)
+			log.Debug().Msgf("shutting down %s", process.id)
+
+			if err := process.command.Process.Signal(os.Interrupt); err != nil {
+				log.Debug().Msgf("killing %s due to error sending interrupt: %s", process.id, err)
+				process.kill()
+				return
+			}
+
+			timeout := time.NewTimer(settings.TimeoutWorkerShutdown)
+			select {
+			case <-timeout.C:
+				log.Debug().Msgf("killing %s after timeout", process.id)
+				process.kill()
+			case <-process.exitChannel:
+				log.Debug().Msgf("%s stopped", process.id)
 			}
 		case <-process.exitChannel:
 			process.errorChannel <- ErrorCrashed
@@ -121,6 +133,12 @@ func (process *Process) monitorCommand() {
 
 	process.command.Wait() //nolint:errcheck
 	close(process.exitChannel)
+}
+
+func (process *Process) kill() {
+	if err := process.command.Process.Kill(); err != nil {
+		log.Debug().Msgf("%s failed killing process: %s", process.id, err)
+	}
 }
 
 func (process *Process) monitorMemory(maxMemoryBytes int) {

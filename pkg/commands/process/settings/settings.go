@@ -19,6 +19,7 @@ var (
 	TimeoutFileMaximum        = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
 	TimeoutFileBytesPerSecond = 1 * 1000          // 1 Kb/s minimum number of bytes per second allowed to scan a file
 	TimeoutWorkerOnline       = 60 * time.Second  // Maximum time to wait for a worker process to come online
+	TimeoutWorkerShutdown     = 5 * time.Second   // Maximum time to wait for a worker process to shut down cleanly
 	FileSizeMaximum           = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
 	FilesToBatch              = 1                 // Specify the number of files to batch per worker
 	MemoryMaximum             = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
