@@ -49,6 +49,7 @@ type Config struct {
 	CacheUsed          bool               `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
 	BearerRulesVersion string             `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
 	NoColor            bool               `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	DebugProfile       bool               `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
 }
 
 type Modules []*PolicyModule
@@ -299,6 +300,7 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		Scan:               opts.ScanOptions,
 		Report:             opts.ReportOptions,
 		NoColor:            opts.GeneralOptions.NoColor || opts.ReportOptions.Output != "",
+		DebugProfile:       opts.GeneralOptions.DebugProfile,
 		Policies:           policies,
 		Rules:              result.Rules,
 		BuiltInRules:       result.BuiltInRules,
