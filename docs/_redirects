@@ -9,3 +9,5 @@
 /reference/rules/javascript_aws_lambda_os_command_injection /reference/rules/javascript_lang_os_command_injection
 /reference/rules/javascript_aws_lambda_query_injection /reference/rules/javascript_third_parties_dynamodb_query_injection
 /reference/rules/ruby_lang_weak_encryption /reference/rules
+/reference/rules/javascript_lang_weak_encryption /reference/rules
+/reference/rules/javascript_lang_weak_password_encryption /reference/rules
