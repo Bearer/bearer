@@ -13,3 +13,4 @@ temp/
 
 
 .envrc
+/*.pprof

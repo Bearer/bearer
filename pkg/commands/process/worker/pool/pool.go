@@ -30,6 +30,9 @@ func New(config settings.Config) *Pool {
 	if config.Scan.Debug {
 		baseArguments = append(baseArguments, "--debug")
 	}
+	if config.DebugProfile {
+		baseArguments = append(baseArguments, "--debug-profile")
+	}
 
 	return &Pool{
 		processOptions: ProcessOptions{

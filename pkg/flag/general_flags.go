@@ -44,6 +44,14 @@ var (
 		Value:      false,
 		Usage:      "Disable color in output",
 	}
+	DebugProfileFlag = Flag{
+		Name:            "debug-profile",
+		ConfigName:      "debug-profile",
+		Value:           false,
+		Usage:           "Generate profiling data for debugging",
+		Hide:            true,
+		DisableInConfig: true,
+	}
 )
 
 type GeneralFlagGroup struct {
@@ -52,6 +60,7 @@ type GeneralFlagGroup struct {
 	Host                *Flag
 	DisableVersionCheck *Flag
 	NoColor             *Flag
+	DebugProfile        *Flag
 }
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
@@ -60,6 +69,7 @@ type GeneralOptions struct {
 	Client              *api.API
 	DisableVersionCheck bool
 	NoColor             bool `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	DebugProfile        bool
 }
 
 func NewGeneralFlagGroup() *GeneralFlagGroup {
@@ -69,6 +79,7 @@ func NewGeneralFlagGroup() *GeneralFlagGroup {
 		Host:                &HostFlag,
 		DisableVersionCheck: &DisableVersionCheckFlag,
 		NoColor:             &NoColorFlag,
+		DebugProfile:        &DebugProfileFlag,
 	}
 }
 
@@ -83,6 +94,7 @@ func (f *GeneralFlagGroup) Flags() []*Flag {
 		f.Host,
 		f.DisableVersionCheck,
 		f.NoColor,
+		f.DebugProfile,
 	}
 }
 
@@ -109,5 +121,6 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		ConfigFile:          getString(f.ConfigFile),
 		DisableVersionCheck: getBool(f.DisableVersionCheck),
 		NoColor:             getBool(f.NoColor),
+		DebugProfile:        getBool(f.DebugProfile),
 	}
 }

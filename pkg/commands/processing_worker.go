@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 
+	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	"github.com/bearer/bearer/pkg/commands/process/worker"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/output"
@@ -31,6 +32,10 @@ func NewProcessingWorkerCommand() *cobra.Command {
 				ProcessID: viper.GetString(flag.WorkerIDFlag.ConfigName),
 			})
 
+			if viper.GetBool(flag.WorkerDebugProfileFlag.ConfigName) {
+				debugprofile.Start()
+			}
+
 			processOptions, err := flags.ProcessFlagGroup.ToOptions()
 			if err != nil {
 				return fmt.Errorf("options binding error: %w", err)
@@ -38,7 +43,9 @@ func NewProcessingWorkerCommand() *cobra.Command {
 
 			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
 
-			return worker.Start(processOptions.Port)
+			err = worker.Start(processOptions.Port)
+			debugprofile.Stop()
+			return err
 		},
 		Hidden:        true,
 		SilenceErrors: true,

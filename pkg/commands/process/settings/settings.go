@@ -19,6 +19,7 @@ var (
 	TimeoutFileMaximum        = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
 	TimeoutFileBytesPerSecond = 1 * 1000          // 1 Kb/s minimum number of bytes per second allowed to scan a file
 	TimeoutWorkerOnline       = 60 * time.Second  // Maximum time to wait for a worker process to come online
+	TimeoutWorkerShutdown     = 5 * time.Second   // Maximum time to wait for a worker process to shut down cleanly
 	FileSizeMaximum           = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
 	FilesToBatch              = 1                 // Specify the number of files to batch per worker
 	MemoryMaximum             = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
@@ -49,6 +50,7 @@ type Config struct {
 	CacheUsed          bool               `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
 	BearerRulesVersion string             `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
 	NoColor            bool               `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	DebugProfile       bool               `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
 }
 
 type Modules []*PolicyModule
@@ -299,6 +301,7 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		Scan:               opts.ScanOptions,
 		Report:             opts.ReportOptions,
 		NoColor:            opts.GeneralOptions.NoColor || opts.ReportOptions.Output != "",
+		DebugProfile:       opts.GeneralOptions.DebugProfile,
 		Policies:           policies,
 		Rules:              result.Rules,
 		BuiltInRules:       result.BuiltInRules,

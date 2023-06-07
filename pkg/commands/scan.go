@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/pkg/commands/artifact"
+	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/output"
@@ -61,6 +62,10 @@ func NewScanCommand() *cobra.Command {
 				ProcessID: "main",
 			})
 
+			if viper.GetBool(flag.DebugProfileFlag.ConfigName) {
+				debugprofile.Start()
+			}
+
 			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
 			var defaultConfigPath = ""
 			if len(args) > 0 {
@@ -93,7 +98,9 @@ func NewScanCommand() *cobra.Command {
 
 			cmd.SilenceUsage = true
 
-			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
+			err = artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
+			debugprofile.Stop()
+			return err
 		},
 		SilenceErrors: false,
 		SilenceUsage:  false,
