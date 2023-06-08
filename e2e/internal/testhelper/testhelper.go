@@ -51,7 +51,10 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 
 	timer := time.NewTimer(TestTimeout)
 	commandFinished := make(chan struct{}, 1)
-	combinedOutput := func() string { return buffOut.String() + "\n--\n" + buffErr.String() }
+	combinedOutput := func() string {
+		errStr := strings.TrimSuffix(buffErr.String(), "exit status 1\n")
+		return buffOut.String() + "\n--\n" + errStr
+	}
 
 	go func() {
 		err = cmd.Start()
