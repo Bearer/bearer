@@ -13,7 +13,7 @@ func TestJavaObjects(t *testing.T) {
 }
 
 func TestJavaString(t *testing.T) {
-	runTest(t, "string_literal", "string", "testdata/string_literal.java")
+	runTest(t, "string", "string", "testdata/string.java")
 }
 
 func runTest(t *testing.T, name, detectorType, fileName string) {

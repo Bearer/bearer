@@ -104,3 +104,35 @@ func GetStringValue(node *tree.Node, evaluator types.Evaluator) (string, bool, e
 		return "", false, fmt.Errorf("expected single string detection but got %d", len(detections))
 	}
 }
+
+func ConcatenateChildStrings(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
+	value := ""
+	isLiteral := true
+
+	for i := 0; i < node.ChildCount(); i += 1 {
+		child := node.Child(i)
+		if !child.IsNamed() {
+			continue
+		}
+
+		childValue, childIsLiteral, err := GetStringValue(child, evaluator)
+		if err != nil {
+			return nil, err
+		}
+
+		if childValue == "" && !childIsLiteral {
+			childValue = "*"
+		}
+
+		value += childValue
+
+		if !childIsLiteral {
+			isLiteral = false
+		}
+	}
+
+	return []interface{}{generictypes.String{
+		Value:     value,
+		IsLiteral: isLiteral,
+	}}, nil
+}

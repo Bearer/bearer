@@ -38,43 +38,11 @@ func (detector *stringDetector) DetectAt(
 		return handleTemplateString(node, evaluator)
 	case "binary_expression":
 		if node.AnonymousChild(0).Content() == "+" {
-			return concatenateChildren(node, evaluator)
+			return generic.ConcatenateChildStrings(node, evaluator)
 		}
 	}
 
 	return nil, nil
-}
-
-func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
-	value := ""
-	isLiteral := true
-
-	for i := 0; i < node.ChildCount(); i += 1 {
-		child := node.Child(i)
-		if !child.IsNamed() {
-			continue
-		}
-
-		childValue, childIsLiteral, err := generic.GetStringValue(child, evaluator)
-		if err != nil {
-			return nil, err
-		}
-
-		if childValue == "" && !childIsLiteral {
-			childValue = "*"
-		}
-
-		value += childValue
-
-		if !childIsLiteral {
-			isLiteral = false
-		}
-	}
-
-	return []interface{}{generictypes.String{
-		Value:     value,
-		IsLiteral: isLiteral,
-	}}, nil
 }
 
 func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {

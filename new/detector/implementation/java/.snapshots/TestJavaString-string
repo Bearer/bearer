@@ -3,4 +3,9 @@
   data:
     value: Hello World
     isliteral: true
+- position: "6:13"
+  content: Greeting + "!"
+  data:
+    value: Hello World!
+    isliteral: true
 
