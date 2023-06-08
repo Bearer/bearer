@@ -3,7 +3,9 @@ package flag
 import (
 	"errors"
 	"math"
+	"os"
 	"runtime"
+	"strconv"
 	"strings"
 	"time"
 
@@ -20,8 +22,10 @@ const (
 	ScannerSecrets = "secrets"
 )
 
-var ErrInvalidContext = errors.New("invalid context argument; supported values: health")
-var ErrInvalidScanner = errors.New("invalid scanner argument; supported values: sast, secrets")
+var (
+	ErrInvalidContext = errors.New("invalid context argument; supported values: health")
+	ErrInvalidScanner = errors.New("invalid scanner argument; supported values: sast, secrets")
+)
 
 var (
 	SkipPathFlag = Flag{
@@ -93,7 +97,7 @@ var (
 	ParallelFlag = Flag{
 		Name:       "parallel",
 		ConfigName: "scan.parallel",
-		Value:      int(math.Min(float64(runtime.NumCPU()), 4)),
+		Value:      parallelValue(),
 		Usage:      "Specify the amount of parallelism to use during the scan",
 	}
 )
@@ -214,4 +218,14 @@ func getContext(flag *Flag) Context {
 
 	flagStr := strings.ToLower(getString(flag))
 	return Context(flagStr)
+}
+
+func parallelValue() int {
+	if overrideStr := os.Getenv("BEARER_DEFAULT_PARALLEL"); overrideStr != "" {
+		if override, err := strconv.Atoi(overrideStr); err == nil {
+			return override
+		}
+	}
+
+	return int(math.Min(float64(runtime.NumCPU()), 4))
 }
