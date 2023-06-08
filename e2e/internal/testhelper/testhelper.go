@@ -51,7 +51,10 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 
 	timer := time.NewTimer(TestTimeout)
 	commandFinished := make(chan struct{}, 1)
-	combinedOutput := func() string { return buffOut.String() + "\n--\n" + buffErr.String() }
+	combinedOutput := func() string {
+		errStr := strings.TrimSuffix(buffErr.String(), "exit status 1\n")
+		return buffOut.String() + "\n--\n" + errStr
+	}
 
 	go func() {
 		err = cmd.Start()
@@ -88,6 +91,7 @@ func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 		cmd = exec.CommandContext(ctx, "go", arguments...)
 	}
 
+	cmd.Env = append(os.Environ(), "BEARER_DEFAULT_PARALLEL=2")
 	cmd.Dir = os.Getenv("GITHUB_WORKSPACE")
 
 	return cmd, cancel
