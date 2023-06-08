@@ -273,17 +273,4 @@
                             state: valid
                             reason: known_pattern
                       datatype: null
-- position: "3:11"
-  content: '{ first_name: "" }'
-  data:
-    properties:
-        - name: first_name
-          node: {}
-          classification:
-            name: first name
-            datatype: null
-            decision:
-                state: invalid
-                reason: belongs_to_invalid_object
-          datatype: null
 
