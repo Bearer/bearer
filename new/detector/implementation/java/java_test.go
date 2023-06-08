@@ -12,6 +12,10 @@ func TestJavaObjects(t *testing.T) {
 	runTest(t, "object_no_class", "object", "testdata/no_class.java")
 }
 
+func TestJavaString(t *testing.T) {
+	runTest(t, "string_literal", "string", "testdata/string_literal.java")
+}
+
 func runTest(t *testing.T, name, detectorType, fileName string) {
 	testhelper.RunTest(t, name, java.New, detectorType, fileName)
 }
