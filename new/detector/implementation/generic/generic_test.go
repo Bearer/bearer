@@ -11,6 +11,10 @@ func TestDatatypeDetector(t *testing.T) {
 	runTest(t, "datatype", "datatype", "testdata/datatype.rb")
 }
 
+func TestDatatypeDetectorInvalidDetection(t *testing.T) {
+	runTest(t, "datatype", "datatype", "testdata/invalid_datatype.java")
+}
+
 func TestInsecureUrlDetector(t *testing.T) {
 	runTest(t, "insecure_url", "insecure_url", "testdata/insecureurl.rb")
 }

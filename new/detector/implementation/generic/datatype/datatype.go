@@ -55,8 +55,10 @@ func (detector *datatypeDetector) DetectAt(
 	var result []interface{}
 
 	for _, object := range objectDetections {
-		data, _ := detector.classifyObject(evaluator.FileName(), "", object)
-		result = append(result, data)
+		data, _, containsValidClassification := detector.classifyObject(evaluator.FileName(), "", object)
+		if containsValidClassification {
+			result = append(result, data)
+		}
 	}
 
 	return result, nil
@@ -68,21 +70,26 @@ func (detector *datatypeDetector) classifyObject(
 	filename,
 	name string,
 	detection *types.Detection,
-) (Data, classificationschema.Classification) {
+) (Data, classificationschema.Classification, bool) {
 	objectData := detection.Data.(generictypes.Object)
 
 	classification := detector.classifier.Classify(buildClassificationRequest(filename, name, objectData))
+	containsValidClassification := classification.Classification.Decision.State == classify.Valid
 
 	properties := make([]Property, len(objectData.Properties))
 
 	// NOTE: assumption is that classification will have all properties that detection has in same order
 	for i, property := range objectData.Properties {
-		propertyDetection, propertyClassification := detector.classifyProperty(
+		propertyDetection, propertyClassification, containsValidPropertyClassification := detector.classifyProperty(
 			filename,
 			property.Name,
 			property.Object,
 			classification.Properties[i].Classification,
 		)
+
+		if !containsValidClassification && containsValidPropertyClassification {
+			containsValidClassification = true
+		}
 
 		node := property.Node
 		if node == nil {
@@ -97,7 +104,7 @@ func (detector *datatypeDetector) classifyObject(
 		}
 	}
 
-	return Data{Properties: properties}, classification.Classification
+	return Data{Properties: properties}, classification.Classification, containsValidClassification
 }
 
 func (detector *datatypeDetector) classifyProperty(
@@ -105,12 +112,12 @@ func (detector *datatypeDetector) classifyProperty(
 	name string,
 	detection *types.Detection,
 	parentClassification classificationschema.Classification,
-) (*types.Detection, classificationschema.Classification) {
+) (*types.Detection, classificationschema.Classification, bool) {
 	if detection == nil {
-		return nil, parentClassification
+		return nil, parentClassification, false
 	}
 
-	data, propertyClassification := detector.classifyObject(filename, name, detection)
+	data, propertyClassification, containsValidClassification := detector.classifyObject(filename, name, detection)
 
 	propertyDetection := &types.Detection{
 		DetectorType: "datatype",
@@ -118,13 +125,19 @@ func (detector *datatypeDetector) classifyProperty(
 		Data:         data,
 	}
 
-	if parentClassification.Decision.State == classify.Valid ||
-		(parentClassification.Decision.State == classify.Potential && propertyClassification.Decision.State == classify.Invalid) ||
-		(parentClassification.Decision.State == classify.Invalid && propertyClassification.Decision.State == classify.Invalid) {
-		return propertyDetection, parentClassification
+	if parentClassification.Decision.State == classify.Valid {
+		return propertyDetection, parentClassification, true
 	}
 
-	return propertyDetection, propertyClassification
+	if (parentClassification.Decision.State == classify.Potential && propertyClassification.Decision.State == classify.Invalid) ||
+		(parentClassification.Decision.State == classify.Invalid && propertyClassification.Decision.State == classify.Invalid) {
+
+		return propertyDetection, parentClassification, containsValidClassification
+	}
+
+	return propertyDetection,
+		propertyClassification,
+		containsValidClassification || propertyClassification.Decision.State == classify.Valid
 }
 
 func buildClassificationRequest(filename, name string, data generictypes.Object) classificationschema.ClassificationRequest {
