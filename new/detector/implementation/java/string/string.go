@@ -4,6 +4,7 @@ import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -28,7 +29,7 @@ func (detector *stringDetector) DetectAt(
 ) ([]interface{}, error) {
 	if node.Type() == "string_literal" {
 		return []interface{}{generictypes.String{
-			Value:     node.Content(),
+			Value:     stringutil.StripQuotes(node.Content()),
 			IsLiteral: true,
 		}}, nil
 	}
