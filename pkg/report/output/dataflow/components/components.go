@@ -1,6 +1,8 @@
 package components
 
 import (
+	"strings"
+
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 
 	dependenciesclassification "github.com/bearer/bearer/pkg/classification/dependencies"
@@ -41,20 +43,22 @@ func New(isInternal bool) *Holder {
 	}
 }
 
-func getComponentType(recipeType string) string {
-	if recipeType == "" {
-		return "internal_service"
-	} else {
+func getComponentType(recipeType string, reason string) string {
+	if recipeType != "" {
 		return recipeType
 	}
+
+	if strings.HasPrefix(reason, "internal") {
+		return "internal_service"
+	}
+	return "external_service"
 }
 
 func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.ClassifiedInterface) error {
 	if classifiedDetection.Classification == nil {
 		return nil
 	}
-
-	componentType := getComponentType(classifiedDetection.Classification.RecipeType)
+	componentType := getComponentType(classifiedDetection.Classification.RecipeType, classifiedDetection.Classification.Decision.Reason)
 	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	componentUUID := classifiedDetection.Classification.RecipeUUID
@@ -83,7 +87,7 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 		return nil
 	}
 
-	componentType := getComponentType(classifiedDetection.Classification.RecipeType)
+	componentType := getComponentType(classifiedDetection.Classification.RecipeType, classifiedDetection.Classification.Decision.Reason)
 	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
@@ -107,7 +111,7 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 		return nil
 	}
 
-	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason, classifiedDetection.Classification.Decision.Reason)
 	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
