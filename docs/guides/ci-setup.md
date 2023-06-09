@@ -60,7 +60,7 @@ bearer:
 These changes set the format to `gitlab-sast` and write an artifact that GitLab can use. Once run, the results of the security scan will display in the Security and Compliance section of the repository.
 
 ### Gitlab Merge Request Comments
-Bearer CLI supports [Reviewdog](https://github.com/reviewdog/reviewdog) rdjson format so, you can get direct feedback on your merge requests.
+Bearer CLI supports [Reviewdog](https://github.com/reviewdog/reviewdog) rdjson format so you can get direct feedback on your merge requests.
 
 ![Bearer CLI results in Gitlab MR](/assets/img/gl-mr-review.png)
 
@@ -78,7 +78,7 @@ pr_check:
     - bearer scan . --format=rdjson --output=rd.json
     - cat rd.json | reviewdog -f=rdjson -reporter=gitlab-mr-discussion
 ```
-[Don't forget](https://github.com/reviewdog/reviewdog#reporter-gitlab-mergerequest-discussions--reportergitlab-mr-discussion) to set `REVIEWDOG_GITLAB_API_TOKEN` in your project environment varaibles with a personal API access token.
+[Don't forget](https://github.com/reviewdog/reviewdog#reporter-gitlab-mergerequest-discussions--reportergitlab-mr-discussion) to set `REVIEWDOG_GITLAB_API_TOKEN` in your project environment variables with a personal API access token.
 
 
 ## Universal setup
