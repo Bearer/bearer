@@ -23,7 +23,7 @@ For more details and additional configuration, see our [guide to using the GitHu
 To integrate Bearer CLI with GitLab CI/CD, we recommend using the docker entrypoint method. Edit your existing `.gitlab-ci.yml` file or add one to your repository root, then add the following lines:
 
 ```yml
-image: 
+image:
   name: bearer/bearer
   entrypoint: [ "" ]
 
@@ -37,7 +37,7 @@ GitLab's guide on [Running CI/CD jobs in Docker containers](https://docs.gitlab.
 
 ### Enable GitLab security scanning integration
 
-GitLab offers an integrated security scanner that can take results from Bearer CLI's scan and add them to your repository's Security and Compliance page. 
+GitLab offers an integrated security scanner that can take results from Bearer CLI's scan and add them to your repository's Security and Compliance page.
 
 ![Bearer CLI security report in GitLab security results](/assets/img/gitlab-code-scanning.jpg)
 
@@ -48,16 +48,38 @@ image:
   name: bearer/bearer
   entrypoint: [ "" ]
 
-bearer:   
-  script:     
-    - bearer scan . --format gitlab-sast --output gl-sast-report.json    
-  
-  artifacts:    
-    reports:       
+bearer:
+  script:
+    - bearer scan . --format gitlab-sast --output gl-sast-report.json
+
+  artifacts:
+    reports:
       sast: gl-sast-report.json
 ```
 
 These changes set the format to `gitlab-sast` and write an artifact that GitLab can use. Once run, the results of the security scan will display in the Security and Compliance section of the repository.
+
+### Gitlab Merge Request Comments
+Bearer CLI supports [Reviewdog](https://github.com/reviewdog/reviewdog) rdjson format so, you can get direct feedback on your merge requests.
+
+![Bearer CLI results in Gitlab MR](/assets/img/gl-mr-review.png)
+
+To keep the thing in one job we download each binary then run the two commands individually.
+
+```yml
+pr_check:
+  variables:
+    SHA: $CI_COMMIT_SHA
+    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
+    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
+  script:
+    - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+    - curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
+    - bearer scan . --format=rdjson --output=rd.json
+    - cat rd.json | reviewdog -f=rdjson -reporter=gitlab-mr-discussion
+```
+[Don't forget](https://github.com/reviewdog/reviewdog#reporter-gitlab-mergerequest-discussions--reportergitlab-mr-discussion) to set `REVIEWDOG_GITLAB_API_TOKEN` in your project environment varaibles with a personal API access token.
+
 
 ## Universal setup
 
