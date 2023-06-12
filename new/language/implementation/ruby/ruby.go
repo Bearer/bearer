@@ -312,6 +312,11 @@ func (*rubyImplementation) ContributesToResult(node *tree.Node) bool {
 		return false
 	}
 
+	// Not the left part of an assignment
+	if parent.Type() == "assignment" && node.Equal(parent.ChildByFieldName("left")) {
+		return false
+	}
+
 	// Must be the last expression in an expression block
 	if slices.Contains([]string{"then", "else"}, parent.Type()) {
 		if !node.Equal(parent.Child(parent.ChildCount() - 1)) {

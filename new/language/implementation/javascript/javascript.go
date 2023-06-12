@@ -301,6 +301,16 @@ func (*javascriptImplementation) ContributesToResult(node *tree.Node) bool {
 		return false
 	}
 
+	// Not the name part of a declaration
+	if parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("name")) {
+		return false
+	}
+
+	// Not the left part of an assignment
+	if parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("left")) {
+		return false
+	}
+
 	return true
 }
 
