@@ -41,7 +41,9 @@ var (
 	passthroughMethods = []string{"JSON.parse", "JSON.stringify"}
 )
 
-type javascriptImplementation struct{}
+type javascriptImplementation struct {
+	implementation.Base
+}
 
 func Get() implementation.Implementation {
 	return &javascriptImplementation{}
@@ -140,6 +142,10 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 		return visitChildren()
 	})
+}
+
+func (implementation *javascriptImplementation) IsMatchLeaf(node *tree.Node) bool {
+	return node.Type() == "string"
 }
 
 func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
@@ -248,10 +254,6 @@ func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node
 	}
 
 	return []string{node.Type()}
-}
-
-func (implementation *javascriptImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
-	return content
 }
 
 func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {

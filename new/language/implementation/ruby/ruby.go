@@ -34,7 +34,9 @@ var (
 	passthroughMethods = []string{"JSON.parse", "JSON.parse!", "*.to_json"}
 )
 
-type rubyImplementation struct{}
+type rubyImplementation struct {
+	implementation.Base
+}
 
 func Get() implementation.Implementation {
 	return &rubyImplementation{}
@@ -172,10 +174,6 @@ func (*rubyImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
-func (*rubyImplementation) ShouldSkipNode(node *tree.Node) bool {
-	return false
-}
-
 func (*rubyImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
@@ -263,10 +261,6 @@ func (*rubyImplementation) TranslatePatternContent(fromNodeType, toNodeType, con
 	}
 
 	return content
-}
-
-func (implementation *rubyImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
-	return true
 }
 
 func (*rubyImplementation) PassthroughNested(node *tree.Node) bool {

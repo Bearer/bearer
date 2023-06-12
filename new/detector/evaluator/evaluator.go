@@ -91,7 +91,7 @@ func (evaluator *evaluator) Evaluate(
 
 		result = append(result, detections...)
 
-		if scope != settings.CURSOR_SCOPE {
+		if scope != settings.CURSOR_SCOPE && !evaluator.langImplementation.IsMatchLeaf(node) {
 			parentNestedMode := nestedMode
 
 			if len(detections) != 0 && nestedDetections {
