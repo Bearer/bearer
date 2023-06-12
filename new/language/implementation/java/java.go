@@ -251,7 +251,8 @@ func (implementation *javaImplementation) PatternIsAnchored(node *tree.Node) (bo
 	// Class body class_body
 	// function block
 	// lambda () -> {} block
-	unAnchored := []string{"class_body", "block"}
+	// try {} catch () {}
+	unAnchored := []string{"class_body", "block", "try_statement"}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
