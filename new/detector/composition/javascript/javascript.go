@@ -8,6 +8,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/customdetectors"
 	"github.com/bearer/bearer/pkg/util/file"
 
 	"github.com/bearer/bearer/new/detector/composition/types"
@@ -117,7 +118,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		patterns := rule.Patterns
 		localRuleName := ruleName
 
-		if !rule.IsAuxilary || presenceRules[ruleName] {
+		if (!rule.IsAuxilary && rule.Type != customdetectors.TypeShared) || presenceRules[ruleName] {
 			composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
 		}
 
