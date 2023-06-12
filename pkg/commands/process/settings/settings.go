@@ -207,6 +207,7 @@ type PatternFilter struct {
 
 type RulePattern struct {
 	Pattern string          `mapstructure:"pattern" json:"pattern" yaml:"pattern"`
+	Focus   string          `mapstructure:"focus" json:"focus" yaml:"focus"`
 	Filters []PatternFilter `mapstructure:"filters" json:"filters" yaml:"filters"`
 }
 
