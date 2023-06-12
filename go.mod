@@ -26,7 +26,7 @@ require (
 	github.com/struCoder/pidusage v0.2.1
 	github.com/tangzero/inflector v1.0.0
 	github.com/weppos/publicsuffix-go v0.30.0
-	github.com/zricethezav/gitleaks/v8 v8.16.3
+	github.com/zricethezav/gitleaks/v8 v8.16.4
 	golang.org/x/exp v0.0.0-20230304125523-9ff063c70017
 	golang.org/x/mod v0.10.0
 	golang.org/x/net v0.10.0
