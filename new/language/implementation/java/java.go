@@ -41,7 +41,9 @@ var (
 	passthroughMethods = []string{}
 )
 
-type javaImplementation struct{}
+type javaImplementation struct {
+	implementation.Base
+}
 
 func Get() implementation.Implementation {
 	return &javaImplementation{}
@@ -225,10 +227,6 @@ func (implementation *javaImplementation) PatternMatchNodeContainerTypes() []str
 	return patternMatchNodeContainerTypes
 }
 
-func (javaImplementation *javaImplementation) ShouldSkipNode(node *tree.Node) bool {
-	return false
-}
-
 func (*javaImplementation) PatternLeafContentTypes() []string {
 	return []string{
 		// todo: see if type identifier should be removed from here (User user) `User` is type
@@ -272,10 +270,6 @@ func (implementation *javaImplementation) PatternNodeTypes(node *tree.Node) []st
 	}
 
 	return []string{node.Type()}
-}
-
-func (implementation *javaImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
-	return content
 }
 
 func (*javaImplementation) PassthroughNested(node *tree.Node) bool {
@@ -325,6 +319,16 @@ func (*javaImplementation) ContributesToResult(node *tree.Node) bool {
 
 	// Must not be a ternary/switch condition
 	if node.Equal(parent.ChildByFieldName("condition")) {
+		return false
+	}
+
+	// Not the name part of a declaration
+	if parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("name")) {
+		return false
+	}
+
+	// Not the left part of an assignment
+	if parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("left")) {
 		return false
 	}
 

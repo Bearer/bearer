@@ -32,6 +32,6 @@ func (lang *Language) CompileQuery(input string) (*tree.Query, error) {
 	return tree.CompileQuery(lang.implementation.SitterLanguage(), input)
 }
 
-func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, error) {
-	return patternquery.Compile(lang, lang.implementation, input)
+func (lang *Language) CompilePatternQuery(input, focusedVariable string) (types.PatternQuery, error) {
+	return patternquery.Compile(lang, lang.implementation, input, focusedVariable)
 }

@@ -41,7 +41,9 @@ var (
 	passthroughMethods = []string{"JSON.parse", "JSON.stringify"}
 )
 
-type javascriptImplementation struct{}
+type javascriptImplementation struct {
+	implementation.Base
+}
 
 func Get() implementation.Implementation {
 	return &javascriptImplementation{}
@@ -140,6 +142,10 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 		return visitChildren()
 	})
+}
+
+func (implementation *javascriptImplementation) IsMatchLeaf(node *tree.Node) bool {
+	return node.Type() == "string"
 }
 
 func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
@@ -250,10 +256,6 @@ func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node
 	return []string{node.Type()}
 }
 
-func (implementation *javascriptImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
-	return content
-}
-
 func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {
 	if node.Type() != "arguments" {
 		return false
@@ -296,6 +298,16 @@ func (*javascriptImplementation) ContributesToResult(node *tree.Node) bool {
 
 	// Must not be a ternary condition
 	if parent.Type() == "ternary_expression" && node.Equal(parent.ChildByFieldName("condition")) {
+		return false
+	}
+
+	// Not the name part of a declaration
+	if parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("name")) {
+		return false
+	}
+
+	// Not the left part of an assignment
+	if parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("left")) {
 		return false
 	}
 

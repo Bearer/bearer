@@ -21,8 +21,9 @@ func Compile(
 	lang languagetypes.Language,
 	langImplementation implementation.Implementation,
 	input string,
+	focusedVariable string,
 ) (*Query, error) {
-	builderResult, err := builder.Build(lang, langImplementation, input)
+	builderResult, err := builder.Build(lang, langImplementation, input, focusedVariable)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}

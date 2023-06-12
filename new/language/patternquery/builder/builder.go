@@ -41,6 +41,7 @@ func Build(
 	lang languagetypes.Language,
 	langImplementation implementation.Implementation,
 	input string,
+	focusedVariable string,
 ) (*Result, error) {
 	processedInput, inputParams, err := processInput(langImplementation, input)
 	if err != nil {
@@ -67,15 +68,6 @@ func Build(
 		}
 	}
 
-	matchNode := findMatchNode(
-		inputParams.MatchNodeOffset,
-		langImplementation.PatternMatchNodeContainerTypes(),
-		tree.RootNode(),
-	)
-	if matchNode == nil {
-		return nil, fmt.Errorf("match node not found")
-	}
-
 	builder := builder{
 		langImplementation: langImplementation,
 		stringBuilder:      strings.Builder{},
@@ -83,7 +75,16 @@ func Build(
 		inputParams:        *inputParams,
 		variableToParams:   make(map[string][]string),
 		paramToContent:     make(map[string]map[string]string),
-		matchNode:          matchNode,
+	}
+
+	builder.setMatchNode(
+		inputParams.MatchNodeOffset,
+		focusedVariable,
+		langImplementation.PatternMatchNodeContainerTypes(),
+		tree.RootNode(),
+	)
+	if builder.matchNode == nil {
+		return nil, fmt.Errorf("match node not found")
 	}
 
 	result, err := builder.build(root)
@@ -291,11 +292,23 @@ func (builder *builder) newParam() string {
 	return "param" + builder.idGenerator.GenerateId()
 }
 
-func findMatchNode(offset int, containerTypes []string, node *tree.Node) (matchNode *tree.Node) {
+func (builder *builder) setMatchNode(
+	offset int,
+	focusedVariable string,
+	containerTypes []string,
+	node *tree.Node,
+) {
 	err := node.Walk(func(node *tree.Node, visitChildren func() error) error {
-		if node.StartByte() == offset && !slices.Contains(containerTypes, node.Type()) {
-			matchNode = node
-			return nil
+		if focusedVariable != "" {
+			if variable := builder.getVariableFor(node); variable != nil && variable.Name == focusedVariable {
+				builder.matchNode = node
+				return nil
+			}
+		} else {
+			if node.StartByte() == offset && !slices.Contains(containerTypes, node.Type()) {
+				builder.matchNode = node
+				return nil
+			}
 		}
 
 		return visitChildren()
@@ -305,6 +318,4 @@ func findMatchNode(offset int, containerTypes []string, node *tree.Node) (matchN
 	if err != nil {
 		panic(err)
 	}
-
-	return
 }

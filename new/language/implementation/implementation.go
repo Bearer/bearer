@@ -123,6 +123,25 @@ type Implementation interface {
 	PassthroughNested(node *tree.Node) bool
 
 	ContributesToResult(node *tree.Node) bool
+	IsMatchLeaf(node *tree.Node) bool
+}
+
+type Base struct{}
+
+func (implementation *Base) IsMatchLeaf(node *tree.Node) bool {
+	return false
+}
+
+func (*Base) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
+	return content
+}
+
+func (*Base) IsRootOfRuleQuery(node *tree.Node) bool {
+	return true
+}
+
+func (*Base) ShouldSkipNode(node *tree.Node) bool {
+	return false
 }
 
 type Scope struct {
