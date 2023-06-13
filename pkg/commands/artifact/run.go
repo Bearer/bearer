@@ -28,6 +28,8 @@ import (
 	"github.com/bearer/bearer/pkg/github_api"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/gitlab"
+	reporthtml "github.com/bearer/bearer/pkg/report/output/html"
+	"github.com/bearer/bearer/pkg/report/output/privacy"
 	rdo "github.com/bearer/bearer/pkg/report/output/reviewdog"
 	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
@@ -404,6 +406,27 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		}
 
 		logger(*content)
+	case flag.FormatHTML:
+		var body *string
+		var err error
+
+		if config.Report.Report == flag.ReportPrivacy {
+			body, err = reporthtml.ReportPrivacyHTML(detections.(*privacy.Report))
+		} else {
+			body, err = reporthtml.ReportSecurityHTML(detections.(*map[string][]security.Result))
+		}
+
+		if err != nil {
+			return false, fmt.Errorf("error generating report %s", err)
+		}
+
+		page, err := reporthtml.ReportHTMLWrapper(body)
+
+		if err != nil {
+			return false, fmt.Errorf("error generating report html page %s", err)
+		}
+
+		logger(*page)
 	}
 
 	outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
