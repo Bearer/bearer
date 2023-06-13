@@ -33,7 +33,8 @@ func TestReportFlagsShouldFail(t *testing.T) {
 	t.Parallel()
 	tests := []testhelper.TestCase{
 		newScanTest("invalid-report-flag", []string{"--report=testing"}),
-		newScanTest("invalid-format-flag", []string{"--format=testing"}),
+		newScanTest("invalid-format-flag-security", []string{"--format=testing"}),
+		newScanTest("invalid-format-flag-privacy", []string{"--report=privacy", "--format=testing"}),
 		newScanTest("invalid-context-flag", []string{"--context=testing"}),
 	}
 

@@ -7,6 +7,7 @@ import (
 	html "github.com/bearer/bearer/pkg/report/output/html/types"
 	privacy "github.com/bearer/bearer/pkg/report/output/privacy"
 	security "github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/russross/blackfriday"
 )
 
 func ReportHTMLWrapper(body *string) (*string, error) {
@@ -47,7 +48,36 @@ func ReportHTMLWrapper(body *string) (*string, error) {
 
 func ReportSecurityHTML(detections *map[string][]security.Result) (*string, error) {
 	htmlContent := &strings.Builder{}
-	htmlContent.WriteString("<h1>Hello World</h1>")
+
+	htmlTemplate := `
+	<ul>
+		{{range $severity, $results := .}}
+		{{range $index, $result := $results}}
+			<li>
+				<h2>[{{$severity}}] <a href="{{.Rule.DocumentationUrl}}" target="_blank">{{.Rule.Title}}</a></h2>
+				<p><strong>CWE IDs:</strong> {{range .Rule.CWEIDs}}{{.}} {{end}}</p>
+				<p><strong>Filename:</strong> {{.Filename}}:{{.LineNumber}}</p>
+
+				{{.Rule.Description | markdownToHtml }}
+			</li>
+		{{end}}
+		{{end}}
+	</ul>
+	`
+
+	findingsTemplate, err := template.New("findingsTemplate").Funcs(template.FuncMap{
+		"kebabCase":      KebabCase,
+		"markdownToHtml": MarkdownToHtml,
+	}).Parse(htmlTemplate)
+	if err != nil {
+		return nil, err
+	}
+
+	err = findingsTemplate.Execute(htmlContent, detections)
+	if err != nil {
+		return nil, err
+	}
+
 	content := htmlContent.String()
 	return &content, nil
 }
@@ -160,4 +190,9 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 
 func KebabCase(s string) string {
 	return strings.ReplaceAll(strings.ToLower(s), " ", "-")
+}
+
+func MarkdownToHtml(s string) string {
+	html := blackfriday.MarkdownCommon([]byte(s))
+	return string(html)
 }
