@@ -2,7 +2,6 @@ package flag
 
 import (
 	"errors"
-	"math"
 	"os"
 	"runtime"
 	"strconv"
@@ -227,5 +226,5 @@ func parallelValue() int {
 		}
 	}
 
-	return int(math.Min(float64(runtime.NumCPU()), 4))
+	return runtime.NumCPU()
 }
