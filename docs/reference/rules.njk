@@ -12,7 +12,7 @@ The built-in rules aim to keep you protected from the most cirtical security ris
 {% endrenderTemplate %}
 
 <form action="" id="rule-search">
-  <label for="search-input" class="font-bold">Search <span class="font-normal italic">&lpar;<span class="js-rule-count">{{rules | length}}</span> results&rpar;</span></label>
+  <label for="search-input" class="font-bold">Search <span class="font-normal italic">&lpar;<span class="js-rule-count">{{rules.rules | length}}</span> results&rpar;</span></label>
   <input class="block w-full px-4 py-2 border-neutral-300 border-2 rounded dark:text-neutral-500" type="search" name="" id="search-input" placeholder="Try searching for CWE-201, encryption, rails, etc.">
 
   <div class="flex justify-end gap-2 mt-4">
@@ -89,7 +89,7 @@ The built-in rules aim to keep you protected from the most cirtical security ris
 </form>
 
 <ul class="flex flex-col gap-4 not-prose list-none p-0">
-  {% for rule in rules | sortById %}
+  {% for rule in rules.rules | sortById %}
     <li class="block rounded border-2 border-neutral-200 dark:border-neutral-500 p-4 js-rule">
       <a href="/reference/rules/{{rule.metadata.id}}/">
         <h2 class="font-bold text-main dark:text-main-300">{{rule.metadata.id}}</h2>

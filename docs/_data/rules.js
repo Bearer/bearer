@@ -9,6 +9,43 @@ const source = "bearer/bearer-rules";
 const rulesPath = "_tmp/rules-data";
 const excludeDirectories = [".github", "scripts"];
 
+let counts = {
+  languages: {},
+};
+
+function updateCounts(lang, framework = null, id = null) {
+  if (framework !== null) {
+    if (counts.languages[lang].frameworks[framework]) {
+      counts.languages[lang].frameworks[framework].count++;
+      counts.languages[lang].frameworks[framework].rules.push(id);
+    } else if (framework != "lang" && framework != "third_parties") {
+      newFramework(lang, framework);
+    } else if (framework === "lang") {
+      counts.languages[lang].baseRules.push(id);
+    }
+    counts.languages[lang].count++;
+  } else {
+    newLang(lang);
+  }
+}
+
+function newFramework(lang, name) {
+  counts.languages[lang].frameworks[name] = {
+    name,
+    count: 1,
+    rules: [],
+  };
+}
+
+function newLang(name) {
+  counts.languages[name] = {
+    name,
+    count: 0,
+    baseRules: [],
+    frameworks: {},
+  };
+}
+
 function isDirectory(dir) {
   const result = statSync(dir);
   return result.isDirectory();
@@ -44,6 +81,7 @@ async function fetchData(location) {
       const dirPath = path.join(rulesPath, dir);
       if (isDirectory(dirPath) && !excludeDirectories.includes(dir)) {
         const subDirs = await readdir(dirPath);
+        updateCounts(dir);
         // ex. looping through rules/ruby [lang, rails]
         subDirs.forEach(async (subDir) => {
           const subDirPath = path.join(dirPath, subDir);
@@ -59,7 +97,7 @@ async function fetchData(location) {
         });
       }
     });
-    return rules;
+    return { counts, rules };
   } catch (err) {
     throw err;
   }
@@ -83,6 +121,9 @@ async function fetchFile(location, breadcrumb) {
   return readFile(location, { encoding: "utf8" }).then((file) => {
     let out = yaml.load(file);
     let owasps = new Set();
+    let subdir = breadcrumb.split("/");
+    let framework = subdir[subdir.length - 1];
+    updateCounts(subdir[subdir.length - 2], framework, out.metadata.id);
     if (out.metadata.cwe_id) {
       out.metadata.cwe_id.forEach((i) => {
         if (cweList[i].owasp) {
@@ -94,6 +135,7 @@ async function fetchFile(location, breadcrumb) {
       name: path.basename(location, ".yml"),
       location: path.join(breadcrumb, path.basename(location, ".yml")),
       owasp_ids: [...owasps].sort(),
+      framework,
       ...out,
     };
   });
