@@ -211,8 +211,8 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 	}
 
 	if filter.StringRegex != nil {
-		value, _, err := generic.GetStringValue(node, evaluator)
-		if err != nil || value == "" {
+		value, isLiteral, err := generic.GetStringValue(node, evaluator)
+		if err != nil || (value == "" && !isLiteral) {
 			return nil, err
 		}
 
