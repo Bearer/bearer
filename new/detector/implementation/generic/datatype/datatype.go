@@ -1,6 +1,7 @@
 package datatype
 
 import (
+	detectiontypes "github.com/bearer/bearer/new/detector/detection"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
@@ -20,7 +21,7 @@ type Property struct {
 	Name           string
 	Node           *tree.Node
 	Classification classificationschema.Classification
-	Datatype       *types.Detection
+	Datatype       *detectiontypes.Detection
 }
 
 type datatypeDetector struct {
@@ -44,10 +45,9 @@ func (detector *datatypeDetector) NestedDetections() bool {
 
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
-	_ settings.RuleReferenceScope,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	objectDetections, err := evaluator.Evaluate(node, "object", "", settings.CURSOR_SCOPE, false)
+	objectDetections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_SCOPE, false)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (detector *datatypeDetector) DetectAt(
 	var result []interface{}
 
 	for _, object := range objectDetections {
-		data, _, containsValidClassification := detector.classifyObject(evaluator.FileName(), "", object)
+		data, _, containsValidClassification := detector.classifyObject(evaluationState.FileName(), "", object)
 		if containsValidClassification {
 			result = append(result, data)
 		}
@@ -69,7 +69,7 @@ func (detector *datatypeDetector) Close() {}
 func (detector *datatypeDetector) classifyObject(
 	filename,
 	name string,
-	detection *types.Detection,
+	detection *detectiontypes.Detection,
 ) (Data, classificationschema.Classification, bool) {
 	objectData := detection.Data.(generictypes.Object)
 
@@ -110,16 +110,16 @@ func (detector *datatypeDetector) classifyObject(
 func (detector *datatypeDetector) classifyProperty(
 	filename,
 	name string,
-	detection *types.Detection,
+	detection *detectiontypes.Detection,
 	parentClassification classificationschema.Classification,
-) (*types.Detection, classificationschema.Classification, bool) {
+) (*detectiontypes.Detection, classificationschema.Classification, bool) {
 	if detection == nil {
 		return nil, parentClassification, false
 	}
 
 	data, propertyClassification, containsValidClassification := detector.classifyObject(filename, name, detection)
 
-	propertyDetection := &types.Detection{
+	propertyDetection := &detectiontypes.Detection{
 		DetectorType: "datatype",
 		MatchNode:    detection.MatchNode,
 		Data:         data,

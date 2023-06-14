@@ -12,7 +12,9 @@ import (
 	"github.com/bearer/bearer/pkg/util/file"
 
 	"github.com/bearer/bearer/new/detector/composition/types"
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/evaluator"
+	cachepkg "github.com/bearer/bearer/new/detector/evaluator/cache"
 	"github.com/bearer/bearer/new/detector/implementation/custom"
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
@@ -30,6 +32,7 @@ import (
 
 type Composition struct {
 	customDetectorTypes []string
+	sharedDetectorTypes []string
 	detectorSet         detectortypes.DetectorSet
 	langImplementation  implementation.Implementation
 	lang                languagetypes.Language
@@ -118,8 +121,12 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		patterns := rule.Patterns
 		localRuleName := ruleName
 
-		if (!rule.IsAuxilary && rule.Type != customdetectors.TypeShared) || presenceRules[ruleName] {
-			composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		if rule.Type == customdetectors.TypeShared {
+			composition.sharedDetectorTypes = append(composition.sharedDetectorTypes, ruleName)
+		} else {
+			if !rule.IsAuxilary || presenceRules[ruleName] {
+				composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+			}
 		}
 
 		go func() {
@@ -164,11 +171,18 @@ func (composition *Composition) Close() {
 	}
 }
 
-func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.Detection, error) {
-	return composition.DetectFromFileWithTypes(file, composition.customDetectorTypes)
+func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detection.Detection, error) {
+	return composition.DetectFromFileWithTypes(
+		file,
+		composition.customDetectorTypes,
+		composition.sharedDetectorTypes,
+	)
 }
 
-func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
+func (composition *Composition) DetectFromFileWithTypes(
+	file *file.FileInfo,
+	detectorTypes, sharedDetectorTypes []string,
+) ([]*detection.Detection, error) {
 	if file.Language != "Java" {
 		return nil, nil
 	}
@@ -191,8 +205,11 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		file.FileInfo.Name(),
 	)
 
-	var result []*detectortypes.Detection
+	sharedCache := cachepkg.NewShared(sharedDetectorTypes)
+
+	var result []*detection.Detection
 	for _, detectorType := range detectorTypes {
+		cache := cachepkg.NewCache(sharedCache)
 		rule := composition.rules[detectorType]
 		sanitizerRuleID := ""
 		if rule != nil {
@@ -202,6 +219,7 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 			tree.RootNode(),
 			detectorType,
 			sanitizerRuleID,
+			cache,
 			settings.DefaultScope,
 			false,
 		)

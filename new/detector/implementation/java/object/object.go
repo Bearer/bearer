@@ -3,9 +3,9 @@ package object
 import (
 	"fmt"
 
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -70,34 +70,33 @@ func (detector *objectDetector) NestedDetections() bool {
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceScope,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	log.Debug().Msgf("node is %s", node.Debug())
 
-	detections, err := detector.getAssignment(node, evaluator)
+	detections, err := detector.getAssignment(node, evaluationState)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node, evaluator)
+	detections, err = detector.getClass(node)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	return detector.getProjections(node, evaluator)
+	return detector.getProjections(node, evaluationState)
 }
 
 func (detector *objectDetector) getAssignment(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	rightObjects, err := generic.GetNonVirtualObjects(evaluator, result["right"])
+	rightObjects, err := generic.GetNonVirtualObjects(evaluationState, result["right"])
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +116,7 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
+func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
 	results, err := detector.classQuery.MatchAt(node)
 	if len(results) == 0 || err != nil {
 		return nil, err
@@ -138,7 +137,7 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 	return []interface{}{generictypes.Object{
 		Properties: []generictypes.Property{{
 			Name: className,
-			Object: &types.Detection{
+			Object: &detection.Detection{
 				DetectorType: "object",
 				MatchNode:    node,
 				Data: generictypes.Object{

@@ -5,9 +5,9 @@ import (
 
 	"github.com/gertd/go-pluralize"
 
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/implementation/custom"
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
-	detectortypes "github.com/bearer/bearer/new/detector/types"
 	reportdetections "github.com/bearer/bearer/pkg/report/detections"
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/schema"
@@ -15,7 +15,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/file"
 )
 
-func ReportDetections(report reportdetections.ReportDetection, file *file.FileInfo, detections []*detectortypes.Detection) {
+func ReportDetections(report reportdetections.ReportDetection, file *file.FileInfo, detections []*detection.Detection) {
 	pluralizer := pluralize.NewClient()
 
 	for _, detection := range detections {
@@ -63,7 +63,7 @@ func reportDatatypeDetection(
 	file *file.FileInfo,
 	detectorType detectors.Type,
 	detection,
-	datatypeDetection *detectortypes.Detection,
+	datatypeDetection *detection.Detection,
 	objectName string,
 ) {
 	data := datatypeDetection.Data.(datatype.Data)

@@ -9,7 +9,7 @@ import (
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.callsQuery.MatchOnceAt(node)
 	if err != nil {
@@ -21,7 +21,7 @@ func (detector *objectDetector) getProjections(
 
 		objects, err := generic.ProjectObject(
 			node,
-			evaluator,
+			evaluationState,
 			receiverNode,
 			getObjectName(receiverNode),
 			result["method"].Content(),
@@ -48,7 +48,7 @@ func (detector *objectDetector) getProjections(
 
 		objects, err := generic.ProjectObject(
 			node,
-			evaluator,
+			evaluationState,
 			objectNode,
 			getObjectName(objectNode),
 			propertyName,

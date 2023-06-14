@@ -3,6 +3,7 @@ package object
 import (
 	"fmt"
 
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -115,30 +116,29 @@ func (detector *objectDetector) NestedDetections() bool {
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
-	_ settings.RuleReferenceScope,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	detections, err := detector.getObject(node, evaluator)
+	detections, err := detector.getObject(node, evaluationState)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getAssignment(node, evaluator)
+	detections, err = detector.getAssignment(node, evaluationState)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node, evaluator)
+	detections, err = detector.getClass(node)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	return detector.getProjections(node, evaluator)
+	return detector.getProjections(node, evaluationState)
 }
 
 func (detector *objectDetector) getObject(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	var properties []generictypes.Property
 	spreadResults, err := detector.spreadElementQuery.MatchAt(node)
@@ -147,7 +147,7 @@ func (detector *objectDetector) getObject(
 	}
 
 	for _, spreadResult := range spreadResults {
-		detections, err := evaluator.Evaluate(spreadResult["identifier"], "object", "", settings.CURSOR_SCOPE, true)
+		detections, err := evaluationState.Evaluate(spreadResult["identifier"], "object", "", settings.CURSOR_SCOPE, true)
 
 		if err != nil {
 			return nil, err
@@ -177,7 +177,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := evaluator.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
+		propertyObjects, err := evaluationState.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
 		if err != nil {
 			return nil, err
 		}
@@ -207,14 +207,14 @@ func (detector *objectDetector) getObject(
 
 func (detector *objectDetector) getAssignment(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	valueObjects, err := generic.GetNonVirtualObjects(evaluator, result["value"])
+	valueObjects, err := generic.GetNonVirtualObjects(evaluationState, result["value"])
 	if err != nil {
 		return nil, err
 	}
@@ -234,7 +234,7 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
+func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
 	results, err := detector.classQuery.MatchAt(node)
 	if len(results) == 0 || err != nil {
 		return nil, err
@@ -264,7 +264,7 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 	return []interface{}{generictypes.Object{
 		Properties: []generictypes.Property{{
 			Name: className,
-			Object: &types.Detection{
+			Object: &detection.Detection{
 				DetectorType: "object",
 				MatchNode:    node,
 				Data: generictypes.Object{

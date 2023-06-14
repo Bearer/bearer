@@ -5,6 +5,7 @@ import (
 
 	"golang.org/x/exp/slices"
 
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
@@ -14,15 +15,14 @@ import (
 )
 
 func matchFilter(
-	scope settings.RuleReferenceScope,
+	evaluationState types.EvaluationState,
 	result *languagetypes.PatternQueryResult,
-	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
 	filter settings.PatternFilter,
 	rules map[string]*settings.Rule,
-) (*bool, []*types.Detection, error) {
+) (*bool, []*detection.Detection, error) {
 	if filter.Not != nil {
-		match, _, err := matchFilter(scope, result, evaluator, variableNodes, *filter.Not, rules)
+		match, _, err := matchFilter(evaluationState, result, variableNodes, *filter.Not, rules)
 		if match == nil {
 			return nil, nil, err
 		}
@@ -30,11 +30,11 @@ func matchFilter(
 	}
 
 	if len(filter.Either) != 0 {
-		return matchEitherFilters(scope, result, evaluator, variableNodes, filter.Either, rules)
+		return matchEitherFilters(evaluationState, result, variableNodes, filter.Either, rules)
 	}
 
 	if filter.FilenameRegex != nil {
-		return boolPointer(filter.FilenameRegex.MatchString(evaluator.FileName())), nil, nil
+		return boolPointer(filter.FilenameRegex.MatchString(evaluationState.FileName())), nil, nil
 	}
 
 	node, ok := result.Variables[filter.Variable]
@@ -44,35 +44,29 @@ func matchFilter(
 	}
 
 	if filter.Detection != "" {
-		effectiveScope := filter.Scope
-		if effectiveScope == settings.NESTED_SCOPE && scope == settings.RESULT_SCOPE {
-			effectiveScope = settings.RESULT_SCOPE
-		}
-
 		return matchDetectionFilter(
+			evaluationState,
 			result,
-			evaluator,
 			variableNodes,
 			node,
 			filter.Detection,
-			effectiveScope,
+			filter.Scope,
 			filter.Contains == nil || *filter.Contains,
 			rules,
 		)
 	}
 
-	matched, err := matchContentFilter(filter, evaluator, node)
+	matched, err := matchContentFilter(evaluationState, filter, node)
 	return matched, nil, err
 }
 
 func matchAllFilters(
-	scope settings.RuleReferenceScope,
+	evaluationState types.EvaluationState,
 	result *languagetypes.PatternQueryResult,
-	evaluator types.Evaluator,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
-) (bool, []*types.Detection, map[string]*tree.Node, error) {
-	var datatypeDetections []*types.Detection
+) (bool, []*detection.Detection, map[string]*tree.Node, error) {
+	var datatypeDetections []*detection.Detection
 
 	variableNodes := make(map[string]*tree.Node)
 	for name, node := range result.Variables {
@@ -80,7 +74,7 @@ func matchAllFilters(
 	}
 
 	for _, filter := range filters {
-		matched, subDataTypeDetections, err := matchFilter(scope, result, evaluator, variableNodes, filter, rules)
+		matched, subDataTypeDetections, err := matchFilter(evaluationState, result, variableNodes, filter, rules)
 		if matched == nil || !*matched || err != nil {
 			return false, nil, nil, err
 		}
@@ -92,19 +86,18 @@ func matchAllFilters(
 }
 
 func matchEitherFilters(
-	scope settings.RuleReferenceScope,
+	evaluationState types.EvaluationState,
 	result *languagetypes.PatternQueryResult,
-	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
-) (*bool, []*types.Detection, error) {
-	var datatypeDetections []*types.Detection
+) (*bool, []*detection.Detection, error) {
+	var datatypeDetections []*detection.Detection
 	oneMatched := false
 	oneNotMatched := false
 
 	for _, subFilter := range filters {
-		subMatch, subDatatypeDetections, err := matchFilter(scope, result, evaluator, variableNodes, subFilter, rules)
+		subMatch, subDatatypeDetections, err := matchFilter(evaluationState, result, variableNodes, subFilter, rules)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -126,29 +119,29 @@ func matchEitherFilters(
 }
 
 func matchDetectionFilter(
+	evaluationState types.EvaluationState,
 	result *languagetypes.PatternQueryResult,
-	evaluator types.Evaluator,
 	variableNodes map[string]*tree.Node,
 	node *tree.Node,
 	detectorType string,
 	scope settings.RuleReferenceScope,
 	contains bool,
 	rules map[string]*settings.Rule,
-) (*bool, []*types.Detection, error) {
+) (*bool, []*detection.Detection, error) {
 	sanitizerRuleID := ""
 	if rule, ok := rules[detectorType]; ok {
 		sanitizerRuleID = rule.SanitizerRuleID
 	}
 
 	if detectorType == "datatype" {
-		detections, err := evaluator.Evaluate(node, "datatype", sanitizerRuleID, scope, true)
+		detections, err := evaluationState.Evaluate(node, "datatype", sanitizerRuleID, scope, true)
 
 		return boolPointer(len(detections) != 0), detections, err
 	}
 
-	detections, err := evaluator.Evaluate(node, detectorType, sanitizerRuleID, scope, true)
+	detections, err := evaluationState.Evaluate(node, detectorType, sanitizerRuleID, scope, true)
 
-	var datatypeDetections []*types.Detection
+	var datatypeDetections []*detection.Detection
 	ignoredVariables := getIgnoredVariables(detections)
 	foundDetection := false
 
@@ -186,7 +179,11 @@ func matchDetectionFilter(
 	return boolPointer(foundDetection), datatypeDetections, err
 }
 
-func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator, node *tree.Node) (*bool, error) {
+func matchContentFilter(
+	evaluationState types.EvaluationState,
+	filter settings.PatternFilter,
+	node *tree.Node,
+) (*bool, error) {
 	content := node.Content()
 
 	if len(filter.Values) != 0 {
@@ -198,7 +195,7 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 	}
 
 	if filter.LengthLessThan != nil {
-		strValue, _, err := generic.GetStringValue(node, evaluator)
+		strValue, _, err := generic.GetStringValue(node, evaluationState)
 		if err != nil || strValue == "" {
 			return nil, err
 		}
@@ -211,7 +208,7 @@ func matchContentFilter(filter settings.PatternFilter, evaluator types.Evaluator
 	}
 
 	if filter.StringRegex != nil {
-		value, isLiteral, err := generic.GetStringValue(node, evaluator)
+		value, isLiteral, err := generic.GetStringValue(node, evaluationState)
 		if err != nil || (value == "" && !isLiteral) {
 			return nil, err
 		}
@@ -279,7 +276,7 @@ func boolPointer(value bool) *bool {
 	return &value
 }
 
-func getIgnoredVariables(detections []*types.Detection) map[string]struct{} {
+func getIgnoredVariables(detections []*detection.Detection) map[string]struct{} {
 	ignoredVariables := make(map[string]struct{})
 	seenNodes := make(map[string]*tree.Node)
 

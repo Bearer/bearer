@@ -4,19 +4,21 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/bearer/bearer/new/detector/detection"
+	cachepkg "github.com/bearer/bearer/new/detector/evaluator/cache"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/tree"
 	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"golang.org/x/exp/slices"
 )
 
-type evaluator struct {
+type Evaluator struct {
 	langImplementation    implementation.Implementation
 	lang                  languagetypes.Language
 	detectorSet           types.DetectorSet
-	detectionCache        map[langtree.NodeID]map[string][]*types.Detection
 	executingDetectors    map[langtree.NodeID][]string
 	fileName              string
 	rulesDisabledForNodes map[string][]*langtree.Node
@@ -28,32 +30,32 @@ func New(
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
 	fileName string,
-) types.Evaluator {
-	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
-
-	return &evaluator{
+) *Evaluator {
+	return &Evaluator{
 		langImplementation:    langImplementation,
 		lang:                  lang,
 		fileName:              fileName,
 		detectorSet:           detectorSet,
-		detectionCache:        detectionCache,
 		executingDetectors:    make(map[langtree.NodeID][]string),
 		rulesDisabledForNodes: mapNodesToDisabledRules(tree.RootNode()),
 	}
 }
 
-func (evaluator *evaluator) FileName() string {
-	return evaluator.fileName
-}
-
-func (evaluator *evaluator) Evaluate(
+func (evaluator *Evaluator) Evaluate(
 	rootNode *langtree.Node,
 	detectorType, sanitizerDetectorType string,
+	cache *cachepkg.Cache,
 	scope settings.RuleReferenceScope,
 	followFlow bool,
-) ([]*types.Detection, error) {
+) ([]*detection.Detection, error) {
 	if rootNode == nil {
 		return nil, nil
+	}
+
+	key := cachepkg.NewKey(rootNode, detectorType, scope, followFlow)
+
+	if detections, cached := cache.Get(key); cached {
+		return detections, nil
 	}
 
 	nestedDetections, err := evaluator.detectorSet.NestedDetections(detectorType)
@@ -61,7 +63,7 @@ func (evaluator *evaluator) Evaluate(
 		return nil, err
 	}
 
-	var result []*types.Detection
+	var result []*detection.Detection
 	var nestedMode bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
@@ -73,14 +75,14 @@ func (evaluator *evaluator) Evaluate(
 			return nil
 		}
 
-		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, scope)
+		detections, sanitized, err := evaluator.sanitizedNodeDetections(node, detectorType, sanitizerDetectorType, cache, scope)
 		if sanitized || err != nil {
 			return err
 		}
 
 		if followFlow {
 			for _, unifiedNode := range node.UnifiedNodes() {
-				unifiedNodeDetections, err := evaluator.Evaluate(unifiedNode, detectorType, sanitizerDetectorType, scope, true)
+				unifiedNodeDetections, err := evaluator.Evaluate(unifiedNode, detectorType, sanitizerDetectorType, cache, scope, true)
 				if err != nil {
 					return err
 				}
@@ -107,10 +109,12 @@ func (evaluator *evaluator) Evaluate(
 		return nil, err
 	}
 
+	cache.Put(key, result)
+
 	return result, nil
 }
 
-func (evaluator *evaluator) ruleDisabledForNode(ruleId string, node *langtree.Node) bool {
+func (evaluator *Evaluator) ruleDisabledForNode(ruleId string, node *langtree.Node) bool {
 	nodesToIgnore := evaluator.rulesDisabledForNodes[ruleId]
 	if nodesToIgnore == nil {
 		return false
@@ -176,77 +180,58 @@ func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Nod
 	return res
 }
 
-func (evaluator *evaluator) sanitizedNodeDetections(
+func (evaluator *Evaluator) sanitizedNodeDetections(
 	node *langtree.Node,
 	detectorType, sanitizerDetectorType string,
+	cache *cachepkg.Cache,
 	scope settings.RuleReferenceScope,
-) ([]*types.Detection, bool, error) {
+) ([]*detection.Detection, bool, error) {
 	if sanitizerDetectorType != "" {
-		sanitizerDetections, err := evaluator.nonUnifiedNodeDetections(node, sanitizerDetectorType, settings.DefaultScope)
+		sanitizerDetections, err := evaluator.detectAtNode(node, sanitizerDetectorType, cache, settings.DefaultScope)
 		if len(sanitizerDetections) != 0 || err != nil {
 			return nil, true, err
 		}
 	}
 
-	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType, scope)
+	detections, err := evaluator.detectAtNode(node, detectorType, cache, scope)
 	return detections, false, err
 }
 
-func (evaluator *evaluator) nonUnifiedNodeDetections(
+func (evaluator *Evaluator) detectAtNode(
 	node *langtree.Node,
 	detectorType string,
+	cache *cachepkg.Cache,
 	scope settings.RuleReferenceScope,
-) ([]*types.Detection, error) {
-	nodeDetections, ok := evaluator.detectionCache[node.ID()]
-	if !ok {
-		err := evaluator.detectAtNode(node, detectorType, scope)
-		if err != nil {
-			return nil, err
-		}
+) ([]*detection.Detection, error) {
+	key := cachepkg.NewKey(node, detectorType, settings.CURSOR_SCOPE, false)
 
-		nodeDetections = evaluator.detectionCache[node.ID()]
-	}
-
-	if detections, ok := nodeDetections[detectorType]; ok {
+	if detections, cached := cache.Get(key); cached {
 		return detections, nil
 	}
 
-	err := evaluator.detectAtNode(node, detectorType, scope)
-	if err != nil {
+	if evaluator.ruleDisabledForNode(detectorType, node) {
+		cache.Put(key, nil)
+		return nil, nil
+	}
+
+	var detections []*detection.Detection
+	if err := evaluator.withCycleProtection(node, detectorType, func() (err error) {
+		state := evaluationState{
+			cache:     cache,
+			scope:     scope,
+			evaluator: evaluator,
+		}
+		detections, err = evaluator.detectorSet.DetectAt(node, detectorType, state)
+		cache.Put(key, detections)
+		return
+	}); err != nil {
 		return nil, err
 	}
 
-	return nodeDetections[detectorType], nil
+	return detections, nil
 }
 
-func (evaluator *evaluator) detectAtNode(
-	node *langtree.Node,
-	detectorType string,
-	scope settings.RuleReferenceScope,
-) error {
-	if evaluator.ruleDisabledForNode(detectorType, node) {
-		return nil
-	}
-
-	return evaluator.withCycleProtection(node, detectorType, func() error {
-		detections, err := evaluator.detectorSet.DetectAt(node, detectorType, scope, evaluator)
-		if err != nil {
-			return err
-		}
-
-		nodeDetections, ok := evaluator.detectionCache[node.ID()]
-		if !ok {
-			nodeDetections = make(map[string][]*types.Detection)
-			evaluator.detectionCache[node.ID()] = nodeDetections
-		}
-
-		nodeDetections[detectorType] = detections
-
-		return nil
-	})
-}
-
-func (evaluator *evaluator) withCycleProtection(node *langtree.Node, detectorType string, body func() error) error {
+func (evaluator *Evaluator) withCycleProtection(node *langtree.Node, detectorType string, body func() error) error {
 	nodeID := node.ID()
 
 	executingDetectors := evaluator.executingDetectors[nodeID]
@@ -274,4 +259,36 @@ func (evaluator *evaluator) withCycleProtection(node *langtree.Node, detectorTyp
 	}
 
 	return nil
+}
+
+type evaluationState struct {
+	cache     *cachepkg.Cache
+	scope     settings.RuleReferenceScope
+	evaluator *Evaluator
+}
+
+func (state evaluationState) Evaluate(
+	rootNode *tree.Node,
+	detectorType,
+	sanitizerDetectorType string,
+	scope settings.RuleReferenceScope,
+	followFlow bool,
+) ([]*detection.Detection, error) {
+	effectiveScope := scope
+	if effectiveScope == settings.NESTED_SCOPE && state.scope == settings.RESULT_SCOPE {
+		effectiveScope = settings.RESULT_SCOPE
+	}
+
+	return state.evaluator.Evaluate(
+		rootNode,
+		detectorType,
+		sanitizerDetectorType,
+		state.cache,
+		effectiveScope,
+		followFlow,
+	)
+}
+
+func (state evaluationState) FileName() string {
+	return state.evaluator.fileName
 }

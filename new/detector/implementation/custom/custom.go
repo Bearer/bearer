@@ -3,6 +3,7 @@ package custom
 import (
 	"fmt"
 
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
@@ -11,7 +12,7 @@ import (
 
 type Data struct {
 	Pattern       string
-	Datatypes     []*types.Detection
+	Datatypes     []*detection.Detection
 	VariableNodes map[string]*tree.Node
 }
 
@@ -62,8 +63,7 @@ func (detector *customDetector) Name() string {
 
 func (detector *customDetector) DetectAt(
 	node *tree.Node,
-	scope settings.RuleReferenceScope,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	var detectionsData []interface{}
 
@@ -75,9 +75,8 @@ func (detector *customDetector) DetectAt(
 
 		for _, result := range results {
 			filtersMatch, datatypeDetections, variableNodes, err := matchAllFilters(
-				scope,
+				evaluationState,
 				result,
-				evaluator,
 				pattern.Filters,
 				detector.rules,
 			)

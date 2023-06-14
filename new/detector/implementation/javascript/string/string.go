@@ -3,7 +3,6 @@ package string
 import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -25,8 +24,7 @@ func (detector *stringDetector) Name() string {
 
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceScope,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string":
@@ -35,17 +33,17 @@ func (detector *stringDetector) DetectAt(
 			IsLiteral: true,
 		}}, nil
 	case "template_string":
-		return handleTemplateString(node, evaluator)
+		return handleTemplateString(node, evaluationState)
 	case "binary_expression":
 		if node.AnonymousChild(0).Content() == "+" {
-			return generic.ConcatenateChildStrings(node, evaluator)
+			return generic.ConcatenateChildStrings(node, evaluationState)
 		}
 	}
 
 	return nil, nil
 }
 
-func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
+func handleTemplateString(node *tree.Node, evaluationState types.EvaluationState) ([]interface{}, error) {
 	text := ""
 	isLiteral := true
 
@@ -53,7 +51,7 @@ func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interfa
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {
-		childValue, childIsLiteral, err := generic.GetStringValue(child.Child(1), evaluator)
+		childValue, childIsLiteral, err := generic.GetStringValue(child.Child(1), evaluationState)
 		if err != nil {
 			return err
 		}

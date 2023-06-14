@@ -51,7 +51,7 @@ func RunTest(
 			tt.Fatalf("failed to create file info for %s: %s", fileName, err)
 		}
 
-		detections, err := composition.DetectFromFileWithTypes(fileInfo, []string{detectorType})
+		detections, err := composition.DetectFromFileWithTypes(fileInfo, []string{detectorType}, nil)
 		if err != nil {
 			tt.Fatalf("failed to detect: %s", err)
 		}

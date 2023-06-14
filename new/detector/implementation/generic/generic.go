@@ -3,6 +3,7 @@ package generic
 import (
 	"fmt"
 
+	"github.com/bearer/bearer/new/detector/detection"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
@@ -10,15 +11,15 @@ import (
 )
 
 func GetNonVirtualObjects(
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 	node *tree.Node,
-) ([]*types.Detection, error) {
-	detections, err := evaluator.Evaluate(node, "object", "", settings.CURSOR_SCOPE, true)
+) ([]*detection.Detection, error) {
+	detections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_SCOPE, true)
 	if err != nil {
 		return nil, err
 	}
 
-	var result []*types.Detection
+	var result []*detection.Detection
 	for _, detection := range detections {
 		data := detection.Data.(generictypes.Object)
 		if !data.IsVirtual {
@@ -31,7 +32,7 @@ func GetNonVirtualObjects(
 
 func ProjectObject(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 	objectNode *tree.Node,
 	objectName,
 	propertyName string,
@@ -40,7 +41,7 @@ func ProjectObject(
 	var result []interface{}
 
 	if isPropertyAccess {
-		objectDetections, err := GetNonVirtualObjects(evaluator, objectNode)
+		objectDetections, err := GetNonVirtualObjects(evaluationState, objectNode)
 		if err != nil {
 			return nil, err
 		}
@@ -54,7 +55,7 @@ func ProjectObject(
 					result = append(result, generictypes.Object{
 						Properties: []generictypes.Property{{
 							Name: propertyName,
-							Object: &types.Detection{
+							Object: &detection.Detection{
 								DetectorType: "object",
 								MatchNode:    node,
 								Data:         property.Object.Data,
@@ -71,7 +72,7 @@ func ProjectObject(
 		result = append(result, generictypes.Object{
 			Properties: []generictypes.Property{{
 				Name: objectName,
-				Object: &types.Detection{
+				Object: &detection.Detection{
 					DetectorType: "object",
 					MatchNode:    node,
 					Data: generictypes.Object{
@@ -87,8 +88,8 @@ func ProjectObject(
 	return result, nil
 }
 
-func GetStringValue(node *tree.Node, evaluator types.Evaluator) (string, bool, error) {
-	detections, err := evaluator.Evaluate(node, "string", "", settings.CURSOR_SCOPE, true)
+func GetStringValue(node *tree.Node, evaluationState types.EvaluationState) (string, bool, error) {
+	detections, err := evaluationState.Evaluate(node, "string", "", settings.CURSOR_SCOPE, true)
 	if err != nil {
 		return "", false, err
 	}
@@ -105,7 +106,7 @@ func GetStringValue(node *tree.Node, evaluator types.Evaluator) (string, bool, e
 	}
 }
 
-func ConcatenateChildStrings(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
+func ConcatenateChildStrings(node *tree.Node, evaluationState types.EvaluationState) ([]interface{}, error) {
 	value := ""
 	isLiteral := true
 
@@ -115,7 +116,7 @@ func ConcatenateChildStrings(node *tree.Node, evaluator types.Evaluator) ([]inte
 			continue
 		}
 
-		childValue, childIsLiteral, err := GetStringValue(child, evaluator)
+		childValue, childIsLiteral, err := GetStringValue(child, evaluationState)
 		if err != nil {
 			return nil, err
 		}

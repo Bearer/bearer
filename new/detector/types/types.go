@@ -1,25 +1,20 @@
 package types
 
 import (
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
 )
 
-type Detection struct {
-	DetectorType string
-	MatchNode    *tree.Node
-	Data         interface{}
-}
-
-type Evaluator interface {
+type EvaluationState interface {
 	Evaluate(
 		rootNode *tree.Node,
 		detectorType,
 		sanitizerDetectorType string,
 		scope settings.RuleReferenceScope,
 		followFlow bool,
-	) ([]*Detection, error)
+	) ([]*detection.Detection, error)
 	FileName() string
 }
 
@@ -28,18 +23,13 @@ type DetectorSet interface {
 	DetectAt(
 		node *tree.Node,
 		detectorType string,
-		ruleReferenceType settings.RuleReferenceScope,
-		evaluator Evaluator,
-	) ([]*Detection, error)
+		evaluationState EvaluationState,
+	) ([]*detection.Detection, error)
 }
 
 type Detector interface {
 	Name() string
-	DetectAt(
-		node *tree.Node,
-		ruleReferenceType settings.RuleReferenceScope,
-		evaluator Evaluator,
-	) ([]interface{}, error)
+	DetectAt(node *tree.Node, evaluationState EvaluationState) ([]interface{}, error)
 	NestedDetections() bool
 	Close()
 }
@@ -51,7 +41,10 @@ func (*DetectorBase) NestedDetections() bool {
 }
 
 type Composition interface {
-	DetectFromFile(file *file.FileInfo) ([]*Detection, error)
-	DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*Detection, error)
+	DetectFromFile(file *file.FileInfo) ([]*detection.Detection, error)
+	DetectFromFileWithTypes(
+		file *file.FileInfo,
+		detectorTypes, sharedDetectorTypes []string,
+	) ([]*detection.Detection, error)
 	Close()
 }

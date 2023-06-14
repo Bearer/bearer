@@ -3,7 +3,6 @@ package string
 import (
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -25,8 +24,7 @@ func (detector *stringDetector) Name() string {
 
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
-	ruleReferenceType settings.RuleReferenceScope,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string_literal":
@@ -36,7 +34,7 @@ func (detector *stringDetector) DetectAt(
 		}}, nil
 	case "binary_expression":
 		if node.AnonymousChild(0).Content() == "+" {
-			return generic.ConcatenateChildStrings(node, evaluator)
+			return generic.ConcatenateChildStrings(node, evaluationState)
 		}
 	}
 
