@@ -12,6 +12,7 @@ import (
 
 	customdetector "github.com/bearer/bearer/new/scanner"
 	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	config "github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/blamer"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
@@ -112,6 +113,8 @@ func Start(port string) error {
 	done := make(chan struct{})
 	go func() {
 		<-ctx.Done()
+
+		debugprofile.Stop()
 
 		if err := server.Shutdown(context.Background()); err != nil {
 			log.Debug().Msgf("error shutting down server: %s", err)

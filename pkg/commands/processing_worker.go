@@ -44,7 +44,6 @@ func NewProcessingWorkerCommand() *cobra.Command {
 			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
 
 			err = worker.Start(processOptions.Port)
-			debugprofile.Stop()
 			return err
 		},
 		Hidden:        true,
