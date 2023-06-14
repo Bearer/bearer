@@ -34,7 +34,7 @@ var ignoredFilenames = []*regexp.Regexp{
 	regexp.MustCompile(`(^|/)_*samples?_*/`),
 	regexp.MustCompile(`(^|/)node_modules/`),
 	regexp.MustCompile(`(^|/)tmp/`),
-	regexp.MustCompile(`\.min\.js$`),
+	regexp.MustCompile(`[.-]min\.js$`),
 	regexp.MustCompile(`\.map\.js$`),
 }
 
