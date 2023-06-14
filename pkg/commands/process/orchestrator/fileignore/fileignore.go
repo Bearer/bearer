@@ -67,6 +67,10 @@ func isMinified(fullPath string, size int64, goclocResult *gocloc.Result) bool {
 		return true
 	}
 
+	if strings.HasSuffix(fullPath, "-min.js") {
+		return true
+	}
+
 	if strings.HasSuffix(fullPath, ".js") {
 		goclocFileResult := goclocResult.Files[fullPath]
 
