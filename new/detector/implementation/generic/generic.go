@@ -137,3 +137,34 @@ func ConcatenateChildStrings(node *tree.Node, evaluationState types.EvaluationSt
 		IsLiteral: isLiteral,
 	}}, nil
 }
+
+func ConcatenateAssignEquals(node *tree.Node, evaluationState types.EvaluationState) ([]interface{}, error) {
+	unifiedNodes := node.ChildByFieldName("left").UnifiedNodes()
+	if len(unifiedNodes) == 0 {
+		return nil, nil
+	}
+	if len(unifiedNodes) != 1 {
+		return nil, fmt.Errorf("expected exactly one unified `+=` node but got %d", len(unifiedNodes))
+	}
+
+	left, leftIsLiteral, err := GetStringValue(unifiedNodes[0], evaluationState)
+	if err != nil {
+		return nil, err
+	}
+	if left == "" && !leftIsLiteral {
+		left = "*"
+	}
+
+	right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), evaluationState)
+	if err != nil {
+		return nil, err
+	}
+	if right == "" && !rightIsLiteral {
+		right = "*"
+	}
+
+	return []interface{}{generictypes.String{
+		Value:     left + right,
+		IsLiteral: leftIsLiteral && rightIsLiteral,
+	}}, nil
+}
