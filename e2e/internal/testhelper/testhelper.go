@@ -91,7 +91,6 @@ func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 		cmd = exec.CommandContext(ctx, "go", arguments...)
 	}
 
-	cmd.Env = append(os.Environ(), "BEARER_DEFAULT_PARALLEL=2")
 	cmd.Dir = os.Getenv("GITHUB_WORKSPACE")
 
 	return cmd, cancel

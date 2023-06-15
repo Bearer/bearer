@@ -2,9 +2,6 @@ package flag
 
 import (
 	"errors"
-	"os"
-	"runtime"
-	"strconv"
 	"strings"
 	"time"
 
@@ -96,7 +93,7 @@ var (
 	ParallelFlag = Flag{
 		Name:       "parallel",
 		ConfigName: "scan.parallel",
-		Value:      parallelValue(),
+		Value:      0,
 		Usage:      "Specify the amount of parallelism to use during the scan",
 	}
 )
@@ -217,14 +214,4 @@ func getContext(flag *Flag) Context {
 
 	flagStr := strings.ToLower(getString(flag))
 	return Context(flagStr)
-}
-
-func parallelValue() int {
-	if overrideStr := os.Getenv("BEARER_DEFAULT_PARALLEL"); overrideStr != "" {
-		if override, err := strconv.Atoi(overrideStr); err == nil {
-			return override
-		}
-	}
-
-	return runtime.NumCPU()
 }
