@@ -26,10 +26,7 @@ func New(config settings.Config) *Pool {
 		log.Fatal().Msgf("failed to get current command executable %s", err)
 	}
 
-	baseArguments := []string{"processing-worker"}
-	if config.Scan.Debug {
-		baseArguments = append(baseArguments, "--debug")
-	}
+	baseArguments := []string{"processing-worker", "--log-level", config.Scan.LogLevel}
 	if config.DebugProfile {
 		baseArguments = append(baseArguments, "--debug-profile")
 	}

@@ -12,6 +12,7 @@ import (
 	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 )
 
@@ -52,9 +53,29 @@ func (evaluator *Evaluator) Evaluate(
 		return nil, nil
 	}
 
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"evaluate start: %d:%d:%s:\n%s",
+			rootNode.StartLineNumber(),
+			rootNode.StartColumnNumber(),
+			rootNode.Type(),
+			rootNode.Content(),
+		)
+	}
+
 	key := cachepkg.NewKey(rootNode, detectorType, scope, followFlow)
 
 	if detections, cached := cache.Get(key); cached {
+		if log.Trace().Enabled() {
+			log.Trace().Msgf(
+				"evaluate end: %d:%d:%s: %d detections (cached)",
+				rootNode.StartLineNumber(),
+				rootNode.StartColumnNumber(),
+				rootNode.Type(),
+				len(detections),
+			)
+		}
+
 		return detections, nil
 	}
 
@@ -110,6 +131,16 @@ func (evaluator *Evaluator) Evaluate(
 	}
 
 	cache.Put(key, result)
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"evaluate end: %d:%d:%s: %d detections",
+			rootNode.StartLineNumber(),
+			rootNode.StartColumnNumber(),
+			rootNode.Type(),
+			len(result),
+		)
+	}
 
 	return result, nil
 }
@@ -203,13 +234,44 @@ func (evaluator *Evaluator) detectAtNode(
 	cache *cachepkg.Cache,
 	scope settings.RuleReferenceScope,
 ) ([]*detection.Detection, error) {
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"detect at node start: %s at %d:%d:%s\n%s",
+			detectorType,
+			node.StartLineNumber(),
+			node.StartColumnNumber(),
+			node.Type(),
+			node.Content(),
+		)
+	}
 	key := cachepkg.NewKey(node, detectorType, settings.CURSOR_SCOPE, false)
 
 	if detections, cached := cache.Get(key); cached {
+		if log.Trace().Enabled() {
+			log.Trace().Msgf(
+				"detect at node end: %s at %d:%d:%s: %d detections (cached)",
+				detectorType,
+				node.StartLineNumber(),
+				node.StartColumnNumber(),
+				node.Type(),
+				len(detections),
+			)
+		}
+
 		return detections, nil
 	}
 
 	if evaluator.ruleDisabledForNode(detectorType, node) {
+		if log.Trace().Enabled() {
+			log.Trace().Msgf(
+				"detect at node end: %s at %d:%d:%s: rule disabled",
+				detectorType,
+				node.StartLineNumber(),
+				node.StartColumnNumber(),
+				node.Type(),
+			)
+		}
+
 		cache.Put(key, nil)
 		return nil, nil
 	}
@@ -226,6 +288,17 @@ func (evaluator *Evaluator) detectAtNode(
 		return
 	}); err != nil {
 		return nil, err
+	}
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"detect at node end: %s at %d:%d:%s: %d detections",
+			detectorType,
+			node.StartLineNumber(),
+			node.StartColumnNumber(),
+			node.Type(),
+			len(detections),
+		)
 	}
 
 	return detections, nil

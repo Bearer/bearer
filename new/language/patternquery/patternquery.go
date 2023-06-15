@@ -33,7 +33,7 @@ func Compile(
 		return nil, fmt.Errorf("failed to compile: %s, %s -> %s", err, input, builderResult.Query)
 	}
 
-	log.Debug().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
+	log.Trace().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
 
 	return &Query{
 		treeQuery:       treeQuery,

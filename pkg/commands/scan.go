@@ -56,8 +56,13 @@ func NewScanCommand() *cobra.Command {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
 
+			logLevel := viper.GetString(flag.LogLevelFlag.ConfigName)
+			if viper.GetBool(flag.DebugFlag.ConfigName) {
+				logLevel = flag.DebugLogLevel
+			}
+
 			output.Setup(cmd, output.SetupRequest{
-				Debug:     viper.GetBool(flag.DebugFlag.ConfigName),
+				LogLevel:  logLevel,
 				Quiet:     viper.GetBool(flag.QuietFlag.ConfigName),
 				ProcessID: "main",
 			})

@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
@@ -19,8 +20,8 @@ var (
 
 type SetupRequest struct {
 	Quiet     bool
-	Debug     bool
 	ProcessID string
+	LogLevel  string
 }
 
 // DefaultLogger returns default output logger
@@ -54,10 +55,15 @@ func Setup(cmd *cobra.Command, options SetupRequest) {
 
 	log.Logger = log.With().Str("process", options.ProcessID).Logger()
 
-	if options.Debug {
-		zerolog.SetGlobalLevel(zerolog.DebugLevel)
-	} else {
+	switch options.LogLevel {
+	case flag.ErrorLogLevel:
+		zerolog.SetGlobalLevel(zerolog.ErrorLevel)
+	case flag.InfoLogLevel:
 		zerolog.SetGlobalLevel(zerolog.InfoLevel)
+	case flag.DebugLogLevel:
+		zerolog.SetGlobalLevel(zerolog.DebugLevel)
+	case flag.TraceLogLevel:
+		zerolog.SetGlobalLevel(zerolog.TraceLevel)
 	}
 }
 
