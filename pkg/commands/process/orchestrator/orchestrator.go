@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"runtime"
 	"sync"
 
 	"github.com/hhatto/gocloc"
@@ -60,12 +61,15 @@ func newOrchestrator(
 		return nil, ErrFileListEmpty
 	}
 
+	parallel := getParallel(len(files), config)
+	log.Debug().Msgf("number of workers: %d", parallel)
+
 	return &orchestrator{
 		repository:          repository,
 		config:              config,
 		reportFile:          reportFile,
 		files:               files,
-		maxWorkersSemaphore: make(chan struct{}, config.Scan.Parallel),
+		maxWorkersSemaphore: make(chan struct{}, parallel),
 		done:                make(chan struct{}),
 		pool:                pool.New(config),
 		progressBar:         bearerprogress.GetProgressBar(len(files), config, "files"),
@@ -186,4 +190,22 @@ func Scan(repository work.Repository, config settings.Config, goclogResult *gocl
 	err = orchestrator.Scan()
 	orchestrator.Close()
 	return err
+}
+
+func getParallel(fileCount int, config settings.Config) int {
+	if config.Scan.Parallel != 0 {
+		return config.Scan.Parallel
+	}
+
+	result := fileCount / settings.FilesPerWorker
+
+	if result == 0 {
+		return 1
+	}
+
+	if result > runtime.NumCPU() {
+		return runtime.NumCPU()
+	}
+
+	return result
 }

@@ -21,7 +21,7 @@ var (
 	TimeoutWorkerOnline       = 60 * time.Second  // Maximum time to wait for a worker process to come online
 	TimeoutWorkerShutdown     = 5 * time.Second   // Maximum time to wait for a worker process to shut down cleanly
 	FileSizeMaximum           = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
-	FilesToBatch              = 1                 // Specify the number of files to batch per worker
+	FilesPerWorker            = 1000              // By default, start a worker per this many files, up to the number of CPUs
 	MemoryMaximum             = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
 	ExistingWorker            = ""                // Specify the URL of an existing worker
 )
@@ -33,7 +33,6 @@ type WorkerOptions struct {
 	TimeoutFileBytesPerSecond int           `mapstructure:"timeout-file-bytes-per-second" json:"timeout-file-bytes-per-second" yaml:"timeout-file-bytes-per-second"`
 	TimeoutWorkerOnline       time.Duration `mapstructure:"timeout-worker-online" json:"timeout-worker-online" yaml:"timeout-worker-online"`
 	FileSizeMaximum           int           `mapstructure:"file-size-max" json:"file-size-max" yaml:"file-size-max"`
-	FilesToBatch              int           `mapstructure:"files-to-batch" json:"files-to-batch" yaml:"files-to-batch"`
 	MemoryMaximum             int           `mapstructure:"memory-max" json:"memory-max" yaml:"memory-max"`
 	ExistingWorker            string        `mapstructure:"existing-worker" json:"existing-worker" yaml:"existing-worker"`
 }
@@ -262,7 +261,6 @@ func defaultWorkerOptions() WorkerOptions {
 		TimeoutFileMaximum:        TimeoutFileMaximum,
 		TimeoutFileBytesPerSecond: TimeoutFileBytesPerSecond,
 		TimeoutWorkerOnline:       TimeoutWorkerOnline,
-		FilesToBatch:              FilesToBatch,
 		FileSizeMaximum:           FileSizeMaximum,
 		MemoryMaximum:             MemoryMaximum,
 		ExistingWorker:            ExistingWorker,
