@@ -21,7 +21,7 @@
   [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
   [![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
 
-  ☁️ Ready to take the next step? [Learn more about Bearer Cloud](https://www.bearer.com). ☁️
+  ☁️ Ready to take the next step? [Learn more about Bearer Cloud](https://www.bearer.com/bearer-cloud). ☁️
 </div>
 
 ## Developer friendly static code analysis for security and privacy
@@ -41,7 +41,7 @@ And many [more](https://docs.bearer.com/reference/rules/).
 
 Bearer CLI is Open Source ([*see license*](#mortar_board-license)) and fully customizable, from creating your own rules to component detection (database, API) and data classification.
 
-Bearer CLI also powers our commercial offering, [Bearer Cloud](https://www.bearer.com), allowing security teams to scale and monitor their application security program using the same engine.
+Bearer CLI also powers our commercial offering, [Bearer Cloud](https://www.bearer.com/bearer-cloud), allowing security teams to scale and monitor their application security program using the same engine.
 
 ## :rocket: Getting started
 
