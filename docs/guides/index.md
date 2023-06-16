@@ -11,3 +11,4 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 - [Set up CI/CD](/guides/ci-setup/)
 - [Create a custom rule](/guides/custom-rule/)
 - [Run a privacy report](/guides/privacy/)
+- [Connect to Bearer Cloud](/guides/bearer-cloud/)
