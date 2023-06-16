@@ -73,3 +73,7 @@ We recommend using [GitLab's CI/CD variables](https://docs.gitlab.com/ee/ci/vari
 Bearer Cloud automatically captures any scans run with a valid `api-key`. Subsequent scans of the same project will update the existing project entry in the Bearer Cloud dashboard.
 
 ![Cloud dashboard](/assets/img/cloud-dashboard.jpg)
+
+## Make the most of Bearer CLI
+
+Looking for more ways to make the most of Bearer CLI? Browse the guides to learn how to [Configure a scan](/guides/configure-scan/), [create a custom rule](/guides/custom-rule), or [run a privacy report](/guides/privacy/).
