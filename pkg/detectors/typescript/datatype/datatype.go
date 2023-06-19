@@ -122,12 +122,13 @@ func annotateDataTypes(finder *datatype.Finder, node *parser.Node, value *schema
 		name := node.ChildByFieldName("pattern")
 		valueType := node.ChildByFieldName("type")
 
+		if name == nil || name.Type() != "identifier" {
+			return false
+		}
+
 		if valueType == nil {
 			name = node.Child(0)
 			valueType = node.Child(1)
-			if name == nil || name.Type() != "identifier" {
-				return false
-			}
 			if valueType == nil {
 				return false
 			}
@@ -141,12 +142,14 @@ func annotateDataTypes(finder *datatype.Finder, node *parser.Node, value *schema
 		name := node.ChildByFieldName("pattern")
 		valueType := node.ChildByFieldName("type")
 
+		if name == nil || name.Type() != "identifier" {
+			return false
+		}
+
 		if valueType == nil {
 			name = node.Child(0)
 			valueType = node.Child(1)
-			if name == nil || name.Type() != "identifier" {
-				return false
-			}
+
 			if valueType == nil {
 				return false
 			}
