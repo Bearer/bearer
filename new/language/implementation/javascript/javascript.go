@@ -1,6 +1,7 @@
 package javascript
 
 import (
+	"context"
 	"fmt"
 	"regexp"
 	"strings"
@@ -53,10 +54,14 @@ func (implementation *javascriptImplementation) SitterLanguage() *sitter.Languag
 	return tsx.GetLanguage()
 }
 
-func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
+func (*javascriptImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node) error {
 	scope := implementation.NewScope(nil)
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
+		if ctx.Err() != nil {
+			return ctx.Err()
+		}
+
 		switch node.Type() {
 		// () => {}
 		// function getName() {}

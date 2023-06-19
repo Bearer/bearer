@@ -1,6 +1,8 @@
 package base
 
 import (
+	"context"
+
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/patternquery"
 	"github.com/bearer/bearer/new/language/tree"
@@ -15,13 +17,13 @@ func New(implementation implementation.Implementation) *Language {
 	return &Language{implementation: implementation}
 }
 
-func (lang *Language) Parse(input string) (*tree.Tree, error) {
-	tree, err := tree.Parse(lang.implementation.SitterLanguage(), input)
+func (lang *Language) Parse(ctx context.Context, input string) (*tree.Tree, error) {
+	tree, err := tree.Parse(ctx, lang.implementation.SitterLanguage(), input)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := lang.implementation.AnalyzeFlow(tree.RootNode()); err != nil {
+	if err := lang.implementation.AnalyzeFlow(ctx, tree.RootNode()); err != nil {
 		return nil, err
 	}
 

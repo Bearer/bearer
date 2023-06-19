@@ -1,6 +1,7 @@
 package java
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -186,8 +187,12 @@ func (composition *Composition) Close() {
 	}
 }
 
-func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detection.Detection, error) {
+func (composition *Composition) DetectFromFile(
+	ctx context.Context,
+	file *file.FileInfo,
+) ([]*detection.Detection, error) {
 	return composition.DetectFromFileWithTypes(
+		ctx,
 		file,
 		composition.customDetectorTypes,
 		composition.sharedDetectorTypes,
@@ -195,6 +200,7 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectio
 }
 
 func (composition *Composition) DetectFromFileWithTypes(
+	ctx context.Context,
 	file *file.FileInfo,
 	detectorTypes, sharedDetectorTypes []string,
 ) ([]*detection.Detection, error) {
@@ -207,12 +213,13 @@ func (composition *Composition) DetectFromFileWithTypes(
 		return nil, fmt.Errorf("failed to read file %s", err)
 	}
 
-	tree, err := composition.lang.Parse(string(fileContent))
+	tree, err := composition.lang.Parse(ctx, string(fileContent))
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
 	evaluator := evaluator.New(
+		ctx,
 		composition.langImplementation,
 		composition.lang,
 		composition.detectorSet,

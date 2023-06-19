@@ -1,6 +1,7 @@
 package testhelper
 
 import (
+	"context"
 	"os"
 	"path/filepath"
 	"strings"
@@ -118,7 +119,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to get absolute path of report file: %s", err)
 	}
 
-	err = runner.worker.Scan(work.ProcessRequest{
+	err = runner.worker.Scan(context.Background(), work.ProcessRequest{
 		File:       fileRelativePath,
 		ReportPath: detectorsReportPath,
 		Repository: work.Repository{

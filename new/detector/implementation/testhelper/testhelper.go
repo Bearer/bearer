@@ -1,6 +1,7 @@
 package testhelper
 
 import (
+	"context"
 	"fmt"
 	"testing"
 
@@ -51,7 +52,7 @@ func RunTest(
 			tt.Fatalf("failed to create file info for %s: %s", fileName, err)
 		}
 
-		detections, err := composition.DetectFromFileWithTypes(fileInfo, []string{detectorType}, nil)
+		detections, err := composition.DetectFromFileWithTypes(context.Background(), fileInfo, []string{detectorType}, nil)
 		if err != nil {
 			tt.Fatalf("failed to detect: %s", err)
 		}

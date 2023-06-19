@@ -13,7 +13,7 @@ type Tree struct {
 	queryCache   map[int]map[NodeID][]QueryResult
 }
 
-func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
+func Parse(ctx context.Context, sitterLanguage *sitter.Language, input string) (*Tree, error) {
 	inputBytes := []byte(input)
 
 	parser := sitter.NewParser()
@@ -21,7 +21,7 @@ func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
 
 	parser.SetLanguage(sitterLanguage)
 
-	sitterTree, err := parser.ParseCtx(context.TODO(), nil, inputBytes)
+	sitterTree, err := parser.ParseCtx(ctx, nil, inputBytes)
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,7 @@
 package builder
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"strings"
@@ -48,7 +49,7 @@ func Build(
 		return nil, err
 	}
 
-	tree, err := lang.Parse(processedInput)
+	tree, err := lang.Parse(context.TODO(), processedInput)
 	if err != nil {
 		return nil, err
 	}

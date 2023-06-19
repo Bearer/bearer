@@ -1,6 +1,7 @@
 package evaluator
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -19,6 +20,7 @@ import (
 )
 
 type Evaluator struct {
+	ctx                   context.Context
 	langImplementation    implementation.Implementation
 	lang                  languagetypes.Language
 	detectorSet           types.DetectorSet
@@ -29,6 +31,7 @@ type Evaluator struct {
 }
 
 func New(
+	ctx context.Context,
 	langImplementation implementation.Implementation,
 	lang languagetypes.Language,
 	detectorSet types.DetectorSet,
@@ -37,6 +40,7 @@ func New(
 	stats *stats.Stats,
 ) *Evaluator {
 	return &Evaluator{
+		ctx:                   ctx,
 		langImplementation:    langImplementation,
 		lang:                  lang,
 		fileName:              fileName,
@@ -98,6 +102,10 @@ func (evaluator *Evaluator) Evaluate(
 	var nestedMode bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
+		if evaluator.ctx.Err() != nil {
+			return evaluator.ctx.Err()
+		}
+
 		if scope == settings.RESULT_SCOPE && !evaluator.langImplementation.ContributesToResult(node) {
 			return nil
 		}

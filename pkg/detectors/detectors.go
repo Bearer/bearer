@@ -1,6 +1,7 @@
 package detectors
 
 import (
+	"context"
 	"fmt"
 	"path/filepath"
 	"runtime/debug"
@@ -130,15 +131,17 @@ func Registrations(scanners []string) []InitializedDetector {
 }
 
 func Extract(
+	ctx context.Context,
 	path string,
 	files []string,
 	report reporttypes.Report,
 	scanners []string,
 ) error {
-	return ExtractWithDetectors(path, files, report, Registrations(scanners))
+	return ExtractWithDetectors(ctx, path, files, report, Registrations(scanners))
 }
 
 func ExtractWithDetectors(
+	ctx context.Context,
 	rootDir string,
 	files []string,
 	report reporttypes.Report,
@@ -185,13 +188,17 @@ func ExtractWithDetectors(
 
 			log.Debug().Msgf("processing file %s", file.AbsolutePath)
 
-			err := scanner.Detect(report, file)
+			err := scanner.Detect(ctx, report, file)
 			if err != nil {
 				log.Debug().Msgf("failed to process file %s for detector: %s", file.RelativePath, err)
 				report.AddError(file.RelativePath, fmt.Errorf("failed to process file for detector : %s", err))
 			}
 
 			for _, detector := range allDetectors {
+				if ctx.Err() != nil {
+					return ctx.Err()
+				}
+
 				active, isActive := activeDetectors[detector]
 				if !isActive {
 					continue

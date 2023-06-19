@@ -19,14 +19,14 @@ import (
 	"github.com/struCoder/pidusage"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/worker"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 )
 
 var (
-	ErrorCrashed        = errors.New("exited unexpectedly")
-	ErrorNotSpawned     = errors.New("didn't start within expected time")
-	ErrorOutOfMemory    = errors.New("exceeded memory limit")
-	ErrorTimeoutReached = errors.New("file processing time exceeded")
+	ErrorCrashed     = errors.New("exited unexpectedly")
+	ErrorNotSpawned  = errors.New("didn't start within expected time")
+	ErrorOutOfMemory = errors.New("exceeded memory limit")
 )
 
 type Process struct {
@@ -241,7 +241,7 @@ func (process *Process) Scan(scanRequest work.ProcessRequest) (*work.ProcessResp
 		scanComplete <- &scanResponse
 	}()
 
-	timeout := time.NewTimer(scanRequest.File.Timeout)
+	timeout := time.NewTimer(scanRequest.File.Timeout + settings.TimeoutWorkerFileGrace)
 	select {
 	case response := <-scanComplete:
 		return response, nil
@@ -250,7 +250,7 @@ func (process *Process) Scan(scanRequest work.ProcessRequest) (*work.ProcessResp
 		return nil, err
 	case <-timeout.C:
 		process.Close()
-		return nil, ErrorTimeoutReached
+		return nil, worker.ErrorTimeoutReached
 	}
 }
 

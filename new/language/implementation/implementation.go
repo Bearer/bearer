@@ -1,6 +1,8 @@
 package implementation
 
 import (
+	"context"
+
 	sitter "github.com/smacker/go-tree-sitter"
 
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
@@ -17,7 +19,7 @@ type Implementation interface {
 	//   user[:first_name]
 	// the `user` identifier node on lines 2 and 3 will be unified with the
 	// assignment node
-	AnalyzeFlow(rootNode *tree.Node) error
+	AnalyzeFlow(ctx context.Context, rootNode *tree.Node) error
 	// ExtractPatternVariables parses variables from a pattern and returns a new
 	// pattern with the variables replaced with a dummy value, along with a list
 	// of the variables. Dummy values are needed to allow Tree Sitter to parse

@@ -1,6 +1,7 @@
 package scanner
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/bearer/bearer/new/detector/composition"
@@ -63,9 +64,9 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 	return err
 }
 
-func Detect(report report.Report, file *file.FileInfo) (err error) {
+func Detect(ctx context.Context, report report.Report, file *file.FileInfo) (err error) {
 	for _, language := range scanner {
-		detections, err := language.composition.DetectFromFile(file)
+		detections, err := language.composition.DetectFromFile(ctx, file)
 		if err != nil {
 			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
 		}
