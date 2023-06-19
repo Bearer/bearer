@@ -22,10 +22,11 @@ type InputParams struct {
 }
 
 type Result struct {
-	Query           string
-	ParamToVariable map[string]string
-	EqualParams     [][]string
-	ParamToContent  map[string]map[string]string
+	Query              string
+	ParamToVariable    map[string]string
+	EqualParams        [][]string
+	ParamToContent     map[string]map[string]string
+	SingleVariableName string
 }
 
 type builder struct {
@@ -97,6 +98,13 @@ func Build(
 }
 
 func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
+	if rootNode.ChildCount() == 0 {
+		variable := builder.getVariableFor(rootNode)
+		if variable != nil {
+			return &Result{SingleVariableName: variable.Name}, nil
+		}
+	}
+
 	builder.write("(")
 
 	if err := builder.compileNode(rootNode, true, false); err != nil {
