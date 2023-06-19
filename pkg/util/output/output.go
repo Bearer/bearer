@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/rs/zerolog"
@@ -49,11 +50,24 @@ func PlainLogger(out io.Writer) *zerolog.Event {
 	return logger.Info()
 }
 
+func debugLogger(out io.Writer, processID string) zerolog.Logger {
+	baseLogger := log.Output(zerolog.ConsoleWriter{
+		Out:     out,
+		NoColor: true,
+		FormatTimestamp: func(i interface{}) string {
+			timestamp, _ := time.Parse(time.RFC3339, i.(string))
+			return timestamp.Format("2006-01-02 15:04:05")
+		},
+	})
+
+	return baseLogger.With().Str("process", processID).Logger()
+}
+
 func Setup(cmd *cobra.Command, options SetupRequest) {
 	outputWriter = cmd.OutOrStdout()
 	ErrorWriter = cmd.ErrOrStderr()
 
-	log.Logger = log.With().Str("process", options.ProcessID).Logger()
+	log.Logger = debugLogger(ErrorWriter, options.ProcessID)
 
 	switch options.LogLevel {
 	case flag.ErrorLogLevel:
