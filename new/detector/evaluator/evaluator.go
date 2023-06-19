@@ -3,9 +3,11 @@ package evaluator
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/bearer/bearer/new/detector/detection"
 	cachepkg "github.com/bearer/bearer/new/detector/evaluator/cache"
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/tree"
@@ -20,6 +22,7 @@ type Evaluator struct {
 	langImplementation    implementation.Implementation
 	lang                  languagetypes.Language
 	detectorSet           types.DetectorSet
+	stats                 *stats.Stats
 	executingDetectors    map[langtree.NodeID][]string
 	fileName              string
 	rulesDisabledForNodes map[string][]*langtree.Node
@@ -31,12 +34,14 @@ func New(
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
 	fileName string,
+	stats *stats.Stats,
 ) *Evaluator {
 	return &Evaluator{
 		langImplementation:    langImplementation,
 		lang:                  lang,
 		fileName:              fileName,
 		detectorSet:           detectorSet,
+		stats:                 stats,
 		executingDetectors:    make(map[langtree.NodeID][]string),
 		rulesDisabledForNodes: mapNodesToDisabledRules(tree.RootNode()),
 	}
@@ -53,6 +58,8 @@ func (evaluator *Evaluator) Evaluate(
 		return nil, nil
 	}
 
+	startTime := time.Now()
+
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
 			"evaluate start: %d:%d:%s:\n%s",
@@ -66,6 +73,9 @@ func (evaluator *Evaluator) Evaluate(
 	key := cachepkg.NewKey(rootNode, detectorType, scope, followFlow)
 
 	if detections, cached := cache.Get(key); cached {
+		if evaluator.stats != nil {
+			evaluator.stats.Record(detectorType, startTime)
+		}
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
 				"evaluate end: %d:%d:%s: %d detections (cached)",
@@ -132,6 +142,9 @@ func (evaluator *Evaluator) Evaluate(
 
 	cache.Put(key, result)
 
+	if evaluator.stats != nil {
+		evaluator.stats.Record(detectorType, startTime)
+	}
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
 			"evaluate end: %d:%d:%s: %d detections",

@@ -10,12 +10,14 @@ import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/evaluator"
 	cachepkg "github.com/bearer/bearer/new/detector/evaluator/cache"
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/new/detector/implementation/custom"
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
 	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
 	"github.com/bearer/bearer/new/detector/implementation/ruby/object"
 	"github.com/bearer/bearer/new/language"
+	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -38,9 +40,14 @@ type Composition struct {
 	lang                languagetypes.Language
 	closers             []func()
 	rules               map[string]*settings.Rule
+	stats               *stats.Stats
 }
 
-func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
+func New(
+	debugProfile bool,
+	rules map[string]*settings.Rule,
+	classifier *classification.Classifier,
+) (detectortypes.Composition, error) {
 	lang, err := language.Get("ruby")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
@@ -49,6 +56,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	composition := &Composition{
 		langImplementation: ruby.Get(),
 		lang:               lang,
+	}
+
+	if debugProfile {
+		composition.stats = stats.New()
 	}
 
 	staticDetectors := []struct {
@@ -165,6 +176,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 }
 
 func (composition *Composition) Close() {
+	if composition.stats != nil {
+		log.Debug().Msgf("ruby stats:\n%s", composition.stats)
+	}
+
 	for _, closeFunc := range composition.closers {
 		closeFunc()
 	}
@@ -202,6 +217,7 @@ func (composition *Composition) DetectFromFileWithTypes(
 		composition.detectorSet,
 		tree,
 		file.FileInfo.Name(),
+		composition.stats,
 	)
 
 	sharedCache := cachepkg.NewShared(sharedDetectorTypes)

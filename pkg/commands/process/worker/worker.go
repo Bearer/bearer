@@ -120,6 +120,8 @@ func Start(port string) error {
 			log.Debug().Msgf("error shutting down server: %s", err)
 		}
 
+		customdetector.Close()
+
 		close(done)
 	}()
 
