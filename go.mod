@@ -26,7 +26,7 @@ require (
 	github.com/struCoder/pidusage v0.2.1
 	github.com/tangzero/inflector v1.0.0
 	github.com/weppos/publicsuffix-go v0.30.0
-	github.com/zricethezav/gitleaks/v8 v8.16.4
+	github.com/zricethezav/gitleaks/v8 v8.17.0
 	golang.org/x/exp v0.0.0-20230304125523-9ff063c70017
 	golang.org/x/mod v0.10.0
 	golang.org/x/net v0.11.0
@@ -50,7 +50,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
-	github.com/muesli/termenv v0.14.0 // indirect
+	github.com/muesli/termenv v0.15.1 // indirect
 	github.com/petar-dambovaliev/aho-corasick v0.0.0-20211021192214-5ab2d9280aa9 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
@@ -68,7 +68,7 @@ require (
 	github.com/Microsoft/go-winio v0.6.0 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20230518184743-7afd39499903 // indirect
 	github.com/acomagu/bufpipe v1.0.4 // indirect
-	github.com/aymanbagabas/go-osc52 v1.2.2 // indirect
+	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cloudflare/circl v1.3.3 // indirect
