@@ -28,10 +28,9 @@ func (detector *insecureURLDetector) Name() string {
 
 func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
-	_ settings.RuleReferenceScope,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	detections, err := evaluator.Evaluate(node, "string", "", settings.CURSOR_SCOPE, false)
+	detections, err := evaluationState.Evaluate(node, "string", "", settings.CURSOR_SCOPE, false)
 	if err != nil {
 		return nil, err
 	}

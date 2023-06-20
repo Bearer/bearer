@@ -1,6 +1,7 @@
 package scanner
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -11,6 +12,7 @@ import (
 )
 
 func Scan(
+	ctx context.Context,
 	rootDir string,
 	FilesToScan []string,
 	blamer blamer.Blamer,
@@ -31,7 +33,7 @@ func Scan(
 		File:       file,
 	}
 
-	if err := detectors.Extract(rootDir, FilesToScan, &rep, scanners); err != nil {
+	if err := detectors.Extract(ctx, rootDir, FilesToScan, &rep, scanners); err != nil {
 		return err
 	}
 

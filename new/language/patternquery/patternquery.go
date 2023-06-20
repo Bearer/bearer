@@ -11,10 +11,11 @@ import (
 )
 
 type Query struct {
-	treeQuery       *tree.Query
-	paramToVariable map[string]string
-	equalParams     [][]string
-	paramToContent  map[string]map[string]string
+	treeQuery          *tree.Query
+	paramToVariable    map[string]string
+	equalParams        [][]string
+	paramToContent     map[string]map[string]string
+	singleVariableName string
 }
 
 func Compile(
@@ -28,12 +29,17 @@ func Compile(
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}
 
+	if builderResult.Query == "" {
+		log.Trace().Msgf("single variable pattern %s -> %s", input, builderResult.SingleVariableName)
+		return &Query{singleVariableName: builderResult.SingleVariableName}, nil
+	}
+
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
 	if err != nil {
 		return nil, fmt.Errorf("failed to compile: %s, %s -> %s", err, input, builderResult.Query)
 	}
 
-	log.Debug().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
+	log.Trace().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
 
 	return &Query{
 		treeQuery:       treeQuery,
@@ -44,6 +50,16 @@ func Compile(
 }
 
 func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error) {
+	if query.singleVariableName != "" {
+		variables := make(tree.QueryResult)
+		variables[query.singleVariableName] = node
+
+		return []*languagetypes.PatternQueryResult{{
+			MatchNode: node,
+			Variables: variables,
+		}}, nil
+	}
+
 	treeResults, err := query.treeQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
@@ -62,6 +78,16 @@ func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResul
 }
 
 func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error) {
+	if query.singleVariableName != "" {
+		variables := make(tree.QueryResult)
+		variables[query.singleVariableName] = node
+
+		return &languagetypes.PatternQueryResult{
+			MatchNode: node,
+			Variables: variables,
+		}, nil
+	}
+
 	treeResult, err := query.treeQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
@@ -71,7 +97,9 @@ func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryRes
 }
 
 func (query *Query) Close() {
-	query.treeQuery.Close()
+	if query.treeQuery != nil {
+		query.treeQuery.Close()
+	}
 }
 
 func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, rootNode *tree.Node) *languagetypes.PatternQueryResult {

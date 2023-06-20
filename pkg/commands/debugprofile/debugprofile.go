@@ -43,4 +43,6 @@ func Stop() {
 	log.Debug().Msg("stopping cpu profiling")
 	pprof.StopCPUProfile()
 	file.Close()
+
+	file = nil
 }

@@ -1,6 +1,7 @@
 package javascript
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -10,9 +11,13 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/composition/types"
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/evaluator"
+	cachepkg "github.com/bearer/bearer/new/detector/evaluator/cache"
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/new/detector/implementation/custom"
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
@@ -30,14 +35,20 @@ import (
 
 type Composition struct {
 	customDetectorTypes []string
+	sharedDetectorTypes []string
 	detectorSet         detectortypes.DetectorSet
 	langImplementation  implementation.Implementation
 	lang                languagetypes.Language
 	closers             []func()
 	rules               map[string]*settings.Rule
+	stats               *stats.Stats
 }
 
-func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
+func New(
+	debugProfile bool,
+	rules map[string]*settings.Rule,
+	classifier *classification.Classifier,
+) (detectortypes.Composition, error) {
 	lang, err := language.Get("javascript")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
@@ -46,6 +57,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	composition := &Composition{
 		langImplementation: javascript.Get(),
 		lang:               lang,
+	}
+
+	if debugProfile {
+		composition.stats = stats.New()
 	}
 
 	staticDetectors := []struct {
@@ -118,8 +133,12 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 		patterns := rule.Patterns
 		localRuleName := ruleName
 
-		if (!rule.IsAuxilary && rule.Type != customdetectors.TypeShared) || presenceRules[ruleName] {
-			composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+		if rule.Type == customdetectors.TypeShared {
+			composition.sharedDetectorTypes = append(composition.sharedDetectorTypes, ruleName)
+		} else {
+			if !rule.IsAuxilary || presenceRules[ruleName] {
+				composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
+			}
 		}
 
 		go func() {
@@ -159,16 +178,32 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 }
 
 func (composition *Composition) Close() {
+	if composition.stats != nil {
+		log.Debug().Msgf("javascript stats:\n%s", composition.stats)
+	}
+
 	for _, closeFunc := range composition.closers {
 		closeFunc()
 	}
 }
 
-func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.Detection, error) {
-	return composition.DetectFromFileWithTypes(file, composition.customDetectorTypes)
+func (composition *Composition) DetectFromFile(
+	ctx context.Context,
+	file *file.FileInfo,
+) ([]*detection.Detection, error) {
+	return composition.DetectFromFileWithTypes(
+		ctx,
+		file,
+		composition.customDetectorTypes,
+		composition.sharedDetectorTypes,
+	)
 }
 
-func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
+func (composition *Composition) DetectFromFileWithTypes(
+	ctx context.Context,
+	file *file.FileInfo,
+	detectorTypes, sharedDetectorTypes []string,
+) ([]*detection.Detection, error) {
 	if file.Language != "JavaScript" && file.Language != "TypeScript" && file.Language != "TSX" {
 		return nil, nil
 	}
@@ -178,21 +213,26 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 		return nil, fmt.Errorf("failed to read file %s", err)
 	}
 
-	tree, err := composition.lang.Parse(string(fileContent))
+	tree, err := composition.lang.Parse(ctx, string(fileContent))
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
 	evaluator := evaluator.New(
+		ctx,
 		composition.langImplementation,
 		composition.lang,
 		composition.detectorSet,
 		tree,
 		file.FileInfo.Name(),
+		composition.stats,
 	)
 
-	var result []*detectortypes.Detection
+	sharedCache := cachepkg.NewShared(sharedDetectorTypes)
+
+	var result []*detection.Detection
 	for _, detectorType := range detectorTypes {
+		cache := cachepkg.NewCache(sharedCache)
 		rule := composition.rules[detectorType]
 		sanitizerRuleID := ""
 		if rule != nil {
@@ -202,6 +242,7 @@ func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, det
 			tree.RootNode(),
 			detectorType,
 			sanitizerRuleID,
+			cache,
 			settings.DefaultScope,
 			false,
 		)

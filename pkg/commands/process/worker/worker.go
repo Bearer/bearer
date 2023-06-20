@@ -3,6 +3,7 @@ package worker
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net"
 	"os"
 	"os/signal"
@@ -12,6 +13,7 @@ import (
 
 	customdetector "github.com/bearer/bearer/new/scanner"
 	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	config "github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/blamer"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
@@ -20,6 +22,8 @@ import (
 	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 )
+
+var ErrorTimeoutReached = errors.New("file processing time exceeded")
 
 type Worker struct {
 	classifer *classification.Classifier
@@ -51,10 +55,11 @@ func (worker *Worker) Setup(config config.Config) error {
 	return nil
 }
 
-func (worker *Worker) Scan(scanRequest work.ProcessRequest) error {
+func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest) error {
 	blamer := blamer.New(scanRequest.Dir, scanRequest.BlameRevisionsFilePath, scanRequest.PreviousCommitSHA)
 
 	return scanner.Scan(
+		ctx,
 		scanRequest.Dir,
 		[]string{scanRequest.File.FilePath},
 		blamer,
@@ -97,10 +102,16 @@ func Start(port string) error {
 
 				response := work.ProcessResponse{}
 
-				err := worker.Scan(scanRequest)
-				if err != nil {
+				scanCtx, cancelScan := context.WithTimeout(ctx, scanRequest.File.Timeout)
+
+				err := worker.Scan(scanCtx, scanRequest)
+				if scanCtx.Err() != nil {
+					response.Error = ErrorTimeoutReached.Error()
+				} else if err != nil {
 					response.Error = err.Error()
 				}
+
+				cancelScan()
 
 				json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 			default:
@@ -113,9 +124,13 @@ func Start(port string) error {
 	go func() {
 		<-ctx.Done()
 
+		debugprofile.Stop()
+
 		if err := server.Shutdown(context.Background()); err != nil {
 			log.Debug().Msgf("error shutting down server: %s", err)
 		}
+
+		customdetector.Close()
 
 		close(done)
 	}()

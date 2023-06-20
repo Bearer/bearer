@@ -1,6 +1,7 @@
 package testhelper
 
 import (
+	"context"
 	"fmt"
 	"testing"
 
@@ -22,7 +23,7 @@ type result struct {
 func RunTest(
 	t *testing.T,
 	name string,
-	compositionInstantiator func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error),
+	compositionInstantiator func(bool, map[string]*settings.Rule, *classification.Classifier) (types.Composition, error),
 	detectorType string,
 	fileName string,
 ) {
@@ -40,7 +41,7 @@ func RunTest(
 			tt.Fatalf("failed to create classifier: %s", err)
 		}
 
-		composition, err := compositionInstantiator(make(map[string]*settings.Rule), classifier)
+		composition, err := compositionInstantiator(false, make(map[string]*settings.Rule), classifier)
 		if err != nil {
 			tt.Fatalf("failed to create composition: %s", err)
 		}
@@ -51,7 +52,7 @@ func RunTest(
 			tt.Fatalf("failed to create file info for %s: %s", fileName, err)
 		}
 
-		detections, err := composition.DetectFromFileWithTypes(fileInfo, []string{detectorType})
+		detections, err := composition.DetectFromFileWithTypes(context.Background(), fileInfo, []string{detectorType}, nil)
 		if err != nil {
 			tt.Fatalf("failed to detect: %s", err)
 		}

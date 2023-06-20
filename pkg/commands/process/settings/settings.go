@@ -18,6 +18,7 @@ var (
 	TimeoutFileMinimum        = 5 * time.Second   // Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
 	TimeoutFileMaximum        = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
 	TimeoutFileBytesPerSecond = 1 * 1000          // 1 Kb/s minimum number of bytes per second allowed to scan a file
+	TimeoutWorkerFileGrace    = 5 * time.Second   // Grace period to allow a worker to timeout on it's own
 	TimeoutWorkerOnline       = 60 * time.Second  // Maximum time to wait for a worker process to come online
 	TimeoutWorkerShutdown     = 5 * time.Second   // Maximum time to wait for a worker process to shut down cleanly
 	FileSizeMaximum           = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value

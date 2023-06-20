@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/language/tree"
 )
 
@@ -15,7 +15,7 @@ type Object struct {
 type Property struct {
 	Name   string
 	Node   *tree.Node
-	Object *types.Detection
+	Object *detection.Detection
 }
 
 type String struct {

@@ -1,6 +1,7 @@
 package java
 
 import (
+	"context"
 	"fmt"
 	"regexp"
 	"strings"
@@ -53,10 +54,14 @@ func (implementation *javaImplementation) SitterLanguage() *sitter.Language {
 	return java.GetLanguage()
 }
 
-func (*javaImplementation) AnalyzeFlow(rootNode *tree.Node) error {
+func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node) error {
 	scope := implementation.NewScope(nil)
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
+		if ctx.Err() != nil {
+			return ctx.Err()
+		}
+
 		switch node.Type() {
 		// public class Main {
 		//

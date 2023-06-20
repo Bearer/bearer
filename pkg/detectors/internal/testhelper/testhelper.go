@@ -1,6 +1,7 @@
 package testhelper
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -51,7 +52,7 @@ func Extract(
 		t.Errorf("report has errored %s", err)
 	}
 
-	err = detectors.ExtractWithDetectors(path, files, &report, registrations)
+	err = detectors.ExtractWithDetectors(context.Background(), path, files, &report, registrations)
 	if len(report.Errors) > 0 {
 		t.Errorf("report has some errors %#v", report.Errors)
 	}

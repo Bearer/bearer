@@ -11,29 +11,29 @@ import (
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	objects, err := detector.getMemberExpressionProjections(node, evaluator)
+	objects, err := detector.getMemberExpressionProjections(node, evaluationState)
 	if len(objects) != 0 || err != nil {
 		return objects, err
 	}
 
-	objects, err = detector.getSubscriptExpressionProjections(node, evaluator)
+	objects, err = detector.getSubscriptExpressionProjections(node, evaluationState)
 	if len(objects) != 0 || err != nil {
 		return objects, err
 	}
 
-	objects, err = detector.getCallProjections(node, evaluator)
+	objects, err = detector.getCallProjections(node, evaluationState)
 	if len(objects) != 0 || err != nil {
 		return objects, err
 	}
 
-	return detector.getObjectDeconstructionProjections(node, evaluator)
+	return detector.getObjectDeconstructionProjections(node, evaluationState)
 }
 
 func (detector *objectDetector) getMemberExpressionProjections(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.memberExpressionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
@@ -44,7 +44,7 @@ func (detector *objectDetector) getMemberExpressionProjections(
 
 	objects, err := generic.ProjectObject(
 		node,
-		evaluator,
+		evaluationState,
 		objectNode,
 		getObjectName(objectNode),
 		result["property"].Content(),
@@ -59,7 +59,7 @@ func (detector *objectDetector) getMemberExpressionProjections(
 
 func (detector *objectDetector) getSubscriptExpressionProjections(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.subscriptExpressionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
@@ -74,7 +74,7 @@ func (detector *objectDetector) getSubscriptExpressionProjections(
 
 	objects, err := generic.ProjectObject(
 		node,
-		evaluator,
+		evaluationState,
 		objectNode,
 		getObjectName(objectNode),
 		propertyName,
@@ -89,7 +89,7 @@ func (detector *objectDetector) getSubscriptExpressionProjections(
 
 func (detector *objectDetector) getCallProjections(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.callQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
@@ -98,7 +98,7 @@ func (detector *objectDetector) getCallProjections(
 
 	var properties []generictypes.Property
 
-	functionDetections, err := evaluator.Evaluate(result["function"], "object", "", settings.NESTED_SCOPE, true)
+	functionDetections, err := evaluationState.Evaluate(result["function"], "object", "", settings.NESTED_SCOPE, true)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func (detector *objectDetector) getCallProjections(
 
 func (detector *objectDetector) getObjectDeconstructionProjections(
 	node *tree.Node,
-	evaluator types.Evaluator,
+	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.objectDeconstructionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
@@ -127,7 +127,7 @@ func (detector *objectDetector) getObjectDeconstructionProjections(
 
 	objects, err := generic.ProjectObject(
 		node,
-		evaluator,
+		evaluationState,
 		objectNode,
 		getObjectName(objectNode),
 		propertyName,

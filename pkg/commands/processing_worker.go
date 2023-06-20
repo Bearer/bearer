@@ -27,7 +27,7 @@ func NewProcessingWorkerCommand() *cobra.Command {
 			}
 
 			output.Setup(cmd, output.SetupRequest{
-				Debug:     viper.GetBool(flag.DebugFlag.ConfigName),
+				LogLevel:  viper.GetString(flag.LogLevelFlag.ConfigName),
 				Quiet:     viper.GetBool(flag.QuietFlag.ConfigName),
 				ProcessID: viper.GetString(flag.WorkerIDFlag.ConfigName),
 			})
@@ -44,7 +44,6 @@ func NewProcessingWorkerCommand() *cobra.Command {
 			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
 
 			err = worker.Start(processOptions.Port)
-			debugprofile.Stop()
 			return err
 		},
 		Hidden:        true,

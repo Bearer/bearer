@@ -3,9 +3,9 @@ package set
 import (
 	"fmt"
 
+	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
 
 type set struct {
@@ -42,22 +42,21 @@ func (set *set) NestedDetections(detectorType string) (bool, error) {
 func (set *set) DetectAt(
 	node *tree.Node,
 	detectorType string,
-	ruleReferenceType settings.RuleReferenceScope,
-	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+	evaluationState types.EvaluationState,
+) ([]*detection.Detection, error) {
 	detector, err := set.lookupDetector(detectorType)
 	if err != nil {
 		return nil, err
 	}
 
-	detectionsData, err := detector.DetectAt(node, ruleReferenceType, evaluator)
+	detectionsData, err := detector.DetectAt(node, evaluationState)
 	if err != nil {
 		return nil, err
 	}
 
-	detections := make([]*types.Detection, len(detectionsData))
+	detections := make([]*detection.Detection, len(detectionsData))
 	for i, data := range detectionsData {
-		detections[i] = &types.Detection{
+		detections[i] = &detection.Detection{
 			DetectorType: detectorType,
 			MatchNode:    node,
 			Data:         data,
