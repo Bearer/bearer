@@ -202,6 +202,7 @@ type PatternFilter struct {
 	Variable  string             `mapstructure:"variable" json:"variable" yaml:"variable"`
 	Detection string             `mapstructure:"detection" json:"detection" yaml:"detection"`
 	Scope     RuleReferenceScope `mapstructure:"scope" json:"scope" yaml:"scope"`
+	Filters   []PatternFilter    `mapstructure:"filters" json:"filters" yaml:"filters"`
 	// Contains is deprecated in favour of Scope
 	Contains           *bool    `mapstructure:"contains" json:"contains" yaml:"contains"`
 	Regex              *Regexp  `mapstructure:"regex" json:"regex" yaml:"regex"`

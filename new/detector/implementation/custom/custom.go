@@ -80,7 +80,7 @@ func (detector *customDetector) DetectAt(
 		for _, result := range results {
 			filtersMatch, datatypeDetections, variableNodes, err := matchAllFilters(
 				evaluationState,
-				result,
+				result.Variables,
 				pattern.Filters,
 				detector.rules,
 			)

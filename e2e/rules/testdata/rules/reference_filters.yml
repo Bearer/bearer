@@ -1,0 +1,23 @@
+languages:
+  - ruby
+patterns:
+  - pattern: $<AUX>
+    filters:
+      - variable: AUX
+        detection: reference_filters_test_foo
+        scope: cursor
+        filters:
+          - variable: RECEIVER
+            values:
+              - x
+auxiliary:
+  - id: reference_filters_test_foo
+    patterns:
+      - $<RECEIVER>.foo
+severity: high
+metadata:
+  description: Test rule reference filters
+  remediation_message: Test rule reference filters
+  cwe_id:
+    - 42
+  id: reference_filters_test
