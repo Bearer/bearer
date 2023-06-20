@@ -155,14 +155,21 @@ func ConcatenateAssignEquals(node *tree.Node, evaluationState types.EvaluationSt
 	if err != nil {
 		return nil, err
 	}
-	if left == "" && !leftIsLiteral {
-		left = "*"
-	}
 
 	right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), evaluationState)
 	if err != nil {
 		return nil, err
 	}
+
+	if left == "" && !leftIsLiteral {
+		left = "*"
+
+		// No detection when neither parts are a string
+		if right == "" && !rightIsLiteral {
+			return nil, nil
+		}
+	}
+
 	if right == "" && !rightIsLiteral {
 		right = "*"
 	}

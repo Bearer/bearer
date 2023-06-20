@@ -14,6 +14,7 @@ func TestRubyObjectDetector(t *testing.T) {
 }
 
 func TestRubyStringDetector(t *testing.T) {
+	runTest(t, "string_assign_eq", "string", "testdata/string_assign_eq.rb")
 	runTest(t, "string_literal", "string", "testdata/string_literal.rb")
 	runTest(t, "string_non_literal", "string", "testdata/string_non_literal.rb")
 }
