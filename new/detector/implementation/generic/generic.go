@@ -102,7 +102,11 @@ func GetStringValue(node *tree.Node, evaluationState types.EvaluationState) (str
 
 		return childString.Value, childString.IsLiteral, nil
 	default:
-		return "", false, fmt.Errorf("expected single string detection but got %d", len(detections))
+		return "", false, fmt.Errorf(
+			"expected single string detection but got %d for %s",
+			len(detections),
+			node.Debug(true),
+		)
 	}
 }
 
@@ -135,5 +139,43 @@ func ConcatenateChildStrings(node *tree.Node, evaluationState types.EvaluationSt
 	return []interface{}{generictypes.String{
 		Value:     value,
 		IsLiteral: isLiteral,
+	}}, nil
+}
+
+func ConcatenateAssignEquals(node *tree.Node, evaluationState types.EvaluationState) ([]interface{}, error) {
+	unifiedNodes := node.ChildByFieldName("left").UnifiedNodes()
+	if len(unifiedNodes) == 0 {
+		return nil, nil
+	}
+	if len(unifiedNodes) != 1 {
+		return nil, fmt.Errorf("expected exactly one unified `+=` node but got %d", len(unifiedNodes))
+	}
+
+	left, leftIsLiteral, err := GetStringValue(unifiedNodes[0], evaluationState)
+	if err != nil {
+		return nil, err
+	}
+
+	right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), evaluationState)
+	if err != nil {
+		return nil, err
+	}
+
+	if left == "" && !leftIsLiteral {
+		left = "*"
+
+		// No detection when neither parts are a string
+		if right == "" && !rightIsLiteral {
+			return nil, nil
+		}
+	}
+
+	if right == "" && !rightIsLiteral {
+		right = "*"
+	}
+
+	return []interface{}{generictypes.String{
+		Value:     left + right,
+		IsLiteral: leftIsLiteral && rightIsLiteral,
 	}}, nil
 }

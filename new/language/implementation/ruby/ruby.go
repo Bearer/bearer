@@ -18,7 +18,7 @@ import (
 )
 
 var (
-	variableLookupParents = []string{"pair", "argument_list", "interpolation", "array", "binary"}
+	variableLookupParents = []string{"pair", "argument_list", "interpolation", "array", "binary", "operator_assignment"}
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
 	patternMatchNodeContainerTypes  = []string{"argument_list", "keyword_parameter", "optional_parameter"}
@@ -70,6 +70,16 @@ func (*rubyImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 
 				return err
 			}
+		// x += y
+		case "operator_assignment":
+			err := visitChildren()
+
+			left := node.ChildByFieldName("left")
+			if left.Type() == "identifier" {
+				scope.Assign(left.Content(), node)
+			}
+
+			return err
 		case "identifier":
 			parent := node.Parent()
 			if parent == nil {

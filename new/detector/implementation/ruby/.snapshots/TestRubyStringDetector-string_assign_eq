@@ -1,0 +1,21 @@
+- position: "1:5"
+  content: '"a"'
+  data:
+    value: a
+    isliteral: true
+- position: "2:1"
+  content: x += "b"
+  data:
+    value: ab
+    isliteral: true
+- position: "3:1"
+  content: x += name
+  data:
+    value: ab*
+    isliteral: false
+- position: "6:1"
+  content: y += "c"
+  data:
+    value: '*c'
+    isliteral: false
+

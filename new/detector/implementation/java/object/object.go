@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
@@ -72,8 +71,6 @@ func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	log.Debug().Msgf("node is %s", node.Debug())
-
 	detections, err := detector.getAssignment(node, evaluationState)
 	if len(detections) != 0 || err != nil {
 		return detections, err

@@ -15,6 +15,7 @@ func TestJavascriptObjectDetector(t *testing.T) {
 }
 
 func TestJavascriptStringDetector(t *testing.T) {
+	runTest(t, "string_assign_eq", "string", "testdata/string_assign_eq.js")
 	runTest(t, "string_literal", "string", "testdata/string_literal.js")
 	runTest(t, "string_non_literal", "string", "testdata/string_non_literal.js")
 }

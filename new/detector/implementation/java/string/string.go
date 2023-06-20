@@ -36,8 +36,13 @@ func (detector *stringDetector) DetectAt(
 		if node.AnonymousChild(0).Content() == "+" {
 			return generic.ConcatenateChildStrings(node, evaluationState)
 		}
+	case "assignment_expression":
+		if node.AnonymousChild(0).Content() == "+=" {
+			return generic.ConcatenateAssignEquals(node, evaluationState)
+		}
 	}
 
 	return nil, nil
 }
+
 func (detector *stringDetector) Close() {}

@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bradleyjkemp/cupaloy"
+	"github.com/rs/zerolog"
 	"gopkg.in/yaml.v3"
 )
 
@@ -27,6 +28,8 @@ func RunTest(
 	detectorType string,
 	fileName string,
 ) {
+	zerolog.SetGlobalLevel(zerolog.InfoLevel)
+
 	t.Run(name, func(tt *testing.T) {
 		classifier, err := classification.NewClassifier(&classification.Config{
 			Config: settings.Config{

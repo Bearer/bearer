@@ -89,17 +89,20 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 			return err
 		// user = ...
 		case "assignment_expression":
+			err := visitChildren()
+
 			left := node.ChildByFieldName("left")
 			right := node.ChildByFieldName("right")
 
-			if left.Type() == "identifier" {
-				err := visitChildren()
-
-				scope.Assign(left.Content(), node)
+			if node.AnonymousChild(0).Content() == "=" {
 				node.UnifyWith(right)
-
-				return err
 			}
+
+			if left.Type() == "identifier" {
+				scope.Assign(left.Content(), node)
+			}
+
+			return err
 		case "field_declaration":
 			declarator := node.ChildByFieldName("declarator")
 			if declarator != nil {
@@ -137,6 +140,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 			// a = user.name()
 			// var a = user
 			// a = user
+			// a += user
 			// user["name"] = name;
 			// todo: new expression
 			if slice.Contains(variableLookupParents, parent.Type()) ||
@@ -145,6 +149,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				(parent.Type() == "field_access" && node.Equal(parent.ChildByFieldName("object"))) ||
 				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
 				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
+				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("left")) && parent.AnonymousChild(0).Content() != "=") ||
 				(parent.Type() == "array_access" && node.Equal(parent.ChildByFieldName("right"))) {
 				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
@@ -332,9 +337,9 @@ func (*javaImplementation) ContributesToResult(node *tree.Node) bool {
 		return false
 	}
 
-	// Not the left part of an assignment
+	// Not the left part of an `=` assignment
 	if parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("left")) {
-		return false
+		return parent.AnonymousChild(0).Content() != "="
 	}
 
 	return true

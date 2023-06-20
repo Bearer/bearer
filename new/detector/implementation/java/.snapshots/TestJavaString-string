@@ -8,4 +8,24 @@
   data:
     value: Hello World!
     isliteral: true
+- position: "7:5"
+  content: s += "!!"
+  data:
+    value: Hello World!!!
+    isliteral: true
+- position: "9:17"
+  content: '"hey "'
+  data:
+    value: 'hey '
+    isliteral: true
+- position: "10:5"
+  content: s2 += args[0]
+  data:
+    value: hey *
+    isliteral: false
+- position: "11:5"
+  content: s2 += " there"
+  data:
+    value: hey * there
+    isliteral: false
 
