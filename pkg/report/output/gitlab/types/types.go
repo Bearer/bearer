@@ -4,8 +4,8 @@ type Vulnerability struct {
 	Id                   string               `json:"id"`                 // fingerprint?
 	Category             string               `json:"category,omitempty"` // sast?
 	Name                 string               `json:"name"`               // The name of the vulnerability. This must not include the finding's specific information.
-	Message              string               `json:"message"`
 	Description          string               `json:"description"`
+	Solution             string               `json:"solution"`
 	CVE                  string               `json:"cve,omitempty"`
 	Severity             string               `json:"severity"`   // Info, Unknown, Low, Medium, High, or Critical.
 	Confidence           string               `json:"confidence"` // Unknown
@@ -16,9 +16,10 @@ type Vulnerability struct {
 }
 
 type Identifier struct {
-	Type  string `json:"type"`  // Rule ID
-	Name  string `json:"name"`  // Rule Name: Human-readable name of the identifier.
-	Value string `json:"value"` // ?? Value of the identifier, for matching purpose.
+	Type  string `json:"type"`  // type like cwe cve we use bearer for our rules
+	Name  string `json:"name"`  // Human-readable name of the identifier.
+	Value string `json:"value"` // id for so for cwe this would be 123
+	Url   string `json:"url"`   // link to documenation
 }
 
 type VulnerabilityScanner struct {
@@ -45,6 +46,7 @@ type Vendor struct {
 type Location struct {
 	File      string `json:"file"`
 	Startline int    `json:"start_line"`
+	Endline   int    `json:"end_line"`
 	// Commit Commit `json:"commit"`
 }
 

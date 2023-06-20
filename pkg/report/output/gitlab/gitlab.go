@@ -1,6 +1,7 @@
 package gitlab
 
 import (
+	"fmt"
 	"strings"
 	"time"
 
@@ -18,13 +19,29 @@ func ReportGitLab(
 	for _, level := range []string{"critical", "high", "medium", "low", "warning"} {
 		if findings, ok := (*outputDetections)[level]; ok {
 			for _, finding := range findings {
+				identifiers := []gitlab.Identifier{
+					{
+						Type:  "bearer",
+						Name:  finding.Rule.Id,
+						Value: finding.Rule.Id,
+						Url:   finding.Rule.DocumentationUrl,
+					},
+				}
+				for _, cwe := range finding.CWEIDs {
+					identifiers = append(identifiers, gitlab.Identifier{
+						Type:  "cwe",
+						Name:  "CWE-" + cwe,
+						Value: cwe,
+						Url:   fmt.Sprintf("https://cwe.mitre.org/data/definitions/%s.html", cwe),
+					})
+				}
+
 				vulnerabilities = append(vulnerabilities, gitlab.Vulnerability{
-					Id:          finding.Fingerprint,
-					Category:    "sast",
-					Name:        finding.Rule.Title,
-					Message:     finding.Description,
-					Description: finding.Description,
-					// CVE:                  "",
+					Id:                   finding.Fingerprint,
+					Category:             "sast",
+					Name:                 finding.Rule.Title,
+					Description:          extractDescription(finding.Description),
+					Solution:             extractSolution(finding.Description),
 					Severity:             formatSeverity(level), // level,
 					Confidence:           "Unknown",
 					RawSourceCodeExtract: finding.Sink.Content,
@@ -35,14 +52,9 @@ func ReportGitLab(
 					Location: gitlab.Location{
 						File:      finding.Filename,
 						Startline: finding.Sink.Start,
+						Endline:   finding.Sink.End,
 					},
-					Identifiers: []gitlab.Identifier{
-						{
-							Type:  finding.Rule.Id,
-							Name:  finding.Rule.Title,
-							Value: finding.Rule.Title,
-						},
-					},
+					Identifiers: identifiers,
 				})
 			}
 		}
@@ -92,8 +104,24 @@ func calculateStatus(vulnerabilities []gitlab.Vulnerability) string {
 func formatSeverity(level string) string {
 	switch level {
 	case "warning":
-		return "Unknown"
+		return "Info"
 	default:
 		return strings.ToUpper(level[:1]) + level[1:]
 	}
+}
+
+func extractDescription(body string) string {
+	split := strings.Split(body, "## Remediations")
+	if len(split) < 2 {
+		return strings.ReplaceAll(body, "## ", "")
+	}
+	return strings.Replace(split[0], "## Description\n", "", 1)
+}
+
+func extractSolution(body string) string {
+	split := strings.Split(body, "## Remediations")
+	if len(split) < 2 {
+		return ""
+	}
+	return strings.Replace(split[len(split)-1], "## Resources\n", "Resources:\n", 1)
 }
