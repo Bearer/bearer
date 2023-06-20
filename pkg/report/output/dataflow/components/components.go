@@ -1,6 +1,7 @@
 package components
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
@@ -13,8 +14,16 @@ import (
 )
 
 type Holder struct {
-	components map[string]*component // group components by name
-	isInternal bool
+	dependencies map[string][]*dependency // group dependencies by detector name
+	components   map[string]*component    // group components by name
+	isInternal   bool
+}
+
+type dependency struct {
+	name     string
+	filename string
+	// version  types.Version
+	version string
 }
 
 type component struct {
@@ -36,10 +45,15 @@ type fileHolder struct {
 	lineNumbers map[int]int //group lines by linenumber
 }
 
+var (
+	unwantedVersionCharRegex = regexp.MustCompile(`[^0-9.]+`)
+)
+
 func New(isInternal bool) *Holder {
 	return &Holder{
-		components: make(map[string]*component),
-		isInternal: isInternal,
+		dependencies: make(map[string][]*dependency),
+		components:   make(map[string]*component),
+		isInternal:   isInternal,
 	}
 }
 
@@ -83,6 +97,17 @@ func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.C
 }
 
 func (holder *Holder) AddDependency(classifiedDetection dependenciesclassification.ClassifiedDependency) error {
+	value := classifiedDetection.Value.(map[string]interface{})
+	version := convertVersion(value["version"].(string))
+	name := value["name"].(string)
+
+	holder.addDependency(
+		string(classifiedDetection.DetectorType),
+		classifiedDetection.Source.Filename,
+		name,
+		version,
+	)
+
 	if classifiedDetection.Classification == nil {
 		return nil
 	}
@@ -105,6 +130,20 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 
 	return nil
 }
+
+func convertVersion(version string) string {
+	return unwantedVersionCharRegex.ReplaceAllString(version, "")
+}
+
+// func convertVersion(version string) types.Version {
+// 	numbers := strings.Split(unwantedVersionCharRegex.ReplaceAllString(version, ""), ".")
+
+// 	return types.Version{
+// 		Major: numbers[0],
+// 		Minor: numbers[1],
+// 		Patch: numbers[2],
+// 	}
+// }
 
 func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.ClassifiedFramework) error {
 	if classifiedDetection.Classification == nil {
@@ -131,7 +170,38 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 }
 
 // addComponent adds component to hash list and at the same time blocks duplicates
-func (holder *Holder) addComponent(componentName string, componentType string, componentSubType string, componentUUID string, detectorName string, fileName string, fullFilename string, lineNumber int) {
+func (holder *Holder) addDependency(
+	detectorName string,
+	fileName string,
+	name string,
+	version string,
+	// version types.Version,
+) {
+	if _, exists := holder.dependencies[detectorName]; !exists {
+		holder.dependencies[detectorName] = make([]*dependency, 0)
+	}
+
+	holder.dependencies[detectorName] = append(
+		holder.dependencies[detectorName],
+		&dependency{
+			name:     name,
+			version:  version,
+			filename: fileName,
+		},
+	)
+}
+
+// addComponent adds component to hash list and at the same time blocks duplicates
+func (holder *Holder) addComponent(
+	componentName string,
+	componentType string,
+	componentSubType string,
+	componentUUID string,
+	detectorName string,
+	fileName string,
+	fullFilename string,
+	lineNumber int,
+) {
 	// create component entry if it doesn't exist
 	if _, exists := holder.components[componentUUID]; !exists {
 		var uuid string
@@ -167,7 +237,23 @@ func (holder *Holder) addComponent(componentName string, componentType string, c
 	}
 
 	targetDetector.files[fileName].lineNumbers[lineNumber] = lineNumber
+}
 
+func (holder *Holder) ToDataFlowForDependencies() []types.Dependency {
+	data := make([]types.Dependency, 0)
+
+	for _, dependencies := range holder.dependencies {
+		for _, dependency := range dependencies {
+			data = append(data, types.Dependency{
+				Name:     dependency.name,
+				Version:  dependency.version,
+				Filename: dependency.filename,
+				// Detector: detectorName,
+			})
+		}
+	}
+
+	return data
 }
 
 func (holder *Holder) ToDataFlow() []types.Component {

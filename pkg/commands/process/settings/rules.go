@@ -426,6 +426,7 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			MatchOn:           PRESENCE,
 			DataTypesRequired: false,
 		}
+
 		if definition.Trigger != nil {
 			if definition.Trigger.MatchOn != nil {
 				ruleTrigger.MatchOn = *definition.Trigger.MatchOn
@@ -468,6 +469,8 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			SanitizerRuleID:    definition.SanitizerRuleID,
 			DocumentationUrl:   definition.Metadata.DocumentationUrl,
 			HasDetailedContext: definition.HasDetailedContext,
+			DependencyCheck:    definition.DependencyCheck,
+			Dependency:         definition.Dependency,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {

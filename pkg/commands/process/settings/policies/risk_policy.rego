@@ -21,6 +21,17 @@ global_failures contains detector if {
 	some data_type in data.bearer.common.global_data_types
 }
 
+presence_failures contains detector if {
+	input.rule.trigger.match_on == "presence"
+	not input.rule.trigger.data_types_required
+
+	some detector in input.dataflow.risks
+	detector.detector_id == input.rule.id
+
+	# not input.rule.id == "javascript_third_parties_dom_purify" # Add check for dependency check in rule
+	not input.rule.dependency_check
+}
+
 # - presence of pattern & data types not required
 presence_failures contains detector if {
 	input.rule.trigger.match_on == "presence"
@@ -28,6 +39,20 @@ presence_failures contains detector if {
 
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
+
+	# input.rule.id == "javascript_third_parties_dom_purify" # Add check for dependency check in rule
+	input.rule.dependency_check
+	dependency := input.dataflow.dependencies[_]
+
+	# dependency.filename == "package.json" # Add file to check for dependency in rule
+	dependency.filename == input.rule.dependency.filename
+
+	# dependency.name == "dompurify" # Add dependency name in rule
+	dependency.name == input.rule.dependency.name
+
+	# output := semver.compare(dependency.version, "2.0.16") # Add min version to check in rule
+	version_check := semver.compare(dependency.version, input.rule.dependency.min_version)
+	version_check <= 0
 }
 
 # # Build policy failures
