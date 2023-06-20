@@ -62,6 +62,7 @@
   }
 
   function filterResults() {
+    updateURL();
     const rules = document.querySelectorAll(".js-rule");
     const langs = document.querySelectorAll(
       "#lang-filters .filter-toggle:checked"
@@ -104,4 +105,34 @@
       filterResults();
     });
   });
+
+  function updateURL() {
+    let params = new URLSearchParams();
+    let checkedBoxes = document.querySelectorAll(".filter-toggle:checked");
+    if (input.value.length > 0) {
+      params.append(input.name, input.value);
+    }
+    checkedBoxes.forEach((checkbox) => {
+      params.append(checkbox.name, checkbox.value);
+    });
+    if (params.size > 0) {
+      window.history.replaceState({}, "", decodeURIComponent(`?${params}`));
+    } else {
+      window.history.replaceState(history.state, "", window.location.pathname);
+    }
+  }
+
+  function load() {
+    let params = new URLSearchParams(window.location.search);
+    for (const [key, value] of params.entries()) {
+      let input = document.querySelector(`input[name="${key}"]`);
+      if (input.type === "search") {
+        input.value = value;
+      } else if (input.type === "checkbox") {
+        input.checked = true;
+      }
+    }
+    filterResults();
+  }
+  load();
 })();

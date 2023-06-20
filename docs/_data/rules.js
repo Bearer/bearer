@@ -18,7 +18,7 @@ function updateCounts(lang, framework = null, id = null) {
     if (counts.languages[lang].frameworks[framework]) {
       counts.languages[lang].frameworks[framework].count++;
       counts.languages[lang].frameworks[framework].rules.push(id);
-    } else if (framework != "lang" && framework != "third_parties") {
+    } else if (framework !== "lang") {
       newFramework(lang, framework);
     } else if (framework === "lang") {
       counts.languages[lang].baseRules.push(id);

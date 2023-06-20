@@ -90,13 +90,14 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("keysToArr", (data) => {
     return Object.keys(data);
   });
-  eleventyConfig.addFilter("rewrite", (word) => {
+  eleventyConfig.addFilter("rewriteFrameworks", (word) => {
     function updatePhrase(word) {
       const dictionary = {
         rails: "Ruby on Rails",
         javascript: "JavaScript / TypeScript",
         express: "ExpressJS",
         react: "React",
+        third_parties: "Third party",
       };
 
       if (dictionary[word]) {
@@ -108,9 +109,11 @@ module.exports = function (eleventyConfig) {
     if (typeof word === "string") {
       return updatePhrase(word);
     } else if (Array.isArray(word)) {
-      return word.map((w) => updatePhrase(w));
+      let cleaned = word.filter((w) => w !== "third_parties");
+      return cleaned.map((w) => updatePhrase(w));
     } else if (typeof word === "object") {
-      return Object.keys(word).map((w) => updatePhrase(w));
+      let cleaned = Object.keys(word).filter((w) => w !== "third_parties");
+      return cleaned.map((w) => updatePhrase(w));
     }
     return word;
   });

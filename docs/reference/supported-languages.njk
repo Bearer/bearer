@@ -9,6 +9,8 @@ supportChart:
       - Privacy
       - Data Flow
     rules: true
+    searchName: lang-ruby
+    searchTerm: ruby
   javascript:
     name: JavaScript / TypeScript
     support:
@@ -16,6 +18,8 @@ supportChart:
       - Privacy
       - Data Flow
     rules: true
+    searchName: lang-jsts
+    searchTerm: javascript
   java:
     name: Java
     support:
@@ -23,6 +27,8 @@ supportChart:
       - Privacy
       - Data Flow
     rules: true
+    searchName: lang-java
+    searchTerm: java_
 ---
 {% renderTemplate "liquid,md" %}
 # Supported languages
@@ -49,41 +55,53 @@ Bearer CLI supports the following language and framework combinations.
           {{ rules
             .counts
             .languages[language]
-            .frameworks | rewrite | join(", ") }}
+            .frameworks | rewriteFrameworks | join(", ") }}
 
         </td>
         <td>{{supportChart[language].support | join(", ")}}</td>
-        <td>{{rules.counts.languages[language].count}}</td>
+        <td>
+          <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{rules.counts.languages[language].count}}</a>
+        </td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
 
 <h2>Support details</h2>
-
+<p>Select a rule count link below to view the complete rules list for the selected language and framework combination.</p>
 {% for language, data in supportChart %}
   {# alias language to thisLang #}
   {% set thisLang = rules
     .counts
     .languages[language] %}
-  {# set frameworkStatus to boolean. Check if language has framework(s) #}
-  {% set frameworkStatus %}
-  {{ true if rules.counts.languages[language].frameworks | keysToArr | length > 0 else false }}
-  {% endset %}
+
   <h3 id="{{language}}">{{data.name}}</h3>
-  {% if frameworkStatus %}
-    <p>
-      <strong>Frameworks supported</strong>: {{ thisLang.frameworks | rewrite | join(", ") }}</p>
-  {% endif %}
-  <p>
-    <strong>Supported report types</strong>: {{ supportChart[language].support | join(", ")}}</p>
+  <ul>
+
+    {% if true if rules
+      .counts
+      .languages[language]
+      .frameworks | keysToArr | length > 0 else 
+        false %}
+      <li>
+        <strong>Frameworks</strong>: {{ thisLang.frameworks | rewriteFrameworks | join(", ") }}</li>
+    {% endif %}
+    <li>
+      <strong>Report types</strong>: {{ supportChart[language].support | join(", ")}}</li>
+  </ul>
   {% if supportChart[language].rules %}
-    <h4>Rule support</h4>
+    <h4 class="">Rule support</h4>
     <ul>
-      <li>Core language rules: {{thisLang.baseRules | length}}</li>
-      {% if frameworkStatus %}
+      <li>Core language rules: <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{thisLang.baseRules | length}}</a>
+      </li>
+      {% if true if rules
+        .counts
+        .languages[language]
+        .frameworks | keysToArr | length > 0 else 
+          false %}
         {% for framework, val in thisLang.frameworks %}
-          <li>{{val.name | rewrite}} rules: {{val.count}}</li>
+          <li>{{val.name | rewriteFrameworks}} rules: <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}&q={{val.name}}">{{val.count}}</a>
+          </li>
           {% endfor%}
         {% endif %}
       </ul>
