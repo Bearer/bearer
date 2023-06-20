@@ -26,6 +26,7 @@ var (
 		"template_substitution",
 		"array",
 		"spread_element",
+		"augmented_assignment_expression",
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
@@ -84,6 +85,16 @@ func (*javascriptImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree
 
 				return err
 			}
+		// x += y
+		case "augmented_assignment_expression":
+			err := visitChildren()
+
+			left := node.ChildByFieldName("left")
+			if left.Type() == "identifier" {
+				scope.Assign(left.Content(), node)
+			}
+
+			return err
 		// const user = ...
 		// var user = ...
 		// let user = ...
