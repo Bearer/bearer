@@ -8,6 +8,13 @@ type Component struct {
 	Locations []ComponentLocation `json:"locations" yaml:"locations"`
 }
 
+type Dependency struct {
+	Name     string `json:"name" yaml:"name"`
+	Version  string `json:"version" yaml:"version"`
+	Filename string `json:"filename" yaml:"filename"`
+	Detector string `json:"detector" yaml:"detector"`
+}
+
 type ComponentLocation struct {
 	Detector     string `json:"detector" yaml:"detector"`
 	FullFilename string `json:"full_filename" yaml:"full_filename"`

@@ -133,6 +133,14 @@ type RuleDefinition struct {
 	HasDetailedContext bool                   `mapstructure:"has_detailed_context" json:"has_detailed_context,omitempty" yaml:"has_detailed_context,omitempty"`
 	Metadata           *RuleMetadata          `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
 	Auxiliary          []Auxiliary            `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
+	DependencyCheck    bool                   `mapstructure:"dependency_check" json:"dependency_check" yaml:"dependency_check"`
+	Dependency         *Dependency            `mapstructure:"dependency" json:"dependency" yaml:"dependency"`
+}
+
+type Dependency struct {
+	Filename   string `mapstructure:"filename" json:"filename" yaml:"filename"`
+	Name       string `mapstructure:"name" json:"name" yaml:"name"`
+	MinVersion string `mapstructure:"min_version" json:"min_version" yaml:"min_version"`
 }
 
 type Auxiliary struct {
@@ -178,6 +186,8 @@ type Rule struct {
 	SanitizerRuleID    string        `mapstructure:"sanitizer" json:"sanitizer" yaml:"sanitizer"`
 	DocumentationUrl   string        `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
 	IsAuxilary         bool          `mapstructure:"is_auxilary" json:"is_auxilary" yaml:"is_auxilary"`
+	DependencyCheck    bool          `mapstructure:"dependency_check" json:"dependency_check" yaml:"dependency_check"`
+	Dependency         *Dependency   `mapstructure:"dependency" json:"dependency" yaml:"dependency"`
 
 	// FIXME: remove after refactor of sql
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`

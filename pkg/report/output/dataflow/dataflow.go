@@ -20,9 +20,10 @@ import (
 )
 
 type DataFlow struct {
-	Datatypes  []types.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks      []types.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
-	Components []types.Component    `json:"components" yaml:"components"`
+	Datatypes    []types.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	Risks        []types.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Components   []types.Component    `json:"components" yaml:"components"`
+	Dependencies []types.Dependency   `json:"dependencies" yaml:"dependencies"`
 }
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{
@@ -190,9 +191,10 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		output.StdErrLogger().Msgf("Generating dataflow")
 	}
 	dataflow := &DataFlow{
-		Datatypes:  dataTypesHolder.ToDataFlow(),
-		Risks:      risksHolder.ToDataFlow(),
-		Components: componentsHolder.ToDataFlow(),
+		Datatypes:    dataTypesHolder.ToDataFlow(),
+		Risks:        risksHolder.ToDataFlow(),
+		Components:   componentsHolder.ToDataFlow(),
+		Dependencies: componentsHolder.ToDataFlowForDependencies(),
 	}
 	return dataflow, nil, nil
 }
