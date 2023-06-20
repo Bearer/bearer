@@ -25,11 +25,12 @@
     });
     langCounter.innerHTML = "All";
     owaspCounter.innerHTML = "All";
+    resetButton.disabled = true;
+    filterResults();
   }
   function compare(item, query, filters) {
     let source = item.innerHTML.toLowerCase();
     let filtersActive = filters.length === 0 ? false : true;
-
     let found = false;
     if (filtersActive) {
       filters.forEach((f) => {
@@ -85,11 +86,20 @@
       }
     });
     ruleCounter.innerHTML = ruleCount;
+    if (
+      document.querySelectorAll(".filter-toggle:checked").length ||
+      query.length
+    ) {
+      resetButton.disabled = false;
+    } else {
+      resetButton.disabled = true;
+    }
   }
 
   const input = document.getElementById("search-input");
   const checkboxes = document.querySelectorAll(".filter-toggle");
   const form = document.getElementById("rule-search");
+  const resetButton = document.querySelector(".js-filter-reset");
   let timer;
   const delay = 300;
   form.addEventListener("submit", (e) => {
@@ -104,6 +114,10 @@
     checkbox.addEventListener("change", (e) => {
       filterResults();
     });
+  });
+
+  resetButton.addEventListener("click", (e) => {
+    resetForm(input);
   });
 
   function updateURL() {

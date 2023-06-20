@@ -16,9 +16,9 @@ The built-in rules aim to keep you protected from the most cirtical security ris
   <input class="block w-full px-4 py-2 border-neutral-300 border-2 rounded dark:text-neutral-500" type="search" name="q" id="search-input" placeholder="Try searching for CWE-201, encryption, rails, etc.">
 
   <div class="flex justify-end gap-2 mt-4">
-
+    <button type="button" class="js-filter-reset flex justify-between items-center px-2 border-2 border-neutral-200 dark:border-neutral-500 rounded hover:border-main disabled:bg-neutral-200 disabled:text-neutral-300 disabled:hover:border-neutral-200" disabled>Clear Filters</button>
     <div class="js-filter-container relative">
-      <button type="button" class="js-filter-button flex justify-between items-center px-2 border-2 border-neutral-200 dark:border-neutral-500 rounded">
+      <button type="button" class="js-filter-button flex justify-between items-center px-2 border-2 border-neutral-200 dark:border-neutral-500 rounded hover:border-main">
         <span>Languages &lpar;<span class="js-lang-count">All</span>&rpar;</span>
         <div class="">{% include 'icon-chevron.njk'%}</div>
       </button>
@@ -38,7 +38,7 @@ The built-in rules aim to keep you protected from the most cirtical security ris
       </ul>
     </div>
     <div class="js-filter-container relative">
-      <button type="button" class="js-filter-button flex justify-between items-center px-2 border-2 border-neutral-200 dark:border-neutral-500 rounded">
+      <button type="button" class="js-filter-button flex justify-between items-center px-2 border-2 border-neutral-200 dark:border-neutral-500 rounded hover:border-main">
         <span>OWASP &lpar;<span class="js-owasp-count">All</span>&rpar;</span>
         <div class="">{% include 'icon-chevron.njk'%}</div>
       </button>
