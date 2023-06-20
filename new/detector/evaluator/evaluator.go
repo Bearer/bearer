@@ -65,13 +65,7 @@ func (evaluator *Evaluator) Evaluate(
 	startTime := time.Now()
 
 	if log.Trace().Enabled() {
-		log.Trace().Msgf(
-			"evaluate start: %d:%d:%s:\n%s",
-			rootNode.StartLineNumber(),
-			rootNode.StartColumnNumber(),
-			rootNode.Type(),
-			rootNode.Content(),
-		)
+		log.Trace().Msgf("evaluate start: %s", rootNode.Debug(true))
 	}
 
 	key := cachepkg.NewKey(rootNode, detectorType, scope, followFlow)
@@ -82,10 +76,8 @@ func (evaluator *Evaluator) Evaluate(
 		}
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
-				"evaluate end: %d:%d:%s: %d detections (cached)",
-				rootNode.StartLineNumber(),
-				rootNode.StartColumnNumber(),
-				rootNode.Type(),
+				"evaluate end: %s: %d detections (cached)",
+				rootNode.Debug(false),
 				len(detections),
 			)
 		}
@@ -155,10 +147,8 @@ func (evaluator *Evaluator) Evaluate(
 	}
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
-			"evaluate end: %d:%d:%s: %d detections",
-			rootNode.StartLineNumber(),
-			rootNode.StartColumnNumber(),
-			rootNode.Type(),
+			"evaluate end: %s: %d detections",
+			rootNode.Debug(false),
 			len(result),
 		)
 	}
@@ -256,25 +246,17 @@ func (evaluator *Evaluator) detectAtNode(
 	scope settings.RuleReferenceScope,
 ) ([]*detection.Detection, error) {
 	if log.Trace().Enabled() {
-		log.Trace().Msgf(
-			"detect at node start: %s at %d:%d:%s\n%s",
-			detectorType,
-			node.StartLineNumber(),
-			node.StartColumnNumber(),
-			node.Type(),
-			node.Content(),
-		)
+		log.Trace().Msgf("detect at node start: %s at %s", detectorType, node.Debug(true))
 	}
+
 	key := cachepkg.NewKey(node, detectorType, settings.CURSOR_SCOPE, false)
 
 	if detections, cached := cache.Get(key); cached {
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
-				"detect at node end: %s at %d:%d:%s: %d detections (cached)",
+				"detect at node end: %s at %s: %d detections (cached)",
 				detectorType,
-				node.StartLineNumber(),
-				node.StartColumnNumber(),
-				node.Type(),
+				node.Debug(false),
 				len(detections),
 			)
 		}
@@ -285,11 +267,9 @@ func (evaluator *Evaluator) detectAtNode(
 	if evaluator.ruleDisabledForNode(detectorType, node) {
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
-				"detect at node end: %s at %d:%d:%s: rule disabled",
+				"detect at node end: %s at %s: rule disabled",
 				detectorType,
-				node.StartLineNumber(),
-				node.StartColumnNumber(),
-				node.Type(),
+				node.Debug(false),
 			)
 		}
 
@@ -313,11 +293,9 @@ func (evaluator *Evaluator) detectAtNode(
 
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
-			"detect at node end: %s at %d:%d:%s: %d detections",
+			"detect at node end: %s at %s: %d detections",
 			detectorType,
-			node.StartLineNumber(),
-			node.StartColumnNumber(),
-			node.Type(),
+			node.Debug(false),
 			len(detections),
 		)
 	}

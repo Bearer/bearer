@@ -1,6 +1,8 @@
 package tree
 
 import (
+	"fmt"
+
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -11,8 +13,19 @@ type Node struct {
 
 type NodeID *sitter.Node
 
-func (node *Node) Debug() string {
-	return node.sitterNode.String()
+func (node *Node) Debug(includeContent bool) string {
+	content := ""
+	if includeContent {
+		content = ":\n" + node.Content()
+	}
+
+	return fmt.Sprintf(
+		"%d:%d:%s%s",
+		node.StartLineNumber(),
+		node.StartColumnNumber(),
+		node.Type(),
+		content,
+	)
 }
 
 func (node *Node) ID() NodeID {

@@ -102,7 +102,11 @@ func GetStringValue(node *tree.Node, evaluationState types.EvaluationState) (str
 
 		return childString.Value, childString.IsLiteral, nil
 	default:
-		return "", false, fmt.Errorf("expected single string detection but got %d", len(detections))
+		return "", false, fmt.Errorf(
+			"expected single string detection but got %d for %s",
+			len(detections),
+			node.Debug(true),
+		)
 	}
 }
 
