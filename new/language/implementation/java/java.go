@@ -106,10 +106,11 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 		case "field_declaration":
 			declarator := node.ChildByFieldName("declarator")
 			if declarator != nil {
-				name := declarator.ChildByFieldName("name")
-				value := declarator.ChildByFieldName("value")
-				scope.Assign(name.Content(), value)
-				node.UnifyWith(value)
+				scope.Assign(declarator.ChildByFieldName("name").Content(), node)
+
+				if value := declarator.ChildByFieldName("value"); value != nil {
+					node.UnifyWith(value)
+				}
 			}
 		// String user = "John";
 		case "local_variable_declaration":
@@ -156,10 +157,10 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				}
 			}
 
-			// user.getName(name, lastName)
-			if parent.Type() == "arguments_list" {
+			if parent.Type() == "formal_parameter" {
 				scope.Assign(node.Content(), node)
 			}
+
 			// todo: see what this is
 			// case "property_identifier":
 			// 	parent := node.Parent()
