@@ -97,16 +97,18 @@ func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.C
 }
 
 func (holder *Holder) AddDependency(classifiedDetection dependenciesclassification.ClassifiedDependency) error {
-	value := classifiedDetection.Value.(map[string]interface{})
-	version := convertVersion(value["version"].(string))
-	name := value["name"].(string)
+	if classifiedDetection.Value != nil {
+		value := classifiedDetection.Value.(map[string]interface{})
+		version := convertVersion(value["version"].(string))
+		name := value["name"].(string)
 
-	holder.addDependency(
-		string(classifiedDetection.DetectorType),
-		classifiedDetection.Source.Filename,
-		name,
-		version,
-	)
+		holder.addDependency(
+			string(classifiedDetection.DetectorType),
+			classifiedDetection.Source.Filename,
+			name,
+			version,
+		)
+	}
 
 	if classifiedDetection.Classification == nil {
 		return nil
@@ -134,16 +136,6 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 func convertVersion(version string) string {
 	return unwantedVersionCharRegex.ReplaceAllString(version, "")
 }
-
-// func convertVersion(version string) types.Version {
-// 	numbers := strings.Split(unwantedVersionCharRegex.ReplaceAllString(version, ""), ".")
-
-// 	return types.Version{
-// 		Major: numbers[0],
-// 		Minor: numbers[1],
-// 		Patch: numbers[2],
-// 	}
-// }
 
 func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.ClassifiedFramework) error {
 	if classifiedDetection.Classification == nil {
@@ -175,7 +167,6 @@ func (holder *Holder) addDependency(
 	fileName string,
 	name string,
 	version string,
-	// version types.Version,
 ) {
 	if _, exists := holder.dependencies[detectorName]; !exists {
 		holder.dependencies[detectorName] = make([]*dependency, 0)
@@ -242,13 +233,13 @@ func (holder *Holder) addComponent(
 func (holder *Holder) ToDataFlowForDependencies() []types.Dependency {
 	data := make([]types.Dependency, 0)
 
-	for _, dependencies := range holder.dependencies {
+	for detectorName, dependencies := range holder.dependencies {
 		for _, dependency := range dependencies {
 			data = append(data, types.Dependency{
 				Name:     dependency.name,
 				Version:  dependency.version,
 				Filename: dependency.filename,
-				// Detector: detectorName,
+				Detector: detectorName,
 			})
 		}
 	}
