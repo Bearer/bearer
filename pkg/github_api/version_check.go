@@ -2,6 +2,7 @@ package github_api
 
 import (
 	"context"
+	"fmt"
 	"strings"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
@@ -21,7 +22,7 @@ func VersionCheck(ctx context.Context, disableVersionCheck bool, Quiet bool) {
 		} else {
 			version := strings.TrimPrefix(*release.Name, "v")
 			if version != build.Version && build.Version != "dev" && !Quiet {
-				output.StdErrLogger().Msgf("You are running an outdated version of Bearer CLI, %s is now available. You can find update instructions at https://docs.bearer.com/reference/installation/#updating-bearer", *release.Name)
+				output.StdErrLog(fmt.Sprintf("You are running an outdated version of Bearer CLI, %s is now available. You can find update instructions at https://docs.bearer.com/reference/installation/#updating-bearer", *release.Name))
 			}
 		}
 	}

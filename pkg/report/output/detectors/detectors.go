@@ -14,7 +14,7 @@ import (
 
 func GetOutput(report types.Report, config settings.Config) ([]interface{}, *dataflow.DataFlow, error) {
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Running Detectors")
+		output.StdErrLog("Running Detectors")
 	}
 
 	var detections []interface{}

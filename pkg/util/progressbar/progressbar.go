@@ -10,13 +10,13 @@ func GetProgressBar(filesLength int, config settings.Config, display_type string
 	hideProgress := config.Scan.Quiet || config.Scan.Debug
 	return progressbar.NewOptions(filesLength,
 		progressbar.OptionSetVisibility(!hideProgress),
-		progressbar.OptionSetWriter(output.ErrorWriter),
+		progressbar.OptionSetWriter(output.ErrorWriter()),
 		progressbar.OptionShowCount(),
 		progressbar.OptionSetWidth(15),
 		progressbar.OptionEnableColorCodes(false),
 		progressbar.OptionShowElapsedTimeOnFinish(),
 		progressbar.OptionOnCompletion(func() {
-			output.ErrorWriter.Write([]byte("\n")) //nolint:all,errcheck
+			output.ErrorWriter().Write([]byte("\n")) //nolint:all,errcheck
 		}),
 		progressbar.OptionShowIts(),
 		progressbar.OptionSetItsString(display_type),

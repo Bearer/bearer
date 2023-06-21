@@ -16,7 +16,10 @@ import (
 
 var (
 	outputWriter io.Writer = os.Stdout
-	ErrorWriter  io.Writer = os.Stderr
+	errorWriter  io.Writer = os.Stderr
+
+	stdOutLogger func(message string)
+	stdErrLogger func(message string)
 )
 
 type SetupRequest struct {
@@ -25,16 +28,11 @@ type SetupRequest struct {
 	LogLevel  string
 }
 
-// DefaultLogger returns default output logger
-func StdOutLogger() *zerolog.Event {
-	return PlainLogger(outputWriter)
+func ErrorWriter() io.Writer {
+	return errorWriter
 }
 
-func StdErrLogger() *zerolog.Event {
-	return PlainLogger(ErrorWriter)
-}
-
-func PlainLogger(out io.Writer) *zerolog.Event {
+func PlainLogger(out io.Writer) func(message string) {
 	logger := log.Output(zerolog.ConsoleWriter{
 		Out:     out,
 		NoColor: true,
@@ -47,7 +45,7 @@ func PlainLogger(out io.Writer) *zerolog.Event {
 		FieldsExclude: []string{"process"},
 	})
 
-	return logger.Info()
+	return func(message string) { logger.Info().Msg(message) }
 }
 
 func debugLogger(out io.Writer, processID string) zerolog.Logger {
@@ -65,9 +63,10 @@ func debugLogger(out io.Writer, processID string) zerolog.Logger {
 
 func Setup(cmd *cobra.Command, options SetupRequest) {
 	outputWriter = cmd.OutOrStdout()
-	ErrorWriter = cmd.ErrOrStderr()
-
-	log.Logger = debugLogger(ErrorWriter, options.ProcessID)
+	errorWriter = cmd.ErrOrStderr()
+	stdOutLogger = PlainLogger(outputWriter)
+	stdErrLogger = PlainLogger(errorWriter)
+	log.Logger = debugLogger(errorWriter, options.ProcessID)
 
 	switch options.LogLevel {
 	case flag.ErrorLogLevel:
@@ -79,6 +78,23 @@ func Setup(cmd *cobra.Command, options SetupRequest) {
 	case flag.TraceLogLevel:
 		zerolog.SetGlobalLevel(zerolog.TraceLevel)
 	}
+}
+
+func StdErrLog(message string) {
+	if stdErrLogger != nil {
+		stdErrLogger(message)
+	}
+}
+
+func StdOutLog(message string) {
+	if stdOutLogger != nil {
+		stdOutLogger(message)
+	}
+}
+
+func Fatal(message string) {
+	StdErrLog(message)
+	os.Exit(1)
 }
 
 func ReportJSON(outputDetections any) (*string, error) {

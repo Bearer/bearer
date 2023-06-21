@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/rego"
 )
 
@@ -367,7 +367,7 @@ func DefaultPolicies() map[string]*Policy {
 
 	err := yaml.Unmarshal(defaultPolicies, &policy)
 	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal policy file %s", err)
+		output.Fatal(fmt.Sprintf("failed to unmarshal policy file %s", err))
 	}
 
 	for _, policy := range policy {

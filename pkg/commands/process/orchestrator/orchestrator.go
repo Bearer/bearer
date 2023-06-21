@@ -2,6 +2,7 @@ package orchestrator
 
 import (
 	"errors"
+	"fmt"
 	"io"
 	"os"
 	"path"
@@ -179,7 +180,7 @@ func (orchestrator *orchestrator) writeFileError(file work.File, fileErr error) 
 
 func Scan(repository work.Repository, config settings.Config, goclogResult *gocloc.Result, reportPath string) error {
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Scanning target %s", config.Scan.Target)
+		output.StdErrLog(fmt.Sprintf("Scanning target %s", config.Scan.Target))
 	}
 
 	orchestrator, err := newOrchestrator(repository, config, goclogResult, reportPath)
