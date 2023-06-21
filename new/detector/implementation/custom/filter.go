@@ -9,20 +9,19 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
-	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/rs/zerolog/log"
 )
 
 func matchFilter(
 	evaluationState types.EvaluationState,
-	result *languagetypes.PatternQueryResult,
-	variableNodes map[string]*tree.Node,
+	variables map[string]*tree.Node,
+	joinedVariables map[string]*tree.Node,
 	filter settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*detection.Detection, error) {
 	if filter.Not != nil {
-		match, _, err := matchFilter(evaluationState, result, variableNodes, *filter.Not, rules)
+		match, _, err := matchFilter(evaluationState, variables, joinedVariables, *filter.Not, rules)
 		if match == nil {
 			return nil, nil, err
 		}
@@ -30,14 +29,14 @@ func matchFilter(
 	}
 
 	if len(filter.Either) != 0 {
-		return matchEitherFilters(evaluationState, result, variableNodes, filter.Either, rules)
+		return matchEitherFilters(evaluationState, variables, joinedVariables, filter.Either, rules)
 	}
 
 	if filter.FilenameRegex != nil {
 		return boolPointer(filter.FilenameRegex.MatchString(evaluationState.FileName())), nil, nil
 	}
 
-	node, ok := result.Variables[filter.Variable]
+	node, ok := variables[filter.Variable]
 	// shouldn't happen if filters are validated against pattern
 	if !ok {
 		return nil, nil, nil
@@ -46,12 +45,10 @@ func matchFilter(
 	if filter.Detection != "" {
 		return matchDetectionFilter(
 			evaluationState,
-			result,
-			variableNodes,
+			variables,
+			joinedVariables,
 			node,
-			filter.Detection,
-			filter.Scope,
-			filter.Contains == nil || *filter.Contains,
+			filter,
 			rules,
 		)
 	}
@@ -62,19 +59,19 @@ func matchFilter(
 
 func matchAllFilters(
 	evaluationState types.EvaluationState,
-	result *languagetypes.PatternQueryResult,
+	variables map[string]*tree.Node,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (bool, []*detection.Detection, map[string]*tree.Node, error) {
 	var datatypeDetections []*detection.Detection
 
-	variableNodes := make(map[string]*tree.Node)
-	for name, node := range result.Variables {
-		variableNodes[name] = node
+	joinedVariables := make(map[string]*tree.Node)
+	for name, node := range variables {
+		joinedVariables[name] = node
 	}
 
 	for _, filter := range filters {
-		matched, subDataTypeDetections, err := matchFilter(evaluationState, result, variableNodes, filter, rules)
+		matched, subDataTypeDetections, err := matchFilter(evaluationState, variables, joinedVariables, filter, rules)
 		if matched == nil || !*matched || err != nil {
 			return false, nil, nil, err
 		}
@@ -82,13 +79,13 @@ func matchAllFilters(
 		datatypeDetections = append(datatypeDetections, subDataTypeDetections...)
 	}
 
-	return true, datatypeDetections, variableNodes, nil
+	return true, datatypeDetections, joinedVariables, nil
 }
 
 func matchEitherFilters(
 	evaluationState types.EvaluationState,
-	result *languagetypes.PatternQueryResult,
-	variableNodes map[string]*tree.Node,
+	variables map[string]*tree.Node,
+	joinedVariables map[string]*tree.Node,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*detection.Detection, error) {
@@ -97,7 +94,7 @@ func matchEitherFilters(
 	oneNotMatched := false
 
 	for _, subFilter := range filters {
-		subMatch, subDatatypeDetections, err := matchFilter(evaluationState, result, variableNodes, subFilter, rules)
+		subMatch, subDatatypeDetections, err := matchFilter(evaluationState, variables, joinedVariables, subFilter, rules)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -120,26 +117,25 @@ func matchEitherFilters(
 
 func matchDetectionFilter(
 	evaluationState types.EvaluationState,
-	result *languagetypes.PatternQueryResult,
-	variableNodes map[string]*tree.Node,
+	variables map[string]*tree.Node,
+	joinedVariables map[string]*tree.Node,
 	node *tree.Node,
-	detectorType string,
-	scope settings.RuleReferenceScope,
-	contains bool,
+	filter settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*detection.Detection, error) {
+	ruleID := filter.Detection
 	sanitizerRuleID := ""
-	if rule, ok := rules[detectorType]; ok {
+	if rule, ok := rules[ruleID]; ok {
 		sanitizerRuleID = rule.SanitizerRuleID
 	}
 
-	if detectorType == "datatype" {
-		detections, err := evaluationState.Evaluate(node, "datatype", sanitizerRuleID, scope, true)
+	if ruleID == "datatype" {
+		detections, err := evaluationState.Evaluate(node, "datatype", sanitizerRuleID, filter.Scope, true)
 
 		return boolPointer(len(detections) != 0), detections, err
 	}
 
-	detections, err := evaluationState.Evaluate(node, detectorType, sanitizerRuleID, scope, true)
+	detections, err := evaluationState.Evaluate(node, ruleID, sanitizerRuleID, filter.Scope, true)
 
 	var datatypeDetections []*detection.Detection
 	ignoredVariables := getIgnoredVariables(detections)
@@ -152,9 +148,17 @@ func matchDetectionFilter(
 			continue
 		}
 
+		filtersMatch, _, _, err := matchAllFilters(evaluationState, data.VariableNodes, filter.Filters, rules)
+		if err != nil {
+			return nil, nil, err
+		}
+		if !filtersMatch {
+			continue
+		}
+
 		variablesMatch := true
 		for name, node := range data.VariableNodes {
-			if existingNode, existing := variableNodes[name]; existing {
+			if existingNode, existing := joinedVariables[name]; existing {
 				if !existingNode.Equal(node) {
 					variablesMatch = false
 					break
@@ -169,7 +173,7 @@ func matchDetectionFilter(
 		foundDetection = true
 		for name, node := range data.VariableNodes {
 			if _, ignored := ignoredVariables[name]; !ignored {
-				variableNodes[name] = node
+				joinedVariables[name] = node
 			}
 		}
 

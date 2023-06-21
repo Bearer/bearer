@@ -30,6 +30,10 @@ func TestAuxilary(t *testing.T) {
 	runRulesTest("auxilary", "javascript_third_parties_datadog_test", t)
 }
 
+func TestReferenceFilters(t *testing.T) {
+	runRulesTest("reference_filters", "reference_filters_test", t)
+}
+
 func TestSanitizer(t *testing.T) {
 	runRulesTest("sanitizer", "sanitizer_test", t)
 }

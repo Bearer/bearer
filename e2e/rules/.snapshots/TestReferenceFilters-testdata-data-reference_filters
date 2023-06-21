@@ -1,0 +1,34 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: reference_filters_test
+        title: Test rule reference filters
+        description: Test rule reference filters
+        documentation_url: ""
+      line_number: 1
+      full_filename: e2e/rules/testdata/data/reference_filters/main.rb
+      filename: main.rb
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 6
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 6
+        content: x.foo
+      parent_line_number: 1
+      snippet: x.foo
+      fingerprint: df1f6d9ee9f4ee60085d0046163b3701_0
+      old_fingerprint: 52f7dcd9f1ba09f3a9f8c1ad305c8a89_0
+
+
+--
+
