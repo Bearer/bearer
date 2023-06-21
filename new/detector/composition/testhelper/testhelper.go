@@ -18,6 +18,7 @@ import (
 	util "github.com/bearer/bearer/pkg/util/output"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/hhatto/gocloc"
+	"github.com/rs/zerolog"
 	"gopkg.in/yaml.v3"
 )
 
@@ -27,6 +28,8 @@ type Runner struct {
 }
 
 func GetRunner(t *testing.T, ruleBytes []byte, lang string) *Runner {
+	zerolog.SetGlobalLevel(zerolog.InfoLevel)
+
 	err := commands.ScanFlags.BindForConfigInit(commands.NewScanCommand())
 	if err != nil {
 		t.Fatalf("failed to bind flags: %s", err)

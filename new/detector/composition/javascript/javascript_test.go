@@ -19,6 +19,9 @@ var datatypeRule []byte
 //go:embed testdata/deconstructing.yml
 var deconstructingRule []byte
 
+//go:embed testdata/pattern_variables_rule.yml
+var patternVariablesRule []byte
+
 //go:embed testdata/scope_rule.yml
 var scopeRule []byte
 
@@ -36,6 +39,10 @@ func TestImport(t *testing.T) {
 
 func TestString(t *testing.T) {
 	testhelper.GetRunner(t, insecureURLRule, "Javascript").RunTest(t, "./testdata/testcases/string", ".snapshots/string/")
+}
+
+func TestPatternVariables(t *testing.T) {
+	testhelper.GetRunner(t, patternVariablesRule, "Javascript").RunTest(t, "./testdata/pattern_variables", ".snapshots/")
 }
 
 func TestScope(t *testing.T) {

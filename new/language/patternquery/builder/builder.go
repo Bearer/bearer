@@ -56,6 +56,19 @@ func Build(
 	}
 	defer tree.Close()
 
+	if fixedInput, fixed := fixupInput(
+		langImplementation,
+		processedInput,
+		inputParams.Variables,
+		tree.RootNode(),
+	); fixed {
+		tree.Close()
+		tree, err = lang.Parse(context.TODO(), fixedInput)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	root := tree.RootNode()
 
 	if root.ChildCount() != 1 {
@@ -95,6 +108,67 @@ func Build(
 	}
 
 	return result, nil
+}
+
+func fixupInput(
+	langImplementation implementation.Implementation,
+	input string,
+	variables []types.Variable,
+	rootNode *tree.Node,
+) (string, bool) {
+	insideError := false
+	inputOffset := 0
+
+	newInput := []byte(input)
+	fixed := false
+
+	err := rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
+		oldInsideError := insideError
+		if node.Type() == "ERROR" {
+			insideError = true
+		}
+		if err := visitChildren(); err != nil {
+			return err
+		}
+		insideError = oldInsideError
+
+		if !insideError {
+			return nil
+		}
+
+		variable := getVariableFor(node, langImplementation, variables)
+		if variable == nil {
+			return nil
+		}
+
+		newValue := langImplementation.FixupPatternVariableDummyValue(node, variable.DummyValue)
+		if newValue == variable.DummyValue {
+			return nil
+		}
+
+		fixed = true
+		valueOffset := len(newValue) - len(variable.DummyValue)
+		variable.DummyValue = newValue
+
+		newInput = append(
+			append(
+				newInput[:node.StartByte()+inputOffset],
+				newValue...,
+			),
+			newInput[node.EndByte()+inputOffset:]...,
+		)
+
+		inputOffset += valueOffset
+
+		return nil
+	})
+
+	// walk errors are only ones we produce, and we don't make any
+	if err != nil {
+		panic(err)
+	}
+
+	return string(newInput), fixed
 }
 
 func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
@@ -280,13 +354,21 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 }
 
 func (builder *builder) getVariableFor(node *tree.Node) *types.Variable {
-	for _, variable := range builder.inputParams.Variables {
-		if builder.langImplementation.ShouldSkipNode(node) {
+	return getVariableFor(node, builder.langImplementation, builder.inputParams.Variables)
+}
+
+func getVariableFor(
+	node *tree.Node,
+	langImplementation implementation.Implementation,
+	variables []types.Variable,
+) *types.Variable {
+	for i, variable := range variables {
+		if langImplementation.ShouldSkipNode(node) {
 			continue
 		}
 
-		if node.ChildCount() == 0 && node.Content() == variable.DummyValue {
-			return &variable
+		if (node.NamedChildCount() == 0 || langImplementation.IsMatchLeaf(node)) && node.Content() == variable.DummyValue {
+			return &variables[i]
 		}
 	}
 

@@ -166,14 +166,7 @@ func (*rubyImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
 }
 
 func produceDummyValue(i int, nodeType string) string {
-	switch nodeType {
-	case "identifier", "call":
-		return "curioVar" + fmt.Sprint(i)
-	case "simple_symbol":
-		return ":curioVar" + fmt.Sprint(i)
-	default:
-		return "CurioVar" + fmt.Sprint(i)
-	}
+	return "curioVar" + fmt.Sprint(i)
 }
 
 func (*rubyImplementation) PatternLeafContentTypes() []string {
@@ -340,4 +333,30 @@ func (*rubyImplementation) ContributesToResult(node *tree.Node) bool {
 	}
 
 	return true
+}
+
+func (*rubyImplementation) FixupPatternVariableDummyValue(node *tree.Node, dummyValue string) string {
+	if isClassNameError(node) {
+		return strings.ToUpper(string(dummyValue[0])) + dummyValue[1:]
+	}
+
+	return dummyValue
+}
+
+func isClassNameError(node *tree.Node) bool {
+	parent := node.Parent()
+	if parent == nil || parent.Type() != "ERROR" || !node.Equal(parent.NamedChild(0)) {
+		return false
+	}
+
+	if strings.HasPrefix(parent.Content(), "class ") {
+		return true
+	}
+
+	grandParent := parent.Parent()
+	if grandParent == nil || grandParent.Type() != "ERROR" || !parent.Equal(grandParent.NamedChild(0)) {
+		return false
+	}
+
+	return strings.HasPrefix(grandParent.Content(), "class ")
 }

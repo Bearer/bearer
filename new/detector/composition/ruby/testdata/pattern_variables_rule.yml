@@ -1,0 +1,22 @@
+languages:
+  - ruby
+patterns:
+  - pattern: $<NAME> = $<_>
+    filters:
+      - variable: NAME
+        values:
+          - matched_variable
+  - pattern: |
+      class $<NAME>
+      end
+    filters:
+      - variable: NAME
+        values:
+          - MatchedClass
+severity: high
+metadata:
+  description: Test pattern variable tree sitter node types/fixups
+  remediation_message: Test pattern variable tree sitter node types/fixups
+  cwe_id:
+    - 42
+  id: pattern_fixup_test
