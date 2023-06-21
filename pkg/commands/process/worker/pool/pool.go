@@ -6,10 +6,9 @@ import (
 	"os"
 	"sync"
 
-	"github.com/rs/zerolog/log"
-
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/util/output"
 )
 
 type Pool struct {
@@ -23,7 +22,7 @@ type Pool struct {
 func New(config settings.Config) *Pool {
 	executable, err := os.Executable()
 	if err != nil {
-		log.Fatal().Msgf("failed to get current command executable %s", err)
+		output.Fatal(fmt.Sprintf("failed to get current command executable %s", err))
 	}
 
 	baseArguments := []string{"processing-worker", "--log-level", config.Scan.LogLevel}

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/bearer/bearer/cmd/bearer/build"
 
 	"github.com/bearer/bearer/pkg/commands"
@@ -11,8 +9,7 @@ import (
 
 func main() {
 	if err := run(); err != nil {
-		output.StdErrLogger().Msgf("%s", err)
-		os.Exit(1)
+		output.Fatal(err.Error())
 	}
 }
 

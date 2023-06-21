@@ -21,6 +21,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
+	"github.com/bearer/bearer/pkg/util/output"
 )
 
 var (
@@ -47,7 +48,11 @@ type ProcessOptions struct {
 }
 
 func newProcess(options *ProcessOptions, id string) (*Process, error) {
-	port := allocatePort()
+	port, err := allocatePort()
+	if err != nil {
+		return nil, err
+	}
+
 	log.Debug().Msgf("%s spawning on port %d", id, port)
 
 	arguments := append(
@@ -94,9 +99,9 @@ func (process *Process) start(config settings.Config) error {
 			// custom detector issue ; assume custom rule parse issue
 			var ruleName = strings.TrimSpace(strings.Split(result[1], ":")[0])
 			log.Debug().Msgf(err.Error())
-			log.Fatal().Msgf("could not parse rule %s. Is this a custom rule? See documentation on rule patterns and format https://docs.bearer.com/guides/custom-rule/", ruleName)
+			output.Fatal(fmt.Sprintf("could not parse rule %s. Is this a custom rule? See documentation on rule patterns and format https://docs.bearer.com/guides/custom-rule/", ruleName))
 		} else {
-			log.Fatal().Msgf("failed to start bearer, error with your configuration %s", err)
+			output.Fatal(fmt.Sprintf("failed to start bearer, error with your configuration %s", err))
 		}
 
 		return err
@@ -172,12 +177,12 @@ func (process *Process) initialize(config settings.Config) error {
 
 	marshalledConfig, err := json.Marshal(config)
 	if err != nil {
-		log.Fatal().Err(fmt.Errorf("couldn't marshal config %w", err)).Send()
+		return fmt.Errorf("couldn't marshal config %w", err)
 	}
 
 	request, err := process.buildRequest(work.RouteInitialize, bytes.NewBuffer(marshalledConfig))
 	if err != nil {
-		log.Fatal().Msgf("%s failed to build initialization request %s", process.id, err)
+		return fmt.Errorf("%s failed to build initialization request %s", process.id, err)
 	}
 
 	for {
@@ -287,16 +292,16 @@ func (process *Process) Close() {
 	<-process.exitChannel
 }
 
-func allocatePort() int {
+func allocatePort() (int, error) {
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	if err != nil {
-		log.Fatal().Err(fmt.Errorf("failed to resolve localhost %w", err)).Send()
+		return 0, fmt.Errorf("failed to resolve localhost %w", err)
 	}
 
 	l, err := net.ListenTCP("tcp", addr)
 	if err != nil {
-		log.Fatal().Err(fmt.Errorf("failed to resolve address %w", err)).Send()
+		return 0, fmt.Errorf("failed to resolve address %w", err)
 	}
 	defer l.Close()
-	return l.Addr().(*net.TCPAddr).Port
+	return l.Addr().(*net.TCPAddr).Port, nil
 }

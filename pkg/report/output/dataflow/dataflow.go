@@ -188,7 +188,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	}
 
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Generating dataflow")
+		output.StdErrLog("Generating dataflow")
 	}
 	dataflow := &DataFlow{
 		Datatypes:    dataTypesHolder.ToDataFlow(),

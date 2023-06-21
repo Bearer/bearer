@@ -218,7 +218,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
 	if !opts.Quiet {
-		outputhandler.StdErrLogger().Msg("Loading rules")
+		outputhandler.StdErrLog("Loading rules")
 	}
 
 	github_api.VersionCheck(ctx, opts.GeneralOptions.DisableVersionCheck, opts.ScanOptions.Quiet)
@@ -249,7 +249,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	if !r.CacheUsed() && scanSettings.CacheUsed {
 		// re-cache rules
 		if opts.ScanOptions.Force && !opts.ScanOptions.Quiet {
-			outputhandler.StdOutLogger().Msgf("Caching rules")
+			outputhandler.StdOutLog("Caching rules")
 		}
 		if err = settings.RefreshRules(scanSettings, opts.ExternalRuleDir, opts.RuleOptions, FormatFoundLanguages(inputgocloc.Languages)); err != nil {
 			return err
@@ -261,7 +261,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	case TargetFilesystem:
 		if report, err = r.ScanFilesystem(ctx, opts); err != nil {
 			if errors.Is(err, orchestrator.ErrFileListEmpty) {
-				outputhandler.StdOutLogger().Msgf(err.Error())
+				outputhandler.StdOutLog(err.Error())
 				os.Exit(0)
 				return
 			}
@@ -296,7 +296,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	// if output is defined we want to write only to file
-	logger := outputhandler.StdOutLogger()
+	logger := outputhandler.StdOutLog
 	if config.Report.Output != "" {
 		reportFile, err := os.Create(config.Report.Output)
 		if err != nil {
@@ -307,7 +307,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 
 	if cacheUsed && !config.Scan.Quiet {
 		// output cached data warning at start of report
-		outputhandler.StdErrLogger().Msg("Using cached data")
+		outputhandler.StdErrLog("Using cached data")
 	}
 
 	detections, dataflow, err := reportoutput.GetOutput(report, config)
@@ -329,7 +329,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, err
 		}
 
-		logger.Msg(placeholderStr.String())
+		logger(placeholderStr.String())
 		return true, nil
 	}
 
@@ -339,7 +339,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			detectionReport := detections.(*security.Results)
 			reportStr, reportPassed := security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
 
-			logger.Msg(reportStr.String())
+			logger(reportStr.String())
 
 			return reportPassed, nil
 		} else if config.Report.Report == flag.ReportPrivacy {
@@ -349,7 +349,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 				return false, fmt.Errorf("error generating report %s", err)
 			}
 
-			logger.Msg(*content)
+			logger(*content)
 
 			return true, nil
 		}
@@ -366,7 +366,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, fmt.Errorf("error generating JSON report %s", err)
 		}
 
-		logger.Msg(*content)
+		logger(*content)
 	case flag.FormatReviewDog:
 		sastContent, err := rdo.ReportReviewdog(detections.(*map[string][]security.Result))
 		if err != nil {
@@ -377,7 +377,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, fmt.Errorf("error generating JSON report %s", err)
 		}
 
-		logger.Msg(*content)
+		logger(*content)
 	case flag.FormatGitLabSast:
 
 		sastContent, err := gitlab.ReportGitLab(detections.(*map[string][]security.Result), startTime, endTime)
@@ -389,21 +389,21 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, fmt.Errorf("error generating JSON report %s", err)
 		}
 
-		logger.Msg(*content)
+		logger(*content)
 	case flag.FormatEmpty, flag.FormatJSON:
 		content, err := outputhandler.ReportJSON(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}
 
-		logger.Msg(*content)
+		logger(*content)
 	case flag.FormatYAML:
 		content, err := outputhandler.ReportYAML(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}
 
-		logger.Msg(*content)
+		logger(*content)
 	}
 
 	outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
@@ -415,7 +415,7 @@ func outputCachedDataWarning(cacheUsed bool, quietMode bool) {
 		return
 	}
 
-	outputhandler.StdErrLogger().Msg("Cached data used (no code changes detected). Unexpected? Use --force to force a re-scan.\n")
+	outputhandler.StdErrLog("Cached data used (no code changes detected). Unexpected? Use --force to force a re-scan.\n")
 }
 
 func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {

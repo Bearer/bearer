@@ -2,9 +2,10 @@ package tmpfile
 
 import (
 	"errors"
+	"fmt"
 	"os"
 
-	"github.com/rs/zerolog/log"
+	"github.com/bearer/bearer/pkg/util/output"
 )
 
 var ErrCreateFailed = errors.New("failed to create file")
@@ -12,7 +13,7 @@ var ErrCreateFailed = errors.New("failed to create file")
 func Create(ext string) string {
 	outputFile, err := os.CreateTemp("", "*"+ext)
 	if err != nil {
-		log.Fatal().Msgf("got create fail error %s %s", err, ErrCreateFailed)
+		output.Fatal(fmt.Sprintf("got create fail error %s %s", err, ErrCreateFailed))
 	}
 	outputFile.Close()
 

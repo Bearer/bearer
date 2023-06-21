@@ -134,7 +134,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *dataflow.DataFlow, error) {
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Evaluating rules")
+		output.StdErrLog("Evaluating rules")
 	}
 
 	bar := progressbar.GetProgressBar(len(config.Rules), config, "rules")
@@ -168,7 +168,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 
 		err := bar.Add(1)
 		if err != nil {
-			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %s", rule.Id, err)
+			output.StdErrLog(fmt.Sprintf("Policy %s failed to write progress bar %s", rule.Id, err))
 		}
 
 		if !rule.PolicyType() {
@@ -286,7 +286,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 	}
 
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Compiling privacy report")
+		output.StdErrLog("Compiling privacy report")
 	}
 
 	// get inventory result

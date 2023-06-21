@@ -119,7 +119,7 @@ type Rule struct {
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Results, error) {
 	summaryResults := make(Results)
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Evaluating rules")
+		output.StdErrLog("Evaluating rules")
 	}
 
 	err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
@@ -152,7 +152,7 @@ func evaluateRules(
 		if !builtIn {
 			err := bar.Add(1)
 			if err != nil {
-				output.StdErrLogger().Msgf("Rule %s failed to write progress bar %s", rule.Id, err)
+				output.StdErrLog(fmt.Sprintf("Rule %s failed to write progress bar %s", rule.Id, err))
 			}
 		}
 
