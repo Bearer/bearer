@@ -5,17 +5,22 @@ import (
 
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/patternquery/builder"
+	"github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/rs/zerolog/log"
+	"golang.org/x/exp/slices"
 )
 
 type Query struct {
-	treeQuery          *tree.Query
-	paramToVariable    map[string]string
-	equalParams        [][]string
-	paramToContent     map[string]map[string]string
-	singleVariableName string
+	treeQuery       *tree.Query
+	paramToVariable map[string]string
+	equalParams     [][]string
+	paramToContent  map[string]map[string]string
+}
+
+type RootVariableQuery struct {
+	variable *types.Variable
 }
 
 func Compile(
@@ -23,15 +28,15 @@ func Compile(
 	langImplementation implementation.Implementation,
 	input string,
 	focusedVariable string,
-) (*Query, error) {
+) (types.PatternQuery, error) {
 	builderResult, err := builder.Build(lang, langImplementation, input, focusedVariable)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}
 
-	if builderResult.Query == "" {
-		log.Trace().Msgf("single variable pattern %s -> %s", input, builderResult.SingleVariableName)
-		return &Query{singleVariableName: builderResult.SingleVariableName}, nil
+	if builderResult.RootVariable != nil {
+		log.Trace().Msgf("single variable pattern %s -> %#v", input, *builderResult.RootVariable)
+		return &RootVariableQuery{variable: builderResult.RootVariable}, nil
 	}
 
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
@@ -50,16 +55,6 @@ func Compile(
 }
 
 func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error) {
-	if query.singleVariableName != "" {
-		variables := make(tree.QueryResult)
-		variables[query.singleVariableName] = node
-
-		return []*languagetypes.PatternQueryResult{{
-			MatchNode: node,
-			Variables: variables,
-		}}, nil
-	}
-
 	treeResults, err := query.treeQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
@@ -78,16 +73,6 @@ func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResul
 }
 
 func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error) {
-	if query.singleVariableName != "" {
-		variables := make(tree.QueryResult)
-		variables[query.singleVariableName] = node
-
-		return &languagetypes.PatternQueryResult{
-			MatchNode: node,
-			Variables: variables,
-		}, nil
-	}
-
 	treeResult, err := query.treeQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
@@ -97,9 +82,7 @@ func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryRes
 }
 
 func (query *Query) Close() {
-	if query.treeQuery != nil {
-		query.treeQuery.Close()
-	}
+	query.treeQuery.Close()
 }
 
 func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, rootNode *tree.Node) *languagetypes.PatternQueryResult {
@@ -152,3 +135,39 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 		Variables: variables,
 	}
 }
+
+func (query *RootVariableQuery) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error) {
+	if !query.isCompatibleType(node) {
+		return nil, nil
+	}
+
+	return []*languagetypes.PatternQueryResult{query.resultFor(node)}, nil
+}
+
+func (query *RootVariableQuery) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error) {
+	if !query.isCompatibleType(node) {
+		return nil, nil
+	}
+
+	return query.resultFor(node), nil
+}
+
+func (query *RootVariableQuery) isCompatibleType(node *tree.Node) bool {
+	if slices.Contains(query.variable.NodeTypes, "_") {
+		return true
+	}
+
+	return slices.Contains(query.variable.NodeTypes, node.Type())
+}
+
+func (query *RootVariableQuery) resultFor(node *tree.Node) *languagetypes.PatternQueryResult {
+	variables := make(tree.QueryResult)
+	variables[query.variable.Name] = node
+
+	return &languagetypes.PatternQueryResult{
+		MatchNode: node,
+		Variables: variables,
+	}
+}
+
+func (query *RootVariableQuery) Close() {}
