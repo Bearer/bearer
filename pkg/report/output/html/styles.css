@@ -1,0 +1,241 @@
+body {
+  margin:0;
+  background-color: #fff;
+  font-family: Source Sans Pro, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  padding-bottom: 75px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.1px;
+  color: #272727;
+}
+header {
+  background-color: #F1F4FF;
+}
+h1 {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 110%;
+  letter-spacing: 0.3px;
+  color: #272727;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border-bottom: #EAEAEA 1px solid;
+  padding-bottom: 16px;
+  margin-bottom: 0px;
+}
+h2 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 110%;
+  letter-spacing: 0.3px;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border-bottom: #EAEAEA 1px solid;
+  padding-bottom: 16px;
+}
+h2.privacy {
+  margin-top:64px;
+}
+h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 140%;
+  letter-spacing: 0.2px;
+  color: #000000;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+header{
+  height: 75px;
+}
+section {
+  margin: auto;
+  width:1024px;
+}
+th {
+  text-align: left;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #696969;
+  padding:11px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+td {
+  padding:11px;
+}
+
+table, th, td {
+  border: 1px solid #EAEAEA;
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+}
+
+.header-icon{
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  border-radius: 28px;
+  background-color: #EBEFFF;
+  text-align: center;
+  line-height: 25px;
+  margin-right:8px;
+}
+
+#result-summary {
+  border-bottom: 1px solid #EAEAEA;
+  padding-bottom:16px;
+  margin-bottom:64px;
+}
+
+.finding {
+  border: 1px solid #EAEAEA;
+  margin-top:32px;
+  margin-bottom:32px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.finding summary::marker {
+  content: ""
+}
+
+.finding .head {
+  border-bottom: 1px solid #EAEAEA;
+  padding-bottom:16px;
+  cursor: pointer;
+}
+
+.finding h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  margin:0;
+  border-top: 6px solid #696969;
+  padding: 16px 32px 8px 16px;
+}
+.finding .cwe {
+  padding: 16px;
+  letter-spacing: 0.1px;
+  color: #696969;
+}
+.finding .filename {
+  margin-left: 32px;
+}
+
+.finding .description {
+  padding: 16px 32px;
+  background-color: #F9F9F9;
+  border-top: 1px solid #EAEAEA;
+}
+.finding .description p{
+  margin: 8px 0;
+}
+
+.finding .description h4 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.2px;
+  color: #272727;
+  margin: 4px 0;
+}
+.finding .description p {
+  max-width: 690px;
+}
+.finding .description code {
+  color: #D4D4D4;
+  background: #272727;
+  border-radius: 4px;
+  padding: 4px;
+}
+.finding .description code.language-ruby,
+.finding .description code.language-javascript,
+.finding .description code.language-java {
+  display: flex;
+  padding: 8px;
+  font-family: Source Sans Pro, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.finding h3.critical {
+  border-color:#CC2A3D;
+}
+.finding h3.high {
+  border-color:#CC6A39;
+}
+.finding h3.medium {
+  border-color:#D6971C;
+}
+.finding h3.low {
+  border-color:#01957A;
+}
+.finding h3.warning {
+  border-color: #2A49CC;
+}
+
+span.badge{
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 14px;
+}
+
+span.critical-bg {
+  background-color: #FFE2E6;
+}
+span.high-bg {
+  background-color: #FFEEE5;
+}
+span.medium-bg {
+  background-color: #FFF4DE;
+}
+span.low-bg {
+  background-color: #DBF5F0;
+}
+span.warning-bg {
+  background-color: #F1F4FF;
+}
+span.critical {
+  color: #CC2A3D;
+}
+span.high {
+  color: #CC6A39;
+}
+span.medium {
+  color: #D6971C;
+}
+span.low {
+  color: #01957A;
+}
+span.warning{
+  color:#2A49CC;
+}
+
+.term-container {
+  color: #D4D4D4;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  background: #272727;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 32px;
+  margin-top: 16px;
+  white-space: pre-wrap;
+}
+.term-fg34 { color: #8db7e0; } /* blue */
+.term-fg35 { color: #f271fb; } /* magenta */

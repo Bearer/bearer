@@ -409,10 +409,12 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	case flag.FormatHTML:
 		var body *string
 		var err error
-
+		var title string
 		if config.Report.Report == flag.ReportPrivacy {
+			title = "Privacy Report"
 			body, err = reporthtml.ReportPrivacyHTML(detections.(*privacy.Report))
 		} else {
+			title = "Security Report"
 			body, err = reporthtml.ReportSecurityHTML(detections.(*map[string][]security.Result))
 		}
 
@@ -420,7 +422,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, fmt.Errorf("error generating report %s", err)
 		}
 
-		page, err := reporthtml.ReportHTMLWrapper(body)
+		page, err := reporthtml.ReportHTMLWrapper(title, body)
 
 		if err != nil {
 			return false, fmt.Errorf("error generating report html page %s", err)

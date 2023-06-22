@@ -543,7 +543,7 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	reportStr.WriteString(color.HiBlueString("File: " + underline(result.FullFilename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(highlightCodeExtract(result.FullFilename, result.LineNumber, result.Sink.Start, result.Sink.Content, result))
+	reportStr.WriteString(HighlightCodeExtract(result.FullFilename, result.LineNumber, result.Sink.Start, result.Sink.Content, result))
 }
 
 func formatSeverity(severity string) string {
@@ -554,7 +554,7 @@ func formatSeverity(severity string) string {
 	return severityColorFn(strings.ToUpper(severity + ": "))
 }
 
-func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string, record Result) string {
+func HighlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string, record Result) string {
 	result := ""
 	targetIndex := lineNumber - extractStartLineNumber
 	beforeOrAfterDetectionLinesAllowed := 3

@@ -19,6 +19,8 @@ type PrivacyHTMLBody = struct {
 }
 
 type WrapperHTMLPage = struct {
-	Body  string
-	Title string
+	Body      string
+	Title     string
+	TimeStamp string
+	Style     string
 }

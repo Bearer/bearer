@@ -1,0 +1,32 @@
+	<div id="result-summary">
+    <span class="badge critical critical-bg">C</span>
+    <span class="critical">{{.critical | count }}</span>
+    <span class="badge high high-bg">H</span>
+    <span class="high">{{.high | count }}</span>
+    <span class="badge medium medium-bg">M</span>
+    <span class="medium">{{.medium | count }}</span>
+    <span class="badge low low-bg">L</span>
+    <span class="low">{{.low | count }}</span>
+	</div>
+
+		{{range $severity, $results := .}}
+		{{range $index, $result := $results}}
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="{{$severity}}">
+              <span>{{.Rule.Title}}</span>
+              <span class="badge {{$severity}} {{$severity}}-bg">{{$severity}}</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> {{.Rule.Id}}&nbsp;&nbsp;<strong>CWE:</strong> {{ .Rule.CWEIDs | joinCwe }}
+            </span>
+          </div>
+
+          <p class="filename">Filename: {{.Filename}}:{{.LineNumber}}</p>
+          <div class="term-container">{{. | displayExtract}}</div>
+        </summary>
+				<div class="description">{{.Rule.Description | markdownToHtml }}</div>
+			</details>
+		{{end}}
+		{{end}}
