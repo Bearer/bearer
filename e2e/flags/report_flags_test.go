@@ -14,6 +14,7 @@ func newScanTest(name string, arguments []string) testhelper.TestCase {
 	arguments = append([]string{
 		"scan",
 		"--disable-version-check",
+		"--disable-default-rules",
 		filepath.Join("e2e", "flags", "testdata", "simple")},
 		arguments...,
 	)
