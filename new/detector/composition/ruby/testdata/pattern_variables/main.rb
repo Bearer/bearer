@@ -4,10 +4,13 @@ ignored = 42
 class MatchedClass
 end
 
-# the error parsing is different between classes with bodies and without
 class MatchedClass
-  something :foo
+  validates :password, length: { minimum: 2 }
 end
 
 class IgnoredClass
+end
+
+class IgnoredClass
+  validates :password, length: { minimum: 2 }
 end

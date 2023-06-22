@@ -68,31 +68,31 @@ high:
         title: Test pattern variable tree sitter node types/fixups
         description: Test pattern variable tree sitter node types/fixups
         documentation_url: ""
-      line_number: 8
+      line_number: 7
       full_filename: main.rb
       filename: main.rb
       source:
         location:
-            start: 8
-            end: 10
+            start: 7
+            end: 9
             column:
                 start: 1
                 end: 4
       sink:
         location:
-            start: 8
-            end: 10
+            start: 7
+            end: 9
             column:
                 start: 1
                 end: 4
         content: |-
             class MatchedClass
-              something :foo
+              validates :password, length: { minimum: 2 }
             end
-      parent_line_number: 8
+      parent_line_number: 7
       snippet: |-
         class MatchedClass
-          something :foo
+          validates :password, length: { minimum: 2 }
         end
       fingerprint: 514e95a40b868d7341016d3fa344513d_2
       old_fingerprint: 514e95a40b868d7341016d3fa344513d_2

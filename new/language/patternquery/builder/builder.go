@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
+	"github.com/rs/zerolog/log"
 )
 
 type InputParams struct {
@@ -119,6 +120,7 @@ func fixupInput(
 	insideError := false
 	inputOffset := 0
 
+	byteInput := []byte(input)
 	newInput := []byte(input)
 	fixed := false
 
@@ -141,7 +143,21 @@ func fixupInput(
 			return nil
 		}
 
-		newValue := langImplementation.FixupPatternVariableDummyValue(node, variable.DummyValue)
+		if log.Trace().Enabled() {
+			var parentDebug, grandparentDebug string
+			if parent := node.Parent(); parent != nil {
+				parentDebug = parent.Debug(true)
+				if grandparent := parent.Parent(); grandparent != nil {
+					grandparentDebug = grandparent.Debug(true)
+				}
+			}
+
+			log.Trace().Msgf("attempting pattern fixup. node: %s", node.Debug(true))
+			log.Trace().Msgf("fixup parent: %s", parentDebug)
+			log.Trace().Msgf("fixup grandparent: %s", grandparentDebug)
+		}
+
+		newValue := langImplementation.FixupPatternVariableDummyValue(byteInput, node, variable.DummyValue)
 		if newValue == variable.DummyValue {
 			return nil
 		}

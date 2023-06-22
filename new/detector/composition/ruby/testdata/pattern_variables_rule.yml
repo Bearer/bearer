@@ -13,6 +13,15 @@ patterns:
       - variable: NAME
         values:
           - MatchedClass
+  # the error parsing is different between classes with bodies and without
+  - pattern: |
+      class $<NAME>
+        validates :password, length: { minimum: $<_> }
+      end
+    filters:
+      - variable: NAME
+        values:
+          - MatchedClass
 severity: high
 metadata:
   description: Test pattern variable tree sitter node types/fixups
