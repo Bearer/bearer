@@ -32,6 +32,8 @@ var (
 
 	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
 
+	classPatternErrorRegex = regexp.MustCompile(`\Aclass\s*\z`)
+
 	passthroughMethods = []string{"JSON.parse", "JSON.parse!", "*.to_json"}
 )
 
@@ -166,14 +168,7 @@ func (*rubyImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
 }
 
 func produceDummyValue(i int, nodeType string) string {
-	switch nodeType {
-	case "identifier", "call":
-		return "curioVar" + fmt.Sprint(i)
-	case "simple_symbol":
-		return ":curioVar" + fmt.Sprint(i)
-	default:
-		return "CurioVar" + fmt.Sprint(i)
-	}
+	return "curioVar" + fmt.Sprint(i)
 }
 
 func (*rubyImplementation) PatternLeafContentTypes() []string {
@@ -340,4 +335,19 @@ func (*rubyImplementation) ContributesToResult(node *tree.Node) bool {
 	}
 
 	return true
+}
+
+func (*rubyImplementation) FixupPatternVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
+	for ancestor := node.Parent(); ancestor != nil; ancestor = ancestor.Parent() {
+		if ancestor.Type() != "ERROR" {
+			continue
+		}
+
+		errorPrefix := input[ancestor.StartByte():node.StartByte()]
+		if classPatternErrorRegex.Match(errorPrefix) {
+			return strings.ToUpper(string(dummyValue[0])) + dummyValue[1:]
+		}
+	}
+
+	return dummyValue
 }

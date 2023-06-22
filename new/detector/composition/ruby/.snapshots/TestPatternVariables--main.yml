@@ -1,0 +1,99 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: pattern_fixup_test
+        title: Test pattern variable tree sitter node types/fixups
+        description: Test pattern variable tree sitter node types/fixups
+        documentation_url: ""
+      line_number: 1
+      full_filename: main.rb
+      filename: main.rb
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 22
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 22
+        content: matched_variable = 42
+      parent_line_number: 1
+      snippet: matched_variable = 42
+      fingerprint: 514e95a40b868d7341016d3fa344513d_0
+      old_fingerprint: 514e95a40b868d7341016d3fa344513d_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: pattern_fixup_test
+        title: Test pattern variable tree sitter node types/fixups
+        description: Test pattern variable tree sitter node types/fixups
+        documentation_url: ""
+      line_number: 4
+      full_filename: main.rb
+      filename: main.rb
+      source:
+        location:
+            start: 4
+            end: 5
+            column:
+                start: 1
+                end: 4
+      sink:
+        location:
+            start: 4
+            end: 5
+            column:
+                start: 1
+                end: 4
+        content: |-
+            class MatchedClass
+            end
+      parent_line_number: 4
+      snippet: |-
+        class MatchedClass
+        end
+      fingerprint: 514e95a40b868d7341016d3fa344513d_1
+      old_fingerprint: 514e95a40b868d7341016d3fa344513d_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: pattern_fixup_test
+        title: Test pattern variable tree sitter node types/fixups
+        description: Test pattern variable tree sitter node types/fixups
+        documentation_url: ""
+      line_number: 7
+      full_filename: main.rb
+      filename: main.rb
+      source:
+        location:
+            start: 7
+            end: 9
+            column:
+                start: 1
+                end: 4
+      sink:
+        location:
+            start: 7
+            end: 9
+            column:
+                start: 1
+                end: 4
+        content: |-
+            class MatchedClass
+              validates :password, length: { minimum: 2 }
+            end
+      parent_line_number: 7
+      snippet: |-
+        class MatchedClass
+          validates :password, length: { minimum: 2 }
+        end
+      fingerprint: 514e95a40b868d7341016d3fa344513d_2
+      old_fingerprint: 514e95a40b868d7341016d3fa344513d_2
+

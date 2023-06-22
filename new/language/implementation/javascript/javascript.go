@@ -362,3 +362,16 @@ func isImportedIdentifier(node *tree.Node) bool {
 
 	return false
 }
+
+func (*javascriptImplementation) FixupPatternVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
+	parent := node.Parent()
+	if parent == nil {
+		return dummyValue
+	}
+
+	if parent.NamedChild(0).Type() == "import_clause" {
+		return "\"" + dummyValue + "\""
+	}
+
+	return dummyValue
+}

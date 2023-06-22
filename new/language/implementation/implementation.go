@@ -109,6 +109,7 @@ type Implementation interface {
 	// we want to ignore member_expressions as roots.
 	IsRootOfRuleQuery(node *tree.Node) bool
 	PatternLeafContentTypes() []string
+	FixupPatternVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string
 	// ShouldSkipNode returns wether a node should should be skipped or assigned variable to it
 	// it is useful for cases when you have nested nodes to ignore and want to assign variable to its child
 	//

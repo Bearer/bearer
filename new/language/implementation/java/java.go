@@ -345,3 +345,7 @@ func (*javaImplementation) ContributesToResult(node *tree.Node) bool {
 
 	return true
 }
+
+func (*javaImplementation) FixupPatternVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
+	return dummyValue
+}

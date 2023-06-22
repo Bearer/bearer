@@ -1,0 +1,20 @@
+languages:
+  - javascript
+patterns:
+  - pattern: const $<NAME> = $<_>
+    filters:
+      - variable: NAME
+        values:
+          - matchedVariable
+  - pattern: |
+      import x from $<NAME>
+    filters:
+      - variable: NAME
+        string_regex: \Amatched_package\z
+severity: high
+metadata:
+  description: Test pattern variable tree sitter node types/fixups
+  remediation_message: Test pattern variable tree sitter node types/fixups
+  cwe_id:
+    - 42
+  id: pattern_variables_test
