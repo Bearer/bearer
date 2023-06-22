@@ -1,6 +1,6 @@
 ---
 pagination:
-  data: rules
+  data: rules.rules
   size: 1
   alias: rule
   addAllPagesToCollections: true
@@ -61,7 +61,8 @@ rule.metadata %}
     {% endif %}
   {% endif %}
 
-{% renderTemplate "liquid,md", rule.metadata %}
+  {% renderTemplate "liquid,md",
+  rule.metadata %}
   ## Configuration
 
   To skip this rule during a scan, use the following flag

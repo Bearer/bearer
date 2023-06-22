@@ -87,6 +87,37 @@ module.exports = function (eleventyConfig) {
     return result;
   });
 
+  eleventyConfig.addFilter("keysToArr", (data) => {
+    return Object.keys(data);
+  });
+  eleventyConfig.addFilter("rewriteFrameworks", (word) => {
+    function updatePhrase(word) {
+      const dictionary = {
+        rails: "Ruby on Rails",
+        javascript: "JavaScript / TypeScript",
+        express: "ExpressJS",
+        react: "React",
+        third_parties: "Third party",
+      };
+
+      if (dictionary[word]) {
+        return dictionary[word];
+      }
+      return word;
+    }
+
+    if (typeof word === "string") {
+      return updatePhrase(word);
+    } else if (Array.isArray(word)) {
+      let cleaned = word.filter((w) => w !== "third_parties");
+      return cleaned.map((w) => updatePhrase(w));
+    } else if (typeof word === "object") {
+      let cleaned = Object.keys(word).filter((w) => w !== "third_parties");
+      return cleaned.map((w) => updatePhrase(w));
+    }
+    return word;
+  });
+
   eleventyConfig.addNunjucksFilter("packageMap", (name, manager, group) => {
     switch (manager) {
       case "rubygems":

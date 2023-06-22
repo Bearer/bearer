@@ -1,0 +1,116 @@
+---
+title: Supported Languages
+layout: layouts/doc.njk
+supportChart:
+  ruby:
+    name: Ruby
+    support:
+      - Security
+      - Privacy
+      - Data Flow
+    rules: true
+    searchName: lang-ruby
+    searchTerm: ruby
+  javascript:
+    name: JavaScript / TypeScript
+    support:
+      - Security
+      - Privacy
+      - Data Flow
+    rules: true
+    searchName: lang-jsts
+    searchTerm: javascript
+  java:
+    name: Java
+    support:
+      - Security (Partial)
+      - Privacy
+      - Data Flow
+    rules: true
+    searchName: lang-java
+    searchTerm: java_
+---
+{% renderTemplate "liquid,md" %}
+# Supported languages
+
+Bearer CLI supports the following language and framework combinations.
+{% endrenderTemplate %}
+
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Frameworks</th>
+      <th>Report Types</th>
+      <th>Total rules</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for language, data in supportChart %}
+      <tr>
+        <td>
+          <a href="#{{language}}">{{data.name}}</a>
+        </td>
+        <td>
+          {{ rules
+            .counts
+            .languages[language]
+            .frameworks | rewriteFrameworks | join(", ") }}
+
+        </td>
+        <td>{{supportChart[language].support | join(", ")}}</td>
+        <td>
+          <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{rules.counts.languages[language].count}}</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Support details</h2>
+<p>Select a rule count link below to view the complete rules list for the selected language and framework combination.</p>
+{% for language, data in supportChart %}
+  {# alias language to thisLang #}
+  {% set thisLang = rules
+    .counts
+    .languages[language] %}
+
+  <h3 id="{{language}}">{{data.name}}</h3>
+  <ul>
+
+    {% if true if rules
+      .counts
+      .languages[language]
+      .frameworks | keysToArr | length > 0 else 
+        false %}
+      <li>
+        <strong>Frameworks</strong>: {{ thisLang.frameworks | rewriteFrameworks | join(", ") }}</li>
+    {% endif %}
+    <li>
+      <strong>Report types</strong>: {{ supportChart[language].support | join(", ")}}</li>
+  </ul>
+  {% if supportChart[language].rules %}
+    <h4 class="">Rule support</h4>
+    <ul>
+      <li>Core language rules: <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{thisLang.baseRules | length}}</a>
+      </li>
+      {% if true if rules
+        .counts
+        .languages[language]
+        .frameworks | keysToArr | length > 0 else 
+          false %}
+        {% for framework, val in thisLang.frameworks %}
+          <li>{{val.name | rewriteFrameworks}} rules: <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}&q={{val.name}}">{{val.count}}</a>
+          </li>
+          {% endfor%}
+        {% endif %}
+      </ul>
+    {% endif %}
+  {% endfor %}
+
+  {% renderTemplate "liquid,md" %}
+  ---
+We are working on adding more languages in the coming months, especially PHP, C#, Go, and Python.
+
+Let us know [on Discord](https://discord.com/invite/eaHZBJUXRF) which language you'd like to see next.   
+{% endrenderTemplate %}
