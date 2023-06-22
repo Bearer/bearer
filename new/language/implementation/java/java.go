@@ -157,7 +157,9 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				}
 			}
 
-			if parent.Type() == "formal_parameter" || parent.Type() == "catch_formal_parameter" {
+			if parent.Type() == "formal_parameter" ||
+				parent.Type() == "catch_formal_parameter" ||
+				(parent.Type() == "resource" && node.Equal(parent.ChildByFieldName("name"))) {
 				scope.Assign(node.Content(), node)
 			}
 
@@ -261,7 +263,7 @@ func (implementation *javaImplementation) PatternIsAnchored(node *tree.Node) (bo
 	// function block
 	// lambda () -> {} block
 	// try {} catch () {}
-	unAnchored := []string{"class_body", "block", "try_statement", "catch_type"}
+	unAnchored := []string{"class_body", "block", "try_statement", "catch_type", "resource_specification"}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
