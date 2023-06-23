@@ -1,0 +1,90 @@
+{
+  "subjects": [
+    {
+      "subject_name": "User",
+      "name": "Email Address",
+      "detection_count": 9,
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 6,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 40
+    },
+    {
+      "subject_name": "User",
+      "name": "Fullname",
+      "detection_count": 4,
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 1,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 45
+    },
+    {
+      "subject_name": "User",
+      "name": "Telephone Number",
+      "detection_count": 1,
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 0,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 46
+    },
+    {
+      "subject_name": "Unknown",
+      "name": "Physical Address",
+      "detection_count": 2,
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 0,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 46
+    },
+    {
+      "subject_name": "Unknown",
+      "name": "Transactions",
+      "detection_count": 7,
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 0,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 46
+    },
+    {
+      "subject_name": "Unknown",
+      "name": "Unique Identifier",
+      "detection_count": 2,
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 0,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 46
+    }
+  ],
+  "third_party": [
+    {
+      "third_party": "Segment",
+      "subject_name": "Unknown",
+      "data_types": [
+        "Unknown"
+      ],
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 0,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 0
+    },
+    {
+      "third_party": "Sentry",
+      "subject_name": "User",
+      "data_types": [
+        "Email Address"
+      ],
+      "critical_risk_failure_count": 0,
+      "high_risk_failure_count": 1,
+      "medium_risk_failure_count": 0,
+      "low_risk_failure_count": 0,
+      "rules_passed_count": 1
+    }
+  ]
+}
