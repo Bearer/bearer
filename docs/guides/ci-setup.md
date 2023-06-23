@@ -23,11 +23,11 @@ For more details and additional configuration, see our [guide to using the GitHu
 To integrate Bearer CLI with GitLab CI/CD, we recommend using the docker entrypoint method. Edit your existing `.gitlab-ci.yml` file or add one to your repository root, then add the following lines:
 
 ```yml
-image:
-  name: bearer/bearer
-  entrypoint: [ "" ]
-
 bearer:
+  image:
+    name: bearer/bearer
+    entrypoint: [ "" ]
+
   script: bearer scan .
 ```
 
@@ -44,11 +44,10 @@ GitLab offers an integrated security scanner that can take results from Bearer C
 To take advantage of this, you'll need a GitLab plan that supports it. Then, you can configure your `.gitlab-ci.yml` file with Bearer CLI's special format type.
 
 ```yml
-image:
-  name: bearer/bearer
-  entrypoint: [ "" ]
-
 bearer:
+  image:
+    name: bearer/bearer
+    entrypoint: [ "" ]
   script:
     - bearer scan . --format gitlab-sast --output gl-sast-report.json
 

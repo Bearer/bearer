@@ -15,7 +15,7 @@ To connect Bearer CLI to Bearer Cloud, you'll first need to generate an API toke
 
 ## Add the API token to Bearer CLI
 
-Use the API token any place where you run a scan. 
+Use the API token any place where you run a scan.
 
 ### Local projects
 
@@ -58,11 +58,10 @@ Set up the [GitLab CI configuration](/guides/ci-setup/#gitlab), then adjust your
 
 ```yml
 # .gitlab-ci.yml
-image:
-  name: bearer/bearer
-  entrypoint: [ "" ]
-
 bearer:
+  image:
+    name: bearer/bearer
+    entrypoint: [ "" ]
   script: bearer scan . --api-key=$BEARER_TOKEN
 ```
 
