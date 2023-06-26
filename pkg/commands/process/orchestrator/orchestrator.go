@@ -201,7 +201,7 @@ func getParallel(fileCount int, config settings.Config) int {
 	result := fileCount / settings.FilesPerWorker
 
 	if result == 0 {
-		return 1
+		return 2
 	}
 
 	if result > runtime.NumCPU() {
