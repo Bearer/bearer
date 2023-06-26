@@ -24,7 +24,16 @@ type objectDetector struct {
 
 func New(lang languagetypes.Language) (types.Detector, error) {
 	// user = <object>
-	assignmentQuery, err := lang.CompileQuery(`(assignment_expression left: (identifier) @name right: (_) @value) @root`)
+	// User user = <object>
+	assignmentQuery, err := lang.CompileQuery(`[
+		(assignment_expression left: (identifier) @name right: (_) @value) @root
+		(
+    	local_variable_declaration (
+        	variable_declarator (identifier) @name
+            value: (object_creation_expression) @value
+        )
+    ) @root
+	]`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling assignment query: %s", err)
 	}
@@ -89,6 +98,7 @@ func (detector *objectDetector) getAssignment(
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
+
 	if result == nil || err != nil {
 		return nil, err
 	}
