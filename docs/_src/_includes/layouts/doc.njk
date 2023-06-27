@@ -3,18 +3,21 @@ layout: layouts/base.njk
 ---
 {% set currentUrl = page.url %}
 <main class="wrap mx-auto flex flex-col sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4 pt-4">
-	<nav class="hidden self-stretch top-heading-offset sm:revert sm:self-start sticky  col-span-1  bg-white dark:bg-neutral-600 z-10 pb-4 text-sm lg:text-base" id="doc-nav" >
+	<nav class="hidden self-stretch overflow-y-scroll max-h-[85vh] top-heading-offset sm:revert sm:self-start sticky  col-span-1  bg-white dark:bg-neutral-600 z-10 pb-4 text-sm lg:text-base" id="doc-nav" >
 		<ul>
 			{% for heading in nav %}
 				<li class="mb-4">
-					<h2 class="font-bold text-md">{{heading.name}}</h2>
-					<ul class="ml-2">
-						{% for item in heading.items %}
-							<li>
-								<a class="hover:underline block" {% if navHighlight(item.url, page.url) %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
-							</li>
-						{% endfor %}
-					</ul>
+					<details {{"open" if heading.open }} >
+						<summary class="font-bold text-md cursor-pointer leading-8 flex items-center">{{heading.name}}
+							<span class="transition-transform -rotate-90">{%include 'icon-chevron.njk' %}</span></summary>
+						<ul class="ml-2">
+							{% for item in heading.items %}
+								<li>
+									<a class="hover:underline block" {% if navHighlight(item.url, page.url) %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</details>
 				</li>
 			{% endfor %}
 		</ul>

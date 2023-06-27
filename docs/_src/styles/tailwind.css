@@ -109,6 +109,12 @@
   [aria-current="page"] {
     @apply text-main dark:text-main-300 font-semibold;
   }
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] span {
+    @apply rotate-0;
+  }
 
   .start-self {
     align-self: start;
