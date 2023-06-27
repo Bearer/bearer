@@ -27,7 +27,8 @@ func TestJuiceShopSecurityHtml(t *testing.T) {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}
 
-	cupaloy.SnapshotT(t, output)
+	snapshotter := cupaloy.New(cupaloy.SnapshotFileExtension(".html"))
+	snapshotter.SnapshotT(t, []byte(*output))
 }
 func TestBearPublishingPrivacyHtml(t *testing.T) {
 	privacyOutput, err := os.ReadFile("testdata/bear-publishing-privacy-report.json")
@@ -45,6 +46,6 @@ func TestBearPublishingPrivacyHtml(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}
-
-	cupaloy.SnapshotT(t, output)
+	snapshotter := cupaloy.New(cupaloy.SnapshotFileExtension(".html"))
+	snapshotter.SnapshotT(t, []byte(*output))
 }

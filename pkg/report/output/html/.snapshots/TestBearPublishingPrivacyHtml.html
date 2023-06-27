@@ -5,9 +5,7 @@
         </svg>
       </span>
 			Data Subjects
-		</h2>
-	{{- range .GroupedDataSubject -}}
-		<h3 id="{{.DataSubjectName | kebabCase }}">{{.DataSubjectName }}</h3>
+		</h2><h3 id="user">User</h3>
 		<table>
 			<tr>
 				<th>Data Type</th>
@@ -17,30 +15,72 @@
 				<th>Medium Risk Findings</th>
 				<th>Low Risk Findings</th>
 				<th>Rules Passed</th>
-			</tr>
-		{{- range .Subject -}}
+			</tr><tr>
+				<td>Email Address</td>
+				<td>9</td>
+				<td>0</td>
+				<td>6</td>
+				<td>0</td>
+				<td>0</td>
+				<td>40</td>
+			</tr><tr>
+				<td>Fullname</td>
+				<td>4</td>
+				<td>0</td>
+				<td>1</td>
+				<td>0</td>
+				<td>0</td>
+				<td>45</td>
+			</tr><tr>
+				<td>Telephone Number</td>
+				<td>1</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>46</td>
+			</tr></table><h3 id="unknown">Unknown</h3>
+		<table>
 			<tr>
-				<td>{{.DataType}}</td>
-				<td>{{.DetectionCount}}</td>
-				<td>{{.CriticalRiskFindingCount}}</td>
-				<td>{{.HighRiskFindingCount}}</td>
-				<td>{{.MediumRiskFindingCount}}</td>
-				<td>{{.LowRiskFindingCount}}</td>
-				<td>{{.RulesPassedCount}}</td>
-			</tr>
-		{{- end -}}
-		</table>
-	{{- end -}}
-		<h2 class="privacy">
+				<th>Data Type</th>
+				<th>Detection Count</th>
+				<th>Critical Risk Findings</th>
+				<th>High Risk Findings</th>
+				<th>Medium Risk Findings</th>
+				<th>Low Risk Findings</th>
+				<th>Rules Passed</th>
+			</tr><tr>
+				<td>Physical Address</td>
+				<td>2</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>46</td>
+			</tr><tr>
+				<td>Transactions</td>
+				<td>7</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>46</td>
+			</tr><tr>
+				<td>Unique Identifier</td>
+				<td>2</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>46</td>
+			</tr></table><h2 class="privacy">
 			<span class="header-icon">
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M10.5011 8C9.85859 8 9.23734 7.71313 8.75109 7.1925C8.27828 6.68469 7.98953 6.0075 7.93859 5.28625C7.88422 4.51688 8.11891 3.80938 8.59922 3.29375C9.07953 2.77813 9.75109 2.5 10.5011 2.5C11.2458 2.5 11.9192 2.78312 12.398 3.2975C12.8814 3.81687 13.1167 4.52312 13.0623 5.28594C13.0102 6.00812 12.7217 6.685 12.2498 7.19219C11.7648 7.71312 11.1439 8 10.5011 8ZM14.6208 13.5H6.38172C6.24925 13.5007 6.11839 13.471 5.9992 13.4132C5.88001 13.3554 5.77568 13.271 5.69422 13.1666C5.60781 13.0533 5.54814 12.922 5.51968 12.7824C5.49121 12.6429 5.49469 12.4987 5.52984 12.3606C5.79297 11.3041 6.44484 10.4278 7.41484 9.82687C8.27578 9.29375 9.37172 9 10.5011 9C11.6527 9 12.7198 9.28125 13.5858 9.81406C14.558 10.4119 15.2108 11.2931 15.4727 12.3625C15.5074 12.5006 15.5105 12.6448 15.4817 12.7843C15.4529 12.9238 15.393 13.055 15.3064 13.1681C15.225 13.2721 15.1209 13.3561 15.0021 13.4136C14.8832 13.4711 14.7528 13.5007 14.6208 13.5ZM4.59484 8.125C3.49516 8.125 2.52828 7.1025 2.43859 5.84594C2.39422 5.20219 2.59484 4.60687 3.00109 4.17031C3.40297 3.73812 3.96984 3.5 4.59484 3.5C5.21984 3.5 5.78234 3.73938 6.18641 4.17406C6.59578 4.61406 6.79578 5.20812 6.74891 5.84656C6.65922 7.10281 5.69266 8.125 4.59484 8.125ZM6.64672 9.10781C6.09703 8.83906 5.38359 8.70469 4.59516 8.70469C3.67453 8.70469 2.78047 8.94469 2.07734 9.38031C1.28016 9.875 0.743906 10.5953 0.527344 11.465C0.495651 11.5901 0.492654 11.7207 0.518575 11.8471C0.544497 11.9736 0.598666 12.0925 0.677031 12.195C0.75139 12.2905 0.846651 12.3676 0.955489 12.4205C1.06433 12.4733 1.18384 12.5006 1.30484 12.5H4.77359C4.83214 12.5 4.88883 12.4794 4.93377 12.4419C4.97872 12.4044 5.00907 12.3523 5.01953 12.2947C5.02297 12.275 5.02734 12.2553 5.03234 12.2359C5.29734 11.1716 5.91828 10.2722 6.83578 9.61656C6.86953 9.59224 6.89667 9.55988 6.91475 9.52241C6.93283 9.48495 6.94127 9.44356 6.93932 9.40201C6.93736 9.36046 6.92507 9.32005 6.90355 9.28445C6.88203 9.24884 6.85197 9.21917 6.81609 9.19812C6.76703 9.16937 6.71078 9.13906 6.64672 9.10781Z" fill="#345BFF"/>
 				</svg>
 			</span>
 			Third Parties
-		</h2>
-	{{- range .GroupedThirdParty -}}
-		<h3>{{.ThirdPartyName}}</h3>
+		</h2><h3>Segment</h3>
 		<table>
 			<tr>
 				<th>Subject / Data Type</th>
@@ -49,29 +89,38 @@
 				<th>Medium Risk Findings</th>
 				<th>Low Risk Findings</th>
 				<th>Rules Passed</th>
-			</tr>
-			{{- range .ThirdParty -}}
-			<tr>
+			</tr><tr>
 				<td>
-				{{if eq .RulesPassedCount 0}}
+				
 					N/A
-				{{else}}
-					<details>
-						<summary><a href="#{{.DataSubject | kebabCase }}">{{.DataSubject}}</a></summary>
-						<ul>
-						{{- range .DataTypes -}}
-							<li>{{.}}</li>
-						{{- end -}}
-						</ul>
-					</details>
-				{{end}}
+				
 				</td>
-				<td>{{.CriticalRiskFindingCount}}</td>
-				<td>{{.HighRiskFindingCount}}</td>
-				<td>{{.MediumRiskFindingCount}}</td>
-				<td>{{.LowRiskFindingCount}}</td>
-				<td>{{.RulesPassedCount}}</td>
-			</tr>
-		{{- end -}}
-		</table>
-	{{- end -}}
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr></table><h3>Sentry</h3>
+		<table>
+			<tr>
+				<th>Subject / Data Type</th>
+				<th>Critical Risk Findings</th>
+				<th>High Risk Findings</th>
+				<th>Medium Risk Findings</th>
+				<th>Low Risk Findings</th>
+				<th>Rules Passed</th>
+			</tr><tr>
+				<td>
+				
+					<details>
+						<summary><a href="#user">User</a></summary>
+						<ul><li>Email Address</li></ul>
+					</details>
+				
+				</td>
+				<td>0</td>
+				<td>1</td>
+				<td>0</td>
+				<td>0</td>
+				<td>1</td>
+			</tr></table>
