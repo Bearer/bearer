@@ -4,7 +4,7 @@ title: Run a data flow report
 
 # Run a data flow report
 
-Bearer CLI's [data flow report type](/explanations/reports/#data-flow-report) 
+Bearer CLI's [data flow report type](/explanations/reports/#data-flow-report) provides additional details about the underlying detections and classifications Bearer CLI makes during a scan. It's a good next step if you need more details than the security report offers.
 
 The data flow report is made up of four sections:
 
