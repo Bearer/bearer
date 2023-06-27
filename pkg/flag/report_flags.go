@@ -12,6 +12,7 @@ var (
 	FormatSarif      = "sarif"
 	FormatJSON       = "json"
 	FormatYAML       = "yaml"
+	FormatHTML       = "html"
 	FormatEmpty      = ""
 
 	ReportPrivacy   = "privacy"
@@ -24,7 +25,9 @@ var (
 	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
-var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml, sarif, gitlab-sast, rdjson")
+var ErrInvalidFormatSecurity = errors.New("invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html")
+var ErrInvalidFormatPrivacy = errors.New("invalid format argument for privacy report; supported values: json, yaml html")
+var ErrInvalidFormatDefault = errors.New("invalid format argument; supported values: json, yaml")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: security, privacy")
 var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 
@@ -34,7 +37,7 @@ var (
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatEmpty,
-		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast, rdjson)",
+		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)",
 	}
 	ReportFlag = Flag{
 		Name:       "report",
@@ -103,10 +106,13 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 }
 
 func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
+	invalidFormat := ErrInvalidFormatDefault
 	report := getString(f.Report)
 	switch report {
 	case ReportPrivacy:
+		invalidFormat = ErrInvalidFormatPrivacy
 	case ReportSecurity:
+		invalidFormat = ErrInvalidFormatSecurity
 	case ReportDataFlow:
 	// hidden flags for development use
 	case ReportDetectors:
@@ -121,12 +127,16 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	case FormatYAML:
 	case FormatJSON:
 	case FormatEmpty:
+	case FormatHTML:
+		if report != ReportPrivacy && report != ReportSecurity {
+			return ReportOptions{}, invalidFormat
+		}
 	case FormatSarif, FormatGitLabSast, FormatReviewDog:
 		if report != ReportSecurity {
-			return ReportOptions{}, ErrInvalidFormat
+			return ReportOptions{}, invalidFormat
 		}
 	default:
-		return ReportOptions{}, ErrInvalidFormat
+		return ReportOptions{}, invalidFormat
 	}
 
 	severity := getStringSlice(f.Severity)

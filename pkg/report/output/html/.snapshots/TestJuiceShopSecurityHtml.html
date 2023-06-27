@@ -1,0 +1,2148 @@
+	<div id="result-summary">
+    <span class="badge critical critical-bg">C</span>
+    <span class="critical">0</span>
+    <span class="badge high high-bg">H</span>
+    <span class="high">20</span>
+    <span class="badge medium medium-bg">M</span>
+    <span class="medium">32</span>
+    <span class="badge low low-bg">L</span>
+    <span class="low">0</span>
+	</div>
+		
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Possible path traversal vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_path_traversal&nbsp;&nbsp;<strong>CWE:</strong> CWE 22
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/dataErasure.ts:69</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Allowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid wherever possible</p>
+
+<p>✅ Sanitize user input when resolving paths, for example:
+- Use <code>replace()</code> to mitigate against unwanted patterns in the path (such as <code>\..\..</code>)
+- Actively guard against paths that end in &ldquo;%00&rdquo; (poison NULL byte attacks)
+- Use path concatenation to ensure the intended scope is respected</p>
+
+<pre><code class="language-javascript">const path = require(&quot;path&quot;);
+
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  if (req.params.path.indexOf('\0')) !== -1 {
+    // prevent access
+  }
+
+  var folder = req.params.path.replace(/^(\.\.(\/|\\|$))+/, '')
+
+  var pathname = path.join(&quot;/public/&quot;, folder)
+  if pathname.indexOf(&quot;/public/&quot;) !== 0 {
+    // prevent access
+  }
+
+  path.resolve(pathname)
+})
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/Path_Traversal">OWASP path traversal</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Possible path traversal vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_path_traversal&nbsp;&nbsp;<strong>CWE:</strong> CWE 22
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/keyServer.ts:14</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Allowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid wherever possible</p>
+
+<p>✅ Sanitize user input when resolving paths, for example:
+- Use <code>replace()</code> to mitigate against unwanted patterns in the path (such as <code>\..\..</code>)
+- Actively guard against paths that end in &ldquo;%00&rdquo; (poison NULL byte attacks)
+- Use path concatenation to ensure the intended scope is respected</p>
+
+<pre><code class="language-javascript">const path = require(&quot;path&quot;);
+
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  if (req.params.path.indexOf('\0')) !== -1 {
+    // prevent access
+  }
+
+  var folder = req.params.path.replace(/^(\.\.(\/|\\|$))+/, '')
+
+  var pathname = path.join(&quot;/public/&quot;, folder)
+  if pathname.indexOf(&quot;/public/&quot;) !== 0 {
+    // prevent access
+  }
+
+  path.resolve(pathname)
+})
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/Path_Traversal">OWASP path traversal</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Possible path traversal vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_path_traversal&nbsp;&nbsp;<strong>CWE:</strong> CWE 22
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/logfileServer.ts:14</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Allowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid wherever possible</p>
+
+<p>✅ Sanitize user input when resolving paths, for example:
+- Use <code>replace()</code> to mitigate against unwanted patterns in the path (such as <code>\..\..</code>)
+- Actively guard against paths that end in &ldquo;%00&rdquo; (poison NULL byte attacks)
+- Use path concatenation to ensure the intended scope is respected</p>
+
+<pre><code class="language-javascript">const path = require(&quot;path&quot;);
+
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  if (req.params.path.indexOf('\0')) !== -1 {
+    // prevent access
+  }
+
+  var folder = req.params.path.replace(/^(\.\.(\/|\\|$))+/, '')
+
+  var pathname = path.join(&quot;/public/&quot;, folder)
+  if pathname.indexOf(&quot;/public/&quot;) !== 0 {
+    // prevent access
+  }
+
+  path.resolve(pathname)
+})
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/Path_Traversal">OWASP path traversal</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Possible path traversal vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_path_traversal&nbsp;&nbsp;<strong>CWE:</strong> CWE 22
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/quarantineServer.ts:14</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Allowing unsanitized user input in path resolution methods means an attacker could gain access to files and folders outside of the intended scope.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid wherever possible</p>
+
+<p>✅ Sanitize user input when resolving paths, for example:
+- Use <code>replace()</code> to mitigate against unwanted patterns in the path (such as <code>\..\..</code>)
+- Actively guard against paths that end in &ldquo;%00&rdquo; (poison NULL byte attacks)
+- Use path concatenation to ensure the intended scope is respected</p>
+
+<pre><code class="language-javascript">const path = require(&quot;path&quot;);
+
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  if (req.params.path.indexOf('\0')) !== -1 {
+    // prevent access
+  }
+
+  var folder = req.params.path.replace(/^(\.\.(\/|\\|$))+/, '')
+
+  var pathname = path.join(&quot;/public/&quot;, folder)
+  if pathname.indexOf(&quot;/public/&quot;) !== 0 {
+    // prevent access
+  }
+
+  path.resolve(pathname)
+})
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/Path_Traversal">OWASP path traversal</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Hardcoded secret detected</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_hardcoded_secret&nbsp;&nbsp;<strong>CWE:</strong> CWE 798
+            </span>
+          </div>
+
+          <p class="filename">Filename: lib/insecurity.ts:43</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Code is not a safe place to store secrets, use environment variables instead.</p>
+
+<h4>Remediations</h2>
+
+<pre><code class="language-javascript">  passport.use(new OAuth2Strategy({
+      authorizationURL: 'https://www.example.com/oauth2/authorize',
+      tokenURL: 'https://www.example.com/oauth2/token',
+      clientID:  process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: &quot;http://localhost:3000/auth/example/callback&quot;
+    },
+    function(accessToken, refreshToken, profile, cb) {
+      User.findOrCreate({ exampleId: profile.id }, function (err, user) {
+        return cb(err, user);
+      });
+    }
+  ));
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password">OWASP hardcoded passwords</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Hardcoded secret detected</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_hardcoded_secret&nbsp;&nbsp;<strong>CWE:</strong> CWE 798
+            </span>
+          </div>
+
+          <p class="filename">Filename: lib/insecurity.ts:166</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Code is not a safe place to store secrets, use environment variables instead.</p>
+
+<h4>Remediations</h2>
+
+<pre><code class="language-javascript">  passport.use(new OAuth2Strategy({
+      authorizationURL: 'https://www.example.com/oauth2/authorize',
+      tokenURL: 'https://www.example.com/oauth2/token',
+      clientID:  process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: &quot;http://localhost:3000/auth/example/callback&quot;
+    },
+    function(accessToken, refreshToken, profile, cb) {
+      User.findOrCreate({ exampleId: profile.id }, function (err, user) {
+        return cb(err, user);
+      });
+    }
+  ));
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password">OWASP hardcoded passwords</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>HTTP communication with user-controlled destination detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_http_url_using_user_input&nbsp;&nbsp;<strong>CWE:</strong> CWE 918
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/profileImageUrlUpload.ts:22</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Applications should not connect to locations formed from user input.
+This rule checks for URLs containing user-supplied data.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid using user input in HTTP URLs:</p>
+
+<pre><code class="language-javascript">const response = axios.get(`https://${req.params.host}`)
+</code></pre>
+
+<p>✅ Use user input indirectly to form a URL:</p>
+
+<pre><code class="language-javascript">const hosts = new Map([
+  [&quot;option1&quot;, &quot;api1.com&quot;],
+  [&quot;option2&quot;, &quot;api2.com&quot;]
+])
+
+const host = hosts.get(req.params.host)
+const response = axois.get(`https://${host}`)
+</code></pre>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Hardcoded JWT secret detected</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_jwt_hardcoded_secret&nbsp;&nbsp;<strong>CWE:</strong> CWE 798
+            </span>
+          </div>
+
+          <p class="filename">Filename: lib/insecurity.ts:55</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Code is not a secure place to store secrets, use environment variables instead.</p>
+
+<h4>Remediations</h2>
+
+<p>Use environment variables</p>
+
+<pre><code class="language-javascript">  var jwt = require(&quot;jsonwebtoken&quot;);
+
+  var token = jwt.sign({ foo: &quot;bar&quot; }, process.env.JWT_SECRET);
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password">OWASP hardcoded passwords</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>Sensitive data stored in HTML local storage detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_session&nbsp;&nbsp;<strong>CWE:</strong> CWE 312
+            </span>
+          </div>
+
+          <p class="filename">Filename: frontend/src/app/login/login.component.ts:102</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Sensitive data should not be stored in a <code>localStorage</code> session. This policy looks for any sensitive data stored within the localstorage.</p>
+
+<h4>Remediations</h2>
+
+<p>It&rsquo;s best to avoid storing sensitive data in <code>localStorage</code> whenever possible. To keep session data safe, use a server-based session storage solution instead.</p>
+
+<p>❌ If you do need do store data in <code>localStorage</code>, avoid including sensitive data:</p>
+
+<pre><code class="language-javascript">localStorage.setItem('user', email)
+</code></pre>
+
+<p>✅ Instead, use a unique identifier:</p>
+
+<pre><code class="language-javascript">localStorage.setItem('user', user.uuid)
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">OWASP sensitive data exposure</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/dbSchemaChallenge_1.ts:5</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/dbSchemaChallenge_3.ts:11</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/loginAdminChallenge_1.ts:20</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/loginBenderChallenge_1.ts:20</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/loginBenderChallenge_4.ts:17</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/loginJimChallenge_2.ts:17</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/loginJimChallenge_4.ts:20</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/unionSqlInjectionChallenge_1.ts:6</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/unionSqlInjectionChallenge_3.ts:10</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/login.ts:36</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="high">
+              <span>SQL injection vulnerability detected.</span>
+              <span class="badge high high-bg">high</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_sql_injection&nbsp;&nbsp;<strong>CWE:</strong> CWE 89
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/search.ts:23</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Including unsanitized data, such as user input or request data, in raw SQL queries makes your application vulnerable to SQL injection attacks.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid raw queries, especially those that contain unsanitized user input</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(&quot;SELECT * FROM users WHERE ID = &quot; + req.params.userId);
+</code></pre>
+
+<p>Instead, consider the following approaches when writing SQL queries</p>
+
+<p>✅ Validate query input wherever possible</p>
+
+<pre><code class="language-javascript">  var rawId = req.params.userId
+  if !(/[0-9]+/.test(rawId)) {
+    // input is unexpected; don't make the query
+  }
+</code></pre>
+
+<p>✅ Use prepared (or parameterized) statements when querying</p>
+
+<p>Sequelize example -</p>
+
+<pre><code class="language-javascript">  var sqlite = new Sequelize(&quot;sqlite::memory:&quot;);
+  sqlite.query(
+    &quot;SELECT * FROM users WHERE ID = ?&quot;,
+    { replacements: [req.params.userId] },
+    type: sequelize.QueryTypes.SELECT
+  )
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/SQL_Injection">OWASP SQL injection explained</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP SQL injection prevention cheat sheet</a></li>
+</ul>
+</div>
+			</details>
+		
+		
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts:2</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_1_correct.ts:7</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_2.ts:2</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_2.ts:7</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_2.ts:11</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_3.ts:2</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_3.ts:7</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_3.ts:11</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_4.ts:2</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/accessLogDisclosureChallenge_4.ts:7</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_1_correct.ts:2</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_1_correct.ts:6</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_2.ts:6</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_2.ts:10</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_3.ts:2</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_3.ts:5</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_3.ts:9</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_4.ts:2</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_4.ts:7</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/directoryListingChallenge_4.ts:11</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: server.ts:241</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: server.ts:246</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Missing access restriction to directory listing detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_exposed_dir_listing&nbsp;&nbsp;<strong>CWE:</strong> CWE 548
+            </span>
+          </div>
+
+          <p class="filename">Filename: server.ts:250</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Inappropriate exposure of a directory listing could give attackers access to sensitive data or source code, either directly or through exploitation of an exposed file structure.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Restrict access to sensitive directories and files</p>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://expressjs.com/en/resources/middleware/serve-index.html">Express Serve index middleware</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>External control of filename or path detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_external_file_upload&nbsp;&nbsp;<strong>CWE:</strong> CWE 73
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/keyServer.ts:14</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Set the root option to be an absolute path to a directory</p>
+
+<pre><code class="language-javascript">app.post(&quot;/upload&quot;, (req, res) =&gt; {
+  var options = {
+    root: path.join(__dirname, &quot;upload&quot;)
+  }
+  res.sendFile(req.params.filename, options)
+}
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="http://expressjs.com/en/5x/api.html#res.sendFile">Express sendFile API reference</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>External control of filename or path detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_external_file_upload&nbsp;&nbsp;<strong>CWE:</strong> CWE 73
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/logfileServer.ts:14</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Set the root option to be an absolute path to a directory</p>
+
+<pre><code class="language-javascript">app.post(&quot;/upload&quot;, (req, res) =&gt; {
+  var options = {
+    root: path.join(__dirname, &quot;upload&quot;)
+  }
+  res.sendFile(req.params.filename, options)
+}
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="http://expressjs.com/en/5x/api.html#res.sendFile">Express sendFile API reference</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>External control of filename or path detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_external_file_upload&nbsp;&nbsp;<strong>CWE:</strong> CWE 73
+            </span>
+          </div>
+
+          <p class="filename">Filename: routes/quarantineServer.ts:14</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Passing unsanitized user input to the sendFile API is bad practice and can lead to path manipulation, by which attackers can gain access to resources and data outside of the intended scope.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Set the root option to be an absolute path to a directory</p>
+
+<pre><code class="language-javascript">app.post(&quot;/upload&quot;, (req, res) =&gt; {
+  var options = {
+    root: path.join(__dirname, &quot;upload&quot;)
+  }
+  res.sendFile(req.params.filename, options)
+}
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="http://expressjs.com/en/5x/api.html#res.sendFile">Express sendFile API reference</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Unrevoked JWT detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_jwt_not_revoked&nbsp;&nbsp;<strong>CWE:</strong> CWE 525
+            </span>
+          </div>
+
+          <p class="filename">Filename: lib/insecurity.ts:53</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>The best practice caching policy is to revoke JWTs especially when these contain senstitive information.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Ensure JWTs are short-lived by revoking them</p>
+
+<pre><code class="language-javascript">expressjwt({
+  ...
+  isRevoked: this.customRevokeCall(),
+  ...
+})
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://github.com/auth0/express-jwt#revoked-tokens">ExpressJWT documentation on revoking tokens</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Unrevoked JWT detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_express_jwt_not_revoked&nbsp;&nbsp;<strong>CWE:</strong> CWE 525
+            </span>
+          </div>
+
+          <p class="filename">Filename: lib/insecurity.ts:54</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>The best practice caching policy is to revoke JWTs especially when these contain senstitive information.</p>
+
+<h4>Remediations</h2>
+
+<p>✅ Ensure JWTs are short-lived by revoking them</p>
+
+<pre><code class="language-javascript">expressjwt({
+  ...
+  isRevoked: this.customRevokeCall(),
+  ...
+})
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://github.com/auth0/express-jwt#revoked-tokens">ExpressJWT documentation on revoking tokens</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Manual HTML sanitization detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_manual_html_sanitization&nbsp;&nbsp;<strong>CWE:</strong> CWE 79
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/redirectChallenge_3.ts:22</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Sanitizing HTML manually is error prone and can lead to Cross Site
+Scripting (XSS) vulnerabilities.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid manually escaping HTML:</p>
+
+<pre><code class="language-javascript">const sanitizedUserInput = user.Input
+  .replaceAll('&lt;', '&amp;lt;')
+  .replaceAll('&gt;', '&amp;gt;');
+const html = `&lt;strong&gt;${sanitizedUserInput}&lt;/strong&gt;`;
+</code></pre>
+
+<p>✅ Use a HTML sanitization library:</p>
+
+<pre><code class="language-javascript">import sanitizeHtml from 'sanitize-html';
+
+const html = sanitizeHtml(`&lt;strong&gt;${user.Input}&lt;/strong&gt;`);
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/xss/">OWASP XSS explained</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Manual HTML sanitization detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_manual_html_sanitization&nbsp;&nbsp;<strong>CWE:</strong> CWE 79
+            </span>
+          </div>
+
+          <p class="filename">Filename: data/static/codefixes/restfulXssChallenge_2.ts:59</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Sanitizing HTML manually is error prone and can lead to Cross Site
+Scripting (XSS) vulnerabilities.</p>
+
+<h4>Remediations</h2>
+
+<p>❌ Avoid manually escaping HTML:</p>
+
+<pre><code class="language-javascript">const sanitizedUserInput = user.Input
+  .replaceAll('&lt;', '&amp;lt;')
+  .replaceAll('&gt;', '&amp;gt;');
+const html = `&lt;strong&gt;${sanitizedUserInput}&lt;/strong&gt;`;
+</code></pre>
+
+<p>✅ Use a HTML sanitization library:</p>
+
+<pre><code class="language-javascript">import sanitizeHtml from 'sanitize-html';
+
+const html = sanitizeHtml(`&lt;strong&gt;${user.Input}&lt;/strong&gt;`);
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/xss/">OWASP XSS explained</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Weak encryption library usage detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_weak_encryption&nbsp;&nbsp;<strong>CWE:</strong> CWE 327
+            </span>
+          </div>
+
+          <p class="filename">Filename: Gruntfile.js:74</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Sensitive data should be encrypted with strong encryption algorithms like aes-256-cbc</p>
+
+<h4>Remediations</h2>
+
+<p>According to <a href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption">OWASP</a>: MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), <sup>80</sup>&frasl;<sub>112</sub>-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefore shouldn&rsquo;t be used.</p>
+
+<p>✅ Use stronger encryption algorithms when storing data.</p>
+
+<pre><code class="language-javascript">const crypto = require(&quot;crypto&quot;);
+
+const key = &quot;secret key&quot;;
+const encrypted = crypto.createHmac(&quot;es-256-cbc&quot;, key).update(user.password);
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options">NodeJS Crypto Module</a></li>
+</ul>
+</div>
+			</details>
+		
+			<details class="finding" open>
+        <summary>
+          <div class="head">
+            <h3 class="medium">
+              <span>Weak encryption library usage detected.</span>
+              <span class="badge medium medium-bg">medium</span>
+            </h3>
+            <span class="cwe">
+              <strong>Rule ID:</strong> javascript_lang_weak_encryption&nbsp;&nbsp;<strong>CWE:</strong> CWE 327
+            </span>
+          </div>
+
+          <p class="filename">Filename: lib/insecurity.ts:42</p>
+          <div class="term-container"></div>
+        </summary>
+				<div class="description"><h4>Description</h2>
+
+<p>Sensitive data should be encrypted with strong encryption algorithms like aes-256-cbc</p>
+
+<h4>Remediations</h2>
+
+<p>According to <a href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption">OWASP</a>: MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), <sup>80</sup>&frasl;<sub>112</sub>-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefore shouldn&rsquo;t be used.</p>
+
+<p>✅ Use stronger encryption algorithms when storing data.</p>
+
+<pre><code class="language-javascript">const crypto = require(&quot;crypto&quot;);
+
+const key = &quot;secret key&quot;;
+const encrypted = crypto.createHmac(&quot;es-256-cbc&quot;, key).update(user.password);
+</code></pre>
+
+<h4>Resources</h2>
+
+<ul>
+<li><a href="https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options">NodeJS Crypto Module</a></li>
+</ul>
+</div>
+			</details>
+		
+		

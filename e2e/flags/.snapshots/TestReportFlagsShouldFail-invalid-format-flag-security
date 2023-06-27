@@ -1,6 +1,6 @@
 
 --
-Error: flag error: scan flag error: invalid context argument; supported values: health
+Error: flag error: report flags error: invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html
 Usage:
    scan [flags] <path>
 Aliases:
@@ -43,5 +43,5 @@ General Flags
       --no-color                Disable color in output
 
 
-flag error: scan flag error: invalid context argument; supported values: health
+flag error: report flags error: invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html
 
