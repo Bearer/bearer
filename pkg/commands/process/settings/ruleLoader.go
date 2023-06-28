@@ -10,7 +10,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -24,6 +26,21 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 		return tagName, err
 	}
 	defer resp.Body.Close()
+	headers := resp.Header
+
+	if headers.Get("x-ratelimit-remaining") == "0" {
+		resetString := headers.Get("x-ratelimit-reset")
+		unixTime, err := strconv.ParseInt(resetString, 10, 64)
+		if err != nil {
+			return tagName, fmt.Errorf("rules download is rate limited. Please wait until: %s", resetString)
+		}
+		tm := time.Unix(unixTime, 0)
+		return tagName, fmt.Errorf("rules download is rate limited. Please wait until: %s", tm.Format("2006-01-02 15:04:05"))
+	}
+
+	if resp.StatusCode != 200 {
+		return tagName, errors.New("rules download returned non 200 status code - could not download rules")
+	}
 
 	// Decode the response JSON to get the URL of the asset we want to download
 	type Asset struct {
@@ -38,6 +55,10 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 
 	if err := json.NewDecoder(resp.Body).Decode(&release); err != nil {
 		return tagName, err
+	}
+
+	if release.TagName == "" {
+		return tagName, errors.New("could not find valid release for rules")
 	}
 
 	bearerRulesDir := bearerRulesDir()

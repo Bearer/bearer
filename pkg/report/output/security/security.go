@@ -249,7 +249,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 	severityForFailure := config.Report.Severity
 	reportStr := &strings.Builder{}
 
-	reportStr.WriteString("\n\nSummary Report\n")
+	reportStr.WriteString("\n\nSecurity Report\n")
 	reportStr.WriteString("\n=====================================")
 
 	initialColorSetting := color.NoColor
@@ -264,6 +264,10 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 		lineOfCodeOutput.Languages,
 		config,
 	)
+
+	if rulesAvailableCount == 0 {
+		return reportStr, false
+	}
 
 	failures := map[string]map[string]bool{
 		types.LevelCritical: make(map[string]bool),
@@ -385,20 +389,25 @@ func writeRuleListToString(
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 ) int {
-	// list rules that were run
-	reportStr.WriteString("\n\nRules: \n")
-
 	defaultRuleCount, customRuleCount := countRules(rules, languages, config, false)
 	builtInCount, _ := countRules(builtInRules, languages, config, true)
 	defaultRuleCount = defaultRuleCount + builtInCount
+	totalRuleCount := defaultRuleCount + customRuleCount
 
-	reportStr.WriteString(fmt.Sprintf(" - %d default rules applied ", defaultRuleCount))
-	reportStr.WriteString(color.HiBlackString("(https://docs.bearer.com/reference/rules)\n"))
+	if totalRuleCount == 0 {
+		reportStr.WriteString("\n\nZero rules found. A security report requires rules to function. Please check configuration.\n")
+		return 0
+	}
+	reportStr.WriteString("\n\nRules: \n")
+	if defaultRuleCount > 0 {
+		reportStr.WriteString(fmt.Sprintf(" - %d default rules applied ", defaultRuleCount))
+		reportStr.WriteString(color.HiBlackString(fmt.Sprintf("(https://docs.bearer.com/reference/rules) [%s]\n", config.BearerRulesVersion)))
+	}
 	if customRuleCount > 0 {
 		reportStr.WriteString(fmt.Sprintf(" - %d custom rules applied", customRuleCount))
 	}
 
-	return defaultRuleCount + customRuleCount
+	return totalRuleCount
 }
 
 func writeApiClientResultToString(

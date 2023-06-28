@@ -24,6 +24,8 @@ func TestBuildReportString(t *testing.T) {
 			"warning":  true,
 		},
 	})
+	// set rule version
+	config.BearerRulesVersion = "TEST"
 
 	// new rules are added
 	customRule := &settings.Rule{
@@ -42,6 +44,46 @@ func TestBuildReportString(t *testing.T) {
 		"ruby_rails_logger":          config.Rules["ruby_rails_logger"],
 		"custom_test_rule":           customRule,
 	}
+
+	if err != nil {
+		t.Fatalf("failed to generate config:%s", err)
+	}
+
+	dataflow := dummyDataflow()
+
+	results, err := security.GetOutput(&dataflow, config)
+	if err != nil {
+		t.Fatalf("failed to generate security output err:%s", err)
+	}
+
+	dummyGoclocLanguage := gocloc.Language{}
+	dummyGoclocResult := gocloc.Result{
+		Total: &dummyGoclocLanguage,
+		Files: map[string]*gocloc.ClocFile{},
+		Languages: map[string]*gocloc.Language{
+			"Ruby": {},
+		},
+		MaxPathLength: 0,
+	}
+
+	stringBuilder, _ := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow)
+	cupaloy.SnapshotT(t, stringBuilder.String())
+}
+
+func TestNoRulesBuildReportString(t *testing.T) {
+	config, err := generateConfig(flag.ReportOptions{
+		Report: "security",
+		Severity: map[string]bool{
+			"critical": true,
+			"high":     true,
+			"medium":   true,
+			"low":      true,
+			"warning":  true,
+		},
+	})
+	// set rule version
+	config.BearerRulesVersion = "TEST"
+	config.Rules = map[string]*settings.Rule{}
 
 	if err != nil {
 		t.Fatalf("failed to generate config:%s", err)
