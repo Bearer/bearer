@@ -32,10 +32,10 @@ func LoadRuleDefinitionsFromGitHub(ruleDefinitions map[string]RuleDefinition, fo
 		resetString := headers.Get("x-ratelimit-reset")
 		unixTime, err := strconv.ParseInt(resetString, 10, 64)
 		if err != nil {
-			return tagName, fmt.Errorf("rules download is rate limited please wait until: %s", resetString)
+			return tagName, fmt.Errorf("rules download is rate limited. Please wait until: %s", resetString)
 		}
 		tm := time.Unix(unixTime, 0)
-		return tagName, fmt.Errorf("rules download is rate limited please wait until: %s", tm.Format("2006-01-02 15:04:05"))
+		return tagName, fmt.Errorf("rules download is rate limited. Please wait until: %s", tm.Format("2006-01-02 15:04:05"))
 	}
 
 	if resp.StatusCode != 200 {
