@@ -10,6 +10,7 @@ import (
 	html "github.com/bearer/bearer/pkg/report/output/html/types"
 	privacy "github.com/bearer/bearer/pkg/report/output/privacy"
 	security "github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/util/maputil"
 	term "github.com/buildkite/terminal"
 	"github.com/russross/blackfriday"
 )
@@ -89,10 +90,10 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 		subjectGroups[subject.DataSubject] = append(subjectGroups[subject.DataSubject], subject)
 	}
 
-	for dataSubjectName, subjectGroup := range subjectGroups {
+	for _, dataSubjectName := range maputil.SortedStringKeys(subjectGroups) {
 		group := html.GroupedDataSubject{
 			DataSubjectName: dataSubjectName,
-			Subject:         subjectGroup,
+			Subject:         subjectGroups[dataSubjectName],
 		}
 		privacyPage.GroupedDataSubject = append(privacyPage.GroupedDataSubject, group)
 	}
@@ -102,10 +103,10 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 		thirdPartyGroups[thirdParty.ThirdParty] = append(thirdPartyGroups[thirdParty.ThirdParty], thirdParty)
 	}
 
-	for thirdPartyName, thirdPartyGroup := range thirdPartyGroups {
+	for _, thirdPartyName := range maputil.SortedStringKeys(thirdPartyGroups) {
 		group := html.GroupedThirdParty{
 			ThirdPartyName: thirdPartyName,
-			ThirdParty:     thirdPartyGroup,
+			ThirdParty:     thirdPartyGroups[thirdPartyName],
 		}
 		privacyPage.GroupedThirdParty = append(privacyPage.GroupedThirdParty, group)
 	}

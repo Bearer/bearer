@@ -24,6 +24,7 @@ var (
 		"argument_list",
 		"binary_expression",
 		"array_access",
+		"array_initializer",
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
@@ -81,7 +82,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 		//
 		// lambda_expression
 		// numbers.forEach( (n) -> { System.out.println(n); } );
-		case "method_declaration", "lambda_expression":
+		case "method_declaration", "lambda_expression", "for_statement", "enhanced_for_statement", "block":
 			previousScope := scope
 			scope = implementation.NewScope(previousScope)
 			err := visitChildren()
@@ -104,14 +105,18 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 
 			return err
 		case "field_declaration":
+			err := visitChildren()
+
 			declarator := node.ChildByFieldName("declarator")
 			if declarator != nil {
-				scope.Assign(declarator.ChildByFieldName("name").Content(), node)
+				scope.Declare(declarator.ChildByFieldName("name").Content(), node)
 
 				if value := declarator.ChildByFieldName("value"); value != nil {
 					node.UnifyWith(value)
 				}
 			}
+
+			return err
 		// String user = "John";
 		case "local_variable_declaration":
 			declarator := node.ChildByFieldName("declarator")
@@ -122,7 +127,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 			if name.Type() == "identifier" {
 				err := visitChildren()
 
-				scope.Assign(name.Content(), node)
+				scope.Declare(name.Content(), node)
 				node.UnifyWith(value)
 
 				return err
@@ -136,14 +141,6 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				break
 			}
 
-			// user.name
-			// a = user.name
-			// a = user.name()
-			// var a = user
-			// a = user
-			// a += user
-			// user["name"] = name;
-			// todo: new expression
 			if slice.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "scoped_type_identifier" && node.Equal(parent.Child(0))) ||
 				(parent.Type() == "method_invocation" && node.Equal(parent.ChildByFieldName("object"))) ||
@@ -151,7 +148,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
 				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
 				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("left")) && parent.AnonymousChild(0).Content() != "=") ||
-				(parent.Type() == "array_access" && node.Equal(parent.ChildByFieldName("right"))) {
+				(parent.Type() == "enhanced_for_statement" && node.Equal(parent.ChildByFieldName("value"))) {
 				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
 				}
@@ -160,7 +157,12 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 			if parent.Type() == "formal_parameter" ||
 				parent.Type() == "catch_formal_parameter" ||
 				(parent.Type() == "resource" && node.Equal(parent.ChildByFieldName("name"))) {
-				scope.Assign(node.Content(), node)
+				scope.Declare(node.Content(), node)
+			}
+
+			if parent.Type() == "enhanced_for_statement" && node.Equal(parent.ChildByFieldName("name")) {
+				scope.Declare(node.Content(), node)
+				node.UnifyWith(parent.ChildByFieldName("value"))
 			}
 
 			// todo: see what this is

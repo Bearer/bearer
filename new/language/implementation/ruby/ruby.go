@@ -101,7 +101,7 @@ func (*rubyImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				parent.Type() == "block_parameters" ||
 				(parent.Type() == "keyword_parameter" && node.Equal(parent.ChildByFieldName("name"))) ||
 				(parent.Type() == "optional_parameter" && node.Equal(parent.ChildByFieldName("name"))) {
-				scope.Assign(node.Content(), node)
+				scope.Declare(node.Content(), node)
 			}
 
 			if parent.Type() == "argument_list" {

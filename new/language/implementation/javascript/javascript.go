@@ -105,13 +105,13 @@ func (*javascriptImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree
 			if name.Type() == "identifier" {
 				err := visitChildren()
 
-				scope.Assign(name.Content(), node)
+				scope.Declare(name.Content(), node)
 				node.UnifyWith(value)
 
 				return err
 			}
 		case "shorthand_property_identifier_pattern":
-			scope.Assign(node.Content(), node)
+			scope.Declare(node.Content(), node)
 		case "identifier":
 			parent := node.Parent()
 			if parent == nil {
@@ -134,7 +134,7 @@ func (*javascriptImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree
 
 			// typescript: different type of identifier
 			if parent.Type() == "required_parameter" {
-				scope.Assign(node.Content(), node)
+				scope.Declare(node.Content(), node)
 				break
 			}
 
@@ -145,7 +145,7 @@ func (*javascriptImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree
 			}
 
 			if isImportedIdentifier(node) {
-				scope.Assign(node.Content(), node)
+				scope.Declare(node.Content(), node)
 			}
 		case "property_identifier":
 			parent := node.Parent()
