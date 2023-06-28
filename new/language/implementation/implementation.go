@@ -159,18 +159,32 @@ func NewScope(parent *Scope) *Scope {
 	}
 }
 
-func (scope *Scope) Assign(name string, node *tree.Node) {
+func (scope *Scope) Declare(name string, node *tree.Node) {
 	scope.variables[name] = node
 }
 
+func (scope *Scope) Assign(name string, node *tree.Node) {
+	targetScope := scope
+	if _, declarationScope := scope.lookupWithScope(name); declarationScope != nil {
+		targetScope = declarationScope
+	}
+
+	targetScope.variables[name] = node
+}
+
 func (scope *Scope) Lookup(name string) *tree.Node {
+	node, _ := scope.lookupWithScope(name)
+	return node
+}
+
+func (scope *Scope) lookupWithScope(name string) (*tree.Node, *Scope) {
 	if node, exists := scope.variables[name]; exists {
-		return node
+		return node, scope
 	}
 
 	if scope.parent != nil {
-		return scope.parent.Lookup(name)
+		return scope.parent.lookupWithScope(name)
 	}
 
-	return nil
+	return nil, nil
 }

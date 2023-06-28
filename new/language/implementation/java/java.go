@@ -104,14 +104,18 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 
 			return err
 		case "field_declaration":
+			err := visitChildren()
+
 			declarator := node.ChildByFieldName("declarator")
 			if declarator != nil {
-				scope.Assign(declarator.ChildByFieldName("name").Content(), node)
+				scope.Declare(declarator.ChildByFieldName("name").Content(), node)
 
 				if value := declarator.ChildByFieldName("value"); value != nil {
 					node.UnifyWith(value)
 				}
 			}
+
+			return err
 		// String user = "John";
 		case "local_variable_declaration":
 			declarator := node.ChildByFieldName("declarator")
@@ -122,7 +126,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 			if name.Type() == "identifier" {
 				err := visitChildren()
 
-				scope.Assign(name.Content(), node)
+				scope.Declare(name.Content(), node)
 				node.UnifyWith(value)
 
 				return err
@@ -160,7 +164,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 			if parent.Type() == "formal_parameter" ||
 				parent.Type() == "catch_formal_parameter" ||
 				(parent.Type() == "resource" && node.Equal(parent.ChildByFieldName("name"))) {
-				scope.Assign(node.Content(), node)
+				scope.Declare(node.Content(), node)
 			}
 
 			// todo: see what this is
