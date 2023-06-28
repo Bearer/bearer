@@ -9,6 +9,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
+	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
@@ -99,7 +100,8 @@ func loadRules(
 
 			tagVersion, err := LoadRuleDefinitionsFromGitHub(definitions, foundLanguages)
 			if err != nil {
-				return result, fmt.Errorf("error loading rules: %s", err)
+				output.Fatal(fmt.Sprintf("Error loading rules: %s", err))
+				// sysexit
 			}
 
 			result.BearerRulesVersion = tagVersion
