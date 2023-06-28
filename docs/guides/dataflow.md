@@ -28,7 +28,7 @@ bearer scan . --report dataflow
 To get a better sense of what's included in the report, lets look at the output from the `juice-shop` example project. If you're following along, run the following command.
 
 ```bash
-bearer scan . --report dataflow --format json
+bearer scan . --report dataflow
 ```
 
 If you have [jq](https://stedolan.github.io/jq/) installed, it can format the output for your to make it easier to browse.
