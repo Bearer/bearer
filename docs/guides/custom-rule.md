@@ -30,13 +30,13 @@ the matched code.
     - `false`: Default. Rule triggers whether or not any data types have been detected in the application.
     - `true`: Rule only triggers if at least one data type is detected in the application.
 - `severity`: This sets the lowest severity level of the rule, by default at `low`. The severity level can [automatically increase based on multiple factors](/explanations/severity). A severity level of `warning`, however, will never increase and won’t cause CI to fail.. Bearer CLI groups rule findings by severity, and you can configure the security report to only trigger on specific severity thresholds.
-- `metadata`: Rule metadata is used for output to the summary report, and documentation for the internal rules.
+- `metadata`: Rule metadata is used for output to the security report, and documentation for the internal rules.
   - `id`: A unique identifier. Internal rules are named `lang_framework_rule_name`. For rules targeting the language core, `lang` is used instead of a framework name. For example `ruby_lang_logger` and `ruby_rails_logger`. For custom rules, you may consider appending your org name.
   - `description`: A brief, one-sentence description of the rule. The best practice is to make this an actionable “rule” phrase, such as “Do X” or “Do not do X in Y”.
   - `cwe_id`: The associated list of [CWE](https://cwe.mitre.org/) identifiers. (Optional)
   - `associated_recipe`: Links the rule to a [recipe]({{meta.sourcePath}}/tree/main/pkg/classification/db/recipes). Useful for associating a rule with a third party. Example: “Sentry” (Optional)
   - `remediation_message`: Used for internal rules, this builds the documentation page for a rule. (Optional)
-  - `documentation_url`: Used to pass custom documentation URL for the summary report. This can be useful for linking to your own internal documentation or policies. By default, all rules in the main repo will automatically generate a link to the rule on [docs.bearer.com](/). (Optional)
+  - `documentation_url`: Used to pass custom documentation URL for the security report. This can be useful for linking to your own internal documentation or policies. By default, all rules in the main repo will automatically generate a link to the rule on [docs.bearer.com](/). (Optional)
 - `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption](https://github.com/Bearer/bearer-rules/blob/main/ruby/lang/weak_encryption.yml) rule for examples. In addition, see our advice on how to avoid [variable joining](#variable-joining) in auxiliary rules. (Optional)
 - `skip_data_types`: Allows you to prevent the specified data types from triggering this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 - `only_data_types`: Allows you to limit the specified data types that trigger this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
@@ -109,7 +109,7 @@ patterns:
 			$<CLIENT>.get($<...>$<DATA_TYPE>$<...>)
 ```
 
-`$<!>`: In some instances, a pattern requires some wider context to match the exact line of code where the rule occurs. For those cases, use this variable type to explicitly mark the line for Bearer CLI to highlight in the summary report. You’ll mostly need this for rules that target configuration files and settings, rather than logic-related code. For example:
+`$<!>`: In some instances, a pattern requires some wider context to match the exact line of code where the rule occurs. For those cases, use this variable type to explicitly mark the line for Bearer CLI to highlight in the security report. You’ll mostly need this for rules that target configuration files and settings, rather than logic-related code. For example:
 
 ```yaml
 patterns:
@@ -219,11 +219,11 @@ Add the rule to your bearer config file.
 external-rule-dir: /path/to/rules/
 ```
 
-*Note: Including an external rules directory adds custom rules to the summary report. To only run custom rules, you’ll need to use the `only-rule` flag or configuration setting and pass it the IDs of your custom rule.*
+*Note: Including an external rules directory adds custom rules to the security report. To only run custom rules, you’ll need to use the `only-rule` flag or configuration setting and pass it the IDs of your custom rule.*
 
 ## Rule best practices
 
-1. Matching patterns in a rule cause *rule findings*. Depending on the severity level, findings can cause CI to exit and will display in the summary report. Keep this in mind when writing patterns so you don’t match a best practice condition and trigger a failed scan.
+1. Matching patterns in a rule cause *rule findings*. Depending on the severity level, findings can cause CI to exit and will display in the security report. Keep this in mind when writing patterns so you don’t match a best practice condition and trigger a failed scan.
 2. Lean on the built-in resources, like the data type detectors and recipes before creating complex rules.
 
 ## Rule starter

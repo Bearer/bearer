@@ -249,7 +249,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 	severityForFailure := config.Report.Severity
 	reportStr := &strings.Builder{}
 
-	reportStr.WriteString("\n\nSummary Report\n")
+	reportStr.WriteString("\n\nSecurity Report\n")
 	reportStr.WriteString("\n=====================================")
 
 	initialColorSetting := color.NoColor
