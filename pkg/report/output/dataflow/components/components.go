@@ -22,8 +22,7 @@ type Holder struct {
 type dependency struct {
 	name     string
 	filename string
-	// version  types.Version
-	version string
+	version  string
 }
 
 type component struct {

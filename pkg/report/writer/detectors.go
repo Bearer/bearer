@@ -22,7 +22,6 @@ import (
 	"github.com/bearer/bearer/pkg/report/secret"
 	"github.com/bearer/bearer/pkg/report/source"
 
-	"github.com/bearer/bearer/pkg/util/blamer"
 	"github.com/bearer/bearer/pkg/util/jsonlines"
 )
 
@@ -42,7 +41,6 @@ type SchemaGroup struct {
 }
 
 type Detectors struct {
-	Blamer        blamer.Blamer
 	Classifier    *classification.Classifier
 	File          io.Writer
 	StoredSchemas *SchemaGroup
@@ -58,10 +56,6 @@ func (report *Detectors) AddInterface(
 	if err != nil {
 		zerolog.Debug().Msgf("classification interfaces error from %s: %s", detection.Source.Filename, err)
 		return
-	}
-
-	if classifiedDetection.Source.StartLineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
 	}
 
 	classifiedDetection.Type = detections.TypeInterfaceClassified
@@ -177,10 +171,6 @@ func (report *Detectors) AddDetection(detectionType detections.DetectionType, de
 		Value:        value,
 	}
 
-	if data.Source.StartLineNumber != nil {
-		data.CommitSHA = report.Blamer.SHAForLine(data.Source.Filename, *data.Source.StartLineNumber)
-	}
-
 	report.Add(data)
 }
 
@@ -195,10 +185,6 @@ func (report *Detectors) AddDependency(
 	if err != nil {
 		report.AddError(source.Filename, fmt.Errorf("classification dependencies error: %s", err))
 		return
-	}
-
-	if classifiedDetection.Source.StartLineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
 	}
 
 	classifiedDetection.Type = detections.TypeDependencyClassified
@@ -216,10 +202,6 @@ func (report *Detectors) AddFramework(
 	if err != nil {
 		report.AddError(source.Filename, fmt.Errorf("classification frameworks error: %s", err))
 		return
-	}
-
-	if classifiedDetection.Source.StartLineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
 	}
 
 	classifiedDetection.Type = detections.TypeFrameworkClassified

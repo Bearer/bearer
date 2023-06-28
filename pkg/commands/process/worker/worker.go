@@ -15,7 +15,6 @@ import (
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	config "github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/blamer"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/detectors"
 	"github.com/bearer/bearer/pkg/scanner"
@@ -56,13 +55,10 @@ func (worker *Worker) Setup(config config.Config) error {
 }
 
 func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest) error {
-	blamer := blamer.New(scanRequest.Dir, scanRequest.BlameRevisionsFilePath, scanRequest.PreviousCommitSHA)
-
 	return scanner.Scan(
 		ctx,
 		scanRequest.Dir,
 		[]string{scanRequest.File.FilePath},
-		blamer,
 		scanRequest.ReportPath,
 		worker.classifer,
 		worker.scanners,

@@ -8,14 +8,12 @@ import (
 	classification "github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/detectors"
 	"github.com/bearer/bearer/pkg/report/writer"
-	"github.com/bearer/bearer/pkg/util/blamer"
 )
 
 func Scan(
 	ctx context.Context,
 	rootDir string,
 	FilesToScan []string,
-	blamer blamer.Blamer,
 	outputPath string,
 	classifier *classification.Classifier,
 	scanners []string,
@@ -28,7 +26,6 @@ func Scan(
 	defer file.Close()
 
 	rep := writer.Detectors{
-		Blamer:     blamer,
 		Classifier: classifier,
 		File:       file,
 	}

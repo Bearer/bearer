@@ -26,5 +26,7 @@ type BearerReport struct {
 	Findings   *map[string][]security.Result `json:"findings" yaml:"findings"`
 	DataTypes  []dataflowtypes.Datatype      `json:"data_types" yaml:"data_types"`
 	Components []dataflowtypes.Component     `json:"components" yaml:"components"`
+	Errors     []dataflowtypes.Error         `json:"errors" yaml:"errors"`
 	Files      []string                      `json:"files" yaml:"files"`
+	// Dependencies []dataflowtypes.Dependency    `json:"dependencies" yaml:"dependencies"`
 }
