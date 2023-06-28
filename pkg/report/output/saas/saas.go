@@ -43,8 +43,10 @@ func GetReport(
 		Findings:   securityResults,
 		DataTypes:  dataflow.Datatypes,
 		Components: dataflow.Components,
+		Errors:     dataflow.Errors,
 		Files:      files,
 		Meta:       *meta,
+		// Dependencies: dataflow.Dependencies,
 	}, dataflow, nil
 }
 

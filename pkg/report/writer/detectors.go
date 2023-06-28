@@ -22,7 +22,6 @@ import (
 	"github.com/bearer/bearer/pkg/report/secret"
 	"github.com/bearer/bearer/pkg/report/source"
 
-	"github.com/bearer/bearer/pkg/util/blamer"
 	"github.com/bearer/bearer/pkg/util/jsonlines"
 )
 
@@ -42,7 +41,7 @@ type SchemaGroup struct {
 }
 
 type Detectors struct {
-	Blamer        blamer.Blamer
+	// Blamer        blamer.Blamer
 	Classifier    *classification.Classifier
 	File          io.Writer
 	StoredSchemas *SchemaGroup
@@ -60,9 +59,9 @@ func (report *Detectors) AddInterface(
 		return
 	}
 
-	if classifiedDetection.Source.StartLineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
-	}
+	// if classifiedDetection.Source.StartLineNumber != nil {
+	// 	classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
+	// }
 
 	classifiedDetection.Type = detections.TypeInterfaceClassified
 	report.Add(classifiedDetection)
@@ -177,9 +176,9 @@ func (report *Detectors) AddDetection(detectionType detections.DetectionType, de
 		Value:        value,
 	}
 
-	if data.Source.StartLineNumber != nil {
-		data.CommitSHA = report.Blamer.SHAForLine(data.Source.Filename, *data.Source.StartLineNumber)
-	}
+	// if data.Source.StartLineNumber != nil {
+	// 	data.CommitSHA = report.Blamer.SHAForLine(data.Source.Filename, *data.Source.StartLineNumber)
+	// }
 
 	report.Add(data)
 }
@@ -197,9 +196,9 @@ func (report *Detectors) AddDependency(
 		return
 	}
 
-	if classifiedDetection.Source.StartLineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
-	}
+	// if classifiedDetection.Source.StartLineNumber != nil {
+	// 	classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
+	// }
 
 	classifiedDetection.Type = detections.TypeDependencyClassified
 	report.Add(classifiedDetection)
@@ -218,9 +217,9 @@ func (report *Detectors) AddFramework(
 		return
 	}
 
-	if classifiedDetection.Source.StartLineNumber != nil {
-		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
-	}
+	// if classifiedDetection.Source.StartLineNumber != nil {
+	// 	classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.StartLineNumber)
+	// }
 
 	classifiedDetection.Type = detections.TypeFrameworkClassified
 	report.Add(classifiedDetection)

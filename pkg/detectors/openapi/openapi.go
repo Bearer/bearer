@@ -44,7 +44,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 
 	fileType, err := getFileType(file)
 	if err != nil {
-		return false, err
+		return false, nil
 	}
 
 	switch fileType {
