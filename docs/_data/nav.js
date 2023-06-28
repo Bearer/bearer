@@ -1,10 +1,12 @@
 module.exports = [
   {
     name: "Get Started",
+    open: true,
     items: [{ name: "Quick Start", url: "/quickstart/" }],
   },
   {
     name: "Guides",
+    open: true,
     items: [
       { name: "Configure the scan", url: "/guides/configure-scan/" },
       {
@@ -32,6 +34,7 @@ module.exports = [
   },
   {
     name: "Explanations",
+    open: true,
     items: [
       {
         name: "How Bearer CLI works",
@@ -57,6 +60,7 @@ module.exports = [
   },
   {
     name: "Reference",
+    open: false,
     items: [
       { name: "Installation", url: "/reference/installation/" },
       { name: "Configuration", url: "/reference/config/" },
@@ -69,6 +73,7 @@ module.exports = [
   },
   {
     name: "Contributing",
+    open: false,
     items: [
       { name: "Overview", url: "/contributing/" },
       { name: "Contribute code", url: "/contributing/code/" },
