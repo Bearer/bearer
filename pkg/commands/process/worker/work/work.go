@@ -20,9 +20,8 @@ type Repository struct {
 
 type ProcessRequest struct {
 	Repository
-	File                   File
-	ReportPath             string
-	BlameRevisionsFilePath string
+	File       File
+	ReportPath string
 }
 
 type File struct {

@@ -14,7 +14,6 @@ func Scan(
 	ctx context.Context,
 	rootDir string,
 	FilesToScan []string,
-	// blamer blamer.Blamer,
 	outputPath string,
 	classifier *classification.Classifier,
 	scanners []string,
@@ -27,7 +26,6 @@ func Scan(
 	defer file.Close()
 
 	rep := writer.Detectors{
-		// Blamer:     blamer,
 		Classifier: classifier,
 		File:       file,
 	}

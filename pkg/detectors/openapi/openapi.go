@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/bearer/pkg/parser/nodeid"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/ghodss/yaml" // Need to use this as some features use custom JSON unmarshalling
+	"github.com/rs/zerolog/log"
 	"golang.org/x/mod/semver"
 
 	"github.com/bearer/bearer/pkg/detectors/openapi/v2yaml"
@@ -44,6 +45,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 
 	fileType, err := getFileType(file)
 	if err != nil {
+		log.Debug().Msgf("error in OpenAPI detector: %s", err.Error())
 		return false, nil
 	}
 
