@@ -21,6 +21,10 @@ module.exports = [
         url: "/guides/privacy/",
       },
       {
+        name: "Run a data flow report",
+        url: "/guides/dataflow/",
+      },
+      {
         name: "Connect to Bearer Cloud",
         url: "/guides/bearer-cloud/",
       },
