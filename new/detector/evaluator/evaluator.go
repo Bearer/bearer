@@ -65,7 +65,7 @@ func (evaluator *Evaluator) Evaluate(
 	startTime := time.Now()
 
 	if log.Trace().Enabled() {
-		log.Trace().Msgf("evaluate start: %s", rootNode.Debug(true))
+		log.Trace().Msgf("evaluate start: %s at %s", detectorType, rootNode.Debug(true))
 	}
 
 	key := cachepkg.NewKey(rootNode, detectorType, scope, followFlow)
@@ -76,7 +76,8 @@ func (evaluator *Evaluator) Evaluate(
 		}
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
-				"evaluate end: %s: %d detections (cached)",
+				"evaluate end: %s at %s: %d detections (cached)",
+				detectorType,
 				rootNode.Debug(false),
 				len(detections),
 			)
@@ -147,7 +148,8 @@ func (evaluator *Evaluator) Evaluate(
 	}
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
-			"evaluate end: %s: %d detections",
+			"evaluate end: %s at %s: %d detections",
+			detectorType,
 			rootNode.Debug(false),
 			len(result),
 		)
