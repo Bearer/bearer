@@ -128,3 +128,19 @@ bearer scan . --format sarif --output sarif-report.sarif
 ```
 
 If you're using GitHub or GitLab, you can use our [integrations](/guides/ci-setup/) to send SARIF reports directly to those services.
+
+## Format a report as HTML
+
+Sometimes it's useful to have a nicely formatted HTML file to hand off to others. Security and privacy reports support the `html` format type. Pair the `--format` and `--output` flags to create and write an HTML file. It looks like this:
+
+![Preview of html output](/assets/img/bearer-output-html.png)
+
+Run the commands together, replacing the scan location and the output path to match your needs:
+
+```bash
+bearer scan . --format html --output path/to/security-scan.html
+```
+
+## Next steps
+
+For more ways to make the most of our Bearer CLI, check out the [commands reference](/reference/commands/). Need additional help? [Open an issue]({{meta.links.issues}}) or join our [Discord community]({{meta.links.discord}}).
