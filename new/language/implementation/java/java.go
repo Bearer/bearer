@@ -20,11 +20,12 @@ import (
 
 var (
 	variableLookupParents = []string{
-		"field_declaration",
 		"argument_list",
-		"binary_expression",
 		"array_access",
 		"array_initializer",
+		"binary_expression",
+		"field_declaration",
+		"ternary_expression",
 	}
 
 	anonymousPatternNodeParentTypes = []string{}
