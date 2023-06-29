@@ -187,20 +187,24 @@ func evaluateRules(
 				return err
 			}
 
-			for i, output := range results["policy_failure"] {
-				ruleSummary := &Rule{
-					Title:            rule.Description,
-					Description:      rule.RemediationMessage,
-					Id:               rule.Id,
-					CWEIDs:           rule.CWEIDs,
-					DocumentationUrl: rule.DocumentationUrl,
-				}
+			ruleSummary := &Rule{
+				Title:            rule.Description,
+				Description:      rule.RemediationMessage,
+				Id:               rule.Id,
+				CWEIDs:           rule.CWEIDs,
+				DocumentationUrl: rule.DocumentationUrl,
+			}
 
+			instanceCount := make(map[string]int)
+			policyFailures := results["policy_failure"]
+			sortByLineNumber(policyFailures)
+
+			for i, output := range policyFailures {
 				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
-				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), i)
+				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceCount[output.Filename])
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
-
+				instanceCount[output.Filename]++
 				if config.Report.ExcludeFingerprint[fingerprint] {
 					// skip finding - fingerprint is in exclude list
 					log.Debug().Msgf("Excluding finding with fingerprint %s", fingerprint)
@@ -690,5 +694,11 @@ func sortResult(data []Result) {
 		}
 
 		return false
+	})
+}
+
+func sortByLineNumber(outputs []Output) {
+	sort.Slice(outputs, func(i, j int) bool {
+		return outputs[i].LineNumber < outputs[j].LineNumber
 	})
 }
