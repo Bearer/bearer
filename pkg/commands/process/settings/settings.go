@@ -255,6 +255,8 @@ func (rule *Rule) Language() string {
 	}
 
 	switch rule.Languages[0] {
+	case "java":
+		return "Java"
 	case "javascript":
 		return "JavaScript"
 	case "ruby":
