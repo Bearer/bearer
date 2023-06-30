@@ -126,7 +126,7 @@ func loadRules(
 		}
 		log.Debug().Msgf("loading external rules from: %s", dir)
 		if err := loadRuleDefinitionsFromDir(definitions, os.DirFS(dir)); err != nil {
-			return result, fmt.Errorf("error loading external rules from %s: %w", dir, err)
+			return result, fmt.Errorf("external rules %w", err)
 		}
 	}
 
@@ -145,7 +145,6 @@ func loadRules(
 
 func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {
 	loadedDefinitions := make(map[string]RuleDefinition)
-
 	if err := fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -170,7 +169,8 @@ func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS
 		var ruleDefinition RuleDefinition
 		err = yaml.Unmarshal(entry, &ruleDefinition)
 		if err != nil {
-			return fmt.Errorf("failed to unmarshal rule %s: %w", path, err)
+			output.StdErrLog(ValidateRule(entry, filename))
+			return fmt.Errorf("rule file was invalid")
 		}
 
 		if ruleDefinition.Metadata == nil {
