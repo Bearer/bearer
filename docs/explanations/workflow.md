@@ -119,15 +119,11 @@ app.use(express.static(__dirname + "/public"))
 app.use(session({}))
 ```
 
-
-*⚠️ At the moment, we're relying on matching sibling AST nodes rather than later instructions so it's a limited control flow analysis.*
-
-
 ### Type analysis
 
 We perform some type analysis to allow for security issues that are related to the type of data being passed more than where it’s coming from. Sensitive data is another source of tainted data that can be used in rules.
 
-For this we support type inference (finding attributes of structured types) (e.g. `[user.email](http://user.email)` or `user["email"]`, etc.) as well as discovered types and schema is classified.
+For this we support type inference (finding attributes of structured types) (e.g. `user.email` or `user["email"]`, etc.) as well as discovered types and schema is classified.
 
 If we take this code snippet as an example:
 
