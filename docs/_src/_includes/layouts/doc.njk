@@ -7,7 +7,7 @@ layout: layouts/base.njk
 		<ul>
 			{% for heading in nav %}
 				<li class="mb-4">
-					<details {{"open" if heading.open }} >
+					<details {{"open"}} >
 						<summary class="font-bold text-md cursor-pointer leading-8 flex items-center">{{heading.name}}
 							<span class="transition-transform -rotate-90">{%include 'icon-chevron.njk' %}</span></summary>
 						<ul class="ml-2">
