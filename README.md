@@ -10,8 +10,7 @@
   <br /><br />
   Bearer CLI is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security and privacy risks.
   <br /><br />
-  Currently supporting <strong>JavaScript</strong>, <strong>TypeScript</strong> and <strong>Ruby</strong> stacks.<br />
-  🚧 <strong>Java</strong> support is under active development.
+  Currently supporting <strong>JavaScript</strong>, <strong>TypeScript</strong>, <strong>Ruby</strong>, and <strong>Java</strong> stacks.<br />
   <br /><br />
 
   [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
@@ -247,8 +246,7 @@ Finally, Bearer CLI also lets you detect components storing and processing sensi
 
 ### Supported Language
 
-Bearer CLI currently supports JavaScript, TypeScript and Ruby and their associated most used frameworks and libraries.
-Java support is under active development, more languages will follow.
+Bearer CLI currently supports JavaScript, TypeScript, Ruby, Java and their associated most used frameworks and libraries. More languages will follow.
 
 ### How long does it take to scan my code? Is it fast?
 

@@ -53,7 +53,7 @@ WARNING: 2
 
 ```
 
-The security report is [currently available](/reference/supported-languages/) for Ruby and JavaScript projects, more languages to follow.
+The security report is [currently available](/reference/supported-languages/) for Ruby, JavaScript, and Java projects, more languages to follow.
 
 ## Privacy Report
 

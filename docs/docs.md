@@ -18,7 +18,7 @@ The CLI provides [built-in rules](/reference/rules) that check against a common 
 
 And [many more](/reference/rules).
 
-Bearer CLI currently supports **JavaScript / TypeScript** and **Ruby** stacks, and more will follow.
+Bearer CLI currently supports **JavaScript / TypeScript**, **Ruby**, and **Java** stacks, and more will follow.
 
 Want a quick rundown? Here's a minute and a half of what you can expect from Bearer CLI:
 
