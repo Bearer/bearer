@@ -16,7 +16,7 @@ import (
 	"time"
 
 	"github.com/rs/zerolog/log"
-	"github.com/struCoder/pidusage"
+	gopsutilprocess "github.com/shirou/gopsutil/v3/process"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker"
@@ -39,6 +39,7 @@ type Process struct {
 	exitChannel   chan struct{}
 	client        *http.Client
 	baseURL       string
+	memoryUsage   uint64
 }
 
 type ProcessOptions struct {
@@ -91,7 +92,7 @@ func (process *Process) start(config settings.Config) error {
 	}
 
 	go process.monitorCommand()
-	go process.monitorMemory(config.Worker.MemoryMaximum)
+	go process.monitorMemory()
 
 	if err := process.initialize(config); err != nil {
 		var result = strings.Split(err.Error(), "failed to create detector customDetector:")
@@ -146,9 +147,13 @@ func (process *Process) kill() {
 	}
 }
 
-func (process *Process) monitorMemory(maxMemoryBytes int) {
-	pid := process.command.Process.Pid
+func (process *Process) monitorMemory() {
 	tick := time.NewTicker(1 * time.Second)
+	monitor, err := gopsutilprocess.NewProcessWithContext(process.context, int32(process.command.Process.Pid))
+	if err != nil {
+		log.Debug().Msgf("failed to start memory monitor: %s", err)
+		return
+	}
 
 	for {
 		select {
@@ -156,13 +161,14 @@ func (process *Process) monitorMemory(maxMemoryBytes int) {
 			log.Debug().Msgf("%s memory monitor shutting down", process.id)
 			return
 		case <-tick.C:
-			stats, err := pidusage.GetStat(pid)
+			stats, err := monitor.MemoryInfo()
 			if err != nil {
 				log.Debug().Msgf("failed to get memory usage %s", err)
 				continue
 			}
 
-			if stats.Memory > float64(maxMemoryBytes) {
+			if stats.RSS > settings.MemoryMaximum {
+				process.memoryUsage = stats.RSS
 				process.errorChannel <- ErrorOutOfMemory
 				return
 			}

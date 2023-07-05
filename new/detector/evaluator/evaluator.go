@@ -24,7 +24,7 @@ type Evaluator struct {
 	langImplementation    implementation.Implementation
 	lang                  languagetypes.Language
 	detectorSet           types.DetectorSet
-	stats                 *stats.Stats
+	fileStats             *stats.FileStats
 	executingDetectors    map[langtree.NodeID][]string
 	fileName              string
 	rulesDisabledForNodes map[string][]*langtree.Node
@@ -37,7 +37,7 @@ func New(
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
 	fileName string,
-	stats *stats.Stats,
+	fileStats *stats.FileStats,
 ) *Evaluator {
 	return &Evaluator{
 		ctx:                   ctx,
@@ -45,7 +45,7 @@ func New(
 		lang:                  lang,
 		fileName:              fileName,
 		detectorSet:           detectorSet,
-		stats:                 stats,
+		fileStats:             fileStats,
 		executingDetectors:    make(map[langtree.NodeID][]string),
 		rulesDisabledForNodes: mapNodesToDisabledRules(tree.RootNode()),
 	}
@@ -71,9 +71,8 @@ func (evaluator *Evaluator) Evaluate(
 	key := cachepkg.NewKey(rootNode, detectorType, scope, followFlow)
 
 	if detections, cached := cache.Get(key); cached {
-		if evaluator.stats != nil {
-			evaluator.stats.Record(detectorType, startTime)
-		}
+		evaluator.fileStats.Rule(detectorType, startTime)
+
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
 				"evaluate end: %s at %s: %d detections (cached)",
@@ -143,9 +142,8 @@ func (evaluator *Evaluator) Evaluate(
 
 	cache.Put(key, result)
 
-	if evaluator.stats != nil {
-		evaluator.stats.Record(detectorType, startTime)
-	}
+	evaluator.fileStats.Rule(detectorType, startTime)
+
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
 			"evaluate end: %s at %s: %d detections",

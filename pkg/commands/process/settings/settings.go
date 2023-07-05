@@ -14,17 +14,17 @@ import (
 )
 
 var (
-	Timeout                   = 10 * time.Minute  // "The maximum time alloted to complete the scan
-	TimeoutFileMinimum        = 5 * time.Second   // Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
-	TimeoutFileMaximum        = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
-	TimeoutFileBytesPerSecond = 1 * 1000          // 1 Kb/s minimum number of bytes per second allowed to scan a file
-	TimeoutWorkerFileGrace    = 5 * time.Second   // Grace period to allow a worker to timeout on it's own
-	TimeoutWorkerOnline       = 60 * time.Second  // Maximum time to wait for a worker process to come online
-	TimeoutWorkerShutdown     = 5 * time.Second   // Maximum time to wait for a worker process to shut down cleanly
-	FileSizeMaximum           = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
-	FilesPerWorker            = 1000              // By default, start a worker per this many files, up to the number of CPUs
-	MemoryMaximum             = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
-	ExistingWorker            = ""                // Specify the URL of an existing worker
+	Timeout                          = 10 * time.Minute  // "The maximum time alloted to complete the scan
+	TimeoutFileMinimum               = 5 * time.Second   // Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
+	TimeoutFileMaximum               = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
+	TimeoutFileBytesPerSecond        = 1 * 1000          // 1 Kb/s minimum number of bytes per second allowed to scan a file
+	TimeoutWorkerFileGrace           = 5 * time.Second   // Grace period to allow a worker to timeout on it's own
+	TimeoutWorkerOnline              = 60 * time.Second  // Maximum time to wait for a worker process to come online
+	TimeoutWorkerShutdown            = 5 * time.Second   // Maximum time to wait for a worker process to shut down cleanly
+	FileSizeMaximum                  = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
+	FilesPerWorker                   = 1000              // By default, start a worker per this many files, up to the number of CPUs
+	MemoryMaximum             uint64 = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
+	ExistingWorker                   = ""                // Specify the URL of an existing worker
 )
 
 type WorkerOptions struct {
@@ -34,7 +34,6 @@ type WorkerOptions struct {
 	TimeoutFileBytesPerSecond int           `mapstructure:"timeout-file-bytes-per-second" json:"timeout-file-bytes-per-second" yaml:"timeout-file-bytes-per-second"`
 	TimeoutWorkerOnline       time.Duration `mapstructure:"timeout-worker-online" json:"timeout-worker-online" yaml:"timeout-worker-online"`
 	FileSizeMaximum           int           `mapstructure:"file-size-max" json:"file-size-max" yaml:"file-size-max"`
-	MemoryMaximum             int           `mapstructure:"memory-max" json:"memory-max" yaml:"memory-max"`
 	ExistingWorker            string        `mapstructure:"existing-worker" json:"existing-worker" yaml:"existing-worker"`
 }
 
@@ -276,7 +275,6 @@ func defaultWorkerOptions() WorkerOptions {
 		TimeoutFileBytesPerSecond: TimeoutFileBytesPerSecond,
 		TimeoutWorkerOnline:       TimeoutWorkerOnline,
 		FileSizeMaximum:           FileSizeMaximum,
-		MemoryMaximum:             MemoryMaximum,
 		ExistingWorker:            ExistingWorker,
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/bearer/bearer/new/detector/detection"
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
@@ -43,9 +44,10 @@ func (*DetectorBase) NestedDetections() bool {
 }
 
 type Composition interface {
-	DetectFromFile(ctx context.Context, file *file.FileInfo) ([]*detection.Detection, error)
+	DetectFromFile(ctx context.Context, fileStats *stats.FileStats, file *file.FileInfo) ([]*detection.Detection, error)
 	DetectFromFileWithTypes(
 		ctx context.Context,
+		fileStats *stats.FileStats,
 		file *file.FileInfo,
 		detectorTypes, sharedDetectorTypes []string,
 	) ([]*detection.Detection, error)

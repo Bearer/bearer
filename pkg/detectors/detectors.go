@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"runtime/debug"
 
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/new/scanner"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/detectors/beego"
@@ -133,18 +134,20 @@ func Registrations(scanners []string) []InitializedDetector {
 func Extract(
 	ctx context.Context,
 	path string,
-	files []string,
+	filename string,
 	report reporttypes.Report,
+	fileStats *stats.FileStats,
 	scanners []string,
 ) error {
-	return ExtractWithDetectors(ctx, path, files, report, Registrations(scanners))
+	return ExtractWithDetectors(ctx, path, filename, report, fileStats, Registrations(scanners))
 }
 
 func ExtractWithDetectors(
 	ctx context.Context,
 	rootDir string,
-	files []string,
+	filename string,
 	report reporttypes.Report,
+	fileStats *stats.FileStats,
 	allDetectors []InitializedDetector,
 ) error {
 
@@ -152,7 +155,7 @@ func ExtractWithDetectors(
 
 	if err := file.IterateFilesList(
 		rootDir,
-		files,
+		[]string{filename},
 		func(dir *file.Path) (bool, error) {
 			for _, detector := range allDetectors {
 				active, isActive := activeDetectors[detector]
@@ -186,9 +189,7 @@ func ExtractWithDetectors(
 			}
 			defer recovery()
 
-			log.Debug().Msgf("processing file %s", file.AbsolutePath)
-
-			err := scanner.Detect(ctx, report, file)
+			err := scanner.Detect(ctx, report, fileStats, file)
 			if err != nil {
 				log.Debug().Msgf("failed to process file %s for detector: %s", file.RelativePath, err)
 				report.AddError(file.RelativePath, fmt.Errorf("failed to process file for detector : %s", err))

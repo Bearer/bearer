@@ -21,6 +21,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
+	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
@@ -70,11 +71,21 @@ type runner struct {
 	reuseDetection bool
 	goclocResult   *gocloc.Result
 	scanSettings   settings.Config
+	stats          *evalstats.Stats
 }
 
 // NewRunner initializes Runner that provides scanning functionalities.
-func NewRunner(ctx context.Context, scanSettings settings.Config, goclocResult *gocloc.Result) Runner {
-	r := &runner{scanSettings: scanSettings, goclocResult: goclocResult}
+func NewRunner(
+	ctx context.Context,
+	scanSettings settings.Config,
+	goclocResult *gocloc.Result,
+	stats *evalstats.Stats,
+) Runner {
+	r := &runner{
+		scanSettings: scanSettings,
+		goclocResult: goclocResult,
+		stats:        stats,
+	}
 
 	scanID, err := buildScanID(scanSettings)
 	if err != nil {
@@ -207,6 +218,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 			r.scanSettings,
 			r.goclocResult,
 			r.reportPath,
+			r.stats,
 		); err != nil {
 			return types.Report{}, err
 		}
@@ -245,7 +257,12 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}()
 
-	r := NewRunner(ctx, scanSettings, inputgocloc)
+	var stats *evalstats.Stats
+	if scanSettings.Scan.Debug {
+		stats = evalstats.New()
+	}
+
+	r := NewRunner(ctx, scanSettings, inputgocloc, stats)
 	defer r.Close(ctx)
 
 	if !r.CacheUsed() && scanSettings.CacheUsed {
@@ -285,6 +302,10 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 			}
 			report.Path = newPath
 		}
+	}
+
+	if stats != nil {
+		outputhandler.StdErrLog(fmt.Sprintf("=====================================\n\nProfile\n\n%s", stats.String()))
 	}
 
 	if !reportPassed {

@@ -122,7 +122,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to get absolute path of report file: %s", err)
 	}
 
-	err = runner.worker.Scan(context.Background(), work.ProcessRequest{
+	response := runner.worker.Scan(context.Background(), work.ProcessRequest{
 		File:       fileRelativePath,
 		ReportPath: detectorsReportPath,
 		Repository: work.Repository{
@@ -130,8 +130,8 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		},
 	})
 
-	if err != nil {
-		t.Fatalf("failed to do scan %s", err)
+	if response.Error != "" {
+		t.Fatalf("failed to do scan %s", response.Error)
 	}
 
 	runner.config.Scan.Target = testDataPath
