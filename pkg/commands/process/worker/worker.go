@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"runtime"
 
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	customdetector "github.com/bearer/bearer/new/scanner"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/debugprofile"
@@ -25,11 +26,13 @@ import (
 var ErrorTimeoutReached = errors.New("file processing time exceeded")
 
 type Worker struct {
+	debug     bool
 	classifer *classification.Classifier
 	scanners  []string
 }
 
 func (worker *Worker) Setup(config config.Config) error {
+	worker.debug = config.Scan.Debug
 	worker.scanners = config.Scan.Scanner
 
 	if slices.Contains(worker.scanners, "sast") {
@@ -54,15 +57,35 @@ func (worker *Worker) Setup(config config.Config) error {
 	return nil
 }
 
-func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest) error {
-	return scanner.Scan(
+func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest) work.ProcessResponse {
+	var fileStats *stats.FileStats
+	if worker.debug {
+		fileStats = stats.NewFileStats()
+	}
+
+	err := scanner.Scan(
 		ctx,
 		scanRequest.Dir,
-		[]string{scanRequest.File.FilePath},
+		scanRequest.File.FilePath,
 		scanRequest.ReportPath,
 		worker.classifer,
+		fileStats,
 		worker.scanners,
 	)
+
+	if ctx.Err() != nil {
+		err = ErrorTimeoutReached
+	}
+
+	var errorString string
+	if err != nil {
+		errorString = err.Error()
+	}
+
+	return work.ProcessResponse{
+		FileStats: fileStats,
+		Error:     errorString,
+	}
 }
 
 func Start(port string) error {
@@ -96,16 +119,8 @@ func Start(port string) error {
 				var scanRequest work.ProcessRequest
 				json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
 
-				response := work.ProcessResponse{}
-
 				scanCtx, cancelScan := context.WithTimeout(ctx, scanRequest.File.Timeout)
-
-				err := worker.Scan(scanCtx, scanRequest)
-				if scanCtx.Err() != nil {
-					response.Error = ErrorTimeoutReached.Error()
-				} else if err != nil {
-					response.Error = err.Error()
-				}
+				response := worker.Scan(scanCtx, scanRequest)
 
 				cancelScan()
 

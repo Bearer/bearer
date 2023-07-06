@@ -52,13 +52,15 @@ func Extract(
 		t.Errorf("report has errored %s", err)
 	}
 
-	err = detectors.ExtractWithDetectors(context.Background(), path, files, &report, registrations)
-	if len(report.Errors) > 0 {
-		t.Errorf("report has some errors %#v", report.Errors)
+	for _, filename := range files {
+		err = detectors.ExtractWithDetectors(context.Background(), path, filename, &report, nil, registrations)
+		if !assert.Nil(t, err) {
+			t.Errorf("report has errored %s", err)
+		}
 	}
 
-	if !assert.Nil(t, err) {
-		t.Errorf("report has errored %s", err)
+	if len(report.Errors) > 0 {
+		t.Errorf("report has some errors %#v", report.Errors)
 	}
 
 	return &report

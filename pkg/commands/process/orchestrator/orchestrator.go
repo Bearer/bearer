@@ -13,6 +13,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/repo_info"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -45,6 +46,7 @@ func newOrchestrator(
 	config settings.Config,
 	goclocResult *gocloc.Result,
 	reportPath string,
+	stats *stats.Stats,
 ) (*orchestrator, error) {
 	reportFile, err := os.Create(reportPath)
 	if err != nil {
@@ -72,7 +74,7 @@ func newOrchestrator(
 		files:               files,
 		maxWorkersSemaphore: make(chan struct{}, parallel),
 		done:                make(chan struct{}),
-		pool:                pool.New(config),
+		pool:                pool.New(config, stats),
 		progressBar:         bearerprogress.GetProgressBar(len(files), config, "files"),
 	}, nil
 }
@@ -178,12 +180,18 @@ func (orchestrator *orchestrator) writeFileError(file work.File, fileErr error) 
 	orchestrator.reportMutex.Unlock()
 }
 
-func Scan(repository work.Repository, config settings.Config, goclogResult *gocloc.Result, reportPath string) error {
+func Scan(
+	repository work.Repository,
+	config settings.Config,
+	goclogResult *gocloc.Result,
+	reportPath string,
+	stats *stats.Stats,
+) error {
 	if !config.Scan.Quiet {
 		output.StdErrLog(fmt.Sprintf("Scanning target %s", config.Scan.Target))
 	}
 
-	orchestrator, err := newOrchestrator(repository, config, goclogResult, reportPath)
+	orchestrator, err := newOrchestrator(repository, config, goclogResult, reportPath, stats)
 	if err != nil {
 		return err
 	}

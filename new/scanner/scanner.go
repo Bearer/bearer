@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/new/detector/composition/java"
 	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/composition/ruby"
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -32,7 +33,7 @@ func Close() {
 
 func Setup(config *settings.Config, classifier *classification.Classifier) (err error) {
 	var toInstantiate = []struct {
-		constructor func(bool, map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)
+		constructor func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)
 		name        string
 	}{
 		{
@@ -50,7 +51,7 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 	}
 
 	for _, instantiatior := range toInstantiate {
-		composition, err := instantiatior.constructor(config.DebugProfile, config.Rules, classifier)
+		composition, err := instantiatior.constructor(config.Rules, classifier)
 		if err != nil {
 			return fmt.Errorf("failed to instantiate composition %s:%s", instantiatior.name, err)
 		}
@@ -64,9 +65,9 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 	return err
 }
 
-func Detect(ctx context.Context, report report.Report, file *file.FileInfo) (err error) {
+func Detect(ctx context.Context, report report.Report, fileStats *stats.FileStats, file *file.FileInfo) error {
 	for _, language := range scanner {
-		detections, err := language.composition.DetectFromFile(ctx, file)
+		detections, err := language.composition.DetectFromFile(ctx, fileStats, file)
 		if err != nil {
 			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
 		}

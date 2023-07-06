@@ -2,6 +2,8 @@ package work
 
 import (
 	"time"
+
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 )
 
 type InitializeResponse struct {
@@ -9,7 +11,8 @@ type InitializeResponse struct {
 }
 
 type ProcessResponse struct {
-	Error string
+	FileStats *stats.FileStats
+	Error     string
 }
 
 type Repository struct {

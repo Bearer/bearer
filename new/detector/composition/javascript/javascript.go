@@ -11,7 +11,6 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/new/detector/composition/types"
 	"github.com/bearer/bearer/new/detector/detection"
@@ -41,11 +40,9 @@ type Composition struct {
 	lang                languagetypes.Language
 	closers             []func()
 	rules               map[string]*settings.Rule
-	stats               *stats.Stats
 }
 
 func New(
-	debugProfile bool,
 	rules map[string]*settings.Rule,
 	classifier *classification.Classifier,
 ) (detectortypes.Composition, error) {
@@ -57,10 +54,6 @@ func New(
 	composition := &Composition{
 		langImplementation: javascript.Get(),
 		lang:               lang,
-	}
-
-	if debugProfile {
-		composition.stats = stats.New()
 	}
 
 	staticDetectors := []struct {
@@ -178,10 +171,6 @@ func New(
 }
 
 func (composition *Composition) Close() {
-	if composition.stats != nil {
-		log.Debug().Msgf("javascript stats:\n%s", composition.stats)
-	}
-
 	for _, closeFunc := range composition.closers {
 		closeFunc()
 	}
@@ -189,10 +178,12 @@ func (composition *Composition) Close() {
 
 func (composition *Composition) DetectFromFile(
 	ctx context.Context,
+	fileStats *stats.FileStats,
 	file *file.FileInfo,
 ) ([]*detection.Detection, error) {
 	return composition.DetectFromFileWithTypes(
 		ctx,
+		fileStats,
 		file,
 		composition.customDetectorTypes,
 		composition.sharedDetectorTypes,
@@ -201,6 +192,7 @@ func (composition *Composition) DetectFromFile(
 
 func (composition *Composition) DetectFromFileWithTypes(
 	ctx context.Context,
+	fileStats *stats.FileStats,
 	file *file.FileInfo,
 	detectorTypes, sharedDetectorTypes []string,
 ) ([]*detection.Detection, error) {
@@ -225,7 +217,7 @@ func (composition *Composition) DetectFromFileWithTypes(
 		composition.detectorSet,
 		tree,
 		file.FileInfo.Name(),
-		composition.stats,
+		fileStats,
 	)
 
 	sharedCache := cachepkg.NewShared(sharedDetectorTypes)

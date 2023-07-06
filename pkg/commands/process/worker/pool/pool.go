@@ -5,21 +5,26 @@ import (
 	"fmt"
 	"os"
 	"sync"
+	"time"
 
+	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/commands/process/worker"
 	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/util/output"
+	"github.com/rs/zerolog/log"
 )
 
 type Pool struct {
 	processOptions ProcessOptions
+	stats          *stats.Stats
 	mutex          sync.Mutex
 	nextId         int
 	closed         bool
 	available      []*Process
 }
 
-func New(config settings.Config) *Pool {
+func New(config settings.Config, stats *stats.Stats) *Pool {
 	executable, err := os.Executable()
 	if err != nil {
 		output.Fatal(fmt.Sprintf("failed to get current command executable %s", err))
@@ -36,6 +41,7 @@ func New(config settings.Config) *Pool {
 			baseArguments: baseArguments,
 			config:        config,
 		},
+		stats: stats,
 	}
 }
 
@@ -45,19 +51,43 @@ func (pool *Pool) Scan(request work.ProcessRequest) error {
 		return err
 	}
 
+	startTime := time.Now()
+	log.Debug().Msgf("processing file %s using %s", request.File.FilePath, process.id)
+
 	response, err := process.Scan(request)
 	if err != nil {
 		process.Close()
+		pool.stats.FileFailed(
+			request.File.FilePath,
+			translateErrorForStats(err.Error(), true),
+			startTime,
+			process.memoryUsage,
+		)
 		return err
 	}
+
+	pool.stats.AddFileStats(response.FileStats)
 
 	pool.mutex.Lock()
 	pool.available = append(pool.available, process)
 	pool.mutex.Unlock()
 
 	if response.Error != "" {
+		pool.stats.FileFailed(
+			request.File.FilePath,
+			translateErrorForStats(response.Error, false),
+			startTime,
+			0,
+		)
 		return errors.New(response.Error)
 	}
+
+	duration := pool.stats.File(request.File.FilePath, startTime)
+	log.Debug().Msgf(
+		"processing complete for %s [%s]",
+		request.File.FilePath,
+		duration.Truncate(time.Millisecond),
+	)
 
 	return nil
 }
@@ -110,4 +140,19 @@ func (pool *Pool) Close() {
 
 	waitGroup.Wait()
 	pool.closed = true
+}
+
+func translateErrorForStats(message string, processKilled bool) stats.FailedReason {
+	switch message {
+	case ErrorOutOfMemory.Error():
+		return stats.MemoryLimitReason
+	case worker.ErrorTimeoutReached.Error():
+		if processKilled {
+			return stats.KilledAfterTimeoutReason
+		}
+
+		return stats.TimeoutReason
+	default:
+		return stats.UnexpectedReason
+	}
 }
