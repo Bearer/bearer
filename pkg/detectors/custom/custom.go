@@ -20,7 +20,6 @@ import (
 	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
 	"github.com/bearer/bearer/pkg/report/source"
 	"github.com/bearer/bearer/pkg/util/file"
-	pluralize "github.com/gertd/go-pluralize"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/pkg/parser/nodeid"
@@ -39,7 +38,6 @@ type Detector struct {
 	idGenerator        nodeid.Generator
 	paramIdGenerator   nodeid.Generator
 	rulesGroupedByLang map[string][]config.CompiledRule
-	pluralize          *pluralize.Client
 
 	Sql language.Detector
 }
@@ -51,7 +49,6 @@ func New(idGenerator nodeid.Generator) types.Detector {
 	}
 
 	detector.Sql = &sqldetector.Detector{}
-	detector.pluralize = pluralize.NewClient()
 
 	return detector
 }
@@ -366,18 +363,6 @@ func shouldIgnoreCaptures(captures parser.Captures, rule config.CompiledRule) bo
 
 	return false
 }
-
-// func (detector *Detector) applyDatatypeTransformations(rule config.CompiledRule, datatypes map[parser.NodeID]*schemadatatype.DataType) {
-// 	for _, datatype := range datatypes {
-// 		if rule.RootSingularize {
-// 			datatype.Name = detector.pluralize.Singular(datatype.Name)
-// 		}
-
-// 		if rule.RootLowercase {
-// 			datatype.Name = strings.ToLower(datatype.Name)
-// 		}
-// 	}
-// }
 
 func filterCaptures(params []config.Param, captures []parser.Captures) (filtered []parser.Captures, err error) {
 	for _, capture := range captures {

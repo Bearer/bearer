@@ -12,7 +12,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/util/file"
-	pluralize "github.com/gertd/go-pluralize"
+	"github.com/bearer/bearer/pkg/util/pluralize"
 )
 
 var (
@@ -65,9 +65,8 @@ func ExtractFromDatabaseSchema(
 
 		normalizedObjectName := ""
 		normalizedFieldName := ""
-		pluralizer := pluralize.NewClient()
-		normalizedObjectName = pluralizer.Singular(strings.ToLower(tableName))
-		normalizedFieldName = pluralizer.Singular(strings.ToLower(columnName))
+		normalizedObjectName = pluralize.Singular(strings.ToLower(tableName))
+		normalizedFieldName = pluralize.Singular(strings.ToLower(columnName))
 
 		currentSchema := schema.Schema{
 			ObjectName:           tableName,
