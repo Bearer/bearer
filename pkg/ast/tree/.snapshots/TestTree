@@ -1,0 +1,1 @@
+(program (method ("def") (identifier) (method_parameters ("(") (identifier) (")")) (call (identifier) (".") (identifier)) ("end")))
