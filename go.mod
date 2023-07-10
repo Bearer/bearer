@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/buildkite/terminal v3.2.0+incompatible
-	github.com/dustin/go-humanize v1.0.0
+	github.com/dustin/go-humanize v1.0.1
 	github.com/fatih/color v1.15.0
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/ghodss/yaml v1.0.0
