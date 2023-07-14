@@ -29,18 +29,26 @@
 
 <https://user-images.githubusercontent.com/1649672/230438696-9bb0fd35-2aa9-4273-9970-733189d01ff1.mp4>
 
-Bearer CLI provides built-in rules against a common set of security risks and vulnerabilities, known as [OWASP Top 10](https://owasp.org/www-project-top-ten/), and privacy risks. Here are some practical examples of what those rules look for:
-* Non-filtered user input (sql injection, path traversal, etc.)
-* Leakage of sensitive data through cookies, internal loggers, third-party logging services, and into analytics environments.
-* Usage of weak encryption libraries or misusage of encryption algorithms.
-* Unencrypted incoming and outgoing communication (HTTP, FTP, SMTP) of sensitive data.
-* Hard-coded secrets and tokens.
+Bearer CLI scans your source code for:
+* **Security risks and vulnerabilities** using [built-in rules](https://docs.bearer.com/reference/rules/) covering the [OWASP Top 10](https://owasp.org/www-project-top-ten/) and [CWE Top 25](https://cwe.mitre.org/top25/archive/2023/2023_top25_list.html), such as:
+  * A01: Access control (e.g. Path Traversal, Open Redirect, Exposure of Sensitive Information).
+  * A02: Cryptographic Failures (e.g. Weak Algorithm, Insecure Communication).
+  * A03: Injection (e.g. SQL Injection, Input Validation, XSS, XPath).
+  * A04: Design (e.g. Missing Encryption of Sensitive Data, Persistent Cookies Containing Sensitive Information).
+  * A05: Security Misconfiguration (e.g. Cleartext Storage of Sensitive Information in a Cookie or JWT).
+  * A07: Identification and Authentication Failures (e.g. Use of Hard-coded Password, Improper Certificate Validation).
+  * A08: Data Integrity Failures (e.g. Deserialization of Untrusted Data).
+  * A09: Security Logging and Monitoring Failures (e.g. Insertion of Sensitive Information into Log File).
+  * A10: Server-Side Request Forgery (SSRF).
+  
+  *Note: all the rules and their code patterns are accessible through the [documentation](https://docs.bearer.com/reference/rules/).*
 
-And many [more](https://docs.bearer.com/reference/rules/).
+* **Privacy risks** with the ability to detect [sensitive data flow](https://docs.bearer.com/explanations/discovery-and-classification/) such as the use of PII, PHI in your app, and [components](https://docs.bearer.com/reference/recipes/) processing sensitive data (e.g. database like pgSQL, third-party API such as OpenAI, Sentry, etc.). This helps generate a [privacy report](https://docs.bearer.com/guides/privacy/) relevant for:
+  * Privacy Impact Assessment (PIA).
+  * Data Protection Impact Assessment (DPIA).
+  * Records of Processing Activities (RoPA) input for GDPR compliance reporting.
 
-Bearer CLI is Open Source ([*see license*](#mortar_board-license)) and fully customizable, from creating your own rules to component detection (database, API) and data classification.
-
-Bearer CLI also powers our commercial offering, [Bearer Cloud](https://www.bearer.com/bearer-cloud), allowing security teams to scale and monitor their application security program using the same engine.
+Bearer CLI also powers our SaaS solution, [Bearer Cloud](https://www.bearer.com/bearer-cloud), allowing security teams to scale and monitor their application security program using the same engine.
 
 ## :rocket: Getting started
 
