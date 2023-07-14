@@ -20,7 +20,7 @@ This includes:
   * A09: Security Logging and Monitoring Failures (e.g. Insertion of Sensitive Information into Log File).
   * A10: Server-Side Request Forgery (SSRF).
  
-* **Privacy risks** with the ability to detect [sensitive data flow](https://docs.bearer.com/explanations/discovery-and-classification/) such as the use of PII, PHI in your app, and [components](https://docs.bearer.com/reference/recipes/) processing sensitive data (e.g. database like pgSQL, third-party API such as OpenAI, Sentry, etc.). This helps generate a [privacy report](https://docs.bearer.com/guides/privacy/) relevant for:
+* **Privacy risks** with the ability to detect [sensitive data flow](https://docs.bearer.com/explanations/discovery-and-classification/) such as the use of PII, PHI in your app, and [components](https://docs.bearer.com/reference/recipes/) processing sensitive data (e.g. databases like pgSQL, third-party APIs such as OpenAI, Sentry, etc.). This helps generate a [privacy report](https://docs.bearer.com/guides/privacy/) relevant for:
   * Privacy Impact Assessment (PIA).
   * Data Protection Impact Assessment (DPIA).
   * Records of Processing Activities (RoPA) input for GDPR compliance reporting.
