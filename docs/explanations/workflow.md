@@ -45,7 +45,7 @@ While there is some variation for each report type, the files to AST to detectio
 
 ## Advanced concepts
 
-Now that you have an understand of the CLI workflow, let's look at the concepts of data flow analysis, control flow analysis, and type analysis.
+Now that you have an understanding of the CLI workflow, let's look at the concepts of data flow analysis, control flow analysis, and type analysis.
 
 ![CLI flow diagram](/assets/img/cli-flow-diagram.jpg)
 
@@ -103,7 +103,7 @@ Control flow analysis recognizes what the program control flow is upon execution
 
 The control flow analyzer detects potentially dangerous operational sequences. The engine determines whether a set of operations execute in a particular order by analyzing control flow paths in a program.
 
-For example, a security rule requires the initialization of the session after the static asset are initialized in ExpressJS (to avoid leaking information when serving the assets).
+For example, a security rule requires the initialization of the session after the static assets are initialized in ExpressJS (to avoid leaking information when serving the assets).
 
 This code needs to raise an alert:
 
