@@ -9,7 +9,7 @@ This page contains a breakdown of how the Bearer CLI SAST scan works. For most u
 
 ## High level overview
 
-At a high level, Bearer CLI scans the files in a project, creates an AST representation of the code using [tree sitter](http://tree-sitter.github.io/tree-sitter/), performs [data discovery and classifications](/explanations/discovery-and-classification/) and updates the tree, and generates an internal detectors report that each report type can use. For example, the [security report](/explanations/reports#security-report) checks that report against a set of [rules](/reference/rules/).
+At a high level, Bearer CLI scans the files in a project, creates an AST representation of the code using [tree sitter](https://tree-sitter.github.io/tree-sitter/), performs [data discovery and classifications](/explanations/discovery-and-classification/) and updates the tree, and generates an internal detectors report that each report type can use. For example, the [security report](/explanations/reports#security-report) checks that report against a set of [rules](/reference/rules/).
 
 When you run a scan for the first time with the default settings, the application flow looks like the following diagram:
 
@@ -141,7 +141,7 @@ let user: User = {
 console.log(`User is: ${user}`)
 ```
 
-We take a user as the source and analyze the context of the source. We know that a user contains some personal information, and that may leak into the logger (sink). Therefor, we are able to report that as a failure.
+We take a user as the source and analyze the context of the source. We know that a user contains some personal information, and that may leak into the logger (sink). Therefore, we are able to report that as a failure.
 
 ---
 
