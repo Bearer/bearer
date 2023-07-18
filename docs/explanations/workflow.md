@@ -9,7 +9,7 @@ This page contains a breakdown of how the Bearer CLI SAST scan works. For most u
 
 ## High level overview
 
-At a high level, Bearer CLI scans the files in a project, creates an AST representation of the code using [tree sitter](http://tree-sitter.github.io/tree-sitter/), performs [data discovery and classifications](/explanations/discovery-and-classification/) and updates the tree, and generates an internal detectors report that each report type can use. For example, the [security report](/explanations/reports#security-report) checks that report against a set of [rules](/reference/rules/).
+At a high level, Bearer CLI scans the files in a project, creates an AST representation of the code using [tree sitter](https://tree-sitter.github.io/tree-sitter/), performs [data discovery and classifications](/explanations/discovery-and-classification/) and updates the tree, and generates an internal detectors report that each report type can use. For example, the [security report](/explanations/reports#security-report) checks that report against a set of [rules](/reference/rules/).
 
 When you run a scan for the first time with the default settings, the application flow looks like the following diagram:
 
@@ -75,13 +75,13 @@ String encodedUserInput = Encode.forHtml(userInput);
 response.getWriter().write(encodedUserInput);
 ```
 
-The above is the same example, but this time the `userInput` is clean as it gets sanitized by `Encode.forHtml` and the vulnerability will not be raised.
+The above is the same example, but this time the `userInput` is clean as it gets sanitized by `Encode.forHtml()` and the vulnerability will not be raised.
 
 We need to recognize expressions in the code that are sources of tainted data. These are the places that bring tainted data into the application from external locations. We also need to identify the sinks for tainted function calls that use the tainted data. Once we have identified all sources and sinks, the analyzer identifies functions that sanitize the tainted data. If the analyzer isn’t able to confirm that the data is harmless, it identifies an error for tainted data reaching a sink.
 
 Tracing the data source and identifying whether it is sanitized before use in sensitive locations is the most difficult part. That’s why we have the ability to customize and expand the rules and add custom sanitizers. This allows the analyzer to recognize that sanitization is taking place and prevents false positives for data flowing through these functions.
 
-We perform a points-to analysis for local variables. A variable resolves to the last assignment of that variable. The Points-To Analysis establishes links between variables and their associated values. This allows sources to be found when the sink is using a variable.
+We perform a [points-to analysis](https://en.wikipedia.org/wiki/Pointer_analysis) for local variables. A variable resolves to the last assignment of that variable. The points-to analysis establishes links between variables and their associated values. This allows sources to be found when the sink is using a variable.
 
 While analyzing the dataflow, we also propagate constant values for strings, which allows us to recreate and identify the entire string.
 
@@ -141,7 +141,7 @@ let user: User = {
 console.log(`User is: ${user}`)
 ```
 
-We take a user as the source and analyze the context of the source. We know that a user contains some personal information, and that may leak into the logger (sink). Therefor, we are able to report that as a failure.
+We take a user as the source and analyze the context of the source. We know that a user contains some personal information, and that may leak into the logger (sink). Therefore, we are able to report that as a failure.
 
 ---
 
