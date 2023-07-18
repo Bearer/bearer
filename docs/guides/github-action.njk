@@ -158,7 +158,11 @@ jobs:
         run: |
           cat rd.json | reviewdog -f=rdjson -reporter=github-pr-review
 ```
-Remember to set a personal access [token](https://github.com/settings/personal-access-tokens/new) with read and write permissions and save it to your repo secrets as `REVIEWDOG_GITHUB_API_TOKEN` and you should be good to go.
+Remember to set a personal access [token](https://github.com/settings/personal-access-tokens/new) with read and write access to your repository.
+- If you choose a "classic" personal access token, it will need full repo permissions (scope: repo)
+- If you choose a "fine-grained" personal access token, it will need read and write access to pull requests for your repo
+
+Save this token to your repo secrets as `REVIEWDOG_GITHUB_API_TOKEN` and you should be good to go.
 
 ## Integrate with Defect Dojo
 
