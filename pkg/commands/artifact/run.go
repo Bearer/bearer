@@ -318,6 +318,8 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 func (r *runner) Report(config settings.Config, report types.Report) (bool, error) {
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
+	reportPassed := true
+
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLog
 	if config.Report.Output != "" {
@@ -356,15 +358,16 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		return true, nil
 	}
 
-	if config.Report.Format == flag.FormatEmpty {
+	// output report string for type and format
+	switch config.Report.Format {
+	case flag.FormatEmpty:
 		if config.Report.Report == flag.ReportSecurity {
 			// for security report, default report format is Table
 			detectionReport := detections.(*security.Results)
-			reportStr, reportPassed := security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
+			var reportStr *strings.Builder
+			reportStr, reportPassed = security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
 
 			logger(reportStr.String())
-
-			return reportPassed, nil
 		} else if config.Report.Report == flag.ReportPrivacy {
 			// for privacy report, default report format is CSV
 			content, err := reportoutput.GetPrivacyReportCSVOutput(report, dataflow, config)
@@ -373,12 +376,15 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			}
 
 			logger(*content)
+		} else {
+			// for everything else, default report format is JSON
+			content, err := outputhandler.ReportJSON(detections)
+			if err != nil {
+				return false, fmt.Errorf("error generating report %s", err)
+			}
 
-			return true, nil
+			logger(*content)
 		}
-	}
-
-	switch config.Report.Format {
 	case flag.FormatSarif:
 		sarifContent, err := sarif.ReportSarif(detections.(*map[string][]security.Result), config.Rules)
 		if err != nil {
@@ -413,7 +419,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		}
 
 		logger(*content)
-	case flag.FormatEmpty, flag.FormatJSON:
+	case flag.FormatJSON:
 		content, err := outputhandler.ReportJSON(detections)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
@@ -453,7 +459,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	}
 
 	outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
-	return true, nil
+	return reportPassed, nil
 }
 
 func outputCachedDataWarning(cacheUsed bool, quietMode bool) {
