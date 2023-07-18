@@ -22,6 +22,31 @@ Did you know that Bearer CLI can also detect hard-coded secrets in your code? In
 bearer scan . --scanner secrets
 ```
 
+## Exclude specific findings
+
+Every finding is associated with a unique fingerprint visible directly in the CLI output, for example:
+
+```bash
+HIGH: SQL injection vulnerability detected. [CWE-89]
+https://docs.bearer.com/reference/rules/javascript_lang_sql_injection
+To exclude this finding, use the flag --exclude-fingerprint=4b0883d52334dfd9a4acce2fcf810121_0
+...
+```
+
+If a finding is not relevant, you can exclude it by using the `--exclude-fingerprint` command, for example:
+```
+bearer scan . --exclude-fingerprint=4b0883d52334dfd9a4acce2fcf810121_0
+```
+
+If you want to exclude findings automatically from future scans, you can add them to your [bearer config](/reference/config) file in the ```exclude-fingerprint``` node:
+
+```yml
+report:
+  exclude-fingerprint:
+    - 4b0883d52334dfd9a4acce2fcf810121_0
+    - 42a76a8c10a52b38c1b8729a2f211830_0
+```
+
 ## Skip or ignore specific rules
 
 Sometimes you want to ignore one or more rules, either for the entire scan or for individual blocks of code. Rules are identified by their id, for example: `ruby_lang_exception`.

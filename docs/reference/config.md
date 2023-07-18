@@ -18,6 +18,8 @@ This creates a config file in your current directory. Below is an annotated vers
 ```yml
 # Report settings
 report:
+    # Specify fingerprints of the findings you would like to exclude.
+    exclude-fingerprint: []
     # Specify report format (json, yaml, sarif, gitlab-sast)
     format: ""
     # Specify the output path for the report.
