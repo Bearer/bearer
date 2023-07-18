@@ -34,7 +34,7 @@ To exclude this finding, use the flag --exclude-fingerprint=4b0883d52334dfd9a4ac
 ```
 
 If a finding is not relevant, you can exclude it by using the `--exclude-fingerprint` command, for example:
-```
+```bash
 bearer scan . --exclude-fingerprint=4b0883d52334dfd9a4acce2fcf810121_0
 ```
 
