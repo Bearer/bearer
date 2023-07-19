@@ -1,7 +1,6 @@
 package fileignore
 
 import (
-	"bytes"
 	"fmt"
 	"io/fs"
 	"os"
@@ -9,12 +8,12 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/hhatto/gocloc"
-	"github.com/monochromegane/go-gitignore"
 	"github.com/rs/zerolog/log"
+	ignore "github.com/sabhiram/go-gitignore"
 )
 
 type FileIgnore struct {
-	ignorer gitignore.IgnoreMatcher
+	ignorer *ignore.GitIgnore
 
 	config settings.Config
 }
@@ -43,8 +42,8 @@ func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, gocloc
 		return true
 	}
 
-	if fileignore.ignorer.Match(trimmedPath, fileInfo.IsDir()) {
-		log.Error().Msgf("file ignore match err: %s %s", projectPath, relativePath)
+	if fileignore.ignorer.MatchesPath(trimmedPath) {
+		log.Debug().Msgf("file ignore match err: %s %s", projectPath, relativePath)
 		return true
 	}
 
@@ -97,11 +96,6 @@ func isSymlink(path string) (bool, error) {
 	return fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink, nil
 }
 
-func ignorerFromStrings(paths []string) gitignore.IgnoreMatcher {
-	buffer := bytes.NewBuffer([]byte{})
-	for _, path := range paths {
-		buffer.Write([]byte(path + "\n"))
-	}
-
-	return gitignore.NewGitIgnoreFromReader(".", buffer)
+func ignorerFromStrings(paths []string) *ignore.GitIgnore {
+	return ignore.CompileIgnoreLines(paths...)
 }
