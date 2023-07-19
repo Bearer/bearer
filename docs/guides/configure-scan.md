@@ -46,6 +46,8 @@ report:
     - 4b0883d52334dfd9a4acce2fcf810121_0
     - 42a76a8c10a52b38c1b8729a2f211830_0
 ```
+<br/>
+{% callout "info" %} If you're looking for more options when it comes to managing findings, take a look at <a href="/guides/bearer-cloud">Bearer Cloud</a>. {% endcallout %}
 
 ## Skip or ignore specific rules
 
@@ -120,6 +122,14 @@ Similar to how you can skip rules, you can also tell the scan to only run specif
 bearer scan . --only-rule ruby_lang_cookies
 ```
 
+## Limit severity levels
+
+Depending on how you're using Bearer CLI, you may want to limit the severity levels that show up in the report. This can be useful for triaging only the most critical issues. Use the `--severity` flag to define which levels to include from the list of critical, high, medium, low, and warning.
+
+```bash
+bearer scan . --severity critical,high
+```
+
 ## Change the output format
 
 Each [report type](/explanations/reports/) has a default output format, but in general you're able to also select between `json` and `yaml` with the `--format` flag.
@@ -134,14 +144,6 @@ Sometimes you'll want to hand off the report, and while you could pipe the resul
 
 ```bash
 bearer scan . --report dataflow --output dataflow.json
-```
-
-## Limit severity levels
-
-Depending on how you're using Bearer CLI, you may want to limit the severity levels that show up in the report. This can be useful for triaging only the most critical issues. Use the `--severity` flag to define which levels to include from the list of critical, high, medium, low, and warning.
-
-```bash
-bearer scan . --severity critical,high
 ```
 
 ## Generate a SARIF report
@@ -165,6 +167,14 @@ Run the commands together, replacing the scan location and the output path to ma
 ```bash
 bearer scan . --format html --output path/to/security-scan.html
 ```
+
+## Send report to Bearer Cloud
+
+If you're looking to manage product and application code security at scale, [Bearer Cloud](https://www.bearer.com/bearer-cloud) offers a platform for teams that syncs with Bearer CLI's output. 
+
+Learn how to [send your report](/guides/bearer-cloud) to Bearer Cloud.
+
+![Cloud dashboard](/assets/img/cloud-dashboard.jpg)
 
 ## Next steps
 

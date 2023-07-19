@@ -4,6 +4,8 @@ layout: "layouts/doc"
 permalink: "/"
 ---
 
+{% callout "info" %}🎉 Bearer Cloud is available now for free for everyone, <a href="/guides/bearer-cloud">learn more</a>.{% endcallout %}
+
 # Bearer CLI
 
 Welcome to the Bearer CLI documentation. Bearer CLI is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security and privacy risks.

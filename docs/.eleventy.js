@@ -1,8 +1,10 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+
 const {
   EleventyHtmlBasePlugin,
   EleventyRenderPlugin,
 } = require("@11ty/eleventy");
+
 const yaml = require("js-yaml");
 const markdownIt = require("markdown-it");
 const markdownItEmoji = require("markdown-it-emoji");
@@ -33,6 +35,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "./_src/styles/prism-theme.css": "./prism-theme.css",
   });
+  eleventyConfig.addPassthroughCopy({
+    "./_src/styles/callout.css": "./callout.css",
+  });
   eleventyConfig.addPassthroughCopy({ "./_src/js/app.js": "./app.js" });
   eleventyConfig.addPassthroughCopy({
     "./_src/js/rule-search.js": "./rule-search.js",
@@ -51,7 +56,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
-
+  
   // mermaid rendering
   eleventyConfig.addPlugin(mermaid, {
     themeVariables: {
@@ -151,6 +156,26 @@ module.exports = function (eleventyConfig) {
       return false;
     }
   });
+  
+  eleventyConfig.addPairedShortcode("callout", function(content, level = "", format = "html", customLabel = "") {
+		if( format === "md" ) {
+			content = mdIt.renderInline(content);
+		} else if( format === "md-block" ) {
+			content = mdIt.render(content);
+		}
+		let label = "";
+		if(customLabel) {
+			label = customLabel;
+		} else if(level === "info" || level === "error") {
+			label = level.toUpperCase() + ":";
+		} else if(level === "warn") {
+			label = "WARNING:";
+		}
+		let labelHtml = label ? `<div class="elv-callout-label">${customLabel || label}</div>` : "";
+		let contentHtml = (content || "").trim().length > 0 ? `<div class="elv-callout-c">${content}</div>` : "";
+
+		return `<div class="elv-callout${level ? ` elv-callout-${level}` : ""}">${labelHtml}${contentHtml}</div>`;
+	});
 
   return {
     dir: {
