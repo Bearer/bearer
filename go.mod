@@ -17,7 +17,6 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/hhatto/gocloc v0.5.0
 	github.com/jessevdk/go-flags v1.5.0
-	github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00
 	github.com/open-policy-agent/opa v0.54.0
 	github.com/rs/zerolog v1.29.1
 	github.com/russross/blackfriday v1.6.0
