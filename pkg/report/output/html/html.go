@@ -154,6 +154,6 @@ func CountItems(arr interface{}) string {
 }
 
 func DisplayExtract(result security.Result) string {
-	terminalOutput := security.HighlightCodeExtract(result.FullFilename, result.LineNumber, result.Sink.Start, result.Sink.Content, result)
+	terminalOutput := security.HighlightCodeExtract(result)
 	return string(term.Render([]byte(terminalOutput)))
 }

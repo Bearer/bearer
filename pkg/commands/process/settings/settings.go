@@ -21,6 +21,7 @@ var (
 	TimeoutWorkerFileGrace           = 5 * time.Second   // Grace period to allow a worker to timeout on it's own
 	TimeoutWorkerOnline              = 60 * time.Second  // Maximum time to wait for a worker process to come online
 	TimeoutWorkerShutdown            = 5 * time.Second   // Maximum time to wait for a worker process to shut down cleanly
+	CodeExtractBuffer                = 3                 // Number of lines allowed before or after the detection
 	FileSizeMaximum                  = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
 	FilesPerWorker                   = 1000              // By default, start a worker per this many files, up to the number of CPUs
 	MemoryMaximum             uint64 = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.

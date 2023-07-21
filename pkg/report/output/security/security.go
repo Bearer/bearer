@@ -94,18 +94,20 @@ type DataType struct {
 
 type Result struct {
 	*Rule
-	LineNumber       int       `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	FullFilename     string    `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
-	Filename         string    `json:"filename,omitempty" yaml:"filename,omitempty"`
-	DataType         *DataType `json:"data_type,omitempty" yaml:"data_type,omitempty"`
-	CategoryGroups   []string  `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	Source           Source    `json:"source,omitempty" yaml:"source,omitempty"`
-	Sink             Sink      `json:"sink,omitempty" yaml:"sink,omitempty"`
-	ParentLineNumber int       `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent    string    `json:"snippet,omitempty" yaml:"snippet,omitempty"`
-	Fingerprint      string    `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
-	OldFingerprint   string    `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
-	DetailedContext  string    `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	LineNumber       int         `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	FullFilename     string      `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
+	Filename         string      `json:"filename,omitempty" yaml:"filename,omitempty"`
+	DataType         *DataType   `json:"data_type,omitempty" yaml:"data_type,omitempty"`
+	CategoryGroups   []string    `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	Source           Source      `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink             Sink        `json:"sink,omitempty" yaml:"sink,omitempty"`
+	ParentLineNumber int         `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent    string      `json:"snippet,omitempty" yaml:"snippet,omitempty"`
+	Fingerprint      string      `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
+	OldFingerprint   string      `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
+	DetailedContext  string      `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	CodeExtract      string      `json:"code_extract" yaml:"code_extract"`
+	RawCodeExtract   []file.Line `json:"-" yaml:"-"`
 }
 
 type Rule struct {
@@ -211,6 +213,9 @@ func evaluateRules(
 					continue
 				}
 
+				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
+				codeExtract := getExtract(rawCodeExtract)
+
 				result := Result{
 					Rule:             ruleSummary,
 					FullFilename:     output.FullFilename,
@@ -223,6 +228,8 @@ func evaluateRules(
 					ParentLineNumber: output.Sink.Start,
 					ParentContent:    output.Sink.Content,
 					DetailedContext:  output.DetailedContext,
+					CodeExtract:      codeExtract,
+					RawCodeExtract:   rawCodeExtract,
 					Fingerprint:      fingerprint,
 					OldFingerprint:   oldFingerprint,
 				}
@@ -247,6 +254,15 @@ func evaluateRules(
 	}
 
 	return nil
+}
+
+func getExtract(rawCodeExtract []file.Line) string {
+	var parts []string
+	for _, line := range rawCodeExtract {
+		parts = append(parts, line.Extract)
+	}
+
+	return strings.Join(parts, "\n")
 }
 
 func BuildReportString(config settings.Config, results *Results, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
@@ -556,7 +572,7 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 	reportStr.WriteString(color.HiBlueString("File: " + underline(result.FullFilename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(HighlightCodeExtract(result.FullFilename, result.LineNumber, result.Sink.Start, result.Sink.Content, result))
+	reportStr.WriteString(HighlightCodeExtract(result))
 }
 
 func formatSeverity(severity string) string {
@@ -567,45 +583,48 @@ func formatSeverity(severity string) string {
 	return severityColorFn(strings.ToUpper(severity + ": "))
 }
 
-func HighlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string, record Result) string {
+func HighlightCodeExtract(record Result) string {
 	result := ""
-	targetIndex := lineNumber - extractStartLineNumber
-	beforeOrAfterDetectionLinesAllowed := 3
-	beforeDetection := targetIndex - beforeOrAfterDetectionLinesAllowed
-	afterDetection := targetIndex + beforeOrAfterDetectionLinesAllowed
-	items := strings.Split(extract, "\n")
-	for index, line := range items {
-		if index == 0 {
-			var err error
-			line, err = file.ReadFileSingleLine(fileName, extractStartLineNumber)
-			if err != nil {
-				break
+	for _, line := range record.RawCodeExtract {
+		if line.Strip {
+			result += color.HiBlackString(
+				fmt.Sprintf(" %s %s", strings.Repeat(" ", iterativeDigitsCount(line.LineNumber)), line.Extract),
+			)
+		} else {
+			result += color.HiMagentaString(fmt.Sprintf(" %d ", line.LineNumber))
+			if line.LineNumber == record.Source.Start && line.LineNumber == record.Source.End {
+				for i, char := range line.Extract {
+					if i >= record.Source.Column.Start-1 && i < record.Source.Column.End-1 {
+						result += color.MagentaString(fmt.Sprintf("%c", char))
+					} else {
+						result += color.HiMagentaString(fmt.Sprintf("%c", char))
+					}
+				}
+			} else if line.LineNumber == record.Source.Start && line.LineNumber <= record.Source.End {
+				for i, char := range line.Extract {
+					if i >= record.Source.Column.Start-1 {
+						result += color.MagentaString(fmt.Sprintf("%c", char))
+					} else {
+						result += color.HiMagentaString(fmt.Sprintf("%c", char))
+					}
+				}
+			} else if line.LineNumber == record.Source.End && line.LineNumber >= record.Source.Start {
+				for i, char := range line.Extract {
+					if i <= record.Source.Column.End-1 {
+						result += color.MagentaString(fmt.Sprintf("%c", char))
+					} else {
+						result += color.HiMagentaString(fmt.Sprintf("%c", char))
+					}
+				}
+			} else if line.LineNumber > record.Source.Start && line.LineNumber < record.Source.End {
+				result += color.MagentaString("%s", line.Extract)
+			} else {
+				result += color.HiMagentaString(line.Extract)
 			}
 		}
 
-		if index == targetIndex {
-			result += color.MagentaString(fmt.Sprintf(" %d ", extractStartLineNumber+index))
-			for i, char := range line {
-				if i >= record.Source.Column.Start-1 && i < record.Source.Column.End-1 {
-					result += color.BlueString(fmt.Sprintf("%c", char))
-				} else {
-					result += color.MagentaString(fmt.Sprintf("%c", char))
-				}
-			}
+		if line.LineNumber != record.Sink.End {
 			result += "\n"
-		} else if index == 0 || len(items)-1 == index {
-			result += fmt.Sprintf(" %d ", extractStartLineNumber+index)
-			result += fmt.Sprintf("%s\n", line)
-		} else if index >= beforeDetection && index <= afterDetection {
-			if index == beforeDetection {
-				result += fmt.Sprintf("%s\t...\n", strings.Repeat(" ", iterativeDigitsCount(extractStartLineNumber)))
-			}
-			result += fmt.Sprintf(" %d ", extractStartLineNumber+index)
-			result += fmt.Sprintf("%s\n", line)
-
-			if index == afterDetection {
-				result += fmt.Sprintf("%s\t...\n", strings.Repeat(" ", iterativeDigitsCount(extractStartLineNumber)))
-			}
 		}
 	}
 
@@ -701,4 +720,21 @@ func sortByLineNumber(outputs []Output) {
 	sort.Slice(outputs, func(i, j int) bool {
 		return outputs[i].LineNumber < outputs[j].LineNumber
 	})
+}
+
+func codeExtract(filename string, Source Source, Sink Sink) []file.Line {
+	code, err := file.ReadFileSinkLines(
+		filename,
+		Sink.Start,
+		Sink.End,
+		Source.Start,
+		Source.End,
+		settings.CodeExtractBuffer,
+	)
+
+	if err != nil {
+		return []file.Line{}
+	}
+
+	return code
 }
