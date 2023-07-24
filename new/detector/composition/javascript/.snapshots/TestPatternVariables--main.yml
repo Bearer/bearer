@@ -28,6 +28,7 @@ high:
       snippet: const matchedVariable = 42
       fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_0
       old_fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_0
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -57,4 +58,5 @@ high:
       snippet: import x from "matched_package"
       fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_1
       old_fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_1
+      code_extract: ""
 

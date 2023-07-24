@@ -33,4 +33,5 @@ high:
       snippet: logger.info(user.name)
       fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
       old_fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
+      code_extract: ""
 

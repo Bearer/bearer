@@ -28,6 +28,7 @@ high:
       snippet: scope_cursor(params[:oops])
       fingerprint: 23e17866f80f43957a84e824da9ce255_0
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_0
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -57,6 +58,7 @@ high:
       snippet: scope_nested(params[:oops])
       fingerprint: 23e17866f80f43957a84e824da9ce255_1
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_1
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -86,6 +88,7 @@ high:
       snippet: 'scope_nested(x ? params[:oops] : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_2
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_2
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -115,6 +118,7 @@ high:
       snippet: 'scope_nested(params[:oops] ? x : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_3
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_3
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -144,6 +148,7 @@ high:
       snippet: scope_result(params[:oops])
       fingerprint: 23e17866f80f43957a84e824da9ce255_4
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_4
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -173,4 +178,5 @@ high:
       snippet: 'scope_result(x ? params[:oops] : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_5
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_5
+      code_extract: ""
 

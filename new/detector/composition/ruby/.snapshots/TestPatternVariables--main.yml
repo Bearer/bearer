@@ -28,6 +28,7 @@ high:
       snippet: matched_variable = 42
       fingerprint: 514e95a40b868d7341016d3fa344513d_0
       old_fingerprint: 514e95a40b868d7341016d3fa344513d_0
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -61,6 +62,7 @@ high:
         end
       fingerprint: 514e95a40b868d7341016d3fa344513d_1
       old_fingerprint: 514e95a40b868d7341016d3fa344513d_1
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -96,4 +98,5 @@ high:
         end
       fingerprint: 514e95a40b868d7341016d3fa344513d_2
       old_fingerprint: 514e95a40b868d7341016d3fa344513d_2
+      code_extract: ""
 

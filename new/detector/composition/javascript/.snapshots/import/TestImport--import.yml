@@ -28,6 +28,7 @@ high:
       snippet: lib.f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_0
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_0
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -57,6 +58,7 @@ high:
       snippet: f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_1
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_1
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -86,6 +88,7 @@ high:
       snippet: x()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_2
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_2
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -115,6 +118,7 @@ high:
       snippet: y.f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_3
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_3
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -144,4 +148,5 @@ high:
       snippet: f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_4
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_4
+      code_extract: ""
 

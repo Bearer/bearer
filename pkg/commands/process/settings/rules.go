@@ -120,13 +120,13 @@ func loadRules(
 	}
 
 	for _, dir := range externalRuleDirs {
+		dirname, _ := os.UserHomeDir()
 		if strings.HasPrefix(dir, "~/") {
-			dirname, _ := os.UserHomeDir()
 			dir = filepath.Join(dirname, dir[2:])
 		}
 		log.Debug().Msgf("loading external rules from: %s", dir)
 		if err := loadRuleDefinitionsFromDir(definitions, os.DirFS(dir)); err != nil {
-			return result, fmt.Errorf("external rules %w", err)
+			return result, fmt.Errorf("external rules %w %s", err, dirname)
 		}
 	}
 

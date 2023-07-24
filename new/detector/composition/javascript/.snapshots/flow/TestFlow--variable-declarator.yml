@@ -33,4 +33,5 @@ high:
       snippet: console.log(user)
       fingerprint: 5d86ec557137111caf0eca9a7d304c91_0
       old_fingerprint: 5d86ec557137111caf0eca9a7d304c91_0
+      code_extract: ""
 

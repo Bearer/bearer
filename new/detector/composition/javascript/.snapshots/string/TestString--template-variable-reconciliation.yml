@@ -33,4 +33,5 @@ high:
       snippet: console.log(`h${path}${config.domain}`, user.name)
       fingerprint: bbac16a148474689a2cb1b5e2d40ada2_0
       old_fingerprint: bbac16a148474689a2cb1b5e2d40ada2_0
+      code_extract: ""
 

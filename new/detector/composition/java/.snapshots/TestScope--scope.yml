@@ -28,6 +28,7 @@ high:
       snippet: scopeCursor(request.getParameter("oops"))
       fingerprint: bdbeee20feb34c6881d975716e2fe09f_0
       old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_0
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -57,6 +58,7 @@ high:
       snippet: scopeNested(request.getParameter("oops"))
       fingerprint: bdbeee20feb34c6881d975716e2fe09f_1
       old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_1
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -86,6 +88,7 @@ high:
       snippet: 'scopeNested(x ? request.getParameter("oops") : y)'
       fingerprint: bdbeee20feb34c6881d975716e2fe09f_2
       old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_2
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -115,6 +118,7 @@ high:
       snippet: 'scopeNested(request.getParameter("oops") ? x : y)'
       fingerprint: bdbeee20feb34c6881d975716e2fe09f_3
       old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_3
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -144,6 +148,7 @@ high:
       snippet: scopeResult(request.getParameter("oops"))
       fingerprint: bdbeee20feb34c6881d975716e2fe09f_4
       old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_4
+      code_extract: ""
     - rule:
         cwe_ids:
             - "42"
@@ -173,4 +178,5 @@ high:
       snippet: 'scopeResult(x ? request.getParameter("oops") : y)'
       fingerprint: bdbeee20feb34c6881d975716e2fe09f_5
       old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_5
+      code_extract: ""
 

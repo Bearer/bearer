@@ -33,4 +33,5 @@ high:
       snippet: logger.error(user.name)
       fingerprint: b000c2a9a82d59a1e826bc709cca9307_0
       old_fingerprint: b000c2a9a82d59a1e826bc709cca9307_0
+      code_extract: ""
 

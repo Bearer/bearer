@@ -85,15 +85,23 @@ func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	if os.Getenv("USE_BINARY") != "" {
-		cmd = exec.CommandContext(ctx, "./bearer", arguments...)
+		cmd = exec.CommandContext(ctx, executablePath(), arguments...)
 	} else {
 		arguments = append([]string{"run", GetCWD() + "/cmd/bearer/main.go"}, arguments...)
 		cmd = exec.CommandContext(ctx, "go", arguments...)
 	}
 
-	cmd.Dir = os.Getenv("GITHUB_WORKSPACE")
+	cmd.Dir = GetCWD()
 
 	return cmd, cancel
+}
+
+func executablePath() string {
+	if value, ok := os.LookupEnv("BEARER_EXECUTABLE_PATH"); ok {
+		return value
+	}
+
+	return "./bearer"
 }
 
 func GetCWD() string {

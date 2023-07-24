@@ -33,4 +33,5 @@ high:
       snippet: console.log("http://", user.name)
       fingerprint: 971b852ae8266c6d2b25437584017e2c_0
       old_fingerprint: 971b852ae8266c6d2b25437584017e2c_0
+      code_extract: ""
 

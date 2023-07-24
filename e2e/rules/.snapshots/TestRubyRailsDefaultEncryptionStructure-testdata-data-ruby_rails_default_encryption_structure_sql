@@ -55,6 +55,15 @@ warning:
         )
       fingerprint: e5e17cede9a731da09a639c9c78af007_0
       old_fingerprint: 86b02d158d5ef7e6b68f6979f4f789aa_0
+      code_extract: |-
+        CREATE TABLE public.users (
+          id bigint NOT NULL,
+          name character varying,
+          password character varying,
+          created_at timestamp(6) without time zone NOT NULL,
+          updated_at timestamp(6) without time zone NOT NULL,
+          email character varying DEFAULT ''::character varying NOT NULL
+        );
 
 
 --
