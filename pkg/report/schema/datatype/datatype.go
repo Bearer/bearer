@@ -11,7 +11,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/util/normalize_key"
-	pluralize "github.com/gertd/go-pluralize"
+	"github.com/bearer/bearer/pkg/util/pluralize"
 )
 
 type ReportDataType interface {
@@ -216,9 +216,8 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 		}
 		normalizedObjectName := ""
 		normalizedFieldName := ""
-		pluralizer := pluralize.NewClient()
-		normalizedObjectName = pluralizer.Singular(strings.ToLower(parentName))
-		normalizedFieldName = pluralizer.Singular(strings.ToLower(selfName))
+		normalizedObjectName = pluralize.Singular(strings.ToLower(parentName))
+		normalizedFieldName = pluralize.Singular(strings.ToLower(selfName))
 
 		report.AddDetection(
 			detectionType,

@@ -7,6 +7,11 @@ import (
 	"github.com/bearer/bearer/pkg/util/set"
 )
 
+const (
+	maxCacheSize = 10_000
+	evictionSize = 1000
+)
+
 type Key struct {
 	rootNodeID tree.NodeID
 	ruleID     string
@@ -63,7 +68,21 @@ func (cache *Cache) Get(key Key) ([]*detection.Detection, bool) {
 }
 
 func (cache *Cache) Put(key Key, detections []*detection.Detection) {
-	cache.dataFor(key)[key] = detections
+	data := cache.dataFor(key)
+
+	if len(data) > maxCacheSize {
+		i := 0
+		for evictedKey := range data {
+			if i == evictionSize {
+				break
+			}
+
+			delete(data, evictedKey)
+			i++
+		}
+	}
+
+	data[key] = detections
 }
 
 func (cache *Cache) dataFor(key Key) cacheMap {

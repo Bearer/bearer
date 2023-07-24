@@ -10,39 +10,55 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 )
 
-var file *os.File
+var cpuFile *os.File
 
 func Start() {
 	log.Debug().Msgf("starting cpu profiling")
 
-	processID := viper.GetString(flag.WorkerIDFlag.ConfigName)
-	if processID == "" {
-		processID = "main"
-	}
-
 	var err error
-	file, err = os.Create(processID + ".pprof")
+	cpuFile, err = os.Create(getProcessID() + "-cpu.pprof")
 	if err != nil {
-		log.Err(err).Msg("failed to create profiling file")
+		log.Err(err).Msg("failed to create cpu profiling file")
 		return
 	}
 
-	if err := pprof.StartCPUProfile(file); err != nil {
+	if err := pprof.StartCPUProfile(cpuFile); err != nil {
 		log.Err(err).Msg("failed to start cpu profile")
-		file.Close()
-		file = nil
+		cpuFile.Close()
+		cpuFile = nil
 		return
 	}
 }
 
 func Stop() {
-	if file == nil {
+	if cpuFile == nil {
 		return
 	}
 
 	log.Debug().Msg("stopping cpu profiling")
 	pprof.StopCPUProfile()
-	file.Close()
+	cpuFile.Close()
+	cpuFile = nil
 
-	file = nil
+	log.Debug().Msgf("writing memory profile")
+	memFile, err := os.Create(getProcessID() + "-mem.pprof")
+	if err != nil {
+		log.Err(err).Msg("failed to create memory profiling file")
+		return
+	}
+
+	if err = pprof.Lookup("allocs").WriteTo(memFile, 0); err != nil {
+		log.Err(err).Msg("failed to write memory profile")
+	}
+
+	memFile.Close()
+}
+
+func getProcessID() string {
+	processID := viper.GetString(flag.WorkerIDFlag.ConfigName)
+	if processID != "" {
+		return processID
+	}
+
+	return "main"
 }

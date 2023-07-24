@@ -9,7 +9,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/gertd/go-pluralize"
+	"github.com/bearer/bearer/pkg/util/pluralize"
 
 	"github.com/bearer/bearer/pkg/parser/nodeid"
 	parserschema "github.com/bearer/bearer/pkg/parser/schema"
@@ -84,9 +84,8 @@ func (detector *detector) ExtractFromSchema(
 
 		normalizedObjectName := ""
 		normalizedFieldName := ""
-		pluralizer := pluralize.NewClient()
-		normalizedObjectName = pluralizer.Singular(strings.ToLower(objectName))
-		normalizedFieldName = pluralizer.Singular(strings.ToLower(fieldName))
+		normalizedObjectName = pluralize.Singular(strings.ToLower(objectName))
+		normalizedFieldName = pluralize.Singular(strings.ToLower(fieldName))
 
 		currentSchema := schema.Schema{
 			ObjectName:           objectName,

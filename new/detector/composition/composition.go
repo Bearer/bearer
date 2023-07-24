@@ -3,8 +3,6 @@ package composition
 import (
 	"strings"
 
-	"github.com/gertd/go-pluralize"
-
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/implementation/custom"
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
@@ -13,11 +11,10 @@ import (
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/report/source"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/pluralize"
 )
 
 func ReportDetections(report reportdetections.ReportDetection, file *file.FileInfo, detections []*detection.Detection) {
-	pluralizer := pluralize.NewClient()
-
 	for _, detection := range detections {
 		detectorType := detectors.Type(detection.DetectorType)
 		data := detection.Data.(custom.Data)
@@ -46,7 +43,6 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 		for _, datatypeDetection := range data.Datatypes {
 			reportDatatypeDetection(
 				report,
-				pluralizer,
 				file,
 				detectorType,
 				detection,
@@ -59,7 +55,6 @@ func ReportDetections(report reportdetections.ReportDetection, file *file.FileIn
 
 func reportDatatypeDetection(
 	report reportdetections.ReportDetection,
-	pluralizer *pluralize.Client,
 	file *file.FileInfo,
 	detectorType detectors.Type,
 	detection,
@@ -83,9 +78,9 @@ func reportDatatypeDetection(
 			),
 			schema.Schema{
 				ObjectName:           objectName,
-				NormalizedObjectName: pluralizer.Singular(strings.ToLower(objectName)),
+				NormalizedObjectName: pluralize.Singular(strings.ToLower(objectName)),
 				FieldName:            property.Name,
-				NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
+				NormalizedFieldName:  pluralize.Singular(strings.ToLower(property.Name)),
 				Classification:       property.Classification,
 				Source: &schema.Source{
 					StartLineNumber:   detection.MatchNode.StartLineNumber(),
@@ -100,7 +95,6 @@ func reportDatatypeDetection(
 		if property.Datatype != nil {
 			reportDatatypeDetection(
 				report,
-				pluralizer,
 				file,
 				detectorType,
 				detection,
