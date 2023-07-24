@@ -33,5 +33,4 @@ high:
       snippet: console.log("ht" + "tp://", user.name)
       fingerprint: 272ebbd3e69ab1032f6fb14b69a79ae8_0
       old_fingerprint: 272ebbd3e69ab1032f6fb14b69a79ae8_0
-      code_extract: ""
 

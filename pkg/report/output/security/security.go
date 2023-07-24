@@ -106,7 +106,7 @@ type Result struct {
 	Fingerprint      string      `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
 	OldFingerprint   string      `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
 	DetailedContext  string      `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
-	CodeExtract      string      `json:"code_extract" yaml:"code_extract"`
+	CodeExtract      string      `json:"code_extract,omitempty" yaml:"code_extract,omitempty"`
 	RawCodeExtract   []file.Line `json:"-" yaml:"-"`
 }
 

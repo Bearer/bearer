@@ -33,5 +33,4 @@ high:
       snippet: console.log(`http://${config.domain}`, user.name)
       fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
       old_fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
-      code_extract: ""
 
