@@ -227,7 +227,7 @@ span.warning{
 }
 
 .term-container {
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #D4D4D4;
   word-break: break-word;
   overflow-wrap: break-word;
