@@ -1,8 +1,6 @@
 package object
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
@@ -11,7 +9,6 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/implementation/ruby/common"
-	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type objectDetector struct {
@@ -27,24 +24,15 @@ type objectDetector struct {
 	elementReferenceQuery *tree.Query
 }
 
-func New(lang languagetypes.Language) (types.Detector, error) {
+func New(querySet *tree.QuerySet) (types.Detector, error) {
 	// { first_name: ..., ... }
-	hashPairQuery, err := lang.CompileQuery(`(hash (pair key: (_) @key value: (_) @value) @pair) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling hash pair query: %s", err)
-	}
+	hashPairQuery := querySet.Add(`(hash (pair key: (_) @key value: (_) @value) @pair) @root`)
 
 	// call(first_name: ...)
-	keywordArgumentQuery, err := lang.CompileQuery(`(argument_list (pair key: (_) @key value: (_) @value) @match) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling keyword argument query: %s", err)
-	}
+	keywordArgumentQuery := querySet.Add(`(argument_list (pair key: (_) @key value: (_) @value) @match) @root`)
 
 	// user = <object>
-	assignmentQuery, err := lang.CompileQuery(`(assignment left: (identifier) @name right: (_) @value) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling assignment query: %s", err)
-	}
+	assignmentQuery := querySet.Add(`(assignment left: (identifier) @name right: (_) @value) @root`)
 
 	// class User
 	//   attr_accessor :name
@@ -52,28 +40,19 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	//   def get_first_name()
 	//   end
 	// end
-	classQuery, err := lang.CompileQuery(`
+	classQuery := querySet.Add(`
 		(class name: (constant) @class_name
 			[
 				(call arguments: (argument_list (simple_symbol) @name))
 				(method name: (identifier) @name)
 			]
 		) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling class query: %s", err)
-	}
 
 	// user.name
-	callsQuery, err := lang.CompileQuery(`(call receiver: (_) @receiver method: (identifier) @method) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling call query: %s", err)
-	}
+	callsQuery := querySet.Add(`(call receiver: (_) @receiver method: (identifier) @method) @root`)
 
 	// user[:name]
-	elementReferenceQuery, err := lang.CompileQuery(`(element_reference object: (_) @object . (_) @key . ) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling element reference query %s", err)
-	}
+	elementReferenceQuery := querySet.Add(`(element_reference object: (_) @object . (_) @key . ) @root`)
 
 	return &objectDetector{
 		hashPairQuery:         hashPairQuery,
@@ -272,10 +251,4 @@ func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error)
 }
 
 func (detector *objectDetector) Close() {
-	detector.hashPairQuery.Close()
-	detector.keywordArgumentQuery.Close()
-	detector.assignmentQuery.Close()
-	detector.classQuery.Close()
-	detector.callsQuery.Close()
-	detector.elementReferenceQuery.Close()
 }

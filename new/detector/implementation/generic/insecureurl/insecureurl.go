@@ -8,7 +8,6 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
-	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type insecureURLDetector struct {
@@ -18,7 +17,7 @@ type insecureURLDetector struct {
 var insecureUrlPattern = regexp.MustCompile(`^http:`)
 var localhostInsecureUrlPattern = regexp.MustCompile(`^http://(localhost|127.0.0.1)`)
 
-func New(lang languagetypes.Language) (types.Detector, error) {
+func New(querySet *tree.QuerySet) (types.Detector, error) {
 	return &insecureURLDetector{}, nil
 }
 

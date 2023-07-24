@@ -52,6 +52,10 @@ func Get() implementation.Implementation {
 	return &javaImplementation{}
 }
 
+func (*javaImplementation) Name() string {
+	return "java"
+}
+
 func (implementation *javaImplementation) SitterLanguage() *sitter.Language {
 	return java.GetLanguage()
 }

@@ -1,15 +1,12 @@
 package object
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
-	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type objectDetector struct {
@@ -22,10 +19,10 @@ type objectDetector struct {
 	fieldAccessQuery *tree.Query
 }
 
-func New(lang languagetypes.Language) (types.Detector, error) {
+func New(querySet *tree.QuerySet) (types.Detector, error) {
 	// user = <object>
 	// User user = <object>
-	assignmentQuery, err := lang.CompileQuery(`[
+	assignmentQuery := querySet.Add(`[
 		(assignment_expression left: (identifier) @name right: (_) @value) @root
 		(
     	local_variable_declaration (
@@ -34,15 +31,12 @@ func New(lang languagetypes.Language) (types.Detector, error) {
         )
     ) @root
 	]`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling assignment query: %s", err)
-	}
 
 	// class User {
 	//    String name
 	//	  String getLevel(){}
 	// }
-	classQuery, err := lang.CompileQuery(`
+	classQuery := querySet.Add(`
 		(class_declaration name: (identifier) @class_name
 			(class_body
 				[
@@ -51,15 +45,9 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 				]
 			)
 		) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling class query: %s", err)
-	}
 
 	// user.name
-	fieldAccessQuery, err := lang.CompileQuery(`(field_access object: (_) @object field: (identifier) @field) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling call query: %s", err)
-	}
+	fieldAccessQuery := querySet.Add(`(field_access object: (_) @object field: (identifier) @field) @root`)
 
 	return &objectDetector{
 		assignmentQuery:  assignmentQuery,
@@ -156,7 +144,4 @@ func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error)
 }
 
 func (detector *objectDetector) Close() {
-	detector.classQuery.Close()
-	detector.assignmentQuery.Close()
-	detector.fieldAccessQuery.Close()
 }

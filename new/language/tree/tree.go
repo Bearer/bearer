@@ -10,7 +10,7 @@ type Tree struct {
 	input        []byte
 	sitterTree   *sitter.Tree
 	unifiedNodes map[NodeID][]*Node
-	queryCache   map[int]map[NodeID][]QueryResult
+	queryCache   QuerySetResults
 }
 
 func Parse(ctx context.Context, sitterLanguage *sitter.Language, input string) (*Tree, error) {
@@ -30,7 +30,6 @@ func Parse(ctx context.Context, sitterLanguage *sitter.Language, input string) (
 		input:        inputBytes,
 		sitterTree:   sitterTree,
 		unifiedNodes: make(map[NodeID][]*Node),
-		queryCache:   make(map[int]map[NodeID][]QueryResult),
 	}, nil
 }
 
