@@ -10,6 +10,7 @@ import (
 )
 
 type Implementation interface {
+	Name() string
 	SitterLanguage() *sitter.Language
 	// AnalyzeFlow unifies nodes that represent the same value in the tree.
 	//

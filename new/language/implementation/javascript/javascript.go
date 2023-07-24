@@ -51,6 +51,10 @@ func Get() implementation.Implementation {
 	return &javascriptImplementation{}
 }
 
+func (*javascriptImplementation) Name() string {
+	return "javascript"
+}
+
 func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {
 	return tsx.GetLanguage()
 }

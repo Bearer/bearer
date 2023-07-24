@@ -2,68 +2,81 @@ package tree
 
 import (
 	"errors"
+	"strings"
 	"sync"
 
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
-var maxQueryID = 0
+type QuerySet struct {
+	mu             sync.RWMutex
+	sitterLanguage *sitter.Language
+	queries        []Query
+	queryByInput   map[string]*Query
+	sitterCursor   *sitter.QueryCursor
+	sitterQuery    *sitter.Query
+}
 
 type Query struct {
-	sitterQuery *sitter.Query
-	id          int
-	input       string
+	querySet *QuerySet
+	id       int
+	input    string
 }
 
 type QueryResult map[string]*Node
+type NodeResults map[NodeID][]QueryResult
+type QuerySetResults map[int]NodeResults
 
-var mu sync.Mutex = sync.Mutex{}
-
-func CompileQuery(sitterLanguage *sitter.Language, input string) (*Query, error) {
-	sitterQuery, err := sitter.NewQuery([]byte(input), sitterLanguage)
-	if err != nil {
-		return nil, err
+func NewQuerySet(sitterLanguage *sitter.Language) *QuerySet {
+	return &QuerySet{
+		sitterLanguage: sitterLanguage,
+		sitterCursor:   sitter.NewQueryCursor(),
+		queryByInput:   make(map[string]*Query),
 	}
-
-	mu.Lock()
-	id := maxQueryID
-	maxQueryID += 1
-	defer mu.Unlock()
-
-	return &Query{sitterQuery: sitterQuery, id: id, input: input}, nil
 }
 
-// Revisit if https://github.com/tree-sitter/tree-sitter/issues/1212 gets implemented
-func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
-	if _, inCache := node.tree.queryCache[query.id]; !inCache {
-		results, err := query.resultsFor(node.tree)
-		if err != nil {
-			return nil, err
-		}
+func (querySet *QuerySet) Add(input string) *Query {
+	querySet.mu.Lock()
+	defer querySet.mu.Unlock()
 
-		node.tree.queryCache[query.id] = results
+	if query := querySet.queryByInput[input]; query != nil {
+		return query
 	}
 
-	return node.tree.queryCache[query.id][node.ID()], nil
+	id := len(querySet.queries)
+	querySet.queries = append(querySet.queries, Query{
+		querySet: querySet,
+		id:       id,
+		input:    input,
+	})
+
+	querySet.freeSitterQuery()
+
+	query := &querySet.queries[id]
+	querySet.queryByInput[input] = query
+	return query
 }
 
-func (query *Query) resultsFor(tree *Tree) (map[NodeID][]QueryResult, error) {
-	cursor := sitter.NewQueryCursor()
-	defer cursor.Close()
+func (querySet *QuerySet) Query(tree *Tree) (QuerySetResults, error) {
+	querySet.mu.RLock()
+	defer querySet.mu.RUnlock()
 
-	cursor.Exec(query.sitterQuery, tree.RootNode().sitterNode)
+	if querySet.sitterQuery == nil {
+		return nil, errors.New("query set has not been compiled")
+	}
 
-	nodeResults := make(map[NodeID][]QueryResult)
+	results := querySet.newResults()
+	querySet.sitterCursor.Exec(querySet.sitterQuery, tree.RootNode().sitterNode)
 
 	for {
-		match, found := cursor.NextMatch()
+		match, found := querySet.sitterCursor.NextMatch()
 		if !found {
 			break
 		}
 
 		result := make(QueryResult)
 		for _, capture := range match.Captures {
-			result[query.sitterQuery.CaptureNameForId(capture.Index)] = tree.wrap(capture.Node)
+			result[querySet.sitterQuery.CaptureNameForId(capture.Index)] = tree.wrap(capture.Node)
 		}
 
 		resultRoot, rootExists := result["root"]
@@ -76,10 +89,81 @@ func (query *Query) resultsFor(tree *Tree) (map[NodeID][]QueryResult, error) {
 			matchNode = resultRoot
 		}
 
-		nodeResults[matchNode.ID()] = append(nodeResults[matchNode.ID()], result)
+		results.add(int(match.PatternIndex), matchNode.ID(), result)
 	}
 
-	return nodeResults, nil
+	return results, nil
+}
+
+func (querySet *QuerySet) Compile() error {
+	querySet.mu.Lock()
+	defer querySet.mu.Unlock()
+
+	if querySet.sitterQuery != nil {
+		return nil
+	}
+
+	var s strings.Builder
+
+	for _, query := range querySet.queries {
+		s.WriteString(query.input)
+		s.WriteString("\n")
+	}
+
+	sitterQuery, err := sitter.NewQuery([]byte(s.String()), querySet.sitterLanguage)
+	if err != nil {
+		return err
+	}
+
+	querySet.sitterQuery = sitterQuery
+
+	return nil
+}
+
+func (querySet *QuerySet) Close() {
+	querySet.sitterCursor.Close()
+	querySet.freeSitterQuery()
+}
+
+func (queries *QuerySet) freeSitterQuery() {
+	if queries.sitterQuery == nil {
+		return
+	}
+
+	queries.sitterQuery.Close()
+	queries.sitterQuery = nil
+}
+
+func (querySet *QuerySet) newResults() QuerySetResults {
+	results := make(QuerySetResults)
+
+	// make sure all queries are in the map so we don't re-trigger for queries with
+	// no results
+	for queryID := range querySet.queries {
+		results[queryID] = nil
+	}
+
+	return results
+}
+
+func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
+	inCache := false
+	var nodeCache NodeResults
+	if node.tree.queryCache != nil {
+		nodeCache, inCache = node.tree.queryCache[query.id]
+	}
+
+	if !inCache {
+		results, err := query.querySet.Query(node.tree)
+		if err != nil {
+			return nil, err
+		}
+
+		node.tree.queryCache = results
+		nodeCache = results[query.id]
+	}
+
+	return nodeCache[node.ID()], nil
 }
 
 func (query *Query) MatchOnceAt(node *Node) (QueryResult, error) {
@@ -98,6 +182,12 @@ func (query *Query) MatchOnceAt(node *Node) (QueryResult, error) {
 	return results[0], nil
 }
 
-func (query *Query) Close() {
-	query.sitterQuery.Close()
+func (results QuerySetResults) add(queryID int, nodeID NodeID, result QueryResult) {
+	nodeResults := results[queryID]
+	if nodeResults == nil {
+		nodeResults = make(NodeResults)
+		results[queryID] = nodeResults
+	}
+
+	nodeResults[nodeID] = append(nodeResults[nodeID], result)
 }

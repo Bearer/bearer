@@ -14,11 +14,10 @@ type PatternQueryResult struct {
 type PatternQuery interface {
 	MatchAt(node *tree.Node) ([]*PatternQueryResult, error)
 	MatchOnceAt(node *tree.Node) (*PatternQueryResult, error)
-	Close()
 }
 
 type Language interface {
 	Parse(ctx context.Context, input string) (*tree.Tree, error)
-	CompileQuery(input string) (*tree.Query, error)
-	CompilePatternQuery(input, focusedVariable string) (PatternQuery, error)
+	NewQuerySet() *tree.QuerySet
+	CompilePatternQuery(querySet *tree.QuerySet, input, focusedVariable string) (PatternQuery, error)
 }

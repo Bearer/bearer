@@ -30,10 +30,10 @@ func (lang *Language) Parse(ctx context.Context, input string) (*tree.Tree, erro
 	return tree, nil
 }
 
-func (lang *Language) CompileQuery(input string) (*tree.Query, error) {
-	return tree.CompileQuery(lang.implementation.SitterLanguage(), input)
+func (lang *Language) NewQuerySet() *tree.QuerySet {
+	return tree.NewQuerySet(lang.implementation.SitterLanguage())
 }
 
-func (lang *Language) CompilePatternQuery(input, focusedVariable string) (types.PatternQuery, error) {
-	return patternquery.Compile(lang, lang.implementation, input, focusedVariable)
+func (lang *Language) CompilePatternQuery(querySet *tree.QuerySet, input, focusedVariable string) (types.PatternQuery, error) {
+	return patternquery.Compile(lang, lang.implementation, querySet, input, focusedVariable)
 }

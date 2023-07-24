@@ -14,5 +14,4 @@ type Variable struct {
 type PatternQuery interface {
 	MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error)
 	MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error)
-	Close()
 }

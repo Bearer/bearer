@@ -45,6 +45,10 @@ func Get() implementation.Implementation {
 	return &rubyImplementation{}
 }
 
+func (*rubyImplementation) Name() string {
+	return "ruby"
+}
+
 func (*rubyImplementation) SitterLanguage() *sitter.Language {
 	return ruby.GetLanguage()
 }

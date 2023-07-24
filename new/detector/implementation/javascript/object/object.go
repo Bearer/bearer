@@ -1,8 +1,6 @@
 package object
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/tree"
@@ -11,7 +9,6 @@ import (
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
-	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type objectDetector struct {
@@ -29,70 +26,46 @@ type objectDetector struct {
 	spreadElementQuery        *tree.Query
 }
 
-func New(lang languagetypes.Language) (types.Detector, error) {
+func New(querySet *tree.QuerySet) (types.Detector, error) {
 	// { first_name: ..., ... }
-	objectPairQuery, err := lang.CompileQuery(`(object (pair key: (_) @key value: (_) @value) @pair) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling object pair query: %s", err)
-	}
+	objectPairQuery := querySet.Add(`(object (pair key: (_) @key value: (_) @value) @pair) @root`)
 
 	// user = <object>
 	// const user = <object>
 	// var user = <object>
 	// let user = <object>
-	assignmentQuery, err := lang.CompileQuery(`[
+	assignmentQuery := querySet.Add(`[
 		(assignment_expression left: (identifier) @name right: (_) @value)
 		(variable_declarator name: (identifier) @name value: (_) @value)
 	] @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling assignment query: %s", err)
-	}
 
 	// const { user } = <object>
 	// let { user } = <object>
 	// var { user } = <object>
-	objectDeconstructionQuery, err := lang.CompileQuery(`(variable_declarator name: (object_pattern (shorthand_property_identifier_pattern) @match) value: (_) @value) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling object deconstruction query: %s", err)
-	}
+	objectDeconstructionQuery := querySet.Add(`(variable_declarator name: (object_pattern (shorthand_property_identifier_pattern) @match) value: (_) @value) @root`)
 
 	// { ...user, foo: "bar" }
-	spreadElementQuery, err := lang.CompileQuery(`(object (spread_element (identifier) @identifier)) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling spreadElement query: %s", err)
-	}
+	spreadElementQuery := querySet.Add(`(object (spread_element (identifier) @identifier)) @root`)
 
 	// class User {
 	//   constructor(name, surname) {}
 	//   GetName() {}
 	// }
-	classQuery, err := lang.CompileQuery(`
+	classQuery := querySet.Add(`
 		(class_declaration
 		  name: (type_identifier) @class_name
       body: (class_body
         (method_definition name: (property_identifier) @method_name (formal_parameters) @params)
       )
     ) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling class query: %s", err)
-	}
 
 	// user.name
-	memberExpressionQuery, err := lang.CompileQuery(`(member_expression object: (_) @object property: (property_identifier) @property) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling member expression query: %s", err)
-	}
+	memberExpressionQuery := querySet.Add(`(member_expression object: (_) @object property: (property_identifier) @property) @root`)
 
 	// user[:name]
-	subscriptExpressionQuery, err := lang.CompileQuery(`(subscript_expression object: (_) @object index: (string) @index ) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling subscript expression query %s", err)
-	}
+	subscriptExpressionQuery := querySet.Add(`(subscript_expression object: (_) @object index: (string) @index ) @root`)
 
-	callQuery, err := lang.CompileQuery(`(call_expression function: (_) @function) @root`)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling call query: %s", err)
-	}
+	callQuery := querySet.Add(`(call_expression function: (_) @function) @root`)
 
 	return &objectDetector{
 		objectPairQuery:           objectPairQuery,
@@ -276,12 +249,4 @@ func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error)
 }
 
 func (detector *objectDetector) Close() {
-	detector.objectPairQuery.Close()
-	detector.assignmentQuery.Close()
-	detector.objectDeconstructionQuery.Close()
-	detector.classQuery.Close()
-	detector.memberExpressionQuery.Close()
-	detector.subscriptExpressionQuery.Close()
-	detector.callQuery.Close()
-	detector.spreadElementQuery.Close()
 }

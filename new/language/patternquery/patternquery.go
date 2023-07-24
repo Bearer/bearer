@@ -3,13 +3,14 @@ package patternquery
 import (
 	"fmt"
 
+	"github.com/rs/zerolog/log"
+	"golang.org/x/exp/slices"
+
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/patternquery/builder"
 	"github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
-	"github.com/rs/zerolog/log"
-	"golang.org/x/exp/slices"
 )
 
 type Query struct {
@@ -26,6 +27,7 @@ type RootVariableQuery struct {
 func Compile(
 	lang languagetypes.Language,
 	langImplementation implementation.Implementation,
+	querySet *tree.QuerySet,
 	input string,
 	focusedVariable string,
 ) (types.PatternQuery, error) {
@@ -39,15 +41,10 @@ func Compile(
 		return &RootVariableQuery{variable: builderResult.RootVariable}, nil
 	}
 
-	treeQuery, err := lang.CompileQuery(builderResult.Query)
-	if err != nil {
-		return nil, fmt.Errorf("failed to compile: %s, %s -> %s", err, input, builderResult.Query)
-	}
-
 	log.Trace().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
 
 	return &Query{
-		treeQuery:       treeQuery,
+		treeQuery:       querySet.Add(builderResult.Query),
 		paramToVariable: builderResult.ParamToVariable,
 		equalParams:     builderResult.EqualParams,
 		paramToContent:  builderResult.ParamToContent,
@@ -79,10 +76,6 @@ func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryRes
 	}
 
 	return query.matchAndTranslateTreeResult(treeResult, node), nil
-}
-
-func (query *Query) Close() {
-	query.treeQuery.Close()
 }
 
 func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, rootNode *tree.Node) *languagetypes.PatternQueryResult {

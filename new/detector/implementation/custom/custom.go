@@ -32,13 +32,14 @@ type customDetector struct {
 
 func New(
 	lang languagetypes.Language,
+	querySet *tree.QuerySet,
 	detectorType string,
 	patterns []settings.RulePattern,
 	rules map[string]*settings.Rule,
 ) (types.Detector, error) {
 	var compiledPatterns []Pattern
 	for _, pattern := range patterns {
-		patternQuery, err := lang.CompilePatternQuery(pattern.Pattern, pattern.Focus)
+		patternQuery, err := lang.CompilePatternQuery(querySet, pattern.Pattern, pattern.Focus)
 		if err != nil {
 			return nil, fmt.Errorf("error compiling pattern: %s", err)
 		}
@@ -104,9 +105,6 @@ func (detector *customDetector) DetectAt(
 }
 
 func (detector *customDetector) Close() {
-	for _, pattern := range detector.patterns {
-		pattern.Query.Close()
-	}
 }
 
 func sortFilters(filters []settings.PatternFilter) {

@@ -6,14 +6,13 @@ import (
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
-	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
 type stringDetector struct {
 	types.DetectorBase
 }
 
-func New(lang languagetypes.Language) (types.Detector, error) {
+func New(querySet *tree.QuerySet) (types.Detector, error) {
 	return &stringDetector{}, nil
 }
 

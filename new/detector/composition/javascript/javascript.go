@@ -29,6 +29,7 @@ import (
 	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/implementation/javascript"
+	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
 )
 
@@ -38,6 +39,7 @@ type Composition struct {
 	detectorSet         detectortypes.DetectorSet
 	langImplementation  implementation.Implementation
 	lang                languagetypes.Language
+	querySet            *tree.QuerySet
 	closers             []func()
 	rules               map[string]*settings.Rule
 }
@@ -51,13 +53,16 @@ func New(
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
 	}
 
+	querySet := lang.NewQuerySet()
+
 	composition := &Composition{
 		langImplementation: javascript.Get(),
 		lang:               lang,
+		querySet:           querySet,
 	}
 
 	staticDetectors := []struct {
-		constructor func(languagetypes.Language) (detectortypes.Detector, error)
+		constructor func(*tree.QuerySet) (detectortypes.Detector, error)
 		name        string
 	}{
 		{
@@ -98,7 +103,7 @@ func New(
 		creator := detectorCreator
 
 		go func() {
-			detector, err := creator.constructor(lang)
+			detector, err := creator.constructor(querySet)
 			receiver <- types.DetectorInitResult{
 				Error:        err,
 				Detector:     detector,
@@ -137,6 +142,7 @@ func New(
 		go func() {
 			customDetector, err := custom.New(
 				lang,
+				querySet,
 				localRuleName,
 				patterns,
 				jsRules,
@@ -167,13 +173,15 @@ func New(
 	}
 	composition.detectorSet = detectorSet
 
-	return composition, nil
+	return composition, querySet.Compile()
 }
 
 func (composition *Composition) Close() {
 	for _, closeFunc := range composition.closers {
 		closeFunc()
 	}
+
+	composition.querySet.Close()
 }
 
 func (composition *Composition) DetectFromFile(
