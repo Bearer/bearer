@@ -228,6 +228,32 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 		},
 		{
+			Name: "known object with properties that matches exclude patterns",
+			Input: schema.ClassificationRequest{
+				Filename:     "db/schema.rb",
+				DetectorType: detectors.DetectorRuby,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "users",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "last_synced_mobile_app",
+							SimpleType: reportschema.SimpleTypeString,
+						},
+					},
+				},
+			},
+			Want: schema.Classification{
+				Name:        "users",
+				DataType:    nil,
+				SubjectName: nil,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
+					Reason: "valid_object_with_invalid_properties",
+				},
+			},
+		},
+		{
 			Name: "known object with properties that match exclude patterns",
 			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",

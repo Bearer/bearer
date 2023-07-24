@@ -2,7 +2,7 @@
   "metadata": { "version": "1.0" },
   "id": 100,
   "data_type_uuid": "198a6ae4-5cfd-4429-9272-fb102817cbbd",
-  "exclude_regexp": "\\b.*code|business|company|radio|dialog|form.*\\b",
+  "exclude_regexp": "\\b.*code|business|company|radio|dialog|app|form.*\\b",
   "exclude_types": ["boolean"],
   "friendly_name": "Telephone Number",
   "health_context_data_type_uuid": null,
