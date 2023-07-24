@@ -28,6 +28,7 @@ high:
       snippet: x.foo
       fingerprint: df1f6d9ee9f4ee60085d0046163b3701_0
       old_fingerprint: 52f7dcd9f1ba09f3a9f8c1ad305c8a89_0
+      code_extract: x.foo
 
 
 --

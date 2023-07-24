@@ -2,6 +2,7 @@ package file
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -19,6 +20,12 @@ import (
 )
 
 const guessByteCount = 16 * 1024
+
+type Line struct {
+	Extract    string
+	LineNumber int
+	Strip      bool
+}
 
 var ignoredFilenames = []*regexp.Regexp{
 	regexp.MustCompile(`(^|/)\.git/`),
@@ -302,6 +309,58 @@ func EnsureFileExists(filePath string) *os.File {
 	}
 
 	return file
+}
+
+func ReadFileSinkLines(
+	filePath string,
+	sinkStartLine int,
+	sinkEndLine int,
+	sourceStartLine int,
+	sourceEndLine int,
+	buffer int,
+) ([]Line, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return []Line{}, err
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	lineCounter := 1
+	var extract []Line
+
+	for scanner.Scan() {
+		if lineCounter >= sinkStartLine && lineCounter <= sinkEndLine {
+			if lineCounter >= sourceStartLine+buffer && lineCounter <= sourceEndLine-buffer {
+				if lineCounter == sourceStartLine+buffer {
+					extract = append(extract, Line{
+						Extract:    fmt.Sprintf("%s...omitted (buffer value %d)", strings.Repeat(" ", countLeadingSpaces(scanner.Text())), buffer),
+						LineNumber: lineCounter,
+						Strip:      true,
+					})
+				}
+			} else {
+				extract = append(extract, Line{
+					Extract:    scanner.Text(),
+					LineNumber: lineCounter,
+					Strip:      false,
+				})
+			}
+		}
+
+		lineCounter++
+	}
+
+	if err := scanner.Err(); err != nil {
+		return []Line{}, err
+	}
+
+	return extract, nil
+}
+
+func countLeadingSpaces(line string) int {
+	return len(line) - len(strings.TrimLeft(line, " "))
 }
 
 func ReadFileSingleLine(filePath string, lineNumber int) (string, error) {

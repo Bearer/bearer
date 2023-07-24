@@ -48,7 +48,10 @@
       ParentContent: (string) (len=38) "Rails.logger.info(user.biometric_data)",
       Fingerprint: (string) (len=34) "375d7c2e9977cf2ce5dbf04b04237bea_0",
       OldFingerprint: (string) (len=34) "80ce0185374c0975a9b2a71e9d11a4f0_0",
-      DetailedContext: (string) ""
+      DetailedContext: (string) "",
+      CodeExtract: (string) "",
+      RawCodeExtract: ([]file.Line) {
+      }
     }
   }
 })

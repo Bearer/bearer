@@ -44,6 +44,7 @@ high:
       snippet: client.event("user", "logged_in", {}, user)
       fingerprint: 68427732321c4df53052a341ac8da647_0
       old_fingerprint: 4d54a4b735da21fbdcb2d2662977b033_0
+      code_extract: client.event("user", "logged_in", {}, user);
 
 
 --
