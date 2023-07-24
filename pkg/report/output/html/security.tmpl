@@ -7,6 +7,8 @@
     <span class="medium">{{.medium | count }}</span>
     <span class="badge low low-bg">L</span>
     <span class="low">{{.low | count }}</span>
+    <span class="badge warning warning-bg">W</span>
+    <span class="warning">{{.warning | count }}</span>
 	</div>
 		{{range $severity, $results := .}}
 		{{range $index, $result := $results}}
