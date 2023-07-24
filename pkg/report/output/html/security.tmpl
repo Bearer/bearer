@@ -23,7 +23,7 @@
           </div>
 
           <p class="filename">Filename: {{.Filename}}:{{.LineNumber}}</p>
-          <pre class="term-container">{{. | displayExtract}}</pre>
+          <div class="term-container">{{. | displayExtract}}</div>
         </summary>
 				<div class="description">{{.Rule.Description | markdownToHtml }}</div>
 			</details>
