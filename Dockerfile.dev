@@ -1,0 +1,6 @@
+FROM golang:1.20
+
+RUN apt update
+RUN apt install jq -y
+
+WORKDIR /root/
