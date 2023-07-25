@@ -62,6 +62,9 @@ func ReportSarif(outputDetections *map[string][]security.Result, rules map[strin
 							},
 						},
 					},
+					PartialFingerprints: &sarif.PartialFingerprints{
+						PrimaryLocationLineHash: finding.Fingerprint,
+					},
 				})
 			}
 		}
