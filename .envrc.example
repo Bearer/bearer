@@ -6,3 +6,4 @@ export REDIS_INIT="true"
 export GOOGLE_MAX_ATTEMPT="5"
 export BEARER_EXECUTABLE_PATH="./bearer"
 export GITHUB_WORKSPACE="/path/to/bearer/project"
+export SCAN_DIR=/Users/username/OWASP
