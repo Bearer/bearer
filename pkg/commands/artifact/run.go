@@ -309,7 +309,11 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	}
 
 	if !reportPassed {
-		defer os.Exit(1)
+		if scanSettings.Scan.ExitCode == -1 {
+			defer os.Exit(1)
+		} else {
+			defer os.Exit(scanSettings.Scan.ExitCode)
+		}
 	}
 
 	return nil
