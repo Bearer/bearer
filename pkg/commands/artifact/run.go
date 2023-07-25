@@ -56,10 +56,8 @@ type ScannerConfig struct {
 type Runner interface {
 	// Cached returns true if cached data was used in scan
 	CacheUsed() bool
-	// ScanFilesystem scans a filesystem
-	ScanFilesystem(ctx context.Context, opts flag.Options) (types.Report, error)
-	// ScanRepository scans repository
-	ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error)
+	// Scan gathers the findings
+	Scan(ctx context.Context, opts flag.Options) (types.Report, error)
 	// Report a writes a report
 	Report(scanSettings settings.Config, report types.Report) (bool, error)
 	// Close closes runner
@@ -195,19 +193,7 @@ func (r *runner) Close(ctx context.Context) error {
 	return nil
 }
 
-func (r *runner) ScanFilesystem(ctx context.Context, opts flag.Options) (types.Report, error) {
-	return r.scanFS(ctx, opts)
-}
-
-func (r *runner) scanFS(ctx context.Context, opts flag.Options) (types.Report, error) {
-	return r.scanArtifact(ctx, opts)
-}
-
-func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error) {
-	return r.scanArtifact(ctx, opts)
-}
-
-func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Report, error) {
+func (r *runner) Scan(ctx context.Context, opts flag.Options) (types.Report, error) {
 	if !r.reuseDetection {
 		if err := orchestrator.Scan(
 			work.Repository{
@@ -278,7 +264,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	var report types.Report
 	switch targetKind {
 	case TargetFilesystem:
-		if report, err = r.ScanFilesystem(ctx, opts); err != nil {
+		if report, err = r.Scan(ctx, opts); err != nil {
 			if errors.Is(err, orchestrator.ErrFileListEmpty) {
 				outputhandler.StdOutLog(err.Error())
 				os.Exit(0)

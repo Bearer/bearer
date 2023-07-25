@@ -34,7 +34,7 @@ func Discover(projectPath string, goclocResult *gocloc.Result, config settings.C
 
 	ignore := fileignore.New(projectPath, config)
 
-	pathsFromGit, err := gitutil.DiscoverFromGit(projectPath)
+	pathsFromGit, err := gitutil.DiscoverFromGit(projectPath, config.Scan.DiffBaseBranch)
 	if err != nil {
 		log.Error().Msg("Git discovery failed")
 		return nil, err

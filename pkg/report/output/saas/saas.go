@@ -88,6 +88,7 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 		SHA:                *sha,
 		CurrentBranch:      *currentBranch,
 		DefaultBranch:      *defaultBranch,
+		DiffBaseBranch:     config.Scan.DiffBaseBranch,
 		BearerRulesVersion: config.BearerRulesVersion,
 		BearerVersion:      build.Version,
 	}, nil

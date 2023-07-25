@@ -114,6 +114,12 @@ var (
 		Value:      -1,
 		Usage:      "Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan.",
 	}
+	DiffBaseBranchFlag = Flag{
+		Name:       "diff-base-branch",
+		ConfigName: "scan.diff-base-branch",
+		Value:      "",
+		Usage:      "Enable diff scanning against a base branch. Requires the scan target to be a git repository",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -131,6 +137,7 @@ type ScanFlagGroup struct {
 	ExternalRuleDirFlag         *Flag
 	ParallelFlag                *Flag
 	ExitCodeFlag                *Flag
+	DiffBaseBranchFlag          *Flag
 }
 
 type ScanOptions struct {
@@ -149,6 +156,7 @@ type ScanOptions struct {
 	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
 	Parallel                int           `mapstructure:"parallel" json:"parallel" yaml:"parallel"`
 	ExitCode                int           `mapstructure:"exit-code" json:"exit-code" yaml:"exit-code"`
+	DiffBaseBranch          string        `mapstructure:"diff_base_branch" json:"diff_base_branch" yaml:"diff_base_branch"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -167,6 +175,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		ScannerFlag:                 &ScannerFlag,
 		ParallelFlag:                &ParallelFlag,
 		ExitCodeFlag:                &ExitCodeFlag,
+		DiffBaseBranchFlag:          &DiffBaseBranchFlag,
 	}
 }
 
@@ -190,6 +199,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.ScannerFlag,
 		f.ParallelFlag,
 		f.ExitCodeFlag,
+		f.DiffBaseBranchFlag,
 	}
 }
 
@@ -238,6 +248,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Scanner:                 scanners,
 		Parallel:                viper.GetInt(f.ParallelFlag.ConfigName),
 		ExitCode:                viper.GetInt(f.ExitCodeFlag.ConfigName),
+		DiffBaseBranch:          getString(f.DiffBaseBranchFlag),
 	}, nil
 }
 
