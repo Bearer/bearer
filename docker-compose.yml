@@ -5,6 +5,7 @@ services:
       context: .
     volumes:
       - .:/root/
+      - "$SCAN_DIR:/scans/"
     environment:
       - UPDATE_SNAPSHOTS=true
       - BEARER_EXECUTABLE_PATH=/root/bearer

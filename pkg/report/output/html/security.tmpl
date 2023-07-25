@@ -20,7 +20,7 @@
               <span class="badge {{$severity}} {{$severity}}-bg">{{$severity}}</span>
             </h3>
             <span class="cwe">
-              <strong>Rule ID:</strong> {{.Rule.Id}}&nbsp;&nbsp;<strong>CWE:</strong> {{ .Rule.CWEIDs | joinCwe }}
+              <strong>Rule ID:</strong> {{.Rule.Id}}&nbsp;&nbsp;<strong>CWE:</strong> {{ .Rule.CWEIDs | joinCwe }}&nbsp;&nbsp;<strong>Fingerprint:</strong> {{ .Fingerprint }}
             </span>
           </div>
 

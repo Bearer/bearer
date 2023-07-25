@@ -77,7 +77,6 @@ func ReportSecurityHTML(detections *map[string][]security.Result) (*string, erro
 }
 
 func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
-
 	htmlContent := &strings.Builder{}
 
 	privacyPage := html.PrivacyHTMLBody{
