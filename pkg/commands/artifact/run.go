@@ -18,7 +18,6 @@ import (
 	"github.com/rs/zerolog/log"
 
 	"golang.org/x/exp/maps"
-	"golang.org/x/xerrors"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
@@ -216,7 +215,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (types.Report, err
 }
 
 // Run performs artifact scanning
-func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
+func Run(ctx context.Context, opts flag.Options) (err error) {
 	if !opts.Quiet {
 		outputhandler.StdErrLog("Loading rules")
 	}
@@ -261,30 +260,28 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}
 
-	var report types.Report
-	switch targetKind {
-	case TargetFilesystem:
-		if report, err = r.Scan(ctx, opts); err != nil {
-			if errors.Is(err, orchestrator.ErrFileListEmpty) {
-				outputhandler.StdOutLog(err.Error())
-				os.Exit(0)
-				return
-			}
-
-			return xerrors.Errorf("filesystem scan error: %w", err)
+	report, err := r.Scan(ctx, opts)
+	if err != nil {
+		if errors.Is(err, orchestrator.ErrFileListEmpty) {
+			outputhandler.StdOutLog(err.Error())
+			os.Exit(0)
+			return
 		}
+
+		return fmt.Errorf("scan error: %w", err)
 	}
+
 	report.Inputgocloc = inputgocloc
 	reportPassed, err := r.Report(scanSettings, report)
 	if err != nil {
-		return xerrors.Errorf("report error: %w", err)
+		return fmt.Errorf("report error: %w", err)
 	} else {
 		if !strings.HasSuffix(report.Path, "-completed.jsonl") {
 			newPath := strings.Replace(report.Path, ".jsonl", "-completed.jsonl", 1)
 			log.Debug().Msgf("renaming report %s -> %s", report.Path, newPath)
 			err := os.Rename(report.Path, newPath)
 			if err != nil {
-				return xerrors.Errorf("failed to rename report file %s -> %s: %w", report.Path, newPath, err)
+				return fmt.Errorf("failed to rename report file %s -> %s: %w", report.Path, newPath, err)
 			}
 			report.Path = newPath
 		}
