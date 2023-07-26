@@ -2,25 +2,20 @@ package artifact
 
 import (
 	"context"
-	"crypto/md5"
-	"encoding/hex"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
-	"os/exec"
 	"sort"
 	"strings"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
 	"golang.org/x/exp/maps"
 
-	"github.com/bearer/bearer/cmd/bearer/build"
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
+	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -90,7 +85,7 @@ func NewRunner(
 		stats:        stats,
 	}
 
-	scanID, err := buildScanID(scanSettings)
+	scanID, err := scanid.Build(scanSettings)
 	if err != nil {
 		log.Error().Msgf("failed to build scan id for caching %s", err)
 	}
@@ -133,60 +128,6 @@ func NewRunner(
 	}
 
 	return r
-}
-
-// buildScanHash builds a hash based on project and settings that latter on gets used for caching scan detections
-func buildScanID(scanSettings settings.Config) (string, error) {
-	// we want head as project may contain new changes
-	cmd := exec.Command("git", "-C", scanSettings.Scan.Target, "rev-parse", "HEAD")
-	sha, err := cmd.Output()
-
-	if err != nil {
-		log.Debug().Msgf("error getting git sha %s", err.Error())
-		sha = []byte(uuid.NewString())
-	}
-
-	// we want hash of all active custom detector rules and their content
-	hashBuilder := md5.New()
-	var ruleNames []string
-	for key := range scanSettings.Rules {
-		ruleNames = append(ruleNames, key)
-	}
-	sort.Strings(ruleNames)
-
-	for _, ruleName := range ruleNames {
-		_, err := hashBuilder.Write([]byte(ruleName))
-		if err != nil {
-			return "", err
-		}
-		detectorContent, err := json.Marshal(scanSettings.Rules[ruleName])
-		if err != nil {
-			return "", err
-		}
-		_, err = hashBuilder.Write(detectorContent)
-		if err != nil {
-			return "", err
-		}
-	}
-
-	var scanners []string
-	scanners = append(scanners, scanSettings.Scan.Scanner...)
-	sort.Strings(scanners)
-
-	for _, scanner := range scanners {
-		_, err := hashBuilder.Write([]byte(scanner))
-		if err != nil {
-			return "", err
-		}
-	}
-
-	configHash := hex.EncodeToString(hashBuilder.Sum(nil)[:])
-
-	// we want sha as it might change detections
-	buildSHA := build.CommitSHA
-	scanID := strings.TrimSuffix(string(sha), "\n") + "-" + buildSHA + "-" + configHash + ".jsonl"
-
-	return scanID, nil
 }
 
 func (r *runner) CacheUsed() bool {
