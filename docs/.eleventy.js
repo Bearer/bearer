@@ -167,9 +167,9 @@ module.exports = function (eleventyConfig) {
 		if(customLabel) {
 			label = customLabel;
 		} else if(level === "info" || level === "error") {
-			label = level.toUpperCase() + ":";
+			label = level.toUpperCase();
 		} else if(level === "warn") {
-			label = "WARNING:";
+			label = "WARNING"
 		}
 		let labelHtml = label ? `<div class="elv-callout-label">${customLabel || label}</div>` : "";
 		let contentHtml = (content || "").trim().length > 0 ? `<div class="elv-callout-c">${content}</div>` : "";
