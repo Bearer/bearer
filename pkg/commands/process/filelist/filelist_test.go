@@ -112,7 +112,7 @@ func TestFileList(t *testing.T) {
 			MaxPathLength: 0,
 		}
 		t.Run(testCase.Name, func(t *testing.T) {
-			output, err := filelist.Discover(testCase.Input.projectPath, &dummyGoclocResult, testCase.Input.config)
+			output, err := filelist.Discover(nil, testCase.Input.projectPath, &dummyGoclocResult, testCase.Input.config)
 
 			if testCase.WantError {
 				if err == nil {

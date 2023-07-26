@@ -1,14 +1,15 @@
 package gitutil
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
 
 	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/config"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
-	"github.com/rs/zerolog/log"
 )
 
 type seenFile struct {
@@ -16,20 +17,7 @@ type seenFile struct {
 	sha   plumbing.Hash
 }
 
-func DiscoverFromGit(path string, diffBaseBranch string) ([]string, error) {
-	repository, err := open(path)
-	if err != nil {
-		return nil, err
-	}
-	if repository == nil {
-		log.Debug().Msg("No .git directory found")
-		return nil, nil
-	}
-
-	return getDiffPaths(repository, diffBaseBranch)
-}
-
-func open(path string) (*git.Repository, error) {
+func Open(path string) (*git.Repository, error) {
 	gitDir := filepath.Join(path, git.GitDirName)
 	if _, err := os.Stat(gitDir); os.IsNotExist(err) {
 		gitDir = path
@@ -47,10 +35,14 @@ func open(path string) (*git.Repository, error) {
 	return repository, nil
 }
 
-func getDiffPaths(repository *git.Repository, baseBranch string) ([]string, error) {
+func ListFiles(repository *git.Repository, path string, diffBaseBranch string) ([]string, error) {
+	if repository == nil {
+		return nil, nil
+	}
+
 	seenFiles := make(map[string]seenFile)
 
-	if err := addBaseSeen(seenFiles, repository, baseBranch); err != nil {
+	if err := addBaseSeen(seenFiles, repository, diffBaseBranch); err != nil {
 		return nil, fmt.Errorf("error with diff base: %w", err)
 	}
 
@@ -119,4 +111,31 @@ func treeForRef(repository *git.Repository, ref *plumbing.Reference) (*object.Tr
 	}
 
 	return commit.Tree()
+}
+
+func FetchIfNotPresent(ctx context.Context, repository *git.Repository, branchName string) error {
+	localRefName := plumbing.NewBranchReferenceName(branchName)
+	remoteRefName := plumbing.NewRemoteReferenceName("origin", branchName)
+
+	ref, err := repository.Reference(localRefName, true)
+	if err != nil && err != plumbing.ErrReferenceNotFound {
+		return fmt.Errorf("invalid branch %s: %w", branchName, err)
+	}
+
+	// Already exists
+	if ref != nil {
+		return nil
+	}
+
+	if err := repository.FetchContext(ctx, &git.FetchOptions{
+		RefSpecs: []config.RefSpec{config.RefSpec(
+			fmt.Sprintf("+%s:%s", localRefName, remoteRefName),
+		)},
+		Depth: 1,
+		Tags:  git.NoTags,
+	}); err != nil {
+		return fmt.Errorf("error fetching branch %s: %w", branchName, err)
+	}
+
+	return nil
 }

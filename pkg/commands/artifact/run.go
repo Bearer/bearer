@@ -30,6 +30,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
+	"github.com/bearer/bearer/pkg/util/gitutil"
 	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
@@ -148,7 +149,26 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) error {
 		output.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
 	}
 
-	files, err := filelist.Discover(opts.Target, r.goclocResult, r.scanSettings)
+	repository, err := gitutil.Open(opts.Target)
+	if err != nil {
+		return fmt.Errorf("error opening git repository: %w", err)
+	}
+
+	if repository == nil {
+		log.Debug().Msg("no git repository found")
+	}
+
+	if opts.DiffBaseBranch != "" && repository == nil {
+		return errors.New("diff base branch specified but no git repository found")
+	}
+
+	if opts.DiffBaseBranch != "" {
+		if err := gitutil.FetchIfNotPresent(ctx, repository, opts.DiffBaseBranch); err != nil {
+			return err
+		}
+	}
+
+	files, err := filelist.Discover(repository, opts.Target, r.goclocResult, r.scanSettings)
 	if err != nil {
 		return err
 	}

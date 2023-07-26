@@ -16,6 +16,7 @@ import (
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/gitutil"
 	util "github.com/bearer/bearer/pkg/util/output"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/gitsight/go-vcsurl"
@@ -147,7 +148,12 @@ func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) erro
 }
 
 func getDiscoveredFiles(config settings.Config, goclocResult *gocloc.Result) []string {
-	filesDiscovered, _ := filelist.Discover(config.Scan.Target, goclocResult, config)
+	repository, err := gitutil.Open(config.Scan.Target)
+	if err != nil {
+		log.Debug().Msgf("failed to open git repository: %s", err)
+	}
+
+	filesDiscovered, _ := filelist.Discover(repository, config.Scan.Target, goclocResult, config)
 	files := []string{}
 	for _, fileDiscovered := range filesDiscovered {
 		files = append(files, file.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))

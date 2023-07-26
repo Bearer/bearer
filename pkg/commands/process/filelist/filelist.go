@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-git/go-git/v5"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
@@ -22,7 +23,7 @@ type File struct {
 }
 
 // Discover searches directory for files to scan, skipping the ones specified by skip config and assigning timeout speficfied by timeout config
-func Discover(projectPath string, goclocResult *gocloc.Result, config settings.Config) ([]File, error) {
+func Discover(repository *git.Repository, projectPath string, goclocResult *gocloc.Result, config settings.Config) ([]File, error) {
 	var files []File
 
 	haveDir, statErr := isDir(projectPath)
@@ -40,7 +41,7 @@ func Discover(projectPath string, goclocResult *gocloc.Result, config settings.C
 
 	ignore := ignore.New(projectPath, config)
 
-	pathsFromGit, err := gitutil.DiscoverFromGit(projectPath, config.Scan.DiffBaseBranch)
+	pathsFromGit, err := gitutil.ListFiles(repository, projectPath, config.Scan.DiffBaseBranch)
 	if err != nil {
 		log.Error().Msg("Git discovery failed")
 		return nil, err
