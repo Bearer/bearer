@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net"
 	"os"
 	"os/signal"
@@ -15,10 +16,10 @@ import (
 	customdetector "github.com/bearer/bearer/new/scanner"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/debugprofile"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	config "github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/detectors"
-	"github.com/bearer/bearer/pkg/scanner"
+	"github.com/bearer/bearer/pkg/report/writer"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 )
@@ -57,35 +58,35 @@ func (worker *Worker) Setup(config config.Config) error {
 	return nil
 }
 
-func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest) work.ProcessResponse {
+func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest) (*stats.FileStats, error) {
 	var fileStats *stats.FileStats
 	if worker.debug {
 		fileStats = stats.NewFileStats()
 	}
 
-	err := scanner.Scan(
+	file, err := os.Create(scanRequest.ReportPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open output file %w", err)
+	}
+	defer file.Close()
+
+	err = detectors.Extract(
 		ctx,
 		scanRequest.Dir,
 		scanRequest.File.FilePath,
-		scanRequest.ReportPath,
-		worker.classifer,
+		&writer.Detectors{
+			Classifier: worker.classifer,
+			File:       file,
+		},
 		fileStats,
 		worker.scanners,
 	)
 
 	if ctx.Err() != nil {
-		err = ErrorTimeoutReached
+		return fileStats, ErrorTimeoutReached
 	}
 
-	var errorString string
-	if err != nil {
-		errorString = err.Error()
-	}
-
-	return work.ProcessResponse{
-		FileStats: fileStats,
-		Error:     errorString,
-	}
+	return fileStats, err
 }
 
 func Start(port string) error {
@@ -120,11 +121,18 @@ func Start(port string) error {
 				json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
 
 				scanCtx, cancelScan := context.WithTimeout(ctx, scanRequest.File.Timeout)
-				response := worker.Scan(scanCtx, scanRequest)
+				fileStats, err := worker.Scan(scanCtx, scanRequest)
+				var errorString string
+				if err != nil {
+					errorString = err.Error()
+				}
 
 				cancelScan()
 
-				json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
+				json.NewEncoder(rw).Encode(work.ProcessResponse{ //nolint:all,errcheck
+					FileStats: fileStats,
+					Error:     errorString,
+				})
 			default:
 				rw.WriteHeader(http.StatusNotFound)
 			}

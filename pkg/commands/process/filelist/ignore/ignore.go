@@ -1,4 +1,4 @@
-package fileignore
+package ignore
 
 import (
 	"fmt"

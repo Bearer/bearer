@@ -5,19 +5,25 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/fileignore"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/timeout"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
-	"github.com/bearer/bearer/pkg/util/gitutil"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
+
+	"github.com/bearer/bearer/pkg/commands/process/filelist/ignore"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/timeout"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/util/gitutil"
 )
 
+type File struct {
+	Timeout  time.Duration
+	FilePath string
+}
+
 // Discover searches directory for files to scan, skipping the ones specified by skip config and assigning timeout speficfied by timeout config
-func Discover(projectPath string, goclocResult *gocloc.Result, config settings.Config) ([]work.File, error) {
-	var files []work.File
+func Discover(projectPath string, goclocResult *gocloc.Result, config settings.Config) ([]File, error) {
+	var files []File
 
 	haveDir, statErr := isDir(projectPath)
 	if statErr != nil {
@@ -32,7 +38,7 @@ func Discover(projectPath string, goclocResult *gocloc.Result, config settings.C
 		}
 	}
 
-	ignore := fileignore.New(projectPath, config)
+	ignore := ignore.New(projectPath, config)
 
 	pathsFromGit, err := gitutil.DiscoverFromGit(projectPath, config.Scan.DiffBaseBranch)
 	if err != nil {
@@ -74,7 +80,7 @@ func Discover(projectPath string, goclocResult *gocloc.Result, config settings.C
 			relativePath := strings.TrimPrefix(pathFromGit, projectPath)
 			relativePath = "/" + relativePath
 
-			file := work.File{
+			file := File{
 				FilePath: relativePath,
 				Timeout:  timeout.Assign(fileEntry, config),
 			}
@@ -109,7 +115,7 @@ func Discover(projectPath string, goclocResult *gocloc.Result, config settings.C
 			return nil
 		}
 
-		file := work.File{
+		file := File{
 			FilePath: relativePath,
 			Timeout:  timeout.Assign(d, config),
 		}

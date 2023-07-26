@@ -11,9 +11,10 @@ import (
 	"github.com/schollz/progressbar/v3"
 
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
+	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/pool"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/pool"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/report/detections"
 	"github.com/bearer/bearer/pkg/util/jsonlines"
 	bearerprogress "github.com/bearer/bearer/pkg/util/progressbar"
@@ -23,7 +24,7 @@ import (
 type Orchestrator struct {
 	repository          work.Repository
 	config              settings.Config
-	files               []work.File
+	files               []filelist.File
 	maxWorkersSemaphore chan struct{}
 	done                chan struct{}
 	pool                *pool.Pool
@@ -33,7 +34,7 @@ type Orchestrator struct {
 func New(
 	repository work.Repository,
 	config settings.Config,
-	files []work.File,
+	files []filelist.File,
 	stats *stats.Stats,
 ) (*Orchestrator, error) {
 	parallel := getParallel(len(files), config)
@@ -102,7 +103,7 @@ func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, progre
 	}
 }
 
-func (orchestrator *Orchestrator) scanFile(reportFile *os.File, fileComplete chan struct{}, file work.File) {
+func (orchestrator *Orchestrator) scanFile(reportFile *os.File, fileComplete chan struct{}, file filelist.File) {
 	orchestrator.maxWorkersSemaphore <- struct{}{}
 	tmpReportPath := tmpfile.Create(".jsonl")
 
@@ -152,7 +153,7 @@ func (orchestrator *Orchestrator) writeFileResult(reportFile *os.File, tmpReport
 	orchestrator.reportMutex.Unlock()
 }
 
-func (orchestrator *Orchestrator) writeFileError(reportFile *os.File, file work.File, fileErr error) {
+func (orchestrator *Orchestrator) writeFileError(reportFile *os.File, file filelist.File, fileErr error) {
 	fullPath := path.Join(orchestrator.config.Scan.Target, file.FilePath)
 	fileInfo, err := os.Stat(fullPath)
 	if err != nil {

@@ -18,9 +18,9 @@ import (
 	"github.com/rs/zerolog/log"
 	gopsutilprocess "github.com/shirou/gopsutil/v3/process"
 
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/worker"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/util/output"
 )
 

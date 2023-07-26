@@ -16,10 +16,10 @@ import (
 
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
+	"github.com/bearer/bearer/pkg/commands/process/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/github_api"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"

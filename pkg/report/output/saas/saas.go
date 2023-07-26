@@ -10,7 +10,7 @@ import (
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/api/s3"
 	"github.com/bearer/bearer/cmd/bearer/build"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"

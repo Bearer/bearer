@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/worker"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/rs/zerolog/log"
 )
