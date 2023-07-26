@@ -16,3 +16,4 @@ temp/
 /*.pprof
 
 .bash_history
+.cache/
