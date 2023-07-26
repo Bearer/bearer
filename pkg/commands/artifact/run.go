@@ -17,6 +17,7 @@ import (
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -30,7 +31,6 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
-	"github.com/bearer/bearer/pkg/util/gitutil"
 	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
@@ -149,23 +149,13 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) error {
 		output.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
 	}
 
-	repository, err := gitutil.Open(opts.Target)
+	repository, err := gitrepository.New(ctx, opts.Target, opts.DiffBaseBranch)
 	if err != nil {
 		return fmt.Errorf("error opening git repository: %w", err)
 	}
 
-	if repository == nil {
-		log.Debug().Msg("no git repository found")
-	}
-
-	if opts.DiffBaseBranch != "" && repository == nil {
-		return errors.New("diff base branch specified but no git repository found")
-	}
-
-	if opts.DiffBaseBranch != "" {
-		if err := gitutil.FetchIfNotPresent(ctx, repository, opts.DiffBaseBranch); err != nil {
-			return err
-		}
+	if err := repository.FetchBaseIfNotPresent(); err != nil {
+		return err
 	}
 
 	files, err := filelist.Discover(repository, opts.Target, r.goclocResult, r.scanSettings)
@@ -187,6 +177,16 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) error {
 		return err
 	}
 	defer orchestrator.Close()
+
+	if err := repository.WithBaseBranch(func() error {
+		if err := orchestrator.Scan(r.reportPath + ".base"); err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return err
+	}
 
 	if err := orchestrator.Scan(r.reportPath); err != nil {
 		return err

@@ -2,6 +2,7 @@ package saas
 
 import (
 	"compress/gzip"
+	"context"
 	"fmt"
 	"os"
 	"os/exec"
@@ -11,12 +12,12 @@ import (
 	"github.com/bearer/bearer/api/s3"
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/bearer/bearer/pkg/util/gitutil"
 	util "github.com/bearer/bearer/pkg/util/output"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/gitsight/go-vcsurl"
@@ -148,7 +149,7 @@ func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) erro
 }
 
 func getDiscoveredFiles(config settings.Config, goclocResult *gocloc.Result) []string {
-	repository, err := gitutil.Open(config.Scan.Target)
+	repository, err := gitrepository.New(context.TODO(), config.Scan.Target, config.Scan.DiffBaseBranch)
 	if err != nil {
 		log.Debug().Msgf("failed to open git repository: %s", err)
 	}
