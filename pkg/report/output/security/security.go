@@ -124,13 +124,26 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Results, e
 		output.StdErrLog("Evaluating rules")
 	}
 
-	err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
+	err, builtInFingerprints := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
 	if err != nil {
 		return nil, err
 	}
-	err = evaluateRules(summaryResults, config.Rules, config, dataflow, false)
+	err, fingerprints := evaluateRules(summaryResults, config.Rules, config, dataflow, false)
 	if err != nil {
 		return nil, err
+	}
+
+	if !config.Scan.Quiet {
+		fingerprints = append(fingerprints, builtInFingerprints...)
+		unusedFingerprints := removeUnusedFingerprints(fingerprints, config.Report.ExcludeFingerprint)
+		if len(unusedFingerprints) > 0 {
+			output.StdErrLog("\n=====================================\n")
+			output.StdErrLog(fmt.Sprintf("%d excluded fingerprints present in your Bearer configuration file are no longer detected:", len(unusedFingerprints)))
+			for _, fingerprint := range unusedFingerprints {
+				output.StdErrLog(fmt.Sprintf("  - %s", fingerprint))
+			}
+			output.StdErrLog("\n=====================================")
+		}
 	}
 
 	return &summaryResults, nil
@@ -142,13 +155,15 @@ func evaluateRules(
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
 	builtIn bool,
-) error {
+) (error, []string) {
 	outputResults := map[string][]Result{}
 
 	var bar *progressbar.ProgressBar
 	if !builtIn {
 		bar = bearerprogressbar.GetProgressBar(len(rules), config, "rules")
 	}
+
+	var fingerprints []string
 
 	for _, rule := range maputil.ToSortedSlice(rules) {
 		if !builtIn {
@@ -174,19 +189,19 @@ func evaluateRules(
 			// TODO: perf question: can we do this once?
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return err
+			return err, fingerprints
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return err
+				return err, fingerprints
 			}
 
 			var results map[string][]Output
 			err = json.Unmarshal(jsonRes, &results)
 			if err != nil {
-				return err
+				return err, fingerprints
 			}
 
 			ruleSummary := &Rule{
@@ -207,6 +222,7 @@ func evaluateRules(
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceCount[output.Filename])
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
 				instanceCount[output.Filename]++
+				fingerprints = append(fingerprints, fingerprint)
 				if config.Report.ExcludeFingerprint[fingerprint] {
 					// skip finding - fingerprint is in exclude list
 					log.Debug().Msgf("Excluding finding with fingerprint %s", fingerprint)
@@ -253,7 +269,19 @@ func evaluateRules(
 		summaryResults[severity] = append(summaryResults[severity], resultSlice...)
 	}
 
-	return nil
+	return nil, fingerprints
+}
+
+func removeUnusedFingerprints(detectedFingerprints []string, excludeFingerprints map[string]bool) []string {
+	filteredFingerprints := []string{}
+
+	for fingerprint := range excludeFingerprints {
+		if !slice.Contains(detectedFingerprints, fingerprint) {
+			filteredFingerprints = append(filteredFingerprints, fingerprint)
+		}
+	}
+
+	return filteredFingerprints
 }
 
 func getExtract(rawCodeExtract []file.Line) string {
