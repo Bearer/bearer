@@ -15,7 +15,7 @@ If you're looking to manage product and application code security at scale, Bear
 You can [start creating your free account](https://my.bearer.sh/users/sign_up) right now using your GitHub, GitLab, or Google SSO. 
 
 {% callout "info" %}
-Bearer Cloud free plan comes with those limits:<br/>
+Bearer Cloud free plan comes with these limits:<br/>
 - 1 team member<br/>
 - 10 applications<br/>
 - Slack integration only<br/>
