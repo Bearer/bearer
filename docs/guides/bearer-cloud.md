@@ -1,11 +1,31 @@
 ---
 title: Connect to Bearer Cloud
-templateEngineOverride: md
 ---
 
-# Connect to Bearer Cloud
+# Bearer Cloud
 
-If you're looking to manage product and application code security at scale, Bearer Cloud offers at platform for teams that syncs with Bearer CLI's output. [Learn more about Bearer Cloud](https://www.bearer.com/bearer-cloud).
+If you're looking to manage product and application code security at scale, Bearer Cloud offers a platform for teams that syncs with Bearer CLI's output. 
+
+<iframe class="w-full aspect-video" src="https://youtube.com/embed/whPRe9GaY7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+[Learn more about Bearer Cloud](https://www.bearer.com/bearer-cloud).
+
+# Create an account
+
+You can [start creating your free account](https://my.bearer.sh/users/sign_up) right now using your GitHub, GitLab, or Google SSO. 
+
+{% callout "info" %}
+Bearer Cloud free plan comes with these limits:<br/>
+- 1 team member<br/>
+- 10 applications<br/>
+- Slack integration only<br/>
+
+Need more? <a href="https://www.bearer.com/contact">Contact us</a>.
+ {% endcallout %}
+
+
+# Get started with Bearer Cloud
+
 
 ## Generate an API token
 
@@ -76,3 +96,8 @@ Bearer Cloud automatically captures any scans run with a valid `api-key`. Subseq
 ## Make the most of Bearer CLI
 
 Looking for more ways to make the most of Bearer CLI? Browse the guides to learn how to [Configure a scan](/guides/configure-scan/), [create a custom rule](/guides/custom-rule), or [run a privacy report](/guides/privacy/).
+
+
+## Need help?
+
+Get in touch with our team directly on [Discord](https://discord.com/invite/eaHZBJUXRF) or [book a demo](https://www.bearer.com/demo) with one of our engineer.
