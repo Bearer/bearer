@@ -1,21 +1,6 @@
 
-<style>
-  .banner {
-    padding:5px; 
-    margin-bottom:20px;
-    font-weight:semi-bold;
-    background-color:#7043ed;
-    text-align:center;
-    color:white;
-  }
-
-  .banner a{
-    color:white;
-  }
-</style>
-
-<div class="banner">
-  🎉 <strong>Latest update:</strong>: Bearer Cloud is now ready available for everyone, <a href="https://docs.bearer.com/guides/bearer-cloud/">learn more</a>.<br/>
+<div style="padding:5px; margin-bottom:20px;font-weight:semi-bold;background-color:#7043ed;text-align:center;color:white;">
+  🎉 <strong>Latest update:</strong> Bearer Cloud is now ready available for everyone, <a style="color:white;" href="https://docs.bearer.com/guides/bearer-cloud/">learn more</a>.<br/>
 </div>
 
 <div align="center">
