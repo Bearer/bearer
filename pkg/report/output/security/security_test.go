@@ -51,7 +51,7 @@ func TestBuildReportString(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	results, err := security.GetOutput(&dataflow, config)
+	results, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -91,7 +91,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	results, err := security.GetOutput(&dataflow, config)
+	results, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -128,7 +128,7 @@ func TestGetOutput(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	res, err := security.GetOutput(&dataflow, config)
+	res, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -154,7 +154,7 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	res, err := security.GetOutput(&dataflow, config)
+	res, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}

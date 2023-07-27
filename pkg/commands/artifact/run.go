@@ -23,6 +23,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/github_api"
+	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/gitlab"
 	reporthtml "github.com/bearer/bearer/pkg/report/output/html"
@@ -58,9 +59,9 @@ type Runner interface {
 	// ReportPath returns the filename of the report
 	ReportPath() string
 	// Scan gathers the findings
-	Scan(ctx context.Context, opts flag.Options) error
+	Scan(ctx context.Context, opts flag.Options) (basebranchfindings.Findings, error)
 	// Report a writes a report
-	Report() (bool, error)
+	Report(baseBranchFindings basebranchfindings.Findings) (bool, error)
 	// Close closes runner
 	Close(ctx context.Context) error
 }
@@ -140,9 +141,9 @@ func (r *runner) Close(ctx context.Context) error {
 	return nil
 }
 
-func (r *runner) Scan(ctx context.Context, opts flag.Options) error {
+func (r *runner) Scan(ctx context.Context, opts flag.Options) (basebranchfindings.Findings, error) {
 	if r.reuseDetection {
-		return nil
+		return nil, nil
 	}
 
 	if !opts.Quiet {
@@ -151,20 +152,20 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) error {
 
 	repository, err := gitrepository.New(ctx, opts.Target, opts.DiffBaseBranch)
 	if err != nil {
-		return fmt.Errorf("error opening git repository: %w", err)
+		return nil, fmt.Errorf("error opening git repository: %w", err)
 	}
 
 	if err := repository.FetchBaseIfNotPresent(); err != nil {
-		return err
+		return nil, err
 	}
 
 	files, err := filelist.Discover(repository, opts.Target, r.goclocResult, r.scanSettings)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	if len(files) == 0 {
-		return ErrFileListEmpty
+		return nil, ErrFileListEmpty
 	}
 
 	orchestrator, err := orchestrator.New(
@@ -174,25 +175,34 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) error {
 		r.stats,
 	)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer orchestrator.Close()
 
+	var baseBranchFindings basebranchfindings.Findings
 	if err := repository.WithBaseBranch(func() error {
 		if err := orchestrator.Scan(r.reportPath + ".base"); err != nil {
 			return err
 		}
 
+		report := types.Report{Path: r.reportPath + ".base", Inputgocloc: r.goclocResult}
+		detections, _, err := reportoutput.GetOutput(report, r.scanSettings, nil)
+		if err != nil {
+			return err
+		}
+
+		baseBranchFindings = buildBaseBranchFindings(detections)
+
 		return nil
 	}); err != nil {
-		return err
+		return nil, err
 	}
 
 	if err := orchestrator.Scan(r.reportPath); err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return baseBranchFindings, nil
 }
 
 // Run performs artifact scanning
@@ -241,7 +251,8 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		}
 	}
 
-	if err = r.Scan(ctx, opts); err != nil {
+	baseBranchFindings, err := r.Scan(ctx, opts)
+	if err != nil {
 		if errors.Is(err, ErrFileListEmpty) {
 			outputhandler.StdOutLog(err.Error())
 			os.Exit(0)
@@ -251,7 +262,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		return fmt.Errorf("scan error: %w", err)
 	}
 
-	reportPassed, err := r.Report()
+	reportPassed, err := r.Report(baseBranchFindings)
 	if err != nil {
 		return fmt.Errorf("report error: %w", err)
 	} else {
@@ -281,7 +292,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	return nil
 }
 
-func (r *runner) Report() (bool, error) {
+func (r *runner) Report(baseBranchFindings basebranchfindings.Findings) (bool, error) {
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	reportPassed := true
@@ -303,7 +314,7 @@ func (r *runner) Report() (bool, error) {
 		outputhandler.StdErrLog("Using cached data")
 	}
 
-	detections, dataflow, err := reportoutput.GetOutput(report, r.scanSettings)
+	detections, dataflow, err := reportoutput.GetOutput(report, r.scanSettings, baseBranchFindings)
 	if err != nil {
 		return false, err
 	}
@@ -495,4 +506,21 @@ func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages
 	sort.Strings(keys)
 
 	return keys
+}
+
+func buildBaseBranchFindings(detections any) basebranchfindings.Findings {
+	result := make(basebranchfindings.Findings)
+
+	for _, findings := range *detections.(*security.Results) {
+		for _, finding := range findings {
+			result.Add(
+				finding.Rule.Id,
+				finding.Filename,
+				finding.Sink.Start,
+				finding.Sink.End,
+			)
+		}
+	}
+
+	return result
 }

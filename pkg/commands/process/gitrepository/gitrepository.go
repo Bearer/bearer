@@ -134,6 +134,10 @@ func (repository *Repository) treeForRef(ref *plumbing.Reference) (*object.Tree,
 }
 
 func (repository *Repository) FetchBaseIfNotPresent() error {
+	if repository == nil || repository.baseBranch == "" {
+		return nil
+	}
+
 	ref, err := repository.repository.Reference(repository.baseLocalRefName, true)
 	if err != nil && err != plumbing.ErrReferenceNotFound {
 		return fmt.Errorf("invalid branch %s: %w", repository.baseBranch, err)
@@ -158,6 +162,10 @@ func (repository *Repository) FetchBaseIfNotPresent() error {
 }
 
 func (repository *Repository) WithBaseBranch(body func() error) error {
+	if repository.baseBranch == "" {
+		return nil
+	}
+
 	branchName := plumbing.NewBranchReferenceName(repository.baseBranch)
 
 	worktree, err := repository.repository.Worktree()
@@ -165,17 +173,16 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 		return fmt.Errorf("error getting git worktree: %w", err)
 	}
 
+	defer repository.restoreHead(worktree)
+
 	if err := worktree.Checkout(&git.CheckoutOptions{
 		Branch: branchName,
 		Keep:   true,
 	}); err != nil {
-		repository.restoreHead(worktree)
 		return fmt.Errorf("error checking out base branch: %w", err)
 	}
 
-	err = body()
-	repository.restoreHead(worktree)
-	return err
+	return body()
 }
 
 func (repository *Repository) restoreHead(worktree *git.Worktree) {

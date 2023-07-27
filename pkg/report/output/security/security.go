@@ -26,6 +26,7 @@ import (
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
+	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	stats "github.com/bearer/bearer/pkg/report/output/stats"
 )
@@ -124,17 +125,21 @@ type Rule struct {
 	DocumentationUrl string   `json:"documentation_url" yaml:"documentation_url"`
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Results, error) {
+func GetOutput(
+	dataflow *dataflow.DataFlow,
+	config settings.Config,
+	baseBranchFindings basebranchfindings.Findings,
+) (*Results, error) {
 	summaryResults := make(Results)
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
 
-	builtInFingerprints, err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
+	builtInFingerprints, err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
 	if err != nil {
 		return nil, err
 	}
-	fingerprints, err := evaluateRules(summaryResults, config.Rules, config, dataflow, false)
+	fingerprints, err := evaluateRules(summaryResults, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
 		return nil, err
 	}
@@ -160,6 +165,7 @@ func evaluateRules(
 	rules map[string]*settings.Rule,
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
+	baseBranchFindings basebranchfindings.Findings,
 	builtIn bool,
 ) ([]string, error) {
 	outputResults := map[string][]Result{}
@@ -223,6 +229,11 @@ func evaluateRules(
 			sortByLineNumber(policyFailures)
 
 			for i, output := range policyFailures {
+				if baseBranchFindings != nil &&
+					baseBranchFindings.Has(rule.Id, output.Filename, output.Sink.Start, output.Sink.End) {
+					continue
+				}
+
 				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceCount[output.Filename])
