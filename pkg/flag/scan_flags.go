@@ -108,6 +108,12 @@ var (
 		Value:      0,
 		Usage:      "Specify the amount of parallelism to use during the scan",
 	}
+	ExitCodeFlag = Flag{
+		Name:       "exit-code",
+		ConfigName: "scan.exit-code",
+		Value:      -1,
+		Usage:      "Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan.",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -124,6 +130,7 @@ type ScanFlagGroup struct {
 	ForceFlag                   *Flag
 	ExternalRuleDirFlag         *Flag
 	ParallelFlag                *Flag
+	ExitCodeFlag                *Flag
 }
 
 type ScanOptions struct {
@@ -141,6 +148,7 @@ type ScanOptions struct {
 	ExternalRuleDir         []string      `mapstructure:"external-rule-dir" json:"external-rule-dir" yaml:"external-rule-dir"`
 	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
 	Parallel                int           `mapstructure:"parallel" json:"parallel" yaml:"parallel"`
+	ExitCode                int           `mapstructure:"exit-code" json:"exit-code" yaml:"exit-code"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -158,6 +166,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		ExternalRuleDirFlag:         &ExternalRuleDirFlag,
 		ScannerFlag:                 &ScannerFlag,
 		ParallelFlag:                &ParallelFlag,
+		ExitCodeFlag:                &ExitCodeFlag,
 	}
 }
 
@@ -180,6 +189,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.ExternalRuleDirFlag,
 		f.ScannerFlag,
 		f.ParallelFlag,
+		f.ExitCodeFlag,
 	}
 }
 
@@ -227,6 +237,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		ExternalRuleDir:         getStringSlice(f.ExternalRuleDirFlag),
 		Scanner:                 scanners,
 		Parallel:                viper.GetInt(f.ParallelFlag.ConfigName),
+		ExitCode:                viper.GetInt(f.ExitCodeFlag.ConfigName),
 	}, nil
 }
 
