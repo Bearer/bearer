@@ -27,17 +27,17 @@ details .elv-callout {
 		border-radius: 0.3em;
 	}
 }
-.dark {
-	.elv-callout {
-		--callout-primary: hsl(195, 100%, 22%);
-		--callout-secondary: hsl(195, 100%, 12%);
-		--callout-primarytext: #fff;
-	}
-	.elv-callout,
-	.elv-callout a {
-		color: #fff;
-	}
+
+.dark .elv-callout {
+	--callout-primary: hsl(195, 100%, 22%);
+	--callout-secondary: hsl(195, 100%, 12%);
+	--callout-primarytext: #fff;
 }
+.dark .elv-callout,
+.dark .elv-callout a {
+	color: #fff;
+}
+
 table .elv-callout {
 	margin-left: 0;
 	margin-right: 0;
