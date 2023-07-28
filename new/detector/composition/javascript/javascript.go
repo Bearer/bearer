@@ -112,7 +112,7 @@ func New(
 		}()
 	}
 
-	detector, err := datatype.New(lang, classifier.Schema)
+	detector, err := datatype.New("javascript", lang, classifier.Schema)
 	if err != nil {
 		composition.Close()
 		return nil, fmt.Errorf("failed to create datatype detector: %s", err)

@@ -25,13 +25,25 @@ type Property struct {
 }
 
 type datatypeDetector struct {
+	detectorType detectors.Type
 	types.DetectorBase
 	classifier *classificationschema.Classifier
 }
 
-func New(lang languagetypes.Language, classifier *classificationschema.Classifier) (types.Detector, error) {
+func New(language string, lang languagetypes.Language, classifier *classificationschema.Classifier) (types.Detector, error) {
+	var detectorType detectors.Type
+	switch language {
+	case "java":
+		detectorType = detectors.DetectorJava
+	case "ruby":
+		detectorType = detectors.DetectorRuby
+	case "javascript", "typescript":
+		detectorType = detectors.DetectorJavascript
+	}
+
 	return &datatypeDetector{
-		classifier: classifier,
+		detectorType: detectorType,
+		classifier:   classifier,
 	}, nil
 }
 
@@ -73,7 +85,7 @@ func (detector *datatypeDetector) classifyObject(
 ) (Data, classificationschema.Classification, bool) {
 	objectData := detection.Data.(generictypes.Object)
 
-	classification := detector.classifier.Classify(buildClassificationRequest(filename, name, objectData))
+	classification := detector.classifier.Classify(buildClassificationRequest(detector.detectorType, filename, name, objectData))
 	containsValidClassification := classification.Classification.Decision.State == classify.Valid
 
 	properties := make([]Property, len(objectData.Properties))
@@ -140,7 +152,7 @@ func (detector *datatypeDetector) classifyProperty(
 		containsValidClassification || propertyClassification.Decision.State == classify.Valid
 }
 
-func buildClassificationRequest(filename, name string, data generictypes.Object) classificationschema.ClassificationRequest {
+func buildClassificationRequest(detectorType detectors.Type, filename, name string, data generictypes.Object) classificationschema.ClassificationRequest {
 	var properties []*classificationschema.ClassificationRequestDetection
 
 	for _, property := range data.Properties {
@@ -156,7 +168,7 @@ func buildClassificationRequest(filename, name string, data generictypes.Object)
 			SimpleType: schema.SimpleTypeUnknown,
 			Properties: properties,
 		},
-		DetectorType: detectors.DetectorRuby,
+		DetectorType: detectorType,
 		Filename:     filename,
 	}
 }
