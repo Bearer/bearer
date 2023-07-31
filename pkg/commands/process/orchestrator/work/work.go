@@ -2,7 +2,7 @@ package work
 
 import (
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
-	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 )
 
 type InitializeResponse struct {
@@ -22,7 +22,7 @@ type Repository struct {
 
 type ProcessRequest struct {
 	Repository
-	File       filelist.File
+	File       files.File
 	ReportPath string
 }
 

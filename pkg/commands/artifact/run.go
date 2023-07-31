@@ -17,6 +17,7 @@ import (
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
@@ -59,9 +60,9 @@ type Runner interface {
 	// ReportPath returns the filename of the report
 	ReportPath() string
 	// Scan gathers the findings
-	Scan(ctx context.Context, opts flag.Options) (basebranchfindings.Findings, error)
+	Scan(ctx context.Context, opts flag.Options) (*basebranchfindings.Findings, error)
 	// Report a writes a report
-	Report(baseBranchFindings basebranchfindings.Findings) (bool, error)
+	Report(baseBranchFindings *basebranchfindings.Findings) (bool, error)
 	// Close closes runner
 	Close(ctx context.Context) error
 }
@@ -141,7 +142,7 @@ func (r *runner) Close(ctx context.Context) error {
 	return nil
 }
 
-func (r *runner) Scan(ctx context.Context, opts flag.Options) (basebranchfindings.Findings, error) {
+func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindings.Findings, error) {
 	if r.reuseDetection {
 		return nil, nil
 	}
@@ -150,7 +151,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (basebranchfinding
 		output.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
 	}
 
-	repository, err := gitrepository.New(ctx, opts.Target, opts.DiffBaseBranch)
+	repository, err := gitrepository.New(ctx, r.scanSettings, opts.Target, opts.DiffBaseBranch)
 	if err != nil {
 		return nil, fmt.Errorf("error opening git repository: %w", err)
 	}
@@ -159,29 +160,29 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (basebranchfinding
 		return nil, err
 	}
 
-	files, err := filelist.Discover(repository, opts.Target, r.goclocResult, r.scanSettings)
+	fileList, err := filelist.Discover(repository, opts.Target, r.goclocResult, r.scanSettings)
 	if err != nil {
 		return nil, err
 	}
 
-	if len(files) == 0 {
+	if len(fileList.Files) == 0 {
 		return nil, ErrFileListEmpty
 	}
 
 	orchestrator, err := orchestrator.New(
 		work.Repository{Dir: opts.Target},
 		r.scanSettings,
-		files,
 		r.stats,
+		len(fileList.Files),
 	)
 	if err != nil {
 		return nil, err
 	}
 	defer orchestrator.Close()
 
-	var baseBranchFindings basebranchfindings.Findings
+	var baseBranchFindings *basebranchfindings.Findings
 	if err := repository.WithBaseBranch(func() error {
-		if err := orchestrator.Scan(r.reportPath + ".base"); err != nil {
+		if err := orchestrator.Scan(r.reportPath+".base", fileList.BaseFiles); err != nil {
 			return err
 		}
 
@@ -191,14 +192,14 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (basebranchfinding
 			return err
 		}
 
-		baseBranchFindings = buildBaseBranchFindings(detections)
+		baseBranchFindings = buildBaseBranchFindings(fileList, detections)
 
 		return nil
 	}); err != nil {
 		return nil, err
 	}
 
-	if err := orchestrator.Scan(r.reportPath); err != nil {
+	if err := orchestrator.Scan(r.reportPath, fileList.Files); err != nil {
 		return nil, err
 	}
 
@@ -292,7 +293,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	return nil
 }
 
-func (r *runner) Report(baseBranchFindings basebranchfindings.Findings) (bool, error) {
+func (r *runner) Report(baseBranchFindings *basebranchfindings.Findings) (bool, error) {
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	reportPassed := true
@@ -508,8 +509,8 @@ func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages
 	return keys
 }
 
-func buildBaseBranchFindings(detections any) basebranchfindings.Findings {
-	result := make(basebranchfindings.Findings)
+func buildBaseBranchFindings(fileList *files.List, detections any) *basebranchfindings.Findings {
+	result := basebranchfindings.New(fileList)
 
 	for _, findings := range *detections.(*security.Results) {
 		for _, finding := range findings {

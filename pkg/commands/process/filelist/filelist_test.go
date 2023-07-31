@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/hhatto/gocloc"
@@ -20,7 +21,7 @@ func TestFileList(t *testing.T) {
 	type testCase struct {
 		Name      string
 		Input     input
-		Want      []filelist.File
+		Want      []files.File
 		WantError bool
 	}
 
@@ -36,7 +37,7 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: []filelist.File{
+			Want: []files.File{
 				{
 					FilePath: "/user.go",
 					Timeout:  0,
@@ -57,7 +58,7 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: []filelist.File{
+			Want: []files.File{
 				{
 					Timeout:  0,
 					FilePath: "/users/users.go",

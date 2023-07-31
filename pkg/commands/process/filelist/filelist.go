@@ -5,29 +5,22 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
+	flfiles "github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/commands/process/filelist/ignore"
 	"github.com/bearer/bearer/pkg/commands/process/filelist/timeout"
 	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
 
-type File struct {
-	Timeout  time.Duration
-	FilePath string
-}
-
 // Discover searches directory for files to scan, skipping the ones specified by skip config and assigning timeout speficfied by timeout config
-func Discover(repository *gitrepository.Repository, projectPath string, goclocResult *gocloc.Result, config settings.Config) ([]File, error) {
-	var files []File
-
+func Discover(repository *gitrepository.Repository, projectPath string, goclocResult *gocloc.Result, config settings.Config) (*flfiles.List, error) {
 	haveDir, statErr := isDir(projectPath)
 	if statErr != nil {
-		return files, statErr
+		return nil, statErr
 	}
 
 	if haveDir {
@@ -40,92 +33,57 @@ func Discover(repository *gitrepository.Repository, projectPath string, goclocRe
 
 	ignore := ignore.New(projectPath, config)
 
-	pathsFromGit, err := repository.ListFiles()
+	fileList, err := repository.ListFiles(ignore, goclocResult, projectPath)
 	if err != nil {
 		log.Error().Msg("Git discovery failed")
 		return nil, err
 	}
 
-	if len(pathsFromGit) != 0 {
+	if fileList != nil {
 		log.Debug().Msg("Files found from Git")
-
-		for _, pathFromGit := range pathsFromGit {
-			fullPath := projectPath + "/" + pathFromGit
-
-			// Check if the file path itself should be ignored
-			fileInfo, err := os.Stat(fullPath)
-			if err != nil {
-				log.Debug().Msgf("Skipping directory: %s, %s", fullPath, err.Error())
-				continue
-			}
-			fileEntry := fs.FileInfoToDirEntry(fileInfo)
-			if ignore.Ignore(projectPath, pathFromGit, goclocResult, fileEntry) {
-				log.Debug().Msgf("Skipping file: %s", pathFromGit)
-				continue
-			}
-
-			// Check if the parent directory should be ignored
-			dirFullPath := filepath.Dir(fullPath)
-			dirInfo, err := os.Stat(dirFullPath)
-			if err != nil {
-				return nil, err
-			}
-			dirEntry := fs.FileInfoToDirEntry(dirInfo)
-			dirRelativePath := filepath.Dir(pathFromGit)
-			if ignore.Ignore(projectPath, dirRelativePath, goclocResult, dirEntry) {
-				log.Debug().Msgf("Skipping parent directory: %s", dirRelativePath)
-				continue
-			}
-
-			relativePath := strings.TrimPrefix(pathFromGit, projectPath)
-			relativePath = "/" + relativePath
-
-			file := File{
-				FilePath: relativePath,
-				Timeout:  timeout.Assign(fileEntry, config),
-			}
-
-			files = append(files, file)
-		}
-
-		return files, nil
+		return fileList, nil
 	}
 
 	log.Debug().Msg("No files found from Git")
 
+	var files []flfiles.File
 	err = filepath.WalkDir(projectPath, func(filePath string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 
+		relativePath := strings.TrimPrefix(filePath, projectPath)
+		relativePath = "/" + relativePath
+
+		fileInfo, err := d.Info()
+		if err != nil {
+			log.Debug().Msgf("skipping due to info error %s: %s", relativePath, err)
+			return nil
+		}
+
 		if d.IsDir() {
-			if ignore.Ignore(projectPath, filePath, goclocResult, d) {
+			if ignore.Ignore(projectPath, filePath, goclocResult, fileInfo) {
 				return filepath.SkipDir
 			}
 
 			return nil
 		}
 
-		relativePath := strings.TrimPrefix(filePath, projectPath)
-		relativePath = "/" + relativePath
-
-		if ignore.Ignore(projectPath, filePath, goclocResult, d) {
+		if ignore.Ignore(projectPath, filePath, goclocResult, fileInfo) {
 			log.Debug().Msgf("skipping file due to file skip rules: %s", relativePath)
 
 			return nil
 		}
 
-		file := File{
+		files = append(files, flfiles.File{
 			FilePath: relativePath,
-			Timeout:  timeout.Assign(d, config),
-		}
-
-		files = append(files, file)
+			Timeout:  timeout.Assign(fileInfo, config),
+		})
 
 		return nil
 	})
 
-	return files, err
+	return &flfiles.List{Files: files}, err
 }
 
 func isDir(path string) (bool, error) {

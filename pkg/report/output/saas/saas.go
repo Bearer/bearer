@@ -149,14 +149,14 @@ func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) erro
 }
 
 func getDiscoveredFiles(config settings.Config, goclocResult *gocloc.Result) []string {
-	repository, err := gitrepository.New(context.TODO(), config.Scan.Target, config.Scan.DiffBaseBranch)
+	repository, err := gitrepository.New(context.TODO(), config, config.Scan.Target, config.Scan.DiffBaseBranch)
 	if err != nil {
 		log.Debug().Msgf("failed to open git repository: %s", err)
 	}
 
-	filesDiscovered, _ := filelist.Discover(repository, config.Scan.Target, goclocResult, config)
+	fileList, _ := filelist.Discover(repository, config.Scan.Target, goclocResult, config)
 	files := []string{}
-	for _, fileDiscovered := range filesDiscovered {
+	for _, fileDiscovered := range fileList.Files {
 		files = append(files, file.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
 	}
 

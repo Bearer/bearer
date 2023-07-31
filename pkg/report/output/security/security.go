@@ -128,7 +128,7 @@ type Rule struct {
 func GetOutput(
 	dataflow *dataflow.DataFlow,
 	config settings.Config,
-	baseBranchFindings basebranchfindings.Findings,
+	baseBranchFindings *basebranchfindings.Findings,
 ) (*Results, error) {
 	summaryResults := make(Results)
 	if !config.Scan.Quiet {
@@ -165,7 +165,7 @@ func evaluateRules(
 	rules map[string]*settings.Rule,
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
-	baseBranchFindings basebranchfindings.Findings,
+	baseBranchFindings *basebranchfindings.Findings,
 	builtIn bool,
 ) ([]string, error) {
 	outputResults := map[string][]Result{}
@@ -230,7 +230,7 @@ func evaluateRules(
 
 			for i, output := range policyFailures {
 				if baseBranchFindings != nil &&
-					baseBranchFindings.Has(rule.Id, output.Filename, output.Sink.Start, output.Sink.End) {
+					baseBranchFindings.Consume(rule.Id, output.Filename, output.Sink.Start, output.Sink.End) {
 					continue
 				}
 

@@ -4,16 +4,29 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/config"
 	"github.com/go-git/go-git/v5/plumbing"
+	"github.com/go-git/go-git/v5/plumbing/format/diff"
 	"github.com/go-git/go-git/v5/plumbing/object"
+	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
+
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/ignore"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/timeout"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/basebranchfindings"
+	bbftypes "github.com/bearer/bearer/pkg/report/basebranchfindings/types"
 )
 
 type Repository struct {
 	ctx        context.Context
+	config     settings.Config
 	repository *git.Repository
 	baseBranch string
 	baseLocalRefName,
@@ -26,7 +39,12 @@ type seenFile struct {
 	sha   plumbing.Hash
 }
 
-func New(ctx context.Context, path string, baseBranch string) (*Repository, error) {
+func New(
+	ctx context.Context,
+	config settings.Config,
+	path string,
+	baseBranch string,
+) (*Repository, error) {
 	repository, err := git.PlainOpen(path)
 	if err != nil {
 		if err == git.ErrRepositoryNotExists {
@@ -52,6 +70,7 @@ func New(ctx context.Context, path string, baseBranch string) (*Repository, erro
 
 	return &Repository{
 		ctx:               ctx,
+		config:            config,
 		repository:        repository,
 		baseBranch:        baseBranch,
 		baseLocalRefName:  baseLocalRefName,
@@ -60,15 +79,13 @@ func New(ctx context.Context, path string, baseBranch string) (*Repository, erro
 	}, nil
 }
 
-func (repository *Repository) ListFiles() ([]string, error) {
+func (repository *Repository) ListFiles(
+	ignore *ignore.FileIgnore,
+	goclocResult *gocloc.Result,
+	projectPath string,
+) (*files.List, error) {
 	if repository == nil {
 		return nil, nil
-	}
-
-	seenFiles := make(map[string]seenFile)
-
-	if err := repository.addBaseSeen(seenFiles); err != nil {
-		return nil, fmt.Errorf("error with diff base: %w", err)
 	}
 
 	headTree, err := repository.treeForRef(repository.headRef)
@@ -76,52 +93,116 @@ func (repository *Repository) ListFiles() ([]string, error) {
 		return nil, err
 	}
 
-	if err := headTree.Files().ForEach(func(f *object.File) error {
-		seen := seenFiles[f.Name]
-
-		if seen.sha == f.Hash {
-			seen.count++
-		}
-
-		seenFiles[f.Name] = seen
-
-		return nil
-	}); err != nil {
-		return nil, err
-	}
-
-	var result []string
-	for name, seen := range seenFiles {
-		if seen.count < 2 {
-			result = append(result, name)
-		}
-	}
-
-	return result, nil
-}
-
-func (repository *Repository) addBaseSeen(seenFiles map[string]seenFile) error {
 	if repository.baseBranch == "" {
-		return nil
+		var headFiles []files.File
+
+		if err := headTree.Files().ForEach(func(f *object.File) error {
+			file := repository.fileFor(
+				ignore,
+				goclocResult,
+				projectPath,
+				f.Name,
+			)
+
+			if file != nil {
+				headFiles = append(headFiles, *file)
+			}
+
+			return nil
+		}); err != nil {
+			return nil, err
+		}
+
+		return &files.List{Files: headFiles}, nil
 	}
 
 	baseRef, err := repository.repository.Reference(repository.baseLocalRefName, true)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	baseTree, err := repository.treeForRef(baseRef)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return baseTree.Files().ForEach(func(f *object.File) error {
-		seenFiles[f.Name] = seenFile{
-			count: 1,
-			sha:   f.Hash,
+	changes, err := object.DiffTreeWithOptions(
+		repository.ctx,
+		baseTree,
+		headTree,
+		object.DefaultDiffTreeOptions,
+	)
+	if err != nil {
+		return nil, fmt.Errorf("error diffing tree: %w", err)
+	}
+
+	patch, err := changes.PatchContext(repository.ctx)
+	if err != nil {
+		return nil, fmt.Errorf("error getting diff patch: %w", err)
+	}
+
+	var baseFiles, headFiles []files.File
+	renames := make(map[string]string)
+	chunks := make(map[string]bbftypes.Chunks)
+
+	for _, filePatch := range patch.FilePatches() {
+		fromFile, toFile := filePatch.Files()
+
+		// we're not interested in removals
+		if toFile == nil {
+			continue
 		}
-		return nil
-	})
+
+		toPath := toFile.Path()
+		headFile := repository.fileFor(ignore, goclocResult, projectPath, toPath)
+		if headFile == nil {
+			continue
+		}
+
+		headFiles = append(headFiles, *headFile)
+
+		if fromFile == nil {
+			continue
+		}
+
+		fromPath := fromFile.Path()
+		baseFile := repository.fileFor(ignore, goclocResult, projectPath, toPath)
+		if baseFile == nil {
+			continue
+		}
+
+		baseFiles = append(baseFiles, *baseFile)
+
+		if fromPath != toPath {
+			renames[baseFile.FilePath[1:]] = headFile.FilePath[1:]
+		}
+
+		fileChunks := basebranchfindings.NewChunks()
+		for _, chunk := range filePatch.Chunks() {
+			var changeType bbftypes.ChangeType
+			switch chunk.Type() {
+			case diff.Delete:
+				changeType = bbftypes.ChunkRemove
+			case diff.Add:
+				changeType = bbftypes.ChunkAdd
+			case diff.Equal:
+				changeType = bbftypes.ChunkEqual
+			default:
+				panic(fmt.Sprintf("unexpected git chunk type %d", chunk.Type()))
+			}
+
+			fileChunks.Add(changeType, strings.Count(chunk.Content(), "\n"))
+		}
+
+		chunks[headFile.FilePath[1:]] = fileChunks
+	}
+
+	return &files.List{
+		Files:     headFiles,
+		BaseFiles: baseFiles,
+		Renames:   renames,
+		Chunks:    chunks,
+	}, nil
 }
 
 func (repository *Repository) treeForRef(ref *plumbing.Reference) (*object.Tree, error) {
@@ -177,7 +258,6 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 
 	if err := worktree.Checkout(&git.CheckoutOptions{
 		Branch: branchName,
-		Keep:   true,
 	}); err != nil {
 		return fmt.Errorf("error checking out base branch: %w", err)
 	}
@@ -186,9 +266,7 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 }
 
 func (repository *Repository) restoreHead(worktree *git.Worktree) {
-	checkoutOptions := &git.CheckoutOptions{
-		Keep: true,
-	}
+	checkoutOptions := &git.CheckoutOptions{}
 	if repository.headRef.Name().IsBranch() {
 		checkoutOptions.Branch = repository.headRef.Name()
 	} else {
@@ -197,5 +275,29 @@ func (repository *Repository) restoreHead(worktree *git.Worktree) {
 
 	if err := worktree.Checkout(checkoutOptions); err != nil {
 		log.Error().Msgf("error restoring git worktree. your worktree may not have been restored to it's original state! %s", err)
+	}
+}
+
+func (repository *Repository) fileFor(
+	ignore *ignore.FileIgnore,
+	goclocResult *gocloc.Result,
+	projectPath,
+	relativePath string,
+) *files.File {
+	fullPath := filepath.Join(projectPath, relativePath)
+
+	fileInfo, err := os.Stat(fullPath)
+	if err != nil {
+		log.Debug().Msgf("error getting file stat: %s, %s", fullPath, err)
+		return nil
+	}
+
+	if ignore.Ignore(projectPath, fullPath, goclocResult, fileInfo) {
+		return nil
+	}
+
+	return &files.File{
+		Timeout:  timeout.Assign(fileInfo, repository.config),
+		FilePath: "/" + relativePath,
 	}
 }

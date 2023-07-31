@@ -8,10 +8,9 @@ import (
 	"sync"
 
 	"github.com/rs/zerolog/log"
-	"github.com/schollz/progressbar/v3"
 
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
-	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/pool"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -24,7 +23,6 @@ import (
 type Orchestrator struct {
 	repository          work.Repository
 	config              settings.Config
-	files               []filelist.File
 	maxWorkersSemaphore chan struct{}
 	done                chan struct{}
 	pool                *pool.Pool
@@ -34,25 +32,26 @@ type Orchestrator struct {
 func New(
 	repository work.Repository,
 	config settings.Config,
-	files []filelist.File,
 	stats *stats.Stats,
+	estimatedFileCount int,
 ) (*Orchestrator, error) {
-	parallel := getParallel(len(files), config)
+	parallel := getParallel(estimatedFileCount, config)
 	log.Debug().Msgf("number of workers: %d", parallel)
 
 	return &Orchestrator{
 		repository:          repository,
 		config:              config,
-		files:               files,
 		maxWorkersSemaphore: make(chan struct{}, parallel),
 		done:                make(chan struct{}),
 		pool:                pool.New(config, stats),
 	}, nil
 }
 
-func (orchestrator *Orchestrator) Scan(reportPath string) error {
-	fileComplete := make(chan struct{}, len(orchestrator.files))
-	progressBar := bearerprogress.GetProgressBar(len(orchestrator.files), orchestrator.config, "files")
+func (orchestrator *Orchestrator) Scan(
+	reportPath string,
+	files []files.File,
+) error {
+	fileComplete := make(chan struct{}, len(files))
 
 	reportFile, err := os.Create(reportPath)
 	if err != nil {
@@ -60,7 +59,7 @@ func (orchestrator *Orchestrator) Scan(reportPath string) error {
 	}
 	defer reportFile.Close()
 
-	for _, file := range orchestrator.files {
+	for _, file := range files {
 		select {
 		case <-orchestrator.done:
 			log.Debug().Msgf("scan stopping early due to close")
@@ -71,17 +70,20 @@ func (orchestrator *Orchestrator) Scan(reportPath string) error {
 		go orchestrator.scanFile(reportFile, fileComplete, file)
 	}
 
-	orchestrator.waitForScan(fileComplete, progressBar)
-
-	if err := progressBar.Close(); err != nil {
-		log.Debug().Msgf("failed to close progress bar: %s", err)
-	}
+	orchestrator.waitForScan(fileComplete, len(files))
 
 	return nil
 }
 
-func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, progressBar *progressbar.ProgressBar) {
+func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, totalCount int) {
+	progressBar := bearerprogress.GetProgressBar(totalCount, orchestrator.config, "files")
 	count := 0
+
+	defer func() {
+		if err := progressBar.Close(); err != nil {
+			log.Debug().Msgf("failed to close progress bar: %s", err)
+		}
+	}()
 
 	for {
 		select {
@@ -96,14 +98,14 @@ func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, progre
 				log.Debug().Msgf("failed to write progress bar: %s", err)
 			}
 
-			if count == len(orchestrator.files) {
+			if count == totalCount {
 				return
 			}
 		}
 	}
 }
 
-func (orchestrator *Orchestrator) scanFile(reportFile *os.File, fileComplete chan struct{}, file filelist.File) {
+func (orchestrator *Orchestrator) scanFile(reportFile *os.File, fileComplete chan struct{}, file files.File) {
 	orchestrator.maxWorkersSemaphore <- struct{}{}
 	tmpReportPath := tmpfile.Create(".jsonl")
 
@@ -153,7 +155,7 @@ func (orchestrator *Orchestrator) writeFileResult(reportFile *os.File, tmpReport
 	orchestrator.reportMutex.Unlock()
 }
 
-func (orchestrator *Orchestrator) writeFileError(reportFile *os.File, file filelist.File, fileErr error) {
+func (orchestrator *Orchestrator) writeFileError(reportFile *os.File, file files.File, fileErr error) {
 	fullPath := path.Join(orchestrator.config.Scan.Target, file.FilePath)
 	fileInfo, err := os.Stat(fullPath)
 	if err != nil {

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/fs"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -26,15 +27,14 @@ func New(projectPath string, config settings.Config) *FileIgnore {
 	}
 }
 
-func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, goclocResult *gocloc.Result, d fs.DirEntry) bool {
+func (fileignore *FileIgnore) Ignore(
+	projectPath string,
+	filePath string,
+	goclocResult *gocloc.Result,
+	fileInfo fs.FileInfo,
+) bool {
 	relativePath := strings.TrimPrefix(filePath, projectPath)
 	trimmedPath := strings.TrimPrefix(relativePath, "/")
-
-	fileInfo, err := d.Info()
-	if err != nil {
-		log.Error().Msgf("fileInfo err: %s %s", projectPath, relativePath)
-		return true
-	}
 
 	symlink, _ := isSymlink(projectPath + relativePath)
 	if symlink {
@@ -58,7 +58,26 @@ func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, gocloc
 		}
 	}
 
-	return false
+	dirTrimmedPath := filepath.Dir(trimmedPath)
+	dirPath := filepath.Join(projectPath, dirTrimmedPath)
+
+	// No parent directory, allow
+	if dirTrimmedPath == "." || dirTrimmedPath[len(dirTrimmedPath)-1] == filepath.Separator {
+		return false
+	}
+
+	dirInfo, err := os.Stat(dirPath)
+	if err != nil {
+		log.Debug().Msgf("error getting dir stat %s: %s", dirPath, err)
+		return true
+	}
+
+	return fileignore.Ignore(
+		projectPath,
+		dirPath,
+		goclocResult,
+		dirInfo,
+	)
 }
 
 func isMinified(fullPath string, size int64, goclocResult *gocloc.Result) bool {
