@@ -18,6 +18,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
+	"github.com/rodaine/table"
 	log "github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
@@ -52,6 +53,11 @@ type Input struct {
 	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
+}
+
+type RuleCounter struct {
+	DefaultRuleCount int
+	CustomRuleCount  int
 }
 
 type Location struct {
@@ -437,23 +443,37 @@ func writeRuleListToString(
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 ) int {
-	defaultRuleCount, customRuleCount := countRules(rules, languages, config, false)
-	builtInCount, _ := countRules(builtInRules, languages, config, true)
-	defaultRuleCount = defaultRuleCount + builtInCount
-	totalRuleCount := defaultRuleCount + customRuleCount
+	ruleCountPerLang, totalRuleCount, defaultRulesUsed := countRules(rules, languages, config, false)
+	builtInRuleCountPerLang, totalBuiltInRuleCount, builtInRulesUsed := countRules(builtInRules, languages, config, true)
+
+	// combine default and built-in rules per lang
+	for _, lang := range maps.Keys(builtInRuleCountPerLang) {
+		if ruleCount, ok := ruleCountPerLang[lang]; ok {
+			ruleCount.DefaultRuleCount += builtInRuleCountPerLang[lang].DefaultRuleCount
+			ruleCountPerLang[lang] = ruleCount
+		} else {
+			ruleCountPerLang[lang] = builtInRuleCountPerLang[lang]
+		}
+	}
+
+	totalRuleCount += totalBuiltInRuleCount
 
 	if totalRuleCount == 0 {
 		reportStr.WriteString("\n\nZero rules found. A security report requires rules to function. Please check configuration.\n")
 		return 0
 	}
 	reportStr.WriteString("\n\nRules: \n")
-	if defaultRuleCount > 0 {
-		reportStr.WriteString(fmt.Sprintf(" - %d default rules applied ", defaultRuleCount))
-		reportStr.WriteString(color.HiBlackString(fmt.Sprintf("(https://docs.bearer.com/reference/rules) [%s]\n", config.BearerRulesVersion)))
+
+	if defaultRulesUsed || builtInRulesUsed {
+		reportStr.WriteString(color.HiBlackString(fmt.Sprintf("https://docs.bearer.com/reference/rules [%s]\n\n", config.BearerRulesVersion)))
 	}
-	if customRuleCount > 0 {
-		reportStr.WriteString(fmt.Sprintf(" - %d custom rules applied", customRuleCount))
+
+	tbl := table.New("Language", "Default Rules", "Custom Rules").WithWriter(reportStr)
+	for _, lang := range maputil.SortedStringKeys(ruleCountPerLang) {
+		ruleCount := ruleCountPerLang[lang]
+		tbl.AddRow(lang, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount)
 	}
+	tbl.Print()
 
 	return totalRuleCount
 }
@@ -476,9 +496,13 @@ func countRules(
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 	builtIn bool,
-) (int, int) {
-	defaultRuleCount := 0
-	customRuleCount := 0
+) (
+	ruleCountPerLang map[string]RuleCounter,
+	totalRuleCount int,
+	defaultRulesUsed bool,
+) {
+	ruleCountPerLang = make(map[string]RuleCounter)
+	totalRuleCount = 0
 
 	for key := range rules {
 		rule := rules[key]
@@ -502,14 +526,40 @@ func countRules(
 			continue
 		}
 
-		if strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") || builtIn {
-			defaultRuleCount++
+		// increase total count by 1
+		totalRuleCount += 1
+
+		defaultRule := strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") || builtIn
+		if ruleCount, ok := ruleCountPerLang[rule.Language()]; ok {
+			if defaultRule {
+				if !defaultRulesUsed {
+					defaultRulesUsed = true
+				}
+				ruleCount.DefaultRuleCount += 1
+				ruleCountPerLang[rule.Language()] = ruleCount
+			} else {
+				ruleCount.CustomRuleCount += 1
+				ruleCountPerLang[rule.Language()] = ruleCount
+			}
 		} else {
-			customRuleCount++
+			if defaultRule {
+				if !defaultRulesUsed {
+					defaultRulesUsed = true
+				}
+				ruleCountPerLang[rule.Language()] = RuleCounter{
+					CustomRuleCount:  0,
+					DefaultRuleCount: 1,
+				}
+			} else {
+				ruleCountPerLang[rule.Language()] = RuleCounter{
+					CustomRuleCount:  1,
+					DefaultRuleCount: 0,
+				}
+			}
 		}
 	}
 
-	return defaultRuleCount, customRuleCount
+	return ruleCountPerLang, totalRuleCount, defaultRulesUsed
 }
 
 func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
