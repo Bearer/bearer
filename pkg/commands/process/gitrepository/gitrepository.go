@@ -34,11 +34,6 @@ type Repository struct {
 	headRef *plumbing.Reference
 }
 
-type seenFile struct {
-	count int
-	sha   plumbing.Hash
-}
-
 func New(
 	ctx context.Context,
 	config settings.Config,
@@ -94,28 +89,60 @@ func (repository *Repository) ListFiles(
 	}
 
 	if repository.baseBranch == "" {
-		var headFiles []files.File
-
-		if err := headTree.Files().ForEach(func(f *object.File) error {
-			file := repository.fileFor(
-				ignore,
-				goclocResult,
-				projectPath,
-				f.Name,
-			)
-
-			if file != nil {
-				headFiles = append(headFiles, *file)
-			}
-
-			return nil
-		}); err != nil {
-			return nil, err
-		}
-
-		return &files.List{Files: headFiles}, nil
+		return repository.getTreeFiles(ignore, goclocResult, projectPath, headTree)
 	}
 
+	filePatches, err := repository.getDiffPatch(headTree)
+	if err != nil {
+		return nil, err
+	}
+
+	return repository.getDiffFiles(
+		ignore,
+		goclocResult,
+		projectPath,
+		filePatches,
+	), nil
+}
+
+func (repository *Repository) treeForRef(ref *plumbing.Reference) (*object.Tree, error) {
+	commit, err := repository.repository.CommitObject(ref.Hash())
+	if err != nil {
+		return nil, err
+	}
+
+	return commit.Tree()
+}
+
+func (repository *Repository) getTreeFiles(
+	ignore *ignore.FileIgnore,
+	goclocResult *gocloc.Result,
+	projectPath string,
+	tree *object.Tree,
+) (*files.List, error) {
+	var headFiles []files.File
+
+	if err := tree.Files().ForEach(func(f *object.File) error {
+		file := repository.fileFor(
+			ignore,
+			goclocResult,
+			projectPath,
+			f.Name,
+		)
+
+		if file != nil {
+			headFiles = append(headFiles, *file)
+		}
+
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return &files.List{Files: headFiles}, nil
+}
+
+func (repository *Repository) getDiffPatch(headTree *object.Tree) ([]diff.FilePatch, error) {
 	baseRef, err := repository.repository.Reference(repository.baseLocalRefName, true)
 	if err != nil {
 		return nil, err
@@ -141,11 +168,41 @@ func (repository *Repository) ListFiles(
 		return nil, fmt.Errorf("error getting diff patch: %w", err)
 	}
 
+	return patch.FilePatches(), nil
+}
+
+func (repository *Repository) translateDiffChunks(gitChunks []diff.Chunk) bbftypes.Chunks {
+	chunks := basebranchfindings.NewChunks()
+	for _, chunk := range gitChunks {
+		var changeType bbftypes.ChangeType
+		switch chunk.Type() {
+		case diff.Delete:
+			changeType = bbftypes.ChunkRemove
+		case diff.Add:
+			changeType = bbftypes.ChunkAdd
+		case diff.Equal:
+			changeType = bbftypes.ChunkEqual
+		default:
+			panic(fmt.Sprintf("unexpected git chunk type %d", chunk.Type()))
+		}
+
+		chunks.Add(changeType, strings.Count(chunk.Content(), "\n"))
+	}
+
+	return chunks
+}
+
+func (repository *Repository) getDiffFiles(
+	ignore *ignore.FileIgnore,
+	goclocResult *gocloc.Result,
+	projectPath string,
+	filePatches []diff.FilePatch,
+) *files.List {
 	var baseFiles, headFiles []files.File
 	renames := make(map[string]string)
 	chunks := make(map[string]bbftypes.Chunks)
 
-	for _, filePatch := range patch.FilePatches() {
+	for _, filePatch := range filePatches {
 		fromFile, toFile := filePatch.Files()
 
 		// we're not interested in removals
@@ -166,35 +223,16 @@ func (repository *Repository) ListFiles(
 		}
 
 		fromPath := fromFile.Path()
-		baseFile := repository.fileFor(ignore, goclocResult, projectPath, toPath)
-		if baseFile == nil {
-			continue
-		}
-
-		baseFiles = append(baseFiles, *baseFile)
+		baseFiles = append(baseFiles, files.File{
+			Timeout:  headFile.Timeout,
+			FilePath: "/" + fromPath,
+		})
 
 		if fromPath != toPath {
-			renames[baseFile.FilePath[1:]] = headFile.FilePath[1:]
+			renames[fromPath] = toPath
 		}
 
-		fileChunks := basebranchfindings.NewChunks()
-		for _, chunk := range filePatch.Chunks() {
-			var changeType bbftypes.ChangeType
-			switch chunk.Type() {
-			case diff.Delete:
-				changeType = bbftypes.ChunkRemove
-			case diff.Add:
-				changeType = bbftypes.ChunkAdd
-			case diff.Equal:
-				changeType = bbftypes.ChunkEqual
-			default:
-				panic(fmt.Sprintf("unexpected git chunk type %d", chunk.Type()))
-			}
-
-			fileChunks.Add(changeType, strings.Count(chunk.Content(), "\n"))
-		}
-
-		chunks[headFile.FilePath[1:]] = fileChunks
+		chunks[toPath] = repository.translateDiffChunks(filePatch.Chunks())
 	}
 
 	return &files.List{
@@ -202,16 +240,7 @@ func (repository *Repository) ListFiles(
 		BaseFiles: baseFiles,
 		Renames:   renames,
 		Chunks:    chunks,
-	}, nil
-}
-
-func (repository *Repository) treeForRef(ref *plumbing.Reference) (*object.Tree, error) {
-	commit, err := repository.repository.CommitObject(ref.Hash())
-	if err != nil {
-		return nil, err
 	}
-
-	return commit.Tree()
 }
 
 func (repository *Repository) FetchBaseIfNotPresent() error {
@@ -274,7 +303,10 @@ func (repository *Repository) restoreHead(worktree *git.Worktree) {
 	}
 
 	if err := worktree.Checkout(checkoutOptions); err != nil {
-		log.Error().Msgf("error restoring git worktree. your worktree may not have been restored to it's original state! %s", err)
+		log.Error().Msgf(
+			"error restoring git worktree. your worktree may not have been restored to it's original state! %s",
+			err,
+		)
 	}
 }
 
@@ -292,7 +324,7 @@ func (repository *Repository) fileFor(
 		return nil
 	}
 
-	if ignore.Ignore(projectPath, fullPath, goclocResult, fileInfo) {
+	if ignore != nil && ignore.Ignore(projectPath, fullPath, goclocResult, fileInfo) {
 		return nil
 	}
 
