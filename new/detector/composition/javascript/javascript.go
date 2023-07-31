@@ -31,6 +31,7 @@ import (
 	"github.com/bearer/bearer/new/language/implementation/javascript"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	reporttypes "github.com/bearer/bearer/pkg/report/detectors"
 )
 
 type Composition struct {
@@ -112,7 +113,7 @@ func New(
 		}()
 	}
 
-	detector, err := datatype.New(lang, classifier.Schema)
+	detector, err := datatype.New(reporttypes.DetectorJavascript, lang, classifier.Schema)
 	if err != nil {
 		composition.Close()
 		return nil, fmt.Errorf("failed to create datatype detector: %s", err)
