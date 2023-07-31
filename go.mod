@@ -18,7 +18,7 @@ require (
 	github.com/hhatto/gocloc v0.5.0
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/open-policy-agent/opa v0.54.0
-	github.com/rs/zerolog v1.29.1
+	github.com/rs/zerolog v1.30.0
 	github.com/russross/blackfriday v1.6.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
 	github.com/schollz/progressbar/v3 v3.13.1
