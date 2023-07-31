@@ -31,6 +31,7 @@ import (
 	"github.com/bearer/bearer/new/language/implementation/ruby"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	reporttypes "github.com/bearer/bearer/pkg/report/detectors"
 )
 
 type Composition struct {
@@ -111,7 +112,7 @@ func New(
 		}()
 	}
 
-	detector, err := datatype.New("ruby", lang, classifier.Schema)
+	detector, err := datatype.New(reporttypes.DetectorRuby, lang, classifier.Schema)
 	if err != nil {
 		composition.Close()
 		return nil, fmt.Errorf("failed to create datatype detector: %s", err)

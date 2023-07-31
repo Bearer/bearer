@@ -30,17 +30,7 @@ type datatypeDetector struct {
 	classifier *classificationschema.Classifier
 }
 
-func New(language string, lang languagetypes.Language, classifier *classificationschema.Classifier) (types.Detector, error) {
-	var detectorType detectors.Type
-	switch language {
-	case "java":
-		detectorType = detectors.DetectorJava
-	case "ruby":
-		detectorType = detectors.DetectorRuby
-	case "javascript", "typescript":
-		detectorType = detectors.DetectorJavascript
-	}
-
+func New(detectorType detectors.Type, lang languagetypes.Language, classifier *classificationschema.Classifier) (types.Detector, error) {
 	return &datatypeDetector{
 		detectorType: detectorType,
 		classifier:   classifier,
