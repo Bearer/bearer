@@ -5,8 +5,11 @@ Security Report
 =====================================
 
 Rules: 
- - 2 default rules applied (https://docs.bearer.com/reference/rules) [TEST]
- - 1 custom rules applied
+https://docs.bearer.com/reference/rules [TEST]
+
+Language  Default Rules  Custom Rules  
+Ruby      2              1             
+
 
 CRITICAL: Sensitive data sent to Rails loggers detected. [CWE-209, CWE-532]
 https://docs.bearer.com/reference/rules/ruby_rails_logger
