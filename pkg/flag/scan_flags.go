@@ -2,6 +2,7 @@ package flag
 
 import (
 	"errors"
+	"os"
 	"strings"
 	"time"
 
@@ -114,12 +115,6 @@ var (
 		Value:      -1,
 		Usage:      "Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan.",
 	}
-	DiffBaseBranchFlag = Flag{
-		Name:       "diff-base-branch",
-		ConfigName: "scan.diff-base-branch",
-		Value:      "",
-		Usage:      "Enable diff scanning against a base branch. Requires the scan target to be a git repository",
-	}
 )
 
 type ScanFlagGroup struct {
@@ -137,7 +132,6 @@ type ScanFlagGroup struct {
 	ExternalRuleDirFlag         *Flag
 	ParallelFlag                *Flag
 	ExitCodeFlag                *Flag
-	DiffBaseBranchFlag          *Flag
 }
 
 type ScanOptions struct {
@@ -175,7 +169,6 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		ScannerFlag:                 &ScannerFlag,
 		ParallelFlag:                &ParallelFlag,
 		ExitCodeFlag:                &ExitCodeFlag,
-		DiffBaseBranchFlag:          &DiffBaseBranchFlag,
 	}
 }
 
@@ -199,7 +192,6 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.ScannerFlag,
 		f.ParallelFlag,
 		f.ExitCodeFlag,
-		f.DiffBaseBranchFlag,
 	}
 }
 
@@ -248,7 +240,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Scanner:                 scanners,
 		Parallel:                viper.GetInt(f.ParallelFlag.ConfigName),
 		ExitCode:                viper.GetInt(f.ExitCodeFlag.ConfigName),
-		DiffBaseBranch:          getString(f.DiffBaseBranchFlag),
+		DiffBaseBranch:          os.Getenv("DIFF_BASE_BRANCH"),
 	}, nil
 }
 
