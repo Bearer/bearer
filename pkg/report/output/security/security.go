@@ -130,11 +130,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Results, e
 		output.StdErrLog("Evaluating rules")
 	}
 
-	err, builtInFingerprints := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
+	builtInFingerprints, err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
 	if err != nil {
 		return nil, err
 	}
-	err, fingerprints := evaluateRules(summaryResults, config.Rules, config, dataflow, false)
+	fingerprints, err := evaluateRules(summaryResults, config.Rules, config, dataflow, false)
 	if err != nil {
 		return nil, err
 	}
@@ -161,7 +161,7 @@ func evaluateRules(
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
 	builtIn bool,
-) (error, []string) {
+) ([]string, error) {
 	outputResults := map[string][]Result{}
 
 	var bar *progressbar.ProgressBar
@@ -195,19 +195,19 @@ func evaluateRules(
 			// TODO: perf question: can we do this once?
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return err, fingerprints
+			return fingerprints, err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return err, fingerprints
+				return fingerprints, err
 			}
 
 			var results map[string][]Output
 			err = json.Unmarshal(jsonRes, &results)
 			if err != nil {
-				return err, fingerprints
+				return fingerprints, err
 			}
 
 			ruleSummary := &Rule{
@@ -275,7 +275,7 @@ func evaluateRules(
 		summaryResults[severity] = append(summaryResults[severity], resultSlice...)
 	}
 
-	return nil, fingerprints
+	return fingerprints, nil
 }
 
 func removeUnusedFingerprints(detectedFingerprints []string, excludeFingerprints map[string]bool) []string {
