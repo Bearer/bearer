@@ -468,10 +468,16 @@ func writeRuleListToString(
 		reportStr.WriteString(color.HiBlackString(fmt.Sprintf("https://docs.bearer.com/reference/rules [%s]\n\n", config.BearerRulesVersion)))
 	}
 
-	tbl := table.New("Language", "Default Rules", "Custom Rules").WithWriter(reportStr)
-	for _, lang := range maputil.SortedStringKeys(ruleCountPerLang) {
-		ruleCount := ruleCountPerLang[lang]
-		tbl.AddRow(lang, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount)
+	tbl := table.New("Language", "Default Rules", "Custom Rules", "Files").WithWriter(reportStr)
+
+	languageSlice := maps.Values(languages)[:]
+	sort.Slice(languageSlice, func(i, j int) bool {
+		return len(languageSlice[i].Files) > len(languageSlice[j].Files)
+	})
+	for _, lang := range languageSlice {
+		if ruleCount, ok := ruleCountPerLang[lang.Name]; ok {
+			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(languages[lang.Name].Files))
+		}
 	}
 	tbl.Print()
 
