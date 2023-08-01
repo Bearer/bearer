@@ -21,7 +21,7 @@ This includes:
   * A08: Data Integrity Failures (e.g. Deserialization of Untrusted Data).
   * A09: Security Logging and Monitoring Failures (e.g. Insertion of Sensitive Information into Log File).
   * A10: Server-Side Request Forgery (SSRF).
- 
+
 * **Privacy risks** with the ability to detect [sensitive data flow](https://docs.bearer.com/explanations/discovery-and-classification/) such as the use of PII, PHI in your app, and [components](https://docs.bearer.com/reference/recipes/) processing sensitive data (e.g. databases like pgSQL, third-party APIs such as OpenAI, Sentry, etc.). This helps generate a [privacy report](https://docs.bearer.com/guides/privacy/) relevant for:
   * Privacy Impact Assessment (PIA).
   * Data Protection Impact Assessment (DPIA).
@@ -35,7 +35,7 @@ Want a quick rundown? Here's a minute and a half of what you can expect from Bea
 
 ## Getting started
 
-New to Bearer CLI? Check out the [quickstart](/quickstart/) to scan your first project. 
+New to Bearer CLI? Check out the [quickstart](/quickstart/) to scan your first project.
 
 Ready to dive in? Bearer CLI's [scanners](/explanations/scanners/) and [reports](/explanations/reports/) are your path to analyzing security risks and vulnerabilities in your application. Check the [command reference](/reference/commands/) to configure Bearer CLI to your needs.
 
@@ -45,6 +45,7 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 
 - [Configure the scan command](/guides/configure-scan/)
 - [GitHub action integration](/guides/github-action/)
+- [GitLab CI/CD](/guides/gitlab/)
 - [Set up CI/CD](/guides/ci-setup/)
 - [Create custom rule](/guides/custom-rule/)
 - [Run a privacy report](/guides/privacy/)

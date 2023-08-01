@@ -4,7 +4,7 @@ title: Connect to Bearer Cloud
 
 # Bearer Cloud
 
-If you're looking to manage product and application code security at scale, Bearer Cloud offers a platform for teams that syncs with Bearer CLI's output. 
+If you're looking to manage product and application code security at scale, Bearer Cloud offers a platform for teams that syncs with Bearer CLI's output.
 
 <iframe class="w-full aspect-video" src="https://youtube.com/embed/whPRe9GaY7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -12,7 +12,7 @@ If you're looking to manage product and application code security at scale, Bear
 
 # Create an account
 
-You can [start creating your free account](https://my.bearer.sh/users/sign_up) right now using your GitHub, GitLab, or Google SSO. 
+You can [start creating your free account](https://my.bearer.sh/users/sign_up) right now using your GitHub, GitLab, or Google SSO.
 
 {% callout "info" %}
 Bearer Cloud free plan comes with these limits:<br/>
@@ -72,9 +72,9 @@ jobs:
 
 We highly recommend using GitHub's [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets). In the example above, the secret is named `BEARER_TOKEN`.
 
-### GitLab CI
+### GitLab CI/CD
 
-Set up the [GitLab CI configuration](/guides/ci-setup/#gitlab), then adjust your settings to include the `--api-key` flag with the `scan` command:
+Set up the [GitLab CI/CD configuration](/guides/gitlab), then adjust your settings to include the `--api-key` flag with the `scan` command:
 
 ```yml
 # .gitlab-ci.yml
@@ -96,7 +96,6 @@ Bearer Cloud automatically captures any scans run with a valid `api-key`. Subseq
 ## Make the most of Bearer CLI
 
 Looking for more ways to make the most of Bearer CLI? Browse the guides to learn how to [Configure a scan](/guides/configure-scan/), [create a custom rule](/guides/custom-rule), or [run a privacy report](/guides/privacy/).
-
 
 ## Need help?
 
