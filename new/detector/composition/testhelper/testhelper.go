@@ -7,19 +7,21 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/bearer/bearer/pkg/commands"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
-	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/report/output"
-	"github.com/bearer/bearer/pkg/types"
-	util "github.com/bearer/bearer/pkg/util/output"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog"
 	"gopkg.in/yaml.v3"
+
+	"github.com/bearer/bearer/pkg/commands"
+	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/worker"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/types"
+	util "github.com/bearer/bearer/pkg/util/output"
 )
 
 type Runner struct {
@@ -91,16 +93,16 @@ func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath st
 		Languages:     map[string]*gocloc.Language{},
 		MaxPathLength: 0,
 	}
-	files, err := filelist.Discover(testdataPath, &dummyGoclocResult, runner.config)
+	fileList, err := filelist.Discover(nil, testdataPath, &dummyGoclocResult, runner.config)
 	if err != nil {
 		t.Fatalf("failed to discover files: %s", err)
 	}
 
-	if len(files) == 0 {
+	if len(fileList.Files) == 0 {
 		t.Fatal("no scannable files found")
 	}
 
-	for _, file := range files {
+	for _, file := range fileList.Files {
 		myfile := file
 		ext := filepath.Ext(file.FilePath)
 		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
@@ -110,7 +112,7 @@ func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath st
 	}
 }
 
-func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRelativePath work.File, snapshotsPath string) {
+func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRelativePath files.File, snapshotsPath string) {
 	detectorsReportFile, err := os.CreateTemp("", "report.jsonl")
 	if err != nil {
 		t.Fatalf("failed to create tmp report file: %s", err)
@@ -122,7 +124,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to get absolute path of report file: %s", err)
 	}
 
-	response := runner.worker.Scan(context.Background(), work.ProcessRequest{
+	_, err = runner.worker.Scan(context.Background(), work.ProcessRequest{
 		File:       fileRelativePath,
 		ReportPath: detectorsReportPath,
 		Repository: work.Repository{
@@ -130,8 +132,8 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		},
 	})
 
-	if response.Error != "" {
-		t.Fatalf("failed to do scan %s", response.Error)
+	if err != nil {
+		t.Fatalf("failed to do scan %s", err)
 	}
 
 	runner.config.Scan.Target = testDataPath
@@ -140,6 +142,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 			Path: detectorsReportPath,
 		},
 		runner.config,
+		nil,
 	)
 
 	report, _ := util.ReportYAML(detections)
