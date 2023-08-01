@@ -17,3 +17,6 @@ temp/
 
 .bash_history
 .cache/
+
+# docs
+docs/yarn.lock

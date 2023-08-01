@@ -8,12 +8,22 @@ module.exports = [
     name: "Guides",
     open: true,
     items: [
-      { name: "Configure the scan", url: "/guides/configure-scan/" },
+      {
+        name: "Configure the scan",
+        url: "/guides/configure-scan/",
+      },
       {
         name: "Set up CI/CD",
         url: "/guides/ci-setup/",
       },
-      { name: "Using the GitHub action", url: "/guides/github-action/" },
+      {
+        name: "Using the GitHub action",
+        url: "/guides/github-action/",
+      },
+      {
+        name: "Using GitLab CI/CD",
+        url: "/guides/gitlab/",
+      },
       {
         name: "Create a custom rule",
         url: "/guides/custom-rule/",
@@ -81,4 +91,4 @@ module.exports = [
       { name: "Contribute new recipes", url: "/contributing/recipes/" },
     ],
   },
-];
+]

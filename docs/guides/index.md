@@ -8,6 +8,7 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 
 - [Configure the scan command](/guides/configure-scan/)
 - [Using the GitHub action](/guides/github-action/)
+- [Using GitLab CI/CD](/guides/gitlab/)
 - [Set up CI/CD](/guides/ci-setup/)
 - [Create a custom rule](/guides/custom-rule/)
 - [Run a privacy report](/guides/privacy/)
