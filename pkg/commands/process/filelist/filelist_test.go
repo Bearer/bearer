@@ -21,7 +21,7 @@ func TestFileList(t *testing.T) {
 	type testCase struct {
 		Name      string
 		Input     input
-		Want      []files.File
+		Want      *files.List
 		WantError bool
 	}
 
@@ -37,10 +37,12 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: []files.File{
-				{
-					FilePath: "/user.go",
-					Timeout:  0,
+			Want: &files.List{
+				Files: []files.File{
+					{
+						FilePath: "/user.go",
+						Timeout:  0,
+					},
 				},
 			},
 		},
@@ -58,10 +60,12 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: []files.File{
-				{
-					Timeout:  0,
-					FilePath: "/users/users.go",
+			Want: &files.List{
+				Files: []files.File{
+					{
+						Timeout:  0,
+						FilePath: "/users/users.go",
+					},
 				},
 			},
 		},
@@ -79,7 +83,7 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: nil,
+			Want: &files.List{},
 		},
 		{
 			Name: "Find files - skip - dir - happy path",
@@ -95,7 +99,7 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: nil,
+			Want: &files.List{},
 		},
 	}
 
