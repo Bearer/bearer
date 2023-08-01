@@ -365,7 +365,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 	reportStr.WriteString("\nNeed help or want to discuss the output? Join the Community https://discord.gg/eaHZBJUXRF\n")
 
 	if config.Client == nil {
-		reportStr.WriteString("\nReady to take the next step, learn more about Bearer Cloud https://www.bearer.com/bearer-cloud\n")
+		reportStr.WriteString("\nManage your findings directly on Bearer Cloud. Start now for free https://www.bearer.com/signup or learn more https://docs.bearer.com/guides/bearer-cloud/\n")
 	}
 
 	color.NoColor = initialColorSetting
