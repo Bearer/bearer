@@ -129,51 +129,38 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
   </tbody>
 </table>
 
-      {% if true if rules
+{% renderTemplate "liquid,md" %}
 
-<h2 id="support">Language and framework support</h2>
+## Language and framework support
 
-Bearer CLI works across a variety of languages, especially:<br/>
-<ul>
-  <li>
-    Dynamically typed languages such as Ruby or JavaScript.
-  </li>
-  <li>
-    Optionally strong typed languages such as TypeScript.
-  </li>
-  <li>
-    Strong typed languages such as Java.
-  </li>
-</ul>
+Bearer CLI works across a variety of languages, especially:
+- Dynamically typed languages such as Ruby or JavaScript.
+- Optionally strong typed languages such as TypeScript.
+- Strong typed languages such as Java.
 
-You can access the complete list of security rules and associated vulnerabilities supported for each language by Bearer CLI in <a href="/reference/rules/">the rules section</a>.
+You can access the complete list of security rules and associated vulnerabilities supported for each language by Bearer CLI in [the rules section](/reference/rules/).
 
-<h3 id="framework">Framework support</h3>
-Bearer CLI supports the majority of frameworks, requiring only core language support to perform its analysis. However, certain frameworks may require specialized rules, in that case, we mention it in the table above in the "framework" section. If you observe any gaps in support for a particular framework, please <a href="https://github.com/Bearer/bearer/issues">submit an issue</a> with relevant details and examples."
+### Framework support
+Bearer CLI supports the majority of frameworks, requiring only core language support to perform its analysis. However, certain frameworks may require specialized rules, in that case, we mention it in the table above in the "framework" section. If you observe any gaps in support for a particular framework, please [submit an issue](https://github.com/Bearer/bearer/issues) with relevant details and examples.
 
-<h3 id="definition">Support status definition</h3>
+### Support status definition
 
-<ul>
-  <li>
-    <strong>General Availability (GA)</strong>: A language at the GA stage encompasses the complete feature set of Bearer, having been rigorously tested to ensure maximum accuracy.
-  </li>
-  <li>
-    <strong>Beta</strong>: A language in the Beta stage is equipped with the full range of Bearer's features, offering a high degree of precision. However, it may not include all the <a href="/explanations/reports/#security-report">security rules</a>.
-  </li>
-  <li>
-    <strong>Alpha</strong>: A language at the Alpha stage does not yet include the entire Bearer feature set, particularly regarding the <a href="/explanations/reports/#security-report">Security report</a>.
-  </li>
-</ul>
+- **General Availability (GA)**: A language at the GA stage encompasses the complete feature set of Bearer, having been rigorously tested to ensure maximum accuracy.
+- **Beta**: A language in the Beta stage is equipped with the full range of Bearer's features, offering a high degree of precision. However, it may not include all the [security rules](/explanations/reports/#security-report).
+- **Alpha**: A language at the Alpha stage does not yet include the entire Bearer feature set, particularly regarding the [security report](/explanations/reports/#security-report).
 
 
-<h2 id="evaluate">How do we evaluate language support?</h2>
+## How do we evaluate language support?
 
-The development of a robust Static Application Security Testing (SAST) tool hinges on two crucial performance metrics: recall and precision. A modern, efficient SAST solution aims is to minimize the false positive rate, thereby preventing developers from being inundated with irrelevant findings. At the same time, it should not overlook a large number of vulnerabilities, thus avoiding the propagation of a false sense of security.<br/><br/>
-The methodology we employ for testing our software is instrumental in achieving this level of confidence. Although there are a few benchmarking projects available for SAST, they often fall short of providing a comprehensive assessment. The multitude of coding styles and the diversity of potential vulnerabilities as numerous as the developers themselves necessitate a well-rounded test suite that truly represents how code is written. Relying solely on benchmarking projects, in this case, is insufficient.<br/><br/>
+The development of a robust Static Application Security Testing (SAST) tool hinges on two crucial performance metrics: recall and precision. A modern, efficient SAST solution aims is to minimize the false positive rate, thereby preventing developers from being inundated with irrelevant findings. At the same time, it should not overlook a large number of vulnerabilities, thus avoiding the propagation of a false sense of security.
 
-Given this, as part of our language release procedure, we heavily depend on Open Source projects to evaluate the quality of our support. Our engineering team has composed an in-depth post detailing our approach, which we strongly recommend you review <a href="https://www.bearer.com/blog/improving-precision-and-recall">here</a>.
+The methodology we employ for testing our software is instrumental in achieving this level of confidence. Although there are a few benchmarking projects available for SAST, they often fall short of providing a comprehensive assessment. The multitude of coding styles and the diversity of potential vulnerabilities as numerous as the developers themselves necessitate a well-rounded test suite that truly represents how code is written. Relying solely on benchmarking projects, in this case, is insufficient.
+
+Given this, as part of our language release procedure, we heavily depend on Open Source projects to evaluate the quality of our support. Our engineering team has composed an in-depth post detailing our approach, which we strongly recommend you review [here](https://www.bearer.com/blog/improving-precision-and-recall).
 
 
-<h2 id="benchmark">How does Bearer precision compare to solutions like Brakeman, Semgrep, or Snyk?</h2>
+## How does Bearer precision compare to solutions like Brakeman, Semgrep, or Snyk?
 
-Establishing a high degree of accuracy for a SAST is challenging, and comparing them becomes an even more complex task. As a part of our in-house toolkit, we have undertaken the task of determining how Bearer stands against other well-established solutions in the market. The comprehensive results of our comparative analysis, along with an open data set, are available <a href="https://www.bearer.com/blog/benchmarking-top-sast-products">here</a>.
+Establishing a high degree of accuracy for a SAST is challenging, and comparing them becomes an even more complex task. As a part of our in-house toolkit, we have undertaken the task of determining how Bearer stands against other well-established solutions in the market. The comprehensive results of our comparative analysis, along with an open data set, are available [here](https://www.bearer.com/blog/benchmarking-top-sast-products).
+
+{% endrenderTemplate %}
