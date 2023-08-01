@@ -22,6 +22,23 @@ Did you know that Bearer CLI can also detect hard-coded secrets in your code? In
 bearer scan . --scanner secrets
 ```
 
+## Only report new findings on a branch
+
+When scanning a Git repository, you can choose to only report new findings that
+have been introduced, relative to a base branch. Any findings that already
+existed in the base branch will not be reported.
+
+Use the `DIFF_BASE_BRANCH` environment variable to enable differential scanning,
+and to specify the base branch to use for comparison.
+
+```bash
+git co my-feature
+DIFF_BASE_BRANCH=main bearer scan .
+```
+
+If the base branch is not available in the git repository, it's head will be
+fetched by Bearer CLI (a shallow fetch of depth 1).
+
 ## Exclude specific findings
 
 Every finding is associated with a unique fingerprint visible directly in the CLI output, for example:
@@ -170,7 +187,7 @@ bearer scan . --format html --output path/to/security-scan.html
 
 ## Send report to Bearer Cloud
 
-If you're looking to manage product and application code security at scale, [Bearer Cloud](https://www.bearer.com/bearer-cloud) offers a platform for teams that syncs with Bearer CLI's output. 
+If you're looking to manage product and application code security at scale, [Bearer Cloud](https://www.bearer.com/bearer-cloud) offers a platform for teams that syncs with Bearer CLI's output.
 
 Learn how to [send your report](/guides/bearer-cloud) to Bearer Cloud.
 

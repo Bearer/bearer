@@ -48,6 +48,25 @@ bearer:
 
 These changes set the format to `gitlab-sast` and write an artifact that GitLab can use. Once run, the results of the security scan will display in the Security and Compliance section of the repository.
 
+### Gitlab Merge Request Diff
+
+When Bearer CLI is being used to check a merge request, you can tell the Bearer
+CLI to only report findings introduced within the merge request by setting the
+`DIFF_BASE_BRANCH` variable.
+
+```yml
+bearer:
+  image:
+    name: bearer/bearer
+    entrypoint: [ "" ]
+  variables:
+    DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+  script: bearer scan .
+```
+
+See our guide on [configuring a scan](/guides/configure-scan#only-report-new-findings-on-a-branch)
+for more information on differential scans.
+
 ### Gitlab Merge Request Comments
 
 Bearer CLI supports [Reviewdog](https://github.com/reviewdog/reviewdog) rdjson format so you can get direct feedback on your merge requests.
@@ -62,6 +81,7 @@ pr_check:
     SHA: $CI_COMMIT_SHA
     CURRENT_BRANCH: $CI_COMMIT_REF_NAME
     DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
+    DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   script:
     - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
     - curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
