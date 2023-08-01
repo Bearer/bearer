@@ -17,7 +17,7 @@ module.exports = [
         url: "/guides/ci-setup/",
       },
       {
-        name: "Using the GitHub action",
+        name: "Using GitHub action",
         url: "/guides/github-action/",
       },
       {

@@ -1,9 +1,9 @@
 ---
-title: Using the GitLab CI/CD
+title: Using GitLab CI/CD
 ---
 {% renderTemplate "md" %}
 
-# Using the GitLab CI/CD
+# Using GitLab CI/CD
 
 
 Running Bearer from the CLI is great, but if you want it integrated directly with your Git workflow there's nothing easier than a GitLab CI/CD integration. If you're unfamiliar with GitLab CI/CD, here's a [primer available from GitLab CI/CD](https://docs.gitlab.com/ee/ci/). You can also see how the integration works directly on our [Bear Publishing example app](https://gitlab.com/bearer/bear-publishing/-/blob/main/.gitlab-ci.yml).
