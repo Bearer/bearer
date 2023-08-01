@@ -15,15 +15,13 @@ import (
 
 type FileIgnore struct {
 	ignorer *ignore.GitIgnore
-
-	config settings.Config
+	config  settings.Config
 }
 
 func New(projectPath string, config settings.Config) *FileIgnore {
 	return &FileIgnore{
 		ignorer: ignorerFromStrings(config.Scan.SkipPath),
-
-		config: config,
+		config:  config,
 	}
 }
 
@@ -36,14 +34,14 @@ func (fileignore *FileIgnore) Ignore(
 	relativePath := strings.TrimPrefix(filePath, projectPath)
 	trimmedPath := strings.TrimPrefix(relativePath, "/")
 
-	symlink, _ := isSymlink(projectPath + relativePath)
+	symlink, _ := isSymlink(filePath)
 	if symlink {
 		log.Debug().Msgf("skipping symlink: %s %s", projectPath, relativePath)
 		return true
 	}
 
 	if fileignore.ignorer.MatchesPath(trimmedPath) {
-		log.Debug().Msgf("file ignore match err: %s %s", projectPath, relativePath)
+		log.Debug().Msgf("file ignore match: %s %s", projectPath, relativePath)
 		return true
 	}
 
@@ -53,7 +51,7 @@ func (fileignore *FileIgnore) Ignore(
 			return true
 		}
 		if isMinified(fmt.Sprintf("%s%s", projectPath, filePath), fileInfo.Size(), goclocResult) {
-			log.Debug().Msgf("skipping file (suspected minified JS): %s%s", projectPath, filePath)
+			log.Debug().Msgf("skipping file (suspected minified JS): %s %s", projectPath, filePath)
 			return true
 		}
 	}
