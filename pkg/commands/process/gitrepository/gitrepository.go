@@ -25,9 +25,12 @@ import (
 )
 
 type Repository struct {
-	ctx        context.Context
-	config     settings.Config
-	repository *git.Repository
+	ctx    context.Context
+	config settings.Config
+	git    *git.Repository
+	rootPath,
+	targetPath,
+	gitTargetPath string
 	baseBranch string
 	baseLocalRefName,
 	baseRemoteRefName plumbing.ReferenceName
@@ -37,39 +40,44 @@ type Repository struct {
 func New(
 	ctx context.Context,
 	config settings.Config,
-	path string,
+	targetPath string,
 	baseBranch string,
 ) (*Repository, error) {
-	repository, err := git.PlainOpen(path)
+	repository, err := git.PlainOpenWithOptions(targetPath, &git.PlainOpenOptions{
+		DetectDotGit: true,
+	})
 	if err != nil {
-		if err == git.ErrRepositoryNotExists {
-			log.Debug().Msg("no git repository found")
-
-			if baseBranch != "" {
-				return nil, errors.New("base branch specified but no git repository found")
-			}
-
-			return nil, nil
-		}
-
-		return nil, err
+		return nil, translateOpenError(baseBranch, err)
 	}
+
+	worktree, err := repository.Worktree()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get worktree: %w", err)
+	}
+
+	rootPath := worktree.Filesystem.Root()
+	gitTargetPath, err := filepath.Rel(rootPath, targetPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get git relative target: %w", err)
+	}
+
+	log.Debug().Msgf("git target: [%s/]%s", rootPath, gitTargetPath)
 
 	headRef, err := repository.Head()
 	if err != nil {
 		return nil, fmt.Errorf("error getting git head: %w", err)
 	}
 
-	baseLocalRefName := plumbing.NewBranchReferenceName(baseBranch)
-	baseRemoteRefName := plumbing.NewRemoteReferenceName("origin", baseBranch)
-
 	return &Repository{
 		ctx:               ctx,
 		config:            config,
-		repository:        repository,
+		git:               repository,
+		rootPath:          rootPath,
+		targetPath:        targetPath,
+		gitTargetPath:     gitTargetPath,
 		baseBranch:        baseBranch,
-		baseLocalRefName:  baseLocalRefName,
-		baseRemoteRefName: baseRemoteRefName,
+		baseLocalRefName:  plumbing.NewBranchReferenceName(baseBranch),
+		baseRemoteRefName: plumbing.NewRemoteReferenceName("origin", baseBranch),
 		headRef:           headRef,
 	}, nil
 }
@@ -77,7 +85,6 @@ func New(
 func (repository *Repository) ListFiles(
 	ignore *ignore.FileIgnore,
 	goclocResult *gocloc.Result,
-	projectPath string,
 ) (*files.List, error) {
 	if repository == nil {
 		return nil, nil
@@ -89,7 +96,7 @@ func (repository *Repository) ListFiles(
 	}
 
 	if repository.baseBranch == "" {
-		return repository.getTreeFiles(ignore, goclocResult, projectPath, headTree)
+		return repository.getTreeFiles(ignore, goclocResult, headTree)
 	}
 
 	filePatches, err := repository.getDiffPatch(headTree)
@@ -97,16 +104,11 @@ func (repository *Repository) ListFiles(
 		return nil, err
 	}
 
-	return repository.getDiffFiles(
-		ignore,
-		goclocResult,
-		projectPath,
-		filePatches,
-	), nil
+	return repository.getDiffFiles(ignore, goclocResult, filePatches)
 }
 
 func (repository *Repository) treeForRef(ref *plumbing.Reference) (*object.Tree, error) {
-	commit, err := repository.repository.CommitObject(ref.Hash())
+	commit, err := repository.git.CommitObject(ref.Hash())
 	if err != nil {
 		return nil, err
 	}
@@ -117,20 +119,16 @@ func (repository *Repository) treeForRef(ref *plumbing.Reference) (*object.Tree,
 func (repository *Repository) getTreeFiles(
 	ignore *ignore.FileIgnore,
 	goclocResult *gocloc.Result,
-	projectPath string,
 	tree *object.Tree,
 ) (*files.List, error) {
 	var headFiles []files.File
 
 	if err := tree.Files().ForEach(func(f *object.File) error {
-		file := repository.fileFor(
+		if file := repository.fileFor(
 			ignore,
 			goclocResult,
-			projectPath,
 			f.Name,
-		)
-
-		if file != nil {
+		); file != nil {
 			headFiles = append(headFiles, *file)
 		}
 
@@ -143,7 +141,7 @@ func (repository *Repository) getTreeFiles(
 }
 
 func (repository *Repository) getDiffPatch(headTree *object.Tree) ([]diff.FilePatch, error) {
-	baseRef, err := repository.repository.Reference(repository.baseLocalRefName, true)
+	baseRef, err := repository.git.Reference(repository.baseLocalRefName, true)
 	if err != nil {
 		return nil, err
 	}
@@ -195,9 +193,8 @@ func (repository *Repository) translateDiffChunks(gitChunks []diff.Chunk) bbftyp
 func (repository *Repository) getDiffFiles(
 	ignore *ignore.FileIgnore,
 	goclocResult *gocloc.Result,
-	projectPath string,
 	filePatches []diff.FilePatch,
-) *files.List {
+) (*files.List, error) {
 	var baseFiles, headFiles []files.File
 	renames := make(map[string]string)
 	chunks := make(map[string]bbftypes.Chunks)
@@ -210,8 +207,7 @@ func (repository *Repository) getDiffFiles(
 			continue
 		}
 
-		toPath := toFile.Path()
-		headFile := repository.fileFor(ignore, goclocResult, projectPath, toPath)
+		headFile := repository.fileFor(ignore, goclocResult, toFile.Path())
 		if headFile == nil {
 			continue
 		}
@@ -222,17 +218,20 @@ func (repository *Repository) getDiffFiles(
 			continue
 		}
 
-		fromPath := fromFile.Path()
+		relativeFromPath, err := filepath.Rel(repository.gitTargetPath, fromFile.Path())
+		if err != nil {
+			return nil, err
+		}
 		baseFiles = append(baseFiles, files.File{
 			Timeout:  headFile.Timeout,
-			FilePath: "/" + fromPath,
+			FilePath: relativeFromPath,
 		})
 
-		if fromPath != toPath {
-			renames[fromPath] = toPath
+		if relativeFromPath != headFile.FilePath {
+			renames[relativeFromPath] = headFile.FilePath
 		}
 
-		chunks[toPath] = repository.translateDiffChunks(filePatch.Chunks())
+		chunks[headFile.FilePath] = repository.translateDiffChunks(filePatch.Chunks())
 	}
 
 	return &files.List{
@@ -240,7 +239,7 @@ func (repository *Repository) getDiffFiles(
 		BaseFiles: baseFiles,
 		Renames:   renames,
 		Chunks:    chunks,
-	}
+	}, nil
 }
 
 func (repository *Repository) FetchBaseIfNotPresent() error {
@@ -248,7 +247,7 @@ func (repository *Repository) FetchBaseIfNotPresent() error {
 		return nil
 	}
 
-	ref, err := repository.repository.Reference(repository.baseLocalRefName, true)
+	ref, err := repository.git.Reference(repository.baseLocalRefName, true)
 	if err != nil && err != plumbing.ErrReferenceNotFound {
 		return fmt.Errorf("invalid branch %s: %w", repository.baseBranch, err)
 	}
@@ -258,7 +257,7 @@ func (repository *Repository) FetchBaseIfNotPresent() error {
 		return nil
 	}
 
-	if err := repository.repository.FetchContext(repository.ctx, &git.FetchOptions{
+	if err := repository.git.FetchContext(repository.ctx, &git.FetchOptions{
 		RefSpecs: []config.RefSpec{config.RefSpec(
 			fmt.Sprintf("+%s:%s", repository.baseLocalRefName, repository.baseRemoteRefName),
 		)},
@@ -278,7 +277,7 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 
 	branchName := plumbing.NewBranchReferenceName(repository.baseBranch)
 
-	worktree, err := repository.repository.Worktree()
+	worktree, err := repository.git.Worktree()
 	if err != nil {
 		return fmt.Errorf("error getting git worktree: %w", err)
 	}
@@ -313,10 +312,19 @@ func (repository *Repository) restoreHead(worktree *git.Worktree) {
 func (repository *Repository) fileFor(
 	ignore *ignore.FileIgnore,
 	goclocResult *gocloc.Result,
-	projectPath,
-	relativePath string,
+	gitRelativePath string,
 ) *files.File {
-	fullPath := filepath.Join(projectPath, relativePath)
+	relativePath, err := filepath.Rel(repository.gitTargetPath, gitRelativePath)
+	if err != nil {
+		log.Error().Msg(err.Error())
+		return nil
+	}
+
+	if strings.Contains(relativePath, "..") {
+		return nil
+	}
+
+	fullPath := filepath.Join(repository.targetPath, relativePath)
 
 	fileInfo, err := os.Stat(fullPath)
 	if err != nil {
@@ -324,12 +332,26 @@ func (repository *Repository) fileFor(
 		return nil
 	}
 
-	if ignore != nil && ignore.Ignore(projectPath, fullPath, goclocResult, fileInfo) {
+	if ignore != nil && ignore.Ignore(repository.targetPath, fullPath, goclocResult, fileInfo) {
 		return nil
 	}
 
 	return &files.File{
 		Timeout:  timeout.Assign(fileInfo, repository.config),
-		FilePath: "/" + relativePath,
+		FilePath: relativePath,
 	}
+}
+
+func translateOpenError(baseBranch string, err error) error {
+	if err != git.ErrRepositoryNotExists {
+		return err
+	}
+
+	log.Debug().Msg("no git repository found")
+
+	if baseBranch != "" {
+		return errors.New("base branch specified but no git repository found")
+	}
+
+	return nil
 }

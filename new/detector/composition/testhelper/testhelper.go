@@ -93,7 +93,13 @@ func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath st
 		Languages:     map[string]*gocloc.Language{},
 		MaxPathLength: 0,
 	}
-	fileList, err := filelist.Discover(nil, testdataPath, &dummyGoclocResult, runner.config)
+
+	absTestdataPath, err := filepath.Abs(testdataPath)
+	if err != nil {
+		t.Fatalf("failed to get absolute target: %s", err)
+	}
+
+	fileList, err := filelist.Discover(nil, absTestdataPath, &dummyGoclocResult, runner.config)
 	if err != nil {
 		t.Fatalf("failed to discover files: %s", err)
 	}
@@ -105,7 +111,7 @@ func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath st
 	for _, file := range fileList.Files {
 		myfile := file
 		ext := filepath.Ext(file.FilePath)
-		testName := strings.TrimSuffix(file.FilePath, ext) + ".yml"
+		testName := "/" + strings.TrimSuffix(file.FilePath, ext) + ".yml"
 		t.Run(testName, func(t *testing.T) {
 			runner.scanSingleFile(t, testdataPath, myfile, snapshotPath)
 		})
