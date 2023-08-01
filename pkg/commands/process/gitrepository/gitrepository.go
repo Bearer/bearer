@@ -272,7 +272,7 @@ func (repository *Repository) FetchBaseIfNotPresent() error {
 }
 
 func (repository *Repository) WithBaseBranch(body func() error) error {
-	if repository.baseBranch == "" {
+	if repository == nil || repository.baseBranch == "" {
 		return nil
 	}
 
