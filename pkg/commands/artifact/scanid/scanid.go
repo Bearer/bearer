@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os/exec"
+	"path/filepath"
 	"sort"
 	"strings"
 
@@ -49,9 +50,18 @@ func hashConfig(scanSettings settings.Config) (string, error) {
 		return "", fmt.Errorf("error building scanners hash: %w", err)
 	}
 
+	absTarget, err := filepath.Abs(scanSettings.Scan.Target)
+	if err != nil {
+		return "", fmt.Errorf("error getting absolute path to target: %w", err)
+	}
+
+	targetHash := md5.Sum([]byte(absTarget))
 	baseBranchHash := md5.Sum([]byte(scanSettings.Scan.DiffBaseBranch))
 
 	hashBuilder := md5.New()
+	if _, err := hashBuilder.Write(targetHash[:]); err != nil {
+		return "", err
+	}
 	if _, err := hashBuilder.Write(ruleHash); err != nil {
 		return "", err
 	}
