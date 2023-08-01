@@ -2,7 +2,6 @@ package filelist
 
 import (
 	"io/fs"
-	"os"
 	"path/filepath"
 	"strings"
 
@@ -17,23 +16,10 @@ import (
 )
 
 // Discover searches directory for files to scan, skipping the ones specified by skip config and assigning timeout speficfied by timeout config
-func Discover(repository *gitrepository.Repository, projectPath string, goclocResult *gocloc.Result, config settings.Config) (*flfiles.List, error) {
-	haveDir, statErr := isDir(projectPath)
-	if statErr != nil {
-		return nil, statErr
-	}
+func Discover(repository *gitrepository.Repository, targetPath string, goclocResult *gocloc.Result, config settings.Config) (*flfiles.List, error) {
+	ignore := ignore.New(targetPath, config)
 
-	if haveDir {
-		projectPath = strings.TrimPrefix(projectPath, "./")
-		projectPath = strings.TrimSuffix(projectPath, "/")
-		if projectPath != "." {
-			projectPath += "/"
-		}
-	}
-
-	ignore := ignore.New(projectPath, config)
-
-	fileList, err := repository.ListFiles(ignore, goclocResult, projectPath)
+	fileList, err := repository.ListFiles(ignore, goclocResult)
 	if err != nil {
 		log.Error().Msg("Git discovery failed")
 		return nil, err
@@ -47,13 +33,15 @@ func Discover(repository *gitrepository.Repository, projectPath string, goclocRe
 	log.Debug().Msg("No files found from Git")
 
 	var files []flfiles.File
-	err = filepath.WalkDir(projectPath, func(filePath string, d fs.DirEntry, err error) error {
+	err = filepath.WalkDir(targetPath, func(filePath string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 
-		relativePath := strings.TrimPrefix(filePath, projectPath)
-		relativePath = "/" + relativePath
+		relativePath := strings.TrimPrefix(strings.TrimPrefix(filePath, targetPath), "/")
+		if relativePath == "" {
+			relativePath = "."
+		}
 
 		fileInfo, err := d.Info()
 		if err != nil {
@@ -62,14 +50,14 @@ func Discover(repository *gitrepository.Repository, projectPath string, goclocRe
 		}
 
 		if d.IsDir() {
-			if ignore.Ignore(projectPath, filePath, goclocResult, fileInfo) {
+			if ignore.Ignore(targetPath, filePath, goclocResult, fileInfo) {
 				return filepath.SkipDir
 			}
 
 			return nil
 		}
 
-		if ignore.Ignore(projectPath, filePath, goclocResult, fileInfo) {
+		if ignore.Ignore(targetPath, filePath, goclocResult, fileInfo) {
 			log.Debug().Msgf("skipping file due to file skip rules: %s", relativePath)
 
 			return nil
@@ -84,13 +72,4 @@ func Discover(repository *gitrepository.Repository, projectPath string, goclocRe
 	})
 
 	return &flfiles.List{Files: files}, err
-}
-
-func isDir(path string) (bool, error) {
-	fileInfo, err := os.Stat(path)
-	if err != nil {
-		return false, err
-	}
-
-	return fileInfo.IsDir(), nil
 }

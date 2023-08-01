@@ -40,7 +40,27 @@ func TestFileList(t *testing.T) {
 			Want: &files.List{
 				Files: []files.File{
 					{
-						FilePath: "/user.go",
+						FilePath: "user.go",
+						Timeout:  0,
+					},
+				},
+			},
+		},
+		{
+			Name: "Find files - standard single file - happy path",
+			Input: input{
+				projectPath: filepath.Join("testdata", "happy_path", "standard", "user.go"),
+				config: settings.Config{
+					Worker: settings.WorkerOptions{
+						FileSizeMaximum:           100000,
+						TimeoutFileBytesPerSecond: 1,
+					},
+				},
+			},
+			Want: &files.List{
+				Files: []files.File{
+					{
+						FilePath: ".",
 						Timeout:  0,
 					},
 				},
@@ -64,7 +84,7 @@ func TestFileList(t *testing.T) {
 				Files: []files.File{
 					{
 						Timeout:  0,
-						FilePath: "/users/users.go",
+						FilePath: "users/users.go",
 					},
 				},
 			},

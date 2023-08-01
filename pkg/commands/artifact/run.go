@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -151,7 +152,12 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 		output.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
 	}
 
-	repository, err := gitrepository.New(ctx, r.scanSettings, opts.Target, opts.DiffBaseBranch)
+	targetPath, err := filepath.Abs(opts.Target)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get absolute target: %w", err)
+	}
+
+	repository, err := gitrepository.New(ctx, r.scanSettings, targetPath, opts.DiffBaseBranch)
 	if err != nil {
 		return nil, fmt.Errorf("error opening git repository: %w", err)
 	}
@@ -160,7 +166,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 		return nil, err
 	}
 
-	fileList, err := filelist.Discover(repository, opts.Target, r.goclocResult, r.scanSettings)
+	fileList, err := filelist.Discover(repository, targetPath, r.goclocResult, r.scanSettings)
 	if err != nil {
 		return nil, err
 	}
