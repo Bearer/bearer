@@ -7,13 +7,8 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
 
-func Assign(d fs.DirEntry, config settings.Config) time.Duration {
+func Assign(fileInfo fs.FileInfo, config settings.Config) time.Duration {
 	var timeout time.Duration
-
-	fileInfo, err := d.Info()
-	if err != nil {
-		return time.Duration(0)
-	}
 
 	timeout = config.Worker.TimeoutFileMinimum
 

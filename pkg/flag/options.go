@@ -10,7 +10,6 @@ import (
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"github.com/ssoroka/slice"
-	"golang.org/x/xerrors"
 )
 
 var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
@@ -233,7 +232,7 @@ func (f *Flags) bind(cmd *cobra.Command, supportIgnoreConfig bool) error {
 			}
 
 			if err := bind(cmd, flag); err != nil {
-				return xerrors.Errorf("flag groups: %w", err)
+				return fmt.Errorf("flag groups: %w", err)
 			}
 		}
 	}

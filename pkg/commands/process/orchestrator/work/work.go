@@ -1,9 +1,8 @@
 package work
 
 import (
-	"time"
-
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 )
 
 type InitializeResponse struct {
@@ -23,13 +22,8 @@ type Repository struct {
 
 type ProcessRequest struct {
 	Repository
-	File       File
+	File       files.File
 	ReportPath string
-}
-
-type File struct {
-	Timeout  time.Duration
-	FilePath string
 }
 
 var RouteInitialize = "/initialize"

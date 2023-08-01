@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/pkg/commands/debugprofile"
-	"github.com/bearer/bearer/pkg/commands/process/worker"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/worker"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/rs/zerolog/log"

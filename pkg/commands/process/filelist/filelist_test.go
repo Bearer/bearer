@@ -4,9 +4,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/hhatto/gocloc"
 	"github.com/stretchr/testify/assert"
@@ -21,7 +21,7 @@ func TestFileList(t *testing.T) {
 	type testCase struct {
 		Name      string
 		Input     input
-		Want      []work.File
+		Want      *files.List
 		WantError bool
 	}
 
@@ -37,10 +37,12 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: []work.File{
-				{
-					FilePath: "/user.go",
-					Timeout:  0,
+			Want: &files.List{
+				Files: []files.File{
+					{
+						FilePath: "/user.go",
+						Timeout:  0,
+					},
 				},
 			},
 		},
@@ -58,10 +60,12 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: []work.File{
-				{
-					Timeout:  0,
-					FilePath: "/users/users.go",
+			Want: &files.List{
+				Files: []files.File{
+					{
+						Timeout:  0,
+						FilePath: "/users/users.go",
+					},
 				},
 			},
 		},
@@ -79,7 +83,7 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: nil,
+			Want: &files.List{},
 		},
 		{
 			Name: "Find files - skip - dir - happy path",
@@ -95,7 +99,7 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			Want: nil,
+			Want: &files.List{},
 		},
 	}
 
@@ -113,7 +117,7 @@ func TestFileList(t *testing.T) {
 			MaxPathLength: 0,
 		}
 		t.Run(testCase.Name, func(t *testing.T) {
-			output, err := filelist.Discover(testCase.Input.projectPath, &dummyGoclocResult, testCase.Input.config)
+			output, err := filelist.Discover(nil, testCase.Input.projectPath, &dummyGoclocResult, testCase.Input.config)
 
 			if testCase.WantError {
 				if err == nil {

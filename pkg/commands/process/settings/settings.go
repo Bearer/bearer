@@ -2,6 +2,7 @@ package settings
 
 import (
 	"embed"
+	"errors"
 	"fmt"
 	"time"
 
@@ -319,6 +320,16 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		BuiltInRules:       result.BuiltInRules,
 		CacheUsed:          result.CacheUsed,
 		BearerRulesVersion: result.BearerRulesVersion,
+	}
+
+	if config.Scan.DiffBaseBranch != "" {
+		if config.Report.Report != flag.ReportSecurity {
+			return Config{}, errors.New("diff base branch is only supported for the security report")
+		}
+
+		if config.Client != nil {
+			return Config{}, errors.New("diff base branch is not supported when using an api key")
+		}
 	}
 
 	return config, nil

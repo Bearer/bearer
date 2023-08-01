@@ -11,7 +11,6 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"golang.org/x/xerrors"
 )
 
 const (
@@ -47,13 +46,13 @@ func NewScanCommand() *cobra.Command {
   $ bearer scan /path/to/your_project`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := ScanFlags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
+				return fmt.Errorf("flag bind error: %w", err)
 			}
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := ScanFlags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
+				return fmt.Errorf("flag bind error: %w", err)
 			}
 
 			logLevel := viper.GetString(flag.LogLevelFlag.ConfigName)
@@ -90,7 +89,7 @@ func NewScanCommand() *cobra.Command {
 
 			options, err := ScanFlags.ToOptions(args)
 			if err != nil {
-				return xerrors.Errorf("flag error: %s", err)
+				return fmt.Errorf("flag error: %s", err)
 			}
 
 			log.Debug().Msgf(loadFileMessage)
@@ -103,7 +102,7 @@ func NewScanCommand() *cobra.Command {
 
 			cmd.SilenceUsage = true
 
-			err = artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
+			err = artifact.Run(cmd.Context(), options)
 			debugprofile.Stop()
 			return err
 		},

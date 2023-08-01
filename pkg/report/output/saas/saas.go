@@ -2,6 +2,7 @@ package saas
 
 import (
 	"compress/gzip"
+	"context"
 	"fmt"
 	"os"
 	"os/exec"
@@ -10,7 +11,8 @@ import (
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/api/s3"
 	"github.com/bearer/bearer/cmd/bearer/build"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
@@ -88,6 +90,7 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 		SHA:                *sha,
 		CurrentBranch:      *currentBranch,
 		DefaultBranch:      *defaultBranch,
+		DiffBaseBranch:     config.Scan.DiffBaseBranch,
 		BearerRulesVersion: config.BearerRulesVersion,
 		BearerVersion:      build.Version,
 	}, nil
@@ -146,9 +149,14 @@ func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) erro
 }
 
 func getDiscoveredFiles(config settings.Config, goclocResult *gocloc.Result) []string {
-	filesDiscovered, _ := filelist.Discover(config.Scan.Target, goclocResult, config)
+	repository, err := gitrepository.New(context.TODO(), config, config.Scan.Target, config.Scan.DiffBaseBranch)
+	if err != nil {
+		log.Debug().Msgf("failed to open git repository: %s", err)
+	}
+
+	fileList, _ := filelist.Discover(repository, config.Scan.Target, goclocResult, config)
 	files := []string{}
-	for _, fileDiscovered := range filesDiscovered {
+	for _, fileDiscovered := range fileList.Files {
 		files = append(files, file.GetFullFilename(config.Scan.Target, fileDiscovered.FilePath))
 	}
 

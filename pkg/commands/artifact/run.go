@@ -2,31 +2,29 @@ package artifact
 
 import (
 	"context"
-	"crypto/md5"
-	"encoding/hex"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
-	"os/exec"
 	"sort"
 	"strings"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
 	"golang.org/x/exp/maps"
-	"golang.org/x/xerrors"
 
-	"github.com/bearer/bearer/cmd/bearer/build"
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
+	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
+	"github.com/bearer/bearer/pkg/commands/process/filelist"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
+	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/github_api"
+	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/gitlab"
 	reporthtml "github.com/bearer/bearer/pkg/report/output/html"
@@ -35,10 +33,13 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
+	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
 	"github.com/bearer/bearer/pkg/types"
 )
+
+var ErrFileListEmpty = errors.New("We couldn't find any files to scan in the specified directory.")
 
 // TargetKind represents what kind of artifact bearer scans
 type TargetKind string
@@ -56,12 +57,12 @@ type ScannerConfig struct {
 type Runner interface {
 	// Cached returns true if cached data was used in scan
 	CacheUsed() bool
-	// ScanFilesystem scans a filesystem
-	ScanFilesystem(ctx context.Context, opts flag.Options) (types.Report, error)
-	// ScanRepository scans repository
-	ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error)
+	// ReportPath returns the filename of the report
+	ReportPath() string
+	// Scan gathers the findings
+	Scan(ctx context.Context, opts flag.Options) (*basebranchfindings.Findings, error)
 	// Report a writes a report
-	Report(scanSettings settings.Config, report types.Report) (bool, error)
+	Report(baseBranchFindings *basebranchfindings.Findings) (bool, error)
 	// Close closes runner
 	Close(ctx context.Context) error
 }
@@ -87,7 +88,7 @@ func NewRunner(
 		stats:        stats,
 	}
 
-	scanID, err := buildScanID(scanSettings)
+	scanID, err := scanid.Build(scanSettings)
 	if err != nil {
 		log.Error().Msgf("failed to build scan id for caching %s", err)
 	}
@@ -132,60 +133,6 @@ func NewRunner(
 	return r
 }
 
-// buildScanHash builds a hash based on project and settings that latter on gets used for caching scan detections
-func buildScanID(scanSettings settings.Config) (string, error) {
-	// we want head as project may contain new changes
-	cmd := exec.Command("git", "-C", scanSettings.Scan.Target, "rev-parse", "HEAD")
-	sha, err := cmd.Output()
-
-	if err != nil {
-		log.Debug().Msgf("error getting git sha %s", err.Error())
-		sha = []byte(uuid.NewString())
-	}
-
-	// we want hash of all active custom detector rules and their content
-	hashBuilder := md5.New()
-	var ruleNames []string
-	for key := range scanSettings.Rules {
-		ruleNames = append(ruleNames, key)
-	}
-	sort.Strings(ruleNames)
-
-	for _, ruleName := range ruleNames {
-		_, err := hashBuilder.Write([]byte(ruleName))
-		if err != nil {
-			return "", err
-		}
-		detectorContent, err := json.Marshal(scanSettings.Rules[ruleName])
-		if err != nil {
-			return "", err
-		}
-		_, err = hashBuilder.Write(detectorContent)
-		if err != nil {
-			return "", err
-		}
-	}
-
-	var scanners []string
-	scanners = append(scanners, scanSettings.Scan.Scanner...)
-	sort.Strings(scanners)
-
-	for _, scanner := range scanners {
-		_, err := hashBuilder.Write([]byte(scanner))
-		if err != nil {
-			return "", err
-		}
-	}
-
-	configHash := hex.EncodeToString(hashBuilder.Sum(nil)[:])
-
-	// we want sha as it might change detections
-	buildSHA := build.CommitSHA
-	scanID := strings.TrimSuffix(string(sha), "\n") + "-" + buildSHA + "-" + configHash + ".jsonl"
-
-	return scanID, nil
-}
-
 func (r *runner) CacheUsed() bool {
 	return r.reuseDetection
 }
@@ -195,42 +142,77 @@ func (r *runner) Close(ctx context.Context) error {
 	return nil
 }
 
-func (r *runner) ScanFilesystem(ctx context.Context, opts flag.Options) (types.Report, error) {
-	return r.scanFS(ctx, opts)
-}
-
-func (r *runner) scanFS(ctx context.Context, opts flag.Options) (types.Report, error) {
-	return r.scanArtifact(ctx, opts)
-}
-
-func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error) {
-	return r.scanArtifact(ctx, opts)
-}
-
-func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Report, error) {
-	if !r.reuseDetection {
-		if err := orchestrator.Scan(
-			work.Repository{
-				Dir:               opts.Target,
-				PreviousCommitSHA: "",
-				CommitSHA:         "",
-			},
-			r.scanSettings,
-			r.goclocResult,
-			r.reportPath,
-			r.stats,
-		); err != nil {
-			return types.Report{}, err
-		}
+func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindings.Findings, error) {
+	if r.reuseDetection {
+		return nil, nil
 	}
 
-	return types.Report{
-		Path: r.reportPath,
-	}, nil
+	if !opts.Quiet {
+		output.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
+	}
+
+	repository, err := gitrepository.New(ctx, r.scanSettings, opts.Target, opts.DiffBaseBranch)
+	if err != nil {
+		return nil, fmt.Errorf("error opening git repository: %w", err)
+	}
+
+	if err := repository.FetchBaseIfNotPresent(); err != nil {
+		return nil, err
+	}
+
+	fileList, err := filelist.Discover(repository, opts.Target, r.goclocResult, r.scanSettings)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(fileList.Files) == 0 {
+		return nil, ErrFileListEmpty
+	}
+
+	orchestrator, err := orchestrator.New(
+		work.Repository{Dir: opts.Target},
+		r.scanSettings,
+		r.stats,
+		len(fileList.Files),
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer orchestrator.Close()
+
+	var baseBranchFindings *basebranchfindings.Findings
+	if err := repository.WithBaseBranch(func() error {
+		output.StdErrLog(fmt.Sprintf(
+			"\nScanning base branch %s",
+			opts.DiffBaseBranch,
+		))
+		if err := orchestrator.Scan(r.reportPath+".base", fileList.BaseFiles); err != nil {
+			return err
+		}
+
+		report := types.Report{Path: r.reportPath + ".base", Inputgocloc: r.goclocResult}
+		detections, _, err := reportoutput.GetOutput(report, r.scanSettings, nil)
+		if err != nil {
+			return err
+		}
+
+		baseBranchFindings = buildBaseBranchFindings(fileList, detections)
+
+		output.StdErrLog("\nScanning current branch")
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+
+	if err := orchestrator.Scan(r.reportPath, fileList.Files); err != nil {
+		return nil, err
+	}
+
+	return baseBranchFindings, nil
 }
 
 // Run performs artifact scanning
-func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
+func Run(ctx context.Context, opts flag.Options) (err error) {
 	if !opts.Quiet {
 		outputhandler.StdErrLog("Loading rules")
 	}
@@ -275,32 +257,29 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}
 
-	var report types.Report
-	switch targetKind {
-	case TargetFilesystem:
-		if report, err = r.ScanFilesystem(ctx, opts); err != nil {
-			if errors.Is(err, orchestrator.ErrFileListEmpty) {
-				outputhandler.StdOutLog(err.Error())
-				os.Exit(0)
-				return
-			}
-
-			return xerrors.Errorf("filesystem scan error: %w", err)
-		}
-	}
-	report.Inputgocloc = inputgocloc
-	reportPassed, err := r.Report(scanSettings, report)
+	baseBranchFindings, err := r.Scan(ctx, opts)
 	if err != nil {
-		return xerrors.Errorf("report error: %w", err)
+		if errors.Is(err, ErrFileListEmpty) {
+			outputhandler.StdOutLog(err.Error())
+			os.Exit(0)
+			return
+		}
+
+		return fmt.Errorf("scan error: %w", err)
+	}
+
+	reportPassed, err := r.Report(baseBranchFindings)
+	if err != nil {
+		return fmt.Errorf("report error: %w", err)
 	} else {
-		if !strings.HasSuffix(report.Path, "-completed.jsonl") {
-			newPath := strings.Replace(report.Path, ".jsonl", "-completed.jsonl", 1)
-			log.Debug().Msgf("renaming report %s -> %s", report.Path, newPath)
-			err := os.Rename(report.Path, newPath)
+		reportPath := r.ReportPath()
+		if !strings.HasSuffix(reportPath, "-completed.jsonl") {
+			newPath := strings.Replace(reportPath, ".jsonl", "-completed.jsonl", 1)
+			log.Debug().Msgf("renaming report %s -> %s", reportPath, newPath)
+			err := os.Rename(reportPath, newPath)
 			if err != nil {
-				return xerrors.Errorf("failed to rename report file %s -> %s: %w", report.Path, newPath, err)
+				return fmt.Errorf("failed to rename report file %s -> %s: %w", reportPath, newPath, err)
 			}
-			report.Path = newPath
 		}
 	}
 
@@ -319,41 +298,43 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	return nil
 }
 
-func (r *runner) Report(config settings.Config, report types.Report) (bool, error) {
+func (r *runner) Report(baseBranchFindings *basebranchfindings.Findings) (bool, error) {
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	reportPassed := true
 
+	report := types.Report{Path: r.reportPath, Inputgocloc: r.goclocResult}
+
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLog
-	if config.Report.Output != "" {
-		reportFile, err := os.Create(config.Report.Output)
+	if r.scanSettings.Report.Output != "" {
+		reportFile, err := os.Create(r.scanSettings.Report.Output)
 		if err != nil {
 			return false, fmt.Errorf("error creating output file %w", err)
 		}
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
-	if cacheUsed && !config.Scan.Quiet {
+	if cacheUsed && !r.scanSettings.Scan.Quiet {
 		// output cached data warning at start of report
 		outputhandler.StdErrLog("Using cached data")
 	}
 
-	detections, dataflow, err := reportoutput.GetOutput(report, config)
+	detections, dataflow, err := reportoutput.GetOutput(report, r.scanSettings, baseBranchFindings)
 	if err != nil {
 		return false, err
 	}
 
 	endTime := time.Now()
 
-	reportSupported, err := anySupportedLanguagesPresent(report.Inputgocloc, config)
+	reportSupported, err := anySupportedLanguagesPresent(report.Inputgocloc, r.scanSettings)
 	if err != nil {
 		return false, err
 	}
 
-	if !reportSupported && config.Report.Report != flag.ReportPrivacy {
+	if !reportSupported && r.scanSettings.Report.Report != flag.ReportPrivacy {
 		var placeholderStr *strings.Builder
-		placeholderStr, err = getPlaceholderOutput(report, config, report.Inputgocloc)
+		placeholderStr, err = getPlaceholderOutput(report, r.scanSettings, report.Inputgocloc)
 		if err != nil {
 			return false, err
 		}
@@ -363,18 +344,18 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	}
 
 	// output report string for type and format
-	switch config.Report.Format {
+	switch r.scanSettings.Report.Format {
 	case flag.FormatEmpty:
-		if config.Report.Report == flag.ReportSecurity {
+		if r.scanSettings.Report.Report == flag.ReportSecurity {
 			// for security report, default report format is Table
 			detectionReport := detections.(*security.Results)
 			var reportStr *strings.Builder
-			reportStr, reportPassed = security.BuildReportString(config, detectionReport, report.Inputgocloc, dataflow)
+			reportStr, reportPassed = security.BuildReportString(r.scanSettings, detectionReport, report.Inputgocloc, dataflow)
 
 			logger(reportStr.String())
-		} else if config.Report.Report == flag.ReportPrivacy {
+		} else if r.scanSettings.Report.Report == flag.ReportPrivacy {
 			// for privacy report, default report format is CSV
-			content, err := reportoutput.GetPrivacyReportCSVOutput(report, dataflow, config)
+			content, err := reportoutput.GetPrivacyReportCSVOutput(report, dataflow, r.scanSettings)
 			if err != nil {
 				return false, fmt.Errorf("error generating report %s", err)
 			}
@@ -390,7 +371,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			logger(*content)
 		}
 	case flag.FormatSarif:
-		sarifContent, err := sarif.ReportSarif(detections.(*map[string][]security.Result), config.Rules)
+		sarifContent, err := sarif.ReportSarif(detections.(*map[string][]security.Result), r.scanSettings.Rules)
 		if err != nil {
 			return false, fmt.Errorf("error generating sarif report %s", err)
 		}
@@ -441,7 +422,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		var body *string
 		var err error
 		var title string
-		if config.Report.Report == flag.ReportPrivacy {
+		if r.scanSettings.Report.Report == flag.ReportPrivacy {
 			title = "Privacy Report"
 			body, err = reporthtml.ReportPrivacyHTML(detections.(*privacy.Report))
 		} else {
@@ -462,8 +443,12 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		logger(*page)
 	}
 
-	outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
+	outputCachedDataWarning(cacheUsed, r.scanSettings.Scan.Quiet)
 	return reportPassed, nil
+}
+
+func (r *runner) ReportPath() string {
+	return r.reportPath
 }
 
 func outputCachedDataWarning(cacheUsed bool, quietMode bool) {
@@ -527,4 +512,21 @@ func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages
 	sort.Strings(keys)
 
 	return keys
+}
+
+func buildBaseBranchFindings(fileList *files.List, detections any) *basebranchfindings.Findings {
+	result := basebranchfindings.New(fileList)
+
+	for _, findings := range *detections.(*security.Results) {
+		for _, finding := range findings {
+			result.Add(
+				finding.Rule.Id,
+				finding.Filename,
+				finding.Sink.Start,
+				finding.Sink.End,
+			)
+		}
+	}
+
+	return result
 }

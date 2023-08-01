@@ -16,6 +16,7 @@ type Meta struct {
 	SHA                string `json:"sha" yaml:"sha"`
 	CurrentBranch      string `json:"current_branch" yaml:"current_branch"`
 	DefaultBranch      string `json:"default_branch" yaml:"default_branch"`
+	DiffBaseBranch     string `json:"diff_base_branch,omitempty" yaml:"diff_base_branch,omitempty"`
 	SignedID           string `json:"signed_id,omitempty" yaml:"signed_id,omitempty"`
 	BearerRulesVersion string `json:"bearer_rules_version,omitempty" yaml:"bearer_rules_version,omitempty"`
 	BearerVersion      string `json:"bearer_version,omitempty" yaml:"bearer_version,omitempty"`

@@ -1,9 +1,10 @@
-package fileignore
+package ignore
 
 import (
 	"fmt"
 	"io/fs"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -14,36 +15,33 @@ import (
 
 type FileIgnore struct {
 	ignorer *ignore.GitIgnore
-
-	config settings.Config
+	config  settings.Config
 }
 
 func New(projectPath string, config settings.Config) *FileIgnore {
 	return &FileIgnore{
 		ignorer: ignorerFromStrings(config.Scan.SkipPath),
-
-		config: config,
+		config:  config,
 	}
 }
 
-func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, goclocResult *gocloc.Result, d fs.DirEntry) bool {
+func (fileignore *FileIgnore) Ignore(
+	projectPath string,
+	filePath string,
+	goclocResult *gocloc.Result,
+	fileInfo fs.FileInfo,
+) bool {
 	relativePath := strings.TrimPrefix(filePath, projectPath)
 	trimmedPath := strings.TrimPrefix(relativePath, "/")
 
-	fileInfo, err := d.Info()
-	if err != nil {
-		log.Error().Msgf("fileInfo err: %s %s", projectPath, relativePath)
-		return true
-	}
-
-	symlink, _ := isSymlink(projectPath + relativePath)
+	symlink, _ := isSymlink(filePath)
 	if symlink {
 		log.Debug().Msgf("skipping symlink: %s %s", projectPath, relativePath)
 		return true
 	}
 
 	if fileignore.ignorer.MatchesPath(trimmedPath) {
-		log.Debug().Msgf("file ignore match err: %s %s", projectPath, relativePath)
+		log.Debug().Msgf("file ignore match: %s %s", projectPath, relativePath)
 		return true
 	}
 
@@ -53,12 +51,31 @@ func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, gocloc
 			return true
 		}
 		if isMinified(fmt.Sprintf("%s%s", projectPath, filePath), fileInfo.Size(), goclocResult) {
-			log.Debug().Msgf("skipping file (suspected minified JS): %s%s", projectPath, filePath)
+			log.Debug().Msgf("skipping file (suspected minified JS): %s %s", projectPath, filePath)
 			return true
 		}
 	}
 
-	return false
+	dirTrimmedPath := filepath.Dir(trimmedPath)
+	dirPath := filepath.Join(projectPath, dirTrimmedPath)
+
+	// No parent directory, allow
+	if dirTrimmedPath == "." || dirTrimmedPath[len(dirTrimmedPath)-1] == filepath.Separator {
+		return false
+	}
+
+	dirInfo, err := os.Stat(dirPath)
+	if err != nil {
+		log.Debug().Msgf("error getting dir stat %s: %s", dirPath, err)
+		return true
+	}
+
+	return fileignore.Ignore(
+		projectPath,
+		dirPath,
+		goclocResult,
+		dirInfo,
+	)
 }
 
 func isMinified(fullPath string, size int64, goclocResult *gocloc.Result) bool {

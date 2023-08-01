@@ -6,6 +6,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
 	"github.com/bearer/bearer/pkg/report/output/saas"
@@ -20,16 +21,20 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func GetOutput(report types.Report, config settings.Config) (any, *dataflow.DataFlow, error) {
+func GetOutput(
+	report types.Report,
+	config settings.Config,
+	baseBranchFindings *basebranchfindings.Findings,
+) (any, *dataflow.DataFlow, error) {
 	switch config.Report.Report {
 	case flag.ReportDetectors:
 		return detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
 		return GetDataflow(report, config, false)
 	case flag.ReportSecurity:
-		return reportSecurity(report, config)
+		return reportSecurity(report, config, baseBranchFindings)
 	case flag.ReportSaaS:
-		securityResults, dataflow, err := reportSecurity(report, config)
+		securityResults, dataflow, err := reportSecurity(report, config, baseBranchFindings)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -89,6 +94,7 @@ func reportStats(report types.Report, config settings.Config) (*stats.Stats, *da
 func reportSecurity(
 	report types.Report,
 	config settings.Config,
+	baseBranchFindings *basebranchfindings.Findings,
 ) (
 	securityResults *security.Results,
 	dataflow *dataflow.DataFlow,
@@ -100,7 +106,7 @@ func reportSecurity(
 		return
 	}
 
-	securityResults, err = security.GetOutput(dataflow, config)
+	securityResults, err = security.GetOutput(dataflow, config, baseBranchFindings)
 	if err != nil {
 		log.Debug().Msgf("error in security %s", err)
 		return

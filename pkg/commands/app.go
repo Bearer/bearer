@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/bearer/pkg/commands/artifact"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/spf13/cobra"
-	"golang.org/x/xerrors"
 )
 
 // VersionInfo holds the bearer version
@@ -86,20 +85,20 @@ func NewConfigCommand() *cobra.Command {
 		Short:   "Scan config files for misconfigurations",
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := configFlags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
+				return fmt.Errorf("flag bind error: %w", err)
 			}
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := configFlags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
+				return fmt.Errorf("flag bind error: %w", err)
 			}
 			options, err := configFlags.ToOptions(args)
 			if err != nil {
-				return xerrors.Errorf("flag error: %w", err)
+				return fmt.Errorf("flag error: %w", err)
 			}
 
-			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
+			return artifact.Run(cmd.Context(), options)
 		},
 		SilenceErrors: true,
 		SilenceUsage:  true,

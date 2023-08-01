@@ -1,163 +1,161 @@
 package orchestrator
 
 import (
-	"errors"
-	"fmt"
 	"io"
 	"os"
 	"path"
 	"runtime"
 	"sync"
 
-	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
-	"github.com/schollz/progressbar/v3"
 
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/filelist"
-	"github.com/bearer/bearer/pkg/commands/process/repo_info"
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/pool"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/commands/process/worker/pool"
-	"github.com/bearer/bearer/pkg/commands/process/worker/work"
 	"github.com/bearer/bearer/pkg/report/detections"
 	"github.com/bearer/bearer/pkg/util/jsonlines"
-	"github.com/bearer/bearer/pkg/util/output"
 	bearerprogress "github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/tmpfile"
 )
 
-var ErrFileListEmpty = errors.New("We couldn't find any files to scan in the specified directory.")
-
-type orchestrator struct {
+type Orchestrator struct {
 	repository          work.Repository
 	config              settings.Config
-	reportFile          *os.File
-	files               []work.File
 	maxWorkersSemaphore chan struct{}
 	done                chan struct{}
 	pool                *pool.Pool
-	progressBar         *progressbar.ProgressBar
-	waitGroup           sync.WaitGroup
 	reportMutex         sync.Mutex
 }
 
-func newOrchestrator(
+func New(
 	repository work.Repository,
 	config settings.Config,
-	goclocResult *gocloc.Result,
-	reportPath string,
 	stats *stats.Stats,
-) (*orchestrator, error) {
-	reportFile, err := os.Create(reportPath)
-	if err != nil {
-		return nil, err
-	}
-
-	files, err := filelist.Discover(config.Scan.Target, goclocResult, config)
-	if err != nil {
-		reportFile.Close()
-		return nil, err
-	}
-
-	if len(files) == 0 {
-		reportFile.Close()
-		return nil, ErrFileListEmpty
-	}
-
-	parallel := getParallel(len(files), config)
+	estimatedFileCount int,
+) (*Orchestrator, error) {
+	parallel := getParallel(estimatedFileCount, config)
 	log.Debug().Msgf("number of workers: %d", parallel)
 
-	return &orchestrator{
+	return &Orchestrator{
 		repository:          repository,
 		config:              config,
-		reportFile:          reportFile,
-		files:               files,
 		maxWorkersSemaphore: make(chan struct{}, parallel),
 		done:                make(chan struct{}),
 		pool:                pool.New(config, stats),
-		progressBar:         bearerprogress.GetProgressBar(len(files), config, "files"),
 	}, nil
 }
 
-func (orchestrator *orchestrator) Scan() error {
-	if err := repo_info.ReportRepositoryInfo(orchestrator.reportFile, orchestrator.repository, nil); err != nil {
+func (orchestrator *Orchestrator) Scan(
+	reportPath string,
+	files []files.File,
+) error {
+	fileComplete := make(chan struct{}, len(files))
+
+	reportFile, err := os.Create(reportPath)
+	if err != nil {
 		return err
 	}
+	defer reportFile.Close()
 
-	for _, file := range orchestrator.files {
+	for _, file := range files {
 		select {
 		case <-orchestrator.done:
-			log.Debug().Msgf("orchestrator stopping early due to close")
+			log.Debug().Msgf("scan stopping early due to close")
 			return nil
 		default:
 		}
 
-		orchestrator.waitGroup.Add(1)
-		go orchestrator.scanFile(file)
+		go orchestrator.scanFile(reportFile, fileComplete, file)
 	}
 
-	orchestrator.waitGroup.Wait()
+	orchestrator.waitForScan(fileComplete, len(files))
 
 	return nil
 }
 
-func (orchestrator *orchestrator) scanFile(file work.File) {
-	orchestrator.maxWorkersSemaphore <- struct{}{}
-	tmpReportFile := tmpfile.Create(".jsonl")
+func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, totalCount int) {
+	progressBar := bearerprogress.GetProgressBar(totalCount, orchestrator.config, "files")
+	count := 0
 
 	defer func() {
-		if err := orchestrator.progressBar.Add(1); err != nil {
-			log.Debug().Msgf("failed to write progress bar for %s", file.FilePath)
+		if err := progressBar.Close(); err != nil {
+			log.Debug().Msgf("failed to close progress bar: %s", err)
 		}
+	}()
 
+	for {
+		select {
+		case <-orchestrator.done:
+			log.Debug().Msgf("scan stopping early due to close")
+
+			return
+		case <-fileComplete:
+			count++
+
+			if err := progressBar.Add(1); err != nil {
+				log.Debug().Msgf("failed to write progress bar: %s", err)
+			}
+
+			if count == totalCount {
+				return
+			}
+		}
+	}
+}
+
+func (orchestrator *Orchestrator) scanFile(reportFile *os.File, fileComplete chan struct{}, file files.File) {
+	orchestrator.maxWorkersSemaphore <- struct{}{}
+	tmpReportPath := tmpfile.Create(".jsonl")
+
+	defer func() {
 		<-orchestrator.maxWorkersSemaphore
-		orchestrator.waitGroup.Done()
-		os.RemoveAll(tmpReportFile)
+		os.RemoveAll(tmpReportPath)
+		fileComplete <- struct{}{}
 	}()
 
 	if err := orchestrator.pool.Scan(work.ProcessRequest{
 		Repository: orchestrator.repository,
 		File:       file,
-		ReportPath: tmpReportFile,
+		ReportPath: tmpReportPath,
 	}); err != nil {
 		log.Debug().Msgf("error processing %s: %s", file.FilePath, err)
-		orchestrator.writeFileError(file, err)
+		orchestrator.writeFileError(reportFile, file, err)
 		return
 	}
 
-	orchestrator.writeFileResult(tmpReportFile)
+	orchestrator.writeFileResult(reportFile, tmpReportPath)
 }
 
-func (orchestrator *orchestrator) Close() {
+func (orchestrator *Orchestrator) Close() {
 	close(orchestrator.done)
-	orchestrator.reportFile.Close()
-	orchestrator.progressBar.Close()
 	orchestrator.pool.Close()
 }
 
-func (orchestrator *orchestrator) writeFileResult(reportPath string) {
-	reportFile, err := os.Open(reportPath)
+func (orchestrator *Orchestrator) writeFileResult(reportFile *os.File, tmpReportPath string) {
+	tmpReportFile, err := os.Open(tmpReportPath)
 	if err != nil {
-		log.Error().Msgf("failed to open tmp report file %s: %s", reportPath, err)
+		log.Error().Msgf("failed to open tmp report file %s: %s", tmpReportPath, err)
 		return
 	}
-	defer reportFile.Close()
+	defer tmpReportFile.Close()
 
-	reportBytes, err := io.ReadAll(reportFile)
+	reportBytes, err := io.ReadAll(tmpReportFile)
 	if err != nil {
-		log.Error().Msgf("failed to read tmp report file %s: %s", reportPath, err)
+		log.Error().Msgf("failed to read tmp report file %s: %s", tmpReportPath, err)
 		return
 	}
 
 	orchestrator.reportMutex.Lock()
-	_, err = orchestrator.reportFile.Write(reportBytes)
+	_, err = reportFile.Write(reportBytes)
 	if err != nil {
-		log.Error().Msgf("failed to write tmp report into main report file %s: %s", reportPath, err)
+		log.Error().Msgf("failed to write tmp report into main report file %s: %s", tmpReportPath, err)
 	}
 	orchestrator.reportMutex.Unlock()
 }
 
-func (orchestrator *orchestrator) writeFileError(file work.File, fileErr error) {
+func (orchestrator *Orchestrator) writeFileError(reportFile *os.File, file files.File, fileErr error) {
 	fullPath := path.Join(orchestrator.config.Scan.Target, file.FilePath)
 	fileInfo, err := os.Stat(fullPath)
 	if err != nil {
@@ -174,31 +172,10 @@ func (orchestrator *orchestrator) writeFileError(file work.File, fileErr error) 
 	}}
 
 	orchestrator.reportMutex.Lock()
-	if err := jsonlines.Encode(orchestrator.reportFile, &detections); err != nil {
+	if err := jsonlines.Encode(reportFile, &detections); err != nil {
 		log.Error().Msgf("failed to encode error for %s: %s", fullPath, err)
 	}
 	orchestrator.reportMutex.Unlock()
-}
-
-func Scan(
-	repository work.Repository,
-	config settings.Config,
-	goclogResult *gocloc.Result,
-	reportPath string,
-	stats *stats.Stats,
-) error {
-	if !config.Scan.Quiet {
-		output.StdErrLog(fmt.Sprintf("Scanning target %s", config.Scan.Target))
-	}
-
-	orchestrator, err := newOrchestrator(repository, config, goclogResult, reportPath, stats)
-	if err != nil {
-		return err
-	}
-
-	err = orchestrator.Scan()
-	orchestrator.Close()
-	return err
 }
 
 func getParallel(fileCount int, config settings.Config) int {

@@ -2,6 +2,7 @@ package flag
 
 import (
 	"errors"
+	"os"
 	"strings"
 	"time"
 
@@ -149,6 +150,7 @@ type ScanOptions struct {
 	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
 	Parallel                int           `mapstructure:"parallel" json:"parallel" yaml:"parallel"`
 	ExitCode                int           `mapstructure:"exit-code" json:"exit-code" yaml:"exit-code"`
+	DiffBaseBranch          string        `mapstructure:"diff_base_branch" json:"diff_base_branch" yaml:"diff_base_branch"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -238,6 +240,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Scanner:                 scanners,
 		Parallel:                viper.GetInt(f.ParallelFlag.ConfigName),
 		ExitCode:                viper.GetInt(f.ExitCodeFlag.ConfigName),
+		DiffBaseBranch:          os.Getenv("DIFF_BASE_BRANCH"),
 	}, nil
 }
 
