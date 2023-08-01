@@ -18,6 +18,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
+	"github.com/rodaine/table"
 	log "github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
@@ -52,6 +53,11 @@ type Input struct {
 	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
+}
+
+type RuleCounter struct {
+	DefaultRuleCount int
+	CustomRuleCount  int
 }
 
 type Location struct {
@@ -124,11 +130,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Results, e
 		output.StdErrLog("Evaluating rules")
 	}
 
-	err, builtInFingerprints := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
+	builtInFingerprints, err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, true)
 	if err != nil {
 		return nil, err
 	}
-	err, fingerprints := evaluateRules(summaryResults, config.Rules, config, dataflow, false)
+	fingerprints, err := evaluateRules(summaryResults, config.Rules, config, dataflow, false)
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +161,7 @@ func evaluateRules(
 	config settings.Config,
 	dataflow *dataflow.DataFlow,
 	builtIn bool,
-) (error, []string) {
+) ([]string, error) {
 	outputResults := map[string][]Result{}
 
 	var bar *progressbar.ProgressBar
@@ -189,19 +195,19 @@ func evaluateRules(
 			// TODO: perf question: can we do this once?
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return err, fingerprints
+			return fingerprints, err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return err, fingerprints
+				return fingerprints, err
 			}
 
 			var results map[string][]Output
 			err = json.Unmarshal(jsonRes, &results)
 			if err != nil {
-				return err, fingerprints
+				return fingerprints, err
 			}
 
 			ruleSummary := &Rule{
@@ -269,7 +275,7 @@ func evaluateRules(
 		summaryResults[severity] = append(summaryResults[severity], resultSlice...)
 	}
 
-	return nil, fingerprints
+	return fingerprints, nil
 }
 
 func removeUnusedFingerprints(detectedFingerprints []string, excludeFingerprints map[string]bool) []string {
@@ -437,23 +443,43 @@ func writeRuleListToString(
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 ) int {
-	defaultRuleCount, customRuleCount := countRules(rules, languages, config, false)
-	builtInCount, _ := countRules(builtInRules, languages, config, true)
-	defaultRuleCount = defaultRuleCount + builtInCount
-	totalRuleCount := defaultRuleCount + customRuleCount
+	ruleCountPerLang, totalRuleCount, defaultRulesUsed := countRules(rules, languages, config, false)
+	builtInRuleCountPerLang, totalBuiltInRuleCount, builtInRulesUsed := countRules(builtInRules, languages, config, true)
+
+	// combine default and built-in rules per lang
+	for _, lang := range maps.Keys(builtInRuleCountPerLang) {
+		if ruleCount, ok := ruleCountPerLang[lang]; ok {
+			ruleCount.DefaultRuleCount += builtInRuleCountPerLang[lang].DefaultRuleCount
+			ruleCountPerLang[lang] = ruleCount
+		} else {
+			ruleCountPerLang[lang] = builtInRuleCountPerLang[lang]
+		}
+	}
+
+	totalRuleCount += totalBuiltInRuleCount
 
 	if totalRuleCount == 0 {
 		reportStr.WriteString("\n\nZero rules found. A security report requires rules to function. Please check configuration.\n")
 		return 0
 	}
 	reportStr.WriteString("\n\nRules: \n")
-	if defaultRuleCount > 0 {
-		reportStr.WriteString(fmt.Sprintf(" - %d default rules applied ", defaultRuleCount))
-		reportStr.WriteString(color.HiBlackString(fmt.Sprintf("(https://docs.bearer.com/reference/rules) [%s]\n", config.BearerRulesVersion)))
+
+	if defaultRulesUsed || builtInRulesUsed {
+		reportStr.WriteString(color.HiBlackString(fmt.Sprintf("https://docs.bearer.com/reference/rules [%s]\n\n", config.BearerRulesVersion)))
 	}
-	if customRuleCount > 0 {
-		reportStr.WriteString(fmt.Sprintf(" - %d custom rules applied", customRuleCount))
+
+	tbl := table.New("Language", "Default Rules", "Custom Rules", "Files").WithWriter(reportStr)
+
+	languageSlice := maps.Values(languages)[:]
+	sort.Slice(languageSlice, func(i, j int) bool {
+		return len(languageSlice[i].Files) > len(languageSlice[j].Files)
+	})
+	for _, lang := range languageSlice {
+		if ruleCount, ok := ruleCountPerLang[lang.Name]; ok {
+			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(languages[lang.Name].Files))
+		}
 	}
+	tbl.Print()
 
 	return totalRuleCount
 }
@@ -476,9 +502,13 @@ func countRules(
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 	builtIn bool,
-) (int, int) {
-	defaultRuleCount := 0
-	customRuleCount := 0
+) (
+	ruleCountPerLang map[string]RuleCounter,
+	totalRuleCount int,
+	defaultRulesUsed bool,
+) {
+	ruleCountPerLang = make(map[string]RuleCounter)
+	totalRuleCount = 0
 
 	for key := range rules {
 		rule := rules[key]
@@ -502,14 +532,40 @@ func countRules(
 			continue
 		}
 
-		if strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") || builtIn {
-			defaultRuleCount++
+		// increase total count by 1
+		totalRuleCount += 1
+
+		defaultRule := strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") || builtIn
+		if ruleCount, ok := ruleCountPerLang[rule.Language()]; ok {
+			if defaultRule {
+				if !defaultRulesUsed {
+					defaultRulesUsed = true
+				}
+				ruleCount.DefaultRuleCount += 1
+				ruleCountPerLang[rule.Language()] = ruleCount
+			} else {
+				ruleCount.CustomRuleCount += 1
+				ruleCountPerLang[rule.Language()] = ruleCount
+			}
 		} else {
-			customRuleCount++
+			if defaultRule {
+				if !defaultRulesUsed {
+					defaultRulesUsed = true
+				}
+				ruleCountPerLang[rule.Language()] = RuleCounter{
+					CustomRuleCount:  0,
+					DefaultRuleCount: 1,
+				}
+			} else {
+				ruleCountPerLang[rule.Language()] = RuleCounter{
+					CustomRuleCount:  1,
+					DefaultRuleCount: 0,
+				}
+			}
 		}
 	}
 
-	return defaultRuleCount, customRuleCount
+	return ruleCountPerLang, totalRuleCount, defaultRulesUsed
 }
 
 func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
