@@ -163,7 +163,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 	}
 
 	if err := repository.FetchBaseIfNotPresent(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error fetching base branch: %w", err)
 	}
 
 	fileList, err := filelist.Discover(repository, targetPath, r.goclocResult, r.scanSettings)
