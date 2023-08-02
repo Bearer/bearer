@@ -129,10 +129,11 @@ When the Bearer action is being used to check a pull request, you can tell the
 action to only report findings introduced within the pull request by setting
 the `diff` input parameter to `true`.
 
-```yaml
+```diff-yaml
 name: Bearer PR Check
 
 on:
++ # Diff can only be used with pull_request events
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -149,6 +150,7 @@ jobs:
         id: report
         uses: bearer/bearer-action@v2
         with:
++         # Add diff option
           diff: true
 ```
 
@@ -169,6 +171,8 @@ on:
 
 permissions:
   contents: read
++ # Add the pull-requests permission
+  pull-requests: write
 
 jobs:
   rule_check:
@@ -180,23 +184,20 @@ jobs:
         id: report
         uses: bearer/bearer-action@v2
         with:
++         # use rdjson output, and only report changes from your PR
           format: rdjson
           output: rd.json
           diff: true
++     # add steps to setup and run reviewdog
       - uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
       - name: Run reviewdog
         env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cat rd.json | reviewdog -f=rdjson -reporter=github-pr-review
 ```
-Remember to set a personal access [token](https://github.com/settings/personal-access-tokens/new) with read and write access to your repository.
-- If you choose a "classic" personal access token, it will need full repo permissions (scope: repo)
-- If you choose a "fine-grained" personal access token, it will need read and write access to pull requests for your repo
-
-Save this token to your repo secrets as `REVIEWDOG_GITHUB_API_TOKEN` and you should be good to go.
 
 ## Integrate with Defect Dojo
 
