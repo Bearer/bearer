@@ -32,7 +32,7 @@ Use the `DIFF_BASE_BRANCH` environment variable to enable differential scanning,
 and to specify the base branch to use for comparison.
 
 ```bash
-git co my-feature
+git checkout my-feature
 DIFF_BASE_BRANCH=main bearer scan .
 ```
 
