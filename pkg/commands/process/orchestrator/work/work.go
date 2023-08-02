@@ -28,3 +28,4 @@ type ProcessRequest struct {
 
 var RouteInitialize = "/initialize"
 var RouteProcess = "/process"
+var RouteReduceMemory = "/reduce_memory"
