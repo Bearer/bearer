@@ -188,10 +188,10 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 
 	var baseBranchFindings *basebranchfindings.Findings
 	if err := repository.WithBaseBranch(func() error {
-		output.StdErrLog(fmt.Sprintf(
-			"\nScanning base branch %s",
-			opts.DiffBaseBranch,
-		))
+		if !opts.Quiet {
+			output.StdErrLog(fmt.Sprintf("\nScanning base branch %s", opts.DiffBaseBranch))
+		}
+
 		if err := orchestrator.Scan(r.reportPath+".base", fileList.BaseFiles); err != nil {
 			return err
 		}
@@ -204,7 +204,10 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 
 		baseBranchFindings = buildBaseBranchFindings(fileList, detections)
 
-		output.StdErrLog("\nScanning current branch")
+		if !opts.Quiet {
+			output.StdErrLog("\nScanning current branch")
+		}
+
 		return nil
 	}); err != nil {
 		return nil, err
