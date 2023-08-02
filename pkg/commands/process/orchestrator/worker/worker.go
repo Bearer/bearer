@@ -133,6 +133,9 @@ func Start(port string) error {
 					FileStats: fileStats,
 					Error:     errorString,
 				})
+			case work.RouteReduceMemory:
+				log.Trace().Msgf("attempting to reduce memory usage")
+				runtime.GC()
 			default:
 				rw.WriteHeader(http.StatusNotFound)
 			}

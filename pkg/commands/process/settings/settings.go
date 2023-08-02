@@ -25,6 +25,7 @@ var (
 	CodeExtractBuffer                = 3                 // Number of lines allowed before or after the detection
 	FileSizeMaximum                  = 2 * 1000 * 1000   // 2 MB Ignore files larger than the specified value
 	FilesPerWorker                   = 1000              // By default, start a worker per this many files, up to the number of CPUs
+	MemorySoftMaximum         uint64 = 650 * 1000 * 1000 // 650 MB If the memory needed to scan a file surpasses the specified limit, ask the worker to reduce memory usage.
 	MemoryMaximum             uint64 = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
 	ExistingWorker                   = ""                // Specify the URL of an existing worker
 )

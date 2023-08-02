@@ -148,7 +148,7 @@ func (process *Process) kill() {
 }
 
 func (process *Process) monitorMemory() {
-	tick := time.NewTicker(1 * time.Second)
+	tick := time.NewTicker(500 * time.Millisecond)
 	monitor, err := gopsutilprocess.NewProcessWithContext(process.context, int32(process.command.Process.Pid))
 	if err != nil {
 		log.Debug().Msgf("failed to start memory monitor: %s", err)
@@ -172,7 +172,29 @@ func (process *Process) monitorMemory() {
 				process.errorChannel <- ErrorOutOfMemory
 				return
 			}
+
+			if stats.RSS > settings.MemorySoftMaximum {
+				process.reduceMemoryUsage()
+			}
 		}
+	}
+}
+
+func (process *Process) reduceMemoryUsage() {
+	request, err := process.buildRequest(work.RouteReduceMemory, nil)
+	if err != nil {
+		log.Debug().Msgf("%s failed to build memory reduction request %s", process.id, err)
+	}
+
+	response, err := process.client.Do(request)
+	if err != nil {
+		log.Debug().Msgf("%s failed to request memory reduction: %s", process.id, err)
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		log.Debug().Msgf("%s memory reduction not ok response", process.id)
 	}
 }
 
