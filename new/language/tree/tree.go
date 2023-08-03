@@ -33,6 +33,10 @@ func Parse(ctx context.Context, sitterLanguage *sitter.Language, input string) (
 	}, nil
 }
 
+func (tree *Tree) SitterRootNode() *sitter.Node {
+	return tree.sitterTree.RootNode()
+}
+
 func (tree *Tree) RootNode() *Node {
 	return tree.wrap(tree.sitterTree.RootNode())
 }

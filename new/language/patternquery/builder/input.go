@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/pkg/util/set"
 )
 
 func processInput(langImplementation implementation.Implementation, input string) (string, *InputParams, error) {
@@ -34,8 +35,14 @@ func processInput(langImplementation implementation.Implementation, input string
 		unanchoredOffsets[i] = adjustForPositions(position[0], unanchoredPositions[:i])
 	}
 
+	variableNames := set.New[string]()
+	for _, variable := range variables {
+		variableNames.Add(variable.Name)
+	}
+
 	return string(inputWithoutUnanchored), &InputParams{
 		Variables:         variables,
+		VariableNames:     variableNames.Items(),
 		MatchNodeOffset:   adjustForPositions(matchNodeOffset, unanchoredPositions),
 		UnanchoredOffsets: unanchoredOffsets,
 	}, nil

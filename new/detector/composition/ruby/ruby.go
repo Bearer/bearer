@@ -31,6 +31,7 @@ import (
 	"github.com/bearer/bearer/new/language/implementation/ruby"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	asttree "github.com/bearer/bearer/pkg/ast/tree"
 	reporttypes "github.com/bearer/bearer/pkg/report/detectors"
 )
 
@@ -217,6 +218,8 @@ func (composition *Composition) DetectFromFileWithTypes(
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
+
+	astRootNode := asttree.NewBuilder(tree.SitterRootNode()).Build()
 
 	evaluator := evaluator.New(
 		ctx,

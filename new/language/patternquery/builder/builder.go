@@ -17,6 +17,7 @@ import (
 )
 
 type InputParams struct {
+	VariableNames     []string
 	Variables         []types.Variable
 	MatchNodeOffset   int
 	UnanchoredOffsets []int
@@ -24,6 +25,7 @@ type InputParams struct {
 
 type Result struct {
 	Query           string
+	VariableNames   []string
 	ParamToVariable map[string]string
 	EqualParams     [][]string
 	ParamToContent  map[string]map[string]string
@@ -208,6 +210,7 @@ func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
 
 	return &Result{
 		Query:           builder.stringBuilder.String(),
+		VariableNames:   builder.inputParams.VariableNames,
 		ParamToVariable: paramToVariable,
 		EqualParams:     equalParams,
 		ParamToContent:  builder.paramToContent,
