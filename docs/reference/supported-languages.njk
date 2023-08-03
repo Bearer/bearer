@@ -8,109 +8,159 @@ supportChart:
       - Security
       - Privacy
       - Data Flow
+    frameworks:
+      - Ruby on Rails
     rules: true
     searchName: lang-ruby
     searchTerm: ruby
+    status: GA
   javascript:
     name: JavaScript / TypeScript
     support:
       - Security
       - Privacy
       - Data Flow
+    frameworks:
+      - Express
+      - React
     rules: true
     searchName: lang-jsts
     searchTerm: javascript
+    status: GA
   java:
     name: Java
     support:
       - Security
       - Privacy
       - Data Flow
+    frameworks:
+      - Spring
     rules: true
     searchName: lang-java
     searchTerm: java_
+    status: Beta
+  csharp:
+    name: C#
+    support:
+      - Privacy
+      - Data Flow
+    frameworks: []
+    rules: false
+    searchName: lang-csharp
+    searchTerm: csharp_
+    status: Alpha
+  php:
+    name: PHP
+    support:
+      - Privacy
+      - Data Flow
+    frameworks:
+    rules: false
+    searchName: lang-php
+    searchTerm: php_
+    status: Alpha
+  python:
+    name: Python
+    support:
+        - Privacy
+        - Data Flow
+    frameworks: []
+    rules: false
+    searchName: lang-python
+    searchTerm: python_
+    status: Alpha
+  go:
+    name: Go
+    support:
+      - Privacy
+      - Data Flow
+    frameworks: []
+    rules: false
+    searchName: lang-go
+    searchTerm: go_
+    status: Alpha
 ---
 {% renderTemplate "liquid,md" %}
 # Supported languages
 
 Bearer CLI supports the following language and framework combinations.
+When you scan a codebase, Bearer will automatically select the appropriate language based on the file extension. For example, if your application is composed of Ruby and JavaScript code, Bearer will automatically apply the right language and set of rules.
+
 {% endrenderTemplate %}
 
 <table>
   <thead>
     <tr>
-      <th>Language</th>
+      <th>Languages</th>
       <th>Frameworks</th>
       <th>Report Types</th>
-      <th>Total rules</th>
+      <th># rules</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
     {% for language, data in supportChart %}
       <tr>
         <td>
-          <a href="#{{language}}">{{data.name}}</a>
+          {{data.name}}
         </td>
         <td>
-          {{ rules
-            .counts
-            .languages[language]
-            .frameworks | rewriteFrameworks | join(", ") }}
-
+          {% if data.frameworks | length > 0 %}
+            {{data.frameworks | join(", ")}}
+          {% else %}
+            -
+          {% endif %}
         </td>
-        <td>{{supportChart[language].support | join(", ")}}</td>
         <td>
-          <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{rules.counts.languages[language].count}}</a>
+          {{ supportChart[language].support | join(", ")}}
+        </td>
+        <td>
+          {% if data.rules %}
+            <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{rules.counts.languages[language].count}}</a>
+          {% else %}
+            -
+          {% endif %}
+        </td>
+        <td>
+          {{ data.status }}
         </td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
 
-<h2>Support details</h2>
-<p>Select a rule count link below to view the complete rules list for the selected language and framework combination.</p>
-{% for language, data in supportChart %}
-  {# alias language to thisLang #}
-  {% set thisLang = rules
-    .counts
-    .languages[language] %}
+{% renderTemplate "liquid,md" %}
 
-  <h3 id="{{language}}">{{data.name}}</h3>
-  <ul>
+## Language and framework support
 
-    {% if true if rules
-      .counts
-      .languages[language]
-      .frameworks | keysToArr | length > 0 else 
-        false %}
-      <li>
-        <strong>Frameworks</strong>: {{ thisLang.frameworks | rewriteFrameworks | join(", ") }}</li>
-    {% endif %}
-    <li>
-      <strong>Report types</strong>: {{ supportChart[language].support | join(", ")}}</li>
-  </ul>
-  {% if supportChart[language].rules %}
-    <h4 class="">Rule support</h4>
-    <ul>
-      <li>Core language rules: <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{thisLang.baseRules | length}}</a>
-      </li>
-      {% if true if rules
-        .counts
-        .languages[language]
-        .frameworks | keysToArr | length > 0 else 
-          false %}
-        {% for framework, val in thisLang.frameworks %}
-          <li>{{val.name | rewriteFrameworks}} rules: <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}&q={{val.name}}">{{val.count}}</a>
-          </li>
-          {% endfor%}
-        {% endif %}
-      </ul>
-    {% endif %}
-  {% endfor %}
+Bearer CLI works across a variety of languages, especially:
+- Dynamically typed languages such as Ruby or JavaScript.
+- Optionally strong typed languages such as TypeScript.
+- Strong typed languages such as Java.
 
-  {% renderTemplate "liquid,md" %}
-  ---
-We are working on adding more languages in the coming months, especially PHP, C#, Go, and Python.
+You can access the complete list of security rules and associated vulnerabilities supported for each language by Bearer CLI in [the rules section](/reference/rules/).
 
-Let us know [on Discord](https://discord.com/invite/eaHZBJUXRF) which language you'd like to see next.   
+### Framework support
+Bearer CLI supports the majority of frameworks, requiring only core language support to perform its analysis. However, certain frameworks may require specialized rules: these are mentioned in the table above in the "framework" section. If you observe any gaps in support for a particular framework, please [submit an issue](https://github.com/Bearer/bearer/issues) with relevant details and examples.
+
+### Support status definition
+
+- **General Availability (GA)**: A language at the GA stage encompasses Bearer's complete feature set, having been rigorously tested to ensure maximum accuracy.
+- **Beta**: A language in the Beta stage is equipped with the full range of Bearer's features, offering a high degree of precision. However, it may not include all the [security rules](/explanations/reports/#security-report).
+- **Alpha**: A language at the Alpha stage does not yet include the entire Bearer feature set, particularly regarding the [security report](/explanations/reports/#security-report).
+
+
+## How do we evaluate language support?
+
+The development of a robust Static Application Security Testing (SAST) tool hinges on two crucial performance metrics: recall and precision. A modern, efficient SAST solution aims to minimize the false positive rate, to avoid inundating developers with irrelevant findings. At the same time, it should not overlook relevant vulnerabilities, or it risks giving a false sense of security.
+
+The methodology we employ for testing our software is instrumental in achieving this level of confidence. Although there are a few benchmarking projects available for SAST, they often fall short of providing a comprehensive assessment. The multitude of coding styles and the diversity of potential vulnerabilities as numerous as the developers themselves necessitate a well-rounded test suite that truly represents how code is written. Relying solely on benchmarking projects, in this case, is insufficient.
+
+Given this, as part of our language release procedure, we heavily depend on Open Source projects to evaluate the quality of our support. Our engineering team has composed an in-depth post detailing our approach, which we strongly recommend you review [here](https://www.bearer.com/blog/improving-precision-and-recall).
+
+
+## How does Bearer precision compare to solutions like Brakeman, Semgrep, or Snyk?
+
+Establishing a high degree of accuracy for a SAST is challenging, and comparing them becomes an even more complex task. As a part of our in-house toolkit, we have undertaken the task of determining how Bearer stands against other well-established solutions in the market. The comprehensive results of our comparative analysis, along with an open data set, are available [here](https://www.bearer.com/blog/benchmarking-top-sast-products).
+
 {% endrenderTemplate %}
