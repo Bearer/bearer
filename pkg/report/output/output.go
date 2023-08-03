@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
@@ -24,6 +25,7 @@ var ErrUndefinedFormat = errors.New("undefined output format")
 func GetOutput(
 	report types.Report,
 	config settings.Config,
+	files []files.File,
 	baseBranchFindings *basebranchfindings.Findings,
 ) (any, *dataflow.DataFlow, error) {
 	switch config.Report.Report {
@@ -32,14 +34,14 @@ func GetOutput(
 	case flag.ReportDataFlow:
 		return GetDataflow(report, config, false)
 	case flag.ReportSecurity:
-		return reportSecurity(report, config, baseBranchFindings)
+		return reportSecurity(report, config, files, baseBranchFindings)
 	case flag.ReportSaaS:
-		securityResults, dataflow, err := reportSecurity(report, config, baseBranchFindings)
+		securityResults, dataflow, err := reportSecurity(report, config, files, baseBranchFindings)
 		if err != nil {
 			return nil, nil, err
 		}
 
-		return saas.GetReport(config, securityResults, dataflow, report.Inputgocloc)
+		return saas.GetReport(config, securityResults, dataflow, files)
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
@@ -94,6 +96,7 @@ func reportStats(report types.Report, config settings.Config) (*stats.Stats, *da
 func reportSecurity(
 	report types.Report,
 	config settings.Config,
+	files []files.File,
 	baseBranchFindings *basebranchfindings.Findings,
 ) (
 	securityResults *security.Results,
@@ -113,7 +116,7 @@ func reportSecurity(
 	}
 
 	if config.Client != nil && config.Client.Error == nil {
-		saas.SendReport(config, securityResults, report.Inputgocloc, dataflow)
+		saas.SendReport(config, securityResults, files, dataflow)
 	}
 
 	return

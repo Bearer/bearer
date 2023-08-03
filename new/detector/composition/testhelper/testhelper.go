@@ -148,6 +148,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 			Path: detectorsReportPath,
 		},
 		runner.config,
+		[]files.File{fileRelativePath},
 		nil,
 	)
 

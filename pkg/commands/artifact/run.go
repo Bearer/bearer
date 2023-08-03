@@ -61,9 +61,9 @@ type Runner interface {
 	// ReportPath returns the filename of the report
 	ReportPath() string
 	// Scan gathers the findings
-	Scan(ctx context.Context, opts flag.Options) (*basebranchfindings.Findings, error)
+	Scan(ctx context.Context, opts flag.Options) ([]files.File, *basebranchfindings.Findings, error)
 	// Report a writes a report
-	Report(baseBranchFindings *basebranchfindings.Findings) (bool, error)
+	Report(files []files.File, baseBranchFindings *basebranchfindings.Findings) (bool, error)
 	// Close closes runner
 	Close(ctx context.Context) error
 }
@@ -143,9 +143,9 @@ func (r *runner) Close(ctx context.Context) error {
 	return nil
 }
 
-func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindings.Findings, error) {
+func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *basebranchfindings.Findings, error) {
 	if r.reuseDetection {
-		return nil, nil
+		return nil, nil, nil
 	}
 
 	if !opts.Quiet {
@@ -154,25 +154,25 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 
 	targetPath, err := filepath.Abs(opts.Target)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get absolute target: %w", err)
+		return nil, nil, fmt.Errorf("failed to get absolute target: %w", err)
 	}
 
 	repository, err := gitrepository.New(ctx, r.scanSettings, targetPath, opts.DiffBaseBranch)
 	if err != nil {
-		return nil, fmt.Errorf("error opening git repository: %w", err)
+		return nil, nil, fmt.Errorf("error opening git repository: %w", err)
 	}
 
 	if err := repository.FetchBaseIfNotPresent(); err != nil {
-		return nil, fmt.Errorf("error fetching base branch: %w", err)
+		return nil, nil, fmt.Errorf("error fetching base branch: %w", err)
 	}
 
 	fileList, err := filelist.Discover(repository, targetPath, r.goclocResult, r.scanSettings)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if len(fileList.Files) == 0 {
-		return nil, ErrFileListEmpty
+		return nil, nil, ErrFileListEmpty
 	}
 
 	orchestrator, err := orchestrator.New(
@@ -182,7 +182,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 		len(fileList.Files),
 	)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	defer orchestrator.Close()
 
@@ -197,7 +197,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 		}
 
 		report := types.Report{Path: r.reportPath + ".base", Inputgocloc: r.goclocResult}
-		detections, _, err := reportoutput.GetOutput(report, r.scanSettings, nil)
+		detections, _, err := reportoutput.GetOutput(report, r.scanSettings, fileList.BaseFiles, nil)
 		if err != nil {
 			return err
 		}
@@ -210,14 +210,14 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) (*basebranchfindin
 
 		return nil
 	}); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if err := orchestrator.Scan(r.reportPath, fileList.Files); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return baseBranchFindings, nil
+	return fileList.Files, baseBranchFindings, nil
 }
 
 // Run performs artifact scanning
@@ -266,7 +266,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		}
 	}
 
-	baseBranchFindings, err := r.Scan(ctx, opts)
+	files, baseBranchFindings, err := r.Scan(ctx, opts)
 	if err != nil {
 		if errors.Is(err, ErrFileListEmpty) {
 			outputhandler.StdOutLog(err.Error())
@@ -277,7 +277,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		return fmt.Errorf("scan error: %w", err)
 	}
 
-	reportPassed, err := r.Report(baseBranchFindings)
+	reportPassed, err := r.Report(files, baseBranchFindings)
 	if err != nil {
 		return fmt.Errorf("report error: %w", err)
 	} else {
@@ -307,7 +307,10 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	return nil
 }
 
-func (r *runner) Report(baseBranchFindings *basebranchfindings.Findings) (bool, error) {
+func (r *runner) Report(
+	files []files.File,
+	baseBranchFindings *basebranchfindings.Findings,
+) (bool, error) {
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	reportPassed := true
@@ -329,7 +332,7 @@ func (r *runner) Report(baseBranchFindings *basebranchfindings.Findings) (bool, 
 		outputhandler.StdErrLog("Using cached data")
 	}
 
-	detections, dataflow, err := reportoutput.GetOutput(report, r.scanSettings, baseBranchFindings)
+	detections, dataflow, err := reportoutput.GetOutput(report, r.scanSettings, files, baseBranchFindings)
 	if err != nil {
 		return false, err
 	}
