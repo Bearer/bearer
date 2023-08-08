@@ -31,7 +31,7 @@ type IgnoreFlagGroup struct {
 type IgnoreOptions struct {
 	Author  string `mapstructure:"author" json:"author" yaml:"author"`
 	Comment string `mapstructure:"comment" json:"comment" yaml:"comment"`
-	Force   bool   `mapstructure:"force" json:"force" yaml:"force"`
+	Force   bool   `mapstructure:"ignore_force" json:"ignore_force" yaml:"ignore_force"`
 }
 
 func NewIgnoreFlagGroup() *IgnoreFlagGroup {
