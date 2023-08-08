@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/bearer/bearer/pkg/flag"
@@ -42,7 +43,7 @@ $ bearer ignore show <fingerprint>`,
 				return nil
 			}
 
-			ignoredFingerprints, err := ignore.GetIgnoredFingerprints()
+			ignoredFingerprints, err := ignore.GetIgnoredFingerprints(nil)
 			if err != nil {
 				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file")
 				return nil
@@ -92,7 +93,17 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				},
 			}
 
-			return ignore.AddToIgnoreFile(fingerprintsToIgnore, options.IgnoreOptions.Force)
+			if err = ignore.AddToIgnoreFile(fingerprintsToIgnore, options.IgnoreOptions.Force); err != nil {
+				target := &ignore.DuplicateIgnoredFingerprintError{}
+				if errors.As(err, &target) {
+					// handle expected error (duplicate entry in bearer.ignore)
+					cmd.Printf("%s\n", err.Error())
+					return nil
+				}
+				return err
+			}
+
+			return nil
 		},
 		SilenceErrors: false,
 		SilenceUsage:  false,

@@ -22,6 +22,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	globaltypes "github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/ignore"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/bearer/bearer/pkg/util/output"
 	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
@@ -148,7 +149,11 @@ func GetOutput(
 
 	if !config.Scan.Quiet {
 		fingerprints = append(fingerprints, builtInFingerprints...)
-		unusedFingerprints := removeUnusedFingerprints(fingerprints, config.Report.ExcludeFingerprint)
+		unusedFingerprints := removeUnusedFingerprints(
+			fingerprints,
+			config.Report.ExcludeFingerprint,
+			config.IgnoredFingerprints,
+		)
 		if len(unusedFingerprints) > 0 {
 			output.StdErrLog("\n=====================================\n")
 			output.StdErrLog(fmt.Sprintf("%d excluded fingerprints present in your Bearer configuration file are no longer detected:", len(unusedFingerprints)))
@@ -255,11 +260,18 @@ func evaluateRules(
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
 				instanceCount[output.Filename]++
 				fingerprints = append(fingerprints, fingerprint)
+				if _, ok := config.IgnoredFingerprints[fingerprint]; ok {
+					// skip finding - fingerprint is in bearer.ignore file
+					log.Debug().Msgf("Ignoring finding with fingerprint %s", fingerprint)
+					continue
+				}
+				// legacy exclude fingerprint functionality
 				if config.Report.ExcludeFingerprint[fingerprint] {
 					// skip finding - fingerprint is in exclude list
 					log.Debug().Msgf("Excluding finding with fingerprint %s", fingerprint)
 					continue
 				}
+				// end legacy exclude fingerprint functionality
 
 				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
 				codeExtract := getExtract(rawCodeExtract)
@@ -304,16 +316,25 @@ func evaluateRules(
 	return fingerprints, nil
 }
 
-func removeUnusedFingerprints(detectedFingerprints []string, excludeFingerprints map[string]bool) []string {
-	filteredFingerprints := []string{}
+func removeUnusedFingerprints(
+	detectedFingerprints []string,
+	excludeFingerprints map[string]bool,
+	ignoredFingerprints map[string]ignore.IgnoredFingerprint) []string {
+	filteredFingerprints := make(map[string]bool)
 
 	for fingerprint := range excludeFingerprints {
 		if !slices.Contains(detectedFingerprints, fingerprint) {
-			filteredFingerprints = append(filteredFingerprints, fingerprint)
+			filteredFingerprints[fingerprint] = true
 		}
 	}
 
-	return filteredFingerprints
+	for fingerprint := range ignoredFingerprints {
+		if !slices.Contains(detectedFingerprints, fingerprint) {
+			filteredFingerprints[fingerprint] = true
+		}
+	}
+
+	return maps.Keys(filteredFingerprints)
 }
 
 func getExtract(rawCodeExtract []file.Line) string {
