@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -14,9 +15,12 @@ import (
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/format/diff"
 	"github.com/go-git/go-git/v5/plumbing/object"
+	"github.com/go-git/go-git/v5/plumbing/transport/client"
+	githttp "github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/google/go-github/github"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
+	"golang.org/x/oauth2"
 
 	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/commands/process/filelist/ignore"
@@ -37,6 +41,7 @@ type Repository struct {
 	headRef           *plumbing.Reference
 	headCommit,
 	mergeBaseCommit *object.Commit
+	githubToken string
 }
 
 func New(
@@ -85,6 +90,7 @@ func New(
 		baseRemoteRefName: plumbing.NewRemoteReferenceName("origin", baseBranch),
 		headRef:           headRef,
 		headCommit:        headCommit,
+		githubToken:       config.Scan.GithubToken,
 	}
 
 	repository.mergeBaseCommit, err = repository.fetchMergeBaseCommit(baseBranch)
@@ -139,6 +145,8 @@ func (repository *Repository) fetchMergeBaseCommit(baseBranch string) (*object.C
 		)
 	}
 
+	log.Debug().Msgf("merge base commit: %s", hash)
+
 	commit, err := repository.git.CommitObject(*hash)
 	if err == nil {
 		return commit, nil
@@ -162,7 +170,7 @@ func (repository *Repository) fetchMergeBaseCommit(baseBranch string) (*object.C
 
 	log.Debug().Msgf("merge base commit fetched")
 
-	return commit, nil
+	return repository.git.CommitObject(*hash)
 }
 
 func (repository *Repository) getTreeFiles(
@@ -421,8 +429,7 @@ func (repository *Repository) lookupMergeBaseRefFromVariable() *plumbing.Hash {
 }
 
 func (repository *Repository) lookupMergeBaseRefFromGithub(baseBranch string) (*plumbing.Hash, error) {
-	githubToken := os.Getenv("GITHUB_TOKEN")
-	if githubToken == "" {
+	if repository.githubToken == "" {
 		return nil, nil
 	}
 
@@ -438,7 +445,10 @@ func (repository *Repository) lookupMergeBaseRefFromGithub(baseBranch string) (*
 		return nil, fmt.Errorf("invalid github repository name '%s'", githubRepository)
 	}
 
-	client := github.NewClient(nil)
+	tokenSource := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: repository.githubToken})
+	httpClient := oauth2.NewClient(context.Background(), tokenSource)
+	client := github.NewClient(httpClient)
+
 	if githubAPIURL := os.Getenv("GITHUB_API_URL"); githubAPIURL != "" {
 		parsedURL, err := url.Parse(githubAPIURL)
 		if err != nil {
@@ -465,4 +475,27 @@ func (repository *Repository) lookupMergeBaseRefFromGithub(baseBranch string) (*
 
 	hash := plumbing.NewHash(*comparison.MergeBaseCommit.SHA)
 	return &hash, nil
+}
+
+type GithubTransport struct {
+	githubToken string
+}
+
+func (transport *GithubTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req.SetBasicAuth("x-access-token", transport.githubToken)
+
+	return http.DefaultTransport.RoundTrip(req)
+}
+
+func ConfigureGithubAuth(githubToken string) {
+	if githubToken == "" {
+		return
+	}
+
+	githubClient := githttp.NewClient(&http.Client{
+		Transport: &GithubTransport{githubToken: githubToken},
+	})
+
+	client.InstallProtocol("http", githubClient)
+	client.InstallProtocol("https", githubClient)
 }
