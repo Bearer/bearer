@@ -17,11 +17,12 @@ require (
 	github.com/hhatto/gocloc v0.5.1
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/open-policy-agent/opa v0.55.0
+	github.com/rodaine/table v1.1.0
 	github.com/rs/zerolog v1.30.0
 	github.com/russross/blackfriday v1.6.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
 	github.com/schollz/progressbar/v3 v3.13.1
-	github.com/shirou/gopsutil/v3 v3.23.6
+	github.com/shirou/gopsutil/v3 v3.23.7
 	github.com/smacker/go-tree-sitter v0.0.0-20220829074436-0a7a807924f2
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b
 	github.com/stretchr/testify v1.8.4
@@ -97,7 +98,6 @@ require (
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.42.0 // indirect
 	github.com/prometheus/procfs v0.10.1 // indirect
-	github.com/rodaine/table v1.1.0 // indirect
 	github.com/sergi/go-diff v1.3.1 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
