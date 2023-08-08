@@ -159,11 +159,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 
 	repository, err := gitrepository.New(ctx, r.scanSettings, targetPath, opts.DiffBaseBranch)
 	if err != nil {
-		return nil, nil, fmt.Errorf("error opening git repository: %w", err)
-	}
-
-	if err := repository.FetchBaseIfNotPresent(); err != nil {
-		return nil, nil, fmt.Errorf("error fetching base branch: %w", err)
+		return nil, nil, fmt.Errorf("git repository error: %w", err)
 	}
 
 	fileList, err := filelist.Discover(repository, targetPath, r.goclocResult, r.scanSettings)
