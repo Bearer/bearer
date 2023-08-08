@@ -53,6 +53,7 @@ type Flags struct {
 	ProcessFlagGroup *ProcessFlagGroup
 	ScanFlagGroup    *ScanFlagGroup
 	GeneralFlagGroup *GeneralFlagGroup
+	IgnoreFlagGroup  *IgnoreFlagGroup
 }
 
 // Options holds all the runtime configuration
@@ -62,6 +63,7 @@ type Options struct {
 	RuleOptions
 	ScanOptions
 	GeneralOptions
+	IgnoreOptions
 }
 
 func addFlag(cmd *cobra.Command, flag *Flag) {
@@ -176,6 +178,9 @@ func (f *Flags) groups() []FlagGroup {
 	if f.RepoFlagGroup != nil {
 		groups = append(groups, f.RepoFlagGroup)
 	}
+	if f.IgnoreFlagGroup != nil {
+		groups = append(groups, f.IgnoreFlagGroup)
+	}
 
 	return groups
 }
@@ -272,6 +277,10 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 
 	if f.GeneralFlagGroup != nil {
 		opts.GeneralOptions = f.GeneralFlagGroup.ToOptions()
+	}
+
+	if f.IgnoreFlagGroup != nil {
+		opts.IgnoreOptions = f.IgnoreFlagGroup.ToOptions()
 	}
 
 	return opts, nil
