@@ -449,17 +449,9 @@ func (repository *Repository) lookupMergeBaseRefFromGithub(baseBranch string) (*
 		return nil, fmt.Errorf("invalid github repository name '%s'", githubRepository)
 	}
 
-	tokenSource := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: repository.githubToken})
-	httpClient := oauth2.NewClient(context.Background(), tokenSource)
-	client := github.NewClient(httpClient)
-
-	if githubAPIURL := os.Getenv("GITHUB_API_URL"); githubAPIURL != "" {
-		parsedURL, err := url.Parse(githubAPIURL)
-		if err != nil {
-			return nil, fmt.Errorf("failed to parse github api url: %w", err)
-		}
-
-		client.BaseURL = parsedURL
+	client, err := repository.newGithubClient()
+	if err != nil {
+		return nil, err
 	}
 
 	comparison, _, err := client.Repositories.CompareCommits(
@@ -479,6 +471,27 @@ func (repository *Repository) lookupMergeBaseRefFromGithub(baseBranch string) (*
 
 	hash := plumbing.NewHash(*comparison.MergeBaseCommit.SHA)
 	return &hash, nil
+}
+
+func (repository *Repository) newGithubClient() (*github.Client, error) {
+	tokenSource := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: repository.githubToken})
+	httpClient := oauth2.NewClient(context.Background(), tokenSource)
+	client := github.NewClient(httpClient)
+
+	if githubAPIURL := os.Getenv("GITHUB_API_URL"); githubAPIURL != "" {
+		parsedURL, err := url.Parse(githubAPIURL)
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse github api url: %w", err)
+		}
+
+		if !strings.HasSuffix(parsedURL.Path, "/") {
+			parsedURL.Path += "/"
+		}
+
+		client.BaseURL = parsedURL
+	}
+
+	return client, nil
 }
 
 type GithubTransport struct {
