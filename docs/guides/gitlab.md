@@ -61,6 +61,7 @@ bearer:
     entrypoint: [ "" ]
   variables:
     DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA
   script: bearer scan .
 ```
 
@@ -82,6 +83,7 @@ pr_check:
     CURRENT_BRANCH: $CI_COMMIT_REF_NAME
     DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
     DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA
   script:
     - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
     - curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
