@@ -391,6 +391,10 @@ func (repository *Repository) lookupMergeBaseHash(baseBranch string) (*plumbing.
 
 	ref, err := repository.git.Reference(repository.baseRemoteRefName, true)
 	if err != nil {
+		if err == plumbing.ErrReferenceNotFound {
+			return nil, nil
+		}
+
 		return nil, fmt.Errorf("invalid ref: %w", err)
 	}
 
