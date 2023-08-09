@@ -151,6 +151,7 @@ type ScanOptions struct {
 	Parallel                int           `mapstructure:"parallel" json:"parallel" yaml:"parallel"`
 	ExitCode                int           `mapstructure:"exit-code" json:"exit-code" yaml:"exit-code"`
 	DiffBaseBranch          string        `mapstructure:"diff_base_branch" json:"diff_base_branch" yaml:"diff_base_branch"`
+	GithubToken             string        `mapstructure:"github_token" json:"github_token" yaml:"github_token"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -241,6 +242,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Parallel:                viper.GetInt(f.ParallelFlag.ConfigName),
 		ExitCode:                viper.GetInt(f.ExitCodeFlag.ConfigName),
 		DiffBaseBranch:          os.Getenv("DIFF_BASE_BRANCH"),
+		GithubToken:             os.Getenv("GITHUB_TOKEN"),
 	}, nil
 }
 

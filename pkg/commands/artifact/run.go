@@ -249,6 +249,8 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		stats = evalstats.New()
 	}
 
+	gitrepository.ConfigureGithubAuth(scanSettings.Scan.GithubToken)
+
 	r := NewRunner(ctx, scanSettings, inputgocloc, stats)
 	defer r.Close(ctx)
 
