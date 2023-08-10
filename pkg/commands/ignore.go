@@ -11,16 +11,10 @@ import (
 	"github.com/spf13/viper"
 )
 
-var IgnoreFlags = &flag.Flags{
-	IgnoreFlagGroup:  flag.NewIgnoreFlagGroup(),
-	GeneralFlagGroup: flag.NewGeneralFlagGroup(),
-}
-
 func NewIgnoreCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:           "ignore [subcommand] <fingerprint>",
 		Short:         "Manage ignored fingerprints",
-		Example:       `  # Add a fingerprint to, or show a fingerprint from, your bearer.ignore file`,
 		Args:          cobra.NoArgs,
 		SilenceErrors: false,
 		SilenceUsage:  false,
@@ -39,7 +33,7 @@ func newIgnoreShowCommand() *cobra.Command {
 	return &cobra.Command{
 		Use:   "show <fingerprint>",
 		Short: "Show an ignored fingerprint",
-		Example: `  # Show the details of an ignored fingerprint from your bearer.ignore file
+		Example: `# Show the details of an ignored fingerprint from your bearer.ignore file
 $ bearer ignore show <fingerprint>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {
@@ -70,13 +64,16 @@ $ bearer ignore show <fingerprint>`,
 }
 
 func newIgnoreAddCommand() *cobra.Command {
+	var IgnoreAddFlags = &flag.Flags{
+		IgnoreFlagGroup: flag.NewIgnoreFlagGroup(),
+	}
 	cmd := &cobra.Command{
 		Use:   "add <fingerprint>",
 		Short: "Add an ignored fingerprint",
-		Example: `  # Add an ignored fingerprint to your bearer.ignore file
+		Example: `# Add an ignored fingerprint to your bearer.ignore file
 $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := IgnoreFlags.Bind(cmd); err != nil {
+			if err := IgnoreAddFlags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
@@ -85,7 +82,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				return nil
 			}
 
-			options, err := IgnoreFlags.ToOptions(args)
+			options, err := IgnoreAddFlags.ToOptions(args)
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
 			}
@@ -112,24 +109,28 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 		SilenceErrors: false,
 		SilenceUsage:  false,
 	}
-	IgnoreFlags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreFlags.Usages(cmd)))
+	IgnoreAddFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreAddFlags.Usages(cmd)))
 
 	return cmd
 }
 
 func newIgnoreMigrateCommand() *cobra.Command {
+	IgnoreMigrateFlags := &flag.Flags{
+		IgnoreFlagGroup:  flag.NewIgnoreFlagGroup(),
+		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
+	}
 	cmd := &cobra.Command{
 		Use:   "migrate",
 		Short: "Migrate ignored fingerprints from bearer.yml to bearer.ignore",
-		Example: `  # Migrate existing ignored (excluded) fingerprints from bearer.yml file to bearer.ignore
+		Example: `# Migrate existing ignored (excluded) fingerprints from bearer.yml file to bearer.ignore
 $ bearer ignore migrate`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := IgnoreFlags.Bind(cmd); err != nil {
+			if err := IgnoreMigrateFlags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			options, err := IgnoreFlags.ToOptions(args)
+			options, err := IgnoreMigrateFlags.ToOptions(args)
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
 			}
@@ -154,8 +155,8 @@ $ bearer ignore migrate`,
 		SilenceErrors: false,
 		SilenceUsage:  false,
 	}
-	IgnoreFlags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreFlags.Usages(cmd)))
+	IgnoreMigrateFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreMigrateFlags.Usages(cmd)))
 
 	return cmd
 }
