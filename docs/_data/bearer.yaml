@@ -5,6 +5,7 @@ options:
       default_value: "false"
       usage: help for this command
 see_also:
+    - ' ignore - Manage ignored fingerprints'
     - ' init - Generates a default config to `bearer.yml`'
     - ' scan - Scan a directory or file'
     - ' version - Print the version'
