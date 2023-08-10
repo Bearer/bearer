@@ -31,6 +31,7 @@ import (
 	java "github.com/bearer/bearer/new/language/implementation/java"
 	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	asttree "github.com/bearer/bearer/pkg/ast/tree"
 	reporttypes "github.com/bearer/bearer/pkg/report/detectors"
 )
 
@@ -209,21 +210,25 @@ func (composition *Composition) DetectFromFileWithTypes(
 		return nil, nil
 	}
 
-	fileContent, err := os.ReadFile(file.AbsolutePath)
+	contentBytes, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read file %s", err)
 	}
 
-	tree, err := composition.lang.Parse(ctx, string(fileContent))
+	content := string(contentBytes)
+	tree, err := composition.lang.Parse(ctx, content)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
+
+	astTree := asttree.NewBuilder(content, tree.SitterRootNode()).Build()
 
 	evaluator := evaluator.New(
 		ctx,
 		composition.langImplementation,
 		composition.lang,
 		composition.detectorSet,
+		astTree,
 		tree,
 		file.FileInfo.Name(),
 		fileStats,
@@ -240,7 +245,7 @@ func (composition *Composition) DetectFromFileWithTypes(
 			sanitizerRuleID = rule.SanitizerRuleID
 		}
 		detections, err := evaluator.Evaluate(
-			tree.RootNode(),
+			astTree.RootNode(),
 			detectorType,
 			sanitizerRuleID,
 			cache,

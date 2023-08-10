@@ -2,7 +2,7 @@ package cache
 
 import (
 	"github.com/bearer/bearer/new/detector/detection"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/set"
 )
@@ -13,7 +13,7 @@ const (
 )
 
 type Key struct {
-	rootNodeID tree.NodeID
+	rootNode   *tree.Node
 	ruleID     string
 	scope      settings.RuleReferenceScope
 	followFlow bool
@@ -26,7 +26,7 @@ func NewKey(
 	followFlow bool,
 ) Key {
 	return Key{
-		rootNodeID: rootNode.ID(),
+		rootNode:   rootNode,
 		ruleID:     ruleID,
 		scope:      scope,
 		followFlow: followFlow,

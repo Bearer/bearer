@@ -2,7 +2,7 @@ package types
 
 import (
 	"github.com/bearer/bearer/new/detector/detection"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 )
 
 type Object struct {

@@ -2,7 +2,8 @@ package string
 
 import (
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -13,7 +14,7 @@ type stringDetector struct {
 	types.DetectorBase
 }
 
-func New(querySet *tree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) (types.Detector, error) {
 	return &stringDetector{}, nil
 }
 
@@ -34,11 +35,11 @@ func (detector *stringDetector) DetectAt(
 	case "template_string":
 		return handleTemplateString(node, evaluationState)
 	case "binary_expression":
-		if node.AnonymousChild(0).Content() == "+" {
+		if node.Children()[1].Content() == "+" {
 			return generic.ConcatenateChildStrings(node, evaluationState)
 		}
 	case "augmented_assignment_expression":
-		if node.AnonymousChild(0).Content() == "+=" {
+		if node.Children()[1].Content() == "+=" {
 			return generic.ConcatenateAssignEquals(node, evaluationState)
 		}
 	}
@@ -54,7 +55,7 @@ func handleTemplateString(node *tree.Node, evaluationState types.EvaluationState
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {
-		childValue, childIsLiteral, err := generic.GetStringValue(child.Child(1), evaluationState)
+		childValue, childIsLiteral, err := generic.GetStringValue(child.Children()[1], evaluationState)
 		if err != nil {
 			return err
 		}

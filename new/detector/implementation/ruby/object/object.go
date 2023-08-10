@@ -3,7 +3,8 @@ package object
 import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -14,17 +15,17 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	hashPairQuery        *tree.Query
-	keywordArgumentQuery *tree.Query
-	classQuery           *tree.Query
+	hashPairQuery        *langtree.Query
+	keywordArgumentQuery *langtree.Query
+	classQuery           *langtree.Query
 	// Naming
-	assignmentQuery *tree.Query
+	assignmentQuery *langtree.Query
 	// Projection
-	callsQuery            *tree.Query
-	elementReferenceQuery *tree.Query
+	callsQuery            *langtree.Query
+	elementReferenceQuery *langtree.Query
 }
 
-func New(querySet *tree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) (types.Detector, error) {
 	// { first_name: ..., ... }
 	hashPairQuery := querySet.Add(`(hash (pair key: (_) @key value: (_) @value) @pair) @root`)
 
@@ -91,7 +92,7 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node)
+	detections, err = detector.getClass(node, evaluationState)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -103,7 +104,7 @@ func (detector *objectDetector) getHash(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	results, err := detector.hashPairQuery.MatchAt(node)
+	results, err := evaluationState.QueryMatchAt(detector.hashPairQuery, node)
 	if len(results) == 0 || err != nil {
 		return nil, err
 	}
@@ -117,7 +118,13 @@ func (detector *objectDetector) getHash(
 			continue
 		}
 
-		propertyObjects, err := evaluationState.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
+		propertyObjects, err := evaluationState.Evaluate(
+			result["value"],
+			"object",
+			"",
+			settings.NESTED_SCOPE,
+			true,
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -147,7 +154,7 @@ func (detector *objectDetector) getKeywordArgument(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.keywordArgumentQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.keywordArgumentQuery, node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -157,7 +164,13 @@ func (detector *objectDetector) getKeywordArgument(
 		return nil, nil
 	}
 
-	propertyObjects, err := evaluationState.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
+	propertyObjects, err := evaluationState.Evaluate(
+		result["value"],
+		"object",
+		"",
+		settings.NESTED_SCOPE,
+		true,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -186,7 +199,7 @@ func (detector *objectDetector) getAssignment(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.assignmentQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.assignmentQuery, node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -211,8 +224,11 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
-	results, err := detector.classQuery.MatchAt(node)
+func (detector *objectDetector) getClass(
+	node *tree.Node,
+	evaluationState types.EvaluationState,
+) ([]interface{}, error) {
+	results, err := evaluationState.QueryMatchAt(detector.classQuery, node)
 	if len(results) == 0 || err != nil {
 		return nil, err
 	}

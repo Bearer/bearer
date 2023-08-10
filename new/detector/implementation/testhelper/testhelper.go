@@ -64,7 +64,7 @@ func RunTest(
 		for i, detection := range detections {
 			node := detection.MatchNode
 			results[i] = result{
-				Position: fmt.Sprintf("%d:%d", node.StartLineNumber(), node.StartColumnNumber()),
+				Position: fmt.Sprintf("%d:%d", node.ContentStart.Line, node.ContentStart.Column),
 				Content:  node.Content(),
 				Data:     detection.Data,
 			}

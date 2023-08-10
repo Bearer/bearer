@@ -1,6 +1,6 @@
 package common
 
-import "github.com/bearer/bearer/new/language/tree"
+import "github.com/bearer/bearer/pkg/ast/tree"
 
 func GetLiteralKey(keyNode *tree.Node) string {
 	switch keyNode.Type() {
@@ -9,8 +9,8 @@ func GetLiteralKey(keyNode *tree.Node) string {
 	case "simple_symbol":
 		return keyNode.Content()[1:]
 	case "string":
-		if keyNode.NamedChildCount() == 1 && keyNode.Child(1).Type() == "string_content" {
-			return keyNode.Child(1).Content()
+		if len(keyNode.Children()) == 3 && keyNode.Children()[1].Type() == "string_content" {
+			return keyNode.Children()[1].Content()
 		}
 	}
 

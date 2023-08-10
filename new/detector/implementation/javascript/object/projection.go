@@ -4,7 +4,7 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 )
@@ -35,18 +35,18 @@ func (detector *objectDetector) getMemberExpressionProjections(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.memberExpressionQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.memberExpressionQuery, node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objectNode, isPropertyAccess := getProjectedObject(result["object"])
+	objectNode, isPropertyAccess := getProjectedObject(evaluationState, result["object"])
 
 	objects, err := generic.ProjectObject(
 		node,
 		evaluationState,
 		objectNode,
-		getObjectName(objectNode),
+		getObjectName(evaluationState, objectNode),
 		result["property"].Content(),
 		isPropertyAccess,
 	)
@@ -61,13 +61,13 @@ func (detector *objectDetector) getSubscriptExpressionProjections(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.subscriptExpressionQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.subscriptExpressionQuery, node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objectNode, isPropertyAccess := getProjectedObject(result["object"])
-	propertyName := getSubscriptProperty(result["root"])
+	objectNode, isPropertyAccess := getProjectedObject(evaluationState, result["object"])
+	propertyName := getSubscriptProperty(evaluationState, result["root"])
 	if propertyName == "" {
 		return nil, nil
 	}
@@ -76,7 +76,7 @@ func (detector *objectDetector) getSubscriptExpressionProjections(
 		node,
 		evaluationState,
 		objectNode,
-		getObjectName(objectNode),
+		getObjectName(evaluationState, objectNode),
 		propertyName,
 		isPropertyAccess,
 	)
@@ -91,14 +91,20 @@ func (detector *objectDetector) getCallProjections(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.callQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.callQuery, node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
 	var properties []generictypes.Property
 
-	functionDetections, err := evaluationState.Evaluate(result["function"], "object", "", settings.NESTED_SCOPE, true)
+	functionDetections, err := evaluationState.Evaluate(
+		result["function"],
+		"object",
+		"",
+		settings.NESTED_SCOPE,
+		true,
+	)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}
@@ -114,7 +120,7 @@ func (detector *objectDetector) getObjectDeconstructionProjections(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.objectDeconstructionQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.objectDeconstructionQuery, node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -129,7 +135,7 @@ func (detector *objectDetector) getObjectDeconstructionProjections(
 		node,
 		evaluationState,
 		objectNode,
-		getObjectName(objectNode),
+		getObjectName(evaluationState, objectNode),
 		propertyName,
 		true,
 	)
@@ -140,7 +146,7 @@ func (detector *objectDetector) getObjectDeconstructionProjections(
 	return objects, nil
 }
 
-func getObjectName(objectNode *tree.Node) string {
+func getObjectName(evaluationState types.EvaluationState, objectNode *tree.Node) string {
 	// user.name or user["name"]
 	if objectNode.Type() == "identifier" {
 		return objectNode.Content()
@@ -148,19 +154,19 @@ func getObjectName(objectNode *tree.Node) string {
 
 	// address.city.zip or address.city["zip"]
 	if objectNode.Type() == "member_expression" {
-		return objectNode.ChildByFieldName("property").Content()
+		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("property")).Content()
 	}
 
 	// address["city"].zip or address["city"]["zip"]
 	if objectNode.Type() == "subscript_expression" {
-		return getSubscriptProperty(objectNode)
+		return getSubscriptProperty(evaluationState, objectNode)
 	}
 
 	return ""
 }
 
-func getSubscriptProperty(node *tree.Node) string {
-	indexNode := node.ChildByFieldName("index")
+func getSubscriptProperty(evaluationState types.EvaluationState, node *tree.Node) string {
+	indexNode := evaluationState.NodeFromSitter(node.SitterNode().ChildByFieldName("index"))
 	if indexNode.Type() == "string" {
 		return stringutil.StripQuotes(indexNode.Content())
 	}
@@ -168,9 +174,9 @@ func getSubscriptProperty(node *tree.Node) string {
 	return ""
 }
 
-func getProjectedObject(objectNode *tree.Node) (*tree.Node, bool) {
+func getProjectedObject(evaluationState types.EvaluationState, objectNode *tree.Node) (*tree.Node, bool) {
 	if objectNode.Type() == "call_expression" {
-		return objectNode.ChildByFieldName("function"), false
+		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("function")), false
 	}
 
 	return objectNode, true

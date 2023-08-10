@@ -5,18 +5,19 @@ import (
 
 	"golang.org/x/exp/slices"
 
+	"github.com/rs/zerolog/log"
+	sitter "github.com/smacker/go-tree-sitter"
+
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/rs/zerolog/log"
 )
 
 func matchFilter(
 	evaluationState types.EvaluationState,
-	variables map[string]*tree.Node,
-	joinedVariables map[string]*tree.Node,
+	variables,
+	joinedVariables map[string]*sitter.Node,
 	filter settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*detection.Detection, error) {
@@ -59,13 +60,13 @@ func matchFilter(
 
 func matchAllFilters(
 	evaluationState types.EvaluationState,
-	variables map[string]*tree.Node,
+	variables map[string]*sitter.Node,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
-) (bool, []*detection.Detection, map[string]*tree.Node, error) {
+) (bool, []*detection.Detection, map[string]*sitter.Node, error) {
 	var datatypeDetections []*detection.Detection
 
-	joinedVariables := make(map[string]*tree.Node)
+	joinedVariables := make(map[string]*sitter.Node)
 	for name, node := range variables {
 		joinedVariables[name] = node
 	}
@@ -84,8 +85,8 @@ func matchAllFilters(
 
 func matchEitherFilters(
 	evaluationState types.EvaluationState,
-	variables map[string]*tree.Node,
-	joinedVariables map[string]*tree.Node,
+	variables,
+	joinedVariables map[string]*sitter.Node,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*detection.Detection, error) {
@@ -117,9 +118,9 @@ func matchEitherFilters(
 
 func matchDetectionFilter(
 	evaluationState types.EvaluationState,
-	variables map[string]*tree.Node,
-	joinedVariables map[string]*tree.Node,
-	node *tree.Node,
+	variables,
+	joinedVariables map[string]*sitter.Node,
+	node *sitter.Node,
 	filter settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*detection.Detection, error) {
@@ -129,13 +130,17 @@ func matchDetectionFilter(
 		sanitizerRuleID = rule.SanitizerRuleID
 	}
 
-	if ruleID == "datatype" {
-		detections, err := evaluationState.Evaluate(node, "datatype", sanitizerRuleID, filter.Scope, true)
+	detections, err := evaluationState.Evaluate(
+		evaluationState.NodeFromSitter(node),
+		ruleID,
+		sanitizerRuleID,
+		filter.Scope,
+		true,
+	)
 
+	if ruleID == "datatype" {
 		return boolPointer(len(detections) != 0), detections, err
 	}
-
-	detections, err := evaluationState.Evaluate(node, ruleID, sanitizerRuleID, filter.Scope, true)
 
 	var datatypeDetections []*detection.Detection
 	ignoredVariables := getIgnoredVariables(detections)
@@ -159,7 +164,7 @@ func matchDetectionFilter(
 		variablesMatch := true
 		for name, node := range data.VariableNodes {
 			if existingNode, existing := joinedVariables[name]; existing {
-				if !existingNode.Equal(node) {
+				if existingNode != node {
 					variablesMatch = false
 					break
 				}
@@ -186,8 +191,9 @@ func matchDetectionFilter(
 func matchContentFilter(
 	evaluationState types.EvaluationState,
 	filter settings.PatternFilter,
-	node *tree.Node,
+	sitterNode *sitter.Node,
 ) (*bool, error) {
+	node := evaluationState.NodeFromSitter(sitterNode)
 	content := node.Content()
 
 	if len(filter.Values) != 0 {
@@ -282,7 +288,7 @@ func boolPointer(value bool) *bool {
 
 func getIgnoredVariables(detections []*detection.Detection) map[string]struct{} {
 	ignoredVariables := make(map[string]struct{})
-	seenNodes := make(map[string]*tree.Node)
+	seenNodes := make(map[string]*sitter.Node)
 
 	for _, detection := range detections {
 		data, ok := detection.Data.(Data)
@@ -292,7 +298,7 @@ func getIgnoredVariables(detections []*detection.Detection) map[string]struct{} 
 
 		for name, node := range data.VariableNodes {
 			seenNode := seenNodes[name]
-			if seenNode != nil && !seenNode.Equal(node) {
+			if seenNode != nil && seenNode != node {
 				ignoredVariables[name] = struct{}{}
 			}
 

@@ -2,7 +2,8 @@ package stringliteral
 
 import (
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
@@ -12,7 +13,7 @@ type stringLiteralDetector struct {
 	types.DetectorBase
 }
 
-func New(querySet *tree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) (types.Detector, error) {
 	return &stringLiteralDetector{}, nil
 }
 

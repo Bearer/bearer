@@ -6,6 +6,7 @@ import (
 )
 
 type Builder struct {
+	content        string
 	types          []string
 	nodes          []Node
 	rootNodeID     int
@@ -13,8 +14,9 @@ type Builder struct {
 	sitterToNodeID map[*sitter.Node]int
 }
 
-func NewBuilder(sitterRootNode *sitter.Node) *Builder {
+func NewBuilder(content string, sitterRootNode *sitter.Node) *Builder {
 	builder := &Builder{
+		content:        content,
 		children:       make(map[int][]int),
 		sitterToNodeID: make(map[*sitter.Node]int),
 	}
@@ -24,24 +26,21 @@ func NewBuilder(sitterRootNode *sitter.Node) *Builder {
 	return builder
 }
 
-func (builder *Builder) AddPatternMatch(sitterNode *sitter.Node, match struct{}) {
-	// node := &builder.nodes[builder.sitterToNodeID[sitterNode]]
-	// node.patternMatches = append(node.patternMatches, match)
-}
-
-func (builder *Builder) Build() *Node {
-	tree := &Tree{}
-	tree.types = builder.types
-	tree.nodes = builder.nodes
-	tree.children = builder.buildChildren()
-	// tree.patternMatches = builder.buildPatternMatches()
-	tree.sitterToNode = builder.buildSitterToNode()
+func (builder *Builder) Build() *Tree {
+	tree := &Tree{
+		content:      []byte(builder.content),
+		types:        builder.types,
+		nodes:        builder.nodes,
+		rootNode:     &builder.nodes[builder.rootNodeID],
+		children:     builder.buildChildren(),
+		sitterToNode: builder.buildSitterToNode(),
+	}
 
 	for i := range tree.nodes {
 		tree.nodes[i].tree = tree
 	}
 
-	return &tree.nodes[builder.rootNodeID]
+	return tree
 }
 
 func (builder *Builder) addNode(sitterNode *sitter.Node) int {
@@ -57,8 +56,9 @@ func (builder *Builder) addNode(sitterNode *sitter.Node) int {
 	}
 
 	builder.nodes = append(builder.nodes, Node{
-		ID:     id,
-		TypeID: builder.internType(sitterType),
+		sitterNode: sitterNode,
+		ID:         id,
+		TypeID:     builder.internType(sitterType),
 		ContentStart: Position{
 			Byte:   int(sitterNode.StartByte()),
 			Line:   int(startPoint.Row) + 1,

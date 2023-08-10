@@ -32,12 +32,20 @@ func (node *Node) ID() NodeID {
 	return node.sitterNode
 }
 
+func (node *Node) SitterEqual(other *sitter.Node) bool {
+	if other == nil {
+		return false
+	}
+
+	return node.sitterNode.Equal(other)
+}
+
 func (node *Node) Equal(other *Node) bool {
 	if other == nil {
 		return false
 	}
 
-	return node.sitterNode.Equal(other.sitterNode)
+	return node.SitterEqual(other.sitterNode)
 }
 
 func (node *Node) Type() string {

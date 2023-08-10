@@ -3,7 +3,8 @@ package object
 import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
@@ -14,19 +15,19 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	objectPairQuery *tree.Query
-	classQuery      *tree.Query
+	objectPairQuery *langtree.Query
+	classQuery      *langtree.Query
 	// Naming
-	assignmentQuery *tree.Query
+	assignmentQuery *langtree.Query
 	// Projection
-	memberExpressionQuery     *tree.Query
-	subscriptExpressionQuery  *tree.Query
-	callQuery                 *tree.Query
-	objectDeconstructionQuery *tree.Query
-	spreadElementQuery        *tree.Query
+	memberExpressionQuery     *langtree.Query
+	subscriptExpressionQuery  *langtree.Query
+	callQuery                 *langtree.Query
+	objectDeconstructionQuery *langtree.Query
+	spreadElementQuery        *langtree.Query
 }
 
-func New(querySet *tree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) (types.Detector, error) {
 	// { first_name: ..., ... }
 	objectPairQuery := querySet.Add(`(object (pair key: (_) @key value: (_) @value) @pair) @root`)
 
@@ -101,7 +102,7 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node)
+	detections, err = detector.getClass(node, evaluationState)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -114,13 +115,19 @@ func (detector *objectDetector) getObject(
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
 	var properties []generictypes.Property
-	spreadResults, err := detector.spreadElementQuery.MatchAt(node)
+	spreadResults, err := evaluationState.QueryMatchAt(detector.spreadElementQuery, node)
 	if err != nil {
 		return nil, err
 	}
 
 	for _, spreadResult := range spreadResults {
-		detections, err := evaluationState.Evaluate(spreadResult["identifier"], "object", "", settings.CURSOR_SCOPE, true)
+		detections, err := evaluationState.Evaluate(
+			spreadResult["identifier"],
+			"object",
+			"",
+			settings.CURSOR_SCOPE,
+			true,
+		)
 
 		if err != nil {
 			return nil, err
@@ -130,7 +137,7 @@ func (detector *objectDetector) getObject(
 		}
 	}
 
-	results, err := detector.objectPairQuery.MatchAt(node)
+	results, err := evaluationState.QueryMatchAt(detector.objectPairQuery, node)
 	if len(results) == 0 || err != nil {
 		return nil, err
 	}
@@ -138,19 +145,26 @@ func (detector *objectDetector) getObject(
 	for _, result := range results {
 		var name string
 		key := result["key"]
+		keyContent := key.Content()
 
 		switch key.Type() {
 		case "string": // {"user": "admin_user"}
-			name = stringutil.StripQuotes(key.Content())
+			name = stringutil.StripQuotes(keyContent)
 		case "property_identifier": // { user: "admin_user"}
-			name = key.Content()
+			name = keyContent
 		}
 
 		if name == "" {
 			continue
 		}
 
-		propertyObjects, err := evaluationState.Evaluate(result["value"], "object", "", settings.NESTED_SCOPE, true)
+		propertyObjects, err := evaluationState.Evaluate(
+			result["value"],
+			"object",
+			"",
+			settings.NESTED_SCOPE,
+			true,
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -182,7 +196,7 @@ func (detector *objectDetector) getAssignment(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.assignmentQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.assignmentQuery, node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -207,8 +221,11 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
-	results, err := detector.classQuery.MatchAt(node)
+func (detector *objectDetector) getClass(
+	node *tree.Node,
+	evaluationState types.EvaluationState,
+) ([]interface{}, error) {
+	results, err := evaluationState.QueryMatchAt(detector.classQuery, node)
 	if len(results) == 0 || err != nil {
 		return nil, err
 	}
@@ -219,10 +236,7 @@ func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error)
 	for _, result := range results {
 		methodName := result["method_name"].Content()
 		if methodName == "constructor" {
-			params := result["params"]
-
-			for i := 0; i < params.ChildCount(); i++ {
-				param := params.Child(i)
+			for _, param := range result["params"].Children() {
 				if param.Type() != "identifier" {
 					continue
 				}

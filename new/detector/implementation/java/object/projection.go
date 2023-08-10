@@ -3,14 +3,14 @@ package object
 import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 )
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.fieldAccessQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.fieldAccessQuery, node)
 	if err != nil {
 		return nil, err
 	}
@@ -22,7 +22,7 @@ func (detector *objectDetector) getProjections(
 			node,
 			evaluationState,
 			objectNode,
-			getObjectName(objectNode),
+			getObjectName(evaluationState, objectNode),
 			result["field"].Content(),
 			true,
 		)
@@ -36,7 +36,7 @@ func (detector *objectDetector) getProjections(
 	return nil, nil
 }
 
-func getObjectName(objectNode *tree.Node) string {
+func getObjectName(evaluationState types.EvaluationState, objectNode *tree.Node) string {
 	// user.name
 	if objectNode.Type() == "identifier" {
 		return objectNode.Content()
@@ -44,12 +44,13 @@ func getObjectName(objectNode *tree.Node) string {
 
 	// address.city.zip
 	if objectNode.Type() == "field_access" {
-		return objectNode.ChildByFieldName("field").Content()
+		// FIXME: implement field names
+		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("field")).Content()
 	}
 
 	// address["city"].zip or address["city"]["zip"]
 	if objectNode.Type() == "method_invocation" {
-		return objectNode.ChildByFieldName("name").Content()
+		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("name")).Content()
 	}
 
 	return ""

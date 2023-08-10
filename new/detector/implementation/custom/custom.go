@@ -5,16 +5,18 @@ import (
 
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	sitter "github.com/smacker/go-tree-sitter"
 	"golang.org/x/exp/slices"
 )
 
 type Data struct {
 	Pattern       string
 	Datatypes     []*detection.Detection
-	VariableNodes map[string]*tree.Node
+	VariableNodes map[string]*sitter.Node
 }
 
 type Pattern struct {
@@ -32,7 +34,7 @@ type customDetector struct {
 
 func New(
 	lang languagetypes.Language,
-	querySet *tree.QuerySet,
+	querySet *langtree.QuerySet,
 	detectorType string,
 	patterns []settings.RulePattern,
 	rules map[string]*settings.Rule,
@@ -73,7 +75,7 @@ func (detector *customDetector) DetectAt(
 	var detectionsData []interface{}
 
 	for _, pattern := range detector.patterns {
-		results, err := pattern.Query.MatchAt(node)
+		results, err := pattern.Query.MatchAt(evaluationState.QueryContext(), node.SitterNode())
 		if err != nil {
 			return nil, err
 		}

@@ -4,28 +4,29 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	"github.com/bearer/bearer/new/detector/implementation/ruby/common"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 )
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.callsQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.callsQuery, node)
 	if err != nil {
 		return nil, err
 	}
 
 	if result != nil {
 		receiverNode := result["receiver"]
+		astReceiverNode := receiverNode
 
 		objects, err := generic.ProjectObject(
 			node,
 			evaluationState,
-			receiverNode,
-			getObjectName(receiverNode),
+			astReceiverNode,
+			getObjectName(evaluationState, astReceiverNode),
 			result["method"].Content(),
-			getIsPropertyAccess(receiverNode),
+			getIsPropertyAccess(astReceiverNode),
 		)
 		if err != nil {
 			return nil, err
@@ -34,7 +35,7 @@ func (detector *objectDetector) getProjections(
 		return objects, nil
 	}
 
-	result, err = detector.elementReferenceQuery.MatchOnceAt(node)
+	result, err = evaluationState.QueryMatchOnceAt(detector.elementReferenceQuery, node)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +51,7 @@ func (detector *objectDetector) getProjections(
 			node,
 			evaluationState,
 			objectNode,
-			getObjectName(objectNode),
+			getObjectName(evaluationState, objectNode),
 			propertyName,
 			getIsPropertyAccess(objectNode),
 		)
@@ -64,7 +65,10 @@ func (detector *objectDetector) getProjections(
 	return nil, nil
 }
 
-func getObjectName(objectNode *tree.Node) string {
+func getObjectName(
+	evaluationState types.EvaluationState,
+	objectNode *tree.Node,
+) string {
 	// user.name or user["name"]
 	if objectNode.Type() == "identifier" {
 		return objectNode.Content()
@@ -77,7 +81,7 @@ func getObjectName(objectNode *tree.Node) string {
 
 	// address.city.zip or address.city["zip"]
 	if objectNode.Type() == "call" {
-		return objectNode.ChildByFieldName("method").Content()
+		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("method")).Content()
 	}
 
 	// address["city"].zip or address["city"]["zip"]
@@ -89,9 +93,9 @@ func getObjectName(objectNode *tree.Node) string {
 }
 
 func getElementProperty(node *tree.Node) string {
-	return common.GetLiteralKey(node.NamedChild(1))
+	return common.GetLiteralKey(node.Children()[2])
 }
 
 func getIsPropertyAccess(objectNode *tree.Node) bool {
-	return objectNode.Type() != "call" || objectNode.ChildByFieldName("arguments") == nil
+	return objectNode.Type() != "call" || objectNode.SitterNode().ChildByFieldName("arguments") == nil
 }

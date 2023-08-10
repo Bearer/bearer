@@ -2,7 +2,8 @@ package string
 
 import (
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -13,7 +14,7 @@ type stringDetector struct {
 	types.DetectorBase
 }
 
-func New(querySet *tree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) (types.Detector, error) {
 	return &stringDetector{}, nil
 }
 
@@ -32,11 +33,11 @@ func (detector *stringDetector) DetectAt(
 			IsLiteral: true,
 		}}, nil
 	case "binary_expression":
-		if node.AnonymousChild(0).Content() == "+" {
+		if node.Children()[1].Content() == "+" {
 			return generic.ConcatenateChildStrings(node, evaluationState)
 		}
 	case "assignment_expression":
-		if node.AnonymousChild(0).Content() == "+=" {
+		if node.Children()[1].Content() == "+=" {
 			return generic.ConcatenateAssignEquals(node, evaluationState)
 		}
 	}

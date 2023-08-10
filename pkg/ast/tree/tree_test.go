@@ -10,7 +10,7 @@ import (
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
-func parseTree(t *testing.T, content string) *tree.Node {
+func parseTree(t *testing.T, content string) *tree.Tree {
 	sitterLanguage := ruby.GetLanguage()
 
 	sitterRootNode, err := sitter.ParseCtx(context.Background(), []byte(content), sitterLanguage)
@@ -18,28 +18,30 @@ func parseTree(t *testing.T, content string) *tree.Node {
 		t.Fatalf("failed to parse input: %s", err)
 	}
 
-	return tree.NewBuilder(sitterRootNode).Build()
+	return tree.NewBuilder(content, sitterRootNode).Build()
 }
 
 func TestTree(t *testing.T) {
-	rootNode := parseTree(t, `
+	tree := parseTree(t, `
 		def m(a)
 			a.foo
 		end
 	`)
 
-	cupaloy.SnapshotT(t, rootNode.Dump())
+	cupaloy.SnapshotT(t, tree.RootNode().Dump())
 }
 
 func TestNodeAndDescendentIDs(t *testing.T) {
-	rootNode := parseTree(t, `
+	tree := parseTree(t, `
 		a.foo
 		b.bar
 	`)
 
+	children := tree.RootNode().Children()
+
 	cupaloy.SnapshotT(
 		t,
-		rootNode.Child(0).NodeAndDescendentIDs(),
-		rootNode.Child(1).NodeAndDescendentIDs(),
+		children[0].NodeAndDescendentIDs(),
+		children[1].NodeAndDescendentIDs(),
 	)
 }

@@ -3,29 +3,38 @@ package types
 import (
 	"context"
 
+	sitter "github.com/smacker/go-tree-sitter"
+
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
 )
 
+type QueryResult map[string]*tree.Node
+
 type EvaluationState interface {
 	Evaluate(
 		rootNode *tree.Node,
-		detectorType,
-		sanitizerDetectorType string,
+		ruleID,
+		sanitizerRuleID string,
 		scope settings.RuleReferenceScope,
 		followFlow bool,
 	) ([]*detection.Detection, error)
 	FileName() string
+	QueryContext() *langtree.QueryContext
+	NodeFromSitter(sitterNode *sitter.Node) *tree.Node
+	QueryMatchAt(query *langtree.Query, node *tree.Node) ([]QueryResult, error)
+	QueryMatchOnceAt(query *langtree.Query, node *tree.Node) (QueryResult, error)
 }
 
 type DetectorSet interface {
-	NestedDetections(detectorType string) (bool, error)
+	NestedDetections(ruleID string) (bool, error)
 	DetectAt(
 		node *tree.Node,
-		detectorType string,
+		ruleID string,
 		evaluationState EvaluationState,
 	) ([]*detection.Detection, error)
 }

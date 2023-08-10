@@ -23,8 +23,14 @@ type Query struct {
 	input    string
 }
 
-type QueryResult map[string]*Node
-type NodeResults map[NodeID][]QueryResult
+type QueryContext struct {
+	contentBytes []byte
+	rootNode     *sitter.Node
+	cache        QuerySetResults
+}
+
+type QueryResult map[string]*sitter.Node
+type NodeResults map[*sitter.Node][]QueryResult
 type QuerySetResults map[int]NodeResults
 
 func NewQuerySet(sitterLanguage *sitter.Language) *QuerySet {
@@ -57,7 +63,7 @@ func (querySet *QuerySet) Add(input string) *Query {
 	return query
 }
 
-func (querySet *QuerySet) Query(tree *Tree) (QuerySetResults, error) {
+func (querySet *QuerySet) Query(rootNode *sitter.Node) (QuerySetResults, error) {
 	querySet.mu.RLock()
 	defer querySet.mu.RUnlock()
 
@@ -66,7 +72,7 @@ func (querySet *QuerySet) Query(tree *Tree) (QuerySetResults, error) {
 	}
 
 	results := querySet.newResults()
-	querySet.sitterCursor.Exec(querySet.sitterQuery, tree.RootNode().sitterNode)
+	querySet.sitterCursor.Exec(querySet.sitterQuery, rootNode)
 
 	for {
 		match, found := querySet.sitterCursor.NextMatch()
@@ -76,7 +82,7 @@ func (querySet *QuerySet) Query(tree *Tree) (QuerySetResults, error) {
 
 		result := make(QueryResult)
 		for _, capture := range match.Captures {
-			result[querySet.sitterQuery.CaptureNameForId(capture.Index)] = tree.wrap(capture.Node)
+			result[querySet.sitterQuery.CaptureNameForId(capture.Index)] = capture.Node
 		}
 
 		resultRoot, rootExists := result["root"]
@@ -89,7 +95,7 @@ func (querySet *QuerySet) Query(tree *Tree) (QuerySetResults, error) {
 			matchNode = resultRoot
 		}
 
-		results.add(int(match.PatternIndex), matchNode.ID(), result)
+		results.add(int(match.PatternIndex), matchNode, result)
 	}
 
 	return results, nil
@@ -146,28 +152,28 @@ func (querySet *QuerySet) newResults() QuerySetResults {
 	return results
 }
 
-func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
+func (query *Query) MatchAt(context *QueryContext, node *sitter.Node) ([]QueryResult, error) {
 	inCache := false
 	var nodeCache NodeResults
-	if node.tree.queryCache != nil {
-		nodeCache, inCache = node.tree.queryCache[query.id]
+	if context.cache != nil {
+		nodeCache, inCache = context.cache[query.id]
 	}
 
 	if !inCache {
-		results, err := query.querySet.Query(node.tree)
+		results, err := query.querySet.Query(context.rootNode)
 		if err != nil {
 			return nil, err
 		}
 
-		node.tree.queryCache = results
+		context.cache = results
 		nodeCache = results[query.id]
 	}
 
-	return nodeCache[node.ID()], nil
+	return nodeCache[node], nil
 }
 
-func (query *Query) MatchOnceAt(node *Node) (QueryResult, error) {
-	results, err := query.MatchAt(node)
+func (query *Query) MatchOnceAt(context *QueryContext, node *sitter.Node) (QueryResult, error) {
+	results, err := query.MatchAt(context, node)
 	if err != nil {
 		return nil, err
 	}
@@ -190,4 +196,15 @@ func (results QuerySetResults) add(queryID int, nodeID NodeID, result QueryResul
 	}
 
 	nodeResults[nodeID] = append(nodeResults[nodeID], result)
+}
+
+func NewQueryContext(content string, rootNode *sitter.Node) *QueryContext {
+	return &QueryContext{
+		contentBytes: []byte(content),
+		rootNode:     rootNode,
+	}
+}
+
+func (context *QueryContext) ContentFor(node *sitter.Node) string {
+	return node.Content(context.contentBytes)
 }

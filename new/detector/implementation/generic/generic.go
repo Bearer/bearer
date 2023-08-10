@@ -6,7 +6,7 @@ import (
 	"github.com/bearer/bearer/new/detector/detection"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
 
@@ -114,9 +114,8 @@ func ConcatenateChildStrings(node *tree.Node, evaluationState types.EvaluationSt
 	value := ""
 	isLiteral := true
 
-	for i := 0; i < node.ChildCount(); i += 1 {
-		child := node.Child(i)
-		if !child.IsNamed() {
+	for _, child := range node.Children() {
+		if !child.SitterNode().IsNamed() {
 			continue
 		}
 
@@ -143,39 +142,41 @@ func ConcatenateChildStrings(node *tree.Node, evaluationState types.EvaluationSt
 }
 
 func ConcatenateAssignEquals(node *tree.Node, evaluationState types.EvaluationState) ([]interface{}, error) {
-	unifiedNodes := node.ChildByFieldName("left").UnifiedNodes()
-	if len(unifiedNodes) == 0 {
-		return nil, nil
-	}
-	if len(unifiedNodes) != 1 {
-		return nil, fmt.Errorf("expected exactly one unified `+=` node but got %d", len(unifiedNodes))
-	}
+	// FIXME: dataflow?
+	return nil, nil
+	// unifiedNodes := node.ChildByFieldName("left").UnifiedNodes()
+	// if len(unifiedNodes) == 0 {
+	// 	return nil, nil
+	// }
+	// if len(unifiedNodes) != 1 {
+	// 	return nil, fmt.Errorf("expected exactly one unified `+=` node but got %d", len(unifiedNodes))
+	// }
 
-	left, leftIsLiteral, err := GetStringValue(unifiedNodes[0], evaluationState)
-	if err != nil {
-		return nil, err
-	}
+	// left, leftIsLiteral, err := GetStringValue(unifiedNodes[0], evaluationState)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), evaluationState)
-	if err != nil {
-		return nil, err
-	}
+	// right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), evaluationState)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	if left == "" && !leftIsLiteral {
-		left = "*"
+	// if left == "" && !leftIsLiteral {
+	// 	left = "*"
 
-		// No detection when neither parts are a string
-		if right == "" && !rightIsLiteral {
-			return nil, nil
-		}
-	}
+	// 	// No detection when neither parts are a string
+	// 	if right == "" && !rightIsLiteral {
+	// 		return nil, nil
+	// 	}
+	// }
 
-	if right == "" && !rightIsLiteral {
-		right = "*"
-	}
+	// if right == "" && !rightIsLiteral {
+	// 	right = "*"
+	// }
 
-	return []interface{}{generictypes.String{
-		Value:     left + right,
-		IsLiteral: leftIsLiteral && rightIsLiteral,
-	}}, nil
+	// return []interface{}{generictypes.String{
+	// 	Value:     left + right,
+	// 	IsLiteral: leftIsLiteral && rightIsLiteral,
+	// }}, nil
 }

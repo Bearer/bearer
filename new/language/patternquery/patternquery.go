@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/rs/zerolog/log"
+	sitter "github.com/smacker/go-tree-sitter"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/new/language/implementation"
@@ -51,8 +52,8 @@ func Compile(
 	}, nil
 }
 
-func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error) {
-	treeResults, err := query.treeQuery.MatchAt(node)
+func (query *Query) MatchAt(astContext *tree.QueryContext, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error) {
+	treeResults, err := query.treeQuery.MatchAt(astContext, node)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +61,7 @@ func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResul
 	var results []*languagetypes.PatternQueryResult
 
 	for _, treeResult := range treeResults {
-		result := query.matchAndTranslateTreeResult(treeResult, node)
+		result := query.matchAndTranslateTreeResult(astContext, treeResult)
 		if result != nil {
 			results = append(results, result)
 		}
@@ -69,16 +70,16 @@ func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResul
 	return results, nil
 }
 
-func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error) {
-	treeResult, err := query.treeQuery.MatchOnceAt(node)
+func (query *Query) MatchOnceAt(astContext *tree.QueryContext, node *sitter.Node) (*languagetypes.PatternQueryResult, error) {
+	treeResult, err := query.treeQuery.MatchOnceAt(astContext, node)
 	if err != nil {
 		return nil, err
 	}
 
-	return query.matchAndTranslateTreeResult(treeResult, node), nil
+	return query.matchAndTranslateTreeResult(astContext, treeResult), nil
 }
 
-func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, rootNode *tree.Node) *languagetypes.PatternQueryResult {
+func (query *Query) matchAndTranslateTreeResult(astContext *tree.QueryContext, treeResult tree.QueryResult) *languagetypes.PatternQueryResult {
 	if treeResult == nil {
 		return nil
 	}
@@ -87,7 +88,7 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 		var equalContent []string
 		for _, equalParam := range equalParams {
 			if node, exists := treeResult[equalParam]; exists {
-				equalContent = append(equalContent, node.Content())
+				equalContent = append(equalContent, astContext.ContentFor(node))
 			}
 		}
 
@@ -109,7 +110,7 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 			continue
 		}
 
-		if content, typeMatched := typedContent[node.Type()]; !typeMatched || node.Content() != content {
+		if content, typeMatched := typedContent[node.Type()]; !typeMatched || astContext.ContentFor(node) != content {
 			return nil
 		}
 	}
@@ -129,7 +130,7 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 	}
 }
 
-func (query *RootVariableQuery) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error) {
+func (query *RootVariableQuery) MatchAt(astContext *tree.QueryContext, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error) {
 	if !query.isCompatibleType(node) {
 		return nil, nil
 	}
@@ -137,7 +138,7 @@ func (query *RootVariableQuery) MatchAt(node *tree.Node) ([]*languagetypes.Patte
 	return []*languagetypes.PatternQueryResult{query.resultFor(node)}, nil
 }
 
-func (query *RootVariableQuery) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error) {
+func (query *RootVariableQuery) MatchOnceAt(astContext *tree.QueryContext, node *sitter.Node) (*languagetypes.PatternQueryResult, error) {
 	if !query.isCompatibleType(node) {
 		return nil, nil
 	}
@@ -145,7 +146,7 @@ func (query *RootVariableQuery) MatchOnceAt(node *tree.Node) (*languagetypes.Pat
 	return query.resultFor(node), nil
 }
 
-func (query *RootVariableQuery) isCompatibleType(node *tree.Node) bool {
+func (query *RootVariableQuery) isCompatibleType(node *sitter.Node) bool {
 	if slices.Contains(query.variable.NodeTypes, "_") {
 		return true
 	}
@@ -153,7 +154,7 @@ func (query *RootVariableQuery) isCompatibleType(node *tree.Node) bool {
 	return slices.Contains(query.variable.NodeTypes, node.Type())
 }
 
-func (query *RootVariableQuery) resultFor(node *tree.Node) *languagetypes.PatternQueryResult {
+func (query *RootVariableQuery) resultFor(node *sitter.Node) *languagetypes.PatternQueryResult {
 	variables := make(tree.QueryResult)
 	variables[query.variable.Name] = node
 

@@ -3,7 +3,8 @@ package object
 import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/new/language/tree"
+	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/tree"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
@@ -12,14 +13,14 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	classQuery *tree.Query
+	classQuery *langtree.Query
 	// Naming
-	assignmentQuery *tree.Query
+	assignmentQuery *langtree.Query
 	// Projection
-	fieldAccessQuery *tree.Query
+	fieldAccessQuery *langtree.Query
 }
 
-func New(querySet *tree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) (types.Detector, error) {
 	// user = <object>
 	// User user = <object>
 	assignmentQuery := querySet.Add(`[
@@ -73,7 +74,7 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node)
+	detections, err = detector.getClass(node, evaluationState)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -85,13 +86,16 @@ func (detector *objectDetector) getAssignment(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	result, err := detector.assignmentQuery.MatchOnceAt(node)
+	result, err := evaluationState.QueryMatchOnceAt(detector.assignmentQuery, node)
 
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	rightObjects, err := generic.GetNonVirtualObjects(evaluationState, result["right"])
+	rightObjects, err := generic.GetNonVirtualObjects(
+		evaluationState,
+		result["right"],
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -111,8 +115,11 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
-	results, err := detector.classQuery.MatchAt(node)
+func (detector *objectDetector) getClass(
+	node *tree.Node,
+	evaluationState types.EvaluationState,
+) ([]interface{}, error) {
+	results, err := evaluationState.QueryMatchAt(detector.classQuery, node)
 	if len(results) == 0 || err != nil {
 		return nil, err
 	}
