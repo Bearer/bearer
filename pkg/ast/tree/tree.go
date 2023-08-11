@@ -25,6 +25,8 @@ type Node struct {
 	children []*Node
 	// FIXME: remove the need for this
 	sitterNode *sitter.Node
+	// FIXME: probably shouldn't be public
+	ExecutingRules []string
 }
 
 type Position struct {

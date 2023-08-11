@@ -316,29 +316,23 @@ func (evaluator *Evaluator) detectAtNode(
 	return detections, nil
 }
 
-func (evaluator *Evaluator) withCycleProtection(node *asttree.Node, detectorType string, body func() error) error {
-	executingDetectors := evaluator.executingRules[node]
-	if slices.Contains(evaluator.executingRules[node], detectorType) {
+func (evaluator *Evaluator) withCycleProtection(node *asttree.Node, ruleID string, body func() error) error {
+	if slices.Contains(node.ExecutingRules, ruleID) {
 		return fmt.Errorf(
-			"cycle found in detector usage: [%s > %s]\nnode: %s",
-			strings.Join(executingDetectors, " > "),
-			detectorType,
+			"cycle found during rule evaluation: [%s > %s]\nnode: %s",
+			strings.Join(evaluator.executingRules[node], " > "),
+			ruleID,
 			node.Debug(true),
 		)
 	}
 
-	evaluator.executingRules[node] = append(evaluator.executingRules[node], detectorType)
+	node.ExecutingRules = append(node.ExecutingRules, ruleID)
 
 	if err := body(); err != nil {
 		return err
 	}
 
-	if len(evaluator.executingRules[node]) == 1 {
-		delete(evaluator.executingRules, node)
-	} else {
-		executingDetectors := evaluator.executingRules[node]
-		evaluator.executingRules[node] = executingDetectors[:len(executingDetectors)-1]
-	}
+	node.ExecutingRules = node.ExecutingRules[:len(node.ExecutingRules)-1]
 
 	return nil
 }
