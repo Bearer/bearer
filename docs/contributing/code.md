@@ -8,7 +8,7 @@ If you're interested in contributing code to Bearer CLI, this guide will help yo
 
 ## Set up Bearer CLI locally
 
-Bearer CLI is written in [Go](https://www.go.dev), so you'll need golang v1.19 or greater installed. Installation instructions for your architecture can be found at [golang downloads page](https://go.dev/dl/).
+Bearer CLI is written in [Go](https://www.go.dev), so you'll need golang v1.21 or greater installed. Installation instructions for your architecture can be found at [golang downloads page](https://go.dev/dl/).
 
 Next, confirm the installation by running the following command:
 

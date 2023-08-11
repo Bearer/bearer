@@ -18,7 +18,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin git && \
     \
-    wget --output-document=/tmp/go.tar.gz https://go.dev/dl/go1.19.8.linux-amd64.tar.gz && \
+    wget --output-document=/tmp/go.tar.gz https://go.dev/dl/go1.21.0.linux-amd64.tar.gz && \
     tar --extract --gunzip --file=/tmp/go.tar.gz --directory=/usr/local && \
     ln -s /usr/local/go/bin/go /usr/local/bin/ && \
     \
