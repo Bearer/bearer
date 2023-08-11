@@ -49,7 +49,7 @@ $ bearer ignore show <fingerprint>`,
 
 			selectedIgnoredFingerprint, ok := ignoredFingerprints[args[0]]
 			if !ok {
-				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file", args[0])
+				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", args[0])
 				return nil
 			}
 
