@@ -18,8 +18,8 @@ type insecureURLDetector struct {
 var insecureUrlPattern = regexp.MustCompile(`^http:`)
 var localhostInsecureUrlPattern = regexp.MustCompile(`^http://(localhost|127.0.0.1)`)
 
-func New(querySet *langtree.QuerySet) (types.Detector, error) {
-	return &insecureURLDetector{}, nil
+func New(querySet *langtree.QuerySet) types.Detector {
+	return &insecureURLDetector{}
 }
 
 func (detector *insecureURLDetector) Name() string {
@@ -49,5 +49,3 @@ func (detector *insecureURLDetector) DetectAt(
 
 	return nil, nil
 }
-
-func (detector *insecureURLDetector) Close() {}

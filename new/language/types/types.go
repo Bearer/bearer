@@ -3,8 +3,9 @@ package types
 import (
 	"context"
 
-	"github.com/bearer/bearer/new/language/tree"
 	sitter "github.com/smacker/go-tree-sitter"
+
+	"github.com/bearer/bearer/new/language/tree"
 )
 
 type PatternQueryResult struct {

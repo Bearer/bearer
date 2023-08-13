@@ -25,7 +25,7 @@ type objectDetector struct {
 	elementReferenceQuery *langtree.Query
 }
 
-func New(querySet *langtree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) types.Detector {
 	// { first_name: ..., ... }
 	hashPairQuery := querySet.Add(`(hash (pair key: (_) @key value: (_) @value) @pair) @root`)
 
@@ -62,7 +62,7 @@ func New(querySet *langtree.QuerySet) (types.Detector, error) {
 		classQuery:            classQuery,
 		callsQuery:            callsQuery,
 		elementReferenceQuery: elementReferenceQuery,
-	}, nil
+	}
 }
 
 func (detector *objectDetector) Name() string {
@@ -256,15 +256,12 @@ func (detector *objectDetector) getClass(
 		Properties: []generictypes.Property{{
 			Name: className,
 			Object: &detection.Detection{
-				DetectorType: "object",
-				MatchNode:    node,
+				RuleID:    "object",
+				MatchNode: node,
 				Data: generictypes.Object{
 					Properties: properties,
 				},
 			},
 		}},
 	}}, nil
-}
-
-func (detector *objectDetector) Close() {
 }

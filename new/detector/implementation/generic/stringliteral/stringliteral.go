@@ -13,8 +13,8 @@ type stringLiteralDetector struct {
 	types.DetectorBase
 }
 
-func New(querySet *langtree.QuerySet) (types.Detector, error) {
-	return &stringLiteralDetector{}, nil
+func New(querySet *langtree.QuerySet) types.Detector {
+	return &stringLiteralDetector{}
 }
 
 func (detector *stringLiteralDetector) Name() string {
@@ -40,5 +40,3 @@ func (detector *stringLiteralDetector) DetectAt(
 
 	return nil, nil
 }
-
-func (detector *stringLiteralDetector) Close() {}

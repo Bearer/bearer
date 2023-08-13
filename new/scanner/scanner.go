@@ -3,77 +3,164 @@ package scanner
 import (
 	"context"
 	"fmt"
+	"strings"
 
-	"github.com/bearer/bearer/new/detector/composition"
-	"github.com/bearer/bearer/new/detector/composition/java"
-	"github.com/bearer/bearer/new/detector/composition/javascript"
-	"github.com/bearer/bearer/new/detector/composition/ruby"
+	"github.com/bearer/bearer/new/detector/detection"
+	"github.com/bearer/bearer/new/detector/evaluator"
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
-	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/new/detector/implementation/custom"
+	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/new/language/implementation/java"
+	"github.com/bearer/bearer/new/language/implementation/javascript"
+	"github.com/bearer/bearer/new/language/implementation/ruby"
+	schemaclassifier "github.com/bearer/bearer/pkg/classification/schema"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report"
+	reportdetections "github.com/bearer/bearer/pkg/report/detections"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	reportschema "github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/report/source"
 	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/pluralize"
 )
 
-type language struct {
-	name        string
-	composition types.Composition
+type Scanner struct {
+	evaluators []*evaluator.Evaluator
 }
 
-type scannerType []language
-
-var scanner scannerType
-
-func Close() {
-	for _, language := range scanner {
-		language.composition.Close()
-	}
-}
-
-func Setup(config *settings.Config, classifier *classification.Classifier) (err error) {
-	var toInstantiate = []struct {
-		constructor func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)
-		name        string
-	}{
-		{
-			constructor: ruby.New,
-			name:        "ruby",
-		},
-		{
-			constructor: javascript.New,
-			name:        "javascript",
-		},
-		{
-			constructor: java.New,
-			name:        "java",
-		},
+func New(schemaClassifier *schemaclassifier.Classifier, rules map[string]*settings.Rule) (*Scanner, error) {
+	langImplementations := []implementation.Implementation{
+		java.Get(),
+		javascript.Get(),
+		ruby.Get(),
 	}
 
-	for _, instantiatior := range toInstantiate {
-		composition, err := instantiatior.constructor(config.Rules, classifier)
+	evaluators := make([]*evaluator.Evaluator, len(langImplementations))
+
+	for i, langImplementation := range langImplementations {
+		evaluator, err := evaluator.New(langImplementation, schemaClassifier, rules)
 		if err != nil {
-			return fmt.Errorf("failed to instantiate composition %s:%s", instantiatior.name, err)
+			return nil, fmt.Errorf("error creating %s evaluator: %w", langImplementation.Name(), err)
 		}
 
-		scanner = append(scanner, language{
-			name:        instantiatior.name,
-			composition: composition,
-		})
+		evaluators[i] = evaluator
 	}
 
-	return err
+	return &Scanner{evaluators: evaluators}, nil
 }
 
-func Detect(ctx context.Context, report report.Report, fileStats *stats.FileStats, file *file.FileInfo) error {
-	for _, language := range scanner {
-		detections, err := language.composition.DetectFromFile(ctx, fileStats, file)
+func (scanner *Scanner) Scan(
+	ctx context.Context,
+	report report.Report,
+	fileStats *stats.FileStats,
+	file *file.FileInfo,
+) error {
+	if scanner == nil {
+		return nil
+	}
+
+	for _, evaluator := range scanner.evaluators {
+		detections, err := evaluator.DetectFromFile(ctx, fileStats, file)
 		if err != nil {
-			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
+			return fmt.Errorf("%s failed to detect in file %s: %w", evaluator.LanguageName(), file.AbsolutePath, err)
 		}
 
-		composition.ReportDetections(report, file, detections)
+		for _, detection := range detections {
+			detectorType := detectors.Type(detection.RuleID)
+			data := detection.Data.(custom.Data)
+
+			if len(data.Datatypes) == 0 {
+				report.AddDetection(reportdetections.TypeCustomRisk,
+					detectorType,
+					source.New(
+						file,
+						file.Path,
+						detection.MatchNode.ContentStart.Line,
+						detection.MatchNode.ContentStart.Column,
+						detection.MatchNode.ContentEnd.Line,
+						detection.MatchNode.ContentEnd.Column,
+						data.Pattern,
+					),
+					reportschema.Source{
+						StartLineNumber:   detection.MatchNode.ContentStart.Line,
+						EndLineNumber:     detection.MatchNode.ContentEnd.Line,
+						StartColumnNumber: detection.MatchNode.ContentStart.Column,
+						EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
+						Content:           detection.MatchNode.Content(),
+					})
+			}
+
+			for _, datatypeDetection := range data.Datatypes {
+				reportDatatypeDetection(
+					report,
+					file,
+					detectorType,
+					detection,
+					datatypeDetection,
+					"",
+				)
+			}
+		}
 	}
 
 	return nil
+}
+
+func reportDatatypeDetection(
+	report reportdetections.ReportDetection,
+	file *file.FileInfo,
+	detectorType detectors.Type,
+	detection,
+	datatypeDetection *detection.Detection,
+	objectName string,
+) {
+	data := datatypeDetection.Data.(datatype.Data)
+
+	for _, property := range data.Properties {
+		report.AddDetection(
+			reportdetections.TypeCustomClassified,
+			detectorType,
+			source.New(
+				file,
+				file.Path,
+				property.Node.ContentStart.Line,
+				property.Node.ContentStart.Column,
+				property.Node.ContentEnd.Line,
+				property.Node.ContentEnd.Column,
+				"",
+			),
+			reportschema.Schema{
+				ObjectName:           objectName,
+				NormalizedObjectName: pluralize.Singular(strings.ToLower(objectName)),
+				FieldName:            property.Name,
+				NormalizedFieldName:  pluralize.Singular(strings.ToLower(property.Name)),
+				Classification:       property.Classification,
+				Source: &reportschema.Source{
+					StartLineNumber:   detection.MatchNode.ContentStart.Line,
+					EndLineNumber:     detection.MatchNode.ContentEnd.Line,
+					StartColumnNumber: detection.MatchNode.ContentStart.Column,
+					EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
+					Content:           detection.MatchNode.Content(),
+				},
+			},
+		)
+
+		if property.Datatype != nil {
+			reportDatatypeDetection(
+				report,
+				file,
+				detectorType,
+				detection,
+				property.Datatype,
+				property.Name,
+			)
+		}
+	}
+}
+
+func (scanner *Scanner) Close() {
+	for _, evaluator := range scanner.evaluators {
+		evaluator.Close()
+	}
 }

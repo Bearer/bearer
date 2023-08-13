@@ -5,12 +5,16 @@ import (
 
 	sitter "github.com/smacker/go-tree-sitter"
 
+	detectortypes "github.com/bearer/bearer/new/detector/types"
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/classification/schema"
 )
 
 type Implementation interface {
 	Name() string
+	EnryLanguages() []string
+	NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *tree.QuerySet) []detectortypes.Detector
 	SitterLanguage() *sitter.Language
 	// AnalyzeFlow unifies nodes that represent the same value in the tree.
 	//

@@ -6,14 +6,22 @@ import (
 	"regexp"
 	"strings"
 
-	sitter "github.com/smacker/go-tree-sitter"
-	"github.com/smacker/go-tree-sitter/ruby"
-	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
+	sitter "github.com/smacker/go-tree-sitter"
+	"github.com/smacker/go-tree-sitter/ruby"
+
+	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
+	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
+	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
+	"github.com/bearer/bearer/new/detector/implementation/ruby/object"
+	stringdetector "github.com/bearer/bearer/new/detector/implementation/ruby/string"
+	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/util/regex"
 )
 
@@ -47,6 +55,20 @@ func Get() implementation.Implementation {
 
 func (*rubyImplementation) Name() string {
 	return "ruby"
+}
+
+func (*rubyImplementation) EnryLanguages() []string {
+	return []string{"Ruby"}
+}
+
+func (impl *rubyImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *tree.QuerySet) []detectortypes.Detector {
+	return []detectortypes.Detector{
+		object.New(querySet),
+		datatype.New(detectors.DetectorRuby, schemaClassifier),
+		stringdetector.New(querySet),
+		stringliteral.New(querySet),
+		insecureurl.New(querySet),
+	}
 }
 
 func (*rubyImplementation) SitterLanguage() *sitter.Language {
@@ -92,7 +114,7 @@ func (*rubyImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				break
 			}
 
-			if slice.Contains(variableLookupParents, parent.Type()) ||
+			if slices.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "assignment" && node.Equal(parent.ChildByFieldName("right"))) ||
 				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) ||
 				(parent.Type() == "element_reference" && node.Equal(parent.ChildByFieldName("object"))) {

@@ -13,7 +13,7 @@ import (
 	"runtime"
 
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
-	customdetector "github.com/bearer/bearer/new/scanner"
+	"github.com/bearer/bearer/new/scanner"
 	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
@@ -27,16 +27,17 @@ import (
 var ErrorTimeoutReached = errors.New("file processing time exceeded")
 
 type Worker struct {
-	debug     bool
-	classifer *classification.Classifier
-	scanners  []string
+	debug           bool
+	classifer       *classification.Classifier
+	enabledScanners []string
+	sastScanner     *scanner.Scanner
 }
 
 func (worker *Worker) Setup(config config.Config) error {
 	worker.debug = config.Debug
-	worker.scanners = config.Scan.Scanner
+	worker.enabledScanners = config.Scan.Scanner
 
-	if slices.Contains(worker.scanners, "sast") {
+	if slices.Contains(worker.enabledScanners, "sast") {
 		classifier, err := classification.NewClassifier(&classification.Config{Config: config})
 		if err != nil {
 			return err
@@ -47,11 +48,12 @@ func (worker *Worker) Setup(config config.Config) error {
 			return err
 		}
 
-		err = customdetector.Setup(&config, classifier)
+		sastScanner, err := scanner.New(classifier.Schema, config.Rules)
 		if err != nil {
 			return err
 		}
 
+		worker.sastScanner = sastScanner
 		worker.classifer = classifier
 	}
 
@@ -79,7 +81,8 @@ func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest)
 			File:       file,
 		},
 		fileStats,
-		worker.scanners,
+		worker.enabledScanners,
+		worker.sastScanner,
 	)
 
 	if ctx.Err() != nil {
@@ -87,6 +90,12 @@ func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest)
 	}
 
 	return fileStats, err
+}
+
+func (worker *Worker) Close() {
+	if worker.sastScanner != nil {
+		worker.sastScanner.Close()
+	}
 }
 
 func Start(port string) error {
@@ -152,7 +161,7 @@ func Start(port string) error {
 			log.Debug().Msgf("error shutting down server: %s", err)
 		}
 
-		customdetector.Close()
+		worker.Close()
 
 		close(done)
 	}()

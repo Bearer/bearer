@@ -56,9 +56,9 @@ func ProjectObject(
 						Properties: []generictypes.Property{{
 							Name: propertyName,
 							Object: &detection.Detection{
-								DetectorType: "object",
-								MatchNode:    node,
-								Data:         property.Object.Data,
+								RuleID:    "object",
+								MatchNode: node,
+								Data:      property.Object.Data,
 							},
 						}},
 						IsVirtual: true,
@@ -73,8 +73,8 @@ func ProjectObject(
 			Properties: []generictypes.Property{{
 				Name: objectName,
 				Object: &detection.Detection{
-					DetectorType: "object",
-					MatchNode:    node,
+					RuleID:    "object",
+					MatchNode: node,
 					Data: generictypes.Object{
 						Properties: []generictypes.Property{{Name: propertyName}},
 						IsVirtual:  true,

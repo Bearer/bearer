@@ -106,9 +106,6 @@ func (detector *customDetector) DetectAt(
 	return detectionsData, nil
 }
 
-func (detector *customDetector) Close() {
-}
-
 func sortFilters(filters []settings.PatternFilter) {
 	slices.SortFunc(filters, func(a, b settings.PatternFilter) bool {
 		return scoreFilter(a) < scoreFilter(b)

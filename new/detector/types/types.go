@@ -31,7 +31,8 @@ type EvaluationState interface {
 }
 
 type DetectorSet interface {
-	NestedDetections(ruleID string) (bool, error)
+	BuiltinAndSharedRuleIDs() []string
+	TopLevelRuleIDs() []string
 	DetectAt(
 		node *tree.Node,
 		ruleID string,
@@ -43,7 +44,6 @@ type Detector interface {
 	Name() string
 	DetectAt(node *tree.Node, evaluationState EvaluationState) ([]interface{}, error)
 	NestedDetections() bool
-	Close()
 }
 
 type DetectorBase struct{}

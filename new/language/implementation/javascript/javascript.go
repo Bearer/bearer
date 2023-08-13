@@ -9,13 +9,21 @@ import (
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/bearer/new/language/implementation"
-	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/util/regex"
-
-	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/typescript/tsx"
+
+	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
+	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
+	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
+	"github.com/bearer/bearer/new/detector/implementation/javascript/object"
+	stringdetector "github.com/bearer/bearer/new/detector/implementation/javascript/string"
+	detectortypes "github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/implementation"
+	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
+	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/util/regex"
 )
 
 var (
@@ -53,6 +61,20 @@ func Get() implementation.Implementation {
 
 func (*javascriptImplementation) Name() string {
 	return "javascript"
+}
+
+func (*javascriptImplementation) EnryLanguages() []string {
+	return []string{"JavaScript", "TypeScript", "TSX"}
+}
+
+func (impl *javascriptImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *tree.QuerySet) []detectortypes.Detector {
+	return []detectortypes.Detector{
+		object.New(querySet),
+		datatype.New(detectors.DetectorJavascript, schemaClassifier),
+		stringdetector.New(querySet),
+		stringliteral.New(querySet),
+		insecureurl.New(querySet),
+	}
 }
 
 func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {

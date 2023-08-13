@@ -1,34 +1,39 @@
 package language
 
 import (
-	"fmt"
+	"context"
 
-	"github.com/bearer/bearer/new/language/base"
 	"github.com/bearer/bearer/new/language/implementation"
-	"github.com/bearer/bearer/new/language/implementation/java"
-	"github.com/bearer/bearer/new/language/implementation/javascript"
-	"github.com/bearer/bearer/new/language/implementation/ruby"
+	"github.com/bearer/bearer/new/language/patternquery"
+	"github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/new/language/types"
 )
 
-func Get(name string) (types.Language, error) {
-	implementation, err := getImplementation(name)
+type Language struct {
+	implementation implementation.Implementation
+}
+
+func New(implementation implementation.Implementation) *Language {
+	return &Language{implementation: implementation}
+}
+
+func (lang *Language) Parse(ctx context.Context, input string) (*tree.Tree, error) {
+	tree, err := tree.Parse(ctx, lang.implementation.SitterLanguage(), input)
 	if err != nil {
 		return nil, err
 	}
 
-	return base.New(implementation), nil
+	if err := lang.implementation.AnalyzeFlow(ctx, tree.RootNode()); err != nil {
+		return nil, err
+	}
+
+	return tree, nil
 }
 
-func getImplementation(name string) (implementation.Implementation, error) {
-	switch name {
-	case "java":
-		return java.Get(), nil
-	case "ruby":
-		return ruby.Get(), nil
-	case "javascript":
-		return javascript.Get(), nil
-	default:
-		return nil, fmt.Errorf("unsupported language '%s'", name)
-	}
+func (lang *Language) NewQuerySet() *tree.QuerySet {
+	return tree.NewQuerySet(lang.implementation.SitterLanguage())
+}
+
+func (lang *Language) CompilePatternQuery(querySet *tree.QuerySet, input, focusedVariable string) (types.PatternQuery, error) {
+	return patternquery.Compile(lang, lang.implementation, querySet, input, focusedVariable)
 }

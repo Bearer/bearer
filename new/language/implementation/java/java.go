@@ -8,14 +8,21 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/bearer/new/language/implementation"
-	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/util/regex"
-	"github.com/ssoroka/slice"
-
-	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/java"
+
+	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
+	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
+	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
+	"github.com/bearer/bearer/new/detector/implementation/java/object"
+	stringdetector "github.com/bearer/bearer/new/detector/implementation/java/string"
+	detectortypes "github.com/bearer/bearer/new/detector/types"
+	"github.com/bearer/bearer/new/language/implementation"
+	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
+	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/util/regex"
 )
 
 var (
@@ -54,6 +61,20 @@ func Get() implementation.Implementation {
 
 func (*javaImplementation) Name() string {
 	return "java"
+}
+
+func (*javaImplementation) EnryLanguages() []string {
+	return []string{"Java"}
+}
+
+func (impl *javaImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *tree.QuerySet) []detectortypes.Detector {
+	return []detectortypes.Detector{
+		object.New(querySet),
+		datatype.New(detectors.DetectorJava, schemaClassifier),
+		stringdetector.New(querySet),
+		stringliteral.New(querySet),
+		insecureurl.New(querySet),
+	}
 }
 
 func (implementation *javaImplementation) SitterLanguage() *sitter.Language {
@@ -146,7 +167,7 @@ func (*javaImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node)
 				break
 			}
 
-			if slice.Contains(variableLookupParents, parent.Type()) ||
+			if slices.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "scoped_type_identifier" && node.Equal(parent.Child(0))) ||
 				(parent.Type() == "method_invocation" && node.Equal(parent.ChildByFieldName("object"))) ||
 				(parent.Type() == "field_access" && node.Equal(parent.ChildByFieldName("object"))) ||

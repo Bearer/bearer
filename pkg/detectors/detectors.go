@@ -137,9 +137,18 @@ func Extract(
 	filename string,
 	report reporttypes.Report,
 	fileStats *stats.FileStats,
-	scanners []string,
+	enabledScanners []string,
+	sastScanner *scanner.Scanner,
 ) error {
-	return ExtractWithDetectors(ctx, path, filename, report, fileStats, Registrations(scanners))
+	return ExtractWithDetectors(
+		ctx,
+		path,
+		filename,
+		report,
+		fileStats,
+		Registrations(enabledScanners),
+		sastScanner,
+	)
 }
 
 func ExtractWithDetectors(
@@ -149,6 +158,7 @@ func ExtractWithDetectors(
 	report reporttypes.Report,
 	fileStats *stats.FileStats,
 	allDetectors []InitializedDetector,
+	sastScanner *scanner.Scanner,
 ) error {
 
 	activeDetectors := make(map[InitializedDetector]activeDetector)
@@ -189,7 +199,7 @@ func ExtractWithDetectors(
 			}
 			defer recovery()
 
-			err := scanner.Detect(ctx, report, fileStats, file)
+			err := sastScanner.Scan(ctx, report, fileStats, file)
 			if err != nil {
 				log.Debug().Msgf("failed to process file %s for detector: %s", file.RelativePath, err)
 				report.AddError(file.RelativePath, fmt.Errorf("failed to process file for detector : %s", err))

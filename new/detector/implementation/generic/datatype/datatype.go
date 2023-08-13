@@ -4,7 +4,6 @@ import (
 	detectiontypes "github.com/bearer/bearer/new/detector/detection"
 	generictypes "github.com/bearer/bearer/new/detector/implementation/generic/types"
 	"github.com/bearer/bearer/new/detector/types"
-	languagetypes "github.com/bearer/bearer/new/language/types"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	classificationschema "github.com/bearer/bearer/pkg/classification/schema"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -30,11 +29,11 @@ type datatypeDetector struct {
 	classifier *classificationschema.Classifier
 }
 
-func New(detectorType detectors.Type, lang languagetypes.Language, classifier *classificationschema.Classifier) (types.Detector, error) {
+func New(detectorType detectors.Type, classifier *classificationschema.Classifier) types.Detector {
 	return &datatypeDetector{
 		detectorType: detectorType,
 		classifier:   classifier,
-	}, nil
+	}
 }
 
 func (detector *datatypeDetector) Name() string {
@@ -65,8 +64,6 @@ func (detector *datatypeDetector) DetectAt(
 
 	return result, nil
 }
-
-func (detector *datatypeDetector) Close() {}
 
 func (detector *datatypeDetector) classifyObject(
 	filename,
@@ -122,9 +119,9 @@ func (detector *datatypeDetector) classifyProperty(
 	data, propertyClassification, containsValidClassification := detector.classifyObject(filename, name, detection)
 
 	propertyDetection := &detectiontypes.Detection{
-		DetectorType: "datatype",
-		MatchNode:    detection.MatchNode,
-		Data:         data,
+		RuleID:    "datatype",
+		MatchNode: detection.MatchNode,
+		Data:      data,
 	}
 
 	if parentClassification.Decision.State == classify.Valid {

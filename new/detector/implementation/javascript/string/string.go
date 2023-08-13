@@ -14,8 +14,8 @@ type stringDetector struct {
 	types.DetectorBase
 }
 
-func New(querySet *langtree.QuerySet) (types.Detector, error) {
-	return &stringDetector{}, nil
+func New(querySet *langtree.QuerySet) types.Detector {
+	return &stringDetector{}
 }
 
 func (detector *stringDetector) Name() string {
@@ -78,5 +78,3 @@ func handleTemplateString(node *tree.Node, evaluationState types.EvaluationState
 		IsLiteral: isLiteral,
 	}}, err
 }
-
-func (detector *stringDetector) Close() {}

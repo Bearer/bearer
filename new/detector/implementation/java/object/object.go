@@ -20,7 +20,7 @@ type objectDetector struct {
 	fieldAccessQuery *langtree.Query
 }
 
-func New(querySet *langtree.QuerySet) (types.Detector, error) {
+func New(querySet *langtree.QuerySet) types.Detector {
 	// user = <object>
 	// User user = <object>
 	assignmentQuery := querySet.Add(`[
@@ -54,7 +54,7 @@ func New(querySet *langtree.QuerySet) (types.Detector, error) {
 		assignmentQuery:  assignmentQuery,
 		classQuery:       classQuery,
 		fieldAccessQuery: fieldAccessQuery,
-	}, nil
+	}
 }
 
 func (detector *objectDetector) Name() string {
@@ -140,15 +140,12 @@ func (detector *objectDetector) getClass(
 		Properties: []generictypes.Property{{
 			Name: className,
 			Object: &detection.Detection{
-				DetectorType: "object",
-				MatchNode:    node,
+				RuleID:    "object",
+				MatchNode: node,
 				Data: generictypes.Object{
 					Properties: properties,
 				},
 			},
 		}},
 	}}, nil
-}
-
-func (detector *objectDetector) Close() {
 }
