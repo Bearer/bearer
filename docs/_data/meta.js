@@ -4,7 +4,7 @@ module.exports = {
   name: "Bearer CLI",
   url: "https://docs.bearer.com",
   description:
-    "Bearer CLI is an open Source code security scanning tool that natively filters and prioritizes security risks by business impact",
+    "Bearer CLI is a free and open code security scanning tool that natively filters and prioritizes security risks by business impact",
   favicon: "/assets/img/favicon.svg",
   links: {
     discord: "https://discord.gg/eaHZBJUXRF",
