@@ -47,6 +47,7 @@ type Config struct {
 	Scan                flag.ScanOptions                     `mapstructure:"scan" json:"scan" yaml:"scan"`
 	Report              flag.ReportOptions                   `mapstructure:"report" json:"report" yaml:"report"`
 	IgnoredFingerprints map[string]ignore.IgnoredFingerprint `mapstructure:"ignored_fingerprints" json:"ignored_fingerprints" yaml:"ignored_fingerprints"`
+	CloudIgnoresUsed    bool                                 `mapstructure:"cloud_ignores_used" json:"cloud_ignores_used" yaml:"cloud_ignores_used"`
 	Policies            map[string]*Policy                   `mapstructure:"policies" json:"policies" yaml:"policies"`
 	Target              string                               `mapstructure:"target" json:"target" yaml:"target"`
 	Rules               map[string]*Rule                     `mapstructure:"rules" json:"rules" yaml:"rules"`
@@ -311,24 +312,18 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		}
 	}
 
-	ignoredFingerprints, err := ignore.GetIgnoredFingerprints(&opts.ScanOptions.Target)
-	if err != nil {
-		return Config{}, err
-	}
-
 	config := Config{
-		Client:              opts.Client,
-		Worker:              workerOptions,
-		Scan:                opts.ScanOptions,
-		Report:              opts.ReportOptions,
-		IgnoredFingerprints: ignoredFingerprints,
-		NoColor:             opts.GeneralOptions.NoColor || opts.ReportOptions.Output != "",
-		DebugProfile:        opts.GeneralOptions.DebugProfile,
-		Policies:            policies,
-		Rules:               result.Rules,
-		BuiltInRules:        result.BuiltInRules,
-		CacheUsed:           result.CacheUsed,
-		BearerRulesVersion:  result.BearerRulesVersion,
+		Client:             opts.Client,
+		Worker:             workerOptions,
+		Scan:               opts.ScanOptions,
+		Report:             opts.ReportOptions,
+		NoColor:            opts.GeneralOptions.NoColor || opts.ReportOptions.Output != "",
+		DebugProfile:       opts.GeneralOptions.DebugProfile,
+		Policies:           policies,
+		Rules:              result.Rules,
+		BuiltInRules:       result.BuiltInRules,
+		CacheUsed:          result.CacheUsed,
+		BearerRulesVersion: result.BearerRulesVersion,
 	}
 
 	if config.Scan.DiffBaseBranch != "" {

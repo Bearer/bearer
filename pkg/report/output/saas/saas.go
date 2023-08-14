@@ -48,6 +48,21 @@ func GetReport(config settings.Config, securityOutput *types.Output[security.Res
 	}, nil
 }
 
+func GetVCSInfo(config settings.Config) (*vcsurl.VCS, error) {
+	gitRemote, err := getRemote(config.Scan.Target)
+	if err != nil {
+		return nil, err
+	}
+
+	info, err := vcsurl.Parse(*gitRemote)
+	if err != nil {
+		log.Debug().Msgf("couldn't parse origin url %s", err)
+		return nil, err
+	}
+
+	return info, nil
+}
+
 func getMeta(config settings.Config) (*saas.Meta, error) {
 	sha, err := getSha(config.Scan.Target)
 	if err != nil {
@@ -64,14 +79,8 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 		return nil, err
 	}
 
-	gitRemote, err := getRemote(config.Scan.Target)
+	info, err := GetVCSInfo(config)
 	if err != nil {
-		return nil, err
-	}
-
-	info, err := vcsurl.Parse(*gitRemote)
-	if err != nil {
-		log.Debug().Msgf("couldn't parse origin url %s", err)
 		return nil, err
 	}
 

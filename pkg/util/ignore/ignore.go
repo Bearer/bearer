@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"time"
+
+	"github.com/bearer/bearer/api"
 )
 
 type IgnoredFingerprint struct {
@@ -29,6 +31,19 @@ func GetIgnoredFingerprints(target *string) (ignoredFingerprints map[string]Igno
 	}
 
 	return fingerprints, nil
+}
+
+func GetIgnoredFingerprintsFromCloud(client *api.API, fullname string) (useCloudIgnores bool, ignoredFingerprints map[string]IgnoredFingerprint, err error) {
+	data, err := client.FetchIgnores(fullname)
+	if err != nil {
+		return useCloudIgnores, ignoredFingerprints, err
+	}
+
+	ignoredFingerprints = make(map[string]IgnoredFingerprint)
+	for _, fingerprint := range data.CloudIgnores {
+		ignoredFingerprints[fingerprint] = IgnoredFingerprint{}
+	}
+	return data.ProjectFound, ignoredFingerprints, nil
 }
 
 func AddToIgnoreFile(fingerprintsToIgnore map[string]IgnoredFingerprint, force bool) error {
