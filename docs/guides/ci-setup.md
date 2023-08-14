@@ -35,7 +35,7 @@ This tells GitLab to use the `bearer/bearer` docker image. You can adjust the `s
 
 GitLab's guide on [Running CI/CD jobs in Docker containers](https://docs.gitlab.com/ee/ci/docker/using_docker_images.html) provides additional context on configuring the CI in this way.
 
-For more details and additional configuration, see our [guide to using the GitLab](/guides/gitlab/).
+For more details and additional configuration, see our [guide to using GitLab](/guides/gitlab/).
 
 ## Universal setup
 
