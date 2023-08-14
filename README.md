@@ -240,7 +240,7 @@ The most vulnerable asset today is sensitive data, so we start there and [priori
 
 We believe that by linking security issues with a clear business impact and risk of a data breach, or data leak, we can build better and more robust software, at no extra cost.
 
-In addition, by being Open Source, extendable by design, and built with a great developer UX in mind, we bet you will see the difference for yourself.
+In addition, by being Free and Open, extendable by design, and built with a great developer UX in mind, we bet you will see the difference for yourself.
 
 ### What is the privacy scanner? 
 
