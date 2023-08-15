@@ -48,7 +48,7 @@ See our [guide to using the GitHub action](/guides/github-action/#pull-request-d
 [guide to using GitLab](/guides/gitlab/#gitlab-merge-request-diff) for
 information on using this feature with those services.
 
-## Exclude specific findings
+## Ignore specific findings
 
 Every finding is associated with a unique fingerprint visible directly in the CLI output, for example:
 
