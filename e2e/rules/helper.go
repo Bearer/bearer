@@ -15,6 +15,7 @@ func buildRulesTestCase(testName, path, ruleID string) testhelper.TestCase {
 		"--only-rule=" + ruleID,
 		"--format=yaml",
 		"--disable-default-rules",
+		"--exit-code=0",
 		"--external-rule-dir=" + filepath.Join("e2e", "rules", "testdata", "rules"),
 	}
 
