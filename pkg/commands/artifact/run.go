@@ -193,7 +193,8 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 		}
 
 		report := types.Report{Path: r.reportPath + ".base", Inputgocloc: r.goclocResult}
-		detections, _, err := reportoutput.GetOutput(report, r.scanSettings, fileList.BaseFiles, nil)
+
+		detections, _, _, err := reportoutput.GetOutput(report, r.scanSettings, fileList.BaseFiles, nil)
 		if err != nil {
 			return err
 		}
@@ -330,7 +331,7 @@ func (r *runner) Report(
 		outputhandler.StdErrLog("Using cached data")
 	}
 
-	detections, dataflow, err := reportoutput.GetOutput(report, r.scanSettings, files, baseBranchFindings)
+	detections, dataflow, reportPassed, err := reportoutput.GetOutput(report, r.scanSettings, files, baseBranchFindings)
 	if err != nil {
 		return false, err
 	}
@@ -359,8 +360,7 @@ func (r *runner) Report(
 		if r.scanSettings.Report.Report == flag.ReportSecurity {
 			// for security report, default report format is Table
 			detectionReport := detections.(*security.Results)
-			var reportStr *strings.Builder
-			reportStr, reportPassed = security.BuildReportString(r.scanSettings, detectionReport, report.Inputgocloc, dataflow)
+			reportStr := security.BuildReportString(r.scanSettings, detectionReport, report.Inputgocloc, dataflow, reportPassed)
 
 			logger(reportStr.String())
 		} else if r.scanSettings.Report.Report == flag.ReportPrivacy {

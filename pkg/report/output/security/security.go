@@ -129,7 +129,7 @@ func GetOutput(
 	dataflow *dataflow.DataFlow,
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
-) (*Results, error) {
+) (*Results, bool, error) {
 	summaryResults := make(Results)
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
@@ -137,11 +137,11 @@ func GetOutput(
 
 	builtInFingerprints, err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 	fingerprints, err := evaluateRules(summaryResults, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 
 	if !config.Scan.Quiet {
@@ -156,8 +156,16 @@ func GetOutput(
 			output.StdErrLog("\n=====================================")
 		}
 	}
+	reportPassed := true
 
-	return &summaryResults, nil
+	for severityLevel, results := range summaryResults {
+		if severityLevel != types.LevelWarning && len(results) != 0 {
+			// fail the report if we have failures above the severity threshold
+			reportPassed = false
+		}
+	}
+
+	return &summaryResults, reportPassed, nil
 }
 
 func evaluateRules(
@@ -310,8 +318,7 @@ func getExtract(rawCodeExtract []file.Line) string {
 	return strings.Join(parts, "\n")
 }
 
-func BuildReportString(config settings.Config, results *Results, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
-	severityForFailure := config.Report.Severity
+func BuildReportString(config settings.Config, results *Results, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow, reportPassed bool) *strings.Builder {
 	reportStr := &strings.Builder{}
 
 	reportStr.WriteString("\n\nSecurity Report\n")
@@ -331,7 +338,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 	)
 
 	if rulesAvailableCount == 0 {
-		return reportStr, false
+		return reportStr
 	}
 
 	failures := map[string]map[string]bool{
@@ -342,16 +349,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 		types.LevelWarning:  make(map[string]bool),
 	}
 
-	reportPassed := true
 	for _, severityLevel := range orderedSeverityLevels {
-		if !severityForFailure[severityLevel] {
-			continue
-		}
-		if severityLevel != types.LevelWarning && len((*results)[severityLevel]) != 0 {
-			// fail the report if we have failures above the severity threshold
-			reportPassed = false
-		}
-
 		for _, failure := range (*results)[severityLevel] {
 			for i := 0; i < len(failure.CWEIDs); i++ {
 				failures[severityLevel]["CWE-"+failure.CWEIDs[i]] = true
@@ -364,7 +362,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.com/guides/custom-rule\n")
 	}
 
-	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, *results, rulesAvailableCount, failures, severityForFailure)
+	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, *results, rulesAvailableCount, failures, config.Report.Severity)
 
 	if noFailureSummary {
 		writeSuccessToString(rulesAvailableCount, reportStr)
@@ -381,7 +379,7 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 
 	color.NoColor = initialColorSetting
 
-	return reportStr, reportPassed
+	return reportStr
 }
 
 func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) string {
@@ -602,9 +600,6 @@ func checkAndWriteFailureSummaryToString(
 	failureCount := 0
 	warningCount := 0
 	for _, severityLevel := range maps.Keys(severityForFailure) {
-		if !severityForFailure[severityLevel] {
-			continue
-		}
 		if severityLevel == types.LevelWarning {
 			warningCount += len(results[severityLevel])
 			continue
@@ -617,16 +612,13 @@ func checkAndWriteFailureSummaryToString(
 	}
 
 	reportStr.WriteString("\n\n")
-	reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount+warningCount) + " findings\n\n"))
+	reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount+warningCount) + " findings\n"))
 
-	for i, severityLevel := range orderedSeverityLevels {
+	for _, severityLevel := range orderedSeverityLevels {
 		if !severityForFailure[severityLevel] {
 			continue
 		}
-		if i > 0 {
-			reportStr.WriteString("\n")
-		}
-		reportStr.WriteString(formatSeverity(severityLevel) + fmt.Sprint(len(results[severityLevel])))
+		reportStr.WriteString("\n" + formatSeverity(severityLevel) + fmt.Sprint(len(results[severityLevel])))
 		if len(failures[severityLevel]) > 0 {
 			ruleIds := maps.Keys(failures[severityLevel])
 			sort.Strings(ruleIds)
