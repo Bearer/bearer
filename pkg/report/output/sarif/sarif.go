@@ -6,7 +6,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/security"
 )
 
-func ReportSarif(outputDetections *map[string][]security.Result, rules map[string]*settings.Rule) (sarif.SarifOutput, error) {
+func ReportSarif(outputDetections map[string][]security.Result, rules map[string]*settings.Rule) (sarif.SarifOutput, error) {
 	var sarifRules []sarif.Rule
 
 	for _, rule := range rules {
@@ -40,7 +40,7 @@ func ReportSarif(outputDetections *map[string][]security.Result, rules map[strin
 	var results []sarif.Result
 
 	for _, level := range []string{"critical", "high", "medium", "low", "warning"} {
-		if findings, ok := (*outputDetections)[level]; ok {
+		if findings, ok := outputDetections[level]; ok {
 			for _, finding := range findings {
 				results = append(results, sarif.Result{
 					RuleId: finding.Rule.Id,

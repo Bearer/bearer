@@ -1,6 +1,7 @@
 package orchestrator
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path"
@@ -71,8 +72,7 @@ func (orchestrator *Orchestrator) Scan(
 	}
 
 	orchestrator.waitForScan(fileComplete, len(files))
-
-	return nil
+	return orchestrator.writeFileList(reportFile, files)
 }
 
 func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, totalCount int) {
@@ -131,6 +131,24 @@ func (orchestrator *Orchestrator) scanFile(reportFile *os.File, fileComplete cha
 func (orchestrator *Orchestrator) Close() {
 	close(orchestrator.done)
 	orchestrator.pool.Close()
+}
+
+func (orchestrator *Orchestrator) writeFileList(reportFile *os.File, files []files.File) error {
+	filenames := make([]string, len(files))
+	for i, file := range files {
+		filenames[i] = file.FilePath
+	}
+
+	detections := []detections.FileListDetection{{
+		Type:      detections.TypeFileList,
+		Filenames: filenames,
+	}}
+
+	if err := jsonlines.Encode(reportFile, &detections); err != nil {
+		return fmt.Errorf("failed to encode file list: %w", err)
+	}
+
+	return nil
 }
 
 func (orchestrator *Orchestrator) writeFileResult(reportFile *os.File, tmpReportPath string) {

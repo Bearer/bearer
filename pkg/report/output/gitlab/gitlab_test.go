@@ -7,9 +7,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/bradleyjkemp/cupaloy"
+
 	"github.com/bearer/bearer/pkg/report/output/security"
 	util "github.com/bearer/bearer/pkg/util/output"
-	"github.com/bradleyjkemp/cupaloy"
 )
 
 func TestJuiceShopSarif(t *testing.T) {
@@ -27,7 +28,7 @@ func TestJuiceShopSarif(t *testing.T) {
 	startTime, _ := time.Parse("2006-01-02T15:04:05", "2006-01-02T15:04:05")
 	endTime, _ := time.Parse("2006-01-02T15:04:05", "2006-01-02T15:05:05")
 
-	res, err := ReportGitLab(&securityResults, startTime, endTime)
+	res, err := ReportGitLab(securityResults, startTime, endTime)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}

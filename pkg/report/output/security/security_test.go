@@ -3,14 +3,17 @@ package security_test
 import (
 	"testing"
 
-	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/report/output/dataflow"
-	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
-	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/hhatto/gocloc"
+	"github.com/stretchr/testify/assert"
+
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/report/schema"
+
+	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
+	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/report/output/types"
 )
 
 func TestBuildReportString(t *testing.T) {
@@ -49,9 +52,8 @@ func TestBuildReportString(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflow := dummyDataflow()
-
-	results, reportPassed, err := security.GetOutput(&dataflow, config, nil)
+	dataflowOutput := dummyDataflowOutput()
+	output, err := security.GetOutput(dataflowOutput, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -66,7 +68,7 @@ func TestBuildReportString(t *testing.T) {
 		MaxPathLength: 0,
 	}
 
-	stringBuilder := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow, reportPassed)
+	stringBuilder := security.BuildReportString(config, output, &dummyGoclocResult)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
@@ -89,9 +91,8 @@ func TestNoRulesBuildReportString(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflow := dummyDataflow()
-
-	results, reportPassed, err := security.GetOutput(&dataflow, config, nil)
+	dataflowOutput := dummyDataflowOutput()
+	output, err := security.GetOutput(dataflowOutput, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -106,7 +107,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 		MaxPathLength: 0,
 	}
 
-	stringBuilder := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow, reportPassed)
+	stringBuilder := security.BuildReportString(config, output, &dummyGoclocResult)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
@@ -126,14 +127,15 @@ func TestGetOutput(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflow := dummyDataflow()
-
-	res, _, err := security.GetOutput(&dataflow, config, nil)
+	dataflowOutput := dummyDataflowOutput()
+	output, err := security.GetOutput(dataflowOutput, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
-	cupaloy.SnapshotT(t, res)
+	assert.Equal(t, dataflowOutput.Dataflow, dataflowOutput.Dataflow)
+	assert.Equal(t, dataflowOutput.Files, dataflowOutput.Files)
+	cupaloy.SnapshotT(t, output.Data)
 }
 
 func TestTestGetOutputWithSeverity(t *testing.T) {
@@ -152,14 +154,13 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflow := dummyDataflow()
-
-	res, _, err := security.GetOutput(&dataflow, config, nil)
+	dataflowOutput := dummyDataflowOutput()
+	output, err := security.GetOutput(dataflowOutput, config, nil)
 	if err != nil {
-		t.Fatalf("failed to generate security output err:%s", err)
+		t.Fatalf("failed to generate security output err: %s", err)
 	}
 
-	cupaloy.SnapshotT(t, res)
+	cupaloy.SnapshotT(t, output.Data)
 }
 
 func TestCalculateSeverity(t *testing.T) {
@@ -188,11 +189,11 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 	return settings.FromOptions(opts, []string{"ruby"})
 }
 
-func dummyDataflow() dataflow.DataFlow {
+func dummyDataflowOutput() *types.Output[*types.DataFlow] {
 	subject := "User"
-	lowRisk := types.RiskDetector{
+	lowRisk := dataflowtypes.RiskDetector{
 		DetectorID: "ruby_lang_ssl_verification",
-		Locations: []types.RiskLocation{
+		Locations: []dataflowtypes.RiskLocation{
 			{
 				Filename:        "config/application.rb",
 				StartLineNumber: 2,
@@ -203,7 +204,7 @@ func dummyDataflow() dataflow.DataFlow {
 					EndColumnNumber:   28,
 					Content:           "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
 				},
-				PresenceMatches: []types.RiskPresence{
+				PresenceMatches: []dataflowtypes.RiskPresence{
 					{
 						Name: "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
 					},
@@ -212,9 +213,9 @@ func dummyDataflow() dataflow.DataFlow {
 		},
 	}
 
-	criticalRisk := types.RiskDetector{
+	criticalRisk := dataflowtypes.RiskDetector{
 		DetectorID: "ruby_rails_logger",
-		Locations: []types.RiskLocation{
+		Locations: []dataflowtypes.RiskLocation{
 			{
 				Filename:        "pkg/datatype_leak.rb",
 				StartLineNumber: 1,
@@ -225,11 +226,11 @@ func dummyDataflow() dataflow.DataFlow {
 					EndColumnNumber:   28,
 					Content:           "Rails.logger.info(user.biometric_data)",
 				},
-				DataTypes: []types.RiskDatatype{
+				DataTypes: []dataflowtypes.RiskDatatype{
 					{
 						Name:         "Biometric Data",
 						CategoryUUID: "35b94efa-9b67-49b2-abb9-29b6a759a030",
-						Schemas: []types.RiskSchema{
+						Schemas: []dataflowtypes.RiskSchema{
 							{
 								FieldName:   "",
 								ObjectName:  "",
@@ -243,20 +244,20 @@ func dummyDataflow() dataflow.DataFlow {
 	}
 
 	// build risk []interface
-	risks := make([]types.RiskDetector, 2)
+	risks := make([]dataflowtypes.RiskDetector, 2)
 	risks[0] = criticalRisk
 	risks[1] = lowRisk
 
-	return dataflow.DataFlow{
-		Datatypes: []types.Datatype{
+	dataflow := &types.DataFlow{
+		Datatypes: []dataflowtypes.Datatype{
 			{
 				Name:         "Email Address",
 				UUID:         "02bb0d3a-2c8c-4842-be1c-c057f0dccd63",
 				CategoryUUID: "dd88aee5-9d40-4ad2-8983-0c791ddec47c",
-				Detectors: []types.DatatypeDetector{
+				Detectors: []dataflowtypes.DatatypeDetector{
 					{
 						Name: "ruby",
-						Locations: []types.DatatypeLocation{
+						Locations: []dataflowtypes.DatatypeLocation{
 							{
 								Filename:          "app/model/user.rb",
 								StartLineNumber:   1,
@@ -272,6 +273,12 @@ func dummyDataflow() dataflow.DataFlow {
 			},
 		},
 		Risks:      risks,
-		Components: []types.Component{},
+		Components: []dataflowtypes.Component{},
+	}
+
+	return &types.Output[*types.DataFlow]{
+		Data:     dataflow,
+		Dataflow: dataflow,
+		Files:    []string{"config/application.rb", "pkg/datatype_leak.rb", "app/model/user.rb"},
 	}
 }

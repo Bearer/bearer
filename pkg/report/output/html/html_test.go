@@ -22,7 +22,7 @@ func TestJuiceShopSecurityHtml(t *testing.T) {
 		t.Fatalf("couldn't unmarshal file output: %s", err)
 	}
 
-	output, err := ReportSecurityHTML(&securityResults)
+	output, err := ReportSecurityHTML(securityResults)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}

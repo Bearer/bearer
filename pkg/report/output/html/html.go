@@ -54,7 +54,7 @@ func ReportHTMLWrapper(title string, body *string) (*string, error) {
 	return &content, nil
 }
 
-func ReportSecurityHTML(detections *map[string][]security.Result) (*string, error) {
+func ReportSecurityHTML(detections map[string][]security.Result) (*string, error) {
 	htmlContent := &strings.Builder{}
 
 	findingsTemplate, err := template.New("findingsTemplate").Funcs(template.FuncMap{

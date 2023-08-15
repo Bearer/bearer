@@ -21,6 +21,7 @@ var TypeFramework DetectionType = "framework"
 var TypeFrameworkClassified DetectionType = "framework_classified"
 var TypeFiller DetectionType = "filler"
 var TypeError DetectionType = "error"
+var TypeFileList DetectionType = "file_list"
 var TypeFileFailed DetectionType = "file_error"
 var TypeSecretleak DetectionType = "secret_leak"
 var TypeCustom DetectionType = "custom"
@@ -29,6 +30,11 @@ var TypeCustomRisk DetectionType = "custom_risk"
 
 type ReportDetection interface {
 	AddDetection(detectionType DetectionType, detectorType detectors.Type, source source.Source, value interface{})
+}
+
+type FileListDetection struct {
+	Type      DetectionType `json:"type" yaml:"type"`
+	Filenames []string      `json:"filenames" yaml:"filenames"`
 }
 
 // broker writes those for files that scanner fails to proccess

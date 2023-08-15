@@ -143,16 +143,21 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 	}
 
 	runner.config.Scan.Target = testDataPath
-	detections, _, _, _ := output.GetOutput(
+	output, err := output.GetOutput(
 		types.Report{
 			Path: detectorsReportPath,
 		},
 		runner.config,
-		[]files.File{fileRelativePath},
 		nil,
 	)
+	if err != nil {
+		t.Fatalf("failed to get output: %s", err)
+	}
 
-	report, _ := util.ReportYAML(detections)
+	report, err := util.ReportYAML(output.Data)
+	if err != nil {
+		t.Fatalf("failed to encoded to yaml: %s", err)
+	}
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
 	cupaloyCopy.SnapshotT(t, *report)

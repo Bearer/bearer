@@ -7,15 +7,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/bearer/bearer/pkg/classification/db"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/types"
-	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/bearer/bearer/pkg/util/maputil"
-	"github.com/bearer/bearer/pkg/util/output"
-	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
-	"github.com/bearer/bearer/pkg/util/rego"
-	"github.com/bearer/bearer/pkg/util/set"
+	"golang.org/x/exp/maps"
+	"golang.org/x/exp/slices"
+
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
 	"github.com/rodaine/table"
@@ -23,37 +17,44 @@ import (
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 
-	"golang.org/x/exp/maps"
-	"golang.org/x/exp/slices"
-
+	"github.com/bearer/bearer/pkg/classification/db"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
-	"github.com/bearer/bearer/pkg/report/output/dataflow"
+	globaltypes "github.com/bearer/bearer/pkg/types"
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/bearer/bearer/pkg/util/maputil"
+	"github.com/bearer/bearer/pkg/util/output"
+	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
+	"github.com/bearer/bearer/pkg/util/rego"
+	"github.com/bearer/bearer/pkg/util/set"
+
 	stats "github.com/bearer/bearer/pkg/report/output/stats"
+	"github.com/bearer/bearer/pkg/report/output/types"
 )
 
 var underline = color.New(color.Underline).SprintFunc()
 var severityColorFns = map[string]func(x ...interface{}) string{
-	types.LevelCritical: color.New(color.FgRed).SprintFunc(),
-	types.LevelHigh:     color.New(color.FgHiRed).SprintFunc(),
-	types.LevelMedium:   color.New(color.FgYellow).SprintFunc(),
-	types.LevelLow:      color.New(color.FgBlue).SprintFunc(),
-	types.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
+	globaltypes.LevelCritical: color.New(color.FgRed).SprintFunc(),
+	globaltypes.LevelHigh:     color.New(color.FgHiRed).SprintFunc(),
+	globaltypes.LevelMedium:   color.New(color.FgYellow).SprintFunc(),
+	globaltypes.LevelLow:      color.New(color.FgBlue).SprintFunc(),
+	globaltypes.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
 var orderedSeverityLevels = []string{
-	types.LevelCritical,
-	types.LevelHigh,
-	types.LevelMedium,
-	types.LevelLow,
-	types.LevelWarning,
+	globaltypes.LevelCritical,
+	globaltypes.LevelHigh,
+	globaltypes.LevelMedium,
+	globaltypes.LevelLow,
+	globaltypes.LevelWarning,
 }
 
 type Results = map[string][]Result
 
 type Input struct {
-	RuleId         string             `json:"rule_id" yaml:"rule_id"`
-	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
-	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
-	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
+	RuleId         string            `json:"rule_id" yaml:"rule_id"`
+	Rule           *settings.Rule    `json:"rule" yaml:"rule"`
+	Dataflow       *types.DataFlow   `json:"dataflow" yaml:"dataflow"`
+	DataCategories []db.DataCategory `json:"data_categories" yaml:"data_categories"`
 }
 
 type RuleCounter struct {
@@ -126,10 +127,11 @@ type Rule struct {
 }
 
 func GetOutput(
-	dataflow *dataflow.DataFlow,
+	dataflowOutput *types.Output[*types.DataFlow],
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
-) (*Results, bool, error) {
+) (*types.Output[Results], error) {
+	dataflow := dataflowOutput.Dataflow
 	summaryResults := make(Results)
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
@@ -137,11 +139,11 @@ func GetOutput(
 
 	builtInFingerprints, err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
 	if err != nil {
-		return nil, false, err
+		return nil, err
 	}
 	fingerprints, err := evaluateRules(summaryResults, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
-		return nil, false, err
+		return nil, err
 	}
 
 	if !config.Scan.Quiet {
@@ -156,23 +158,28 @@ func GetOutput(
 			output.StdErrLog("\n=====================================")
 		}
 	}
-	reportPassed := true
 
+	// fail the report if we have failures above the severity threshold
+	reportFailed := false
 	for severityLevel, results := range summaryResults {
-		if severityLevel != types.LevelWarning && len(results) != 0 {
-			// fail the report if we have failures above the severity threshold
-			reportPassed = false
+		if severityLevel != globaltypes.LevelWarning && len(results) != 0 {
+			reportFailed = true
 		}
 	}
 
-	return &summaryResults, reportPassed, nil
+	return &types.Output[Results]{
+		Data:         summaryResults,
+		Dataflow:     dataflow,
+		Files:        dataflowOutput.Files,
+		ReportFailed: reportFailed,
+	}, nil
 }
 
 func evaluateRules(
 	summaryResults Results,
 	rules map[string]*settings.Rule,
 	config settings.Config,
-	dataflow *dataflow.DataFlow,
+	dataflow *types.DataFlow,
 	baseBranchFindings *basebranchfindings.Findings,
 	builtIn bool,
 ) ([]string, error) {
@@ -301,7 +308,7 @@ func removeUnusedFingerprints(detectedFingerprints []string, excludeFingerprints
 	filteredFingerprints := []string{}
 
 	for fingerprint := range excludeFingerprints {
-		if !slice.Contains(detectedFingerprints, fingerprint) {
+		if !slices.Contains(detectedFingerprints, fingerprint) {
 			filteredFingerprints = append(filteredFingerprints, fingerprint)
 		}
 	}
@@ -318,7 +325,7 @@ func getExtract(rawCodeExtract []file.Line) string {
 	return strings.Join(parts, "\n")
 }
 
-func BuildReportString(config settings.Config, results *Results, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow, reportPassed bool) *strings.Builder {
+func BuildReportString(config settings.Config, output *types.Output[Results], lineOfCodeOutput *gocloc.Result) *strings.Builder {
 	reportStr := &strings.Builder{}
 
 	reportStr.WriteString("\n\nSecurity Report\n")
@@ -342,15 +349,15 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 	}
 
 	failures := map[string]map[string]bool{
-		types.LevelCritical: make(map[string]bool),
-		types.LevelHigh:     make(map[string]bool),
-		types.LevelMedium:   make(map[string]bool),
-		types.LevelLow:      make(map[string]bool),
-		types.LevelWarning:  make(map[string]bool),
+		globaltypes.LevelCritical: make(map[string]bool),
+		globaltypes.LevelHigh:     make(map[string]bool),
+		globaltypes.LevelMedium:   make(map[string]bool),
+		globaltypes.LevelLow:      make(map[string]bool),
+		globaltypes.LevelWarning:  make(map[string]bool),
 	}
 
 	for _, severityLevel := range orderedSeverityLevels {
-		for _, failure := range (*results)[severityLevel] {
+		for _, failure := range output.Data[severityLevel] {
 			for i := 0; i < len(failure.CWEIDs); i++ {
 				failures[severityLevel]["CWE-"+failure.CWEIDs[i]] = true
 			}
@@ -358,15 +365,15 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 		}
 	}
 
-	if reportPassed {
+	if !output.ReportFailed {
 		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.com/guides/custom-rule\n")
 	}
 
-	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, *results, rulesAvailableCount, failures, config.Report.Severity)
+	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, output.Data, rulesAvailableCount, failures, config.Report.Severity)
 
 	if noFailureSummary {
 		writeSuccessToString(rulesAvailableCount, reportStr)
-		writeStatsToString(reportStr, config, lineOfCodeOutput, dataflow)
+		writeStatsToString(reportStr, config, lineOfCodeOutput, output.Dataflow)
 	}
 
 	writeApiClientResultToString(reportStr, config)
@@ -383,8 +390,8 @@ func BuildReportString(config settings.Config, results *Results, lineOfCodeOutpu
 }
 
 func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) string {
-	if severity == types.LevelWarning {
-		return types.LevelWarning
+	if severity == globaltypes.LevelWarning {
+		return globaltypes.LevelWarning
 	}
 
 	// highest sensitive data category
@@ -401,11 +408,11 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 
 	var ruleSeverityWeighting int
 	switch severity {
-	case types.LevelCritical:
+	case globaltypes.LevelCritical:
 		ruleSeverityWeighting = 8
-	case types.LevelHigh:
+	case globaltypes.LevelHigh:
 		ruleSeverityWeighting = 5
-	case types.LevelMedium:
+	case globaltypes.LevelMedium:
 		ruleSeverityWeighting = 3
 	default:
 		ruleSeverityWeighting = 2 // low weighting as default
@@ -418,29 +425,29 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 
 	switch finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting); {
 	case finalWeighting >= 8:
-		return types.LevelCritical
+		return globaltypes.LevelCritical
 	case finalWeighting >= 5:
-		return types.LevelHigh
+		return globaltypes.LevelHigh
 	case finalWeighting >= 3:
-		return types.LevelMedium
+		return globaltypes.LevelMedium
 	}
 
-	return types.LevelLow
+	return globaltypes.LevelLow
 }
 
 func writeStatsToString(
 	reportStr *strings.Builder,
 	config settings.Config,
 	lineOfCodeOutput *gocloc.Result,
-	dataflow *dataflow.DataFlow,
+	dataflow *types.DataFlow,
 ) {
-	statistics, _, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
+	statisticsOutput, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
 	if err != nil {
 		return
 	}
-	if stats.AnythingFoundFor(statistics) {
+	if stats.AnythingFoundFor(&statisticsOutput.Data) {
 		reportStr.WriteString("\nBearer found:\n")
-		stats.WriteStatsToString(reportStr, statistics)
+		stats.WriteStatsToString(reportStr, &statisticsOutput.Data)
 		reportStr.WriteString("\n")
 	}
 }
@@ -600,7 +607,7 @@ func checkAndWriteFailureSummaryToString(
 	failureCount := 0
 	warningCount := 0
 	for _, severityLevel := range maps.Keys(severityForFailure) {
-		if severityLevel == types.LevelWarning {
+		if severityLevel == globaltypes.LevelWarning {
 			warningCount += len(results[severityLevel])
 			continue
 		}

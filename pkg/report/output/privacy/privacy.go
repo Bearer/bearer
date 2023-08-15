@@ -6,23 +6,24 @@ import (
 	"sort"
 	"strings"
 
+	"golang.org/x/exp/maps"
+
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/types"
+	globaltypes "github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
-	"golang.org/x/exp/maps"
 
-	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/report/output/types"
 )
 
 type RuleInput struct {
-	RuleId         string             `json:"rule_id" yaml:"rule_id"`
-	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
-	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
-	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
+	RuleId         string            `json:"rule_id" yaml:"rule_id"`
+	Rule           *settings.Rule    `json:"rule" yaml:"rule"`
+	Dataflow       *types.DataFlow   `json:"dataflow" yaml:"dataflow"`
+	DataCategories []db.DataCategory `json:"data_categories" yaml:"data_categories"`
 }
 
 type RuleOutput struct {
@@ -45,8 +46,8 @@ type RuleFailureSummary struct {
 }
 
 type Input struct {
-	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
-	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
+	Dataflow       *types.DataFlow   `json:"dataflow" yaml:"dataflow"`
+	DataCategories []db.DataCategory `json:"data_categories" yaml:"data_categories"`
 }
 
 type Output struct {
@@ -90,15 +91,15 @@ type Report struct {
 
 const PLACEHOLDER_VALUE = "Unknown"
 
-func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
+func BuildCsvString(dataflow *types.DataFlow, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
 	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
-	result, _, err := GetOutput(dataflow, config)
+	output, err := GetOutput(dataflow, config)
 	if err != nil {
 		return csvStr, err
 	}
 
-	for _, subject := range result.Subjects {
+	for _, subject := range output.Data.Subjects {
 		subjectArr := []string{
 			subject.DataSubject,
 			subject.DataType,
@@ -115,7 +116,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	csvStr.WriteString("\n")
 	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
 
-	for _, thirdParty := range result.ThirdParty {
+	for _, thirdParty := range output.Data.ThirdParty {
 		thirdPartyArr := []string{
 			thirdParty.ThirdParty,
 			thirdParty.DataSubject,
@@ -132,7 +133,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	return csvStr, nil
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *dataflow.DataFlow, error) {
+func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[*Report], error) {
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
@@ -186,19 +187,19 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 			},
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 
 			var ruleOutput map[string][]RuleOutput
 			err = json.Unmarshal(jsonRes, &ruleOutput)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
@@ -219,13 +220,13 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 
 				// count severity
 				switch ruleSeverity {
-				case types.LevelCritical:
+				case globaltypes.LevelCritical:
 					subjectRuleFailure.CriticalRiskFindingCount += 1
-				case types.LevelHigh:
+				case globaltypes.LevelHigh:
 					subjectRuleFailure.HighRiskFindingCount += 1
-				case types.LevelMedium:
+				case globaltypes.LevelMedium:
 					subjectRuleFailure.MediumRiskFindingCount += 1
-				case types.LevelLow:
+				case globaltypes.LevelLow:
 					subjectRuleFailure.LowRiskFindingCount += 1
 				}
 
@@ -259,13 +260,13 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 
 				// count severity
 				switch ruleSeverity {
-				case types.LevelCritical:
+				case globaltypes.LevelCritical:
 					thirdPartyDataSubject.CriticalRiskFindingCount += 1
-				case types.LevelHigh:
+				case globaltypes.LevelHigh:
 					thirdPartyDataSubject.HighRiskFindingCount += 1
-				case types.LevelMedium:
+				case globaltypes.LevelMedium:
 					thirdPartyDataSubject.MediumRiskFindingCount += 1
-				case types.LevelLow:
+				case globaltypes.LevelLow:
 					thirdPartyDataSubject.LowRiskFindingCount += 1
 				}
 
@@ -301,19 +302,19 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 	)
 
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	if len(rs) > 0 {
 		jsonRes, err := json.Marshal(rs)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 
 		var outputItems map[string][]Output
 		err = json.Unmarshal(jsonRes, &outputItems)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 
 		for _, outputItem := range outputItems["items"] {
@@ -378,10 +379,13 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, *d
 	subjects := maps.Values(subjectInventory)
 	sortInventory(subjects, thirdPartyInventory)
 
-	return &Report{
-		Subjects:   subjects,
-		ThirdParty: thirdPartyInventory,
-	}, dataflow, nil
+	return &types.Output[*Report]{
+		Data: &Report{
+			Subjects:   subjects,
+			ThirdParty: thirdPartyInventory,
+		},
+		Dataflow: dataflow,
+	}, nil
 }
 
 func sortInventory(subjectInventory []Subject, thirdPartyInventory []ThirdParty) {

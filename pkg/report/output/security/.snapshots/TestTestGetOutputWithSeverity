@@ -1,4 +1,4 @@
-(*map[string][]security.Result)((len=1) {
+(map[string][]security.Result) (len=1) {
   (string) (len=8) "critical": ([]security.Result) (len=1) {
     (security.Result) {
       Rule: (*security.Rule)({
@@ -54,4 +54,4 @@
       }
     }
   }
-})
+}

@@ -5,11 +5,11 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/security"
 )
 
-func ReportReviewdog(outputDetections *map[string][]security.Result) (reviewdog.ReviewdogOutput, error) {
+func ReportReviewdog(outputDetections map[string][]security.Result) (reviewdog.ReviewdogOutput, error) {
 	var reviewdogDiagnostics []reviewdog.Diagnostic
 
 	for _, level := range []string{"critical", "high", "medium", "low", "warning"} {
-		if findings, ok := (*outputDetections)[level]; ok {
+		if findings, ok := outputDetections[level]; ok {
 			for _, finding := range findings {
 				var severity string
 				if level == "warning" {
