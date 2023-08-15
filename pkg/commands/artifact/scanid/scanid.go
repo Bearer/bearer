@@ -104,7 +104,7 @@ func hashRules(rules map[string]*settings.Rule) ([]byte, error) {
 func hashScanners(scanners []string) ([]byte, error) {
 	hashBuilder := md5.New()
 
-	var sortedScanners []string
+	sortedScanners := make([]string, len(scanners))
 	copy(sortedScanners, scanners)
 	sort.Strings(sortedScanners)
 
