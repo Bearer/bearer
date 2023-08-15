@@ -51,7 +51,7 @@ func TestBuildReportString(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	results, err := security.GetOutput(&dataflow, config, nil)
+	results, reportPassed, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -66,7 +66,7 @@ func TestBuildReportString(t *testing.T) {
 		MaxPathLength: 0,
 	}
 
-	stringBuilder, _ := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow)
+	stringBuilder := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow, reportPassed)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
@@ -91,7 +91,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	results, err := security.GetOutput(&dataflow, config, nil)
+	results, reportPassed, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -106,7 +106,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 		MaxPathLength: 0,
 	}
 
-	stringBuilder, _ := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow)
+	stringBuilder := security.BuildReportString(config, results, &dummyGoclocResult, &dataflow, reportPassed)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
@@ -128,7 +128,7 @@ func TestGetOutput(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	res, err := security.GetOutput(&dataflow, config, nil)
+	res, _, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
@@ -154,7 +154,7 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 
 	dataflow := dummyDataflow()
 
-	res, err := security.GetOutput(&dataflow, config, nil)
+	res, _, err := security.GetOutput(&dataflow, config, nil)
 	if err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}

@@ -143,7 +143,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 	}
 
 	runner.config.Scan.Target = testDataPath
-	detections, _, _ := output.GetOutput(
+	detections, _, _, _ := output.GetOutput(
 		types.Report{
 			Path: detectorsReportPath,
 		},

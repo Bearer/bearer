@@ -27,28 +27,33 @@ func GetOutput(
 	config settings.Config,
 	files []files.File,
 	baseBranchFindings *basebranchfindings.Findings,
-) (any, *dataflow.DataFlow, error) {
+) (data any, flow *dataflow.DataFlow, reportPassed bool, err error) {
+	reportPassed = true
+
 	switch config.Report.Report {
 	case flag.ReportDetectors:
-		return detectors.GetOutput(report, config)
+		data, flow, err = detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
-		return GetDataflow(report, config, false)
+		data, flow, err = GetDataflow(report, config, false)
 	case flag.ReportSecurity:
-		return reportSecurity(report, config, files, baseBranchFindings)
+		data, flow, reportPassed, err = reportSecurity(report, config, files, baseBranchFindings)
 	case flag.ReportSaaS:
-		securityResults, dataflow, err := reportSecurity(report, config, files, baseBranchFindings)
-		if err != nil {
-			return nil, nil, err
+		securityResults, dataflow, _, secErr := reportSecurity(report, config, files, baseBranchFindings)
+
+		if secErr != nil {
+			err = secErr
+			return
 		}
 
-		return saas.GetReport(config, securityResults, dataflow, files)
+		data, flow, err = saas.GetReport(config, securityResults, dataflow, files)
 	case flag.ReportPrivacy:
-		return getPrivacyReportOutput(report, config)
+		data, flow, err = getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
-		return reportStats(report, config)
+		data, flow, err = reportStats(report, config)
+	default:
+		err = fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
-
-	return nil, nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+	return
 }
 
 func GetPrivacyReportCSVOutput(report types.Report, dataflow *dataflow.DataFlow, config settings.Config) (*string, error) {
@@ -101,6 +106,7 @@ func reportSecurity(
 ) (
 	securityResults *security.Results,
 	dataflow *dataflow.DataFlow,
+	reportPassed bool,
 	err error,
 ) {
 	dataflow, _, err = GetDataflow(report, config, true)
@@ -109,7 +115,7 @@ func reportSecurity(
 		return
 	}
 
-	securityResults, err = security.GetOutput(dataflow, config, baseBranchFindings)
+	securityResults, reportPassed, err = security.GetOutput(dataflow, config, baseBranchFindings)
 	if err != nil {
 		log.Debug().Msgf("error in security %s", err)
 		return

@@ -18,6 +18,7 @@ func TestSecrets(t *testing.T) {
 				"--only-rule=gitleaks",
 				"--format=yaml",
 				"--disable-default-rules",
+				"--exit-code=0",
 			},
 			testhelper.TestCaseOptions{},
 		),
