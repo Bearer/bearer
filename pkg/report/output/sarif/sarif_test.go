@@ -6,10 +6,11 @@ import (
 	"os"
 	"testing"
 
+	"github.com/bradleyjkemp/cupaloy"
+
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	util "github.com/bearer/bearer/pkg/util/output"
-	"github.com/bradleyjkemp/cupaloy"
 )
 
 func TestJuiceShopSarif(t *testing.T) {
@@ -52,7 +53,7 @@ func TestJuiceShopSarif(t *testing.T) {
 		OmitParent:         false,
 	}
 
-	res, err := ReportSarif(&securityResults, rules)
+	res, err := ReportSarif(securityResults, rules)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}

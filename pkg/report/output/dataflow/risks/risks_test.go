@@ -223,7 +223,7 @@ func TestDataflowRisks(t *testing.T) {
 			}
 			file.Close()
 
-			detections, _, err := detectors.GetOutput(globaltypes.Report{
+			detectorsOutput, err := detectors.GetOutput(globaltypes.Report{
 				Path: file.Name(),
 			}, test.Config)
 			if err != nil {
@@ -231,13 +231,14 @@ func TestDataflowRisks(t *testing.T) {
 				return
 			}
 
-			dataflow, _, err := dataflow.GetOutput(detections, test.Config, false)
+			output, err := dataflow.GetOutput(detectorsOutput.Data, test.Config, false)
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return
 			}
 
-			assert.Equal(t, test.Want, dataflow.Risks)
+			assert.Equal(t, output.Data, output.Dataflow)
+			assert.Equal(t, test.Want, output.Data.Risks)
 		})
 	}
 }

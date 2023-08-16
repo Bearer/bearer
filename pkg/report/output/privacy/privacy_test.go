@@ -3,13 +3,15 @@ package privacy_test
 import (
 	"testing"
 
+	"github.com/bradleyjkemp/cupaloy"
+	"github.com/stretchr/testify/assert"
+
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
+	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/report/schema"
-	"github.com/bradleyjkemp/cupaloy"
 )
 
 func TestBuildCsvString(t *testing.T) {
@@ -23,8 +25,7 @@ func TestBuildCsvString(t *testing.T) {
 	}
 
 	dataflow := dummyDataflow()
-
-	stringBuilder, _ := privacy.BuildCsvString(&dataflow, config)
+	stringBuilder, _ := privacy.BuildCsvString(dataflow, config)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
@@ -39,12 +40,13 @@ func TestGetOutput(t *testing.T) {
 	}
 
 	dataflow := dummyDataflow()
-	results, _, err := privacy.GetOutput(&dataflow, config)
+	output, err := privacy.GetOutput(dataflow, config)
 	if err != nil {
 		t.Fatalf("failed to generate privacy output err:%s", err)
 	}
 
-	cupaloy.SnapshotT(t, results)
+	assert.Equal(t, dataflow, output.Dataflow)
+	cupaloy.SnapshotT(t, output.Data)
 }
 
 func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
@@ -61,7 +63,7 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 	return settings.FromOptions(opts, []string{"ruby"})
 }
 
-func dummyDataflow() dataflow.DataFlow {
+func dummyDataflow() *outputtypes.DataFlow {
 	subject := "User"
 	thirdPartyRisk := types.RiskDetector{
 		DetectorID: "ruby_third_parties_sentry",
@@ -97,7 +99,7 @@ func dummyDataflow() dataflow.DataFlow {
 	risks := make([]types.RiskDetector, 1)
 	risks[0] = thirdPartyRisk
 
-	return dataflow.DataFlow{
+	return &outputtypes.DataFlow{
 		Datatypes: []types.Datatype{
 			{
 				Name:         "Email Address",

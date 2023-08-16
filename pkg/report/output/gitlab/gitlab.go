@@ -11,13 +11,13 @@ import (
 )
 
 func ReportGitLab(
-	outputDetections *map[string][]security.Result,
+	outputDetections map[string][]security.Result,
 	startTime time.Time,
 	endTime time.Time,
 ) (gitlab.GitLabOutput, error) {
 	var vulnerabilities []gitlab.Vulnerability
 	for _, level := range []string{"critical", "high", "medium", "low", "warning"} {
-		if findings, ok := (*outputDetections)[level]; ok {
+		if findings, ok := outputDetections[level]; ok {
 			for _, finding := range findings {
 				identifiers := []gitlab.Identifier{
 					{

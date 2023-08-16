@@ -24,7 +24,7 @@ func TestRailsGoatReviewdog(t *testing.T) {
 		t.Fatalf("couldn't unmarshal file output: %s", err)
 	}
 
-	res, err := ReportReviewdog(&securityResults)
+	res, err := ReportReviewdog(securityResults)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}

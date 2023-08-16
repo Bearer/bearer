@@ -14,19 +14,10 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/dataflow/detectiondecoder"
 	fileerrors "github.com/bearer/bearer/pkg/report/output/dataflow/file_errors"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/risks"
+	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/output"
-
-	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 )
-
-type DataFlow struct {
-	Datatypes    []types.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks        []types.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
-	Components   []types.Component    `json:"components,omitempty" yaml:"components,omitempty"`
-	Dependencies []types.Dependency   `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
-	Errors       []types.Error        `json:"errors,omitempty" yaml:"errors,omitempty"`
-}
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{
 	detections.TypeSchemaClassified,
@@ -37,6 +28,7 @@ var allowedDetections []detections.DetectionType = []detections.DetectionType{
 	detections.TypeCustomRisk,
 	detections.TypeSecretleak,
 	detections.TypeError,
+	detections.TypeFileList,
 	detections.TypeFileFailed,
 }
 
@@ -50,7 +42,7 @@ func contains(detections []detections.DetectionType, detection detections.Detect
 	return false
 }
 
-func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, *DataFlow, error) {
+func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*types.Output[*types.DataFlow], error) {
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
@@ -58,18 +50,19 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 	extras, err := datatypes.NewExtras(input, config)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	customExtras, err := datatypes.NewCustomExtras(input, config)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
+	var files []string
 	for _, detection := range input {
 		detectionMap, ok := detection.(map[string]interface{})
 		if !ok {
-			return nil, nil, fmt.Errorf("found detection in report which is not object")
+			return nil, fmt.Errorf("found detection in report which is not object")
 		}
 
 		detectionTypeS, ok := detectionMap["type"].(string)
@@ -86,16 +79,30 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		switch detectionType {
+		case detections.TypeFileList:
+			var fileListDetection detections.FileListDetection
+
+			buf := bytes.NewBuffer(nil)
+			err := json.NewEncoder(buf).Encode(detection)
+			if err != nil {
+				return nil, err
+			}
+			err = json.NewDecoder(buf).Decode(&fileListDetection)
+			if err != nil {
+				return nil, err
+			}
+
+			files = fileListDetection.Filenames
 		case detections.TypeFileFailed:
 			var errorDetection detections.FileFailedDetection
 			buf := bytes.NewBuffer(nil)
 			err := json.NewEncoder(buf).Encode(detection)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 			err = json.NewDecoder(buf).Decode(&errorDetection)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 
 			errorsHolder.AddFileError(errorDetection)
@@ -104,11 +111,11 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			buf := bytes.NewBuffer(nil)
 			err := json.NewEncoder(buf).Encode(detection)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 			err = json.NewDecoder(buf).Decode(&errorDetection)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 
 			errorsHolder.AddError(errorDetection)
@@ -117,11 +124,11 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			buf := bytes.NewBuffer(nil)
 			err := json.NewEncoder(buf).Encode(detection)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 			err = json.NewDecoder(buf).Decode(&castDetection)
 			if err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 
 			// add full path to filename
@@ -137,7 +144,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 				if err != nil {
-					return nil, nil, err
+					return nil, err
 				}
 			case detections.TypeCustomRisk:
 				ruleName := string(castDetection.DetectorType)
@@ -145,7 +152,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				if !ok {
 					customDetector, ok = config.BuiltInRules[ruleName]
 					if !ok {
-						return nil, nil, fmt.Errorf("custom detector not in config %s", ruleName)
+						return nil, fmt.Errorf("custom detector not in config %s", ruleName)
 					}
 				}
 				if customDetector.Type == customdetectors.TypeShared {
@@ -159,7 +166,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				if !ok {
 					customDetector, ok = config.BuiltInRules[ruleName]
 					if !ok {
-						return nil, nil, fmt.Errorf("custom detector not in config %s", ruleName)
+						return nil, fmt.Errorf("custom detector not in config %s", ruleName)
 					}
 				}
 
@@ -170,7 +177,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				case customdetectors.TypeRisk:
 					err := risksHolder.AddSchema(castDetection)
 					if err != nil {
-						return nil, nil, err
+						return nil, err
 					}
 				case customdetectors.TypeDatatype:
 					var detectionExtras *datatypes.ExtraFields
@@ -178,7 +185,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 					err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 					if err != nil {
-						return nil, nil, err
+						return nil, err
 					}
 				}
 			case detections.TypeSecretleak:
@@ -186,34 +193,34 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			case detections.TypeDependencyClassified:
 				classifiedDetection, err := detectiondecoder.GetClassifiedDependency(detection)
 				if err != nil {
-					return nil, nil, err
+					return nil, err
 				}
 
 				classifiedDetection.Source.FullFilename = fullFilename
 				err = componentsHolder.AddDependency(classifiedDetection)
 				if err != nil {
-					return nil, nil, err
+					return nil, err
 				}
 			case detections.TypeInterfaceClassified:
 				classifiedDetection, err := detectiondecoder.GetClassifiedInterface(detection)
 				if err != nil {
-					return nil, nil, err
+					return nil, err
 				}
 
 				classifiedDetection.Source.FullFilename = fullFilename
 				err = componentsHolder.AddInterface(classifiedDetection)
 				if err != nil {
-					return nil, nil, err
+					return nil, err
 				}
 			case detections.TypeFrameworkClassified:
 				classifiedDetection, err := detectiondecoder.GetClassifiedFramework(detection)
 				if err != nil {
-					return nil, nil, err
+					return nil, err
 				}
 				classifiedDetection.Source.FullFilename = fullFilename
 				err = componentsHolder.AddFramework(classifiedDetection)
 				if err != nil {
-					return nil, nil, err
+					return nil, err
 				}
 			}
 		}
@@ -222,12 +229,18 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	if !config.Scan.Quiet {
 		output.StdErrLog("Generating dataflow")
 	}
-	dataflow := &DataFlow{
+
+	dataflow := &types.DataFlow{
 		Datatypes:    dataTypesHolder.ToDataFlow(),
 		Risks:        risksHolder.ToDataFlow(),
 		Components:   componentsHolder.ToDataFlow(),
 		Dependencies: componentsHolder.ToDataFlowForDependencies(),
 		Errors:       errorsHolder.ToDataFlow(),
 	}
-	return dataflow, nil, nil
+
+	return &types.Output[*types.DataFlow]{
+		Data:     dataflow,
+		Dataflow: dataflow,
+		Files:    files,
+	}, nil
 }

@@ -34,6 +34,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/sarif"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
+	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
@@ -194,12 +195,12 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 
 		report := types.Report{Path: r.reportPath + ".base", Inputgocloc: r.goclocResult}
 
-		detections, _, _, err := reportoutput.GetOutput(report, r.scanSettings, fileList.BaseFiles, nil)
+		reportOutput, err := reportoutput.GetOutput(report, r.scanSettings, nil)
 		if err != nil {
 			return err
 		}
 
-		baseBranchFindings = buildBaseBranchFindings(fileList, detections)
+		baseBranchFindings = buildBaseBranchFindings(fileList, reportOutput.Data)
 
 		if !opts.Quiet {
 			output.StdErrLog("\nScanning current branch")
@@ -331,7 +332,7 @@ func (r *runner) Report(
 		outputhandler.StdErrLog("Using cached data")
 	}
 
-	detections, dataflow, reportPassed, err := reportoutput.GetOutput(report, r.scanSettings, files, baseBranchFindings)
+	output, err := reportoutput.GetOutput(report, r.scanSettings, baseBranchFindings)
 	if err != nil {
 		return false, err
 	}
@@ -358,14 +359,16 @@ func (r *runner) Report(
 	switch r.scanSettings.Report.Format {
 	case flag.FormatEmpty:
 		if r.scanSettings.Report.Report == flag.ReportSecurity {
-			// for security report, default report format is Table
-			detectionReport := detections.(*security.Results)
-			reportStr := security.BuildReportString(r.scanSettings, detectionReport, report.Inputgocloc, dataflow, reportPassed)
+			reportStr := security.BuildReportString(
+				r.scanSettings,
+				outputtypes.ToSpecific[security.Results](output),
+				report.Inputgocloc,
+			)
 
 			logger(reportStr.String())
 		} else if r.scanSettings.Report.Report == flag.ReportPrivacy {
 			// for privacy report, default report format is CSV
-			content, err := reportoutput.GetPrivacyReportCSVOutput(report, dataflow, r.scanSettings)
+			content, err := reportoutput.GetPrivacyReportCSVOutput(report, output.Dataflow, r.scanSettings)
 			if err != nil {
 				return false, fmt.Errorf("error generating report %s", err)
 			}
@@ -373,7 +376,7 @@ func (r *runner) Report(
 			logger(*content)
 		} else {
 			// for everything else, default report format is JSON
-			content, err := outputhandler.ReportJSON(detections)
+			content, err := outputhandler.ReportJSON(output.Data)
 			if err != nil {
 				return false, fmt.Errorf("error generating report %s", err)
 			}
@@ -381,7 +384,7 @@ func (r *runner) Report(
 			logger(*content)
 		}
 	case flag.FormatSarif:
-		sarifContent, err := sarif.ReportSarif(detections.(*map[string][]security.Result), r.scanSettings.Rules)
+		sarifContent, err := sarif.ReportSarif(output.Data.(security.Results), r.scanSettings.Rules)
 		if err != nil {
 			return false, fmt.Errorf("error generating sarif report %s", err)
 		}
@@ -392,7 +395,7 @@ func (r *runner) Report(
 
 		logger(*content)
 	case flag.FormatReviewDog:
-		sastContent, err := rdo.ReportReviewdog(detections.(*map[string][]security.Result))
+		sastContent, err := rdo.ReportReviewdog(output.Data.(security.Results))
 		if err != nil {
 			return false, fmt.Errorf("error generating reviewdog report %s", err)
 		}
@@ -404,7 +407,7 @@ func (r *runner) Report(
 		logger(*content)
 	case flag.FormatGitLabSast:
 
-		sastContent, err := gitlab.ReportGitLab(detections.(*map[string][]security.Result), startTime, endTime)
+		sastContent, err := gitlab.ReportGitLab(output.Data.(security.Results), startTime, endTime)
 		if err != nil {
 			return false, fmt.Errorf("error generating gitlab-sast report %s", err)
 		}
@@ -415,14 +418,14 @@ func (r *runner) Report(
 
 		logger(*content)
 	case flag.FormatJSON:
-		content, err := outputhandler.ReportJSON(detections)
+		content, err := outputhandler.ReportJSON(output.Data)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}
 
 		logger(*content)
 	case flag.FormatYAML:
-		content, err := outputhandler.ReportYAML(detections)
+		content, err := outputhandler.ReportYAML(output.Data)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %s", err)
 		}
@@ -434,10 +437,10 @@ func (r *runner) Report(
 		var title string
 		if r.scanSettings.Report.Report == flag.ReportPrivacy {
 			title = "Privacy Report"
-			body, err = reporthtml.ReportPrivacyHTML(detections.(*privacy.Report))
+			body, err = reporthtml.ReportPrivacyHTML(output.Data.(*privacy.Report))
 		} else {
 			title = "Security Report"
-			body, err = reporthtml.ReportSecurityHTML(detections.(*map[string][]security.Result))
+			body, err = reporthtml.ReportSecurityHTML(output.Data.(security.Results))
 		}
 
 		if err != nil {
@@ -499,12 +502,12 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 }
 
 func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
-	dataflowOutput, _, err := reportoutput.GetDataflow(report, config, true)
+	dataflowOutput, err := reportoutput.GetDataflow(report, config, true)
 	if err != nil {
 		return
 	}
 
-	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput, config)
+	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput.Dataflow, config)
 }
 
 func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages []string) {

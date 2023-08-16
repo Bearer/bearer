@@ -7,7 +7,7 @@ import (
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 
-	"github.com/bearer/bearer/pkg/report/output/dataflow"
+	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
@@ -31,7 +31,11 @@ type Stats struct {
 	DataGroups           []string         `json:"-" yaml:"-"`
 }
 
-func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (*Stats, *dataflow.DataFlow, error) {
+func GetOutput(
+	inputgocloc *gocloc.Result,
+	inputDataflow *types.DataFlow,
+	config settings.Config,
+) (*types.Output[Stats], error) {
 	numberOfDataTypesFound := len(inputDataflow.Datatypes)
 	data_types := []DataType{}
 
@@ -83,16 +87,19 @@ func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, con
 		languages[language.Name] = language.Code
 	}
 
-	return &Stats{
-		NumberOfLines:        inputgocloc.Total.Code,
-		NumberOfDataTypes:    numberOfDataTypesFound,
-		DataTypes:            data_types,
-		NumberOfDatabases:    numberOfDatabases,
-		NumberOfExternalAPIs: numberOfExternalAPIs,
-		NumberOfInternalAPIs: numberOfInternalAPIs,
-		Languages:            languages,
-		DataGroups:           dataGroupNames,
-	}, nil, nil
+	return &types.Output[Stats]{
+		Data: Stats{
+			NumberOfLines:        inputgocloc.Total.Code,
+			NumberOfDataTypes:    numberOfDataTypesFound,
+			DataTypes:            data_types,
+			NumberOfDatabases:    numberOfDatabases,
+			NumberOfExternalAPIs: numberOfExternalAPIs,
+			NumberOfInternalAPIs: numberOfInternalAPIs,
+			Languages:            languages,
+			DataGroups:           dataGroupNames,
+		},
+		Dataflow: inputDataflow,
+	}, nil
 }
 
 func getDataGroupNames(config settings.Config, dataTypes []DataType) []string {
@@ -160,16 +167,20 @@ func WriteStatsToString(outputStr *strings.Builder, statistics *Stats) {
 	}
 }
 
-func GetPlaceholderOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (outputStr *strings.Builder, err error) {
+func GetPlaceholderOutput(
+	inputgocloc *gocloc.Result,
+	inputDataflow *types.DataFlow,
+	config settings.Config,
+) (outputStr *strings.Builder, err error) {
 	outputStr = &strings.Builder{}
-	statistics, _, err := GetOutput(inputgocloc, inputDataflow, config)
+	statisticsOutput, err := GetOutput(inputgocloc, inputDataflow, config)
 
 	supportURL := "https://docs.bearer.com/explanations/reports/"
 	outputStr.WriteString(fmt.Sprintf(`
 The policy report is not yet available for your stack. Learn more at %s`,
 		supportURL))
 
-	if AnythingFoundFor(statistics) {
+	if AnythingFoundFor(&statisticsOutput.Data) {
 		outputStr.WriteString(`
 
 Though this doesn’t mean the curious bear comes empty-handed, it found:
@@ -177,7 +188,7 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 `)
 	}
 
-	WriteStatsToString(outputStr, statistics)
+	WriteStatsToString(outputStr, &statisticsOutput.Data)
 
 	suggestedCommand := color.New(color.Italic).Sprintf("bearer scan %s --report dataflow", config.Target)
 	outputStr.WriteString(fmt.Sprintf(`
