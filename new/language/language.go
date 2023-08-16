@@ -21,9 +21,7 @@ func New(implementation implementation.Implementation) *Language {
 	return &Language{implementation: implementation}
 }
 
-func (lang *Language) Parse(ctx context.Context, content string) (*tree.Tree, error) {
-	contentBytes := []byte(content)
-
+func (lang *Language) Parse(ctx context.Context, contentBytes []byte) (*tree.Tree, error) {
 	parser := sitter.NewParser()
 	defer parser.Close()
 
@@ -34,7 +32,7 @@ func (lang *Language) Parse(ctx context.Context, content string) (*tree.Tree, er
 		return nil, err
 	}
 
-	builder := tree.NewBuilder(content, sitterTree.RootNode())
+	builder := tree.NewBuilder(contentBytes, sitterTree.RootNode())
 
 	if err := lang.implementation.AnalyzeTree(ctx, sitterTree.RootNode(), builder); err != nil {
 		return nil, fmt.Errorf("error running language analysis: %w", err)

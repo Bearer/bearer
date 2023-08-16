@@ -20,7 +20,7 @@ type PatternQuery interface {
 }
 
 type Language interface {
-	Parse(ctx context.Context, content string) (*tree.Tree, error)
+	Parse(ctx context.Context, contentBytes []byte) (*tree.Tree, error)
 	NewQuerySet() *query.Set
 	CompilePatternQuery(querySet *query.Set, input, focusedVariable string) (PatternQuery, error)
 }

@@ -11,14 +11,15 @@ import (
 )
 
 func parseTree(t *testing.T, content string) *tree.Tree {
+	contentBytes := []byte(content)
 	sitterLanguage := ruby.GetLanguage()
 
-	sitterRootNode, err := sitter.ParseCtx(context.Background(), []byte(content), sitterLanguage)
+	sitterRootNode, err := sitter.ParseCtx(context.Background(), contentBytes, sitterLanguage)
 	if err != nil {
 		t.Fatalf("failed to parse input: %s", err)
 	}
 
-	return tree.NewBuilder(content, sitterRootNode).Build()
+	return tree.NewBuilder(contentBytes, sitterRootNode).Build()
 }
 
 func TestTree(t *testing.T) {

@@ -119,8 +119,8 @@ type Implementation interface {
 	// AnalyzeTree populates the dataflow analysis
 	AnalyzeTree(ctx context.Context, rootNode *sitter.Node, astBuilder *tree.Builder) error
 	Pattern() Pattern
-	PassthroughNested(node *tree.Node) bool
-	ContributesToResult(node *tree.Node) bool
+	// FIXME: use this, or remove it. test rules to see if we need it
+	// PassthroughNested(node *tree.Node) bool
 }
 
 type PatternBase struct{}
@@ -155,21 +155,21 @@ func (*PatternBase) AnonymousParentTypes() []string {
 
 type Scope struct {
 	parent    *Scope
-	variables map[string]*tree.Node
+	variables map[string]*sitter.Node
 }
 
 func NewScope(parent *Scope) *Scope {
 	return &Scope{
 		parent:    parent,
-		variables: make(map[string]*tree.Node),
+		variables: make(map[string]*sitter.Node),
 	}
 }
 
-func (scope *Scope) Declare(name string, node *tree.Node) {
+func (scope *Scope) Declare(name string, node *sitter.Node) {
 	scope.variables[name] = node
 }
 
-func (scope *Scope) Assign(name string, node *tree.Node) {
+func (scope *Scope) Assign(name string, node *sitter.Node) {
 	targetScope := scope
 	if _, declarationScope := scope.lookupWithScope(name); declarationScope != nil {
 		targetScope = declarationScope
@@ -178,12 +178,12 @@ func (scope *Scope) Assign(name string, node *tree.Node) {
 	targetScope.variables[name] = node
 }
 
-func (scope *Scope) Lookup(name string) *tree.Node {
+func (scope *Scope) Lookup(name string) *sitter.Node {
 	node, _ := scope.lookupWithScope(name)
 	return node
 }
 
-func (scope *Scope) lookupWithScope(name string) (*tree.Node, *Scope) {
+func (scope *Scope) lookupWithScope(name string) (*sitter.Node, *Scope) {
 	if node, exists := scope.variables[name]; exists {
 		return node, scope
 	}

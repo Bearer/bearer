@@ -115,15 +115,15 @@ func Build(
 
 func fixupInput(
 	patternImplementation implementation.Pattern,
-	input string,
+	byteInput []byte,
 	variables []types.Variable,
 	rootNode *tree.Node,
-) (string, bool) {
+) ([]byte, bool) {
 	insideError := false
 	inputOffset := 0
 
-	byteInput := []byte(input)
-	newInput := []byte(input)
+	newInput := make([]byte, len(byteInput))
+	copy(newInput, byteInput)
 	fixed := false
 
 	err := rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
@@ -186,7 +186,7 @@ func fixupInput(
 		panic(err)
 	}
 
-	return string(newInput), fixed
+	return newInput, fixed
 }
 
 func (builder *builder) build(rootNode *tree.Node) (*Result, error) {

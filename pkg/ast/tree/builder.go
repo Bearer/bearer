@@ -6,19 +6,21 @@ import (
 )
 
 type Builder struct {
-	content        string
-	types          []string
-	nodes          []Node
-	rootNodeID     int
-	children       map[int][]int
-	sitterToNodeID map[*sitter.Node]int
+	contentBytes    []byte
+	types           []string
+	nodes           []Node
+	rootNodeID      int
+	children        map[int][]int
+	dataflowSources map[int][]int
+	sitterToNodeID  map[*sitter.Node]int
 }
 
-func NewBuilder(content string, sitterRootNode *sitter.Node) *Builder {
+func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node) *Builder {
 	builder := &Builder{
-		content:        content,
-		children:       make(map[int][]int),
-		sitterToNodeID: make(map[*sitter.Node]int),
+		contentBytes:    contentBytes,
+		children:        make(map[int][]int),
+		dataflowSources: make(map[int][]int),
+		sitterToNodeID:  make(map[*sitter.Node]int),
 	}
 
 	builder.rootNodeID = builder.addNode(sitterRootNode)
@@ -26,13 +28,30 @@ func NewBuilder(content string, sitterRootNode *sitter.Node) *Builder {
 	return builder
 }
 
+func (builder *Builder) ContentFor(sitterNode *sitter.Node) string {
+	return sitterNode.Content(builder.contentBytes)
+}
+
+func (builder *Builder) Dataflow(toNode *sitter.Node, fromNodes ...*sitter.Node) {
+	toID := builder.sitterToNodeID[toNode]
+
+	fromIDs := make([]int, len(fromNodes))
+	for i, fromNode := range fromNodes {
+		fromIDs[i] = builder.sitterToNodeID[fromNode]
+	}
+
+	builder.dataflowSources[toID] = append(builder.dataflowSources[toID], fromIDs...)
+}
+
 func (builder *Builder) Build() *Tree {
+	builder.buildChildren()
+	builder.buildDataflowSources()
+
 	tree := &Tree{
-		content:      []byte(builder.content),
+		contentBytes: builder.contentBytes,
 		types:        builder.types,
 		nodes:        builder.nodes,
 		rootNode:     &builder.nodes[builder.rootNodeID],
-		children:     builder.buildChildren(),
 		sitterToNode: builder.buildSitterToNode(),
 	}
 
@@ -91,7 +110,7 @@ func (builder *Builder) addChildren(parentID int, sitterNode *sitter.Node) []int
 	return children
 }
 
-func (builder *Builder) buildChildren() []*Node {
+func (builder *Builder) buildChildren() {
 	totalCount := 0
 	for _, childIDs := range builder.children {
 		totalCount += len(childIDs)
@@ -116,8 +135,33 @@ func (builder *Builder) buildChildren() []*Node {
 		builder.nodes[id].children = nodeChildren
 		offset += count
 	}
+}
 
-	return children
+func (builder *Builder) buildDataflowSources() {
+	totalCount := 0
+	for _, sourceIDs := range builder.dataflowSources {
+		totalCount += len(sourceIDs)
+	}
+
+	dataflowSources := make([]*Node, totalCount)
+
+	offset := 0
+	for id := range builder.nodes {
+		sourceIDs := builder.dataflowSources[id]
+		count := len(sourceIDs)
+		if count == 0 {
+			continue
+		}
+
+		nodeDataflowSources := dataflowSources[offset : offset+count]
+
+		for i, sourceID := range sourceIDs {
+			nodeDataflowSources[i] = &builder.nodes[sourceID]
+		}
+
+		builder.nodes[id].dataflowSources = nodeDataflowSources
+		offset += count
+	}
 }
 
 func (builder *Builder) buildSitterToNode() map[*sitter.Node]*Node {

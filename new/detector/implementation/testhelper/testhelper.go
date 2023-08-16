@@ -69,7 +69,7 @@ func RunTest(
 			tt.Fatalf("failed to read file: %s", err)
 		}
 
-		tree, err := lang.Parse(context.Background(), string(contentBytes))
+		tree, err := lang.Parse(context.Background(), contentBytes)
 		if err != nil {
 			tt.Fatalf("failed to parse content: %s", err)
 		}

@@ -8,11 +8,10 @@ import (
 )
 
 type Tree struct {
-	content      []byte
+	contentBytes []byte
 	types        []string
 	nodes        []Node
 	rootNode     *Node
-	children     []*Node
 	sitterToNode map[*sitter.Node]*Node
 }
 
@@ -22,8 +21,9 @@ type Node struct {
 	TypeID int
 	ContentStart,
 	ContentEnd Position
-	parent   *Node
-	children []*Node
+	parent          *Node
+	children        []*Node
+	dataflowSources []*Node
 	// FIXME: remove the need for this
 	sitterNode *sitter.Node
 	// FIXME: probably shouldn't be public
@@ -36,8 +36,8 @@ type Position struct {
 	Column int
 }
 
-func (tree *Tree) Content() []byte {
-	return tree.content
+func (tree *Tree) ContentBytes() []byte {
+	return tree.contentBytes
 }
 
 func (tree *Tree) RootNode() *Node {
@@ -61,7 +61,7 @@ func (node *Node) Parent() *Node {
 }
 
 func (node *Node) Content() string {
-	return string(node.tree.content[node.ContentStart.Byte:node.ContentEnd.Byte])
+	return string(node.tree.contentBytes[node.ContentStart.Byte:node.ContentEnd.Byte])
 }
 
 func (node *Node) Debug(includeContent bool) string {
@@ -126,6 +126,10 @@ func (node *Node) NodeAndDescendentIDs() []int {
 	return result
 }
 
+func (node *Node) DataflowSources() []*Node {
+	return node.dataflowSources
+}
+
 func (node *Node) Dump() string {
 	var s strings.Builder
 
@@ -153,7 +157,7 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 			return nil
 		}
 
-		return onText(string(node.tree.content[start:end]))
+		return onText(string(node.tree.contentBytes[start:end]))
 	}
 
 	for _, child := range node.children {

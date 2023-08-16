@@ -79,8 +79,7 @@ func (evaluator *Evaluator) DetectFromFile(
 		return nil, fmt.Errorf("failed to read file %s", err)
 	}
 
-	content := string(contentBytes)
-	tree, err := evaluator.lang.Parse(ctx, content)
+	tree, err := evaluator.lang.Parse(ctx, contentBytes)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}

@@ -44,7 +44,7 @@ func New(
 		detectorSet:           detectorSet,
 		fileStats:             fileStats,
 		rulesDisabledForNodes: mapNodesToDisabledRules(tree.RootNode()),
-		queryContext:          query.NewContext(tree.Content(), tree.RootNode().SitterNode()),
+		queryContext:          query.NewContext(tree.ContentBytes(), tree.RootNode().SitterNode()),
 	}
 }
 
@@ -92,9 +92,9 @@ func (evaluator *FileEvaluator) Evaluate(
 	case settings.NESTED_SCOPE:
 		detections, err = evaluator.evalAtDescendents(ruleID, sanitizerRuleID, rootNode, cache, scope)
 	case settings.RESULT_SCOPE:
-		// FIXME: use dataflow
-		detections, err = evaluator.evalAtDescendents(ruleID, sanitizerRuleID, rootNode, cache, scope)
+		detections, err = evaluator.evalAtDataflowSources(ruleID, sanitizerRuleID, rootNode, cache, scope)
 	case settings.CURSOR_SCOPE:
+		// FIXME: variable lookups
 		detections, _, err = evaluator.sanitizedNodeDetections(rootNode, ruleID, sanitizerRuleID, cache, scope)
 	}
 
@@ -147,6 +147,43 @@ func (evaluator *FileEvaluator) evalAtDescendents(
 
 			detections = append(detections, nodeDetections...)
 			next = append(next, node.Children()...)
+		}
+
+		nodes = next
+	}
+
+	return detections, nil
+}
+
+func (evaluator *FileEvaluator) evalAtDataflowSources(
+	ruleID,
+	sanitizerRuleID string,
+	rootNode *asttree.Node,
+	cache *cachepkg.Cache,
+	scope settings.RuleReferenceScope,
+) ([]*detection.Detection, error) {
+	nodes := []*asttree.Node{rootNode}
+
+	var detections []*detection.Detection
+
+	for {
+		if len(nodes) == 0 {
+			break
+		}
+
+		var next []*asttree.Node
+
+		for _, node := range nodes {
+			nodeDetections, sanitized, err := evaluator.sanitizedNodeDetections(node, ruleID, sanitizerRuleID, cache, scope)
+			if err != nil {
+				return nil, err
+			}
+			if sanitized {
+				continue
+			}
+
+			detections = append(detections, nodeDetections...)
+			next = append(next, node.DataflowSources()...)
 		}
 
 		nodes = next

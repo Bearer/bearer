@@ -8,10 +8,10 @@ import (
 	"github.com/bearer/bearer/pkg/util/set"
 )
 
-func processInput(patternImplementation implementation.Pattern, input string) (string, *InputParams, error) {
+func processInput(patternImplementation implementation.Pattern, input string) ([]byte, *InputParams, error) {
 	inputWithoutVariables, variables, err := patternImplementation.ExtractVariables(input)
 	if err != nil {
-		return "", nil, fmt.Errorf("error processing variables: %s", err)
+		return nil, nil, fmt.Errorf("error processing variables: %s", err)
 	}
 
 	inputWithoutVariablesBytes := []byte(inputWithoutVariables)
@@ -20,7 +20,7 @@ func processInput(patternImplementation implementation.Pattern, input string) (s
 	matchNodeOffset := 0
 
 	if len(matchNodePositions) > 1 {
-		return "", nil, errors.New("pattern must only contain a single match node")
+		return nil, nil, errors.New("pattern must only contain a single match node")
 	}
 
 	if len(matchNodePositions) == 1 {
@@ -40,7 +40,7 @@ func processInput(patternImplementation implementation.Pattern, input string) (s
 		variableNames.Add(variable.Name)
 	}
 
-	return string(inputWithoutUnanchored), &InputParams{
+	return inputWithoutUnanchored, &InputParams{
 		Variables:         variables,
 		VariableNames:     variableNames.Items(),
 		MatchNodeOffset:   adjustForPositions(matchNodeOffset, unanchoredPositions),
