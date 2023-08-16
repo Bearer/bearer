@@ -3,8 +3,8 @@ package types
 import (
 	sitter "github.com/smacker/go-tree-sitter"
 
-	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/ast/query"
 )
 
 type Variable struct {
@@ -14,6 +14,6 @@ type Variable struct {
 }
 
 type PatternQuery interface {
-	MatchAt(astContext *tree.QueryContext, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error)
-	MatchOnceAt(astContext *tree.QueryContext, node *sitter.Node) (*languagetypes.PatternQueryResult, error)
+	MatchAt(astContext *query.Context, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error)
+	MatchOnceAt(astContext *query.Context, node *sitter.Node) (*languagetypes.PatternQueryResult, error)
 }

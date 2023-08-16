@@ -81,7 +81,7 @@ func getObjectName(
 
 	// address.city.zip or address.city["zip"]
 	if objectNode.Type() == "call" {
-		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("method")).Content()
+		return objectNode.ChildByFieldName("method").Content()
 	}
 
 	// address["city"].zip or address["city"]["zip"]
@@ -97,5 +97,5 @@ func getElementProperty(node *tree.Node) string {
 }
 
 func getIsPropertyAccess(objectNode *tree.Node) bool {
-	return objectNode.Type() != "call" || objectNode.SitterNode().ChildByFieldName("arguments") == nil
+	return objectNode.Type() != "call" || objectNode.ChildByFieldName("arguments") == nil
 }

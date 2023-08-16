@@ -22,6 +22,7 @@ type Node struct {
 	TypeID int
 	ContentStart,
 	ContentEnd Position
+	parent   *Node
 	children []*Node
 	// FIXME: remove the need for this
 	sitterNode *sitter.Node
@@ -33,6 +34,10 @@ type Position struct {
 	Byte,
 	Line,
 	Column int
+}
+
+func (tree *Tree) Content() []byte {
+	return tree.content
 }
 
 func (tree *Tree) RootNode() *Node {
@@ -49,6 +54,10 @@ func (node *Node) SitterNode() *sitter.Node {
 
 func (node *Node) Type() string {
 	return node.tree.types[node.TypeID]
+}
+
+func (node *Node) Parent() *Node {
+	return node.parent
 }
 
 func (node *Node) Content() string {
@@ -72,6 +81,25 @@ func (node *Node) Debug(includeContent bool) string {
 
 func (node *Node) Children() []*Node {
 	return node.children
+}
+
+// FIXME: can we remove this?
+func (node *Node) NamedChildren() []*Node {
+	var namedChildren []*Node
+
+	for _, child := range node.children {
+		// FIXME: don't use the sitter node
+		if child.sitterNode.IsNamed() {
+			namedChildren = append(namedChildren, child)
+		}
+	}
+
+	return namedChildren
+}
+
+func (node *Node) ChildByFieldName(name string) *Node {
+	// FIXME: don't use the sitter node
+	return node.tree.sitterToNode[node.sitterNode.ChildByFieldName(name)]
 }
 
 func (node *Node) NodeAndDescendentIDs() []int {
@@ -150,4 +178,19 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 	}
 
 	return nil
+}
+
+// FIXME: maybe users of this could work iteratively?
+func (node *Node) Walk(visit func(node *Node, visitChildren func() error) error) error {
+	visitChildren := func() error {
+		for _, child := range node.Children() {
+			if err := child.Walk(visit); err != nil {
+				return err
+			}
+		}
+
+		return nil
+	}
+
+	return visit(node, visitChildren)
 }

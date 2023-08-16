@@ -4,7 +4,7 @@ import (
 	"regexp"
 
 	"github.com/bearer/bearer/new/detector/types"
-	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 
@@ -18,7 +18,7 @@ type insecureURLDetector struct {
 var insecureUrlPattern = regexp.MustCompile(`^http:`)
 var localhostInsecureUrlPattern = regexp.MustCompile(`^http://(localhost|127.0.0.1)`)
 
-func New(querySet *langtree.QuerySet) types.Detector {
+func New(querySet *query.Set) types.Detector {
 	return &insecureURLDetector{}
 }
 

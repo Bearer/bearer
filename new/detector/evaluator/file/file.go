@@ -15,7 +15,7 @@ import (
 	cachepkg "github.com/bearer/bearer/new/detector/evaluator/cache"
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/new/detector/types"
-	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
 	asttree "github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 )
@@ -26,26 +26,25 @@ type FileEvaluator struct {
 	detectorSet           types.DetectorSet
 	fileStats             *stats.FileStats
 	fileName              string
-	rulesDisabledForNodes map[string][]*langtree.Node
-	queryContext          *langtree.QueryContext
+	rulesDisabledForNodes map[string][]*asttree.Node
+	queryContext          *query.Context
 }
 
 func New(
 	ctx context.Context,
 	detectorSet types.DetectorSet,
-	astTree *asttree.Tree,
-	tree *langtree.Tree,
+	tree *asttree.Tree,
 	fileName string,
 	fileStats *stats.FileStats,
 ) *FileEvaluator {
 	return &FileEvaluator{
 		ctx:                   ctx,
-		tree:                  astTree,
+		tree:                  tree,
 		fileName:              fileName,
 		detectorSet:           detectorSet,
 		fileStats:             fileStats,
 		rulesDisabledForNodes: mapNodesToDisabledRules(tree.RootNode()),
-		queryContext:          langtree.NewQueryContext(string(tree.Input()), tree.SitterRootNode()),
+		queryContext:          query.NewContext(tree.Content(), tree.RootNode().SitterNode()),
 	}
 }
 
@@ -157,8 +156,6 @@ func (evaluator *FileEvaluator) evalAtDescendents(
 }
 
 func (evaluator *FileEvaluator) ruleDisabledForNode(ruleId string, node *asttree.Node) bool {
-	sitterNode := node.SitterNode()
-
 	nodesToIgnore := evaluator.rulesDisabledForNodes[ruleId]
 	if nodesToIgnore == nil {
 		return false
@@ -166,16 +163,16 @@ func (evaluator *FileEvaluator) ruleDisabledForNode(ruleId string, node *asttree
 
 	// check node
 	for _, ignoredNode := range nodesToIgnore {
-		if ignoredNode.SitterEqual(sitterNode) {
+		if ignoredNode == node {
 			return true
 		}
 	}
 
 	// check node ancestors
-	parent := sitterNode.Parent()
+	parent := node.Parent()
 	for parent != nil {
 		for _, ignoredNode := range nodesToIgnore {
-			if ignoredNode.SitterEqual(parent) {
+			if ignoredNode == parent {
 				return true
 			}
 		}
@@ -186,10 +183,10 @@ func (evaluator *FileEvaluator) ruleDisabledForNode(ruleId string, node *asttree
 	return false
 }
 
-func mapNodesToDisabledRules(rootNode *langtree.Node) map[string][]*langtree.Node {
-	res := make(map[string][]*langtree.Node)
+func mapNodesToDisabledRules(rootNode *asttree.Node) map[string][]*asttree.Node {
+	res := make(map[string][]*asttree.Node)
 	var disabledRules []string
-	err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
+	err := rootNode.Walk(func(node *asttree.Node, visitChildren func() error) error {
 		if node.Type() == "comment" {
 			// reset rules skipped array
 			disabledRules = []string{}
@@ -329,7 +326,7 @@ func (evaluator *FileEvaluator) withCycleProtection(node *asttree.Node, ruleID s
 
 type evaluationState struct {
 	cache        *cachepkg.Cache
-	queryContext *langtree.QueryContext
+	queryContext *query.Context
 	scope        settings.RuleReferenceScope
 	evaluator    *FileEvaluator
 }
@@ -360,7 +357,7 @@ func (state evaluationState) FileName() string {
 	return state.evaluator.fileName
 }
 
-func (state evaluationState) QueryContext() *langtree.QueryContext {
+func (state evaluationState) QueryContext() *query.Context {
 	return state.queryContext
 }
 
@@ -368,7 +365,7 @@ func (state evaluationState) NodeFromSitter(sitterNode *sitter.Node) *asttree.No
 	return state.evaluator.tree.NodeFromSitter(sitterNode)
 }
 
-func (state evaluationState) QueryMatchAt(query *langtree.Query, node *asttree.Node) ([]types.QueryResult, error) {
+func (state evaluationState) QueryMatchAt(query *query.Query, node *asttree.Node) ([]types.QueryResult, error) {
 	sitterResults, err := query.MatchAt(state.queryContext, node.SitterNode())
 	if err != nil {
 		return nil, err
@@ -383,7 +380,7 @@ func (state evaluationState) QueryMatchAt(query *langtree.Query, node *asttree.N
 	return results, nil
 }
 
-func (state evaluationState) QueryMatchOnceAt(query *langtree.Query, node *asttree.Node) (types.QueryResult, error) {
+func (state evaluationState) QueryMatchOnceAt(query *query.Query, node *asttree.Node) (types.QueryResult, error) {
 	sitterResult, err := query.MatchOnceAt(state.queryContext, node.SitterNode())
 	if err != nil {
 		return nil, err
@@ -393,7 +390,7 @@ func (state evaluationState) QueryMatchOnceAt(query *langtree.Query, node *asttr
 }
 
 // FIXME: try and remove the translation by caching query results on the ast tree
-func (state evaluationState) translateResult(sitterResult langtree.QueryResult) types.QueryResult {
+func (state evaluationState) translateResult(sitterResult query.Result) types.QueryResult {
 	result := make(map[string]*asttree.Node)
 
 	for name, sitterNode := range sitterResult {

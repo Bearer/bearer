@@ -11,18 +11,20 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
 
+	detectortypes "github.com/bearer/bearer/new/detector/types"
+	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
+	"github.com/bearer/bearer/pkg/ast/query"
+	"github.com/bearer/bearer/pkg/ast/tree"
+	"github.com/bearer/bearer/pkg/classification/schema"
+	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/util/regex"
+
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
 	"github.com/bearer/bearer/new/detector/implementation/generic/stringliteral"
 	"github.com/bearer/bearer/new/detector/implementation/ruby/object"
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/ruby/string"
-	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
-	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
-	"github.com/bearer/bearer/new/language/tree"
-	"github.com/bearer/bearer/pkg/classification/schema"
-	"github.com/bearer/bearer/pkg/report/detectors"
-	"github.com/bearer/bearer/pkg/util/regex"
 )
 
 var (
@@ -61,7 +63,7 @@ func (*rubyImplementation) EnryLanguages() []string {
 	return []string{"Ruby"}
 }
 
-func (impl *rubyImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *tree.QuerySet) []detectortypes.Detector {
+func (impl *rubyImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
 	return []detectortypes.Detector{
 		object.New(querySet),
 		datatype.New(detectors.DetectorRuby, schemaClassifier),
@@ -75,75 +77,76 @@ func (*rubyImplementation) SitterLanguage() *sitter.Language {
 	return ruby.GetLanguage()
 }
 
-func (*rubyImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node) error {
-	scope := implementation.NewScope(nil)
+func (*rubyImplementation) AnalyzeTree(ctx context.Context, rootNode *sitter.Node, builder *tree.Builder) error {
+	return nil
+	// scope := implementation.NewScope(nil)
 
-	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
-		if ctx.Err() != nil {
-			return ctx.Err()
-		}
+	// return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
+	// 	if ctx.Err() != nil {
+	// 		return ctx.Err()
+	// 	}
 
-		switch node.Type() {
-		case "method":
-			scope = implementation.NewScope(nil)
-		case "assignment":
-			left := node.ChildByFieldName("left")
-			right := node.ChildByFieldName("right")
+	// 	switch node.Type() {
+	// 	case "method":
+	// 		scope = implementation.NewScope(nil)
+	// 	case "assignment":
+	// 		left := node.ChildByFieldName("left")
+	// 		right := node.ChildByFieldName("right")
 
-			if left.Type() == "identifier" {
-				err := visitChildren()
+	// 		if left.Type() == "identifier" {
+	// 			err := visitChildren()
 
-				scope.Assign(left.Content(), node)
-				node.UnifyWith(right)
+	// 			scope.Assign(left.Content(), node)
+	// 			node.UnifyWith(right)
 
-				return err
-			}
-		// x += y
-		case "operator_assignment":
-			err := visitChildren()
+	// 			return err
+	// 		}
+	// 	// x += y
+	// 	case "operator_assignment":
+	// 		err := visitChildren()
 
-			left := node.ChildByFieldName("left")
-			if left.Type() == "identifier" {
-				scope.Assign(left.Content(), node)
-			}
+	// 		left := node.ChildByFieldName("left")
+	// 		if left.Type() == "identifier" {
+	// 			scope.Assign(left.Content(), node)
+	// 		}
 
-			return err
-		case "identifier":
-			parent := node.Parent()
-			if parent == nil {
-				break
-			}
+	// 		return err
+	// 	case "identifier":
+	// 		parent := node.Parent()
+	// 		if parent == nil {
+	// 			break
+	// 		}
 
-			if slices.Contains(variableLookupParents, parent.Type()) ||
-				(parent.Type() == "assignment" && node.Equal(parent.ChildByFieldName("right"))) ||
-				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) ||
-				(parent.Type() == "element_reference" && node.Equal(parent.ChildByFieldName("object"))) {
-				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-					node.UnifyWith(scopedNode)
-				}
-			}
+	// 		if slices.Contains(variableLookupParents, parent.Type()) ||
+	// 			(parent.Type() == "assignment" && node.Equal(parent.ChildByFieldName("right"))) ||
+	// 			(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) ||
+	// 			(parent.Type() == "element_reference" && node.Equal(parent.ChildByFieldName("object"))) {
+	// 			if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
+	// 				node.UnifyWith(scopedNode)
+	// 			}
+	// 		}
 
-			if parent.Type() == "method_parameters" ||
-				parent.Type() == "block_parameters" ||
-				(parent.Type() == "keyword_parameter" && node.Equal(parent.ChildByFieldName("name"))) ||
-				(parent.Type() == "optional_parameter" && node.Equal(parent.ChildByFieldName("name"))) {
-				scope.Declare(node.Content(), node)
-			}
+	// 		if parent.Type() == "method_parameters" ||
+	// 			parent.Type() == "block_parameters" ||
+	// 			(parent.Type() == "keyword_parameter" && node.Equal(parent.ChildByFieldName("name"))) ||
+	// 			(parent.Type() == "optional_parameter" && node.Equal(parent.ChildByFieldName("name"))) {
+	// 			scope.Declare(node.Content(), node)
+	// 		}
 
-			if parent.Type() == "argument_list" {
-				callNode := parent.Parent()
-				callNode.UnifyWith(node)
-			}
-		case "block", "do_block":
-			previousScope := scope
-			scope = implementation.NewScope(scope)
-			err := visitChildren()
-			scope = previousScope
-			return err
-		}
+	// 		if parent.Type() == "argument_list" {
+	// 			callNode := parent.Parent()
+	// 			callNode.UnifyWith(node)
+	// 		}
+	// 	case "block", "do_block":
+	// 		previousScope := scope
+	// 		scope = implementation.NewScope(scope)
+	// 		err := visitChildren()
+	// 		scope = previousScope
+	// 		return err
+	// 	}
 
-		return visitChildren()
-	})
+	// 	return visitChildren()
+	// })
 }
 
 func (*rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
@@ -226,7 +229,7 @@ func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 
 	// Class body
 	if parent.Type() == "class" {
-		if node.Equal(parent.ChildByFieldName("name")) {
+		if node == parent.ChildByFieldName("name") {
 			return true, false
 		}
 
@@ -235,7 +238,7 @@ func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 
 	// Block body
 	if parent.Type() == "do_block" || parent.Type() == "block" {
-		if node.Equal(parent.ChildByFieldName("parameters")) {
+		if node == parent.ChildByFieldName("parameters") {
 			return true, false
 		}
 
@@ -244,7 +247,7 @@ func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 
 	// Method body
 	if parent.Type() == "method" {
-		if node.Equal(parent.ChildByFieldName("name")) || node.Equal(parent.ChildByFieldName("parameters")) {
+		if node == parent.ChildByFieldName("name") || node == parent.ChildByFieldName("parameters") {
 			return true, false
 		}
 
@@ -257,7 +260,7 @@ func (*rubyImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
 	}
 
 	if (parent.Type() == "if" || parent.Type() == "elsif" || parent.Type() == "unless") &&
-		node.Equal(parent.ChildByFieldName("condition")) {
+		node == parent.ChildByFieldName("condition") {
 		return true, false
 	}
 
@@ -272,7 +275,7 @@ func (*rubyImplementation) PatternNodeTypes(node *tree.Node) []string {
 	//   :key => value
 	if parent != nil &&
 		parent.Type() == "pair" &&
-		node.Equal(parent.ChildByFieldName("key")) &&
+		node == parent.ChildByFieldName("key") &&
 		(node.Type() == "hash_key_symbol" || node.Type() == "simple_symbol") {
 		return []string{"hash_key_symbol", "simple_symbol"}
 	}
@@ -307,7 +310,7 @@ func (*rubyImplementation) PassthroughNested(node *tree.Node) bool {
 
 	receiverNode := callNode.ChildByFieldName("receiver")
 
-	if node.Type() != "arguments_list" && (receiverNode == nil || !node.Equal(receiverNode)) {
+	if node.Type() != "arguments_list" && (receiverNode == nil || node != receiverNode) {
 		return false
 	}
 
@@ -334,28 +337,29 @@ func (*rubyImplementation) ContributesToResult(node *tree.Node) bool {
 	}
 
 	// Must not be a condition
-	if node.Equal(parent.ChildByFieldName("condition")) {
+	if node == parent.ChildByFieldName("condition") {
 		return false
 	}
 
 	// Must not be a case value
-	if parent.Type() == "case" && node.Equal(parent.ChildByFieldName("value")) {
+	if parent.Type() == "case" && node == parent.ChildByFieldName("value") {
 		return false
 	}
 
 	// Must not be a case-when pattern
-	if parent.Type() == "when" && node.Equal(parent.ChildByFieldName("pattern")) {
+	if parent.Type() == "when" && node == parent.ChildByFieldName("pattern") {
 		return false
 	}
 
 	// Not the left part of an assignment
-	if parent.Type() == "assignment" && node.Equal(parent.ChildByFieldName("left")) {
+	if parent.Type() == "assignment" && node == parent.ChildByFieldName("left") {
 		return false
 	}
 
 	// Must be the last expression in an expression block
 	if slices.Contains([]string{"then", "else"}, parent.Type()) {
-		if !node.Equal(parent.Child(parent.ChildCount() - 1)) {
+		parentChildren := parent.Children()
+		if node != parentChildren[len(parentChildren)-1] {
 			return false
 		}
 	}
@@ -369,7 +373,7 @@ func (*rubyImplementation) FixupPatternVariableDummyValue(input []byte, node *tr
 			continue
 		}
 
-		errorPrefix := input[ancestor.StartByte():node.StartByte()]
+		errorPrefix := input[ancestor.ContentStart.Byte:node.ContentStart.Byte]
 		if classPatternErrorRegex.Match(errorPrefix) {
 			return strings.ToUpper(string(dummyValue[0])) + dummyValue[1:]
 		}

@@ -8,12 +8,14 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/bearer/new/language/implementation"
-	"github.com/bearer/bearer/new/language/patternquery/types"
-	"github.com/bearer/bearer/new/language/tree"
-	languagetypes "github.com/bearer/bearer/new/language/types"
-	"github.com/bearer/bearer/pkg/parser/nodeid"
 	"github.com/rs/zerolog/log"
+
+	"github.com/bearer/bearer/new/language/implementation"
+	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/ast/tree"
+	"github.com/bearer/bearer/pkg/parser/nodeid"
+
+	"github.com/bearer/bearer/new/language/patternquery/types"
 )
 
 type InputParams struct {
@@ -57,7 +59,6 @@ func Build(
 	if err != nil {
 		return nil, err
 	}
-	defer tree.Close()
 
 	if fixedInput, fixed := fixupInput(
 		langImplementation,
@@ -65,7 +66,6 @@ func Build(
 		inputParams.Variables,
 		tree.RootNode(),
 	); fixed {
-		tree.Close()
 		tree, err = lang.Parse(context.TODO(), fixedInput)
 		if err != nil {
 			return nil, err
@@ -74,12 +74,12 @@ func Build(
 
 	root := tree.RootNode()
 
-	if root.ChildCount() != 1 {
-		return nil, fmt.Errorf("expecting 1 node but got %d", root.ChildCount())
+	if len(root.Children()) != 1 {
+		return nil, fmt.Errorf("expecting 1 node but got %d", len(root.Children()))
 	}
 
 	for {
-		root = root.Child(0)
+		root = root.Children()[0]
 
 		if langImplementation.IsRootOfRuleQuery(root) {
 			break
@@ -170,10 +170,10 @@ func fixupInput(
 
 		newInput = append(
 			append(
-				newInput[:node.StartByte()+inputOffset],
+				newInput[:node.ContentStart.Byte+inputOffset],
 				newValue...,
 			),
-			newInput[node.EndByte()+inputOffset:]...,
+			newInput[node.ContentEnd.Byte+inputOffset:]...,
 		)
 
 		inputOffset += valueOffset
@@ -190,7 +190,7 @@ func fixupInput(
 }
 
 func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
-	if rootNode.ChildCount() == 0 {
+	if len(rootNode.Children()) == 0 {
 		variable := builder.getVariableFor(rootNode)
 		if variable != nil {
 			return &Result{RootVariable: variable}, nil
@@ -218,37 +218,37 @@ func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
 }
 
 func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bool) error {
-	if node.IsError() {
+	if node.SitterNode().IsError() {
 		return fmt.Errorf(
 			"error parsing pattern at %d:%d: %s",
-			node.StartLineNumber(),
-			node.StartColumnNumber(),
+			node.ContentStart.Line,
+			node.ContentStart.Column,
 			node.Content(),
 		)
 	}
 
 	nodeAnchoredBefore, nodeAnchoredAfter := builder.langImplementation.PatternIsAnchored(node)
-	anchored := !isRoot && node.IsNamed() && nodeAnchoredBefore
+	anchored := !isRoot && node.SitterNode().IsNamed() && nodeAnchoredBefore
 
-	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.StartByte()) {
+	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.ContentStart.Byte) {
 		builder.write(". ")
 	}
 
 	if variable := builder.getVariableFor(node); variable != nil {
 		builder.compileVariableNode(variable)
-	} else if !node.IsNamed() {
+	} else if !node.SitterNode().IsNamed() {
 		builder.compileAnonymousNode(node)
-	} else if node.NamedChildCount() == 0 {
+	} else if len(node.NamedChildren()) == 0 {
 		builder.compileLeafNode(node)
 	} else if err := builder.compileNodeWithChildren(node); err != nil {
 		return err
 	}
 
-	if node.Equal(builder.matchNode) {
+	if node == builder.matchNode {
 		builder.write(" @match")
 	}
 
-	if anchored && isLastChild && nodeAnchoredAfter && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.EndByte()) {
+	if anchored && isLastChild && nodeAnchoredAfter && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.ContentEnd.Byte) {
 		builder.write(" .")
 	}
 
@@ -326,23 +326,23 @@ func (builder *builder) compileLeafNode(node *tree.Node) {
 func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
 	builder.write("[")
 
-	var lastNode *tree.Node
+	var children []*tree.Node
 	if slices.Contains(builder.langImplementation.AnonymousPatternNodeParentTypes(), node.Type()) {
-		lastNode = node.Child(node.ChildCount() - 1)
+		children = node.Children()
 	} else {
-		lastNode = node.NamedChild(node.NamedChildCount() - 1)
+		children = node.NamedChildren()
 	}
+
+	lastNode := children[len(children)-1]
 
 	for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
 		builder.write("(")
 		builder.write(nodeType)
 
-		for i := 0; i < node.ChildCount(); i++ {
+		for _, child := range node.Children() {
 			builder.write(" ")
 
-			child := node.Child(i)
-
-			if err := builder.compileNode(child, false, child.Equal(lastNode)); err != nil {
+			if err := builder.compileNode(child, false, child == lastNode); err != nil {
 				return err
 			}
 		}
@@ -386,7 +386,7 @@ func getVariableFor(
 			continue
 		}
 
-		if (node.NamedChildCount() == 0 || langImplementation.IsMatchLeaf(node)) && node.Content() == variable.DummyValue {
+		if (len(node.NamedChildren()) == 0 || langImplementation.IsMatchLeaf(node)) && node.Content() == variable.DummyValue {
 			return &variables[i]
 		}
 	}
@@ -415,7 +415,7 @@ func (builder *builder) setMatchNode(
 				return nil
 			}
 		} else {
-			if node.StartByte() == offset && !slices.Contains(containerTypes, node.Type()) {
+			if node.ContentStart.Byte == offset && !slices.Contains(containerTypes, node.Type()) {
 				builder.matchNode = node
 				return nil
 			}

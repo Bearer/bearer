@@ -5,21 +5,22 @@ import (
 
 	sitter "github.com/smacker/go-tree-sitter"
 
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
+	"github.com/bearer/bearer/pkg/ast/tree"
 )
 
 type PatternQueryResult struct {
 	MatchNode *sitter.Node
-	Variables tree.QueryResult
+	Variables query.Result
 }
 
 type PatternQuery interface {
-	MatchAt(context *tree.QueryContext, node *sitter.Node) ([]*PatternQueryResult, error)
-	MatchOnceAt(context *tree.QueryContext, node *sitter.Node) (*PatternQueryResult, error)
+	MatchAt(context *query.Context, node *sitter.Node) ([]*PatternQueryResult, error)
+	MatchOnceAt(context *query.Context, node *sitter.Node) (*PatternQueryResult, error)
 }
 
 type Language interface {
-	Parse(ctx context.Context, input string) (*tree.Tree, error)
-	NewQuerySet() *tree.QuerySet
-	CompilePatternQuery(querySet *tree.QuerySet, input, focusedVariable string) (PatternQuery, error)
+	Parse(ctx context.Context, content string) (*tree.Tree, error)
+	NewQuerySet() *query.Set
+	CompilePatternQuery(querySet *query.Set, input, focusedVariable string) (PatternQuery, error)
 }

@@ -45,12 +45,12 @@ func getObjectName(evaluationState types.EvaluationState, objectNode *tree.Node)
 	// address.city.zip
 	if objectNode.Type() == "field_access" {
 		// FIXME: implement field names
-		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("field")).Content()
+		return objectNode.ChildByFieldName("field").Content()
 	}
 
 	// address["city"].zip or address["city"]["zip"]
 	if objectNode.Type() == "method_invocation" {
-		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("name")).Content()
+		return objectNode.ChildByFieldName("name").Content()
 	}
 
 	return ""

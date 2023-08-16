@@ -3,7 +3,7 @@ package object
 import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
-	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 
@@ -15,17 +15,17 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	hashPairQuery        *langtree.Query
-	keywordArgumentQuery *langtree.Query
-	classQuery           *langtree.Query
+	hashPairQuery        *query.Query
+	keywordArgumentQuery *query.Query
+	classQuery           *query.Query
 	// Naming
-	assignmentQuery *langtree.Query
+	assignmentQuery *query.Query
 	// Projection
-	callsQuery            *langtree.Query
-	elementReferenceQuery *langtree.Query
+	callsQuery            *query.Query
+	elementReferenceQuery *query.Query
 }
 
-func New(querySet *langtree.QuerySet) types.Detector {
+func New(querySet *query.Set) types.Detector {
 	// { first_name: ..., ... }
 	hashPairQuery := querySet.Add(`(hash (pair key: (_) @key value: (_) @value) @pair) @root`)
 

@@ -1,4 +1,4 @@
-package tree
+package query
 
 import (
 	"errors"
@@ -8,7 +8,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
-type QuerySet struct {
+type Set struct {
 	mu             sync.RWMutex
 	sitterLanguage *sitter.Language
 	queries        []Query
@@ -18,30 +18,30 @@ type QuerySet struct {
 }
 
 type Query struct {
-	querySet *QuerySet
+	querySet *Set
 	id       int
 	input    string
 }
 
-type QueryContext struct {
+type Context struct {
 	contentBytes []byte
 	rootNode     *sitter.Node
-	cache        QuerySetResults
+	cache        SetResults
 }
 
-type QueryResult map[string]*sitter.Node
-type NodeResults map[*sitter.Node][]QueryResult
-type QuerySetResults map[int]NodeResults
+type Result map[string]*sitter.Node
+type NodeResults map[*sitter.Node][]Result
+type SetResults map[int]NodeResults
 
-func NewQuerySet(sitterLanguage *sitter.Language) *QuerySet {
-	return &QuerySet{
+func NewSet(sitterLanguage *sitter.Language) *Set {
+	return &Set{
 		sitterLanguage: sitterLanguage,
 		sitterCursor:   sitter.NewQueryCursor(),
 		queryByInput:   make(map[string]*Query),
 	}
 }
 
-func (querySet *QuerySet) Add(input string) *Query {
+func (querySet *Set) Add(input string) *Query {
 	querySet.mu.Lock()
 	defer querySet.mu.Unlock()
 
@@ -63,7 +63,7 @@ func (querySet *QuerySet) Add(input string) *Query {
 	return query
 }
 
-func (querySet *QuerySet) Query(rootNode *sitter.Node) (QuerySetResults, error) {
+func (querySet *Set) Query(rootNode *sitter.Node) (SetResults, error) {
 	querySet.mu.RLock()
 	defer querySet.mu.RUnlock()
 
@@ -80,7 +80,7 @@ func (querySet *QuerySet) Query(rootNode *sitter.Node) (QuerySetResults, error) 
 			break
 		}
 
-		result := make(QueryResult)
+		result := make(Result)
 		for _, capture := range match.Captures {
 			result[querySet.sitterQuery.CaptureNameForId(capture.Index)] = capture.Node
 		}
@@ -101,7 +101,7 @@ func (querySet *QuerySet) Query(rootNode *sitter.Node) (QuerySetResults, error) 
 	return results, nil
 }
 
-func (querySet *QuerySet) Compile() error {
+func (querySet *Set) Compile() error {
 	querySet.mu.Lock()
 	defer querySet.mu.Unlock()
 
@@ -126,12 +126,12 @@ func (querySet *QuerySet) Compile() error {
 	return nil
 }
 
-func (querySet *QuerySet) Close() {
+func (querySet *Set) Close() {
 	querySet.sitterCursor.Close()
 	querySet.freeSitterQuery()
 }
 
-func (queries *QuerySet) freeSitterQuery() {
+func (queries *Set) freeSitterQuery() {
 	if queries.sitterQuery == nil {
 		return
 	}
@@ -140,8 +140,8 @@ func (queries *QuerySet) freeSitterQuery() {
 	queries.sitterQuery = nil
 }
 
-func (querySet *QuerySet) newResults() QuerySetResults {
-	results := make(QuerySetResults)
+func (querySet *Set) newResults() SetResults {
+	results := make(SetResults)
 
 	// make sure all queries are in the map so we don't re-trigger for queries with
 	// no results
@@ -152,7 +152,7 @@ func (querySet *QuerySet) newResults() QuerySetResults {
 	return results
 }
 
-func (query *Query) MatchAt(context *QueryContext, node *sitter.Node) ([]QueryResult, error) {
+func (query *Query) MatchAt(context *Context, node *sitter.Node) ([]Result, error) {
 	inCache := false
 	var nodeCache NodeResults
 	if context.cache != nil {
@@ -172,7 +172,7 @@ func (query *Query) MatchAt(context *QueryContext, node *sitter.Node) ([]QueryRe
 	return nodeCache[node], nil
 }
 
-func (query *Query) MatchOnceAt(context *QueryContext, node *sitter.Node) (QueryResult, error) {
+func (query *Query) MatchOnceAt(context *Context, node *sitter.Node) (Result, error) {
 	results, err := query.MatchAt(context, node)
 	if err != nil {
 		return nil, err
@@ -188,23 +188,23 @@ func (query *Query) MatchOnceAt(context *QueryContext, node *sitter.Node) (Query
 	return results[0], nil
 }
 
-func (results QuerySetResults) add(queryID int, nodeID NodeID, result QueryResult) {
+func (results SetResults) add(queryID int, node *sitter.Node, result Result) {
 	nodeResults := results[queryID]
 	if nodeResults == nil {
 		nodeResults = make(NodeResults)
 		results[queryID] = nodeResults
 	}
 
-	nodeResults[nodeID] = append(nodeResults[nodeID], result)
+	nodeResults[node] = append(nodeResults[node], result)
 }
 
-func NewQueryContext(content string, rootNode *sitter.Node) *QueryContext {
-	return &QueryContext{
-		contentBytes: []byte(content),
+func NewContext(contentBytes []byte, rootNode *sitter.Node) *Context {
+	return &Context{
+		contentBytes: contentBytes,
 		rootNode:     rootNode,
 	}
 }
 
-func (context *QueryContext) ContentFor(node *sitter.Node) string {
+func (context *Context) ContentFor(node *sitter.Node) string {
 	return node.Content(context.contentBytes)
 }

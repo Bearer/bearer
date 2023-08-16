@@ -7,8 +7,8 @@ import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/implementation/custom"
 	detectortypes "github.com/bearer/bearer/new/detector/types"
-	langtree "github.com/bearer/bearer/new/language/tree"
 	"github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
@@ -18,12 +18,12 @@ import (
 type detectorSet struct {
 	builtinAndSharedRuleIDs,
 	topLevelRuleIDs []string
-	querySet  *langtree.QuerySet
+	querySet  *query.Set
 	detectors map[string]detectortypes.Detector
 }
 
 func New(
-	querySet *langtree.QuerySet,
+	querySet *query.Set,
 	builtinDetectors []detectortypes.Detector,
 	rules map[string]*settings.Rule,
 	languageName string,
@@ -151,7 +151,7 @@ func findRuleIDs(
 
 func createDetectors(
 	lang types.Language,
-	querySet *langtree.QuerySet,
+	querySet *query.Set,
 	builtinDetectors []detectortypes.Detector,
 	relevantRules map[string]*settings.Rule,
 ) (map[string]detectortypes.Detector, error) {

@@ -3,7 +3,7 @@ package object
 import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
-	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic"
@@ -13,14 +13,14 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	classQuery *langtree.Query
+	classQuery *query.Query
 	// Naming
-	assignmentQuery *langtree.Query
+	assignmentQuery *query.Query
 	// Projection
-	fieldAccessQuery *langtree.Query
+	fieldAccessQuery *query.Query
 }
 
-func New(querySet *langtree.QuerySet) types.Detector {
+func New(querySet *query.Set) types.Detector {
 	// user = <object>
 	// User user = <object>
 	assignmentQuery := querySet.Add(`[

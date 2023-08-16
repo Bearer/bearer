@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
 	sitter "github.com/smacker/go-tree-sitter"
@@ -20,7 +19,8 @@ import (
 	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/classification/schema"
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/util/regex"
@@ -67,7 +67,7 @@ func (*javascriptImplementation) EnryLanguages() []string {
 	return []string{"JavaScript", "TypeScript", "TSX"}
 }
 
-func (impl *javascriptImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *tree.QuerySet) []detectortypes.Detector {
+func (impl *javascriptImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
 	return []detectortypes.Detector{
 		object.New(querySet),
 		datatype.New(detectors.DetectorJavascript, schemaClassifier),
@@ -81,109 +81,110 @@ func (implementation *javascriptImplementation) SitterLanguage() *sitter.Languag
 	return tsx.GetLanguage()
 }
 
-func (*javascriptImplementation) AnalyzeFlow(ctx context.Context, rootNode *tree.Node) error {
-	scope := implementation.NewScope(nil)
+func (*javascriptImplementation) AnalyzeTree(ctx context.Context, rootNode *sitter.Node, builder *tree.Builder) error {
+	return nil
+	// scope := implementation.NewScope(nil)
 
-	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
-		if ctx.Err() != nil {
-			return ctx.Err()
-		}
+	// return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
+	// 	if ctx.Err() != nil {
+	// 		return ctx.Err()
+	// 	}
 
-		switch node.Type() {
-		// () => {}
-		// function getName() {}
-		case "function", "arrow_function", "method_definition":
-			previousScope := scope
-			scope = implementation.NewScope(previousScope)
-			err := visitChildren()
-			scope = previousScope
-			return err
-		// user = ...
-		case "assignment_expression":
-			left := node.ChildByFieldName("left")
-			right := node.ChildByFieldName("right")
+	// 	switch node.Type() {
+	// 	// () => {}
+	// 	// function getName() {}
+	// 	case "function", "arrow_function", "method_definition":
+	// 		previousScope := scope
+	// 		scope = implementation.NewScope(previousScope)
+	// 		err := visitChildren()
+	// 		scope = previousScope
+	// 		return err
+	// 	// user = ...
+	// 	case "assignment_expression":
+	// 		left := node.ChildByFieldName("left")
+	// 		right := node.ChildByFieldName("right")
 
-			if left.Type() == "identifier" {
-				err := visitChildren()
+	// 		if left.Type() == "identifier" {
+	// 			err := visitChildren()
 
-				scope.Assign(left.Content(), node)
-				node.UnifyWith(right)
+	// 			scope.Assign(left.Content(), node)
+	// 			node.UnifyWith(right)
 
-				return err
-			}
-		// x += y
-		case "augmented_assignment_expression":
-			err := visitChildren()
+	// 			return err
+	// 		}
+	// 	// x += y
+	// 	case "augmented_assignment_expression":
+	// 		err := visitChildren()
 
-			left := node.ChildByFieldName("left")
-			if left.Type() == "identifier" {
-				scope.Assign(left.Content(), node)
-			}
+	// 		left := node.ChildByFieldName("left")
+	// 		if left.Type() == "identifier" {
+	// 			scope.Assign(left.Content(), node)
+	// 		}
 
-			return err
-		// const user = ...
-		// var user = ...
-		// let user = ...
-		case "variable_declarator":
-			name := node.ChildByFieldName("name")
-			value := node.ChildByFieldName("value")
+	// 		return err
+	// 	// const user = ...
+	// 	// var user = ...
+	// 	// let user = ...
+	// 	case "variable_declarator":
+	// 		name := node.ChildByFieldName("name")
+	// 		value := node.ChildByFieldName("value")
 
-			if name.Type() == "identifier" {
-				err := visitChildren()
+	// 		if name.Type() == "identifier" {
+	// 			err := visitChildren()
 
-				scope.Declare(name.Content(), node)
-				node.UnifyWith(value)
+	// 			scope.Declare(name.Content(), node)
+	// 			node.UnifyWith(value)
 
-				return err
-			}
-		case "shorthand_property_identifier_pattern":
-			scope.Declare(node.Content(), node)
-		case "identifier":
-			parent := node.Parent()
-			if parent == nil {
-				break
-			}
+	// 			return err
+	// 		}
+	// 	case "shorthand_property_identifier_pattern":
+	// 		scope.Declare(node.Content(), node)
+	// 	case "identifier":
+	// 		parent := node.Parent()
+	// 		if parent == nil {
+	// 			break
+	// 		}
 
-			if slice.Contains(variableLookupParents, parent.Type()) ||
-				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
-				(parent.Type() == "new_expression" && node.Equal(parent.ChildByFieldName("constructor"))) ||
-				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
-				(parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object"))) ||
-				(parent.Type() == "call_expression" && node.Equal(parent.ChildByFieldName("function"))) ||
-				(parent.Type() == "subscript_expression" && node.Equal(parent.ChildByFieldName("object"))) {
-				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-					node.UnifyWith(scopedNode)
-				}
+	// 		if slice.Contains(variableLookupParents, parent.Type()) ||
+	// 			(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
+	// 			(parent.Type() == "new_expression" && node.Equal(parent.ChildByFieldName("constructor"))) ||
+	// 			(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
+	// 			(parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object"))) ||
+	// 			(parent.Type() == "call_expression" && node.Equal(parent.ChildByFieldName("function"))) ||
+	// 			(parent.Type() == "subscript_expression" && node.Equal(parent.ChildByFieldName("object"))) {
+	// 			if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
+	// 				node.UnifyWith(scopedNode)
+	// 			}
 
-				break
-			}
+	// 			break
+	// 		}
 
-			// typescript: different type of identifier
-			if parent.Type() == "required_parameter" {
-				scope.Declare(node.Content(), node)
-				break
-			}
+	// 		// typescript: different type of identifier
+	// 		if parent.Type() == "required_parameter" {
+	// 			scope.Declare(node.Content(), node)
+	// 			break
+	// 		}
 
-			if parent.Type() == "arguments" {
-				callNode := parent.Parent()
-				callNode.UnifyWith(node)
-				break
-			}
+	// 		if parent.Type() == "arguments" {
+	// 			callNode := parent.Parent()
+	// 			callNode.UnifyWith(node)
+	// 			break
+	// 		}
 
-			if isImportedIdentifier(node) {
-				scope.Declare(node.Content(), node)
-			}
-		case "property_identifier":
-			parent := node.Parent()
-			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
-				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-					node.UnifyWith(scopedNode)
-				}
-			}
-		}
+	// 		if isImportedIdentifier(node) {
+	// 			scope.Declare(node.Content(), node)
+	// 		}
+	// 	case "property_identifier":
+	// 		parent := node.Parent()
+	// 		if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
+	// 			if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
+	// 				node.UnifyWith(scopedNode)
+	// 			}
+	// 		}
+	// 	}
 
-		return visitChildren()
-	})
+	// 	return visitChildren()
+	// })
 }
 
 func (implementation *javascriptImplementation) IsMatchLeaf(node *tree.Node) bool {
@@ -288,7 +289,7 @@ func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Nod
 
 func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node) []string {
 	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
-		if node.NamedChildCount() == 0 {
+		if len(node.NamedChildren()) == 0 {
 			return []string{"object"}
 		} else {
 			return []string{node.Type(), "program"}
@@ -339,17 +340,17 @@ func (*javascriptImplementation) ContributesToResult(node *tree.Node) bool {
 	}
 
 	// Must not be a ternary condition
-	if parent.Type() == "ternary_expression" && node.Equal(parent.ChildByFieldName("condition")) {
+	if parent.Type() == "ternary_expression" && node == parent.ChildByFieldName("condition") {
 		return false
 	}
 
 	// Not the name part of a declaration
-	if parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("name")) {
+	if parent.Type() == "variable_declarator" && node == parent.ChildByFieldName("name") {
 		return false
 	}
 
 	// Not the left part of an assignment
-	if parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("left")) {
+	if parent.Type() == "assignment_expression" && node == parent.ChildByFieldName("left") {
 		return false
 	}
 
@@ -382,7 +383,7 @@ func isImportedIdentifier(node *tree.Node) bool {
 	}
 
 	// import { a as x } from "library"
-	if node.Equal(parent.ChildByFieldName("alias")) {
+	if node == parent.ChildByFieldName("alias") {
 		return true
 	}
 
@@ -395,7 +396,7 @@ func (*javascriptImplementation) FixupPatternVariableDummyValue(input []byte, no
 		return dummyValue
 	}
 
-	if parent.NamedChild(0).Type() == "import_clause" {
+	if parent.NamedChildren()[0].Type() == "import_clause" {
 		return "\"" + dummyValue + "\""
 	}
 

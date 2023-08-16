@@ -7,24 +7,18 @@ import (
 
 	detectortypes "github.com/bearer/bearer/new/detector/types"
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
-	"github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
+	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/classification/schema"
 )
 
 type Implementation interface {
 	Name() string
 	EnryLanguages() []string
-	NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *tree.QuerySet) []detectortypes.Detector
+	NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector
 	SitterLanguage() *sitter.Language
-	// AnalyzeFlow unifies nodes that represent the same value in the tree.
-	//
-	// eg. given Ruby code like this:
-	//   user = { first_name: "" }
-	//   some_call(user)
-	//   user[:first_name]
-	// the `user` identifier node on lines 2 and 3 will be unified with the
-	// assignment node
-	AnalyzeFlow(ctx context.Context, rootNode *tree.Node) error
+	// AnalyzeTree populates the dataflow analysis
+	AnalyzeTree(ctx context.Context, rootNode *sitter.Node, astBuilder *tree.Builder) error
 	// ExtractPatternVariables parses variables from a pattern and returns a new
 	// pattern with the variables replaced with a dummy value, along with a list
 	// of the variables. Dummy values are needed to allow Tree Sitter to parse

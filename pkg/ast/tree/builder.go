@@ -38,6 +38,7 @@ func (builder *Builder) Build() *Tree {
 
 	for i := range tree.nodes {
 		tree.nodes[i].tree = tree
+		tree.nodes[i].parent = tree.sitterToNode[tree.nodes[i].sitterNode.Parent()]
 	}
 
 	return tree

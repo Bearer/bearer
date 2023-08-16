@@ -154,7 +154,7 @@ func getObjectName(evaluationState types.EvaluationState, objectNode *tree.Node)
 
 	// address.city.zip or address.city["zip"]
 	if objectNode.Type() == "member_expression" {
-		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("property")).Content()
+		return objectNode.ChildByFieldName("property").Content()
 	}
 
 	// address["city"].zip or address["city"]["zip"]
@@ -166,7 +166,7 @@ func getObjectName(evaluationState types.EvaluationState, objectNode *tree.Node)
 }
 
 func getSubscriptProperty(evaluationState types.EvaluationState, node *tree.Node) string {
-	indexNode := evaluationState.NodeFromSitter(node.SitterNode().ChildByFieldName("index"))
+	indexNode := node.ChildByFieldName("index")
 	if indexNode.Type() == "string" {
 		return stringutil.StripQuotes(indexNode.Content())
 	}
@@ -176,7 +176,7 @@ func getSubscriptProperty(evaluationState types.EvaluationState, node *tree.Node
 
 func getProjectedObject(evaluationState types.EvaluationState, objectNode *tree.Node) (*tree.Node, bool) {
 	if objectNode.Type() == "call_expression" {
-		return evaluationState.NodeFromSitter(objectNode.SitterNode().ChildByFieldName("function")), false
+		return objectNode.ChildByFieldName("function"), false
 	}
 
 	return objectNode, true

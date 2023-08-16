@@ -10,12 +10,12 @@ import (
 	"github.com/bearer/bearer/new/language/implementation"
 	"github.com/bearer/bearer/new/language/patternquery/builder"
 	"github.com/bearer/bearer/new/language/patternquery/types"
-	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	astquery "github.com/bearer/bearer/pkg/ast/query"
 )
 
 type Query struct {
-	treeQuery       *tree.Query
+	treeQuery       *astquery.Query
 	paramToVariable map[string]string
 	equalParams     [][]string
 	paramToContent  map[string]map[string]string
@@ -28,7 +28,7 @@ type RootVariableQuery struct {
 func Compile(
 	lang languagetypes.Language,
 	langImplementation implementation.Implementation,
-	querySet *tree.QuerySet,
+	querySet *astquery.Set,
 	input string,
 	focusedVariable string,
 ) (types.PatternQuery, error) {
@@ -52,7 +52,7 @@ func Compile(
 	}, nil
 }
 
-func (query *Query) MatchAt(astContext *tree.QueryContext, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error) {
+func (query *Query) MatchAt(astContext *astquery.Context, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error) {
 	treeResults, err := query.treeQuery.MatchAt(astContext, node)
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ func (query *Query) MatchAt(astContext *tree.QueryContext, node *sitter.Node) ([
 	return results, nil
 }
 
-func (query *Query) MatchOnceAt(astContext *tree.QueryContext, node *sitter.Node) (*languagetypes.PatternQueryResult, error) {
+func (query *Query) MatchOnceAt(astContext *astquery.Context, node *sitter.Node) (*languagetypes.PatternQueryResult, error) {
 	treeResult, err := query.treeQuery.MatchOnceAt(astContext, node)
 	if err != nil {
 		return nil, err
@@ -79,7 +79,7 @@ func (query *Query) MatchOnceAt(astContext *tree.QueryContext, node *sitter.Node
 	return query.matchAndTranslateTreeResult(astContext, treeResult), nil
 }
 
-func (query *Query) matchAndTranslateTreeResult(astContext *tree.QueryContext, treeResult tree.QueryResult) *languagetypes.PatternQueryResult {
+func (query *Query) matchAndTranslateTreeResult(astContext *astquery.Context, treeResult astquery.Result) *languagetypes.PatternQueryResult {
 	if treeResult == nil {
 		return nil
 	}
@@ -115,7 +115,7 @@ func (query *Query) matchAndTranslateTreeResult(astContext *tree.QueryContext, t
 		}
 	}
 
-	variables := make(tree.QueryResult)
+	variables := make(astquery.Result)
 
 	for paramName, node := range treeResult {
 		variableName := query.paramToVariable[paramName]
@@ -130,7 +130,7 @@ func (query *Query) matchAndTranslateTreeResult(astContext *tree.QueryContext, t
 	}
 }
 
-func (query *RootVariableQuery) MatchAt(astContext *tree.QueryContext, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error) {
+func (query *RootVariableQuery) MatchAt(astContext *astquery.Context, node *sitter.Node) ([]*languagetypes.PatternQueryResult, error) {
 	if !query.isCompatibleType(node) {
 		return nil, nil
 	}
@@ -138,7 +138,7 @@ func (query *RootVariableQuery) MatchAt(astContext *tree.QueryContext, node *sit
 	return []*languagetypes.PatternQueryResult{query.resultFor(node)}, nil
 }
 
-func (query *RootVariableQuery) MatchOnceAt(astContext *tree.QueryContext, node *sitter.Node) (*languagetypes.PatternQueryResult, error) {
+func (query *RootVariableQuery) MatchOnceAt(astContext *astquery.Context, node *sitter.Node) (*languagetypes.PatternQueryResult, error) {
 	if !query.isCompatibleType(node) {
 		return nil, nil
 	}
@@ -155,7 +155,7 @@ func (query *RootVariableQuery) isCompatibleType(node *sitter.Node) bool {
 }
 
 func (query *RootVariableQuery) resultFor(node *sitter.Node) *languagetypes.PatternQueryResult {
-	variables := make(tree.QueryResult)
+	variables := make(astquery.Result)
 	variables[query.variable.Name] = node
 
 	return &languagetypes.PatternQueryResult{

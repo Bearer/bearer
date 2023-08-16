@@ -5,8 +5,8 @@ import (
 
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/types"
-	langtree "github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
+	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	sitter "github.com/smacker/go-tree-sitter"
@@ -34,7 +34,7 @@ type customDetector struct {
 
 func New(
 	lang languagetypes.Language,
-	querySet *langtree.QuerySet,
+	querySet *query.Set,
 	detectorType string,
 	patterns []settings.RulePattern,
 	rules map[string]*settings.Rule,

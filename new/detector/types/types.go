@@ -7,7 +7,7 @@ import (
 
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/new/detector/evaluator/stats"
-	langtree "github.com/bearer/bearer/new/language/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
@@ -24,10 +24,10 @@ type EvaluationState interface {
 		followFlow bool,
 	) ([]*detection.Detection, error)
 	FileName() string
-	QueryContext() *langtree.QueryContext
+	QueryContext() *query.Context
 	NodeFromSitter(sitterNode *sitter.Node) *tree.Node
-	QueryMatchAt(query *langtree.Query, node *tree.Node) ([]QueryResult, error)
-	QueryMatchOnceAt(query *langtree.Query, node *tree.Node) (QueryResult, error)
+	QueryMatchAt(query *query.Query, node *tree.Node) ([]QueryResult, error)
+	QueryMatchOnceAt(query *query.Query, node *tree.Node) (QueryResult, error)
 }
 
 type DetectorSet interface {

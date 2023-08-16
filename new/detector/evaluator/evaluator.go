@@ -15,16 +15,15 @@ import (
 	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language"
 	"github.com/bearer/bearer/new/language/implementation"
-	"github.com/bearer/bearer/new/language/tree"
 	languagetypes "github.com/bearer/bearer/new/language/types"
-	asttree "github.com/bearer/bearer/pkg/ast/tree"
+	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/classification/schema"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/file"
 )
 
 type Evaluator struct {
-	querySet      *tree.QuerySet
+	querySet      *query.Set
 	languageName  string
 	enryLanguages []string
 	lang          languagetypes.Language
@@ -86,12 +85,9 @@ func (evaluator *Evaluator) DetectFromFile(
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
-	astTree := asttree.NewBuilder(content, tree.SitterRootNode()).Build()
-
 	fileEvaluator := fileeval.New(
 		ctx,
 		evaluator.detectorSet,
-		astTree,
 		tree,
 		file.FileInfo.Name(),
 		fileStats,
@@ -110,7 +106,7 @@ func (evaluator *Evaluator) DetectFromFile(
 		}
 
 		ruleDetections, err := fileEvaluator.Evaluate(
-			astTree.RootNode(),
+			tree.RootNode(),
 			ruleID,
 			sanitizerRuleID,
 			cache,
