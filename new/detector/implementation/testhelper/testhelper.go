@@ -3,16 +3,22 @@ package testhelper
 import (
 	"context"
 	"fmt"
+	"os"
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/types"
-	"github.com/bearer/bearer/pkg/classification"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/rs/zerolog"
 	"gopkg.in/yaml.v3"
+
+	cachepkg "github.com/bearer/bearer/new/detector/evaluator/cache"
+	fileeval "github.com/bearer/bearer/new/detector/evaluator/file"
+	"github.com/bearer/bearer/new/detector/set"
+	"github.com/bearer/bearer/new/language"
+	"github.com/bearer/bearer/new/language/implementation"
+	"github.com/bearer/bearer/pkg/ast/query"
+	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/flag"
 )
 
 type result struct {
@@ -24,7 +30,7 @@ type result struct {
 func RunTest(
 	t *testing.T,
 	name string,
-	compositionInstantiator func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error),
+	langImplementation implementation.Implementation,
 	detectorType string,
 	fileName string,
 ) {
@@ -44,18 +50,49 @@ func RunTest(
 			tt.Fatalf("failed to create classifier: %s", err)
 		}
 
-		composition, err := compositionInstantiator(make(map[string]*settings.Rule), classifier)
-		if err != nil {
-			tt.Fatalf("failed to create composition: %s", err)
-		}
-		defer composition.Close()
+		querySet := query.NewSet(langImplementation.SitterLanguage())
+		lang := language.New(langImplementation)
 
-		fileInfo, err := file.FileInfoFromPath(fileName)
+		detectorSet, err := set.New(
+			querySet,
+			langImplementation.NewBuiltInDetectors(classifier.Schema, querySet),
+			make(map[string]*settings.Rule),
+			langImplementation.Name(),
+			lang,
+		)
 		if err != nil {
-			tt.Fatalf("failed to create file info for %s: %s", fileName, err)
+			tt.Fatalf("failed to create detector set: %s", err)
 		}
 
-		detections, err := composition.DetectFromFileWithTypes(context.Background(), nil, fileInfo, []string{detectorType}, nil)
+		contentBytes, err := os.ReadFile(fileName)
+		if err != nil {
+			tt.Fatalf("failed to read file: %s", err)
+		}
+
+		tree, err := lang.Parse(context.Background(), string(contentBytes))
+		if err != nil {
+			tt.Fatalf("failed to parse content: %s", err)
+		}
+
+		fileEvaluator := fileeval.New(
+			context.Background(),
+			detectorSet,
+			tree,
+			fileName,
+			nil,
+		)
+		if err != nil {
+			tt.Fatalf("failed to create file evaluator: %s", err)
+		}
+
+		detections, err := fileEvaluator.Evaluate(
+			tree.RootNode(),
+			detectorType,
+			"",
+			cachepkg.NewCache(cachepkg.NewShared(detectorSet.BuiltinAndSharedRuleIDs())),
+			settings.NESTED_SCOPE,
+			true,
+		)
 		if err != nil {
 			tt.Fatalf("failed to detect: %s", err)
 		}

@@ -3,8 +3,8 @@ package ruby_test
 import (
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/composition/javascript"
 	"github.com/bearer/bearer/new/detector/implementation/testhelper"
+	"github.com/bearer/bearer/new/language/implementation/javascript"
 )
 
 func TestJavascriptObjectDetector(t *testing.T) {
@@ -32,5 +32,5 @@ func TestJavascriptFileTypes(t *testing.T) {
 }
 
 func runTest(t *testing.T, name, detectorType, fileName string) {
-	testhelper.RunTest(t, name, javascript.New, detectorType, fileName)
+	testhelper.RunTest(t, name, javascript.Get(), detectorType, fileName)
 }

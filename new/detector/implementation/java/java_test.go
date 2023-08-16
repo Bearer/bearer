@@ -3,8 +3,8 @@ package java_test
 import (
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/composition/java"
 	"github.com/bearer/bearer/new/detector/implementation/testhelper"
+	"github.com/bearer/bearer/new/language/implementation/java"
 )
 
 func TestJavaObjects(t *testing.T) {
@@ -17,5 +17,5 @@ func TestJavaString(t *testing.T) {
 }
 
 func runTest(t *testing.T, name, detectorType, fileName string) {
-	testhelper.RunTest(t, name, java.New, detectorType, fileName)
+	testhelper.RunTest(t, name, java.Get(), detectorType, fileName)
 }

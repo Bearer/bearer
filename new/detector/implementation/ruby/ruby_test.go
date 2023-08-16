@@ -3,8 +3,8 @@ package ruby_test
 import (
 	"testing"
 
-	"github.com/bearer/bearer/new/detector/composition/ruby"
 	"github.com/bearer/bearer/new/detector/implementation/testhelper"
+	"github.com/bearer/bearer/new/language/implementation/ruby"
 )
 
 func TestRubyObjectDetector(t *testing.T) {
@@ -20,5 +20,5 @@ func TestRubyStringDetector(t *testing.T) {
 }
 
 func runTest(t *testing.T, name string, detectorType, fileName string) {
-	testhelper.RunTest(t, name, ruby.New, detectorType, fileName)
+	testhelper.RunTest(t, name, ruby.Get(), detectorType, fileName)
 }
