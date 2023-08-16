@@ -49,7 +49,7 @@ bearer scan project-folder --api-key=XXXXXXXX
 
 Using the same setup process found in [the GitHub action guide](/guides/github-action/), configure the action to run `with` the `api-key` option. For example:
 
-```yml
+```yaml
 # .github/workflows/bearer.yml
 name: Bearer
 on:
@@ -67,7 +67,7 @@ jobs:
         id: report
         uses: bearer/bearer-action@v2
         with:
-          api-key: ${{ secrets.BEARER_TOKEN }}
+          api-key: {% raw %}${{ secrets.BEARER_TOKEN }}{% endraw %}
 ```
 
 We highly recommend using GitHub's [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets). In the example above, the secret is named `BEARER_TOKEN`.
@@ -76,7 +76,7 @@ We highly recommend using GitHub's [encrypted secrets](https://docs.github.com/e
 
 Set up the [GitLab CI/CD configuration](/guides/gitlab), then adjust your settings to include the `--api-key` flag with the `scan` command:
 
-```yml
+```yaml
 # .gitlab-ci.yml
 bearer:
   image:

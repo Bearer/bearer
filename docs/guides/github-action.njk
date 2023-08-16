@@ -15,7 +15,7 @@ Actions live in the `.github/workflows/` directory within your repository. Start
 
 We recommend the following config in `.github/workflows/bearer.yml` to run Bearer's security report:
 
-```yml
+```yaml
 name: Bearer
 
 on:
@@ -42,7 +42,7 @@ This will run the [security report](/explanations/reports), display the results 
 
 Just as with the CLI app, you can configure the action to meet the needs of your project. Set custom inputs and outputs using the `with` key. Here's an example using the `config-file`, `skip-path`, and `only-rule` flags:
 
-```yml
+```yaml
 steps:
   - uses: actions/checkout@v3
   - name: Bearer
@@ -89,7 +89,7 @@ Bearer CLI supports [GitHub code scanning](https://docs.github.com/en/code-secur
 
 To enable this feature, update your action configuration to include new permissions, new format and outputs, and an additional step. Here's an example configuration:
 
-```diff-yml
+```diff-yaml
 name: Bearer
 
 on:
@@ -162,7 +162,7 @@ Bearer CLI supports [Reviewdog](https://github.com/reviewdog/reviewdog) rdjson f
 
 ![Bearer CLI results in Github PR](/assets/img/gh-pr-review.png)
 
-```yaml
+```diff-yaml
 name: Bearer PR Check
 
 on:
