@@ -8,14 +8,14 @@ import (
 	"github.com/bearer/bearer/pkg/util/set"
 )
 
-func processInput(langImplementation implementation.Implementation, input string) (string, *InputParams, error) {
-	inputWithoutVariables, variables, err := langImplementation.ExtractPatternVariables(input)
+func processInput(patternImplementation implementation.Pattern, input string) (string, *InputParams, error) {
+	inputWithoutVariables, variables, err := patternImplementation.ExtractVariables(input)
 	if err != nil {
 		return "", nil, fmt.Errorf("error processing variables: %s", err)
 	}
 
 	inputWithoutVariablesBytes := []byte(inputWithoutVariables)
-	matchNodePositions := langImplementation.FindPatternMatchNode(inputWithoutVariablesBytes)
+	matchNodePositions := patternImplementation.FindMatchNode(inputWithoutVariablesBytes)
 	inputWithoutMatchNode := stripPositions(inputWithoutVariablesBytes, matchNodePositions)
 	matchNodeOffset := 0
 
@@ -27,7 +27,7 @@ func processInput(langImplementation implementation.Implementation, input string
 		matchNodeOffset = matchNodePositions[0][0]
 	}
 
-	unanchoredPositions := langImplementation.FindPatternUnanchoredPoints(inputWithoutMatchNode)
+	unanchoredPositions := patternImplementation.FindUnanchoredPoints(inputWithoutMatchNode)
 	inputWithoutUnanchored := stripPositions(inputWithoutMatchNode, unanchoredPositions)
 
 	unanchoredOffsets := make([]int, len(unanchoredPositions))

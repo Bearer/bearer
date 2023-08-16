@@ -2,8 +2,6 @@ package javascript
 
 import (
 	"context"
-	"fmt"
-	"regexp"
 	"strings"
 
 	"golang.org/x/exp/slices"
@@ -18,12 +16,10 @@ import (
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/javascript/string"
 	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
-	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/classification/schema"
 	"github.com/bearer/bearer/pkg/report/detectors"
-	"github.com/bearer/bearer/pkg/util/regex"
 )
 
 var (
@@ -37,22 +33,11 @@ var (
 		"augmented_assignment_expression",
 	}
 
-	anonymousPatternNodeParentTypes = []string{}
-	patternMatchNodeContainerTypes  = []string{"import_clause", "import_specifier", "required_parameter"}
-
-	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression", "string", "template_string"}
-
-	matchNodeRegex = regexp.MustCompile(`\$<!>`)
-
-	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
-
 	passthroughMethods = []string{"JSON.parse", "JSON.stringify"}
 )
 
 type javascriptImplementation struct {
-	implementation.Base
+	pattern patternImplementation
 }
 
 func Get() implementation.Implementation {
@@ -67,7 +52,7 @@ func (*javascriptImplementation) EnryLanguages() []string {
 	return []string{"JavaScript", "TypeScript", "TSX"}
 }
 
-func (impl *javascriptImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
+func (*javascriptImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
 	return []detectortypes.Detector{
 		object.New(querySet),
 		datatype.New(detectors.DetectorJavascript, schemaClassifier),
@@ -77,7 +62,7 @@ func (impl *javascriptImplementation) NewBuiltInDetectors(schemaClassifier *sche
 	}
 }
 
-func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {
+func (*javascriptImplementation) SitterLanguage() *sitter.Language {
 	return tsx.GetLanguage()
 }
 
@@ -187,116 +172,8 @@ func (*javascriptImplementation) AnalyzeTree(ctx context.Context, rootNode *sitt
 	// })
 }
 
-func (implementation *javascriptImplementation) IsMatchLeaf(node *tree.Node) bool {
-	return node.Type() == "string"
-}
-
-func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
-	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
-	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
-	i := 0
-
-	var params []patternquerytypes.Variable
-
-	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
-		nodeTypes := strings.Split(submatches[typesIndex], "|")
-		if nodeTypes[0] == "" {
-			nodeTypes = []string{"_"}
-		}
-
-		for _, nodeType := range nodeTypes {
-			if !slices.Contains(allowedPatternQueryTypes, nodeType) {
-				return "", fmt.Errorf("invalid node type '%s' in pattern query", nodeType)
-			}
-		}
-
-		dummyValue := produceDummyValue(i, nodeTypes[0])
-
-		params = append(params, patternquerytypes.Variable{
-			Name:       submatches[nameIndex],
-			NodeTypes:  nodeTypes,
-			DummyValue: dummyValue,
-		})
-
-		i += 1
-
-		return dummyValue, nil
-	})
-
-	if err != nil {
-		return "", nil, err
-	}
-
-	return replaced, params, nil
-}
-
-func produceDummyValue(i int, nodeType string) string {
-	return "CurioVar" + fmt.Sprint(i)
-}
-
-func (implementation *javascriptImplementation) AnonymousPatternNodeParentTypes() []string {
-	return anonymousPatternNodeParentTypes
-}
-
-func (implementation *javascriptImplementation) FindPatternMatchNode(input []byte) [][]int {
-	return matchNodeRegex.FindAllIndex(input, -1)
-}
-
-func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
-	return ellipsisRegex.FindAllIndex(input, -1)
-}
-
-func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
-	return patternMatchNodeContainerTypes
-}
-
-func (javascriptImplementation *javascriptImplementation) ShouldSkipNode(node *tree.Node) bool {
-	return node.Type() == "required_parameter"
-}
-
-func (*javascriptImplementation) PatternLeafContentTypes() []string {
-	return []string{
-		// identifiers
-		"identifier", "property_identifier", "shorthand_property_identifier", "type_identifier",
-		// datatypes/literals
-		"template_string", "string_fragment", "number", "null", "true", "false",
-	}
-}
-
-func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
-	if node.Type() == "pair" {
-		return false, false
-	}
-
-	parent := node.Parent()
-	if parent == nil {
-		return true, true
-	}
-
-	// Class body class_body
-	// arrow functions statement_block
-	// function statement_block
-	// method statement_block
-	unAnchored := []string{"statement_block", "class_body", "object_pattern", "named_imports"}
-
-	isUnanchored := !slices.Contains(unAnchored, parent.Type())
-	return isUnanchored, isUnanchored
-}
-
-func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
-	return !(node.Type() == "expression_statement")
-}
-
-func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node) []string {
-	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
-		if len(node.NamedChildren()) == 0 {
-			return []string{"object"}
-		} else {
-			return []string{node.Type(), "program"}
-		}
-	}
-
-	return []string{node.Type()}
+func (implementation *javascriptImplementation) Pattern() implementation.Pattern {
+	return &implementation.pattern
 }
 
 func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {
@@ -388,17 +265,4 @@ func isImportedIdentifier(node *tree.Node) bool {
 	}
 
 	return false
-}
-
-func (*javascriptImplementation) FixupPatternVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
-	parent := node.Parent()
-	if parent == nil {
-		return dummyValue
-	}
-
-	if parent.NamedChildren()[0].Type() == "import_clause" {
-		return "\"" + dummyValue + "\""
-	}
-
-	return dummyValue
 }

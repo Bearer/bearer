@@ -48,5 +48,5 @@ func (lang *Language) NewQuerySet() *query.Set {
 }
 
 func (lang *Language) CompilePatternQuery(querySet *query.Set, input, focusedVariable string) (types.PatternQuery, error) {
-	return patternquery.Compile(lang, lang.implementation, querySet, input, focusedVariable)
+	return patternquery.Compile(lang, lang.implementation.Pattern(), querySet, input, focusedVariable)
 }

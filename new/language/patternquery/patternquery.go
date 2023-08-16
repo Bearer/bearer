@@ -27,12 +27,12 @@ type RootVariableQuery struct {
 
 func Compile(
 	lang languagetypes.Language,
-	langImplementation implementation.Implementation,
+	patternImplementation implementation.Pattern,
 	querySet *astquery.Set,
 	input string,
 	focusedVariable string,
 ) (types.PatternQuery, error) {
-	builderResult, err := builder.Build(lang, langImplementation, input, focusedVariable)
+	builderResult, err := builder.Build(lang, patternImplementation, input, focusedVariable)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}

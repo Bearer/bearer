@@ -2,11 +2,7 @@ package java
 
 import (
 	"context"
-	"fmt"
-	"regexp"
 	"strings"
-
-	"golang.org/x/exp/slices"
 
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/java"
@@ -18,42 +14,23 @@ import (
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/java/string"
 	detectortypes "github.com/bearer/bearer/new/detector/types"
 	"github.com/bearer/bearer/new/language/implementation"
-	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/pkg/ast/query"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/classification/schema"
 	"github.com/bearer/bearer/pkg/report/detectors"
-	"github.com/bearer/bearer/pkg/util/regex"
 )
 
-var (
-	variableLookupParents = []string{
-		"argument_list",
-		"array_access",
-		"array_initializer",
-		"binary_expression",
-		"field_declaration",
-		"ternary_expression",
-	}
-
-	anonymousPatternNodeParentTypes = []string{}
-	patternMatchNodeContainerTypes  = []string{}
-
-	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-
-	// todo: see if it is ok to replace typescripts `member_expression` with javas `field_access` and `method_invocation`
-	allowedPatternQueryTypes = []string{"identifier", "type_identifier", "_", "field_access", "method_invocation", "string_literal"}
-
-	matchNodeRegex = regexp.MustCompile(`\$<!>`)
-
-	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
-
-	passthroughMethods = []string{}
-)
+var variableLookupParents = []string{
+	"argument_list",
+	"array_access",
+	"array_initializer",
+	"binary_expression",
+	"field_declaration",
+	"ternary_expression",
+}
 
 type javaImplementation struct {
-	implementation.Base
+	pattern patternImplementation
 }
 
 func Get() implementation.Implementation {
@@ -68,7 +45,7 @@ func (*javaImplementation) EnryLanguages() []string {
 	return []string{"Java"}
 }
 
-func (impl *javaImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
+func (*javaImplementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
 	return []detectortypes.Detector{
 		object.New(querySet),
 		datatype.New(detectors.DetectorJava, schemaClassifier),
@@ -78,7 +55,7 @@ func (impl *javaImplementation) NewBuiltInDetectors(schemaClassifier *schema.Cla
 	}
 }
 
-func (implementation *javaImplementation) SitterLanguage() *sitter.Language {
+func (*javaImplementation) SitterLanguage() *sitter.Language {
 	return java.GetLanguage()
 }
 
@@ -207,141 +184,12 @@ func (*javaImplementation) AnalyzeTree(ctx context.Context, rootNode *sitter.Nod
 	// })
 }
 
-// TODO: See if anything needs to be added here
-func (implementation *javaImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
-	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
-	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
-	i := 0
-
-	var params []patternquerytypes.Variable
-
-	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
-		nodeTypes := strings.Split(submatches[typesIndex], "|")
-		if nodeTypes[0] == "" {
-			nodeTypes = []string{"_"}
-		}
-
-		for _, nodeType := range nodeTypes {
-			if !slices.Contains(allowedPatternQueryTypes, nodeType) {
-				return "", fmt.Errorf("invalid node type '%s' in pattern query", nodeType)
-			}
-		}
-
-		dummyValue := produceDummyValue(i, nodeTypes[0])
-
-		params = append(params, patternquerytypes.Variable{
-			Name:       submatches[nameIndex],
-			NodeTypes:  nodeTypes,
-			DummyValue: dummyValue,
-		})
-
-		i += 1
-
-		return dummyValue, nil
-	})
-
-	if err != nil {
-		return "", nil, err
-	}
-
-	return replaced, params, nil
-}
-
-func produceDummyValue(i int, nodeType string) string {
-	return "CurioVar" + fmt.Sprint(i)
-}
-
-// TODO: See if anything needs to be added here
-func (implementation *javaImplementation) AnonymousPatternNodeParentTypes() []string {
-	return anonymousPatternNodeParentTypes
-}
-
-// TODO: See if anything needs to be added here
-func (implementation *javaImplementation) FindPatternMatchNode(input []byte) [][]int {
-	return matchNodeRegex.FindAllIndex(input, -1)
-}
-
-// TODO: See if anything needs to be added here
-func (implementation *javaImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
-	return ellipsisRegex.FindAllIndex(input, -1)
-}
-
-func (implementation *javaImplementation) PatternMatchNodeContainerTypes() []string {
-	return patternMatchNodeContainerTypes
-}
-
-func (*javaImplementation) PatternLeafContentTypes() []string {
-	return []string{
-		// todo: see if type identifier should be removed from here (User user) `User` is type
-		// identifiers
-		"identifier", "modifier",
-		// types
-		// int user, User user, void user function,
-		"integral_type", "type_identifier", "void_type",
-		// datatypes/literals
-		"string_literal", "character_literal", "null_literal", "true", "false", "decimal_integer_literal", "decimal_floating_point_literal",
-	}
-}
-
-func (implementation *javaImplementation) PatternIsAnchored(node *tree.Node) (bool, bool) {
-	parent := node.Parent()
-	if parent == nil {
-		return true, true
-	}
-
-	// Class body class_body
-	// function block
-	// lambda () -> {} block
-	// try {} catch () {}
-	unAnchored := []string{"class_body", "block", "try_statement", "catch_type", "resource_specification"}
-
-	isUnanchored := !slices.Contains(unAnchored, parent.Type())
-	return isUnanchored, isUnanchored
-}
-
-func (implementation *javaImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
-	return !(node.Type() == "expression_statement")
-}
-
-func (implementation *javaImplementation) PatternNodeTypes(node *tree.Node) []string {
-	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
-		if len(node.NamedChildren()) == 0 {
-			return []string{"object"}
-		} else {
-			return []string{node.Type(), "program"}
-		}
-	}
-
-	return []string{node.Type()}
+func (implementation *javaImplementation) Pattern() implementation.Pattern {
+	return &implementation.pattern
 }
 
 func (*javaImplementation) PassthroughNested(node *tree.Node) bool {
-	if node.Type() != "arguments" {
-		return false
-	}
-
-	callNode := node.Parent()
-	if callNode.Type() != "field_access" {
-		return false
-	}
-
-	functionNode := callNode.ChildByFieldName("function")
-
-	var method string
-	var wildcardMethod string
-	switch functionNode.Type() {
-	case "identifier":
-		return slices.Contains(passthroughMethods, functionNode.Content())
-	case "member_expression":
-		object := functionNode.ChildByFieldName("object")
-		if object.Type() == "identifier" {
-			property := functionNode.ChildByFieldName("property").Content()
-			method = object.Content() + "." + property
-			wildcardMethod = "*." + property
-		}
-	}
-
-	return slices.Contains(passthroughMethods, method) || slices.Contains(passthroughMethods, wildcardMethod)
+	return false
 }
 
 func (*javaImplementation) ContributesToResult(node *tree.Node) bool {
@@ -376,8 +224,4 @@ func (*javaImplementation) ContributesToResult(node *tree.Node) bool {
 	}
 
 	return true
-}
-
-func (*javaImplementation) FixupPatternVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
-	return dummyValue
 }

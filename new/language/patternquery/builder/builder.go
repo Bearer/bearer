@@ -35,22 +35,22 @@ type Result struct {
 }
 
 type builder struct {
-	langImplementation implementation.Implementation
-	stringBuilder      strings.Builder
-	idGenerator        nodeid.Generator
-	inputParams        InputParams
-	variableToParams   map[string][]string
-	paramToContent     map[string]map[string]string
-	matchNode          *tree.Node
+	patternImplementation implementation.Pattern
+	stringBuilder         strings.Builder
+	idGenerator           nodeid.Generator
+	inputParams           InputParams
+	variableToParams      map[string][]string
+	paramToContent        map[string]map[string]string
+	matchNode             *tree.Node
 }
 
 func Build(
 	lang languagetypes.Language,
-	langImplementation implementation.Implementation,
+	patternImplementation implementation.Pattern,
 	input string,
 	focusedVariable string,
 ) (*Result, error) {
-	processedInput, inputParams, err := processInput(langImplementation, input)
+	processedInput, inputParams, err := processInput(patternImplementation, input)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func Build(
 	}
 
 	if fixedInput, fixed := fixupInput(
-		langImplementation,
+		patternImplementation,
 		processedInput,
 		inputParams.Variables,
 		tree.RootNode(),
@@ -81,24 +81,24 @@ func Build(
 	for {
 		root = root.Children()[0]
 
-		if langImplementation.IsRootOfRuleQuery(root) {
+		if patternImplementation.IsRoot(root) {
 			break
 		}
 	}
 
 	builder := builder{
-		langImplementation: langImplementation,
-		stringBuilder:      strings.Builder{},
-		idGenerator:        &nodeid.IntGenerator{},
-		inputParams:        *inputParams,
-		variableToParams:   make(map[string][]string),
-		paramToContent:     make(map[string]map[string]string),
+		patternImplementation: patternImplementation,
+		stringBuilder:         strings.Builder{},
+		idGenerator:           &nodeid.IntGenerator{},
+		inputParams:           *inputParams,
+		variableToParams:      make(map[string][]string),
+		paramToContent:        make(map[string]map[string]string),
 	}
 
 	builder.setMatchNode(
 		inputParams.MatchNodeOffset,
 		focusedVariable,
-		langImplementation.PatternMatchNodeContainerTypes(),
+		patternImplementation.ContainerTypes(),
 		tree.RootNode(),
 	)
 	if builder.matchNode == nil {
@@ -114,7 +114,7 @@ func Build(
 }
 
 func fixupInput(
-	langImplementation implementation.Implementation,
+	patternImplementation implementation.Pattern,
 	input string,
 	variables []types.Variable,
 	rootNode *tree.Node,
@@ -140,7 +140,7 @@ func fixupInput(
 			return nil
 		}
 
-		variable := getVariableFor(node, langImplementation, variables)
+		variable := getVariableFor(node, patternImplementation, variables)
 		if variable == nil {
 			return nil
 		}
@@ -159,7 +159,7 @@ func fixupInput(
 			log.Trace().Msgf("fixup grandparent: %s", grandparentDebug)
 		}
 
-		newValue := langImplementation.FixupPatternVariableDummyValue(byteInput, node, variable.DummyValue)
+		newValue := patternImplementation.FixupVariableDummyValue(byteInput, node, variable.DummyValue)
 		if newValue == variable.DummyValue {
 			return nil
 		}
@@ -227,7 +227,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		)
 	}
 
-	nodeAnchoredBefore, nodeAnchoredAfter := builder.langImplementation.PatternIsAnchored(node)
+	nodeAnchoredBefore, nodeAnchoredAfter := builder.patternImplementation.IsAnchored(node)
 	anchored := !isRoot && node.SitterNode().IsNamed() && nodeAnchoredBefore
 
 	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.ContentStart.Byte) {
@@ -279,7 +279,7 @@ func (builder *builder) compileVariableNode(variable *types.Variable) {
 
 // Anonymous nodes match their content as a literal
 func (builder *builder) compileAnonymousNode(node *tree.Node) {
-	if !slices.Contains(builder.langImplementation.AnonymousPatternNodeParentTypes(), node.Parent().Type()) {
+	if !slices.Contains(builder.patternImplementation.AnonymousParentTypes(), node.Parent().Type()) {
 		return
 	}
 
@@ -288,10 +288,10 @@ func (builder *builder) compileAnonymousNode(node *tree.Node) {
 
 // Leaves match their type and content
 func (builder *builder) compileLeafNode(node *tree.Node) {
-	if !slices.Contains(builder.langImplementation.PatternLeafContentTypes(), node.Type()) {
+	if !slices.Contains(builder.patternImplementation.LeafContentTypes(), node.Type()) {
 		builder.write("[")
 
-		for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
+		for _, nodeType := range builder.patternImplementation.NodeTypes(node) {
 			builder.write(" (")
 			builder.write(nodeType)
 			builder.write(" )")
@@ -307,8 +307,8 @@ func (builder *builder) compileLeafNode(node *tree.Node) {
 
 	builder.write("[")
 
-	for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
-		paramContent[nodeType] = builder.langImplementation.TranslatePatternContent(
+	for _, nodeType := range builder.patternImplementation.NodeTypes(node) {
+		paramContent[nodeType] = builder.patternImplementation.TranslateContent(
 			node.Type(),
 			nodeType, node.Content(),
 		)
@@ -327,7 +327,7 @@ func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
 	builder.write("[")
 
 	var children []*tree.Node
-	if slices.Contains(builder.langImplementation.AnonymousPatternNodeParentTypes(), node.Type()) {
+	if slices.Contains(builder.patternImplementation.AnonymousParentTypes(), node.Type()) {
 		children = node.Children()
 	} else {
 		children = node.NamedChildren()
@@ -335,7 +335,7 @@ func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
 
 	lastNode := children[len(children)-1]
 
-	for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
+	for _, nodeType := range builder.patternImplementation.NodeTypes(node) {
 		builder.write("(")
 		builder.write(nodeType)
 
@@ -373,20 +373,16 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 }
 
 func (builder *builder) getVariableFor(node *tree.Node) *types.Variable {
-	return getVariableFor(node, builder.langImplementation, builder.inputParams.Variables)
+	return getVariableFor(node, builder.patternImplementation, builder.inputParams.Variables)
 }
 
 func getVariableFor(
 	node *tree.Node,
-	langImplementation implementation.Implementation,
+	patternImplementation implementation.Pattern,
 	variables []types.Variable,
 ) *types.Variable {
 	for i, variable := range variables {
-		if langImplementation.ShouldSkipNode(node) {
-			continue
-		}
-
-		if (len(node.NamedChildren()) == 0 || langImplementation.IsMatchLeaf(node)) && node.Content() == variable.DummyValue {
+		if (len(node.NamedChildren()) == 0 || patternImplementation.IsLeaf(node)) && node.Content() == variable.DummyValue {
 			return &variables[i]
 		}
 	}
