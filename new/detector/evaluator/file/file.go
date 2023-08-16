@@ -57,11 +57,6 @@ func (evaluator *FileEvaluator) Evaluate(
 	// FIXME: support or remove followFlow
 	followFlow bool,
 ) ([]*detection.Detection, error) {
-	// FIXME: remove this and fix the caller that's passing nil
-	if rootNode == nil {
-		return nil, nil
-	}
-
 	startTime := time.Now()
 
 	if log.Trace().Enabled() {

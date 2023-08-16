@@ -44,7 +44,6 @@ func getObjectName(evaluationState types.EvaluationState, objectNode *tree.Node)
 
 	// address.city.zip
 	if objectNode.Type() == "field_access" {
-		// FIXME: implement field names
 		return objectNode.ChildByFieldName("field").Content()
 	}
 

@@ -12,15 +12,6 @@ const (
 	evictionSize = 1000
 )
 
-// FIXME: get this dynamically
-var builtinRuleIDs = []string{
-	"datatype",
-	"insecure_url",
-	"object",
-	"string",
-	"string_literal",
-}
-
 type Key struct {
 	rootNode   *tree.Node
 	ruleID     string
@@ -52,7 +43,6 @@ type Shared struct {
 func NewShared(ruleIDs []string) *Shared {
 	idSet := set.New[string]()
 	idSet.AddAll(ruleIDs)
-	idSet.AddAll(builtinRuleIDs)
 
 	return &Shared{
 		ruleIDs: idSet,

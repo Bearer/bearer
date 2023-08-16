@@ -30,7 +30,7 @@ func New(
 	lang types.Language,
 ) (detectortypes.DetectorSet, error) {
 	relevantRules, presenceRules := getRelevantRules(rules, languageName)
-	builtinAndSharedRuleIDs, topLevelRuleIDs := findRuleIDs(builtinDetectors, relevantRules, presenceRules)
+	builtinAndSharedRuleIDs, topLevelRuleIDs := findNotableRuleIDs(builtinDetectors, relevantRules, presenceRules)
 
 	detectors, err := createDetectors(lang, querySet, builtinDetectors, relevantRules)
 	if err != nil {
@@ -124,8 +124,7 @@ func getRelevantRules(
 	return relevantRules, presenceRules
 }
 
-// FIXME: name
-func findRuleIDs(
+func findNotableRuleIDs(
 	builtinDetectors []detectortypes.Detector,
 	relevantRules map[string]*settings.Rule,
 	presenceRules set.Set[string],

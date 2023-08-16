@@ -142,41 +142,39 @@ func ConcatenateChildStrings(node *tree.Node, evaluationState types.EvaluationSt
 }
 
 func ConcatenateAssignEquals(node *tree.Node, evaluationState types.EvaluationState) ([]interface{}, error) {
-	// FIXME: dataflow?
-	return nil, nil
-	// unifiedNodes := node.ChildByFieldName("left").UnifiedNodes()
-	// if len(unifiedNodes) == 0 {
-	// 	return nil, nil
-	// }
-	// if len(unifiedNodes) != 1 {
-	// 	return nil, fmt.Errorf("expected exactly one unified `+=` node but got %d", len(unifiedNodes))
-	// }
+	dataflowSources := node.ChildByFieldName("left").DataflowSources()
+	if len(dataflowSources) == 0 {
+		return nil, nil
+	}
+	if len(dataflowSources) != 1 {
+		return nil, fmt.Errorf("expected exactly one data source for `+=` node but got %d", len(dataflowSources))
+	}
 
-	// left, leftIsLiteral, err := GetStringValue(unifiedNodes[0], evaluationState)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	left, leftIsLiteral, err := GetStringValue(dataflowSources[0], evaluationState)
+	if err != nil {
+		return nil, err
+	}
 
-	// right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), evaluationState)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), evaluationState)
+	if err != nil {
+		return nil, err
+	}
 
-	// if left == "" && !leftIsLiteral {
-	// 	left = "*"
+	if left == "" && !leftIsLiteral {
+		left = "*"
 
-	// 	// No detection when neither parts are a string
-	// 	if right == "" && !rightIsLiteral {
-	// 		return nil, nil
-	// 	}
-	// }
+		// No detection when neither parts are a string
+		if right == "" && !rightIsLiteral {
+			return nil, nil
+		}
+	}
 
-	// if right == "" && !rightIsLiteral {
-	// 	right = "*"
-	// }
+	if right == "" && !rightIsLiteral {
+		right = "*"
+	}
 
-	// return []interface{}{generictypes.String{
-	// 	Value:     left + right,
-	// 	IsLiteral: leftIsLiteral && rightIsLiteral,
-	// }}, nil
+	return []interface{}{generictypes.String{
+		Value:     left + right,
+		IsLiteral: leftIsLiteral && rightIsLiteral,
+	}}, nil
 }
