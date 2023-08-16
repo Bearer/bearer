@@ -1,0 +1,21 @@
+name: ' ignore migrate'
+synopsis: |
+    Migrate ignored fingerprints from bearer.yml to bearer.ignore
+usage: ' ignore migrate [flags]'
+options:
+    - name: config-file
+      default_value: bearer.yml
+      usage: Load configuration from the specified path.
+    - name: force
+      default_value: "false"
+      usage: Overwrite an existing ignored finding.
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for migrate
+example: |-
+    # Migrate existing ignored (excluded) fingerprints from bearer.yml file to bearer.ignore
+    $ bearer ignore migrate
+see_also:
+    - ' ignore - Manage ignored fingerprints'
+aliases:
