@@ -65,7 +65,7 @@ $ bearer ignore show <fingerprint>`,
 
 func newIgnoreAddCommand() *cobra.Command {
 	var IgnoreAddFlags = &flag.Flags{
-		IgnoreFlagGroup: flag.NewIgnoreFlagGroup(),
+		IgnoreAddFlagGroup: flag.NewIgnoreAddFlagGroup(),
 	}
 	cmd := &cobra.Command{
 		Use:   "add <fingerprint>",
@@ -89,12 +89,12 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 
 			fingerprintsToIgnore := map[string]ignore.IgnoredFingerprint{
 				args[0]: {
-					Author:  options.IgnoreOptions.Author,
-					Comment: options.IgnoreOptions.Comment,
+					Author:  options.IgnoreAddOptions.Author,
+					Comment: options.IgnoreAddOptions.Comment,
 				},
 			}
 
-			if err = ignore.AddToIgnoreFile(fingerprintsToIgnore, options.IgnoreOptions.Force); err != nil {
+			if err = ignore.AddToIgnoreFile(fingerprintsToIgnore, options.IgnoreAddOptions.Force); err != nil {
 				target := &ignore.DuplicateIgnoredFingerprintError{}
 				if errors.As(err, &target) {
 					// handle expected error (duplicate entry in bearer.ignore)
@@ -117,8 +117,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 
 func newIgnoreMigrateCommand() *cobra.Command {
 	IgnoreMigrateFlags := &flag.Flags{
-		IgnoreFlagGroup:  flag.NewIgnoreFlagGroup(),
-		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
+		IgnoreMigrateFlagGroup: flag.NewIgnoreMigrateFlagGroup(),
 	}
 	cmd := &cobra.Command{
 		Use:   "migrate",
@@ -137,10 +136,12 @@ $ bearer ignore migrate`,
 
 			ignoredFingerprintsFromConfig, err := getIgnoredFingerprintsFromConfig(args)
 			if err != nil {
-				return err
+				// handle expected error (duplicate entry in bearer.ignore)
+				cmd.Printf("%s\n", err.Error())
+				return nil
 			}
 
-			if err = ignore.AddToIgnoreFile(ignoredFingerprintsFromConfig, options.IgnoreOptions.Force); err != nil {
+			if err = ignore.AddToIgnoreFile(ignoredFingerprintsFromConfig, options.IgnoreMigrateOptions.Force); err != nil {
 				target := &ignore.DuplicateIgnoredFingerprintError{}
 				if errors.As(err, &target) {
 					// handle expected error (duplicate entry in bearer.ignore)
