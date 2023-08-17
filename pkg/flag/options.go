@@ -47,12 +47,14 @@ type FlagGroup interface {
 }
 
 type Flags struct {
-	RepoFlagGroup    *RepoFlagGroup
-	ReportFlagGroup  *ReportFlagGroup
-	RuleFlagGroup    *RuleFlagGroup
-	ProcessFlagGroup *ProcessFlagGroup
-	ScanFlagGroup    *ScanFlagGroup
-	GeneralFlagGroup *GeneralFlagGroup
+	RepoFlagGroup          *RepoFlagGroup
+	ReportFlagGroup        *ReportFlagGroup
+	RuleFlagGroup          *RuleFlagGroup
+	ProcessFlagGroup       *ProcessFlagGroup
+	ScanFlagGroup          *ScanFlagGroup
+	GeneralFlagGroup       *GeneralFlagGroup
+	IgnoreAddFlagGroup     *IgnoreAddFlagGroup
+	IgnoreMigrateFlagGroup *IgnoreMigrateFlagGroup
 }
 
 // Options holds all the runtime configuration
@@ -62,6 +64,8 @@ type Options struct {
 	RuleOptions
 	ScanOptions
 	GeneralOptions
+	IgnoreAddOptions
+	IgnoreMigrateOptions
 }
 
 func addFlag(cmd *cobra.Command, flag *Flag) {
@@ -176,6 +180,12 @@ func (f *Flags) groups() []FlagGroup {
 	if f.RepoFlagGroup != nil {
 		groups = append(groups, f.RepoFlagGroup)
 	}
+	if f.IgnoreAddFlagGroup != nil {
+		groups = append(groups, f.IgnoreAddFlagGroup)
+	}
+	if f.IgnoreMigrateFlagGroup != nil {
+		groups = append(groups, f.IgnoreMigrateFlagGroup)
+	}
 
 	return groups
 }
@@ -272,6 +282,14 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 
 	if f.GeneralFlagGroup != nil {
 		opts.GeneralOptions = f.GeneralFlagGroup.ToOptions()
+	}
+
+	if f.IgnoreAddFlagGroup != nil {
+		opts.IgnoreAddOptions = f.IgnoreAddFlagGroup.ToOptions()
+	}
+
+	if f.IgnoreMigrateFlagGroup != nil {
+		opts.IgnoreMigrateOptions = f.IgnoreMigrateFlagGroup.ToOptions()
 	}
 
 	return opts, nil
