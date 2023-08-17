@@ -279,7 +279,6 @@ func (classifier *Classifier) classifyKnownObject(
 		}
 
 		classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "invalid_property", subjectName)
-
 	}
 
 	if validProperties {

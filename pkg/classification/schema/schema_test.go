@@ -904,6 +904,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 		},
 	}
+
 	classifier := schema.New(
 		schema.Config{
 			DataTypes:                      db.Default().DataTypes,
@@ -919,4 +920,47 @@ func TestSchemaObjectClassification(t *testing.T) {
 			assert.Equal(t, testCase.Want, output.Classification)
 		})
 	}
+
+	t.Run("incorrect Personal health history classification", func(t *testing.T) {
+		output := classifier.Classify(
+			schema.ClassificationRequest{
+				Filename:     "src/components/order/client-transaction-modals/withdraw-vault/index.jsx",
+				DetectorType: detectors.DetectorJavascript,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "selfManagedCustodySigningSteps",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "cold",
+							SimpleType: reportschema.SimpleTypeString,
+						},
+					},
+				},
+			})
+
+		assert.Equal(t, &schema.ClassifiedDatatype{
+			Name: "selfManagedCustodySigningSteps",
+			Properties: []*schema.ClassifiedDatatype{
+				{
+					Name:       "cold",
+					Properties: nil,
+					Classification: schema.Classification{
+						Name:     "cold",
+						DataType: nil,
+						Decision: classify.ClassificationDecision{
+							State:  classify.Invalid,
+							Reason: "invalid_property",
+						},
+					},
+				},
+			},
+			Classification: schema.Classification{
+				Name: "self managed custody signing steps",
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
+					Reason: "valid_object_with_invalid_properties",
+				},
+			},
+		}, output)
+	})
 }
