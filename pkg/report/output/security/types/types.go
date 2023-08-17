@@ -10,21 +10,21 @@ import (
 
 type Finding struct {
 	*Rule
-	LineNumber       int         `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	FullFilename     string      `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
-	Filename         string      `json:"filename,omitempty" yaml:"filename,omitempty"`
-	DataType         *DataType   `json:"data_type,omitempty" yaml:"data_type,omitempty"`
-	CategoryGroups   []string    `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	Source           Source      `json:"source,omitempty" yaml:"source,omitempty"`
-	Sink             Sink        `json:"sink,omitempty" yaml:"sink,omitempty"`
-	ParentLineNumber int         `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent    string      `json:"snippet,omitempty" yaml:"snippet,omitempty"`
-	Fingerprint      string      `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
-	OldFingerprint   string      `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
-	DetailedContext  string      `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
-	CodeExtract      string      `json:"code_extract,omitempty" yaml:"code_extract,omitempty"`
-	RawCodeExtract   []file.Line `json:"-" yaml:"-"`
-	SomeExtraField   string      `json:"-" yaml:"-"`
+	LineNumber        int               `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	FullFilename      string            `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
+	Filename          string            `json:"filename,omitempty" yaml:"filename,omitempty"`
+	DataType          *DataType         `json:"data_type,omitempty" yaml:"data_type,omitempty"`
+	CategoryGroups    []string          `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	Source            Source            `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink              Sink              `json:"sink,omitempty" yaml:"sink,omitempty"`
+	ParentLineNumber  int               `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent     string            `json:"snippet,omitempty" yaml:"snippet,omitempty"`
+	Fingerprint       string            `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
+	OldFingerprint    string            `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
+	DetailedContext   string            `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	CodeExtract       string            `json:"code_extract,omitempty" yaml:"code_extract,omitempty"`
+	RawCodeExtract    []file.Line       `json:"-" yaml:"-"`
+	SeverityWeighting SeverityWeighting `json:"-" yaml:"-"`
 }
 
 type DataType struct {
@@ -33,6 +33,7 @@ type DataType struct {
 }
 
 type Rule struct {
+	Severity         string   `json:"severity" yaml:"severity"`
 	CWEIDs           []string `json:"cwe_ids" yaml:"cwe_ids"`
 	Id               string   `json:"id" yaml:"id"`
 	Title            string   `json:"title" yaml:"title"`
@@ -58,6 +59,15 @@ type Column struct {
 type Sink struct {
 	*Location
 	Content string `json:"content" yaml:"content"`
+}
+
+type SeverityWeighting struct {
+	RuleSeverity                   string `json:"rule_severity" yaml:"rule_severity"`
+	DisplaySeverity                string `json:"display_severity" yaml:"display_severity"`
+	SensitiveDataCategoryWeighting int    `json:"sensitive_data_category_weighting,omitempty" yaml:"sensitive_data_category_weighting,omitempty"`
+	RuleSeverityWeighting          int    `json:"rule_severity_weighting,omitempty" yaml:"rule_severity_weighting,omitempty"`
+	TriggerWeighting               bool   `json:"trigger_weighting,omitempty" yaml:"trigger_weighting,omitempty"`
+	FinalWeighting                 int    `json:"final_weighting,omitempty" yaml:"final_weighting,omitempty"`
 }
 
 func (f Finding) HighlightCodeExtract() string {

@@ -9,7 +9,8 @@
         Id: (string) (len=17) "ruby_rails_logger",
         Title: (string) (len=46) "Sensitive data sent to Rails loggers detected.",
         Description: (string) (len=608) "## Description\nLeaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to rails loggers.\n\n## Remediations\n❌ Avoid using sensitive data in logger messages:\n\n```ruby\nRails.logger.info('User is: #{user.email}')\n```\n\n✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:\n\n```ruby\nRails.logger.info('User is: #{user.uuid}')\n```\n\n## Resources\n- [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)\n",
-        DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger"
+        DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger",
+        Severity: (string) ""
       }),
       LineNumber: (int) 1,
       FullFilename: (string) "",
@@ -50,6 +51,14 @@
       OldFingerprint: (string) (len=34) "80ce0185374c0975a9b2a71e9d11a4f0_0",
       DetailedContext: (string) "",
       CodeExtract: (string) "",
+      SeverityWeighting: (security.SeverityWeighting) {
+        RuleSeverity: (string) "",
+        DisplaySeverity: (string) (len=8) "critical",
+        SensitiveDataCategoryWeighting: (int) 3,
+        RuleSeverityWeighting: (int) 2,
+        TriggerWeighting: (bool) true,
+        FinalWeighting: (int) 8
+      },
       RawCodeExtract: ([]file.Line) {
       },
       SomeExtraField: (string) ""
@@ -64,7 +73,8 @@
         Id: (string) (len=26) "ruby_lang_ssl_verification",
         Title: (string) (len=46) "Missing SSL certificate verification detected.",
         Description: (string) (len=728) "## Description\n\nApplications processing sensitive data should use valid SSL certificates. This rule checks if SSL verification is enabled.\n\n## Remediations\n\n❌ By default Ruby check for SSL certificate verification but this can be bypassed when setting Open SSL verification mode to `VERIFY_NONE`:\n\n```clojure\nrequire \"net/https\"\nrequire \"uri\"\n\nuri = URI.parse(\"https://ssl-site.com/\")\nhttp = Net::HTTP.new(uri.host, uri.port)\nhttp.use_ssl = true\nhttp.verify_mode = OpenSSL::SSL::VERIFY_NONE\n```\n\n✅ To ensure that SSL verification always happens, make sure to use the following mode:\n\n```bash\nhttp.verify_mode = OpenSSL::SSL::VERIFY_PEER\n```\n\n## Resources\n- [Ruby OpenSSL module](https://ruby.github.io/openssl/OpenSSL.html)\n",
-        DocumentationUrl: (string) (len=66) "https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification"
+        DocumentationUrl: (string) (len=66) "https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification",
+        Severity: (string) (len=6) "medium"
       }),
       LineNumber: (int) 2,
       FullFilename: (string) "",
@@ -101,6 +111,14 @@
       OldFingerprint: (string) (len=34) "dcc50aebb6a6da7f0a8cb06e071f2af2_0",
       DetailedContext: (string) "",
       CodeExtract: (string) "",
+      SeverityWeighting: (security.SeverityWeighting) {
+        RuleSeverity: (string) (len=6) "medium",
+        DisplaySeverity: (string) (len=4) "high",
+        SensitiveDataCategoryWeighting: (int) 2,
+        RuleSeverityWeighting: (int) 3,
+        TriggerWeighting: (bool) false,
+        FinalWeighting: (int) 5
+      },
       RawCodeExtract: ([]file.Line) {
       },
       SomeExtraField: (string) ""

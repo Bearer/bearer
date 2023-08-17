@@ -171,6 +171,7 @@ func evaluateRules(
 			}
 
 			ruleSummary := &types.Rule{
+				Severity:         rule.Severity,
 				Title:            rule.Description,
 				Description:      rule.RemediationMessage,
 				Id:               rule.Id,
@@ -228,9 +229,11 @@ func evaluateRules(
 					OldFingerprint:   oldFingerprint,
 				}
 
-				severity := CalculateSeverity(finding.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
+				severityWeighting := CalculateSeverity(finding.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
+				severity := severityWeighting.DisplaySeverity
 
 				if config.Report.Severity[severity] {
+					finding.SeverityWeighting = severityWeighting
 					outputFindings[severity] = append(outputFindings[severity], finding)
 				}
 			}
@@ -389,9 +392,12 @@ func BuildReportString(reportData *outputtypes.ReportData, config settings.Confi
 	return reportStr
 }
 
-func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) string {
+func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) types.SeverityWeighting {
 	if severity == globaltypes.LevelWarning {
-		return globaltypes.LevelWarning
+		return types.SeverityWeighting{
+			RuleSeverity:    severity,
+			DisplaySeverity: globaltypes.LevelWarning,
+		}
 	}
 
 	// highest sensitive data category
@@ -423,16 +429,27 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		triggerWeighting = 2
 	}
 
-	switch finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting); {
+	var displaySeverity string
+	finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting)
+	switch {
 	case finalWeighting >= 8:
-		return globaltypes.LevelCritical
+		displaySeverity = globaltypes.LevelCritical
 	case finalWeighting >= 5:
-		return globaltypes.LevelHigh
+		displaySeverity = globaltypes.LevelHigh
 	case finalWeighting >= 3:
-		return globaltypes.LevelMedium
+		displaySeverity = globaltypes.LevelMedium
+	default:
+		displaySeverity = globaltypes.LevelLow
 	}
 
-	return globaltypes.LevelLow
+	return types.SeverityWeighting{
+		RuleSeverity:                   severity,
+		SensitiveDataCategoryWeighting: sensitiveDataCategoryWeighting,
+		RuleSeverityWeighting:          ruleSeverityWeighting,
+		TriggerWeighting:               hasLocalDataTypes,
+		FinalWeighting:                 finalWeighting,
+		DisplaySeverity:                displaySeverity,
+	}
 }
 
 func writeStatsToString(

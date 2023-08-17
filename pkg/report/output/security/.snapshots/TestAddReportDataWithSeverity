@@ -9,7 +9,8 @@
         Id: (string) (len=17) "ruby_rails_logger",
         Title: (string) (len=46) "Sensitive data sent to Rails loggers detected.",
         Description: (string) (len=608) "## Description\nLeaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to rails loggers.\n\n## Remediations\n❌ Avoid using sensitive data in logger messages:\n\n```ruby\nRails.logger.info('User is: #{user.email}')\n```\n\n✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:\n\n```ruby\nRails.logger.info('User is: #{user.uuid}')\n```\n\n## Resources\n- [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)\n",
-        DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger"
+        DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger",
+        Severity: (string) ""
       }),
       LineNumber: (int) 1,
       FullFilename: (string) "",
@@ -50,6 +51,14 @@
       OldFingerprint: (string) (len=34) "80ce0185374c0975a9b2a71e9d11a4f0_0",
       DetailedContext: (string) "",
       CodeExtract: (string) "",
+      SeverityWeighting: (security.SeverityWeighting) {
+        RuleSeverity: (string) "",
+        DisplaySeverity: (string) (len=8) "critical",
+        SensitiveDataCategoryWeighting: (int) 3,
+        RuleSeverityWeighting: (int) 2,
+        TriggerWeighting: (bool) true,
+        FinalWeighting: (int) 8
+      },
       RawCodeExtract: ([]file.Line) {
       },
       SomeExtraField: (string) ""

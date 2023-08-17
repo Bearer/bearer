@@ -193,7 +193,7 @@ func AddReportData(reportData *outputtypes.ReportData, config settings.Config) e
 				}
 
 				// count severity
-				switch ruleSeverity {
+				switch ruleSeverity.DisplaySeverity {
 				case globaltypes.LevelCritical:
 					subjectRuleFailure.CriticalRiskFindingCount += 1
 				case globaltypes.LevelHigh:
@@ -233,7 +233,7 @@ func AddReportData(reportData *outputtypes.ReportData, config settings.Config) e
 				}
 
 				// count severity
-				switch ruleSeverity {
+				switch ruleSeverity.DisplaySeverity {
 				case globaltypes.LevelCritical:
 					thirdPartyDataSubject.CriticalRiskFindingCount += 1
 				case globaltypes.LevelHigh:

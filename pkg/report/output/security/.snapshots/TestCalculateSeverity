@@ -1,7 +1,42 @@
-([]string) (len=5) {
-  (string) (len=8) "critical",
-  (string) (len=4) "high",
-  (string) (len=6) "medium",
-  (string) (len=7) "warning",
-  (string) (len=7) "warning"
+([]security.SeverityWeighting) (len=5) {
+  (security.SeverityWeighting) {
+    RuleSeverity: (string) (len=3) "low",
+    DisplaySeverity: (string) (len=8) "critical",
+    SensitiveDataCategoryWeighting: (int) 3,
+    RuleSeverityWeighting: (int) 2,
+    TriggerWeighting: (bool) true,
+    FinalWeighting: (int) 8
+  },
+  (security.SeverityWeighting) {
+    RuleSeverity: (string) (len=3) "low",
+    DisplaySeverity: (string) (len=4) "high",
+    SensitiveDataCategoryWeighting: (int) 3,
+    RuleSeverityWeighting: (int) 2,
+    TriggerWeighting: (bool) false,
+    FinalWeighting: (int) 5
+  },
+  (security.SeverityWeighting) {
+    RuleSeverity: (string) (len=3) "low",
+    DisplaySeverity: (string) (len=6) "medium",
+    SensitiveDataCategoryWeighting: (int) 2,
+    RuleSeverityWeighting: (int) 2,
+    TriggerWeighting: (bool) false,
+    FinalWeighting: (int) 4
+  },
+  (security.SeverityWeighting) {
+    RuleSeverity: (string) (len=7) "warning",
+    DisplaySeverity: (string) (len=7) "warning",
+    SensitiveDataCategoryWeighting: (int) 0,
+    RuleSeverityWeighting: (int) 0,
+    TriggerWeighting: (bool) false,
+    FinalWeighting: (int) 0
+  },
+  (security.SeverityWeighting) {
+    RuleSeverity: (string) (len=7) "warning",
+    DisplaySeverity: (string) (len=7) "warning",
+    SensitiveDataCategoryWeighting: (int) 0,
+    RuleSeverityWeighting: (int) 0,
+    TriggerWeighting: (bool) false,
+    FinalWeighting: (int) 0
+  }
 }
