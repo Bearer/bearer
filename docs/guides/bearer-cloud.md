@@ -1,5 +1,5 @@
 ---
-title: Connect to Bearer Cloud
+title: Using Bearer Cloud
 ---
 
 # Bearer Cloud
@@ -93,9 +93,40 @@ Bearer Cloud automatically captures any scans run with a valid `api-key`. Subseq
 
 ![Cloud dashboard](/assets/img/cloud-dashboard.jpg)
 
-## Make the most of Bearer CLI
+## Jira integration
 
-Looking for more ways to make the most of Bearer CLI? Browse the guides to learn how to [Configure a scan](/guides/configure-scan/), [create a custom rule](/guides/custom-rule), or [run a privacy report](/guides/privacy/).
+The Jira integration is available on the *Settings > Integrations* page.
+
+To use the integration, you must connect a Jira account and allow access to the required permissions through the OAuth login.
+
+Following your company's best practices, you can provide access to an existing account or set up a new user in Jira specifically for this integration. Whichever option you choose, make sure the account has the access permissions required to create and update tickets in the projects you want to.
+
+You have two ways to use the Jira Integration:
+1. Creating a Jira Ticket directly from a finding.
+![Create Jira Ticket](/assets/img/jira-integration/create.png)
+
+2. Link a finding to an existing Jira ticket.
+![Link Jira Ticket](/assets/img/jira-integration/link.png)
+
+Once a finding is associated with a Jira ticket, you can quickly see it in the interface, view the ticket status and go to the ticket. 
+
+![View Jira Ticket](/assets/img/jira-integration/view.png)
+
+
+{% callout "warn" %}
+Findings on Bearer Cloud are only marked resolved when the associated code is fixed. If the associated Jira ticket is closed, but no code fix has been applied, the finding will stay open. The source of truth is always the code.
+{% endcallout %}
+
+
+## Slack integration
+
+The Slack integration is available on the *Settings > Integrations* page.
+
+To use the integration, you must connect a Slack account and allow access to the required permissions through the OAuth login, then select a default channel where you want to receive notifications on new findings.
+
+Below an example of a Slack notification triggered by a new finding:
+![Slack notification](/assets/img/slack-integration/notification.png)
+
 
 ## Need help?
 
