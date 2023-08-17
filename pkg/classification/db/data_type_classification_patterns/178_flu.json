@@ -6,7 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Flu",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b(flu|influenza|cold)\\b",
+  "include_regexp": "\\b(flu|influenza)\\b",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]
