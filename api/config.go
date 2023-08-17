@@ -15,6 +15,7 @@ type Endpoint struct {
 type APIEndpoints struct {
 	RequestFileUpload Endpoint
 	ScanFinished      Endpoint
+	FetchIgnores      Endpoint
 	Hello             Endpoint
 }
 
@@ -26,6 +27,10 @@ var Endpoints = APIEndpoints{
 	ScanFinished: Endpoint{
 		HttpMethod: "POST",
 		Route:      "/cloud/scans",
+	},
+	FetchIgnores: Endpoint{
+		HttpMethod: "GET",
+		Route:      "/cloud/ignores",
 	},
 	Hello: Endpoint{
 		HttpMethod: "POST",

@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/bearer/bearer/api"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/fatih/color"
 )
@@ -51,6 +52,19 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignore
 
 	err = json.Unmarshal(content, &ignoredFingerprints)
 	return ignoredFingerprints, true, err
+}
+
+func GetIgnoredFingerprintsFromCloud(client *api.API, fullname string) (useCloudIgnores bool, ignoredFingerprints map[string]IgnoredFingerprint, err error) {
+	data, err := client.FetchIgnores(fullname)
+	if err != nil {
+		return useCloudIgnores, ignoredFingerprints, err
+	}
+
+	ignoredFingerprints = make(map[string]IgnoredFingerprint)
+	for _, fingerprint := range data.CloudIgnores {
+		ignoredFingerprints[fingerprint] = IgnoredFingerprint{}
+	}
+	return data.ProjectFound, ignoredFingerprints, nil
 }
 
 func MergeIgnoredFingerprints(fingerprintsToIgnore map[string]IgnoredFingerprint, ignoredFingerprints map[string]IgnoredFingerprint, force bool) error {

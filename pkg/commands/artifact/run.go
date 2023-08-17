@@ -15,6 +15,7 @@ import (
 
 	"golang.org/x/exp/maps"
 
+	"github.com/bearer/bearer/api"
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
@@ -27,8 +28,10 @@ import (
 	"github.com/bearer/bearer/pkg/github_api"
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/report/output/saas"
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
+	"github.com/bearer/bearer/pkg/util/ignore"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
 	"github.com/bearer/bearer/pkg/types"
@@ -211,6 +214,32 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 	return fileList.Files, baseBranchFindings, nil
 }
 
+func getIgnoredFingerprints(client *api.API, settings settings.Config) (useCloudIgnores bool, cloudIgnores map[string]ignore.IgnoredFingerprint, err error) {
+	if client != nil && client.Error == nil {
+		// get ignores from Cloud
+		vcsInfo, err := saas.GetVCSInfo(settings)
+		if err != nil {
+			return useCloudIgnores, cloudIgnores, err
+		}
+
+		useCloudIgnores, cloudIgnores, err := ignore.GetIgnoredFingerprintsFromCloud(client, vcsInfo.FullName)
+		if err != nil {
+			return useCloudIgnores, cloudIgnores, err
+		}
+	}
+
+	if useCloudIgnores {
+		return useCloudIgnores, cloudIgnores, nil
+	}
+
+	ignoredFingerprints, err := ignore.GetIgnoredFingerprints(&settings.Target)
+	if err != nil {
+		return useCloudIgnores, cloudIgnores, err
+	}
+
+	return useCloudIgnores, ignoredFingerprints, nil
+}
+
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options) (err error) {
 	if !opts.Quiet {
@@ -226,6 +255,13 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	}
 	scanSettings, err := settings.FromOptions(opts, FormatFoundLanguages(inputgocloc.Languages))
 	scanSettings.Target = opts.Target
+	if err != nil {
+		return err
+	}
+	scanSettings.CloudIgnoresUsed, scanSettings.IgnoredFingerprints, err = getIgnoredFingerprints(
+		opts.GeneralOptions.Client,
+		scanSettings,
+	)
 	if err != nil {
 		return err
 	}

@@ -49,6 +49,7 @@ type Config struct {
 	Scan                flag.ScanOptions                     `mapstructure:"scan" json:"scan" yaml:"scan"`
 	Report              flag.ReportOptions                   `mapstructure:"report" json:"report" yaml:"report"`
 	IgnoredFingerprints map[string]ignore.IgnoredFingerprint `mapstructure:"ignored_fingerprints" json:"ignored_fingerprints" yaml:"ignored_fingerprints"`
+	CloudIgnoresUsed    bool                                 `mapstructure:"cloud_ignores_used" json:"cloud_ignores_used" yaml:"cloud_ignores_used"`
 	Policies            map[string]*Policy                   `mapstructure:"policies" json:"policies" yaml:"policies"`
 	Target              string                               `mapstructure:"target" json:"target" yaml:"target"`
 	Rules               map[string]*Rule                     `mapstructure:"rules" json:"rules" yaml:"rules"`
