@@ -13,7 +13,6 @@ import (
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
 	"github.com/rodaine/table"
-	log "github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 
@@ -84,15 +83,16 @@ func AddReportData(
 ) error {
 	dataflow := reportData.Dataflow
 	summaryFindings := make(Findings)
+	ignoredSummaryFindings := make(Findings)
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
 
-	builtInFingerprints, err := evaluateRules(summaryFindings, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
+	builtInFingerprints, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
 	if err != nil {
 		return err
 	}
-	fingerprints, err := evaluateRules(summaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
+	fingerprints, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
 		return err
 	}
@@ -121,6 +121,7 @@ func AddReportData(
 
 func evaluateRules(
 	summaryFindings Findings,
+	ignoredSummaryFindings Findings,
 	rules map[string]*settings.Rule,
 	config settings.Config,
 	dataflow *outputtypes.DataFlow,
@@ -128,6 +129,7 @@ func evaluateRules(
 	builtIn bool,
 ) ([]string, error) {
 	outputFindings := map[string][]types.Finding{}
+	ignoredOutputFindings := map[string][]types.Finding{}
 
 	var bar *progressbar.ProgressBar
 	if !builtIn {
@@ -197,21 +199,9 @@ func evaluateRules(
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceCount[output.Filename])
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
+
 				instanceCount[output.Filename]++
 				fingerprints = append(fingerprints, fingerprint)
-				if _, ok := config.IgnoredFingerprints[fingerprint]; ok {
-					// skip finding - fingerprint is in bearer.ignore file
-					log.Debug().Msgf("Ignoring finding with fingerprint %s", fingerprint)
-					continue
-				}
-				// legacy exclude fingerprint functionality
-				if config.Report.ExcludeFingerprint[fingerprint] {
-					// skip finding - fingerprint is in exclude list
-					log.Debug().Msgf("Excluding finding with fingerprint %s", fingerprint)
-					continue
-				}
-				// end legacy exclude fingerprint functionality
-
 				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
 				codeExtract := getExtract(rawCodeExtract)
 
@@ -233,12 +223,22 @@ func evaluateRules(
 					OldFingerprint:   oldFingerprint,
 				}
 
-				severityWeighting := CalculateSeverity(finding.CategoryGroups, rule.GetSeverity(), output.IsLocal != nil && *output.IsLocal)
-				severity := severityWeighting.DisplaySeverity
+				_, ignored := config.IgnoredFingerprints[fingerprint]
+				if !ignored {
+					// legacy excluded fingerprint
+					ignored = config.Report.ExcludeFingerprint[fingerprint]
+				}
+
+				severityMeta := CalculateSeverity(finding.CategoryGroups, rule.GetSeverity(), output.IsLocal != nil && *output.IsLocal)
+				severity := severityMeta.DisplaySeverity
 
 				if config.Report.Severity[severity] {
-					finding.SeverityMeta = severityWeighting
-					outputFindings[severity] = append(outputFindings[severity], finding)
+					finding.SeverityMeta = severityMeta
+					if ignored {
+						ignoredOutputFindings[severity] = append(ignoredOutputFindings[severity], finding)
+					} else {
+						outputFindings[severity] = append(outputFindings[severity], finding)
+					}
 				}
 			}
 		}
@@ -252,6 +252,16 @@ func evaluateRules(
 
 	for severity, findingSlice := range outputFindings {
 		summaryFindings[severity] = append(summaryFindings[severity], findingSlice...)
+	}
+
+	ignoredOutputFindings = removeDuplicates(ignoredOutputFindings)
+
+	for _, findingsSlice := range ignoredOutputFindings {
+		sortFindings(findingsSlice)
+	}
+
+	for severity, findingSlice := range ignoredOutputFindings {
+		ignoredSummaryFindings[severity] = append(ignoredSummaryFindings[severity], findingSlice...)
 	}
 
 	return fingerprints, nil
