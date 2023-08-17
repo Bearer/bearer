@@ -5,6 +5,7 @@ low:
         title: ""
         description: ""
         documentation_url: ""
+        severity: ""
       line_number: 1
       full_filename: multiple_objects.js
       filename: multiple_objects.js
@@ -27,4 +28,9 @@ low:
       snippet: user
       fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
       old_fingerprint: 83d173c5a31e8a9fc4b42968d18f584f_0
+      severity:
+        rule_severity: ""
+        display_severity: low
+        rule_severity_weighting: 2
+        final_weighting: 2
 

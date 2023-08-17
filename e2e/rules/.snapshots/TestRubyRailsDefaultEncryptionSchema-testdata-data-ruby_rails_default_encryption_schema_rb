@@ -14,6 +14,7 @@ warning:
             ## Resources
             - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
         documentation_url: ""
+        severity: warning
       line_number: 4
       full_filename: e2e/rules/testdata/data/ruby_rails_default_encryption_schema_rb/db/schema.rb
       filename: db/schema.rb
@@ -61,6 +62,9 @@ warning:
             t.datetime "created_at", null: false
             t.datetime "updated_at", null: false
           end
+      severity:
+        rule_severity: warning
+        display_severity: warning
 
 
 --

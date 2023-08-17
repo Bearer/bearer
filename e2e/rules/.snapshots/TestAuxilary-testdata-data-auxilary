@@ -16,6 +16,7 @@ high:
             - [Datadog docs](https://docs.datadoghq.com)
             - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: ""
+        severity: low
       line_number: 3
       full_filename: e2e/rules/testdata/data/auxilary/unsecure.js
       filename: unsecure.js
@@ -45,6 +46,13 @@ high:
       fingerprint: 68427732321c4df53052a341ac8da647_0
       old_fingerprint: 4d54a4b735da21fbdcb2d2662977b033_0
       code_extract: client.event("user", "logged_in", {}, user);
+      severity:
+        rule_severity: low
+        display_severity: high
+        sensitive_data_category_weighting: 2
+        rule_severity_weighting: 2
+        trigger_weighting: true
+        final_weighting: 6
 
 
 --

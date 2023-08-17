@@ -5,6 +5,7 @@ high:
         title: ""
         description: ""
         documentation_url: ""
+        severity: ""
       line_number: 1
       full_filename: call.rb
       filename: call.rb
@@ -33,4 +34,11 @@ high:
       snippet: logger.info(user.name)
       fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
       old_fingerprint: e61c5d04fc38732e3374bc499d4daec1_0
+      severity:
+        rule_severity: ""
+        display_severity: high
+        sensitive_data_category_weighting: 2
+        rule_severity_weighting: 2
+        trigger_weighting: true
+        final_weighting: 6
 

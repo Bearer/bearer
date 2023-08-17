@@ -14,6 +14,7 @@ warning:
             ## Resources
             - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
         documentation_url: ""
+        severity: warning
       line_number: 3
       full_filename: e2e/rules/testdata/data/ruby_rails_default_encryption_structure_sql/db/structure.sql
       filename: db/structure.sql
@@ -64,6 +65,9 @@ warning:
           updated_at timestamp(6) without time zone NOT NULL,
           email character varying DEFAULT ''::character varying NOT NULL
         );
+      severity:
+        rule_severity: warning
+        display_severity: warning
 
 
 --

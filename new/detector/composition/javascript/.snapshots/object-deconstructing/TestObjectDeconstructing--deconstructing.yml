@@ -5,6 +5,7 @@ low:
         title: ""
         description: ""
         documentation_url: ""
+        severity: ""
       line_number: 1
       full_filename: deconstructing.js
       filename: deconstructing.js
@@ -27,4 +28,9 @@ low:
       snippet: user
       fingerprint: 391f0431340399f3f30398341feeb70a_0
       old_fingerprint: 391f0431340399f3f30398341feeb70a_0
+      severity:
+        rule_severity: ""
+        display_severity: low
+        rule_severity_weighting: 2
+        final_weighting: 2
 

@@ -6,6 +6,7 @@ high:
         title: Test imports
         description: Test imports
         documentation_url: ""
+        severity: high
       line_number: 4
       full_filename: import.js
       filename: import.js
@@ -28,6 +29,11 @@ high:
       snippet: lib.f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_0
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_0
+      severity:
+        rule_severity: high
+        display_severity: high
+        rule_severity_weighting: 5
+        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -35,6 +41,7 @@ high:
         title: Test imports
         description: Test imports
         documentation_url: ""
+        severity: high
       line_number: 5
       full_filename: import.js
       filename: import.js
@@ -57,6 +64,11 @@ high:
       snippet: f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_1
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_1
+      severity:
+        rule_severity: high
+        display_severity: high
+        rule_severity_weighting: 5
+        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -64,6 +76,7 @@ high:
         title: Test imports
         description: Test imports
         documentation_url: ""
+        severity: high
       line_number: 6
       full_filename: import.js
       filename: import.js
@@ -86,6 +99,11 @@ high:
       snippet: x()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_2
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_2
+      severity:
+        rule_severity: high
+        display_severity: high
+        rule_severity_weighting: 5
+        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -93,6 +111,7 @@ high:
         title: Test imports
         description: Test imports
         documentation_url: ""
+        severity: high
       line_number: 9
       full_filename: import.js
       filename: import.js
@@ -115,6 +134,11 @@ high:
       snippet: y.f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_3
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_3
+      severity:
+        rule_severity: high
+        display_severity: high
+        rule_severity_weighting: 5
+        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -122,6 +146,7 @@ high:
         title: Test imports
         description: Test imports
         documentation_url: ""
+        severity: high
       line_number: 11
       full_filename: import.js
       filename: import.js
@@ -144,4 +169,9 @@ high:
       snippet: f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_4
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_4
+      severity:
+        rule_severity: high
+        display_severity: high
+        rule_severity_weighting: 5
+        final_weighting: 5
 

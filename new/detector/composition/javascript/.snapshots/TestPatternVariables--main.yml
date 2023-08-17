@@ -6,6 +6,7 @@ high:
         title: Test pattern variable tree sitter node types/fixups
         description: Test pattern variable tree sitter node types/fixups
         documentation_url: ""
+        severity: high
       line_number: 1
       full_filename: main.js
       filename: main.js
@@ -28,6 +29,11 @@ high:
       snippet: const matchedVariable = 42
       fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_0
       old_fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_0
+      severity:
+        rule_severity: high
+        display_severity: high
+        rule_severity_weighting: 5
+        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -35,6 +41,7 @@ high:
         title: Test pattern variable tree sitter node types/fixups
         description: Test pattern variable tree sitter node types/fixups
         documentation_url: ""
+        severity: high
       line_number: 4
       full_filename: main.js
       filename: main.js
@@ -57,4 +64,9 @@ high:
       snippet: import x from "matched_package"
       fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_1
       old_fingerprint: 5cac1aedf89257ee57d014d2ccc8d328_1
+      severity:
+        rule_severity: high
+        display_severity: high
+        rule_severity_weighting: 5
+        final_weighting: 5
 
