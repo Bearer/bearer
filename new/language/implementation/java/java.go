@@ -148,9 +148,6 @@ func analyzeNode(ctx context.Context, node *sitter.Node, builder *tree.Builder, 
 
 			return err
 		}
-	// // TODO: figure out this one
-	// case "shorthand_property_identifier_pattern":
-	// 	scope.Assign(node.Content(), node)
 	case "identifier":
 		if parent == nil {
 			break
@@ -179,16 +176,6 @@ func analyzeNode(ctx context.Context, node *sitter.Node, builder *tree.Builder, 
 			scope.Declare(builder.ContentFor(node), node)
 			builder.Dataflow(node, parent.ChildByFieldName("value"))
 		}
-
-		// todo: see what this is
-		// case "property_identifier":
-		// 	parent := node.Parent()
-		// 	if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
-		// 		if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
-		// 			node.UnifyWith(scopedNode)
-		// 		}
-		// 	}
-		// }
 	}
 
 	return visitChildren(scope)
@@ -197,10 +184,6 @@ func analyzeNode(ctx context.Context, node *sitter.Node, builder *tree.Builder, 
 func (implementation *javaImplementation) Pattern() implementation.Pattern {
 	return &implementation.pattern
 }
-
-// func (*javaImplementation) PassthroughNested(node *tree.Node) bool {
-// 	return false
-// }
 
 func contributesToResult(builder *tree.Builder, node *sitter.Node) bool {
 	// Statements don't have results

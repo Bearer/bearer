@@ -40,15 +40,11 @@ func (detector *datatypeDetector) Name() string {
 	return "datatype"
 }
 
-func (detector *datatypeDetector) NestedDetections() bool {
-	return false
-}
-
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	objectDetections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_SCOPE, false)
+	objectDetections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_STATIC_SCOPE)
 	if err != nil {
 		return nil, err
 	}

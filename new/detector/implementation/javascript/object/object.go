@@ -84,10 +84,6 @@ func (detector *objectDetector) Name() string {
 	return "object"
 }
 
-func (detector *objectDetector) NestedDetections() bool {
-	return false
-}
-
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
@@ -126,7 +122,6 @@ func (detector *objectDetector) getObject(
 			"object",
 			"",
 			settings.CURSOR_SCOPE,
-			true,
 		)
 
 		if err != nil {
@@ -162,8 +157,7 @@ func (detector *objectDetector) getObject(
 			result["value"],
 			"object",
 			"",
-			settings.NESTED_SCOPE,
-			true,
+			settings.CURSOR_SCOPE,
 		)
 		if err != nil {
 			return nil, err

@@ -3,8 +3,6 @@ package ruby
 import (
 	"context"
 
-	"golang.org/x/exp/slices"
-
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
 
@@ -20,12 +18,6 @@ import (
 	"github.com/bearer/bearer/new/detector/implementation/ruby/object"
 	stringdetector "github.com/bearer/bearer/new/detector/implementation/ruby/string"
 	"github.com/bearer/bearer/new/language/implementation"
-)
-
-var (
-	variableLookupParents = []string{"pair", "argument_list", "interpolation", "array", "binary", "operator_assignment"}
-
-	passthroughMethods = []string{"JSON.parse", "JSON.parse!", "*.to_json"}
 )
 
 type rubyImplementation struct {
@@ -58,18 +50,18 @@ func (*rubyImplementation) SitterLanguage() *sitter.Language {
 	return ruby.GetLanguage()
 }
 
+func (implementation *rubyImplementation) Pattern() implementation.Pattern {
+	return &implementation.pattern
+}
+
 func (*rubyImplementation) AnalyzeTree(ctx context.Context, rootNode *sitter.Node, builder *tree.Builder) error {
 	return analyzeNode(ctx, rootNode, builder, implementation.NewScope(nil))
 }
 
+// FIXME: extract the common logic across languages
 func analyzeNode(ctx context.Context, node *sitter.Node, builder *tree.Builder, scope *implementation.Scope) error {
 	if ctx.Err() != nil {
 		return ctx.Err()
-	}
-
-	parent := node.Parent()
-	if parent != nil && contributesToResult(node) {
-		builder.Dataflow(parent, node)
 	}
 
 	visitChildren := func(childScope *implementation.Scope) error {
@@ -85,127 +77,137 @@ func analyzeNode(ctx context.Context, node *sitter.Node, builder *tree.Builder, 
 		return nil
 	}
 
+	lookupVariable := func(variableNode *sitter.Node) {
+		if variableNode == nil || variableNode.Type() != "identifier" {
+			return
+		}
+
+		if scopedNode := scope.Lookup(builder.ContentFor(variableNode)); scopedNode != nil {
+			builder.Dataflow(variableNode, scopedNode)
+		}
+	}
+
 	switch node.Type() {
 	case "method":
 		return visitChildren(implementation.NewScope(nil))
+	case "block", "do_block":
+		return visitChildren(implementation.NewScope(scope))
 	case "assignment":
 		left := node.ChildByFieldName("left")
 		right := node.ChildByFieldName("right")
+		builder.Dataflow(node, right)
+		lookupVariable(right)
 
 		if left.Type() == "identifier" {
 			err := visitChildren(scope)
-
 			scope.Assign(builder.ContentFor(left), node)
-			builder.Dataflow(node, right)
-
 			return err
 		}
 	// x += y
 	case "operator_assignment":
-		err := visitChildren(scope)
+		builder.SetOperation(node)
 
 		left := node.ChildByFieldName("left")
+		right := node.ChildByFieldName("right")
+		builder.Dataflow(node, left, right)
+		lookupVariable(left)
+		lookupVariable(right)
+
 		if left.Type() == "identifier" {
+			err := visitChildren(scope)
 			scope.Assign(builder.ContentFor(left), node)
+			return err
+		}
+	// foo.bar(42)
+	case "call":
+		builder.SetOperation(node)
+
+		if argumentsNode := node.ChildByFieldName("arguments"); argumentsNode != nil {
+			builder.Dataflow(node, argumentsNode)
 		}
 
-		return err
-	case "identifier":
-		if parent == nil {
+		lookupVariable(node.ChildByFieldName("right"))
+	// foo["bar"]
+	case "element_reference":
+		objectNode := node.ChildByFieldName("object")
+		builder.Dataflow(node, objectNode)
+		lookupVariable(objectNode)
+		lookupVariable(objectNode)
+	// case foo
+	// ...
+	// end
+	case "case":
+		if valueNode := node.ChildByFieldName("value"); valueNode != nil {
+			builder.Dataflow(
+				node,
+				builder.ChildrenExcept(node, valueNode)...,
+			)
+
 			break
 		}
 
-		if slices.Contains(variableLookupParents, parent.Type()) ||
-			(parent.Type() == "assignment" && node == parent.ChildByFieldName("right")) ||
-			(parent.Type() == "call" && node == parent.ChildByFieldName("receiver")) ||
-			(parent.Type() == "element_reference" && node == parent.ChildByFieldName("object")) {
-			if scopedNode := scope.Lookup(builder.ContentFor(node)); scopedNode != nil {
-				builder.Dataflow(node, scopedNode)
+		builder.Dataflow(node, builder.ChildrenFor(node)...)
+	// case foo
+	// when 1
+	// end
+	case "when":
+		if patternNode := node.ChildByFieldName("pattern"); patternNode != nil {
+			builder.Dataflow(
+				node,
+				builder.ChildrenExcept(node, patternNode)...,
+			)
+
+			break
+		}
+
+		builder.Dataflow(node, builder.ChildrenFor(node)...)
+	// if x
+	//   expr...
+	// end
+	// case/if
+	//   ...
+	// else
+	//   expr...
+	// end
+	case "then", "else":
+		if lastChild := builder.LastChild(node); lastChild != nil {
+			builder.Dataflow(node, lastChild)
+		}
+	case "keyword_parameter", "optional_parameter":
+		nameNode := node.ChildByFieldName("name")
+		builder.Dataflow(node, nameNode)
+
+		if nameNode.Type() == "identifier" {
+			scope.Declare(builder.ContentFor(nameNode), nameNode)
+		}
+	case "method_parameters", "block_parameters":
+		children := builder.ChildrenFor(node)
+		builder.Dataflow(node, children...)
+
+		for _, child := range children {
+			if child.Type() == "identifier" {
+				scope.Declare(builder.ContentFor(child), child)
 			}
 		}
+	case "pair", "argument_list":
+		children := builder.ChildrenFor(node)
+		builder.Dataflow(node, children...)
 
-		if parent.Type() == "method_parameters" ||
-			parent.Type() == "block_parameters" ||
-			(parent.Type() == "keyword_parameter" && node == parent.ChildByFieldName("name")) ||
-			(parent.Type() == "optional_parameter" && node == parent.ChildByFieldName("name")) {
-			scope.Declare(builder.ContentFor(node), node)
+		for _, child := range children {
+			lookupVariable(child)
 		}
+	case "interpolation", "array", "binary", "unary":
+		builder.SetOperation(node)
 
-		if parent.Type() == "argument_list" {
-			callNode := parent.Parent()
-			builder.Dataflow(callNode, node)
+		children := builder.ChildrenFor(node)
+		builder.Dataflow(node, children...)
+
+		for _, child := range children {
+			lookupVariable(child)
 		}
-	case "block", "do_block":
-		return visitChildren(implementation.NewScope(scope))
+	default:
+		builder.Dataflow(node, builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)
 	}
 
 	return visitChildren(scope)
-}
-
-func (implementation *rubyImplementation) Pattern() implementation.Pattern {
-	return &implementation.pattern
-}
-
-func (*rubyImplementation) PassthroughNested(node *tree.Node) bool {
-	callNode := node.Parent()
-	if callNode.Type() != "call" {
-		return false
-	}
-
-	receiverNode := callNode.ChildByFieldName("receiver")
-
-	if node.Type() != "arguments_list" && (receiverNode == nil || node != receiverNode) {
-		return false
-	}
-
-	var receiverMethod string
-	var wildcardMethod string
-
-	if receiverNode != nil {
-		methodName := callNode.ChildByFieldName("method").Content()
-
-		if receiverNode.Type() == "identifier" {
-			receiverMethod = receiverNode.Content() + "." + methodName
-		}
-
-		wildcardMethod = "*." + methodName
-	}
-
-	return slices.Contains(passthroughMethods, receiverMethod) || slices.Contains(passthroughMethods, wildcardMethod)
-}
-
-func contributesToResult(node *sitter.Node) bool {
-	parent := node.Parent()
-	if parent == nil {
-		return true
-	}
-
-	// Must not be a condition
-	if node == parent.ChildByFieldName("condition") {
-		return false
-	}
-
-	// Must not be a case value
-	if parent.Type() == "case" && node == parent.ChildByFieldName("value") {
-		return false
-	}
-
-	// Must not be a case-when pattern
-	if parent.Type() == "when" && node == parent.ChildByFieldName("pattern") {
-		return false
-	}
-
-	// Not the left part of an assignment
-	if parent.Type() == "assignment" && node == parent.ChildByFieldName("left") {
-		return false
-	}
-
-	// Must be the last expression in an expression block
-	if slices.Contains([]string{"then", "else"}, parent.Type()) {
-		if node != parent.Child(int(parent.ChildCount())-1) {
-			return false
-		}
-	}
-
-	return true
 }

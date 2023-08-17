@@ -61,10 +61,6 @@ func (detector *objectDetector) Name() string {
 	return "object"
 }
 
-func (detector *objectDetector) NestedDetections() bool {
-	return false
-}
-
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluationState types.EvaluationState,

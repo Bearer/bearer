@@ -91,7 +91,6 @@ func RunTest(
 			"",
 			cachepkg.NewCache(cachepkg.NewShared(detectorSet.BuiltinAndSharedRuleIDs())),
 			settings.NESTED_SCOPE,
-			true,
 		)
 		if err != nil {
 			tt.Fatalf("failed to detect: %s", err)

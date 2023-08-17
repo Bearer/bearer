@@ -119,8 +119,6 @@ type Implementation interface {
 	// AnalyzeTree populates the dataflow analysis
 	AnalyzeTree(ctx context.Context, rootNode *sitter.Node, astBuilder *tree.Builder) error
 	Pattern() Pattern
-	// FIXME: use this, or remove it. test rules to see if we need it
-	// PassthroughNested(node *tree.Node) bool
 }
 
 type PatternBase struct{}

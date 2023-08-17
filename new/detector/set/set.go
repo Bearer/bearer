@@ -57,15 +57,6 @@ func (set *detectorSet) TopLevelRuleIDs() []string {
 	return set.topLevelRuleIDs
 }
 
-func (set *detectorSet) NestedDetections(detectorType string) (bool, error) {
-	detector, err := set.lookupDetector(detectorType)
-	if err != nil {
-		return false, err
-	}
-
-	return detector.NestedDetections(), nil
-}
-
 func (set *detectorSet) DetectAt(
 	node *tree.Node,
 	detectorType string,

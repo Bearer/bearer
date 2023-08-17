@@ -30,7 +30,7 @@ func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	detections, err := evaluationState.Evaluate(node, "string", "", settings.CURSOR_SCOPE, false)
+	detections, err := evaluationState.Evaluate(node, "string", "", settings.CURSOR_STATIC_SCOPE)
 	if err != nil {
 		return nil, err
 	}

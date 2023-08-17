@@ -4,10 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bradleyjkemp/cupaloy"
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
+
+	"github.com/bearer/bearer/pkg/ast/tree"
 )
 
 func parseTree(t *testing.T, content string) *tree.Tree {

@@ -13,23 +13,20 @@ const (
 )
 
 type Key struct {
-	rootNode   *tree.Node
-	ruleID     string
-	scope      settings.RuleReferenceScope
-	followFlow bool
+	rootNode *tree.Node
+	ruleID   string
+	scope    settings.RuleReferenceScope
 }
 
 func NewKey(
 	rootNode *tree.Node,
 	ruleID string,
 	scope settings.RuleReferenceScope,
-	followFlow bool,
 ) Key {
 	return Key{
-		rootNode:   rootNode,
-		ruleID:     ruleID,
-		scope:      scope,
-		followFlow: followFlow,
+		rootNode: rootNode,
+		ruleID:   ruleID,
+		scope:    scope,
 	}
 }
 

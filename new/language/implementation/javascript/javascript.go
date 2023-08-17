@@ -7,6 +7,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/typescript/tsx"
 	"github.com/ssoroka/slice"
+	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/new/detector/implementation/generic/datatype"
 	"github.com/bearer/bearer/new/detector/implementation/generic/insecureurl"
@@ -186,34 +187,34 @@ func (implementation *javascriptImplementation) Pattern() implementation.Pattern
 	return &implementation.pattern
 }
 
-// func (*javascriptImplementation) PassthroughNested(node *tree.Node) bool {
-// 	if node.Type() != "arguments" {
-// 		return false
-// 	}
+func isPassthrough(builder *tree.Builder, node *sitter.Node) bool {
+	if node.Type() != "arguments" {
+		return false
+	}
 
-// 	callNode := node.Parent()
-// 	if callNode.Type() != "call_expression" {
-// 		return false
-// 	}
+	callNode := node.Parent()
+	if callNode.Type() != "call_expression" {
+		return false
+	}
 
-// 	functionNode := callNode.ChildByFieldName("function")
+	functionNode := callNode.ChildByFieldName("function")
 
-// 	var method string
-// 	var wildcardMethod string
-// 	switch functionNode.Type() {
-// 	case "identifier":
-// 		return slices.Contains(passthroughMethods, functionNode.Content())
-// 	case "member_expression":
-// 		object := functionNode.ChildByFieldName("object")
-// 		if object.Type() == "identifier" {
-// 			property := functionNode.ChildByFieldName("property").Content()
-// 			method = object.Content() + "." + property
-// 			wildcardMethod = "*." + property
-// 		}
-// 	}
+	var method string
+	var wildcardMethod string
+	switch functionNode.Type() {
+	case "identifier":
+		return slices.Contains(passthroughMethods, builder.ContentFor(functionNode))
+	case "member_expression":
+		object := functionNode.ChildByFieldName("object")
+		if object.Type() == "identifier" {
+			property := builder.ContentFor(functionNode.ChildByFieldName("property"))
+			method = builder.ContentFor(object) + "." + property
+			wildcardMethod = "*." + property
+		}
+	}
 
-// 	return slices.Contains(passthroughMethods, method) || slices.Contains(passthroughMethods, wildcardMethod)
-// }
+	return slices.Contains(passthroughMethods, method) || slices.Contains(passthroughMethods, wildcardMethod)
+}
 
 func contributesToResult(node *sitter.Node) bool {
 	// Statements don't have results

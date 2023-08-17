@@ -135,7 +135,6 @@ func matchDetectionFilter(
 		ruleID,
 		sanitizerRuleID,
 		filter.Scope,
-		true,
 	)
 
 	if ruleID == "datatype" {

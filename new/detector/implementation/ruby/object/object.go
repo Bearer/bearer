@@ -69,10 +69,6 @@ func (detector *objectDetector) Name() string {
 	return "object"
 }
 
-func (detector *objectDetector) NestedDetections() bool {
-	return false
-}
-
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
@@ -122,8 +118,7 @@ func (detector *objectDetector) getHash(
 			result["value"],
 			"object",
 			"",
-			settings.NESTED_SCOPE,
-			true,
+			settings.CURSOR_SCOPE,
 		)
 		if err != nil {
 			return nil, err
@@ -168,8 +163,7 @@ func (detector *objectDetector) getKeywordArgument(
 		result["value"],
 		"object",
 		"",
-		settings.NESTED_SCOPE,
-		true,
+		settings.CURSOR_SCOPE,
 	)
 	if err != nil {
 		return nil, err

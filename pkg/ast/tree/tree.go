@@ -21,9 +21,10 @@ type Node struct {
 	TypeID int
 	ContentStart,
 	ContentEnd Position
-	parent          *Node
-	children        []*Node
+	parent *Node
+	children,
 	dataflowSources []*Node
+	isOperation bool
 	// FIXME: remove the need for this
 	sitterNode *sitter.Node
 	// FIXME: probably shouldn't be public
@@ -124,6 +125,10 @@ func (node *Node) NodeAndDescendentIDs() []int {
 	}
 
 	return result
+}
+
+func (node *Node) IsOperation() bool {
+	return node.isOperation
 }
 
 func (node *Node) DataflowSources() []*Node {

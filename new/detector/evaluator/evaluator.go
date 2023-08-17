@@ -110,7 +110,6 @@ func (evaluator *Evaluator) DetectFromFile(
 			sanitizerRuleID,
 			cache,
 			settings.DefaultScope,
-			false,
 		)
 		if err != nil {
 			return nil, err

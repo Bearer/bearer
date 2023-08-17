@@ -54,8 +54,6 @@ func (evaluator *FileEvaluator) Evaluate(
 	sanitizerRuleID string,
 	cache *cachepkg.Cache,
 	scope settings.RuleReferenceScope,
-	// FIXME: support or remove followFlow
-	followFlow bool,
 ) ([]*detection.Detection, error) {
 	startTime := time.Now()
 
@@ -63,7 +61,7 @@ func (evaluator *FileEvaluator) Evaluate(
 		log.Trace().Msgf("evaluate start: %s at %s", ruleID, rootNode.Debug(true))
 	}
 
-	key := cachepkg.NewKey(rootNode, ruleID, scope, followFlow)
+	key := cachepkg.NewKey(rootNode, ruleID, scope)
 
 	if detections, cached := cache.Get(key); cached {
 		evaluator.fileStats.Rule(ruleID, startTime)
@@ -89,7 +87,8 @@ func (evaluator *FileEvaluator) Evaluate(
 	case settings.RESULT_SCOPE:
 		detections, err = evaluator.evalAtDataflowSources(ruleID, sanitizerRuleID, rootNode, cache, scope)
 	case settings.CURSOR_SCOPE:
-		// FIXME: variable lookups
+		detections, err = evaluator.evalAtTransparentDataflowSources(ruleID, sanitizerRuleID, rootNode, cache, scope)
+	case settings.CURSOR_STATIC_SCOPE:
 		detections, _, err = evaluator.sanitizedNodeDetections(rootNode, ruleID, sanitizerRuleID, cache, scope)
 	}
 
@@ -120,34 +119,9 @@ func (evaluator *FileEvaluator) evalAtDescendents(
 	cache *cachepkg.Cache,
 	scope settings.RuleReferenceScope,
 ) ([]*detection.Detection, error) {
-	nodes := []*asttree.Node{rootNode}
-
-	var detections []*detection.Detection
-
-	for {
-		if len(nodes) == 0 {
-			break
-		}
-
-		var next []*asttree.Node
-
-		for _, node := range nodes {
-			nodeDetections, sanitized, err := evaluator.sanitizedNodeDetections(node, ruleID, sanitizerRuleID, cache, scope)
-			if err != nil {
-				return nil, err
-			}
-			if sanitized {
-				continue
-			}
-
-			detections = append(detections, nodeDetections...)
-			next = append(next, node.Children()...)
-		}
-
-		nodes = next
-	}
-
-	return detections, nil
+	return evaluator.evalWithNext(ruleID, sanitizerRuleID, rootNode, cache, scope, func(node *asttree.Node) []*asttree.Node {
+		return node.Children()
+	})
 }
 
 func (evaluator *FileEvaluator) evalAtDataflowSources(
@@ -156,6 +130,34 @@ func (evaluator *FileEvaluator) evalAtDataflowSources(
 	rootNode *asttree.Node,
 	cache *cachepkg.Cache,
 	scope settings.RuleReferenceScope,
+) ([]*detection.Detection, error) {
+	return evaluator.evalWithNext(ruleID, sanitizerRuleID, rootNode, cache, scope, func(node *asttree.Node) []*asttree.Node {
+		return node.DataflowSources()
+	})
+}
+func (evaluator *FileEvaluator) evalAtTransparentDataflowSources(
+	ruleID,
+	sanitizerRuleID string,
+	rootNode *asttree.Node,
+	cache *cachepkg.Cache,
+	scope settings.RuleReferenceScope,
+) ([]*detection.Detection, error) {
+	return evaluator.evalWithNext(ruleID, sanitizerRuleID, rootNode, cache, scope, func(node *asttree.Node) []*asttree.Node {
+		if node.IsOperation() {
+			return nil
+		}
+
+		return node.DataflowSources()
+	})
+}
+
+func (evaluator *FileEvaluator) evalWithNext(
+	ruleID,
+	sanitizerRuleID string,
+	rootNode *asttree.Node,
+	cache *cachepkg.Cache,
+	scope settings.RuleReferenceScope,
+	getNext func(node *asttree.Node) []*asttree.Node,
 ) ([]*detection.Detection, error) {
 	nodes := []*asttree.Node{rootNode}
 
@@ -178,7 +180,7 @@ func (evaluator *FileEvaluator) evalAtDataflowSources(
 			}
 
 			detections = append(detections, nodeDetections...)
-			next = append(next, node.DataflowSources()...)
+			next = append(next, getNext(node)...)
 		}
 
 		nodes = next
@@ -280,7 +282,7 @@ func (evaluator *FileEvaluator) detectAtNode(
 		log.Trace().Msgf("detect at node start: %s at %s", ruleID, node.Debug(true))
 	}
 
-	key := cachepkg.NewKey(node, ruleID, settings.CURSOR_SCOPE, false)
+	key := cachepkg.NewKey(node, ruleID, settings.CURSOR_STATIC_SCOPE)
 
 	if detections, cached := cache.Get(key); cached {
 		if log.Trace().Enabled() {
@@ -368,7 +370,6 @@ func (state evaluationState) Evaluate(
 	detectorType,
 	sanitizerDetectorType string,
 	scope settings.RuleReferenceScope,
-	followFlow bool,
 ) ([]*detection.Detection, error) {
 	effectiveScope := scope
 	if effectiveScope == settings.NESTED_SCOPE && state.scope == settings.RESULT_SCOPE {
@@ -381,7 +382,6 @@ func (state evaluationState) Evaluate(
 		sanitizerDetectorType,
 		state.cache,
 		effectiveScope,
-		followFlow,
 	)
 }
 

@@ -14,7 +14,7 @@ func GetNonVirtualObjects(
 	evaluationState types.EvaluationState,
 	node *tree.Node,
 ) ([]*detection.Detection, error) {
-	detections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_SCOPE, true)
+	detections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_SCOPE)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func ProjectObject(
 }
 
 func GetStringValue(node *tree.Node, evaluationState types.EvaluationState) (string, bool, error) {
-	detections, err := evaluationState.Evaluate(node, "string", "", settings.CURSOR_SCOPE, true)
+	detections, err := evaluationState.Evaluate(node, "string", "", settings.CURSOR_SCOPE)
 	if err != nil {
 		return "", false, err
 	}

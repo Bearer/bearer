@@ -102,8 +102,7 @@ func (detector *objectDetector) getCallProjections(
 		result["function"],
 		"object",
 		"",
-		settings.NESTED_SCOPE,
-		true,
+		settings.CURSOR_SCOPE,
 	)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
