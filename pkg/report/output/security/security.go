@@ -446,7 +446,7 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		RuleSeverity:                   severity,
 		SensitiveDataCategoryWeighting: sensitiveDataCategoryWeighting,
 		RuleSeverityWeighting:          ruleSeverityWeighting,
-		TriggerWeighting:               hasLocalDataTypes,
+		TriggerWeighting:               &hasLocalDataTypes,
 		FinalWeighting:                 finalWeighting,
 		DisplaySeverity:                displaySeverity,
 	}

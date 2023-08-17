@@ -56,7 +56,7 @@
         DisplaySeverity: (string) (len=8) "critical",
         SensitiveDataCategoryWeighting: (int) 3,
         RuleSeverityWeighting: (int) 2,
-        TriggerWeighting: (bool) true,
+        TriggerWeighting: (*bool)(true),
         FinalWeighting: (int) 8
       },
       RawCodeExtract: ([]file.Line) {
@@ -116,7 +116,7 @@
         DisplaySeverity: (string) (len=4) "high",
         SensitiveDataCategoryWeighting: (int) 2,
         RuleSeverityWeighting: (int) 3,
-        TriggerWeighting: (bool) false,
+        TriggerWeighting: (*bool)(false),
         FinalWeighting: (int) 5
       },
       RawCodeExtract: ([]file.Line) {

@@ -34,6 +34,7 @@ high:
         rule_severity: high
         display_severity: high
         rule_severity_weighting: 5
+        trigger_weighting: false
         final_weighting: 5
 
 

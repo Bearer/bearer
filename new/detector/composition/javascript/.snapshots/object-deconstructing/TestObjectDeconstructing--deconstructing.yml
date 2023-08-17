@@ -32,5 +32,6 @@ low:
         rule_severity: ""
         display_severity: low
         rule_severity_weighting: 2
+        trigger_weighting: false
         final_weighting: 2
 

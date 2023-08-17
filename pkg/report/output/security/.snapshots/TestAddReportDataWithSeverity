@@ -56,7 +56,7 @@
         DisplaySeverity: (string) (len=8) "critical",
         SensitiveDataCategoryWeighting: (int) 3,
         RuleSeverityWeighting: (int) 2,
-        TriggerWeighting: (bool) true,
+        TriggerWeighting: (*bool)(true),
         FinalWeighting: (int) 8
       },
       RawCodeExtract: ([]file.Line) {
