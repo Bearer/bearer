@@ -50,7 +50,7 @@ func writeDocs(cmd *cobra.Command, dir string) error {
 	basename := "bearer.yaml"
 
 	if cmd.CommandPath() != "" {
-		basename = "bearer" + strings.Replace(cmd.CommandPath(), " ", "_", -1) + ".yaml"
+		basename = fmt.Sprintf("bearer%s.yaml", strings.Replace(cmd.CommandPath(), " ", "_", -1))
 	}
 
 	filename := filepath.Join(dir, basename)
