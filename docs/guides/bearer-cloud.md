@@ -124,7 +124,7 @@ The Slack integration is available on the *Settings > Integrations* page.
 
 To use the integration, you must connect a Slack account and allow access to the required permissions through the OAuth login, then select a default channel where you want to receive notifications on new findings.
 
-Here is below an example of a Slack notification triggered by a new finding:
+Below an example of a Slack notification triggered by a new finding:
 ![Slack notification](/assets/img/slack-integration/notification.png)
 
 
