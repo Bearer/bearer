@@ -1,0 +1,2 @@
+pkg/parser/sitter/**/*.c linguist-generated
+pkg/parser/sitter/**/*.cc linguist-generated
