@@ -37,7 +37,7 @@ module.exports = [
         url: "/guides/dataflow/",
       },
       {
-        name: "Connect to Bearer Cloud",
+        name: "Using Bearer Cloud",
         url: "/guides/bearer-cloud/",
       },
     ],
