@@ -114,7 +114,7 @@ Once a finding is associated with a Jira ticket, you can quickly see it in the i
 
 
 {% callout "warn" %}
-Findings on Bearer dashboard are marked resolved only when the associated code is fixed. For example, if the associated Jira ticket is closed, but no code fix has been applied, the finding will stay open on Bearer dashboard. The source of truth is always code.
+Findings on Bearer Cloud are only marked resolved when the associated code is fixed. If the associated Jira ticket is closed, but no code fix has been applied, the finding will stay open. The source of truth is always the code.
 {% endcallout %}
 
 
