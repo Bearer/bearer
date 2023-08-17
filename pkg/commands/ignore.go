@@ -43,7 +43,7 @@ $ bearer ignore show <fingerprint>`,
 
 			ignoredFingerprints, err := ignore.GetIgnoredFingerprints(nil)
 			if err != nil {
-				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file")
+				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
 				return nil
 			}
 
