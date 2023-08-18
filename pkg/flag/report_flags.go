@@ -64,6 +64,7 @@ var (
 		Usage:           "Specify the comma-separated fingerprints of the findings you would like to exclude from the report.",
 		DisableInConfig: true,
 		Hide:            true,
+		Deprecated:      true,
 	}
 )
 
