@@ -5,7 +5,7 @@ low:
         title: ""
         description: ""
         documentation_url: ""
-        severity: ""
+        severity: low
       line_number: 1
       full_filename: deconstructing.js
       filename: deconstructing.js
@@ -29,9 +29,9 @@ low:
       fingerprint: 391f0431340399f3f30398341feeb70a_0
       old_fingerprint: 391f0431340399f3f30398341feeb70a_0
       severity:
-        rule_severity: ""
+        rule_severity: low
         display_severity: low
         rule_severity_weighting: 2
-        trigger_weighting: false
+        local_data_types: false
         final_weighting: 2
 

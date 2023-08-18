@@ -54,7 +54,7 @@ medium:
         display_severity: medium
         sensitive_data_category_weighting: 2
         rule_severity_weighting: 2
-        trigger_weighting: false
+        local_data_types: false
         final_weighting: 4
 
 

@@ -171,7 +171,7 @@ func evaluateRules(
 			}
 
 			ruleSummary := &types.Rule{
-				Severity:         rule.Severity,
+				Severity:         rule.GetSeverity(),
 				Title:            rule.Description,
 				Description:      rule.RemediationMessage,
 				Id:               rule.Id,
@@ -229,7 +229,7 @@ func evaluateRules(
 					OldFingerprint:   oldFingerprint,
 				}
 
-				severityWeighting := CalculateSeverity(finding.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
+				severityWeighting := CalculateSeverity(finding.CategoryGroups, rule.GetSeverity(), output.IsLocal != nil && *output.IsLocal)
 				severity := severityWeighting.DisplaySeverity
 
 				if config.Report.Severity[severity] {
@@ -446,7 +446,7 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		RuleSeverity:                   severity,
 		SensitiveDataCategoryWeighting: sensitiveDataCategoryWeighting,
 		RuleSeverityWeighting:          ruleSeverityWeighting,
-		TriggerWeighting:               &hasLocalDataTypes,
+		HasLocalDataTypes:              &hasLocalDataTypes,
 		FinalWeighting:                 finalWeighting,
 		DisplaySeverity:                displaySeverity,
 	}

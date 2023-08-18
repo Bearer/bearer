@@ -5,7 +5,7 @@ high:
         title: ""
         description: ""
         documentation_url: ""
-        severity: ""
+        severity: low
       line_number: 1
       full_filename: variable-declarator.js
       filename: variable-declarator.js
@@ -35,10 +35,10 @@ high:
       fingerprint: 5d86ec557137111caf0eca9a7d304c91_0
       old_fingerprint: 5d86ec557137111caf0eca9a7d304c91_0
       severity:
-        rule_severity: ""
+        rule_severity: low
         display_severity: high
         sensitive_data_category_weighting: 2
         rule_severity_weighting: 2
-        trigger_weighting: true
+        local_data_types: true
         final_weighting: 6
 

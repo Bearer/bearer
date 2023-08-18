@@ -66,7 +66,7 @@ type SeverityWeighting struct {
 	DisplaySeverity                string `json:"display_severity" yaml:"display_severity"`
 	SensitiveDataCategoryWeighting int    `json:"sensitive_data_category_weighting,omitempty" yaml:"sensitive_data_category_weighting,omitempty"`
 	RuleSeverityWeighting          int    `json:"rule_severity_weighting,omitempty" yaml:"rule_severity_weighting,omitempty"`
-	TriggerWeighting               *bool  `json:"trigger_weighting,omitempty" yaml:"trigger_weighting,omitempty"`
+	HasLocalDataTypes              *bool  `json:"local_data_types,omitempty" yaml:"local_data_types,omitempty"`
 	FinalWeighting                 int    `json:"final_weighting,omitempty" yaml:"final_weighting,omitempty"`
 }
 

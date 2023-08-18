@@ -5,7 +5,7 @@ high:
         title: ""
         description: ""
         documentation_url: ""
-        severity: ""
+        severity: low
       line_number: 1
       full_filename: template.js
       filename: template.js
@@ -35,10 +35,10 @@ high:
       fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
       old_fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
       severity:
-        rule_severity: ""
+        rule_severity: low
         display_severity: high
         sensitive_data_category_weighting: 2
         rule_severity_weighting: 2
-        trigger_weighting: true
+        local_data_types: true
         final_weighting: 6
 

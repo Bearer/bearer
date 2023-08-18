@@ -41,7 +41,7 @@ critical:
         display_severity: critical
         sensitive_data_category_weighting: 2
         rule_severity_weighting: 5
-        trigger_weighting: true
+        local_data_types: true
         final_weighting: 9
     - rule:
         cwe_ids:
@@ -85,7 +85,7 @@ critical:
         display_severity: critical
         sensitive_data_category_weighting: 2
         rule_severity_weighting: 5
-        trigger_weighting: true
+        local_data_types: true
         final_weighting: 9
 
 

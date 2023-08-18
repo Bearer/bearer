@@ -177,7 +177,7 @@ func AddReportData(reportData *outputtypes.ReportData, config settings.Config) e
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
-				ruleSeverity := security.CalculateSeverity(ruleOutputFailure.CategoryGroups, rule.Severity, true)
+				ruleSeverity := security.CalculateSeverity(ruleOutputFailure.CategoryGroups, rule.GetSeverity(), true)
 
 				key := buildKey(ruleOutputFailure.DataSubject, ruleOutputFailure.DataType)
 				subjectRuleFailure, ok := subjectRuleFailures[key]

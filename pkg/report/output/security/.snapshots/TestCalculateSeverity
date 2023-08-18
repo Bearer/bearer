@@ -4,7 +4,7 @@
     DisplaySeverity: (string) (len=8) "critical",
     SensitiveDataCategoryWeighting: (int) 3,
     RuleSeverityWeighting: (int) 2,
-    TriggerWeighting: (*bool)(true),
+    HasLocalDataTypes: (*bool)(true),
     FinalWeighting: (int) 8
   },
   (security.SeverityWeighting) {
@@ -12,7 +12,7 @@
     DisplaySeverity: (string) (len=4) "high",
     SensitiveDataCategoryWeighting: (int) 3,
     RuleSeverityWeighting: (int) 2,
-    TriggerWeighting: (*bool)(false),
+    HasLocalDataTypes: (*bool)(false),
     FinalWeighting: (int) 5
   },
   (security.SeverityWeighting) {
@@ -20,7 +20,7 @@
     DisplaySeverity: (string) (len=6) "medium",
     SensitiveDataCategoryWeighting: (int) 2,
     RuleSeverityWeighting: (int) 2,
-    TriggerWeighting: (*bool)(false),
+    HasLocalDataTypes: (*bool)(false),
     FinalWeighting: (int) 4
   },
   (security.SeverityWeighting) {
@@ -28,7 +28,7 @@
     DisplaySeverity: (string) (len=7) "warning",
     SensitiveDataCategoryWeighting: (int) 0,
     RuleSeverityWeighting: (int) 0,
-    TriggerWeighting: (*bool)(<nil>),
+    HasLocalDataTypes: (*bool)(<nil>),
     FinalWeighting: (int) 0
   },
   (security.SeverityWeighting) {
@@ -36,7 +36,7 @@
     DisplaySeverity: (string) (len=7) "warning",
     SensitiveDataCategoryWeighting: (int) 0,
     RuleSeverityWeighting: (int) 0,
-    TriggerWeighting: (*bool)(<nil>),
+    HasLocalDataTypes: (*bool)(<nil>),
     FinalWeighting: (int) 0
   }
 }
