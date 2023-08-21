@@ -85,9 +85,9 @@ func (evaluator *FileEvaluator) Evaluate(
 	case settings.NESTED_SCOPE:
 		detections, err = evaluator.evalAtDescendents(ruleID, sanitizerRuleID, rootNode, cache, scope)
 	case settings.RESULT_SCOPE:
-		detections, err = evaluator.evalAtDataflowSources(ruleID, sanitizerRuleID, rootNode, cache, scope)
+		detections, err = evaluator.evalAtDataflowSourcesOrAliasOf(ruleID, sanitizerRuleID, rootNode, cache, scope)
 	case settings.CURSOR_SCOPE:
-		detections, err = evaluator.evalAtTransparentDataflowSources(ruleID, sanitizerRuleID, rootNode, cache, scope)
+		detections, err = evaluator.evalAtAliasOf(ruleID, sanitizerRuleID, rootNode, cache, scope)
 	case settings.CURSOR_STATIC_SCOPE:
 		detections, _, err = evaluator.sanitizedNodeDetections(rootNode, ruleID, sanitizerRuleID, cache, scope)
 	}
@@ -124,7 +124,7 @@ func (evaluator *FileEvaluator) evalAtDescendents(
 	})
 }
 
-func (evaluator *FileEvaluator) evalAtDataflowSources(
+func (evaluator *FileEvaluator) evalAtDataflowSourcesOrAliasOf(
 	ruleID,
 	sanitizerRuleID string,
 	rootNode *asttree.Node,
@@ -132,10 +132,10 @@ func (evaluator *FileEvaluator) evalAtDataflowSources(
 	scope settings.RuleReferenceScope,
 ) ([]*detection.Detection, error) {
 	return evaluator.evalWithNext(ruleID, sanitizerRuleID, rootNode, cache, scope, func(node *asttree.Node) []*asttree.Node {
-		return node.DataflowSources()
+		return append(node.DataflowSources(), node.AliasOf()...)
 	})
 }
-func (evaluator *FileEvaluator) evalAtTransparentDataflowSources(
+func (evaluator *FileEvaluator) evalAtAliasOf(
 	ruleID,
 	sanitizerRuleID string,
 	rootNode *asttree.Node,
@@ -143,11 +143,7 @@ func (evaluator *FileEvaluator) evalAtTransparentDataflowSources(
 	scope settings.RuleReferenceScope,
 ) ([]*detection.Detection, error) {
 	return evaluator.evalWithNext(ruleID, sanitizerRuleID, rootNode, cache, scope, func(node *asttree.Node) []*asttree.Node {
-		if node.IsOperation() {
-			return nil
-		}
-
-		return node.DataflowSources()
+		return node.AliasOf()
 	})
 }
 
@@ -406,7 +402,10 @@ func (state evaluationState) QueryMatchAt(query *query.Query, node *asttree.Node
 	results := make([]types.QueryResult, len(sitterResults))
 
 	for i, sitterResult := range sitterResults {
-		results[i] = state.translateResult(sitterResult)
+		results[i], err = state.translateResult(sitterResult)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return results, nil
@@ -418,16 +417,31 @@ func (state evaluationState) QueryMatchOnceAt(query *query.Query, node *asttree.
 		return nil, err
 	}
 
-	return state.translateResult(sitterResult), nil
+	return state.translateResult(sitterResult)
 }
 
 // FIXME: try and remove the translation by caching query results on the ast tree
-func (state evaluationState) translateResult(sitterResult query.Result) types.QueryResult {
+func (state evaluationState) translateResult(sitterResult query.Result) (types.QueryResult, error) {
+	if sitterResult == nil {
+		return nil, nil
+	}
+
 	result := make(map[string]*asttree.Node)
 
 	for name, sitterNode := range sitterResult {
-		result[name] = state.NodeFromSitter(sitterNode)
+		node := state.NodeFromSitter(sitterNode)
+		if node == nil {
+			return nil, fmt.Errorf(
+				"missing node for sitter node %d:%d:\n%s\n%s",
+				sitterNode.StartPoint().Row+1,
+				sitterNode.StartPoint().Column+1,
+				sitterNode.String(),
+				state.QueryContext().ContentFor(sitterNode),
+			)
+		}
+
+		result[name] = node
 	}
 
-	return result
+	return result, nil
 }

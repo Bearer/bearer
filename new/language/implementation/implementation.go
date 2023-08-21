@@ -1,8 +1,6 @@
 package implementation
 
 import (
-	"context"
-
 	sitter "github.com/smacker/go-tree-sitter"
 
 	detectortypes "github.com/bearer/bearer/new/detector/types"
@@ -116,9 +114,8 @@ type Implementation interface {
 	EnryLanguages() []string
 	NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector
 	SitterLanguage() *sitter.Language
-	// AnalyzeTree populates the dataflow analysis
-	AnalyzeTree(ctx context.Context, rootNode *sitter.Node, astBuilder *tree.Builder) error
 	Pattern() Pattern
+	NewAnalyzer(builder *tree.Builder) Analyzer
 }
 
 type PatternBase struct{}
@@ -149,6 +146,10 @@ func (*PatternBase) FixupVariableDummyValue(input []byte, node *tree.Node, dummy
 
 func (*PatternBase) AnonymousParentTypes() []string {
 	return nil
+}
+
+type Analyzer interface {
+	Analyze(node *sitter.Node, visitChildren func() error) error
 }
 
 type Scope struct {

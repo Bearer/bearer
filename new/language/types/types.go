@@ -19,8 +19,8 @@ type PatternQuery interface {
 	MatchOnceAt(context *query.Context, node *sitter.Node) (*PatternQueryResult, error)
 }
 
+// FIXME: drop language?
 type Language interface {
 	Parse(ctx context.Context, contentBytes []byte) (*tree.Tree, error)
-	NewQuerySet() *query.Set
 	CompilePatternQuery(querySet *query.Set, input, focusedVariable string) (PatternQuery, error)
 }

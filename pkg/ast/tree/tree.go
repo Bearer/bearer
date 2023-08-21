@@ -23,8 +23,8 @@ type Node struct {
 	ContentEnd Position
 	parent *Node
 	children,
-	dataflowSources []*Node
-	isOperation bool
+	dataflowSources,
+	aliasOf []*Node
 	// FIXME: remove the need for this
 	sitterNode *sitter.Node
 	// FIXME: probably shouldn't be public
@@ -103,6 +103,7 @@ func (node *Node) ChildByFieldName(name string) *Node {
 	return node.tree.sitterToNode[node.sitterNode.ChildByFieldName(name)]
 }
 
+// FIXME: this is only used by tests
 func (node *Node) NodeAndDescendentIDs() []int {
 	var result []int
 
@@ -127,12 +128,12 @@ func (node *Node) NodeAndDescendentIDs() []int {
 	return result
 }
 
-func (node *Node) IsOperation() bool {
-	return node.isOperation
-}
-
 func (node *Node) DataflowSources() []*Node {
 	return node.dataflowSources
+}
+
+func (node *Node) AliasOf() []*Node {
+	return node.aliasOf
 }
 
 func (node *Node) Dump() string {
@@ -145,6 +146,23 @@ func (node *Node) Dump() string {
 		for _, child := range node.children {
 			s.WriteString(" ")          //nolint:errcheck
 			s.WriteString(child.Dump()) //nolint:errcheck
+		}
+	}
+
+	s.WriteString(")") //nolint:errcheck
+	return s.String()
+}
+
+func (node *Node) Dump2() string {
+	var s strings.Builder
+
+	s.WriteString("(")         //nolint:errcheck
+	s.WriteString(node.Type()) //nolint:errcheck
+
+	if len(node.dataflowSources) != 0 {
+		for _, child := range node.dataflowSources {
+			s.WriteString(" ")           //nolint:errcheck
+			s.WriteString(child.Dump2()) //nolint:errcheck
 		}
 	}
 

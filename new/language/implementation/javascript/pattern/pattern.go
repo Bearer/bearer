@@ -1,4 +1,4 @@
-package javascript
+package pattern
 
 import (
 	"fmt"
@@ -24,15 +24,15 @@ var (
 	allowedPatternQueryTypes = []string{"identifier", "property_identifier", "_", "member_expression", "string", "template_string"}
 )
 
-type patternImplementation struct {
+type Pattern struct {
 	implementation.PatternBase
 }
 
-func (*patternImplementation) IsLeaf(node *tree.Node) bool {
+func (*Pattern) IsLeaf(node *tree.Node) bool {
 	return node.Type() == "string"
 }
 
-func (*patternImplementation) ExtractVariables(input string) (string, []patternquerytypes.Variable, error) {
+func (*Pattern) ExtractVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
 	i := 0
@@ -75,19 +75,19 @@ func produceDummyValue(i int, nodeType string) string {
 	return "CurioVar" + fmt.Sprint(i)
 }
 
-func (*patternImplementation) FindMatchNode(input []byte) [][]int {
+func (*Pattern) FindMatchNode(input []byte) [][]int {
 	return matchNodeRegex.FindAllIndex(input, -1)
 }
 
-func (*patternImplementation) FindUnanchoredPoints(input []byte) [][]int {
+func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
-func (*patternImplementation) ContainerTypes() []string {
+func (*Pattern) ContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
-func (*patternImplementation) LeafContentTypes() []string {
+func (*Pattern) LeafContentTypes() []string {
 	return []string{
 		// identifiers
 		"identifier", "property_identifier", "shorthand_property_identifier", "type_identifier",
@@ -96,7 +96,7 @@ func (*patternImplementation) LeafContentTypes() []string {
 	}
 }
 
-func (*patternImplementation) IsAnchored(node *tree.Node) (bool, bool) {
+func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	if node.Type() == "pair" {
 		return false, false
 	}
@@ -116,11 +116,11 @@ func (*patternImplementation) IsAnchored(node *tree.Node) (bool, bool) {
 	return isUnanchored, isUnanchored
 }
 
-func (*patternImplementation) IsRoot(node *tree.Node) bool {
+func (*Pattern) IsRoot(node *tree.Node) bool {
 	return !(node.Type() == "expression_statement")
 }
 
-func (*patternImplementation) NodeTypes(node *tree.Node) []string {
+func (*Pattern) NodeTypes(node *tree.Node) []string {
 	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
 		if len(node.NamedChildren()) == 0 {
 			return []string{"object"}
@@ -132,7 +132,7 @@ func (*patternImplementation) NodeTypes(node *tree.Node) []string {
 	return []string{node.Type()}
 }
 
-func (*patternImplementation) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
+func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
 	parent := node.Parent()
 	if parent == nil {
 		return dummyValue

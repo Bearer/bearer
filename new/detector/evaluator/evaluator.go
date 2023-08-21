@@ -37,7 +37,7 @@ func New(
 	rules map[string]*settings.Rule,
 ) (*Evaluator, error) {
 	lang := language.New(langImplementation)
-	querySet := lang.NewQuerySet()
+	querySet := query.NewSet(langImplementation.SitterLanguage())
 
 	detectorSet, err := detectorset.New(
 		querySet,

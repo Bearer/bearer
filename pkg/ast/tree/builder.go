@@ -6,14 +6,14 @@ import (
 )
 
 type Builder struct {
-	contentBytes    []byte
-	types           []string
-	nodes           []Node
-	rootNodeID      int
-	children        map[int][]int
-	dataflowSources map[int][]int
-	unifiedSources  map[int][]int
-	sitterToNodeID  map[*sitter.Node]int
+	contentBytes []byte
+	types        []string
+	nodes        []Node
+	rootNodeID   int
+	children,
+	dataflowSources,
+	aliasOf map[int][]int
+	sitterToNodeID map[*sitter.Node]int
 }
 
 func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node) *Builder {
@@ -21,6 +21,7 @@ func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node) *Builder {
 		contentBytes:    contentBytes,
 		children:        make(map[int][]int),
 		dataflowSources: make(map[int][]int),
+		aliasOf:         make(map[int][]int),
 		sitterToNodeID:  make(map[*sitter.Node]int),
 	}
 
@@ -68,21 +69,35 @@ func (builder *Builder) ContentFor(node *sitter.Node) string {
 func (builder *Builder) Dataflow(toNode *sitter.Node, fromNodes ...*sitter.Node) {
 	toID := builder.sitterToNodeID[toNode]
 
-	fromIDs := make([]int, len(fromNodes))
-	for i, fromNode := range fromNodes {
-		fromIDs[i] = builder.sitterToNodeID[fromNode]
-	}
-
-	builder.dataflowSources[toID] = append(builder.dataflowSources[toID], fromIDs...)
+	builder.dataflowSources[toID] = append(
+		builder.dataflowSources[toID],
+		builder.sitterToNodeIDs(fromNodes)...,
+	)
 }
 
-func (builder *Builder) SetOperation(node *sitter.Node) {
-	builder.nodes[builder.sitterToNodeID[node]].isOperation = true
+func (builder *Builder) Alias(toNode *sitter.Node, fromNodes ...*sitter.Node) {
+	toID := builder.sitterToNodeID[toNode]
+
+	builder.dataflowSources[toID] = append(
+		builder.aliasOf[toID],
+		builder.sitterToNodeIDs(fromNodes)...,
+	)
+}
+
+func (builder *Builder) sitterToNodeIDs(nodes []*sitter.Node) []int {
+	ids := make([]int, len(nodes))
+
+	for i, node := range nodes {
+		ids[i] = builder.sitterToNodeID[node]
+	}
+
+	return ids
 }
 
 func (builder *Builder) Build() *Tree {
 	builder.buildChildren()
 	builder.buildDataflowSources()
+	builder.buildAliasOf()
 
 	tree := &Tree{
 		contentBytes: builder.contentBytes,
@@ -156,6 +171,12 @@ func (builder *Builder) buildChildren() {
 func (builder *Builder) buildDataflowSources() {
 	builder.buildAdjacencyList(builder.dataflowSources, func(node *Node, dataflowSources []*Node) {
 		node.dataflowSources = dataflowSources
+	})
+}
+
+func (builder *Builder) buildAliasOf() {
+	builder.buildAdjacencyList(builder.aliasOf, func(node *Node, aliasOf []*Node) {
+		node.aliasOf = aliasOf
 	})
 }
 

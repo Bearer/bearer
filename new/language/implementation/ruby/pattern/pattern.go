@@ -1,4 +1,4 @@
-package ruby
+package pattern
 
 import (
 	"fmt"
@@ -7,10 +7,11 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/bearer/new/language/implementation"
 	patternquerytypes "github.com/bearer/bearer/new/language/patternquery/types"
 	"github.com/bearer/bearer/pkg/ast/tree"
 	"github.com/bearer/bearer/pkg/util/regex"
+
+	"github.com/bearer/bearer/new/language/implementation"
 )
 
 var (
@@ -27,11 +28,11 @@ var (
 	classPatternErrorRegex = regexp.MustCompile(`\Aclass\s*\z`)
 )
 
-type patternImplementation struct {
+type Pattern struct {
 	implementation.PatternBase
 }
 
-func (*patternImplementation) ExtractVariables(input string) (string, []patternquerytypes.Variable, error) {
+func (*Pattern) ExtractVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
 	i := 0
@@ -70,11 +71,11 @@ func (*patternImplementation) ExtractVariables(input string) (string, []patternq
 	return replaced, params, nil
 }
 
-func (*patternImplementation) FindMatchNode(input []byte) [][]int {
+func (*Pattern) FindMatchNode(input []byte) [][]int {
 	return matchNodeRegex.FindAllIndex(input, -1)
 }
 
-func (*patternImplementation) FindUnanchoredPoints(input []byte) [][]int {
+func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
@@ -82,7 +83,7 @@ func produceDummyValue(i int, nodeType string) string {
 	return "curioVar" + fmt.Sprint(i)
 }
 
-func (*patternImplementation) LeafContentTypes() []string {
+func (*Pattern) LeafContentTypes() []string {
 	return []string{
 		// identifiers
 		"identifier", "constant",
@@ -91,15 +92,15 @@ func (*patternImplementation) LeafContentTypes() []string {
 	}
 }
 
-func (*patternImplementation) AnonymousParentTypes() []string {
+func (*Pattern) AnonymousParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
-func (*patternImplementation) ContainerTypes() []string {
+func (*Pattern) ContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
-func (*patternImplementation) IsAnchored(node *tree.Node) (bool, bool) {
+func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	if slices.Contains(unanchoredPatternNodeTypes, node.Type()) {
 		return false, false
 	}
@@ -149,7 +150,7 @@ func (*patternImplementation) IsAnchored(node *tree.Node) (bool, bool) {
 	return true, true
 }
 
-func (*patternImplementation) NodeTypes(node *tree.Node) []string {
+func (*Pattern) NodeTypes(node *tree.Node) []string {
 	parent := node.Parent()
 
 	// Make these equivalent:
@@ -172,7 +173,7 @@ func (*patternImplementation) NodeTypes(node *tree.Node) []string {
 	return []string{node.Type()}
 }
 
-func (*patternImplementation) TranslateContent(fromNodeType, toNodeType, content string) string {
+func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) string {
 	if fromNodeType == "hash_key_symbol" && toNodeType == "simple_symbol" {
 		return ":" + content
 	}
@@ -184,7 +185,7 @@ func (*patternImplementation) TranslateContent(fromNodeType, toNodeType, content
 	return content
 }
 
-func (*patternImplementation) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
+func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
 	for ancestor := node.Parent(); ancestor != nil; ancestor = ancestor.Parent() {
 		if ancestor.Type() != "ERROR" {
 			continue
