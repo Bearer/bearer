@@ -48,30 +48,25 @@ See our [guide to using the GitHub action](/guides/github-action/#pull-request-d
 [guide to using GitLab](/guides/gitlab/#gitlab-merge-request-diff) for
 information on using this feature with those services.
 
-## Exclude specific findings
+## Ignore specific findings
 
 Every finding is associated with a unique fingerprint visible directly in the CLI output, for example:
 
 ```bash
 HIGH: SQL injection vulnerability detected. [CWE-89]
 https://docs.bearer.com/reference/rules/javascript_lang_sql_injection
-To exclude this finding, use the flag --exclude-fingerprint=4b0883d52334dfd9a4acce2fcf810121_0
+To ignore this finding, run: bearer ignore add 4b0883d52334dfd9a4acce2fcf810121_0
 ...
 ```
 
-If a finding is not relevant, you can exclude it by using the `--exclude-fingerprint` command, for example:
+If a finding is not relevant, you can ignore it automatically from future scans using the ```bearer ignore add``` command. This adds the finding's fingerprint to your bearer.ignore file. You can also provide optional author information or a comment:
+
 ```bash
-bearer scan . --exclude-fingerprint=4b0883d52334dfd9a4acce2fcf810121_0
+bearer ignore add 4b0883d52334dfd9a4acce2fcf810121_0 \
+  --author="Mish Bear" \
+  --comment="Ignore this finding"
 ```
 
-If you want to exclude findings automatically from future scans, you can add them to your [bearer config](/reference/config) file in the ```exclude-fingerprint``` node:
-
-```yml
-report:
-  exclude-fingerprint:
-    - 4b0883d52334dfd9a4acce2fcf810121_0
-    - 42a76a8c10a52b38c1b8729a2f211830_0
-```
 <br/>
 {% callout "info" %} If you're looking for more options when it comes to managing findings, take a look at <a href="/guides/bearer-cloud">Bearer Cloud</a>. {% endcallout %}
 

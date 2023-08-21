@@ -148,20 +148,7 @@ func GetOutput(
 	}
 
 	if !config.Scan.Quiet {
-		fingerprints = append(fingerprints, builtInFingerprints...)
-		unusedFingerprints := removeUnusedFingerprints(
-			fingerprints,
-			config.Report.ExcludeFingerprint,
-			config.IgnoredFingerprints,
-		)
-		if len(unusedFingerprints) > 0 {
-			output.StdErrLog("\n=====================================\n")
-			output.StdErrLog(fmt.Sprintf("%d excluded fingerprints present in your Bearer configuration file are no longer detected:", len(unusedFingerprints)))
-			for _, fingerprint := range unusedFingerprints {
-				output.StdErrLog(fmt.Sprintf("  - %s", fingerprint))
-			}
-			output.StdErrLog("\n=====================================")
-		}
+		fingerprintOutput(append(fingerprints, builtInFingerprints...), config.Report.ExcludeFingerprint, config.IgnoredFingerprints)
 	}
 
 	// fail the report if we have failures above the severity threshold
@@ -316,25 +303,59 @@ func evaluateRules(
 	return fingerprints, nil
 }
 
+func fingerprintOutput(fingerprints []string, legacyExcludedFingerprints map[string]bool, ignoredFingerprints map[string]ignore.IgnoredFingerprint) {
+	unusedFingerprints, unusedLegacyFingerprints := removeUnusedFingerprints(
+		fingerprints,
+		legacyExcludedFingerprints,
+		ignoredFingerprints,
+	)
+	if len(legacyExcludedFingerprints) > 0 || len(unusedFingerprints) > 0 || len(unusedLegacyFingerprints) > 0 {
+		output.StdErrLog("\n=====================================\n")
+		// legacy
+		if len(legacyExcludedFingerprints) > 0 {
+			output.StdErrLog("\nNote: exclude_fingerprints is legacy. To use new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate.\n\n")
+		}
+
+		if len(unusedLegacyFingerprints) > 0 {
+			output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your Bearer Configuration file are no longer detected:", len(unusedLegacyFingerprints)))
+			for _, fingerprint := range unusedLegacyFingerprints {
+				output.StdErrLog(fmt.Sprintf("  - %s", fingerprint))
+			}
+		}
+		// end legacy
+
+		if len(unusedFingerprints) > 0 {
+			output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your bearer.ignore file are no longer detected:", len(unusedFingerprints)))
+			for _, fingerprint := range unusedFingerprints {
+				output.StdErrLog(fmt.Sprintf("  - %s", fingerprint))
+			}
+		}
+		output.StdErrLog("\n=====================================")
+	}
+}
+
 func removeUnusedFingerprints(
 	detectedFingerprints []string,
 	excludeFingerprints map[string]bool,
-	ignoredFingerprints map[string]ignore.IgnoredFingerprint) []string {
-	filteredFingerprints := make(map[string]bool)
+	ignoredFingerprints map[string]ignore.IgnoredFingerprint) ([]string, []string) {
 
-	for fingerprint := range excludeFingerprints {
-		if !slices.Contains(detectedFingerprints, fingerprint) {
-			filteredFingerprints[fingerprint] = true
-		}
-	}
-
+	filteredBearerIgnoreFingerprints := make(map[string]bool)
 	for fingerprint := range ignoredFingerprints {
 		if !slices.Contains(detectedFingerprints, fingerprint) {
-			filteredFingerprints[fingerprint] = true
+			filteredBearerIgnoreFingerprints[fingerprint] = true
 		}
 	}
 
-	return maps.Keys(filteredFingerprints)
+	// legacy
+	filteredExcludeFingerprints := make(map[string]bool)
+	for fingerprint := range excludeFingerprints {
+		if !slices.Contains(detectedFingerprints, fingerprint) {
+			filteredExcludeFingerprints[fingerprint] = true
+		}
+	}
+	// end legacy
+
+	return maps.Keys(filteredBearerIgnoreFingerprints), maps.Keys(filteredExcludeFingerprints)
 }
 
 func getExtract(rawCodeExtract []file.Line) string {
@@ -679,7 +700,7 @@ func writeFailureToString(reportStr *strings.Builder, result Result, severity st
 		reportStr.WriteString(color.HiBlackString(result.DocumentationUrl + "\n"))
 	}
 
-	reportStr.WriteString(color.HiBlackString("To exclude this finding, use the flag --exclude-fingerprint=" + result.Fingerprint + "\n"))
+	reportStr.WriteString(color.HiBlackString("To ignore this finding, run: bearer ignore add " + result.Fingerprint + "\n"))
 	reportStr.WriteString("\n")
 	if result.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + result.DetailedContext + "\n\n")

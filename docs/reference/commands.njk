@@ -6,7 +6,7 @@ layout: layouts/doc.njk
 They can be found here: https://github.com/Bearer/bearer/tree/main/pkg/commands
  #}
 
-{% set items = [bearer_scan, bearer_init, bearer_version] %}
+{% set items = [bearer_scan, bearer_init, bearer_ignore_add, bearer_ignore_show, bearer_ignore_migrate, bearer_version] %}
 {% renderTemplate "md" %}
 # Commands
 
@@ -15,13 +15,13 @@ Bearer CLI offers a number of commands to use and customize the CLI to your need
 <ul>
   {% for item in items %}
     <li>
-      <a href="#{{ item.name | trim}}">{{ item.name | trim}}</a>: {{item.synopsis}}
+      <a href="#{{ item.name | trim | replace(" ", "_") }}">{{ item.name | trim}}</a>: {{item.synopsis}}
     </li>
   {% endfor %}
 </ul>
 
 {% for item in items %}
-  <h2 class="inline-block text-neutral-100 bg-code p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e}}">bearer {{ item.name | trim | escape }}</h2>
+  <h2 class="inline-block text-neutral-100 bg-code p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e | replace(" ", "_")}}">bearer {{ item.name | trim | escape }}</h2>
 
   <p>{{item.synopsis}}</p>
 

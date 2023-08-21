@@ -58,10 +58,13 @@ var (
 		Usage:      "Specify which severities are included in the report.",
 	}
 	ExcludeFingerprintFlag = Flag{
-		Name:       "exclude-fingerprint",
-		ConfigName: "report.exclude-fingerprint",
-		Value:      []string{},
-		Usage:      "Specify the comma-separated fingerprints of the findings you would like to exclude from the report.",
+		Name:            "exclude-fingerprint",
+		ConfigName:      "report.exclude-fingerprint",
+		Value:           []string{},
+		Usage:           "Specify the comma-separated fingerprints of the findings you would like to exclude from the report.",
+		DisableInConfig: true,
+		Hide:            true,
+		Deprecated:      true,
 	}
 )
 

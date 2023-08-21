@@ -33,6 +33,14 @@ func writeDocs(cmd *cobra.Command, dir string) error {
 		if !c.IsAvailableCommand() || c.IsAdditionalHelpTopicCommand() {
 			continue
 		}
+		if c.HasSubCommands() {
+			for _, subCmd := range c.Commands() {
+				if err := writeDocs(subCmd, dir); err != nil {
+					return err
+				}
+			}
+			continue
+		}
 		if err := writeDocs(c, dir); err != nil {
 			return err
 		}
@@ -42,7 +50,7 @@ func writeDocs(cmd *cobra.Command, dir string) error {
 	basename := "bearer.yaml"
 
 	if cmd.CommandPath() != "" {
-		basename = strings.Replace(cmd.CommandPath(), " ", "bearer_", -1) + ".yaml"
+		basename = fmt.Sprintf("bearer%s.yaml", strings.Replace(cmd.CommandPath(), " ", "_", -1))
 	}
 
 	filename := filepath.Join(dir, basename)
