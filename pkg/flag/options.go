@@ -6,10 +6,11 @@ import (
 	"strings"
 	"time"
 
+	"golang.org/x/exp/slices"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
-	"github.com/ssoroka/slice"
 )
 
 var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
@@ -280,7 +281,7 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 			return Options{}, fmt.Errorf("scan flag error: %w", err)
 		}
 
-		if opts.ReportOptions.Report == "privacy" && !slice.Contains(opts.ScanOptions.Scanner, "sast") {
+		if opts.ReportOptions.Report == "privacy" && !slices.Contains(opts.ScanOptions.Scanner, "sast") {
 			return Options{}, ErrInvalidScannerReportCombination
 		}
 	}

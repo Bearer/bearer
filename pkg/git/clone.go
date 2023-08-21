@@ -7,8 +7,9 @@ import (
 	"os"
 	"time"
 
+	"golang.org/x/exp/slices"
+
 	"github.com/rs/zerolog/log"
-	"github.com/ssoroka/slice"
 )
 
 func CloneAndGetTree(token string, url *url.URL, branchName string) (*Tree, error) {
@@ -68,7 +69,7 @@ func CloneRangeAndCheckoutFiles(
 }
 
 func appendMailmap(filenames []string, treeFiles []TreeFile) []string {
-	if slice.Contains(filenames, mailmapFilename) {
+	if slices.Contains(filenames, mailmapFilename) {
 		return filenames
 	}
 

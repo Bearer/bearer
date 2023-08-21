@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ssoroka/slice"
+	"golang.org/x/exp/slices"
 )
 
 const blankID = "0000000000000000000000000000000000000000"
@@ -106,7 +106,9 @@ func getObjectIDsForRangeFiles(rootDir, firstCommitSHA, lastCommitSHA string, fi
 		return nil, err
 	}
 
-	return slice.Unique(append(firstCommitFileObjectIDs, rangeUsedObjectIDs...)), nil
+	ids := append(firstCommitFileObjectIDs, rangeUsedObjectIDs...)
+	slices.Sort(ids)
+	return slices.Compact(ids), nil
 }
 
 // Returns all the object ids of files touched by the given range of commits.
@@ -191,7 +193,7 @@ func getObjectIDsForFiles(rootDir, commitSHA string, filenames []string) ([]stri
 			continue
 		}
 
-		if slice.Contains(specialFiles, path.Base(treeFile.Filename)) {
+		if slices.Contains(specialFiles, path.Base(treeFile.Filename)) {
 			objectIDs = append(objectIDs, treeFile.SHA)
 		}
 	}

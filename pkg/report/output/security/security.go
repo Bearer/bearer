@@ -14,7 +14,6 @@ import (
 	"github.com/hhatto/gocloc"
 	"github.com/rodaine/table"
 	"github.com/schollz/progressbar/v3"
-	"github.com/ssoroka/slice"
 
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -577,8 +576,8 @@ func countRules(
 		var shouldCount bool
 
 		if rule.Language() == "secret" {
-			shouldCount = slice.Contains(config.Scan.Scanner, "secrets")
-		} else if slice.Contains(config.Scan.Scanner, "sast") {
+			shouldCount = slices.Contains(config.Scan.Scanner, "secrets")
+		} else if slices.Contains(config.Scan.Scanner, "sast") {
 			if rule.Language() == "JavaScript" {
 				shouldCount = languages["JavaScript"] != nil || languages["TypeScript"] != nil
 			} else {

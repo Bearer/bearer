@@ -24,7 +24,6 @@ require (
 	github.com/schollz/progressbar/v3 v3.13.1
 	github.com/shirou/gopsutil/v3 v3.23.8
 	github.com/smacker/go-tree-sitter v0.0.0-20220829074436-0a7a807924f2
-	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b
 	github.com/stretchr/testify v1.8.4
 	github.com/tangzero/inflector v1.0.0
 	github.com/weppos/publicsuffix-go v0.30.1
