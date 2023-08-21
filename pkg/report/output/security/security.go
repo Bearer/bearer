@@ -244,27 +244,19 @@ func evaluateRules(
 		}
 	}
 
-	outputFindings = removeDuplicates(outputFindings)
-
-	for _, findingsSlice := range outputFindings {
-		sortFindings(findingsSlice)
-	}
-
-	for severity, findingSlice := range outputFindings {
-		summaryFindings[severity] = append(summaryFindings[severity], findingSlice...)
-	}
-
-	ignoredOutputFindings = removeDuplicates(ignoredOutputFindings)
-
-	for _, findingsSlice := range ignoredOutputFindings {
-		sortFindings(findingsSlice)
-	}
-
-	for severity, findingSlice := range ignoredOutputFindings {
-		ignoredSummaryFindings[severity] = append(ignoredSummaryFindings[severity], findingSlice...)
-	}
+	sortFindingsBySeverity(summaryFindings, outputFindings)
+	sortFindingsBySeverity(ignoredSummaryFindings, ignoredOutputFindings)
 
 	return fingerprints, nil
+}
+
+func sortFindingsBySeverity(findingsBySeverity map[string][]types.Finding, outputFindings map[string][]types.Finding) {
+	outputFindings = removeDuplicates(outputFindings)
+
+	for severity, findingsSlice := range outputFindings {
+		sortFindings(findingsSlice)
+		findingsBySeverity[severity] = append(findingsBySeverity[severity], findingsSlice...)
+	}
 }
 
 func fingerprintOutput(
