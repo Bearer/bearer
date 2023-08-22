@@ -90,7 +90,7 @@ const (
 type RuleReferenceScope string
 
 const (
-	CURSOR_STATIC_SCOPE RuleReferenceScope = "cursor_static"
+	CURSOR_STRICT_SCOPE RuleReferenceScope = "cursor_strict"
 	CURSOR_SCOPE        RuleReferenceScope = "cursor"
 	NESTED_SCOPE        RuleReferenceScope = "nested"
 	RESULT_SCOPE        RuleReferenceScope = "result"

@@ -88,7 +88,7 @@ func (evaluator *FileEvaluator) Evaluate(
 		detections, err = evaluator.evalAtDataflowSourcesOrAliasOf(ruleID, sanitizerRuleID, rootNode, cache, scope)
 	case settings.CURSOR_SCOPE:
 		detections, err = evaluator.evalAtAliasOf(ruleID, sanitizerRuleID, rootNode, cache, scope)
-	case settings.CURSOR_STATIC_SCOPE:
+	case settings.CURSOR_STRICT_SCOPE:
 		detections, _, err = evaluator.sanitizedNodeDetections(rootNode, ruleID, sanitizerRuleID, cache, scope)
 	}
 

@@ -44,7 +44,7 @@ func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	evaluationState types.EvaluationState,
 ) ([]interface{}, error) {
-	objectDetections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_STATIC_SCOPE)
+	objectDetections, err := evaluationState.Evaluate(node, "object", "", settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}
