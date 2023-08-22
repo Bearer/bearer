@@ -151,6 +151,14 @@ Depending on how you're using Bearer CLI, you may want to limit the severity lev
 bearer scan . --severity critical,high
 ```
 
+## Force a given exit code for the scan command
+
+If you want to force a successful exit code even when findings are reported, use the `--exit-code` flag and set it to 0. It's particularly useful if you want to perform a scan and report findings without failing your CI or CD pipeline.
+
+```bash
+bearer scan . --exit-code 0
+```
+
 ## Change the output format
 
 Each [report type](/explanations/reports/) has a default output format, but in general you're able to also select between `json` and `yaml` with the `--format` flag.
