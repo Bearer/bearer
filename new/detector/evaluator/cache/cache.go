@@ -3,38 +3,24 @@ package cache
 import (
 	"github.com/bearer/bearer/new/detector/detection"
 	"github.com/bearer/bearer/pkg/ast/tree"
-	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/util/set"
+	"golang.org/x/exp/slices"
 )
 
 const (
-	maxCacheSize = 10_000
-	evictionSize = 1000
+	maxCacheSize = 100
+	evictionSize = 20
 )
 
-type Key struct {
-	rootNode *tree.Node
-	ruleID   string
-	scope    settings.RuleReferenceScope
+type entry struct {
+	Node       *tree.Node
+	RuleID     string
+	Detections []*detection.Detection
 }
-
-func NewKey(
-	rootNode *tree.Node,
-	ruleID string,
-	scope settings.RuleReferenceScope,
-) Key {
-	return Key{
-		rootNode: rootNode,
-		ruleID:   ruleID,
-		scope:    scope,
-	}
-}
-
-type cacheMap map[Key][]*detection.Detection
 
 type Shared struct {
 	ruleIDs set.Set[string]
-	data    cacheMap
+	data    []entry
 }
 
 func NewShared(ruleIDs []string) *Shared {
@@ -43,49 +29,48 @@ func NewShared(ruleIDs []string) *Shared {
 
 	return &Shared{
 		ruleIDs: idSet,
-		data:    make(cacheMap),
 	}
 }
 
 type Cache struct {
 	shared *Shared
-	data   cacheMap
+	data   []entry
 }
 
 func NewCache(sharedCache *Shared) *Cache {
 	return &Cache{
 		shared: sharedCache,
-		data:   make(cacheMap),
 	}
 }
 
-func (cache *Cache) Get(key Key) ([]*detection.Detection, bool) {
-	detections, cached := cache.dataFor(key)[key]
-	return detections, cached
-}
-
-func (cache *Cache) Put(key Key, detections []*detection.Detection) {
-	data := cache.dataFor(key)
-
-	if len(data) > maxCacheSize {
-		i := 0
-		for evictedKey := range data {
-			if i == evictionSize {
-				break
-			}
-
-			delete(data, evictedKey)
-			i++
+func (cache *Cache) Get(node *tree.Node, ruleID string) ([]*detection.Detection, bool) {
+	for _, entry := range *cache.dataFor(ruleID) {
+		if entry.Node == node && entry.RuleID == ruleID {
+			return entry.Detections, true
 		}
 	}
 
-	data[key] = detections
+	return nil, false
 }
 
-func (cache *Cache) dataFor(key Key) cacheMap {
-	if cache.shared.ruleIDs.Has(key.ruleID) {
-		return cache.shared.data
+func (cache *Cache) Put(node *tree.Node, ruleID string, detections []*detection.Detection) {
+	data := cache.dataFor(ruleID)
+
+	if len(*data) > maxCacheSize {
+		*data = slices.Delete(*data, 0, evictionSize)
 	}
 
-	return cache.data
+	*data = append(*data, entry{
+		Node:       node,
+		RuleID:     ruleID,
+		Detections: detections,
+	})
+}
+
+func (cache *Cache) dataFor(ruleID string) *[]entry {
+	if cache.shared.ruleIDs.Has(ruleID) {
+		return &cache.shared.data
+	} else {
+		return &cache.data
+	}
 }

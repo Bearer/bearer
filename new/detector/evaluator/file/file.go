@@ -61,23 +61,6 @@ func (evaluator *FileEvaluator) Evaluate(
 		log.Trace().Msgf("evaluate start: %s at %s", ruleID, rootNode.Debug(true))
 	}
 
-	key := cachepkg.NewKey(rootNode, ruleID, scope)
-
-	if detections, cached := cache.Get(key); cached {
-		evaluator.fileStats.Rule(ruleID, startTime)
-
-		if log.Trace().Enabled() {
-			log.Trace().Msgf(
-				"evaluate end: %s at %s: %d detections (cached)",
-				ruleID,
-				rootNode.Debug(false),
-				len(detections),
-			)
-		}
-
-		return detections, nil
-	}
-
 	var detections []*detection.Detection
 	var err error
 
@@ -95,8 +78,6 @@ func (evaluator *FileEvaluator) Evaluate(
 	if err != nil {
 		return nil, err
 	}
-
-	cache.Put(key, detections)
 
 	evaluator.fileStats.Rule(ruleID, startTime)
 
@@ -278,9 +259,7 @@ func (evaluator *FileEvaluator) detectAtNode(
 		log.Trace().Msgf("detect at node start: %s at %s", ruleID, node.Debug(true))
 	}
 
-	key := cachepkg.NewKey(node, ruleID, settings.CURSOR_STATIC_SCOPE)
-
-	if detections, cached := cache.Get(key); cached {
+	if detections, cached := cache.Get(node, ruleID); cached {
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
 				"detect at node end: %s at %s: %d detections (cached)",
@@ -302,7 +281,7 @@ func (evaluator *FileEvaluator) detectAtNode(
 			)
 		}
 
-		cache.Put(key, nil)
+		cache.Put(node, ruleID, nil)
 		return nil, nil
 	}
 
@@ -315,7 +294,7 @@ func (evaluator *FileEvaluator) detectAtNode(
 			evaluator:    evaluator,
 		}
 		detections, err = evaluator.detectorSet.DetectAt(node, ruleID, state)
-		cache.Put(key, detections)
+		cache.Put(node, ruleID, detections)
 		return
 	}); err != nil {
 		return nil, err

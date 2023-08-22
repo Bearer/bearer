@@ -49,6 +49,10 @@ func (tree *Tree) NodeFromSitter(sitterNode *sitter.Node) *Node {
 	return tree.sitterToNode[sitterNode]
 }
 
+func (node *Node) Tree() *Tree {
+	return node.tree
+}
+
 func (node *Node) SitterNode() *sitter.Node {
 	return node.sitterNode
 }
