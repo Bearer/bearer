@@ -194,7 +194,7 @@ func getSha(target string) (*string, error) {
 	}
 	bytes, err := exec.Command("git", "-C", target, "rev-parse", "HEAD").Output()
 	if err != nil {
-		log.Debug().Msg("Couldn't extract git info for commit sha please set 'SHA' environment variable.")
+		log.Error().Msg("Couldn't extract git info for commit sha please set 'SHA' environment variable.")
 		return nil, err
 	}
 	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
@@ -207,7 +207,7 @@ func getCurrentBranch(target string) (*string, error) {
 	}
 	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "HEAD").Output()
 	if err != nil {
-		log.Debug().Msg("Couldn't extract git info for current branch please set 'CURRENT_BRANCH' environment variable.")
+		log.Error().Msg("Couldn't extract git info for current branch please set 'CURRENT_BRANCH' environment variable.")
 		return nil, err
 	}
 	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
@@ -220,7 +220,7 @@ func getDefaultBranch(target string) (*string, error) {
 	}
 	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
 	if err != nil {
-		log.Debug().Msg("Couldn't extract the default branch of this repository please set 'DEFAULT_BRANCH' environment variable.")
+		log.Error().Msg("Couldn't extract the default branch of this repository. Please set 'DEFAULT_BRANCH' environment variable.")
 		return nil, err
 	}
 	return pointer.String(strings.TrimPrefix(strings.TrimSuffix(string(bytes), "\n"), "origin/")), nil
@@ -233,7 +233,7 @@ func getRemote(target string) (*string, error) {
 	}
 	bytes, err := exec.Command("git", "-C", target, "remote", "get-url", "origin").Output()
 	if err != nil {
-		log.Debug().Msg("Couldn't extract git info for origin url please set 'ORIGIN_URL' environment variable.")
+		log.Error().Msg("Couldn't extract git info for origin url please set 'ORIGIN_URL' environment variable.")
 		return nil, err
 	}
 	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
