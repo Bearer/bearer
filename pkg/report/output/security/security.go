@@ -100,6 +100,7 @@ func AddReportData(
 	if !config.Scan.Quiet {
 		fingerprintOutput(
 			append(fingerprints, builtInFingerprints...),
+			config.CloudIgnoresUsed,
 			config.Report.ExcludeFingerprint,
 			config.IgnoredFingerprints,
 			config.Scan.DiffBaseBranch != "",
@@ -261,10 +262,19 @@ func sortFindingsBySeverity(findingsBySeverity map[string][]types.Finding, outpu
 
 func fingerprintOutput(
 	fingerprints []string,
+	cloudIgnoresUsed bool,
 	legacyExcludedFingerprints map[string]bool,
 	ignoredFingerprints map[string]ignore.IgnoredFingerprint,
 	diffScan bool,
 ) {
+	if cloudIgnoresUsed {
+		if len(ignoredFingerprints) > 0 {
+			output.StdErrLog("\n=====================================\n")
+			output.StdErrLog(fmt.Sprintf("\n%d findings have been ignored from Bearer Cloud\n\n", len(ignoredFingerprints)))
+			output.StdErrLog("\n=====================================\n")
+		}
+		return
+	}
 	unusedFingerprints, unusedLegacyFingerprints := removeUnusedFingerprints(
 		fingerprints,
 		legacyExcludedFingerprints,
