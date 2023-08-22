@@ -90,7 +90,7 @@ func (detector *objectDetector) getAssignment(
 
 	rightObjects, err := generic.GetNonVirtualObjects(
 		evaluationState,
-		result["right"],
+		result["value"],
 	)
 	if err != nil {
 		return nil, err
