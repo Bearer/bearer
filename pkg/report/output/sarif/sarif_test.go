@@ -1,4 +1,4 @@
-package sarif
+package sarif_test
 
 import (
 	"bytes"
@@ -9,7 +9,8 @@ import (
 	"github.com/bradleyjkemp/cupaloy"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/report/output/sarif"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	util "github.com/bearer/bearer/pkg/util/output"
 )
 
@@ -19,7 +20,7 @@ func TestJuiceShopSarif(t *testing.T) {
 		t.Fatalf("failed to read file, err: %s", err)
 	}
 
-	var securityResults map[string][]security.Result
+	var securityResults map[string][]securitytypes.Finding
 	err = json.Unmarshal(securityOutput, &securityResults)
 	if err != nil {
 		t.Fatalf("couldn't unmarshal file output: %s", err)
@@ -53,7 +54,7 @@ func TestJuiceShopSarif(t *testing.T) {
 		OmitParent:         false,
 	}
 
-	res, err := ReportSarif(securityResults, rules)
+	res, err := sarif.ReportSarif(securityResults, rules)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}

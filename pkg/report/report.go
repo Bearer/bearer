@@ -23,7 +23,3 @@ type Report interface {
 	AddSecretLeak(secret secret.Secret, source source.Source)
 	AddError(filePath string, err error)
 }
-
-type ReportOutput interface {
-	Output(filePath string, outputType string)
-}

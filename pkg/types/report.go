@@ -1,6 +1,8 @@
 package types
 
-import "github.com/hhatto/gocloc"
+import (
+	"github.com/hhatto/gocloc"
+)
 
 type Report struct {
 	Path        string

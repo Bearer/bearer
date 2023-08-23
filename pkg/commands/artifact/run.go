@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
-	"time"
 
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
@@ -27,12 +26,6 @@ import (
 	"github.com/bearer/bearer/pkg/github_api"
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
-	"github.com/bearer/bearer/pkg/report/output/gitlab"
-	reporthtml "github.com/bearer/bearer/pkg/report/output/html"
-	"github.com/bearer/bearer/pkg/report/output/privacy"
-	rdo "github.com/bearer/bearer/pkg/report/output/reviewdog"
-	"github.com/bearer/bearer/pkg/report/output/sarif"
-	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/output"
@@ -200,7 +193,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 			return err
 		}
 
-		baseBranchFindings = buildBaseBranchFindings(fileList, reportOutput.Data)
+		baseBranchFindings = buildBaseBranchFindings(reportOutput, fileList)
 
 		if !opts.Quiet {
 			output.StdErrLog("\nScanning current branch")
@@ -311,7 +304,7 @@ func (r *runner) Report(
 	files []files.File,
 	baseBranchFindings *basebranchfindings.Findings,
 ) (bool, error) {
-	startTime := time.Now()
+	// startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	reportPassed := true
 
@@ -337,7 +330,7 @@ func (r *runner) Report(
 		return false, err
 	}
 
-	endTime := time.Now()
+	// endTime := time.Now()
 
 	reportSupported, err := anySupportedLanguagesPresent(report.Inputgocloc, r.scanSettings)
 	if err != nil {
@@ -346,7 +339,7 @@ func (r *runner) Report(
 
 	if !reportSupported && r.scanSettings.Report.Report != flag.ReportPrivacy {
 		var placeholderStr *strings.Builder
-		placeholderStr, err = getPlaceholderOutput(report, r.scanSettings, report.Inputgocloc)
+		placeholderStr, err = getPlaceholderOutput(output, report, r.scanSettings, report.Inputgocloc)
 		if err != nil {
 			return false, err
 		}
@@ -355,106 +348,118 @@ func (r *runner) Report(
 		return true, nil
 	}
 
-	// output report string for type and format
-	switch r.scanSettings.Report.Format {
-	case flag.FormatEmpty:
-		if r.scanSettings.Report.Report == flag.ReportSecurity {
-			reportStr := security.BuildReportString(
-				r.scanSettings,
-				outputtypes.ToSpecific[security.Results](output),
-				report.Inputgocloc,
-			)
+	// {
+	// 	"Security": interface.Format("JSON") string {} -> output data (JSON string)
+	// }
 
-			logger(reportStr.String())
-		} else if r.scanSettings.Report.Report == flag.ReportPrivacy {
-			// for privacy report, default report format is CSV
-			content, err := reportoutput.GetPrivacyReportCSVOutput(report, output.Dataflow, r.scanSettings)
-			if err != nil {
-				return false, fmt.Errorf("error generating report %s", err)
-			}
+	// var formatter generic.Formatter
+	// switch on report TYPE
+	// case Security
+	// formatter = security.NewFormatter(output, scanSettings, gocloc) *security.Formatter {}
+	//
 
-			logger(*content)
-		} else {
-			// for everything else, default report format is JSON
-			content, err := outputhandler.ReportJSON(output.Data)
-			if err != nil {
-				return false, fmt.Errorf("error generating report %s", err)
-			}
+	// formatter.format(Report.Format)
 
-			logger(*content)
-		}
-	case flag.FormatSarif:
-		sarifContent, err := sarif.ReportSarif(output.Data.(security.Results), r.scanSettings.Rules)
-		if err != nil {
-			return false, fmt.Errorf("error generating sarif report %s", err)
-		}
-		content, err := outputhandler.ReportJSON(sarifContent)
-		if err != nil {
-			return false, fmt.Errorf("error generating JSON report %s", err)
-		}
+	// TODO: this should be a formatter that takes report output and format type
+	// switch r.scanSettings.Report.Format {
+	// case flag.FormatEmpty:
+	// 	if r.scanSettings.Report.Report == flag.ReportSecurity {
+	// 		reportStr := security.BuildReportString(
+	// 			output,
+	// 			r.scanSettings,
+	// 			report.Inputgocloc,
+	// 		)
 
-		logger(*content)
-	case flag.FormatReviewDog:
-		sastContent, err := rdo.ReportReviewdog(output.Data.(security.Results))
-		if err != nil {
-			return false, fmt.Errorf("error generating reviewdog report %s", err)
-		}
-		content, err := outputhandler.ReportJSON(sastContent)
-		if err != nil {
-			return false, fmt.Errorf("error generating JSON report %s", err)
-		}
+	// 		logger(reportStr.String())
+	// 	} else if r.scanSettings.Report.Report == flag.ReportPrivacy {
+	// 		// for privacy report, default report format is CSV
+	// 		content, err := reportoutput.GetPrivacyReportCSVOutput(output, report, r.scanSettings)
+	// 		if err != nil {
+	// 			return false, fmt.Errorf("error generating report %s", err)
+	// 		}
 
-		logger(*content)
-	case flag.FormatGitLabSast:
+	// 		logger(*content)
+	// 	} else {
+	// 		// for everything else, default report format is JSON
+	// 		content, err := outputhandler.ReportJSON(output)
+	// 		if err != nil {
+	// 			return false, fmt.Errorf("error generating report %s", err)
+	// 		}
 
-		sastContent, err := gitlab.ReportGitLab(output.Data.(security.Results), startTime, endTime)
-		if err != nil {
-			return false, fmt.Errorf("error generating gitlab-sast report %s", err)
-		}
-		content, err := outputhandler.ReportJSON(sastContent)
-		if err != nil {
-			return false, fmt.Errorf("error generating JSON report %s", err)
-		}
+	// 		logger(*content)
+	// 	}
+	// case flag.FormatSarif:
+	// 	sarifContent, err := sarif.ReportSarif(output.Findings, r.scanSettings.Rules)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating sarif report %s", err)
+	// 	}
+	// 	content, err := outputhandler.ReportJSON(sarifContent)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating JSON report %s", err)
+	// 	}
 
-		logger(*content)
-	case flag.FormatJSON:
-		content, err := outputhandler.ReportJSON(output.Data)
-		if err != nil {
-			return false, fmt.Errorf("error generating report %s", err)
-		}
+	// 	logger(*content)
+	// case flag.FormatReviewDog:
+	// 	sastContent, err := rdo.ReportReviewdog(output.Findings)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating reviewdog report %s", err)
+	// 	}
+	// 	content, err := outputhandler.ReportJSON(sastContent)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating JSON report %s", err)
+	// 	}
 
-		logger(*content)
-	case flag.FormatYAML:
-		content, err := outputhandler.ReportYAML(output.Data)
-		if err != nil {
-			return false, fmt.Errorf("error generating report %s", err)
-		}
+	// 	logger(*content)
+	// case flag.FormatGitLabSast:
 
-		logger(*content)
-	case flag.FormatHTML:
-		var body *string
-		var err error
-		var title string
-		if r.scanSettings.Report.Report == flag.ReportPrivacy {
-			title = "Privacy Report"
-			body, err = reporthtml.ReportPrivacyHTML(output.Data.(*privacy.Report))
-		} else {
-			title = "Security Report"
-			body, err = reporthtml.ReportSecurityHTML(output.Data.(security.Results))
-		}
+	// 	sastContent, err := gitlab.ReportGitLab(output.Findings, startTime, endTime)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating gitlab-sast report %s", err)
+	// 	}
+	// 	content, err := outputhandler.ReportJSON(sastContent)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating JSON report %s", err)
+	// 	}
 
-		if err != nil {
-			return false, fmt.Errorf("error generating report %s", err)
-		}
+	// 	logger(*content)
+	// case flag.FormatJSON:
+	// 	content, err := outputhandler.ReportJSON(output)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating report %s", err)
+	// 	}
 
-		page, err := reporthtml.ReportHTMLWrapper(title, body)
+	// 	logger(*content)
+	// case flag.FormatYAML:
+	// 	content, err := outputhandler.ReportYAML(output)
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating report %s", err)
+	// 	}
 
-		if err != nil {
-			return false, fmt.Errorf("error generating report html page %s", err)
-		}
+	// 	logger(*content)
+	// case flag.FormatHTML:
+	// 	var body *string
+	// 	var err error
+	// 	var title string
+	// 	if r.scanSettings.Report.Report == flag.ReportPrivacy {
+	// 		title = "Privacy Report"
+	// 		body, err = reporthtml.ReportPrivacyHTML(output.PrivacyReport)
+	// 	} else {
+	// 		title = "Security Report"
+	// 		body, err = reporthtml.ReportSecurityHTML(output.Findings)
+	// 	}
 
-		logger(*page)
-	}
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating report %s", err)
+	// 	}
+
+	// 	page, err := reporthtml.ReportHTMLWrapper(title, body)
+
+	// 	if err != nil {
+	// 		return false, fmt.Errorf("error generating report html page %s", err)
+	// 	}
+
+	// 	logger(*page)
+	// }
 
 	outputCachedDataWarning(cacheUsed, r.scanSettings.Scan.Quiet)
 	return reportPassed, nil
@@ -501,13 +506,12 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 	return false, nil
 }
 
-func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
-	dataflowOutput, err := reportoutput.GetDataflow(report, config, true)
-	if err != nil {
-		return
+func getPlaceholderOutput(reportData *outputtypes.ReportData, report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
+	if err := reportoutput.GetDataflow(reportData, report, config, true); err != nil {
+		return nil, err
 	}
 
-	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput.Dataflow, config)
+	return stats.GetPlaceholderOutput(reportData, inputgocloc, config)
 }
 
 func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages []string) {
@@ -527,10 +531,10 @@ func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages
 	return keys
 }
 
-func buildBaseBranchFindings(fileList *files.List, detections any) *basebranchfindings.Findings {
+func buildBaseBranchFindings(reportData *outputtypes.ReportData, fileList *files.List) *basebranchfindings.Findings {
 	result := basebranchfindings.New(fileList)
 
-	for _, findings := range *detections.(*security.Results) {
+	for _, findings := range reportData.FindingsBySeverity {
 		for _, finding := range findings {
 			result.Add(
 				finding.Rule.Id,

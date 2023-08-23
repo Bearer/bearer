@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	privacy "github.com/bearer/bearer/pkg/report/output/privacy"
-	"github.com/bearer/bearer/pkg/report/output/security"
+	privacytypes "github.com/bearer/bearer/pkg/report/output/privacy/types"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bradleyjkemp/cupaloy"
 )
 
@@ -16,7 +16,7 @@ func TestJuiceShopSecurityHtml(t *testing.T) {
 		t.Fatalf("failed to read file, err: %s", err)
 	}
 
-	var securityResults map[string][]security.Result
+	var securityResults map[string][]securitytypes.Finding
 	err = json.Unmarshal(securityOutput, &securityResults)
 	if err != nil {
 		t.Fatalf("couldn't unmarshal file output: %s", err)
@@ -36,7 +36,7 @@ func TestBearPublishingPrivacyHtml(t *testing.T) {
 		t.Fatalf("failed to read file, err: %s", err)
 	}
 
-	var privacyResults privacy.Report
+	var privacyResults privacytypes.Report
 	err = json.Unmarshal(privacyOutput, &privacyResults)
 	if err != nil {
 		t.Fatalf("couldn't unmarshal file output: %s", err)

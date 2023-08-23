@@ -154,7 +154,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to get output: %s", err)
 	}
 
-	report, err := util.ReportYAML(output.Data)
+	report, err := util.ReportYAML(output.FindingsBySeverity)
 	if err != nil {
 		t.Fatalf("failed to encoded to yaml: %s", err)
 	}

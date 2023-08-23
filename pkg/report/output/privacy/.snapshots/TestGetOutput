@@ -1,6 +1,6 @@
-(*privacy.Report)({
-  Subjects: ([]privacy.Subject) (len=2) {
-    (privacy.Subject) {
+(*types.Report)({
+  Subjects: ([]types.Subject) (len=2) {
+    (types.Subject) {
       DataSubject: (string) (len=4) "User",
       DataType: (string) (len=13) "Email Address",
       DetectionCount: (int) 1,
@@ -10,7 +10,7 @@
       LowRiskFindingCount: (int) 0,
       RulesPassedCount: (int) 0
     },
-    (privacy.Subject) {
+    (types.Subject) {
       DataSubject: (string) (len=7) "Unknown",
       DataType: (string) (len=7) "Country",
       DetectionCount: (int) 1,
@@ -21,8 +21,8 @@
       RulesPassedCount: (int) 1
     }
   },
-  ThirdParty: ([]privacy.ThirdParty) (len=1) {
-    (privacy.ThirdParty) {
+  ThirdParty: ([]types.ThirdParty) (len=1) {
+    (types.ThirdParty) {
       ThirdParty: (string) (len=6) "Sentry",
       DataSubject: (string) (len=4) "User",
       DataTypes: ([]string) (len=1) {

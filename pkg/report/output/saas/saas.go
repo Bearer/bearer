@@ -15,14 +15,13 @@ import (
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/file"
 	util "github.com/bearer/bearer/pkg/util/output"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 )
 
-func GetReport(config settings.Config, securityOutput *types.Output[security.Results]) (*types.Output[saas.BearerReport], error) {
+func GetReport(output *types.ReportData, config settings.Config) error {
 	var meta *saas.Meta
 	meta, err := getMeta(config)
 	if err != nil {
@@ -31,21 +30,16 @@ func GetReport(config settings.Config, securityOutput *types.Output[security.Res
 		}
 	}
 
-	dataflow := securityOutput.Dataflow
-	filenames := getDiscoveredFiles(config, securityOutput.Files)
+	output.SaasReport = &saas.BearerReport{
+		Meta:       *meta,
+		Findings:   output.FindingsBySeverity,
+		DataTypes:  output.Dataflow.Datatypes,
+		Components: output.Dataflow.Components,
+		Errors:     output.Dataflow.Errors,
+		Files:      getDiscoveredFiles(config, output.Files),
+	}
 
-	return &types.Output[saas.BearerReport]{
-		Data: saas.BearerReport{
-			Findings:   securityOutput.Data,
-			DataTypes:  dataflow.Datatypes,
-			Components: dataflow.Components,
-			Errors:     dataflow.Errors,
-			Files:      filenames,
-			Meta:       *meta,
-			// Dependencies: dataflow.Dependencies,
-		},
-		Dataflow: dataflow,
-	}, nil
+	return nil
 }
 
 func getMeta(config settings.Config) (*saas.Meta, error) {
@@ -92,7 +86,7 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 	}, nil
 }
 
-func SendReport(config settings.Config, securityOutput *types.Output[security.Results]) {
+func SendReport(config settings.Config, output *types.ReportData) {
 	var meta *saas.Meta
 	meta, err := getMeta(config)
 	if err != nil {
@@ -102,7 +96,7 @@ func SendReport(config settings.Config, securityOutput *types.Output[security.Re
 		return
 	}
 
-	tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityOutput)
+	tmpDir, filename, err := createBearerGzipFileReport(config, meta, output)
 	if err != nil {
 		config.Client.Error = pointer.String("Could not compress report.")
 		log.Debug().Msgf("error creating report %s", err)
@@ -152,7 +146,7 @@ func getDiscoveredFiles(config settings.Config, files []string) []string {
 func createBearerGzipFileReport(
 	config settings.Config,
 	meta *saas.Meta,
-	securityOutput *types.Output[security.Results],
+	output *types.ReportData,
 ) (*string, *string, error) {
 	tempDir, err := os.MkdirTemp("", "reports")
 	if err != nil {
@@ -164,11 +158,11 @@ func createBearerGzipFileReport(
 		return &tempDir, nil, err
 	}
 
-	dataflow := securityOutput.Dataflow
-	filenames := getDiscoveredFiles(config, securityOutput.Files)
+	dataflow := output.Dataflow
+	filenames := getDiscoveredFiles(config, output.Files)
 
 	content, _ := util.ReportJSON(&saas.BearerReport{
-		Findings:   securityOutput.Data,
+		Findings:   output.FindingsBySeverity,
 		DataTypes:  dataflow.Datatypes,
 		Components: dataflow.Components,
 		Files:      filenames,

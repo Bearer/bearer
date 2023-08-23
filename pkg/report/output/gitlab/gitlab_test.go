@@ -9,7 +9,7 @@ import (
 
 	"github.com/bradleyjkemp/cupaloy"
 
-	"github.com/bearer/bearer/pkg/report/output/security"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	util "github.com/bearer/bearer/pkg/util/output"
 )
 
@@ -19,8 +19,8 @@ func TestJuiceShopSarif(t *testing.T) {
 		t.Fatalf("failed to read file, err: %s", err)
 	}
 
-	var securityResults map[string][]security.Result
-	err = json.Unmarshal(securityOutput, &securityResults)
+	var securityFindings map[string][]securitytypes.Finding
+	err = json.Unmarshal(securityOutput, &securityFindings)
 	if err != nil {
 		t.Fatalf("couldn't unmarshal file output: %s", err)
 	}
@@ -28,7 +28,7 @@ func TestJuiceShopSarif(t *testing.T) {
 	startTime, _ := time.Parse("2006-01-02T15:04:05", "2006-01-02T15:04:05")
 	endTime, _ := time.Parse("2006-01-02T15:04:05", "2006-01-02T15:05:05")
 
-	res, err := ReportGitLab(securityResults, startTime, endTime)
+	res, err := ReportGitLab(securityFindings, startTime, endTime)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}

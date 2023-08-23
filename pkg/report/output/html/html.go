@@ -8,8 +8,9 @@ import (
 	"time"
 
 	html "github.com/bearer/bearer/pkg/report/output/html/types"
-	privacy "github.com/bearer/bearer/pkg/report/output/privacy"
-	security "github.com/bearer/bearer/pkg/report/output/security"
+	privacytypes "github.com/bearer/bearer/pkg/report/output/privacy/types"
+	"github.com/bearer/bearer/pkg/report/output/security"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	term "github.com/buildkite/terminal"
 	"github.com/russross/blackfriday"
@@ -54,7 +55,7 @@ func ReportHTMLWrapper(title string, body *string) (*string, error) {
 	return &content, nil
 }
 
-func ReportSecurityHTML(detections map[string][]security.Result) (*string, error) {
+func ReportSecurityHTML(detections map[string][]securitytypes.Finding) (*string, error) {
 	htmlContent := &strings.Builder{}
 
 	findingsTemplate, err := template.New("findingsTemplate").Funcs(template.FuncMap{
@@ -76,7 +77,7 @@ func ReportSecurityHTML(detections map[string][]security.Result) (*string, error
 	return &content, nil
 }
 
-func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
+func ReportPrivacyHTML(privacyReport *privacytypes.Report) (*string, error) {
 	htmlContent := &strings.Builder{}
 
 	privacyPage := html.PrivacyHTMLBody{
@@ -84,7 +85,7 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 		GroupedThirdParty:  make([]html.GroupedThirdParty, 0),
 	}
 
-	subjectGroups := make(map[string][]privacy.Subject)
+	subjectGroups := make(map[string][]privacytypes.Subject)
 	for _, subject := range privacyReport.Subjects {
 		subjectGroups[subject.DataSubject] = append(subjectGroups[subject.DataSubject], subject)
 	}
@@ -97,7 +98,7 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 		privacyPage.GroupedDataSubject = append(privacyPage.GroupedDataSubject, group)
 	}
 
-	thirdPartyGroups := make(map[string][]privacy.ThirdParty)
+	thirdPartyGroups := make(map[string][]privacytypes.ThirdParty)
 	for _, thirdParty := range privacyReport.ThirdParty {
 		thirdPartyGroups[thirdParty.ThirdParty] = append(thirdPartyGroups[thirdParty.ThirdParty], thirdParty)
 	}
@@ -145,14 +146,14 @@ func JoinCwe(data []string) string {
 
 func CountItems(arr interface{}) string {
 	switch v := arr.(type) {
-	case []security.Result:
+	case []securitytypes.Finding:
 		return fmt.Sprint(len(v))
 	default:
 		return "0"
 	}
 }
 
-func DisplayExtract(result security.Result) string {
+func DisplayExtract(result securitytypes.Finding) string {
 	terminalOutput := security.HighlightCodeExtract(result)
 	return string(term.Render([]byte(terminalOutput)))
 }

@@ -1,16 +1,16 @@
 package types
 
 import (
-	privacy "github.com/bearer/bearer/pkg/report/output/privacy"
+	privacytypes "github.com/bearer/bearer/pkg/report/output/privacy/types"
 )
 
 type GroupedThirdParty struct {
 	ThirdPartyName string
-	ThirdParty     []privacy.ThirdParty
+	ThirdParty     []privacytypes.ThirdParty
 }
 type GroupedDataSubject struct {
 	DataSubjectName string
-	Subject         []privacy.Subject
+	Subject         []privacytypes.Subject
 }
 
 type PrivacyHTMLBody = struct {

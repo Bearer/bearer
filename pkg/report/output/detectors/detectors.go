@@ -13,7 +13,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/output"
 )
 
-func GetOutput(report globaltypes.Report, config settings.Config) (*types.Output[[]any], error) {
+func AddReportData(reportData *types.ReportData, report globaltypes.Report, config settings.Config) error {
 	if !config.Scan.Quiet {
 		output.StdErrLog("Running Detectors")
 	}
@@ -21,14 +21,16 @@ func GetOutput(report globaltypes.Report, config settings.Config) (*types.Output
 	var detections []interface{}
 	f, err := os.Open(report.Path)
 	if err != nil {
-		return nil, fmt.Errorf("failed to open report: %w", err)
+		return fmt.Errorf("failed to open report: %w", err)
 	}
 
 	err = jsonlines.Decode(f, &detections)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode report: %w", err)
+		return fmt.Errorf("failed to decode report: %w", err)
 	}
 	log.Debug().Msgf("got %d detections", len(detections))
 
-	return &types.Output[[]any]{Data: detections}, nil
+	reportData.Detectors = detections
+
+	return nil
 }

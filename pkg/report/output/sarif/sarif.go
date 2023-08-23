@@ -3,10 +3,10 @@ package sarif
 import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	sarif "github.com/bearer/bearer/pkg/report/output/sarif/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 )
 
-func ReportSarif(outputDetections map[string][]security.Result, rules map[string]*settings.Rule) (sarif.SarifOutput, error) {
+func ReportSarif(outputDetections map[string][]securitytypes.Finding, rules map[string]*settings.Rule) (sarif.SarifOutput, error) {
 	var sarifRules []sarif.Rule
 
 	for _, rule := range rules {
