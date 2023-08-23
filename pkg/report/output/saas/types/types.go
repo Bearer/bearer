@@ -23,12 +23,12 @@ type Meta struct {
 }
 
 type BearerReport struct {
-	Meta       Meta                               `json:"meta" yaml:"meta"`
-	Findings   map[string][]securitytypes.Finding `json:"findings" yaml:"findings"`
-	DataTypes  []dataflowtypes.Datatype           `json:"data_types" yaml:"data_types"`
-	Components []dataflowtypes.Component          `json:"components" yaml:"components"`
-	Errors     []dataflowtypes.Error              `json:"errors" yaml:"errors"`
-	Files      []string                           `json:"files" yaml:"files"`
+	Meta       Meta                      `json:"meta" yaml:"meta"`
+	Findings   map[string][]SaasFinding  `json:"findings" yaml:"findings"`
+	DataTypes  []dataflowtypes.Datatype  `json:"data_types" yaml:"data_types"`
+	Components []dataflowtypes.Component `json:"components" yaml:"components"`
+	Errors     []dataflowtypes.Error     `json:"errors" yaml:"errors"`
+	Files      []string                  `json:"files" yaml:"files"`
 	// Dependencies []dataflowtypes.Dependency    `json:"dependencies" yaml:"dependencies"`
 }
 

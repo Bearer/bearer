@@ -665,7 +665,7 @@ func writeFailureToString(reportStr *strings.Builder, finding types.Finding, sev
 	reportStr.WriteString(color.HiBlueString("File: " + underline(finding.FullFilename+":"+fmt.Sprint(finding.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(HighlightCodeExtract(finding))
+	reportStr.WriteString(finding.HighlightCodeExtract())
 }
 
 func formatSeverity(severity string) string {
@@ -674,64 +674,6 @@ func formatSeverity(severity string) string {
 		return strings.ToUpper(severity)
 	}
 	return severityColorFn(strings.ToUpper(severity + ": "))
-}
-
-func HighlightCodeExtract(finding types.Finding) string {
-	result := ""
-	for _, line := range finding.RawCodeExtract {
-		if line.Strip {
-			result += color.HiBlackString(
-				fmt.Sprintf(" %s %s", strings.Repeat(" ", iterativeDigitsCount(line.LineNumber)), line.Extract),
-			)
-		} else {
-			result += color.HiMagentaString(fmt.Sprintf(" %d ", line.LineNumber))
-			if line.LineNumber == finding.Source.Start && line.LineNumber == finding.Source.End {
-				for i, char := range line.Extract {
-					if i >= finding.Source.Column.Start-1 && i < finding.Source.Column.End-1 {
-						result += color.MagentaString(fmt.Sprintf("%c", char))
-					} else {
-						result += color.HiMagentaString(fmt.Sprintf("%c", char))
-					}
-				}
-			} else if line.LineNumber == finding.Source.Start && line.LineNumber <= finding.Source.End {
-				for i, char := range line.Extract {
-					if i >= finding.Source.Column.Start-1 {
-						result += color.MagentaString(fmt.Sprintf("%c", char))
-					} else {
-						result += color.HiMagentaString(fmt.Sprintf("%c", char))
-					}
-				}
-			} else if line.LineNumber == finding.Source.End && line.LineNumber >= finding.Source.Start {
-				for i, char := range line.Extract {
-					if i <= finding.Source.Column.End-1 {
-						result += color.MagentaString(fmt.Sprintf("%c", char))
-					} else {
-						result += color.HiMagentaString(fmt.Sprintf("%c", char))
-					}
-				}
-			} else if line.LineNumber > finding.Source.Start && line.LineNumber < finding.Source.End {
-				result += color.MagentaString("%s", line.Extract)
-			} else {
-				result += color.HiMagentaString(line.Extract)
-			}
-		}
-
-		if line.LineNumber != finding.Sink.End {
-			result += "\n"
-		}
-	}
-
-	return result
-}
-
-func iterativeDigitsCount(number int) int {
-	count := 0
-	for number != 0 {
-		number /= 10
-		count += 1
-	}
-
-	return count
 }
 
 // removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection

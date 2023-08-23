@@ -9,7 +9,6 @@ import (
 
 	html "github.com/bearer/bearer/pkg/report/output/html/types"
 	privacytypes "github.com/bearer/bearer/pkg/report/output/privacy/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
 	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	term "github.com/buildkite/terminal"
@@ -59,11 +58,11 @@ func ReportSecurityHTML(detections map[string][]securitytypes.Finding) (*string,
 	htmlContent := &strings.Builder{}
 
 	findingsTemplate, err := template.New("findingsTemplate").Funcs(template.FuncMap{
-		"kebabCase":      KebabCase,
-		"markdownToHtml": MarkdownToHtml,
-		"joinCwe":        JoinCwe,
-		"count":          CountItems,
-		"displayExtract": DisplayExtract,
+		"kebabCase":      kebabCase,
+		"markdownToHtml": markdownToHtml,
+		"joinCwe":        joinCwe,
+		"count":          countItems,
+		"displayExtract": displayExtract,
 	}).Parse(securityTemplate)
 	if err != nil {
 		return nil, err
@@ -112,7 +111,7 @@ func ReportPrivacyHTML(privacyReport *privacytypes.Report) (*string, error) {
 	}
 
 	subjectTemplate, err := template.New("subjectTemplate").Funcs(template.FuncMap{
-		"kebabCase": KebabCase,
+		"kebabCase": kebabCase,
 	}).Parse(privacyTemplate)
 	if err != nil {
 		return nil, err
@@ -127,16 +126,16 @@ func ReportPrivacyHTML(privacyReport *privacytypes.Report) (*string, error) {
 	return &content, nil
 }
 
-func KebabCase(s string) string {
+func kebabCase(s string) string {
 	return strings.ReplaceAll(strings.ToLower(s), " ", "-")
 }
 
-func MarkdownToHtml(s string) string {
+func markdownToHtml(s string) string {
 	html := blackfriday.MarkdownCommon([]byte(s))
 	return strings.ReplaceAll(string(html), "<h2", "<h4")
 }
 
-func JoinCwe(data []string) string {
+func joinCwe(data []string) string {
 	var out = []string{}
 	for _, cwe := range data {
 		out = append(out, "CWE "+cwe)
@@ -144,7 +143,7 @@ func JoinCwe(data []string) string {
 	return strings.Join(out, ", ")
 }
 
-func CountItems(arr interface{}) string {
+func countItems(arr interface{}) string {
 	switch v := arr.(type) {
 	case []securitytypes.Finding:
 		return fmt.Sprint(len(v))
@@ -153,7 +152,7 @@ func CountItems(arr interface{}) string {
 	}
 }
 
-func DisplayExtract(result securitytypes.Finding) string {
-	terminalOutput := security.HighlightCodeExtract(result)
+func displayExtract(finding securitytypes.Finding) string {
+	terminalOutput := finding.HighlightCodeExtract()
 	return string(term.Render([]byte(terminalOutput)))
 }

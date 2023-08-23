@@ -3,8 +3,10 @@ package output
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
+	"github.com/hhatto/gocloc"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
@@ -57,7 +59,7 @@ func GetOutput(
 		}
 
 		sendToCloud = true
-		err = saas.GetReport(data, config)
+		err = saas.GetReport(data, config, false)
 	case flag.ReportPrivacy:
 		err = privacy.AddReportData(data, config)
 	case flag.ReportStats:
@@ -74,17 +76,6 @@ func GetOutput(
 	return data, err
 }
 
-func GetPrivacyReportCSVOutput(reportOutput *types.ReportData, report globaltypes.Report, config settings.Config) (*string, error) {
-	csvString, err := privacy.BuildCsvString(reportOutput, config)
-	if err != nil {
-		return nil, err
-	}
-
-	content := csvString.String()
-
-	return &content, nil
-}
-
 func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config settings.Config, isInternal bool) error {
 	if reportData.Detectors == nil {
 		if err := detectors.AddReportData(reportData, report, config); err != nil {
@@ -95,4 +86,32 @@ func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config
 		detection.(map[string]interface{})["id"] = uuid.NewString()
 	}
 	return dataflow.AddReportData(reportData, config, isInternal)
+}
+
+func FormatOutput(
+	reportData *types.ReportData,
+	config settings.Config,
+	goclocResult *gocloc.Result,
+	startTime time.Time,
+	endTime time.Time,
+) (*string, error) {
+	var formatter types.GenericFormatter
+	switch config.Report.Report {
+	case flag.ReportDetectors:
+		formatter = detectors.NewFormatter(reportData, config)
+	case flag.ReportDataFlow:
+		formatter = dataflow.NewFormatter(reportData, config)
+	case flag.ReportSecurity:
+		formatter = security.NewFormatter(reportData, config, goclocResult, startTime, endTime)
+	case flag.ReportPrivacy:
+		formatter = privacy.NewFormatter(reportData, config)
+	case flag.ReportSaaS:
+		formatter = saas.NewFormatter(reportData, config)
+	case flag.ReportStats:
+		formatter = stats.NewFormatter(reportData, config)
+	default:
+		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+	}
+
+	return formatter.Format(config.Report.Format)
 }

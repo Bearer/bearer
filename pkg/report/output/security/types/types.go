@@ -1,6 +1,12 @@
 package types
 
-import "github.com/bearer/bearer/pkg/util/file"
+import (
+	"fmt"
+	"strings"
+
+	"github.com/bearer/bearer/pkg/util/file"
+	"github.com/fatih/color"
+)
 
 type Finding struct {
 	*Rule
@@ -18,6 +24,7 @@ type Finding struct {
 	DetailedContext  string      `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 	CodeExtract      string      `json:"code_extract,omitempty" yaml:"code_extract,omitempty"`
 	RawCodeExtract   []file.Line `json:"-" yaml:"-"`
+	SomeExtraField   string      `json:"-" yaml:"-"`
 }
 
 type DataType struct {
@@ -51,4 +58,62 @@ type Column struct {
 type Sink struct {
 	*Location
 	Content string `json:"content" yaml:"content"`
+}
+
+func (f Finding) HighlightCodeExtract() string {
+	result := ""
+	for _, line := range f.RawCodeExtract {
+		if line.Strip {
+			result += color.HiBlackString(
+				fmt.Sprintf(" %s %s", strings.Repeat(" ", iterativeDigitsCount(line.LineNumber)), line.Extract),
+			)
+		} else {
+			result += color.HiMagentaString(fmt.Sprintf(" %d ", line.LineNumber))
+			if line.LineNumber == f.Source.Start && line.LineNumber == f.Source.End {
+				for i, char := range line.Extract {
+					if i >= f.Source.Column.Start-1 && i < f.Source.Column.End-1 {
+						result += color.MagentaString(fmt.Sprintf("%c", char))
+					} else {
+						result += color.HiMagentaString(fmt.Sprintf("%c", char))
+					}
+				}
+			} else if line.LineNumber == f.Source.Start && line.LineNumber <= f.Source.End {
+				for i, char := range line.Extract {
+					if i >= f.Source.Column.Start-1 {
+						result += color.MagentaString(fmt.Sprintf("%c", char))
+					} else {
+						result += color.HiMagentaString(fmt.Sprintf("%c", char))
+					}
+				}
+			} else if line.LineNumber == f.Source.End && line.LineNumber >= f.Source.Start {
+				for i, char := range line.Extract {
+					if i <= f.Source.Column.End-1 {
+						result += color.MagentaString(fmt.Sprintf("%c", char))
+					} else {
+						result += color.HiMagentaString(fmt.Sprintf("%c", char))
+					}
+				}
+			} else if line.LineNumber > f.Source.Start && line.LineNumber < f.Source.End {
+				result += color.MagentaString("%s", line.Extract)
+			} else {
+				result += color.HiMagentaString(line.Extract)
+			}
+		}
+
+		if line.LineNumber != f.Sink.End {
+			result += "\n"
+		}
+	}
+
+	return result
+}
+
+func iterativeDigitsCount(number int) int {
+	count := 0
+	for number != 0 {
+		number /= 10
+		count += 1
+	}
+
+	return count
 }

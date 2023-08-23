@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
@@ -28,13 +29,12 @@ import (
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
-	"github.com/bearer/bearer/pkg/util/output"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
 	"github.com/bearer/bearer/pkg/types"
 )
 
-var ErrFileListEmpty = errors.New("We couldn't find any files to scan in the specified directory.")
+var ErrFileListEmpty = errors.New("couldn't find any files to scan in the specified directory")
 
 // TargetKind represents what kind of artifact bearer scans
 type TargetKind string
@@ -143,7 +143,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 	}
 
 	if !opts.Quiet {
-		output.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
+		outputhandler.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
 	}
 
 	targetPath, err := filepath.Abs(opts.Target)
@@ -179,7 +179,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 	var baseBranchFindings *basebranchfindings.Findings
 	if err := repository.WithBaseBranch(func() error {
 		if !opts.Quiet {
-			output.StdErrLog(fmt.Sprintf("\nScanning base branch %s", opts.DiffBaseBranch))
+			outputhandler.StdErrLog(fmt.Sprintf("\nScanning base branch %s", opts.DiffBaseBranch))
 		}
 
 		if err := orchestrator.Scan(r.reportPath+".base", fileList.BaseFiles); err != nil {
@@ -196,7 +196,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 		baseBranchFindings = buildBaseBranchFindings(reportOutput, fileList)
 
 		if !opts.Quiet {
-			output.StdErrLog("\nScanning current branch")
+			outputhandler.StdErrLog("\nScanning current branch")
 		}
 
 		return nil
@@ -304,7 +304,7 @@ func (r *runner) Report(
 	files []files.File,
 	baseBranchFindings *basebranchfindings.Findings,
 ) (bool, error) {
-	// startTime := time.Now()
+	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 	reportPassed := true
 
@@ -330,7 +330,7 @@ func (r *runner) Report(
 		return false, err
 	}
 
-	// endTime := time.Now()
+	endTime := time.Now()
 
 	reportSupported, err := anySupportedLanguagesPresent(report.Inputgocloc, r.scanSettings)
 	if err != nil {
@@ -348,120 +348,21 @@ func (r *runner) Report(
 		return true, nil
 	}
 
-	// {
-	// 	"Security": interface.Format("JSON") string {} -> output data (JSON string)
-	// }
+	formatStr, err := reportoutput.FormatOutput(
+		output,
+		r.scanSettings,
+		report.Inputgocloc,
+		startTime,
+		endTime,
+	)
+	if err != nil {
+		return false, fmt.Errorf("error generating report %s", err)
+	}
 
-	// var formatter generic.Formatter
-	// switch on report TYPE
-	// case Security
-	// formatter = security.NewFormatter(output, scanSettings, gocloc) *security.Formatter {}
-	//
-
-	// formatter.format(Report.Format)
-
-	// TODO: this should be a formatter that takes report output and format type
-	// switch r.scanSettings.Report.Format {
-	// case flag.FormatEmpty:
-	// 	if r.scanSettings.Report.Report == flag.ReportSecurity {
-	// 		reportStr := security.BuildReportString(
-	// 			output,
-	// 			r.scanSettings,
-	// 			report.Inputgocloc,
-	// 		)
-
-	// 		logger(reportStr.String())
-	// 	} else if r.scanSettings.Report.Report == flag.ReportPrivacy {
-	// 		// for privacy report, default report format is CSV
-	// 		content, err := reportoutput.GetPrivacyReportCSVOutput(output, report, r.scanSettings)
-	// 		if err != nil {
-	// 			return false, fmt.Errorf("error generating report %s", err)
-	// 		}
-
-	// 		logger(*content)
-	// 	} else {
-	// 		// for everything else, default report format is JSON
-	// 		content, err := outputhandler.ReportJSON(output)
-	// 		if err != nil {
-	// 			return false, fmt.Errorf("error generating report %s", err)
-	// 		}
-
-	// 		logger(*content)
-	// 	}
-	// case flag.FormatSarif:
-	// 	sarifContent, err := sarif.ReportSarif(output.Findings, r.scanSettings.Rules)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating sarif report %s", err)
-	// 	}
-	// 	content, err := outputhandler.ReportJSON(sarifContent)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating JSON report %s", err)
-	// 	}
-
-	// 	logger(*content)
-	// case flag.FormatReviewDog:
-	// 	sastContent, err := rdo.ReportReviewdog(output.Findings)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating reviewdog report %s", err)
-	// 	}
-	// 	content, err := outputhandler.ReportJSON(sastContent)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating JSON report %s", err)
-	// 	}
-
-	// 	logger(*content)
-	// case flag.FormatGitLabSast:
-
-	// 	sastContent, err := gitlab.ReportGitLab(output.Findings, startTime, endTime)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating gitlab-sast report %s", err)
-	// 	}
-	// 	content, err := outputhandler.ReportJSON(sastContent)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating JSON report %s", err)
-	// 	}
-
-	// 	logger(*content)
-	// case flag.FormatJSON:
-	// 	content, err := outputhandler.ReportJSON(output)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating report %s", err)
-	// 	}
-
-	// 	logger(*content)
-	// case flag.FormatYAML:
-	// 	content, err := outputhandler.ReportYAML(output)
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating report %s", err)
-	// 	}
-
-	// 	logger(*content)
-	// case flag.FormatHTML:
-	// 	var body *string
-	// 	var err error
-	// 	var title string
-	// 	if r.scanSettings.Report.Report == flag.ReportPrivacy {
-	// 		title = "Privacy Report"
-	// 		body, err = reporthtml.ReportPrivacyHTML(output.PrivacyReport)
-	// 	} else {
-	// 		title = "Security Report"
-	// 		body, err = reporthtml.ReportSecurityHTML(output.Findings)
-	// 	}
-
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating report %s", err)
-	// 	}
-
-	// 	page, err := reporthtml.ReportHTMLWrapper(title, body)
-
-	// 	if err != nil {
-	// 		return false, fmt.Errorf("error generating report html page %s", err)
-	// 	}
-
-	// 	logger(*page)
-	// }
+	logger(*formatStr)
 
 	outputCachedDataWarning(cacheUsed, r.scanSettings.Scan.Quiet)
+
 	return reportPassed, nil
 }
 

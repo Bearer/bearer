@@ -26,3 +26,7 @@ type DataFlow struct {
 	Dependencies []dataflowtypes.Dependency   `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
 	Errors       []dataflowtypes.Error        `json:"errors,omitempty" yaml:"errors,omitempty"`
 }
+
+type GenericFormatter interface {
+	Format(format string) (*string, error) // TODO: ensure format is an expected format (from report flags)
+}
