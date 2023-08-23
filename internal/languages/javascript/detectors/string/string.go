@@ -54,9 +54,19 @@ func handleTemplateString(node *tree.Node, scanContext types.ScanContext) ([]int
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {
-		childValue, childIsLiteral, err := common.GetStringValue(child.Children()[1], scanContext)
-		if err != nil {
-			return err
+		var childValue string
+		var childIsLiteral bool
+		namedChildren := child.NamedChildren()
+
+		if len(namedChildren) == 0 {
+			childValue = ""
+			childIsLiteral = true
+		} else {
+			var err error
+			childValue, childIsLiteral, err = common.GetStringValue(namedChildren[0], scanContext)
+			if err != nil {
+				return err
+			}
 		}
 
 		if childValue == "" && !childIsLiteral {

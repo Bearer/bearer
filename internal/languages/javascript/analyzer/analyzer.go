@@ -174,8 +174,7 @@ func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() er
 // parameter definition
 // foo(a, b = 1)
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
-	pattern := node.ChildByFieldName("pattern")
-	if pattern.Type() == "identifier" {
+	if pattern := node.ChildByFieldName("pattern"); pattern != nil && pattern.Type() == "identifier" {
 		analyzer.scope.Declare(analyzer.builder.ContentFor(pattern), node)
 	}
 
