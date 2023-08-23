@@ -6,11 +6,11 @@ title: Add or update a recipe
 
 Recipes are part of how Bearer CLI makes connections between your code and other sources. These are things like data stores, APIs, and internal services. They work by providing information about endpoints, API base urls, package information, etc.
 
-Recipes are located at `bearer/pkg/classification/db/recipes/`.
+Recipes are located at `bearer/internal/classification/db/recipes/`.
 
 ```md
 .
-├ pkg/
+├ internal/
 │  └ classification/
 │       └  db/
 │           └  recipes/
@@ -29,7 +29,7 @@ Each recipe consists of a `JSON` file containing the following properties:
   - `package_manager` (string): The package manager that manages the package, such as npm, go, etc.
 - `uuid`: A unique identifier to distinguish the recipe from others. See below for [generating a new uuid](#generating-a-uuid).
 - `sub_type` (string): The subtype of the earlier `type` property.
-  - `external_service` subtypes: 
+  - `external_service` subtypes:
     - `third_party`
   - `data_store` subtypes:
     - `database`
@@ -42,7 +42,7 @@ Each recipe consists of a `JSON` file containing the following properties:
   - `internal_service` subtypes:
     - `message_bus`
 
-If any of the existing properties and available values don't meet the needs of your new recipe, [open a new issue]({{meta.sourcePath}}/issues/new/choose). You can view the existing recipes [in the GitHub repo]({{meta.sourcePath}}/tree/main/pkg/classification/db/recipes).
+If any of the existing properties and available values don't meet the needs of your new recipe, [open a new issue]({{meta.sourcePath}}/issues/new/choose). You can view the existing recipes [in the GitHub repo]({{meta.sourcePath}}/tree/main/internal/classification/db/recipes).
 
 ## Generating a UUID
 

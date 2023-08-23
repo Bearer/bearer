@@ -65,13 +65,13 @@ go test ./...
 Running classification tests:
 
 ```bash
-go test ./pkg/classification/... -count=1
+go test ./internal/classification/... -count=1
 ```
 
 Running a single specific test:
 
 ```bash
-go test -run ^TestSchema$ ./pkg/classification/schema -count=1
+go test -run ^TestSchema$ ./internal/classification/schema -count=1
 ```
 
 ### Integration testing

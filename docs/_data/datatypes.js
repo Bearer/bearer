@@ -74,10 +74,10 @@ function sortData(typesFile, catsFile, groupsFile) {
 }
 // example();
 module.exports = async function () {
-  let dataTypes = await fetchData("../pkg/classification/db/data_types/");
-  let dataCats = await fetchData("../pkg/classification/db/data_categories/");
+  let dataTypes = await fetchData("../internal/classification/db/data_types/");
+  let dataCats = await fetchData("../internal/classification/db/data_categories/");
   let groupings = await fetchFile(
-    "../pkg/classification/db/category_grouping.json"
+    "../internal/classification/db/category_grouping.json"
   );
   return sortData(dataTypes, dataCats, groupings);
 };

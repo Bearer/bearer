@@ -4,7 +4,7 @@ title: Scanner Types
 
 # Scanner Types
 
-Bearer CLI comes with two types of security scanners, SAST (default) and Secrets. 
+Bearer CLI comes with two types of security scanners, SAST (default) and Secrets.
 
 ## SAST Scanner
 
@@ -51,7 +51,7 @@ Detected: Password in URL
 File: ../../OWASP/NodeGoat/README.md:59
 ```
 
-You can see a full list of [built-in patterns](https://github.com/Bearer/bearer/blob/main/pkg/detectors/gitleaks/gitlab_config.toml).
+You can see a full list of [built-in patterns](https://github.com/Bearer/bearer/blob/main/internal/detectors/gitleaks/gitlab_config.toml).
 
 ⚠️ Secret detection patterns are not configurable today. If this is something you'd like to see, please open an [issue](https://github.com/Bearer/bearer/issues).
 

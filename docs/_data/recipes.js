@@ -16,7 +16,7 @@ async function fetchData(dir) {
         return {
           ...data,
           id: path.basename(file, ".json"),
-          source: `/pkg/classification/db/recipes/${file}`,
+          source: `/internal/classification/db/recipes/${file}`,
         };
       })
     );
@@ -26,6 +26,6 @@ async function fetchData(dir) {
   }
 }
 module.exports = async function () {
-  let recipes = await fetchData("../pkg/classification/db/recipes/");
+  let recipes = await fetchData("../internal/classification/db/recipes/");
   return recipes;
 };

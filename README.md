@@ -41,7 +41,7 @@ Bearer CLI scans your source code for:
   * A08: Data Integrity Failures (e.g. Deserialization of Untrusted Data).
   * A09: Security Logging and Monitoring Failures (e.g. Insertion of Sensitive Information into Log File).
   * A10: Server-Side Request Forgery (SSRF).
-  
+
   *Note: all the rules and their code patterns are accessible through the [documentation](https://docs.bearer.com/reference/rules/).*
 
 * **Privacy risks** with the ability to detect [sensitive data flow](https://docs.bearer.com/explanations/discovery-and-classification/) such as the use of PII, PHI in your app, and [components](https://docs.bearer.com/reference/recipes/) processing sensitive data (e.g. databases like pgSQL, third-party APIs such as OpenAI, Sentry, etc.). This helps generate a [privacy report](https://docs.bearer.com/guides/privacy/) relevant for:
@@ -133,7 +133,7 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 <details>
   <summary>Docker</summary>
 
-  Bearer CLI is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/bearer) and [ghcr.io](https://github.com/Bearer/bearer/pkgs/container/bearer).
+  Bearer CLI is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/bearer) and [ghcr.io](https://github.com/bearer/bearer/internals/container/bearer).
 
   With docker installed, you can run the following command with the appropriate paths in place of the examples.
 
@@ -243,9 +243,9 @@ We believe that by linking security issues with a clear business impact and risk
 
 In addition, by being Free and Open, extendable by design, and built with a great developer UX in mind, we bet you will see the difference for yourself.
 
-### What is the privacy scanner? 
+### What is the privacy scanner?
 
-In addition of detecting security flaws in your code, Bearer CLI allows you to automate the evidence gathering process needed to generate a privacy report for your compliance team. 
+In addition of detecting security flaws in your code, Bearer CLI allows you to automate the evidence gathering process needed to generate a privacy report for your compliance team.
 
 When you run Bearer CLI on your codebase, it discovers and classifies data by identifying patterns in the source code. Specifically, it looks for data types and matches against them. Most importantly, it never views the actual values—it just can’t—but only the code itself. If you want to learn more, here is the [longer explanation](https://docs.bearer.com/explanations/discovery-and-classification/).
 
