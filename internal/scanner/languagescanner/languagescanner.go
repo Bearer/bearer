@@ -65,20 +65,12 @@ func (scanner *Scanner) Scan(
 	fileStats *stats.FileStats,
 	file *file.FileInfo,
 ) ([]*detectortypes.Detection, error) {
-	if !slices.Contains(scanner.language.EnryLanguages(), file.Language) {
-		return nil, nil
+	tree, err := scanner.parse(ctx, file)
+	if tree == nil || err != nil {
+		return nil, err
 	}
 
-	contentBytes, err := os.ReadFile(file.AbsolutePath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read file %s", err)
-	}
-
-	tree, err := ast.Parse(ctx, scanner.language, contentBytes)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse file %s", err)
-	}
-
+	queryContext := query.NewContext(tree.ContentBytes(), tree.RootNode().SitterNode())
 	sharedCache := cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())
 	rulesDisabledForNodes := mapNodesToDisabledRules(tree.RootNode())
 
@@ -98,7 +90,7 @@ func (scanner *Scanner) Scan(
 			file.FileInfo.Name(),
 			fileStats,
 			tree,
-			query.NewContext(tree.ContentBytes(), tree.RootNode().SitterNode()),
+			queryContext,
 			rulesDisabledForNodes,
 			tree.RootNode(),
 			cache,
@@ -114,6 +106,24 @@ func (scanner *Scanner) Scan(
 	}
 
 	return detections, nil
+}
+
+func (scanner *Scanner) parse(ctx context.Context, file *file.FileInfo) (*tree.Tree, error) {
+	if !slices.Contains(scanner.language.EnryLanguages(), file.Language) {
+		return nil, nil
+	}
+
+	contentBytes, err := os.ReadFile(file.AbsolutePath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file %s", err)
+	}
+
+	tree, err := ast.Parse(ctx, scanner.language, contentBytes)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse file %s", err)
+	}
+
+	return tree, err
 }
 
 func (scanner *Scanner) Close() {
