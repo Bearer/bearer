@@ -37,6 +37,45 @@ GitLab's guide on [Running CI/CD jobs in Docker containers](https://docs.gitlab.
 
 For more details and additional configuration, see our [guide to using GitLab](/guides/gitlab/).
 
+## CicleCI
+
+To integrate with CicleCI using a Github repository and reviewdog for comments you can use the following setup.
+
+```yml
+version: 2.1
+
+jobs:
+  bearer:
+    machine:
+      image: ubuntu-2204:2023.07.2
+    environment:
+      # Set to default branch of your repo
+      DEFAULT_BRANCH: main
+    steps:
+      - checkout
+      - run: curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /tmp
+      - run: curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /tmp
+      - run: |
+          CURRENT_BRANCH=$CIRCLE_BRANCH SHA=$CIRCLE_SHA1 /tmp/bearer scan . --format=rdjson --output=rd.json || export BEARER_EXIT=$?
+          cat rd.json | REVIEWDOG_GITHUB_API_TOKEN=$GITHUB_TOKEN /tmp/reviewdog -f=rdjson -reporter=github-pr-review
+          exit $BEARER_EXIT
+
+workflows:
+  test:
+    jobs:
+      - bearer:
+          context:
+            - bearer
+            # make sure to set GITHUB_TOKEN in your context
+```
+
+The `GITHUB_TOKEN` in this case just requires read and write access to pull requests for the repository.
+
+{% callout "warn" %}
+Currently DEFAULT_BRANCH is hard coded and diff scan support is not available due to base branch information not being available in Circle CI.
+In the future we hope to make this available by having the CLI call the Github API for the details.
+{% endcallout %}
+
 ## Universal setup
 
 For other services, we recommend selecting the [installation method](/reference/installation/) that best fits the platform.
