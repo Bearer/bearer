@@ -124,7 +124,7 @@ func (scanner *Scanner) parse(ctx context.Context, file *file.FileInfo) (*tree.T
 
 	analyzer := scanner.language.NewAnalyzer(builder)
 
-	if err := scanner.querySet.Query(builder, builder.SitterRootNode()); err != nil {
+	if err := scanner.querySet.Query(ctx, builder, builder.SitterRootNode()); err != nil {
 		return nil, fmt.Errorf("error running ast queries: %w", err)
 	}
 

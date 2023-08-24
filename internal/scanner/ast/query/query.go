@@ -1,6 +1,7 @@
 package query
 
 import (
+	"context"
 	"errors"
 	"strings"
 
@@ -50,7 +51,7 @@ func (querySet *Set) Add(input string) *Query {
 	return query
 }
 
-func (querySet *Set) Query(builder *tree.Builder, rootNode *sitter.Node) error {
+func (querySet *Set) Query(ctx context.Context, builder *tree.Builder, rootNode *sitter.Node) error {
 	if querySet.sitterQuery == nil {
 		return errors.New("query set has not been compiled")
 	}
@@ -60,6 +61,10 @@ func (querySet *Set) Query(builder *tree.Builder, rootNode *sitter.Node) error {
 	captureNames := make(map[uint32]string)
 
 	for {
+		if ctx.Err() != nil {
+			return ctx.Err()
+		}
+
 		match, found := querySet.sitterCursor.NextMatch()
 		if !found {
 			break
