@@ -37,9 +37,9 @@ GitLab's guide on [Running CI/CD jobs in Docker containers](https://docs.gitlab.
 
 For more details and additional configuration, see our [guide to using GitLab](/guides/gitlab/).
 
-## CicleCI
+## CircleCI
 
-To integrate with CicleCI using a Github repository and reviewdog for comments you can use the following setup.
+To integrate with CircleCI using a Github repository and reviewdog for comments, you can use the following setup.
 
 ```yml
 version: 2.1
