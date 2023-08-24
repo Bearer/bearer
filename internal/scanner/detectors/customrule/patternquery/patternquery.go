@@ -51,10 +51,11 @@ func Compile(
 		return &rootVariableQuery{variable: builderResult.RootVariable}, nil
 	}
 
-	log.Trace().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
+	treeQuery := querySet.Add(builderResult.Query)
+	log.Trace().Msgf("compiled pattern to query %d: %s -> %s", treeQuery.ID(), input, builderResult.Query)
 
 	return &query{
-		treeQuery:       querySet.Add(builderResult.Query),
+		treeQuery:       treeQuery,
 		paramToVariable: builderResult.ParamToVariable,
 		equalParams:     builderResult.EqualParams,
 		paramToContent:  builderResult.ParamToContent,

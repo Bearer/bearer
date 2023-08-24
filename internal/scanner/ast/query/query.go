@@ -133,6 +133,10 @@ func (queries *Set) freeSitterQuery() {
 	queries.sitterQuery = nil
 }
 
+func (query *Query) ID() int {
+	return query.id
+}
+
 func (query *Query) MatchAt(node *tree.Node) []tree.QueryResult {
 	return node.QueryResults(query.id)
 }

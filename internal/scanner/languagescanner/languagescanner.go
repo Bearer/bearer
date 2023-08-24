@@ -16,6 +16,7 @@ import (
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/util/file"
+	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/cache"
@@ -69,6 +70,10 @@ func (scanner *Scanner) Scan(
 	tree, err := scanner.parse(ctx, file)
 	if tree == nil || err != nil {
 		return nil, err
+	}
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("tree:\n%s", tree.RootNode().Dump())
 	}
 
 	sharedCache := cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())

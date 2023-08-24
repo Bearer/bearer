@@ -2,9 +2,9 @@ package tree
 
 import (
 	"fmt"
-	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
+	"gopkg.in/yaml.v3"
 )
 
 type Tree struct {
@@ -151,21 +151,61 @@ func (node *Node) QueryResults(queryID int) []QueryResult {
 	return node.queryResults[queryID]
 }
 
+type nodeDump struct {
+	Type    string
+	ID      int
+	Content string `yaml:",omitempty"`
+	DataflowSources,
+	AliasOf []int `yaml:",omitempty"`
+	Children []nodeDump `yaml:",omitempty"`
+	Queries  []int      `yaml:",omitempty"`
+}
+
 func (node *Node) Dump() string {
-	var s strings.Builder
-
-	s.WriteString("(")         //nolint:errcheck
-	s.WriteString(node.Type()) //nolint:errcheck
-
-	if len(node.children) != 0 {
-		for _, child := range node.children {
-			s.WriteString(" ")          //nolint:errcheck
-			s.WriteString(child.Dump()) //nolint:errcheck
-		}
+	dump := node.dumpValue()
+	yamlDump, err := yaml.Marshal(&dump)
+	if err != nil {
+		return err.Error()
 	}
 
-	s.WriteString(")") //nolint:errcheck
-	return s.String()
+	return string(yamlDump)
+}
+
+func (node *Node) dumpValue() nodeDump {
+	childDump := make([]nodeDump, len(node.children))
+	for i, child := range node.children {
+		childDump[i] = child.dumpValue()
+	}
+
+	var queries []int
+	for queryID := range node.queryResults {
+		queries = append(queries, queryID)
+	}
+
+	content := ""
+	if len(node.children) == 0 && node.Type()[0] != '"' {
+		content = node.Content()
+	}
+
+	return nodeDump{
+		Type:            node.Type(),
+		ID:              node.ID,
+		Content:         content,
+		DataflowSources: nodeListToID(node.dataflowSources),
+		AliasOf:         nodeListToID(node.aliasOf),
+		Children:        childDump,
+		Queries:         queries,
+	}
+}
+
+func nodeListToID(nodes []*Node) []int {
+	result := make([]int, len(nodes))
+
+	for i, node := range nodes {
+		result[i] = node.ID
+	}
+
+	return result
 }
 
 // FIXME: remove this
