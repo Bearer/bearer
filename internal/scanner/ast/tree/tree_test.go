@@ -8,7 +8,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
 
-	"github.com/bearer/bearer/internal/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/ast/tree"
 )
 
 func parseTree(t *testing.T, content string) *tree.Tree {

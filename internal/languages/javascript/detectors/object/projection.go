@@ -35,7 +35,7 @@ func (detector *objectDetector) getMemberExpressionProjections(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.memberExpressionQuery, node)
+	result, err := detector.memberExpressionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (detector *objectDetector) getSubscriptExpressionProjections(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.subscriptExpressionQuery, node)
+	result, err := detector.subscriptExpressionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ func (detector *objectDetector) getCallProjections(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.callQuery, node)
+	result, err := detector.callQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ func (detector *objectDetector) getObjectDeconstructionProjections(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.objectDeconstructionQuery, node)
+	result, err := detector.objectDeconstructionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}

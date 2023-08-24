@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/internal/languages/javascript"
-	"github.com/bearer/bearer/new/detector/implementation/testhelper"
+	"github.com/bearer/bearer/internal/scanner/detectors/testhelper"
 )
 
 func TestJavascriptObjectDetector(t *testing.T) {

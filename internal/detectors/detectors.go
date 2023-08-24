@@ -201,12 +201,9 @@ func ExtractWithDetectors(
 			}
 			defer recovery()
 
-			if sastScanner != nil {
-				err := sastScanner.Scan(ctx, report, fileStats, file)
-				if err != nil {
-					log.Debug().Msgf("failed to scan file %s: %s", file.RelativePath, err)
-					report.AddError(file.RelativePath, fmt.Errorf("failed to scan file: %s", err))
-				}
+			if err := sastScanner.Scan(ctx, report, fileStats, file); err != nil {
+				log.Debug().Msgf("failed to scan file %s: %s", file.RelativePath, err)
+				report.AddError(file.RelativePath, fmt.Errorf("failed to scan file: %s", err))
 			}
 
 			for _, detector := range allDetectors {

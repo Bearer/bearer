@@ -11,7 +11,7 @@ func (detector *objectDetector) getProjections(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.fieldAccessQuery, node)
+	result, err := detector.fieldAccessQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
 	}
@@ -23,7 +23,7 @@ func (detector *objectDetector) getProjections(
 			node,
 			scanContext,
 			objectNode,
-			getObjectName(scanContext, objectNode),
+			getObjectName(objectNode),
 			result["field"].Content(),
 			true,
 		)
@@ -37,7 +37,7 @@ func (detector *objectDetector) getProjections(
 	return nil, nil
 }
 
-func getObjectName(scanContext types.ScanContext, objectNode *tree.Node) string {
+func getObjectName(objectNode *tree.Node) string {
 	// user.name
 	if objectNode.Type() == "identifier" {
 		return objectNode.Content()

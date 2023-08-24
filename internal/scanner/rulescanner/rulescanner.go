@@ -11,7 +11,6 @@ import (
 	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/detectorset"
@@ -27,7 +26,6 @@ type Scanner struct {
 	fileStats             *stats.FileStats
 	fileName              string
 	rulesDisabledForNodes map[string][]*tree.Node
-	queryContext          *query.Context
 	rootNode              *tree.Node
 	context,
 	sanitizerContext *scanContext
@@ -41,7 +39,6 @@ func new(
 	fileName string,
 	fileStats *stats.FileStats,
 	tree *tree.Tree,
-	queryContext *query.Context,
 	rulesDisabledForNodes map[string][]*tree.Node,
 	rootNode *tree.Node,
 	cache *cache.Cache,
@@ -56,7 +53,6 @@ func new(
 		detectorSet:           detectorSet,
 		fileStats:             fileStats,
 		rulesDisabledForNodes: rulesDisabledForNodes,
-		queryContext:          queryContext,
 		rootNode:              rootNode,
 		ruleID:                ruleID,
 		sanitizerRuleID:       sanitizerRuleID,
@@ -284,7 +280,6 @@ func Scan(
 	fileName string,
 	fileStats *stats.FileStats,
 	tree *tree.Tree,
-	queryContext *query.Context,
 	rulesDisabledForNodes map[string][]*tree.Node,
 	rootNode *tree.Node,
 	cache *cache.Cache,
@@ -298,7 +293,6 @@ func Scan(
 		fileName,
 		fileStats,
 		tree,
-		queryContext,
 		rulesDisabledForNodes,
 		rootNode,
 		cache,

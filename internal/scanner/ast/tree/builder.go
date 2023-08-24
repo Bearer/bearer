@@ -13,6 +13,7 @@ type Builder struct {
 	children,
 	dataflowSources,
 	aliasOf map[int][]int
+	sitterRootNode *sitter.Node
 	sitterToNodeID map[*sitter.Node]int
 }
 
@@ -22,12 +23,17 @@ func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node) *Builder {
 		children:        make(map[int][]int),
 		dataflowSources: make(map[int][]int),
 		aliasOf:         make(map[int][]int),
+		sitterRootNode:  sitterRootNode,
 		sitterToNodeID:  make(map[*sitter.Node]int),
 	}
 
 	builder.rootNodeID = builder.addNode(sitterRootNode)
 
 	return builder
+}
+
+func (builder *Builder) SitterRootNode() *sitter.Node {
+	return builder.sitterRootNode
 }
 
 func (builder *Builder) LastChild(node *sitter.Node) *sitter.Node {
@@ -92,6 +98,16 @@ func (builder *Builder) sitterToNodeIDs(nodes []*sitter.Node) []int {
 	}
 
 	return ids
+}
+
+func (builder *Builder) QueryResult(queryID int, sitterNode *sitter.Node, result map[string]*sitter.Node) {
+	node := &builder.nodes[builder.sitterToNodeID[sitterNode]]
+
+	if node.queryResults == nil {
+		node.queryResults = make(map[int][]QueryResult)
+	}
+
+	node.queryResults[queryID] = append(node.queryResults[queryID], builder.translateNodeMap(result))
 }
 
 func (builder *Builder) Build() *Tree {
@@ -231,4 +247,14 @@ func (builder *Builder) internType(nodeType string) int {
 	id = len(builder.types)
 	builder.types = append(builder.types, nodeType)
 	return id
+}
+
+func (builder *Builder) translateNodeMap(sitterMap map[string]*sitter.Node) map[string]*Node {
+	result := make(map[string]*Node)
+
+	for name, sitterNode := range sitterMap {
+		result[name] = &builder.nodes[builder.sitterToNodeID[sitterNode]]
+	}
+
+	return result
 }

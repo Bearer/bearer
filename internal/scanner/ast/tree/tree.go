@@ -15,6 +15,8 @@ type Tree struct {
 	sitterToNode map[*sitter.Node]*Node
 }
 
+type QueryResult map[string]*Node
+
 type Node struct {
 	tree *Tree
 	ID,
@@ -26,7 +28,8 @@ type Node struct {
 	dataflowSources,
 	aliasOf []*Node
 	// FIXME: remove the need for this
-	sitterNode *sitter.Node
+	sitterNode   *sitter.Node
+	queryResults map[int][]QueryResult
 	// FIXME: probably shouldn't be public
 	ExecutingRules []string
 }
@@ -140,6 +143,14 @@ func (node *Node) AliasOf() []*Node {
 	return node.aliasOf
 }
 
+func (node *Node) QueryResults(queryID int) []QueryResult {
+	if node.queryResults == nil {
+		return nil
+	}
+
+	return node.queryResults[queryID]
+}
+
 func (node *Node) Dump() string {
 	var s strings.Builder
 
@@ -150,23 +161,6 @@ func (node *Node) Dump() string {
 		for _, child := range node.children {
 			s.WriteString(" ")          //nolint:errcheck
 			s.WriteString(child.Dump()) //nolint:errcheck
-		}
-	}
-
-	s.WriteString(")") //nolint:errcheck
-	return s.String()
-}
-
-func (node *Node) Dump2() string {
-	var s strings.Builder
-
-	s.WriteString("(")         //nolint:errcheck
-	s.WriteString(node.Type()) //nolint:errcheck
-
-	if len(node.dataflowSources) != 0 {
-		for _, child := range node.dataflowSources {
-			s.WriteString(" ")           //nolint:errcheck
-			s.WriteString(child.Dump2()) //nolint:errcheck
 		}
 	}
 

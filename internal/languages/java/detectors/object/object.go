@@ -68,7 +68,7 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node, scanContext)
+	detections, err = detector.getClass(node)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -80,7 +80,7 @@ func (detector *objectDetector) getAssignment(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.assignmentQuery, node)
+	result, err := detector.assignmentQuery.MatchOnceAt(node)
 
 	if result == nil || err != nil {
 		return nil, err
@@ -109,13 +109,10 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClass(
-	node *tree.Node,
-	scanContext types.ScanContext,
-) ([]interface{}, error) {
-	results, err := scanContext.QueryMatchAt(detector.classQuery, node)
-	if len(results) == 0 || err != nil {
-		return nil, err
+func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
+	results := detector.classQuery.MatchAt(node)
+	if len(results) == 0 {
+		return nil, nil
 	}
 
 	className := results[0]["class_name"].Content()

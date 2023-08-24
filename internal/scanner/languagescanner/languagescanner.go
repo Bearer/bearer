@@ -16,6 +16,7 @@ import (
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/util/file"
+	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/cache"
 	"github.com/bearer/bearer/internal/scanner/detectorset"
@@ -70,7 +71,6 @@ func (scanner *Scanner) Scan(
 		return nil, err
 	}
 
-	queryContext := query.NewContext(tree.ContentBytes(), tree.RootNode().SitterNode())
 	sharedCache := cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())
 	rulesDisabledForNodes := mapNodesToDisabledRules(tree.RootNode())
 
@@ -90,7 +90,6 @@ func (scanner *Scanner) Scan(
 			file.FileInfo.Name(),
 			fileStats,
 			tree,
-			queryContext,
 			rulesDisabledForNodes,
 			tree.RootNode(),
 			cache,
@@ -118,12 +117,22 @@ func (scanner *Scanner) parse(ctx context.Context, file *file.FileInfo) (*tree.T
 		return nil, fmt.Errorf("failed to read file %s", err)
 	}
 
-	tree, err := ast.Parse(ctx, scanner.language, contentBytes)
+	builder, err := ast.Parse(ctx, scanner.language, contentBytes)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
-	return tree, err
+	analyzer := scanner.language.NewAnalyzer(builder)
+
+	if err := scanner.querySet.Query(builder, builder.SitterRootNode()); err != nil {
+		return nil, fmt.Errorf("error running ast queries: %w", err)
+	}
+
+	if err := analyzeNode(ctx, analyzer, builder.SitterRootNode()); err != nil {
+		return nil, fmt.Errorf("error running language analysis: %w", err)
+	}
+
+	return builder.Build(), nil
 }
 
 func (scanner *Scanner) Close() {
@@ -166,4 +175,24 @@ func mapNodesToDisabledRules(rootNode *tree.Node) map[string][]*tree.Node {
 	}
 
 	return res
+}
+
+func analyzeNode(ctx context.Context, analyzer language.Analyzer, node *sitter.Node) error {
+	if ctx.Err() != nil {
+		return ctx.Err()
+	}
+
+	visitChildren := func() error {
+		childCount := int(node.ChildCount())
+
+		for i := 0; i < childCount; i++ {
+			if err := analyzeNode(ctx, analyzer, node.Child(i)); err != nil {
+				return err
+			}
+		}
+
+		return nil
+	}
+
+	return analyzer.Analyze(node, visitChildren)
 }

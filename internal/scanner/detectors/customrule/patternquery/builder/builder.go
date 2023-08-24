@@ -53,7 +53,7 @@ func Build(
 		return nil, err
 	}
 
-	tree, err := ast.Parse(context.TODO(), language, processedInput)
+	tree, err := ast.ParseAndBuild(context.TODO(), language, processedInput)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func Build(
 		inputParams.Variables,
 		tree.RootNode(),
 	); fixed {
-		tree, err = ast.Parse(context.TODO(), language, fixedInput)
+		tree, err = ast.ParseAndBuild(context.TODO(), language, fixedInput)
 		if err != nil {
 			return nil, err
 		}

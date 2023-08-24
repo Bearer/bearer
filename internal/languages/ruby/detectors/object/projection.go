@@ -12,7 +12,7 @@ func (detector *objectDetector) getProjections(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.callsQuery, node)
+	result, err := detector.callsQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +25,7 @@ func (detector *objectDetector) getProjections(
 			node,
 			scanContext,
 			astReceiverNode,
-			getObjectName(scanContext, astReceiverNode),
+			getObjectName(astReceiverNode),
 			result["method"].Content(),
 			getIsPropertyAccess(astReceiverNode),
 		)
@@ -36,7 +36,7 @@ func (detector *objectDetector) getProjections(
 		return objects, nil
 	}
 
-	result, err = scanContext.QueryMatchOnceAt(detector.elementReferenceQuery, node)
+	result, err = detector.elementReferenceQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func (detector *objectDetector) getProjections(
 			node,
 			scanContext,
 			objectNode,
-			getObjectName(scanContext, objectNode),
+			getObjectName(objectNode),
 			propertyName,
 			getIsPropertyAccess(objectNode),
 		)
@@ -66,10 +66,7 @@ func (detector *objectDetector) getProjections(
 	return nil, nil
 }
 
-func getObjectName(
-	scanContext types.ScanContext,
-	objectNode *tree.Node,
-) string {
+func getObjectName(objectNode *tree.Node) string {
 	// user.name or user["name"]
 	if objectNode.Type() == "identifier" {
 		return objectNode.Content()

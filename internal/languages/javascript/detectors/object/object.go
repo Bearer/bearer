@@ -96,7 +96,7 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node, scanContext)
+	detections, err = detector.getClass(node)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -109,11 +109,8 @@ func (detector *objectDetector) getObject(
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
 	var properties []common.Property
-	spreadResults, err := scanContext.QueryMatchAt(detector.spreadElementQuery, node)
-	if err != nil {
-		return nil, err
-	}
 
+	spreadResults := detector.spreadElementQuery.MatchAt(node)
 	for _, spreadResult := range spreadResults {
 		detections, err := scanContext.Scan(
 			spreadResult["identifier"],
@@ -121,20 +118,16 @@ func (detector *objectDetector) getObject(
 			"",
 			settings.CURSOR_SCOPE,
 		)
-
 		if err != nil {
 			return nil, err
 		}
+
 		for _, detection := range detections {
 			properties = append(properties, detection.Data.(common.Object).Properties...)
 		}
 	}
 
-	results, err := scanContext.QueryMatchAt(detector.objectPairQuery, node)
-	if len(results) == 0 || err != nil {
-		return nil, err
-	}
-
+	results := detector.objectPairQuery.MatchAt(node)
 	for _, result := range results {
 		var name string
 		key := result["key"]
@@ -181,6 +174,10 @@ func (detector *objectDetector) getObject(
 		}
 	}
 
+	if len(properties) == 0 {
+		return nil, nil
+	}
+
 	return []interface{}{common.Object{Properties: properties}}, nil
 }
 
@@ -188,7 +185,7 @@ func (detector *objectDetector) getAssignment(
 	node *tree.Node,
 	scanContext types.ScanContext,
 ) ([]interface{}, error) {
-	result, err := scanContext.QueryMatchOnceAt(detector.assignmentQuery, node)
+	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
@@ -213,13 +210,10 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-func (detector *objectDetector) getClass(
-	node *tree.Node,
-	scanContext types.ScanContext,
-) ([]interface{}, error) {
-	results, err := scanContext.QueryMatchAt(detector.classQuery, node)
-	if len(results) == 0 || err != nil {
-		return nil, err
+func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
+	results := detector.classQuery.MatchAt(node)
+	if len(results) == 0 {
+		return nil, nil
 	}
 
 	className := results[0]["class_name"].Content()

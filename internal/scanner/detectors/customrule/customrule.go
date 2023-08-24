@@ -5,8 +5,6 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	sitter "github.com/smacker/go-tree-sitter"
-
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
@@ -19,7 +17,7 @@ import (
 type Data struct {
 	Pattern       string
 	Datatypes     []*types.Detection
-	VariableNodes map[string]*sitter.Node
+	VariableNodes map[string]*tree.Node
 }
 
 type Pattern struct {
@@ -76,7 +74,7 @@ func (detector *customDetector) DetectAt(
 	var detectionsData []interface{}
 
 	for _, pattern := range detector.patterns {
-		results, err := pattern.Query.MatchAt(scanContext.QueryContext(), node.SitterNode())
+		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
 			return nil, err
 		}

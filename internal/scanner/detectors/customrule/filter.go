@@ -6,9 +6,9 @@ import (
 	"golang.org/x/exp/slices"
 
 	"github.com/rs/zerolog/log"
-	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 )
@@ -16,7 +16,7 @@ import (
 func matchFilter(
 	scanContext types.ScanContext,
 	variables,
-	joinedVariables map[string]*sitter.Node,
+	joinedVariables map[string]*tree.Node,
 	filter settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
@@ -59,13 +59,13 @@ func matchFilter(
 
 func matchAllFilters(
 	scanContext types.ScanContext,
-	variables map[string]*sitter.Node,
+	variables map[string]*tree.Node,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
-) (bool, []*types.Detection, map[string]*sitter.Node, error) {
+) (bool, []*types.Detection, map[string]*tree.Node, error) {
 	var datatypeDetections []*types.Detection
 
-	joinedVariables := make(map[string]*sitter.Node)
+	joinedVariables := make(map[string]*tree.Node)
 	for name, node := range variables {
 		joinedVariables[name] = node
 	}
@@ -85,7 +85,7 @@ func matchAllFilters(
 func matchEitherFilters(
 	scanContext types.ScanContext,
 	variables,
-	joinedVariables map[string]*sitter.Node,
+	joinedVariables map[string]*tree.Node,
 	filters []settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
@@ -118,8 +118,8 @@ func matchEitherFilters(
 func matchDetectionFilter(
 	scanContext types.ScanContext,
 	variables,
-	joinedVariables map[string]*sitter.Node,
-	node *sitter.Node,
+	joinedVariables map[string]*tree.Node,
+	node *tree.Node,
 	filter settings.PatternFilter,
 	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
@@ -130,7 +130,7 @@ func matchDetectionFilter(
 	}
 
 	detections, err := scanContext.Scan(
-		scanContext.NodeFromSitter(node),
+		node,
 		ruleID,
 		sanitizerRuleID,
 		filter.Scope,
@@ -189,9 +189,8 @@ func matchDetectionFilter(
 func matchContentFilter(
 	scanContext types.ScanContext,
 	filter settings.PatternFilter,
-	sitterNode *sitter.Node,
+	node *tree.Node,
 ) (*bool, error) {
-	node := scanContext.NodeFromSitter(sitterNode)
 	content := node.Content()
 
 	if len(filter.Values) != 0 {
@@ -286,7 +285,7 @@ func boolPointer(value bool) *bool {
 
 func getIgnoredVariables(detections []*types.Detection) map[string]struct{} {
 	ignoredVariables := make(map[string]struct{})
-	seenNodes := make(map[string]*sitter.Node)
+	seenNodes := make(map[string]*tree.Node)
 
 	for _, detection := range detections {
 		data, ok := detection.Data.(Data)

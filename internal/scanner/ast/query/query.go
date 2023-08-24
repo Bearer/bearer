@@ -3,13 +3,13 @@ package query
 import (
 	"errors"
 	"strings"
-	"sync"
 
 	sitter "github.com/smacker/go-tree-sitter"
+
+	"github.com/bearer/bearer/internal/scanner/ast/tree"
 )
 
 type Set struct {
-	mu             sync.RWMutex
 	sitterLanguage *sitter.Language
 	queries        []Query
 	queryByInput   map[string]*Query
@@ -23,16 +23,6 @@ type Query struct {
 	input    string
 }
 
-type Context struct {
-	contentBytes []byte
-	rootNode     *sitter.Node
-	cache        SetResults
-}
-
-type Result map[string]*sitter.Node
-type NodeResults map[*sitter.Node][]Result
-type SetResults map[int]NodeResults
-
 func NewSet(sitterLanguage *sitter.Language) *Set {
 	return &Set{
 		sitterLanguage: sitterLanguage,
@@ -42,9 +32,6 @@ func NewSet(sitterLanguage *sitter.Language) *Set {
 }
 
 func (querySet *Set) Add(input string) *Query {
-	querySet.mu.Lock()
-	defer querySet.mu.Unlock()
-
 	if query := querySet.queryByInput[input]; query != nil {
 		return query
 	}
@@ -63,16 +50,14 @@ func (querySet *Set) Add(input string) *Query {
 	return query
 }
 
-func (querySet *Set) Query(rootNode *sitter.Node) (SetResults, error) {
-	querySet.mu.RLock()
-	defer querySet.mu.RUnlock()
-
+func (querySet *Set) Query(builder *tree.Builder, rootNode *sitter.Node) error {
 	if querySet.sitterQuery == nil {
-		return nil, errors.New("query set has not been compiled")
+		return errors.New("query set has not been compiled")
 	}
 
-	results := querySet.newResults()
 	querySet.sitterCursor.Exec(querySet.sitterQuery, rootNode)
+
+	captureNames := make(map[uint32]string)
 
 	for {
 		match, found := querySet.sitterCursor.NextMatch()
@@ -80,14 +65,20 @@ func (querySet *Set) Query(rootNode *sitter.Node) (SetResults, error) {
 			break
 		}
 
-		result := make(Result)
+		result := make(map[string]*sitter.Node)
 		for _, capture := range match.Captures {
-			result[querySet.sitterQuery.CaptureNameForId(capture.Index)] = capture.Node
+			name := captureNames[capture.Index]
+			if name == "" {
+				name = querySet.sitterQuery.CaptureNameForId(capture.Index)
+				captureNames[capture.Index] = name
+			}
+
+			result[name] = capture.Node
 		}
 
 		resultRoot, rootExists := result["root"]
 		if !rootExists {
-			return nil, errors.New("missing @root capture in tree sitter query")
+			return errors.New("missing @root capture in tree sitter query")
 		}
 
 		matchNode, matchNodeExists := result["match"]
@@ -95,16 +86,13 @@ func (querySet *Set) Query(rootNode *sitter.Node) (SetResults, error) {
 			matchNode = resultRoot
 		}
 
-		results.add(int(match.PatternIndex), matchNode, result)
+		builder.QueryResult(int(match.PatternIndex), matchNode, result)
 	}
 
-	return results, nil
+	return nil
 }
 
 func (querySet *Set) Compile() error {
-	querySet.mu.Lock()
-	defer querySet.mu.Unlock()
-
 	if querySet.sitterQuery != nil {
 		return nil
 	}
@@ -140,71 +128,19 @@ func (queries *Set) freeSitterQuery() {
 	queries.sitterQuery = nil
 }
 
-func (querySet *Set) newResults() SetResults {
-	results := make(SetResults)
-
-	// make sure all queries are in the map so we don't re-trigger for queries with
-	// no results
-	for queryID := range querySet.queries {
-		results[queryID] = nil
-	}
-
-	return results
+func (query *Query) MatchAt(node *tree.Node) []tree.QueryResult {
+	return node.QueryResults(query.id)
 }
 
-func (query *Query) MatchAt(context *Context, node *sitter.Node) ([]Result, error) {
-	inCache := false
-	var nodeCache NodeResults
-	if context.cache != nil {
-		nodeCache, inCache = context.cache[query.id]
-	}
-
-	if !inCache {
-		results, err := query.querySet.Query(context.rootNode)
-		if err != nil {
-			return nil, err
-		}
-
-		context.cache = results
-		nodeCache = results[query.id]
-	}
-
-	return nodeCache[node], nil
-}
-
-func (query *Query) MatchOnceAt(context *Context, node *sitter.Node) (Result, error) {
-	results, err := query.MatchAt(context, node)
-	if err != nil {
-		return nil, err
+func (query *Query) MatchOnceAt(node *tree.Node) (tree.QueryResult, error) {
+	results := query.MatchAt(node)
+	if len(results) > 1 {
+		return nil, errors.New("query returned more than one result")
 	}
 
 	if len(results) == 0 {
 		return nil, nil
 	}
-	if len(results) > 1 {
-		return nil, errors.New("query returned more than one result")
-	}
 
 	return results[0], nil
-}
-
-func (results SetResults) add(queryID int, node *sitter.Node, result Result) {
-	nodeResults := results[queryID]
-	if nodeResults == nil {
-		nodeResults = make(NodeResults)
-		results[queryID] = nodeResults
-	}
-
-	nodeResults[node] = append(nodeResults[node], result)
-}
-
-func NewContext(contentBytes []byte, rootNode *sitter.Node) *Context {
-	return &Context{
-		contentBytes: contentBytes,
-		rootNode:     rootNode,
-	}
-}
-
-func (context *Context) ContentFor(node *sitter.Node) string {
-	return node.Content(context.contentBytes)
 }
