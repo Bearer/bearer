@@ -72,8 +72,8 @@ workflows:
 The `GITHUB_TOKEN` in this case just requires read and write access to pull requests for the repository.
 
 {% callout "warn" %}
-Currently DEFAULT_BRANCH is hard coded and diff scan support is not available due to base branch information not being available in Circle CI.
-In the future we hope to make this available by having the CLI call the Github API for the details.
+Currently DEFAULT_BRANCH is hard coded and diff scanning is not supported because base branch information is not available in Circle CI.
+In the future we hope to support diff scanning in Circle CI by having the CLI call the Github API for the details.
 {% endcallout %}
 
 ## Universal setup
