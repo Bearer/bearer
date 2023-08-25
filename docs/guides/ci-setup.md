@@ -39,7 +39,30 @@ For more details and additional configuration, see our [guide to using GitLab](/
 
 ## CircleCI
 
-To integrate with CircleCI using a Github repository and reviewdog for comments, you can use the following setup.
+To integrate with CicleCI you can add the following job to your `.circleci/config.yml`
+
+```yml
+version: 2.1
+
+jobs:
+  bearer:
+    machine:
+      image: ubuntu-2204:2023.07.2
+    environment:
+      # Set to default branch of your repo
+      DEFAULT_BRANCH: main
+    steps:
+      - checkout
+      - run: curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /tmp
+      - run: CURRENT_BRANCH=$CIRCLE_BRANCH SHA=$CIRCLE_SHA1 /tmp/bearer scan .
+
+workflows:
+  test:
+    jobs:
+      - bearer
+```
+
+A more advanced example using a Github repository and reviewdog for PR comments:
 
 ```yml
 version: 2.1
@@ -64,9 +87,14 @@ workflows:
   test:
     jobs:
       - bearer:
+          filters:
+            branches:
+              # No need to run a check on default branch
+              ignore: main
           context:
             - bearer
             # make sure to set GITHUB_TOKEN in your context
+
 ```
 
 The `GITHUB_TOKEN` in this case just requires read and write access to pull requests for the repository.
