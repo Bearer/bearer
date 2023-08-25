@@ -2,8 +2,6 @@ package api
 
 import (
 	"encoding/json"
-
-	"github.com/rs/zerolog/log"
 )
 
 type CloudIgnoreData struct {
@@ -27,8 +25,6 @@ func (api *API) FetchIgnores(fullname string) (*CloudIgnoreData, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	log.Error().Msgf("Ignores: %#v", cloudIgnoreData)
 
 	return &cloudIgnoreData, err
 }
