@@ -12,6 +12,7 @@ Usage: bearer <command> [flags]
 Available Commands:
 	scan              Scan a directory or file
 	init              Write the default config to bearer.yml
+	ignore            Manage ignored fingerprints
 	version           Print the version
 
 Examples:
