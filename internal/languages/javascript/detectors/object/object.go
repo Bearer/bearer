@@ -78,20 +78,20 @@ func New(querySet *query.Set) types.Detector {
 	}
 }
 
-func (detector *objectDetector) Name() string {
+func (detector *objectDetector) RuleID() string {
 	return "object"
 }
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := detector.getObject(node, scanContext)
+	detections, err := detector.getObject(node, detectorContext)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getAssignment(node, scanContext)
+	detections, err = detector.getAssignment(node, detectorContext)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -101,23 +101,18 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	return detector.getProjections(node, scanContext)
+	return detector.getProjections(node, detectorContext)
 }
 
 func (detector *objectDetector) getObject(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	var properties []common.Property
 
 	spreadResults := detector.spreadElementQuery.MatchAt(node)
 	for _, spreadResult := range spreadResults {
-		detections, err := scanContext.Scan(
-			spreadResult["identifier"],
-			"object",
-			"",
-			settings.CURSOR_SCOPE,
-		)
+		detections, err := detectorContext.Scan(spreadResult["identifier"], "object", settings.CURSOR_SCOPE)
 		if err != nil {
 			return nil, err
 		}
@@ -144,12 +139,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := scanContext.Scan(
-			result["value"],
-			"object",
-			"",
-			settings.CURSOR_SCOPE,
-		)
+		propertyObjects, err := detectorContext.Scan(result["value"], "object", settings.CURSOR_SCOPE)
 		if err != nil {
 			return nil, err
 		}
@@ -183,14 +173,14 @@ func (detector *objectDetector) getObject(
 
 func (detector *objectDetector) getAssignment(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	valueObjects, err := common.GetNonVirtualObjects(scanContext, result["value"])
+	valueObjects, err := common.GetNonVirtualObjects(detectorContext, result["value"])
 	if err != nil {
 		return nil, err
 	}

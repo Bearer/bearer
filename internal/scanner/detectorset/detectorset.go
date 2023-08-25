@@ -20,7 +20,7 @@ type Set interface {
 	DetectAt(
 		node *tree.Node,
 		ruleID string,
-		scanContext detectortypes.ScanContext,
+		detectorContext detectortypes.Context,
 	) ([]*detectortypes.Detection, error)
 }
 
@@ -68,14 +68,14 @@ func (set *detectorSet) TopLevelRuleIDs() []string {
 func (set *detectorSet) DetectAt(
 	node *tree.Node,
 	detectorType string,
-	scanContext detectortypes.ScanContext,
+	detectorContext detectortypes.Context,
 ) ([]*detectortypes.Detection, error) {
 	detector, err := set.lookupDetector(detectorType)
 	if err != nil {
 		return nil, err
 	}
 
-	detectionsData, err := detector.DetectAt(node, scanContext)
+	detectionsData, err := detector.DetectAt(node, detectorContext)
 	if err != nil {
 		return nil, err
 	}
@@ -131,7 +131,7 @@ func findNotableRuleIDs(
 	var builtinAndSharedRuleIDs, topLevelRuleIDs []string
 
 	for _, detector := range builtinDetectors {
-		builtinAndSharedRuleIDs = append(builtinAndSharedRuleIDs, detector.Name())
+		builtinAndSharedRuleIDs = append(builtinAndSharedRuleIDs, detector.RuleID())
 	}
 
 	for ruleID, rule := range relevantRules {
@@ -160,13 +160,7 @@ func createDetectors(
 	}
 
 	for ruleID, rule := range relevantRules {
-		detector, err := customrule.New(
-			language,
-			querySet,
-			ruleID,
-			rule.Patterns,
-			relevantRules,
-		)
+		detector, err := customrule.New(language, querySet, ruleID, rule.Patterns)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create %s detector: %w", ruleID, err)
 		}
@@ -178,13 +172,13 @@ func createDetectors(
 }
 
 func addDetector(detectorMap map[string]detectortypes.Detector, detector detectortypes.Detector) error {
-	name := detector.Name()
+	ruleID := detector.RuleID()
 
-	if _, existing := detectorMap[name]; existing {
-		return fmt.Errorf("duplicate detector '%s'", name)
+	if _, existing := detectorMap[ruleID]; existing {
+		return fmt.Errorf("duplicate detector for rule '%s'", ruleID)
 	}
 
-	detectorMap[name] = detector
+	detectorMap[ruleID] = detector
 
 	return nil
 }

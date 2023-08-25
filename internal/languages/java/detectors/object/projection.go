@@ -9,7 +9,7 @@ import (
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.fieldAccessQuery.MatchOnceAt(node)
 	if err != nil {
@@ -21,7 +21,7 @@ func (detector *objectDetector) getProjections(
 
 		objects, err := common.ProjectObject(
 			node,
-			scanContext,
+			detectorContext,
 			objectNode,
 			getObjectName(objectNode),
 			result["field"].Content(),

@@ -21,15 +21,15 @@ func New(querySet *query.Set) types.Detector {
 	return &insecureURLDetector{}
 }
 
-func (detector *insecureURLDetector) Name() string {
+func (detector *insecureURLDetector) RuleID() string {
 	return "insecure_url"
 }
 
 func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := scanContext.Scan(node, "string", "", settings.CURSOR_STRICT_SCOPE)
+	detections, err := detectorContext.Scan(node, "string", settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}

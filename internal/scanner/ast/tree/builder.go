@@ -90,6 +90,11 @@ func (builder *Builder) Alias(toNode *sitter.Node, fromNodes ...*sitter.Node) {
 	)
 }
 
+func (builder *Builder) AddDisabledRules(sitterNode *sitter.Node, ruleIDs []string) {
+	node := &builder.nodes[builder.sitterToNodeID[sitterNode]]
+	node.disabledRuleIDs = append(node.disabledRuleIDs, ruleIDs...)
+}
+
 func (builder *Builder) sitterToNodeIDs(nodes []*sitter.Node) []int {
 	ids := make([]int, len(nodes))
 

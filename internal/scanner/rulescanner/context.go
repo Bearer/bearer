@@ -5,26 +5,26 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/cache"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
+	"github.com/bearer/bearer/internal/scanner/filecontext"
 )
 
-type scanContext struct {
-	cache   *cache.Cache
-	scope   settings.RuleReferenceScope
-	scanner *Scanner
+type detectorContext struct {
+	fileContext *filecontext.Context
+	cache       *cache.Cache
+	scope       settings.RuleReferenceScope
 }
 
-func newContext(scanner *Scanner, cache *cache.Cache, scope settings.RuleReferenceScope) *scanContext {
-	return &scanContext{
-		cache:   cache,
-		scope:   scope,
-		scanner: scanner,
+func newContext(fileContext *filecontext.Context, cache *cache.Cache, scope settings.RuleReferenceScope) *detectorContext {
+	return &detectorContext{
+		fileContext: fileContext,
+		cache:       cache,
+		scope:       scope,
 	}
 }
 
-func (context scanContext) Scan(
+func (context detectorContext) Scan(
 	rootNode *tree.Node,
-	ruleID,
-	sanitizerRuleID string,
+	ruleID string,
 	scope settings.RuleReferenceScope,
 ) ([]*detectortypes.Detection, error) {
 	effectiveScope := scope
@@ -32,21 +32,9 @@ func (context scanContext) Scan(
 		effectiveScope = settings.RESULT_SCOPE
 	}
 
-	return Scan(
-		context.scanner.ctx,
-		context.scanner.detectorSet,
-		context.scanner.fileName,
-		context.scanner.fileStats,
-		context.scanner.tree,
-		context.scanner.rulesDisabledForNodes,
-		rootNode,
-		context.scanner.context.cache,
-		effectiveScope,
-		ruleID,
-		sanitizerRuleID,
-	)
+	return Scan(context.fileContext, context.cache, effectiveScope, ruleID, rootNode)
 }
 
-func (context scanContext) FileName() string {
-	return context.scanner.fileName
+func (context detectorContext) Filename() string {
+	return context.fileContext.Filename()
 }

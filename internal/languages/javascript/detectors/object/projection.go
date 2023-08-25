@@ -11,42 +11,42 @@ import (
 
 func (detector *objectDetector) getProjections(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
-	objects, err := detector.getMemberExpressionProjections(node, scanContext)
+	objects, err := detector.getMemberExpressionProjections(node, detectorContext)
 	if len(objects) != 0 || err != nil {
 		return objects, err
 	}
 
-	objects, err = detector.getSubscriptExpressionProjections(node, scanContext)
+	objects, err = detector.getSubscriptExpressionProjections(node, detectorContext)
 	if len(objects) != 0 || err != nil {
 		return objects, err
 	}
 
-	objects, err = detector.getCallProjections(node, scanContext)
+	objects, err = detector.getCallProjections(node, detectorContext)
 	if len(objects) != 0 || err != nil {
 		return objects, err
 	}
 
-	return detector.getObjectDeconstructionProjections(node, scanContext)
+	return detector.getObjectDeconstructionProjections(node, detectorContext)
 }
 
 func (detector *objectDetector) getMemberExpressionProjections(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.memberExpressionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objectNode, isPropertyAccess := getProjectedObject(scanContext, result["object"])
+	objectNode, isPropertyAccess := getProjectedObject(detectorContext, result["object"])
 
 	objects, err := common.ProjectObject(
 		node,
-		scanContext,
+		detectorContext,
 		objectNode,
-		getObjectName(scanContext, objectNode),
+		getObjectName(detectorContext, objectNode),
 		result["property"].Content(),
 		isPropertyAccess,
 	)
@@ -59,24 +59,24 @@ func (detector *objectDetector) getMemberExpressionProjections(
 
 func (detector *objectDetector) getSubscriptExpressionProjections(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.subscriptExpressionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objectNode, isPropertyAccess := getProjectedObject(scanContext, result["object"])
-	propertyName := getSubscriptProperty(scanContext, result["root"])
+	objectNode, isPropertyAccess := getProjectedObject(detectorContext, result["object"])
+	propertyName := getSubscriptProperty(detectorContext, result["root"])
 	if propertyName == "" {
 		return nil, nil
 	}
 
 	objects, err := common.ProjectObject(
 		node,
-		scanContext,
+		detectorContext,
 		objectNode,
-		getObjectName(scanContext, objectNode),
+		getObjectName(detectorContext, objectNode),
 		propertyName,
 		isPropertyAccess,
 	)
@@ -89,7 +89,7 @@ func (detector *objectDetector) getSubscriptExpressionProjections(
 
 func (detector *objectDetector) getCallProjections(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.callQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
@@ -98,12 +98,7 @@ func (detector *objectDetector) getCallProjections(
 
 	var properties []common.Property
 
-	functionDetections, err := scanContext.Scan(
-		result["function"],
-		"object",
-		"",
-		settings.CURSOR_SCOPE,
-	)
+	functionDetections, err := detectorContext.Scan(result["function"], "object", settings.CURSOR_SCOPE)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}
@@ -117,7 +112,7 @@ func (detector *objectDetector) getCallProjections(
 
 func (detector *objectDetector) getObjectDeconstructionProjections(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.objectDeconstructionQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
@@ -132,9 +127,9 @@ func (detector *objectDetector) getObjectDeconstructionProjections(
 
 	objects, err := common.ProjectObject(
 		node,
-		scanContext,
+		detectorContext,
 		objectNode,
-		getObjectName(scanContext, objectNode),
+		getObjectName(detectorContext, objectNode),
 		propertyName,
 		true,
 	)
@@ -145,7 +140,7 @@ func (detector *objectDetector) getObjectDeconstructionProjections(
 	return objects, nil
 }
 
-func getObjectName(scanContext types.ScanContext, objectNode *tree.Node) string {
+func getObjectName(detectorContext types.Context, objectNode *tree.Node) string {
 	// user.name or user["name"]
 	if objectNode.Type() == "identifier" {
 		return objectNode.Content()
@@ -158,13 +153,13 @@ func getObjectName(scanContext types.ScanContext, objectNode *tree.Node) string 
 
 	// address["city"].zip or address["city"]["zip"]
 	if objectNode.Type() == "subscript_expression" {
-		return getSubscriptProperty(scanContext, objectNode)
+		return getSubscriptProperty(detectorContext, objectNode)
 	}
 
 	return ""
 }
 
-func getSubscriptProperty(scanContext types.ScanContext, node *tree.Node) string {
+func getSubscriptProperty(detectorContext types.Context, node *tree.Node) string {
 	indexNode := node.ChildByFieldName("index")
 	if indexNode.Type() == "string" {
 		return stringutil.StripQuotes(indexNode.Content())
@@ -173,7 +168,7 @@ func getSubscriptProperty(scanContext types.ScanContext, node *tree.Node) string
 	return ""
 }
 
-func getProjectedObject(scanContext types.ScanContext, objectNode *tree.Node) (*tree.Node, bool) {
+func getProjectedObject(detectorContext types.Context, objectNode *tree.Node) (*tree.Node, bool) {
 	if objectNode.Type() == "call_expression" {
 		return objectNode.ChildByFieldName("function"), false
 	}

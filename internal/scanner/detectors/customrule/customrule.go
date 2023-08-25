@@ -28,17 +28,15 @@ type Pattern struct {
 
 type customDetector struct {
 	types.DetectorBase
-	detectorType string
-	patterns     []Pattern
-	rules        map[string]*settings.Rule
+	ruleID   string
+	patterns []Pattern
 }
 
 func New(
 	language language.Language,
 	querySet *query.Set,
-	detectorType string,
+	ruleID string,
 	patterns []settings.RulePattern,
-	rules map[string]*settings.Rule,
 ) (types.Detector, error) {
 	var compiledPatterns []Pattern
 	for _, pattern := range patterns {
@@ -57,19 +55,18 @@ func New(
 	}
 
 	return &customDetector{
-		detectorType: detectorType,
-		patterns:     compiledPatterns,
-		rules:        rules,
+		ruleID:   ruleID,
+		patterns: compiledPatterns,
 	}, nil
 }
 
-func (detector *customDetector) Name() string {
-	return detector.detectorType
+func (detector *customDetector) RuleID() string {
+	return detector.ruleID
 }
 
 func (detector *customDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	var detectionsData []interface{}
 
@@ -81,10 +78,9 @@ func (detector *customDetector) DetectAt(
 
 		for _, result := range results {
 			filtersMatch, datatypeDetections, variableNodes, err := matchAllFilters(
-				scanContext,
+				detectorContext,
 				result.Variables,
 				pattern.Filters,
-				detector.rules,
 			)
 			if err != nil {
 				return nil, err

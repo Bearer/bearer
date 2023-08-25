@@ -63,40 +63,40 @@ func New(querySet *query.Set) types.Detector {
 	}
 }
 
-func (detector *objectDetector) Name() string {
+func (detector *objectDetector) RuleID() string {
 	return "object"
 }
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := detector.getHash(node, scanContext)
+	detections, err := detector.getHash(node, detectorContext)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getKeywordArgument(node, scanContext)
+	detections, err = detector.getKeywordArgument(node, detectorContext)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getAssignment(node, scanContext)
+	detections, err = detector.getAssignment(node, detectorContext)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.getClass(node, scanContext)
+	detections, err = detector.getClass(node, detectorContext)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	return detector.getProjections(node, scanContext)
+	return detector.getProjections(node, detectorContext)
 }
 
 func (detector *objectDetector) getHash(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	results := detector.hashPairQuery.MatchAt(node)
 	if len(results) == 0 {
@@ -112,12 +112,7 @@ func (detector *objectDetector) getHash(
 			continue
 		}
 
-		propertyObjects, err := scanContext.Scan(
-			result["value"],
-			"object",
-			"",
-			settings.CURSOR_SCOPE,
-		)
+		propertyObjects, err := detectorContext.Scan(result["value"], "object", settings.CURSOR_SCOPE)
 		if err != nil {
 			return nil, err
 		}
@@ -145,7 +140,7 @@ func (detector *objectDetector) getHash(
 
 func (detector *objectDetector) getKeywordArgument(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.keywordArgumentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
@@ -157,12 +152,7 @@ func (detector *objectDetector) getKeywordArgument(
 		return nil, nil
 	}
 
-	propertyObjects, err := scanContext.Scan(
-		result["value"],
-		"object",
-		"",
-		settings.CURSOR_SCOPE,
-	)
+	propertyObjects, err := detectorContext.Scan(result["value"], "object", settings.CURSOR_SCOPE)
 	if err != nil {
 		return nil, err
 	}
@@ -189,14 +179,14 @@ func (detector *objectDetector) getKeywordArgument(
 
 func (detector *objectDetector) getAssignment(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	valueObjects, err := detectorscommon.GetNonVirtualObjects(scanContext, result["value"])
+	valueObjects, err := detectorscommon.GetNonVirtualObjects(detectorContext, result["value"])
 	if err != nil {
 		return nil, err
 	}
@@ -218,7 +208,7 @@ func (detector *objectDetector) getAssignment(
 
 func (detector *objectDetector) getClass(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	results := detector.classQuery.MatchAt(node)
 	if len(results) == 0 {

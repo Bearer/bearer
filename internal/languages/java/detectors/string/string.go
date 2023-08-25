@@ -17,13 +17,13 @@ func New(querySet *query.Set) types.Detector {
 	return &stringDetector{}
 }
 
-func (detector *stringDetector) Name() string {
+func (detector *stringDetector) RuleID() string {
 	return "string"
 }
 
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string_literal":
@@ -33,11 +33,11 @@ func (detector *stringDetector) DetectAt(
 		}}, nil
 	case "binary_expression":
 		if node.Children()[1].Content() == "+" {
-			return common.ConcatenateChildStrings(node, scanContext)
+			return common.ConcatenateChildStrings(node, detectorContext)
 		}
 	case "assignment_expression":
 		if node.Children()[1].Content() == "+=" {
-			return common.ConcatenateAssignEquals(node, scanContext)
+			return common.ConcatenateAssignEquals(node, detectorContext)
 		}
 	}
 

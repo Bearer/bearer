@@ -16,15 +16,15 @@ func New(querySet *query.Set) types.Detector {
 	return &stringLiteralDetector{}
 }
 
-func (detector *stringLiteralDetector) Name() string {
+func (detector *stringLiteralDetector) RuleID() string {
 	return "string_literal"
 }
 
 func (detector *stringLiteralDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := scanContext.Scan(node, "string", "", settings.CURSOR_STRICT_SCOPE)
+	detections, err := detectorContext.Scan(node, "string", settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}

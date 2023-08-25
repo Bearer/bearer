@@ -55,15 +55,15 @@ func New(querySet *query.Set) types.Detector {
 	}
 }
 
-func (detector *objectDetector) Name() string {
+func (detector *objectDetector) RuleID() string {
 	return "object"
 }
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := detector.getAssignment(node, scanContext)
+	detections, err := detector.getAssignment(node, detectorContext)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -73,12 +73,12 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
-	return detector.getProjections(node, scanContext)
+	return detector.getProjections(node, detectorContext)
 }
 
 func (detector *objectDetector) getAssignment(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 
@@ -87,7 +87,7 @@ func (detector *objectDetector) getAssignment(
 	}
 
 	rightObjects, err := common.GetNonVirtualObjects(
-		scanContext,
+		detectorContext,
 		result["value"],
 	)
 	if err != nil {

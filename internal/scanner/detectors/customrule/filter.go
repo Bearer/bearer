@@ -14,14 +14,13 @@ import (
 )
 
 func matchFilter(
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 	variables,
 	joinedVariables map[string]*tree.Node,
 	filter settings.PatternFilter,
-	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
 	if filter.Not != nil {
-		match, _, err := matchFilter(scanContext, variables, joinedVariables, *filter.Not, rules)
+		match, _, err := matchFilter(detectorContext, variables, joinedVariables, *filter.Not)
 		if match == nil {
 			return nil, nil, err
 		}
@@ -29,11 +28,11 @@ func matchFilter(
 	}
 
 	if len(filter.Either) != 0 {
-		return matchEitherFilters(scanContext, variables, joinedVariables, filter.Either, rules)
+		return matchEitherFilters(detectorContext, variables, joinedVariables, filter.Either)
 	}
 
 	if filter.FilenameRegex != nil {
-		return boolPointer(filter.FilenameRegex.MatchString(scanContext.FileName())), nil, nil
+		return boolPointer(filter.FilenameRegex.MatchString(detectorContext.Filename())), nil, nil
 	}
 
 	node, ok := variables[filter.Variable]
@@ -44,24 +43,22 @@ func matchFilter(
 
 	if filter.Detection != "" {
 		return matchDetectionFilter(
-			scanContext,
+			detectorContext,
 			variables,
 			joinedVariables,
 			node,
 			filter,
-			rules,
 		)
 	}
 
-	matched, err := matchContentFilter(scanContext, filter, node)
+	matched, err := matchContentFilter(detectorContext, filter, node)
 	return matched, nil, err
 }
 
 func matchAllFilters(
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 	variables map[string]*tree.Node,
 	filters []settings.PatternFilter,
-	rules map[string]*settings.Rule,
 ) (bool, []*types.Detection, map[string]*tree.Node, error) {
 	var datatypeDetections []*types.Detection
 
@@ -71,7 +68,7 @@ func matchAllFilters(
 	}
 
 	for _, filter := range filters {
-		matched, subDataTypeDetections, err := matchFilter(scanContext, variables, joinedVariables, filter, rules)
+		matched, subDataTypeDetections, err := matchFilter(detectorContext, variables, joinedVariables, filter)
 		if matched == nil || !*matched || err != nil {
 			return false, nil, nil, err
 		}
@@ -83,18 +80,17 @@ func matchAllFilters(
 }
 
 func matchEitherFilters(
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 	variables,
 	joinedVariables map[string]*tree.Node,
 	filters []settings.PatternFilter,
-	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
 	var datatypeDetections []*types.Detection
 	oneMatched := false
 	oneNotMatched := false
 
 	for _, subFilter := range filters {
-		subMatch, subDatatypeDetections, err := matchFilter(scanContext, variables, joinedVariables, subFilter, rules)
+		subMatch, subDatatypeDetections, err := matchFilter(detectorContext, variables, joinedVariables, subFilter)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -116,28 +112,20 @@ func matchEitherFilters(
 }
 
 func matchDetectionFilter(
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 	variables,
 	joinedVariables map[string]*tree.Node,
 	node *tree.Node,
 	filter settings.PatternFilter,
-	rules map[string]*settings.Rule,
 ) (*bool, []*types.Detection, error) {
 	ruleID := filter.Detection
-	sanitizerRuleID := ""
-	if rule, ok := rules[ruleID]; ok {
-		sanitizerRuleID = rule.SanitizerRuleID
+	detections, err := detectorContext.Scan(node, ruleID, filter.Scope)
+	if err != nil {
+		return nil, nil, err
 	}
 
-	detections, err := scanContext.Scan(
-		node,
-		ruleID,
-		sanitizerRuleID,
-		filter.Scope,
-	)
-
 	if ruleID == "datatype" {
-		return boolPointer(len(detections) != 0), detections, err
+		return boolPointer(len(detections) != 0), detections, nil
 	}
 
 	var datatypeDetections []*types.Detection
@@ -151,7 +139,7 @@ func matchDetectionFilter(
 			continue
 		}
 
-		filtersMatch, _, _, err := matchAllFilters(scanContext, data.VariableNodes, filter.Filters, rules)
+		filtersMatch, _, _, err := matchAllFilters(detectorContext, data.VariableNodes, filter.Filters)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -183,11 +171,11 @@ func matchDetectionFilter(
 		datatypeDetections = append(datatypeDetections, data.Datatypes...)
 	}
 
-	return boolPointer(foundDetection), datatypeDetections, err
+	return boolPointer(foundDetection), datatypeDetections, nil
 }
 
 func matchContentFilter(
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 	filter settings.PatternFilter,
 	node *tree.Node,
 ) (*bool, error) {
@@ -202,7 +190,7 @@ func matchContentFilter(
 	}
 
 	if filter.LengthLessThan != nil {
-		strValue, _, err := common.GetStringValue(node, scanContext)
+		strValue, _, err := common.GetStringValue(node, detectorContext)
 		if err != nil || strValue == "" {
 			return nil, err
 		}
@@ -215,7 +203,7 @@ func matchContentFilter(
 	}
 
 	if filter.StringRegex != nil {
-		value, isLiteral, err := common.GetStringValue(node, scanContext)
+		value, isLiteral, err := common.GetStringValue(node, detectorContext)
 		if err != nil || (value == "" && !isLiteral) {
 			return nil, err
 		}

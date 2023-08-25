@@ -21,10 +21,10 @@ type Property struct {
 }
 
 func GetNonVirtualObjects(
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 	node *tree.Node,
 ) ([]*types.Detection, error) {
-	detections, err := scanContext.Scan(node, "object", "", settings.CURSOR_SCOPE)
+	detections, err := detectorContext.Scan(node, "object", settings.CURSOR_SCOPE)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func GetNonVirtualObjects(
 
 func ProjectObject(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 	objectNode *tree.Node,
 	objectName,
 	propertyName string,
@@ -51,7 +51,7 @@ func ProjectObject(
 	var result []interface{}
 
 	if isPropertyAccess {
-		objectDetections, err := GetNonVirtualObjects(scanContext, objectNode)
+		objectDetections, err := GetNonVirtualObjects(detectorContext, objectNode)
 		if err != nil {
 			return nil, err
 		}

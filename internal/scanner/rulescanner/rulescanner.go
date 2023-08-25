@@ -1,7 +1,6 @@
 package rulescanner
 
 import (
-	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -13,55 +12,18 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
-	"github.com/bearer/bearer/internal/scanner/detectorset"
+	"github.com/bearer/bearer/internal/scanner/filecontext"
 
 	"github.com/bearer/bearer/internal/scanner/cache"
-	"github.com/bearer/bearer/internal/scanner/stats"
 )
 
 type Scanner struct {
-	ctx                   context.Context
-	tree                  *tree.Tree
-	detectorSet           detectorset.Set
-	fileStats             *stats.FileStats
-	fileName              string
-	rulesDisabledForNodes map[string][]*tree.Node
-	rootNode              *tree.Node
+	fileContext *filecontext.Context
+	rootNode    *tree.Node
 	context,
-	sanitizerContext *scanContext
+	sanitizerContext *detectorContext
 	ruleID,
 	sanitizerRuleID string
-}
-
-func new(
-	ctx context.Context,
-	detectorSet detectorset.Set,
-	fileName string,
-	fileStats *stats.FileStats,
-	tree *tree.Tree,
-	rulesDisabledForNodes map[string][]*tree.Node,
-	rootNode *tree.Node,
-	cache *cache.Cache,
-	scope settings.RuleReferenceScope,
-	ruleID,
-	sanitizerRuleID string,
-) *Scanner {
-	scanner := &Scanner{
-		ctx:                   ctx,
-		tree:                  tree,
-		fileName:              fileName,
-		detectorSet:           detectorSet,
-		fileStats:             fileStats,
-		rulesDisabledForNodes: rulesDisabledForNodes,
-		rootNode:              rootNode,
-		ruleID:                ruleID,
-		sanitizerRuleID:       sanitizerRuleID,
-	}
-
-	scanner.context = newContext(scanner, cache, scope)
-	scanner.sanitizerContext = newContext(scanner, cache, settings.DefaultScope)
-
-	return scanner
 }
 
 func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
@@ -89,7 +51,7 @@ func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
 		return nil, err
 	}
 
-	scanner.fileStats.Rule(scanner.ruleID, startTime)
+	scanner.fileContext.RuleStats(scanner.ruleID, startTime)
 
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
@@ -153,29 +115,11 @@ func (scanner *Scanner) detectWithNext(
 	return detections, nil
 }
 
-func (scanner *Scanner) ruleDisabledForNode(ruleId string, node *tree.Node) bool {
-	nodesToIgnore := scanner.rulesDisabledForNodes[ruleId]
-	if nodesToIgnore == nil {
-		return false
-	}
-
-	// check node
-	for _, ignoredNode := range nodesToIgnore {
-		if ignoredNode == node {
+func (scanner *Scanner) ruleDisabledForNode(ruleID string, node *tree.Node) bool {
+	for current := node; current != nil; current = current.Parent() {
+		if slices.Contains(current.DisabledRuleIDs(), ruleID) {
 			return true
 		}
-	}
-
-	// check node ancestors
-	parent := node.Parent()
-	for parent != nil {
-		for _, ignoredNode := range nodesToIgnore {
-			if ignoredNode == parent {
-				return true
-			}
-		}
-
-		parent = parent.Parent()
 	}
 
 	return false
@@ -194,12 +138,12 @@ func (scanner *Scanner) sanitizedNodeDetections(node *tree.Node) ([]*detectortyp
 }
 
 func (scanner *Scanner) detectAtNode(
-	context *scanContext,
+	context *detectorContext,
 	node *tree.Node,
 	ruleID string,
 ) ([]*detectortypes.Detection, error) {
-	if scanner.ctx.Err() != nil {
-		return nil, scanner.ctx.Err()
+	if scanner.fileContext.Err() != nil {
+		return nil, scanner.fileContext.Err()
 	}
 
 	if log.Trace().Enabled() {
@@ -232,12 +176,8 @@ func (scanner *Scanner) detectAtNode(
 		return nil, nil
 	}
 
-	var detections []*detectortypes.Detection
-	if err := scanner.withCycleProtection(node, ruleID, func() (err error) {
-		detections, err = scanner.detectorSet.DetectAt(node, ruleID, context)
-		context.cache.Put(node, ruleID, detections)
-		return
-	}); err != nil {
+	detections, err := scanner.detectWithoutCycles(node, ruleID, context)
+	if err != nil {
 		return nil, err
 	}
 
@@ -250,12 +190,17 @@ func (scanner *Scanner) detectAtNode(
 		)
 	}
 
+	context.cache.Put(node, ruleID, detections)
 	return detections, nil
 }
 
-func (scanner *Scanner) withCycleProtection(node *tree.Node, ruleID string, body func() error) error {
+func (scanner *Scanner) detectWithoutCycles(
+	node *tree.Node,
+	ruleID string,
+	context *detectorContext,
+) ([]*detectortypes.Detection, error) {
 	if slices.Contains(node.ExecutingRules, ruleID) {
-		return fmt.Errorf(
+		return nil, fmt.Errorf(
 			"cycle found during rule evaluation: [%s > %s]\nnode: %s",
 			strings.Join(node.ExecutingRules, " > "),
 			ruleID,
@@ -264,40 +209,33 @@ func (scanner *Scanner) withCycleProtection(node *tree.Node, ruleID string, body
 	}
 
 	node.ExecutingRules = append(node.ExecutingRules, ruleID)
-
-	if err := body(); err != nil {
-		return err
-	}
-
+	detections, err := scanner.fileContext.DetectAt(node, ruleID, context)
 	node.ExecutingRules = node.ExecutingRules[:len(node.ExecutingRules)-1]
 
-	return nil
+	return detections, err
 }
 
 func Scan(
-	ctx context.Context,
-	detectorSet detectorset.Set,
-	fileName string,
-	fileStats *stats.FileStats,
-	tree *tree.Tree,
-	rulesDisabledForNodes map[string][]*tree.Node,
-	rootNode *tree.Node,
+	fileContext *filecontext.Context,
 	cache *cache.Cache,
 	scope settings.RuleReferenceScope,
-	ruleID,
-	sanitizerRuleID string,
+	ruleID string,
+	rootNode *tree.Node,
 ) ([]*detectortypes.Detection, error) {
-	return new(
-		ctx,
-		detectorSet,
-		fileName,
-		fileStats,
-		tree,
-		rulesDisabledForNodes,
-		rootNode,
-		cache,
-		scope,
-		ruleID,
-		sanitizerRuleID,
-	).Scan()
+	sanitizerRuleID := ""
+	if rule, ok := fileContext.Rules()[ruleID]; ok {
+		sanitizerRuleID = rule.SanitizerRuleID
+	}
+
+	scanner := &Scanner{
+		fileContext:     fileContext,
+		ruleID:          ruleID,
+		sanitizerRuleID: sanitizerRuleID,
+		rootNode:        rootNode,
+	}
+
+	scanner.context = newContext(fileContext, cache, scope)
+	scanner.sanitizerContext = newContext(fileContext, cache, settings.DefaultScope)
+
+	return scanner.Scan()
 }

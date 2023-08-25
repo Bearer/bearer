@@ -35,15 +35,15 @@ func New(detectorType detectors.Type, classifier *classificationschema.Classifie
 	}
 }
 
-func (detector *datatypeDetector) Name() string {
+func (detector *datatypeDetector) RuleID() string {
 	return "datatype"
 }
 
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
-	objectDetections, err := scanContext.Scan(node, "object", "", settings.CURSOR_STRICT_SCOPE)
+	objectDetections, err := detectorContext.Scan(node, "object", settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (detector *datatypeDetector) DetectAt(
 	var result []interface{}
 
 	for _, object := range objectDetections {
-		data, _, containsValidClassification := detector.classifyObject(scanContext.FileName(), "", object)
+		data, _, containsValidClassification := detector.classifyObject(detectorContext.Filename(), "", object)
 		if containsValidClassification {
 			result = append(result, data)
 		}

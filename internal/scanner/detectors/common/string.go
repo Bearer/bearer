@@ -14,8 +14,8 @@ type String struct {
 	IsLiteral bool
 }
 
-func GetStringValue(node *tree.Node, scanContext types.ScanContext) (string, bool, error) {
-	detections, err := scanContext.Scan(node, "string", "", settings.CURSOR_SCOPE)
+func GetStringValue(node *tree.Node, detectorContext types.Context) (string, bool, error) {
+	detections, err := detectorContext.Scan(node, "string", settings.CURSOR_SCOPE)
 	if err != nil {
 		return "", false, err
 	}
@@ -36,7 +36,7 @@ func GetStringValue(node *tree.Node, scanContext types.ScanContext) (string, boo
 	}
 }
 
-func ConcatenateChildStrings(node *tree.Node, scanContext types.ScanContext) ([]interface{}, error) {
+func ConcatenateChildStrings(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
 	value := ""
 	isLiteral := true
 
@@ -45,7 +45,7 @@ func ConcatenateChildStrings(node *tree.Node, scanContext types.ScanContext) ([]
 			continue
 		}
 
-		childValue, childIsLiteral, err := GetStringValue(child, scanContext)
+		childValue, childIsLiteral, err := GetStringValue(child, detectorContext)
 		if err != nil {
 			return nil, err
 		}
@@ -67,7 +67,7 @@ func ConcatenateChildStrings(node *tree.Node, scanContext types.ScanContext) ([]
 	}}, nil
 }
 
-func ConcatenateAssignEquals(node *tree.Node, scanContext types.ScanContext) ([]interface{}, error) {
+func ConcatenateAssignEquals(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
 	dataflowSources := node.ChildByFieldName("left").DataflowSources()
 	if len(dataflowSources) == 0 {
 		return nil, nil
@@ -76,12 +76,12 @@ func ConcatenateAssignEquals(node *tree.Node, scanContext types.ScanContext) ([]
 		return nil, fmt.Errorf("expected exactly one data source for `+=` node but got %d", len(dataflowSources))
 	}
 
-	left, leftIsLiteral, err := GetStringValue(dataflowSources[0], scanContext)
+	left, leftIsLiteral, err := GetStringValue(dataflowSources[0], detectorContext)
 	if err != nil {
 		return nil, err
 	}
 
-	right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), scanContext)
+	right, rightIsLiteral, err := GetStringValue(node.ChildByFieldName("right"), detectorContext)
 	if err != nil {
 		return nil, err
 	}

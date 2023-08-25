@@ -11,19 +11,14 @@ type Detection struct {
 	Data      interface{}
 }
 
-type ScanContext interface {
-	FileName() string
-	Scan(
-		rootNode *tree.Node,
-		ruleID,
-		sanitizerRuleID string,
-		scope settings.RuleReferenceScope,
-	) ([]*Detection, error)
+type Context interface {
+	Filename() string
+	Scan(rootNode *tree.Node, ruleID string, scope settings.RuleReferenceScope) ([]*Detection, error)
 }
 
 type Detector interface {
-	Name() string
-	DetectAt(node *tree.Node, scanContext ScanContext) ([]interface{}, error)
+	RuleID() string
+	DetectAt(node *tree.Node, detectorContext Context) ([]interface{}, error)
 }
 
 type DetectorBase struct{}

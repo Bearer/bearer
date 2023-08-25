@@ -17,13 +17,13 @@ func New(querySet *query.Set) types.Detector {
 	return &stringDetector{}
 }
 
-func (detector *stringDetector) Name() string {
+func (detector *stringDetector) RuleID() string {
 	return "string"
 }
 
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
-	scanContext types.ScanContext,
+	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string":
@@ -32,21 +32,21 @@ func (detector *stringDetector) DetectAt(
 			IsLiteral: true,
 		}}, nil
 	case "template_string":
-		return handleTemplateString(node, scanContext)
+		return handleTemplateString(node, detectorContext)
 	case "binary_expression":
 		if node.Children()[1].Content() == "+" {
-			return common.ConcatenateChildStrings(node, scanContext)
+			return common.ConcatenateChildStrings(node, detectorContext)
 		}
 	case "augmented_assignment_expression":
 		if node.Children()[1].Content() == "+=" {
-			return common.ConcatenateAssignEquals(node, scanContext)
+			return common.ConcatenateAssignEquals(node, detectorContext)
 		}
 	}
 
 	return nil, nil
 }
 
-func handleTemplateString(node *tree.Node, scanContext types.ScanContext) ([]interface{}, error) {
+func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
 	text := ""
 	isLiteral := true
 
@@ -63,7 +63,7 @@ func handleTemplateString(node *tree.Node, scanContext types.ScanContext) ([]int
 			childIsLiteral = true
 		} else {
 			var err error
-			childValue, childIsLiteral, err = common.GetStringValue(namedChildren[0], scanContext)
+			childValue, childIsLiteral, err = common.GetStringValue(namedChildren[0], detectorContext)
 			if err != nil {
 				return err
 			}
