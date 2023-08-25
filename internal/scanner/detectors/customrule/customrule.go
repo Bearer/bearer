@@ -39,8 +39,8 @@ func New(
 	patterns []settings.RulePattern,
 ) (types.Detector, error) {
 	var compiledPatterns []Pattern
-	for _, pattern := range patterns {
-		patternQuery, err := patternquery.Compile(language, querySet, pattern.Pattern, pattern.Focus)
+	for i, pattern := range patterns {
+		patternQuery, err := patternquery.Compile(language, querySet, ruleID, i, pattern.Pattern, pattern.Focus)
 		if err != nil {
 			return nil, fmt.Errorf("error compiling pattern: %s", err)
 		}

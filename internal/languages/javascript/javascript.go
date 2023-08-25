@@ -28,7 +28,7 @@ func Get() language.Language {
 	return &implementation{}
 }
 
-func (*implementation) Name() string {
+func (*implementation) ID() string {
 	return "javascript"
 }
 

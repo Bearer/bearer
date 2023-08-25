@@ -10,7 +10,7 @@ import (
 )
 
 type Language interface {
-	Name() string
+	ID() string
 	EnryLanguages() []string
 	NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector
 	SitterLanguage() *sitter.Language

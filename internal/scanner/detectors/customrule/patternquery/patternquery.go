@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"golang.org/x/exp/slices"
+	"gopkg.in/yaml.v3"
 
 	"github.com/rs/zerolog/log"
 
@@ -20,6 +21,9 @@ type Query interface {
 }
 
 type query struct {
+	ruleID          string
+	patternIndex    int
+	input           string
 	treeQuery       *astquery.Query
 	paramToVariable map[string]string
 	equalParams     [][]string
@@ -38,6 +42,8 @@ type Result struct {
 func Compile(
 	language language.Language,
 	querySet *astquery.Set,
+	ruleID string,
+	patternIndex int,
 	input string,
 	focusedVariable string,
 ) (Query, error) {
@@ -51,15 +57,48 @@ func Compile(
 		return &rootVariableQuery{variable: builderResult.RootVariable}, nil
 	}
 
-	treeQuery := querySet.Add(builderResult.Query)
-	log.Trace().Msgf("compiled pattern to query %d: %s -> %s", treeQuery.ID(), input, builderResult.Query)
-
-	return &query{
-		treeQuery:       treeQuery,
+	query := &query{
+		ruleID:          ruleID,
+		patternIndex:    patternIndex,
+		input:           input,
+		treeQuery:       querySet.Add(builderResult.Query),
 		paramToVariable: builderResult.ParamToVariable,
 		equalParams:     builderResult.EqualParams,
 		paramToContent:  builderResult.ParamToContent,
-	}, nil
+	}
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("compiled pattern:\n%s", query.dump())
+	}
+
+	return query, nil
+}
+
+type dumpValue struct {
+	RuleID          string `yaml:"rule_id"`
+	PatternIndex    int    `yaml:"pattern_index"`
+	Pattern         string
+	TreeQueryID     int                          `yaml:"tree_query_id"`
+	ParamToVariable map[string]string            `yaml:"param_to_variable,omitempty"`
+	ParamToContent  map[string]map[string]string `yaml:"param_to_content,omitempty"`
+	EqualParams     [][]string                   `yaml:"equal_params,omitempty"`
+}
+
+func (query *query) dump() string {
+	yamlQuery, err := yaml.Marshal(&dumpValue{
+		RuleID:          query.ruleID,
+		PatternIndex:    query.patternIndex,
+		Pattern:         query.input,
+		TreeQueryID:     query.treeQuery.ID(),
+		ParamToVariable: query.paramToVariable,
+		ParamToContent:  query.paramToContent,
+		EqualParams:     query.equalParams,
+	})
+	if err != nil {
+		return err.Error()
+	}
+
+	return string(yamlQuery)
 }
 
 func (query *query) MatchAt(node *tree.Node) ([]*Result, error) {

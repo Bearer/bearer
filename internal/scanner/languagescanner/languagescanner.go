@@ -37,7 +37,7 @@ func New(
 	schemaClassifier *schema.Classifier,
 	rules map[string]*settings.Rule,
 ) (*Scanner, error) {
-	querySet := query.NewSet(language.SitterLanguage())
+	querySet := query.NewSet(language.ID(), language.SitterLanguage())
 
 	detectorSet, err := detectorset.New(
 		querySet,
@@ -58,8 +58,8 @@ func New(
 	}, nil
 }
 
-func (scanner *Scanner) LanguageName() string {
-	return scanner.language.Name()
+func (scanner *Scanner) LanguageID() string {
+	return scanner.language.ID()
 }
 
 func (scanner *Scanner) Scan(

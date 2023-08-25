@@ -37,7 +37,7 @@ func New(
 	rules map[string]*settings.Rule,
 	language language.Language,
 ) (Set, error) {
-	relevantRules, presenceRules := getRelevantRules(rules, language.Name())
+	relevantRules, presenceRules := getRelevantRules(rules, language.ID())
 	builtinAndSharedRuleIDs, topLevelRuleIDs := findNotableRuleIDs(builtinDetectors, relevantRules, presenceRules)
 
 	detectors, err := createDetectors(language, querySet, builtinDetectors, relevantRules)
@@ -103,13 +103,13 @@ func (set *detectorSet) lookupDetector(detectorType string) (detectortypes.Detec
 
 func getRelevantRules(
 	rules map[string]*settings.Rule,
-	languageName string,
+	languageID string,
 ) (map[string]*settings.Rule, set.Set[string]) {
 	relevantRules := make(map[string]*settings.Rule)
 	presenceRules := set.New[string]()
 
 	for ruleID, rule := range rules {
-		if !slices.Contains(rule.Languages, languageName) {
+		if !slices.Contains(rule.Languages, languageID) {
 			continue
 		}
 

@@ -31,18 +31,18 @@ type Scanner struct {
 }
 
 func New(schemaClassifier *schemaclassifier.Classifier, rules map[string]*settings.Rule) (*Scanner, error) {
-	langImplementations := []language.Language{
+	languages := []language.Language{
 		java.Get(),
 		javascript.Get(),
 		ruby.Get(),
 	}
 
-	languageScanners := make([]*languagescanner.Scanner, len(langImplementations))
+	languageScanners := make([]*languagescanner.Scanner, len(languages))
 
-	for i, langImplementation := range langImplementations {
-		languageScanner, err := languagescanner.New(langImplementation, schemaClassifier, rules)
+	for i, language := range languages {
+		languageScanner, err := languagescanner.New(language, schemaClassifier, rules)
 		if err != nil {
-			return nil, fmt.Errorf("error creating %s language scanner: %w", langImplementation.Name(), err)
+			return nil, fmt.Errorf("error creating %s language scanner: %w", language.ID(), err)
 		}
 
 		languageScanners[i] = languageScanner
@@ -64,7 +64,7 @@ func (scanner *Scanner) Scan(
 	for _, languageScanner := range scanner.languageScanners {
 		detections, err := languageScanner.Scan(ctx, fileStats, file)
 		if err != nil {
-			return fmt.Errorf("%s scan failed: %w", languageScanner.LanguageName(), err)
+			return fmt.Errorf("%s scan failed: %w", languageScanner.LanguageID(), err)
 		}
 
 		for _, detection := range detections {

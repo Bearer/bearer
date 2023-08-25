@@ -5,12 +5,15 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
+	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 )
 
 type Set struct {
+	languageID     string
 	sitterLanguage *sitter.Language
 	queries        []Query
 	queryByInput   map[string]*Query
@@ -24,8 +27,9 @@ type Query struct {
 	input    string
 }
 
-func NewSet(sitterLanguage *sitter.Language) *Set {
+func NewSet(languageID string, sitterLanguage *sitter.Language) *Set {
 	return &Set{
+		languageID:     languageID,
 		sitterLanguage: sitterLanguage,
 		sitterCursor:   sitter.NewQueryCursor(),
 		queryByInput:   make(map[string]*Query),
@@ -109,6 +113,10 @@ func (querySet *Set) Compile() error {
 		s.WriteString("\n")
 	}
 
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("%s queries:\n%s", querySet.languageID, querySet.dump())
+	}
+
 	sitterQuery, err := sitter.NewQuery([]byte(s.String()), querySet.sitterLanguage)
 	if err != nil {
 		return err
@@ -117,6 +125,27 @@ func (querySet *Set) Compile() error {
 	querySet.sitterQuery = sitterQuery
 
 	return nil
+}
+
+type dumpValue struct {
+	ID    int
+	Input string
+}
+
+func (querySet *Set) dump() string {
+	queries := make([]dumpValue, len(querySet.queries))
+
+	for i, query := range querySet.queries {
+		queries[i].ID = query.id
+		queries[i].Input = query.input
+	}
+
+	yamlQueries, err := yaml.Marshal(queries)
+	if err != nil {
+		return err.Error()
+	}
+
+	return string(yamlQueries)
 }
 
 func (querySet *Set) Close() {
