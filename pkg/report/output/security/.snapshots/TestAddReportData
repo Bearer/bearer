@@ -51,7 +51,8 @@
       DetailedContext: (string) "",
       CodeExtract: (string) "",
       RawCodeExtract: ([]file.Line) {
-      }
+      },
+      SomeExtraField: (string) ""
     }
   },
   (string) (len=4) "high": ([]types.Finding) (len=1) {
@@ -101,7 +102,8 @@
       DetailedContext: (string) "",
       CodeExtract: (string) "",
       RawCodeExtract: ([]file.Line) {
-      }
+      },
+      SomeExtraField: (string) ""
     }
   }
 }

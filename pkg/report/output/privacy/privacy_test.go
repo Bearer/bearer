@@ -30,7 +30,7 @@ func TestBuildCsvString(t *testing.T) {
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
-func TestGetData(t *testing.T) {
+func TestAddReportData(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{Report: "privacy"})
 	config.Rules = map[string]*settings.Rule{
 		"ruby_third_parties_sentry": config.Rules["ruby_third_parties_sentry"],

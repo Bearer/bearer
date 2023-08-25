@@ -51,7 +51,8 @@
       DetailedContext: (string) "",
       CodeExtract: (string) "",
       RawCodeExtract: ([]file.Line) {
-      }
+      },
+      SomeExtraField: (string) ""
     }
   }
 }

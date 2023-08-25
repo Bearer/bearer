@@ -110,7 +110,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
-func AddReportData(t *testing.T) {
+func TestAddReportData(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
 		Report: "security",
 		Severity: map[string]bool{
@@ -136,7 +136,7 @@ func AddReportData(t *testing.T) {
 	cupaloy.SnapshotT(t, output.FindingsBySeverity)
 }
 
-func AddReportDataWithSeverity(t *testing.T) {
+func TestAddReportDataWithSeverity(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
 		Report: "security",
 		Severity: map[string]bool{
