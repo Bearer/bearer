@@ -39,7 +39,7 @@ For more details and additional configuration, see our [guide to using GitLab](/
 
 ## CircleCI
 
-To integrate with CicleCI you can add the following job to your `.circleci/config.yml`
+To integrate with CircleCI, you can add the following job to your `.circleci/config.yml`
 
 ```yml
 version: 2.1
