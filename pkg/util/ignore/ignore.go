@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"time"
+
+	"github.com/fatih/color"
 )
 
 type IgnoredFingerprint struct {
@@ -20,6 +22,34 @@ type DuplicateIgnoredFingerprintError struct {
 
 func (f *DuplicateIgnoredFingerprintError) Error() string {
 	return f.Err.Error()
+}
+
+var bold = color.New(color.Bold).SprintFunc()
+var morePrefix = color.HiBlackString("├─ ")
+var lastPrefix = color.HiBlackString("└─ ")
+
+func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprint) string {
+	prefix := morePrefix
+	result := fmt.Sprintf(bold(color.HiBlueString("%s \n")), fingerprintId)
+
+	if entry.Author == "" && entry.Comment == "" {
+		prefix = lastPrefix
+	}
+	result += fmt.Sprintf("%sIgnored At: %s\n", prefix, bold(entry.IgnoredAt))
+
+	if entry.Author != "" {
+		if entry.Comment == "" {
+			prefix = lastPrefix
+		}
+
+		result += fmt.Sprintf("%sAuthor: %s\n", prefix, bold(entry.Author))
+	}
+
+	if entry.Comment != "" {
+		result += fmt.Sprintf("%sComment: %s\n", lastPrefix, bold(entry.Comment))
+	}
+
+	return result
 }
 
 func GetIgnoredFingerprints(target *string) (ignoredFingerprints map[string]IgnoredFingerprint, err error) {
@@ -43,11 +73,11 @@ func AddToIgnoreFile(fingerprintsToIgnore map[string]IgnoredFingerprint, force b
 
 	for key, value := range fingerprintsToIgnore {
 		if !force {
-			if existingIgnoredFingerprint, ok := existingIgnoredFingerprints[key]; ok {
+			if _, ok := existingIgnoredFingerprints[key]; ok {
 				error := fmt.Errorf(
-					"fingerprint %s already exists in bearer.ignore file%s. To overwrite this entry, use --force",
+					"fingerprint '%s' already exists in bearer.ignore file. To view this entry run:\n\n$ bearer ignore show %s\n\nTo overwrite this entry, use --force",
 					key,
-					fingerprintDetailsStr(existingIgnoredFingerprint),
+					key,
 				)
 				return &DuplicateIgnoredFingerprintError{
 					Err: error,
@@ -59,7 +89,7 @@ func AddToIgnoreFile(fingerprintsToIgnore map[string]IgnoredFingerprint, force b
 		existingIgnoredFingerprints[key] = value
 	}
 
-	data, err := json.Marshal(existingIgnoredFingerprints)
+	data, err := json.MarshalIndent(existingIgnoredFingerprints, "", "  ")
 	if err != nil {
 		// failed to marshall data
 		return err
@@ -91,18 +121,4 @@ func readIgnoreFile(target *string) (payload map[string]IgnoredFingerprint, err 
 
 	err = json.Unmarshal(content, &payload)
 	return payload, err
-}
-
-func fingerprintDetailsStr(ignoredFingerprint IgnoredFingerprint) (fingerprintDetailsStr string) {
-	if len(ignoredFingerprint.Author) > 0 {
-		fingerprintDetailsStr += fmt.Sprintf(" with author %s", ignoredFingerprint.Author)
-		if len(ignoredFingerprint.Comment) > 0 {
-			fingerprintDetailsStr += fmt.Sprintf("and comment %s", ignoredFingerprint.Comment)
-		}
-	} else {
-		if len(ignoredFingerprint.Comment) > 0 {
-			fingerprintDetailsStr += fmt.Sprintf(" with comment %s", ignoredFingerprint.Comment)
-		}
-	}
-	return fingerprintDetailsStr
 }
