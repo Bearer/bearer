@@ -61,7 +61,7 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string) (ignoredFingerprints ma
 }
 
 func GetExistingIgnoredFingerprints(bearerIgnoreFilePath string) (existingIgnoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
-	if _, err = os.Stat(bearerIgnoreFilePath); err != nil {
+	if _, noFileErr := os.Stat(bearerIgnoreFilePath); noFileErr != nil {
 		existingIgnoredFingerprints = make(map[string]IgnoredFingerprint)
 	} else {
 		fileExists = true

@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/ignore"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -185,11 +184,10 @@ $ bearer ignore migrate`,
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
 			}
-
-			ignoredFingerprintsFromConfig, err := getIgnoredFingerprintsFromConfig(args)
+			configFilePath := viper.GetString(flag.ConfigFileFlag.ConfigName)
+			ignoredFingerprintsFromConfig, err := getIgnoredFingerprintsFromConfig(configFilePath)
 			if err != nil {
-				// handle expected error (duplicate entry in bearer.ignore)
-				cmd.Printf("%s\n", err.Error())
+				cmd.Printf("Error: %s, perhaps you need to use --config-file to specify the config path?\n", err.Error())
 				return nil
 			}
 
@@ -197,8 +195,31 @@ $ bearer ignore migrate`,
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
+
+			entrysInConfig := len(ignoredFingerprintsFromConfig)
+			entrysInConfigSkipped := ""
+			cmd.Printf("Found %d ignores in:\n\t%s\n", entrysInConfig, configFilePath)
+
 			if !fileExists {
-				cmd.Printf("\nCreating bearer.ignore file")
+				cmd.Printf("Creating bearer.ignore file\n")
+			}
+
+			if !options.IgnoreMigrateOptions.Force {
+				for key := range existingIgnoredFingerprints {
+					if _, ok := ignoredFingerprintsFromConfig[key]; ok {
+						entrysInConfig--
+						entrysInConfigSkipped += fmt.Sprintf("- %s\n", key)
+						delete(ignoredFingerprintsFromConfig, key)
+					}
+				}
+			}
+
+			cmd.Printf("Added %d ignores to:\n\t%s\n", entrysInConfig, options.IgnoreOptions.BearerIgnoreFile)
+
+			if entrysInConfigSkipped != "" {
+				cmd.Printf("\nThe following items where already ignored:\n")
+				cmd.Printf(entrysInConfigSkipped)
+				cmd.Printf("\nTo overwrite these entries in the ignore file, use --force\n")
 			}
 
 			if err = ignore.AddToIgnoreFile(ignoredFingerprintsFromConfig, existingIgnoredFingerprints, options.IgnoreOptions.BearerIgnoreFile, options.IgnoreMigrateOptions.Force); err != nil {
@@ -222,24 +243,17 @@ $ bearer ignore migrate`,
 	return cmd
 }
 
-func getIgnoredFingerprintsFromConfig(args []string) (ignoredFingerprintsFromConfig map[string]ignore.IgnoredFingerprint, err error) {
+func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFromConfig map[string]ignore.IgnoredFingerprint, err error) {
 	ignoredFingerprintsFromConfig = make(map[string]ignore.IgnoredFingerprint)
 
-	configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
-	var defaultConfigPath = ""
-	if len(args) > 0 {
-		defaultConfigPath = file.GetFullFilename(args[0], configPath)
-	}
-
 	if err := readConfig(configPath); err != nil {
-		if err := readConfig(defaultConfigPath); err != nil {
-			return ignoredFingerprintsFromConfig, err
-		}
 		return ignoredFingerprintsFromConfig, err
 	}
 
 	for _, fingerprint := range viper.GetStringSlice("report.exclude-fingerprint") {
-		ignoredFingerprintsFromConfig[fingerprint] = ignore.IgnoredFingerprint{}
+		ignoredFingerprintsFromConfig[fingerprint] = ignore.IgnoredFingerprint{
+			Comment: "migrated from bearer.yml",
+		}
 	}
 
 	return ignoredFingerprintsFromConfig, nil
