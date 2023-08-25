@@ -12,6 +12,27 @@ import (
 )
 
 func NewIgnoreCommand() *cobra.Command {
+	usageTemplate := `
+Usage: bearer ignore <command> [flags]
+
+Available Commands:
+    add              Add an ignored fingerprint
+    show             Show an ignored fingerprint
+    migrate          Migrate ignored fingerprints
+
+Examples:
+    # Add an ignored fingerprint to your bearer.ignore file
+    $ bearer ignore add <fingerprint> --author Mish --comment "investigate this"
+
+    # Show the details of an ignored fingerprint from your bearer.ignore file
+    $ bearer ignore show <fingerprint>
+
+    # Migrate existing ignored (excluded) fingerprints from bearer.yml file
+    # to bearer.ignore
+    $ bearer ignore migrate
+
+`
+
 	cmd := &cobra.Command{
 		Use:           "ignore [subcommand] <fingerprint>",
 		Short:         "Manage ignored fingerprints",
@@ -26,6 +47,8 @@ func NewIgnoreCommand() *cobra.Command {
 		newIgnoreMigrateCommand(),
 	)
 
+	cmd.SetUsageTemplate(usageTemplate)
+
 	return cmd
 }
 
@@ -37,8 +60,7 @@ func newIgnoreShowCommand() *cobra.Command {
 $ bearer ignore show <fingerprint>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {
-				cmd.Printf("No fingerprint given. Please provide a fingerprint with the command: $ bearer ignore show <fingerprint>\n")
-				return nil
+				return cmd.Help()
 			}
 
 			ignoredFingerprints, err := ignore.GetIgnoredFingerprints(nil)
@@ -78,8 +100,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			}
 
 			if len(args) == 0 {
-				cmd.Printf("No fingerprint given. Please provide a fingerprint with the command: $ bearer ignore add <fingerprint>\n")
-				return nil
+				return cmd.Help()
 			}
 
 			options, err := IgnoreAddFlags.ToOptions(args)

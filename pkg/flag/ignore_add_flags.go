@@ -6,7 +6,7 @@ var (
 		ConfigName: "ignore_add.author",
 		Shorthand:  "a",
 		Value:      FormatEmpty,
-		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)",
+		Usage:      "Add author information to this ignored finding.",
 	}
 	CommentFlag = Flag{
 		Name:       "comment",
