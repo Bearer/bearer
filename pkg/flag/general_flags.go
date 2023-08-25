@@ -56,6 +56,7 @@ var (
 
 type GeneralFlagGroup struct {
 	ConfigFile          *Flag
+	BearerIgnoreFile    *Flag
 	APIKey              *Flag
 	Host                *Flag
 	DisableVersionCheck *Flag

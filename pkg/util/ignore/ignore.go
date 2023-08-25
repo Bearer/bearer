@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/fatih/color"
@@ -52,8 +51,8 @@ func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprin
 	return result
 }
 
-func GetIgnoredFingerprints(target *string) (ignoredFingerprints map[string]IgnoredFingerprint, err error) {
-	fingerprints, err := readIgnoreFile(target)
+func GetIgnoredFingerprints(bearerIgnoreFilePath string) (ignoredFingerprints map[string]IgnoredFingerprint, err error) {
+	fingerprints, err := readIgnoreFile(bearerIgnoreFilePath)
 	if err != nil {
 		return map[string]IgnoredFingerprint{}, err
 	}
@@ -61,16 +60,18 @@ func GetIgnoredFingerprints(target *string) (ignoredFingerprints map[string]Igno
 	return fingerprints, nil
 }
 
-func AddToIgnoreFile(fingerprintsToIgnore map[string]IgnoredFingerprint, force bool) error {
-	var existingIgnoredFingerprints map[string]IgnoredFingerprint
-	if _, err := os.Stat("./bearer.ignore"); err != nil {
+func GetExistingIgnoredFingerprints(bearerIgnoreFilePath string) (existingIgnoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
+	if _, err = os.Stat(bearerIgnoreFilePath); err != nil {
 		existingIgnoredFingerprints = make(map[string]IgnoredFingerprint)
 	} else {
-		if existingIgnoredFingerprints, err = readIgnoreFile(nil); err != nil {
-			return err
-		}
+		fileExists = true
+		existingIgnoredFingerprints, err = readIgnoreFile(bearerIgnoreFilePath)
 	}
 
+	return existingIgnoredFingerprints, fileExists, err
+}
+
+func AddToIgnoreFile(fingerprintsToIgnore map[string]IgnoredFingerprint, existingIgnoredFingerprints map[string]IgnoredFingerprint, bearerIgnoreFilePath string, force bool) error {
 	for key, value := range fingerprintsToIgnore {
 		if !force {
 			if _, ok := existingIgnoredFingerprints[key]; ok {
@@ -95,26 +96,17 @@ func AddToIgnoreFile(fingerprintsToIgnore map[string]IgnoredFingerprint, force b
 		return err
 	}
 
-	return os.WriteFile("./bearer.ignore", data, 0644)
+	return os.WriteFile(bearerIgnoreFilePath, data, 0644)
 }
 
-func readIgnoreFile(target *string) (payload map[string]IgnoredFingerprint, err error) {
-	targetPath := ""
-	if target != nil {
-		if targetPath, err = filepath.Abs(*target); err != nil {
-			return payload, err
-		}
-	}
-
-	path := filepath.Join(targetPath, "bearer.ignore")
-
-	if _, err := os.Stat(path); err != nil {
+func readIgnoreFile(bearerIgnoreFilePath string) (payload map[string]IgnoredFingerprint, err error) {
+	if _, err := os.Stat(bearerIgnoreFilePath); err != nil {
 		// bearer.ignore file does not exist
 		// return blank payload
 		return map[string]IgnoredFingerprint{}, nil
 	}
 
-	content, err := os.ReadFile(path)
+	content, err := os.ReadFile(bearerIgnoreFilePath)
 	if err != nil {
 		return payload, err
 	}

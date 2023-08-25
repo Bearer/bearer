@@ -53,7 +53,10 @@ Examples:
 }
 
 func newIgnoreShowCommand() *cobra.Command {
-	return &cobra.Command{
+	var IgnoreShowFlags = &flag.Flags{
+		IgnoreFlagGroup: flag.NewIgnoreFlagGroup(),
+	}
+	cmd := &cobra.Command{
 		Use:   "show <fingerprint>",
 		Short: "Show an ignored fingerprint",
 		Example: `# Show the details of an ignored fingerprint from your bearer.ignore file
@@ -63,7 +66,12 @@ $ bearer ignore show <fingerprint>`,
 				return cmd.Help()
 			}
 
-			ignoredFingerprints, err := ignore.GetIgnoredFingerprints(nil)
+			options, err := IgnoreShowFlags.ToOptions(args)
+			if err != nil {
+				return fmt.Errorf("flag error: %s", err)
+			}
+
+			ignoredFingerprints, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
 			if err != nil {
 				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
 				return nil
@@ -82,10 +90,15 @@ $ bearer ignore show <fingerprint>`,
 		SilenceErrors: false,
 		SilenceUsage:  false,
 	}
+	IgnoreShowFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreShowFlags.Usages(cmd)))
+
+	return cmd
 }
 
 func newIgnoreAddCommand() *cobra.Command {
 	var IgnoreAddFlags = &flag.Flags{
+		IgnoreFlagGroup:    flag.NewIgnoreFlagGroup(),
 		IgnoreAddFlagGroup: flag.NewIgnoreAddFlagGroup(),
 	}
 	cmd := &cobra.Command{
@@ -115,7 +128,21 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				fingerprintId: fingerprintEntry,
 			}
 
-			if err = ignore.AddToIgnoreFile(fingerprintsToIgnore, options.IgnoreAddOptions.Force); err != nil {
+			existingIgnoredFingerprints, fileExists, err := ignore.GetExistingIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			if err != nil {
+				return fmt.Errorf("error retrieving existing ignores: %s", err)
+			}
+
+			if !fileExists {
+				cmd.Printf("\nCreating bearer.ignore file...")
+			}
+
+			if err := ignore.AddToIgnoreFile(
+				fingerprintsToIgnore,
+				existingIgnoredFingerprints,
+				options.IgnoreOptions.BearerIgnoreFile,
+				options.IgnoreAddOptions.Force,
+			); err != nil {
 				target := &ignore.DuplicateIgnoredFingerprintError{}
 				if errors.As(err, &target) {
 					// handle expected error (duplicate entry in bearer.ignore)
@@ -141,6 +168,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 
 func newIgnoreMigrateCommand() *cobra.Command {
 	IgnoreMigrateFlags := &flag.Flags{
+		IgnoreFlagGroup:        flag.NewIgnoreFlagGroup(),
 		IgnoreMigrateFlagGroup: flag.NewIgnoreMigrateFlagGroup(),
 	}
 	cmd := &cobra.Command{
@@ -165,7 +193,15 @@ $ bearer ignore migrate`,
 				return nil
 			}
 
-			if err = ignore.AddToIgnoreFile(ignoredFingerprintsFromConfig, options.IgnoreMigrateOptions.Force); err != nil {
+			existingIgnoredFingerprints, fileExists, err := ignore.GetExistingIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			if err != nil {
+				return fmt.Errorf("error retrieving existing ignores: %s", err)
+			}
+			if !fileExists {
+				cmd.Printf("\nCreating bearer.ignore file")
+			}
+
+			if err = ignore.AddToIgnoreFile(ignoredFingerprintsFromConfig, existingIgnoredFingerprints, options.IgnoreOptions.BearerIgnoreFile, options.IgnoreMigrateOptions.Force); err != nil {
 				target := &ignore.DuplicateIgnoredFingerprintError{}
 				if errors.As(err, &target) {
 					// handle expected error (duplicate entry in bearer.ignore)
