@@ -12,6 +12,27 @@ import (
 )
 
 func NewIgnoreCommand() *cobra.Command {
+	usageTemplate := `
+Usage: bearer ignore <command> [flags]
+
+Available Commands:
+    add              Add an ignored fingerprint
+    show             Show an ignored fingerprint
+    migrate          Migrate ignored fingerprints
+
+Examples:
+    # Add an ignored fingerprint to your bearer.ignore file
+    $ bearer ignore add <fingerprint> --author Mish --comment "investigate this"
+
+    # Show the details of an ignored fingerprint from your bearer.ignore file
+    $ bearer ignore show <fingerprint>
+
+    # Migrate existing ignored (excluded) fingerprints from bearer.yml file
+    # to bearer.ignore
+    $ bearer ignore migrate
+
+`
+
 	cmd := &cobra.Command{
 		Use:           "ignore [subcommand] <fingerprint>",
 		Short:         "Manage ignored fingerprints",
@@ -25,6 +46,8 @@ func NewIgnoreCommand() *cobra.Command {
 		newIgnoreAddCommand(),
 		newIgnoreMigrateCommand(),
 	)
+
+	cmd.SetUsageTemplate(usageTemplate)
 
 	return cmd
 }
