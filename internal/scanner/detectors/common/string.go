@@ -31,7 +31,7 @@ func GetStringValue(node *tree.Node, detectorContext types.Context) (string, boo
 		return "", false, fmt.Errorf(
 			"expected single string detection but got %d for %s",
 			len(detections),
-			node.Debug(true),
+			node.Debug(),
 		)
 	}
 }

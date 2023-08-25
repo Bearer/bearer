@@ -73,18 +73,13 @@ func (node *Node) Content() string {
 	return string(node.tree.contentBytes[node.ContentStart.Byte:node.ContentEnd.Byte])
 }
 
-func (node *Node) Debug(includeContent bool) string {
-	content := ""
-	if includeContent {
-		content = ":\n" + node.Content()
-	}
-
+func (node *Node) Debug() string {
 	return fmt.Sprintf(
-		"%d:%d:%s%s",
+		"node-%d (%d:%d:%s)",
+		node.ID,
 		node.ContentStart.Line,
 		node.ContentStart.Column,
 		node.Type(),
-		content,
 	)
 }
 

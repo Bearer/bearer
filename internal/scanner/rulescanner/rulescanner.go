@@ -30,7 +30,7 @@ func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
 	startTime := time.Now()
 
 	if log.Trace().Enabled() {
-		log.Trace().Msgf("file scan start: %s at %s", scanner.ruleID, scanner.rootNode.Debug(true))
+		log.Trace().Msgf("file scan start: %s at %s", scanner.ruleID, scanner.rootNode.Debug())
 	}
 
 	var detections []*detectortypes.Detection
@@ -57,7 +57,7 @@ func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
 		log.Trace().Msgf(
 			"file scan end: %s at %s: %d detections",
 			scanner.ruleID,
-			scanner.rootNode.Debug(false),
+			scanner.rootNode.Debug(),
 			len(detections),
 		)
 	}
@@ -147,7 +147,7 @@ func (scanner *Scanner) detectAtNode(
 	}
 
 	if log.Trace().Enabled() {
-		log.Trace().Msgf("detect at node start: %s at %s", ruleID, node.Debug(true))
+		log.Trace().Msgf("detect at node start: %s at %s", ruleID, node.Debug())
 	}
 
 	if detections, cached := context.cache.Get(node, ruleID); cached {
@@ -155,7 +155,7 @@ func (scanner *Scanner) detectAtNode(
 			log.Trace().Msgf(
 				"detect at node end: %s at %s: %d detections (cached)",
 				ruleID,
-				node.Debug(false),
+				node.Debug(),
 				len(detections),
 			)
 		}
@@ -168,7 +168,7 @@ func (scanner *Scanner) detectAtNode(
 			log.Trace().Msgf(
 				"detect at node end: %s at %s: rule disabled",
 				ruleID,
-				node.Debug(false),
+				node.Debug(),
 			)
 		}
 
@@ -185,7 +185,7 @@ func (scanner *Scanner) detectAtNode(
 		log.Trace().Msgf(
 			"detect at node end: %s at %s: %d detections",
 			ruleID,
-			node.Debug(false),
+			node.Debug(),
 			len(detections),
 		)
 	}
@@ -201,10 +201,10 @@ func (scanner *Scanner) detectWithoutCycles(
 ) ([]*detectortypes.Detection, error) {
 	if slices.Contains(node.ExecutingRules, ruleID) {
 		return nil, fmt.Errorf(
-			"cycle found during rule evaluation: [%s > %s]\nnode: %s",
+			"cycle found during rule evaluation at %s: [%s > %s]",
+			node.Debug(),
 			strings.Join(node.ExecutingRules, " > "),
 			ruleID,
-			node.Debug(true),
 		)
 	}
 

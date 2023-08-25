@@ -144,17 +144,7 @@ func fixupInput(
 		}
 
 		if log.Trace().Enabled() {
-			var parentDebug, grandparentDebug string
-			if parent := node.Parent(); parent != nil {
-				parentDebug = parent.Debug(true)
-				if grandparent := parent.Parent(); grandparent != nil {
-					grandparentDebug = grandparent.Debug(true)
-				}
-			}
-
-			log.Trace().Msgf("attempting pattern fixup. node: %s", node.Debug(true))
-			log.Trace().Msgf("fixup parent: %s", parentDebug)
-			log.Trace().Msgf("fixup grandparent: %s", grandparentDebug)
+			log.Trace().Msgf("attempting pattern fixup. node: %s", node.Debug())
 		}
 
 		newValue := patternLanguage.FixupVariableDummyValue(byteInput, node, variable.DummyValue)

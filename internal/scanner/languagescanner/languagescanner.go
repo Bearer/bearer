@@ -155,6 +155,9 @@ func analyzeNode(
 		var disabledRules []string
 		for i := 0; i < childCount; i++ {
 			child := node.Child(i)
+			if !child.IsNamed() {
+				continue
+			}
 
 			disabledRules = addDisabledRules(builder, disabledRules, node)
 			if err := analyzeNode(ctx, builder, analyzer, child); err != nil {
