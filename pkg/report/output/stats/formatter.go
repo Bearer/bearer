@@ -23,9 +23,7 @@ func NewFormatter(reportData *outputtypes.ReportData, config settings.Config) *F
 
 func (f Formatter) Format(format string) (output *string, err error) {
 	switch format {
-	case flag.FormatEmpty:
-		output, err = outputhandler.ReportJSON(f.ReportData.Stats)
-	case flag.FormatJSON:
+	case flag.FormatEmpty, flag.FormatJSON:
 		output, err = outputhandler.ReportJSON(f.ReportData.Stats)
 	case flag.FormatYAML:
 		output, err = outputhandler.ReportYAML(f.ReportData.Stats)
