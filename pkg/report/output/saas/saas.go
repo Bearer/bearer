@@ -16,6 +16,7 @@ import (
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/file"
 	util "github.com/bearer/bearer/pkg/util/output"
@@ -35,25 +36,17 @@ func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta 
 		}
 	}
 
-	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
-	for _, severity := range maps.Keys(reportData.FindingsBySeverity) {
-		for _, finding := range reportData.FindingsBySeverity[severity] {
-			saasFindingsBySeverity[severity] = append(
-				saasFindingsBySeverity[severity],
-				saas.SaasFinding{
-					Finding:      finding,
-					SeverityMeta: finding.SeverityMeta,
-				})
-		}
-	}
+	saasFindingsBySeverity := translateFindingsBySeverity(reportData.FindingsBySeverity)
+	saasIgnoredFindingsBySeverity := translateFindingsBySeverity(reportData.IgnoredFindingsBySeverity)
 
 	reportData.SaasReport = &saas.BearerReport{
-		Meta:       *meta,
-		Findings:   saasFindingsBySeverity,
-		DataTypes:  reportData.Dataflow.Datatypes,
-		Components: reportData.Dataflow.Components,
-		Errors:     reportData.Dataflow.Errors,
-		Files:      getDiscoveredFiles(config, reportData.Files),
+		Meta:            *meta,
+		Findings:        saasFindingsBySeverity,
+		IgnoredFindings: saasIgnoredFindingsBySeverity,
+		DataTypes:       reportData.Dataflow.Datatypes,
+		Components:      reportData.Dataflow.Components,
+		Errors:          reportData.Dataflow.Errors,
+		Files:           getDiscoveredFiles(config, reportData.Files),
 	}
 
 	return nil
@@ -97,6 +90,16 @@ func SendReport(config settings.Config, reportData *types.ReportData) {
 		config.Client.Error = pointer.String("Report upload failed.")
 		log.Debug().Msgf("error sending report to Bearer cloud: %s", err)
 	}
+}
+
+func translateFindingsBySeverity(findingBySeverity map[string][]securitytypes.Finding) map[string][]saas.SaasFinding {
+	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
+	for _, severity := range maps.Keys(findingBySeverity) {
+		for _, finding := range findingBySeverity[severity] {
+			saasFindingsBySeverity[severity] = append(saasFindingsBySeverity[severity], saas.SaasFinding{Finding: finding, SeverityMeta: finding.SeverityMeta})
+		}
+	}
+	return saasFindingsBySeverity
 }
 
 func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) error {

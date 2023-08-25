@@ -116,6 +116,7 @@ func AddReportData(
 	}
 
 	reportData.FindingsBySeverity = summaryFindings
+	reportData.IgnoredFindingsBySeverity = ignoredSummaryFindings
 	reportData.ReportFailed = reportFailed
 	return nil
 }

@@ -9,14 +9,15 @@ import (
 )
 
 type ReportData struct {
-	ReportFailed       bool
-	Files              []string
-	Detectors          []any
-	Dataflow           *DataFlow
-	FindingsBySeverity map[string][]securitytypes.Finding
-	PrivacyReport      *privacytypes.Report
-	Stats              *statstypes.Stats
-	SaasReport         *saastypes.BearerReport
+	ReportFailed              bool
+	Files                     []string
+	Detectors                 []any
+	Dataflow                  *DataFlow
+	FindingsBySeverity        map[string][]securitytypes.Finding
+	IgnoredFindingsBySeverity map[string][]securitytypes.Finding
+	PrivacyReport             *privacytypes.Report
+	Stats                     *statstypes.Stats
+	SaasReport                *saastypes.BearerReport
 }
 
 type DataFlow struct {

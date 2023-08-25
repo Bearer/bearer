@@ -232,7 +232,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (useCloud
 		return useCloudIgnores, cloudIgnores, nil
 	}
 
-	ignoredFingerprints, err := ignore.GetIgnoredFingerprints(&settings.Target)
+	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(settings.BearerIgnoreFile, &settings.Target)
 	if err != nil {
 		return useCloudIgnores, cloudIgnores, err
 	}
