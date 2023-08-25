@@ -159,6 +159,10 @@ func (analyzer *analyzer) analyzeNew(node *sitter.Node, visitChildren func() err
 	constructor := node.ChildByFieldName("constructor")
 	analyzer.lookupVariable(constructor)
 
+	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
+		analyzer.builder.Alias(node, arguments)
+	}
+
 	return visitChildren()
 }
 
@@ -176,6 +180,7 @@ func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() er
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
 	if pattern := node.ChildByFieldName("pattern"); pattern != nil && pattern.Type() == "identifier" {
 		analyzer.scope.Declare(analyzer.builder.ContentFor(pattern), node)
+		analyzer.builder.Alias(node, pattern)
 	}
 
 	if value := node.ChildByFieldName("value"); value != nil {

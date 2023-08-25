@@ -94,6 +94,7 @@ const (
 	CURSOR_STRICT_SCOPE RuleReferenceScope = "cursor_strict"
 	CURSOR_SCOPE        RuleReferenceScope = "cursor"
 	NESTED_SCOPE        RuleReferenceScope = "nested"
+	NESTED_STRICT_SCOPE RuleReferenceScope = "nested_strict"
 	RESULT_SCOPE        RuleReferenceScope = "result"
 
 	DefaultScope = NESTED_SCOPE

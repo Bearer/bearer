@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/filecontext"
+	"github.com/bearer/bearer/internal/util/set"
 
 	"github.com/bearer/bearer/internal/scanner/cache"
 )
@@ -43,6 +44,8 @@ func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
 
 	switch scanner.context.scope {
 	case settings.NESTED_SCOPE:
+		detections, err = scanner.scanDescendantsAndAliases()
+	case settings.NESTED_STRICT_SCOPE:
 		detections, err = scanner.scanDescendants()
 	case settings.RESULT_SCOPE:
 		detections, err = scanner.scanDataflowAndAliases()
@@ -69,6 +72,27 @@ func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
 	}
 
 	return detections, nil
+}
+
+func (scanner *Scanner) scanDescendantsAndAliases() ([]*detectortypes.Detection, error) {
+	seen := set.New[*tree.Node]()
+
+	return scanner.detectWithNext(func(node *tree.Node) []*tree.Node {
+		var result []*tree.Node
+
+		for _, child := range node.Children() {
+			if seen.Add(child) {
+				result = append(result, child)
+			}
+		}
+		for _, alias := range node.AliasOf() {
+			if seen.Add(alias) {
+				result = append(result, alias)
+			}
+		}
+
+		return result
+	})
 }
 
 func (scanner *Scanner) scanDescendants() ([]*detectortypes.Detection, error) {

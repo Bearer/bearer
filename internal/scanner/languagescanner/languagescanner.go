@@ -90,7 +90,7 @@ func (scanner *Scanner) Scan(
 		ruleDetections, err := rulescanner.Scan(
 			fileContext,
 			cache.NewCache(sharedCache),
-			settings.DefaultScope,
+			settings.NESTED_STRICT_SCOPE,
 			ruleID,
 			tree.RootNode(),
 		)

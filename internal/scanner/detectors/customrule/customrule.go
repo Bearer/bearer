@@ -5,12 +5,13 @@ import (
 
 	"golang.org/x/exp/slices"
 
+	"github.com/rs/zerolog/log"
+
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/language"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery"
 )
@@ -140,20 +141,24 @@ func scoreFilter(filter settings.PatternFilter) int {
 	}
 
 	if filter.Detection == "datatype" {
-		return 5
+		return 6
 	}
 
 	if filter.StringRegex != nil ||
-		filter.Detection != "" && filter.Scope == settings.CURSOR_SCOPE {
+		filter.Detection != "" && filter.Scope == settings.CURSOR_STRICT_SCOPE {
 		return 2
 	}
 
-	if filter.Detection != "" && filter.Scope == settings.RESULT_SCOPE {
+	if filter.Detection != "" && filter.Scope == settings.CURSOR_SCOPE {
 		return 3
 	}
 
-	if filter.Detection != "" && filter.Scope == settings.NESTED_SCOPE {
+	if filter.Detection != "" && filter.Scope == settings.RESULT_SCOPE {
 		return 4
+	}
+
+	if filter.Detection != "" && filter.Scope == settings.NESTED_SCOPE {
+		return 5
 	}
 
 	if filter.Not != nil {

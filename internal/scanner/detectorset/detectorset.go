@@ -137,6 +137,7 @@ func findNotableRuleIDs(
 	for ruleID, rule := range relevantRules {
 		if rule.Type == customdetectors.TypeShared {
 			builtinAndSharedRuleIDs = append(builtinAndSharedRuleIDs, ruleID)
+			continue
 		}
 
 		if !rule.IsAuxilary || presenceRules.Has(ruleID) {

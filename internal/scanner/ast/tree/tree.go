@@ -157,8 +157,8 @@ type nodeDump struct {
 	Content         string     `yaml:",omitempty"`
 	DataflowSources []int      `yaml:"dataflow_sources,omitempty"`
 	AliasOf         []int      `yaml:"alias_of,omitempty"`
-	Children        []nodeDump `yaml:",omitempty"`
 	Queries         []int      `yaml:",omitempty"`
+	Children        []nodeDump `yaml:",omitempty"`
 }
 
 func (node *Node) Dump() string {
