@@ -16,13 +16,13 @@ import (
 )
 
 type Query interface {
+	ID() string
 	MatchAt(node *tree.Node) ([]*Result, error)
 	MatchOnceAt(node *tree.Node) (*Result, error)
 }
 
 type query struct {
-	ruleID          string
-	patternIndex    int
+	id              string
 	input           string
 	treeQuery       *astquery.Query
 	paramToVariable map[string]string
@@ -31,6 +31,7 @@ type query struct {
 }
 
 type rootVariableQuery struct {
+	id       string
 	variable *language.PatternVariable
 }
 
@@ -52,14 +53,15 @@ func Compile(
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}
 
+	id := fmt.Sprintf("%s[%d]", ruleID, patternIndex)
+
 	if builderResult.RootVariable != nil {
-		log.Trace().Msgf("single variable pattern %s -> %#v", input, *builderResult.RootVariable)
-		return &rootVariableQuery{variable: builderResult.RootVariable}, nil
+		log.Trace().Msgf("single variable pattern %s: %s -> %#v", id, input, *builderResult.RootVariable)
+		return &rootVariableQuery{id: id, variable: builderResult.RootVariable}, nil
 	}
 
 	query := &query{
-		ruleID:          ruleID,
-		patternIndex:    patternIndex,
+		id:              id,
 		input:           input,
 		treeQuery:       querySet.Add(builderResult.Query),
 		paramToVariable: builderResult.ParamToVariable,
@@ -75,8 +77,7 @@ func Compile(
 }
 
 type dumpValue struct {
-	RuleID          string `yaml:"rule_id"`
-	PatternIndex    int    `yaml:"pattern_index"`
+	ID              string
 	Pattern         string
 	TreeQueryID     int                          `yaml:"tree_query_id"`
 	ParamToVariable map[string]string            `yaml:"param_to_variable,omitempty"`
@@ -86,8 +87,7 @@ type dumpValue struct {
 
 func (query *query) dump() string {
 	yamlQuery, err := yaml.Marshal(&dumpValue{
-		RuleID:          query.ruleID,
-		PatternIndex:    query.patternIndex,
+		ID:              query.id,
 		Pattern:         query.input,
 		TreeQueryID:     query.treeQuery.ID(),
 		ParamToVariable: query.paramToVariable,
@@ -99,6 +99,10 @@ func (query *query) dump() string {
 	}
 
 	return string(yamlQuery)
+}
+
+func (query *query) ID() string {
+	return query.id
 }
 
 func (query *query) MatchAt(node *tree.Node) ([]*Result, error) {
@@ -172,6 +176,10 @@ func (query *query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *Re
 		MatchNode: treeResult["match"],
 		Variables: variables,
 	}
+}
+
+func (query *rootVariableQuery) ID() string {
+	return query.id
 }
 
 func (query *rootVariableQuery) MatchAt(node *tree.Node) ([]*Result, error) {

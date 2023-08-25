@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/language"
+	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery"
 )
@@ -21,6 +22,7 @@ type Data struct {
 }
 
 type Pattern struct {
+	Index   int
 	Pattern string
 	Query   patternquery.Query
 	Filters []settings.PatternFilter
@@ -48,6 +50,7 @@ func New(
 		sortFilters(pattern.Filters)
 
 		compiledPatterns = append(compiledPatterns, Pattern{
+			Index:   i,
 			Pattern: pattern.Pattern,
 			Query:   patternQuery,
 			Filters: pattern.Filters,
@@ -74,6 +77,10 @@ func (detector *customDetector) DetectAt(
 		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
 			return nil, err
+		}
+
+		if log.Trace().Enabled() && len(results) != 0 {
+			log.Trace().Msgf("pattern %s matched (without filters)", pattern.Query.ID())
 		}
 
 		for _, result := range results {

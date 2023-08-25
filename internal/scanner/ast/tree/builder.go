@@ -84,7 +84,7 @@ func (builder *Builder) Dataflow(toNode *sitter.Node, fromNodes ...*sitter.Node)
 func (builder *Builder) Alias(toNode *sitter.Node, fromNodes ...*sitter.Node) {
 	toID := builder.sitterToNodeID[toNode]
 
-	builder.dataflowSources[toID] = append(
+	builder.aliasOf[toID] = append(
 		builder.aliasOf[toID],
 		builder.sitterToNodeIDs(fromNodes)...,
 	)

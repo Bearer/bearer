@@ -30,7 +30,12 @@ func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
 	startTime := time.Now()
 
 	if log.Trace().Enabled() {
-		log.Trace().Msgf("file scan start: %s at %s", scanner.ruleID, scanner.rootNode.Debug())
+		log.Trace().Msgf(
+			"rule %s scan start at %s [%s]",
+			scanner.ruleID,
+			scanner.rootNode.Debug(),
+			scanner.context.scope,
+		)
 	}
 
 	var detections []*detectortypes.Detection
@@ -55,9 +60,10 @@ func (scanner *Scanner) Scan() ([]*detectortypes.Detection, error) {
 
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
-			"file scan end: %s at %s: %d detections",
+			"rule %s scan end at %s [%s]: %d detections",
 			scanner.ruleID,
 			scanner.rootNode.Debug(),
+			scanner.context.scope,
 			len(detections),
 		)
 	}
