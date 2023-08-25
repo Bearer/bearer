@@ -188,12 +188,12 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 
 		report := types.Report{Path: r.reportPath + ".base", Inputgocloc: r.goclocResult}
 
-		reportOutput, err := reportoutput.GetOutput(report, r.scanSettings, nil)
+		reportData, err := reportoutput.GetData(report, r.scanSettings, nil)
 		if err != nil {
 			return err
 		}
 
-		baseBranchFindings = buildBaseBranchFindings(reportOutput, fileList)
+		baseBranchFindings = buildBaseBranchFindings(reportData, fileList)
 
 		if !opts.Quiet {
 			outputhandler.StdErrLog("\nScanning current branch")
@@ -325,7 +325,7 @@ func (r *runner) Report(
 		outputhandler.StdErrLog("Using cached data")
 	}
 
-	output, err := reportoutput.GetOutput(report, r.scanSettings, baseBranchFindings)
+	reportData, err := reportoutput.GetData(report, r.scanSettings, baseBranchFindings)
 	if err != nil {
 		return false, err
 	}
@@ -339,7 +339,7 @@ func (r *runner) Report(
 
 	if !reportSupported && r.scanSettings.Report.Report != flag.ReportPrivacy {
 		var placeholderStr *strings.Builder
-		placeholderStr, err = getPlaceholderOutput(output, report, r.scanSettings, report.Inputgocloc)
+		placeholderStr, err = getPlaceholderOutput(reportData, report, r.scanSettings, report.Inputgocloc)
 		if err != nil {
 			return false, err
 		}
@@ -349,7 +349,7 @@ func (r *runner) Report(
 	}
 
 	formatStr, err := reportoutput.FormatOutput(
-		output,
+		reportData,
 		r.scanSettings,
 		report.Inputgocloc,
 		startTime,

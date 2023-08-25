@@ -24,7 +24,7 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func GetOutput(
+func GetData(
 	report globaltypes.Report,
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
