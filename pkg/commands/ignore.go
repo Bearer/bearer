@@ -68,16 +68,15 @@ $ bearer ignore show <fingerprint>`,
 				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
 				return nil
 			}
-
-			selectedIgnoredFingerprint, ok := ignoredFingerprints[args[0]]
+			fingerprintId := args[0]
+			selectedIgnoredFingerprint, ok := ignoredFingerprints[fingerprintId]
 			if !ok {
-				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", args[0])
+				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
 				return nil
 			}
-
-			cmd.Printf("\nIgnored At: %s\nAuthor: %s\n", selectedIgnoredFingerprint.IgnoredAt, selectedIgnoredFingerprint.Author)
-			cmd.Printf("Comment: %s\n\n", selectedIgnoredFingerprint.Comment)
-
+			cmd.Print("\n")
+			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint))
+			cmd.Print("\n")
 			return nil
 		},
 		SilenceErrors: false,
@@ -107,24 +106,28 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
 			}
-
+			fingerprintId := args[0]
+			fingerprintEntry := ignore.IgnoredFingerprint{
+				Author:  options.IgnoreAddOptions.Author,
+				Comment: options.IgnoreAddOptions.Comment,
+			}
 			fingerprintsToIgnore := map[string]ignore.IgnoredFingerprint{
-				args[0]: {
-					Author:  options.IgnoreAddOptions.Author,
-					Comment: options.IgnoreAddOptions.Comment,
-				},
+				fingerprintId: fingerprintEntry,
 			}
 
 			if err = ignore.AddToIgnoreFile(fingerprintsToIgnore, options.IgnoreAddOptions.Force); err != nil {
 				target := &ignore.DuplicateIgnoredFingerprintError{}
 				if errors.As(err, &target) {
 					// handle expected error (duplicate entry in bearer.ignore)
-					cmd.Printf("%s\n", err.Error())
+					cmd.Printf("Error: %s\n", err.Error())
 					return nil
 				}
 				return err
 			}
 
+			cmd.Print("fingerprint added to bearer.ignore:\n\n")
+			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, fingerprintEntry))
+			cmd.Print("\n")
 			return nil
 		},
 		SilenceErrors: false,
