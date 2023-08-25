@@ -85,6 +85,11 @@ func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, totalC
 		}
 	}()
 
+	if totalCount == 0 {
+		log.Debug().Msgf("no files to scan")
+		return
+	}
+
 	for {
 		select {
 		case <-orchestrator.done:
