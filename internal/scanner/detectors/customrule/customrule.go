@@ -141,7 +141,7 @@ func scoreFilter(filter settings.PatternFilter) int {
 	}
 
 	if filter.Detection == "datatype" {
-		return 6
+		return 7
 	}
 
 	if filter.StringRegex != nil ||
@@ -153,12 +153,16 @@ func scoreFilter(filter settings.PatternFilter) int {
 		return 3
 	}
 
-	if filter.Detection != "" && filter.Scope == settings.RESULT_SCOPE {
+	if filter.Detection != "" && filter.Scope == settings.NESTED_STRICT_SCOPE {
 		return 4
 	}
 
-	if filter.Detection != "" && filter.Scope == settings.NESTED_SCOPE {
+	if filter.Detection != "" && filter.Scope == settings.RESULT_SCOPE {
 		return 5
+	}
+
+	if filter.Detection != "" && filter.Scope == settings.NESTED_SCOPE {
+		return 6
 	}
 
 	if filter.Not != nil {

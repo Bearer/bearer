@@ -4,6 +4,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/util/set"
+	"github.com/rs/zerolog/log"
 )
 
 const (
@@ -44,6 +45,10 @@ func NewCache(sharedCache *Shared) *Cache {
 }
 
 func (cache *Cache) Get(node *tree.Node, ruleID string) ([]*detectortypes.Detection, bool) {
+	if cache == nil {
+		return nil, false
+	}
+
 	for _, entry := range cache.dataFor(ruleID)[node] {
 		if entry.RuleID == ruleID {
 			return entry.Detections, true
@@ -54,15 +59,22 @@ func (cache *Cache) Get(node *tree.Node, ruleID string) ([]*detectortypes.Detect
 }
 
 func (cache *Cache) Put(node *tree.Node, ruleID string, detections []*detectortypes.Detection) {
+	if cache == nil {
+		return
+	}
+
 	data := cache.dataFor(ruleID)
 
 	if len(data) > maxCacheSize {
+		log.Trace().Msg("detection cache full, evicting entries")
+
 		i := 0
 		for evictedNode := range data {
 			if i == evictionSize {
 				break
 			}
 
+			data[evictedNode] = nil
 			delete(data, evictedNode)
 
 			i++

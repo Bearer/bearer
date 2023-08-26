@@ -72,11 +72,20 @@ func (scanner *Scanner) Scan(
 		return nil, err
 	}
 
-	if log.Trace().Enabled() {
-		log.Trace().Msgf("tree:\n%s", tree.RootNode().Dump())
+	cacheEnabled := false
+	if tree.NodeCount() > 20_000 {
+		cacheEnabled = true
 	}
 
-	sharedCache := cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("tree (%d nodes, cache=%t):\n%s", tree.NodeCount(), cacheEnabled, tree.RootNode().Dump())
+	}
+
+	var sharedCache *cache.Shared
+	if cacheEnabled {
+		sharedCache = cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())
+	}
+
 	fileContext := filecontext.New(
 		ctx,
 		scanner.rules,
@@ -87,9 +96,14 @@ func (scanner *Scanner) Scan(
 
 	var detections []*detectortypes.Detection
 	for _, ruleID := range scanner.detectorSet.TopLevelRuleIDs() {
+		var ruleCache *cache.Cache
+		if cacheEnabled {
+			ruleCache = cache.NewCache(sharedCache)
+		}
+
 		ruleDetections, err := rulescanner.Scan(
 			fileContext,
-			cache.NewCache(sharedCache),
+			ruleCache,
 			settings.NESTED_STRICT_SCOPE,
 			ruleID,
 			tree.RootNode(),

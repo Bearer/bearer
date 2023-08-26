@@ -115,7 +115,9 @@ func (scanner *Scanner) scanAliases() ([]*detectortypes.Detection, error) {
 func (scanner *Scanner) detectWithNext(
 	getNext func(node *tree.Node) []*tree.Node,
 ) ([]*detectortypes.Detection, error) {
-	nodes := []*tree.Node{scanner.rootNode}
+	next := make([]*tree.Node, 0, 1000)
+	nodes := make([]*tree.Node, 0, 1000)
+	nodes = append(nodes, scanner.rootNode)
 
 	var detections []*detectortypes.Detection
 
@@ -123,8 +125,6 @@ func (scanner *Scanner) detectWithNext(
 		if len(nodes) == 0 {
 			break
 		}
-
-		var next []*tree.Node
 
 		for _, node := range nodes {
 			nodeDetections, sanitized, err := scanner.sanitizedNodeDetections(node)
@@ -139,7 +139,9 @@ func (scanner *Scanner) detectWithNext(
 			next = append(next, getNext(node)...)
 		}
 
+		old := nodes
 		nodes = next
+		next = old[:0]
 	}
 
 	return detections, nil

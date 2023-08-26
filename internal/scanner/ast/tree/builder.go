@@ -20,6 +20,7 @@ type Builder struct {
 func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node) *Builder {
 	builder := &Builder{
 		contentBytes:    contentBytes,
+		nodes:           make([]Node, 0, 1000),
 		children:        make(map[int][]int),
 		dataflowSources: make(map[int][]int),
 		aliasOf:         make(map[int][]int),

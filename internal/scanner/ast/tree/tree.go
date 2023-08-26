@@ -45,6 +45,10 @@ func (tree *Tree) ContentBytes() []byte {
 	return tree.contentBytes
 }
 
+func (tree *Tree) NodeCount() int {
+	return len(tree.nodes)
+}
+
 func (tree *Tree) RootNode() *Node {
 	return tree.rootNode
 }
