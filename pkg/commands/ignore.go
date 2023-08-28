@@ -67,6 +67,10 @@ func newIgnoreShowCommand() *cobra.Command {
 		Example: `# Show the details of an ignored fingerprint from your bearer.ignore file
 $ bearer ignore show <fingerprint>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
+			if err := IgnoreShowFlags.Bind(cmd); err != nil {
+				return fmt.Errorf("flag bind error: %w", err)
+			}
+
 			if len(args) == 0 {
 				return cmd.Help()
 			}
@@ -79,6 +83,10 @@ $ bearer ignore show <fingerprint>`,
 			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
 			if err != nil {
 				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
+				return nil
+			}
+			if !fileExists {
+				cmd.Printf("bearer.ignore file not found. Perhaps you need to use --bearer-ignore-file to specify the path to bearer.ignore?\n")
 				return nil
 			}
 			fingerprintId := args[0]
@@ -139,7 +147,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			}
 
 			if !fileExists {
-				cmd.Printf("\nCreating bearer.ignore file...")
+				cmd.Printf("\nCreating bearer.ignore file...\n")
 			}
 
 			if mergeErr := ignore.MergeIgnoredFingerprints(fingerprintsToIgnore, ignoredFingerprints, options.IgnoreAddOptions.Force); mergeErr != nil {
