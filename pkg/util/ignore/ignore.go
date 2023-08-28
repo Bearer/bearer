@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"time"
+
+	"github.com/fatih/color"
 )
 
 type IgnoredFingerprint struct {
@@ -45,4 +47,32 @@ func MergeIgnoredFingerprints(fingerprintsToIgnore map[string]IgnoredFingerprint
 		ignoredFingerprints[key] = value
 	}
 	return nil
+}
+
+var bold = color.New(color.Bold).SprintFunc()
+var morePrefix = color.HiBlackString("├─ ")
+var lastPrefix = color.HiBlackString("└─ ")
+
+func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprint) string {
+	prefix := morePrefix
+	result := fmt.Sprintf(bold(color.HiBlueString("%s \n")), fingerprintId)
+
+	if entry.Author == nil && entry.Comment == nil {
+		prefix = lastPrefix
+	}
+	result += fmt.Sprintf("%sIgnored At: %s", prefix, bold(entry.IgnoredAt))
+
+	if entry.Author != nil {
+		if entry.Comment == nil {
+			prefix = lastPrefix
+		}
+
+		result += fmt.Sprintf("\n%sAuthor: %s", prefix, bold(*entry.Author))
+	}
+
+	if entry.Comment != nil {
+		result += fmt.Sprintf("\n%sComment: %s", lastPrefix, bold(*entry.Comment))
+	}
+
+	return result
 }
