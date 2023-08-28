@@ -6,7 +6,9 @@ import (
 	"os"
 
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/ignore"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -259,13 +261,30 @@ $ bearer ignore migrate`,
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
+			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
+			var defaultConfigPath = ""
+			if len(args) > 0 {
+				defaultConfigPath = file.GetFullFilename(args[0], configPath)
+			}
+
+			var loadFileMessage string
+			if err := readConfig(configPath); err != nil {
+				if err := readConfig(defaultConfigPath); err != nil {
+					loadFileMessage = "Couldn't find any config file"
+				} else {
+					loadFileMessage = fmt.Sprintf("Loading default config file %s", defaultConfigPath)
+				}
+			} else {
+				loadFileMessage = fmt.Sprintf("Loading config file %s", configPath)
+			}
+			log.Debug().Msgf(loadFileMessage)
+
 			options, err := IgnoreMigrateFlags.ToOptions(args)
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			configFilePath := viper.GetString(flag.ConfigFileFlag.ConfigName)
-			fingerprintsToMigrate, err := getIgnoredFingerprintsFromConfig(configFilePath)
+			fingerprintsToMigrate, err := getIgnoredFingerprintsFromConfig(configPath)
 			if err != nil {
 				return fmt.Errorf("error reading config: %s\nPerhaps you need to use --config-file to specify the config path?", err.Error())
 			}
@@ -277,7 +296,7 @@ $ bearer ignore migrate`,
 
 			migratedIgnoredCount := len(fingerprintsToMigrate)
 			skippedIgnoresToMigrate := ""
-			cmd.Printf("Found %d ignores in:\n\t%s\n", migratedIgnoredCount, configFilePath)
+			cmd.Printf("Found %d ignores in:\n\t%s\n", migratedIgnoredCount, configPath)
 
 			if !fileExists {
 				cmd.Printf("\nCreating bearer.ignore file...\n")
