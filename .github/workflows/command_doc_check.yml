@@ -1,0 +1,27 @@
+name: Command Doc Check
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.19
+      - name: Generate command docs
+        run: go run ./scripts/gen-doc-yaml.go
+      - name: Check no uncommited changes
+        run: git diff --exit-code
