@@ -226,7 +226,8 @@ func (analyzer *analyzer) analyzeImportSpecifier(node *sitter.Node, visitChildre
 		importedName = alias
 	}
 
-	analyzer.scope.Declare(analyzer.builder.ContentFor(importedName), node)
+	analyzer.builder.Alias(node, importedName)
+	analyzer.scope.Declare(analyzer.builder.ContentFor(importedName), importedName)
 
 	return visitChildren()
 }
