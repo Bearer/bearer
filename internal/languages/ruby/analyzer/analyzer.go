@@ -2,10 +2,28 @@ package analyzer
 
 import (
 	sitter "github.com/smacker/go-tree-sitter"
+	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
 )
+
+// methods that use `self` in their result
+var reflexiveMethods = []string{
+	"to_a",
+	"to_ary",
+	"to_h",
+	"to_hash",
+	"to_s",
+	"to_str",
+	"to_i",
+	"to_f",
+	"to_c",
+	"to_d",
+	"to_r",
+	"to_sym",
+	"to_json",
+}
 
 type analyzer struct {
 	builder *tree.Builder
@@ -94,7 +112,13 @@ func (analyzer *analyzer) analyzeOperatorAssignment(node *sitter.Node, visitChil
 
 // foo.bar(42)
 func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() error) error {
-	analyzer.lookupVariable(node.ChildByFieldName("receiver"))
+	if receiver := node.ChildByFieldName("receiver"); receiver != nil {
+		analyzer.lookupVariable(receiver)
+
+		if slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(node.ChildByFieldName("method"))) {
+			analyzer.builder.Dataflow(node, receiver)
+		}
+	}
 
 	if argumentsNode := node.ChildByFieldName("arguments"); argumentsNode != nil {
 		analyzer.builder.Dataflow(node, argumentsNode)
