@@ -311,7 +311,7 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		}
 	}
 
-	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(opts.IgnoreOptions.BearerIgnoreFile, &opts.ScanOptions.Target)
+	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(opts.GeneralOptions.BearerIgnoreFile, &opts.ScanOptions.Target)
 	if err != nil {
 		return Config{}, err
 	}

@@ -62,7 +62,11 @@ var bold = color.New(color.Bold).SprintFunc()
 var morePrefix = color.HiBlackString("├─ ")
 var lastPrefix = color.HiBlackString("└─ ")
 
-func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprint) string {
+func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprint, noColor bool) string {
+	initialColorSetting := color.NoColor
+	if noColor && !initialColorSetting {
+		color.NoColor = true
+	}
 	prefix := morePrefix
 	result := fmt.Sprintf(bold(color.HiBlueString("%s \n")), fingerprintId)
 
@@ -82,6 +86,8 @@ func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprin
 	if entry.Comment != nil {
 		result += fmt.Sprintf("\n%sComment: %s", lastPrefix, bold(*entry.Comment))
 	}
+
+	color.NoColor = initialColorSetting
 
 	return result
 }

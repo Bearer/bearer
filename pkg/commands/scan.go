@@ -35,7 +35,6 @@ var ScanFlags = &flag.Flags{
 	RuleFlagGroup:    flag.NewRuleFlagGroup(),
 	ReportFlagGroup:  flag.NewReportFlagGroup(),
 	GeneralFlagGroup: flag.NewGeneralFlagGroup(),
-	IgnoreFlagGroup:  flag.NewIgnoreFlagGroup(),
 }
 
 func NewScanCommand() *cobra.Command {
