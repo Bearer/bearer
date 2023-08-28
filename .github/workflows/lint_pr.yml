@@ -11,7 +11,6 @@ jobs:
   main:
     name: Validate PR title
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: amannn/action-semantic-pull-request@v5
         env:

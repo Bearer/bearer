@@ -18,4 +18,4 @@ example: |-
     $ bearer ignore migrate
 see_also:
     - ' ignore - Manage ignored fingerprints'
-aliases:
+aliases: 
