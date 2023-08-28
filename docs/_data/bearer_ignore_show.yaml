@@ -2,6 +2,9 @@ name: ' ignore show'
 synopsis: Show an ignored fingerprint
 usage: ' ignore show <fingerprint> [flags]'
 options:
+    - name: all
+      default_value: "false"
+      usage: Show all ignored fingerprints.
     - name: bearer-ignore-file
       default_value: bearer.ignore
       usage: Load bearer.ignore file from the specified path.
