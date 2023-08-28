@@ -29,7 +29,7 @@ require (
 	github.com/tangzero/inflector v1.0.0
 	github.com/weppos/publicsuffix-go v0.30.1
 	github.com/xeipuuv/gojsonschema v1.2.0
-	github.com/zricethezav/gitleaks/v8 v8.17.0
+	github.com/zricethezav/gitleaks/v8 v8.18.0
 	golang.org/x/exp v0.0.0-20230304125523-9ff063c70017
 	golang.org/x/mod v0.12.0
 	golang.org/x/net v0.14.0
@@ -43,7 +43,7 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/semgroup v1.2.0 // indirect
-	github.com/gitleaks/go-gitdiff v0.8.0 // indirect
+	github.com/gitleaks/go-gitdiff v0.9.0 // indirect
 	github.com/go-enry/go-oniguruma v1.2.1 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/h2non/filetype v1.1.3 // indirect
