@@ -168,6 +168,8 @@ func (analyzer *analyzer) analyzeNew(node *sitter.Node, visitChildren func() err
 
 // foo.bar(1, 2)
 func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() error) error {
+	analyzer.lookupVariable(node.ChildByFieldName("function"))
+
 	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
 		analyzer.builder.Dataflow(node, arguments)
 	}
