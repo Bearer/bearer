@@ -42,6 +42,9 @@ General Flags
       --disable-version-check   Disable Bearer version checking
       --no-color                Disable color in output
 
+Ignore Flags
+      --bearer-ignore-file string   Load bearer.ignore file from the specified path. (default "bearer.ignore")
+
 
 flag error: report flags error: invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html
 
