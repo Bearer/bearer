@@ -43,23 +43,23 @@ func (f Formatter) Format(format string) (output *string, err error) {
 		if sarifErr != nil {
 			return output, fmt.Errorf("error generating sarif report %s", sarifErr)
 		}
-		output, err = outputhandler.ReportJSON(sarifContent)
+		return outputhandler.ReportJSON(sarifContent)
 	case flag.FormatReviewDog:
 		sastContent, reviewdogErr := reviewdog.ReportReviewdog(f.ReportData.FindingsBySeverity)
 		if reviewdogErr != nil {
 			return output, fmt.Errorf("error generating reviewdog report %s", reviewdogErr)
 		}
-		output, err = outputhandler.ReportJSON(sastContent)
+		return outputhandler.ReportJSON(sastContent)
 	case flag.FormatGitLabSast:
 		sastContent, sastErr := gitlab.ReportGitLab(f.ReportData.FindingsBySeverity, f.StartTime, f.EndTime)
 		if sastErr != nil {
 			return output, fmt.Errorf("error generating gitlab-sast report %s", sastErr)
 		}
-		output, err = outputhandler.ReportJSON(sastContent)
+		return outputhandler.ReportJSON(sastContent)
 	case flag.FormatJSON:
-		output, err = outputhandler.ReportJSON(f.ReportData.FindingsBySeverity)
+		return outputhandler.ReportJSON(f.ReportData.FindingsBySeverity)
 	case flag.FormatYAML:
-		output, err = outputhandler.ReportYAML(f.ReportData.FindingsBySeverity)
+		return outputhandler.ReportYAML(f.ReportData.FindingsBySeverity)
 	case flag.FormatHTML:
 		title := "Security Report"
 		body, securityErr := html.ReportSecurityHTML(f.ReportData.FindingsBySeverity)
@@ -71,8 +71,6 @@ func (f Formatter) Format(format string) (output *string, err error) {
 		if err != nil {
 			err = fmt.Errorf("could not generate html page %s", err)
 		}
-	default:
-		err = fmt.Errorf(`--report flag "%s" is not supported`, f.Config.Report.Report)
 	}
 
 	return output, err

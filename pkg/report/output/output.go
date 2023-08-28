@@ -34,22 +34,19 @@ func GetData(
 	data := &types.ReportData{}
 	// add detectors
 	err := detectors.AddReportData(data, report, config)
-	if config.Report.Report == flag.ReportDetectors {
+	if config.Report.Report == flag.ReportDetectors || err != nil {
 		return data, err
 	}
 
-	if config.Report.Report == flag.ReportDataFlow {
-		err = GetDataflow(data, report, config, false)
-		return data, err
-	}
-
-	// add dataflow to data for internal use
-	if err = GetDataflow(data, report, config, true); err != nil {
+	// add dataflow to data
+	if err = GetDataflow(data, report, config, config.Report.Report != flag.ReportDataFlow); err != nil {
 		return data, err
 	}
 
 	// add report-specific items
 	switch config.Report.Report {
+	case flag.ReportDataFlow:
+		return data, err
 	case flag.ReportSecurity:
 		sendToCloud = true
 		err = security.AddReportData(data, config, baseBranchFindings)
@@ -113,5 +110,13 @@ func FormatOutput(
 		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
-	return formatter.Format(config.Report.Format)
+	formatStr, err := formatter.Format(config.Report.Format)
+	if err != nil {
+		return formatStr, err
+	}
+	if formatStr == nil {
+		return nil, fmt.Errorf(`--report flag "%s" does not support --format flag "%s"`, config.Report.Report, config.Report.Format)
+	}
+
+	return formatStr, err
 }

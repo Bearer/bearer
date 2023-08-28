@@ -32,9 +32,9 @@ func (f Formatter) Format(format string) (output *string, err error) {
 		csvStr := stringBuilder.String()
 		output = &csvStr
 	case flag.FormatJSON:
-		output, err = outputhandler.ReportJSON(f.ReportData.PrivacyReport)
+		return outputhandler.ReportJSON(f.ReportData.PrivacyReport)
 	case flag.FormatYAML:
-		output, err = outputhandler.ReportYAML(f.ReportData.PrivacyReport)
+		return outputhandler.ReportYAML(f.ReportData.PrivacyReport)
 	case flag.FormatHTML:
 		title := "Privacy Report"
 		body, err := html.ReportPrivacyHTML(f.ReportData.PrivacyReport)
@@ -46,8 +46,6 @@ func (f Formatter) Format(format string) (output *string, err error) {
 		if err != nil {
 			return output, fmt.Errorf("could not generate html page %s", err)
 		}
-	default:
-		err = fmt.Errorf(`--report flag "%s" is not supported`, f.Config.Report.Report)
 	}
 
 	return output, err

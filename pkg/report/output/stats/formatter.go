@@ -1,8 +1,6 @@
 package stats
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
@@ -24,11 +22,9 @@ func NewFormatter(reportData *outputtypes.ReportData, config settings.Config) *F
 func (f Formatter) Format(format string) (output *string, err error) {
 	switch format {
 	case flag.FormatEmpty, flag.FormatJSON:
-		output, err = outputhandler.ReportJSON(f.ReportData.Stats)
+		return outputhandler.ReportJSON(f.ReportData.Stats)
 	case flag.FormatYAML:
-		output, err = outputhandler.ReportYAML(f.ReportData.Stats)
-	default:
-		err = fmt.Errorf(`--report flag "%s" is not supported`, f.Config.Report.Report)
+		return outputhandler.ReportYAML(f.ReportData.Stats)
 	}
 
 	return output, err
