@@ -12,6 +12,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+var migratedIgnoreComment = "migrated from bearer.yml"
+
 var bold = color.New(color.Bold).SprintFunc()
 var morePrefix = color.HiBlackString("├─ ")
 var lastPrefix = color.HiBlackString("└─ ")
@@ -133,10 +135,14 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				return fmt.Errorf("flag error: %s", err)
 			}
 			fingerprintId := args[0]
-			fingerprintEntry := ignore.IgnoredFingerprint{
-				Author:  options.IgnoreAddOptions.Author,
-				Comment: options.IgnoreAddOptions.Comment,
+			var fingerprintEntry ignore.IgnoredFingerprint
+			if options.IgnoreAddOptions.Author != "" {
+				fingerprintEntry.Author = &options.IgnoreAddOptions.Author
 			}
+			if options.IgnoreAddOptions.Comment != "" {
+				fingerprintEntry.Comment = &options.IgnoreAddOptions.Comment
+			}
+
 			fingerprintsToIgnore := map[string]ignore.IgnoredFingerprint{
 				fingerprintId: fingerprintEntry,
 			}
@@ -262,7 +268,7 @@ func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFro
 
 	for _, fingerprint := range viper.GetStringSlice("report.exclude-fingerprint") {
 		ignoredFingerprintsFromConfig[fingerprint] = ignore.IgnoredFingerprint{
-			Comment: "migrated from bearer.yml",
+			Comment: &migratedIgnoreComment,
 		}
 	}
 
@@ -273,21 +279,21 @@ func displayIgnoredEntryTextString(fingerprintId string, entry ignore.IgnoredFin
 	prefix := morePrefix
 	result := fmt.Sprintf(bold(color.HiBlueString("%s \n")), fingerprintId)
 
-	if entry.Author == "" && entry.Comment == "" {
+	if entry.Author == nil && entry.Comment == nil {
 		prefix = lastPrefix
 	}
 	result += fmt.Sprintf("%sIgnored At: %s\n", prefix, bold(entry.IgnoredAt))
 
-	if entry.Author != "" {
-		if entry.Comment == "" {
+	if entry.Author != nil {
+		if entry.Comment == nil {
 			prefix = lastPrefix
 		}
 
-		result += fmt.Sprintf("%sAuthor: %s\n", prefix, bold(entry.Author))
+		result += fmt.Sprintf("%sAuthor: %s\n", prefix, bold(*entry.Author))
 	}
 
-	if entry.Comment != "" {
-		result += fmt.Sprintf("%sComment: %s\n", lastPrefix, bold(entry.Comment))
+	if entry.Comment != nil {
+		result += fmt.Sprintf("%sComment: %s\n", lastPrefix, bold(*entry.Comment))
 	}
 
 	return result

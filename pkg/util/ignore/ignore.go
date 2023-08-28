@@ -8,9 +8,9 @@ import (
 )
 
 type IgnoredFingerprint struct {
-	Author    string
-	Comment   string
-	IgnoredAt string
+	Author    *string `json:"author,omitempty"`
+	Comment   *string `json:"comment,omitempty"`
+	IgnoredAt string  `json:"ignored_at"`
 }
 
 func GetIgnoredFingerprints(bearerIgnoreFilePath string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {

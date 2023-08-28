@@ -30,12 +30,12 @@ func TestMergeIgnoredFingerprints(t *testing.T) {
 			Name: "Happy path - no duplicates",
 			FingerprintsToIgnore: map[string]ignore.IgnoredFingerprint{
 				"123": {
-					IgnoredAt: "2",
+					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
 			},
 			IgnoredFingerprints: map[string]ignore.IgnoredFingerprint{
 				"456": {
-					IgnoredAt: "2",
+					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
 			},
 			Force:         false,
@@ -46,15 +46,15 @@ func TestMergeIgnoredFingerprints(t *testing.T) {
 			Name: "Duplicate entries",
 			FingerprintsToIgnore: map[string]ignore.IgnoredFingerprint{
 				"123": {
-					IgnoredAt: "2",
+					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
 			},
 			IgnoredFingerprints: map[string]ignore.IgnoredFingerprint{
 				"123": {
-					IgnoredAt: "2",
+					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
 				"456": {
-					IgnoredAt: "2",
+					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
 			},
 			Force:         false,
