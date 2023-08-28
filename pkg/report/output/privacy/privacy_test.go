@@ -58,6 +58,7 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 		RepoOptions:    flag.RepoOptions{},
 		ReportOptions:  reportOptions,
 		GeneralOptions: flag.GeneralOptions{},
+		IgnoreOptions:  flag.IgnoreOptions{},
 	}
 
 	return settings.FromOptions(opts, []string{"ruby"})
