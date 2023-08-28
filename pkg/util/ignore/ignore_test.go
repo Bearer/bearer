@@ -10,7 +10,7 @@ import (
 
 func TestGetIgnoredFingerprints(t *testing.T) {
 	t.Run("bearer.ignore does not exist", func(t *testing.T) {
-		ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints("some_path.ignore")
+		ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints("some_path.ignore", nil)
 		assert.Equal(t, map[string]ignore.IgnoredFingerprint{}, ignoredFingerprints)
 		assert.Equal(t, false, fileExists)
 		assert.Equal(t, nil, err)

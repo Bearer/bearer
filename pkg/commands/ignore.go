@@ -79,7 +79,7 @@ $ bearer ignore show <fingerprint>`,
 				return cmd.Help()
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile, nil)
 			if err != nil {
 				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
 				return nil
@@ -153,7 +153,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				fingerprintId: fingerprintEntry,
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -269,7 +269,7 @@ $ bearer ignore migrate`,
 				return fmt.Errorf("error reading config: %s\nPerhaps you need to use --config-file to specify the config path?", err.Error())
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}

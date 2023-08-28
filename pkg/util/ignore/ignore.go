@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/fatih/color"
@@ -15,7 +16,15 @@ type IgnoredFingerprint struct {
 	IgnoredAt string  `json:"ignored_at"`
 }
 
-func GetIgnoredFingerprints(bearerIgnoreFilePath string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
+func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
+	if target != nil {
+		targetPath := ""
+		if targetPath, err = filepath.Abs(*target); err != nil {
+			return ignoredFingerprints, fileExists, err
+		}
+		bearerIgnoreFilePath = filepath.Join(targetPath, bearerIgnoreFilePath)
+	}
+
 	if _, noFileErr := os.Stat(bearerIgnoreFilePath); noFileErr != nil {
 		ignoredFingerprints = make(map[string]IgnoredFingerprint)
 		return ignoredFingerprints, false, err
