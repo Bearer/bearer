@@ -4,8 +4,7 @@ usage: ' ignore add <fingerprint> [flags]'
 options:
     - name: author
       shorthand: a
-      usage: |
-        Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)
+      usage: Add author information to this ignored finding.
     - name: comment
       usage: Add a comment to this ignored finding.
     - name: force
