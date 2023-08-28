@@ -51,6 +51,7 @@ Examples:
 	cmd.AddCommand(
 		newIgnoreShowCommand(),
 		newIgnoreAddCommand(),
+		newIgnoreRemoveCommand(),
 		newIgnoreMigrateCommand(),
 	)
 
@@ -186,6 +187,64 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 	}
 	IgnoreAddFlags.AddFlags(cmd)
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreAddFlags.Usages(cmd)))
+
+	return cmd
+}
+
+func newIgnoreRemoveCommand() *cobra.Command {
+	var IgnoreRemoveFlags = &flag.Flags{
+		IgnoreFlagGroup: flag.NewIgnoreFlagGroup(),
+	}
+	cmd := &cobra.Command{
+		Use:   "remove <fingerprint>",
+		Short: "Remove an ignored fingerprint",
+		Example: `# Remove an ignored fingerprint from your bearer.ignore file
+$ bearer ignore remove <fingerprint>`,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if err := IgnoreRemoveFlags.Bind(cmd); err != nil {
+				return fmt.Errorf("flag bind error: %w", err)
+			}
+
+			if len(args) == 0 {
+				return cmd.Help()
+			}
+
+			options, err := IgnoreRemoveFlags.ToOptions(args)
+			if err != nil {
+				return fmt.Errorf("flag error: %s", err)
+			}
+
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			if err != nil {
+				return fmt.Errorf("error retrieving existing ignores: %s", err)
+			}
+			if !fileExists {
+				cmd.Printf("bearer.ignore file not found. Perhaps you need to use --bearer-ignore-file to specify the path to bearer.ignore?\n")
+				return nil
+			}
+
+			fingerprintId := args[0]
+			removedFingerprint, ok := ignoredFingerprints[fingerprintId]
+			if !ok {
+				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
+				return nil
+			}
+
+			delete(ignoredFingerprints, fingerprintId)
+			if err := writeIgnoreFile(ignoredFingerprints, options.IgnoreOptions.BearerIgnoreFile); err != nil {
+				return err
+			}
+
+			cmd.Print("Fingerprint successfully removed from bearer.ignore:\n\n")
+			cmd.Print(displayIgnoredEntryTextString(fingerprintId, removedFingerprint))
+			cmd.Print("\n")
+			return nil
+		},
+		SilenceErrors: false,
+		SilenceUsage:  false,
+	}
+	IgnoreRemoveFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreRemoveFlags.Usages(cmd)))
 
 	return cmd
 }
