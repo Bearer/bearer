@@ -33,6 +33,6 @@ type BearerReport struct {
 }
 
 type SaasFinding struct {
-	Finding *securitytypes.Finding
+	securitytypes.Finding
 	// add any extra data to send to SaaS
 }
