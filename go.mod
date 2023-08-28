@@ -13,7 +13,7 @@ require (
 	github.com/go-enry/go-enry/v2 v2.8.4
 	github.com/go-git/go-git/v5 v5.8.1
 	github.com/google/go-github v17.0.0+incompatible
-	github.com/google/uuid v1.3.0
+	github.com/google/uuid v1.3.1
 	github.com/hhatto/gocloc v0.5.1
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/open-policy-agent/opa v0.55.0
