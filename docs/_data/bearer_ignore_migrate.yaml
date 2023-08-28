@@ -3,6 +3,9 @@ synopsis: |
     Migrate ignored fingerprints from bearer.yml to bearer.ignore
 usage: ' ignore migrate [flags]'
 options:
+    - name: bearer-ignore-file
+      default_value: bearer.ignore
+      usage: Load bearer.ignore file from the specified path.
     - name: config-file
       default_value: bearer.yml
       usage: Load configuration from the specified path.
