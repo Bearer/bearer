@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/fatih/color"
@@ -15,10 +16,27 @@ type IgnoredFingerprint struct {
 	IgnoredAt string  `json:"ignored_at"`
 }
 
-func GetIgnoredFingerprints(bearerIgnoreFilePath string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
-	if _, noFileErr := os.Stat(bearerIgnoreFilePath); noFileErr != nil {
-		ignoredFingerprints = make(map[string]IgnoredFingerprint)
+func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
+	if bearerIgnoreFilePath == "" {
+		// nothing to do here
 		return ignoredFingerprints, false, err
+	}
+
+	if target != nil {
+		targetPath := ""
+		if targetPath, err = filepath.Abs(*target); err != nil {
+			return ignoredFingerprints, fileExists, err
+		}
+		bearerIgnoreFilePath = filepath.Join(targetPath, bearerIgnoreFilePath)
+	}
+
+	info, statErr := os.Stat(bearerIgnoreFilePath)
+	if statErr != nil {
+		return make(map[string]IgnoredFingerprint), false, err
+	}
+
+	if info.IsDir() {
+		return ignoredFingerprints, false, fmt.Errorf("bearer-ignore-file path %s is a dir not a file", bearerIgnoreFilePath)
 	}
 
 	// file exists
@@ -53,7 +71,11 @@ var bold = color.New(color.Bold).SprintFunc()
 var morePrefix = color.HiBlackString("├─ ")
 var lastPrefix = color.HiBlackString("└─ ")
 
-func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprint) string {
+func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprint, noColor bool) string {
+	initialColorSetting := color.NoColor
+	if noColor && !initialColorSetting {
+		color.NoColor = true
+	}
 	prefix := morePrefix
 	result := fmt.Sprintf(bold(color.HiBlueString("%s \n")), fingerprintId)
 
@@ -73,6 +95,8 @@ func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprin
 	if entry.Comment != nil {
 		result += fmt.Sprintf("\n%sComment: %s", lastPrefix, bold(*entry.Comment))
 	}
+
+	color.NoColor = initialColorSetting
 
 	return result
 }

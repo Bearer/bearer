@@ -44,6 +44,13 @@ var (
 		Value:      false,
 		Usage:      "Disable color in output",
 	}
+	BearerIgnoreFileFlag = Flag{
+		Name:            "bearer-ignore-file",
+		ConfigName:      "bearer-ignore-file",
+		Value:           "bearer.ignore",
+		Usage:           "Load bearer.ignore file from the specified path.",
+		DisableInConfig: true,
+	}
 	DebugProfileFlag = Flag{
 		Name:            "debug-profile",
 		ConfigName:      "debug-profile",
@@ -69,7 +76,8 @@ type GeneralOptions struct {
 	ConfigFile          string `json:"config_file" yaml:"config_file"`
 	Client              *api.API
 	DisableVersionCheck bool
-	NoColor             bool `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	NoColor             bool   `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	BearerIgnoreFile    string `mapstructure:"bearer_ignore_file" json:"bearer_ignore_file" yaml:"bearer_ignore_file"`
 	DebugProfile        bool
 }
 
@@ -80,6 +88,7 @@ func NewGeneralFlagGroup() *GeneralFlagGroup {
 		Host:                &HostFlag,
 		DisableVersionCheck: &DisableVersionCheckFlag,
 		NoColor:             &NoColorFlag,
+		BearerIgnoreFile:    &BearerIgnoreFileFlag,
 		DebugProfile:        &DebugProfileFlag,
 	}
 }
@@ -95,6 +104,7 @@ func (f *GeneralFlagGroup) Flags() []*Flag {
 		f.Host,
 		f.DisableVersionCheck,
 		f.NoColor,
+		f.BearerIgnoreFile,
 		f.DebugProfile,
 	}
 }
@@ -122,6 +132,7 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		ConfigFile:          getString(f.ConfigFile),
 		DisableVersionCheck: getBool(f.DisableVersionCheck),
 		NoColor:             getBool(f.NoColor),
+		BearerIgnoreFile:    getString(f.BearerIgnoreFile),
 		DebugProfile:        getBool(f.DebugProfile),
 	}
 }

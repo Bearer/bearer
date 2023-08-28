@@ -4,6 +4,9 @@ usage: ' scan [flags] <path>'
 options:
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.
+    - name: bearer-ignore-file
+      default_value: bearer.ignore
+      usage: Load bearer.ignore file from the specified path.
     - name: config-file
       default_value: bearer.yml
       usage: Load configuration from the specified path.
