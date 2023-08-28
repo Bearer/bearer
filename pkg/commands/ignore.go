@@ -1,14 +1,20 @@
 package commands
 
 import (
-	"errors"
+	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/ignore"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
+
+var bold = color.New(color.Bold).SprintFunc()
+var morePrefix = color.HiBlackString("├─ ")
+var lastPrefix = color.HiBlackString("└─ ")
 
 func NewIgnoreCommand() *cobra.Command {
 	usageTemplate := `
@@ -70,7 +76,7 @@ $ bearer ignore show <fingerprint>`,
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			ignoredFingerprints, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
 			if err != nil {
 				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
 				return nil
@@ -82,7 +88,7 @@ $ bearer ignore show <fingerprint>`,
 				return nil
 			}
 			cmd.Print("\n")
-			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint))
+			cmd.Print(displayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint))
 			cmd.Print("\n")
 			return nil
 		},
@@ -127,7 +133,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				fingerprintId: fingerprintEntry,
 			}
 
-			existingIgnoredFingerprints, fileExists, err := ignore.GetExistingIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -136,23 +142,18 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				cmd.Printf("\nCreating bearer.ignore file...")
 			}
 
-			if err := ignore.AddToIgnoreFile(
-				fingerprintsToIgnore,
-				existingIgnoredFingerprints,
-				options.IgnoreOptions.BearerIgnoreFile,
-				options.IgnoreAddOptions.Force,
-			); err != nil {
-				target := &ignore.DuplicateIgnoredFingerprintError{}
-				if errors.As(err, &target) {
-					// handle expected error (duplicate entry in bearer.ignore)
-					cmd.Printf("Error: %s\n", err.Error())
-					return nil
-				}
+			if mergeErr := ignore.MergeIgnoredFingerprints(fingerprintsToIgnore, ignoredFingerprints, options.IgnoreAddOptions.Force); mergeErr != nil {
+				// handle expected error (duplicate entry in bearer.ignore)
+				cmd.Printf("Error: %s\n", mergeErr.Error())
+				return nil
+			}
+
+			if err := writeIgnoreFile(ignoredFingerprints, options.IgnoreOptions.BearerIgnoreFile); err != nil {
 				return err
 			}
 
-			cmd.Print("fingerprint added to bearer.ignore:\n\n")
-			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, fingerprintEntry))
+			cmd.Print("Fingerprint added to bearer.ignore:\n\n")
+			cmd.Print(displayIgnoredEntryTextString(fingerprintId, ignoredFingerprints[fingerprintId]))
 			cmd.Print("\n")
 			return nil
 		},
@@ -185,54 +186,45 @@ $ bearer ignore migrate`,
 				return fmt.Errorf("flag error: %s", err)
 			}
 			configFilePath := viper.GetString(flag.ConfigFileFlag.ConfigName)
-			ignoredFingerprintsFromConfig, err := getIgnoredFingerprintsFromConfig(configFilePath)
+			fingerprintsToMigrate, err := getIgnoredFingerprintsFromConfig(configFilePath)
 			if err != nil {
-				cmd.Printf("Error: %s, perhaps you need to use --config-file to specify the config path?\n", err.Error())
-				return nil
+				return fmt.Errorf("error reading config: %s\nPerhaps you need to use --config-file to specify the config path?", err.Error())
 			}
 
-			existingIgnoredFingerprints, fileExists, err := ignore.GetExistingIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
 
-			entrysInConfig := len(ignoredFingerprintsFromConfig)
-			entrysInConfigSkipped := ""
-			cmd.Printf("Found %d ignores in:\n\t%s\n", entrysInConfig, configFilePath)
+			migratedIgnoredCount := len(fingerprintsToMigrate)
+			skippedIgnoresToMigrate := ""
+			cmd.Printf("Found %d ignores in:\n\t%s\n", migratedIgnoredCount, configFilePath)
 
 			if !fileExists {
-				cmd.Printf("Creating bearer.ignore file\n")
+				cmd.Printf("\nCreating bearer.ignore file...\n")
 			}
 
 			if !options.IgnoreMigrateOptions.Force {
-				for key := range existingIgnoredFingerprints {
-					if _, ok := ignoredFingerprintsFromConfig[key]; ok {
-						entrysInConfig--
-						entrysInConfigSkipped += fmt.Sprintf("- %s\n", key)
-						delete(ignoredFingerprintsFromConfig, key)
+				for key := range ignoredFingerprints {
+					if _, ok := fingerprintsToMigrate[key]; ok {
+						migratedIgnoredCount--
+						skippedIgnoresToMigrate += fmt.Sprintf("- %s\n", key)
+						delete(fingerprintsToMigrate, key)
 					}
 				}
 			}
 
-			cmd.Printf("Added %d ignores to:\n\t%s\n", entrysInConfig, options.IgnoreOptions.BearerIgnoreFile)
+			cmd.Printf("Added %d ignores to:\n\t%s\n", migratedIgnoredCount, options.IgnoreOptions.BearerIgnoreFile)
 
-			if entrysInConfigSkipped != "" {
-				cmd.Printf("\nThe following items where already ignored:\n")
-				cmd.Printf(entrysInConfigSkipped)
-				cmd.Printf("\nTo overwrite these entries in the ignore file, use --force\n")
+			if skippedIgnoresToMigrate != "" {
+				cmd.Printf("\nThe following ignores already exist in the bearer.ignore file:\n")
+				cmd.Printf(skippedIgnoresToMigrate)
+				cmd.Printf("\nTo overwrite these entries, use --force\n")
 			}
 
-			if err = ignore.AddToIgnoreFile(ignoredFingerprintsFromConfig, existingIgnoredFingerprints, options.IgnoreOptions.BearerIgnoreFile, options.IgnoreMigrateOptions.Force); err != nil {
-				target := &ignore.DuplicateIgnoredFingerprintError{}
-				if errors.As(err, &target) {
-					// handle expected error (duplicate entry in bearer.ignore)
-					cmd.Printf("%s\n", err.Error())
-					return nil
-				}
-				return err
-			}
-
-			return nil
+			// either no duplicate entries at this point or --force is true so we can ignore merge error
+			_ = ignore.MergeIgnoredFingerprints(fingerprintsToMigrate, ignoredFingerprints, options.IgnoreMigrateOptions.Force)
+			return writeIgnoreFile(ignoredFingerprints, options.IgnoreOptions.BearerIgnoreFile)
 		},
 		SilenceErrors: false,
 		SilenceUsage:  false,
@@ -241,6 +233,16 @@ $ bearer ignore migrate`,
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreMigrateFlags.Usages(cmd)))
 
 	return cmd
+}
+
+func writeIgnoreFile(ignoredFingerprints map[string]ignore.IgnoredFingerprint, bearerIgnoreFilePath string) error {
+	data, err := json.MarshalIndent(ignoredFingerprints, "", "  ")
+	if err != nil {
+		// failed to marshall data
+		return err
+	}
+
+	return os.WriteFile(bearerIgnoreFilePath, data, 0644)
 }
 
 func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFromConfig map[string]ignore.IgnoredFingerprint, err error) {
@@ -257,4 +259,28 @@ func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFro
 	}
 
 	return ignoredFingerprintsFromConfig, nil
+}
+
+func displayIgnoredEntryTextString(fingerprintId string, entry ignore.IgnoredFingerprint) string {
+	prefix := morePrefix
+	result := fmt.Sprintf(bold(color.HiBlueString("%s \n")), fingerprintId)
+
+	if entry.Author == "" && entry.Comment == "" {
+		prefix = lastPrefix
+	}
+	result += fmt.Sprintf("%sIgnored At: %s\n", prefix, bold(entry.IgnoredAt))
+
+	if entry.Author != "" {
+		if entry.Comment == "" {
+			prefix = lastPrefix
+		}
+
+		result += fmt.Sprintf("%sAuthor: %s\n", prefix, bold(entry.Author))
+	}
+
+	if entry.Comment != "" {
+		result += fmt.Sprintf("%sComment: %s\n", lastPrefix, bold(entry.Comment))
+	}
+
+	return result
 }
