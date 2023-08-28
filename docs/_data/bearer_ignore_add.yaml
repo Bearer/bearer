@@ -5,6 +5,9 @@ options:
     - name: author
       shorthand: a
       usage: Add author information to this ignored finding.
+    - name: bearer-ignore-file
+      default_value: bearer.ignore
+      usage: Load bearer.ignore file from the specified path.
     - name: comment
       usage: Add a comment to this ignored finding.
     - name: force

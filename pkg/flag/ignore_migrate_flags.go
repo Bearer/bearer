@@ -7,6 +7,13 @@ var (
 		Value:      false,
 		Usage:      "Overwrite an existing ignored finding.",
 	}
+	IgnoreMigrateBearerIgnoreFileFlag = Flag{
+		Name:            "config-file",
+		ConfigName:      "config-file",
+		Value:           "bearer.yml",
+		Usage:           "Load configuration from the specified path.",
+		DisableInConfig: true,
+	}
 	IgnoreMigrateConfigFileFlag = Flag{
 		Name:            "config-file",
 		ConfigName:      "config-file",
@@ -17,8 +24,9 @@ var (
 )
 
 type IgnoreMigrateFlagGroup struct {
-	IgnoreMigrateForceFlag      *Flag
-	IgnoreMigrateConfigFileFlag *Flag
+	IgnoreMigrateForceFlag            *Flag
+	IgnoreMigrateConfigFileFlag       *Flag
+	IgnoreMigrateBearerIgnoreFileFlag *Flag
 }
 
 type IgnoreMigrateOptions struct {
@@ -28,8 +36,9 @@ type IgnoreMigrateOptions struct {
 
 func NewIgnoreMigrateFlagGroup() *IgnoreMigrateFlagGroup {
 	return &IgnoreMigrateFlagGroup{
-		IgnoreMigrateForceFlag:      &IgnoreMigrateForceFlag,
-		IgnoreMigrateConfigFileFlag: &IgnoreMigrateConfigFileFlag,
+		IgnoreMigrateForceFlag:            &IgnoreMigrateForceFlag,
+		IgnoreMigrateBearerIgnoreFileFlag: &IgnoreMigrateBearerIgnoreFileFlag,
+		IgnoreMigrateConfigFileFlag:       &IgnoreMigrateConfigFileFlag,
 	}
 }
 
