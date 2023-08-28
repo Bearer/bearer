@@ -7,16 +7,11 @@ import (
 
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/ignore"
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
 var migratedIgnoreComment = "migrated from bearer.yml"
-
-var bold = color.New(color.Bold).SprintFunc()
-var morePrefix = color.HiBlackString("├─ ")
-var lastPrefix = color.HiBlackString("└─ ")
 
 func NewIgnoreCommand() *cobra.Command {
 	usageTemplate := `
@@ -51,6 +46,7 @@ Examples:
 	cmd.AddCommand(
 		newIgnoreShowCommand(),
 		newIgnoreAddCommand(),
+		newIgnoreRemoveCommand(),
 		newIgnoreMigrateCommand(),
 	)
 
@@ -97,7 +93,7 @@ $ bearer ignore show <fingerprint>`,
 			if options.IgnoreShowOptions.All {
 				// show all fingerprints
 				for fingerprintId, fingerprint := range ignoredFingerprints {
-					cmd.Print(displayIgnoredEntryTextString(fingerprintId, fingerprint))
+					cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, fingerprint))
 				}
 			} else {
 				// show a specific fingerprint
@@ -107,9 +103,9 @@ $ bearer ignore show <fingerprint>`,
 					cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
 					return nil
 				}
-				cmd.Print(displayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint))
+				cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint))
 			}
-			cmd.Print("\n")
+			cmd.Print("\n\n")
 			return nil
 		},
 		SilenceErrors: false,
@@ -177,8 +173,8 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			}
 
 			cmd.Print("Fingerprint added to bearer.ignore:\n\n")
-			cmd.Print(displayIgnoredEntryTextString(fingerprintId, ignoredFingerprints[fingerprintId]))
-			cmd.Print("\n")
+			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, ignoredFingerprints[fingerprintId]))
+			cmd.Print("\n\n")
 			return nil
 		},
 		SilenceErrors: false,
@@ -186,6 +182,64 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 	}
 	IgnoreAddFlags.AddFlags(cmd)
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreAddFlags.Usages(cmd)))
+
+	return cmd
+}
+
+func newIgnoreRemoveCommand() *cobra.Command {
+	var IgnoreRemoveFlags = &flag.Flags{
+		IgnoreFlagGroup: flag.NewIgnoreFlagGroup(),
+	}
+	cmd := &cobra.Command{
+		Use:   "remove <fingerprint>",
+		Short: "Remove an ignored fingerprint",
+		Example: `# Remove an ignored fingerprint from your bearer.ignore file
+$ bearer ignore remove <fingerprint>`,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if err := IgnoreRemoveFlags.Bind(cmd); err != nil {
+				return fmt.Errorf("flag bind error: %w", err)
+			}
+
+			if len(args) == 0 {
+				return cmd.Help()
+			}
+
+			options, err := IgnoreRemoveFlags.ToOptions(args)
+			if err != nil {
+				return fmt.Errorf("flag error: %s", err)
+			}
+
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
+			if err != nil {
+				return fmt.Errorf("error retrieving existing ignores: %s", err)
+			}
+			if !fileExists {
+				cmd.Printf("bearer.ignore file not found. Perhaps you need to use --bearer-ignore-file to specify the path to bearer.ignore?\n")
+				return nil
+			}
+
+			fingerprintId := args[0]
+			removedFingerprint, ok := ignoredFingerprints[fingerprintId]
+			if !ok {
+				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
+				return nil
+			}
+
+			delete(ignoredFingerprints, fingerprintId)
+			if err := writeIgnoreFile(ignoredFingerprints, options.IgnoreOptions.BearerIgnoreFile); err != nil {
+				return err
+			}
+
+			cmd.Print("Fingerprint successfully removed from bearer.ignore:\n\n")
+			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, removedFingerprint))
+			cmd.Print("\n\n")
+			return nil
+		},
+		SilenceErrors: false,
+		SilenceUsage:  false,
+	}
+	IgnoreRemoveFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreRemoveFlags.Usages(cmd)))
 
 	return cmd
 }
@@ -283,28 +337,4 @@ func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFro
 	}
 
 	return ignoredFingerprintsFromConfig, nil
-}
-
-func displayIgnoredEntryTextString(fingerprintId string, entry ignore.IgnoredFingerprint) string {
-	prefix := morePrefix
-	result := fmt.Sprintf(bold(color.HiBlueString("%s \n")), fingerprintId)
-
-	if entry.Author == nil && entry.Comment == nil {
-		prefix = lastPrefix
-	}
-	result += fmt.Sprintf("%sIgnored At: %s\n", prefix, bold(entry.IgnoredAt))
-
-	if entry.Author != nil {
-		if entry.Comment == nil {
-			prefix = lastPrefix
-		}
-
-		result += fmt.Sprintf("%sAuthor: %s\n", prefix, bold(*entry.Author))
-	}
-
-	if entry.Comment != nil {
-		result += fmt.Sprintf("%sComment: %s\n", lastPrefix, bold(*entry.Comment))
-	}
-
-	return result
 }

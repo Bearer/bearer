@@ -313,7 +313,7 @@ func fingerprintOutput(fingerprints []string, legacyExcludedFingerprints map[str
 		output.StdErrLog("\n=====================================\n")
 		// legacy
 		if len(legacyExcludedFingerprints) > 0 {
-			output.StdErrLog("\nNote: exclude_fingerprints is legacy. To use new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate.\n\n")
+			output.StdErrLog("Note: exclude-fingerprints is being replaced by bearer.ignore. To use the new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate.\n")
 		}
 
 		if len(unusedLegacyFingerprints) > 0 {
@@ -326,8 +326,19 @@ func fingerprintOutput(fingerprints []string, legacyExcludedFingerprints map[str
 
 		if len(unusedFingerprints) > 0 {
 			output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your bearer.ignore file are no longer detected:", len(unusedFingerprints)))
-			for _, fingerprint := range unusedFingerprints {
-				output.StdErrLog(fmt.Sprintf("  - %s", fingerprint))
+			for _, fingerprintId := range unusedFingerprints {
+				fingerprint, ok := ignoredFingerprints[fingerprintId]
+				if !ok {
+					// fingerprint will always be found, but if not let's not blow up the scan
+					continue
+				}
+
+				if fingerprint.Comment == nil {
+					output.StdErrLog(fmt.Sprintf("  - %s", fingerprintId))
+				} else {
+					output.StdErrLog(fmt.Sprintf("  - %s (%s)", fingerprintId, *fingerprint.Comment))
+				}
+				output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your bearer.ignore file, run: bearer ignore remove " + fingerprintId))
 			}
 		}
 		output.StdErrLog("\n=====================================")

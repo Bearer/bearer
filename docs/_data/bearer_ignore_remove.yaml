@@ -1,0 +1,17 @@
+name: ' ignore remove'
+synopsis: Remove an ignored fingerprint
+usage: ' ignore remove <fingerprint> [flags]'
+options:
+    - name: bearer-ignore-file
+      default_value: bearer.ignore
+      usage: Load bearer.ignore file from the specified path.
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for remove
+example: |-
+    # Remove an ignored fingerprint from your bearer.ignore file
+    $ bearer ignore remove <fingerprint>
+see_also:
+    - ' ignore - Manage ignored fingerprints'
+aliases: 
