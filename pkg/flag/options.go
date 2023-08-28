@@ -55,6 +55,7 @@ type Flags struct {
 	GeneralFlagGroup       *GeneralFlagGroup
 	IgnoreFlagGroup        *IgnoreFlagGroup
 	IgnoreAddFlagGroup     *IgnoreAddFlagGroup
+	IgnoreShowFlagGroup    *IgnoreShowFlagGroup
 	IgnoreMigrateFlagGroup *IgnoreMigrateFlagGroup
 }
 
@@ -67,6 +68,7 @@ type Options struct {
 	GeneralOptions
 	IgnoreOptions
 	IgnoreAddOptions
+	IgnoreShowOptions
 	IgnoreMigrateOptions
 }
 
@@ -188,6 +190,9 @@ func (f *Flags) groups() []FlagGroup {
 	if f.IgnoreAddFlagGroup != nil {
 		groups = append(groups, f.IgnoreAddFlagGroup)
 	}
+	if f.IgnoreShowFlagGroup != nil {
+		groups = append(groups, f.IgnoreShowFlagGroup)
+	}
 	if f.IgnoreMigrateFlagGroup != nil {
 		groups = append(groups, f.IgnoreMigrateFlagGroup)
 	}
@@ -295,6 +300,10 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 
 	if f.IgnoreAddFlagGroup != nil {
 		opts.IgnoreAddOptions = f.IgnoreAddFlagGroup.ToOptions()
+	}
+
+	if f.IgnoreShowFlagGroup != nil {
+		opts.IgnoreShowOptions = f.IgnoreShowFlagGroup.ToOptions()
 	}
 
 	if f.IgnoreMigrateFlagGroup != nil {

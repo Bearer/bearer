@@ -61,7 +61,8 @@ Examples:
 
 func newIgnoreShowCommand() *cobra.Command {
 	var IgnoreShowFlags = &flag.Flags{
-		IgnoreFlagGroup: flag.NewIgnoreFlagGroup(),
+		IgnoreFlagGroup:     flag.NewIgnoreFlagGroup(),
+		IgnoreShowFlagGroup: flag.NewIgnoreShowFlagGroup(),
 	}
 	cmd := &cobra.Command{
 		Use:   "show <fingerprint>",
@@ -73,13 +74,13 @@ $ bearer ignore show <fingerprint>`,
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			if len(args) == 0 {
-				return cmd.Help()
-			}
-
 			options, err := IgnoreShowFlags.ToOptions(args)
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
+			}
+
+			if len(args) == 0 && !options.IgnoreShowOptions.All {
+				return cmd.Help()
 			}
 
 			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreOptions.BearerIgnoreFile)
@@ -91,14 +92,23 @@ $ bearer ignore show <fingerprint>`,
 				cmd.Printf("bearer.ignore file not found. Perhaps you need to use --bearer-ignore-file to specify the path to bearer.ignore?\n")
 				return nil
 			}
-			fingerprintId := args[0]
-			selectedIgnoredFingerprint, ok := ignoredFingerprints[fingerprintId]
-			if !ok {
-				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
-				return nil
-			}
+
 			cmd.Print("\n")
-			cmd.Print(displayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint))
+			if options.IgnoreShowOptions.All {
+				// show all fingerprints
+				for fingerprintId, fingerprint := range ignoredFingerprints {
+					cmd.Print(displayIgnoredEntryTextString(fingerprintId, fingerprint))
+				}
+			} else {
+				// show a specific fingerprint
+				fingerprintId := args[0]
+				selectedIgnoredFingerprint, ok := ignoredFingerprints[fingerprintId]
+				if !ok {
+					cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
+					return nil
+				}
+				cmd.Print(displayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint))
+			}
 			cmd.Print("\n")
 			return nil
 		},
