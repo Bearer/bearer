@@ -17,6 +17,11 @@ type IgnoredFingerprint struct {
 }
 
 func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
+	if bearerIgnoreFilePath == "" {
+		// nothing to do here
+		return ignoredFingerprints, false, err
+	}
+
 	if target != nil {
 		targetPath := ""
 		if targetPath, err = filepath.Abs(*target); err != nil {
@@ -25,9 +30,13 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignore
 		bearerIgnoreFilePath = filepath.Join(targetPath, bearerIgnoreFilePath)
 	}
 
-	if _, noFileErr := os.Stat(bearerIgnoreFilePath); noFileErr != nil {
-		ignoredFingerprints = make(map[string]IgnoredFingerprint)
-		return ignoredFingerprints, false, err
+	info, statErr := os.Stat(bearerIgnoreFilePath)
+	if statErr != nil {
+		return make(map[string]IgnoredFingerprint), false, err
+	}
+
+	if info.IsDir() {
+		return ignoredFingerprints, false, fmt.Errorf("bearer-ignore-file path %s is a dir not a file", bearerIgnoreFilePath)
 	}
 
 	// file exists
