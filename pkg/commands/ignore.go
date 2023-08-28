@@ -6,9 +6,7 @@ import (
 	"os"
 
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/ignore"
-	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -261,33 +259,16 @@ $ bearer ignore migrate`,
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
-			var defaultConfigPath = ""
-			if len(args) > 0 {
-				defaultConfigPath = file.GetFullFilename(args[0], configPath)
-			}
-
-			var loadFileMessage string
-			if err := readConfig(configPath); err != nil {
-				if err := readConfig(defaultConfigPath); err != nil {
-					loadFileMessage = "Couldn't find any config file"
-				} else {
-					loadFileMessage = fmt.Sprintf("Loading default config file %s", defaultConfigPath)
-				}
-			} else {
-				loadFileMessage = fmt.Sprintf("Loading config file %s", configPath)
-			}
-			log.Debug().Msgf(loadFileMessage)
-
 			options, err := IgnoreMigrateFlags.ToOptions(args)
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			fingerprintsToMigrate, err := getIgnoredFingerprintsFromConfig(configPath)
+			configFilePath, _, err := readConfig(args)
 			if err != nil {
 				return fmt.Errorf("error reading config: %s\nPerhaps you need to use --config-file to specify the config path?", err.Error())
 			}
+			fingerprintsToMigrate := getIgnoredFingerprintsFromConfig(configFilePath)
 
 			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.BearerIgnoreFile, nil)
 			if err != nil {
@@ -296,7 +277,7 @@ $ bearer ignore migrate`,
 
 			migratedIgnoredCount := len(fingerprintsToMigrate)
 			skippedIgnoresToMigrate := ""
-			cmd.Printf("Found %d ignores in:\n\t%s\n", migratedIgnoredCount, configPath)
+			cmd.Printf("Found %d ignores in:\n\t%s\n", migratedIgnoredCount, configFilePath)
 
 			if !fileExists {
 				cmd.Printf("\nCreating bearer.ignore file...\n")
@@ -343,12 +324,8 @@ func writeIgnoreFile(ignoredFingerprints map[string]ignore.IgnoredFingerprint, b
 	return os.WriteFile(bearerIgnoreFilePath, data, 0644)
 }
 
-func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFromConfig map[string]ignore.IgnoredFingerprint, err error) {
+func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFromConfig map[string]ignore.IgnoredFingerprint) {
 	ignoredFingerprintsFromConfig = make(map[string]ignore.IgnoredFingerprint)
-
-	if err := readConfig(configPath); err != nil {
-		return ignoredFingerprintsFromConfig, err
-	}
 
 	for _, fingerprint := range viper.GetStringSlice("report.exclude-fingerprint") {
 		ignoredFingerprintsFromConfig[fingerprint] = ignore.IgnoredFingerprint{
@@ -356,5 +333,5 @@ func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFro
 		}
 	}
 
-	return ignoredFingerprintsFromConfig, nil
+	return ignoredFingerprintsFromConfig
 }
