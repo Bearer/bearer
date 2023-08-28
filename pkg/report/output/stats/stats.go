@@ -9,7 +9,6 @@ import (
 
 	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/maputil"
-	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
 )
 
@@ -175,10 +174,9 @@ func GetPlaceholderOutput(
 	outputStr = &strings.Builder{}
 	statisticsOutput, err := GetOutput(inputgocloc, inputDataflow, config)
 
-	supportURL := "https://docs.bearer.com/explanations/reports/"
-	outputStr.WriteString(fmt.Sprintf(`
-The policy report is not yet available for your stack. Learn more at %s`,
-		supportURL))
+	outputStr.WriteString(`
+The security report is not yet available for your application.
+Learn more about language support at https://docs.bearer.com/reference/supported-languages/`)
 
 	if AnythingFoundFor(&statisticsOutput.Data) {
 		outputStr.WriteString(`
@@ -189,11 +187,6 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 	}
 
 	WriteStatsToString(outputStr, &statisticsOutput.Data)
-
-	suggestedCommand := color.New(color.Italic).Sprintf("bearer scan %s --report dataflow", config.Target)
-	outputStr.WriteString(fmt.Sprintf(`
-
-Run the data flow report if you want the full output using: %s`, suggestedCommand))
 
 	return
 }
