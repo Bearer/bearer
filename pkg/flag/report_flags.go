@@ -13,6 +13,7 @@ var (
 	FormatJSON       = "json"
 	FormatYAML       = "yaml"
 	FormatHTML       = "html"
+	FormatCSV        = "csv"
 	FormatEmpty      = ""
 
 	ReportPrivacy   = "privacy"
@@ -26,7 +27,7 @@ var (
 )
 
 var ErrInvalidFormatSecurity = errors.New("invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html")
-var ErrInvalidFormatPrivacy = errors.New("invalid format argument for privacy report; supported values: json, yaml html")
+var ErrInvalidFormatPrivacy = errors.New("invalid format argument for privacy report; supported values: csv, json, yaml, html")
 var ErrInvalidFormatDefault = errors.New("invalid format argument; supported values: json, yaml")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: security, privacy")
 var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
@@ -132,6 +133,10 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	case FormatEmpty:
 	case FormatHTML:
 		if report != ReportPrivacy && report != ReportSecurity {
+			return ReportOptions{}, invalidFormat
+		}
+	case FormatCSV:
+		if report != ReportPrivacy {
 			return ReportOptions{}, invalidFormat
 		}
 	case FormatSarif, FormatGitLabSast, FormatReviewDog:

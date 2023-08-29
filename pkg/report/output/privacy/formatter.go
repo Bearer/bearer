@@ -24,7 +24,7 @@ func NewFormatter(reportData *outputtypes.ReportData, config settings.Config) *F
 
 func (f Formatter) Format(format string) (output *string, err error) {
 	switch format {
-	case flag.FormatEmpty:
+	case flag.FormatEmpty, flag.FormatCSV:
 		stringBuilder, err := BuildCsvString(f.ReportData, f.Config)
 		if err != nil {
 			return output, err
