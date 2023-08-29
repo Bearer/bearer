@@ -57,11 +57,14 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeTernary(node, visitChildren)
 	case "parenthesized_expression":
 		return analyzer.analyzeParentheses(node, visitChildren)
+	case "object":
+		return analyzer.analyzeObject(node, visitChildren)
+	case "spread_element":
+		return analyzer.analyzeSpreadElement(node, visitChildren)
 	case "arguments",
 		"array",
 		"binary_expression",
 		"pair",
-		"spread_element",
 		"template_substitution",
 		"unary_expression":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
@@ -256,6 +259,31 @@ func (analyzer *analyzer) analyzeParentheses(node *sitter.Node, visitChildren fu
 	return visitChildren()
 }
 
+// { ...source, x, y: 42 }
+func (analyzer *analyzer) analyzeObject(node *sitter.Node, visitChildren func() error) error {
+	for _, child := range analyzer.builder.ChildrenFor(node) {
+		if child.Type() == "spread_element" {
+			analyzer.builder.Alias(node, child)
+			continue
+		}
+
+		analyzer.builder.Dataflow(node, child)
+		analyzer.lookupVariable(child)
+	}
+
+	return visitChildren()
+}
+
+// `...source` in { ...source }
+func (analyzer *analyzer) analyzeSpreadElement(node *sitter.Node, visitChildren func() error) error {
+	identifier := node.NamedChild(0)
+
+	analyzer.builder.Alias(node, identifier)
+	analyzer.lookupVariable(identifier)
+
+	return visitChildren()
+}
+
 // default analysis, where the children are assumed to be data sources
 func (analyzer *analyzer) analyzeGenericOperation(node *sitter.Node, visitChildren func() error) error {
 	children := analyzer.builder.ChildrenFor(node)
@@ -279,7 +307,7 @@ func (analyzer *analyzer) withScope(newScope *language.Scope, body func() error)
 }
 
 func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
-	if node == nil || node.Type() != "identifier" {
+	if node == nil || !(node.Type() == "identifier" || node.Type() == "shorthand_property_identifier") {
 		return
 	}
 

@@ -158,6 +158,7 @@ func (node *Node) QueryResults(queryID int) []QueryResult {
 type nodeDump struct {
 	Type            string
 	ID              int
+	Range           string
 	Content         string     `yaml:",omitempty"`
 	DataflowSources []int      `yaml:"dataflow_sources,omitempty"`
 	AliasOf         []int      `yaml:"alias_of,omitempty"`
@@ -186,6 +187,14 @@ func (node *Node) dumpValue() nodeDump {
 		queries = append(queries, queryID)
 	}
 
+	contentRange := fmt.Sprintf(
+		"%d:%d-%d:%d",
+		node.ContentStart.Line,
+		node.ContentStart.Column,
+		node.ContentEnd.Line,
+		node.ContentEnd.Column,
+	)
+
 	content := ""
 	if len(node.children) == 0 && node.Type()[0] != '"' {
 		content = node.Content()
@@ -194,6 +203,7 @@ func (node *Node) dumpValue() nodeDump {
 	return nodeDump{
 		Type:            node.Type(),
 		ID:              node.ID,
+		Range:           contentRange,
 		Content:         content,
 		DataflowSources: nodeListToID(node.dataflowSources),
 		AliasOf:         nodeListToID(node.aliasOf),
