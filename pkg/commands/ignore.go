@@ -94,6 +94,7 @@ $ bearer ignore show <fingerprint>`,
 				// show all fingerprints
 				for fingerprintId, fingerprint := range ignoredFingerprints {
 					cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, fingerprint, options.GeneralOptions.NoColor))
+					cmd.Print("\n\n")
 				}
 			} else {
 				// show a specific fingerprint
