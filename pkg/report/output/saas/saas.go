@@ -38,7 +38,12 @@ func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta 
 	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
 	for _, severity := range maps.Keys(reportData.FindingsBySeverity) {
 		for _, finding := range reportData.FindingsBySeverity[severity] {
-			saasFindingsBySeverity[severity] = append(saasFindingsBySeverity[severity], saas.SaasFinding{Finding: finding})
+			saasFindingsBySeverity[severity] = append(
+				saasFindingsBySeverity[severity],
+				saas.SaasFinding{
+					Finding:           finding,
+					SeverityWeighting: finding.SeverityWeighting,
+				})
 		}
 	}
 
