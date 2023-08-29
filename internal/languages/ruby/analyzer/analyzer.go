@@ -194,7 +194,6 @@ func (analyzer *analyzer) analyzeWhen(node *sitter.Node, visitChildren func() er
 // def m(a = 1, b:)
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
 	nameNode := node.ChildByFieldName("name")
-	analyzer.builder.Alias(node, nameNode)
 
 	if nameNode.Type() == "identifier" {
 		analyzer.scope.Declare(analyzer.builder.ContentFor(nameNode), nameNode)

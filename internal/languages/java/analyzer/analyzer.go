@@ -43,8 +43,6 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		})
 	case "assignment_expression":
 		return analyzer.analyzeAssignment(node, visitChildren)
-	case "field_declaration", "local_variable_declaration":
-		return analyzer.analyzeVariableDeclaration(node, visitChildren)
 	case "variable_declarator":
 		return analyzer.analyzeVariableDeclarator(node, visitChildren)
 	case "parenthesized_expression":
@@ -104,18 +102,6 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 	return err
 }
 
-// field or variable declaration:
-//
-//	class X {
-//	  Integer foo;
-//	}
-func (analyzer *analyzer) analyzeVariableDeclaration(node *sitter.Node, visitChildren func() error) error {
-	declarator := node.ChildByFieldName("declarator")
-	analyzer.builder.Alias(node, declarator)
-
-	return visitChildren()
-}
-
 // the "foo = 1" part in:
 //
 //	class X {
@@ -126,14 +112,18 @@ func (analyzer *analyzer) analyzeVariableDeclaration(node *sitter.Node, visitChi
 func (analyzer *analyzer) analyzeVariableDeclarator(node *sitter.Node, visitChildren func() error) error {
 	name := node.ChildByFieldName("name")
 
+	// backwards compatibility with rules. fixup rules to use variable name node,
+	// and then remove this
+	analyzer.builder.Alias(name, node.Parent())
+
 	if value := node.ChildByFieldName("value"); value != nil {
 		analyzer.lookupVariable(value)
-		analyzer.builder.Alias(node, value)
+		analyzer.builder.Alias(name, value)
 	}
 
 	err := visitChildren()
 
-	analyzer.scope.Declare(analyzer.builder.ContentFor(name), node)
+	analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
 
 	return err
 }
@@ -221,7 +211,7 @@ func (analyzer *analyzer) analyzeResource(node *sitter.Node, visitChildren func(
 	if name := node.ChildByFieldName("name"); name != nil {
 		value := node.ChildByFieldName("value")
 		analyzer.builder.Alias(node, value)
-		analyzer.scope.Declare(analyzer.builder.ContentFor(name), node)
+		analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
 	}
 
 	return visitChildren()
