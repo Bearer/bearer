@@ -3,11 +3,20 @@ package analyzer
 import (
 	"strings"
 
+	"golang.org/x/exp/slices"
+
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
 )
+
+// methods that use `this` in their result
+var reflexiveMethods = []string{
+	// String
+	"replace",
+	"replaceAll",
+}
 
 type analyzer struct {
 	builder *tree.Builder
@@ -171,7 +180,15 @@ func (analyzer *analyzer) analyzeNew(node *sitter.Node, visitChildren func() err
 
 // foo.bar(1, 2)
 func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() error) error {
-	analyzer.lookupVariable(node.ChildByFieldName("function"))
+	function := node.ChildByFieldName("function")
+	analyzer.lookupVariable(function)
+
+	if function.Type() == "member_expression" {
+		property := function.ChildByFieldName("property")
+		if slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(property)) {
+			analyzer.builder.Dataflow(node, function)
+		}
+	}
 
 	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
 		analyzer.builder.Dataflow(node, arguments)

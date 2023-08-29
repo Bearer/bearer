@@ -188,7 +188,7 @@ func (node *Node) dumpValue() nodeDump {
 	}
 
 	contentRange := fmt.Sprintf(
-		"%d:%d-%d:%d",
+		"%d:%d - %d:%d",
 		node.ContentStart.Line,
 		node.ContentStart.Column,
 		node.ContentEnd.Line,

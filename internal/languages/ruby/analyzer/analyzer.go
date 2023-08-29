@@ -23,6 +23,10 @@ var reflexiveMethods = []string{
 	"to_r",
 	"to_sym",
 	"to_json",
+	"sub",
+	"sub!",
+	"gsub",
+	"gsub!",
 }
 
 type analyzer struct {
