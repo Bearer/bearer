@@ -260,7 +260,7 @@ func fingerprintOutput(fingerprints []string, legacyExcludedFingerprints map[str
 		output.StdErrLog("\n=====================================\n")
 		// legacy
 		if len(legacyExcludedFingerprints) > 0 {
-			output.StdErrLog("Note: exclude-fingerprints is being replaced by bearer.ignore. To use the new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate.\n")
+			output.StdErrLog(color.HiYellowString("Note: exclude-fingerprints is being replaced by bearer.ignore. To use the new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate.\n"))
 		}
 
 		if len(unusedLegacyFingerprints) > 0 {
