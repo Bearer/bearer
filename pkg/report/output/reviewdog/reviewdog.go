@@ -2,10 +2,10 @@ package reviewdog
 
 import (
 	reviewdog "github.com/bearer/bearer/pkg/report/output/reviewdog/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 )
 
-func ReportReviewdog(outputDetections map[string][]security.Result) (reviewdog.ReviewdogOutput, error) {
+func ReportReviewdog(outputDetections map[string][]securitytypes.Finding) (reviewdog.ReviewdogOutput, error) {
 	var reviewdogDiagnostics []reviewdog.Diagnostic
 
 	for _, level := range []string{"critical", "high", "medium", "low", "warning"} {

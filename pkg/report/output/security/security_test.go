@@ -14,6 +14,7 @@ import (
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/types"
+	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 )
 
 func TestBuildReportString(t *testing.T) {
@@ -52,9 +53,8 @@ func TestBuildReportString(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflowOutput := dummyDataflowOutput()
-	output, err := security.GetOutput(dataflowOutput, config, nil)
-	if err != nil {
+	data := dummyDataflowData()
+	if err := security.AddReportData(data, config, nil); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -68,7 +68,7 @@ func TestBuildReportString(t *testing.T) {
 		MaxPathLength: 0,
 	}
 
-	stringBuilder := security.BuildReportString(config, output, &dummyGoclocResult)
+	stringBuilder := security.BuildReportString(data, config, &dummyGoclocResult)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
@@ -91,9 +91,8 @@ func TestNoRulesBuildReportString(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflowOutput := dummyDataflowOutput()
-	output, err := security.GetOutput(dataflowOutput, config, nil)
-	if err != nil {
+	output := dummyDataflowData()
+	if err := security.AddReportData(output, config, nil); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -107,11 +106,11 @@ func TestNoRulesBuildReportString(t *testing.T) {
 		MaxPathLength: 0,
 	}
 
-	stringBuilder := security.BuildReportString(config, output, &dummyGoclocResult)
+	stringBuilder := security.BuildReportString(output, config, &dummyGoclocResult)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
-func TestGetOutput(t *testing.T) {
+func TestAddReportData(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
 		Report: "security",
 		Severity: map[string]bool{
@@ -127,18 +126,17 @@ func TestGetOutput(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflowOutput := dummyDataflowOutput()
-	output, err := security.GetOutput(dataflowOutput, config, nil)
-	if err != nil {
+	output := dummyDataflowData()
+	if err = security.AddReportData(output, config, nil); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
-	assert.Equal(t, dataflowOutput.Dataflow, dataflowOutput.Dataflow)
-	assert.Equal(t, dataflowOutput.Files, dataflowOutput.Files)
-	cupaloy.SnapshotT(t, output.Data)
+	assert.Equal(t, output.Dataflow, output.Dataflow)
+	assert.Equal(t, output.Files, output.Files)
+	cupaloy.SnapshotT(t, output.FindingsBySeverity)
 }
 
-func TestTestGetOutputWithSeverity(t *testing.T) {
+func TestAddReportDataWithSeverity(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
 		Report: "security",
 		Severity: map[string]bool{
@@ -154,13 +152,12 @@ func TestTestGetOutputWithSeverity(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflowOutput := dummyDataflowOutput()
-	output, err := security.GetOutput(dataflowOutput, config, nil)
-	if err != nil {
-		t.Fatalf("failed to generate security output err: %s", err)
+	data := dummyDataflowData()
+	if err = security.AddReportData(data, config, nil); err != nil {
+		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
-	cupaloy.SnapshotT(t, output.Data)
+	cupaloy.SnapshotT(t, data.FindingsBySeverity)
 }
 
 func TestCalculateSeverity(t *testing.T) {
@@ -189,7 +186,7 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 	return settings.FromOptions(opts, []string{"ruby"})
 }
 
-func dummyDataflowOutput() *types.Output[*types.DataFlow] {
+func dummyDataflowData() *outputtypes.ReportData {
 	subject := "User"
 	lowRisk := dataflowtypes.RiskDetector{
 		DetectorID: "ruby_lang_ssl_verification",
@@ -276,8 +273,7 @@ func dummyDataflowOutput() *types.Output[*types.DataFlow] {
 		Components: []dataflowtypes.Component{},
 	}
 
-	return &types.Output[*types.DataFlow]{
-		Data:     dataflow,
+	return &outputtypes.ReportData{
 		Dataflow: dataflow,
 		Files:    []string{"config/application.rb", "pkg/datatype_leak.rb", "app/model/user.rb"},
 	}

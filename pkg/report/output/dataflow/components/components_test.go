@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/detectors"
+	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 	globaltypes "github.com/bearer/bearer/pkg/types"
 	"github.com/stretchr/testify/assert"
 )
@@ -129,22 +130,20 @@ func TestDataflowComponents(t *testing.T) {
 			}
 			file.Close()
 
-			detectorsOutput, err := detectors.GetOutput(globaltypes.Report{
+			output := &outputtypes.ReportData{}
+			if err = detectors.AddReportData(output, globaltypes.Report{
 				Path: file.Name(),
-			}, settings.Config{})
-			if err != nil {
+			}, settings.Config{}); err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return
 			}
 
-			output, err := dataflow.GetOutput(detectorsOutput.Data, settings.Config{}, false)
-			if err != nil {
-				t.Fatalf("failed to get detectors output %s", err)
+			if err = dataflow.AddReportData(output, settings.Config{}, false); err != nil {
+				t.Fatalf("failed to get dataflow output %s", err)
 				return
 			}
 
-			assert.Equal(t, output.Data, output.Dataflow)
-			assert.Equal(t, test.Want, output.Data.Components)
+			assert.Equal(t, test.Want, output.Dataflow.Components)
 		})
 	}
 }

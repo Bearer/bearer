@@ -1,4 +1,4 @@
-package reviewdog
+package reviewdog_test
 
 import (
 	"bytes"
@@ -8,7 +8,8 @@ import (
 
 	"github.com/bradleyjkemp/cupaloy"
 
-	"github.com/bearer/bearer/pkg/report/output/security"
+	"github.com/bearer/bearer/pkg/report/output/reviewdog"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bearer/bearer/pkg/util/output"
 )
 
@@ -18,13 +19,13 @@ func TestRailsGoatReviewdog(t *testing.T) {
 		t.Fatalf("failed to read file, err: %s", err)
 	}
 
-	var securityResults map[string][]security.Result
-	err = json.Unmarshal(securityOutput, &securityResults)
+	var securityFindings map[string][]securitytypes.Finding
+	err = json.Unmarshal(securityOutput, &securityFindings)
 	if err != nil {
 		t.Fatalf("couldn't unmarshal file output: %s", err)
 	}
 
-	res, err := ReportReviewdog(securityResults)
+	res, err := reviewdog.ReportReviewdog(securityFindings)
 	if err != nil {
 		t.Fatalf("failed to generate security output, err: %s", err)
 	}

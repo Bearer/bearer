@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/bradleyjkemp/cupaloy"
-	"github.com/stretchr/testify/assert"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
@@ -24,12 +23,14 @@ func TestBuildCsvString(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflow := dummyDataflow()
-	stringBuilder, _ := privacy.BuildCsvString(dataflow, config)
+	output := &outputtypes.ReportData{
+		Dataflow: dummyDataflow(),
+	}
+	stringBuilder, _ := privacy.BuildCsvString(output, config)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
 
-func TestGetOutput(t *testing.T) {
+func TestAddReportData(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{Report: "privacy"})
 	config.Rules = map[string]*settings.Rule{
 		"ruby_third_parties_sentry": config.Rules["ruby_third_parties_sentry"],
@@ -39,14 +40,14 @@ func TestGetOutput(t *testing.T) {
 		t.Fatalf("failed to generate config:%s", err)
 	}
 
-	dataflow := dummyDataflow()
-	output, err := privacy.GetOutput(dataflow, config)
-	if err != nil {
+	output := &outputtypes.ReportData{
+		Dataflow: dummyDataflow(),
+	}
+	if err = privacy.AddReportData(output, config); err != nil {
 		t.Fatalf("failed to generate privacy output err:%s", err)
 	}
 
-	assert.Equal(t, dataflow, output.Dataflow)
-	cupaloy.SnapshotT(t, output.Data)
+	cupaloy.SnapshotT(t, output.PrivacyReport)
 }
 
 func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {

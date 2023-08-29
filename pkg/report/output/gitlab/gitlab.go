@@ -7,11 +7,11 @@ import (
 
 	"github.com/bearer/bearer/cmd/bearer/build"
 	gitlab "github.com/bearer/bearer/pkg/report/output/gitlab/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 )
 
 func ReportGitLab(
-	outputDetections map[string][]security.Result,
+	outputDetections map[string][]securitytypes.Finding,
 	startTime time.Time,
 	endTime time.Time,
 ) (gitlab.GitLabOutput, error) {

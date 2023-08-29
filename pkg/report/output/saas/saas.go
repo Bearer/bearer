@@ -9,43 +9,133 @@ import (
 
 	"github.com/gitsight/go-vcsurl"
 	"github.com/rs/zerolog/log"
+	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/api/s3"
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/file"
 	util "github.com/bearer/bearer/pkg/util/output"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 )
 
-func GetReport(config settings.Config, securityOutput *types.Output[security.Results]) (*types.Output[saas.BearerReport], error) {
+func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta bool) error {
 	var meta *saas.Meta
 	meta, err := getMeta(config)
 	if err != nil {
-		meta = &saas.Meta{
-			Target: config.Scan.Target,
+		if ensureMeta {
+			return err
+		} else {
+			meta = &saas.Meta{
+				Target: config.Scan.Target,
+			}
 		}
 	}
 
-	dataflow := securityOutput.Dataflow
-	filenames := getDiscoveredFiles(config, securityOutput.Files)
+	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
+	for _, severity := range maps.Keys(reportData.FindingsBySeverity) {
+		for _, finding := range reportData.FindingsBySeverity[severity] {
+			saasFindingsBySeverity[severity] = append(saasFindingsBySeverity[severity], saas.SaasFinding{Finding: finding})
+		}
+	}
 
-	return &types.Output[saas.BearerReport]{
-		Data: saas.BearerReport{
-			Findings:   securityOutput.Data,
-			DataTypes:  dataflow.Datatypes,
-			Components: dataflow.Components,
-			Errors:     dataflow.Errors,
-			Files:      filenames,
-			Meta:       *meta,
-			// Dependencies: dataflow.Dependencies,
-		},
-		Dataflow: dataflow,
-	}, nil
+	reportData.SaasReport = &saas.BearerReport{
+		Meta:       *meta,
+		Findings:   saasFindingsBySeverity,
+		DataTypes:  reportData.Dataflow.Datatypes,
+		Components: reportData.Dataflow.Components,
+		Errors:     reportData.Dataflow.Errors,
+		Files:      getDiscoveredFiles(config, reportData.Files),
+	}
+
+	return nil
+}
+
+func SendReport(config settings.Config, reportData *types.ReportData) {
+	if reportData.SaasReport == nil {
+		err := GetReport(reportData, config, true)
+		if err != nil {
+			errorMessage := fmt.Sprintf("Unable to calculate Metadata. %s", err)
+			log.Debug().Msgf(errorMessage)
+			config.Client.Error = &errorMessage
+		}
+	}
+
+	tmpDir, filename, err := createBearerGzipFileReport(config, reportData)
+	if err != nil {
+		config.Client.Error = pointer.String("Could not compress report.")
+		log.Debug().Msgf("error creating report %s", err)
+	}
+
+	defer os.RemoveAll(*tmpDir)
+
+	err = sendReportToBearer(config.Client, &reportData.SaasReport.Meta, filename)
+	if err != nil {
+		config.Client.Error = pointer.String("Report upload failed.")
+		log.Debug().Msgf("error sending report to Bearer cloud: %s", err)
+	}
+}
+
+func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) error {
+	fileUploadOffer, err := s3.UploadS3(&s3.UploadRequestS3{
+		Api:             client,
+		FilePath:        *filename,
+		FilePrefix:      "bearer_security_report",
+		ContentType:     "application/json",
+		ContentEncoding: "gzip",
+	})
+	if err != nil {
+		return err
+	}
+
+	meta.SignedID = fileUploadOffer.SignedID
+
+	err = client.ScanFinished(meta)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func getDiscoveredFiles(config settings.Config, files []string) []string {
+	filenames := make([]string, len(files))
+
+	for i, filename := range files {
+		filenames[i] = file.GetFullFilename(config.Scan.Target, filename)
+	}
+
+	return filenames
+}
+
+func createBearerGzipFileReport(
+	config settings.Config,
+	reportData *types.ReportData,
+) (*string, *string, error) {
+	tempDir, err := os.MkdirTemp("", "reports")
+	if err != nil {
+		return nil, nil, err
+	}
+
+	file, err := os.CreateTemp(tempDir, "security-*.json.gz")
+	if err != nil {
+		return &tempDir, nil, err
+	}
+
+	content, _ := util.ReportJSON(reportData.SaasReport)
+	gzWriter := gzip.NewWriter(file)
+	_, err = gzWriter.Write([]byte(*content))
+	if err != nil {
+		return nil, nil, err
+	}
+	gzWriter.Close()
+
+	filename := file.Name()
+
+	return &tempDir, &filename, nil
 }
 
 func getMeta(config settings.Config) (*saas.Meta, error) {
@@ -90,101 +180,6 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 		BearerRulesVersion: config.BearerRulesVersion,
 		BearerVersion:      build.Version,
 	}, nil
-}
-
-func SendReport(config settings.Config, securityOutput *types.Output[security.Results]) {
-	var meta *saas.Meta
-	meta, err := getMeta(config)
-	if err != nil {
-		errorMessage := fmt.Sprintf("Unable to calculate Metadata. %s", err)
-		log.Debug().Msgf(errorMessage)
-		config.Client.Error = &errorMessage
-		return
-	}
-
-	tmpDir, filename, err := createBearerGzipFileReport(config, meta, securityOutput)
-	if err != nil {
-		config.Client.Error = pointer.String("Could not compress report.")
-		log.Debug().Msgf("error creating report %s", err)
-	}
-
-	defer os.RemoveAll(*tmpDir)
-
-	err = sendReportToBearer(config.Client, meta, filename)
-	if err != nil {
-		config.Client.Error = pointer.String("Report upload failed.")
-		log.Debug().Msgf("error sending report to Bearer cloud: %s", err)
-	}
-}
-
-func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) error {
-	fileUploadOffer, err := s3.UploadS3(&s3.UploadRequestS3{
-		Api:             client,
-		FilePath:        *filename,
-		FilePrefix:      "bearer_security_report",
-		ContentType:     "application/json",
-		ContentEncoding: "gzip",
-	})
-	if err != nil {
-		return err
-	}
-
-	meta.SignedID = fileUploadOffer.SignedID
-
-	err = client.ScanFinished(meta)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func getDiscoveredFiles(config settings.Config, files []string) []string {
-	filenames := make([]string, len(files))
-
-	for i, filename := range files {
-		filenames[i] = file.GetFullFilename(config.Scan.Target, filename)
-	}
-
-	return filenames
-}
-
-func createBearerGzipFileReport(
-	config settings.Config,
-	meta *saas.Meta,
-	securityOutput *types.Output[security.Results],
-) (*string, *string, error) {
-	tempDir, err := os.MkdirTemp("", "reports")
-	if err != nil {
-		return nil, nil, err
-	}
-
-	file, err := os.CreateTemp(tempDir, "security-*.json.gz")
-	if err != nil {
-		return &tempDir, nil, err
-	}
-
-	dataflow := securityOutput.Dataflow
-	filenames := getDiscoveredFiles(config, securityOutput.Files)
-
-	content, _ := util.ReportJSON(&saas.BearerReport{
-		Findings:   securityOutput.Data,
-		DataTypes:  dataflow.Datatypes,
-		Components: dataflow.Components,
-		Files:      filenames,
-		Meta:       *meta,
-	})
-
-	gzWriter := gzip.NewWriter(file)
-	_, err = gzWriter.Write([]byte(*content))
-	if err != nil {
-		return nil, nil, err
-	}
-	gzWriter.Close()
-
-	filename := file.Name()
-
-	return &tempDir, &filename, nil
 }
 
 func getSha(target string) (*string, error) {

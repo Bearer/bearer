@@ -3,8 +3,10 @@ package output
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
+	"github.com/hhatto/gocloc"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
@@ -22,99 +24,99 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func GetOutput(
+func GetData(
 	report globaltypes.Report,
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
-) (*types.Output[any], error) {
-	var err error
-	var output types.GenericOutput
+) (*types.ReportData, error) {
+	sendToCloud := false
 
+	data := &types.ReportData{}
+	// add detectors
+	err := detectors.AddReportData(data, report, config)
+	if config.Report.Report == flag.ReportDetectors || err != nil {
+		return data, err
+	}
+
+	// add dataflow to data
+	if err = GetDataflow(data, report, config, config.Report.Report != flag.ReportDataFlow); err != nil {
+		return data, err
+	}
+
+	// add report-specific items
 	switch config.Report.Report {
-	case flag.ReportDetectors:
-		output, err = detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
-		output, err = GetDataflow(report, config, false)
+		return data, err
 	case flag.ReportSecurity:
-		output, err = reportSecurity(report, config, baseBranchFindings)
+		sendToCloud = true
+		err = security.AddReportData(data, config, baseBranchFindings)
 	case flag.ReportSaaS:
-		securityOutput, secErr := reportSecurity(report, config, baseBranchFindings)
-		if secErr != nil {
-			return nil, secErr
+		if err = security.AddReportData(data, config, baseBranchFindings); err != nil {
+			return nil, err
 		}
 
-		output, err = saas.GetReport(config, securityOutput)
+		sendToCloud = true
+		err = saas.GetReport(data, config, false)
 	case flag.ReportPrivacy:
-		output, err = getPrivacyReportOutput(report, config)
+		err = privacy.AddReportData(data, config)
 	case flag.ReportStats:
-		output, err = reportStats(report, config)
+		err = stats.AddReportData(data, report.Inputgocloc, config)
 	default:
 		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
-	return output.ToGeneric(), err
-}
-
-func GetPrivacyReportCSVOutput(report globaltypes.Report, dataflow *types.DataFlow, config settings.Config) (*string, error) {
-	csvString, err := privacy.BuildCsvString(dataflow, config)
-	if err != nil {
-		return nil, err
+	if sendToCloud && config.Client != nil && config.Client.Error == nil {
+		// send SaaS report to Cloud
+		saas.SendReport(config, data)
 	}
 
-	content := csvString.String()
-
-	return &content, nil
+	return data, err
 }
 
-func getPrivacyReportOutput(report globaltypes.Report, config settings.Config) (*types.Output[*privacy.Report], error) {
-	dataflowOutput, err := GetDataflow(report, config, true)
-	if err != nil {
-		return nil, err
+func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config settings.Config, isInternal bool) error {
+	if reportData.Detectors == nil {
+		if err := detectors.AddReportData(reportData, report, config); err != nil {
+			return err
+		}
 	}
-
-	return privacy.GetOutput(dataflowOutput.Dataflow, config)
-}
-
-func GetDataflow(report globaltypes.Report, config settings.Config, isInternal bool) (*types.Output[*types.DataFlow], error) {
-	detectorsOutput, err := detectors.GetOutput(report, config)
-	if err != nil {
-		return nil, err
-	}
-
-	for _, detection := range detectorsOutput.Data {
+	for _, detection := range reportData.Detectors {
 		detection.(map[string]interface{})["id"] = uuid.NewString()
 	}
-
-	return dataflow.GetOutput(detectorsOutput.Data, config, isInternal)
+	return dataflow.AddReportData(reportData, config, isInternal)
 }
 
-func reportStats(report globaltypes.Report, config settings.Config) (*types.Output[stats.Stats], error) {
-	dataflowOutput, err := GetDataflow(report, config, true)
-	if err != nil {
-		return nil, err
-	}
-
-	return stats.GetOutput(report.Inputgocloc, dataflowOutput.Dataflow, config)
-}
-
-func reportSecurity(
-	report globaltypes.Report,
+func FormatOutput(
+	reportData *types.ReportData,
 	config settings.Config,
-	baseBranchFindings *basebranchfindings.Findings,
-) (*types.Output[security.Results], error) {
-	dataflowOutput, err := GetDataflow(report, config, true)
+	goclocResult *gocloc.Result,
+	startTime time.Time,
+	endTime time.Time,
+) (*string, error) {
+	var formatter types.GenericFormatter
+	switch config.Report.Report {
+	case flag.ReportDetectors:
+		formatter = detectors.NewFormatter(reportData, config)
+	case flag.ReportDataFlow:
+		formatter = dataflow.NewFormatter(reportData, config)
+	case flag.ReportSecurity:
+		formatter = security.NewFormatter(reportData, config, goclocResult, startTime, endTime)
+	case flag.ReportPrivacy:
+		formatter = privacy.NewFormatter(reportData, config)
+	case flag.ReportSaaS:
+		formatter = saas.NewFormatter(reportData, config)
+	case flag.ReportStats:
+		formatter = stats.NewFormatter(reportData, config)
+	default:
+		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+	}
+
+	formatStr, err := formatter.Format(config.Report.Format)
 	if err != nil {
-		return nil, fmt.Errorf("error in dataflow %w", err)
+		return formatStr, err
+	}
+	if formatStr == nil {
+		return nil, fmt.Errorf(`--report flag "%s" does not support --format flag "%s"`, config.Report.Report, config.Report.Format)
 	}
 
-	output, err := security.GetOutput(dataflowOutput, config, baseBranchFindings)
-	if err != nil {
-		return nil, fmt.Errorf("error in security %w", err)
-	}
-
-	if config.Client != nil && config.Client.Error == nil {
-		saas.SendReport(config, output)
-	}
-
-	return output, nil
+	return formatStr, err
 }

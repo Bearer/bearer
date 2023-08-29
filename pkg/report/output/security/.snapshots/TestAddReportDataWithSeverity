@@ -1,7 +1,7 @@
-(map[string][]security.Result) (len=1) {
-  (string) (len=8) "critical": ([]security.Result) (len=1) {
-    (security.Result) {
-      Rule: (*security.Rule)({
+(map[string][]types.Finding) (len=1) {
+  (string) (len=8) "critical": ([]types.Finding) (len=1) {
+    (types.Finding) {
+      Rule: (*types.Rule)({
         CWEIDs: ([]string) (len=2) {
           (string) (len=3) "209",
           (string) (len=3) "532"
@@ -14,7 +14,7 @@
       LineNumber: (int) 1,
       FullFilename: (string) "",
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
-      DataType: (*security.DataType)({
+      DataType: (*types.DataType)({
         CategoryUUID: (string) (len=36) "35b94efa-9b67-49b2-abb9-29b6a759a030",
         Name: (string) (len=14) "Biometric Data"
       }),
@@ -23,21 +23,21 @@
         (string) (len=13) "Personal Data",
         (string) (len=25) "Personal Data (Sensitive)"
       },
-      Source: (security.Source) {
-        Location: (*security.Location)({
+      Source: (types.Source) {
+        Location: (*types.Location)({
           Start: (int) 1,
           End: (int) 0,
-          Column: (security.Column) {
+          Column: (types.Column) {
             Start: (int) 0,
             End: (int) 0
           }
         })
       },
-      Sink: (security.Sink) {
-        Location: (*security.Location)({
+      Sink: (types.Sink) {
+        Location: (*types.Location)({
           Start: (int) 1,
           End: (int) 2,
-          Column: (security.Column) {
+          Column: (types.Column) {
             Start: (int) 10,
             End: (int) 28
           }
@@ -51,7 +51,8 @@
       DetailedContext: (string) "",
       CodeExtract: (string) "",
       RawCodeExtract: ([]file.Line) {
-      }
+      },
+      SomeExtraField: (string) ""
     }
   }
 }

@@ -29,8 +29,9 @@ import (
 	"github.com/bearer/bearer/pkg/util/rego"
 	"github.com/bearer/bearer/pkg/util/set"
 
+	types "github.com/bearer/bearer/pkg/report/output/security/types"
 	stats "github.com/bearer/bearer/pkg/report/output/stats"
-	"github.com/bearer/bearer/pkg/report/output/types"
+	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 )
 
 var underline = color.New(color.Underline).SprintFunc()
@@ -49,13 +50,13 @@ var orderedSeverityLevels = []string{
 	globaltypes.LevelWarning,
 }
 
-type Results = map[string][]Result
+type Findings = map[string][]types.Finding
 
 type Input struct {
-	RuleId         string            `json:"rule_id" yaml:"rule_id"`
-	Rule           *settings.Rule    `json:"rule" yaml:"rule"`
-	Dataflow       *types.DataFlow   `json:"dataflow" yaml:"dataflow"`
-	DataCategories []db.DataCategory `json:"data_categories" yaml:"data_categories"`
+	RuleId         string                `json:"rule_id" yaml:"rule_id"`
+	Rule           *settings.Rule        `json:"rule" yaml:"rule"`
+	Dataflow       *outputtypes.DataFlow `json:"dataflow" yaml:"dataflow"`
+	DataCategories []db.DataCategory     `json:"data_categories" yaml:"data_categories"`
 }
 
 type RuleCounter struct {
@@ -63,88 +64,37 @@ type RuleCounter struct {
 	CustomRuleCount  int
 }
 
-type Location struct {
-	Start  int    `json:"start" yaml:"start"`
-	End    int    `json:"end" yaml:"end"`
-	Column Column `json:"column" yaml:"column"`
-}
-
-type Source struct {
-	*Location
-}
-
-type Column struct {
-	Start int `json:"start" yaml:"start"`
-	End   int `json:"end" yaml:"end"`
-}
-
-type Sink struct {
-	*Location
-	Content string `json:"content" yaml:"content"`
-}
-
 type Output struct {
-	IsLocal         *bool     `json:"is_local,omitempty" yaml:"is_local,omitempty"`
-	Source          Source    `json:"source,omitempty" yaml:"source,omitempty"`
-	Sink            Sink      `json:"sink,omitempty" yaml:"sink,omitempty"`
-	LineNumber      int       `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename        string    `json:"filename,omitempty" yaml:"filename,omitempty"`
-	FullFilename    string    `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
-	CategoryGroups  []string  `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	DataType        *DataType `json:"data_type,omitempty" yaml:"data_type,omitempty"`
-	Severity        string    `json:"severity,omitempty" yaml:"severity,omitempty"`
-	DetailedContext string    `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	IsLocal         *bool           `json:"is_local,omitempty" yaml:"is_local,omitempty"`
+	Source          types.Source    `json:"source,omitempty" yaml:"source,omitempty"`
+	Sink            types.Sink      `json:"sink,omitempty" yaml:"sink,omitempty"`
+	LineNumber      int             `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename        string          `json:"filename,omitempty" yaml:"filename,omitempty"`
+	FullFilename    string          `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
+	CategoryGroups  []string        `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	DataType        *types.DataType `json:"data_type,omitempty" yaml:"data_type,omitempty"`
+	Severity        string          `json:"severity,omitempty" yaml:"severity,omitempty"`
+	DetailedContext string          `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
-type DataType struct {
-	CategoryUUID string `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
-	Name         string `json:"name,omitempty" yaml:"name,omitempty"`
-}
-
-type Result struct {
-	*Rule
-	LineNumber       int         `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	FullFilename     string      `json:"full_filename,omitempty" yaml:"full_filename,omitempty"`
-	Filename         string      `json:"filename,omitempty" yaml:"filename,omitempty"`
-	DataType         *DataType   `json:"data_type,omitempty" yaml:"data_type,omitempty"`
-	CategoryGroups   []string    `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	Source           Source      `json:"source,omitempty" yaml:"source,omitempty"`
-	Sink             Sink        `json:"sink,omitempty" yaml:"sink,omitempty"`
-	ParentLineNumber int         `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent    string      `json:"snippet,omitempty" yaml:"snippet,omitempty"`
-	Fingerprint      string      `json:"fingerprint,omitempty" yaml:"fingerprint,omitempty"`
-	OldFingerprint   string      `json:"old_fingerprint,omitempty" yaml:"old_fingerprint,omitempty"`
-	DetailedContext  string      `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
-	CodeExtract      string      `json:"code_extract,omitempty" yaml:"code_extract,omitempty"`
-	RawCodeExtract   []file.Line `json:"-" yaml:"-"`
-}
-
-type Rule struct {
-	CWEIDs           []string `json:"cwe_ids" yaml:"cwe_ids"`
-	Id               string   `json:"id" yaml:"id"`
-	Title            string   `json:"title" yaml:"title"`
-	Description      string   `json:"description" yaml:"description"`
-	DocumentationUrl string   `json:"documentation_url" yaml:"documentation_url"`
-}
-
-func GetOutput(
-	dataflowOutput *types.Output[*types.DataFlow],
+func AddReportData(
+	reportData *outputtypes.ReportData,
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
-) (*types.Output[Results], error) {
-	dataflow := dataflowOutput.Dataflow
-	summaryResults := make(Results)
+) error {
+	dataflow := reportData.Dataflow
+	summaryFindings := make(Findings)
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
 
-	builtInFingerprints, err := evaluateRules(summaryResults, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
+	builtInFingerprints, err := evaluateRules(summaryFindings, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	fingerprints, err := evaluateRules(summaryResults, config.Rules, config, dataflow, baseBranchFindings, false)
+	fingerprints, err := evaluateRules(summaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	if !config.Scan.Quiet {
@@ -153,29 +103,26 @@ func GetOutput(
 
 	// fail the report if we have failures above the severity threshold
 	reportFailed := false
-	for severityLevel, results := range summaryResults {
-		if severityLevel != globaltypes.LevelWarning && len(results) != 0 {
+	for severityLevel, findings := range summaryFindings {
+		if severityLevel != globaltypes.LevelWarning && len(findings) != 0 {
 			reportFailed = true
 		}
 	}
 
-	return &types.Output[Results]{
-		Data:         summaryResults,
-		Dataflow:     dataflow,
-		Files:        dataflowOutput.Files,
-		ReportFailed: reportFailed,
-	}, nil
+	reportData.FindingsBySeverity = summaryFindings
+	reportData.ReportFailed = reportFailed
+	return nil
 }
 
 func evaluateRules(
-	summaryResults Results,
+	summaryFindings Findings,
 	rules map[string]*settings.Rule,
 	config settings.Config,
-	dataflow *types.DataFlow,
+	dataflow *outputtypes.DataFlow,
 	baseBranchFindings *basebranchfindings.Findings,
 	builtIn bool,
 ) ([]string, error) {
-	outputResults := map[string][]Result{}
+	outputFindings := map[string][]types.Finding{}
 
 	var bar *progressbar.ProgressBar
 	if !builtIn {
@@ -223,7 +170,7 @@ func evaluateRules(
 				return fingerprints, err
 			}
 
-			ruleSummary := &Rule{
+			ruleSummary := &types.Rule{
 				Title:            rule.Description,
 				Description:      rule.RemediationMessage,
 				Id:               rule.Id,
@@ -263,7 +210,7 @@ func evaluateRules(
 				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
 				codeExtract := getExtract(rawCodeExtract)
 
-				result := Result{
+				finding := types.Finding{
 					Rule:             ruleSummary,
 					FullFilename:     output.FullFilename,
 					Filename:         output.Filename,
@@ -281,23 +228,23 @@ func evaluateRules(
 					OldFingerprint:   oldFingerprint,
 				}
 
-				severity := CalculateSeverity(result.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
+				severity := CalculateSeverity(finding.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
 
 				if config.Report.Severity[severity] {
-					outputResults[severity] = append(outputResults[severity], result)
+					outputFindings[severity] = append(outputFindings[severity], finding)
 				}
 			}
 		}
 	}
 
-	outputResults = removeDuplicates(outputResults)
+	outputFindings = removeDuplicates(outputFindings)
 
-	for _, resultsSlice := range outputResults {
-		sortResult(resultsSlice)
+	for _, findingsSlice := range outputFindings {
+		sortFindings(findingsSlice)
 	}
 
-	for severity, resultSlice := range outputResults {
-		summaryResults[severity] = append(summaryResults[severity], resultSlice...)
+	for severity, findingSlice := range outputFindings {
+		summaryFindings[severity] = append(summaryFindings[severity], findingSlice...)
 	}
 
 	return fingerprints, nil
@@ -378,7 +325,7 @@ func getExtract(rawCodeExtract []file.Line) string {
 	return strings.Join(parts, "\n")
 }
 
-func BuildReportString(config settings.Config, output *types.Output[Results], lineOfCodeOutput *gocloc.Result) *strings.Builder {
+func BuildReportString(reportData *outputtypes.ReportData, config settings.Config, lineOfCodeOutput *gocloc.Result) *strings.Builder {
 	reportStr := &strings.Builder{}
 
 	reportStr.WriteString("\n\nSecurity Report\n")
@@ -410,7 +357,7 @@ func BuildReportString(config settings.Config, output *types.Output[Results], li
 	}
 
 	for _, severityLevel := range orderedSeverityLevels {
-		for _, failure := range output.Data[severityLevel] {
+		for _, failure := range reportData.FindingsBySeverity[severityLevel] {
 			for i := 0; i < len(failure.CWEIDs); i++ {
 				failures[severityLevel]["CWE-"+failure.CWEIDs[i]] = true
 			}
@@ -418,15 +365,15 @@ func BuildReportString(config settings.Config, output *types.Output[Results], li
 		}
 	}
 
-	if !output.ReportFailed {
+	if !reportData.ReportFailed {
 		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.com/guides/custom-rule\n")
 	}
 
-	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, output.Data, rulesAvailableCount, failures, config.Report.Severity)
+	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, reportData.FindingsBySeverity, rulesAvailableCount, failures, config.Report.Severity)
 
 	if noFailureSummary {
 		writeSuccessToString(rulesAvailableCount, reportStr)
-		writeStatsToString(reportStr, config, lineOfCodeOutput, output.Dataflow)
+		writeStatsToString(reportData, reportStr, config, lineOfCodeOutput)
 	}
 
 	writeApiClientResultToString(reportStr, config)
@@ -489,18 +436,17 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 }
 
 func writeStatsToString(
+	reportData *outputtypes.ReportData,
 	reportStr *strings.Builder,
 	config settings.Config,
 	lineOfCodeOutput *gocloc.Result,
-	dataflow *types.DataFlow,
 ) {
-	statisticsOutput, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
-	if err != nil {
+	if err := stats.AddReportData(reportData, lineOfCodeOutput, config); err != nil {
 		return
 	}
-	if stats.AnythingFoundFor(&statisticsOutput.Data) {
+	if stats.AnythingFoundFor(reportData.Stats) {
 		reportStr.WriteString("\nBearer found:\n")
-		stats.WriteStatsToString(reportStr, &statisticsOutput.Data)
+		stats.WriteStatsToString(reportStr, reportData.Stats)
 		reportStr.WriteString("\n")
 	}
 }
@@ -645,14 +591,14 @@ func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
 
 func checkAndWriteFailureSummaryToString(
 	reportStr *strings.Builder,
-	results Results,
+	findings Findings,
 	ruleCount int,
 	failures map[string]map[string]bool,
 	severityForFailure map[string]bool,
 ) bool {
 	reportStr.WriteString("\n=====================================")
 
-	if len(results) == 0 {
+	if len(findings) == 0 {
 		return true
 	}
 
@@ -661,10 +607,10 @@ func checkAndWriteFailureSummaryToString(
 	warningCount := 0
 	for _, severityLevel := range maps.Keys(severityForFailure) {
 		if severityLevel == globaltypes.LevelWarning {
-			warningCount += len(results[severityLevel])
+			warningCount += len(findings[severityLevel])
 			continue
 		}
-		failureCount += len(results[severityLevel])
+		failureCount += len(findings[severityLevel])
 	}
 
 	if failureCount == 0 && warningCount == 0 {
@@ -678,7 +624,7 @@ func checkAndWriteFailureSummaryToString(
 		if !severityForFailure[severityLevel] {
 			continue
 		}
-		reportStr.WriteString("\n" + formatSeverity(severityLevel) + fmt.Sprint(len(results[severityLevel])))
+		reportStr.WriteString("\n" + formatSeverity(severityLevel) + fmt.Sprint(len(findings[severityLevel])))
 		if len(failures[severityLevel]) > 0 {
 			ruleIds := maps.Keys(failures[severityLevel])
 			sort.Strings(ruleIds)
@@ -693,33 +639,33 @@ func checkAndWriteFailureSummaryToString(
 	return false
 }
 
-func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
+func writeFailureToString(reportStr *strings.Builder, finding types.Finding, severity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(severity))
-	reportStr.WriteString(result.Title)
-	cweCount := len(result.CWEIDs)
+	reportStr.WriteString(finding.Title)
+	cweCount := len(finding.CWEIDs)
 	if cweCount > 0 {
 		var displayCWEList = []string{}
 		for i := 0; i < cweCount; i++ {
-			displayCWEList = append(displayCWEList, "CWE-"+result.CWEIDs[i])
+			displayCWEList = append(displayCWEList, "CWE-"+finding.CWEIDs[i])
 		}
 		reportStr.WriteString(" [" + strings.Join(displayCWEList, ", ") + "]")
 	}
 	reportStr.WriteString("\n")
 
-	if result.DocumentationUrl != "" {
-		reportStr.WriteString(color.HiBlackString(result.DocumentationUrl + "\n"))
+	if finding.DocumentationUrl != "" {
+		reportStr.WriteString(color.HiBlackString(finding.DocumentationUrl + "\n"))
 	}
 
-	reportStr.WriteString(color.HiBlackString("To ignore this finding, run: bearer ignore add " + result.Fingerprint + "\n"))
+	reportStr.WriteString(color.HiBlackString("To ignore this finding, run: bearer ignore add " + finding.Fingerprint + "\n"))
 	reportStr.WriteString("\n")
-	if result.DetailedContext != "" {
-		reportStr.WriteString("Detected: " + result.DetailedContext + "\n\n")
+	if finding.DetailedContext != "" {
+		reportStr.WriteString("Detected: " + finding.DetailedContext + "\n\n")
 	}
-	reportStr.WriteString(color.HiBlueString("File: " + underline(result.FullFilename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
+	reportStr.WriteString(color.HiBlueString("File: " + underline(finding.FullFilename+":"+fmt.Sprint(finding.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(HighlightCodeExtract(result))
+	reportStr.WriteString(finding.HighlightCodeExtract())
 }
 
 func formatSeverity(severity string) string {
@@ -730,67 +676,9 @@ func formatSeverity(severity string) string {
 	return severityColorFn(strings.ToUpper(severity + ": "))
 }
 
-func HighlightCodeExtract(record Result) string {
-	result := ""
-	for _, line := range record.RawCodeExtract {
-		if line.Strip {
-			result += color.HiBlackString(
-				fmt.Sprintf(" %s %s", strings.Repeat(" ", iterativeDigitsCount(line.LineNumber)), line.Extract),
-			)
-		} else {
-			result += color.HiMagentaString(fmt.Sprintf(" %d ", line.LineNumber))
-			if line.LineNumber == record.Source.Start && line.LineNumber == record.Source.End {
-				for i, char := range line.Extract {
-					if i >= record.Source.Column.Start-1 && i < record.Source.Column.End-1 {
-						result += color.MagentaString(fmt.Sprintf("%c", char))
-					} else {
-						result += color.HiMagentaString(fmt.Sprintf("%c", char))
-					}
-				}
-			} else if line.LineNumber == record.Source.Start && line.LineNumber <= record.Source.End {
-				for i, char := range line.Extract {
-					if i >= record.Source.Column.Start-1 {
-						result += color.MagentaString(fmt.Sprintf("%c", char))
-					} else {
-						result += color.HiMagentaString(fmt.Sprintf("%c", char))
-					}
-				}
-			} else if line.LineNumber == record.Source.End && line.LineNumber >= record.Source.Start {
-				for i, char := range line.Extract {
-					if i <= record.Source.Column.End-1 {
-						result += color.MagentaString(fmt.Sprintf("%c", char))
-					} else {
-						result += color.HiMagentaString(fmt.Sprintf("%c", char))
-					}
-				}
-			} else if line.LineNumber > record.Source.Start && line.LineNumber < record.Source.End {
-				result += color.MagentaString("%s", line.Extract)
-			} else {
-				result += color.HiMagentaString(line.Extract)
-			}
-		}
-
-		if line.LineNumber != record.Sink.End {
-			result += "\n"
-		}
-	}
-
-	return result
-}
-
-func iterativeDigitsCount(number int) int {
-	count := 0
-	for number != 0 {
-		number /= 10
-		count += 1
-	}
-
-	return count
-}
-
 // removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection
-func removeDuplicates(data map[string][]Result) map[string][]Result {
-	filteredData := map[string][]Result{}
+func removeDuplicates(data map[string][]types.Finding) map[string][]types.Finding {
+	filteredData := map[string][]types.Finding{}
 
 	type Key struct {
 		LineNumber int
@@ -802,19 +690,19 @@ func removeDuplicates(data map[string][]Result) map[string][]Result {
 
 	// filter duplicates
 	for _, severity := range orderedSeverityLevels {
-		resultsSlice, hasSeverity := data[severity]
+		findingsSlice, hasSeverity := data[severity]
 		if !hasSeverity {
 			continue
 		}
 
-		for _, result := range resultsSlice {
+		for _, finding := range findingsSlice {
 			key := Key{
-				LineNumber: result.LineNumber,
-				FileName:   result.Filename,
-				Detector:   result.Rule.Id,
+				LineNumber: finding.LineNumber,
+				FileName:   finding.Filename,
+				Detector:   finding.Rule.Id,
 			}
 			if reportedDetections.Add(key) {
-				filteredData[severity] = append(filteredData[severity], result)
+				filteredData[severity] = append(filteredData[severity], finding)
 			}
 		}
 	}
@@ -822,7 +710,7 @@ func removeDuplicates(data map[string][]Result) map[string][]Result {
 	return filteredData
 }
 
-func sortResult(data []Result) {
+func sortFindings(data []types.Finding) {
 	sort.Slice(data, func(i, j int) bool {
 		vulnerabilityA := data[i]
 		vulnerabilityB := data[j]
@@ -869,7 +757,7 @@ func sortByLineNumber(outputs []Output) {
 	})
 }
 
-func codeExtract(filename string, Source Source, Sink Sink) []file.Line {
+func codeExtract(filename string, Source types.Source, Sink types.Sink) []file.Line {
 	code, err := file.ReadFileSinkLines(
 		filename,
 		Sink.Start,

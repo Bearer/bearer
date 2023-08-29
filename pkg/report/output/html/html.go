@@ -8,8 +8,8 @@ import (
 	"time"
 
 	html "github.com/bearer/bearer/pkg/report/output/html/types"
-	privacy "github.com/bearer/bearer/pkg/report/output/privacy"
-	security "github.com/bearer/bearer/pkg/report/output/security"
+	privacytypes "github.com/bearer/bearer/pkg/report/output/privacy/types"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	term "github.com/buildkite/terminal"
 	"github.com/russross/blackfriday"
@@ -54,15 +54,15 @@ func ReportHTMLWrapper(title string, body *string) (*string, error) {
 	return &content, nil
 }
 
-func ReportSecurityHTML(detections map[string][]security.Result) (*string, error) {
+func ReportSecurityHTML(detections map[string][]securitytypes.Finding) (*string, error) {
 	htmlContent := &strings.Builder{}
 
 	findingsTemplate, err := template.New("findingsTemplate").Funcs(template.FuncMap{
-		"kebabCase":      KebabCase,
-		"markdownToHtml": MarkdownToHtml,
-		"joinCwe":        JoinCwe,
-		"count":          CountItems,
-		"displayExtract": DisplayExtract,
+		"kebabCase":      kebabCase,
+		"markdownToHtml": markdownToHtml,
+		"joinCwe":        joinCwe,
+		"count":          countItems,
+		"displayExtract": displayExtract,
 	}).Parse(securityTemplate)
 	if err != nil {
 		return nil, err
@@ -76,7 +76,7 @@ func ReportSecurityHTML(detections map[string][]security.Result) (*string, error
 	return &content, nil
 }
 
-func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
+func ReportPrivacyHTML(privacyReport *privacytypes.Report) (*string, error) {
 	htmlContent := &strings.Builder{}
 
 	privacyPage := html.PrivacyHTMLBody{
@@ -84,7 +84,7 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 		GroupedThirdParty:  make([]html.GroupedThirdParty, 0),
 	}
 
-	subjectGroups := make(map[string][]privacy.Subject)
+	subjectGroups := make(map[string][]privacytypes.Subject)
 	for _, subject := range privacyReport.Subjects {
 		subjectGroups[subject.DataSubject] = append(subjectGroups[subject.DataSubject], subject)
 	}
@@ -97,7 +97,7 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 		privacyPage.GroupedDataSubject = append(privacyPage.GroupedDataSubject, group)
 	}
 
-	thirdPartyGroups := make(map[string][]privacy.ThirdParty)
+	thirdPartyGroups := make(map[string][]privacytypes.ThirdParty)
 	for _, thirdParty := range privacyReport.ThirdParty {
 		thirdPartyGroups[thirdParty.ThirdParty] = append(thirdPartyGroups[thirdParty.ThirdParty], thirdParty)
 	}
@@ -111,7 +111,7 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 	}
 
 	subjectTemplate, err := template.New("subjectTemplate").Funcs(template.FuncMap{
-		"kebabCase": KebabCase,
+		"kebabCase": kebabCase,
 	}).Parse(privacyTemplate)
 	if err != nil {
 		return nil, err
@@ -126,16 +126,16 @@ func ReportPrivacyHTML(privacyReport *privacy.Report) (*string, error) {
 	return &content, nil
 }
 
-func KebabCase(s string) string {
+func kebabCase(s string) string {
 	return strings.ReplaceAll(strings.ToLower(s), " ", "-")
 }
 
-func MarkdownToHtml(s string) string {
+func markdownToHtml(s string) string {
 	html := blackfriday.MarkdownCommon([]byte(s))
 	return strings.ReplaceAll(string(html), "<h2", "<h4")
 }
 
-func JoinCwe(data []string) string {
+func joinCwe(data []string) string {
 	var out = []string{}
 	for _, cwe := range data {
 		out = append(out, "CWE "+cwe)
@@ -143,16 +143,16 @@ func JoinCwe(data []string) string {
 	return strings.Join(out, ", ")
 }
 
-func CountItems(arr interface{}) string {
+func countItems(arr interface{}) string {
 	switch v := arr.(type) {
-	case []security.Result:
+	case []securitytypes.Finding:
 		return fmt.Sprint(len(v))
 	default:
 		return "0"
 	}
 }
 
-func DisplayExtract(result security.Result) string {
-	terminalOutput := security.HighlightCodeExtract(result)
+func displayExtract(finding securitytypes.Finding) string {
+	terminalOutput := finding.HighlightCodeExtract()
 	return string(term.Render([]byte(terminalOutput)))
 }

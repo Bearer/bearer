@@ -2,7 +2,7 @@ package types
 
 import (
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
-	"github.com/bearer/bearer/pkg/report/output/security"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 )
 
 type Meta struct {
@@ -23,11 +23,16 @@ type Meta struct {
 }
 
 type BearerReport struct {
-	Meta       Meta                         `json:"meta" yaml:"meta"`
-	Findings   map[string][]security.Result `json:"findings" yaml:"findings"`
-	DataTypes  []dataflowtypes.Datatype     `json:"data_types" yaml:"data_types"`
-	Components []dataflowtypes.Component    `json:"components" yaml:"components"`
-	Errors     []dataflowtypes.Error        `json:"errors" yaml:"errors"`
-	Files      []string                     `json:"files" yaml:"files"`
+	Meta       Meta                      `json:"meta" yaml:"meta"`
+	Findings   map[string][]SaasFinding  `json:"findings" yaml:"findings"`
+	DataTypes  []dataflowtypes.Datatype  `json:"data_types" yaml:"data_types"`
+	Components []dataflowtypes.Component `json:"components" yaml:"components"`
+	Errors     []dataflowtypes.Error     `json:"errors" yaml:"errors"`
+	Files      []string                  `json:"files" yaml:"files"`
 	// Dependencies []dataflowtypes.Dependency    `json:"dependencies" yaml:"dependencies"`
+}
+
+type SaasFinding struct {
+	securitytypes.Finding
+	// add any extra data to send to SaaS
 }

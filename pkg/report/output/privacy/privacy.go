@@ -15,15 +15,16 @@ import (
 	"github.com/bearer/bearer/pkg/util/progressbar"
 	"github.com/bearer/bearer/pkg/util/rego"
 
+	"github.com/bearer/bearer/pkg/report/output/privacy/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
-	"github.com/bearer/bearer/pkg/report/output/types"
+	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 )
 
 type RuleInput struct {
-	RuleId         string            `json:"rule_id" yaml:"rule_id"`
-	Rule           *settings.Rule    `json:"rule" yaml:"rule"`
-	Dataflow       *types.DataFlow   `json:"dataflow" yaml:"dataflow"`
-	DataCategories []db.DataCategory `json:"data_categories" yaml:"data_categories"`
+	RuleId         string                `json:"rule_id" yaml:"rule_id"`
+	Rule           *settings.Rule        `json:"rule" yaml:"rule"`
+	Dataflow       *outputtypes.DataFlow `json:"dataflow" yaml:"dataflow"`
+	DataCategories []db.DataCategory     `json:"data_categories" yaml:"data_categories"`
 }
 
 type RuleOutput struct {
@@ -46,8 +47,8 @@ type RuleFailureSummary struct {
 }
 
 type Input struct {
-	Dataflow       *types.DataFlow   `json:"dataflow" yaml:"dataflow"`
-	DataCategories []db.DataCategory `json:"data_categories" yaml:"data_categories"`
+	Dataflow       *outputtypes.DataFlow `json:"dataflow" yaml:"dataflow"`
+	DataCategories []db.DataCategory     `json:"data_categories" yaml:"data_categories"`
 }
 
 type Output struct {
@@ -56,50 +57,23 @@ type Output struct {
 	LineNumber  int    `json:"line_number,omitempty" yaml:"line_number"`
 }
 
-type Subject struct {
-	DataSubject              string `json:"subject_name,omitempty" yaml:"subject_name"`
-	DataType                 string `json:"name,omitempty" yaml:"name"`
-	DetectionCount           int    `json:"detection_count" yaml:"detection_count"`
-	CriticalRiskFindingCount int    `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
-	HighRiskFindingCount     int    `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
-	MediumRiskFindingCount   int    `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
-	LowRiskFindingCount      int    `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
-	RulesPassedCount         int    `json:"rules_passed_count" yaml:"rules_passed_count"`
-}
-
 type ThirdPartyRuleCounter struct {
 	RuleIds         map[string]bool
 	Count           int
 	SubjectFailures map[string]map[string]bool
 }
 
-type ThirdParty struct {
-	ThirdParty               string   `json:"third_party,omitempty" yaml:"third_party"`
-	DataSubject              string   `json:"subject_name,omitempty" yaml:"subject_name"`
-	DataTypes                []string `json:"data_types,omitempty" yaml:"data_types"`
-	CriticalRiskFindingCount int      `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
-	HighRiskFindingCount     int      `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
-	MediumRiskFindingCount   int      `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
-	LowRiskFindingCount      int      `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
-	RulesPassedCount         int      `json:"rules_passed_count" yaml:"rules_passed_count"`
-}
-
-type Report struct {
-	Subjects   []Subject    `json:"subjects,omitempty" yaml:"subjects"`
-	ThirdParty []ThirdParty `json:"third_party,omitempty" yaml:"third_party"`
-}
-
 const PLACEHOLDER_VALUE = "Unknown"
 
-func BuildCsvString(dataflow *types.DataFlow, config settings.Config) (*strings.Builder, error) {
+func BuildCsvString(reportData *outputtypes.ReportData, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
 	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
-	output, err := GetOutput(dataflow, config)
+	err := AddReportData(reportData, config)
 	if err != nil {
 		return csvStr, err
 	}
 
-	for _, subject := range output.Data.Subjects {
+	for _, subject := range reportData.PrivacyReport.Subjects {
 		subjectArr := []string{
 			subject.DataSubject,
 			subject.DataType,
@@ -116,7 +90,7 @@ func BuildCsvString(dataflow *types.DataFlow, config settings.Config) (*strings.
 	csvStr.WriteString("\n")
 	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
 
-	for _, thirdParty := range output.Data.ThirdParty {
+	for _, thirdParty := range reportData.PrivacyReport.ThirdParty {
 		thirdPartyArr := []string{
 			thirdParty.ThirdParty,
 			thirdParty.DataSubject,
@@ -133,7 +107,7 @@ func BuildCsvString(dataflow *types.DataFlow, config settings.Config) (*strings.
 	return csvStr, nil
 }
 
-func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[*Report], error) {
+func AddReportData(reportData *outputtypes.ReportData, config settings.Config) error {
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
@@ -182,24 +156,24 @@ func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[
 			RuleInput{
 				RuleId:         rule.Id,
 				Rule:           rule,
-				Dataflow:       dataflow,
+				Dataflow:       reportData.Dataflow,
 				DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 			},
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var ruleOutput map[string][]RuleOutput
 			err = json.Unmarshal(jsonRes, &ruleOutput)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
@@ -291,30 +265,30 @@ func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[
 	}
 
 	// get inventory result
-	subjectInventory := make(map[string]Subject)
+	subjectInventory := make(map[string]types.Subject)
 	privacyReportPolicy := config.Policies["privacy_report"]
 	rs, err := rego.RunQuery(privacyReportPolicy.Query,
 		Input{
-			Dataflow:       dataflow,
+			Dataflow:       reportData.Dataflow,
 			DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 		},
 		privacyReportPolicy.Modules.ToRegoModules(),
 	)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	if len(rs) > 0 {
 		jsonRes, err := json.Marshal(rs)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		var outputItems map[string][]Output
 		err = json.Unmarshal(jsonRes, &outputItems)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		for _, outputItem := range outputItems["items"] {
@@ -326,7 +300,7 @@ func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[
 					outputItem.DataSubject = PLACEHOLDER_VALUE
 				}
 				ruleFailure := subjectRuleFailures[key]
-				subject = Subject{
+				subject = types.Subject{
 					DataSubject:              outputItem.DataSubject,
 					DataType:                 outputItem.DataType,
 					CriticalRiskFindingCount: ruleFailure.CriticalRiskFindingCount,
@@ -341,8 +315,8 @@ func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[
 		}
 	}
 
-	var thirdPartyInventory []ThirdParty
-	for _, component := range dataflow.Components {
+	var thirdPartyInventory []types.ThirdParty
+	for _, component := range reportData.Dataflow.Components {
 		if component.SubType != "third_party" {
 			continue
 		}
@@ -350,7 +324,7 @@ func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[
 		thirdPartyFailure, ok := thirdPartyRuleFailures[component.Name]
 		if !ok {
 			// no failures, therefore no associated data subjects
-			thirdPartyInventory = append(thirdPartyInventory, ThirdParty{
+			thirdPartyInventory = append(thirdPartyInventory, types.ThirdParty{
 				ThirdParty:               component.Name,
 				DataSubject:              PLACEHOLDER_VALUE,
 				DataTypes:                []string{PLACEHOLDER_VALUE},
@@ -363,7 +337,7 @@ func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[
 		}
 
 		for _, ruleFailure := range thirdPartyFailure {
-			thirdPartyInventory = append(thirdPartyInventory, ThirdParty{
+			thirdPartyInventory = append(thirdPartyInventory, types.ThirdParty{
 				ThirdParty:               component.Name,
 				DataSubject:              ruleFailure.DataSubject,
 				DataTypes:                maps.Keys(ruleFailure.DataTypes),
@@ -379,16 +353,14 @@ func GetOutput(dataflow *types.DataFlow, config settings.Config) (*types.Output[
 	subjects := maps.Values(subjectInventory)
 	sortInventory(subjects, thirdPartyInventory)
 
-	return &types.Output[*Report]{
-		Data: &Report{
-			Subjects:   subjects,
-			ThirdParty: thirdPartyInventory,
-		},
-		Dataflow: dataflow,
-	}, nil
+	reportData.PrivacyReport = &types.Report{
+		Subjects:   subjects,
+		ThirdParty: thirdPartyInventory,
+	}
+	return nil
 }
 
-func sortInventory(subjectInventory []Subject, thirdPartyInventory []ThirdParty) {
+func sortInventory(subjectInventory []types.Subject, thirdPartyInventory []types.ThirdParty) {
 	// sort subject
 	sort.Slice(subjectInventory, func(i, j int) bool {
 		if subjectInventory[i].DataSubject != subjectInventory[j].DataSubject {
