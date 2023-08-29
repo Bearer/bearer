@@ -271,7 +271,7 @@ func fingerprintOutput(
 	if cloudIgnoresUsed {
 		if len(ignoredFingerprints) > 0 {
 			output.StdErrLog("\n=====================================\n")
-			output.StdErrLog(fmt.Sprintf("\n%d findings have been ignored from Bearer Cloud\n\n", len(ignoredFingerprints)))
+			output.StdErrLog(fmt.Sprintf("%d findings have been ignored from Bearer Cloud", len(ignoredFingerprints)))
 			output.StdErrLog("\n=====================================\n")
 		}
 		return
