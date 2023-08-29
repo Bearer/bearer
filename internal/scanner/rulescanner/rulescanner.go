@@ -141,6 +141,7 @@ func (scanner *Scanner) detectWithNext(
 
 		old := nodes
 		nodes = next
+		// allow memory to be re-used
 		next = old[:0]
 	}
 
