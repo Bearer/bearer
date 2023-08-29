@@ -42,7 +42,7 @@ func (f Formatter) Format(format string) (output *string, err error) {
 			return output, err
 		}
 
-		output, err := html.ReportHTMLWrapper(title, body)
+		output, err = html.ReportHTMLWrapper(title, body)
 		if err != nil {
 			return output, fmt.Errorf("could not generate html page %s", err)
 		}
