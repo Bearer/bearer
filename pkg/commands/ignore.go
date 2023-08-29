@@ -20,6 +20,7 @@ Usage: bearer ignore <command> [flags]
 Available Commands:
     add              Add an ignored fingerprint
     show             Show an ignored fingerprint
+    remove           Remove an ignored fingerprint
     migrate          Migrate ignored fingerprints
 
 Examples:
@@ -28,6 +29,9 @@ Examples:
 
     # Show the details of an ignored fingerprint from your bearer.ignore file
     $ bearer ignore show <fingerprint>
+
+    # Remove an ignored fingerprint from your bearer.ignore file
+    $ bearer ignore remove <fingerprint>
 
     # Migrate existing ignored (excluded) fingerprints from bearer.yml file
     # to bearer.ignore
