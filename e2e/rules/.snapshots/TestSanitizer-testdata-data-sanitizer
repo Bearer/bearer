@@ -6,7 +6,6 @@ critical:
         title: Test sanitizer
         description: Test sanitizer
         documentation_url: ""
-        severity: high
       line_number: 1
       full_filename: e2e/rules/testdata/data/sanitizer/sanitizer.rb
       filename: sanitizer.rb
@@ -36,13 +35,6 @@ critical:
       fingerprint: 6c505050fabde2c4ed17380d19fab254_0
       old_fingerprint: d2e829ba86a33c5a52844641617ad8a7_0
       code_extract: log("abc" + x)
-      severity:
-        rule_severity: high
-        display_severity: critical
-        sensitive_data_category_weighting: 2
-        rule_severity_weighting: 5
-        local_data_types: true
-        final_weighting: 9
     - rule:
         cwe_ids:
             - "42"
@@ -50,7 +42,6 @@ critical:
         title: Test sanitizer
         description: Test sanitizer
         documentation_url: ""
-        severity: high
       line_number: 4
       full_filename: e2e/rules/testdata/data/sanitizer/sanitizer.rb
       filename: sanitizer.rb
@@ -80,13 +71,6 @@ critical:
       fingerprint: 6c505050fabde2c4ed17380d19fab254_2
       old_fingerprint: d2e829ba86a33c5a52844641617ad8a7_2
       code_extract: log("abc" + user.email)
-      severity:
-        rule_severity: high
-        display_severity: critical
-        sensitive_data_category_weighting: 2
-        rule_severity_weighting: 5
-        local_data_types: true
-        final_weighting: 9
 
 
 --

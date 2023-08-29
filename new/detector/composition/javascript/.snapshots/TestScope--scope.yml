@@ -6,7 +6,6 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-        severity: high
       line_number: 1
       full_filename: scope.js
       filename: scope.js
@@ -29,12 +28,6 @@ high:
       snippet: scopeCursor(req.params.oops)
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_0
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_0
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -42,7 +35,6 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-        severity: high
       line_number: 5
       full_filename: scope.js
       filename: scope.js
@@ -65,12 +57,6 @@ high:
       snippet: scopeNested(req.params.oops)
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_1
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_1
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -78,7 +64,6 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-        severity: high
       line_number: 6
       full_filename: scope.js
       filename: scope.js
@@ -101,12 +86,6 @@ high:
       snippet: 'scopeNested(x ? req.params.oops : y)'
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_2
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_2
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -114,7 +93,6 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-        severity: high
       line_number: 7
       full_filename: scope.js
       filename: scope.js
@@ -137,12 +115,6 @@ high:
       snippet: 'scopeNested(req.params.oops ? x : y)'
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_3
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_3
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -150,7 +122,6 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-        severity: high
       line_number: 9
       full_filename: scope.js
       filename: scope.js
@@ -173,12 +144,6 @@ high:
       snippet: scopeResult(req.params.oops)
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_4
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_4
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -186,7 +151,6 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-        severity: high
       line_number: 10
       full_filename: scope.js
       filename: scope.js
@@ -209,10 +173,4 @@ high:
       snippet: 'scopeResult(x ? req.params.oops : y)'
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_5
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_5
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
 

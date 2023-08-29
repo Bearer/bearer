@@ -6,7 +6,6 @@ high:
         title: Test pattern variable tree sitter node types/fixups
         description: Test pattern variable tree sitter node types/fixups
         documentation_url: ""
-        severity: high
       line_number: 1
       full_filename: main.rb
       filename: main.rb
@@ -29,12 +28,6 @@ high:
       snippet: matched_variable = 42
       fingerprint: 514e95a40b868d7341016d3fa344513d_0
       old_fingerprint: 514e95a40b868d7341016d3fa344513d_0
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -42,7 +35,6 @@ high:
         title: Test pattern variable tree sitter node types/fixups
         description: Test pattern variable tree sitter node types/fixups
         documentation_url: ""
-        severity: high
       line_number: 4
       full_filename: main.rb
       filename: main.rb
@@ -69,12 +61,6 @@ high:
         end
       fingerprint: 514e95a40b868d7341016d3fa344513d_1
       old_fingerprint: 514e95a40b868d7341016d3fa344513d_1
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
     - rule:
         cwe_ids:
             - "42"
@@ -82,7 +68,6 @@ high:
         title: Test pattern variable tree sitter node types/fixups
         description: Test pattern variable tree sitter node types/fixups
         documentation_url: ""
-        severity: high
       line_number: 7
       full_filename: main.rb
       filename: main.rb
@@ -111,10 +96,4 @@ high:
         end
       fingerprint: 514e95a40b868d7341016d3fa344513d_2
       old_fingerprint: 514e95a40b868d7341016d3fa344513d_2
-      severity:
-        rule_severity: high
-        display_severity: high
-        rule_severity_weighting: 5
-        local_data_types: false
-        final_weighting: 5
 

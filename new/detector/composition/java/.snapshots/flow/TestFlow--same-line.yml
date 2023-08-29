@@ -5,7 +5,6 @@ high:
         title: ""
         description: ""
         documentation_url: ""
-        severity: low
       line_number: 1
       full_filename: same-line.java
       filename: same-line.java
@@ -34,11 +33,4 @@ high:
       snippet: logger.error(user.name)
       fingerprint: b000c2a9a82d59a1e826bc709cca9307_0
       old_fingerprint: b000c2a9a82d59a1e826bc709cca9307_0
-      severity:
-        rule_severity: low
-        display_severity: high
-        sensitive_data_category_weighting: 2
-        rule_severity_weighting: 2
-        local_data_types: true
-        final_weighting: 6
 

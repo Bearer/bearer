@@ -1,5 +1,5 @@
-([]security.SeverityWeighting) (len=5) {
-  (security.SeverityWeighting) {
+([]types.SeverityWeighting) (len=5) {
+  (types.SeverityWeighting) {
     RuleSeverity: (string) (len=3) "low",
     DisplaySeverity: (string) (len=8) "critical",
     SensitiveDataCategoryWeighting: (int) 3,
@@ -7,7 +7,7 @@
     HasLocalDataTypes: (*bool)(true),
     FinalWeighting: (int) 8
   },
-  (security.SeverityWeighting) {
+  (types.SeverityWeighting) {
     RuleSeverity: (string) (len=3) "low",
     DisplaySeverity: (string) (len=4) "high",
     SensitiveDataCategoryWeighting: (int) 3,
@@ -15,7 +15,7 @@
     HasLocalDataTypes: (*bool)(false),
     FinalWeighting: (int) 5
   },
-  (security.SeverityWeighting) {
+  (types.SeverityWeighting) {
     RuleSeverity: (string) (len=3) "low",
     DisplaySeverity: (string) (len=6) "medium",
     SensitiveDataCategoryWeighting: (int) 2,
@@ -23,7 +23,7 @@
     HasLocalDataTypes: (*bool)(false),
     FinalWeighting: (int) 4
   },
-  (security.SeverityWeighting) {
+  (types.SeverityWeighting) {
     RuleSeverity: (string) (len=7) "warning",
     DisplaySeverity: (string) (len=7) "warning",
     SensitiveDataCategoryWeighting: (int) 0,
@@ -31,7 +31,7 @@
     HasLocalDataTypes: (*bool)(<nil>),
     FinalWeighting: (int) 0
   },
-  (security.SeverityWeighting) {
+  (types.SeverityWeighting) {
     RuleSeverity: (string) (len=7) "warning",
     DisplaySeverity: (string) (len=7) "warning",
     SensitiveDataCategoryWeighting: (int) 0,

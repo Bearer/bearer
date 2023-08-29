@@ -33,7 +33,6 @@ type DataType struct {
 }
 
 type Rule struct {
-	Severity         string   `json:"severity" yaml:"severity"`
 	CWEIDs           []string `json:"cwe_ids" yaml:"cwe_ids"`
 	Id               string   `json:"id" yaml:"id"`
 	Title            string   `json:"title" yaml:"title"`

@@ -171,7 +171,6 @@ func evaluateRules(
 			}
 
 			ruleSummary := &types.Rule{
-				Severity:         rule.GetSeverity(),
 				Title:            rule.Description,
 				Description:      rule.RemediationMessage,
 				Id:               rule.Id,

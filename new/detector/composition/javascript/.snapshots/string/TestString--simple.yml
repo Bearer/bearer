@@ -5,7 +5,6 @@ high:
         title: ""
         description: ""
         documentation_url: ""
-        severity: low
       line_number: 1
       full_filename: simple.js
       filename: simple.js
@@ -34,11 +33,4 @@ high:
       snippet: console.log("http://", user.name)
       fingerprint: 971b852ae8266c6d2b25437584017e2c_0
       old_fingerprint: 971b852ae8266c6d2b25437584017e2c_0
-      severity:
-        rule_severity: low
-        display_severity: high
-        sensitive_data_category_weighting: 2
-        rule_severity_weighting: 2
-        local_data_types: true
-        final_weighting: 6
 
