@@ -1,9 +1,11 @@
 package commands
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/ignore"
@@ -149,9 +151,22 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			var fingerprintEntry ignore.IgnoredFingerprint
 			if options.IgnoreAddOptions.Author != "" {
 				fingerprintEntry.Author = &options.IgnoreAddOptions.Author
+			} else {
+				if author, err := ignore.GetAuthor(); err == nil {
+					fingerprintEntry.Author = author
+				}
 			}
 			if options.IgnoreAddOptions.Comment != "" {
 				fingerprintEntry.Comment = &options.IgnoreAddOptions.Comment
+			} else {
+				reader := bufio.NewReader(os.Stdin)
+				fmt.Print("Add a comment or press enter to continue: ")
+				input, _ := reader.ReadString('\n')
+				comment := strings.TrimSuffix(input, "\n")
+				if comment != "" {
+					fingerprintEntry.Comment = &comment
+				}
+				cmd.Printf("\n")
 			}
 
 			fingerprintsToIgnore := map[string]ignore.IgnoredFingerprint{
