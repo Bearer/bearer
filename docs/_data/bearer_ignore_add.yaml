@@ -6,7 +6,8 @@ options:
       usage: Use your Bearer API Key to send the report to Bearer.
     - name: author
       shorthand: a
-      usage: Add author information to this ignored finding.
+      usage: |
+        Add author information to this ignored finding. (default output of "git config user.name")
     - name: bearer-ignore-file
       default_value: bearer.ignore
       usage: Load bearer.ignore file from the specified path.

@@ -4,9 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
+	"strings"
 	"time"
 
+	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/fatih/color"
 )
 
@@ -99,4 +102,13 @@ func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprin
 	color.NoColor = initialColorSetting
 
 	return result
+}
+
+func GetAuthor() (*string, error) {
+	nameBytes, err := exec.Command("git", "config", "user.name").Output()
+	if err != nil {
+		return nil, err
+	}
+
+	return pointer.String(strings.TrimSuffix(string(nameBytes), "\n")), nil
 }

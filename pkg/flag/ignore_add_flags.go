@@ -6,7 +6,7 @@ var (
 		ConfigName: "ignore_add.author",
 		Shorthand:  "a",
 		Value:      FormatEmpty,
-		Usage:      "Add author information to this ignored finding.",
+		Usage:      "Add author information to this ignored finding. (default output of \"git config user.name\")",
 	}
 	CommentFlag = Flag{
 		Name:       "comment",
