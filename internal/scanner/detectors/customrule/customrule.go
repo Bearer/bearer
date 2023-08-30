@@ -28,16 +28,18 @@ type Pattern struct {
 	Filters []settings.PatternFilter
 }
 
-type customDetector struct {
+type Detector struct {
 	types.DetectorBase
-	ruleID   string
+	ruleID,
+	sanitizerRuleID string
 	patterns []Pattern
 }
 
 func New(
 	language language.Language,
 	querySet *query.Set,
-	ruleID string,
+	ruleID,
+	sanitizerRuleID string,
 	patterns []settings.RulePattern,
 ) (types.Detector, error) {
 	var compiledPatterns []Pattern
@@ -57,17 +59,21 @@ func New(
 		})
 	}
 
-	return &customDetector{
+	return &Detector{
 		ruleID:   ruleID,
 		patterns: compiledPatterns,
 	}, nil
 }
 
-func (detector *customDetector) RuleID() string {
+func (detector *Detector) RuleID() string {
 	return detector.ruleID
 }
 
-func (detector *customDetector) DetectAt(
+func (detector *Detector) SanitizerRuleID() string {
+	return detector.sanitizerRuleID
+}
+
+func (detector *Detector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {

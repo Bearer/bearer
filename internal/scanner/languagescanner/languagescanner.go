@@ -23,6 +23,8 @@ import (
 	"github.com/bearer/bearer/internal/scanner/stats"
 )
 
+const minimumNodeCountForCache = 20_000
+
 type Scanner struct {
 	querySet    *query.Set
 	language    language.Language
@@ -65,46 +67,56 @@ func (scanner *Scanner) Scan(
 	fileStats *stats.FileStats,
 	fileInfo *file.FileInfo,
 ) ([]*detectortypes.Detection, error) {
-	tree, err := scanner.parseAndAnalyze(ctx, fileInfo)
-	if tree == nil || err != nil {
+	if !slices.Contains(scanner.language.EnryLanguages(), fileInfo.Language) {
+		return nil, nil
+	}
+
+	contentBytes, err := os.ReadFile(fileInfo.AbsolutePath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file: %w", err)
+	}
+
+	tree, err := ast.ParseAndAnalyze(ctx, scanner.language, scanner.querySet, contentBytes)
+	if err != nil {
 		return nil, err
 	}
 
-	cacheEnabled := false
-	if tree.NodeCount() > 20_000 {
-		cacheEnabled = true
-	}
-
 	if log.Trace().Enabled() {
-		log.Trace().Msgf("tree (%d nodes, cache=%t):\n%s", tree.NodeCount(), cacheEnabled, tree.RootNode().Dump())
-	}
-
-	var sharedCache *cache.Shared
-	if cacheEnabled {
-		sharedCache = cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())
+		log.Trace().Msgf("tree (%d nodes):\n%s", tree.NodeCount(), tree.RootNode().Dump())
 	}
 
 	fileContext := filecontext.New(
 		ctx,
-		scanner.rules,
 		scanner.detectorSet,
 		fileInfo.FileInfo.Name(),
 		fileStats,
 	)
 
+	return scanner.evaluateRules(fileContext, tree)
+}
+
+func (scanner *Scanner) evaluateRules(
+	fileContext *filecontext.Context,
+	tree *tree.Tree,
+) ([]*detectortypes.Detection, error) {
+	var sharedCache *cache.Shared
+	if tree.NodeCount() > minimumNodeCountForCache {
+		sharedCache = cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())
+		log.Trace().Msg("cache enabled")
+	}
+
 	var detections []*detectortypes.Detection
 	for _, ruleID := range scanner.detectorSet.TopLevelRuleIDs() {
 		var ruleCache *cache.Cache
-		if cacheEnabled {
+		if sharedCache != nil {
 			ruleCache = cache.NewCache(sharedCache)
 		}
 
-		ruleDetections, err := rulescanner.Scan(
+		ruleDetections, err := rulescanner.ScanTopLevelRule(
 			fileContext,
 			ruleCache,
-			settings.NESTED_STRICT_SCOPE,
+			tree,
 			ruleID,
-			tree.RootNode(),
 		)
 		if err != nil {
 			return nil, err
@@ -118,17 +130,4 @@ func (scanner *Scanner) Scan(
 
 func (scanner *Scanner) Close() {
 	scanner.querySet.Close()
-}
-
-func (scanner *Scanner) parseAndAnalyze(ctx context.Context, fileInfo *file.FileInfo) (*tree.Tree, error) {
-	if !slices.Contains(scanner.language.EnryLanguages(), fileInfo.Language) {
-		return nil, nil
-	}
-
-	contentBytes, err := os.ReadFile(fileInfo.AbsolutePath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read file: %w", err)
-	}
-
-	return ast.ParseAndAnalyze(ctx, scanner.language, scanner.querySet, contentBytes)
 }

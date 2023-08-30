@@ -1,10 +1,11 @@
 package cache
 
 import (
-	"github.com/bearer/bearer/internal/scanner/ast/tree"
-	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
-	"github.com/bearer/bearer/internal/util/set"
 	"github.com/rs/zerolog/log"
+
+	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/detectorset"
+	"github.com/bearer/bearer/internal/util/set"
 )
 
 const (
@@ -13,8 +14,8 @@ const (
 )
 
 type entry struct {
-	RuleID     string
-	Detections []*detectortypes.Detection
+	RuleID string
+	Result *detectorset.Result
 }
 
 type Shared struct {
@@ -44,21 +45,21 @@ func NewCache(sharedCache *Shared) *Cache {
 	}
 }
 
-func (cache *Cache) Get(node *tree.Node, ruleID string) ([]*detectortypes.Detection, bool) {
+func (cache *Cache) Get(node *tree.Node, ruleID string) (*detectorset.Result, bool) {
 	if cache == nil {
 		return nil, false
 	}
 
 	for _, entry := range cache.dataFor(ruleID)[node] {
 		if entry.RuleID == ruleID {
-			return entry.Detections, true
+			return entry.Result, true
 		}
 	}
 
 	return nil, false
 }
 
-func (cache *Cache) Put(node *tree.Node, ruleID string, detections []*detectortypes.Detection) {
+func (cache *Cache) Put(node *tree.Node, ruleID string, result *detectorset.Result) {
 	if cache == nil {
 		return
 	}
@@ -82,8 +83,8 @@ func (cache *Cache) Put(node *tree.Node, ruleID string, detections []*detectorty
 	}
 
 	data[node] = append(data[node], entry{
-		RuleID:     ruleID,
-		Detections: detections,
+		RuleID: ruleID,
+		Result: result,
 	})
 }
 

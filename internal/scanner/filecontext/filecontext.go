@@ -4,7 +4,6 @@ import (
 	"context"
 	"time"
 
-	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/detectorset"
@@ -13,7 +12,6 @@ import (
 
 type Context struct {
 	ctx         context.Context
-	rules       map[string]*settings.Rule
 	detectorSet detectorset.Set
 	filename    string
 	stats       *stats.FileStats
@@ -21,14 +19,12 @@ type Context struct {
 
 func New(
 	ctx context.Context,
-	rules map[string]*settings.Rule,
 	detectorSet detectorset.Set,
 	filename string,
 	stats *stats.FileStats,
 ) *Context {
 	return &Context{
 		ctx:         ctx,
-		rules:       rules,
 		detectorSet: detectorSet,
 		filename:    filename,
 		stats:       stats,
@@ -39,15 +35,11 @@ func (fileContext *Context) Err() error {
 	return fileContext.ctx.Err()
 }
 
-func (fileContext *Context) Rules() map[string]*settings.Rule {
-	return fileContext.rules
-}
-
 func (fileContext *Context) DetectAt(
 	node *tree.Node,
 	ruleID string,
 	detectorContext detectortypes.Context,
-) ([]*detectortypes.Detection, error) {
+) (*detectorset.Result, error) {
 	return fileContext.detectorSet.DetectAt(node, ruleID, detectorContext)
 }
 

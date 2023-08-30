@@ -14,6 +14,11 @@ import (
 	"github.com/bearer/bearer/internal/util/set"
 )
 
+type Result struct {
+	Detections []*detectortypes.Detection
+	Sanitized  bool
+}
+
 type Set interface {
 	BuiltinAndSharedRuleIDs() []string
 	TopLevelRuleIDs() []string
@@ -21,7 +26,7 @@ type Set interface {
 		node *tree.Node,
 		ruleID string,
 		detectorContext detectortypes.Context,
-	) ([]*detectortypes.Detection, error)
+	) (*Result, error)
 }
 
 type detectorSet struct {
@@ -67,12 +72,16 @@ func (set *detectorSet) TopLevelRuleIDs() []string {
 
 func (set *detectorSet) DetectAt(
 	node *tree.Node,
-	detectorType string,
+	ruleID string,
 	detectorContext detectortypes.Context,
-) ([]*detectortypes.Detection, error) {
-	detector, err := set.lookupDetector(detectorType)
+) (*Result, error) {
+	detector, err := set.lookupDetector(ruleID)
 	if err != nil {
 		return nil, err
+	}
+
+	if isSanitized, err := set.isSanitized(detector, node, detectorContext); isSanitized || err != nil {
+		return &Result{Sanitized: true}, err
 	}
 
 	detectionsData, err := detector.DetectAt(node, detectorContext)
@@ -83,19 +92,45 @@ func (set *detectorSet) DetectAt(
 	detections := make([]*detectortypes.Detection, len(detectionsData))
 	for i, data := range detectionsData {
 		detections[i] = &detectortypes.Detection{
-			RuleID:    detectorType,
+			RuleID:    ruleID,
 			MatchNode: node,
 			Data:      data,
 		}
 	}
 
-	return detections, nil
+	return &Result{Detections: detections}, nil
 }
 
-func (set *detectorSet) lookupDetector(detectorType string) (detectortypes.Detector, error) {
-	detector, ok := set.detectors[detectorType]
+func (set *detectorSet) isSanitized(
+	detector detectortypes.Detector,
+	node *tree.Node,
+	detectorContext detectortypes.Context,
+) (bool, error) {
+	ruleDetector, isCustomRule := detector.(*customrule.Detector)
+	if !isCustomRule {
+		return false, nil
+	}
+
+	if ruleDetector.SanitizerRuleID() == "" {
+		return false, nil
+	}
+
+	sanitizerDetections, err := detectorContext.Scan(
+		node,
+		ruleDetector.SanitizerRuleID(),
+		settings.CURSOR_STRICT_SCOPE,
+	)
+	if err != nil {
+		return false, err
+	}
+
+	return len(sanitizerDetections) != 0, nil
+}
+
+func (set *detectorSet) lookupDetector(ruleID string) (detectortypes.Detector, error) {
+	detector, ok := set.detectors[ruleID]
 	if !ok {
-		return nil, fmt.Errorf("detector type '%s' not registered", detectorType)
+		return nil, fmt.Errorf("detector for rule '%s' not registered", ruleID)
 	}
 
 	return detector, nil
@@ -161,7 +196,7 @@ func createDetectors(
 	}
 
 	for ruleID, rule := range relevantRules {
-		detector, err := customrule.New(language, querySet, ruleID, rule.Patterns)
+		detector, err := customrule.New(language, querySet, ruleID, rule.SanitizerRuleID, rule.Patterns)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create %s detector: %w", ruleID, err)
 		}

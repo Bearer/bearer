@@ -68,7 +68,6 @@ func RunTest(
 
 		fileContext := filecontext.New(
 			context.Background(),
-			rules,
 			detectorSet,
 			fileName,
 			nil,
@@ -84,15 +83,9 @@ func RunTest(
 			tt.Fatalf("failed to parse file: %s", err)
 		}
 
-		detections, err := rulescanner.Scan(
-			fileContext,
-			nil,
-			settings.NESTED_STRICT_SCOPE,
-			detectorType,
-			tree.RootNode(),
-		)
+		detections, err := rulescanner.ScanTopLevelRule(fileContext, nil, tree, detectorType)
 		if err != nil {
-			tt.Fatalf("failed to create rule scanner: %s", err)
+			tt.Fatalf("failed to scan with rule scanner: %s", err)
 		}
 
 		results := make([]result, len(detections))
