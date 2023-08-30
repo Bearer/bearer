@@ -92,11 +92,16 @@ func SendReport(config settings.Config, reportData *types.ReportData) {
 	}
 }
 
-func translateFindingsBySeverity(findingBySeverity map[string][]securitytypes.Finding) map[string][]saas.SaasFinding {
+func translateFindingsBySeverity[F securitytypes.GenericFinding](someFindingsBySeverity map[string][]F) map[string][]saas.SaasFinding {
 	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
-	for _, severity := range maps.Keys(findingBySeverity) {
-		for _, finding := range findingBySeverity[severity] {
-			saasFindingsBySeverity[severity] = append(saasFindingsBySeverity[severity], saas.SaasFinding{Finding: finding, SeverityMeta: finding.SeverityMeta})
+	for _, severity := range maps.Keys(someFindingsBySeverity) {
+		for _, someFinding := range someFindingsBySeverity[severity] {
+			finding := someFinding.GetFinding()
+			saasFindingsBySeverity[severity] = append(saasFindingsBySeverity[severity], saas.SaasFinding{
+				Finding:      finding,
+				SeverityMeta: finding.SeverityMeta,
+				IgnoreMeta:   someFinding.GetIgnoreMeta(),
+			})
 		}
 	}
 	return saasFindingsBySeverity
