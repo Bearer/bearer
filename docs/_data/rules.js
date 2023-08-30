@@ -6,7 +6,7 @@ const yaml = require("js-yaml");
 const cweList = require("./cweList.json");
 const gitly = require("gitly");
 const source = "bearer/bearer-rules";
-const rulesPath = "_tmp/rules-data";
+const rulesPath = "_tmp/rules-data/rules";
 const excludeDirectories = [".github", "scripts"];
 
 let counts = {
