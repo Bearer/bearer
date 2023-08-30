@@ -6,7 +6,7 @@ const yaml = require("js-yaml");
 const cweList = require("./cweList.json");
 const gitly = require("gitly");
 const source = "bearer/bearer-rules";
-const rulesPath = "_tmp/rules-data/rules";
+const rulesPath = "_tmp/rules-data";
 const excludeDirectories = [".github", "scripts"];
 
 let counts = {
@@ -143,5 +143,5 @@ async function fetchFile(location, breadcrumb) {
 
 module.exports = async function () {
   await fetchRelease();
-  return await fetchData(rulesPath);
+  return await fetchData(rulesPath + "/rules");
 };
