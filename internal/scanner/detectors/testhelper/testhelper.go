@@ -2,7 +2,7 @@ package testhelper
 
 import (
 	"context"
-	"fmt"
+	"os"
 	"testing"
 
 	"github.com/bradleyjkemp/cupaloy"
@@ -12,15 +12,18 @@ import (
 	"github.com/bearer/bearer/internal/classification"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
+	"github.com/bearer/bearer/internal/scanner/ast"
+	"github.com/bearer/bearer/internal/scanner/ast/query"
+	"github.com/bearer/bearer/internal/scanner/detectorset"
+	"github.com/bearer/bearer/internal/scanner/filecontext"
 	"github.com/bearer/bearer/internal/scanner/language"
-	"github.com/bearer/bearer/internal/scanner/languagescanner"
-	"github.com/bearer/bearer/internal/util/file"
+	"github.com/bearer/bearer/internal/scanner/rulescanner"
 )
 
 type result struct {
-	Position string
-	Content  string
-	Data     interface{}
+	Node    int
+	Content string
+	Data    interface{}
 }
 
 func RunTest(
@@ -33,6 +36,9 @@ func RunTest(
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	t.Run(name, func(tt *testing.T) {
+		rules := make(map[string]*settings.Rule)
+		querySet := query.NewSet(language.ID(), language.SitterLanguage())
+
 		classifier, err := classification.NewClassifier(&classification.Config{
 			Config: settings.Config{
 				Scan: flag.ScanOptions{
@@ -46,28 +52,55 @@ func RunTest(
 			tt.Fatalf("failed to create classifier: %s", err)
 		}
 
-		languageScanner, err := languagescanner.New(language, classifier.Schema, make(map[string]*settings.Rule))
+		detectorSet, err := detectorset.New(
+			querySet,
+			language.NewBuiltInDetectors(classifier.Schema, querySet),
+			rules,
+			language,
+		)
 		if err != nil {
-			tt.Fatalf("failed to create language scanner: %s", err)
+			tt.Fatalf("failed to create detector set: %s", err)
 		}
 
-		fileInfo, err := file.FileInfoFromPath(fileName)
-		if err != nil {
-			tt.Fatalf("failed to create file info: %s", err)
+		if err := querySet.Compile(); err != nil {
+			tt.Fatalf("failed to compile queries: %s", err)
 		}
 
-		detections, err := languageScanner.Scan(context.Background(), nil, fileInfo)
+		fileContext := filecontext.New(
+			context.Background(),
+			rules,
+			detectorSet,
+			fileName,
+			nil,
+		)
+
+		contentBytes, err := os.ReadFile(fileName)
 		if err != nil {
-			tt.Fatalf("failed to detect: %s", err)
+			tt.Fatalf("failed to read file: %s", err)
+		}
+
+		tree, err := ast.ParseAndAnalyze(context.Background(), language, querySet, contentBytes)
+		if err != nil {
+			tt.Fatalf("failed to parse file: %s", err)
+		}
+
+		detections, err := rulescanner.Scan(
+			fileContext,
+			nil,
+			settings.NESTED_STRICT_SCOPE,
+			detectorType,
+			tree.RootNode(),
+		)
+		if err != nil {
+			tt.Fatalf("failed to create rule scanner: %s", err)
 		}
 
 		results := make([]result, len(detections))
 		for i, detection := range detections {
 			node := detection.MatchNode
 			results[i] = result{
-				Position: fmt.Sprintf("%d:%d", node.ContentStart.Line, node.ContentStart.Column),
-				Content:  node.Content(),
-				Data:     detection.Data,
+				Content: node.Content(),
+				Data:    detection.Data,
 			}
 		}
 
@@ -76,6 +109,7 @@ func RunTest(
 			tt.Fatalf("failed to marshal results: %s", err)
 		}
 
+		cupaloy.SnapshotT(tt, tree.RootNode().Dump())
 		cupaloy.SnapshotT(tt, string(yamlResults))
 	})
 }
