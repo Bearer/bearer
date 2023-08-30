@@ -78,7 +78,7 @@ async function fetchData(location) {
     const dirs = await readdir(location);
     // ex: looping through rules [ruby, gitleaks, sql]
     dirs.forEach(async (dir) => {
-      const dirPath = path.join(rulesPath, dir);
+      const dirPath = path.join(location, dir);
       if (isDirectory(dirPath) && !excludeDirectories.includes(dir)) {
         const subDirs = await readdir(dirPath);
         updateCounts(dir);
@@ -143,5 +143,5 @@ async function fetchFile(location, breadcrumb) {
 
 module.exports = async function () {
   await fetchRelease();
-  return await fetchData(rulesPath + "/rules");
+  return await fetchData(path.join(rulesPath, "rules"));
 };
