@@ -1,8 +1,9 @@
 package tree
 
 import (
-	sitter "github.com/smacker/go-tree-sitter"
 	"golang.org/x/exp/slices"
+
+	sitter "github.com/smacker/go-tree-sitter"
 )
 
 type Builder struct {
