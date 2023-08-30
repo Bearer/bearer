@@ -15,7 +15,7 @@ type ReportData struct {
 	Detectors                 []any
 	Dataflow                  *DataFlow
 	FindingsBySeverity        map[string][]securitytypes.Finding
-	IgnoredFindingsBySeverity map[string][]securitytypes.Finding
+	IgnoredFindingsBySeverity map[string][]securitytypes.IgnoredFinding
 	PrivacyReport             *privacytypes.Report
 	Stats                     *statstypes.Stats
 	SaasReport                *saastypes.BearerReport

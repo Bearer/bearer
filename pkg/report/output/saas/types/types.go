@@ -3,6 +3,7 @@ package types
 import (
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
+	"github.com/bearer/bearer/pkg/util/ignore"
 )
 
 type Meta struct {
@@ -36,4 +37,5 @@ type BearerReport struct {
 type SaasFinding struct {
 	securitytypes.Finding
 	SeverityMeta securitytypes.SeverityMeta `json:"severity_meta" yaml:"severity_meta"`
+	IgnoreMeta   *ignore.IgnoredFingerprint `json:"ignore_meta,omitempty" yaml:"ignore_meta,omitempty"`
 }

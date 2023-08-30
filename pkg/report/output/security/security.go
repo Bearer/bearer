@@ -50,6 +50,7 @@ var orderedSeverityLevels = []string{
 }
 
 type Findings = map[string][]types.Finding
+type IgnoredFindings = map[string][]types.IgnoredFinding
 
 type Input struct {
 	RuleId         string                `json:"rule_id" yaml:"rule_id"`
@@ -83,7 +84,7 @@ func AddReportData(
 ) error {
 	dataflow := reportData.Dataflow
 	summaryFindings := make(Findings)
-	ignoredSummaryFindings := make(Findings)
+	ignoredSummaryFindings := make(IgnoredFindings)
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
@@ -123,7 +124,7 @@ func AddReportData(
 
 func evaluateRules(
 	summaryFindings Findings,
-	ignoredSummaryFindings Findings,
+	ignoredSummaryFindings IgnoredFindings,
 	rules map[string]*settings.Rule,
 	config settings.Config,
 	dataflow *outputtypes.DataFlow,
@@ -131,7 +132,7 @@ func evaluateRules(
 	builtIn bool,
 ) ([]string, error) {
 	outputFindings := map[string][]types.Finding{}
-	ignoredOutputFindings := map[string][]types.Finding{}
+	ignoredOutputFindings := map[string][]types.IgnoredFinding{}
 
 	var bar *progressbar.ProgressBar
 	if !builtIn {
@@ -225,9 +226,9 @@ func evaluateRules(
 					OldFingerprint:   oldFingerprint,
 				}
 
-				_, ignored := config.IgnoredFingerprints[fingerprint]
+				ignoredFingerprint, ignored := config.IgnoredFingerprints[fingerprint]
 				if !ignored {
-					// legacy excluded fingerprint
+					// check for legacy excluded fingerprint
 					ignored = config.Report.ExcludeFingerprint[fingerprint]
 				}
 
@@ -237,7 +238,7 @@ func evaluateRules(
 				if config.Report.Severity[severity] {
 					finding.SeverityMeta = severityMeta
 					if ignored {
-						ignoredOutputFindings[severity] = append(ignoredOutputFindings[severity], finding)
+						ignoredOutputFindings[severity] = append(ignoredOutputFindings[severity], types.IgnoredFinding{Finding: finding, IgnoreMeta: ignoredFingerprint})
 					} else {
 						outputFindings[severity] = append(outputFindings[severity], finding)
 					}
@@ -252,7 +253,7 @@ func evaluateRules(
 	return fingerprints, nil
 }
 
-func sortFindingsBySeverity(findingsBySeverity map[string][]types.Finding, outputFindings map[string][]types.Finding) {
+func sortFindingsBySeverity[F types.GenericFinding](findingsBySeverity map[string][]F, outputFindings map[string][]F) {
 	outputFindings = removeDuplicates(outputFindings)
 
 	for severity, findingsSlice := range outputFindings {
@@ -705,17 +706,17 @@ func formatSeverity(severity string) string {
 	return severityColorFn(strings.ToUpper(severity + ": "))
 }
 
+type key struct {
+	LineNumber int
+	FileName   string
+	Detector   string
+}
+
 // removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection
-func removeDuplicates(data map[string][]types.Finding) map[string][]types.Finding {
-	filteredData := map[string][]types.Finding{}
+func removeDuplicates[F types.GenericFinding](data map[string][]F) map[string][]F {
+	filteredData := map[string][]F{}
 
-	type Key struct {
-		LineNumber int
-		FileName   string
-		Detector   string
-	}
-
-	reportedDetections := set.Set[Key]{}
+	reportedDetections := set.Set[key]{}
 
 	// filter duplicates
 	for _, severity := range orderedSeverityLevels {
@@ -724,14 +725,15 @@ func removeDuplicates(data map[string][]types.Finding) map[string][]types.Findin
 			continue
 		}
 
-		for _, finding := range findingsSlice {
-			key := Key{
+		for _, genericFinding := range findingsSlice {
+			finding := genericFinding.GetFinding()
+			key := key{
 				LineNumber: finding.LineNumber,
 				FileName:   finding.Filename,
 				Detector:   finding.Rule.Id,
 			}
 			if reportedDetections.Add(key) {
-				filteredData[severity] = append(filteredData[severity], finding)
+				filteredData[severity] = append(filteredData[severity], genericFinding)
 			}
 		}
 	}
@@ -739,10 +741,10 @@ func removeDuplicates(data map[string][]types.Finding) map[string][]types.Findin
 	return filteredData
 }
 
-func sortFindings(data []types.Finding) {
+func sortFindings[F types.GenericFinding](data []F) {
 	sort.Slice(data, func(i, j int) bool {
-		vulnerabilityA := data[i]
-		vulnerabilityB := data[j]
+		vulnerabilityA := data[i].GetFinding()
+		vulnerabilityB := data[j].GetFinding()
 
 		if vulnerabilityA.Rule.Id < vulnerabilityB.Rule.Id {
 			return true
