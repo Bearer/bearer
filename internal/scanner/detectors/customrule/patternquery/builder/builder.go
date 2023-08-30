@@ -3,10 +3,9 @@ package builder
 import (
 	"context"
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
-
-	"golang.org/x/exp/slices"
 
 	"github.com/rs/zerolog/log"
 

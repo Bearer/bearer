@@ -1,9 +1,8 @@
 package analyzer
 
 import (
+	"slices"
 	"strings"
-
-	"golang.org/x/exp/slices"
 
 	sitter "github.com/smacker/go-tree-sitter"
 

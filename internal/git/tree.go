@@ -5,10 +5,9 @@ import (
 	"fmt"
 	"io"
 	"path"
+	"slices"
 	"strings"
 	"time"
-
-	"golang.org/x/exp/slices"
 )
 
 const blankID = "0000000000000000000000000000000000000000"

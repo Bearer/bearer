@@ -4,11 +4,11 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"slices"
 	"sort"
 	"strings"
 
 	"golang.org/x/exp/maps"
-	"golang.org/x/exp/slices"
 
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"

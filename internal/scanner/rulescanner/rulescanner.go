@@ -2,10 +2,9 @@ package rulescanner
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 	"time"
-
-	"golang.org/x/exp/slices"
 
 	"github.com/rs/zerolog/log"
 

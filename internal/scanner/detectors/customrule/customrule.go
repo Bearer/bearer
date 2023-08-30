@@ -2,8 +2,7 @@ package customrule
 
 import (
 	"fmt"
-
-	"golang.org/x/exp/slices"
+	"slices"
 
 	"github.com/rs/zerolog/log"
 
@@ -113,8 +112,8 @@ func (detector *customDetector) DetectAt(
 }
 
 func sortFilters(filters []settings.PatternFilter) {
-	slices.SortFunc(filters, func(a, b settings.PatternFilter) bool {
-		return scoreFilter(a) < scoreFilter(b)
+	slices.SortFunc(filters, func(a, b settings.PatternFilter) int {
+		return scoreFilter(a) - scoreFilter(b)
 	})
 
 	for i := range filters {

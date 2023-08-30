@@ -1,9 +1,10 @@
 package basebranchfindings
 
 import (
+	"slices"
+
 	"github.com/bearer/bearer/internal/commands/process/filelist/files"
 	"github.com/bearer/bearer/internal/report/basebranchfindings/types"
-	"golang.org/x/exp/slices"
 )
 
 type key struct {

@@ -7,7 +7,10 @@ import (
 	"io"
 	"os"
 	"regexp"
+	"slices"
 	"strings"
+
+	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/detectors/custom/config"
@@ -20,14 +23,12 @@ import (
 	schemadatatype "github.com/bearer/bearer/internal/report/schema/datatype"
 	"github.com/bearer/bearer/internal/report/source"
 	"github.com/bearer/bearer/internal/util/file"
-	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/internal/parser/nodeid"
 	"github.com/bearer/bearer/internal/parser/sitter/sql"
 	"github.com/bearer/bearer/internal/report"
 	"github.com/bearer/bearer/internal/report/detectors"
 	"github.com/bearer/bearer/internal/report/schema"
-	sitter "github.com/smacker/go-tree-sitter"
 )
 
 var insecureUrlPattern = regexp.MustCompile(`^http[^s]`)

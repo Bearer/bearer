@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"slices"
 	"time"
-
-	"golang.org/x/exp/slices"
 
 	"github.com/rs/zerolog/log"
 )

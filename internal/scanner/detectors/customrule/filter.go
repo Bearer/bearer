@@ -1,9 +1,8 @@
 package customrule
 
 import (
+	"slices"
 	"strconv"
-
-	"golang.org/x/exp/slices"
 
 	"github.com/rs/zerolog/log"
 

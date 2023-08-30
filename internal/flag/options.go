@@ -3,10 +3,9 @@ package flag
 import (
 	"errors"
 	"fmt"
+	"slices"
 	"strings"
 	"time"
-
-	"golang.org/x/exp/slices"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"

@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"runtime/debug"
-
-	"golang.org/x/exp/slices"
+	"slices"
 
 	"github.com/rs/zerolog/log"
 

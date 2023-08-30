@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 	"sync"
 	"time"
 
 	"golang.org/x/exp/maps"
-	"golang.org/x/exp/slices"
 
 	"github.com/dustin/go-humanize"
 )
@@ -166,9 +166,12 @@ func (stats *Stats) reportSlowestFiles(writer io.StringWriter) {
 		"Slowest files (total runtime %s):\n",
 		stats.totalFileDuration.Truncate(time.Millisecond)),
 	)
-	slices.SortFunc(stats.slowFiles, func(a, b slowFile) bool {
-		return a.duration > b.duration ||
-			(a.duration == b.duration && a.filename < b.filename)
+	slices.SortFunc(stats.slowFiles, func(a, b slowFile) int {
+		if a.duration == b.duration {
+			return strings.Compare(a.filename, b.filename)
+		}
+
+		return int(b.duration - a.duration)
 	})
 
 	for _, file := range stats.slowFiles {
@@ -193,8 +196,8 @@ func (stats *Stats) reportSlowestRules(writer io.StringWriter) {
 		totalRuleDuration.Truncate(time.Millisecond),
 	))
 	sortedRuleIDs := maps.Keys(stats.rules)
-	slices.SortFunc(sortedRuleIDs, func(a, b string) bool {
-		return stats.rules[a] > stats.rules[b]
+	slices.SortFunc(sortedRuleIDs, func(a, b string) int {
+		return int(stats.rules[b] - stats.rules[a])
 	})
 
 	numSlowRules := maxSlowRules
@@ -220,8 +223,8 @@ func (stats *Stats) reportFailedFiles(writer io.StringWriter) {
 	}
 
 	writer.WriteString("\nFailed files:\n") //nolint:errcheck
-	slices.SortFunc(stats.failedFiles, func(a, b failedFile) bool {
-		return a.filename < b.filename
+	slices.SortFunc(stats.failedFiles, func(a, b failedFile) int {
+		return strings.Compare(a.filename, b.filename)
 	})
 
 	for _, file := range stats.failedFiles {

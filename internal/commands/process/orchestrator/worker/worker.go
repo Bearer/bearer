@@ -10,8 +10,7 @@ import (
 	"os"
 	"os/signal"
 	"runtime"
-
-	"golang.org/x/exp/slices"
+	"slices"
 
 	"github.com/rs/zerolog/log"
 

@@ -2,11 +2,10 @@ package patternquery
 
 import (
 	"fmt"
-
-	"golang.org/x/exp/slices"
-	"gopkg.in/yaml.v3"
+	"slices"
 
 	"github.com/rs/zerolog/log"
+	"gopkg.in/yaml.v3"
 
 	astquery "github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"

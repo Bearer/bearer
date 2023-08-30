@@ -1,7 +1,7 @@
 package tree
 
 import (
-	"golang.org/x/exp/slices"
+	"slices"
 
 	sitter "github.com/smacker/go-tree-sitter"
 )
