@@ -136,6 +136,7 @@ func matchDetectionFilter(
 		data, ok := detection.Data.(Data)
 		if !ok { // Built-in detector
 			foundDetection = true
+			log.Trace().Msg("detection match (built-in)")
 			continue
 		}
 
@@ -144,6 +145,7 @@ func matchDetectionFilter(
 			return nil, nil, err
 		}
 		if !filtersMatch {
+			log.Trace().Msg("detection filters do not match")
 			continue
 		}
 
@@ -158,6 +160,7 @@ func matchDetectionFilter(
 		}
 
 		if !variablesMatch {
+			log.Trace().Msg("detection variable mismatch")
 			continue
 		}
 
@@ -169,6 +172,7 @@ func matchDetectionFilter(
 		}
 
 		datatypeDetections = append(datatypeDetections, data.Datatypes...)
+		log.Trace().Msg("detection match")
 	}
 
 	return boolPointer(foundDetection), datatypeDetections, nil

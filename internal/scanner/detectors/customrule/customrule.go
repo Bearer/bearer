@@ -95,6 +95,7 @@ func (detector *customDetector) DetectAt(
 			}
 
 			if !filtersMatch {
+				log.Trace().Msg("filters didn't match")
 				continue
 			}
 
@@ -103,6 +104,8 @@ func (detector *customDetector) DetectAt(
 				Datatypes:     datatypeDetections,
 				VariableNodes: variableNodes,
 			})
+
+			log.Trace().Msg("filters matched")
 		}
 	}
 
