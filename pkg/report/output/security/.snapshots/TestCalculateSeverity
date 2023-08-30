@@ -1,7 +1,54 @@
-([]string) (len=5) {
-  (string) (len=8) "critical",
-  (string) (len=4) "high",
-  (string) (len=6) "medium",
-  (string) (len=7) "warning",
-  (string) (len=7) "warning"
+([]types.SeverityMeta) (len=5) {
+  (types.SeverityMeta) {
+    RuleSeverity: (string) (len=3) "low",
+    SensitiveDataCategories: ([]string) (len=2) {
+      (string) (len=3) "PHI",
+      (string) (len=13) "Personal Data"
+    },
+    HasLocalDataTypes: (*bool)(true),
+    SensitiveDataCategoryWeighting: (int) 3,
+    RuleSeverityWeighting: (int) 2,
+    FinalWeighting: (int) 8,
+    DisplaySeverity: (string) (len=8) "critical"
+  },
+  (types.SeverityMeta) {
+    RuleSeverity: (string) (len=3) "low",
+    SensitiveDataCategories: ([]string) (len=1) {
+      (string) (len=25) "Personal Data (Sensitive)"
+    },
+    HasLocalDataTypes: (*bool)(false),
+    SensitiveDataCategoryWeighting: (int) 3,
+    RuleSeverityWeighting: (int) 2,
+    FinalWeighting: (int) 5,
+    DisplaySeverity: (string) (len=4) "high"
+  },
+  (types.SeverityMeta) {
+    RuleSeverity: (string) (len=3) "low",
+    SensitiveDataCategories: ([]string) (len=1) {
+      (string) (len=13) "Personal Data"
+    },
+    HasLocalDataTypes: (*bool)(false),
+    SensitiveDataCategoryWeighting: (int) 2,
+    RuleSeverityWeighting: (int) 2,
+    FinalWeighting: (int) 4,
+    DisplaySeverity: (string) (len=6) "medium"
+  },
+  (types.SeverityMeta) {
+    RuleSeverity: (string) (len=7) "warning",
+    SensitiveDataCategories: ([]string) <nil>,
+    HasLocalDataTypes: (*bool)(<nil>),
+    SensitiveDataCategoryWeighting: (int) 0,
+    RuleSeverityWeighting: (int) 0,
+    FinalWeighting: (int) 0,
+    DisplaySeverity: (string) (len=7) "warning"
+  },
+  (types.SeverityMeta) {
+    RuleSeverity: (string) (len=7) "warning",
+    SensitiveDataCategories: ([]string) <nil>,
+    HasLocalDataTypes: (*bool)(<nil>),
+    SensitiveDataCategoryWeighting: (int) 0,
+    RuleSeverityWeighting: (int) 0,
+    FinalWeighting: (int) 0,
+    DisplaySeverity: (string) (len=7) "warning"
+  }
 }

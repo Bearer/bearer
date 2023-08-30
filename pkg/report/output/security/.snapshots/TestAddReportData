@@ -52,7 +52,19 @@
       CodeExtract: (string) "",
       RawCodeExtract: ([]file.Line) {
       },
-      SomeExtraField: (string) ""
+      SeverityMeta: (types.SeverityMeta) {
+        RuleSeverity: (string) (len=3) "low",
+        SensitiveDataCategories: ([]string) (len=3) {
+          (string) (len=3) "PII",
+          (string) (len=13) "Personal Data",
+          (string) (len=25) "Personal Data (Sensitive)"
+        },
+        HasLocalDataTypes: (*bool)(true),
+        SensitiveDataCategoryWeighting: (int) 3,
+        RuleSeverityWeighting: (int) 2,
+        FinalWeighting: (int) 8,
+        DisplaySeverity: (string) (len=8) "critical"
+      }
     }
   },
   (string) (len=4) "high": ([]types.Finding) (len=1) {
@@ -103,7 +115,18 @@
       CodeExtract: (string) "",
       RawCodeExtract: ([]file.Line) {
       },
-      SomeExtraField: (string) ""
+      SeverityMeta: (types.SeverityMeta) {
+        RuleSeverity: (string) (len=6) "medium",
+        SensitiveDataCategories: ([]string) (len=2) {
+          (string) (len=3) "PII",
+          (string) (len=13) "Personal Data"
+        },
+        HasLocalDataTypes: (*bool)(false),
+        SensitiveDataCategoryWeighting: (int) 2,
+        RuleSeverityWeighting: (int) 3,
+        FinalWeighting: (int) 5,
+        DisplaySeverity: (string) (len=4) "high"
+      }
     }
   }
 }

@@ -13,6 +13,8 @@ import (
 	"github.com/bearer/bearer/pkg/util/ignore"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/rego"
+
+	globaltypes "github.com/bearer/bearer/pkg/types"
 )
 
 var (
@@ -251,6 +253,14 @@ var processorsFs embed.FS
 
 func (rule *Rule) PolicyType() bool {
 	return rule.Type == "risk"
+}
+
+func (rule *Rule) GetSeverity() string {
+	if rule.Severity == "" {
+		return globaltypes.LevelLow
+	}
+
+	return rule.Severity
 }
 
 func (rule *Rule) Language() string {

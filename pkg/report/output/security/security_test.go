@@ -13,6 +13,7 @@ import (
 
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 )
@@ -161,7 +162,7 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 }
 
 func TestCalculateSeverity(t *testing.T) {
-	res := []string{
+	res := []securitytypes.SeverityMeta{
 		security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", true),
 		security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", false),
 		security.CalculateSeverity([]string{"Personal Data"}, "low", false),

@@ -228,9 +228,11 @@ func evaluateRules(
 					OldFingerprint:   oldFingerprint,
 				}
 
-				severity := CalculateSeverity(finding.CategoryGroups, rule.Severity, output.IsLocal != nil && *output.IsLocal)
+				severityWeighting := CalculateSeverity(finding.CategoryGroups, rule.GetSeverity(), output.IsLocal != nil && *output.IsLocal)
+				severity := severityWeighting.DisplaySeverity
 
 				if config.Report.Severity[severity] {
+					finding.SeverityMeta = severityWeighting
 					outputFindings[severity] = append(outputFindings[severity], finding)
 				}
 			}
@@ -389,9 +391,12 @@ func BuildReportString(reportData *outputtypes.ReportData, config settings.Confi
 	return reportStr
 }
 
-func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) string {
+func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) types.SeverityMeta {
 	if severity == globaltypes.LevelWarning {
-		return globaltypes.LevelWarning
+		return types.SeverityMeta{
+			RuleSeverity:    severity,
+			DisplaySeverity: globaltypes.LevelWarning,
+		}
 	}
 
 	// highest sensitive data category
@@ -423,16 +428,28 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		triggerWeighting = 2
 	}
 
-	switch finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting); {
+	var displaySeverity string
+	finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting)
+	switch {
 	case finalWeighting >= 8:
-		return globaltypes.LevelCritical
+		displaySeverity = globaltypes.LevelCritical
 	case finalWeighting >= 5:
-		return globaltypes.LevelHigh
+		displaySeverity = globaltypes.LevelHigh
 	case finalWeighting >= 3:
-		return globaltypes.LevelMedium
+		displaySeverity = globaltypes.LevelMedium
+	default:
+		displaySeverity = globaltypes.LevelLow
 	}
 
-	return globaltypes.LevelLow
+	return types.SeverityMeta{
+		RuleSeverity:                   severity,
+		SensitiveDataCategories:        groups,
+		HasLocalDataTypes:              &hasLocalDataTypes,
+		RuleSeverityWeighting:          ruleSeverityWeighting,
+		SensitiveDataCategoryWeighting: sensitiveDataCategoryWeighting,
+		FinalWeighting:                 finalWeighting,
+		DisplaySeverity:                displaySeverity,
+	}
 }
 
 func writeStatsToString(
