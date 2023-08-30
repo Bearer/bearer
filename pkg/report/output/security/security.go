@@ -232,7 +232,7 @@ func evaluateRules(
 				severity := severityWeighting.DisplaySeverity
 
 				if config.Report.Severity[severity] {
-					finding.SeverityWeighting = severityWeighting
+					finding.SeverityMeta = severityWeighting
 					outputFindings[severity] = append(outputFindings[severity], finding)
 				}
 			}
@@ -391,9 +391,9 @@ func BuildReportString(reportData *outputtypes.ReportData, config settings.Confi
 	return reportStr
 }
 
-func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) types.SeverityWeighting {
+func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool) types.SeverityMeta {
 	if severity == globaltypes.LevelWarning {
-		return types.SeverityWeighting{
+		return types.SeverityMeta{
 			RuleSeverity:    severity,
 			DisplaySeverity: globaltypes.LevelWarning,
 		}
@@ -441,11 +441,12 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		displaySeverity = globaltypes.LevelLow
 	}
 
-	return types.SeverityWeighting{
+	return types.SeverityMeta{
 		RuleSeverity:                   severity,
-		SensitiveDataCategoryWeighting: sensitiveDataCategoryWeighting,
-		RuleSeverityWeighting:          ruleSeverityWeighting,
+		SensitiveDataCategories:        groups,
 		HasLocalDataTypes:              &hasLocalDataTypes,
+		RuleSeverityWeighting:          ruleSeverityWeighting,
+		SensitiveDataCategoryWeighting: sensitiveDataCategoryWeighting,
 		FinalWeighting:                 finalWeighting,
 		DisplaySeverity:                displaySeverity,
 	}

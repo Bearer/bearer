@@ -52,13 +52,18 @@
       CodeExtract: (string) "",
       RawCodeExtract: ([]file.Line) {
       },
-      SeverityWeighting: (types.SeverityWeighting) {
+      SeverityMeta: (types.SeverityMeta) {
         RuleSeverity: (string) (len=3) "low",
-        DisplaySeverity: (string) (len=8) "critical",
+        SensitiveDataCategories: ([]string) (len=3) {
+          (string) (len=3) "PII",
+          (string) (len=13) "Personal Data",
+          (string) (len=25) "Personal Data (Sensitive)"
+        },
+        HasLocalDataTypes: (*bool)(true),
         SensitiveDataCategoryWeighting: (int) 3,
         RuleSeverityWeighting: (int) 2,
-        HasLocalDataTypes: (*bool)(true),
-        FinalWeighting: (int) 8
+        FinalWeighting: (int) 8,
+        DisplaySeverity: (string) (len=8) "critical"
       }
     }
   }

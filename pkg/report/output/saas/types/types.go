@@ -34,5 +34,5 @@ type BearerReport struct {
 
 type SaasFinding struct {
 	securitytypes.Finding
-	SeverityWeighting securitytypes.SeverityWeighting `json:"severity_weighting" yaml:"severity_weighting"`
+	SeverityMeta securitytypes.SeverityMeta `json:"severity_meta" yaml:"severity_meta"`
 }

@@ -162,7 +162,7 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 }
 
 func TestCalculateSeverity(t *testing.T) {
-	res := []securitytypes.SeverityWeighting{
+	res := []securitytypes.SeverityMeta{
 		security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", true),
 		security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", false),
 		security.CalculateSeverity([]string{"Personal Data"}, "low", false),

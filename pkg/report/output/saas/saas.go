@@ -41,8 +41,8 @@ func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta 
 			saasFindingsBySeverity[severity] = append(
 				saasFindingsBySeverity[severity],
 				saas.SaasFinding{
-					Finding:           finding,
-					SeverityWeighting: finding.SeverityWeighting,
+					Finding:      finding,
+					SeverityMeta: finding.SeverityMeta,
 				})
 		}
 	}
