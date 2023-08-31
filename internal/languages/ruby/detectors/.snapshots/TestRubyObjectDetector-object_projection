@@ -1,184 +1,561 @@
-- position: "1:5"
-  content: 'obj = { x: { a: { i: 3 } }, y: 4 }'
-  data:
-    properties:
-        - name: obj
-          node: {}
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: x
-                      node: {}
-                      object:
-                        detectortype: object
-                        matchnode: {}
-                        data:
-                            properties:
-                                - name: a
-                                  node: {}
-                                  object:
-                                    detectortype: object
-                                    matchnode: {}
-                                    data:
-                                        properties:
-                                            - name: i
-                                              node: {}
-                                              object: null
-                                        isvirtual: false
-                            isvirtual: false
-                    - name: x
-                      node: {}
-                      object:
-                        detectortype: object
-                        matchnode: {}
-                        data:
-                            properties:
-                                - name: i
-                                  node: {}
-                                  object: null
-                            isvirtual: false
-                    - name: "y"
-                      node: {}
-                      object: null
-                isvirtual: false
-    isvirtual: true
-- position: "1:11"
-  content: '{ x: { a: { i: 3 } }, y: 4 }'
-  data:
-    properties:
-        - name: x
-          node: {}
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: a
-                      node: {}
-                      object:
-                        detectortype: object
-                        matchnode: {}
-                        data:
-                            properties:
-                                - name: i
-                                  node: {}
-                                  object: null
-                            isvirtual: false
-                isvirtual: false
-        - name: x
-          node: {}
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: i
-                      node: {}
-                      object: null
-                isvirtual: false
-        - name: "y"
-          node: {}
-          object: null
-    isvirtual: false
-- position: "1:16"
-  content: '{ a: { i: 3 } }'
-  data:
-    properties:
-        - name: a
-          node: {}
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: i
-                      node: {}
-                      object: null
-                isvirtual: false
-    isvirtual: false
-- position: "1:21"
-  content: '{ i: 3 }'
-  data:
-    properties:
-        - name: i
-          node: {}
-          object: null
-    isvirtual: false
-- position: "4:1"
+type: program
+id: 0
+range: 1:1 - 14:10
+dataflow_sources:
+    - 1
+    - 31
+    - 32
+    - 36
+    - 47
+    - 48
+    - 52
+    - 56
+    - 64
+    - 65
+    - 80
+children:
+    - type: call
+      id: 1
+      range: 1:1 - 1:39
+      dataflow_sources:
+        - 3
+      children:
+        - type: identifier
+          id: 2
+          range: 1:1 - 1:4
+          content: let
+        - type: argument_list
+          id: 3
+          range: 1:5 - 1:39
+          dataflow_sources:
+            - 4
+          children:
+            - type: assignment
+              id: 4
+              range: 1:5 - 1:39
+              alias_of:
+                - 7
+              queries:
+                - 2
+              children:
+                - type: identifier
+                  id: 5
+                  range: 1:5 - 1:8
+                  content: obj
+                - type: '"="'
+                  id: 6
+                  range: 1:9 - 1:10
+                - type: hash
+                  id: 7
+                  range: 1:11 - 1:39
+                  dataflow_sources:
+                    - 8
+                    - 9
+                    - 25
+                    - 26
+                    - 30
+                  queries:
+                    - 0
+                  children:
+                    - type: '"{"'
+                      id: 8
+                      range: 1:11 - 1:12
+                    - type: pair
+                      id: 9
+                      range: 1:13 - 1:31
+                      dataflow_sources:
+                        - 10
+                        - 11
+                        - 12
+                      children:
+                        - type: hash_key_symbol
+                          id: 10
+                          range: 1:13 - 1:14
+                          content: x
+                        - type: '":"'
+                          id: 11
+                          range: 1:14 - 1:15
+                        - type: hash
+                          id: 12
+                          range: 1:16 - 1:31
+                          dataflow_sources:
+                            - 13
+                            - 14
+                            - 24
+                          queries:
+                            - 0
+                          children:
+                            - type: '"{"'
+                              id: 13
+                              range: 1:16 - 1:17
+                            - type: pair
+                              id: 14
+                              range: 1:18 - 1:29
+                              dataflow_sources:
+                                - 15
+                                - 16
+                                - 17
+                              children:
+                                - type: hash_key_symbol
+                                  id: 15
+                                  range: 1:18 - 1:19
+                                  content: a
+                                - type: '":"'
+                                  id: 16
+                                  range: 1:19 - 1:20
+                                - type: hash
+                                  id: 17
+                                  range: 1:21 - 1:29
+                                  dataflow_sources:
+                                    - 18
+                                    - 19
+                                    - 23
+                                  queries:
+                                    - 0
+                                  children:
+                                    - type: '"{"'
+                                      id: 18
+                                      range: 1:21 - 1:22
+                                    - type: pair
+                                      id: 19
+                                      range: 1:23 - 1:27
+                                      dataflow_sources:
+                                        - 20
+                                        - 21
+                                        - 22
+                                      children:
+                                        - type: hash_key_symbol
+                                          id: 20
+                                          range: 1:23 - 1:24
+                                          content: i
+                                        - type: '":"'
+                                          id: 21
+                                          range: 1:24 - 1:25
+                                        - type: integer
+                                          id: 22
+                                          range: 1:26 - 1:27
+                                          content: "3"
+                                    - type: '"}"'
+                                      id: 23
+                                      range: 1:28 - 1:29
+                            - type: '"}"'
+                              id: 24
+                              range: 1:30 - 1:31
+                    - type: '","'
+                      id: 25
+                      range: 1:31 - 1:32
+                    - type: pair
+                      id: 26
+                      range: 1:33 - 1:37
+                      dataflow_sources:
+                        - 27
+                        - 28
+                        - 29
+                      children:
+                        - type: hash_key_symbol
+                          id: 27
+                          range: 1:33 - 1:34
+                          content: "y"
+                        - type: '":"'
+                          id: 28
+                          range: 1:34 - 1:35
+                        - type: integer
+                          id: 29
+                          range: 1:36 - 1:37
+                          content: "4"
+                    - type: '"}"'
+                      id: 30
+                      range: 1:38 - 1:39
+    - type: comment
+      id: 31
+      range: 3:1 - 3:19
+      content: '# Known properties'
+    - type: call
+      id: 32
+      range: 4:1 - 4:6
+      queries:
+        - 4
+      children:
+        - type: identifier
+          id: 33
+          range: 4:1 - 4:4
+          content: obj
+          alias_of:
+            - 4
+        - type: '"."'
+          id: 34
+          range: 4:4 - 4:5
+        - type: identifier
+          id: 35
+          range: 4:5 - 4:6
+          content: x
+    - type: call
+      id: 36
+      range: 5:1 - 5:11
+      queries:
+        - 4
+      children:
+        - type: element_reference
+          id: 37
+          range: 5:1 - 5:9
+          dataflow_sources:
+            - 38
+          queries:
+            - 5
+          children:
+            - type: identifier
+              id: 38
+              range: 5:1 - 5:4
+              content: obj
+              alias_of:
+                - 4
+            - type: '"["'
+              id: 39
+              range: 5:4 - 5:5
+            - type: string
+              id: 40
+              range: 5:5 - 5:8
+              dataflow_sources:
+                - 41
+                - 42
+                - 43
+              children:
+                - type: '"""'
+                  id: 41
+                  range: 5:5 - 5:6
+                - type: string_content
+                  id: 42
+                  range: 5:6 - 5:7
+                  content: x
+                - type: '"""'
+                  id: 43
+                  range: 5:7 - 5:8
+            - type: '"]"'
+              id: 44
+              range: 5:8 - 5:9
+        - type: '"."'
+          id: 45
+          range: 5:9 - 5:10
+        - type: identifier
+          id: 46
+          range: 5:10 - 5:11
+          content: a
+    - type: comment
+      id: 47
+      range: 7:1 - 7:21
+      content: '# Unknown properties'
+    - type: call
+      id: 48
+      range: 8:1 - 8:6
+      queries:
+        - 4
+      children:
+        - type: identifier
+          id: 49
+          range: 8:1 - 8:4
+          content: obj
+          alias_of:
+            - 4
+        - type: '"."'
+          id: 50
+          range: 8:4 - 8:5
+        - type: identifier
+          id: 51
+          range: 8:5 - 8:6
+          content: z
+    - type: call
+      id: 52
+      range: 9:1 - 9:9
+      queries:
+        - 4
+      children:
+        - type: instance_variable
+          id: 53
+          range: 9:1 - 9:7
+          content: '@myvar'
+        - type: '"."'
+          id: 54
+          range: 9:7 - 9:8
+        - type: identifier
+          id: 55
+          range: 9:8 - 9:9
+          content: x
+    - type: element_reference
+      id: 56
+      range: 10:1 - 10:12
+      dataflow_sources:
+        - 57
+      queries:
+        - 5
+      children:
+        - type: instance_variable
+          id: 57
+          range: 10:1 - 10:7
+          content: '@myvar'
+        - type: '"["'
+          id: 58
+          range: 10:7 - 10:8
+        - type: string
+          id: 59
+          range: 10:8 - 10:11
+          dataflow_sources:
+            - 60
+            - 61
+            - 62
+          children:
+            - type: '"""'
+              id: 60
+              range: 10:8 - 10:9
+            - type: string_content
+              id: 61
+              range: 10:9 - 10:10
+              content: w
+            - type: '"""'
+              id: 62
+              range: 10:10 - 10:11
+        - type: '"]"'
+          id: 63
+          range: 10:11 - 10:12
+    - type: comment
+      id: 64
+      range: 12:1 - 12:17
+      content: '# Multiple index'
+    - type: assignment
+      id: 65
+      range: 13:1 - 13:27
+      alias_of:
+        - 68
+      queries:
+        - 2
+      children:
+        - type: identifier
+          id: 66
+          range: 13:1 - 13:4
+          content: foo
+        - type: '"="'
+          id: 67
+          range: 13:5 - 13:6
+        - type: array
+          id: 68
+          range: 13:7 - 13:27
+          dataflow_sources:
+            - 69
+            - 70
+            - 71
+            - 72
+            - 73
+            - 74
+            - 75
+            - 76
+            - 77
+            - 78
+            - 79
+          children:
+            - type: '"["'
+              id: 69
+              range: 13:7 - 13:8
+            - type: simple_symbol
+              id: 70
+              range: 13:8 - 13:10
+              content: :a
+            - type: '","'
+              id: 71
+              range: 13:10 - 13:11
+            - type: simple_symbol
+              id: 72
+              range: 13:12 - 13:14
+              content: :b
+            - type: '","'
+              id: 73
+              range: 13:14 - 13:15
+            - type: simple_symbol
+              id: 74
+              range: 13:16 - 13:18
+              content: :c
+            - type: '","'
+              id: 75
+              range: 13:18 - 13:19
+            - type: simple_symbol
+              id: 76
+              range: 13:20 - 13:22
+              content: :d
+            - type: '","'
+              id: 77
+              range: 13:22 - 13:23
+            - type: simple_symbol
+              id: 78
+              range: 13:24 - 13:26
+              content: :e
+            - type: '"]"'
+              id: 79
+              range: 13:26 - 13:27
+    - type: element_reference
+      id: 80
+      range: 14:1 - 14:10
+      dataflow_sources:
+        - 81
+      children:
+        - type: identifier
+          id: 81
+          range: 14:1 - 14:4
+          content: foo
+          alias_of:
+            - 65
+        - type: '"["'
+          id: 82
+          range: 14:4 - 14:5
+        - type: integer
+          id: 83
+          range: 14:5 - 14:6
+          content: "0"
+        - type: '","'
+          id: 84
+          range: 14:6 - 14:7
+        - type: integer
+          id: 85
+          range: 14:8 - 14:9
+          content: "2"
+        - type: '"]"'
+          id: 86
+          range: 14:9 - 14:10
+
+- node: 32
   content: obj.x
   data:
     properties:
         - name: a
-          node: {}
+          node:
+            id: 14
+            typeid: 8
+            contentstart:
+                byte: 17
+                line: 1
+                column: 18
+            contentend:
+                byte: 28
+                line: 1
+                column: 29
+            executingdetectors: []
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 17
+                typeid: 6
+                contentstart:
+                    byte: 20
+                    line: 1
+                    column: 21
+                contentend:
+                    byte: 28
+                    line: 1
+                    column: 29
+                executingdetectors: []
             data:
                 properties:
                     - name: i
-                      node: {}
+                      node:
+                        id: 19
+                        typeid: 8
+                        contentstart:
+                            byte: 22
+                            line: 1
+                            column: 23
+                        contentend:
+                            byte: 26
+                            line: 1
+                            column: 27
+                        executingdetectors: []
                       object: null
                 isvirtual: false
     isvirtual: false
-- position: "4:1"
+- node: 32
   content: obj.x
   data:
     properties:
         - name: x
           node: null
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 32
+                typeid: 1
+                contentstart:
+                    byte: 59
+                    line: 4
+                    column: 1
+                contentend:
+                    byte: 64
+                    line: 4
+                    column: 6
+                executingdetectors: []
             data:
                 properties:
                     - name: a
-                      node: {}
+                      node:
+                        id: 14
+                        typeid: 8
+                        contentstart:
+                            byte: 17
+                            line: 1
+                            column: 18
+                        contentend:
+                            byte: 28
+                            line: 1
+                            column: 29
+                        executingdetectors: []
                       object:
-                        detectortype: object
-                        matchnode: {}
+                        ruleid: object
+                        matchnode:
+                            id: 17
+                            typeid: 6
+                            contentstart:
+                                byte: 20
+                                line: 1
+                                column: 21
+                            contentend:
+                                byte: 28
+                                line: 1
+                                column: 29
+                            executingdetectors: []
                         data:
                             properties:
                                 - name: i
-                                  node: {}
+                                  node:
+                                    id: 19
+                                    typeid: 8
+                                    contentstart:
+                                        byte: 22
+                                        line: 1
+                                        column: 23
+                                    contentend:
+                                        byte: 26
+                                        line: 1
+                                        column: 27
+                                    executingdetectors: []
                                   object: null
                             isvirtual: false
                 isvirtual: false
     isvirtual: true
-- position: "4:1"
-  content: obj.x
-  data:
-    properties:
-        - name: i
-          node: {}
-          object: null
-    isvirtual: false
-- position: "4:1"
-  content: obj.x
-  data:
-    properties:
-        - name: x
-          node: null
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: i
-                      node: {}
-                      object: null
-                isvirtual: false
-    isvirtual: true
-- position: "4:1"
+- node: 32
   content: obj.x
   data:
     properties:
         - name: obj
           node: null
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 32
+                typeid: 1
+                contentstart:
+                    byte: 59
+                    line: 4
+                    column: 1
+                contentend:
+                    byte: 64
+                    line: 4
+                    column: 6
+                executingdetectors: []
             data:
                 properties:
                     - name: x
@@ -186,39 +563,83 @@
                       object: null
                 isvirtual: true
     isvirtual: true
-- position: "5:1"
+- node: 36
   content: obj["x"].a
   data:
     properties:
         - name: i
-          node: {}
+          node:
+            id: 19
+            typeid: 8
+            contentstart:
+                byte: 22
+                line: 1
+                column: 23
+            contentend:
+                byte: 26
+                line: 1
+                column: 27
+            executingdetectors: []
           object: null
     isvirtual: false
-- position: "5:1"
+- node: 36
   content: obj["x"].a
   data:
     properties:
         - name: a
           node: null
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 36
+                typeid: 1
+                contentstart:
+                    byte: 65
+                    line: 5
+                    column: 1
+                contentend:
+                    byte: 75
+                    line: 5
+                    column: 11
+                executingdetectors: []
             data:
                 properties:
                     - name: i
-                      node: {}
+                      node:
+                        id: 19
+                        typeid: 8
+                        contentstart:
+                            byte: 22
+                            line: 1
+                            column: 23
+                        contentend:
+                            byte: 26
+                            line: 1
+                            column: 27
+                        executingdetectors: []
                       object: null
                 isvirtual: false
     isvirtual: true
-- position: "5:1"
+- node: 36
   content: obj["x"].a
   data:
     properties:
         - name: x
           node: null
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 36
+                typeid: 1
+                contentstart:
+                    byte: 65
+                    line: 5
+                    column: 1
+                contentend:
+                    byte: 75
+                    line: 5
+                    column: 11
+                executingdetectors: []
             data:
                 properties:
                     - name: a
@@ -226,95 +647,26 @@
                       object: null
                 isvirtual: true
     isvirtual: true
-- position: "5:1"
-  content: obj["x"]
-  data:
-    properties:
-        - name: a
-          node: {}
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: i
-                      node: {}
-                      object: null
-                isvirtual: false
-    isvirtual: false
-- position: "5:1"
-  content: obj["x"]
-  data:
-    properties:
-        - name: x
-          node: null
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: a
-                      node: {}
-                      object:
-                        detectortype: object
-                        matchnode: {}
-                        data:
-                            properties:
-                                - name: i
-                                  node: {}
-                                  object: null
-                            isvirtual: false
-                isvirtual: false
-    isvirtual: true
-- position: "5:1"
-  content: obj["x"]
-  data:
-    properties:
-        - name: i
-          node: {}
-          object: null
-    isvirtual: false
-- position: "5:1"
-  content: obj["x"]
-  data:
-    properties:
-        - name: x
-          node: null
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: i
-                      node: {}
-                      object: null
-                isvirtual: false
-    isvirtual: true
-- position: "5:1"
-  content: obj["x"]
-  data:
-    properties:
-        - name: obj
-          node: null
-          object:
-            detectortype: object
-            matchnode: {}
-            data:
-                properties:
-                    - name: x
-                      node: null
-                      object: null
-                isvirtual: true
-    isvirtual: true
-- position: "8:1"
+- node: 48
   content: obj.z
   data:
     properties:
         - name: obj
           node: null
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 48
+                typeid: 1
+                contentstart:
+                    byte: 98
+                    line: 8
+                    column: 1
+                contentend:
+                    byte: 103
+                    line: 8
+                    column: 6
+                executingdetectors: []
             data:
                 properties:
                     - name: z
@@ -322,15 +674,26 @@
                       object: null
                 isvirtual: true
     isvirtual: true
-- position: "9:1"
+- node: 52
   content: '@myvar.x'
   data:
     properties:
         - name: myvar
           node: null
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 52
+                typeid: 1
+                contentstart:
+                    byte: 104
+                    line: 9
+                    column: 1
+                contentend:
+                    byte: 112
+                    line: 9
+                    column: 9
+                executingdetectors: []
             data:
                 properties:
                     - name: x
@@ -338,15 +701,26 @@
                       object: null
                 isvirtual: true
     isvirtual: true
-- position: "10:1"
+- node: 56
   content: '@myvar["w"]'
   data:
     properties:
         - name: myvar
           node: null
           object:
-            detectortype: object
-            matchnode: {}
+            ruleid: object
+            matchnode:
+                id: 56
+                typeid: 16
+                contentstart:
+                    byte: 113
+                    line: 10
+                    column: 1
+                contentend:
+                    byte: 124
+                    line: 10
+                    column: 12
+                executingdetectors: []
             data:
                 properties:
                     - name: w
@@ -354,4 +728,432 @@
                       object: null
                 isvirtual: true
     isvirtual: true
+- node: 37
+  content: obj["x"]
+  data:
+    properties:
+        - name: a
+          node:
+            id: 14
+            typeid: 8
+            contentstart:
+                byte: 17
+                line: 1
+                column: 18
+            contentend:
+                byte: 28
+                line: 1
+                column: 29
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 17
+                typeid: 6
+                contentstart:
+                    byte: 20
+                    line: 1
+                    column: 21
+                contentend:
+                    byte: 28
+                    line: 1
+                    column: 29
+                executingdetectors: []
+            data:
+                properties:
+                    - name: i
+                      node:
+                        id: 19
+                        typeid: 8
+                        contentstart:
+                            byte: 22
+                            line: 1
+                            column: 23
+                        contentend:
+                            byte: 26
+                            line: 1
+                            column: 27
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 37
+  content: obj["x"]
+  data:
+    properties:
+        - name: x
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 37
+                typeid: 16
+                contentstart:
+                    byte: 65
+                    line: 5
+                    column: 1
+                contentend:
+                    byte: 73
+                    line: 5
+                    column: 9
+                executingdetectors: []
+            data:
+                properties:
+                    - name: a
+                      node:
+                        id: 14
+                        typeid: 8
+                        contentstart:
+                            byte: 17
+                            line: 1
+                            column: 18
+                        contentend:
+                            byte: 28
+                            line: 1
+                            column: 29
+                        executingdetectors: []
+                      object:
+                        ruleid: object
+                        matchnode:
+                            id: 17
+                            typeid: 6
+                            contentstart:
+                                byte: 20
+                                line: 1
+                                column: 21
+                            contentend:
+                                byte: 28
+                                line: 1
+                                column: 29
+                            executingdetectors: []
+                        data:
+                            properties:
+                                - name: i
+                                  node:
+                                    id: 19
+                                    typeid: 8
+                                    contentstart:
+                                        byte: 22
+                                        line: 1
+                                        column: 23
+                                    contentend:
+                                        byte: 26
+                                        line: 1
+                                        column: 27
+                                    executingdetectors: []
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+    isvirtual: true
+- node: 37
+  content: obj["x"]
+  data:
+    properties:
+        - name: obj
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 37
+                typeid: 16
+                contentstart:
+                    byte: 65
+                    line: 5
+                    column: 1
+                contentend:
+                    byte: 73
+                    line: 5
+                    column: 9
+                executingdetectors: []
+            data:
+                properties:
+                    - name: x
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 4
+  content: 'obj = { x: { a: { i: 3 } }, y: 4 }'
+  data:
+    properties:
+        - name: obj
+          node:
+            id: 4
+            typeid: 4
+            contentstart:
+                byte: 4
+                line: 1
+                column: 5
+            contentend:
+                byte: 38
+                line: 1
+                column: 39
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 7
+                typeid: 6
+                contentstart:
+                    byte: 10
+                    line: 1
+                    column: 11
+                contentend:
+                    byte: 38
+                    line: 1
+                    column: 39
+                executingdetectors: []
+            data:
+                properties:
+                    - name: x
+                      node:
+                        id: 9
+                        typeid: 8
+                        contentstart:
+                            byte: 12
+                            line: 1
+                            column: 13
+                        contentend:
+                            byte: 30
+                            line: 1
+                            column: 31
+                        executingdetectors: []
+                      object:
+                        ruleid: object
+                        matchnode:
+                            id: 12
+                            typeid: 6
+                            contentstart:
+                                byte: 15
+                                line: 1
+                                column: 16
+                            contentend:
+                                byte: 30
+                                line: 1
+                                column: 31
+                            executingdetectors: []
+                        data:
+                            properties:
+                                - name: a
+                                  node:
+                                    id: 14
+                                    typeid: 8
+                                    contentstart:
+                                        byte: 17
+                                        line: 1
+                                        column: 18
+                                    contentend:
+                                        byte: 28
+                                        line: 1
+                                        column: 29
+                                    executingdetectors: []
+                                  object:
+                                    ruleid: object
+                                    matchnode:
+                                        id: 17
+                                        typeid: 6
+                                        contentstart:
+                                            byte: 20
+                                            line: 1
+                                            column: 21
+                                        contentend:
+                                            byte: 28
+                                            line: 1
+                                            column: 29
+                                        executingdetectors: []
+                                    data:
+                                        properties:
+                                            - name: i
+                                              node:
+                                                id: 19
+                                                typeid: 8
+                                                contentstart:
+                                                    byte: 22
+                                                    line: 1
+                                                    column: 23
+                                                contentend:
+                                                    byte: 26
+                                                    line: 1
+                                                    column: 27
+                                                executingdetectors: []
+                                              object: null
+                                        isvirtual: false
+                            isvirtual: false
+                    - name: "y"
+                      node:
+                        id: 26
+                        typeid: 8
+                        contentstart:
+                            byte: 32
+                            line: 1
+                            column: 33
+                        contentend:
+                            byte: 36
+                            line: 1
+                            column: 37
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: true
+- node: 7
+  content: '{ x: { a: { i: 3 } }, y: 4 }'
+  data:
+    properties:
+        - name: x
+          node:
+            id: 9
+            typeid: 8
+            contentstart:
+                byte: 12
+                line: 1
+                column: 13
+            contentend:
+                byte: 30
+                line: 1
+                column: 31
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 12
+                typeid: 6
+                contentstart:
+                    byte: 15
+                    line: 1
+                    column: 16
+                contentend:
+                    byte: 30
+                    line: 1
+                    column: 31
+                executingdetectors: []
+            data:
+                properties:
+                    - name: a
+                      node:
+                        id: 14
+                        typeid: 8
+                        contentstart:
+                            byte: 17
+                            line: 1
+                            column: 18
+                        contentend:
+                            byte: 28
+                            line: 1
+                            column: 29
+                        executingdetectors: []
+                      object:
+                        ruleid: object
+                        matchnode:
+                            id: 17
+                            typeid: 6
+                            contentstart:
+                                byte: 20
+                                line: 1
+                                column: 21
+                            contentend:
+                                byte: 28
+                                line: 1
+                                column: 29
+                            executingdetectors: []
+                        data:
+                            properties:
+                                - name: i
+                                  node:
+                                    id: 19
+                                    typeid: 8
+                                    contentstart:
+                                        byte: 22
+                                        line: 1
+                                        column: 23
+                                    contentend:
+                                        byte: 26
+                                        line: 1
+                                        column: 27
+                                    executingdetectors: []
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+        - name: "y"
+          node:
+            id: 26
+            typeid: 8
+            contentstart:
+                byte: 32
+                line: 1
+                column: 33
+            contentend:
+                byte: 36
+                line: 1
+                column: 37
+            executingdetectors: []
+          object: null
+    isvirtual: false
+- node: 12
+  content: '{ a: { i: 3 } }'
+  data:
+    properties:
+        - name: a
+          node:
+            id: 14
+            typeid: 8
+            contentstart:
+                byte: 17
+                line: 1
+                column: 18
+            contentend:
+                byte: 28
+                line: 1
+                column: 29
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 17
+                typeid: 6
+                contentstart:
+                    byte: 20
+                    line: 1
+                    column: 21
+                contentend:
+                    byte: 28
+                    line: 1
+                    column: 29
+                executingdetectors: []
+            data:
+                properties:
+                    - name: i
+                      node:
+                        id: 19
+                        typeid: 8
+                        contentstart:
+                            byte: 22
+                            line: 1
+                            column: 23
+                        contentend:
+                            byte: 26
+                            line: 1
+                            column: 27
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 17
+  content: '{ i: 3 }'
+  data:
+    properties:
+        - name: i
+          node:
+            id: 19
+            typeid: 8
+            contentstart:
+                byte: 22
+                line: 1
+                column: 23
+            contentend:
+                byte: 26
+                line: 1
+                column: 27
+            executingdetectors: []
+          object: null
+    isvirtual: false
 

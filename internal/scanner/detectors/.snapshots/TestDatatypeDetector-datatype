@@ -1,4 +1,165 @@
-- position: "1:1"
+type: program
+id: 0
+range: 1:1 - 7:1
+dataflow_sources:
+    - 1
+children:
+    - type: assignment
+      id: 1
+      range: 1:1 - 6:2
+      alias_of:
+        - 4
+      queries:
+        - 2
+      children:
+        - type: identifier
+          id: 2
+          range: 1:1 - 1:2
+          content: x
+        - type: '"="'
+          id: 3
+          range: 1:3 - 1:4
+        - type: hash
+          id: 4
+          range: 1:5 - 6:2
+          dataflow_sources:
+            - 5
+            - 6
+            - 24
+            - 25
+            - 31
+          queries:
+            - 0
+          children:
+            - type: '"{"'
+              id: 5
+              range: 1:5 - 1:6
+            - type: pair
+              id: 6
+              range: 2:3 - 4:4
+              dataflow_sources:
+                - 7
+                - 8
+                - 9
+              children:
+                - type: hash_key_symbol
+                  id: 7
+                  range: 2:3 - 2:4
+                  content: "y"
+                - type: '":"'
+                  id: 8
+                  range: 2:4 - 2:5
+                - type: hash
+                  id: 9
+                  range: 2:6 - 4:4
+                  dataflow_sources:
+                    - 10
+                    - 11
+                    - 23
+                  queries:
+                    - 0
+                  children:
+                    - type: '"{"'
+                      id: 10
+                      range: 2:6 - 2:7
+                    - type: pair
+                      id: 11
+                      range: 3:5 - 3:29
+                      dataflow_sources:
+                        - 12
+                        - 13
+                        - 14
+                      children:
+                        - type: hash_key_symbol
+                          id: 12
+                          range: 3:5 - 3:9
+                          content: user
+                        - type: '":"'
+                          id: 13
+                          range: 3:9 - 3:10
+                        - type: hash
+                          id: 14
+                          range: 3:11 - 3:29
+                          dataflow_sources:
+                            - 15
+                            - 16
+                            - 22
+                          queries:
+                            - 0
+                          children:
+                            - type: '"{"'
+                              id: 15
+                              range: 3:11 - 3:12
+                            - type: pair
+                              id: 16
+                              range: 3:13 - 3:27
+                              dataflow_sources:
+                                - 17
+                                - 18
+                                - 19
+                              children:
+                                - type: hash_key_symbol
+                                  id: 17
+                                  range: 3:13 - 3:23
+                                  content: first_name
+                                - type: '":"'
+                                  id: 18
+                                  range: 3:23 - 3:24
+                                - type: string
+                                  id: 19
+                                  range: 3:25 - 3:27
+                                  dataflow_sources:
+                                    - 20
+                                    - 21
+                                  children:
+                                    - type: '"""'
+                                      id: 20
+                                      range: 3:25 - 3:26
+                                    - type: '"""'
+                                      id: 21
+                                      range: 3:26 - 3:27
+                            - type: '"}"'
+                              id: 22
+                              range: 3:28 - 3:29
+                    - type: '"}"'
+                      id: 23
+                      range: 4:3 - 4:4
+            - type: '","'
+              id: 24
+              range: 4:4 - 4:5
+            - type: pair
+              id: 25
+              range: 5:3 - 5:12
+              dataflow_sources:
+                - 26
+                - 27
+                - 28
+              children:
+                - type: hash_key_symbol
+                  id: 26
+                  range: 5:3 - 5:8
+                  content: email
+                - type: '":"'
+                  id: 27
+                  range: 5:8 - 5:9
+                - type: string
+                  id: 28
+                  range: 5:10 - 5:12
+                  dataflow_sources:
+                    - 29
+                    - 30
+                  children:
+                    - type: '"""'
+                      id: 29
+                      range: 5:10 - 5:11
+                    - type: '"""'
+                      id: 30
+                      range: 5:11 - 5:12
+            - type: '"}"'
+              id: 31
+              range: 6:1 - 6:2
+
+- node: 1
   content: |-
     x = {
       y: {
@@ -9,7 +170,18 @@
   data:
     properties:
         - name: x
-          node: {}
+          node:
+            id: 1
+            typeid: 1
+            contentstart:
+                byte: 0
+                line: 1
+                column: 1
+            contentend:
+                byte: 60
+                line: 6
+                column: 2
+            executingdetectors: []
           classification:
             name: x
             datatype: null
@@ -17,12 +189,34 @@
                 state: valid
                 reason: invalid_object_with_valid_properties
           datatype:
-            detectortype: datatype
-            matchnode: {}
+            ruleid: datatype
+            matchnode:
+                id: 4
+                typeid: 4
+                contentstart:
+                    byte: 4
+                    line: 1
+                    column: 5
+                contentend:
+                    byte: 60
+                    line: 6
+                    column: 2
+                executingdetectors: []
             data:
                 properties:
                     - name: "y"
-                      node: {}
+                      node:
+                        id: 6
+                        typeid: 6
+                        contentstart:
+                            byte: 8
+                            line: 2
+                            column: 3
+                        contentend:
+                            byte: 45
+                            line: 4
+                            column: 4
+                        executingdetectors: []
                       classification:
                         name: "y"
                         datatype: null
@@ -30,12 +224,34 @@
                             state: invalid
                             reason: invalid_property
                       datatype:
-                        detectortype: datatype
-                        matchnode: {}
+                        ruleid: datatype
+                        matchnode:
+                            id: 9
+                            typeid: 4
+                            contentstart:
+                                byte: 11
+                                line: 2
+                                column: 6
+                            contentend:
+                                byte: 45
+                                line: 4
+                                column: 4
+                            executingdetectors: []
                         data:
                             properties:
                                 - name: user
-                                  node: {}
+                                  node:
+                                    id: 11
+                                    typeid: 6
+                                    contentstart:
+                                        byte: 17
+                                        line: 3
+                                        column: 5
+                                    contentend:
+                                        byte: 41
+                                        line: 3
+                                        column: 29
+                                    executingdetectors: []
                                   classification:
                                     name: user
                                     datatype: null
@@ -43,12 +259,34 @@
                                         state: valid
                                         reason: valid_object_with_valid_properties
                                   datatype:
-                                    detectortype: datatype
-                                    matchnode: {}
+                                    ruleid: datatype
+                                    matchnode:
+                                        id: 14
+                                        typeid: 4
+                                        contentstart:
+                                            byte: 23
+                                            line: 3
+                                            column: 11
+                                        contentend:
+                                            byte: 41
+                                            line: 3
+                                            column: 29
+                                        executingdetectors: []
                                     data:
                                         properties:
                                             - name: first_name
-                                              node: {}
+                                              node:
+                                                id: 16
+                                                typeid: 6
+                                                contentstart:
+                                                    byte: 25
+                                                    line: 3
+                                                    column: 13
+                                                contentend:
+                                                    byte: 39
+                                                    line: 3
+                                                    column: 27
+                                                executingdetectors: []
                                               classification:
                                                 name: first name
                                                 subject_name: User
@@ -70,43 +308,19 @@
                                                     state: valid
                                                     reason: known_pattern
                                               datatype: null
-                    - name: "y"
-                      node: {}
-                      classification:
-                        name: "y"
-                        datatype: null
-                        decision:
-                            state: valid
-                            reason: invalid_object_with_valid_properties
-                      datatype:
-                        detectortype: datatype
-                        matchnode: {}
-                        data:
-                            properties:
-                                - name: first_name
-                                  node: {}
-                                  classification:
-                                    name: first name
-                                    datatype:
-                                        name: Firstname
-                                        uuid: 380c8cde-ca2e-44ed-82db-2ab1e7c255c7
-                                        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
-                                        category:
-                                            name: Identification
-                                            uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
-                                            groups:
-                                                172d90e3-cb9a-46b6-90e5-dd7169c3af54:
-                                                    name: PII
-                                                    uuid: 172d90e3-cb9a-46b6-90e5-dd7169c3af54
-                                                e1d3135b-3c0f-4b55-abce-19f27a26cbb3:
-                                                    name: Personal Data
-                                                    uuid: e1d3135b-3c0f-4b55-abce-19f27a26cbb3
-                                    decision:
-                                        state: valid
-                                        reason: valid_unknown_pattern
-                                  datatype: null
                     - name: email
-                      node: {}
+                      node:
+                        id: 25
+                        typeid: 6
+                        contentstart:
+                            byte: 49
+                            line: 5
+                            column: 3
+                        contentend:
+                            byte: 58
+                            line: 5
+                            column: 12
+                        executingdetectors: []
                       classification:
                         name: email
                         datatype:
@@ -127,7 +341,7 @@
                             state: valid
                             reason: valid_unknown_pattern
                       datatype: null
-- position: "1:5"
+- node: 4
   content: |-
     {
       y: {
@@ -138,7 +352,18 @@
   data:
     properties:
         - name: "y"
-          node: {}
+          node:
+            id: 6
+            typeid: 6
+            contentstart:
+                byte: 8
+                line: 2
+                column: 3
+            contentend:
+                byte: 45
+                line: 4
+                column: 4
+            executingdetectors: []
           classification:
             name: "y"
             datatype: null
@@ -146,12 +371,34 @@
                 state: invalid
                 reason: belongs_to_invalid_object
           datatype:
-            detectortype: datatype
-            matchnode: {}
+            ruleid: datatype
+            matchnode:
+                id: 9
+                typeid: 4
+                contentstart:
+                    byte: 11
+                    line: 2
+                    column: 6
+                contentend:
+                    byte: 45
+                    line: 4
+                    column: 4
+                executingdetectors: []
             data:
                 properties:
                     - name: user
-                      node: {}
+                      node:
+                        id: 11
+                        typeid: 6
+                        contentstart:
+                            byte: 17
+                            line: 3
+                            column: 5
+                        contentend:
+                            byte: 41
+                            line: 3
+                            column: 29
+                        executingdetectors: []
                       classification:
                         name: user
                         datatype: null
@@ -159,12 +406,34 @@
                             state: valid
                             reason: valid_object_with_valid_properties
                       datatype:
-                        detectortype: datatype
-                        matchnode: {}
+                        ruleid: datatype
+                        matchnode:
+                            id: 14
+                            typeid: 4
+                            contentstart:
+                                byte: 23
+                                line: 3
+                                column: 11
+                            contentend:
+                                byte: 41
+                                line: 3
+                                column: 29
+                            executingdetectors: []
                         data:
                             properties:
                                 - name: first_name
-                                  node: {}
+                                  node:
+                                    id: 16
+                                    typeid: 6
+                                    contentstart:
+                                        byte: 25
+                                        line: 3
+                                        column: 13
+                                    contentend:
+                                        byte: 39
+                                        line: 3
+                                        column: 27
+                                    executingdetectors: []
                                   classification:
                                     name: first name
                                     subject_name: User
@@ -186,43 +455,19 @@
                                         state: valid
                                         reason: known_pattern
                                   datatype: null
-        - name: "y"
-          node: {}
-          classification:
-            name: "y"
-            datatype: null
-            decision:
-                state: valid
-                reason: invalid_object_with_valid_properties
-          datatype:
-            detectortype: datatype
-            matchnode: {}
-            data:
-                properties:
-                    - name: first_name
-                      node: {}
-                      classification:
-                        name: first name
-                        datatype:
-                            name: Firstname
-                            uuid: 380c8cde-ca2e-44ed-82db-2ab1e7c255c7
-                            category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
-                            category:
-                                name: Identification
-                                uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
-                                groups:
-                                    172d90e3-cb9a-46b6-90e5-dd7169c3af54:
-                                        name: PII
-                                        uuid: 172d90e3-cb9a-46b6-90e5-dd7169c3af54
-                                    e1d3135b-3c0f-4b55-abce-19f27a26cbb3:
-                                        name: Personal Data
-                                        uuid: e1d3135b-3c0f-4b55-abce-19f27a26cbb3
-                        decision:
-                            state: valid
-                            reason: valid_unknown_pattern
-                      datatype: null
         - name: email
-          node: {}
+          node:
+            id: 25
+            typeid: 6
+            contentstart:
+                byte: 49
+                line: 5
+                column: 3
+            contentend:
+                byte: 58
+                line: 5
+                column: 12
+            executingdetectors: []
           classification:
             name: email
             datatype: null
@@ -230,7 +475,7 @@
                 state: invalid
                 reason: belongs_to_invalid_object
           datatype: null
-- position: "2:6"
+- node: 9
   content: |-
     {
         user: { first_name: "" }
@@ -238,7 +483,18 @@
   data:
     properties:
         - name: user
-          node: {}
+          node:
+            id: 11
+            typeid: 6
+            contentstart:
+                byte: 17
+                line: 3
+                column: 5
+            contentend:
+                byte: 41
+                line: 3
+                column: 29
+            executingdetectors: []
           classification:
             name: user
             datatype: null
@@ -246,12 +502,34 @@
                 state: valid
                 reason: valid_object_with_valid_properties
           datatype:
-            detectortype: datatype
-            matchnode: {}
+            ruleid: datatype
+            matchnode:
+                id: 14
+                typeid: 4
+                contentstart:
+                    byte: 23
+                    line: 3
+                    column: 11
+                contentend:
+                    byte: 41
+                    line: 3
+                    column: 29
+                executingdetectors: []
             data:
                 properties:
                     - name: first_name
-                      node: {}
+                      node:
+                        id: 16
+                        typeid: 6
+                        contentstart:
+                            byte: 25
+                            line: 3
+                            column: 13
+                        contentend:
+                            byte: 39
+                            line: 3
+                            column: 27
+                        executingdetectors: []
                       classification:
                         name: first name
                         subject_name: User

@@ -104,6 +104,7 @@ func RunTest(
 		for i, detection := range detections {
 			node := detection.MatchNode
 			results[i] = result{
+				Node:    node.ID,
 				Content: node.Content(),
 				Data:    detection.Data,
 			}
@@ -114,7 +115,6 @@ func RunTest(
 			tt.Fatalf("failed to marshal results: %s", err)
 		}
 
-		cupaloy.SnapshotT(tt, tree.RootNode().Dump())
-		cupaloy.SnapshotT(tt, string(yamlResults))
+		cupaloy.SnapshotT(tt, tree.RootNode().Dump(), string(yamlResults))
 	})
 }

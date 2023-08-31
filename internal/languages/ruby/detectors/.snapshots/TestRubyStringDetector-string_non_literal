@@ -1,11 +1,109 @@
-- position: "1:1"
+type: program
+id: 0
+range: 1:1 - 4:1
+dataflow_sources:
+    - 1
+    - 8
+children:
+    - type: binary
+      id: 1
+      range: 1:1 - 1:8
+      dataflow_sources:
+        - 2
+        - 6
+        - 7
+      children:
+        - type: string
+          id: 2
+          range: 1:1 - 1:4
+          dataflow_sources:
+            - 3
+            - 4
+            - 5
+          children:
+            - type: '"""'
+              id: 3
+              range: 1:1 - 1:2
+            - type: string_content
+              id: 4
+              range: 1:2 - 1:3
+              content: a
+            - type: '"""'
+              id: 5
+              range: 1:3 - 1:4
+        - type: '"+"'
+          id: 6
+          range: 1:5 - 1:6
+        - type: identifier
+          id: 7
+          range: 1:7 - 1:8
+          content: x
+    - type: string
+      id: 8
+      range: 3:1 - 3:9
+      dataflow_sources:
+        - 9
+        - 10
+        - 14
+        - 15
+      children:
+        - type: '"""'
+          id: 9
+          range: 3:1 - 3:2
+        - type: interpolation
+          id: 10
+          range: 3:2 - 3:6
+          dataflow_sources:
+            - 11
+            - 12
+            - 13
+          children:
+            - type: '"#{"'
+              id: 11
+              range: 3:2 - 3:4
+            - type: identifier
+              id: 12
+              range: 3:4 - 3:5
+              content: x
+            - type: '"}"'
+              id: 13
+              range: 3:5 - 3:6
+        - type: string_content
+          id: 14
+          range: 3:6 - 3:8
+          content: ' b'
+        - type: '"""'
+          id: 15
+          range: 3:8 - 3:9
+
+- node: 1
   content: '"a" + x'
   data:
     value: a*
     isliteral: false
-- position: "3:1"
+- node: 8
   content: '"#{x} b"'
   data:
     value: '* b'
     isliteral: false
+- node: 2
+  content: '"a"'
+  data:
+    value: a
+    isliteral: true
+- node: 10
+  content: '#{x}'
+  data:
+    value: '*'
+    isliteral: false
+- node: 14
+  content: ' b'
+  data:
+    value: ' b'
+    isliteral: true
+- node: 4
+  content: a
+  data:
+    value: a
+    isliteral: true
 
