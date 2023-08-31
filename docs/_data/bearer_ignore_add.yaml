@@ -22,6 +22,9 @@ options:
     - name: disable-version-check
       default_value: "false"
       usage: Disable Bearer version checking
+    - name: false-positive
+      default_value: "false"
+      usage: Mark an this ignored finding as false positive.
     - name: force
       default_value: "false"
       usage: Overwrite an existing ignored finding.
