@@ -227,7 +227,7 @@ func evaluateRules(
 				}
 
 				ignoredFingerprint, ignored := config.IgnoredFingerprints[fingerprint]
-				if !ignored {
+				if !ignored && !config.CloudIgnoresUsed {
 					// check for legacy excluded fingerprint
 					ignored = config.Report.ExcludeFingerprint[fingerprint]
 				}
