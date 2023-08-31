@@ -391,9 +391,12 @@ func requestConfirmation(s string) bool {
 		if response == "" {
 			// Enter key defaults to Y
 			return true
+		}
 
 		if response == "n" || response == "no" {
 			return false
+		}
+
 		continue
 	}
 
