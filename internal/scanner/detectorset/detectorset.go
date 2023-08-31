@@ -20,20 +20,24 @@ type Result struct {
 }
 
 type Set interface {
-	BuiltinAndSharedRuleIDs() []string
-	TopLevelRuleIDs() []string
+	BuiltinAndSharedDetectorIDs() []int
+	TopLevelDetectorIDs() []int
+	RuleIDFor(detectorID int) string
+	DetectorIDFor(ruleID string) int
 	DetectAt(
 		node *tree.Node,
-		ruleID string,
+		detectorID int,
 		detectorContext detectortypes.Context,
 	) (*Result, error)
 }
 
 type detectorSet struct {
-	builtinAndSharedRuleIDs,
-	topLevelRuleIDs []string
+	// FIXME: remove this
+	detectorIDByRuleID map[string]int
+	builtinAndSharedDetectorIDs,
+	topLevelDetectorIDs []int
 	querySet  *query.Set
-	detectors map[string]detectortypes.Detector
+	detectors []detectortypes.Detector
 }
 
 func New(
@@ -43,42 +47,58 @@ func New(
 	language language.Language,
 ) (Set, error) {
 	relevantRules, presenceRules := getRelevantRules(rules, language.ID())
-	builtinAndSharedRuleIDs, topLevelRuleIDs := findNotableRuleIDs(builtinDetectors, relevantRules, presenceRules)
-
-	detectors, err := createDetectors(language, querySet, builtinDetectors, relevantRules)
+	detectors, detectorIDByRuleID, err := createDetectors(language, querySet, builtinDetectors, relevantRules)
 	if err != nil {
 		return nil, err
 	}
+
+	builtinAndSharedDetectorIDs, topLevelDetectorIDs := findNotableIDs(
+		detectorIDByRuleID,
+		builtinDetectors,
+		relevantRules,
+		presenceRules,
+	)
 
 	if err = querySet.Compile(); err != nil {
 		return nil, fmt.Errorf("error compiling query set: %w", err)
 	}
 
 	return &detectorSet{
-		builtinAndSharedRuleIDs: builtinAndSharedRuleIDs,
-		topLevelRuleIDs:         topLevelRuleIDs,
-		querySet:                querySet,
-		detectors:               detectors,
+		detectorIDByRuleID:          detectorIDByRuleID,
+		builtinAndSharedDetectorIDs: builtinAndSharedDetectorIDs,
+		topLevelDetectorIDs:         topLevelDetectorIDs,
+		querySet:                    querySet,
+		detectors:                   detectors,
 	}, nil
 }
 
-func (set *detectorSet) BuiltinAndSharedRuleIDs() []string {
-	return set.builtinAndSharedRuleIDs
+func (set *detectorSet) BuiltinAndSharedDetectorIDs() []int {
+	return set.builtinAndSharedDetectorIDs
 }
 
-func (set *detectorSet) TopLevelRuleIDs() []string {
-	return set.topLevelRuleIDs
+func (set *detectorSet) TopLevelDetectorIDs() []int {
+	return set.topLevelDetectorIDs
+}
+
+func (set *detectorSet) RuleIDFor(detectorID int) string {
+	return set.detectors[detectorID].RuleID()
+}
+
+func (set *detectorSet) DetectorIDFor(ruleID string) int {
+	detectorID, exists := set.detectorIDByRuleID[ruleID]
+	if !exists {
+		panic(fmt.Sprintf("unknown rule %s", ruleID))
+	}
+
+	return detectorID
 }
 
 func (set *detectorSet) DetectAt(
 	node *tree.Node,
-	ruleID string,
+	detectorID int,
 	detectorContext detectortypes.Context,
 ) (*Result, error) {
-	detector, err := set.lookupDetector(ruleID)
-	if err != nil {
-		return nil, err
-	}
+	detector := set.detectors[detectorID]
 
 	if isSanitized, err := set.isSanitized(detector, node, detectorContext); isSanitized || err != nil {
 		return &Result{Sanitized: true}, err
@@ -92,7 +112,7 @@ func (set *detectorSet) DetectAt(
 	detections := make([]*detectortypes.Detection, len(detectionsData))
 	for i, data := range detectionsData {
 		detections[i] = &detectortypes.Detection{
-			RuleID:    ruleID,
+			RuleID:    detector.RuleID(),
 			MatchNode: node,
 			Data:      data,
 		}
@@ -111,13 +131,13 @@ func (set *detectorSet) isSanitized(
 		return false, nil
 	}
 
-	if ruleDetector.SanitizerRuleID() == "" {
+	if ruleDetector.SanitizerDetectorID() == -1 {
 		return false, nil
 	}
 
 	sanitizerDetections, err := detectorContext.Scan(
 		node,
-		ruleDetector.SanitizerRuleID(),
+		ruleDetector.SanitizerDetectorID(),
 		settings.CURSOR_STRICT_SCOPE,
 	)
 	if err != nil {
@@ -127,28 +147,19 @@ func (set *detectorSet) isSanitized(
 	return len(sanitizerDetections) != 0, nil
 }
 
-func (set *detectorSet) lookupDetector(ruleID string) (detectortypes.Detector, error) {
-	detector, ok := set.detectors[ruleID]
-	if !ok {
-		return nil, fmt.Errorf("detector for rule '%s' not registered", ruleID)
-	}
-
-	return detector, nil
-}
-
 func getRelevantRules(
 	rules map[string]*settings.Rule,
 	languageID string,
-) (map[string]*settings.Rule, set.Set[string]) {
-	relevantRules := make(map[string]*settings.Rule)
+) ([]*settings.Rule, set.Set[string]) {
+	var relevantRules []*settings.Rule
 	presenceRules := set.New[string]()
 
-	for ruleID, rule := range rules {
+	for _, rule := range rules {
 		if !slices.Contains(rule.Languages, languageID) {
 			continue
 		}
 
-		relevantRules[ruleID] = rule
+		relevantRules = append(relevantRules, rule)
 
 		if rule.Trigger.RequiredDetection != nil {
 			presenceRules.Add(*rule.Trigger.RequiredDetection)
@@ -158,63 +169,86 @@ func getRelevantRules(
 	return relevantRules, presenceRules
 }
 
-func findNotableRuleIDs(
+func findNotableIDs(
+	detectorIDByRuleID map[string]int,
 	builtinDetectors []detectortypes.Detector,
-	relevantRules map[string]*settings.Rule,
+	relevantRules []*settings.Rule,
 	presenceRules set.Set[string],
-) ([]string, []string) {
-	var builtinAndSharedRuleIDs, topLevelRuleIDs []string
+) ([]int, []int) {
+	var builtinAndSharedDetectorIDs, topLevelDetectorIDs []int
 
 	for _, detector := range builtinDetectors {
-		builtinAndSharedRuleIDs = append(builtinAndSharedRuleIDs, detector.RuleID())
+		builtinAndSharedDetectorIDs = append(builtinAndSharedDetectorIDs, detectorIDByRuleID[detector.RuleID()])
 	}
 
-	for ruleID, rule := range relevantRules {
+	for _, rule := range relevantRules {
 		if rule.Type == customdetectors.TypeShared {
-			builtinAndSharedRuleIDs = append(builtinAndSharedRuleIDs, ruleID)
+			builtinAndSharedDetectorIDs = append(builtinAndSharedDetectorIDs, detectorIDByRuleID[rule.Id])
 			continue
 		}
 
-		if !rule.IsAuxilary || presenceRules.Has(ruleID) {
-			topLevelRuleIDs = append(topLevelRuleIDs, ruleID)
+		if !rule.IsAuxilary || presenceRules.Has(rule.Id) {
+			topLevelDetectorIDs = append(topLevelDetectorIDs, detectorIDByRuleID[rule.Id])
 		}
 	}
 
-	return builtinAndSharedRuleIDs, topLevelRuleIDs
+	return builtinAndSharedDetectorIDs, topLevelDetectorIDs
 }
 
 func createDetectors(
 	language language.Language,
 	querySet *query.Set,
 	builtinDetectors []detectortypes.Detector,
-	relevantRules map[string]*settings.Rule,
-) (map[string]detectortypes.Detector, error) {
-	detectors := make(map[string]detectortypes.Detector)
-
-	for _, detector := range builtinDetectors {
-		addDetector(detectors, detector)
+	relevantRules []*settings.Rule,
+) ([]detectortypes.Detector, map[string]int, error) {
+	detectorIDByRuleID, err := allocateIDs(builtinDetectors, relevantRules)
+	if err != nil {
+		return nil, nil, err
 	}
 
-	for ruleID, rule := range relevantRules {
-		detector, err := customrule.New(language, querySet, ruleID, rule.SanitizerRuleID, rule.Patterns)
+	detectors := builtinDetectors
+	for _, rule := range relevantRules {
+		detector, err := customrule.New(
+			language,
+			querySet,
+			detectorIDByRuleID,
+			rule.Id,
+			rule.SanitizerRuleID,
+			rule.Patterns,
+		)
 		if err != nil {
-			return nil, fmt.Errorf("failed to create %s detector: %w", ruleID, err)
+			return nil, nil, fmt.Errorf("failed to create %s detector: %w", rule.Id, err)
 		}
 
-		addDetector(detectors, detector)
+		detectors = append(detectors, detector)
 	}
 
-	return detectors, nil
+	return detectors, detectorIDByRuleID, nil
 }
 
-func addDetector(detectorMap map[string]detectortypes.Detector, detector detectortypes.Detector) error {
-	ruleID := detector.RuleID()
+func allocateIDs(
+	builtinDetectors []detectortypes.Detector,
+	relevantRules []*settings.Rule,
+) (map[string]int, error) {
+	result := make(map[string]int)
 
-	if _, existing := detectorMap[ruleID]; existing {
-		return fmt.Errorf("duplicate detector for rule '%s'", ruleID)
+	for i, detector := range builtinDetectors {
+		ruleID := detector.RuleID()
+		if _, existing := result[ruleID]; existing {
+			return nil, fmt.Errorf("duplicate built-in detector for rule '%s'", ruleID)
+		}
+
+		result[ruleID] = i
 	}
 
-	detectorMap[ruleID] = detector
+	for i, rule := range relevantRules {
+		ruleID := rule.Id
+		if _, existing := result[ruleID]; existing {
+			return nil, fmt.Errorf("duplicate detector for rule '%s'", ruleID)
+		}
 
-	return nil
+		result[ruleID] = i + len(builtinDetectors)
+	}
+
+	return result, nil
 }

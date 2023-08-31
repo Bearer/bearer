@@ -112,7 +112,7 @@ func (detector *objectDetector) getObject(
 
 	spreadResults := detector.spreadElementQuery.MatchAt(node)
 	for _, spreadResult := range spreadResults {
-		detections, err := detectorContext.Scan(spreadResult["identifier"], "object", settings.CURSOR_SCOPE)
+		detections, err := detectorContext.ScanRule(spreadResult["identifier"], "object", settings.CURSOR_SCOPE)
 		if err != nil {
 			return nil, err
 		}
@@ -139,7 +139,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := detectorContext.Scan(result["value"], "object", settings.CURSOR_SCOPE)
+		propertyObjects, err := detectorContext.ScanRule(result["value"], "object", settings.CURSOR_SCOPE)
 		if err != nil {
 			return nil, err
 		}

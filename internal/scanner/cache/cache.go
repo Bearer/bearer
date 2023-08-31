@@ -3,55 +3,63 @@ package cache
 import (
 	"github.com/rs/zerolog/log"
 
-	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	treepkg "github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectorset"
 	"github.com/bearer/bearer/internal/util/set"
 )
 
 const (
-	maxCacheSize = 1000
-	evictionSize = 100
+	minNodeCount = 20_000 // minimum number of AST nodes for cache to be enabled
+	maxCacheSize = 1000   // maximum number of AST nodes per cache/shared-cache
+	evictionSize = 100    // number of AST nodes to evict when max is reached
 )
 
 type entry struct {
-	RuleID string
-	Result *detectorset.Result
+	DetectorID int
+	Result     *detectorset.Result
 }
 
 type Shared struct {
-	ruleIDs set.Set[string]
-	data    map[*tree.Node][]entry
+	detectorIDs set.Set[int]
+	data        map[*treepkg.Node][]entry
 }
 
-func NewShared(ruleIDs []string) *Shared {
-	idSet := set.New[string]()
-	idSet.AddAll(ruleIDs)
+func NewShared(detectorIDs []int) *Shared {
+	idSet := set.New[int]()
+	idSet.AddAll(detectorIDs)
 
 	return &Shared{
-		ruleIDs: idSet,
-		data:    make(map[*tree.Node][]entry),
+		detectorIDs: idSet,
+		data:        make(map[*treepkg.Node][]entry),
 	}
 }
 
 type Cache struct {
-	shared *Shared
-	data   map[*tree.Node][]entry
+	enabled bool
+	shared  *Shared
+	data    map[*treepkg.Node][]entry
 }
 
-func NewCache(sharedCache *Shared) *Cache {
+func NewCache(tree *treepkg.Tree, sharedCache *Shared) *Cache {
+	enabled := tree.NodeCount() > minNodeCount
+	if enabled {
+		log.Trace().Msg("cache enabled")
+	}
+
 	return &Cache{
-		shared: sharedCache,
-		data:   make(map[*tree.Node][]entry),
+		enabled: enabled,
+		shared:  sharedCache,
+		data:    make(map[*treepkg.Node][]entry),
 	}
 }
 
-func (cache *Cache) Get(node *tree.Node, ruleID string) (*detectorset.Result, bool) {
-	if cache == nil {
+func (cache *Cache) Get(node *treepkg.Node, detectorID int) (*detectorset.Result, bool) {
+	if cache == nil || !cache.enabled {
 		return nil, false
 	}
 
-	for _, entry := range cache.dataFor(ruleID)[node] {
-		if entry.RuleID == ruleID {
+	for _, entry := range cache.dataFor(detectorID)[node] {
+		if entry.DetectorID == detectorID {
 			return entry.Result, true
 		}
 	}
@@ -59,12 +67,12 @@ func (cache *Cache) Get(node *tree.Node, ruleID string) (*detectorset.Result, bo
 	return nil, false
 }
 
-func (cache *Cache) Put(node *tree.Node, ruleID string, result *detectorset.Result) {
-	if cache == nil {
+func (cache *Cache) Put(node *treepkg.Node, detectorID int, result *detectorset.Result) {
+	if cache == nil || !cache.enabled {
 		return
 	}
 
-	data := cache.dataFor(ruleID)
+	data := cache.dataFor(detectorID)
 
 	if len(data) > maxCacheSize {
 		log.Trace().Msg("detection cache full, evicting entries")
@@ -83,13 +91,13 @@ func (cache *Cache) Put(node *tree.Node, ruleID string, result *detectorset.Resu
 	}
 
 	data[node] = append(data[node], entry{
-		RuleID: ruleID,
-		Result: result,
+		DetectorID: detectorID,
+		Result:     result,
 	})
 }
 
-func (cache *Cache) dataFor(ruleID string) map[*tree.Node][]entry {
-	if cache.shared.ruleIDs.Has(ruleID) {
+func (cache *Cache) dataFor(detectorID int) map[*treepkg.Node][]entry {
+	if cache.shared.detectorIDs.Has(detectorID) {
 		return cache.shared.data
 	} else {
 		return cache.data

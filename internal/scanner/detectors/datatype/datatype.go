@@ -43,7 +43,7 @@ func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
-	objectDetections, err := detectorContext.Scan(node, "object", settings.CURSOR_STRICT_SCOPE)
+	objectDetections, err := detectorContext.ScanRule(node, "object", settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}

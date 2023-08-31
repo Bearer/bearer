@@ -98,7 +98,7 @@ func (detector *objectDetector) getCallProjections(
 
 	var properties []common.Property
 
-	functionDetections, err := detectorContext.Scan(result["function"], "object", settings.CURSOR_SCOPE)
+	functionDetections, err := detectorContext.ScanRule(result["function"], "object", settings.CURSOR_SCOPE)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}

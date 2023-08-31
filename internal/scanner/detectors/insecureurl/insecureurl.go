@@ -29,7 +29,7 @@ func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := detectorContext.Scan(node, "string", settings.CURSOR_STRICT_SCOPE)
+	detections, err := detectorContext.ScanRule(node, "string", settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}

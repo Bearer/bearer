@@ -37,14 +37,24 @@ func (fileContext *Context) Err() error {
 
 func (fileContext *Context) DetectAt(
 	node *tree.Node,
-	ruleID string,
+	detectorID int,
 	detectorContext detectortypes.Context,
 ) (*detectorset.Result, error) {
-	return fileContext.detectorSet.DetectAt(node, ruleID, detectorContext)
+	return fileContext.detectorSet.DetectAt(node, detectorID, detectorContext)
 }
 
-func (fileContext *Context) RuleStats(ruleID string, startTime time.Time) {
-	fileContext.stats.Rule(ruleID, startTime)
+func (fileContext *Context) RuleStats(detectorID int, startTime time.Time) {
+	if fileContext.stats != nil {
+		fileContext.stats.Rule(fileContext.RuleIDFor(detectorID), startTime)
+	}
+}
+
+func (fileContext *Context) RuleIDFor(detectorID int) string {
+	return fileContext.detectorSet.RuleIDFor(detectorID)
+}
+
+func (fileContext *Context) DetectorIDFor(ruleID string) int {
+	return fileContext.detectorSet.DetectorIDFor(ruleID)
 }
 
 func (fileContext *Context) Filename() string {

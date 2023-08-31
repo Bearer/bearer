@@ -23,8 +23,6 @@ import (
 	"github.com/bearer/bearer/internal/scanner/stats"
 )
 
-const minimumNodeCountForCache = 20_000
-
 type Scanner struct {
 	querySet    *query.Set
 	language    language.Language
@@ -99,24 +97,15 @@ func (scanner *Scanner) evaluateRules(
 	fileContext *filecontext.Context,
 	tree *tree.Tree,
 ) ([]*detectortypes.Detection, error) {
-	var sharedCache *cache.Shared
-	if tree.NodeCount() > minimumNodeCountForCache {
-		sharedCache = cache.NewShared(scanner.detectorSet.BuiltinAndSharedRuleIDs())
-		log.Trace().Msg("cache enabled")
-	}
+	sharedCache := cache.NewShared(scanner.detectorSet.BuiltinAndSharedDetectorIDs())
 
 	var detections []*detectortypes.Detection
-	for _, ruleID := range scanner.detectorSet.TopLevelRuleIDs() {
-		var ruleCache *cache.Cache
-		if sharedCache != nil {
-			ruleCache = cache.NewCache(sharedCache)
-		}
-
+	for _, detectorID := range scanner.detectorSet.TopLevelDetectorIDs() {
 		ruleDetections, err := rulescanner.ScanTopLevelRule(
 			fileContext,
-			ruleCache,
+			cache.NewCache(tree, sharedCache),
 			tree,
-			ruleID,
+			detectorID,
 		)
 		if err != nil {
 			return nil, err

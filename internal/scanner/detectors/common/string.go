@@ -15,7 +15,7 @@ type String struct {
 }
 
 func GetStringValue(node *tree.Node, detectorContext types.Context) (string, bool, error) {
-	detections, err := detectorContext.Scan(node, "string", settings.CURSOR_SCOPE)
+	detections, err := detectorContext.ScanRule(node, "string", settings.CURSOR_SCOPE)
 	if err != nil {
 		return "", false, err
 	}

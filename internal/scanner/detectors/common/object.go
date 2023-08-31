@@ -24,7 +24,7 @@ func GetNonVirtualObjects(
 	detectorContext types.Context,
 	node *tree.Node,
 ) ([]*types.Detection, error) {
-	detections, err := detectorContext.Scan(node, "object", settings.CURSOR_SCOPE)
+	detections, err := detectorContext.ScanRule(node, "object", settings.CURSOR_SCOPE)
 	if err != nil {
 		return nil, err
 	}

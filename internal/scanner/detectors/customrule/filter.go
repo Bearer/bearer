@@ -1,298 +1,204 @@
 package customrule
 
 import (
+	"fmt"
 	"slices"
-	"strconv"
-
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/scanner/ast/tree"
-	"github.com/bearer/bearer/internal/scanner/detectors/common"
-	"github.com/bearer/bearer/internal/scanner/detectors/types"
+	"github.com/bearer/bearer/internal/scanner/detectors/customrule/filters"
+	"github.com/rs/zerolog/log"
 )
 
-func matchFilter(
-	detectorContext types.Context,
-	variables,
-	joinedVariables map[string]*tree.Node,
-	filter settings.PatternFilter,
-) (*bool, []*types.Detection, error) {
-	if filter.Not != nil {
-		match, _, err := matchFilter(detectorContext, variables, joinedVariables, *filter.Not)
-		if match == nil {
-			return nil, nil, err
+func translateFilters(detectorIDByRuleID map[string]int, sourceFilters []settings.PatternFilter) ([]filters.Filter, error) {
+	filters := make([]filters.Filter, len(sourceFilters))
+
+	sortFilters(sourceFilters)
+	for i, sourceFilter := range sourceFilters {
+		filter, err := translateFilter(detectorIDByRuleID, &sourceFilter)
+		if err != nil {
+			return nil, err
 		}
-		return boolPointer(!*match), nil, err
+
+		filters[i] = filter
+	}
+
+	return filters, nil
+}
+
+func translateFilter(detectorIDByRuleID map[string]int, sourceFilter *settings.PatternFilter) (filters.Filter, error) {
+	if sourceFilter.Not != nil {
+		child, err := translateFilter(detectorIDByRuleID, sourceFilter.Not)
+		if err != nil {
+			return nil, err
+		}
+
+		return &filters.Not{Child: child}, nil
+	}
+
+	if len(sourceFilter.Either) != 0 {
+		children, err := translateFilters(detectorIDByRuleID, sourceFilter.Either)
+		if err != nil {
+			return nil, err
+		}
+
+		return &filters.Either{Children: children}, nil
+	}
+
+	if sourceFilter.FilenameRegex != nil {
+		return &filters.FilenameRegex{Regex: sourceFilter.FilenameRegex.Regexp}, nil
+	}
+
+	if sourceFilter.Detection != "" {
+		detectorID, exists := detectorIDByRuleID[sourceFilter.Detection]
+		if !exists {
+			return nil, fmt.Errorf("invalid rule name '%s'", sourceFilter.Detection)
+		}
+
+		ruleFilters, err := translateFilters(detectorIDByRuleID, sourceFilter.Filters)
+		if err != nil {
+			return nil, err
+		}
+
+		return &filters.Rule{
+			VariableName:   sourceFilter.Variable,
+			DetectorID:     detectorID,
+			Scope:          sourceFilter.Scope,
+			IsDatatypeRule: sourceFilter.Detection == "datatype",
+			Filters:        ruleFilters,
+		}, nil
+	}
+
+	if len(sourceFilter.Values) != 0 {
+		return &filters.Values{
+			VariableName: sourceFilter.Variable,
+			Values:       sourceFilter.Values,
+		}, nil
+	}
+
+	if sourceFilter.Regex != nil {
+		return &filters.Regex{
+			VariableName: sourceFilter.Variable,
+			Regex:        sourceFilter.Regex.Regexp,
+		}, nil
+	}
+
+	if sourceFilter.LengthLessThan != nil {
+		return &filters.StringLengthLessThan{
+			VariableName: sourceFilter.Variable,
+			Value:        *sourceFilter.LengthLessThan,
+		}, nil
+	}
+
+	if sourceFilter.StringRegex != nil {
+		return &filters.StringRegex{
+			VariableName: sourceFilter.Variable,
+			Regex:        *&sourceFilter.StringRegex.Regexp,
+		}, nil
+	}
+
+	if sourceFilter.LessThan != nil {
+		return &filters.IntegerLessThan{
+			VariableName: sourceFilter.Variable,
+			Value:        *sourceFilter.LessThan,
+		}, nil
+	}
+
+	if sourceFilter.LessThanOrEqual != nil {
+		return &filters.IntegerLessThanOrEqual{
+			VariableName: sourceFilter.Variable,
+			Value:        *sourceFilter.LessThanOrEqual,
+		}, nil
+	}
+
+	if sourceFilter.GreaterThan != nil {
+		return &filters.IntegerGreaterThan{
+			VariableName: sourceFilter.Variable,
+			Value:        *sourceFilter.GreaterThan,
+		}, nil
+	}
+
+	if sourceFilter.GreaterThanOrEqual != nil {
+		return &filters.IntegerGreaterThanOrEqual{
+			VariableName: sourceFilter.Variable,
+			Value:        *sourceFilter.GreaterThanOrEqual,
+		}, nil
+	}
+
+	log.Debug().Msgf("unknown filter type: %#v", sourceFilter)
+	return &filters.Unknown{}, nil
+}
+
+func sortFilters(filters []settings.PatternFilter) {
+	slices.SortFunc(filters, func(a, b settings.PatternFilter) int {
+		return scoreFilter(a) - scoreFilter(b)
+	})
+
+	for i := range filters {
+		sortFilter(&filters[i])
+	}
+}
+
+func sortFilter(filter *settings.PatternFilter) {
+	switch {
+	case len(filter.Either) != 0:
+		sortFilters(filter.Either)
+	case filter.Not != nil:
+		sortFilter(filter.Not)
+	}
+}
+
+func scoreFilter(filter settings.PatternFilter) int {
+	if filter.Regex != nil ||
+		len(filter.Values) != 0 ||
+		filter.LengthLessThan != nil ||
+		filter.LessThan != nil ||
+		filter.LessThanOrEqual != nil ||
+		filter.GreaterThan != nil ||
+		filter.GreaterThanOrEqual != nil ||
+		filter.FilenameRegex != nil {
+		return 1
+	}
+
+	if filter.Detection == "datatype" {
+		return 7
+	}
+
+	if filter.StringRegex != nil ||
+		filter.Detection != "" && filter.Scope == settings.CURSOR_STRICT_SCOPE {
+		return 2
+	}
+
+	if filter.Detection != "" && filter.Scope == settings.CURSOR_SCOPE {
+		return 3
+	}
+
+	if filter.Detection != "" && filter.Scope == settings.NESTED_STRICT_SCOPE {
+		return 4
+	}
+
+	if filter.Detection != "" && filter.Scope == settings.RESULT_SCOPE {
+		return 5
+	}
+
+	if filter.Detection != "" && filter.Scope == settings.NESTED_SCOPE {
+		return 6
+	}
+
+	if filter.Not != nil {
+		return scoreFilter(*filter.Not)
 	}
 
 	if len(filter.Either) != 0 {
-		return matchEitherFilters(detectorContext, variables, joinedVariables, filter.Either)
-	}
+		max := 0
 
-	if filter.FilenameRegex != nil {
-		return boolPointer(filter.FilenameRegex.MatchString(detectorContext.Filename())), nil, nil
-	}
-
-	node, ok := variables[filter.Variable]
-	// shouldn't happen if filters are validated against pattern
-	if !ok {
-		return nil, nil, nil
-	}
-
-	if filter.Detection != "" {
-		return matchDetectionFilter(
-			detectorContext,
-			variables,
-			joinedVariables,
-			node,
-			filter,
-		)
-	}
-
-	matched, err := matchContentFilter(detectorContext, filter, node)
-	return matched, nil, err
-}
-
-func matchAllFilters(
-	detectorContext types.Context,
-	variables map[string]*tree.Node,
-	filters []settings.PatternFilter,
-) (bool, []*types.Detection, map[string]*tree.Node, error) {
-	var datatypeDetections []*types.Detection
-
-	joinedVariables := make(map[string]*tree.Node)
-	for name, node := range variables {
-		joinedVariables[name] = node
-	}
-
-	for _, filter := range filters {
-		matched, subDataTypeDetections, err := matchFilter(detectorContext, variables, joinedVariables, filter)
-		if matched == nil || !*matched || err != nil {
-			return false, nil, nil, err
-		}
-
-		datatypeDetections = append(datatypeDetections, subDataTypeDetections...)
-	}
-
-	return true, datatypeDetections, joinedVariables, nil
-}
-
-func matchEitherFilters(
-	detectorContext types.Context,
-	variables,
-	joinedVariables map[string]*tree.Node,
-	filters []settings.PatternFilter,
-) (*bool, []*types.Detection, error) {
-	var datatypeDetections []*types.Detection
-	oneMatched := false
-	oneNotMatched := false
-
-	for _, subFilter := range filters {
-		subMatch, subDatatypeDetections, err := matchFilter(detectorContext, variables, joinedVariables, subFilter)
-		if err != nil {
-			return nil, nil, err
-		}
-
-		datatypeDetections = append(datatypeDetections, subDatatypeDetections...)
-		oneMatched = oneMatched || (subMatch != nil && *subMatch)
-		oneNotMatched = oneNotMatched || (subMatch != nil && !*subMatch)
-	}
-
-	if oneMatched {
-		return boolPointer(true), datatypeDetections, nil
-	}
-
-	if oneNotMatched {
-		return boolPointer(false), nil, nil
-	}
-
-	return nil, nil, nil
-}
-
-func matchDetectionFilter(
-	detectorContext types.Context,
-	variables,
-	joinedVariables map[string]*tree.Node,
-	node *tree.Node,
-	filter settings.PatternFilter,
-) (*bool, []*types.Detection, error) {
-	ruleID := filter.Detection
-	detections, err := detectorContext.Scan(node, ruleID, filter.Scope)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	if ruleID == "datatype" {
-		return boolPointer(len(detections) != 0), detections, nil
-	}
-
-	var datatypeDetections []*types.Detection
-	ignoredVariables := getIgnoredVariables(detections)
-	foundDetection := false
-
-	for _, detection := range detections {
-		data, ok := detection.Data.(Data)
-		if !ok { // Built-in detector
-			foundDetection = true
-			log.Trace().Msg("detection match (built-in)")
-			continue
-		}
-
-		filtersMatch, _, _, err := matchAllFilters(detectorContext, data.VariableNodes, filter.Filters)
-		if err != nil {
-			return nil, nil, err
-		}
-		if !filtersMatch {
-			log.Trace().Msg("detection filters do not match")
-			continue
-		}
-
-		variablesMatch := true
-		for name, node := range data.VariableNodes {
-			if existingNode, existing := joinedVariables[name]; existing {
-				if existingNode != node {
-					variablesMatch = false
-					break
-				}
+		for _, subFilter := range filter.Either {
+			if subScore := scoreFilter(subFilter); subScore > max {
+				max = subScore
 			}
 		}
 
-		if !variablesMatch {
-			log.Trace().Msg("detection variable mismatch")
-			continue
-		}
-
-		foundDetection = true
-		for name, node := range data.VariableNodes {
-			if _, ignored := ignoredVariables[name]; !ignored {
-				joinedVariables[name] = node
-			}
-		}
-
-		datatypeDetections = append(datatypeDetections, data.Datatypes...)
-		log.Trace().Msg("detection match")
+		return max
 	}
 
-	return boolPointer(foundDetection), datatypeDetections, nil
-}
-
-func matchContentFilter(
-	detectorContext types.Context,
-	filter settings.PatternFilter,
-	node *tree.Node,
-) (*bool, error) {
-	content := node.Content()
-
-	if len(filter.Values) != 0 {
-		return boolPointer(slices.Contains(filter.Values, content)), nil
-	}
-
-	if filter.Regex != nil {
-		return boolPointer(filter.Regex.MatchString(content)), nil
-	}
-
-	if filter.LengthLessThan != nil {
-		strValue, _, err := common.GetStringValue(node, detectorContext)
-		if err != nil || strValue == "" {
-			return nil, err
-		}
-
-		if len(strValue) >= *filter.LengthLessThan {
-			return boolPointer(false), nil
-		}
-
-		return boolPointer(true), nil
-	}
-
-	if filter.StringRegex != nil {
-		value, isLiteral, err := common.GetStringValue(node, detectorContext)
-		if err != nil || (value == "" && !isLiteral) {
-			return nil, err
-		}
-
-		return boolPointer(filter.StringRegex.MatchString(value)), nil
-	}
-
-	if filter.LessThan != nil {
-		value, err := strconv.Atoi(content)
-		if err != nil {
-			return nil, nil
-		}
-
-		if value >= *filter.LessThan {
-			return boolPointer(false), nil
-		}
-
-		return boolPointer(true), nil
-	}
-
-	if filter.LessThanOrEqual != nil {
-		value, err := strconv.Atoi(content)
-		if err != nil {
-			return nil, nil
-		}
-
-		if value > *filter.LessThanOrEqual {
-			return boolPointer(false), nil
-		}
-
-		return boolPointer(true), nil
-	}
-
-	if filter.GreaterThan != nil {
-		value, err := strconv.Atoi(content)
-		if err != nil {
-			return nil, nil
-		}
-
-		if value <= *filter.GreaterThan {
-			return boolPointer(false), nil
-		}
-
-		return boolPointer(true), nil
-	}
-
-	if filter.GreaterThanOrEqual != nil {
-		value, err := strconv.Atoi(content)
-		if err != nil {
-			return nil, nil
-		}
-
-		if value < *filter.GreaterThanOrEqual {
-			return boolPointer(false), nil
-		}
-
-		return boolPointer(true), nil
-	}
-
-	log.Debug().Msgf("unknown filter: %#v", filter)
-	return nil, nil
-}
-
-func boolPointer(value bool) *bool {
-	return &value
-}
-
-func getIgnoredVariables(detections []*types.Detection) map[string]struct{} {
-	ignoredVariables := make(map[string]struct{})
-	seenNodes := make(map[string]*tree.Node)
-
-	for _, detection := range detections {
-		data, ok := detection.Data.(Data)
-		if !ok {
-			continue
-		}
-
-		for name, node := range data.VariableNodes {
-			seenNode := seenNodes[name]
-			if seenNode != nil && seenNode != node {
-				ignoredVariables[name] = struct{}{}
-			}
-
-			seenNodes[name] = node
-		}
-	}
-
-	return ignoredVariables
+	panic(fmt.Sprintf("unknown filter %#v", filter))
 }

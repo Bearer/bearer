@@ -13,7 +13,9 @@ type Detection struct {
 
 type Context interface {
 	Filename() string
-	Scan(rootNode *tree.Node, ruleID string, scope settings.RuleReferenceScope) ([]*Detection, error)
+	Scan(rootNode *tree.Node, detectorID int, scope settings.RuleReferenceScope) ([]*Detection, error)
+	// FIXME: remove this
+	ScanRule(rootNode *tree.Node, ruleID string, scope settings.RuleReferenceScope) ([]*Detection, error)
 }
 
 type Detector interface {

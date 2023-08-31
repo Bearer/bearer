@@ -32,7 +32,7 @@ type Node struct {
 	sitterNode   *sitter.Node
 	queryResults map[int][]QueryResult
 	// FIXME: probably shouldn't be public
-	ExecutingRules []string
+	ExecutingDetectors []int
 }
 
 type Position struct {

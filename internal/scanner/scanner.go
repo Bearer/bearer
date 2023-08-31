@@ -15,7 +15,7 @@ import (
 	"github.com/bearer/bearer/internal/report/detectors"
 	reportschema "github.com/bearer/bearer/internal/report/schema"
 	"github.com/bearer/bearer/internal/report/source"
-	"github.com/bearer/bearer/internal/scanner/detectors/customrule"
+	customruletypes "github.com/bearer/bearer/internal/scanner/detectors/customrule/types"
 	"github.com/bearer/bearer/internal/scanner/detectors/datatype"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/language"
@@ -69,7 +69,7 @@ func (scanner *Scanner) Scan(
 
 		for _, detection := range detections {
 			detectorType := detectors.Type(detection.RuleID)
-			data := detection.Data.(customrule.Data)
+			data := detection.Data.(customruletypes.Data)
 
 			if len(data.Datatypes) == 0 {
 				report.AddDetection(reportdetections.TypeCustomRisk,

@@ -112,7 +112,7 @@ func (detector *objectDetector) getHash(
 			continue
 		}
 
-		propertyObjects, err := detectorContext.Scan(result["value"], "object", settings.CURSOR_SCOPE)
+		propertyObjects, err := detectorContext.ScanRule(result["value"], "object", settings.CURSOR_SCOPE)
 		if err != nil {
 			return nil, err
 		}
@@ -152,7 +152,7 @@ func (detector *objectDetector) getKeywordArgument(
 		return nil, nil
 	}
 
-	propertyObjects, err := detectorContext.Scan(result["value"], "object", settings.CURSOR_SCOPE)
+	propertyObjects, err := detectorContext.ScanRule(result["value"], "object", settings.CURSOR_SCOPE)
 	if err != nil {
 		return nil, err
 	}

@@ -432,6 +432,7 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {
 			rules[auxiliaryDefinition.Id] = &Rule{
+				Id:              auxiliaryDefinition.Id,
 				Type:            defaultAuxiliaryRuleType,
 				Languages:       definition.Languages,
 				ParamParenting:  auxiliaryDefinition.ParamParenting,

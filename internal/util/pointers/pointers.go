@@ -7,3 +7,7 @@ func String(value string) *string {
 func Int(value int) *int {
 	return &value
 }
+
+func Bool(value bool) *bool {
+	return &value
+}

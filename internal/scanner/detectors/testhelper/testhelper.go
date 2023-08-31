@@ -52,9 +52,10 @@ func RunTest(
 			tt.Fatalf("failed to create classifier: %s", err)
 		}
 
+		builtinDetectors := language.NewBuiltInDetectors(classifier.Schema, querySet)
 		detectorSet, err := detectorset.New(
 			querySet,
-			language.NewBuiltInDetectors(classifier.Schema, querySet),
+			builtinDetectors,
 			rules,
 			language,
 		)
@@ -83,7 +84,18 @@ func RunTest(
 			tt.Fatalf("failed to parse file: %s", err)
 		}
 
-		detections, err := rulescanner.ScanTopLevelRule(fileContext, nil, tree, detectorType)
+		detectorID := -1
+		for i, detector := range builtinDetectors {
+			if detector.RuleID() == detectorType {
+				detectorID = i
+			}
+		}
+
+		if detectorID == -1 {
+			tt.Fatalf("no detector for %s", detectorType)
+		}
+
+		detections, err := rulescanner.ScanTopLevelRule(fileContext, nil, tree, detectorID)
 		if err != nil {
 			tt.Fatalf("failed to scan with rule scanner: %s", err)
 		}
