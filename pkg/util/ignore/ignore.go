@@ -14,9 +14,10 @@ import (
 )
 
 type IgnoredFingerprint struct {
-	Author    *string `json:"author,omitempty"`
-	Comment   *string `json:"comment,omitempty"`
-	IgnoredAt string  `json:"ignored_at"`
+	Author        *string `json:"author,omitempty"`
+	Comment       *string `json:"comment,omitempty"`
+	FalsePositive bool    `json:"false_positive"`
+	IgnoredAt     string  `json:"ignored_at"`
 }
 
 func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
@@ -88,12 +89,19 @@ func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprin
 	result += fmt.Sprintf("%sIgnored At: %s", prefix, bold(entry.IgnoredAt))
 
 	if entry.Author != nil {
-		if entry.Comment == nil {
-			prefix = lastPrefix
-		}
-
 		result += fmt.Sprintf("\n%sAuthor: %s", prefix, bold(*entry.Author))
 	}
+
+	if entry.Comment == nil {
+		prefix = lastPrefix
+	}
+	var falsePositiveStr string
+	if entry.FalsePositive {
+		falsePositiveStr = "Yes"
+	} else {
+		falsePositiveStr = "No"
+	}
+	result += fmt.Sprintf("\n%sFalse positive? %s", prefix, bold(falsePositiveStr))
 
 	if entry.Comment != nil {
 		result += fmt.Sprintf("\n%sComment: %s", lastPrefix, bold(*entry.Comment))

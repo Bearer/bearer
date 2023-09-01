@@ -147,14 +147,42 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
 			}
+
+			// create initial entry
 			fingerprintId := args[0]
 			var fingerprintEntry ignore.IgnoredFingerprint
+			fingerprintsToIgnore := map[string]ignore.IgnoredFingerprint{
+				fingerprintId: fingerprintEntry,
+			}
+
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.BearerIgnoreFile, nil)
+			if err != nil {
+				return fmt.Errorf("error retrieving existing ignores: %s", err)
+			}
+
+			// check for merge conflicts
+			if mergeErr := ignore.MergeIgnoredFingerprints(fingerprintsToIgnore, ignoredFingerprints, options.IgnoreAddOptions.Force); mergeErr != nil {
+				// handle expected error (duplicate entry in bearer.ignore)
+				cmd.Printf("Error: %s\n", mergeErr.Error())
+				return nil
+			}
+
+			// ensure ignored at is set
+			fingerprintEntry = ignoredFingerprints[fingerprintId]
+
+			// add additional information to entry
 			if options.IgnoreAddOptions.Author != "" {
 				fingerprintEntry.Author = &options.IgnoreAddOptions.Author
 			} else {
 				if author, err := ignore.GetAuthor(); err == nil {
 					fingerprintEntry.Author = author
 				}
+			}
+			if options.IgnoreAddOptions.FalsePositive {
+				fingerprintEntry.FalsePositive = options.IgnoreAddOptions.FalsePositive
+			} else {
+				fingerprintEntry.FalsePositive = requestConfirmation("Is this finding a false positive?")
+				cmd.Printf("\n")
 			}
 			if options.IgnoreAddOptions.Comment != "" {
 				fingerprintEntry.Comment = &options.IgnoreAddOptions.Comment
@@ -169,23 +197,11 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				cmd.Printf("\n")
 			}
 
-			fingerprintsToIgnore := map[string]ignore.IgnoredFingerprint{
-				fingerprintId: fingerprintEntry,
-			}
-
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.BearerIgnoreFile, nil)
-			if err != nil {
-				return fmt.Errorf("error retrieving existing ignores: %s", err)
-			}
+			// update entry to include additional information
+			ignoredFingerprints[fingerprintId] = fingerprintEntry
 
 			if !fileExists {
 				cmd.Printf("\nCreating bearer.ignore file...\n")
-			}
-
-			if mergeErr := ignore.MergeIgnoredFingerprints(fingerprintsToIgnore, ignoredFingerprints, options.IgnoreAddOptions.Force); mergeErr != nil {
-				// handle expected error (duplicate entry in bearer.ignore)
-				cmd.Printf("Error: %s\n", mergeErr.Error())
-				return nil
 			}
 
 			if err := writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.BearerIgnoreFile); err != nil {
@@ -354,4 +370,35 @@ func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFro
 	}
 
 	return ignoredFingerprintsFromConfig
+}
+
+func requestConfirmation(s string) bool {
+	r := bufio.NewReader(os.Stdin)
+
+	for i := 0; true; i++ {
+		if i > 0 {
+			fmt.Printf("Please enter y or n\n")
+		}
+		fmt.Printf("%s [Y/n]: ", s)
+
+		response, _ := r.ReadString('\n')
+		response = strings.ToLower(strings.TrimSpace(response))
+
+		if response == "y" || response == "yes" {
+			return true
+		}
+
+		if response == "" {
+			// Enter key defaults to Y
+			return true
+		}
+
+		if response == "n" || response == "no" {
+			return false
+		}
+
+		continue
+	}
+
+	return false
 }

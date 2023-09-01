@@ -1,0 +1,42 @@
+{
+  "123": {
+    "author": "elsapet",
+    "false_positive": true,
+    "ignored_at": "2023-08-31T10:50:33Z"
+  },
+  "234": {
+    "author": "elsapet",
+    "comment": "hello world",
+    "false_positive": false,
+    "ignored_at": "2023-08-31T10:50:33Z"
+  },
+  "345": {
+    "author": "elsapet",
+    "false_positive": false,
+    "ignored_at": "2023-08-31T10:50:33Z"
+  },
+  "456": {
+    "author": "elsapet",
+    "comment": "hello true world",
+    "false_positive": true,
+    "ignored_at": "2023-08-31T10:50:33Z"
+  },
+  "789": {
+    "author": "elsapet",
+    "comment": "hello",
+    "false_positive": true,
+    "ignored_at": "2023-08-31T11:25:22Z"
+  },
+  "890": {
+    "author": "elsapet",
+    "comment": "hello there",
+    "false_positive": true,
+    "ignored_at": "2023-08-31T11:25:51Z"
+  },
+  "8901": {
+    "author": "elsapet",
+    "comment": "asd",
+    "false_positive": false,
+    "ignored_at": "2023-08-31T11:26:50Z"
+  }
+}
