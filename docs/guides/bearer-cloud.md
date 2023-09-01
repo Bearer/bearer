@@ -93,6 +93,12 @@ Bearer Cloud automatically captures any scans run with a valid `api-key`. Subseq
 
 ![Cloud dashboard](/assets/img/cloud-dashboard.jpg)
 
+### Ignored findings in Bearer Cloud
+
+When a valid `api-key` is present, the very first scan of a project reads ignored fingerprints from the bearer.ignore file and subsequently create ignored findings for these in the Cloud. A finding has "False Positive" status in the Cloud if its corresponding bearer.ignore entry is a false positive (`false_positive: true`); otherwise, it has the status "Allowed".
+
+After this initial scan, the Cloud is taken as the source of truth for ignored fingerprints. This means that, when a valid `api-key` is present, subsequent scans of the project read ignored fingerprints from the Cloud and not the bearer.ignore file.
+
 ## Jira integration
 
 The Jira integration is available on the *Settings > Integrations* page.
