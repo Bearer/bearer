@@ -65,6 +65,7 @@ If a finding is not relevant, you can ignore it automatically from future scans 
 bearer ignore add 4b0883d52334dfd9a4acce2fcf810121_0 \
   --author="Mish Bear" \
   --comment="Ignore this finding"
+  --false-positive
 ```
 
 <br/>
