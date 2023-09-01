@@ -379,12 +379,17 @@ func requestConfirmation(s string) bool {
 		if i > 0 {
 			fmt.Printf("Please enter y or n\n")
 		}
-		fmt.Printf("%s [y/n]: ", s)
+		fmt.Printf("%s [Y/n]: ", s)
 
 		response, _ := r.ReadString('\n')
 		response = strings.ToLower(strings.TrimSpace(response))
 
 		if response == "y" || response == "yes" {
+			return true
+		}
+
+		if response == "" {
+			// Enter key defaults to Y
 			return true
 		}
 
