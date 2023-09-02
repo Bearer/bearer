@@ -3,6 +3,7 @@ package object
 import (
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -55,8 +56,8 @@ func New(querySet *query.Set) types.Detector {
 	}
 }
 
-func (detector *objectDetector) RuleID() string {
-	return "object"
+func (detector *objectDetector) Rule() *ruleset.Rule {
+	return ruleset.BuiltinObjectRule
 }
 
 func (detector *objectDetector) DetectAt(
@@ -131,7 +132,7 @@ func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error)
 		Properties: []common.Property{{
 			Name: className,
 			Object: &types.Detection{
-				RuleID:    "object",
+				RuleID:    ruleset.BuiltinObjectRule.ID(),
 				MatchNode: node,
 				Data: common.Object{
 					Properties: properties,

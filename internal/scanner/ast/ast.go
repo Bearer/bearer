@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/language"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
@@ -29,6 +31,7 @@ func Parse(
 func ParseAndAnalyze(
 	ctx context.Context,
 	language language.Language,
+	ruleSet *ruleset.Set,
 	querySet *query.Set,
 	contentBytes []byte,
 ) (*tree.Tree, error) {
@@ -42,7 +45,7 @@ func ParseAndAnalyze(
 	}
 
 	analyzer := language.NewAnalyzer(builder)
-	if err := analyzeNode(ctx, builder, analyzer, builder.SitterRootNode()); err != nil {
+	if err := analyzeNode(ctx, ruleSet, builder, analyzer, builder.SitterRootNode()); err != nil {
 		return nil, fmt.Errorf("error running language analysis: %w", err)
 	}
 
@@ -69,6 +72,7 @@ func parseBuilder(
 
 func analyzeNode(
 	ctx context.Context,
+	ruleSet *ruleset.Set,
 	builder *tree.Builder,
 	analyzer language.Analyzer,
 	node *sitter.Node,
@@ -80,15 +84,15 @@ func analyzeNode(
 	visitChildren := func() error {
 		childCount := int(node.ChildCount())
 
-		var disabledRules []string
+		var disabledRules []*ruleset.Rule
 		for i := 0; i < childCount; i++ {
 			child := node.Child(i)
 			if !child.IsNamed() {
 				continue
 			}
 
-			disabledRules = addDisabledRules(builder, disabledRules, node)
-			if err := analyzeNode(ctx, builder, analyzer, child); err != nil {
+			disabledRules = addDisabledRules(ruleSet, builder, disabledRules, node)
+			if err := analyzeNode(ctx, ruleSet, builder, analyzer, child); err != nil {
 				return err
 			}
 		}
@@ -99,16 +103,27 @@ func analyzeNode(
 	return analyzer.Analyze(node, visitChildren)
 }
 
-func addDisabledRules(builder *tree.Builder, disabledRules []string, node *sitter.Node) []string {
+func addDisabledRules(
+	ruleSet *ruleset.Set,
+	builder *tree.Builder,
+	disabledRules []*ruleset.Rule,
+	node *sitter.Node,
+) []*ruleset.Rule {
 	if node.Type() == "comment" {
 		nextDisabledRules := disabledRules
 
 		nodeContent := builder.ContentFor(node)
 		if strings.Contains(nodeContent, "bearer:disable") {
-			ruleIdsStr := strings.Split(nodeContent, "bearer:disable")[1]
+			rawRuleIDs := strings.Split(nodeContent, "bearer:disable")[1]
 
-			for _, ruleId := range strings.Split(ruleIdsStr, ",") {
-				nextDisabledRules = append(nextDisabledRules, strings.TrimSpace(ruleId))
+			for _, ruleID := range strings.Split(rawRuleIDs, ",") {
+				rule, err := ruleSet.RuleByID(strings.TrimSpace(ruleID))
+				if err != nil {
+					log.Debug().Msgf("ignoring unknown disabled rule '%s': %s", ruleID, err)
+					continue
+				}
+
+				nextDisabledRules = append(nextDisabledRules, rule)
 			}
 		}
 

@@ -3,6 +3,7 @@ package object
 import (
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/util/stringutil"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
@@ -98,7 +99,7 @@ func (detector *objectDetector) getCallProjections(
 
 	var properties []common.Property
 
-	functionDetections, err := detectorContext.ScanRule(result["function"], "object", settings.CURSOR_SCOPE)
+	functionDetections, err := detectorContext.Scan(result["function"], ruleset.BuiltinObjectRule, settings.CURSOR_SCOPE)
 	if len(functionDetections) == 0 || err != nil {
 		return nil, err
 	}

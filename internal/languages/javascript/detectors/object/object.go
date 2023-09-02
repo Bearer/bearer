@@ -4,6 +4,7 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/util/stringutil"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
@@ -78,8 +79,8 @@ func New(querySet *query.Set) types.Detector {
 	}
 }
 
-func (detector *objectDetector) RuleID() string {
-	return "object"
+func (detector *objectDetector) Rule() *ruleset.Rule {
+	return ruleset.BuiltinObjectRule
 }
 
 func (detector *objectDetector) DetectAt(
@@ -112,7 +113,11 @@ func (detector *objectDetector) getObject(
 
 	spreadResults := detector.spreadElementQuery.MatchAt(node)
 	for _, spreadResult := range spreadResults {
-		detections, err := detectorContext.ScanRule(spreadResult["identifier"], "object", settings.CURSOR_SCOPE)
+		detections, err := detectorContext.Scan(
+			spreadResult["identifier"],
+			ruleset.BuiltinObjectRule,
+			settings.CURSOR_SCOPE,
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -139,7 +144,7 @@ func (detector *objectDetector) getObject(
 			continue
 		}
 
-		propertyObjects, err := detectorContext.ScanRule(result["value"], "object", settings.CURSOR_SCOPE)
+		propertyObjects, err := detectorContext.Scan(result["value"], ruleset.BuiltinObjectRule, settings.CURSOR_SCOPE)
 		if err != nil {
 			return nil, err
 		}
@@ -228,7 +233,7 @@ func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error)
 		Properties: []common.Property{{
 			Name: className,
 			Object: &types.Detection{
-				RuleID:    "object",
+				RuleID:    ruleset.BuiltinObjectRule.ID(),
 				MatchNode: node,
 				Data: common.Object{
 					Properties: properties,

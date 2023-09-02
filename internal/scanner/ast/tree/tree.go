@@ -27,7 +27,7 @@ type Node struct {
 	children,
 	dataflowSources,
 	aliasOf []*Node
-	disabledRuleIDs []string
+	disabledRuleIndices []int
 	// FIXME: remove the need for this
 	sitterNode   *sitter.Node
 	queryResults map[int][]QueryResult
@@ -143,8 +143,8 @@ func (node *Node) AliasOf() []*Node {
 	return node.aliasOf
 }
 
-func (node *Node) DisabledRuleIDs() []string {
-	return node.disabledRuleIDs
+func (node *Node) DisabledRuleIndices() []int {
+	return node.disabledRuleIndices
 }
 
 func (node *Node) QueryResults(queryID int) []QueryResult {

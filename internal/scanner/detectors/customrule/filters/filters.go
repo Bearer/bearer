@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/types"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/util/pointers"
 )
 
@@ -90,7 +91,7 @@ func (filter *FilenameRegex) Evaluate(
 
 type Rule struct {
 	VariableName   string
-	DetectorID     int
+	Rule           *ruleset.Rule
 	Scope          settings.RuleReferenceScope
 	IsDatatypeRule bool
 	Filters        []Filter
@@ -106,7 +107,7 @@ func (filter *Rule) Evaluate(
 		return nil, nil, err
 	}
 
-	detections, err := detectorContext.Scan(node, filter.DetectorID, filter.Scope)
+	detections, err := detectorContext.Scan(node, filter.Rule, filter.Scope)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -3,6 +3,7 @@ package common
 import (
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 )
@@ -24,7 +25,7 @@ func GetNonVirtualObjects(
 	detectorContext types.Context,
 	node *tree.Node,
 ) ([]*types.Detection, error) {
-	detections, err := detectorContext.ScanRule(node, "object", settings.CURSOR_SCOPE)
+	detections, err := detectorContext.Scan(node, ruleset.BuiltinObjectRule, settings.CURSOR_SCOPE)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +67,7 @@ func ProjectObject(
 						Properties: []Property{{
 							Name: propertyName,
 							Object: &types.Detection{
-								RuleID:    "object",
+								RuleID:    ruleset.BuiltinObjectRule.ID(),
 								MatchNode: node,
 								Data:      property.Object.Data,
 							},
@@ -83,7 +84,7 @@ func ProjectObject(
 			Properties: []Property{{
 				Name: objectName,
 				Object: &types.Detection{
-					RuleID:    "object",
+					RuleID:    ruleset.BuiltinObjectRule.ID(),
 					MatchNode: node,
 					Data: Object{
 						Properties: []Property{{Name: propertyName}},

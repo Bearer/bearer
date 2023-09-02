@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/util/classify"
 )
 
@@ -35,15 +36,15 @@ func New(detectorType detectors.Type, classifier *classificationschema.Classifie
 	}
 }
 
-func (detector *datatypeDetector) RuleID() string {
-	return "datatype"
+func (detector *datatypeDetector) Rule() *ruleset.Rule {
+	return ruleset.BuiltinDatatypeRule
 }
 
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
-	objectDetections, err := detectorContext.ScanRule(node, "object", settings.CURSOR_STRICT_SCOPE)
+	objectDetections, err := detectorContext.Scan(node, ruleset.BuiltinObjectRule, settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}

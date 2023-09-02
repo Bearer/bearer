@@ -3,6 +3,7 @@ package string
 import (
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -16,8 +17,8 @@ func New(querySet *query.Set) types.Detector {
 	return &stringDetector{}
 }
 
-func (detector *stringDetector) RuleID() string {
-	return "string"
+func (detector *stringDetector) Rule() *ruleset.Rule {
+	return ruleset.BuiltinStringRule
 }
 
 func (detector *stringDetector) DetectAt(

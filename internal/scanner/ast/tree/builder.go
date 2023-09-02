@@ -3,6 +3,7 @@ package tree
 import (
 	"slices"
 
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -92,9 +93,12 @@ func (builder *Builder) Alias(toNode *sitter.Node, fromNodes ...*sitter.Node) {
 	)
 }
 
-func (builder *Builder) AddDisabledRules(sitterNode *sitter.Node, ruleIDs []string) {
+func (builder *Builder) AddDisabledRules(sitterNode *sitter.Node, rules []*ruleset.Rule) {
 	node := &builder.nodes[builder.sitterToNodeID[sitterNode]]
-	node.disabledRuleIDs = append(node.disabledRuleIDs, ruleIDs...)
+
+	for _, rule := range rules {
+		node.disabledRuleIndices = append(node.disabledRuleIndices, rule.Index())
+	}
 }
 
 func (builder *Builder) sitterToNodeIDs(nodes []*sitter.Node) []int {

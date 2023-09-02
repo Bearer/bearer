@@ -6,15 +6,16 @@ import (
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/filters"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/rs/zerolog/log"
 )
 
-func translateFilters(detectorIDByRuleID map[string]int, sourceFilters []settings.PatternFilter) ([]filters.Filter, error) {
+func translateFilters(ruleSet *ruleset.Set, sourceFilters []settings.PatternFilter) ([]filters.Filter, error) {
 	filters := make([]filters.Filter, len(sourceFilters))
 
 	sortFilters(sourceFilters)
 	for i, sourceFilter := range sourceFilters {
-		filter, err := translateFilter(detectorIDByRuleID, &sourceFilter)
+		filter, err := translateFilter(ruleSet, &sourceFilter)
 		if err != nil {
 			return nil, err
 		}
@@ -25,9 +26,9 @@ func translateFilters(detectorIDByRuleID map[string]int, sourceFilters []setting
 	return filters, nil
 }
 
-func translateFilter(detectorIDByRuleID map[string]int, sourceFilter *settings.PatternFilter) (filters.Filter, error) {
+func translateFilter(ruleSet *ruleset.Set, sourceFilter *settings.PatternFilter) (filters.Filter, error) {
 	if sourceFilter.Not != nil {
-		child, err := translateFilter(detectorIDByRuleID, sourceFilter.Not)
+		child, err := translateFilter(ruleSet, sourceFilter.Not)
 		if err != nil {
 			return nil, err
 		}
@@ -36,7 +37,7 @@ func translateFilter(detectorIDByRuleID map[string]int, sourceFilter *settings.P
 	}
 
 	if len(sourceFilter.Either) != 0 {
-		children, err := translateFilters(detectorIDByRuleID, sourceFilter.Either)
+		children, err := translateFilters(ruleSet, sourceFilter.Either)
 		if err != nil {
 			return nil, err
 		}
@@ -49,19 +50,19 @@ func translateFilter(detectorIDByRuleID map[string]int, sourceFilter *settings.P
 	}
 
 	if sourceFilter.Detection != "" {
-		detectorID, exists := detectorIDByRuleID[sourceFilter.Detection]
-		if !exists {
-			return nil, fmt.Errorf("invalid rule name '%s'", sourceFilter.Detection)
+		rule, err := ruleSet.RuleByID(sourceFilter.Detection)
+		if err != nil {
+			return nil, err
 		}
 
-		ruleFilters, err := translateFilters(detectorIDByRuleID, sourceFilter.Filters)
+		ruleFilters, err := translateFilters(ruleSet, sourceFilter.Filters)
 		if err != nil {
 			return nil, err
 		}
 
 		return &filters.Rule{
 			VariableName:   sourceFilter.Variable,
-			DetectorID:     detectorID,
+			Rule:           rule,
 			Scope:          sourceFilter.Scope,
 			IsDatatypeRule: sourceFilter.Detection == "datatype",
 			Filters:        ruleFilters,

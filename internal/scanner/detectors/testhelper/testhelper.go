@@ -18,6 +18,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/filecontext"
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/scanner/rulescanner"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 )
 
 type result struct {
@@ -36,7 +37,6 @@ func RunTest(
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	t.Run(name, func(tt *testing.T) {
-		rules := make(map[string]*settings.Rule)
 		querySet := query.NewSet(language.ID(), language.SitterLanguage())
 
 		classifier, err := classification.NewClassifier(&classification.Config{
@@ -52,11 +52,15 @@ func RunTest(
 			tt.Fatalf("failed to create classifier: %s", err)
 		}
 
-		builtinDetectors := language.NewBuiltInDetectors(classifier.Schema, querySet)
+		ruleSet, err := ruleset.New(language.ID(), make(map[string]*settings.Rule))
+		if err != nil {
+			tt.Fatalf("failed to create rule set: %s", err)
+		}
+
 		detectorSet, err := detectorset.New(
 			querySet,
-			builtinDetectors,
-			rules,
+			language.NewBuiltInDetectors(classifier.Schema, querySet),
+			ruleSet,
 			language,
 		)
 		if err != nil {
@@ -84,18 +88,12 @@ func RunTest(
 			tt.Fatalf("failed to parse file: %s", err)
 		}
 
-		detectorID := -1
-		for i, detector := range builtinDetectors {
-			if detector.RuleID() == detectorType {
-				detectorID = i
-			}
+		rule, err := ruleSet.RuleByID(detectorType)
+		if err != nil {
+			tt.Fatalf("failed to lookup rule: %s", err)
 		}
 
-		if detectorID == -1 {
-			tt.Fatalf("no detector for %s", detectorType)
-		}
-
-		detections, err := rulescanner.ScanTopLevelRule(fileContext, nil, tree, detectorID)
+		detections, err := rulescanner.ScanTopLevelRule(fileContext, nil, tree, rule)
 		if err != nil {
 			tt.Fatalf("failed to scan with rule scanner: %s", err)
 		}

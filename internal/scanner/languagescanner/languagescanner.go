@@ -6,6 +6,8 @@ import (
 	"os"
 	"slices"
 
+	"github.com/rs/zerolog/log"
+
 	"github.com/bearer/bearer/internal/classification/schema"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast"
@@ -14,8 +16,8 @@ import (
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/filecontext"
 	"github.com/bearer/bearer/internal/scanner/language"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/util/file"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/internal/scanner/cache"
 	"github.com/bearer/bearer/internal/scanner/detectorset"
@@ -24,9 +26,9 @@ import (
 )
 
 type Scanner struct {
-	querySet    *query.Set
 	language    language.Language
-	rules       map[string]*settings.Rule
+	ruleSet     *ruleset.Set
+	querySet    *query.Set
 	detectorSet detectorset.Set
 }
 
@@ -35,23 +37,28 @@ func New(
 	schemaClassifier *schema.Classifier,
 	rules map[string]*settings.Rule,
 ) (*Scanner, error) {
+	ruleSet, err := ruleset.New(language.ID(), rules)
+	if err != nil {
+		return nil, fmt.Errorf("error creating rule set: %w", err)
+	}
+
 	querySet := query.NewSet(language.ID(), language.SitterLanguage())
 
-	detectorSet, err := detectorset.New(
-		querySet,
-		language.NewBuiltInDetectors(schemaClassifier, querySet),
-		rules,
-		language,
-	)
+	detectorSet, err := detectorset.New(schemaClassifier, language, ruleSet, querySet)
 	if err != nil {
 		querySet.Close()
 		return nil, fmt.Errorf("failed to create detector set: %w", err)
 	}
 
+	if err = querySet.Compile(); err != nil {
+		querySet.Close()
+		return nil, fmt.Errorf("error compiling query set: %w", err)
+	}
+
 	return &Scanner{
-		querySet:    querySet,
 		language:    language,
-		rules:       rules,
+		ruleSet:     ruleSet,
+		querySet:    querySet,
 		detectorSet: detectorSet,
 	}, nil
 }
@@ -74,7 +81,7 @@ func (scanner *Scanner) Scan(
 		return nil, fmt.Errorf("failed to read file: %w", err)
 	}
 
-	tree, err := ast.ParseAndAnalyze(ctx, scanner.language, scanner.querySet, contentBytes)
+	tree, err := ast.ParseAndAnalyze(ctx, scanner.language, scanner.ruleSet, scanner.querySet, contentBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -85,6 +92,7 @@ func (scanner *Scanner) Scan(
 
 	fileContext := filecontext.New(
 		ctx,
+		scanner.ruleSet,
 		scanner.detectorSet,
 		fileInfo.FileInfo.Name(),
 		fileStats,
@@ -97,15 +105,19 @@ func (scanner *Scanner) evaluateRules(
 	fileContext *filecontext.Context,
 	tree *tree.Tree,
 ) ([]*detectortypes.Detection, error) {
-	sharedCache := cache.NewShared(scanner.detectorSet.BuiltinAndSharedDetectorIDs())
+	sharedCache := cache.NewShared(scanner.ruleSet.Rules())
 
 	var detections []*detectortypes.Detection
-	for _, detectorID := range scanner.detectorSet.TopLevelDetectorIDs() {
+	for _, rule := range scanner.ruleSet.Rules() {
+		if rule.Type() != ruleset.RuleTypeTopLevel {
+			continue
+		}
+
 		ruleDetections, err := rulescanner.ScanTopLevelRule(
 			fileContext,
 			cache.NewCache(tree, sharedCache),
 			tree,
-			detectorID,
+			rule,
 		)
 		if err != nil {
 			return nil, err

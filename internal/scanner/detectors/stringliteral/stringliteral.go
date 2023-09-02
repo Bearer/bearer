@@ -6,6 +6,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 )
 
 type stringLiteralDetector struct {
@@ -16,15 +17,15 @@ func New(querySet *query.Set) types.Detector {
 	return &stringLiteralDetector{}
 }
 
-func (detector *stringLiteralDetector) RuleID() string {
-	return "string_literal"
+func (detector *stringLiteralDetector) Rule() *ruleset.Rule {
+	return ruleset.BuiltinStringLiteralRule
 }
 
 func (detector *stringLiteralDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := detectorContext.ScanRule(node, "string", settings.CURSOR_STRICT_SCOPE)
+	detections, err := detectorContext.Scan(node, ruleset.BuiltinStringRule, settings.CURSOR_STRICT_SCOPE)
 	if err != nil {
 		return nil, err
 	}
