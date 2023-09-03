@@ -58,6 +58,14 @@ func NewCache(tree *treepkg.Tree, sharedCache *Shared) *Cache {
 	}
 }
 
+func (cache *Cache) Clear() {
+	if cache == nil || !cache.enabled {
+		return
+	}
+
+	clear(cache.data)
+}
+
 func (cache *Cache) Get(node *treepkg.Node, rule *ruleset.Rule) (*detectorset.Result, bool) {
 	if cache == nil || !cache.enabled {
 		return nil, false

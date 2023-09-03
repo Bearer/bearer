@@ -1,8 +1,8 @@
 package object
 
 import (
-	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 
@@ -113,7 +113,7 @@ func (detector *objectDetector) getHash(
 			continue
 		}
 
-		propertyObjects, err := detectorContext.Scan(result["value"], ruleset.BuiltinObjectRule, settings.CURSOR_SCOPE)
+		propertyObjects, err := detectorContext.Scan(result["value"], ruleset.BuiltinObjectRule, traversalstrategy.Cursor)
 		if err != nil {
 			return nil, err
 		}
@@ -153,7 +153,7 @@ func (detector *objectDetector) getKeywordArgument(
 		return nil, nil
 	}
 
-	propertyObjects, err := detectorContext.Scan(result["value"], ruleset.BuiltinObjectRule, settings.CURSOR_SCOPE)
+	propertyObjects, err := detectorContext.Scan(result["value"], ruleset.BuiltinObjectRule, traversalstrategy.Cursor)
 	if err != nil {
 		return nil, err
 	}

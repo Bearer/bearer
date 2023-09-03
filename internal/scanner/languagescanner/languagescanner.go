@@ -12,9 +12,9 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
-	"github.com/bearer/bearer/internal/scanner/filecontext"
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/util/file"
@@ -90,22 +90,24 @@ func (scanner *Scanner) Scan(
 		log.Trace().Msgf("tree (%d nodes):\n%s", tree.NodeCount(), tree.RootNode().Dump())
 	}
 
-	fileContext := filecontext.New(
+	sharedCache := cache.NewShared(scanner.ruleSet.Rules())
+	cache := cache.NewCache(tree, sharedCache)
+	ruleScanner := rulescanner.New(
 		ctx,
-		scanner.ruleSet,
 		scanner.detectorSet,
 		fileInfo.FileInfo.Name(),
 		fileStats,
+		cache,
 	)
 
-	return scanner.evaluateRules(fileContext, tree)
+	return scanner.evaluateRules(ruleScanner, cache, tree)
 }
 
 func (scanner *Scanner) evaluateRules(
-	fileContext *filecontext.Context,
+	ruleScanner *rulescanner.Scanner,
+	cache *cache.Cache,
 	tree *tree.Tree,
 ) ([]*detectortypes.Detection, error) {
-	sharedCache := cache.NewShared(scanner.ruleSet.Rules())
 
 	var detections []*detectortypes.Detection
 	for _, rule := range scanner.ruleSet.Rules() {
@@ -113,12 +115,8 @@ func (scanner *Scanner) evaluateRules(
 			continue
 		}
 
-		ruleDetections, err := rulescanner.ScanTopLevelRule(
-			fileContext,
-			cache.NewCache(tree, sharedCache),
-			tree,
-			rule,
-		)
+		cache.Clear()
+		ruleDetections, err := ruleScanner.Scan(tree.RootNode(), rule, traversalstrategy.NestedStrict)
 		if err != nil {
 			return nil, err
 		}

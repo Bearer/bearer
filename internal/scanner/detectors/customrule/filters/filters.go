@@ -8,7 +8,7 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/types"
@@ -90,11 +90,11 @@ func (filter *FilenameRegex) Evaluate(
 }
 
 type Rule struct {
-	VariableName   string
-	Rule           *ruleset.Rule
-	Scope          settings.RuleReferenceScope
-	IsDatatypeRule bool
-	Filters        []Filter
+	VariableName      string
+	Rule              *ruleset.Rule
+	TraversalStrategy *traversalstrategy.Strategy
+	IsDatatypeRule    bool
+	Filters           []Filter
 }
 
 func (filter *Rule) Evaluate(
@@ -107,7 +107,7 @@ func (filter *Rule) Evaluate(
 		return nil, nil, err
 	}
 
-	detections, err := detectorContext.Scan(node, filter.Rule, filter.Scope)
+	detections, err := detectorContext.Scan(node, filter.Rule, filter.TraversalStrategy)
 	if err != nil {
 		return nil, nil, err
 	}

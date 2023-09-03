@@ -2,10 +2,12 @@ package detectorset
 
 import (
 	"fmt"
+	"slices"
+	"strings"
 
 	"github.com/bearer/bearer/internal/classification/schema"
-	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -67,6 +69,32 @@ func (set *detectorSet) DetectAt(
 	rule *ruleset.Rule,
 	detectorContext detectortypes.Context,
 ) (*Result, error) {
+	if slices.Contains(node.ExecutingDetectors, rule.Index()) {
+		executingRules := make([]string, len(node.ExecutingDetectors))
+		for i, ruleIndex := range node.ExecutingDetectors {
+			executingRules[i] = set.detectors[ruleIndex].Rule().ID()
+		}
+
+		return nil, fmt.Errorf(
+			"cycle found during rule evaluation at %s: [%s > %s]",
+			node.Debug(),
+			strings.Join(executingRules, " > "),
+			rule.ID(),
+		)
+	}
+
+	node.ExecutingDetectors = append(node.ExecutingDetectors, rule.Index())
+	result, err := set.detectSanitized(node, rule, detectorContext)
+	node.ExecutingDetectors = node.ExecutingDetectors[:len(node.ExecutingDetectors)-1]
+
+	return result, err
+}
+
+func (set *detectorSet) detectSanitized(
+	node *tree.Node,
+	rule *ruleset.Rule,
+	detectorContext detectortypes.Context,
+) (*Result, error) {
 	detector := set.detectors[rule.Index()]
 
 	if isSanitized, err := set.isSanitized(rule, node, detectorContext); isSanitized || err != nil {
@@ -76,6 +104,10 @@ func (set *detectorSet) DetectAt(
 	detectionsData, err := detector.DetectAt(node, detectorContext)
 	if err != nil {
 		return nil, err
+	}
+
+	if len(detectionsData) == 0 {
+		return nil, nil
 	}
 
 	detections := make([]*detectortypes.Detection, len(detectionsData))
@@ -100,7 +132,7 @@ func (set *detectorSet) isSanitized(
 		return false, nil
 	}
 
-	detections, err := detectorContext.Scan(node, sanitizerRule, settings.CURSOR_STRICT_SCOPE)
+	detections, err := detectorContext.Scan(node, sanitizerRule, traversalstrategy.CursorStrict)
 	if err != nil {
 		return false, err
 	}

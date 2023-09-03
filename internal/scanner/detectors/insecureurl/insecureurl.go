@@ -3,8 +3,8 @@ package insecureurl
 import (
 	"regexp"
 
-	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -30,7 +30,7 @@ func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
-	detections, err := detectorContext.Scan(node, ruleset.BuiltinStringRule, settings.CURSOR_STRICT_SCOPE)
+	detections, err := detectorContext.Scan(node, ruleset.BuiltinStringRule, traversalstrategy.CursorStrict)
 	if err != nil {
 		return nil, err
 	}

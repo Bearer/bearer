@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 
@@ -25,7 +25,7 @@ func GetNonVirtualObjects(
 	detectorContext types.Context,
 	node *tree.Node,
 ) ([]*types.Detection, error) {
-	detections, err := detectorContext.Scan(node, ruleset.BuiltinObjectRule, settings.CURSOR_SCOPE)
+	detections, err := detectorContext.Scan(node, ruleset.BuiltinObjectRule, traversalstrategy.Cursor)
 	if err != nil {
 		return nil, err
 	}

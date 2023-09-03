@@ -2,9 +2,9 @@ package datatype
 
 import (
 	classificationschema "github.com/bearer/bearer/internal/classification/schema"
-	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/report/detectors"
 	"github.com/bearer/bearer/internal/report/schema"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -44,7 +44,7 @@ func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
-	objectDetections, err := detectorContext.Scan(node, ruleset.BuiltinObjectRule, settings.CURSOR_STRICT_SCOPE)
+	objectDetections, err := detectorContext.Scan(node, ruleset.BuiltinObjectRule, traversalstrategy.CursorStrict)
 	if err != nil {
 		return nil, err
 	}

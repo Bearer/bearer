@@ -14,8 +14,8 @@ import (
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/scanner/ast"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/detectorset"
-	"github.com/bearer/bearer/internal/scanner/filecontext"
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/scanner/rulescanner"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
@@ -37,8 +37,6 @@ func RunTest(
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	t.Run(name, func(tt *testing.T) {
-		querySet := query.NewSet(language.ID(), language.SitterLanguage())
-
 		classifier, err := classification.NewClassifier(&classification.Config{
 			Config: settings.Config{
 				Scan: flag.ScanOptions{
@@ -57,11 +55,12 @@ func RunTest(
 			tt.Fatalf("failed to create rule set: %s", err)
 		}
 
+		querySet := query.NewSet(language.ID(), language.SitterLanguage())
 		detectorSet, err := detectorset.New(
-			querySet,
-			language.NewBuiltInDetectors(classifier.Schema, querySet),
-			ruleSet,
+			classifier.Schema,
 			language,
+			ruleSet,
+			querySet,
 		)
 		if err != nil {
 			tt.Fatalf("failed to create detector set: %s", err)
@@ -71,10 +70,11 @@ func RunTest(
 			tt.Fatalf("failed to compile queries: %s", err)
 		}
 
-		fileContext := filecontext.New(
+		ruleScanner := rulescanner.New(
 			context.Background(),
 			detectorSet,
 			fileName,
+			nil,
 			nil,
 		)
 
@@ -83,7 +83,7 @@ func RunTest(
 			tt.Fatalf("failed to read file: %s", err)
 		}
 
-		tree, err := ast.ParseAndAnalyze(context.Background(), language, querySet, contentBytes)
+		tree, err := ast.ParseAndAnalyze(context.Background(), language, ruleSet, querySet, contentBytes)
 		if err != nil {
 			tt.Fatalf("failed to parse file: %s", err)
 		}
@@ -93,7 +93,7 @@ func RunTest(
 			tt.Fatalf("failed to lookup rule: %s", err)
 		}
 
-		detections, err := rulescanner.ScanTopLevelRule(fileContext, nil, tree, rule)
+		detections, err := ruleScanner.Scan(tree.RootNode(), rule, traversalstrategy.NestedStrict)
 		if err != nil {
 			tt.Fatalf("failed to scan with rule scanner: %s", err)
 		}

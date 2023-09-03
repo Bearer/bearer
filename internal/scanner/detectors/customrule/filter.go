@@ -5,6 +5,7 @@ import (
 	"slices"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/filters"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/rs/zerolog/log"
@@ -60,12 +61,17 @@ func translateFilter(ruleSet *ruleset.Set, sourceFilter *settings.PatternFilter)
 			return nil, err
 		}
 
+		traversalStrategy, err := traversalstrategy.Get(sourceFilter.Scope)
+		if err != nil {
+			return nil, err
+		}
+
 		return &filters.Rule{
-			VariableName:   sourceFilter.Variable,
-			Rule:           rule,
-			Scope:          sourceFilter.Scope,
-			IsDatatypeRule: sourceFilter.Detection == "datatype",
-			Filters:        ruleFilters,
+			VariableName:      sourceFilter.Variable,
+			Rule:              rule,
+			TraversalStrategy: traversalStrategy,
+			IsDatatypeRule:    sourceFilter.Detection == "datatype",
+			Filters:           ruleFilters,
 		}, nil
 	}
 

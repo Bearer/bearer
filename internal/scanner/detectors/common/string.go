@@ -3,7 +3,7 @@ package common
 import (
 	"fmt"
 
-	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 
@@ -16,7 +16,7 @@ type String struct {
 }
 
 func GetStringValue(node *tree.Node, detectorContext types.Context) (string, bool, error) {
-	detections, err := detectorContext.Scan(node, ruleset.BuiltinStringRule, settings.CURSOR_SCOPE)
+	detections, err := detectorContext.Scan(node, ruleset.BuiltinStringRule, traversalstrategy.Cursor)
 	if err != nil {
 		return "", false, err
 	}

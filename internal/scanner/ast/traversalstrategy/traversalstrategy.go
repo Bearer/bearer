@@ -5,44 +5,68 @@ import (
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
-	"github.com/bearer/bearer/internal/util/set"
+	"github.com/bits-and-blooms/bitset"
 )
 
-var strategies = map[settings.RuleReferenceScope]*Strategy{
-	settings.NESTED_SCOPE: {
+var (
+	Nested = &Strategy{
+		scope: settings.NESTED_SCOPE,
 		nextNodes: func(node *tree.Node) []*tree.Node {
 			return append(node.Children(), node.AliasOf()...)
 		},
-	},
-	settings.NESTED_STRICT_SCOPE: {
+	}
+
+	NestedStrict = &Strategy{
+		scope: settings.NESTED_STRICT_SCOPE,
 		nextNodes: func(node *tree.Node) []*tree.Node {
 			return node.Children()
 		},
-	},
-	settings.RESULT_SCOPE: {
+	}
+
+	Result = &Strategy{
+		scope: settings.RESULT_SCOPE,
 		nextNodes: func(node *tree.Node) []*tree.Node {
 			return append(node.AliasOf(), node.DataflowSources()...)
 		},
-	},
-	settings.CURSOR_SCOPE: {
+	}
+
+	Cursor = &Strategy{
+		scope: settings.CURSOR_SCOPE,
 		nextNodes: func(node *tree.Node) []*tree.Node {
 			return node.AliasOf()
 		},
-	},
-	settings.CURSOR_STRICT_SCOPE: {},
-}
+	}
+
+	CursorStrict = &Strategy{
+		scope:     settings.CURSOR_STRICT_SCOPE,
+		nextNodes: nil,
+	}
+)
 
 type Strategy struct {
+	scope     settings.RuleReferenceScope
 	nextNodes func(node *tree.Node) []*tree.Node
 }
 
 func Get(scope settings.RuleReferenceScope) (*Strategy, error) {
-	strategy, exists := strategies[scope]
-	if !exists {
+	switch scope {
+	case settings.NESTED_SCOPE:
+		return Nested, nil
+	case settings.NESTED_STRICT_SCOPE:
+		return NestedStrict, nil
+	case settings.RESULT_SCOPE:
+		return Result, nil
+	case settings.CURSOR_SCOPE:
+		return Cursor, nil
+	case settings.CURSOR_STRICT_SCOPE:
+		return CursorStrict, nil
+	default:
 		return nil, fmt.Errorf("unknown scope '%s'", scope)
 	}
+}
 
-	return strategy, nil
+func (strategy *Strategy) Scope() settings.RuleReferenceScope {
+	return strategy.scope
 }
 
 func (strategy *Strategy) Traverse(rootNode *tree.Node, visit func(node *tree.Node) (bool, error)) error {
@@ -54,7 +78,7 @@ func (strategy *Strategy) Traverse(rootNode *tree.Node, visit func(node *tree.No
 	next := make([]*tree.Node, 0, 1000)
 	nodes := make([]*tree.Node, 0, 1000)
 	nodes = append(nodes, rootNode)
-	seen := set.New[*tree.Node]()
+	seen := bitset.New(uint(rootNode.Tree().NodeCount()))
 
 	for {
 		if len(nodes) == 0 {
@@ -62,9 +86,11 @@ func (strategy *Strategy) Traverse(rootNode *tree.Node, visit func(node *tree.No
 		}
 
 		for _, node := range nodes {
-			if !seen.Add(node) {
+			bit := uint(node.ID)
+			if seen.Test(bit) {
 				continue
 			}
+			seen.Set(bit)
 
 			stopTraversal, err := visit(node)
 			if err != nil {

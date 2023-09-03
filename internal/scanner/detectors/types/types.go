@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 )
@@ -14,7 +14,11 @@ type Detection struct {
 
 type Context interface {
 	Filename() string
-	Scan(rootNode *tree.Node, rule *ruleset.Rule, scope settings.RuleReferenceScope) ([]*Detection, error)
+	Scan(
+		rootNode *tree.Node,
+		rule *ruleset.Rule,
+		traversalStrategy *traversalstrategy.Strategy,
+	) ([]*Detection, error)
 }
 
 type Detector interface {
