@@ -29,11 +29,19 @@ func GetStringValue(node *tree.Node, detectorContext types.Context) (string, boo
 
 		return childString.Value, childString.IsLiteral, nil
 	default:
-		return "", false, fmt.Errorf(
-			"expected single string detection but got %d for %s",
-			len(detections),
-			node.Debug(),
-		)
+		literalValue := ""
+		for _, detection := range detections {
+			childString := detection.Data.(String)
+			if childString.IsLiteral && childString.Value != "" {
+				if literalValue != "" && childString.Value != literalValue {
+					return "", false, nil
+				}
+
+				literalValue = childString.Value
+			}
+		}
+
+		return literalValue, true, nil
 	}
 }
 
