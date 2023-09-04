@@ -13,11 +13,15 @@ module.exports = [
         url: "/guides/configure-scan/",
       },
       {
+        name: "Integration strategy",
+        url: "/guides/integration-strategy/",
+      },
+      {
         name: "Set up CI/CD",
         url: "/guides/ci-setup/",
       },
       {
-        name: "Using GitHub action",
+        name: "Using GitHub Actions",
         url: "/guides/github-action/",
       },
       {
