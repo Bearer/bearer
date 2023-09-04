@@ -16,7 +16,7 @@ require (
 	github.com/google/uuid v1.3.1
 	github.com/hhatto/gocloc v0.5.1
 	github.com/jessevdk/go-flags v1.5.0
-	github.com/open-policy-agent/opa v0.55.0
+	github.com/open-policy-agent/opa v0.56.0
 	github.com/rodaine/table v1.1.0
 	github.com/rs/zerolog v1.30.0
 	github.com/russross/blackfriday v1.6.0
@@ -116,6 +116,7 @@ require (
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
+	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
 require (
