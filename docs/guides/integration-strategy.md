@@ -93,7 +93,7 @@ To prevent significant security vulnerabilities in production, we recommend cond
 
 If you've followed our previous setup recommendations, you may have noticed that certain findings will persist in production. This is particularly true for low-priority findings or rules that you have low confidence in and disabled.
 
-To address these findings and maintain effective control over your security posture, we recommend conducting a full scan of your codebase at least once a month. This scan should allow all severity levels and rules to ensure a comprehensive review.
+To address these findings and maintain effective control over your security posture, we recommend conducting a full scan of your codebase at least once a month. This scan should allow all severity levels and enable all rules to ensure a comprehensive review.
 
 Once the scan is complete, you can employ the same logic as step 2) to prioritize and resolve any identified findings.
 
