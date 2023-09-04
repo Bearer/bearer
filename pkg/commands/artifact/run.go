@@ -270,7 +270,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		return fmt.Errorf("scan error: %w", err)
 	}
 
-	reportPassed, err := r.Report(files, baseBranchFindings)
+	reportFailed, err := r.Report(files, baseBranchFindings)
 	if err != nil {
 		return fmt.Errorf("report error: %w", err)
 	} else {
@@ -289,7 +289,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		outputhandler.StdErrLog(fmt.Sprintf("=====================================\n\nProfile\n\n%s", stats.String()))
 	}
 
-	if !reportPassed {
+	if reportFailed {
 		if scanSettings.Scan.ExitCode == -1 {
 			defer os.Exit(1)
 		} else {
@@ -306,7 +306,6 @@ func (r *runner) Report(
 ) (bool, error) {
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
-	reportPassed := true
 
 	report := types.Report{Path: r.reportPath, Inputgocloc: r.goclocResult}
 
@@ -363,7 +362,7 @@ func (r *runner) Report(
 
 	outputCachedDataWarning(cacheUsed, r.scanSettings.Scan.Quiet)
 
-	return reportPassed, nil
+	return reportData.ReportFailed, nil
 }
 
 func (r *runner) ReportPath() string {
