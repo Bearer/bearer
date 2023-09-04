@@ -66,7 +66,7 @@ Start configuring a Bearer scan when developers create a new PR/MR. This allows 
 - For GitHub Actions, refer to [using GitHub Action](/guides/github-action/#pull-request-diff).
 - For GitLab CI, refer to the [using GitLab Action](/guides/gitlab/#gitlab-merge-request-diff).
 - For CircleCI, refer to [using CircleCI](/guides/ci-setup/#circleci).
-- For other CI, refer to the [universel setup](/guides/ci-setup/#universal-setup).
+- For other CI, refer to the [universal setup](/guides/ci-setup/#universal-setup).
 
 Also, depending on your GitHub or GitLab configuration, you can choose to block MR/PR until all findings have been resolved. However, it is important to consider the impact this may have on your development team before implementing this setting.
 
