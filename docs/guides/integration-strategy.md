@@ -46,7 +46,7 @@ We need to start triaging findings from the CLI on your local machine.
 Here is our recommended strategy:
 1. Start by addressing "Critical" findings, then "High", "Medium", and finally "Low" findings.
 2. Remove any irrelevant findings for each severity level by using the ```bearer ignore``` command and categorize them as *false positive* (see [doc](/guides/configure-scan/#ignore-specific-findings)).
-3. If a rule is problematic with your code, skip it entirely using the ```--skip-rule``` option (see [doc](/guides/configure-scan/#skip-rules-for-the-entire-scan)).
+3. If a rule is problematic for your codebase, skip it entirely using the ```--skip-rule``` option (see [doc](/guides/configure-scan/#skip-rules-for-the-entire-scan)).
 4. Review the remaining findings with your team and begin fixing them.
 5. Commit your changes before running another scan to ensure the scanner picks up the changes.
 6. If you have unresolved findings, choose one of two strategies:
