@@ -98,7 +98,12 @@ func AddReportData(
 	}
 
 	if !config.Scan.Quiet {
-		fingerprintOutput(append(fingerprints, builtInFingerprints...), config.Report.ExcludeFingerprint, config.IgnoredFingerprints)
+		fingerprintOutput(
+			append(fingerprints, builtInFingerprints...),
+			config.Report.ExcludeFingerprint,
+			config.IgnoredFingerprints,
+			config.Scan.DiffBaseBranch != "",
+		)
 	}
 
 	// fail the report if we have failures above the severity threshold
@@ -252,7 +257,12 @@ func evaluateRules(
 	return fingerprints, nil
 }
 
-func fingerprintOutput(fingerprints []string, legacyExcludedFingerprints map[string]bool, ignoredFingerprints map[string]ignore.IgnoredFingerprint) {
+func fingerprintOutput(
+	fingerprints []string,
+	legacyExcludedFingerprints map[string]bool,
+	ignoredFingerprints map[string]ignore.IgnoredFingerprint,
+	diffScan bool,
+) {
 	unusedFingerprints, unusedLegacyFingerprints := removeUnusedFingerprints(
 		fingerprints,
 		legacyExcludedFingerprints,
@@ -262,34 +272,38 @@ func fingerprintOutput(fingerprints []string, legacyExcludedFingerprints map[str
 		output.StdErrLog("\n=====================================\n")
 		// legacy
 		if len(legacyExcludedFingerprints) > 0 {
-			output.StdErrLog(color.HiYellowString("Note: exclude-fingerprints is being replaced by bearer.ignore. To use the new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate.\n"))
+			output.StdErrLog(color.HiYellowString("Note: exclude-fingerprints is being replaced by bearer.ignore. To use the new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate."))
 		}
 
-		if len(unusedLegacyFingerprints) > 0 {
-			output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your Bearer Configuration file are no longer detected:", len(unusedLegacyFingerprints)))
-			for _, fingerprint := range unusedLegacyFingerprints {
-				output.StdErrLog(fmt.Sprintf("  - %s", fingerprint))
+		if !diffScan { // stale ignored fingerprint warning is misleading for diff scans
+			output.StdErrLog("\n")
+			if len(unusedLegacyFingerprints) > 0 {
+				output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your Bearer Configuration file are no longer detected:", len(unusedLegacyFingerprints)))
+				for _, fingerprint := range unusedLegacyFingerprints {
+					output.StdErrLog(fmt.Sprintf("  - %s", fingerprint))
+				}
+			}
+			// end legacy
+
+			if len(unusedFingerprints) > 0 {
+				output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your bearer.ignore file are no longer detected:", len(unusedFingerprints)))
+				for _, fingerprintId := range unusedFingerprints {
+					fingerprint, ok := ignoredFingerprints[fingerprintId]
+					if !ok {
+						// fingerprint will always be found, but if not let's not blow up the scan
+						continue
+					}
+
+					if fingerprint.Comment == nil {
+						output.StdErrLog(fmt.Sprintf("  - %s", fingerprintId))
+					} else {
+						output.StdErrLog(fmt.Sprintf("  - %s (%s)", fingerprintId, *fingerprint.Comment))
+					}
+					output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your bearer.ignore file, run: bearer ignore remove " + fingerprintId))
+				}
 			}
 		}
-		// end legacy
 
-		if len(unusedFingerprints) > 0 {
-			output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your bearer.ignore file are no longer detected:", len(unusedFingerprints)))
-			for _, fingerprintId := range unusedFingerprints {
-				fingerprint, ok := ignoredFingerprints[fingerprintId]
-				if !ok {
-					// fingerprint will always be found, but if not let's not blow up the scan
-					continue
-				}
-
-				if fingerprint.Comment == nil {
-					output.StdErrLog(fmt.Sprintf("  - %s", fingerprintId))
-				} else {
-					output.StdErrLog(fmt.Sprintf("  - %s (%s)", fingerprintId, *fingerprint.Comment))
-				}
-				output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your bearer.ignore file, run: bearer ignore remove " + fingerprintId))
-			}
-		}
 		output.StdErrLog("\n=====================================")
 	}
 }
