@@ -13,6 +13,7 @@ import (
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
+	"github.com/bearer/bearer/internal/scanner/variableshape"
 )
 
 const ()
@@ -38,6 +39,7 @@ func New(
 	schemaClassifier *schema.Classifier,
 	language language.Language,
 	ruleSet *ruleset.Set,
+	variableShapeSet *variableshape.Set,
 	querySet *query.Set,
 ) (Set, error) {
 	detectors := make([]detectortypes.Detector, len(ruleSet.Rules()))
@@ -51,7 +53,7 @@ func New(
 			continue
 		}
 
-		detector, err := customrule.New(language, ruleSet, querySet, rule)
+		detector, err := customrule.New(language, ruleSet, variableShapeSet, querySet, rule)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create %s detector: %w", rule.ID(), err)
 		}
@@ -107,7 +109,7 @@ func (set *detectorSet) detectSanitized(
 	}
 
 	if len(detectionsData) == 0 {
-		return nil, nil
+		return &Result{}, nil
 	}
 
 	detections := make([]*detectortypes.Detection, len(detectionsData))

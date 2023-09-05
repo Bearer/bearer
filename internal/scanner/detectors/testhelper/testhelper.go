@@ -19,6 +19,7 @@ import (
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/scanner/rulescanner"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
+	"github.com/bearer/bearer/internal/scanner/variableshape"
 )
 
 type result struct {
@@ -55,11 +56,17 @@ func RunTest(
 			tt.Fatalf("failed to create rule set: %s", err)
 		}
 
+		variableShapeSet, err := variableshape.NewSet(language, ruleSet)
+		if err != nil {
+			tt.Fatalf("failed to create variable shape set: %s", err)
+		}
+
 		querySet := query.NewSet(language.ID(), language.SitterLanguage())
 		detectorSet, err := detectorset.New(
 			classifier.Schema,
 			language,
 			ruleSet,
+			variableShapeSet,
 			querySet,
 		)
 		if err != nil {

@@ -17,6 +17,7 @@ import (
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
+	"github.com/bearer/bearer/internal/scanner/variableshape"
 	"github.com/bearer/bearer/internal/util/file"
 
 	"github.com/bearer/bearer/internal/scanner/cache"
@@ -42,9 +43,14 @@ func New(
 		return nil, fmt.Errorf("error creating rule set: %w", err)
 	}
 
+	variableShapeSet, err := variableshape.NewSet(language, ruleSet)
+	if err != nil {
+		return nil, fmt.Errorf("error creating variable shape set: %w", err)
+	}
+
 	querySet := query.NewSet(language.ID(), language.SitterLanguage())
 
-	detectorSet, err := detectorset.New(schemaClassifier, language, ruleSet, querySet)
+	detectorSet, err := detectorset.New(schemaClassifier, language, ruleSet, variableShapeSet, querySet)
 	if err != nil {
 		querySet.Close()
 		return nil, fmt.Errorf("failed to create detector set: %w", err)

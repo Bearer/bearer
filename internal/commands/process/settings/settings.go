@@ -211,13 +211,19 @@ type Rule struct {
 	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
 }
 
+type RuleReferenceImport struct {
+	Variable string `mapstructure:"variable" json:"variable" yaml:"variable"`
+	As       string `mapstructure:"as" json:"as" yaml:"as"`
+}
+
 type PatternFilter struct {
-	Not       *PatternFilter     `mapstructure:"not" json:"not" yaml:"not"`
-	Either    []PatternFilter    `mapstructure:"either" json:"either" yaml:"either"`
-	Variable  string             `mapstructure:"variable" json:"variable" yaml:"variable"`
-	Detection string             `mapstructure:"detection" json:"detection" yaml:"detection"`
-	Scope     RuleReferenceScope `mapstructure:"scope" json:"scope" yaml:"scope"`
-	Filters   []PatternFilter    `mapstructure:"filters" json:"filters" yaml:"filters"`
+	Not       *PatternFilter        `mapstructure:"not" json:"not" yaml:"not"`
+	Either    []PatternFilter       `mapstructure:"either" json:"either" yaml:"either"`
+	Variable  string                `mapstructure:"variable" json:"variable" yaml:"variable"`
+	Detection string                `mapstructure:"detection" json:"detection" yaml:"detection"`
+	Scope     RuleReferenceScope    `mapstructure:"scope" json:"scope" yaml:"scope"`
+	Filters   []PatternFilter       `mapstructure:"filters" json:"filters" yaml:"filters"`
+	Imports   []RuleReferenceImport `mapstructure:"imports" json:"imports" yaml:"imports"`
 	// Contains is deprecated in favour of Scope
 	Contains           *bool    `mapstructure:"contains" json:"contains" yaml:"contains"`
 	Regex              *Regexp  `mapstructure:"regex" json:"regex" yaml:"regex"`

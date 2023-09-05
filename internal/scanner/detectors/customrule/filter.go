@@ -4,19 +4,40 @@ import (
 	"fmt"
 	"slices"
 
+	"github.com/rs/zerolog/log"
+
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/filters"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
-	"github.com/rs/zerolog/log"
+	"github.com/bearer/bearer/internal/scanner/variableshape"
 )
 
-func translateFilters(ruleSet *ruleset.Set, sourceFilters []settings.PatternFilter) ([]filters.Filter, error) {
+func translateFiltersTop(
+	ruleSet *ruleset.Set,
+	variableShapeSet *variableshape.Set,
+	variableShape *variableshape.Shape,
+	sourceFilters []settings.PatternFilter,
+) (filters.Filter, error) {
+	children, err := translateFilters(ruleSet, variableShapeSet, variableShape, sourceFilters)
+	if err != nil {
+		return nil, err
+	}
+
+	return &filters.All{Children: children}, nil
+}
+
+func translateFilters(
+	ruleSet *ruleset.Set,
+	variableShapeSet *variableshape.Set,
+	variableShape *variableshape.Shape,
+	sourceFilters []settings.PatternFilter,
+) ([]filters.Filter, error) {
 	filters := make([]filters.Filter, len(sourceFilters))
 
 	sortFilters(sourceFilters)
 	for i, sourceFilter := range sourceFilters {
-		filter, err := translateFilter(ruleSet, &sourceFilter)
+		filter, err := translateFilter(ruleSet, variableShapeSet, variableShape, &sourceFilter)
 		if err != nil {
 			return nil, err
 		}
@@ -27,9 +48,14 @@ func translateFilters(ruleSet *ruleset.Set, sourceFilters []settings.PatternFilt
 	return filters, nil
 }
 
-func translateFilter(ruleSet *ruleset.Set, sourceFilter *settings.PatternFilter) (filters.Filter, error) {
+func translateFilter(
+	ruleSet *ruleset.Set,
+	variableShapeSet *variableshape.Set,
+	variableShape *variableshape.Shape,
+	sourceFilter *settings.PatternFilter,
+) (filters.Filter, error) {
 	if sourceFilter.Not != nil {
-		child, err := translateFilter(ruleSet, sourceFilter.Not)
+		child, err := translateFilter(ruleSet, variableShapeSet, variableShape, sourceFilter.Not)
 		if err != nil {
 			return nil, err
 		}
@@ -38,7 +64,7 @@ func translateFilter(ruleSet *ruleset.Set, sourceFilter *settings.PatternFilter)
 	}
 
 	if len(sourceFilter.Either) != 0 {
-		children, err := translateFilters(ruleSet, sourceFilter.Either)
+		children, err := translateFilters(ruleSet, variableShapeSet, variableShape, sourceFilter.Either)
 		if err != nil {
 			return nil, err
 		}
@@ -50,13 +76,23 @@ func translateFilter(ruleSet *ruleset.Set, sourceFilter *settings.PatternFilter)
 		return &filters.FilenameRegex{Regex: sourceFilter.FilenameRegex.Regexp}, nil
 	}
 
+	variable, err := variableShape.Variable(sourceFilter.Variable)
+	if err != nil {
+		return nil, err
+	}
+
 	if sourceFilter.Detection != "" {
 		rule, err := ruleSet.RuleByID(sourceFilter.Detection)
 		if err != nil {
 			return nil, err
 		}
 
-		ruleFilters, err := translateFilters(ruleSet, sourceFilter.Filters)
+		ruleFilter, err := translateFiltersTop(
+			ruleSet,
+			variableShapeSet,
+			variableShapeSet.Shape(rule),
+			sourceFilter.Filters,
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -66,68 +102,86 @@ func translateFilter(ruleSet *ruleset.Set, sourceFilter *settings.PatternFilter)
 			return nil, err
 		}
 
+		childVariableShape := variableShapeSet.Shape(rule)
+
+		importedVariables := make([]filters.ImportedVariable, len(sourceFilter.Imports))
+		for i, importedVariable := range sourceFilter.Imports {
+			parentVariable, err := variableShape.Variable(importedVariable.As)
+			if err != nil {
+				return nil, err
+			}
+
+			childVariable, err := childVariableShape.Variable(importedVariable.Variable)
+
+			importedVariables[i] = filters.ImportedVariable{
+				ParentVariable: parentVariable,
+				ChildVariable:  childVariable,
+			}
+		}
+
 		return &filters.Rule{
-			VariableName:      sourceFilter.Variable,
+			Variable:          variable,
 			Rule:              rule,
 			TraversalStrategy: traversalStrategy,
 			IsDatatypeRule:    sourceFilter.Detection == "datatype",
-			Filters:           ruleFilters,
+			Filter:            ruleFilter,
+			ImportedVariables: importedVariables,
 		}, nil
 	}
 
 	if len(sourceFilter.Values) != 0 {
 		return &filters.Values{
-			VariableName: sourceFilter.Variable,
-			Values:       sourceFilter.Values,
+			Variable: variable,
+			Values:   sourceFilter.Values,
 		}, nil
 	}
 
 	if sourceFilter.Regex != nil {
 		return &filters.Regex{
-			VariableName: sourceFilter.Variable,
-			Regex:        sourceFilter.Regex.Regexp,
+			Variable: variable,
+			Regex:    sourceFilter.Regex.Regexp,
 		}, nil
 	}
 
 	if sourceFilter.LengthLessThan != nil {
 		return &filters.StringLengthLessThan{
-			VariableName: sourceFilter.Variable,
-			Value:        *sourceFilter.LengthLessThan,
+			Variable: variable,
+			Value:    *sourceFilter.LengthLessThan,
 		}, nil
 	}
 
 	if sourceFilter.StringRegex != nil {
 		return &filters.StringRegex{
-			VariableName: sourceFilter.Variable,
-			Regex:        *&sourceFilter.StringRegex.Regexp,
+			Variable: variable,
+			Regex:    *&sourceFilter.StringRegex.Regexp,
 		}, nil
 	}
 
 	if sourceFilter.LessThan != nil {
 		return &filters.IntegerLessThan{
-			VariableName: sourceFilter.Variable,
-			Value:        *sourceFilter.LessThan,
+			Variable: variable,
+			Value:    *sourceFilter.LessThan,
 		}, nil
 	}
 
 	if sourceFilter.LessThanOrEqual != nil {
 		return &filters.IntegerLessThanOrEqual{
-			VariableName: sourceFilter.Variable,
-			Value:        *sourceFilter.LessThanOrEqual,
+			Variable: variable,
+			Value:    *sourceFilter.LessThanOrEqual,
 		}, nil
 	}
 
 	if sourceFilter.GreaterThan != nil {
 		return &filters.IntegerGreaterThan{
-			VariableName: sourceFilter.Variable,
-			Value:        *sourceFilter.GreaterThan,
+			Variable: variable,
+			Value:    *sourceFilter.GreaterThan,
 		}, nil
 	}
 
 	if sourceFilter.GreaterThanOrEqual != nil {
 		return &filters.IntegerGreaterThanOrEqual{
-			VariableName: sourceFilter.Variable,
-			Value:        *sourceFilter.GreaterThanOrEqual,
+			Variable: variable,
+			Value:    *sourceFilter.GreaterThanOrEqual,
 		}, nil
 	}
 

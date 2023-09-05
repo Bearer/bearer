@@ -10,6 +10,7 @@ import (
 	astquery "github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
+	"github.com/bearer/bearer/internal/scanner/variableshape"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery/builder"
 )
@@ -21,22 +22,25 @@ type Query interface {
 }
 
 type query struct {
-	id              string
-	input           string
-	treeQuery       *astquery.Query
-	paramToVariable map[string]string
-	equalParams     [][]string
-	paramToContent  map[string]map[string]string
+	id                   string
+	input                string
+	treeQuery            *astquery.Query
+	paramToShapeVariable map[string]*variableshape.Variable
+	equalParams          [][]string
+	paramToContent       map[string]map[string]string
+	variableShape        *variableshape.Shape
 }
 
 type rootVariableQuery struct {
-	id       string
-	variable *language.PatternVariable
+	id            string
+	variable      *language.PatternVariable
+	shapeVariable *variableshape.Variable
+	variableShape *variableshape.Shape
 }
 
 type Result struct {
 	MatchNode *tree.Node
-	Variables tree.QueryResult
+	Variables variableshape.Values
 }
 
 func Compile(
@@ -46,6 +50,7 @@ func Compile(
 	patternIndex int,
 	input string,
 	focusedVariable string,
+	variableShape *variableshape.Shape,
 ) (Query, error) {
 	builderResult, err := builder.Build(language, input, focusedVariable)
 	if err != nil {
@@ -56,16 +61,38 @@ func Compile(
 
 	if builderResult.RootVariable != nil {
 		log.Trace().Msgf("single variable pattern %s: %s -> %#v", id, input, *builderResult.RootVariable)
-		return &rootVariableQuery{id: id, variable: builderResult.RootVariable}, nil
+
+		shapeVariable, err := variableShape.Variable(builderResult.RootVariable.Name)
+		if err != nil {
+			return nil, err
+		}
+
+		return &rootVariableQuery{
+			id:            id,
+			variable:      builderResult.RootVariable,
+			shapeVariable: shapeVariable,
+			variableShape: variableShape,
+		}, nil
+	}
+
+	paramToShapeVariable := make(map[string]*variableshape.Variable)
+	for param, variableName := range builderResult.ParamToVariable {
+		shapeVariable, err := variableShape.Variable(variableName)
+		if err != nil {
+			return nil, err
+		}
+
+		paramToShapeVariable[param] = shapeVariable
 	}
 
 	query := &query{
-		id:              id,
-		input:           input,
-		treeQuery:       querySet.Add(builderResult.Query),
-		paramToVariable: builderResult.ParamToVariable,
-		equalParams:     builderResult.EqualParams,
-		paramToContent:  builderResult.ParamToContent,
+		id:                   id,
+		input:                input,
+		treeQuery:            querySet.Add(builderResult.Query),
+		paramToShapeVariable: paramToShapeVariable,
+		equalParams:          builderResult.EqualParams,
+		paramToContent:       builderResult.ParamToContent,
+		variableShape:        variableShape,
 	}
 
 	if log.Trace().Enabled() {
@@ -85,11 +112,16 @@ type dumpValue struct {
 }
 
 func (query *query) dump() string {
+	paramToVariableName := make(map[string]string)
+	for param, variable := range query.paramToShapeVariable {
+		paramToVariableName[param] = variable.Name()
+	}
+
 	yamlQuery, err := yaml.Marshal(&dumpValue{
 		ID:              query.id,
 		Pattern:         query.input,
 		TreeQueryID:     query.treeQuery.ID(),
-		ParamToVariable: query.paramToVariable,
+		ParamToVariable: paramToVariableName,
 		ParamToContent:  query.paramToContent,
 		EqualParams:     query.equalParams,
 	})
@@ -162,12 +194,11 @@ func (query *query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *Re
 		}
 	}
 
-	variables := make(tree.QueryResult)
+	variables := query.variableShape.NewValues()
 
 	for paramName, node := range treeResult {
-		variableName := query.paramToVariable[paramName]
-		if variableName != "" {
-			variables[variableName] = node
+		if variable := query.paramToShapeVariable[paramName]; variable != nil {
+			variables.Set(variable, node)
 		}
 	}
 
@@ -206,8 +237,8 @@ func (query *rootVariableQuery) isCompatibleType(node *tree.Node) bool {
 }
 
 func (query *rootVariableQuery) resultFor(node *tree.Node) *Result {
-	variables := make(tree.QueryResult)
-	variables[query.variable.Name] = node
+	variables := query.variableShape.NewValues()
+	variables.Set(query.shapeVariable, node)
 
 	return &Result{
 		MatchNode: node,
