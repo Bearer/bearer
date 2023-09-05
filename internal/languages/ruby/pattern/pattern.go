@@ -78,7 +78,7 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 }
 
 func produceDummyValue(i int, nodeType string) string {
-	return "curioVar" + fmt.Sprint(i)
+	return "bearerVar" + fmt.Sprint(i)
 }
 
 func (*Pattern) LeafContentTypes() []string {

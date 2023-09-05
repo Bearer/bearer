@@ -70,7 +70,7 @@ func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariab
 }
 
 func produceDummyValue(i int, nodeType string) string {
-	return "CurioVar" + fmt.Sprint(i)
+	return "BearerVar" + fmt.Sprint(i)
 }
 
 func (*Pattern) FindMatchNode(input []byte) [][]int {
