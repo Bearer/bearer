@@ -6,7 +6,8 @@ import (
 
 type CloudIgnoreData struct {
 	ProjectFound bool     `json:"project_found"`
-	CloudIgnores []string `json:"cloud_ignores"`
+	Ignores      []string `json:"ignores"`
+	StaleIgnores []string `json:"stale_ignores"`
 }
 
 type CloudIgnorePayload struct {

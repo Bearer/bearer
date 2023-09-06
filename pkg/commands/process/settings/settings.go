@@ -44,21 +44,22 @@ type WorkerOptions struct {
 }
 
 type Config struct {
-	Client              *api.API
-	Worker              WorkerOptions                        `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan                flag.ScanOptions                     `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report              flag.ReportOptions                   `mapstructure:"report" json:"report" yaml:"report"`
-	IgnoredFingerprints map[string]ignore.IgnoredFingerprint `mapstructure:"ignored_fingerprints" json:"ignored_fingerprints" yaml:"ignored_fingerprints"`
-	CloudIgnoresUsed    bool                                 `mapstructure:"cloud_ignores_used" json:"cloud_ignores_used" yaml:"cloud_ignores_used"`
-	Policies            map[string]*Policy                   `mapstructure:"policies" json:"policies" yaml:"policies"`
-	Target              string                               `mapstructure:"target" json:"target" yaml:"target"`
-	BearerIgnoreFile    string                               `mapstructure:"bearer_ignore_file" json:"bearer_ignore_file" yaml:"bearer_ignore_file"`
-	Rules               map[string]*Rule                     `mapstructure:"rules" json:"rules" yaml:"rules"`
-	BuiltInRules        map[string]*Rule                     `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
-	CacheUsed           bool                                 `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
-	BearerRulesVersion  string                               `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
-	NoColor             bool                                 `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
-	DebugProfile        bool                                 `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
+	Client                     *api.API
+	Worker                     WorkerOptions                        `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Scan                       flag.ScanOptions                     `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report                     flag.ReportOptions                   `mapstructure:"report" json:"report" yaml:"report"`
+	IgnoredFingerprints        map[string]ignore.IgnoredFingerprint `mapstructure:"ignored_fingerprints" json:"ignored_fingerprints" yaml:"ignored_fingerprints"`
+	StaleIgnoredFingerprintIds []string                             `mapstructure:"stale_ignored_fingerprint_ids" json:"stale_ignored_fingerprint_ids" yaml:"stale_ignored_fingerprint_ids"`
+	CloudIgnoresUsed           bool                                 `mapstructure:"cloud_ignores_used" json:"cloud_ignores_used" yaml:"cloud_ignores_used"`
+	Policies                   map[string]*Policy                   `mapstructure:"policies" json:"policies" yaml:"policies"`
+	Target                     string                               `mapstructure:"target" json:"target" yaml:"target"`
+	BearerIgnoreFile           string                               `mapstructure:"bearer_ignore_file" json:"bearer_ignore_file" yaml:"bearer_ignore_file"`
+	Rules                      map[string]*Rule                     `mapstructure:"rules" json:"rules" yaml:"rules"`
+	BuiltInRules               map[string]*Rule                     `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
+	CacheUsed                  bool                                 `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
+	BearerRulesVersion         string                               `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
+	NoColor                    bool                                 `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	DebugProfile               bool                                 `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
 }
 
 type Modules []*PolicyModule
