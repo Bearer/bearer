@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/schema"
+	"github.com/bearer/bearer/pkg/version_check"
 
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
@@ -184,7 +185,16 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 		GeneralOptions: flag.GeneralOptions{},
 	}
 
-	return settings.FromOptions(opts, []string{"ruby"})
+	meta := &version_check.VersionMeta{
+		Rules: version_check.RuleVersionMeta{
+			Packages: make(map[string]string),
+		},
+		Binary: version_check.BinaryVersionMeta{
+			Latest:  true,
+			Message: "",
+		},
+	}
+	return settings.FromOptions(opts, meta)
 }
 
 func dummyDataflowData() *outputtypes.ReportData {

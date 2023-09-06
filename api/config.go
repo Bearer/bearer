@@ -17,6 +17,7 @@ type APIEndpoints struct {
 	ScanFinished      Endpoint
 	FetchIgnores      Endpoint
 	Hello             Endpoint
+	Version           Endpoint
 }
 
 var Endpoints = APIEndpoints{
@@ -35,5 +36,9 @@ var Endpoints = APIEndpoints{
 	Hello: Endpoint{
 		HttpMethod: "POST",
 		Route:      "/cloud/hello",
+	},
+	Version: Endpoint{
+		HttpMethod: "GET",
+		Route:      "/r/version",
 	},
 }

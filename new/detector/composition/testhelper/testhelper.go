@@ -22,6 +22,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/types"
 	util "github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/version_check"
 )
 
 type Runner struct {
@@ -45,7 +46,16 @@ func GetRunner(t *testing.T, ruleBytes []byte, lang string) *Runner {
 	configFlags.Report = flag.ReportSecurity
 	configFlags.Quiet = true
 
-	config, err := settings.FromOptions(configFlags, []string{lang})
+	meta := &version_check.VersionMeta{
+		Rules: version_check.RuleVersionMeta{
+			Packages: make(map[string]string),
+		},
+		Binary: version_check.BinaryVersionMeta{
+			Latest:  true,
+			Message: "",
+		},
+	}
+	config, err := settings.FromOptions(configFlags, meta)
 	if err != nil {
 		t.Fatalf("failed to generate default scan settings: %s", err)
 	}

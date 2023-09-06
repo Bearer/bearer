@@ -25,7 +25,6 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/github_api"
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	reportoutput "github.com/bearer/bearer/pkg/report/output"
 	"github.com/bearer/bearer/pkg/report/output/saas"
@@ -34,6 +33,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/ignore"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/version_check"
 
 	"github.com/bearer/bearer/pkg/types"
 )
@@ -248,18 +248,31 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options) (err error) {
-	if !opts.Quiet {
-		outputhandler.StdErrLog("Loading rules")
-	}
-
-	github_api.VersionCheck(ctx, opts.GeneralOptions.DisableVersionCheck, opts.ScanOptions.Quiet)
-
 	inputgocloc, err := stats.GoclocDetectorOutput(opts.ScanOptions.Target)
 	if err != nil {
 		log.Debug().Msgf("Error in line of code output %s", err)
 		return err
 	}
-	scanSettings, err := settings.FromOptions(opts, FormatFoundLanguages(inputgocloc.Languages))
+	languageList := FormatFoundLanguages(inputgocloc.Languages)
+
+	// set used language list for extetrnal rules to empty if we dont use them
+	metaLanguageList := languageList
+	if opts.RuleOptions.DisableDefaultRules {
+		metaLanguageList = make([]string, 0)
+	}
+	// deal with no version check here
+	versionMeta, err := version_check.GetVersionMeta(ctx, metaLanguageList)
+	if err != nil {
+		log.Debug().Msgf("failed: %s", err)
+	} else {
+		version_check.DisplayBinaryVersionWarning(versionMeta, opts.ScanOptions.Quiet)
+	}
+
+	if !opts.Quiet {
+		outputhandler.StdErrLog("Loading rules")
+	}
+
+	scanSettings, err := settings.FromOptions(opts, versionMeta)
 	scanSettings.Target = opts.Target
 	if err != nil {
 		return err
@@ -290,16 +303,6 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 
 	r := NewRunner(ctx, scanSettings, inputgocloc, stats)
 	defer r.Close(ctx)
-
-	if !r.CacheUsed() && scanSettings.CacheUsed {
-		// re-cache rules
-		if opts.ScanOptions.Force && !opts.ScanOptions.Quiet {
-			outputhandler.StdOutLog("Caching rules")
-		}
-		if err = settings.RefreshRules(scanSettings, opts.ExternalRuleDir, opts.RuleOptions, FormatFoundLanguages(inputgocloc.Languages)); err != nil {
-			return err
-		}
-	}
 
 	files, baseBranchFindings, err := r.Scan(ctx, opts)
 	if err != nil {

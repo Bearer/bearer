@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/customdetectors"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/set"
+	"github.com/bearer/bearer/pkg/version_check"
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
 )
@@ -37,82 +38,35 @@ func GetSupportedRuleLanguages() map[string]bool {
 	}
 }
 
-func RefreshRules(config Config, externalRuleDirs []string, options flag.RuleOptions, foundLanguages []string) (err error) {
-	result, err := loadRules(externalRuleDirs, options, foundLanguages, true)
-	config.BuiltInRules = result.BuiltInRules
-	config.Rules = result.Rules
-	config.BearerRulesVersion = result.BearerRulesVersion
-
-	return
-}
-
 func loadRules(
 	externalRuleDirs []string,
 	options flag.RuleOptions,
-	foundLanguages []string,
+	versionMeta *version_check.VersionMeta,
 	force bool) (
 	result LoadRulesResult,
 	err error,
 ) {
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
-	ruleLanguages := make(map[string]bool)
 
-	if !options.DisableDefaultRules {
-		bearerRulesDir := bearerRulesDir()
-		if !force && cachedRulesExist(bearerRulesDir) {
-			result.CacheUsed = true
-			err := filepath.WalkDir(bearerRulesDir, func(filePath string, d fs.DirEntry, err error) error {
-				if !d.IsDir() {
-					file, err := os.Open(filepath.Join(bearerRulesDir, d.Name()))
-					if err != nil {
-						return err
-					}
-					if ruleLanguages, err = ReadRuleDefinitions(definitions, file); err != nil {
-						return err
-					}
-				}
-				return nil
-			})
+	log.Debug().Msg("Loading rules")
 
-			if err != nil {
-				return result, fmt.Errorf("error loading rules from cache: %s", err)
-			}
+	if versionMeta.Rules.Version != nil {
+		result.BearerRulesVersion = *versionMeta.Rules.Version
 
-			supportedLanguages := GetSupportedRuleLanguages()
-			for _, foundLang := range foundLanguages {
-				if !supportedLanguages[foundLang] {
-					// no rule support for this language e.g. CSS, plain text
-					continue
-				}
-
-				if !ruleLanguages[foundLang] {
-					definitions = make(map[string]RuleDefinition)
-					result.CacheUsed = false // re-cache rules
-				}
-			}
+		urls := make([]string, 0, len(versionMeta.Rules.Packages))
+		for _, value := range versionMeta.Rules.Packages {
+			log.Debug().Msgf("Added rule package URL %s", value)
+			urls = append(urls, value)
 		}
 
-		if !result.CacheUsed {
-			if err := cleanupRuleDirFiles(bearerRulesDir); err != nil {
-				return result, fmt.Errorf("error cleaning rules cache: %s", err)
-			}
-
-			tagVersion, err := LoadRuleDefinitionsFromGitHub(definitions, foundLanguages)
-			if err != nil {
-				output.Fatal(fmt.Sprintf("Error loading rules: %s", err))
-				// sysexit
-			}
-
-			result.BearerRulesVersion = tagVersion
+		err = LoadRuleDefinitionsFromUrls(definitions, urls)
+		if err != nil {
+			output.Fatal(fmt.Sprintf("Error loading rules: %s", err))
+			// sysexit
 		}
-
-		// add default documentation urls for default rules
-		for id, definition := range definitions {
-			if definition.Metadata.DocumentationUrl == "" {
-				definitions[id].Metadata.DocumentationUrl = "https://docs.bearer.com/reference/rules/" + id
-			}
-		}
+	} else {
+		log.Debug().Msg("No rule packages found")
 	}
 
 	if err := loadRuleDefinitionsFromDir(builtInDefinitions, buildInRulesFs); err != nil {
@@ -489,11 +443,6 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 	}
 
 	return rules
-}
-
-func cachedRulesExist(bearerRulesDir string) bool {
-	_, err := os.Stat(bearerRulesDir)
-	return err == nil
 }
 
 func cleanupRuleDirFiles(bearerRulesDir string) error {
