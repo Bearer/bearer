@@ -55,17 +55,26 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignore
 	return ignoredFingerprints, true, err
 }
 
-func GetIgnoredFingerprintsFromCloud(client *api.API, fullname string, localIgnores map[string]IgnoredFingerprint) (useCloudIgnores bool, ignoredFingerprints map[string]IgnoredFingerprint, err error) {
+func GetIgnoredFingerprintsFromCloud(
+	client *api.API,
+	fullname string,
+	localIgnores map[string]IgnoredFingerprint,
+) (
+	useCloudIgnores bool,
+	ignoredFingerprints map[string]IgnoredFingerprint,
+	staleIgnoredFingerprintIds []string,
+	err error,
+) {
 	data, err := client.FetchIgnores(fullname, maps.Keys(localIgnores))
 	if err != nil {
-		return useCloudIgnores, ignoredFingerprints, err
+		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
 	}
 
 	ignoredFingerprints = make(map[string]IgnoredFingerprint)
-	for _, fingerprint := range data.CloudIgnores {
+	for _, fingerprint := range data.Ignores {
 		ignoredFingerprints[fingerprint] = IgnoredFingerprint{}
 	}
-	return data.ProjectFound, ignoredFingerprints, nil
+	return data.ProjectFound, ignoredFingerprints, data.StaleIgnores, nil
 }
 
 func MergeIgnoredFingerprints(fingerprintsToIgnore map[string]IgnoredFingerprint, ignoredFingerprints map[string]IgnoredFingerprint, force bool) error {

@@ -214,30 +214,35 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 	return fileList.Files, baseBranchFindings, nil
 }
 
-func getIgnoredFingerprints(client *api.API, settings settings.Config) (useCloudIgnores bool, cloudIgnores map[string]ignore.IgnoredFingerprint, err error) {
-	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(settings.BearerIgnoreFile, &settings.Target)
+func getIgnoredFingerprints(client *api.API, settings settings.Config) (
+	useCloudIgnores bool,
+	ignoredFingerprints map[string]ignore.IgnoredFingerprint,
+	staleIgnoredFingerprintIds []string,
+	err error,
+) {
+	ignoredFingerprints, _, err = ignore.GetIgnoredFingerprints(settings.BearerIgnoreFile, &settings.Target)
 	if err != nil {
-		return useCloudIgnores, cloudIgnores, err
+		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
 	}
 
 	if client != nil && client.Error == nil {
 		// get ignores from Cloud
 		vcsInfo, err := saas.GetVCSInfo(settings)
 		if err != nil {
-			return useCloudIgnores, cloudIgnores, err
+			return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
 		}
 
-		useCloudIgnores, cloudIgnores, err = ignore.GetIgnoredFingerprintsFromCloud(client, vcsInfo.FullName, ignoredFingerprints)
+		useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err = ignore.GetIgnoredFingerprintsFromCloud(client, vcsInfo.FullName, ignoredFingerprints)
 		if err != nil {
-			return useCloudIgnores, cloudIgnores, err
+			return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
 		}
 	}
 
 	if useCloudIgnores {
-		return useCloudIgnores, cloudIgnores, nil
+		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, nil
 	}
 
-	return useCloudIgnores, ignoredFingerprints, nil
+	return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, nil
 }
 
 // Run performs artifact scanning
@@ -258,7 +263,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	if err != nil {
 		return err
 	}
-	scanSettings.CloudIgnoresUsed, scanSettings.IgnoredFingerprints, err = getIgnoredFingerprints(
+	scanSettings.CloudIgnoresUsed, scanSettings.IgnoredFingerprints, scanSettings.StaleIgnoredFingerprintIds, err = getIgnoredFingerprints(
 		opts.GeneralOptions.Client,
 		scanSettings,
 	)
