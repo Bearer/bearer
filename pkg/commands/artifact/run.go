@@ -215,6 +215,11 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 }
 
 func getIgnoredFingerprints(client *api.API, settings settings.Config) (useCloudIgnores bool, cloudIgnores map[string]ignore.IgnoredFingerprint, err error) {
+	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(settings.BearerIgnoreFile, &settings.Target)
+	if err != nil {
+		return useCloudIgnores, cloudIgnores, err
+	}
+
 	if client != nil && client.Error == nil {
 		// get ignores from Cloud
 		vcsInfo, err := saas.GetVCSInfo(settings)
@@ -222,7 +227,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (useCloud
 			return useCloudIgnores, cloudIgnores, err
 		}
 
-		useCloudIgnores, cloudIgnores, err = ignore.GetIgnoredFingerprintsFromCloud(client, vcsInfo.FullName)
+		useCloudIgnores, cloudIgnores, err = ignore.GetIgnoredFingerprintsFromCloud(client, vcsInfo.FullName, ignoredFingerprints)
 		if err != nil {
 			return useCloudIgnores, cloudIgnores, err
 		}
@@ -230,11 +235,6 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (useCloud
 
 	if useCloudIgnores {
 		return useCloudIgnores, cloudIgnores, nil
-	}
-
-	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(settings.BearerIgnoreFile, &settings.Target)
-	if err != nil {
-		return useCloudIgnores, cloudIgnores, err
 	}
 
 	return useCloudIgnores, ignoredFingerprints, nil
