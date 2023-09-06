@@ -12,6 +12,7 @@ import (
 	"github.com/bearer/bearer/api"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/fatih/color"
+	"golang.org/x/exp/maps"
 )
 
 type IgnoredFingerprint struct {
@@ -54,8 +55,8 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignore
 	return ignoredFingerprints, true, err
 }
 
-func GetIgnoredFingerprintsFromCloud(client *api.API, fullname string) (useCloudIgnores bool, ignoredFingerprints map[string]IgnoredFingerprint, err error) {
-	data, err := client.FetchIgnores(fullname)
+func GetIgnoredFingerprintsFromCloud(client *api.API, fullname string, localIgnores map[string]IgnoredFingerprint) (useCloudIgnores bool, ignoredFingerprints map[string]IgnoredFingerprint, err error) {
+	data, err := client.FetchIgnores(fullname, maps.Keys(localIgnores))
 	if err != nil {
 		return useCloudIgnores, ignoredFingerprints, err
 	}
