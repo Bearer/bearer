@@ -20,9 +20,17 @@ type Result struct {
 	matches []Match
 }
 
+func NewResult(matches ...Match) *Result {
+	return &Result{matches: matches}
+}
+
 type Match struct {
 	variables          variableshape.Values
 	datatypeDetections []*detectortypes.Detection
+}
+
+func NewMatch(variables variableshape.Values, datatypeDetections []*detectortypes.Detection) Match {
+	return Match{variables: variables, datatypeDetections: datatypeDetections}
 }
 
 func (result *Result) Matches() []Match {
@@ -57,7 +65,7 @@ func (filter *Not) Evaluate(
 		return nil, err
 	}
 
-	return boolResult(patternVariables, len(result.Matches()) != 0), nil
+	return boolResult(patternVariables, len(result.Matches()) == 0), nil
 }
 
 type Either struct {
@@ -89,7 +97,7 @@ func (filter *Either) Evaluate(
 		return nil, nil
 	}
 
-	return &Result{matches: matches}, nil
+	return NewResult(matches...), nil
 }
 
 type All struct {
@@ -119,7 +127,7 @@ func (filter *All) Evaluate(
 		}
 	}
 
-	return &Result{matches: matches}, nil
+	return NewResult(matches...), nil
 }
 
 func (filter *All) joinMatches(matches, childMatches []Match) []Match {
@@ -128,11 +136,11 @@ func (filter *All) joinMatches(matches, childMatches []Match) []Match {
 	for _, match := range matches {
 		for _, childMatch := range childMatches {
 			if variables, variablesMatch := match.variables.Merge(childMatch.variables); variablesMatch {
-				result = append(result, Match{
-					variables: variables,
+				result = append(result, NewMatch(
+					variables,
 					// FIXME: this seems like it will create unnecessary duplicates
-					datatypeDetections: append(match.datatypeDetections, childMatch.datatypeDetections...),
-				})
+					append(match.datatypeDetections, childMatch.datatypeDetections...),
+				))
 			}
 		}
 	}
@@ -176,16 +184,11 @@ func (filter *Rule) Evaluate(
 	}
 
 	if len(detections) == 0 {
-		return &Result{}, nil
+		return NewResult(), nil
 	}
 
 	if filter.IsDatatypeRule {
-		return &Result{
-			matches: []Match{{
-				variables:          patternVariables,
-				datatypeDetections: detections,
-			}},
-		}, nil
+		return NewResult(NewMatch(patternVariables, detections)), nil
 	}
 
 	if log.Trace().Enabled() {
@@ -217,7 +220,7 @@ func (filter *Rule) Evaluate(
 		}
 
 		if len(filter.ImportedVariables) == 0 {
-			matches = append(matches, Match{variables: patternVariables})
+			matches = append(matches, NewMatch(patternVariables, nil))
 			continue
 		}
 
@@ -225,10 +228,7 @@ func (filter *Rule) Evaluate(
 		for _, detectionMatch := range subResult.matches {
 			if variables, variablesMatch := filter.importVariables(patternVariables, detectionMatch.variables); variablesMatch {
 				matched = true
-				matches = append(matches, Match{
-					variables:          variables,
-					datatypeDetections: detectionMatch.datatypeDetections,
-				})
+				matches = append(matches, NewMatch(variables, detectionMatch.datatypeDetections))
 			}
 		}
 
@@ -239,7 +239,7 @@ func (filter *Rule) Evaluate(
 		}
 	}
 
-	return &Result{matches: matches}, nil
+	return NewResult(matches...), nil
 }
 
 func (filter *Rule) importVariables(parentVariables, childVariables variableshape.Values) (variableshape.Values, bool) {
@@ -432,12 +432,12 @@ func parseInteger(node *tree.Node) (int, bool, error) {
 }
 
 func boolResult(patternVariables variableshape.Values, value bool) *Result {
-	return &Result{matches: boolMatches(patternVariables, value)}
+	return NewResult(boolMatches(patternVariables, value)...)
 }
 
 func boolMatches(patternVariables variableshape.Values, value bool) []Match {
 	if value {
-		return []Match{{variables: patternVariables}}
+		return []Match{NewMatch(patternVariables, nil)}
 	} else {
 		return nil
 	}

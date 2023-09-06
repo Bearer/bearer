@@ -2,7 +2,6 @@ package variableshape
 
 import (
 	"fmt"
-	"unsafe"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
@@ -28,7 +27,7 @@ func (values Values) Merge(other Values) (Values, bool) {
 		return nil, true
 	}
 
-	if unsafe.SliceData(values) == unsafe.SliceData(other) {
+	if &values[0] == &other[0] {
 		return values, true
 	}
 
@@ -37,15 +36,16 @@ func (values Values) Merge(other Values) (Values, bool) {
 		otherNode := other[i]
 
 		if node == nil || node == otherNode {
+			result[i] = otherNode
+			continue
+		}
+
+		if otherNode == nil {
 			result[i] = node
 			continue
 		}
 
-		if node != otherNode {
-			return nil, false
-		}
-
-		result[i] = otherNode
+		return nil, false
 	}
 
 	return result, true
@@ -73,16 +73,16 @@ type Builder struct {
 	nameToID  map[string]int
 }
 
-func newBuilder() *Builder {
+func NewBuilder() *Builder {
 	return &Builder{
 		nameToID: make(map[string]int),
 	}
 }
 
-func (builder *Builder) Add(name string) {
+func (builder *Builder) Add(name string) *Builder {
 	_, exists := builder.nameToID[name]
 	if exists {
-		return
+		return builder
 	}
 
 	id := len(builder.variables)
@@ -93,6 +93,8 @@ func (builder *Builder) Add(name string) {
 	})
 
 	builder.nameToID[name] = id
+
+	return builder
 }
 
 func (builder *Builder) Build() Shape {
@@ -150,7 +152,7 @@ func NewSet(language language.Language, ruleSet *ruleset.Set) (*Set, error) {
 
 // FIXME: don't do this!
 func (set *Set) add(language language.Language, rule *ruleset.Rule) error {
-	builder := newBuilder()
+	builder := NewBuilder()
 
 	for _, pattern := range rule.Patterns() {
 		if err := addVariablesFromPattern(language, builder, pattern.Pattern); err != nil {
