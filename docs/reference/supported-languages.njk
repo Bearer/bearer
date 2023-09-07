@@ -39,16 +39,6 @@ supportChart:
     searchName: lang-java
     searchTerm: java_
     status: Beta
-  csharp:
-    name: C#
-    support:
-      - Privacy
-      - Data Flow
-    frameworks: []
-    rules: false
-    searchName: lang-csharp
-    searchTerm: csharp_
-    status: Alpha
   php:
     name: PHP
     support:
@@ -58,6 +48,17 @@ supportChart:
     rules: false
     searchName: lang-php
     searchTerm: php_
+    status: Alpha
+    comment: Beta coming soon
+  csharp:
+    name: C#
+    support:
+      - Privacy
+      - Data Flow
+    frameworks: []
+    rules: false
+    searchName: lang-csharp
+    searchTerm: csharp_
     status: Alpha
   python:
     name: Python
@@ -122,7 +123,8 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
           {% endif %}
         </td>
         <td>
-          {{ data.status }}
+          {{ data.status }}<br/>
+          <span class="italic text-xs">{{ data.comment }}</span>
         </td>
       </tr>
     {% endfor %}
