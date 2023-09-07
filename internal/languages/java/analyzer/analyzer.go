@@ -16,6 +16,9 @@ var reflexiveMethods = []string{
 	"getBytes",
 	"replace",
 	"replaceAll",
+	"substring",
+	// Enumeration
+	"nextElement",
 }
 
 type analyzer struct {

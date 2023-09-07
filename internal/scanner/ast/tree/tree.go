@@ -69,6 +69,11 @@ func (node *Node) Type() string {
 	return node.tree.types[node.TypeID]
 }
 
+func (node *Node) IsNamed() bool {
+	// FIXME: don't use the sitter node
+	return node.sitterNode.IsNamed()
+}
+
 func (node *Node) Parent() *Node {
 	return node.parent
 }
@@ -93,11 +98,10 @@ func (node *Node) Children() []*Node {
 
 // FIXME: can we remove this?
 func (node *Node) NamedChildren() []*Node {
-	var namedChildren []*Node
+	namedChildren := make([]*Node, 0, len(node.children))
 
 	for _, child := range node.children {
-		// FIXME: don't use the sitter node
-		if child.sitterNode.IsNamed() {
+		if child.IsNamed() {
 			namedChildren = append(namedChildren, child)
 		}
 	}
@@ -242,7 +246,7 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 			return err
 		}
 
-		if child.SitterNode().IsNamed() {
+		if child.IsNamed() {
 			if err := onChild(child); err != nil {
 				return err
 			}

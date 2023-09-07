@@ -215,7 +215,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 	}
 
 	nodeAnchoredBefore, nodeAnchoredAfter := builder.patternLanguage.IsAnchored(node)
-	anchored := !isRoot && node.SitterNode().IsNamed() && nodeAnchoredBefore
+	anchored := !isRoot && node.IsNamed() && nodeAnchoredBefore
 
 	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.ContentStart.Byte) {
 		builder.write(". ")
@@ -223,7 +223,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 
 	if variable := builder.getVariableFor(node); variable != nil {
 		builder.compileVariableNode(variable)
-	} else if !node.SitterNode().IsNamed() {
+	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
 	} else if len(node.NamedChildren()) == 0 {
 		builder.compileLeafNode(node)

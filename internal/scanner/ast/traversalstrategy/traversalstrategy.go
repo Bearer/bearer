@@ -12,7 +12,7 @@ var (
 	Nested = &Strategy{
 		scope: settings.NESTED_SCOPE,
 		nextNodes: func(node *tree.Node) []*tree.Node {
-			return append(node.Children(), node.AliasOf()...)
+			return append(append([]*tree.Node(nil), node.Children()...), node.AliasOf()...)
 		},
 	}
 
@@ -26,7 +26,7 @@ var (
 	Result = &Strategy{
 		scope: settings.RESULT_SCOPE,
 		nextNodes: func(node *tree.Node) []*tree.Node {
-			return append(node.AliasOf(), node.DataflowSources()...)
+			return append(append([]*tree.Node(nil), node.AliasOf()...), node.DataflowSources()...)
 		},
 	}
 

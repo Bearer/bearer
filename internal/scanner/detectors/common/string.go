@@ -50,7 +50,7 @@ func ConcatenateChildStrings(node *tree.Node, detectorContext types.Context) ([]
 	isLiteral := true
 
 	for _, child := range node.Children() {
-		if !child.SitterNode().IsNamed() {
+		if !child.IsNamed() {
 			continue
 		}
 
