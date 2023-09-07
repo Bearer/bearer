@@ -104,6 +104,7 @@ func AddReportData(
 			config.CloudIgnoresUsed,
 			config.Report.ExcludeFingerprint,
 			config.IgnoredFingerprints,
+			config.StaleIgnoredFingerprintIds,
 			config.Scan.DiffBaseBranch != "",
 		)
 	}
@@ -267,12 +268,24 @@ func fingerprintOutput(
 	cloudIgnoresUsed bool,
 	legacyExcludedFingerprints map[string]bool,
 	ignoredFingerprints map[string]ignore.IgnoredFingerprint,
+	staleFingerprints []string,
 	diffScan bool,
 ) {
 	if cloudIgnoresUsed {
-		if len(ignoredFingerprints) > 0 {
+		if len(ignoredFingerprints) > 0 || len(staleFingerprints) > 0 {
 			output.StdErrLog("\n=====================================\n")
-			output.StdErrLog(fmt.Sprintf("%d findings have been ignored from Bearer Cloud", len(ignoredFingerprints)))
+			if len(ignoredFingerprints) > 0 {
+				output.StdErrLog(fmt.Sprintf("%d findings have been ignored from Bearer Cloud", len(ignoredFingerprints)))
+			}
+
+			if len(staleFingerprints) > 0 {
+				// bearer.ignore entries that have been e.g. re-opened in the Cloud
+				output.StdErrLog(fmt.Sprintf("%d fingerprints present in your bearer.ignore are stale and have not been applied", len(staleFingerprints)))
+				for _, fingerprintId := range staleFingerprints {
+					output.StdErrLog(fmt.Sprintf("  - %s", fingerprintId))
+					output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your bearer.ignore file, run: bearer ignore remove " + fingerprintId))
+				}
+			}
 			output.StdErrLog("\n=====================================\n")
 		}
 		return
