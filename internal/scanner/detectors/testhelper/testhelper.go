@@ -77,14 +77,6 @@ func RunTest(
 			tt.Fatalf("failed to compile queries: %s", err)
 		}
 
-		ruleScanner := rulescanner.New(
-			context.Background(),
-			detectorSet,
-			fileName,
-			nil,
-			nil,
-		)
-
 		contentBytes, err := os.ReadFile(fileName)
 		if err != nil {
 			tt.Fatalf("failed to read file: %s", err)
@@ -94,6 +86,15 @@ func RunTest(
 		if err != nil {
 			tt.Fatalf("failed to parse file: %s", err)
 		}
+
+		ruleScanner := rulescanner.New(
+			context.Background(),
+			detectorSet,
+			fileName,
+			nil,
+			traversalstrategy.NewCache(tree.NodeCount()),
+			nil,
+		)
 
 		rule, err := ruleSet.RuleByID(detectorType)
 		if err != nil {

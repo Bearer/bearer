@@ -18,11 +18,12 @@ import (
 )
 
 type Scanner struct {
-	ctx         context.Context
-	detectorSet detectorset.Set
-	filename    string
-	stats       *stats.FileStats
-	cache       *cache.Cache
+	ctx            context.Context
+	detectorSet    detectorset.Set
+	filename       string
+	stats          *stats.FileStats
+	traversalCache *traversalstrategy.Cache
+	cache          *cache.Cache
 }
 
 func New(
@@ -30,21 +31,23 @@ func New(
 	detectorSet detectorset.Set,
 	filename string,
 	stats *stats.FileStats,
+	traversalCache *traversalstrategy.Cache,
 	cache *cache.Cache,
 ) *Scanner {
 	return &Scanner{
-		ctx:         ctx,
-		detectorSet: detectorSet,
-		filename:    filename,
-		stats:       stats,
-		cache:       cache,
+		ctx:            ctx,
+		detectorSet:    detectorSet,
+		filename:       filename,
+		stats:          stats,
+		traversalCache: traversalCache,
+		cache:          cache,
 	}
 }
 
 func (scanner *Scanner) Scan(
 	rootNode *tree.Node,
 	rule *ruleset.Rule,
-	traversalStrategy *traversalstrategy.Strategy,
+	traversalStrategy traversalstrategy.Strategy,
 ) ([]*detectortypes.Detection, error) {
 	startTime := time.Now()
 	if scanner.stats != nil {
@@ -61,7 +64,7 @@ func (scanner *Scanner) Scan(
 	}
 
 	var detections []*detectortypes.Detection
-	if err := traversalStrategy.Traverse(rootNode, func(node *tree.Node) (bool, error) {
+	if err := traversalStrategy.Traverse(scanner.traversalCache, rootNode, func(node *tree.Node) (bool, error) {
 		if scanner.ctx.Err() != nil {
 			return false, scanner.ctx.Err()
 		}

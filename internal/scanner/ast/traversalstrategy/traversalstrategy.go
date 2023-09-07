@@ -8,47 +8,12 @@ import (
 	"github.com/bits-and-blooms/bitset"
 )
 
-var (
-	Nested = &Strategy{
-		scope: settings.NESTED_SCOPE,
-		nextNodes: func(node *tree.Node) []*tree.Node {
-			return append(append([]*tree.Node(nil), node.Children()...), node.AliasOf()...)
-		},
-	}
-
-	NestedStrict = &Strategy{
-		scope: settings.NESTED_STRICT_SCOPE,
-		nextNodes: func(node *tree.Node) []*tree.Node {
-			return node.Children()
-		},
-	}
-
-	Result = &Strategy{
-		scope: settings.RESULT_SCOPE,
-		nextNodes: func(node *tree.Node) []*tree.Node {
-			return append(append([]*tree.Node(nil), node.AliasOf()...), node.DataflowSources()...)
-		},
-	}
-
-	Cursor = &Strategy{
-		scope: settings.CURSOR_SCOPE,
-		nextNodes: func(node *tree.Node) []*tree.Node {
-			return node.AliasOf()
-		},
-	}
-
-	CursorStrict = &Strategy{
-		scope:     settings.CURSOR_STRICT_SCOPE,
-		nextNodes: nil,
-	}
-)
-
-type Strategy struct {
-	scope     settings.RuleReferenceScope
-	nextNodes func(node *tree.Node) []*tree.Node
+type Strategy interface {
+	Scope() settings.RuleReferenceScope
+	Traverse(cache *Cache, rootNode *tree.Node, visit func(node *tree.Node) (bool, error)) error
 }
 
-func Get(scope settings.RuleReferenceScope) (*Strategy, error) {
+func Get(scope settings.RuleReferenceScope) (Strategy, error) {
 	switch scope {
 	case settings.NESTED_SCOPE:
 		return Nested, nil
@@ -65,50 +30,82 @@ func Get(scope settings.RuleReferenceScope) (*Strategy, error) {
 	}
 }
 
-func (strategy *Strategy) Scope() settings.RuleReferenceScope {
-	return strategy.scope
+type Cache struct {
+	nodeCount int
+	allocated []*data
 }
 
-func (strategy *Strategy) Traverse(rootNode *tree.Node, visit func(node *tree.Node) (bool, error)) error {
-	if strategy.nextNodes == nil {
-		_, err := visit(rootNode)
-		return err
+type data struct {
+	seen *bitset.BitSet
+	nodes,
+	next []*tree.Node
+}
+
+func NewCache(nodeCount int) *Cache {
+	return &Cache{nodeCount: nodeCount}
+}
+
+func (cache *Cache) get() *data {
+	if len(cache.allocated) == 0 {
+		return &data{
+			seen:  bitset.New(uint(cache.nodeCount)),
+			nodes: make([]*tree.Node, 0, 1000),
+			next:  make([]*tree.Node, 0, 1000),
+		}
 	}
 
-	next := make([]*tree.Node, 0, 1000)
-	nodes := make([]*tree.Node, 0, 1000)
-	nodes = append(nodes, rootNode)
-	seen := bitset.New(uint(rootNode.Tree().NodeCount()))
+	index := len(cache.allocated) - 1
+	data := cache.allocated[index]
+	cache.allocated = cache.allocated[:index]
+	return data
+}
 
-	for {
-		if len(nodes) == 0 {
-			break
+func (cache *Cache) put(data *data) {
+	// same buffer but zero length
+	data.nodes = data.nodes[:0]
+	data.next = data.next[:0]
+	data.seen.ClearAll()
+
+	cache.allocated = append(cache.allocated, data)
+}
+
+func makeTraverse(appendNext func(next *[]*tree.Node, node *tree.Node)) func(cache *Cache, rootNode *tree.Node, visit func(node *tree.Node) (bool, error)) error {
+	return func(cache *Cache, rootNode *tree.Node, visit func(node *tree.Node) (bool, error)) error {
+		data := cache.get()
+		defer cache.put(data)
+
+		data.nodes = append(data.nodes, rootNode)
+
+		for {
+			if len(data.nodes) == 0 {
+				break
+			}
+
+			for _, node := range data.nodes {
+				bit := uint(node.ID)
+				if data.seen.Test(bit) {
+					continue
+				}
+				data.seen.Set(bit)
+
+				stopTraversal, err := visit(node)
+				if err != nil {
+					return err
+				}
+
+				if stopTraversal {
+					continue
+				}
+
+				appendNext(&data.next, node)
+			}
+
+			old := data.nodes
+			data.nodes = data.next
+			// allow memory to be re-used
+			data.next = old[:0]
 		}
 
-		for _, node := range nodes {
-			bit := uint(node.ID)
-			if seen.Test(bit) {
-				continue
-			}
-			seen.Set(bit)
-
-			stopTraversal, err := visit(node)
-			if err != nil {
-				return err
-			}
-
-			if stopTraversal {
-				continue
-			}
-
-			next = append(next, strategy.nextNodes(node)...)
-		}
-
-		old := nodes
-		nodes = next
-		// allow memory to be re-used
-		next = old[:0]
+		return nil
 	}
-
-	return nil
 }

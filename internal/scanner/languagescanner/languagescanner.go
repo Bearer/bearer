@@ -97,12 +97,14 @@ func (scanner *Scanner) Scan(
 	}
 
 	sharedCache := cache.NewShared(scanner.ruleSet.Rules())
+	traversalCache := traversalstrategy.NewCache(tree.NodeCount())
 	cache := cache.NewCache(tree, sharedCache)
 	ruleScanner := rulescanner.New(
 		ctx,
 		scanner.detectorSet,
 		fileInfo.FileInfo.Name(),
 		fileStats,
+		traversalCache,
 		cache,
 	)
 

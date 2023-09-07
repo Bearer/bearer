@@ -17,7 +17,7 @@ type Context interface {
 	Scan(
 		rootNode *tree.Node,
 		rule *ruleset.Rule,
-		traversalStrategy *traversalstrategy.Strategy,
+		traversalStrategy traversalstrategy.Strategy,
 	) ([]*Detection, error)
 }
 

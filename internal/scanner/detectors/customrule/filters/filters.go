@@ -167,7 +167,7 @@ type ImportedVariable struct {
 type Rule struct {
 	Variable          *variableshape.Variable
 	Rule              *ruleset.Rule
-	TraversalStrategy *traversalstrategy.Strategy
+	TraversalStrategy traversalstrategy.Strategy
 	IsDatatypeRule    bool
 	Filter            Filter
 	ImportedVariables []ImportedVariable
@@ -196,6 +196,7 @@ func (filter *Rule) Evaluate(
 	}
 
 	var matches []Match
+	hasSimpleMatch := false
 
 	for _, detection := range detections {
 		data, ok := detection.Data.(types.Data)
@@ -220,7 +221,11 @@ func (filter *Rule) Evaluate(
 		}
 
 		if len(filter.ImportedVariables) == 0 {
-			matches = append(matches, NewMatch(patternVariables, nil))
+			if !hasSimpleMatch {
+				hasSimpleMatch = true
+				matches = append(matches, NewMatch(patternVariables, nil))
+			}
+
 			continue
 		}
 

@@ -67,7 +67,7 @@ func (cache *Cache) Clear() {
 }
 
 func (cache *Cache) Get(node *treepkg.Node, rule *ruleset.Rule) (*detectorset.Result, bool) {
-	if cache == nil || !cache.enabled {
+	if cache == nil || (!cache.enabled && rule != ruleset.BuiltinDatatypeRule) {
 		return nil, false
 	}
 
@@ -81,7 +81,7 @@ func (cache *Cache) Get(node *treepkg.Node, rule *ruleset.Rule) (*detectorset.Re
 }
 
 func (cache *Cache) Put(node *treepkg.Node, rule *ruleset.Rule, result *detectorset.Result) {
-	if cache == nil || !cache.enabled {
+	if cache == nil || (!cache.enabled && rule != ruleset.BuiltinDatatypeRule) {
 		return
 	}
 

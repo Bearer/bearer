@@ -30,7 +30,7 @@ type MockDetectorContext struct {
 	scan     func(
 		rootNode *tree.Node,
 		rule *ruleset.Rule,
-		traversalStrategy *traversalstrategy.Strategy,
+		traversalStrategy traversalstrategy.Strategy,
 	) ([]*detectortypes.Detection, error)
 }
 
@@ -41,7 +41,7 @@ func (context *MockDetectorContext) Filename() string {
 func (context *MockDetectorContext) Scan(
 	rootNode *tree.Node,
 	rule *ruleset.Rule,
-	traversalStrategy *traversalstrategy.Strategy,
+	traversalStrategy traversalstrategy.Strategy,
 ) ([]*detectortypes.Detection, error) {
 	if context.scan != nil {
 		return context.scan(rootNode, rule, traversalStrategy)
@@ -712,7 +712,7 @@ func setupStringTest(node *tree.Node, value *string) detectortypes.Context {
 		scan: func(
 			rootNode *tree.Node,
 			rule *ruleset.Rule,
-			traversalStrategy *traversalstrategy.Strategy,
+			traversalStrategy traversalstrategy.Strategy,
 		) ([]*detectortypes.Detection, error) {
 			if rootNode == node &&
 				rule == ruleset.BuiltinStringRule &&
