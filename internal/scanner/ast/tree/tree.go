@@ -99,6 +99,14 @@ func (node *Node) Children() []*Node {
 	return node.children
 }
 
+func (node *Node) IsMissing() bool {
+	return node.sitterNode.IsMissing()
+}
+
+func (node *Node) IsError() bool {
+	return node.sitterNode.IsError()
+}
+
 // FIXME: can we remove this?
 func (node *Node) NamedChildren() []*Node {
 	namedChildren := make([]*Node, 0, len(node.children))

@@ -25,6 +25,18 @@ type Pattern struct {
 	language.PatternBase
 }
 
+func (*Pattern) AdjustInput(input string) string {
+	return "<?php " + input
+}
+
+func (*Pattern) FixupMissing(node *tree.Node) string {
+	if node.Type() != `";"` {
+		return ""
+	}
+
+	return ";"
+}
+
 func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
@@ -65,7 +77,7 @@ func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariab
 }
 
 func produceDummyValue(i int, nodeType string) string {
-	return "CurioVar" + fmt.Sprint(i)
+	return "BearerVar" + fmt.Sprint(i)
 }
 
 func (*Pattern) FindMatchNode(input []byte) [][]int {
@@ -107,9 +119,12 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	return isUnanchored, isUnanchored
 }
 
-// ToDo:
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	return !(node.Type() == "expression_statement")
+	return !slices.Contains([]string{"expression_statement"}, node.Type())
+}
+
+func (*Pattern) ShouldSkip(node *tree.Node) bool {
+	return slices.Contains([]string{"php_tag"}, node.Type())
 }
 
 // ToDo:

@@ -24,39 +24,39 @@ func New(querySet *query.Set) types.Detector {
 	// ToDo:
 	// user = <object>
 	// User user = <object>
-	assignmentQuery := querySet.Add(`[
-		(assignment_expression left: (identifier) @name right: (_) @value) @root
-		(
-    	local_variable_declaration (
-        	variable_declarator (identifier) @name
-            value: (object_creation_expression) @value
-        )
-    ) @root
-	]`)
+	// assignmentQuery := querySet.Add(`[
+	// 	(assignment_expression left: (identifier) @name right: (_) @value) @root
+	// 	(
+	//   	local_variable_declaration (
+	//       	variable_declarator (identifier) @name
+	//           value: (object_creation_expression) @value
+	//       )
+	//   ) @root
+	// ]`)
 
 	// ToDo:
 	// class User {
 	//    String name
 	//	  String getLevel(){}
 	// }
-	classQuery := querySet.Add(`
-		(class_declaration name: (identifier) @class_name
-			(class_body
-				[
-					(field_declaration (variable_declarator name: (identifier) @name))
-					(method_declaration name: (identifier) @name)
-				]
-			)
-		) @root`)
+	// classQuery := querySet.Add(`
+	// 	(class_declaration name: (identifier) @class_name
+	// 		(class_body
+	// 			[
+	// 				(field_declaration (variable_declarator name: (identifier) @name))
+	// 				(method_declaration name: (identifier) @name)
+	// 			]
+	// 		)
+	// 	) @root`)
 
 	// ToDo:
 	// user.name
-	fieldAccessQuery := querySet.Add(`(field_access object: (_) @object field: (identifier) @field) @root`)
+	// fieldAccessQuery := querySet.Add(`(field_access object: (_) @object field: (identifier) @field) @root`)
 
 	return &objectDetector{
-		assignmentQuery:  assignmentQuery,
-		classQuery:       classQuery,
-		fieldAccessQuery: fieldAccessQuery,
+		assignmentQuery:  nil, // assignmentQuery,
+		classQuery:       nil, // classQuery,
+		fieldAccessQuery: nil, // fieldAccessQuery,
 	}
 }
 

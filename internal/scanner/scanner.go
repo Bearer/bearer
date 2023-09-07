@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/languages/java"
 	"github.com/bearer/bearer/internal/languages/javascript"
+	"github.com/bearer/bearer/internal/languages/php"
 	"github.com/bearer/bearer/internal/languages/ruby"
 	"github.com/bearer/bearer/internal/report"
 	reportdetections "github.com/bearer/bearer/internal/report/detections"
@@ -35,6 +36,7 @@ func New(schemaClassifier *schemaclassifier.Classifier, rules map[string]*settin
 		java.Get(),
 		javascript.Get(),
 		ruby.Get(),
+		php.Get(), // FIXME: Not obvious to spot. Can we do something better (auto-registration)?
 	}
 
 	languageScanners := make([]*languagescanner.Scanner, len(languages))

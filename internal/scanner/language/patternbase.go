@@ -31,3 +31,15 @@ func (*PatternBase) FixupVariableDummyValue(input []byte, node *tree.Node, dummy
 func (*PatternBase) AnonymousParentTypes() []string {
 	return nil
 }
+
+func (*PatternBase) AdjustInput(input string) string {
+	return input
+}
+
+func (*PatternBase) FixupMissing(node *tree.Node) string {
+	return ""
+}
+
+func (*PatternBase) ShouldSkip(node *tree.Node) bool {
+	return false
+}

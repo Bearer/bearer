@@ -1,11 +1,10 @@
-type: "risk"
-languages:
-  - php
-patterns:
-  - pattern: |
-      error_log($<DATA_TYPE>);
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-metadata:
-  id: php_rule_logger_test
+# type: "risk"
+# languages:
+#   - php
+# patterns:
+#   - pattern: error_log($<DATA_TYPE>)
+#     filters:
+#       - variable: DATA_TYPE
+#         detection: datatype
+# metadata:
+#   id: php_rule_logger_test

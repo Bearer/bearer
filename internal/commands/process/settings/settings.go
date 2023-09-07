@@ -292,6 +292,8 @@ func (rule *Rule) Language() string {
 		return "Ruby"
 	case "sql":
 		return "SQL"
+	case "php":
+		return "PHP"
 	default:
 		return rule.Languages[0]
 	}

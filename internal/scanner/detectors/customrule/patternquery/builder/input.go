@@ -9,7 +9,8 @@ import (
 )
 
 func processInput(patternLanguage language.Pattern, input string) ([]byte, *InputParams, error) {
-	inputWithoutVariables, variables, err := patternLanguage.ExtractVariables(input)
+	adjustedInput := patternLanguage.AdjustInput(input)
+	inputWithoutVariables, variables, err := patternLanguage.ExtractVariables(adjustedInput)
 	if err != nil {
 		return nil, nil, fmt.Errorf("error processing variables: %s", err)
 	}

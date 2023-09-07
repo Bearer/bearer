@@ -146,6 +146,11 @@ func (scanner *Scanner) detectAtNode(rule *ruleset.Rule, node *tree.Node) (*dete
 }
 
 func traceResultText(result *detectorset.Result) string {
+	// FIXME: Should not be required after next rebase!!!
+	if result == nil {
+		return ""
+	}
+
 	if result.Sanitized {
 		return "sanitized"
 	}

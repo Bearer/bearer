@@ -32,6 +32,7 @@ var (
 
 func GetSupportedRuleLanguages() map[string]bool {
 	return map[string]bool{
+		"php":        true,
 		"java":       true,
 		"ruby":       true,
 		"javascript": true,

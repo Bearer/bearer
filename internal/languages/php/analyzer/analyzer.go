@@ -1,19 +1,11 @@
 package analyzer
 
 import (
-	"slices"
-	"strings"
-
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
 )
-
-// methods that use `this` in their result
-var reflexiveMethods = []string{
-	// String
-}
 
 type analyzer struct {
 	builder *tree.Builder
@@ -27,50 +19,42 @@ func New(builder *tree.Builder) language.Analyzer {
 	}
 }
 
-// ToDo
 func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error) error {
 	switch node.Type() {
-	case "class_body",
+	case "declaration_list",
 		"method_declaration",
-		"lambda_expression",
+		"anonymous_function_creation_expression",
 		"for_statement",
-		"block",
-		"try_with_resources_statement":
+		"block":
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
 	case "assignment_expression":
 		return analyzer.analyzeAssignment(node, visitChildren)
-	case "variable_declarator":
-		return analyzer.analyzeVariableDeclarator(node, visitChildren)
 	case "parenthesized_expression":
 		return analyzer.analyzeParentheses(node, visitChildren)
-	case "ternary_expression":
+	case "conditional_expression":
 		return analyzer.analyzeTernary(node, visitChildren)
-	case "method_invocation":
+	case "function_call_expression", "member_call_expression":
 		return analyzer.analyzeMethodInvocation(node, visitChildren)
-	case "field_access":
+	case "member_access_expression":
 		return analyzer.analyzeFieldAccess(node, visitChildren)
-	case "enhanced_for_statement":
-		return analyzer.analyzeEnhancedForStatement(node, visitChildren)
-	case "formal_parameter", "catch_formal_parameter":
+	case "simple_parameter", "variadic_parameter":
 		return analyzer.analyzeParameter(node, visitChildren)
-	case "resource":
-		return analyzer.analyzeResource(node, visitChildren)
-	case "switch":
+	case "switch_statement":
 		return analyzer.analyzeSwitch(node, visitChildren)
 	case "switch_block":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
-	case "argument_list", "array_access", "array_initializer", "binary_expression", "unary_expression":
+	case "arguments", "binary_expression", "unary_op_expression":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
+	case "while_statement", "do_statement", "if_statement": // statements don't have results
+		return visitChildren()
+	case "match_expression":
+		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)
+		return visitChildren()
 	default:
-		// statements don't have results
-		if !strings.HasSuffix(node.Type(), "_statement") {
-			analyzer.builder.Dataflow(node, analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)
-		}
-
 		return visitChildren()
 	}
 }
@@ -100,34 +84,6 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 	return err
 }
 
-// ToDo:
-// the "foo = 1" part in:
-//
-//	class X {
-//	  void m() {
-//	  	 Integer foo = 1;
-//	  }
-//	}
-func (analyzer *analyzer) analyzeVariableDeclarator(node *sitter.Node, visitChildren func() error) error {
-	name := node.ChildByFieldName("name")
-
-	// backwards compatibility with rules. fixup rules to use variable name node,
-	// and then remove this
-	analyzer.builder.Alias(name, node.Parent())
-
-	if value := node.ChildByFieldName("value"); value != nil {
-		analyzer.lookupVariable(value)
-		analyzer.builder.Alias(name, value)
-	}
-
-	err := visitChildren()
-
-	analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
-
-	return err
-}
-
-// ToDo: (foo)
 func (analyzer *analyzer) analyzeParentheses(node *sitter.Node, visitChildren func() error) error {
 	child := node.NamedChild(0)
 	analyzer.builder.Alias(node, child)
@@ -136,10 +92,11 @@ func (analyzer *analyzer) analyzeParentheses(node *sitter.Node, visitChildren fu
 	return visitChildren()
 }
 
-// ToDo: a ? x : y
+// a ? x : y
+// a ?: x
 func (analyzer *analyzer) analyzeTernary(node *sitter.Node, visitChildren func() error) error {
 	condition := node.ChildByFieldName("condition")
-	consequence := node.ChildByFieldName("consequence")
+	consequence := node.ChildByFieldName("body")
 	alternative := node.ChildByFieldName("alternative")
 
 	analyzer.lookupVariable(condition)
@@ -151,15 +108,9 @@ func (analyzer *analyzer) analyzeTernary(node *sitter.Node, visitChildren func()
 	return visitChildren()
 }
 
-// ToDo: foo.bar(1, 2);
+// foo->bar(1, 2);
 func (analyzer *analyzer) analyzeMethodInvocation(node *sitter.Node, visitChildren func() error) error {
-	if object := node.ChildByFieldName("object"); object != nil {
-		analyzer.lookupVariable(object)
-
-		if slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(node.ChildByFieldName("name"))) {
-			analyzer.builder.Dataflow(node, object)
-		}
-	}
+	analyzer.lookupVariable(node.ChildByFieldName("object"))
 
 	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
 		analyzer.builder.Dataflow(node, arguments)
@@ -168,52 +119,21 @@ func (analyzer *analyzer) analyzeMethodInvocation(node *sitter.Node, visitChildr
 	return visitChildren()
 }
 
-// ToDo: foo.bar
+// foo->bar
 func (analyzer *analyzer) analyzeFieldAccess(node *sitter.Node, visitChildren func() error) error {
 	analyzer.lookupVariable(node.ChildByFieldName("object"))
 
 	return visitChildren()
 }
 
-// ToDo: for (String value : array)
-func (analyzer *analyzer) analyzeEnhancedForStatement(node *sitter.Node, visitChildren func() error) error {
-	return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
-		name := node.ChildByFieldName("name")
-		value := node.ChildByFieldName("value")
-
-		analyzer.lookupVariable(value)
-		analyzer.builder.Dataflow(name, value)
-		analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
-
-		return visitChildren()
-	})
-}
-
-// ToDo:
-// method parameter declaration or catch parameter declaration
+// method parameter declaration
 //
-// void m(String foo) {}
-// try {} catch (Exception foo) {}
+// fn(bool $a) => $a;
+// fn($x = 42) => $x;
+// fn($x, ...$rest) => $rest;
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
 	name := node.ChildByFieldName("name")
 	analyzer.builder.Alias(node, name)
-
-	if name.Type() == "identifier" {
-		analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
-	}
-
-	return visitChildren()
-}
-
-// ToDo:
-// parts like "foo" and "File f = open()" from:
-// try (foo; File f = open(); Other b = ...) {}
-func (analyzer *analyzer) analyzeResource(node *sitter.Node, visitChildren func() error) error {
-	if name := node.ChildByFieldName("name"); name != nil {
-		value := node.ChildByFieldName("value")
-		analyzer.builder.Alias(node, value)
-		analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
-	}
 
 	return visitChildren()
 }
@@ -224,7 +144,6 @@ func (analyzer *analyzer) analyzeSwitch(node *sitter.Node, visitChildren func() 
 	return visitChildren()
 }
 
-// ToDo:
 // default analysis, where the children are assumed to be aliases
 func (analyzer *analyzer) analyzeGenericConstruct(node *sitter.Node, visitChildren func() error) error {
 	analyzer.builder.Alias(node, analyzer.builder.ChildrenFor(node)...)
@@ -232,7 +151,6 @@ func (analyzer *analyzer) analyzeGenericConstruct(node *sitter.Node, visitChildr
 	return visitChildren()
 }
 
-// ToDo:
 // default analysis, where the children are assumed to be data sources
 func (analyzer *analyzer) analyzeGenericOperation(node *sitter.Node, visitChildren func() error) error {
 	children := analyzer.builder.ChildrenFor(node)
@@ -255,9 +173,8 @@ func (analyzer *analyzer) withScope(newScope *language.Scope, body func() error)
 	return err
 }
 
-// ToDo:
 func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
-	if node == nil || node.Type() != "identifier" {
+	if node == nil || node.Type() != "variable_name" {
 		return
 	}
 

@@ -19,7 +19,8 @@ patterns:
 auxiliary:
   - id: scope_test_user_input
     patterns:
-      - request.getParameter()
+      - $_GET[$<_>]
+      - $_POST[$<_>]
 severity: high
 metadata:
   description: Test detection filter scopes
