@@ -52,8 +52,8 @@ func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta 
 	return nil
 }
 
-func GetVCSInfo(config settings.Config) (*vcsurl.VCS, error) {
-	gitRemote, err := getRemote(config.Scan.Target)
+func GetVCSInfo(target string) (*vcsurl.VCS, error) {
+	gitRemote, err := getRemote(target)
 	if err != nil {
 		return nil, err
 	}
@@ -182,7 +182,7 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 		return nil, err
 	}
 
-	info, err := GetVCSInfo(config)
+	info, err := GetVCSInfo(config.Scan.Target)
 	if err != nil {
 		return nil, err
 	}

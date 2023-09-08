@@ -227,7 +227,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 
 	if client != nil && client.Error == nil {
 		// get ignores from Cloud
-		vcsInfo, err := saas.GetVCSInfo(settings)
+		vcsInfo, err := saas.GetVCSInfo(settings.Scan.Target)
 		if err != nil {
 			return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
 		}
