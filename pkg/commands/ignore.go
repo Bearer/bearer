@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/pkg/flag"
+	"github.com/bearer/bearer/pkg/report/output/saas"
 	"github.com/bearer/bearer/pkg/util/ignore"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/spf13/cobra"
@@ -24,6 +25,7 @@ Available Commands:
     add              Add an ignored fingerprint
     show             Show an ignored fingerprint
     remove           Remove an ignored fingerprint
+    pull             Pull ignored fingerprints from Cloud
     migrate          Migrate ignored fingerprints
 
 Examples:
@@ -35,6 +37,9 @@ Examples:
 
     # Remove an ignored fingerprint from your bearer.ignore file
     $ bearer ignore remove <fingerprint>
+
+    # Pull ignored fingerprints from the Cloud (requires API key)
+    $ bearer ignore pull /path/to/your_project --api-key=XXXXX
 
     # Migrate existing ignored (excluded) fingerprints from bearer.yml file
     # to bearer.ignore
@@ -54,6 +59,7 @@ Examples:
 		newIgnoreShowCommand(),
 		newIgnoreAddCommand(),
 		newIgnoreRemoveCommand(),
+		newIgnorePullCommand(),
 		newIgnoreMigrateCommand(),
 	)
 
@@ -277,6 +283,106 @@ $ bearer ignore remove <fingerprint>`,
 	}
 	IgnoreRemoveFlags.AddFlags(cmd)
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreRemoveFlags.Usages(cmd)))
+
+	return cmd
+}
+
+func newIgnorePullCommand() *cobra.Command {
+	var IgnorePullFlags = &flag.Flags{
+		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
+	}
+	cmd := &cobra.Command{
+		Use:   "pull",
+		Short: "Pull ignored fingerprints from Cloud",
+		Example: `# Pull ignored fingerprints from the Cloud (requires API key)
+$ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if err := IgnorePullFlags.Bind(cmd); err != nil {
+				return fmt.Errorf("flag bind error: %w", err)
+			}
+
+			options, err := IgnorePullFlags.ToOptions(args)
+			if err != nil {
+				return fmt.Errorf("flag error: %s", err)
+			}
+
+			if len(args) == 0 {
+				return cmd.Help()
+			} else {
+				options.Target = args[0]
+			}
+
+			// confirm overwrite if bearer.ignore file exists
+			bearerIgnoreFilePath := options.GeneralOptions.BearerIgnoreFile
+			fileExists := true
+			info, err := os.Stat(bearerIgnoreFilePath)
+			if os.IsNotExist(err) {
+				fileExists = false
+			} else {
+				if info.IsDir() {
+					return fmt.Errorf("bearer-ignore-file path %s is a dir not a file", bearerIgnoreFilePath)
+				}
+			}
+			if err != nil && fileExists {
+				return fmt.Errorf("file error: %s", err)
+			}
+
+			if fileExists {
+				overwriteApproved := requestConfirmation("Warning: this action will overwrite your current bearer.ignore file. Continue?")
+				cmd.Printf("\n")
+				if !overwriteApproved {
+					cmd.Printf("Okay, pull cancelled!\n")
+					return nil
+				}
+			}
+
+			// get project full name
+			vcsInfo, err := saas.GetVCSInfo(options.Target)
+			if err != nil {
+				return fmt.Errorf("error fetching project info: %s", err)
+			}
+
+			data, err := options.GeneralOptions.Client.FetchIgnores(vcsInfo.FullName, []string{})
+			if err != nil {
+				return fmt.Errorf("cloud error: %s", err)
+			}
+
+			if !data.ProjectFound {
+				// no project
+				cmd.Printf("Project %s not found in Cloud. Pull cancelled.", vcsInfo.FullName)
+				return nil
+			}
+
+			cloudIgnoresCount := len(data.CloudIgnoredFingerprints)
+			if cloudIgnoresCount == 0 {
+				// project found but no ignores
+				cmd.Printf("No ignores for project %s found in the Cloud. Pull cancelled", vcsInfo.FullName)
+				return nil
+			}
+
+			// project found and we have ignores - write to bearer.ignore
+			cmd.Printf("Pulling %d ignores from the Cloud:\n", cloudIgnoresCount)
+			for fingerprintId, fingerprint := range data.CloudIgnoredFingerprints {
+				if fingerprint.Comment == nil {
+					cmd.Printf("\t- %s", fingerprintId)
+				} else {
+					cmd.Printf("\t- %s (%s)", fingerprintId, *fingerprint.Comment)
+				}
+			}
+			cmd.Printf("\n\n")
+
+			if err = writeIgnoreFile(data.CloudIgnoredFingerprints, bearerIgnoreFilePath); err != nil {
+				return fmt.Errorf("error writing to file: %s", err)
+			}
+
+			cmd.Printf("Pull successful! To view updated ignore file, run: bearer ignore show --all\n")
+			return nil
+		},
+		SilenceErrors: false,
+		SilenceUsage:  false,
+	}
+	IgnorePullFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnorePullFlags.Usages(cmd)))
 
 	return cmd
 }
