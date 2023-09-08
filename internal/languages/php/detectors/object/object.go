@@ -19,44 +19,42 @@ type objectDetector struct {
 	fieldAccessQuery *query.Query
 }
 
-// ToDo:
 func New(querySet *query.Set) types.Detector {
-	// ToDo:
 	// user = <object>
-	// User user = <object>
-	// assignmentQuery := querySet.Add(`[
-	// 	(assignment_expression left: (identifier) @name right: (_) @value) @root
-	// 	(
-	//   	local_variable_declaration (
-	//       	variable_declarator (identifier) @name
-	//           value: (object_creation_expression) @value
-	//       )
-	//   ) @root
-	// ]`)
+	assignmentQuery := querySet.Add(`[
+		(assignment_expression left: (variable_name) @name right: (_) @value) @root
+	]`)
 
-	// ToDo:
 	// class User {
-	//    String name
-	//	  String getLevel(){}
+	//   public $name;
+	// 	 public $gender;
+	//   function set_name($name) {
+	//     $this->name = $name;
+	//   }
 	// }
-	// classQuery := querySet.Add(`
-	// 	(class_declaration name: (identifier) @class_name
-	// 		(class_body
-	// 			[
-	// 				(field_declaration (variable_declarator name: (identifier) @name))
-	// 				(method_declaration name: (identifier) @name)
-	// 			]
-	// 		)
-	// 	) @root`)
+	classQuery := querySet.Add(`
+	(
+		class_declaration
+			name: (name) @class_name
+			body: (
+				declaration_list [
+						(property_declaration (property_element (variable_name) @name ))
+						(method_declaration name: (name) @name)
+					]
+			)
+	) @root`)
 
-	// ToDo:
-	// user.name
-	// fieldAccessQuery := querySet.Add(`(field_access object: (_) @object field: (identifier) @field) @root`)
+	// $user->name
+	// $user->name()
+	fieldAccessQuery := querySet.Add(`[
+		(member_access_expression object: (_) @object name: (name) @field) @root
+		(member_call_expression object: (_) @object name: (name) @field) @root
+	]`)
 
 	return &objectDetector{
-		assignmentQuery:  nil, // assignmentQuery,
-		classQuery:       nil, // classQuery,
-		fieldAccessQuery: nil, // fieldAccessQuery,
+		assignmentQuery:  assignmentQuery,
+		classQuery:       classQuery,
+		fieldAccessQuery: fieldAccessQuery,
 	}
 }
 
@@ -64,7 +62,6 @@ func (detector *objectDetector) Rule() *ruleset.Rule {
 	return ruleset.BuiltinObjectRule
 }
 
-// ToDo:
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
@@ -82,7 +79,6 @@ func (detector *objectDetector) DetectAt(
 	return detector.getProjections(node, detectorContext)
 }
 
-// ToDo:
 func (detector *objectDetector) getAssignment(
 	node *tree.Node,
 	detectorContext types.Context,
@@ -116,7 +112,6 @@ func (detector *objectDetector) getAssignment(
 	return objects, nil
 }
 
-// ToDo:
 func (detector *objectDetector) getClass(node *tree.Node) ([]interface{}, error) {
 	results := detector.classQuery.MatchAt(node)
 	if len(results) == 0 {

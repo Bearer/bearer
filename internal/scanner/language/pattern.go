@@ -30,8 +30,6 @@ type Pattern interface {
 	// if we want to pull both datatypes inside `child()` as well as inside `info()`
 	// we want to ignore member_expressions as roots.
 	IsRoot(node *tree.Node) bool
-	// Will the language contains extra node that should be skipped (e.g. in PHP `php_tag`)
-	ShouldSkip(node *tree.Node) bool
 	// IsLeaf returns whether the given node should be treated as a leaf, even if
 	// it has children
 	IsLeaf(node *tree.Node) bool

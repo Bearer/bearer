@@ -183,6 +183,10 @@ func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) strin
 	return content
 }
 
+func (*Pattern) IsRoot(node *tree.Node) bool {
+	return !slices.Contains([]string{"program"}, node.Type())
+}
+
 func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
 	for ancestor := node.Parent(); ancestor != nil; ancestor = ancestor.Parent() {
 		if ancestor.Type() != "ERROR" {

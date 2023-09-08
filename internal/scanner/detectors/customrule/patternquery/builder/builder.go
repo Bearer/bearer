@@ -11,7 +11,7 @@ import (
 
 	"github.com/bearer/bearer/internal/parser/nodeid"
 	"github.com/bearer/bearer/internal/scanner/ast"
-	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	asttree "github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
 )
 
@@ -38,7 +38,7 @@ type builder struct {
 	inputParams      InputParams
 	variableToParams map[string][]string
 	paramToContent   map[string]map[string]string
-	matchNode        *tree.Node
+	matchNode        *asttree.Node
 }
 
 func Build(
@@ -63,6 +63,7 @@ func Build(
 		inputParams.Variables,
 		tree.RootNode(),
 	); fixed {
+		// log.Error().Msgf("fixedInput -> %s", fixedInput)
 		tree, err = ast.Parse(context.TODO(), language, fixedInput)
 		if err != nil {
 			return nil, err
@@ -70,23 +71,19 @@ func Build(
 	}
 
 	root := tree.RootNode()
-	// FIXME: Can this ever be valid for languages like PHP?
-	// if len(root.Children()) != 1 {
-	// 	return nil, fmt.Errorf("expecting 1 node but got %d", len(root.Children()))
-	// }
 
-	for {
-		for _, children := range root.Children() {
-			if !patternLanguage.ShouldSkip(children) {
-				root = children
-				break
-			}
+	// FIXME: Check with Dave why the walking seems to be showing the `;` and is not responding to `IsMissing()` as we would expect
+	// There shouldn't be any missing here since we are passing the updated tree produced by fixedInput...
+	root.Walk(func(rootNode *asttree.Node, visitChildren func() error) error { //nolint:errcheck
+		if patternLanguage.IsRoot(rootNode) {
+			// log.Error().Msgf("[ROOT][%s] NodeType %s", language.ID(), rootNode.Type())
+			root = rootNode
+			return nil
+		} else {
+			// log.Error().Msgf("[NOT_ROOT][%s] NodeType %s", language.ID(), rootNode.Type())
+			return visitChildren()
 		}
-
-		if patternLanguage.IsRoot(root) {
-			break
-		}
-	}
+	})
 
 	builder := builder{
 		patternLanguage:  patternLanguage,
@@ -112,6 +109,9 @@ func Build(
 		return nil, err
 	}
 
+	// log.Error().Msgf("tree[%s][%s] -> %#v", language.ID(), root.Type(), tree.RootNode().Debug())
+	// log.Error().Msgf("result[%s][%s] -> %#v", language.ID(), root.Type(), result)
+
 	return result, nil
 }
 
@@ -119,7 +119,7 @@ func fixupInput(
 	patternLanguage language.Pattern,
 	byteInput []byte,
 	variables []language.PatternVariable,
-	rootNode *tree.Node,
+	rootNode *asttree.Node,
 ) ([]byte, bool) {
 	insideError := false
 	inputOffset := 0
@@ -128,7 +128,7 @@ func fixupInput(
 	copy(newInput, byteInput)
 	fixed := false
 
-	err := rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
+	err := rootNode.Walk(func(node *asttree.Node, visitChildren func() error) error {
 		oldInsideError := insideError
 		if node.IsError() {
 			insideError = true
@@ -210,7 +210,7 @@ func appendByte(slice []byte, data ...byte) []byte {
 	return slice
 }
 
-func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
+func (builder *builder) build(rootNode *asttree.Node) (*Result, error) {
 	if len(rootNode.Children()) == 0 {
 		variable := builder.getVariableFor(rootNode)
 		if variable != nil {
@@ -238,7 +238,7 @@ func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
 	}, nil
 }
 
-func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bool) error {
+func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild bool) error {
 	if node.SitterNode().IsError() {
 		return fmt.Errorf(
 			"error parsing pattern at %d:%d: %s",
@@ -299,7 +299,7 @@ func (builder *builder) compileVariableNode(variable *language.PatternVariable) 
 }
 
 // Anonymous nodes match their content as a literal
-func (builder *builder) compileAnonymousNode(node *tree.Node) {
+func (builder *builder) compileAnonymousNode(node *asttree.Node) {
 	if !slices.Contains(builder.patternLanguage.AnonymousParentTypes(), node.Parent().Type()) {
 		return
 	}
@@ -308,7 +308,7 @@ func (builder *builder) compileAnonymousNode(node *tree.Node) {
 }
 
 // Leaves match their type and content
-func (builder *builder) compileLeafNode(node *tree.Node) {
+func (builder *builder) compileLeafNode(node *asttree.Node) {
 	if !slices.Contains(builder.patternLanguage.LeafContentTypes(), node.Type()) {
 		builder.write("[")
 
@@ -344,10 +344,10 @@ func (builder *builder) compileLeafNode(node *tree.Node) {
 }
 
 // Nodes with children match their type and child nodes
-func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
+func (builder *builder) compileNodeWithChildren(node *asttree.Node) error {
 	builder.write("[")
 
-	var children []*tree.Node
+	var children []*asttree.Node
 	if slices.Contains(builder.patternLanguage.AnonymousParentTypes(), node.Type()) {
 		children = node.Children()
 	} else {
@@ -393,12 +393,12 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 	return paramToVariable, equalParams
 }
 
-func (builder *builder) getVariableFor(node *tree.Node) *language.PatternVariable {
+func (builder *builder) getVariableFor(node *asttree.Node) *language.PatternVariable {
 	return getVariableFor(node, builder.patternLanguage, builder.inputParams.Variables)
 }
 
 func getVariableFor(
-	node *tree.Node,
+	node *asttree.Node,
 	patternLanguage language.Pattern,
 	variables []language.PatternVariable,
 ) *language.PatternVariable {
@@ -423,9 +423,9 @@ func (builder *builder) setMatchNode(
 	offset int,
 	focusedVariable string,
 	containerTypes []string,
-	node *tree.Node,
+	node *asttree.Node,
 ) {
-	err := node.Walk(func(node *tree.Node, visitChildren func() error) error {
+	err := node.Walk(func(node *asttree.Node, visitChildren func() error) error {
 		if focusedVariable != "" {
 			if variable := builder.getVariableFor(node); variable != nil && variable.Name == focusedVariable {
 				builder.matchNode = node

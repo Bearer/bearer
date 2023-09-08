@@ -39,7 +39,3 @@ func (*PatternBase) AdjustInput(input string) string {
 func (*PatternBase) FixupMissing(node *tree.Node) string {
 	return ""
 }
-
-func (*PatternBase) ShouldSkip(node *tree.Node) bool {
-	return false
-}

@@ -1,8 +1,8 @@
 package php
 
 import (
+	php "github.com/bearer/bearer/internal/parser/sitter/php2"
 	sitter "github.com/smacker/go-tree-sitter"
-	"github.com/smacker/go-tree-sitter/php"
 
 	"github.com/bearer/bearer/internal/classification/schema"
 	"github.com/bearer/bearer/internal/report/detectors"

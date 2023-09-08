@@ -34,7 +34,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 	case "parenthesized_expression":
 		return analyzer.analyzeParentheses(node, visitChildren)
 	case "conditional_expression":
-		return analyzer.analyzeTernary(node, visitChildren)
+		return analyzer.analyzeConditional(node, visitChildren)
 	case "function_call_expression", "member_call_expression":
 		return analyzer.analyzeMethodInvocation(node, visitChildren)
 	case "member_access_expression":
@@ -56,6 +56,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return visitChildren()
 	default:
 		return visitChildren()
+		// return nil
 	}
 }
 
@@ -77,7 +78,7 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 
 	err := visitChildren()
 
-	if left.Type() == "identifier" {
+	if left.Type() == "variable_name" {
 		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
 	}
 
@@ -94,7 +95,7 @@ func (analyzer *analyzer) analyzeParentheses(node *sitter.Node, visitChildren fu
 
 // a ? x : y
 // a ?: x
-func (analyzer *analyzer) analyzeTernary(node *sitter.Node, visitChildren func() error) error {
+func (analyzer *analyzer) analyzeConditional(node *sitter.Node, visitChildren func() error) error {
 	condition := node.ChildByFieldName("condition")
 	consequence := node.ChildByFieldName("body")
 	alternative := node.ChildByFieldName("alternative")
@@ -103,7 +104,11 @@ func (analyzer *analyzer) analyzeTernary(node *sitter.Node, visitChildren func()
 	analyzer.lookupVariable(consequence)
 	analyzer.lookupVariable(alternative)
 
-	analyzer.builder.Alias(node, consequence, alternative)
+	if consequence != nil {
+		analyzer.builder.Alias(node, consequence, alternative)
+	} else {
+		analyzer.builder.Alias(node, condition, alternative)
+	}
 
 	return visitChildren()
 }

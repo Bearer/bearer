@@ -74,6 +74,7 @@ func addFlag(cmd *cobra.Command, flag *Flag) {
 	if flag == nil || flag.Name == "" {
 		return
 	}
+
 	flags := cmd.Flags()
 
 	switch v := flag.Value.(type) {
@@ -102,7 +103,14 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 	if err := viper.BindPFlag(flag.ConfigName, cmd.Flags().Lookup(flag.Name)); err != nil {
 		return err
 	}
+
 	// We don't use viper.AutomaticEnv, so we need to add a prefix manually here.
+	// FIXME: look into replacing L113 by this?
+	// Check https://github.com/spf13/viper/blob/master/viper_test.go
+	// viper.AutomaticEnv()
+	// viper.SetEnvPrefix("bearer")
+	// replacer := strings.NewReplacer("-", "_")
+	// viper.SetEnvKeyReplacer(replacer)
 	if err := viper.BindEnv(flag.ConfigName, strings.ToUpper("bearer_"+strings.ReplaceAll(flag.Name, "-", "_"))); err != nil {
 		return err
 	}

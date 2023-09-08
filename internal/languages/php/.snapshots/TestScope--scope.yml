@@ -1,2 +1,437 @@
-{}
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 2
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 27
+      sink:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 27
+        content: scopeCursor($_GET["oops"])
+      parent_line_number: 2
+      snippet: scopeCursor($_GET["oops"])
+      fingerprint: d065246ff18b050df029893f5d9a667b_0
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 3
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 31
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 31
+        content: scopeCursor(x . $_GET["oops"])
+      parent_line_number: 3
+      snippet: scopeCursor(x . $_GET["oops"])
+      fingerprint: d065246ff18b050df029893f5d9a667b_1
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 4
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 1
+                end: 35
+      sink:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 1
+                end: 35
+        content: 'scopeCursor(x ? $_GET["oops"] : y)'
+      parent_line_number: 4
+      snippet: 'scopeCursor(x ? $_GET["oops"] : y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_2
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 5
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 5
+            end: 5
+            column:
+                start: 1
+                end: 33
+      sink:
+        location:
+            start: 5
+            end: 5
+            column:
+                start: 1
+                end: 33
+        content: 'scopeCursor($_GET["ok"] ? x : y)'
+      parent_line_number: 5
+      snippet: 'scopeCursor($_GET["ok"] ? x : y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_3
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 6
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 6
+            end: 6
+            column:
+                start: 1
+                end: 32
+      sink:
+        location:
+            start: 6
+            end: 6
+            column:
+                start: 1
+                end: 32
+        content: 'scopeCursor($_GET["oops"] ?: y)'
+      parent_line_number: 6
+      snippet: 'scopeCursor($_GET["oops"] ?: y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_4
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_4
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 8
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 27
+      sink:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 27
+        content: scopeNested($_GET["oops"])
+      parent_line_number: 8
+      snippet: scopeNested($_GET["oops"])
+      fingerprint: d065246ff18b050df029893f5d9a667b_5
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_5
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 9
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 31
+      sink:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 31
+        content: scopeNested(x . $_GET["oops"])
+      parent_line_number: 9
+      snippet: scopeNested(x . $_GET["oops"])
+      fingerprint: d065246ff18b050df029893f5d9a667b_6
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_6
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 10
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 35
+      sink:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 35
+        content: 'scopeNested(x ? $_GET["oops"] : y)'
+      parent_line_number: 10
+      snippet: 'scopeNested(x ? $_GET["oops"] : y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_7
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_7
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 11
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 33
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 33
+        content: 'scopeNested($_GET["ok"] ? x : y)'
+      parent_line_number: 11
+      snippet: 'scopeNested($_GET["ok"] ? x : y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_8
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_8
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 12
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 32
+      sink:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 32
+        content: 'scopeNested($_GET["oops"] ?: y)'
+      parent_line_number: 12
+      snippet: 'scopeNested($_GET["oops"] ?: y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_9
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_9
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 14
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 1
+                end: 27
+      sink:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 1
+                end: 27
+        content: scopeResult($_GET["oops"])
+      parent_line_number: 14
+      snippet: scopeResult($_GET["oops"])
+      fingerprint: d065246ff18b050df029893f5d9a667b_10
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_10
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 15
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 1
+                end: 31
+      sink:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 1
+                end: 31
+        content: scopeResult(x . $_GET["oops"])
+      parent_line_number: 15
+      snippet: scopeResult(x . $_GET["oops"])
+      fingerprint: d065246ff18b050df029893f5d9a667b_11
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_11
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 16
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 16
+            end: 16
+            column:
+                start: 1
+                end: 35
+      sink:
+        location:
+            start: 16
+            end: 16
+            column:
+                start: 1
+                end: 35
+        content: 'scopeResult(x ? $_GET["oops"] : y)'
+      parent_line_number: 16
+      snippet: 'scopeResult(x ? $_GET["oops"] : y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_12
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_12
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 17
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 1
+                end: 33
+      sink:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 1
+                end: 33
+        content: 'scopeResult($_GET["ok"] ? x : y)'
+      parent_line_number: 17
+      snippet: 'scopeResult($_GET["ok"] ? x : y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_13
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_13
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 18
+      full_filename: scope.php
+      filename: scope.php
+      source:
+        location:
+            start: 18
+            end: 18
+            column:
+                start: 1
+                end: 32
+      sink:
+        location:
+            start: 18
+            end: 18
+            column:
+                start: 1
+                end: 32
+        content: 'scopeResult($_GET["oops"] ?: y)'
+      parent_line_number: 18
+      snippet: 'scopeResult($_GET["oops"] ?: y)'
+      fingerprint: d065246ff18b050df029893f5d9a667b_14
+      old_fingerprint: d065246ff18b050df029893f5d9a667b_14
 

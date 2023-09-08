@@ -18,7 +18,7 @@ var (
 	ellipsisRegex             = regexp.MustCompile(`\$<\.\.\.>`)
 
 	// ToDo:
-	allowedPatternQueryTypes = []string{"identifier", "type_identifier", "_", "field_access", "method_invocation", "string_literal"}
+	allowedPatternQueryTypes = []string{"string", "encapsed_string", "qualified_name", "_"}
 )
 
 type Pattern struct {
@@ -91,14 +91,15 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 // ToDo:
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
+		"string",
 		// todo: see if type identifier should be removed from here (User user) `User` is type
 		// identifiers
-		"identifier", "modifier",
+		// "identifier", "modifier",
 		// types
 		// int user, User user, void user function,
-		"integral_type", "type_identifier", "void_type",
+		// "integral_type", "type_identifier", "void_type",
 		// datatypes/literals
-		"string_literal", "character_literal", "null_literal", "true", "false", "decimal_integer_literal", "decimal_floating_point_literal",
+		// "string_literal", "character_literal", "null_literal", "true", "false", "decimal_integer_literal", "decimal_floating_point_literal",
 	}
 }
 
@@ -113,29 +114,19 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// function block
 	// lambda () -> {} block
 	// try {} catch () {}
-	unAnchored := []string{"class_body", "block", "try_statement", "catch_type", "resource_specification"}
+	// unAnchored := []string{"class_body", "block", "try_statement", "catch_type", "resource_specification"}
+	unAnchored := []string{""}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	return !slices.Contains([]string{"expression_statement"}, node.Type())
+	// Why is `";"` required here?
+	// It breaks the walking in builder.builder.go/Build because even though the node is `";"`, it doesn't return true for `IsMissing()`
+	return !slices.Contains([]string{"expression_statement", "php_tag", "program", `";"`}, node.Type()) && !node.IsMissing()
 }
 
-func (*Pattern) ShouldSkip(node *tree.Node) bool {
-	return slices.Contains([]string{"php_tag"}, node.Type())
-}
-
-// ToDo:
 func (*Pattern) NodeTypes(node *tree.Node) []string {
-	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
-		if len(node.NamedChildren()) == 0 {
-			return []string{"object"}
-		} else {
-			return []string{node.Type(), "program"}
-		}
-	}
-
 	return []string{node.Type()}
 }
