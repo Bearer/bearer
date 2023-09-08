@@ -21,7 +21,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	globaltypes "github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/bearer/bearer/pkg/util/ignore"
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/bearer/bearer/pkg/util/output"
 	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
@@ -267,7 +267,7 @@ func fingerprintOutput(
 	fingerprints []string,
 	cloudIgnoresUsed bool,
 	legacyExcludedFingerprints map[string]bool,
-	ignoredFingerprints map[string]ignore.IgnoredFingerprint,
+	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint,
 	staleFingerprints []string,
 	diffScan bool,
 ) {
@@ -338,7 +338,7 @@ func fingerprintOutput(
 func removeUnusedFingerprints(
 	detectedFingerprints []string,
 	excludeFingerprints map[string]bool,
-	ignoredFingerprints map[string]ignore.IgnoredFingerprint) ([]string, []string) {
+	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint) ([]string, []string) {
 
 	filteredBearerIgnoreFingerprints := make(map[string]bool)
 	for fingerprint := range ignoredFingerprints {

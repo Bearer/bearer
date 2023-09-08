@@ -32,6 +32,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/ignore"
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 
 	"github.com/bearer/bearer/pkg/types"
@@ -216,7 +217,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 
 func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 	useCloudIgnores bool,
-	ignoredFingerprints map[string]ignore.IgnoredFingerprint,
+	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint,
 	staleIgnoredFingerprintIds []string,
 	err error,
 ) {

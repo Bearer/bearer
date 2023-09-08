@@ -9,6 +9,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/ignore"
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -150,8 +151,8 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 
 			// create initial entry
 			fingerprintId := args[0]
-			var fingerprintEntry ignore.IgnoredFingerprint
-			fingerprintsToIgnore := map[string]ignore.IgnoredFingerprint{
+			var fingerprintEntry ignoretypes.IgnoredFingerprint
+			fingerprintsToIgnore := map[string]ignoretypes.IgnoredFingerprint{
 				fingerprintId: fingerprintEntry,
 			}
 
@@ -350,7 +351,7 @@ $ bearer ignore migrate`,
 	return cmd
 }
 
-func writeIgnoreFile(ignoredFingerprints map[string]ignore.IgnoredFingerprint, bearerIgnoreFilePath string) error {
+func writeIgnoreFile(ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint, bearerIgnoreFilePath string) error {
 	data, err := json.MarshalIndent(ignoredFingerprints, "", "  ")
 	if err != nil {
 		// failed to marshall data
@@ -360,11 +361,11 @@ func writeIgnoreFile(ignoredFingerprints map[string]ignore.IgnoredFingerprint, b
 	return os.WriteFile(bearerIgnoreFilePath, data, 0644)
 }
 
-func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFromConfig map[string]ignore.IgnoredFingerprint) {
-	ignoredFingerprintsFromConfig = make(map[string]ignore.IgnoredFingerprint)
+func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFromConfig map[string]ignoretypes.IgnoredFingerprint) {
+	ignoredFingerprintsFromConfig = make(map[string]ignoretypes.IgnoredFingerprint)
 
 	for _, fingerprint := range viper.GetStringSlice("report.exclude-fingerprint") {
-		ignoredFingerprintsFromConfig[fingerprint] = ignore.IgnoredFingerprint{
+		ignoredFingerprintsFromConfig[fingerprint] = ignoretypes.IgnoredFingerprint{
 			Comment: &migratedIgnoreComment,
 		}
 	}
