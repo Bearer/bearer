@@ -16,7 +16,12 @@ var reflexiveMethods = []string{
 	"getBytes",
 	"replace",
 	"replaceAll",
+	"split",
 	"substring",
+	"toCharArray",
+	// StringBuilder
+	"append",
+	"toString",
 	// Enumeration
 	"nextElement",
 }
