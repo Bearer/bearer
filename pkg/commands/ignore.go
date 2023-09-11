@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/saas"
 	"github.com/bearer/bearer/pkg/util/ignore"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
+	"github.com/rs/zerolog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -62,6 +63,8 @@ Examples:
 		newIgnorePullCommand(),
 		newIgnoreMigrateCommand(),
 	)
+
+	zerolog.SetGlobalLevel(zerolog.ErrorLevel)
 
 	cmd.SetUsageTemplate(usageTemplate)
 
