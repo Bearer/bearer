@@ -13,6 +13,7 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/rs/zerolog/log"
@@ -58,6 +59,7 @@ func newProcess(options *ProcessOptions, id string) (*Process, error) {
 
 	arguments := append(
 		options.baseArguments,
+		"--parent-process-id", strconv.Itoa(syscall.Getpid()),
 		"--port", strconv.Itoa(port),
 		"--worker-id", id,
 	)

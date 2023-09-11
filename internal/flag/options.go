@@ -161,6 +161,14 @@ func getDuration(flag *Flag) time.Duration {
 	return viper.GetDuration(flag.ConfigName)
 }
 
+func getInteger(flag *Flag) int {
+	if flag == nil {
+		return -1
+	}
+
+	return viper.GetInt(flag.ConfigName)
+}
+
 func (f *Flags) groups() []FlagGroup {
 	var groups []FlagGroup
 	// This order affects the usage message, so they are sorted by frequency of use.

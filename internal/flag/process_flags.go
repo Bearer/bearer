@@ -1,6 +1,12 @@
 package flag
 
 var (
+	ParentProcessIDFlag = Flag{
+		Name:       "parent-process-id",
+		ConfigName: "process.parent-process-id",
+		Value:      -1,
+	}
+
 	PortFlag = Flag{
 		Name:       "port",
 		ConfigName: "process.port",
@@ -18,20 +24,22 @@ var (
 )
 
 type ProcessFlagGroup struct {
-	PortFlag               *Flag
-	WorkerIDFlag           *Flag
-	WorkerDebugProfileFlag *Flag
+	ParentProcessIDFlag *Flag
+	PortFlag            *Flag
+	WorkerIDFlag        *Flag
 }
 
 type ProcessOptions struct {
-	WorkerID string `mapstructure:"worker-id" json:"worker-id" yaml:"worker-id"`
-	Port     string `mapstructure:"port" json:"port" yaml:"port"`
+	ParentProcessID int
+	WorkerID        string `mapstructure:"worker-id" json:"worker-id" yaml:"worker-id"`
+	Port            string `mapstructure:"port" json:"port" yaml:"port"`
 }
 
 func NewProcessGroup() *ProcessFlagGroup {
 	return &ProcessFlagGroup{
-		PortFlag:     &PortFlag,
-		WorkerIDFlag: &WorkerIDFlag,
+		ParentProcessIDFlag: &ParentProcessIDFlag,
+		PortFlag:            &PortFlag,
+		WorkerIDFlag:        &WorkerIDFlag,
 	}
 }
 
@@ -41,6 +49,7 @@ func (f *ProcessFlagGroup) Name() string {
 
 func (f *ProcessFlagGroup) Flags() []*Flag {
 	return []*Flag{
+		f.ParentProcessIDFlag,
 		f.PortFlag,
 		f.WorkerIDFlag,
 	}
@@ -51,7 +60,8 @@ func (f *ProcessFlagGroup) ToOptions() (ProcessOptions, error) {
 	workerID := getString(f.WorkerIDFlag)
 
 	return ProcessOptions{
-		Port:     port,
-		WorkerID: workerID,
+		ParentProcessID: getInteger(f.ParentProcessIDFlag),
+		Port:            port,
+		WorkerID:        workerID,
 	}, nil
 }

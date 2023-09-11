@@ -11,6 +11,8 @@ import (
 	"os/signal"
 	"runtime"
 	"slices"
+	"syscall"
+	"time"
 
 	"github.com/rs/zerolog/log"
 
@@ -99,10 +101,11 @@ func (worker *Worker) Close() {
 	}
 }
 
-func Start(port string) error {
+func Start(parentProcessID int, port string) error {
 	worker := Worker{}
 
-	ctx, _ := signal.NotifyContext(context.Background(), os.Interrupt)
+	ctx, cancelProcess := signal.NotifyContext(context.Background(), os.Interrupt)
+	go monitorParentProcess(ctx, parentProcessID, cancelProcess)
 
 	server := &http.Server{
 		Addr: `localhost:` + port,
@@ -174,4 +177,20 @@ func Start(port string) error {
 
 	<-done
 	return nil
+}
+
+func monitorParentProcess(ctx context.Context, parentProcessID int, cancel func()) {
+	timer := time.NewTimer(5 * time.Second)
+
+	for {
+		select {
+		case <-timer.C:
+			if syscall.Getppid() != parentProcessID {
+				log.Debug().Msg("parent process gone, stopping")
+				cancel()
+			}
+		case <-ctx.Done():
+			return
+		}
+	}
 }

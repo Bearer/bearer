@@ -3,13 +3,14 @@ package commands
 import (
 	"fmt"
 
+	"github.com/rs/zerolog/log"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+
 	"github.com/bearer/bearer/internal/commands/debugprofile"
 	"github.com/bearer/bearer/internal/commands/process/orchestrator/worker"
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/util/output"
-	"github.com/rs/zerolog/log"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 func NewProcessingWorkerCommand() *cobra.Command {
@@ -44,7 +45,7 @@ func NewProcessingWorkerCommand() *cobra.Command {
 
 			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
 
-			err = worker.Start(processOptions.Port)
+			err = worker.Start(processOptions.ParentProcessID, processOptions.Port)
 			return err
 		},
 		Hidden:        true,
