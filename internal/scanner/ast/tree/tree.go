@@ -100,7 +100,6 @@ func (node *Node) Children() []*Node {
 }
 
 func (node *Node) IsMissing() bool {
-	// log.Error().Msgf("here in IsMissing with nodeType[%s] %t %s", node.sitterNode.Type(), node.sitterNode.IsMissing(), node.sitterNode.String())
 	return node.sitterNode.IsMissing()
 }
 

@@ -63,7 +63,6 @@ func Build(
 		inputParams.Variables,
 		tree.RootNode(),
 	); fixed {
-		// log.Error().Msgf("fixedInput -> %s", fixedInput)
 		tree, err = ast.Parse(context.TODO(), language, fixedInput)
 		if err != nil {
 			return nil, err
@@ -72,15 +71,17 @@ func Build(
 
 	root := tree.RootNode()
 
-	// FIXME: Check with Dave why the walking seems to be showing the `;` and is not responding to `IsMissing()` as we would expect
-	// There shouldn't be any missing here since we are passing the updated tree produced by fixedInput...
+	var foundRoot bool
 	root.Walk(func(rootNode *asttree.Node, visitChildren func() error) error { //nolint:errcheck
+		if foundRoot {
+			return nil
+		}
+
 		if patternLanguage.IsRoot(rootNode) {
-			// log.Error().Msgf("[ROOT][%s] NodeType %s", language.ID(), rootNode.Type())
 			root = rootNode
+			foundRoot = true
 			return nil
 		} else {
-			// log.Error().Msgf("[NOT_ROOT][%s] NodeType %s", language.ID(), rootNode.Type())
 			return visitChildren()
 		}
 	})
@@ -108,9 +109,6 @@ func Build(
 	if err != nil {
 		return nil, err
 	}
-
-	// log.Error().Msgf("tree[%s][%s] -> %#v", language.ID(), root.Type(), tree.RootNode().Debug())
-	// log.Error().Msgf("result[%s][%s] -> %#v", language.ID(), root.Type(), result)
 
 	return result, nil
 }

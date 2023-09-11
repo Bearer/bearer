@@ -17,8 +17,7 @@ var (
 	matchNodeRegex            = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex             = regexp.MustCompile(`\$<\.\.\.>`)
 
-	// ToDo:
-	allowedPatternQueryTypes = []string{"string", "encapsed_string", "qualified_name", "_"}
+	allowedPatternQueryTypes = []string{"_"}
 )
 
 type Pattern struct {
@@ -88,18 +87,13 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
-// ToDo:
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
 		"string",
-		// todo: see if type identifier should be removed from here (User user) `User` is type
-		// identifiers
-		// "identifier", "modifier",
-		// types
-		// int user, User user, void user function,
-		// "integral_type", "type_identifier", "void_type",
-		// datatypes/literals
-		// "string_literal", "character_literal", "null_literal", "true", "false", "decimal_integer_literal", "decimal_floating_point_literal",
+		"name",
+		"integer",
+		"float",
+		"boolean",
 	}
 }
 
@@ -122,9 +116,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	// Why is `";"` required here?
-	// It breaks the walking in builder.builder.go/Build because even though the node is `";"`, it doesn't return true for `IsMissing()`
-	return !slices.Contains([]string{"expression_statement", "php_tag", "program", `";"`}, node.Type()) && !node.IsMissing()
+	return !slices.Contains([]string{"expression_statement", "php_tag", "program"}, node.Type()) && !node.IsMissing()
 }
 
 func (*Pattern) NodeTypes(node *tree.Node) []string {

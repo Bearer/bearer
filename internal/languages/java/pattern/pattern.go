@@ -106,8 +106,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	// FIXME: why is `";"` required here?
-	return !slices.Contains([]string{"expression_statement", "program", `";"`}, node.Type())
+	return !slices.Contains([]string{"expression_statement", "program"}, node.Type())
 }
 
 func (*Pattern) FixupMissing(node *tree.Node) string {

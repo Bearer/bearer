@@ -1,6 +1,6 @@
 <?php
 scopeCursor($_GET["oops"]);
-scopeCursor(x . $_GET["oops"]);
+scopeCursor(x . $_GET["ok"]);
 scopeCursor(x ? $_GET["oops"] : y);
 scopeCursor($_GET["ok"] ? x : y);
 scopeCursor($_GET["oops"] ?: y);
