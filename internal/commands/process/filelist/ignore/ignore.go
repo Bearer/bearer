@@ -1,7 +1,6 @@
 package ignore
 
 import (
-	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -50,7 +49,7 @@ func (fileignore *FileIgnore) Ignore(
 			log.Debug().Msgf("skipping file due to size: %s %s", projectPath, relativePath)
 			return true
 		}
-		if isMinified(fmt.Sprintf("%s%s", projectPath, filePath), fileInfo.Size(), goclocResult) {
+		if isMinified(filePath, fileInfo.Size(), goclocResult) {
 			log.Debug().Msgf("skipping file (suspected minified JS): %s %s", projectPath, filePath)
 			return true
 		}

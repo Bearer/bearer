@@ -67,7 +67,8 @@ type Runner interface {
 }
 
 type runner struct {
-	reportPath     string
+	targetPath,
+	reportPath string
 	reuseDetection bool
 	goclocResult   *gocloc.Result
 	scanSettings   settings.Config
@@ -78,11 +79,13 @@ type runner struct {
 func NewRunner(
 	ctx context.Context,
 	scanSettings settings.Config,
+	targetPath string,
 	goclocResult *gocloc.Result,
 	stats *scannerstats.Stats,
 ) Runner {
 	r := &runner{
 		scanSettings: scanSettings,
+		targetPath:   targetPath,
 		goclocResult: goclocResult,
 		stats:        stats,
 	}
@@ -150,17 +153,12 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 		outputhandler.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
 	}
 
-	targetPath, err := filepath.Abs(opts.Target)
-	if err != nil {
-		return nil, nil, fmt.Errorf("failed to get absolute target: %w", err)
-	}
-
-	repository, err := gitrepository.New(ctx, r.scanSettings, targetPath, opts.DiffBaseBranch)
+	repository, err := gitrepository.New(ctx, r.scanSettings, r.targetPath, opts.DiffBaseBranch)
 	if err != nil {
 		return nil, nil, fmt.Errorf("git repository error: %w", err)
 	}
 
-	fileList, err := filelist.Discover(repository, targetPath, r.goclocResult, r.scanSettings)
+	fileList, err := filelist.Discover(repository, r.targetPath, r.goclocResult, r.scanSettings)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -170,7 +168,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 	}
 
 	orchestrator, err := orchestrator.New(
-		work.Repository{Dir: opts.Target},
+		work.Repository{Dir: r.targetPath},
 		r.scanSettings,
 		r.stats,
 		len(fileList.Files),
@@ -252,7 +250,12 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options) (err error) {
-	inputgocloc, err := stats.GoclocDetectorOutput(opts.ScanOptions.Target)
+	targetPath, err := filepath.Abs(opts.Target)
+	if err != nil {
+		return fmt.Errorf("failed to get absolute target: %w", err)
+	}
+
+	inputgocloc, err := stats.GoclocDetectorOutput(targetPath)
 	if err != nil {
 		log.Debug().Msgf("Error in line of code output %s", err)
 		return err
@@ -305,7 +308,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 
 	gitrepository.ConfigureGithubAuth(scanSettings.Scan.GithubToken)
 
-	r := NewRunner(ctx, scanSettings, inputgocloc, stats)
+	r := NewRunner(ctx, scanSettings, targetPath, inputgocloc, stats)
 	defer r.Close(ctx)
 
 	files, baseBranchFindings, err := r.Scan(ctx, opts)
