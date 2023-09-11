@@ -65,7 +65,7 @@ func TestJuiceShopSarif(t *testing.T) {
 	}
 
 	var prettyJSON bytes.Buffer
-	err = json.Indent(&prettyJSON, []byte(*sarifOutput), "", "\t")
+	err = json.Indent(&prettyJSON, []byte(sarifOutput), "", "\t")
 	if err != nil {
 		t.Fatalf("error indenting output, err: %s", err)
 	}

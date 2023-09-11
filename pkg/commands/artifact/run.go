@@ -359,7 +359,7 @@ func (r *runner) Report(
 		return false, fmt.Errorf("error generating report %s", err)
 	}
 
-	logger(*formatStr)
+	logger(formatStr)
 
 	outputSendToCloudInfo(reportData.SendToCloud, r.scanSettings.Scan.Quiet, r.scanSettings.Client)
 	outputCachedDataWarning(cacheUsed, r.scanSettings.Scan.Quiet)

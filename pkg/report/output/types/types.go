@@ -29,5 +29,5 @@ type DataFlow struct {
 }
 
 type GenericFormatter interface {
-	Format(format string) (*string, error) // TODO: ensure format is an expected format (from report flags)
+	Format(format string) (string, error) // TODO: ensure format is an expected format (from report flags)
 }

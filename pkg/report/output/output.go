@@ -89,7 +89,7 @@ func FormatOutput(
 	goclocResult *gocloc.Result,
 	startTime time.Time,
 	endTime time.Time,
-) (*string, error) {
+) (string, error) {
 	var formatter types.GenericFormatter
 	switch config.Report.Report {
 	case flag.ReportDetectors:
@@ -105,15 +105,15 @@ func FormatOutput(
 	case flag.ReportStats:
 		formatter = stats.NewFormatter(reportData, config)
 	default:
-		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+		return "", fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
 	formatStr, err := formatter.Format(config.Report.Format)
 	if err != nil {
 		return formatStr, err
 	}
-	if formatStr == nil {
-		return nil, fmt.Errorf(`--report flag "%s" does not support --format flag "%s"`, config.Report.Report, config.Report.Format)
+	if formatStr == "" {
+		return "", fmt.Errorf(`--report flag "%s" does not support --format flag "%s"`, config.Report.Report, config.Report.Format)
 	}
 
 	return formatStr, err

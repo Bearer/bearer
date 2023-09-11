@@ -27,7 +27,7 @@ var wrapperTemplate string
 //go:embed styles.css
 var siteCss string
 
-func ReportHTMLWrapper(title string, body *string) (*string, error) {
+func ReportHTMLWrapper(title string, body *string) (string, error) {
 	htmlContent := &strings.Builder{}
 
 	t := time.Now()
@@ -41,17 +41,16 @@ func ReportHTMLWrapper(title string, body *string) (*string, error) {
 	}
 	pageTemplate, err := template.New("pageTemplate").Parse(wrapperTemplate)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
 	err = pageTemplate.Execute(htmlContent, wrapperContent)
 
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	content := htmlContent.String()
-	return &content, nil
+	return htmlContent.String(), nil
 }
 
 func ReportSecurityHTML(detections map[string][]securitytypes.Finding) (*string, error) {
