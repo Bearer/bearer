@@ -49,8 +49,8 @@ func (scanner *Scanner) Scan(
 	rule *ruleset.Rule,
 	traversalStrategy traversalstrategy.Strategy,
 ) ([]*detectortypes.Detection, error) {
-	startTime := time.Now()
 	if scanner.stats != nil {
+		startTime := time.Now()
 		defer scanner.stats.Rule(rule.ID(), startTime)
 	}
 

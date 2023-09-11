@@ -60,12 +60,23 @@ func (filter *Not) Evaluate(
 	detectorContext detectortypes.Context,
 	patternVariables variableshape.Values,
 ) (*Result, error) {
-	result, err := filter.Child.Evaluate(detectorContext, patternVariables)
-	if result == nil || err != nil {
+	childResult, err := filter.Child.Evaluate(detectorContext, patternVariables)
+	if err != nil {
 		return nil, err
 	}
 
-	return boolResult(patternVariables, len(result.Matches()) == 0), nil
+	if childResult == nil {
+		log.Trace().Msg("filters.Not: nil")
+		return nil, nil
+	}
+
+	result := len(childResult.Matches()) == 0
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("filters.Not: %t", result)
+	}
+
+	return boolResult(patternVariables, result), nil
 }
 
 type Either struct {
@@ -111,22 +122,39 @@ func (filter *All) Evaluate(
 	var matches []Match
 
 	if len(filter.Children) == 0 {
+		log.Trace().Msg("filters.All: true (no children)")
 		return boolResult(patternVariables, true), nil
 	}
 
+	log.Trace().Msgf("filters.All: children %#v", filter.Children)
+
 	for i, child := range filter.Children {
+		log.Trace().Msgf("filters.All: child %#v", child)
+
 		subResult, err := child.Evaluate(detectorContext, patternVariables)
-		if subResult == nil || err != nil {
+		if err != nil {
 			return nil, err
+		}
+
+		if subResult == nil {
+			log.Trace().Msg("filters.All: nil")
+			return nil, nil
 		}
 
 		if i == 0 {
 			matches = subResult.matches
-		} else {
-			matches = filter.joinMatches(matches, subResult.matches)
+			continue
+		}
+
+		matches = filter.joinMatches(matches, subResult.matches)
+
+		if len(matches) == 0 {
+			log.Trace().Msg("filters.All: no matches")
+			return NewResult(), nil
 		}
 	}
 
+	log.Trace().Msg("filters.All: matches")
 	return NewResult(matches...), nil
 }
 
@@ -202,6 +230,12 @@ func (filter *Rule) Evaluate(
 		data, ok := detection.Data.(types.Data)
 		if !ok { // Built-in detector
 			log.Trace().Msg("filters.Rule: match (built-in)")
+
+			if !hasSimpleMatch {
+				hasSimpleMatch = true
+				matches = append(matches, NewMatch(patternVariables, nil))
+			}
+
 			continue
 		}
 
@@ -221,6 +255,8 @@ func (filter *Rule) Evaluate(
 		}
 
 		if len(filter.ImportedVariables) == 0 {
+			log.Trace().Msg("filters.Rule: match (no imported vars)")
+
 			if !hasSimpleMatch {
 				hasSimpleMatch = true
 				matches = append(matches, NewMatch(patternVariables, nil))
@@ -295,7 +331,19 @@ func (filter *Regex) Evaluate(
 	patternVariables variableshape.Values,
 ) (*Result, error) {
 	node := patternVariables.Node(filter.Variable)
-	return boolResult(patternVariables, filter.Regex.MatchString(node.Content())), nil
+	result := filter.Regex.MatchString(node.Content())
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"filters.Regex: %t for pattern %s at %s, content=%s",
+			result,
+			filter.Regex.String(),
+			node.Debug(),
+			node.Content(),
+		)
+	}
+
+	return boolResult(patternVariables, result), nil
 }
 
 type StringLengthLessThan struct {
@@ -327,11 +375,30 @@ func (filter *StringRegex) Evaluate(
 ) (*Result, error) {
 	node := patternVariables.Node(filter.Variable)
 	value, isString, err := lookupString(detectorContext, node)
-	if err != nil || !isString {
+	if err != nil {
 		return nil, err
 	}
 
-	return boolResult(patternVariables, filter.Regex.MatchString(value)), nil
+	if !isString {
+		if log.Trace().Enabled() {
+			log.Trace().Msgf("filters.StringRegex: nil for pattern %s at %s", filter.Regex.String(), node.Debug())
+		}
+
+		return nil, nil
+	}
+
+	result := filter.Regex.MatchString(value)
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"filters.StringRegex: %t for pattern %s at %s, content=%s",
+			result,
+			filter.Regex.String(),
+			node.Debug(),
+			value,
+		)
+	}
+
+	return boolResult(patternVariables, result), nil
 }
 
 type IntegerLessThan struct {
