@@ -126,11 +126,7 @@ func (filter *All) Evaluate(
 		return boolResult(patternVariables, true), nil
 	}
 
-	log.Trace().Msgf("filters.All: children %#v", filter.Children)
-
 	for i, child := range filter.Children {
-		log.Trace().Msgf("filters.All: child %#v", child)
-
 		subResult, err := child.Evaluate(detectorContext, patternVariables)
 		if err != nil {
 			return nil, err

@@ -24,9 +24,6 @@ var reflexiveMethods = []string{
 	"to_r",
 	"to_sym",
 	"to_json",
-	// activesupport
-	"classify",
-	"presence",
 	//string
 	"bytes",
 	"capitalize",
@@ -66,7 +63,14 @@ var reflexiveMethods = []string{
 	"upcase",
 	"upcase!",
 	// hash
+	"fetch",
 	"slice",
+	// activesupport
+	"classify",
+	"presence",
+	"html_safe",
+	// activerecord
+	"attributes",
 }
 
 type analyzer struct {
