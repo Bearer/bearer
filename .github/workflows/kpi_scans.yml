@@ -24,7 +24,7 @@ jobs:
     outputs:
       matrix: ${{ steps.load_json.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - id: load_json
         run : |
           content=$(cat ./kpi_scan/kpi_repo_list.json | jq -c)
