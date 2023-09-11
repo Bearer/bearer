@@ -95,9 +95,19 @@ Bearer Cloud automatically captures any scans run with a valid `api-key`. Subseq
 
 ### Ignored findings in Bearer Cloud
 
-When a valid `api-key` is present, the very first scan of a project reads ignored fingerprints from the bearer.ignore file and subsequently create ignored findings for these in the Cloud. A finding has "False Positive" status in the Cloud if its corresponding bearer.ignore entry is a false positive (`false_positive: true`); otherwise, it has the status "Allowed".
+When a valid `api-key` is present, the very first scan of a project reads ignored fingerprints from the bearer.ignore file and subsequently creates ignored findings for these in the Cloud, including status and comments (if present). A finding has "False Positive" status in the Cloud if its corresponding bearer.ignore entry is a false positive (`false_positive: true`); otherwise, it has the status "Allowed".
 
-After this initial scan, the Cloud is taken as the source of truth for ignored fingerprints. This means that, when a valid `api-key` is present, subsequent scans of the project read ignored fingerprints from the Cloud and not the bearer.ignore file.
+After the initial scan, the Cloud is taken as the source of truth for ignored fingerprints. If there are new entries added to the bearer.ignore file, in most cases, these are sent to the Cloud on subsequent scans, and the corresponding Cloud findings are updated to "False Positive" or "Allowed" status accordingly.
+
+However, it is important to note that the Cloud state is always prioritized over the contents of the bearer.ignore file. If a finding is already ignored in the Cloud, and then added to the bearer.ignore file, its Cloud status and comments are unchanged by subsequent scans. Similarly, if an ignored finding is re-opened in the Cloud, and then added to the bearer.ignore file, its Cloud status remains "Open". That is, re-opened findings can only be re-ignored again from the Cloud.
+
+Furthermore, if an ignored finding is later re-opened in the Cloud, any corresponding bearer.ignore entry is not automatically removed. Over time, then, the bearer.ignore file may become out-of-sync with the Cloud state. To remedy this, and align the bearer.ignore file with what is in the Cloud, use the following action:
+
+```bash
+bearer ignore pull project-folder --api-key=XXXXXXXX
+```
+
+This action overwrites the current bearer.ignore file (including any new additions not yet sent to the Cloud) with all ignored findings from the Cloud, including status, comments, and author information.
 
 ## Jira integration
 
