@@ -15,6 +15,7 @@ import (
 
 	"golang.org/x/exp/maps"
 
+	"github.com/bearer/bearer/api"
 	evalstats "github.com/bearer/bearer/new/detector/evaluator/stats"
 	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
@@ -360,6 +361,7 @@ func (r *runner) Report(
 
 	logger(*formatStr)
 
+	outputSendToCloudInfo(reportData.SendToCloud, r.scanSettings.Scan.Quiet, r.scanSettings.Client)
 	outputCachedDataWarning(cacheUsed, r.scanSettings.Scan.Quiet)
 
 	return reportData.ReportFailed, nil
@@ -367,6 +369,20 @@ func (r *runner) Report(
 
 func (r *runner) ReportPath() string {
 	return r.reportPath
+}
+
+func outputSendToCloudInfo(sendToCloud bool, quietMode bool, client *api.API) {
+	if quietMode || !sendToCloud {
+		return
+	}
+
+	if client.Error != nil {
+		// client error sending to saas
+		outputhandler.StdErrLog(fmt.Sprintf("Failed to send data to Bearer Cloud. %s \n", *client.Error))
+		return
+	}
+
+	outputhandler.StdErrLog("Data successfully sent to Bearer Cloud.\n")
 }
 
 func outputCachedDataWarning(cacheUsed bool, quietMode bool) {

@@ -10,6 +10,7 @@ import (
 
 type ReportData struct {
 	ReportFailed       bool
+	SendToCloud        bool
 	Files              []string
 	Detectors          []any
 	Dataflow           *DataFlow

@@ -29,8 +29,6 @@ func GetData(
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
 ) (*types.ReportData, error) {
-	sendToCloud := false
-
 	data := &types.ReportData{}
 	// add detectors
 	err := detectors.AddReportData(data, report, config)
@@ -48,14 +46,14 @@ func GetData(
 	case flag.ReportDataFlow:
 		return data, err
 	case flag.ReportSecurity:
-		sendToCloud = true
+		data.SendToCloud = true
 		err = security.AddReportData(data, config, baseBranchFindings)
 	case flag.ReportSaaS:
 		if err = security.AddReportData(data, config, baseBranchFindings); err != nil {
 			return nil, err
 		}
 
-		sendToCloud = true
+		data.SendToCloud = true
 		err = saas.GetReport(data, config, false)
 	case flag.ReportPrivacy:
 		err = privacy.AddReportData(data, config)
@@ -65,7 +63,7 @@ func GetData(
 		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
-	if sendToCloud && config.Client != nil && config.Client.Error == nil {
+	if data.SendToCloud && config.Client != nil && config.Client.Error == nil {
 		// send SaaS report to Cloud
 		saas.SendReport(config, data)
 	}
