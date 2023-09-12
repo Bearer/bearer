@@ -336,6 +336,8 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		IgnoredFingerprints: ignoredFingerprints,
 		NoColor:             opts.GeneralOptions.NoColor || opts.ReportOptions.Output != "",
 		DebugProfile:        opts.GeneralOptions.DebugProfile,
+		Debug:               opts.GeneralOptions.Debug,
+		LogLevel:            opts.GeneralOptions.LogLevel,
 		Policies:            policies,
 		Rules:               result.Rules,
 		BuiltInRules:        result.BuiltInRules,

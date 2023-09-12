@@ -15,13 +15,6 @@ var (
 		Value:      "",
 		Usage:      "Set the worker's identifier.",
 	}
-
-	WorkerDebugProfileFlag = Flag{
-		Name:       "debug-profile",
-		ConfigName: "process.debug-profile",
-		Value:      false,
-		Usage:      "Generate profiling data for debugging",
-	}
 )
 
 type ProcessFlagGroup struct {
@@ -31,16 +24,14 @@ type ProcessFlagGroup struct {
 }
 
 type ProcessOptions struct {
-	WorkerID     string `mapstructure:"worker-id" json:"worker-id" yaml:"worker-id"`
-	Port         string `mapstructure:"port" json:"port" yaml:"port"`
-	DebugProfile bool   `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
+	WorkerID string `mapstructure:"worker-id" json:"worker-id" yaml:"worker-id"`
+	Port     string `mapstructure:"port" json:"port" yaml:"port"`
 }
 
 func NewProcessGroup() *ProcessFlagGroup {
 	return &ProcessFlagGroup{
-		PortFlag:               &PortFlag,
-		WorkerIDFlag:           &WorkerIDFlag,
-		WorkerDebugProfileFlag: &WorkerDebugProfileFlag,
+		PortFlag:     &PortFlag,
+		WorkerIDFlag: &WorkerIDFlag,
 	}
 }
 
@@ -52,7 +43,6 @@ func (f *ProcessFlagGroup) Flags() []*Flag {
 	return []*Flag{
 		f.PortFlag,
 		f.WorkerIDFlag,
-		f.WorkerDebugProfileFlag,
 	}
 }
 
@@ -61,8 +51,7 @@ func (f *ProcessFlagGroup) ToOptions() (ProcessOptions, error) {
 	workerID := getString(f.WorkerIDFlag)
 
 	return ProcessOptions{
-		Port:         port,
-		WorkerID:     workerID,
-		DebugProfile: getBool(f.WorkerDebugProfileFlag),
+		Port:     port,
+		WorkerID: workerID,
 	}, nil
 }

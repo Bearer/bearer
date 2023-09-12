@@ -15,6 +15,7 @@ import (
 func NewProcessingWorkerCommand() *cobra.Command {
 	flags := &flag.Flags{
 		ProcessFlagGroup: flag.NewProcessGroup(),
+		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
 		ScanFlagGroup:    flag.NewScanFlagGroup(),
 	}
 
@@ -32,7 +33,7 @@ func NewProcessingWorkerCommand() *cobra.Command {
 				ProcessID: viper.GetString(flag.WorkerIDFlag.ConfigName),
 			})
 
-			if viper.GetBool(flag.WorkerDebugProfileFlag.ConfigName) {
+			if viper.GetBool(flag.DebugProfileFlag.ConfigName) {
 				debugprofile.Start()
 			}
 

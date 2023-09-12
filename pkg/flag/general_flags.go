@@ -60,14 +60,14 @@ var (
 	}
 	DebugFlag = Flag{
 		Name:            "debug",
-		ConfigName:      "scan.debug",
+		ConfigName:      "debug",
 		Value:           false,
 		Usage:           "Enable debug logs. Equivalent to --log-level=debug",
 		DisableInConfig: true,
 	}
 	LogLevelFlag = Flag{
 		Name:       "log-level",
-		ConfigName: "scan.log-level",
+		ConfigName: "log-level",
 		Value:      "info",
 		Usage:      "Set log level (error, info, debug, trace)",
 	}
