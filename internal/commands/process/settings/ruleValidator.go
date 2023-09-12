@@ -23,7 +23,7 @@ func ValidateRule(entry []byte, filename string) string {
 
 	jsonData, err := yaml.YAMLToJSON(entry)
 	if err != nil {
-		validationStr.WriteString("File fdormat is invalid")
+		validationStr.WriteString("File format is invalid")
 		return validationStr.String()
 	}
 
