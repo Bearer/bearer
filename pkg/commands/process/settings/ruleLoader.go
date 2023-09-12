@@ -46,7 +46,7 @@ func LoadRuleDefinitionsFromUrls(ruleDefinitions map[string]RuleDefinition, lang
 			}
 			defer file.Close()
 
-			if _, err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
+			if err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
 				return err
 			}
 		} else {
@@ -75,7 +75,7 @@ func LoadRuleDefinitionsFromUrls(ruleDefinitions map[string]RuleDefinition, lang
 				return err
 			}
 
-			if _, err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
+			if err = ReadRuleDefinitions(ruleDefinitions, file); err != nil {
 				return err
 			}
 		}
@@ -84,12 +84,10 @@ func LoadRuleDefinitionsFromUrls(ruleDefinitions map[string]RuleDefinition, lang
 	return nil
 }
 
-func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) (map[string]bool, error) {
-	ruleLanguages := make(map[string]bool)
-
+func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.File) error {
 	gzr, err := gzip.NewReader(file)
 	if err != nil {
-		return ruleLanguages, err
+		return err
 	}
 	defer gzr.Close()
 
@@ -99,7 +97,7 @@ func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.Fil
 		if err == io.EOF {
 			break
 		} else if err != nil {
-			return ruleLanguages, err
+			return err
 		}
 
 		if !isRuleFile(header.Name) {
@@ -109,29 +107,25 @@ func ReadRuleDefinitions(ruleDefinitions map[string]RuleDefinition, file *os.Fil
 		data := make([]byte, header.Size)
 		_, err = io.ReadFull(tr, data)
 		if err != nil {
-			return ruleLanguages, fmt.Errorf("failed to read file %s: %w", header.Name, err)
+			return fmt.Errorf("failed to read file %s: %w", header.Name, err)
 		}
 
 		var ruleDefinition RuleDefinition
 		err = yaml.Unmarshal(data, &ruleDefinition)
 		if err != nil {
-			return ruleLanguages, fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
+			return fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
 		}
 
 		id := ruleDefinition.Metadata.ID
 		_, ruleExists := ruleDefinitions[id]
 		if ruleExists {
-			return ruleLanguages, fmt.Errorf("duplicate built-in rule ID %s", id)
-		}
-
-		for _, lang := range ruleDefinition.Languages {
-			ruleLanguages[lang] = true
+			return fmt.Errorf("duplicate built-in rule ID %s", id)
 		}
 
 		ruleDefinitions[id] = ruleDefinition
 	}
 
-	return ruleLanguages, nil
+	return nil
 }
 
 func isRuleFile(headerName string) bool {

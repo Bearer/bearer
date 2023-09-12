@@ -445,10 +445,6 @@ func BuildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 	return rules
 }
 
-func cleanupRuleDirFiles(bearerRulesDir string) error {
-	return os.RemoveAll(bearerRulesDir)
-}
-
 func bearerRulesDir() string {
 	return filepath.Join(os.TempDir(), "bearer-rules")
 }
