@@ -35,12 +35,12 @@ Scan Flags
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 
 General Flags
-      --bearer-ignore-file string   Load bearer.ignore file from the specified path. (default "bearer.ignore")
-      --config-file string          Load configuration from the specified path. (default "bearer.yml")
-      --debug                       Enable debug logs. Equivalent to --log-level=debug
-      --disable-version-check       Disable Bearer version checking
-      --log-level string            Set log level (error, info, debug, trace) (default "info")
-      --no-color                    Disable color in output
+      --config-file string      Load configuration from the specified path. (default "bearer.yml")
+      --debug                   Enable debug logs. Equivalent to --log-level=debug
+      --disable-version-check   Disable Bearer version checking
+      --ignore-file string      Load bearer.ignore file from the specified path. (default "bearer.ignore")
+      --log-level string        Set log level (error, info, debug, trace) (default "info")
+      --no-color                Disable color in output
 
 
 --
