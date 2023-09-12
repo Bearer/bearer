@@ -2,12 +2,15 @@ package api
 
 import (
 	"encoding/json"
+
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 )
 
 type CloudIgnoreData struct {
-	ProjectFound bool     `json:"project_found"`
-	Ignores      []string `json:"ignores"`
-	StaleIgnores []string `json:"stale_ignores"`
+	ProjectFound             bool                                      `json:"project_found"`
+	Ignores                  []string                                  `json:"ignores"`
+	StaleIgnores             []string                                  `json:"stale_ignores"`
+	CloudIgnoredFingerprints map[string]ignoretypes.IgnoredFingerprint `json:"detailed_cloud_ignores"`
 }
 
 type CloudIgnorePayload struct {

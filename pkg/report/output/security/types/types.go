@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/bearer/bearer/pkg/util/ignore"
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/fatih/color"
 )
 
@@ -30,19 +30,19 @@ type Finding struct {
 
 type IgnoredFinding struct {
 	Finding
-	IgnoreMeta ignore.IgnoredFingerprint
+	IgnoreMeta ignoretypes.IgnoredFingerprint
 }
 
 type GenericFinding interface {
 	GetFinding() Finding
-	GetIgnoreMeta() *ignore.IgnoredFingerprint
+	GetIgnoreMeta() *ignoretypes.IgnoredFingerprint
 }
 
 func (f Finding) GetFinding() Finding {
 	return f
 }
 
-func (f Finding) GetIgnoreMeta() *ignore.IgnoredFingerprint {
+func (f Finding) GetIgnoreMeta() *ignoretypes.IgnoredFingerprint {
 	return nil
 }
 
@@ -50,7 +50,7 @@ func (i IgnoredFinding) GetFinding() Finding {
 	return i.Finding
 }
 
-func (i IgnoredFinding) GetIgnoreMeta() *ignore.IgnoredFingerprint {
+func (i IgnoredFinding) GetIgnoreMeta() *ignoretypes.IgnoredFingerprint {
 	return &i.IgnoreMeta
 }
 
