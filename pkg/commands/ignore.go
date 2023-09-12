@@ -11,7 +11,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/saas"
 	"github.com/bearer/bearer/pkg/util/ignore"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
-	"github.com/rs/zerolog"
+	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -64,8 +64,6 @@ Examples:
 		newIgnoreMigrateCommand(),
 	)
 
-	zerolog.SetGlobalLevel(zerolog.ErrorLevel)
-
 	cmd.SetUsageTemplate(usageTemplate)
 
 	return cmd
@@ -85,6 +83,8 @@ $ bearer ignore show <fingerprint>`,
 			if err := IgnoreShowFlags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
+
+			setLogLevel(cmd)
 
 			options, err := IgnoreShowFlags.ToOptions(args)
 			if err != nil {
@@ -152,6 +152,8 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			if len(args) == 0 {
 				return cmd.Help()
 			}
+
+			setLogLevel(cmd)
 
 			options, err := IgnoreAddFlags.ToOptions(args)
 			if err != nil {
@@ -250,6 +252,8 @@ $ bearer ignore remove <fingerprint>`,
 				return cmd.Help()
 			}
 
+			setLogLevel(cmd)
+
 			options, err := IgnoreRemoveFlags.ToOptions(args)
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
@@ -303,6 +307,8 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 			if err := IgnorePullFlags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
+
+			setLogLevel(cmd)
 
 			options, err := IgnorePullFlags.ToOptions(args)
 			if err != nil {
@@ -405,6 +411,8 @@ $ bearer ignore migrate`,
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
+			setLogLevel(cmd)
+
 			options, err := IgnoreMigrateFlags.ToOptions(args)
 			if err != nil {
 				return fmt.Errorf("flag error: %s", err)
@@ -458,6 +466,16 @@ $ bearer ignore migrate`,
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreMigrateFlags.Usages(cmd)))
 
 	return cmd
+}
+
+func setLogLevel(cmd *cobra.Command) {
+	logLevel := viper.GetString(flag.LogLevelFlag.ConfigName)
+	if viper.GetBool(flag.DebugFlag.ConfigName) {
+		logLevel = flag.DebugLogLevel
+	}
+	output.Setup(cmd, output.SetupRequest{
+		LogLevel: logLevel,
+	})
 }
 
 func writeIgnoreFile(ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint, bearerIgnoreFilePath string) error {
