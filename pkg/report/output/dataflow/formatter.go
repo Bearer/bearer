@@ -19,7 +19,7 @@ func NewFormatter(reportData *outputtypes.ReportData, config settings.Config) *F
 	}
 }
 
-func (f Formatter) Format(format string) (output *string, err error) {
+func (f Formatter) Format(format string) (output string, err error) {
 	switch format {
 	case flag.FormatEmpty, flag.FormatJSON:
 		return outputhandler.ReportJSON(f.ReportData.Dataflow)

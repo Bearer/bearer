@@ -350,6 +350,7 @@ func (r *runner) Report(
 	formatStr, err := reportoutput.FormatOutput(
 		reportData,
 		r.scanSettings,
+		cacheUsed,
 		report.Inputgocloc,
 		startTime,
 		endTime,
@@ -358,23 +359,13 @@ func (r *runner) Report(
 		return false, fmt.Errorf("error generating report %s", err)
 	}
 
-	logger(*formatStr)
-
-	outputCachedDataWarning(cacheUsed, r.scanSettings.Scan.Quiet)
+	logger(formatStr)
 
 	return reportData.ReportFailed, nil
 }
 
 func (r *runner) ReportPath() string {
 	return r.reportPath
-}
-
-func outputCachedDataWarning(cacheUsed bool, quietMode bool) {
-	if quietMode || !cacheUsed {
-		return
-	}
-
-	outputhandler.StdErrLog("Cached data used (no code changes detected). Unexpected? Use --force to force a re-scan.\n")
 }
 
 func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {

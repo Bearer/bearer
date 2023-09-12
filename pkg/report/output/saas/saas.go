@@ -132,7 +132,7 @@ func createBearerGzipFileReport(
 
 	content, _ := util.ReportJSON(reportData.SaasReport)
 	gzWriter := gzip.NewWriter(file)
-	_, err = gzWriter.Write([]byte(*content))
+	_, err = gzWriter.Write([]byte(content))
 	if err != nil {
 		return nil, nil, err
 	}

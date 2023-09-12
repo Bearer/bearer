@@ -33,11 +33,10 @@ func NewFormatter(reportData *outputtypes.ReportData, config settings.Config, go
 	}
 }
 
-func (f Formatter) Format(format string) (output *string, err error) {
+func (f Formatter) Format(format string) (output string, err error) {
 	switch format {
 	case flag.FormatEmpty:
-		reportStr := BuildReportString(f.ReportData, f.Config, f.GoclocResult).String()
-		output = &reportStr
+		output = BuildReportString(f.ReportData, f.Config, f.GoclocResult).String()
 	case flag.FormatSarif:
 		sarifContent, sarifErr := sarif.ReportSarif(f.ReportData.FindingsBySeverity, f.Config.Rules)
 		if sarifErr != nil {

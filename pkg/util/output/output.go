@@ -97,22 +97,20 @@ func Fatal(message string) {
 	os.Exit(1)
 }
 
-func ReportJSON(outputDetections any) (*string, error) {
+func ReportJSON(outputDetections any) (string, error) {
 	jsonBytes, err := json.Marshal(&outputDetections)
 	if err != nil {
-		return nil, fmt.Errorf("failed to json marshal detections: %s", err)
+		return "", fmt.Errorf("failed to json marshal detections: %s", err)
 	}
 
-	content := string(jsonBytes)
-	return &content, nil
+	return string(jsonBytes), nil
 }
 
-func ReportYAML(outputDetections any) (*string, error) {
+func ReportYAML(outputDetections any) (string, error) {
 	yamlBytes, err := yaml.Marshal(&outputDetections)
 	if err != nil {
-		return nil, fmt.Errorf("failed to yaml marshal detections: %s", err)
+		return "", fmt.Errorf("failed to yaml marshal detections: %s", err)
 	}
 
-	content := string(yamlBytes)
-	return &content, nil
+	return string(yamlBytes), nil
 }

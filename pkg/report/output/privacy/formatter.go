@@ -22,15 +22,14 @@ func NewFormatter(reportData *outputtypes.ReportData, config settings.Config) *F
 	}
 }
 
-func (f Formatter) Format(format string) (output *string, err error) {
+func (f Formatter) Format(format string) (output string, err error) {
 	switch format {
 	case flag.FormatEmpty, flag.FormatCSV:
 		stringBuilder, err := BuildCsvString(f.ReportData, f.Config)
 		if err != nil {
 			return output, err
 		}
-		csvStr := stringBuilder.String()
-		output = &csvStr
+		output = stringBuilder.String()
 	case flag.FormatJSON:
 		return outputhandler.ReportJSON(f.ReportData.PrivacyReport)
 	case flag.FormatYAML:

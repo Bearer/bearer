@@ -160,5 +160,5 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 	}
 
 	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
-	cupaloyCopy.SnapshotT(t, *report)
+	cupaloyCopy.SnapshotT(t, report)
 }

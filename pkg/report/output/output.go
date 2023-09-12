@@ -29,8 +29,6 @@ func GetData(
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
 ) (*types.ReportData, error) {
-	sendToCloud := false
-
 	data := &types.ReportData{}
 	// add detectors
 	err := detectors.AddReportData(data, report, config)
@@ -48,14 +46,14 @@ func GetData(
 	case flag.ReportDataFlow:
 		return data, err
 	case flag.ReportSecurity:
-		sendToCloud = true
+		data.SendToCloud = true
 		err = security.AddReportData(data, config, baseBranchFindings)
 	case flag.ReportSaaS:
 		if err = security.AddReportData(data, config, baseBranchFindings); err != nil {
 			return nil, err
 		}
 
-		sendToCloud = true
+		data.SendToCloud = true
 		err = saas.GetReport(data, config, false)
 	case flag.ReportPrivacy:
 		err = privacy.AddReportData(data, config)
@@ -65,7 +63,7 @@ func GetData(
 		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
-	if sendToCloud && config.Client != nil && config.Client.Error == nil {
+	if data.SendToCloud && config.Client != nil && config.Client.Error == nil {
 		// send SaaS report to Cloud
 		saas.SendReport(config, data)
 	}
@@ -88,10 +86,11 @@ func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config
 func FormatOutput(
 	reportData *types.ReportData,
 	config settings.Config,
+	cacheUsed bool,
 	goclocResult *gocloc.Result,
 	startTime time.Time,
 	endTime time.Time,
-) (*string, error) {
+) (string, error) {
 	var formatter types.GenericFormatter
 	switch config.Report.Report {
 	case flag.ReportDetectors:
@@ -107,15 +106,34 @@ func FormatOutput(
 	case flag.ReportStats:
 		formatter = stats.NewFormatter(reportData, config)
 	default:
-		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+		return "", fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
 	formatStr, err := formatter.Format(config.Report.Format)
 	if err != nil {
 		return formatStr, err
 	}
-	if formatStr == nil {
-		return nil, fmt.Errorf(`--report flag "%s" does not support --format flag "%s"`, config.Report.Report, config.Report.Format)
+	if formatStr == "" {
+		return "", fmt.Errorf(`--report flag "%s" does not support --format flag "%s"`, config.Report.Report, config.Report.Format)
+	}
+
+	if !config.Scan.Quiet && (reportData.SendToCloud || cacheUsed) {
+		// add cached data warning message
+		if cacheUsed {
+			formatStr += "\n\nCached data used (no code changes detected). Unexpected? Use --force to force a re-scan."
+		}
+
+		// add cloud info message
+		if reportData.SendToCloud {
+			if config.Client.Error == nil {
+				formatStr += "\n\nData successfully sent to Bearer Cloud."
+			} else {
+				// client error
+				formatStr += fmt.Sprintf("\n\nFailed to send data to Bearer Cloud. %s ", *config.Client.Error)
+			}
+		}
+
+		formatStr += "\n"
 	}
 
 	return formatStr, err
