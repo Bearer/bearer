@@ -30,7 +30,7 @@ func New(config settings.Config, stats *stats.Stats) *Pool {
 		output.Fatal(fmt.Sprintf("failed to get current command executable %s", err))
 	}
 
-	baseArguments := []string{"processing-worker", "--log-level", config.Scan.LogLevel}
+	baseArguments := []string{"processing-worker", "--log-level", config.LogLevel}
 	if config.DebugProfile {
 		baseArguments = append(baseArguments, "--debug-profile")
 	}

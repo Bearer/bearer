@@ -240,7 +240,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	}()
 
 	var stats *evalstats.Stats
-	if scanSettings.Scan.Debug {
+	if scanSettings.Debug {
 		stats = evalstats.New()
 	}
 

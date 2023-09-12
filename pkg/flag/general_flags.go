@@ -8,6 +8,13 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+const (
+	ErrorLogLevel = "error"
+	InfoLogLevel  = "info"
+	DebugLogLevel = "debug"
+	TraceLogLevel = "trace"
+)
+
 var (
 	HostFlag = Flag{
 		Name:            "host",
@@ -51,6 +58,19 @@ var (
 		Usage:           "Load bearer.ignore file from the specified path.",
 		DisableInConfig: true,
 	}
+	DebugFlag = Flag{
+		Name:            "debug",
+		ConfigName:      "scan.debug",
+		Value:           false,
+		Usage:           "Enable debug logs. Equivalent to --log-level=debug",
+		DisableInConfig: true,
+	}
+	LogLevelFlag = Flag{
+		Name:       "log-level",
+		ConfigName: "scan.log-level",
+		Value:      "info",
+		Usage:      "Set log level (error, info, debug, trace)",
+	}
 	DebugProfileFlag = Flag{
 		Name:            "debug-profile",
 		ConfigName:      "debug-profile",
@@ -68,6 +88,8 @@ type GeneralFlagGroup struct {
 	Host                *Flag
 	DisableVersionCheck *Flag
 	NoColor             *Flag
+	DebugFlag           *Flag
+	LogLevelFlag        *Flag
 	DebugProfile        *Flag
 }
 
@@ -78,6 +100,8 @@ type GeneralOptions struct {
 	DisableVersionCheck bool
 	NoColor             bool   `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
 	BearerIgnoreFile    string `mapstructure:"bearer_ignore_file" json:"bearer_ignore_file" yaml:"bearer_ignore_file"`
+	Debug               bool   `mapstructure:"debug" json:"debug" yaml:"debug"`
+	LogLevel            string `mapstructure:"log-level" json:"log-level" yaml:"log-level"`
 	DebugProfile        bool
 }
 
@@ -89,6 +113,8 @@ func NewGeneralFlagGroup() *GeneralFlagGroup {
 		DisableVersionCheck: &DisableVersionCheckFlag,
 		NoColor:             &NoColorFlag,
 		BearerIgnoreFile:    &BearerIgnoreFileFlag,
+		DebugFlag:           &DebugFlag,
+		LogLevelFlag:        &LogLevelFlag,
 		DebugProfile:        &DebugProfileFlag,
 	}
 }
@@ -105,6 +131,8 @@ func (f *GeneralFlagGroup) Flags() []*Flag {
 		f.DisableVersionCheck,
 		f.NoColor,
 		f.BearerIgnoreFile,
+		f.DebugFlag,
+		f.LogLevelFlag,
 		f.DebugProfile,
 	}
 }
@@ -127,12 +155,20 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		}
 	}
 
+	debug := getBool(f.DebugFlag)
+	logLevel := getString(f.LogLevelFlag)
+	if debug {
+		logLevel = DebugLogLevel
+	}
+
 	return GeneralOptions{
 		Client:              client,
 		ConfigFile:          getString(f.ConfigFile),
 		DisableVersionCheck: getBool(f.DisableVersionCheck),
 		NoColor:             getBool(f.NoColor),
 		BearerIgnoreFile:    getString(f.BearerIgnoreFile),
+		Debug:               debug,
+		LogLevel:            logLevel,
 		DebugProfile:        getBool(f.DebugProfile),
 	}
 }

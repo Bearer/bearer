@@ -11,6 +11,9 @@ options:
     - name: config-file
       default_value: bearer.yml
       usage: Load configuration from the specified path.
+    - name: debug
+      default_value: "false"
+      usage: Enable debug logs. Equivalent to --log-level=debug
     - name: debug-profile
       default_value: "false"
       usage: Generate profiling data for debugging
@@ -27,6 +30,9 @@ options:
     - name: host
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
+    - name: log-level
+      default_value: info
+      usage: Set log level (error, info, debug, trace)
     - name: no-color
       default_value: "false"
       usage: Disable color in output
