@@ -33,7 +33,7 @@ type Worker struct {
 }
 
 func (worker *Worker) Setup(config config.Config) error {
-	worker.debug = config.Scan.Debug
+	worker.debug = config.Debug
 	worker.scanners = config.Scan.Scanner
 
 	if slices.Contains(worker.scanners, "sast") {

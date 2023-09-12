@@ -17,11 +17,6 @@ const (
 
 	ScannerSAST    = "sast"
 	ScannerSecrets = "secrets"
-
-	ErrorLogLevel = "error"
-	InfoLogLevel  = "info"
-	DebugLogLevel = "debug"
-	TraceLogLevel = "trace"
 )
 
 var (
@@ -35,19 +30,6 @@ var (
 		ConfigName: "scan.skip-path",
 		Value:      []string{},
 		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql",
-	}
-	DebugFlag = Flag{
-		Name:            "debug",
-		ConfigName:      "scan.debug",
-		Value:           false,
-		Usage:           "Enable debug logs. Equivalent to --log-level=debug",
-		DisableInConfig: true,
-	}
-	LogLevelFlag = Flag{
-		Name:       "log-level",
-		ConfigName: "scan.log-level",
-		Value:      "info",
-		Usage:      "Set log level (error, info, debug, trace)",
 	}
 	DisableDomainResolutionFlag = Flag{
 		Name:       "disable-domain-resolution",
@@ -120,8 +102,6 @@ var (
 type ScanFlagGroup struct {
 	ScannerFlag                 *Flag
 	SkipPathFlag                *Flag
-	DebugFlag                   *Flag
-	LogLevelFlag                *Flag
 	DisableDomainResolutionFlag *Flag
 	DomainResolutionTimeoutFlag *Flag
 	InternalDomainsFlag         *Flag
@@ -137,8 +117,6 @@ type ScanFlagGroup struct {
 type ScanOptions struct {
 	Target                  string        `mapstructure:"target" json:"target" yaml:"target"`
 	SkipPath                []string      `mapstructure:"skip-path" json:"skip-path" yaml:"skip-path"`
-	Debug                   bool          `mapstructure:"debug" json:"debug" yaml:"debug"`
-	LogLevel                string        `mapstructure:"log-level" json:"log-level" yaml:"log-level"`
 	DisableDomainResolution bool          `mapstructure:"disable-domain-resolution" json:"disable-domain-resolution" yaml:"disable-domain-resolution"`
 	DomainResolutionTimeout time.Duration `mapstructure:"domain-resolution-timeout" json:"domain-resolution-timeout" yaml:"domain-resolution-timeout"`
 	InternalDomains         []string      `mapstructure:"internal-domains" json:"internal-domains" yaml:"internal-domains"`
@@ -157,8 +135,6 @@ type ScanOptions struct {
 func NewScanFlagGroup() *ScanFlagGroup {
 	return &ScanFlagGroup{
 		SkipPathFlag:                &SkipPathFlag,
-		DebugFlag:                   &DebugFlag,
-		LogLevelFlag:                &LogLevelFlag,
 		DisableDomainResolutionFlag: &DisableDomainResolutionFlag,
 		DomainResolutionTimeoutFlag: &DomainResolutionTimeoutFlag,
 		InternalDomainsFlag:         &InternalDomainsFlag,
@@ -180,8 +156,6 @@ func (f *ScanFlagGroup) Name() string {
 func (f *ScanFlagGroup) Flags() []*Flag {
 	return []*Flag{
 		f.SkipPathFlag,
-		f.DebugFlag,
-		f.LogLevelFlag,
 		f.DisableDomainResolutionFlag,
 		f.DomainResolutionTimeoutFlag,
 		f.InternalDomainsFlag,
@@ -219,16 +193,8 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		}
 	}
 
-	debug := getBool(f.DebugFlag)
-	logLevel := getString(f.LogLevelFlag)
-	if debug {
-		logLevel = DebugLogLevel
-	}
-
 	return ScanOptions{
 		SkipPath:                getStringSlice(f.SkipPathFlag),
-		Debug:                   debug,
-		LogLevel:                logLevel,
 		DisableDomainResolution: getBool(f.DisableDomainResolutionFlag),
 		DomainResolutionTimeout: getDuration(f.DomainResolutionTimeoutFlag),
 		InternalDomains:         getStringSlice(f.InternalDomainsFlag),

@@ -24,14 +24,12 @@ Rule Flags
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
       --data-subject-mapping string          Override default data subject mapping by providing a path to a custom mapping JSON file
-      --debug                                Enable debug logs. Equivalent to --log-level=debug
       --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default true)
       --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s (default 3s)
       --exit-code int                        Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan. (default -1)
       --external-rule-dir strings            Specify directories paths that contain .yaml files with external rules configuration
       --force                                Disable the cache and runs the detections again
       --internal-domains strings             Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
-      --log-level string                     Set log level (error, info, debug, trace) (default "info")
       --parallel int                         Specify the amount of parallelism to use during the scan
       --quiet                                Suppress non-essential messages
       --scanner strings                      Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast (default [sast])
@@ -40,7 +38,9 @@ Scan Flags
 General Flags
       --bearer-ignore-file string   Load bearer.ignore file from the specified path. (default "bearer.ignore")
       --config-file string          Load configuration from the specified path. (default "bearer.yml")
+      --debug                       Enable debug logs. Equivalent to --log-level=debug
       --disable-version-check       Disable Bearer version checking
+      --log-level string            Set log level (error, info, debug, trace) (default "info")
       --no-color                    Disable color in output
 
 

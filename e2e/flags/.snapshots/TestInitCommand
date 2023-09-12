@@ -1,4 +1,5 @@
 disable-version-check: false
+log-level: info
 report:
     format: ""
     no-color: false
@@ -18,7 +19,6 @@ scan:
     external-rule-dir: []
     force: false
     internal-domains: []
-    log-level: info
     parallel: 0
     quiet: false
     scanner:

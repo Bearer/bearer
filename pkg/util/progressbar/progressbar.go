@@ -7,7 +7,7 @@ import (
 )
 
 func GetProgressBar(filesLength int, config settings.Config, display_type string) *progressbar.ProgressBar {
-	hideProgress := config.Scan.Quiet || config.Scan.Debug
+	hideProgress := config.Scan.Quiet || config.Debug
 	return progressbar.NewOptions(filesLength,
 		progressbar.OptionSetVisibility(!hideProgress),
 		progressbar.OptionSetWriter(output.ErrorWriter()),

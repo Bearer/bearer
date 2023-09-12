@@ -56,6 +56,8 @@ type Config struct {
 	CacheUsed           bool                                 `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
 	BearerRulesVersion  string                               `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
 	NoColor             bool                                 `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	Debug               bool                                 `mapstructure:"debug" json:"debug" yaml:"debug"`
+	LogLevel            string                               `mapstructure:"string" json:"string" yaml:"string"`
 	DebugProfile        bool                                 `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
 }
 
@@ -334,6 +336,8 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		IgnoredFingerprints: ignoredFingerprints,
 		NoColor:             opts.GeneralOptions.NoColor || opts.ReportOptions.Output != "",
 		DebugProfile:        opts.GeneralOptions.DebugProfile,
+		Debug:               opts.GeneralOptions.Debug,
+		LogLevel:            opts.GeneralOptions.LogLevel,
 		Policies:            policies,
 		Rules:               result.Rules,
 		BuiltInRules:        result.BuiltInRules,
