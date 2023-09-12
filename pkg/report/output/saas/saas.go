@@ -16,6 +16,7 @@ import (
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	saas "github.com/bearer/bearer/pkg/report/output/saas/types"
+	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/file"
 	util "github.com/bearer/bearer/pkg/util/output"
@@ -35,28 +36,35 @@ func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta 
 		}
 	}
 
-	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
-	for _, severity := range maps.Keys(reportData.FindingsBySeverity) {
-		for _, finding := range reportData.FindingsBySeverity[severity] {
-			saasFindingsBySeverity[severity] = append(
-				saasFindingsBySeverity[severity],
-				saas.SaasFinding{
-					Finding:      finding,
-					SeverityMeta: finding.SeverityMeta,
-				})
-		}
-	}
+	saasFindingsBySeverity := translateFindingsBySeverity(reportData.FindingsBySeverity)
+	saasIgnoredFindingsBySeverity := translateFindingsBySeverity(reportData.IgnoredFindingsBySeverity)
 
 	reportData.SaasReport = &saas.BearerReport{
-		Meta:       *meta,
-		Findings:   saasFindingsBySeverity,
-		DataTypes:  reportData.Dataflow.Datatypes,
-		Components: reportData.Dataflow.Components,
-		Errors:     reportData.Dataflow.Errors,
-		Files:      getDiscoveredFiles(config, reportData.Files),
+		Meta:            *meta,
+		Findings:        saasFindingsBySeverity,
+		IgnoredFindings: saasIgnoredFindingsBySeverity,
+		DataTypes:       reportData.Dataflow.Datatypes,
+		Components:      reportData.Dataflow.Components,
+		Errors:          reportData.Dataflow.Errors,
+		Files:           getDiscoveredFiles(config, reportData.Files),
 	}
 
 	return nil
+}
+
+func GetVCSInfo(target string) (*vcsurl.VCS, error) {
+	gitRemote, err := getRemote(target)
+	if err != nil {
+		return nil, err
+	}
+
+	info, err := vcsurl.Parse(*gitRemote)
+	if err != nil {
+		log.Debug().Msgf("couldn't parse origin url %s", err)
+		return nil, err
+	}
+
+	return info, nil
 }
 
 func SendReport(config settings.Config, reportData *types.ReportData) {
@@ -82,6 +90,21 @@ func SendReport(config settings.Config, reportData *types.ReportData) {
 		config.Client.Error = pointer.String("Report upload failed.")
 		log.Debug().Msgf("error sending report to Bearer cloud: %s", err)
 	}
+}
+
+func translateFindingsBySeverity[F securitytypes.GenericFinding](someFindingsBySeverity map[string][]F) map[string][]saas.SaasFinding {
+	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
+	for _, severity := range maps.Keys(someFindingsBySeverity) {
+		for _, someFinding := range someFindingsBySeverity[severity] {
+			finding := someFinding.GetFinding()
+			saasFindingsBySeverity[severity] = append(saasFindingsBySeverity[severity], saas.SaasFinding{
+				Finding:      finding,
+				SeverityMeta: finding.SeverityMeta,
+				IgnoreMeta:   someFinding.GetIgnoreMeta(),
+			})
+		}
+	}
+	return saasFindingsBySeverity
 }
 
 func sendReportToBearer(client *api.API, meta *saas.Meta, filename *string) error {
@@ -159,14 +182,8 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 		return nil, err
 	}
 
-	gitRemote, err := getRemote(config.Scan.Target)
+	info, err := GetVCSInfo(config.Scan.Target)
 	if err != nil {
-		return nil, err
-	}
-
-	info, err := vcsurl.Parse(*gitRemote)
-	if err != nil {
-		log.Debug().Msgf("couldn't parse origin url %s", err)
 		return nil, err
 	}
 

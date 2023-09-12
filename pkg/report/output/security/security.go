@@ -13,7 +13,6 @@ import (
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
 	"github.com/rodaine/table"
-	log "github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 	"github.com/ssoroka/slice"
 
@@ -22,7 +21,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	globaltypes "github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/bearer/bearer/pkg/util/ignore"
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/bearer/bearer/pkg/util/maputil"
 	"github.com/bearer/bearer/pkg/util/output"
 	bearerprogressbar "github.com/bearer/bearer/pkg/util/progressbar"
@@ -51,6 +50,7 @@ var orderedSeverityLevels = []string{
 }
 
 type Findings = map[string][]types.Finding
+type IgnoredFindings = map[string][]types.IgnoredFinding
 
 type Input struct {
 	RuleId         string                `json:"rule_id" yaml:"rule_id"`
@@ -84,15 +84,16 @@ func AddReportData(
 ) error {
 	dataflow := reportData.Dataflow
 	summaryFindings := make(Findings)
+	ignoredSummaryFindings := make(IgnoredFindings)
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
 
-	builtInFingerprints, err := evaluateRules(summaryFindings, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
+	builtInFingerprints, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
 	if err != nil {
 		return err
 	}
-	fingerprints, err := evaluateRules(summaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
+	fingerprints, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
 		return err
 	}
@@ -100,8 +101,10 @@ func AddReportData(
 	if !config.Scan.Quiet {
 		fingerprintOutput(
 			append(fingerprints, builtInFingerprints...),
+			config.CloudIgnoresUsed,
 			config.Report.ExcludeFingerprint,
 			config.IgnoredFingerprints,
+			config.StaleIgnoredFingerprintIds,
 			config.Scan.DiffBaseBranch != "",
 		)
 	}
@@ -115,12 +118,14 @@ func AddReportData(
 	}
 
 	reportData.FindingsBySeverity = summaryFindings
+	reportData.IgnoredFindingsBySeverity = ignoredSummaryFindings
 	reportData.ReportFailed = reportFailed
 	return nil
 }
 
 func evaluateRules(
 	summaryFindings Findings,
+	ignoredSummaryFindings IgnoredFindings,
 	rules map[string]*settings.Rule,
 	config settings.Config,
 	dataflow *outputtypes.DataFlow,
@@ -128,6 +133,7 @@ func evaluateRules(
 	builtIn bool,
 ) ([]string, error) {
 	outputFindings := map[string][]types.Finding{}
+	ignoredOutputFindings := map[string][]types.IgnoredFinding{}
 
 	var bar *progressbar.ProgressBar
 	if !builtIn {
@@ -197,21 +203,9 @@ func evaluateRules(
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceCount[output.Filename])
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
+
 				instanceCount[output.Filename]++
 				fingerprints = append(fingerprints, fingerprint)
-				if _, ok := config.IgnoredFingerprints[fingerprint]; ok {
-					// skip finding - fingerprint is in bearer.ignore file
-					log.Debug().Msgf("Ignoring finding with fingerprint %s", fingerprint)
-					continue
-				}
-				// legacy exclude fingerprint functionality
-				if config.Report.ExcludeFingerprint[fingerprint] {
-					// skip finding - fingerprint is in exclude list
-					log.Debug().Msgf("Excluding finding with fingerprint %s", fingerprint)
-					continue
-				}
-				// end legacy exclude fingerprint functionality
-
 				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
 				codeExtract := getExtract(rawCodeExtract)
 
@@ -233,36 +227,69 @@ func evaluateRules(
 					OldFingerprint:   oldFingerprint,
 				}
 
-				severityWeighting := CalculateSeverity(finding.CategoryGroups, rule.GetSeverity(), output.IsLocal != nil && *output.IsLocal)
-				severity := severityWeighting.DisplaySeverity
+				ignoredFingerprint, ignored := config.IgnoredFingerprints[fingerprint]
+				if !ignored && !config.CloudIgnoresUsed {
+					// check for legacy excluded fingerprint
+					ignored = config.Report.ExcludeFingerprint[fingerprint]
+				}
+
+				severityMeta := CalculateSeverity(finding.CategoryGroups, rule.GetSeverity(), output.IsLocal != nil && *output.IsLocal)
+				severity := severityMeta.DisplaySeverity
 
 				if config.Report.Severity[severity] {
-					finding.SeverityMeta = severityWeighting
-					outputFindings[severity] = append(outputFindings[severity], finding)
+					finding.SeverityMeta = severityMeta
+					if ignored {
+						ignoredOutputFindings[severity] = append(ignoredOutputFindings[severity], types.IgnoredFinding{Finding: finding, IgnoreMeta: ignoredFingerprint})
+					} else {
+						outputFindings[severity] = append(outputFindings[severity], finding)
+					}
 				}
 			}
 		}
 	}
 
-	outputFindings = removeDuplicates(outputFindings)
-
-	for _, findingsSlice := range outputFindings {
-		sortFindings(findingsSlice)
-	}
-
-	for severity, findingSlice := range outputFindings {
-		summaryFindings[severity] = append(summaryFindings[severity], findingSlice...)
-	}
+	sortFindingsBySeverity(summaryFindings, outputFindings)
+	sortFindingsBySeverity(ignoredSummaryFindings, ignoredOutputFindings)
 
 	return fingerprints, nil
 }
 
+func sortFindingsBySeverity[F types.GenericFinding](findingsBySeverity map[string][]F, outputFindings map[string][]F) {
+	outputFindings = removeDuplicates(outputFindings)
+
+	for severity, findingsSlice := range outputFindings {
+		sortFindings(findingsSlice)
+		findingsBySeverity[severity] = append(findingsBySeverity[severity], findingsSlice...)
+	}
+}
+
 func fingerprintOutput(
 	fingerprints []string,
+	cloudIgnoresUsed bool,
 	legacyExcludedFingerprints map[string]bool,
-	ignoredFingerprints map[string]ignore.IgnoredFingerprint,
+	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint,
+	staleFingerprints []string,
 	diffScan bool,
 ) {
+	if cloudIgnoresUsed {
+		if len(ignoredFingerprints) > 0 || len(staleFingerprints) > 0 {
+			output.StdErrLog("\n=====================================\n")
+			if len(ignoredFingerprints) > 0 {
+				output.StdErrLog(fmt.Sprintf("%d findings have been ignored from Bearer Cloud", len(ignoredFingerprints)))
+			}
+
+			if len(staleFingerprints) > 0 {
+				// bearer.ignore entries that have been e.g. re-opened in the Cloud
+				output.StdErrLog(fmt.Sprintf("%d fingerprints present in your bearer.ignore are stale and have not been applied", len(staleFingerprints)))
+				for _, fingerprintId := range staleFingerprints {
+					output.StdErrLog(fmt.Sprintf("  - %s", fingerprintId))
+					output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your bearer.ignore file, run: bearer ignore remove " + fingerprintId))
+				}
+			}
+			output.StdErrLog("\n=====================================\n")
+		}
+		return
+	}
 	unusedFingerprints, unusedLegacyFingerprints := removeUnusedFingerprints(
 		fingerprints,
 		legacyExcludedFingerprints,
@@ -311,7 +338,7 @@ func fingerprintOutput(
 func removeUnusedFingerprints(
 	detectedFingerprints []string,
 	excludeFingerprints map[string]bool,
-	ignoredFingerprints map[string]ignore.IgnoredFingerprint) ([]string, []string) {
+	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint) ([]string, []string) {
 
 	filteredBearerIgnoreFingerprints := make(map[string]bool)
 	for fingerprint := range ignoredFingerprints {
@@ -692,17 +719,17 @@ func formatSeverity(severity string) string {
 	return severityColorFn(strings.ToUpper(severity + ": "))
 }
 
+type key struct {
+	LineNumber int
+	FileName   string
+	Detector   string
+}
+
 // removeDuplicates removes detections for same detector with same line number by keeping only a single highest severity detection
-func removeDuplicates(data map[string][]types.Finding) map[string][]types.Finding {
-	filteredData := map[string][]types.Finding{}
+func removeDuplicates[F types.GenericFinding](data map[string][]F) map[string][]F {
+	filteredData := map[string][]F{}
 
-	type Key struct {
-		LineNumber int
-		FileName   string
-		Detector   string
-	}
-
-	reportedDetections := set.Set[Key]{}
+	reportedDetections := set.Set[key]{}
 
 	// filter duplicates
 	for _, severity := range orderedSeverityLevels {
@@ -711,14 +738,15 @@ func removeDuplicates(data map[string][]types.Finding) map[string][]types.Findin
 			continue
 		}
 
-		for _, finding := range findingsSlice {
-			key := Key{
+		for _, genericFinding := range findingsSlice {
+			finding := genericFinding.GetFinding()
+			key := key{
 				LineNumber: finding.LineNumber,
 				FileName:   finding.Filename,
 				Detector:   finding.Rule.Id,
 			}
 			if reportedDetections.Add(key) {
-				filteredData[severity] = append(filteredData[severity], finding)
+				filteredData[severity] = append(filteredData[severity], genericFinding)
 			}
 		}
 	}
@@ -726,10 +754,10 @@ func removeDuplicates(data map[string][]types.Finding) map[string][]types.Findin
 	return filteredData
 }
 
-func sortFindings(data []types.Finding) {
+func sortFindings[F types.GenericFinding](data []F) {
 	sort.Slice(data, func(i, j int) bool {
-		vulnerabilityA := data[i]
-		vulnerabilityB := data[j]
+		vulnerabilityA := data[i].GetFinding()
+		vulnerabilityB := data[j].GetFinding()
 
 		if vulnerabilityA.Rule.Id < vulnerabilityB.Rule.Id {
 			return true

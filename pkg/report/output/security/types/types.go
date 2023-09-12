@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/pkg/util/file"
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/fatih/color"
 )
 
@@ -25,6 +26,32 @@ type Finding struct {
 	CodeExtract      string       `json:"code_extract,omitempty" yaml:"code_extract,omitempty"`
 	RawCodeExtract   []file.Line  `json:"-" yaml:"-"`
 	SeverityMeta     SeverityMeta `json:"-" yaml:"-"`
+}
+
+type IgnoredFinding struct {
+	Finding
+	IgnoreMeta ignoretypes.IgnoredFingerprint
+}
+
+type GenericFinding interface {
+	GetFinding() Finding
+	GetIgnoreMeta() *ignoretypes.IgnoredFingerprint
+}
+
+func (f Finding) GetFinding() Finding {
+	return f
+}
+
+func (f Finding) GetIgnoreMeta() *ignoretypes.IgnoredFingerprint {
+	return nil
+}
+
+func (i IgnoredFinding) GetFinding() Finding {
+	return i.Finding
+}
+
+func (i IgnoredFinding) GetIgnoreMeta() *ignoretypes.IgnoredFingerprint {
+	return &i.IgnoreMeta
 }
 
 type DataType struct {

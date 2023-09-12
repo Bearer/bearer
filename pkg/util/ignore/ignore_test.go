@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/pkg/util/ignore"
+	types "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/exp/maps"
 )
@@ -11,7 +12,7 @@ import (
 func TestGetIgnoredFingerprints(t *testing.T) {
 	t.Run("bearer.ignore does not exist", func(t *testing.T) {
 		ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints("some_path.ignore", nil)
-		assert.Equal(t, map[string]ignore.IgnoredFingerprint{}, ignoredFingerprints)
+		assert.Equal(t, map[string]types.IgnoredFingerprint{}, ignoredFingerprints)
 		assert.Equal(t, false, fileExists)
 		assert.Equal(t, nil, err)
 	})
@@ -20,20 +21,20 @@ func TestGetIgnoredFingerprints(t *testing.T) {
 func TestMergeIgnoredFingerprints(t *testing.T) {
 	tests := []struct {
 		Name                 string
-		FingerprintsToIgnore map[string]ignore.IgnoredFingerprint
-		IgnoredFingerprints  map[string]ignore.IgnoredFingerprint
+		FingerprintsToIgnore map[string]types.IgnoredFingerprint
+		IgnoredFingerprints  map[string]types.IgnoredFingerprint
 		Force                bool
 		Want                 []string
 		ShouldSucceed        bool
 	}{
 		{
 			Name: "Happy path - no duplicates",
-			FingerprintsToIgnore: map[string]ignore.IgnoredFingerprint{
+			FingerprintsToIgnore: map[string]types.IgnoredFingerprint{
 				"123": {
 					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
 			},
-			IgnoredFingerprints: map[string]ignore.IgnoredFingerprint{
+			IgnoredFingerprints: map[string]types.IgnoredFingerprint{
 				"456": {
 					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
@@ -44,12 +45,12 @@ func TestMergeIgnoredFingerprints(t *testing.T) {
 		},
 		{
 			Name: "Duplicate entries",
-			FingerprintsToIgnore: map[string]ignore.IgnoredFingerprint{
+			FingerprintsToIgnore: map[string]types.IgnoredFingerprint{
 				"123": {
 					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
 			},
-			IgnoredFingerprints: map[string]ignore.IgnoredFingerprint{
+			IgnoredFingerprints: map[string]types.IgnoredFingerprint{
 				"123": {
 					IgnoredAt: "2023-08-28T09:30:01Z",
 				},
@@ -63,12 +64,12 @@ func TestMergeIgnoredFingerprints(t *testing.T) {
 		},
 		{
 			Name: "Duplicate entries with force flag set",
-			FingerprintsToIgnore: map[string]ignore.IgnoredFingerprint{
+			FingerprintsToIgnore: map[string]types.IgnoredFingerprint{
 				"123": {
 					IgnoredAt: "2",
 				},
 			},
-			IgnoredFingerprints: map[string]ignore.IgnoredFingerprint{
+			IgnoredFingerprints: map[string]types.IgnoredFingerprint{
 				"123": {
 					IgnoredAt: "2",
 				},

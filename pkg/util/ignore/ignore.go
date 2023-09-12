@@ -9,18 +9,14 @@ import (
 	"strings"
 	"time"
 
+	"github.com/bearer/bearer/api"
+	types "github.com/bearer/bearer/pkg/util/ignore/types"
 	pointer "github.com/bearer/bearer/pkg/util/pointers"
 	"github.com/fatih/color"
+	"golang.org/x/exp/maps"
 )
 
-type IgnoredFingerprint struct {
-	Author        *string `json:"author,omitempty"`
-	Comment       *string `json:"comment,omitempty"`
-	FalsePositive bool    `json:"false_positive"`
-	IgnoredAt     string  `json:"ignored_at"`
-}
-
-func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignoredFingerprints map[string]IgnoredFingerprint, fileExists bool, err error) {
+func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignoredFingerprints map[string]types.IgnoredFingerprint, fileExists bool, err error) {
 	if bearerIgnoreFilePath == "" {
 		// nothing to do here
 		return ignoredFingerprints, false, err
@@ -34,9 +30,13 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignore
 		bearerIgnoreFilePath = filepath.Join(targetPath, bearerIgnoreFilePath)
 	}
 
-	info, statErr := os.Stat(bearerIgnoreFilePath)
-	if statErr != nil {
-		return make(map[string]IgnoredFingerprint), false, err
+	info, err := os.Stat(bearerIgnoreFilePath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			// file does not exist : expected scenario
+			err = nil
+		}
+		return make(map[string]types.IgnoredFingerprint), false, err
 	}
 
 	if info.IsDir() {
@@ -53,7 +53,30 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignore
 	return ignoredFingerprints, true, err
 }
 
-func MergeIgnoredFingerprints(fingerprintsToIgnore map[string]IgnoredFingerprint, ignoredFingerprints map[string]IgnoredFingerprint, force bool) error {
+func GetIgnoredFingerprintsFromCloud(
+	client *api.API,
+	fullname string,
+	localIgnores map[string]types.IgnoredFingerprint,
+) (
+	useCloudIgnores bool,
+	ignoredFingerprints map[string]types.IgnoredFingerprint,
+	staleIgnoredFingerprintIds []string,
+	err error,
+) {
+	data, err := client.FetchIgnores(fullname, maps.Keys(localIgnores))
+	if err != nil {
+		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
+	}
+
+	ignoredFingerprints = make(map[string]types.IgnoredFingerprint)
+	for _, fingerprint := range data.Ignores {
+		ignoredFingerprints[fingerprint] = types.IgnoredFingerprint{}
+	}
+
+	return data.ProjectFound, ignoredFingerprints, data.StaleIgnores, nil
+}
+
+func MergeIgnoredFingerprints(fingerprintsToIgnore map[string]types.IgnoredFingerprint, ignoredFingerprints map[string]types.IgnoredFingerprint, force bool) error {
 	for key, value := range fingerprintsToIgnore {
 		if !force {
 			if _, ok := ignoredFingerprints[key]; ok {
@@ -75,7 +98,7 @@ var bold = color.New(color.Bold).SprintFunc()
 var morePrefix = color.HiBlackString("├─ ")
 var lastPrefix = color.HiBlackString("└─ ")
 
-func DisplayIgnoredEntryTextString(fingerprintId string, entry IgnoredFingerprint, noColor bool) string {
+func DisplayIgnoredEntryTextString(fingerprintId string, entry types.IgnoredFingerprint, noColor bool) string {
 	initialColorSetting := color.NoColor
 	if noColor && !initialColorSetting {
 		color.NoColor = true

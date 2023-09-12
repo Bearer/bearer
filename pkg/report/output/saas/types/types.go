@@ -3,6 +3,7 @@ package types
 import (
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
+	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 )
 
 type Meta struct {
@@ -23,16 +24,18 @@ type Meta struct {
 }
 
 type BearerReport struct {
-	Meta       Meta                      `json:"meta" yaml:"meta"`
-	Findings   map[string][]SaasFinding  `json:"findings" yaml:"findings"`
-	DataTypes  []dataflowtypes.Datatype  `json:"data_types" yaml:"data_types"`
-	Components []dataflowtypes.Component `json:"components" yaml:"components"`
-	Errors     []dataflowtypes.Error     `json:"errors" yaml:"errors"`
-	Files      []string                  `json:"files" yaml:"files"`
+	Meta            Meta                      `json:"meta" yaml:"meta"`
+	Findings        map[string][]SaasFinding  `json:"findings" yaml:"findings"`
+	IgnoredFindings map[string][]SaasFinding  `json:"ignored_findings" yaml:"ignored_findings"`
+	DataTypes       []dataflowtypes.Datatype  `json:"data_types" yaml:"data_types"`
+	Components      []dataflowtypes.Component `json:"components" yaml:"components"`
+	Errors          []dataflowtypes.Error     `json:"errors" yaml:"errors"`
+	Files           []string                  `json:"files" yaml:"files"`
 	// Dependencies []dataflowtypes.Dependency    `json:"dependencies" yaml:"dependencies"`
 }
 
 type SaasFinding struct {
 	securitytypes.Finding
-	SeverityMeta securitytypes.SeverityMeta `json:"severity_meta" yaml:"severity_meta"`
+	SeverityMeta securitytypes.SeverityMeta      `json:"severity_meta" yaml:"severity_meta"`
+	IgnoreMeta   *ignoretypes.IgnoredFingerprint `json:"ignore_meta,omitempty" yaml:"ignore_meta,omitempty"`
 }
