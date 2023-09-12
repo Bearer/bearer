@@ -15,6 +15,7 @@ import (
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/security"
 	securitytypes "github.com/bearer/bearer/pkg/report/output/security/types"
+	"github.com/bearer/bearer/pkg/report/output/testhelper"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 )
@@ -33,22 +34,10 @@ func TestBuildReportString(t *testing.T) {
 	// set rule version
 	config.BearerRulesVersion = "TEST"
 
-	// new rules are added
-	customRule := &settings.Rule{
-		Id:          "custom_test_rule",
-		Description: "Its a test!",
-		CWEIDs:      []string{},
-		Type:        "risk",
-		Languages:   []string{"ruby"},
-		Severity:    "low",
-		IsLocal:     false,
-	}
-
-	// limit rules so that test doesn't fail just because
 	config.Rules = map[string]*settings.Rule{
-		"ruby_lang_ssl_verification": config.Rules["ruby_lang_ssl_verification"],
-		"ruby_rails_logger":          config.Rules["ruby_rails_logger"],
-		"custom_test_rule":           customRule,
+		"ruby_lang_ssl_verification": testhelper.RubyLangSSLVerificationRule(),
+		"ruby_rails_logger":          testhelper.RubyRailsLoggerRule(),
+		"custom_test_rule":           testhelper.CustomRule(),
 	}
 
 	if err != nil {
@@ -124,6 +113,11 @@ func TestAddReportData(t *testing.T) {
 		},
 	})
 
+	config.Rules = map[string]*settings.Rule{
+		"ruby_lang_ssl_verification": testhelper.RubyLangSSLVerificationRule(),
+		"ruby_rails_logger":          testhelper.RubyRailsLoggerRule(),
+	}
+
 	if err != nil {
 		t.Fatalf("failed to generate config:%s", err)
 	}
@@ -152,6 +146,10 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 
 	if err != nil {
 		t.Fatalf("failed to generate config:%s", err)
+	}
+
+	config.Rules = map[string]*settings.Rule{
+		"ruby_rails_logger": testhelper.RubyRailsLoggerRule(),
 	}
 
 	data := dummyDataflowData()

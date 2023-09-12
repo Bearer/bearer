@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
+	"github.com/bearer/bearer/pkg/report/output/testhelper"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/version_check"
@@ -17,7 +18,7 @@ import (
 func TestBuildCsvString(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{Report: "privacy"})
 	config.Rules = map[string]*settings.Rule{
-		"ruby_third_parties_sentry": config.Rules["ruby_third_parties_sentry"],
+		"ruby_third_parties_sentry": testhelper.RubyThirdPartiesSentryRule(),
 	}
 
 	if err != nil {
@@ -34,7 +35,7 @@ func TestBuildCsvString(t *testing.T) {
 func TestAddReportData(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{Report: "privacy"})
 	config.Rules = map[string]*settings.Rule{
-		"ruby_third_parties_sentry": config.Rules["ruby_third_parties_sentry"],
+		"ruby_third_parties_sentry": testhelper.RubyThirdPartiesSentryRule(),
 	}
 
 	if err != nil {
