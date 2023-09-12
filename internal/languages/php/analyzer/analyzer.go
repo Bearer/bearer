@@ -47,7 +47,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
-	case "arguments", "binary_expression", "unary_op_expression":
+	case "binary_expression", "unary_op_expression", "argument":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "while_statement", "do_statement", "if_statement": // statements don't have results
 		return visitChildren()
@@ -55,8 +55,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)
 		return visitChildren()
 	default:
+		// analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
-		// return nil
 	}
 }
 

@@ -20,7 +20,7 @@ type objectDetector struct {
 }
 
 func New(querySet *query.Set) types.Detector {
-	// user = <object>
+	// $user = new <object>;
 	assignmentQuery := querySet.Add(`[
 		(assignment_expression left: (variable_name) @name right: (_) @value) @root
 	]`)
@@ -44,8 +44,8 @@ func New(querySet *query.Set) types.Detector {
 			)
 	) @root`)
 
-	// $user->name
-	// $user->name()
+	// $user->name;
+	// $user->name();
 	fieldAccessQuery := querySet.Add(`[
 		(member_access_expression object: (_) @object name: (name) @field) @root
 		(member_call_expression object: (_) @object name: (name) @field) @root

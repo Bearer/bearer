@@ -77,6 +77,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 	case "while_statement", "do_statement", "if_statement": // statements don't have results
 		return visitChildren()
 	default:
+		// analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
 }

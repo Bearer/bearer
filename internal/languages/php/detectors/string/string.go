@@ -27,20 +27,17 @@ func (detector *stringDetector) DetectAt(
 	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
-	// ToDo:
-	case "string_literal":
+	case "string":
 		return []interface{}{common.String{
 			Value:     stringutil.StripQuotes(node.Content()),
 			IsLiteral: true,
 		}}, nil
-	// ToDo:
 	case "binary_expression":
-		if node.Children()[1].Content() == "+" {
+		if node.Children()[1].Content() == "." {
 			return common.ConcatenateChildStrings(node, detectorContext)
 		}
-	// ToDo:
-	case "assignment_expression":
-		if node.Children()[1].Content() == "+=" {
+	case "augmented_assignment_expression":
+		if node.Children()[1].Content() == ".=" {
 			return common.ConcatenateAssignEquals(node, detectorContext)
 		}
 	}

@@ -74,7 +74,7 @@ type Pattern interface {
 	//   call(:verify_mode => OpenSSL::SSL::VERIFY_NONE)
 	NodeTypes(node *tree.Node) []string
 	// LeafContentTypes returns all the leaf node types which should be matched
-	// on their content. eg. strings literals will match their literal values
+	// on their content. eg. strings literals will match their literal values, function names, ...
 	LeafContentTypes() []string
 	// TranslateContent converts the content of a pattern node to a different
 	// type. This is used when NodeTypes returns multiple types for a leaf node.

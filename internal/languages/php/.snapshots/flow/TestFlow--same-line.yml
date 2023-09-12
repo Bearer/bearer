@@ -1,2 +1,70 @@
-{}
+high:
+    - rule:
+        cwe_ids: []
+        id: php_rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 2
+      full_filename: same-line.php
+      filename: same-line.php
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 11
+                end: 22
+      sink:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 23
+        content: error_log($user->name)
+      parent_line_number: 2
+      snippet: error_log($user->name)
+      fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_0
+      old_fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_0
+    - rule:
+        cwe_ids: []
+        id: php_rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 3
+      full_filename: same-line.php
+      filename: same-line.php
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 11
+                end: 24
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 25
+        content: error_log($user->name())
+      parent_line_number: 3
+      snippet: error_log($user->name())
+      fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_1
+      old_fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_1
 

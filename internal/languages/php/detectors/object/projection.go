@@ -18,7 +18,6 @@ func (detector *objectDetector) getProjections(
 
 	if result != nil {
 		objectNode := result["object"]
-
 		objects, err := common.ProjectObject(
 			node,
 			detectorContext,
@@ -37,23 +36,11 @@ func (detector *objectDetector) getProjections(
 	return nil, nil
 }
 
-// ToDo:
 func getObjectName(objectNode *tree.Node) string {
-	// ToDo:
-	// user.name
-	if objectNode.Type() == "identifier" {
+	// $user->name()
+	// $user->name
+	if objectNode.Type() == "variable_name" {
 		return objectNode.Content()
-	}
-
-	// ToDo:
-	// address.city.zip
-	if objectNode.Type() == "field_access" {
-		return objectNode.ChildByFieldName("field").Content()
-	}
-	// ToDo:
-	// address["city"].zip or address["city"]["zip"]
-	if objectNode.Type() == "method_invocation" {
-		return objectNode.ChildByFieldName("name").Content()
 	}
 
 	return ""
