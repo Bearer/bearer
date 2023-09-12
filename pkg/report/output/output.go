@@ -42,18 +42,19 @@ func GetData(
 	}
 
 	// add report-specific items
+	attemptCloudUpload := false
 	switch config.Report.Report {
 	case flag.ReportDataFlow:
 		return data, err
 	case flag.ReportSecurity:
-		data.SendToCloud = true
+		attemptCloudUpload = true
 		err = security.AddReportData(data, config, baseBranchFindings)
 	case flag.ReportSaaS:
 		if err = security.AddReportData(data, config, baseBranchFindings); err != nil {
 			return nil, err
 		}
 
-		data.SendToCloud = true
+		attemptCloudUpload = true
 		err = saas.GetReport(data, config, false)
 	case flag.ReportPrivacy:
 		err = privacy.AddReportData(data, config)
@@ -63,8 +64,9 @@ func GetData(
 		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
-	if data.SendToCloud && config.Client != nil && config.Client.Error == nil {
+	if attemptCloudUpload && config.Client != nil && config.Client.Error == nil {
 		// send SaaS report to Cloud
+		data.SendToCloud = true
 		saas.SendReport(config, data)
 	}
 
