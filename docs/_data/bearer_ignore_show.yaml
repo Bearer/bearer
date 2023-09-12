@@ -7,9 +7,6 @@ options:
       usage: Show all ignored fingerprints.
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.
-    - name: bearer-ignore-file
-      default_value: bearer.ignore
-      usage: Load bearer.ignore file from the specified path.
     - name: config-file
       default_value: bearer.yml
       usage: Load configuration from the specified path.
@@ -29,6 +26,9 @@ options:
     - name: host
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
+    - name: ignore-file
+      default_value: bearer.ignore
+      usage: Load bearer.ignore file from the specified path.
     - name: log-level
       default_value: info
       usage: Set log level (error, info, debug, trace)

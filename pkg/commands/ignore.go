@@ -85,7 +85,7 @@ $ bearer ignore show <fingerprint>`,
 				return cmd.Help()
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.BearerIgnoreFile, nil)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
 				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
 				return nil
@@ -155,7 +155,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				fingerprintId: fingerprintEntry,
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.BearerIgnoreFile, nil)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -204,7 +204,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				cmd.Printf("\nCreating bearer.ignore file...\n")
 			}
 
-			if err := writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.BearerIgnoreFile); err != nil {
+			if err := writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.IgnoreFile); err != nil {
 				return err
 			}
 
@@ -245,7 +245,7 @@ $ bearer ignore remove <fingerprint>`,
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.BearerIgnoreFile, nil)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -262,7 +262,7 @@ $ bearer ignore remove <fingerprint>`,
 			}
 
 			delete(ignoredFingerprints, fingerprintId)
-			if err := writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.BearerIgnoreFile); err != nil {
+			if err := writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.IgnoreFile); err != nil {
 				return err
 			}
 
@@ -306,7 +306,7 @@ $ bearer ignore migrate`,
 			}
 			fingerprintsToMigrate := getIgnoredFingerprintsFromConfig(configFilePath)
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.BearerIgnoreFile, nil)
+			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -329,7 +329,7 @@ $ bearer ignore migrate`,
 				}
 			}
 
-			cmd.Printf("Added %d ignores to:\n\t%s\n", migratedIgnoredCount, options.GeneralOptions.BearerIgnoreFile)
+			cmd.Printf("Added %d ignores to:\n\t%s\n", migratedIgnoredCount, options.GeneralOptions.IgnoreFile)
 
 			if skippedIgnoresToMigrate != "" {
 				cmd.Printf("\nThe following ignores already exist in the bearer.ignore file:\n")
@@ -339,7 +339,7 @@ $ bearer ignore migrate`,
 
 			// either no duplicate entries at this point or --force is true so we can ignore merge error
 			_ = ignore.MergeIgnoredFingerprints(fingerprintsToMigrate, ignoredFingerprints, options.IgnoreMigrateOptions.Force)
-			return writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.BearerIgnoreFile)
+			return writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.IgnoreFile)
 		},
 		SilenceErrors: false,
 		SilenceUsage:  false,

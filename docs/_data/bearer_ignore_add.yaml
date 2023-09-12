@@ -8,9 +8,6 @@ options:
       shorthand: a
       usage: |
         Add author information to this ignored finding. (default output of "git config user.name")
-    - name: bearer-ignore-file
-      default_value: bearer.ignore
-      usage: Load bearer.ignore file from the specified path.
     - name: comment
       usage: Add a comment to this ignored finding.
     - name: config-file
@@ -38,6 +35,9 @@ options:
     - name: host
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
+    - name: ignore-file
+      default_value: bearer.ignore
+      usage: Load bearer.ignore file from the specified path.
     - name: log-level
       default_value: info
       usage: Set log level (error, info, debug, trace)

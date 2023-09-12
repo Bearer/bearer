@@ -53,7 +53,7 @@ type Config struct {
 	CloudIgnoresUsed           bool                                 `mapstructure:"cloud_ignores_used" json:"cloud_ignores_used" yaml:"cloud_ignores_used"`
 	Policies                   map[string]*Policy                   `mapstructure:"policies" json:"policies" yaml:"policies"`
 	Target                     string                               `mapstructure:"target" json:"target" yaml:"target"`
-	BearerIgnoreFile           string                               `mapstructure:"bearer_ignore_file" json:"bearer_ignore_file" yaml:"bearer_ignore_file"`
+	IgnoreFile                 string                               `mapstructure:"ignore_file" json:"ignore_file" yaml:"ignore_file"`
 	Rules                      map[string]*Rule                     `mapstructure:"rules" json:"rules" yaml:"rules"`
 	BuiltInRules               map[string]*Rule                     `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
 	CacheUsed                  bool                                 `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
@@ -326,7 +326,7 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		}
 	}
 
-	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(opts.GeneralOptions.BearerIgnoreFile, &opts.ScanOptions.Target)
+	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(opts.GeneralOptions.IgnoreFile, &opts.ScanOptions.Target)
 	if err != nil {
 		return Config{}, err
 	}
@@ -341,7 +341,7 @@ func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
 		DebugProfile:        opts.GeneralOptions.DebugProfile,
 		Debug:               opts.GeneralOptions.Debug,
 		LogLevel:            opts.GeneralOptions.LogLevel,
-		BearerIgnoreFile:    opts.GeneralOptions.BearerIgnoreFile,
+		IgnoreFile:          opts.GeneralOptions.IgnoreFile,
 		Policies:            policies,
 		Rules:               result.Rules,
 		BuiltInRules:        result.BuiltInRules,

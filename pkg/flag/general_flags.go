@@ -51,9 +51,9 @@ var (
 		Value:      false,
 		Usage:      "Disable color in output",
 	}
-	BearerIgnoreFileFlag = Flag{
-		Name:            "bearer-ignore-file",
-		ConfigName:      "bearer-ignore-file",
+	IgnoreFileFlag = Flag{
+		Name:            "ignore-file",
+		ConfigName:      "ignore-file",
 		Value:           "bearer.ignore",
 		Usage:           "Load bearer.ignore file from the specified path.",
 		DisableInConfig: true,
@@ -83,7 +83,7 @@ var (
 
 type GeneralFlagGroup struct {
 	ConfigFile          *Flag
-	BearerIgnoreFile    *Flag
+	IgnoreFile          *Flag
 	APIKey              *Flag
 	Host                *Flag
 	DisableVersionCheck *Flag
@@ -99,7 +99,7 @@ type GeneralOptions struct {
 	Client              *api.API
 	DisableVersionCheck bool
 	NoColor             bool   `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
-	BearerIgnoreFile    string `mapstructure:"bearer_ignore_file" json:"bearer_ignore_file" yaml:"bearer_ignore_file"`
+	IgnoreFile          string `mapstructure:"ignore_file" json:"ignore_file" yaml:"ignore_file"`
 	Debug               bool   `mapstructure:"debug" json:"debug" yaml:"debug"`
 	LogLevel            string `mapstructure:"log-level" json:"log-level" yaml:"log-level"`
 	DebugProfile        bool
@@ -112,7 +112,7 @@ func NewGeneralFlagGroup() *GeneralFlagGroup {
 		Host:                &HostFlag,
 		DisableVersionCheck: &DisableVersionCheckFlag,
 		NoColor:             &NoColorFlag,
-		BearerIgnoreFile:    &BearerIgnoreFileFlag,
+		IgnoreFile:          &IgnoreFileFlag,
 		DebugFlag:           &DebugFlag,
 		LogLevelFlag:        &LogLevelFlag,
 		DebugProfile:        &DebugProfileFlag,
@@ -130,7 +130,7 @@ func (f *GeneralFlagGroup) Flags() []*Flag {
 		f.Host,
 		f.DisableVersionCheck,
 		f.NoColor,
-		f.BearerIgnoreFile,
+		f.IgnoreFile,
 		f.DebugFlag,
 		f.LogLevelFlag,
 		f.DebugProfile,
@@ -166,7 +166,7 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		ConfigFile:          getString(f.ConfigFile),
 		DisableVersionCheck: getBool(f.DisableVersionCheck),
 		NoColor:             getBool(f.NoColor),
-		BearerIgnoreFile:    getString(f.BearerIgnoreFile),
+		IgnoreFile:          getString(f.IgnoreFile),
 		Debug:               debug,
 		LogLevel:            logLevel,
 		DebugProfile:        getBool(f.DebugProfile),
