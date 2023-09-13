@@ -112,6 +112,9 @@ func translateFilter(
 			}
 
 			childVariable, err := childVariableShape.Variable(importedVariable.Variable)
+			if err != nil {
+				return nil, err
+			}
 
 			importedVariables[i] = filters.ImportedVariable{
 				ParentVariable: parentVariable,
@@ -153,7 +156,7 @@ func translateFilter(
 	if sourceFilter.StringRegex != nil {
 		return &filters.StringRegex{
 			Variable: variable,
-			Regex:    *&sourceFilter.StringRegex.Regexp,
+			Regex:    sourceFilter.StringRegex.Regexp,
 		}, nil
 	}
 

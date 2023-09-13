@@ -5,7 +5,6 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -117,23 +116,4 @@ func (detector *Detector) DetectAt(
 	}
 
 	return detectionsData, nil
-}
-
-func addVariablesFromFilters(builder *variableshape.Builder, filters []settings.PatternFilter) {
-	for _, filter := range filters {
-		addVariablesFromFilter(builder, filter)
-	}
-}
-
-func addVariablesFromFilter(builder *variableshape.Builder, filter settings.PatternFilter) {
-	for _, importedVariable := range filter.Imports {
-		builder.Add(importedVariable.As)
-	}
-
-	addVariablesFromFilters(builder, filter.Either)
-	addVariablesFromFilters(builder, filter.Filters)
-
-	if filter.Not != nil {
-		addVariablesFromFilter(builder, *filter.Not)
-	}
 }
