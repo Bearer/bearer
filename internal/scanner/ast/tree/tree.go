@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	sitter "github.com/smacker/go-tree-sitter"
+	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 )
 
@@ -165,6 +166,7 @@ func (node *Node) dumpValue() nodeDump {
 	for queryID := range node.queryResults {
 		queries = append(queries, queryID)
 	}
+	slices.Sort(queries)
 
 	contentRange := fmt.Sprintf(
 		"%d:%d - %d:%d",
@@ -198,6 +200,7 @@ func nodeListToID(nodes []*Node) []int {
 		result[i] = node.ID
 	}
 
+	slices.Sort(result)
 	return result
 }
 

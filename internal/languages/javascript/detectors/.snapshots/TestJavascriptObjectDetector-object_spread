@@ -102,8 +102,8 @@ children:
               alias_of:
                 - 20
               queries:
-                - 3
                 - 0
+                - 3
               children:
                 - type: '"{"'
                   id: 19
