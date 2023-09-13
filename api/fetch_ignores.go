@@ -9,7 +9,7 @@ import (
 type CloudIgnoreData struct {
 	ProjectFound             bool                                      `json:"project_found"`
 	Ignores                  []string                                  `json:"ignores"`
-	StaleIgnores             []string                                  `json:"stale_ignores"`
+	StaleIgnores             []string                                  `json:"stale_local_ignores"`
 	CloudIgnoredFingerprints map[string]ignoretypes.IgnoredFingerprint `json:"detailed_cloud_ignores"`
 }
 
