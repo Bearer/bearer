@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
 )
@@ -34,7 +35,7 @@ type ErrorData struct {
 
 func New(config API) *API {
 	return &API{
-		client: &http.Client{},
+		client: &http.Client{Timeout: 10 * time.Second},
 		Token:  config.Token,
 		Host:   config.Host,
 		Error:  nil,

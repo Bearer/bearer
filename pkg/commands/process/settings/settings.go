@@ -15,6 +15,7 @@ import (
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/rego"
+	"github.com/bearer/bearer/pkg/version_check"
 )
 
 var (
@@ -299,13 +300,13 @@ func defaultWorkerOptions() WorkerOptions {
 	}
 }
 
-func FromOptions(opts flag.Options, foundLanguages []string) (Config, error) {
+func FromOptions(opts flag.Options, versionMeta *version_check.VersionMeta) (Config, error) {
 	policies := DefaultPolicies()
 	workerOptions := defaultWorkerOptions()
 	result, err := loadRules(
 		opts.ExternalRuleDir,
 		opts.RuleOptions,
-		foundLanguages,
+		versionMeta,
 		opts.ScanOptions.Force,
 	)
 	if err != nil {

@@ -2,10 +2,36 @@ name: ' version'
 synopsis: Print the version
 usage: ' version [flags]'
 options:
+    - name: api-key
+      usage: Use your Bearer API Key to send the report to Bearer.
+    - name: config-file
+      default_value: bearer.yml
+      usage: Load configuration from the specified path.
+    - name: debug
+      default_value: "false"
+      usage: Enable debug logs. Equivalent to --log-level=debug
+    - name: debug-profile
+      default_value: "false"
+      usage: Generate profiling data for debugging
+    - name: disable-version-check
+      default_value: "false"
+      usage: Disable Bearer version checking
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for version
+    - name: host
+      default_value: my.bearer.sh
+      usage: Specify the Host for sending the report.
+    - name: ignore-file
+      default_value: bearer.ignore
+      usage: Load bearer.ignore file from the specified path.
+    - name: log-level
+      default_value: info
+      usage: Set log level (error, info, debug, trace)
+    - name: no-color
+      default_value: "false"
+      usage: Disable color in output
 see_also:
     - ' - '
 aliases: 
