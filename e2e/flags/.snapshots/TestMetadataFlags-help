@@ -5,7 +5,7 @@
 [0;37m█[0m    [0;37m█[0m [0;37m█▀▀▀▀[0m  [0;37m▄[0;1;30;90m▀▀▀█[0m   [0;1;30;90m█[0m     [0;1;30;90m█▀▀[0;1;34;94m▀▀[0m   [0;1;34;94m█[0m
 [0;37m█▄▄▄▄▀[0m [0;1;30;90m▀█▄▄▀[0m  [0;1;30;90m▀▄▄▀█[0m   [0;1;30;90m█[0m     [0;1;34;94m▀█▄▄▀[0m   [0;1;34;94m█[0m
 
-Discover sensitive data flows and security risks.
+Scan your source code to discover, filter and prioritize security and privacy risks.
 
 Usage: bearer <command> [flags]
 
@@ -17,15 +17,18 @@ Available Commands:
 
 Examples:
 	# Scan local directory or file and output security risks
-	$ bearer scan <path>
+	$ bearer scan <path> --scanner=sast,secrets
 
 	# Scan current directory and output the privacy report to a file
 	$ bearer scan --report privacy --output <output-path> .
 
+	# Scan local directory and output details about the underlying
+	# detections and classifications
+	$ bearer scan . --report dataflow
+
 Learn More:
-	Bearer is a static code analysis tool (SAST) that scans your source code to
-	discover security risks and vulnerabilities that put your sensitive data
-	at risk (PHI, PD, PII).
+	Bearer is a code security tool that scans your source code to
+	identify OWASP/CWE top security risks, privacy impact, and sensitive dataflows
 
 	For more examples, tutorials, and to learn more about the project
 	visit https://docs.bearer.com
