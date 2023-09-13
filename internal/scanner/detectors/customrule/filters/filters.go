@@ -212,6 +212,7 @@ func (filter *Rule) Evaluate(
 	}
 
 	if filter.IsDatatypeRule {
+		log.Trace().Msg("filters.Rule: match (datatype)")
 		return NewResult(NewMatch(patternVariables, detections)), nil
 	}
 
@@ -220,18 +221,16 @@ func (filter *Rule) Evaluate(
 	}
 
 	var matches []Match
-	hasSimpleMatch := false
+	hasPatternVariableMatch := false
+
+	var datatypeDetections []*detectortypes.Detection
 
 	for _, detection := range detections {
 		data, ok := detection.Data.(types.Data)
 		if !ok { // Built-in detector
 			log.Trace().Msg("filters.Rule: match (built-in)")
 
-			if !hasSimpleMatch {
-				hasSimpleMatch = true
-				matches = append(matches, NewMatch(patternVariables, nil))
-			}
-
+			hasPatternVariableMatch = true
 			continue
 		}
 
@@ -253,9 +252,11 @@ func (filter *Rule) Evaluate(
 		if len(filter.ImportedVariables) == 0 {
 			log.Trace().Msg("filters.Rule: match (no imported vars)")
 
-			if !hasSimpleMatch {
-				hasSimpleMatch = true
-				matches = append(matches, NewMatch(patternVariables, nil))
+			hasPatternVariableMatch = true
+			datatypeDetections = append(datatypeDetections, data.Datatypes...)
+
+			for _, detectionMatch := range subResult.matches {
+				datatypeDetections = append(datatypeDetections, detectionMatch.datatypeDetections...)
 			}
 
 			continue
@@ -271,9 +272,18 @@ func (filter *Rule) Evaluate(
 
 		if matched {
 			log.Trace().Msg("filters.Rule: match")
+
+			if len(data.Datatypes) != 0 {
+				hasPatternVariableMatch = true
+				datatypeDetections = append(datatypeDetections, data.Datatypes...)
+			}
 		} else {
 			log.Trace().Msg("filters.Rule: no match (variable mismatch)")
 		}
+	}
+
+	if hasPatternVariableMatch {
+		matches = append(matches, NewMatch(patternVariables, datatypeDetections))
 	}
 
 	return NewResult(matches...), nil

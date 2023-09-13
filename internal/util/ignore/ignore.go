@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -23,13 +24,13 @@ func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignore
 		return ignoredFingerprints, false, err
 	}
 
-	// if target != nil {
-	// 	targetPath := ""
-	// 	if targetPath, err = filepath.Abs(*target); err != nil {
-	// 		return ignoredFingerprints, fileExists, err
-	// 	}
-	// 	bearerIgnoreFilePath = filepath.Join(targetPath, bearerIgnoreFilePath)
-	// }
+	if target != nil {
+		targetPath := ""
+		if targetPath, err = filepath.Abs(*target); err != nil {
+			return ignoredFingerprints, fileExists, err
+		}
+		bearerIgnoreFilePath = filepath.Join(targetPath, bearerIgnoreFilePath)
+	}
 
 	info, err := os.Stat(bearerIgnoreFilePath)
 	if err != nil {

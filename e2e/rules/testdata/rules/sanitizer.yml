@@ -14,7 +14,7 @@ auxiliary:
         filters:
           - variable: DATA_TYPE
             detection: datatype
-            contains: false
+            scope: cursor
   - id: sanitizer_test_sanitizer
     patterns:
       - hash($<!>$<_>)
