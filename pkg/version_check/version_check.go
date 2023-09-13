@@ -4,8 +4,10 @@ import (
 	"context"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
+	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/rs/zerolog/log"
+	"github.com/spf13/viper"
 )
 
 type VersionMeta struct {
@@ -23,39 +25,43 @@ type BinaryVersionMeta struct {
 	Message string
 }
 
-func GetVersionMeta(ctx context.Context, languages []string) (*VersionMeta, error) {
-	meta, err := GetBearerVerionMeta(languages)
+func GetVersionMeta(ctx context.Context, languages []string) (meta *VersionMeta, err error) {
+	meta, err = GetBearerVerionMeta(languages)
 	if err != nil {
 		log.Debug().Msgf("Bearer version API failed: %s", err)
-		log.Debug().Msgf("Falling back to github version check")
 
-		var meta = &VersionMeta{
+		// set default data
+		meta = &VersionMeta{
 			Rules: RuleVersionMeta{
 				Packages: make(map[string]string),
 			},
-		}
-		err := GithubBinaryVersionCheck(ctx, meta)
-
-		if err != nil {
-			return nil, err
+			Binary: BinaryVersionMeta{
+				Latest: true,
+			},
 		}
 
 		if len(languages) != 0 {
 			log.Debug().Msgf("Falling back to github rules downloads - this downloads the latest version of the rules which may not be compatible with old versions")
-			err := GithubLatestRules(ctx, meta, languages)
+			err = GithubLatestRules(ctx, meta, languages)
 			if err != nil {
-				return nil, err
+				return
 			}
 		}
 
-		return meta, nil
+		if checkVersion() {
+			log.Debug().Msgf("Falling back to github version check")
+			err = GithubBinaryVersionCheck(ctx, meta)
+			if err != nil {
+				return
+			}
+		}
 	}
 
-	return meta, nil
+	return
 }
 
 func DisplayBinaryVersionWarning(meta *VersionMeta, Quiet bool) {
-	if !meta.Binary.Latest {
+	if !meta.Binary.Latest && checkVersion() {
 		log.Debug().Msg("Binary version is outdated")
 		if build.Version != "dev" && !Quiet {
 			output.StdErrLog(meta.Binary.Message + "\n")
@@ -65,4 +71,8 @@ func DisplayBinaryVersionWarning(meta *VersionMeta, Quiet bool) {
 	} else {
 		log.Debug().Msg("Binary version is up to date")
 	}
+}
+
+func checkVersion() bool {
+	return !viper.GetBool(flag.DisableVersionCheckFlag.ConfigName)
 }
