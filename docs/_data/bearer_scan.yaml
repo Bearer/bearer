@@ -60,8 +60,7 @@ options:
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
     - name: ignore-file
-      default_value: bearer.ignore
-      usage: Load bearer.ignore file from the specified path.
+      usage: Load ignore file from the specified path.
     - name: internal-domains
       default_value: '[]'
       usage: |
