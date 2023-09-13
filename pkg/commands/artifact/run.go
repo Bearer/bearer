@@ -221,7 +221,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 	staleIgnoredFingerprintIds []string,
 	err error,
 ) {
-	ignoredFingerprints, _, err = ignore.GetIgnoredFingerprints(settings.IgnoreFile, &settings.Target)
+	localIgnoredFingerprints, _, err := ignore.GetIgnoredFingerprints(settings.IgnoreFile, &settings.Target)
 	if err != nil {
 		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
 	}
@@ -243,7 +243,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, nil
 	}
 
-	return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, nil
+	return false, localIgnoredFingerprints, []string{}, nil
 }
 
 // Run performs artifact scanning
