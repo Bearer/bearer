@@ -65,10 +65,11 @@ If a finding is not relevant, you can ignore it automatically from future scans 
 bearer ignore add 4b0883d52334dfd9a4acce2fcf810121_0 \
   --author="Mish Bear" \
   --comment="Ignore this finding"
+  --false-positive
 ```
 
 <br/>
-{% callout "info" %} If you're looking for more options when it comes to managing findings, take a look at <a href="/guides/bearer-cloud">Bearer Cloud</a>. {% endcallout %}
+{% callout "info" %} If you're looking for more options when it comes to managing findings, take a look at <a href="/guides/bearer-cloud">Bearer Cloud</a>. For ignored findings in particular, see <a href="/guides/bearer-cloud/#ignored-findings-in-bearer-cloud">Ignored findings in Bearer Cloud</a>. {% endcallout %}
 
 ## Skip or ignore specific rules
 
