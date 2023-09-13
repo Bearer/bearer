@@ -18,35 +18,21 @@ import (
 	pointer "github.com/bearer/bearer/internal/util/pointers"
 )
 
-func GetIgnoredFingerprints(bearerIgnoreFilePath string, target *string) (ignoredFingerprints map[string]types.IgnoredFingerprint, fileExists bool, err error) {
-	if bearerIgnoreFilePath == "" {
-		// nothing to do here
-		return ignoredFingerprints, false, err
-	}
+const DefaultIgnoreFilepath = "bearer.ignore"
 
-	if target != nil {
-		targetPath := ""
-		if targetPath, err = filepath.Abs(*target); err != nil {
-			return ignoredFingerprints, fileExists, err
-		}
-		bearerIgnoreFilePath = filepath.Join(targetPath, bearerIgnoreFilePath)
-	}
-
-	info, err := os.Stat(bearerIgnoreFilePath)
+func GetIgnoredFingerprints(ignoreFilePath string, target *string) (ignoredFingerprints map[string]types.IgnoredFingerprint, fileExists bool, err error) {
+	ignorePath, err := getIgnoreFilePath(ignoreFilePath, target)
 	if err != nil {
-		if os.IsNotExist(err) {
-			// file does not exist : expected scenario
-			err = nil
+		if ignoreFilePath == "" && os.IsNotExist(err) {
+			// bearer.ignore file does not exist: expected scenario
+			return map[string]types.IgnoredFingerprint{}, false, nil
 		}
-		return make(map[string]types.IgnoredFingerprint), false, err
-	}
 
-	if info.IsDir() {
-		return ignoredFingerprints, false, fmt.Errorf("bearer-ignore-file path %s is a dir not a file", bearerIgnoreFilePath)
+		return ignoredFingerprints, fileExists, err
 	}
 
 	// file exists
-	content, err := os.ReadFile(bearerIgnoreFilePath)
+	content, err := os.ReadFile(ignorePath)
 	if err != nil {
 		return ignoredFingerprints, true, err
 	}
@@ -144,4 +130,61 @@ func GetAuthor() (*string, error) {
 	}
 
 	return pointer.String(strings.TrimSuffix(string(nameBytes), "\n")), nil
+}
+
+func getIgnoreFilePath(ignoreFilePath string, target *string) (string, error) {
+	if ignoreFilePath == "" {
+		// use default ignore file path
+		ignoreFilePath = DefaultIgnoreFilepath
+	}
+
+	_, err := os.Stat(ignoreFilePath)
+	if err == nil || !os.IsNotExist(err) {
+		// either file is found (all good) or we've hit an unexpected error
+		return ignoreFilePath, err
+	}
+
+	// file not found
+
+	// append filepath to target path and try again
+	targetPath, targetErr := targetPath(target)
+	if targetErr != nil {
+		return "", targetErr
+	}
+
+	ignoreFilePath = filepath.Join(targetPath, ignoreFilePath)
+	info, err := os.Stat(ignoreFilePath)
+	if err != nil {
+		return "", err
+	}
+
+	if info.IsDir() {
+		return "", fmt.Errorf("ignore file path %s is a dir not a file", ignoreFilePath)
+	}
+
+	return ignoreFilePath, nil
+}
+
+// returns target directory from target
+func targetPath(target *string) (string, error) {
+	if target == nil {
+		return "", nil
+	}
+
+	targetPath, err := filepath.Abs(*target)
+	if err != nil {
+		return "", err
+	}
+
+	info, err := os.Stat(targetPath)
+	if err != nil {
+		return "", err
+	}
+
+	if info.IsDir() {
+		return targetPath, nil
+	}
+
+	// not a directory
+	return filepath.Dir(targetPath), nil
 }

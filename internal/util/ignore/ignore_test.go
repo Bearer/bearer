@@ -12,11 +12,18 @@ import (
 )
 
 func TestGetIgnoredFingerprints(t *testing.T) {
-	t.Run("bearer.ignore does not exist", func(t *testing.T) {
-		ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints("some_path.ignore", nil)
+	t.Run("Default bearer.ignore does not exist", func(t *testing.T) {
+		ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints("", nil)
 		assert.Equal(t, map[string]types.IgnoredFingerprint{}, ignoredFingerprints)
 		assert.Equal(t, false, fileExists)
 		assert.Equal(t, nil, err)
+	})
+
+	t.Run("Custom ignore file does not exist", func(t *testing.T) {
+		ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints("my-own-ignore-file.ignore", nil)
+		assert.Equal(t, map[string]types.IgnoredFingerprint(nil), ignoredFingerprints)
+		assert.Equal(t, false, fileExists)
+		assert.NotEqual(t, nil, err)
 	})
 }
 

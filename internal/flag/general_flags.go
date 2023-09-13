@@ -54,8 +54,8 @@ var (
 	IgnoreFileFlag = Flag{
 		Name:            "ignore-file",
 		ConfigName:      "ignore-file",
-		Value:           "bearer.ignore",
-		Usage:           "Load bearer.ignore file from the specified path.",
+		Value:           "",
+		Usage:           "Load ignore file from the specified path.",
 		DisableInConfig: true,
 	}
 	DebugFlag = Flag{
