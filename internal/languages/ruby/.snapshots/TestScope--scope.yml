@@ -35,26 +35,26 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-      line_number: 5
+      line_number: 3
       full_filename: scope.rb
       filename: scope.rb
       source:
         location:
-            start: 5
-            end: 5
+            start: 3
+            end: 3
             column:
                 start: 1
-                end: 28
+                end: 36
       sink:
         location:
-            start: 5
-            end: 5
+            start: 3
+            end: 3
             column:
                 start: 1
-                end: 28
-        content: scope_nested(params[:oops])
-      parent_line_number: 5
-      snippet: scope_nested(params[:oops])
+                end: 36
+        content: 'scope_cursor(x ? params[:oops] : y)'
+      parent_line_number: 3
+      snippet: 'scope_cursor(x ? params[:oops] : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_1
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_1
     - rule:
@@ -73,17 +73,17 @@ high:
             end: 6
             column:
                 start: 1
-                end: 36
+                end: 28
       sink:
         location:
             start: 6
             end: 6
             column:
                 start: 1
-                end: 36
-        content: 'scope_nested(x ? params[:oops] : y)'
+                end: 28
+        content: scope_nested(params[:oops])
       parent_line_number: 6
-      snippet: 'scope_nested(x ? params[:oops] : y)'
+      snippet: scope_nested(params[:oops])
       fingerprint: 23e17866f80f43957a84e824da9ce255_2
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_2
     - rule:
@@ -102,19 +102,48 @@ high:
             end: 7
             column:
                 start: 1
-                end: 36
+                end: 32
       sink:
         location:
             start: 7
             end: 7
             column:
                 start: 1
-                end: 36
-        content: 'scope_nested(params[:oops] ? x : y)'
+                end: 32
+        content: scope_nested(params[:oops] + x)
       parent_line_number: 7
-      snippet: 'scope_nested(params[:oops] ? x : y)'
+      snippet: scope_nested(params[:oops] + x)
       fingerprint: 23e17866f80f43957a84e824da9ce255_3
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 8
+      full_filename: scope.rb
+      filename: scope.rb
+      source:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 36
+      sink:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 36
+        content: 'scope_nested(x ? params[:oops] : y)'
+      parent_line_number: 8
+      snippet: 'scope_nested(x ? params[:oops] : y)'
+      fingerprint: 23e17866f80f43957a84e824da9ce255_4
+      old_fingerprint: 23e17866f80f43957a84e824da9ce255_4
     - rule:
         cwe_ids:
             - "42"
@@ -131,19 +160,19 @@ high:
             end: 9
             column:
                 start: 1
-                end: 28
+                end: 36
       sink:
         location:
             start: 9
             end: 9
             column:
                 start: 1
-                end: 28
-        content: scope_result(params[:oops])
+                end: 36
+        content: 'scope_nested(params[:oops] ? x : y)'
       parent_line_number: 9
-      snippet: scope_result(params[:oops])
-      fingerprint: 23e17866f80f43957a84e824da9ce255_4
-      old_fingerprint: 23e17866f80f43957a84e824da9ce255_4
+      snippet: 'scope_nested(params[:oops] ? x : y)'
+      fingerprint: 23e17866f80f43957a84e824da9ce255_5
+      old_fingerprint: 23e17866f80f43957a84e824da9ce255_5
     - rule:
         cwe_ids:
             - "42"
@@ -151,26 +180,84 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-      line_number: 10
+      line_number: 11
       full_filename: scope.rb
       filename: scope.rb
       source:
         location:
-            start: 10
-            end: 10
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 28
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 28
+        content: scope_result(params[:oops])
+      parent_line_number: 11
+      snippet: scope_result(params[:oops])
+      fingerprint: 23e17866f80f43957a84e824da9ce255_6
+      old_fingerprint: 23e17866f80f43957a84e824da9ce255_6
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 12
+      full_filename: scope.rb
+      filename: scope.rb
+      source:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 32
+      sink:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 32
+        content: scope_result(params[:oops] + x)
+      parent_line_number: 12
+      snippet: scope_result(params[:oops] + x)
+      fingerprint: 23e17866f80f43957a84e824da9ce255_7
+      old_fingerprint: 23e17866f80f43957a84e824da9ce255_7
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 13
+      full_filename: scope.rb
+      filename: scope.rb
+      source:
+        location:
+            start: 13
+            end: 13
             column:
                 start: 1
                 end: 36
       sink:
         location:
-            start: 10
-            end: 10
+            start: 13
+            end: 13
             column:
                 start: 1
                 end: 36
         content: 'scope_result(x ? params[:oops] : y)'
-      parent_line_number: 10
+      parent_line_number: 13
       snippet: 'scope_result(x ? params[:oops] : y)'
-      fingerprint: 23e17866f80f43957a84e824da9ce255_5
-      old_fingerprint: 23e17866f80f43957a84e824da9ce255_5
+      fingerprint: 23e17866f80f43957a84e824da9ce255_8
+      old_fingerprint: 23e17866f80f43957a84e824da9ce255_8
 

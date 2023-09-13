@@ -35,26 +35,26 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-      line_number: 5
+      line_number: 3
       full_filename: scope.js
       filename: scope.js
       source:
         location:
-            start: 5
-            end: 5
+            start: 3
+            end: 3
             column:
                 start: 1
-                end: 29
+                end: 37
       sink:
         location:
-            start: 5
-            end: 5
+            start: 3
+            end: 3
             column:
                 start: 1
-                end: 29
-        content: scopeNested(req.params.oops)
-      parent_line_number: 5
-      snippet: scopeNested(req.params.oops)
+                end: 37
+        content: 'scopeCursor(x ? req.params.oops : y)'
+      parent_line_number: 3
+      snippet: 'scopeCursor(x ? req.params.oops : y)'
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_1
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_1
     - rule:
@@ -73,17 +73,17 @@ high:
             end: 6
             column:
                 start: 1
-                end: 37
+                end: 29
       sink:
         location:
             start: 6
             end: 6
             column:
                 start: 1
-                end: 37
-        content: 'scopeNested(x ? req.params.oops : y)'
+                end: 29
+        content: scopeNested(req.params.oops)
       parent_line_number: 6
-      snippet: 'scopeNested(x ? req.params.oops : y)'
+      snippet: scopeNested(req.params.oops)
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_2
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_2
     - rule:
@@ -102,19 +102,48 @@ high:
             end: 7
             column:
                 start: 1
-                end: 37
+                end: 33
       sink:
         location:
             start: 7
             end: 7
             column:
                 start: 1
-                end: 37
-        content: 'scopeNested(req.params.oops ? x : y)'
+                end: 33
+        content: scopeResult(req.params.oops + x)
       parent_line_number: 7
-      snippet: 'scopeNested(req.params.oops ? x : y)'
+      snippet: scopeResult(req.params.oops + x)
       fingerprint: 408407aa362e0520faf6b66c3d59bb8c_3
       old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 8
+      full_filename: scope.js
+      filename: scope.js
+      source:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 37
+      sink:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 37
+        content: 'scopeNested(x ? req.params.oops : y)'
+      parent_line_number: 8
+      snippet: 'scopeNested(x ? req.params.oops : y)'
+      fingerprint: 408407aa362e0520faf6b66c3d59bb8c_4
+      old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_4
     - rule:
         cwe_ids:
             - "42"
@@ -131,19 +160,19 @@ high:
             end: 9
             column:
                 start: 1
-                end: 29
+                end: 37
       sink:
         location:
             start: 9
             end: 9
             column:
                 start: 1
-                end: 29
-        content: scopeResult(req.params.oops)
+                end: 37
+        content: 'scopeNested(req.params.oops ? x : y)'
       parent_line_number: 9
-      snippet: scopeResult(req.params.oops)
-      fingerprint: 408407aa362e0520faf6b66c3d59bb8c_4
-      old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_4
+      snippet: 'scopeNested(req.params.oops ? x : y)'
+      fingerprint: 408407aa362e0520faf6b66c3d59bb8c_5
+      old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_5
     - rule:
         cwe_ids:
             - "42"
@@ -151,26 +180,84 @@ high:
         title: Test detection filter scopes
         description: Test detection filter scopes
         documentation_url: ""
-      line_number: 10
+      line_number: 11
       full_filename: scope.js
       filename: scope.js
       source:
         location:
-            start: 10
-            end: 10
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 29
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 29
+        content: scopeResult(req.params.oops)
+      parent_line_number: 11
+      snippet: scopeResult(req.params.oops)
+      fingerprint: 408407aa362e0520faf6b66c3d59bb8c_6
+      old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_6
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 12
+      full_filename: scope.js
+      filename: scope.js
+      source:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 33
+      sink:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 33
+        content: scopeResult(req.params.oops + x)
+      parent_line_number: 12
+      snippet: scopeResult(req.params.oops + x)
+      fingerprint: 408407aa362e0520faf6b66c3d59bb8c_7
+      old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_7
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 13
+      full_filename: scope.js
+      filename: scope.js
+      source:
+        location:
+            start: 13
+            end: 13
             column:
                 start: 1
                 end: 37
       sink:
         location:
-            start: 10
-            end: 10
+            start: 13
+            end: 13
             column:
                 start: 1
                 end: 37
         content: 'scopeResult(x ? req.params.oops : y)'
-      parent_line_number: 10
+      parent_line_number: 13
       snippet: 'scopeResult(x ? req.params.oops : y)'
-      fingerprint: 408407aa362e0520faf6b66c3d59bb8c_5
-      old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_5
+      fingerprint: 408407aa362e0520faf6b66c3d59bb8c_8
+      old_fingerprint: 408407aa362e0520faf6b66c3d59bb8c_8
 

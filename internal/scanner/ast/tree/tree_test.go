@@ -32,18 +32,3 @@ func TestTree(t *testing.T) {
 
 	cupaloy.SnapshotT(t, tree.RootNode().Dump())
 }
-
-func TestNodeAndDescendentIDs(t *testing.T) {
-	tree := parseTree(t, `
-		a.foo
-		b.bar
-	`)
-
-	children := tree.RootNode().Children()
-
-	cupaloy.SnapshotT(
-		t,
-		children[0].NodeAndDescendentIDs(),
-		children[1].NodeAndDescendentIDs(),
-	)
-}

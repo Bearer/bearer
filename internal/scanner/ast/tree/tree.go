@@ -114,31 +114,6 @@ func (node *Node) ChildByFieldName(name string) *Node {
 	return node.tree.sitterToNode[node.sitterNode.ChildByFieldName(name)]
 }
 
-// FIXME: this is only used by tests
-func (node *Node) NodeAndDescendentIDs() []int {
-	var result []int
-
-	next := []int{node.ID}
-	for {
-		if len(next) == 0 {
-			break
-		}
-
-		result = append(result, next...)
-
-		var newNext []int
-		for _, id := range next {
-			for _, child := range node.tree.nodes[id].children {
-				newNext = append(newNext, child.ID)
-			}
-		}
-
-		next = newNext
-	}
-
-	return result
-}
-
 func (node *Node) DataflowSources() []*Node {
 	return node.dataflowSources
 }

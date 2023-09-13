@@ -1,1 +1,48 @@
-(program (method ("def") (identifier) (method_parameters ("(") (identifier) (")")) (call (identifier) (".") (identifier)) ("end")))
+type: program
+id: 0
+range: 2:3 - 5:2
+children:
+    - type: method
+      id: 1
+      range: 2:3 - 4:6
+      children:
+        - type: '"def"'
+          id: 2
+          range: 2:3 - 2:6
+        - type: identifier
+          id: 3
+          range: 2:7 - 2:8
+          content: m
+        - type: method_parameters
+          id: 4
+          range: 2:8 - 2:11
+          children:
+            - type: '"("'
+              id: 5
+              range: 2:8 - 2:9
+            - type: identifier
+              id: 6
+              range: 2:9 - 2:10
+              content: a
+            - type: '")"'
+              id: 7
+              range: 2:10 - 2:11
+        - type: call
+          id: 8
+          range: 3:4 - 3:9
+          children:
+            - type: identifier
+              id: 9
+              range: 3:4 - 3:5
+              content: a
+            - type: '"."'
+              id: 10
+              range: 3:5 - 3:6
+            - type: identifier
+              id: 11
+              range: 3:6 - 3:9
+              content: foo
+        - type: '"end"'
+          id: 12
+          range: 4:3 - 4:6
+
