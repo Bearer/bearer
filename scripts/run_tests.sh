@@ -2,6 +2,9 @@
 #
 # Run the project test suite
 
+# Ensures environment variables are not going to conflict with tests
+unset ${!BEARER_*}
+
 DEFAULT_TEST_ARGS="-count=1 -v ./..."
 
 do_info() {
