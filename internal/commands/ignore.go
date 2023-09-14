@@ -374,12 +374,12 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 			cmd.Printf("Pulling %d ignores from the Cloud:\n", cloudIgnoresCount)
 			for fingerprintId, fingerprint := range data.CloudIgnoredFingerprints {
 				if fingerprint.Comment == nil {
-					cmd.Printf("\t- %s", fingerprintId)
+					cmd.Printf("\t- %s\n", fingerprintId)
 				} else {
-					cmd.Printf("\t- %s (%s)", fingerprintId, *fingerprint.Comment)
+					cmd.Printf("\t- %s (%s)\n", fingerprintId, *fingerprint.Comment)
 				}
 			}
-			cmd.Printf("\n\n")
+			cmd.Printf("\n")
 
 			if err = writeIgnoreFile(data.CloudIgnoredFingerprints, bearerIgnoreFilePath); err != nil {
 				return fmt.Errorf("error writing to file: %s", err)
