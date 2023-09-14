@@ -50,7 +50,7 @@ func (fileignore *FileIgnore) Ignore(
 			return true
 		}
 		if isMinified(filePath, fileInfo.Size(), goclocResult) {
-			log.Debug().Msgf("skipping file (suspected minified JS): %s %s", projectPath, filePath)
+			log.Debug().Msgf("skipping file (suspected minified JS): %s %s", projectPath, relativePath)
 			return true
 		}
 	}
