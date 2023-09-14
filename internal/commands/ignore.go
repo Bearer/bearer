@@ -480,6 +480,10 @@ func setLogLevel(cmd *cobra.Command) {
 }
 
 func writeIgnoreFile(ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint, bearerIgnoreFilePath string) error {
+	if bearerIgnoreFilePath == "" {
+		bearerIgnoreFilePath = ignore.DefaultIgnoreFilepath
+	}
+
 	data, err := json.MarshalIndent(ignoredFingerprints, "", "  ")
 	if err != nil {
 		// failed to marshall data
