@@ -117,6 +117,10 @@ children:
                     - type: return_statement
                       id: 25
                       range: 7:9 - 7:35
+                      dataflow_sources:
+                        - 26
+                        - 27
+                        - 34
                       children:
                         - type: '"return"'
                           id: 26

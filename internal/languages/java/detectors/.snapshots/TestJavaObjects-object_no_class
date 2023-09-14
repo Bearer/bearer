@@ -7,6 +7,9 @@ children:
     - type: expression_statement
       id: 1
       range: 1:1 - 1:11
+      dataflow_sources:
+        - 2
+        - 6
       children:
         - type: field_access
           id: 2

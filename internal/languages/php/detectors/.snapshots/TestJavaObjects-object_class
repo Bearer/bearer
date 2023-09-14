@@ -1,0 +1,319 @@
+type: program
+id: 0
+range: 1:1 - 10:3
+dataflow_sources:
+    - 1
+    - 2
+    - 47
+children:
+    - type: php_tag
+      id: 1
+      range: 1:1 - 1:6
+      content: <?php
+    - type: class_declaration
+      id: 2
+      range: 2:1 - 9:2
+      dataflow_sources:
+        - 3
+        - 4
+        - 5
+      queries:
+        - 1
+      children:
+        - type: '"class"'
+          id: 3
+          range: 2:1 - 2:6
+        - type: name
+          id: 4
+          range: 2:7 - 2:11
+          content: User
+        - type: declaration_list
+          id: 5
+          range: 3:1 - 9:2
+          children:
+            - type: '"{"'
+              id: 6
+              range: 3:1 - 3:2
+            - type: property_declaration
+              id: 7
+              range: 4:5 - 4:23
+              dataflow_sources:
+                - 8
+                - 10
+                - 19
+              children:
+                - type: visibility_modifier
+                  id: 8
+                  range: 4:5 - 4:11
+                  dataflow_sources:
+                    - 9
+                  children:
+                    - type: '"public"'
+                      id: 9
+                      range: 4:5 - 4:11
+                - type: property_element
+                  id: 10
+                  range: 4:12 - 4:22
+                  dataflow_sources:
+                    - 11
+                    - 14
+                  children:
+                    - type: variable_name
+                      id: 11
+                      range: 4:12 - 4:17
+                      dataflow_sources:
+                        - 12
+                        - 13
+                      children:
+                        - type: '"$"'
+                          id: 12
+                          range: 4:12 - 4:13
+                        - type: name
+                          id: 13
+                          range: 4:13 - 4:17
+                          content: name
+                    - type: property_initializer
+                      id: 14
+                      range: 4:18 - 4:22
+                      dataflow_sources:
+                        - 15
+                        - 16
+                      children:
+                        - type: '"="'
+                          id: 15
+                          range: 4:18 - 4:19
+                        - type: string
+                          id: 16
+                          range: 4:20 - 4:22
+                          dataflow_sources:
+                            - 17
+                            - 18
+                          children:
+                            - type: '"''"'
+                              id: 17
+                              range: 4:20 - 4:21
+                            - type: '"''"'
+                              id: 18
+                              range: 4:21 - 4:22
+                - type: '";"'
+                  id: 19
+                  range: 4:22 - 4:23
+            - type: method_declaration
+              id: 20
+              range: 6:5 - 8:6
+              children:
+                - type: visibility_modifier
+                  id: 21
+                  range: 6:5 - 6:11
+                  dataflow_sources:
+                    - 22
+                  children:
+                    - type: '"public"'
+                      id: 22
+                      range: 6:5 - 6:11
+                - type: '"function"'
+                  id: 23
+                  range: 6:12 - 6:20
+                - type: name
+                  id: 24
+                  range: 6:21 - 6:34
+                  content: LowercaseName
+                - type: formal_parameters
+                  id: 25
+                  range: 6:34 - 6:36
+                  dataflow_sources:
+                    - 26
+                    - 27
+                  children:
+                    - type: '"("'
+                      id: 26
+                      range: 6:34 - 6:35
+                    - type: '")"'
+                      id: 27
+                      range: 6:35 - 6:36
+                - type: compound_statement
+                  id: 28
+                  range: 6:37 - 8:6
+                  dataflow_sources:
+                    - 29
+                    - 30
+                    - 45
+                  children:
+                    - type: '"{"'
+                      id: 29
+                      range: 6:37 - 6:38
+                    - type: echo_statement
+                      id: 30
+                      range: 7:9 - 7:38
+                      dataflow_sources:
+                        - 31
+                        - 32
+                        - 44
+                      children:
+                        - type: '"echo"'
+                          id: 31
+                          range: 7:9 - 7:13
+                        - type: function_call_expression
+                          id: 32
+                          range: 7:14 - 7:37
+                          dataflow_sources:
+                            - 34
+                          children:
+                            - type: name
+                              id: 33
+                              range: 7:14 - 7:24
+                              content: strtolower
+                            - type: arguments
+                              id: 34
+                              range: 7:24 - 7:37
+                              dataflow_sources:
+                                - 35
+                                - 36
+                                - 43
+                              children:
+                                - type: '"("'
+                                  id: 35
+                                  range: 7:24 - 7:25
+                                - type: argument
+                                  id: 36
+                                  range: 7:25 - 7:36
+                                  dataflow_sources:
+                                    - 37
+                                  children:
+                                    - type: member_access_expression
+                                      id: 37
+                                      range: 7:25 - 7:36
+                                      queries:
+                                        - 2
+                                      children:
+                                        - type: variable_name
+                                          id: 38
+                                          range: 7:25 - 7:30
+                                          dataflow_sources:
+                                            - 39
+                                            - 40
+                                          children:
+                                            - type: '"$"'
+                                              id: 39
+                                              range: 7:25 - 7:26
+                                            - type: name
+                                              id: 40
+                                              range: 7:26 - 7:30
+                                              content: this
+                                        - type: '"->"'
+                                          id: 41
+                                          range: 7:30 - 7:32
+                                        - type: name
+                                          id: 42
+                                          range: 7:32 - 7:36
+                                          content: name
+                                - type: '")"'
+                                  id: 43
+                                  range: 7:36 - 7:37
+                        - type: '";"'
+                          id: 44
+                          range: 7:37 - 7:38
+                    - type: '"}"'
+                      id: 45
+                      range: 8:5 - 8:6
+            - type: '"}"'
+              id: 46
+              range: 9:1 - 9:2
+    - type: text_interpolation
+      id: 47
+      range: 10:1 - 10:3
+      dataflow_sources:
+        - 48
+      children:
+        - type: '"?>"'
+          id: 48
+          range: 10:1 - 10:3
+
+- node: 2
+  content: |-
+    class User
+    {
+        public $name = '';
+
+        public function LowercaseName() {
+            echo strtolower($this->name);
+        }
+    }
+  data:
+    properties:
+        - name: User
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 2
+                typeid: 2
+                contentstart:
+                    byte: 6
+                    line: 2
+                    column: 1
+                contentend:
+                    byte: 126
+                    line: 9
+                    column: 2
+                executingdetectors: []
+            data:
+                properties:
+                    - name: $name
+                      node:
+                        id: 11
+                        typeid: 11
+                        contentstart:
+                            byte: 30
+                            line: 4
+                            column: 12
+                        contentend:
+                            byte: 35
+                            line: 4
+                            column: 17
+                        executingdetectors: []
+                      object: null
+                    - name: LowercaseName
+                      node:
+                        id: 24
+                        typeid: 4
+                        contentstart:
+                            byte: 63
+                            line: 6
+                            column: 21
+                        contentend:
+                            byte: 76
+                            line: 6
+                            column: 34
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 37
+  content: $this->name
+  data:
+    properties:
+        - name: $this
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 37
+                typeid: 29
+                contentstart:
+                    byte: 105
+                    line: 7
+                    column: 25
+                contentend:
+                    byte: 116
+                    line: 7
+                    column: 36
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+

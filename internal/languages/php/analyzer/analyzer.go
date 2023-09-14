@@ -55,7 +55,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)
 		return visitChildren()
 	default:
-		// analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
+		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
 }
