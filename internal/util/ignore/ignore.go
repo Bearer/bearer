@@ -21,9 +21,9 @@ import (
 const DefaultIgnoreFilepath = "bearer.ignore"
 
 func GetIgnoredFingerprints(ignoreFilePath string, target *string) (ignoredFingerprints map[string]types.IgnoredFingerprint, fileExists bool, err error) {
-	ignorePath, err := getIgnoreFilePath(ignoreFilePath, target)
+	ignorePath, isDefaultPath, fileExists, err := getIgnoreFilePath(ignoreFilePath, target)
 	if err != nil {
-		if ignoreFilePath == "" && os.IsNotExist(err) {
+		if isDefaultPath && !fileExists {
 			// bearer.ignore file does not exist: expected scenario
 			return map[string]types.IgnoredFingerprint{}, false, nil
 		}
@@ -132,37 +132,50 @@ func GetAuthor() (*string, error) {
 	return pointer.String(strings.TrimSuffix(string(nameBytes), "\n")), nil
 }
 
-func getIgnoreFilePath(ignoreFilePath string, target *string) (string, error) {
+func getIgnoreFilePath(ignoreFilePath string, target *string) (
+	ignorePath string,
+	isDefaultPath bool,
+	fileExists bool,
+	err error,
+) {
 	if ignoreFilePath == "" {
 		// use default ignore file path
+		isDefaultPath = true
 		ignoreFilePath = DefaultIgnoreFilepath
 	}
 
-	_, err := os.Stat(ignoreFilePath)
-	if err == nil || !os.IsNotExist(err) {
-		// either file is found (all good) or we've hit an unexpected error
-		return ignoreFilePath, err
+	_, err = os.Stat(ignoreFilePath)
+	if err == nil {
+		// file is found (all good)
+		return ignoreFilePath, isDefaultPath, true, err
+	}
+	fileNotFoundErr := os.IsNotExist(err)
+	if !isDefaultPath || !fileNotFoundErr {
+		// custom ignore file is not found (fail early)
+		// or unexpected error has occurred
+		return ignoreFilePath, isDefaultPath, fileExists, err
 	}
 
 	// file not found
+	fileExists = false
 
-	// append filepath to target path and try again
+	// append default path to target path and try again
 	targetPath, targetErr := targetPath(target)
 	if targetErr != nil {
-		return "", targetErr
+		return "", isDefaultPath, fileExists, targetErr
 	}
 
 	ignoreFilePath = filepath.Join(targetPath, ignoreFilePath)
 	info, err := os.Stat(ignoreFilePath)
 	if err != nil {
-		return "", err
+		return "", isDefaultPath, fileExists, err
 	}
 
 	if info.IsDir() {
-		return "", fmt.Errorf("ignore file path %s is a dir not a file", ignoreFilePath)
+		return "", isDefaultPath, fileExists, fmt.Errorf("ignore file path %s is a dir not a file", ignoreFilePath)
 	}
 
-	return ignoreFilePath, nil
+	return ignoreFilePath, isDefaultPath, fileExists, nil
 }
 
 // returns target directory from target
