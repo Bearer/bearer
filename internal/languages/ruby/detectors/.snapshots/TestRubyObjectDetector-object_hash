@@ -1,0 +1,775 @@
+type: program
+id: 0
+range: 1:1 - 10:1
+dataflow_sources:
+    - 1
+    - 25
+children:
+    - type: assignment
+      id: 1
+      range: 1:1 - 4:2
+      alias_of:
+        - 4
+      queries:
+        - 2
+      children:
+        - type: identifier
+          id: 2
+          range: 1:1 - 1:7
+          content: nested
+        - type: '"="'
+          id: 3
+          range: 1:8 - 1:9
+        - type: hash
+          id: 4
+          range: 1:10 - 4:2
+          dataflow_sources:
+            - 5
+            - 6
+            - 13
+            - 14
+            - 24
+          queries:
+            - 0
+          children:
+            - type: '"{"'
+              id: 5
+              range: 1:10 - 1:11
+            - type: pair
+              id: 6
+              range: 2:3 - 2:14
+              dataflow_sources:
+                - 7
+                - 11
+                - 12
+              children:
+                - type: string
+                  id: 7
+                  range: 2:3 - 2:8
+                  dataflow_sources:
+                    - 8
+                    - 9
+                    - 10
+                  children:
+                    - type: '"""'
+                      id: 8
+                      range: 2:3 - 2:4
+                    - type: string_content
+                      id: 9
+                      range: 2:4 - 2:7
+                      content: one
+                    - type: '"""'
+                      id: 10
+                      range: 2:7 - 2:8
+                - type: '"=>"'
+                  id: 11
+                  range: 2:9 - 2:11
+                - type: integer
+                  id: 12
+                  range: 2:12 - 2:14
+                  content: "42"
+            - type: '","'
+              id: 13
+              range: 2:14 - 2:15
+            - type: pair
+              id: 14
+              range: 3:3 - 3:16
+              dataflow_sources:
+                - 15
+                - 19
+                - 20
+              children:
+                - type: string
+                  id: 15
+                  range: 3:3 - 3:8
+                  dataflow_sources:
+                    - 16
+                    - 17
+                    - 18
+                  children:
+                    - type: '"""'
+                      id: 16
+                      range: 3:3 - 3:4
+                    - type: string_content
+                      id: 17
+                      range: 3:4 - 3:7
+                      content: two
+                    - type: '"""'
+                      id: 18
+                      range: 3:7 - 3:8
+                - type: '"=>"'
+                  id: 19
+                  range: 3:9 - 3:11
+                - type: string
+                  id: 20
+                  range: 3:12 - 3:16
+                  dataflow_sources:
+                    - 21
+                    - 22
+                    - 23
+                  children:
+                    - type: '"""'
+                      id: 21
+                      range: 3:12 - 3:13
+                    - type: string_content
+                      id: 22
+                      range: 3:13 - 3:15
+                      content: hi
+                    - type: '"""'
+                      id: 23
+                      range: 3:15 - 3:16
+            - type: '"}"'
+              id: 24
+              range: 4:1 - 4:2
+    - type: call
+      id: 25
+      range: 6:1 - 9:3
+      dataflow_sources:
+        - 27
+      children:
+        - type: identifier
+          id: 26
+          range: 6:1 - 6:5
+          content: call
+        - type: argument_list
+          id: 27
+          range: 6:5 - 9:3
+          dataflow_sources:
+            - 28
+            - 29
+            - 53
+          children:
+            - type: '"("'
+              id: 28
+              range: 6:5 - 6:6
+            - type: hash
+              id: 29
+              range: 6:6 - 9:2
+              dataflow_sources:
+                - 30
+                - 31
+                - 41
+                - 42
+                - 52
+              queries:
+                - 0
+              children:
+                - type: '"{"'
+                  id: 30
+                  range: 6:6 - 6:7
+                - type: pair
+                  id: 31
+                  range: 7:3 - 7:19
+                  dataflow_sources:
+                    - 32
+                    - 33
+                    - 34
+                  children:
+                    - type: hash_key_symbol
+                      id: 32
+                      range: 7:3 - 7:4
+                      content: x
+                    - type: '":"'
+                      id: 33
+                      range: 7:4 - 7:5
+                    - type: hash
+                      id: 34
+                      range: 7:6 - 7:19
+                      dataflow_sources:
+                        - 35
+                        - 36
+                        - 40
+                      queries:
+                        - 0
+                      children:
+                        - type: '"{"'
+                          id: 35
+                          range: 7:6 - 7:7
+                        - type: pair
+                          id: 36
+                          range: 7:8 - 7:17
+                          dataflow_sources:
+                            - 37
+                            - 38
+                            - 39
+                          children:
+                            - type: hash_key_symbol
+                              id: 37
+                              range: 7:8 - 7:9
+                              content: "n"
+                            - type: '":"'
+                              id: 38
+                              range: 7:9 - 7:10
+                            - type: identifier
+                              id: 39
+                              range: 7:11 - 7:17
+                              content: nested
+                              alias_of:
+                                - 1
+                        - type: '"}"'
+                          id: 40
+                          range: 7:18 - 7:19
+                - type: '","'
+                  id: 41
+                  range: 7:19 - 7:20
+                - type: pair
+                  id: 42
+                  range: 8:3 - 8:14
+                  dataflow_sources:
+                    - 43
+                    - 44
+                    - 45
+                  children:
+                    - type: hash_key_symbol
+                      id: 43
+                      range: 8:3 - 8:4
+                      content: "y"
+                    - type: '":"'
+                      id: 44
+                      range: 8:4 - 8:5
+                    - type: hash
+                      id: 45
+                      range: 8:6 - 8:14
+                      dataflow_sources:
+                        - 46
+                        - 47
+                        - 51
+                      queries:
+                        - 0
+                      children:
+                        - type: '"{"'
+                          id: 46
+                          range: 8:6 - 8:7
+                        - type: pair
+                          id: 47
+                          range: 8:8 - 8:12
+                          dataflow_sources:
+                            - 48
+                            - 49
+                            - 50
+                          children:
+                            - type: hash_key_symbol
+                              id: 48
+                              range: 8:8 - 8:9
+                              content: b
+                            - type: '":"'
+                              id: 49
+                              range: 8:9 - 8:10
+                            - type: integer
+                              id: 50
+                              range: 8:11 - 8:12
+                              content: "4"
+                        - type: '"}"'
+                          id: 51
+                          range: 8:13 - 8:14
+                - type: '"}"'
+                  id: 52
+                  range: 9:1 - 9:2
+            - type: '")"'
+              id: 53
+              range: 9:2 - 9:3
+
+- node: 1
+  content: |-
+    nested = {
+      "one" => 42,
+      "two" => "hi"
+    }
+  data:
+    properties:
+        - name: nested
+          node:
+            id: 1
+            typeid: 1
+            contentstart:
+                byte: 0
+                line: 1
+                column: 1
+            contentend:
+                byte: 43
+                line: 4
+                column: 2
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 4
+                typeid: 4
+                contentstart:
+                    byte: 9
+                    line: 1
+                    column: 10
+                contentend:
+                    byte: 43
+                    line: 4
+                    column: 2
+                executingdetectors: []
+            data:
+                properties:
+                    - name: one
+                      node:
+                        id: 6
+                        typeid: 6
+                        contentstart:
+                            byte: 13
+                            line: 2
+                            column: 3
+                        contentend:
+                            byte: 24
+                            line: 2
+                            column: 14
+                        executingdetectors: []
+                      object: null
+                    - name: two
+                      node:
+                        id: 14
+                        typeid: 6
+                        contentstart:
+                            byte: 28
+                            line: 3
+                            column: 3
+                        contentend:
+                            byte: 41
+                            line: 3
+                            column: 16
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: true
+- node: 4
+  content: |-
+    {
+      "one" => 42,
+      "two" => "hi"
+    }
+  data:
+    properties:
+        - name: one
+          node:
+            id: 6
+            typeid: 6
+            contentstart:
+                byte: 13
+                line: 2
+                column: 3
+            contentend:
+                byte: 24
+                line: 2
+                column: 14
+            executingdetectors: []
+          object: null
+        - name: two
+          node:
+            id: 14
+            typeid: 6
+            contentstart:
+                byte: 28
+                line: 3
+                column: 3
+            contentend:
+                byte: 41
+                line: 3
+                column: 16
+            executingdetectors: []
+          object: null
+    isvirtual: false
+- node: 29
+  content: |-
+    {
+      x: { n: nested },
+      y: { b: 4 }
+    }
+  data:
+    properties:
+        - name: x
+          node:
+            id: 31
+            typeid: 6
+            contentstart:
+                byte: 54
+                line: 7
+                column: 3
+            contentend:
+                byte: 70
+                line: 7
+                column: 19
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 34
+                typeid: 4
+                contentstart:
+                    byte: 57
+                    line: 7
+                    column: 6
+                contentend:
+                    byte: 70
+                    line: 7
+                    column: 19
+                executingdetectors: []
+            data:
+                properties:
+                    - name: "n"
+                      node:
+                        id: 36
+                        typeid: 6
+                        contentstart:
+                            byte: 59
+                            line: 7
+                            column: 8
+                        contentend:
+                            byte: 68
+                            line: 7
+                            column: 17
+                        executingdetectors: []
+                      object:
+                        ruleid: object
+                        matchnode:
+                            id: 1
+                            typeid: 1
+                            contentstart:
+                                byte: 0
+                                line: 1
+                                column: 1
+                            contentend:
+                                byte: 43
+                                line: 4
+                                column: 2
+                            executingdetectors: []
+                        data:
+                            properties:
+                                - name: nested
+                                  node:
+                                    id: 1
+                                    typeid: 1
+                                    contentstart:
+                                        byte: 0
+                                        line: 1
+                                        column: 1
+                                    contentend:
+                                        byte: 43
+                                        line: 4
+                                        column: 2
+                                    executingdetectors: []
+                                  object:
+                                    ruleid: object
+                                    matchnode:
+                                        id: 4
+                                        typeid: 4
+                                        contentstart:
+                                            byte: 9
+                                            line: 1
+                                            column: 10
+                                        contentend:
+                                            byte: 43
+                                            line: 4
+                                            column: 2
+                                        executingdetectors: []
+                                    data:
+                                        properties:
+                                            - name: one
+                                              node:
+                                                id: 6
+                                                typeid: 6
+                                                contentstart:
+                                                    byte: 13
+                                                    line: 2
+                                                    column: 3
+                                                contentend:
+                                                    byte: 24
+                                                    line: 2
+                                                    column: 14
+                                                executingdetectors: []
+                                              object: null
+                                            - name: two
+                                              node:
+                                                id: 14
+                                                typeid: 6
+                                                contentstart:
+                                                    byte: 28
+                                                    line: 3
+                                                    column: 3
+                                                contentend:
+                                                    byte: 41
+                                                    line: 3
+                                                    column: 16
+                                                executingdetectors: []
+                                              object: null
+                                        isvirtual: false
+                            isvirtual: true
+                    - name: "n"
+                      node:
+                        id: 36
+                        typeid: 6
+                        contentstart:
+                            byte: 59
+                            line: 7
+                            column: 8
+                        contentend:
+                            byte: 68
+                            line: 7
+                            column: 17
+                        executingdetectors: []
+                      object:
+                        ruleid: object
+                        matchnode:
+                            id: 4
+                            typeid: 4
+                            contentstart:
+                                byte: 9
+                                line: 1
+                                column: 10
+                            contentend:
+                                byte: 43
+                                line: 4
+                                column: 2
+                            executingdetectors: []
+                        data:
+                            properties:
+                                - name: one
+                                  node:
+                                    id: 6
+                                    typeid: 6
+                                    contentstart:
+                                        byte: 13
+                                        line: 2
+                                        column: 3
+                                    contentend:
+                                        byte: 24
+                                        line: 2
+                                        column: 14
+                                    executingdetectors: []
+                                  object: null
+                                - name: two
+                                  node:
+                                    id: 14
+                                    typeid: 6
+                                    contentstart:
+                                        byte: 28
+                                        line: 3
+                                        column: 3
+                                    contentend:
+                                        byte: 41
+                                        line: 3
+                                        column: 16
+                                    executingdetectors: []
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+        - name: "y"
+          node:
+            id: 42
+            typeid: 6
+            contentstart:
+                byte: 74
+                line: 8
+                column: 3
+            contentend:
+                byte: 85
+                line: 8
+                column: 14
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 45
+                typeid: 4
+                contentstart:
+                    byte: 77
+                    line: 8
+                    column: 6
+                contentend:
+                    byte: 85
+                    line: 8
+                    column: 14
+                executingdetectors: []
+            data:
+                properties:
+                    - name: b
+                      node:
+                        id: 47
+                        typeid: 6
+                        contentstart:
+                            byte: 79
+                            line: 8
+                            column: 8
+                        contentend:
+                            byte: 83
+                            line: 8
+                            column: 12
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 34
+  content: '{ n: nested }'
+  data:
+    properties:
+        - name: "n"
+          node:
+            id: 36
+            typeid: 6
+            contentstart:
+                byte: 59
+                line: 7
+                column: 8
+            contentend:
+                byte: 68
+                line: 7
+                column: 17
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 1
+                typeid: 1
+                contentstart:
+                    byte: 0
+                    line: 1
+                    column: 1
+                contentend:
+                    byte: 43
+                    line: 4
+                    column: 2
+                executingdetectors: []
+            data:
+                properties:
+                    - name: nested
+                      node:
+                        id: 1
+                        typeid: 1
+                        contentstart:
+                            byte: 0
+                            line: 1
+                            column: 1
+                        contentend:
+                            byte: 43
+                            line: 4
+                            column: 2
+                        executingdetectors: []
+                      object:
+                        ruleid: object
+                        matchnode:
+                            id: 4
+                            typeid: 4
+                            contentstart:
+                                byte: 9
+                                line: 1
+                                column: 10
+                            contentend:
+                                byte: 43
+                                line: 4
+                                column: 2
+                            executingdetectors: []
+                        data:
+                            properties:
+                                - name: one
+                                  node:
+                                    id: 6
+                                    typeid: 6
+                                    contentstart:
+                                        byte: 13
+                                        line: 2
+                                        column: 3
+                                    contentend:
+                                        byte: 24
+                                        line: 2
+                                        column: 14
+                                    executingdetectors: []
+                                  object: null
+                                - name: two
+                                  node:
+                                    id: 14
+                                    typeid: 6
+                                    contentstart:
+                                        byte: 28
+                                        line: 3
+                                        column: 3
+                                    contentend:
+                                        byte: 41
+                                        line: 3
+                                        column: 16
+                                    executingdetectors: []
+                                  object: null
+                            isvirtual: false
+                isvirtual: true
+        - name: "n"
+          node:
+            id: 36
+            typeid: 6
+            contentstart:
+                byte: 59
+                line: 7
+                column: 8
+            contentend:
+                byte: 68
+                line: 7
+                column: 17
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 4
+                typeid: 4
+                contentstart:
+                    byte: 9
+                    line: 1
+                    column: 10
+                contentend:
+                    byte: 43
+                    line: 4
+                    column: 2
+                executingdetectors: []
+            data:
+                properties:
+                    - name: one
+                      node:
+                        id: 6
+                        typeid: 6
+                        contentstart:
+                            byte: 13
+                            line: 2
+                            column: 3
+                        contentend:
+                            byte: 24
+                            line: 2
+                            column: 14
+                        executingdetectors: []
+                      object: null
+                    - name: two
+                      node:
+                        id: 14
+                        typeid: 6
+                        contentstart:
+                            byte: 28
+                            line: 3
+                            column: 3
+                        contentend:
+                            byte: 41
+                            line: 3
+                            column: 16
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 45
+  content: '{ b: 4 }'
+  data:
+    properties:
+        - name: b
+          node:
+            id: 47
+            typeid: 6
+            contentstart:
+                byte: 79
+                line: 8
+                column: 8
+            contentend:
+                byte: 83
+                line: 8
+                column: 12
+            executingdetectors: []
+          object: null
+    isvirtual: false
+

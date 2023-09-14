@@ -14,7 +14,7 @@ Bearer CLI's [privacy report type](/explanations/reports/#privacy-report) allows
 
 ## Getting started
 
-If you haven't already, install Bearer CLI using the instructions on the [installation page](/reference/installation/) or the [quick start](/quickstart/). 
+If you haven't already, install Bearer CLI using the instructions on the [installation page](/reference/installation/) or the [quick start](/quickstart/).
 
 To run your first privacy report, navigate to the project root and use the `bearer scan` command with the `--report privacy` flag:
 
@@ -110,7 +110,7 @@ This will allow team members to import the report into spreadsheets or their pre
 
 ## Subject mapping
 
-Bearer CLI uses "User" as the default data subject. To override this, you can copy the [subject_mapping.json](https://github.com/bearer/bearer/blob/main/pkg/classification/db/subject_mapping.json) and customize it to your needs. Then, use the `--data-subject-mapping` flag to use your mappings instead. This will use your supplied mapping file instead of the default.
+Bearer CLI uses "User" as the default data subject. To override this, you can copy the [subject_mapping.json](https://github.com/bearer/bearer/blob/main/internal/classification/db/subject_mapping.json) and customize it to your needs. Then, use the `--data-subject-mapping` flag to use your mappings instead. This will use your supplied mapping file instead of the default.
 
 ```bash
 bearer scan . --report privacy --data-subject-mapping /path/to/mappings.json

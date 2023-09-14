@@ -1,0 +1,59 @@
+type: program
+id: 0
+range: 1:1 - 1:11
+dataflow_sources:
+    - 1
+children:
+    - type: expression_statement
+      id: 1
+      range: 1:1 - 1:11
+      children:
+        - type: field_access
+          id: 2
+          range: 1:1 - 1:10
+          queries:
+            - 2
+          children:
+            - type: identifier
+              id: 3
+              range: 1:1 - 1:5
+              content: user
+            - type: '"."'
+              id: 4
+              range: 1:5 - 1:6
+            - type: identifier
+              id: 5
+              range: 1:6 - 1:10
+              content: name
+        - type: '";"'
+          id: 6
+          range: 1:10 - 1:11
+
+- node: 2
+  content: user.name
+  data:
+    properties:
+        - name: user
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 2
+                typeid: 2
+                contentstart:
+                    byte: 0
+                    line: 1
+                    column: 1
+                contentend:
+                    byte: 9
+                    line: 1
+                    column: 10
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+

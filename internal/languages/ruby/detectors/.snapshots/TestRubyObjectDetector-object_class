@@ -1,0 +1,204 @@
+type: program
+id: 0
+range: 1:1 - 10:1
+dataflow_sources:
+    - 1
+children:
+    - type: class
+      id: 1
+      range: 1:1 - 9:4
+      dataflow_sources:
+        - 2
+        - 3
+        - 4
+        - 10
+        - 14
+        - 24
+      queries:
+        - 3
+      children:
+        - type: '"class"'
+          id: 2
+          range: 1:1 - 1:6
+        - type: constant
+          id: 3
+          range: 1:7 - 1:8
+          content: A
+        - type: call
+          id: 4
+          range: 2:3 - 2:27
+          dataflow_sources:
+            - 6
+          children:
+            - type: identifier
+              id: 5
+              range: 2:3 - 2:16
+              content: attr_accessor
+            - type: argument_list
+              id: 6
+              range: 2:17 - 2:27
+              dataflow_sources:
+                - 7
+                - 8
+                - 9
+              children:
+                - type: simple_symbol
+                  id: 7
+                  range: 2:17 - 2:21
+                  content: :one
+                - type: '","'
+                  id: 8
+                  range: 2:21 - 2:22
+                - type: simple_symbol
+                  id: 9
+                  range: 2:23 - 2:27
+                  content: :two
+        - type: method
+          id: 10
+          range: 4:3 - 5:6
+          children:
+            - type: '"def"'
+              id: 11
+              range: 4:3 - 4:6
+            - type: identifier
+              id: 12
+              range: 4:7 - 4:12
+              content: three
+            - type: '"end"'
+              id: 13
+              range: 5:3 - 5:6
+        - type: method
+          id: 14
+          range: 7:3 - 8:6
+          children:
+            - type: '"def"'
+              id: 15
+              range: 7:3 - 7:6
+            - type: identifier
+              id: 16
+              range: 7:7 - 7:11
+              content: four
+            - type: method_parameters
+              id: 17
+              range: 7:11 - 7:17
+              dataflow_sources:
+                - 18
+                - 19
+                - 20
+                - 21
+                - 22
+              children:
+                - type: '"("'
+                  id: 18
+                  range: 7:11 - 7:12
+                - type: identifier
+                  id: 19
+                  range: 7:12 - 7:13
+                  content: a
+                - type: '","'
+                  id: 20
+                  range: 7:13 - 7:14
+                - type: identifier
+                  id: 21
+                  range: 7:15 - 7:16
+                  content: b
+                - type: '")"'
+                  id: 22
+                  range: 7:16 - 7:17
+            - type: '"end"'
+              id: 23
+              range: 8:3 - 8:6
+        - type: '"end"'
+          id: 24
+          range: 9:1 - 9:4
+
+- node: 1
+  content: |-
+    class A
+      attr_accessor :one, :two
+
+      def three
+      end
+
+      def four(a, b)
+      end
+    end
+  data:
+    properties:
+        - name: A
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 1
+                typeid: 1
+                contentstart:
+                    byte: 0
+                    line: 1
+                    column: 1
+                contentend:
+                    byte: 81
+                    line: 9
+                    column: 4
+                executingdetectors: []
+            data:
+                properties:
+                    - name: one
+                      node:
+                        id: 7
+                        typeid: 7
+                        contentstart:
+                            byte: 24
+                            line: 2
+                            column: 17
+                        contentend:
+                            byte: 28
+                            line: 2
+                            column: 21
+                        executingdetectors: []
+                      object: null
+                    - name: two
+                      node:
+                        id: 9
+                        typeid: 7
+                        contentstart:
+                            byte: 30
+                            line: 2
+                            column: 23
+                        contentend:
+                            byte: 34
+                            line: 2
+                            column: 27
+                        executingdetectors: []
+                      object: null
+                    - name: three
+                      node:
+                        id: 12
+                        typeid: 5
+                        contentstart:
+                            byte: 42
+                            line: 4
+                            column: 7
+                        contentend:
+                            byte: 47
+                            line: 4
+                            column: 12
+                        executingdetectors: []
+                      object: null
+                    - name: four
+                      node:
+                        id: 16
+                        typeid: 5
+                        contentstart:
+                            byte: 61
+                            line: 7
+                            column: 7
+                        contentend:
+                            byte: 65
+                            line: 7
+                            column: 11
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+

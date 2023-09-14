@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/bearer/bearer/e2e/internal/testhelper"
-	"github.com/bearer/bearer/pkg/util/tmpfile"
+	"github.com/bearer/bearer/internal/util/tmpfile"
 	"github.com/bradleyjkemp/cupaloy"
 )
 

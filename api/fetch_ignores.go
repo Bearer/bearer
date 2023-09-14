@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 
-	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
+	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
 )
 
 type CloudIgnoreData struct {

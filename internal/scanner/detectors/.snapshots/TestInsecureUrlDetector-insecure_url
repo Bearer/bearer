@@ -1,0 +1,99 @@
+type: program
+id: 0
+range: 1:1 - 6:25
+dataflow_sources:
+    - 1
+    - 2
+    - 6
+    - 7
+    - 11
+    - 15
+children:
+    - type: comment
+      id: 1
+      range: 1:1 - 1:8
+      content: '# match'
+    - type: string
+      id: 2
+      range: 2:1 - 2:26
+      dataflow_sources:
+        - 3
+        - 4
+        - 5
+      children:
+        - type: '"""'
+          id: 3
+          range: 2:1 - 2:2
+        - type: string_content
+          id: 4
+          range: 2:2 - 2:25
+          content: http://api.insecure.com
+        - type: '"""'
+          id: 5
+          range: 2:25 - 2:26
+    - type: comment
+      id: 6
+      range: 3:1 - 3:12
+      content: '# not match'
+    - type: string
+      id: 7
+      range: 4:1 - 4:25
+      dataflow_sources:
+        - 8
+        - 9
+        - 10
+      children:
+        - type: '"""'
+          id: 8
+          range: 4:1 - 4:2
+        - type: string_content
+          id: 9
+          range: 4:2 - 4:24
+          content: https://api.secure.com
+        - type: '"""'
+          id: 10
+          range: 4:24 - 4:25
+    - type: string
+      id: 11
+      range: 5:1 - 5:30
+      dataflow_sources:
+        - 12
+        - 13
+        - 14
+      children:
+        - type: '"""'
+          id: 12
+          range: 5:1 - 5:2
+        - type: string_content
+          id: 13
+          range: 5:2 - 5:29
+          content: http://localhost:3000/admin
+        - type: '"""'
+          id: 14
+          range: 5:29 - 5:30
+    - type: string
+      id: 15
+      range: 6:1 - 6:25
+      dataflow_sources:
+        - 16
+        - 17
+        - 18
+      children:
+        - type: '"""'
+          id: 16
+          range: 6:1 - 6:2
+        - type: string_content
+          id: 17
+          range: 6:2 - 6:24
+          content: http://127.0.0.1/admin
+        - type: '"""'
+          id: 18
+          range: 6:24 - 6:25
+
+- node: 2
+  content: '"http://api.insecure.com"'
+  data: null
+- node: 4
+  content: http://api.insecure.com
+  data: null
+

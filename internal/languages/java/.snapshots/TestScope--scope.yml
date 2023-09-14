@@ -1,0 +1,263 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 1
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 42
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 42
+        content: scopeCursor(request.getParameter("oops"))
+      parent_line_number: 1
+      snippet: scopeCursor(request.getParameter("oops"))
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_0
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 3
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 48
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 48
+        content: 'scopeCursor(x ? request.getParameter("ok") : y)'
+      parent_line_number: 3
+      snippet: 'scopeCursor(x ? request.getParameter("ok") : y)'
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_1
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 6
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 6
+            end: 6
+            column:
+                start: 1
+                end: 42
+      sink:
+        location:
+            start: 6
+            end: 6
+            column:
+                start: 1
+                end: 42
+        content: scopeNested(request.getParameter("oops"))
+      parent_line_number: 6
+      snippet: scopeNested(request.getParameter("oops"))
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_2
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 7
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 1
+                end: 46
+      sink:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 1
+                end: 46
+        content: scopeNested(x + request.getParameter("oops"))
+      parent_line_number: 7
+      snippet: scopeNested(x + request.getParameter("oops"))
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_3
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 8
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 50
+      sink:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 50
+        content: 'scopeNested(x ? request.getParameter("oops") : y)'
+      parent_line_number: 8
+      snippet: 'scopeNested(x ? request.getParameter("oops") : y)'
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_4
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_4
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 9
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 50
+      sink:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 50
+        content: 'scopeNested(request.getParameter("oops") ? x : y)'
+      parent_line_number: 9
+      snippet: 'scopeNested(request.getParameter("oops") ? x : y)'
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_5
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_5
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 11
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 42
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 42
+        content: scopeResult(request.getParameter("oops"))
+      parent_line_number: 11
+      snippet: scopeResult(request.getParameter("oops"))
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_6
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_6
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 12
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 46
+      sink:
+        location:
+            start: 12
+            end: 12
+            column:
+                start: 1
+                end: 46
+        content: scopeResult(x + request.getParameter("oops"))
+      parent_line_number: 12
+      snippet: scopeResult(x + request.getParameter("oops"))
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_7
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_7
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 13
+      full_filename: scope.java
+      filename: scope.java
+      source:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 1
+                end: 50
+      sink:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 1
+                end: 50
+        content: 'scopeResult(x ? request.getParameter("oops") : y)'
+      parent_line_number: 13
+      snippet: 'scopeResult(x ? request.getParameter("oops") : y)'
+      fingerprint: bdbeee20feb34c6881d975716e2fe09f_8
+      old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_8
+
