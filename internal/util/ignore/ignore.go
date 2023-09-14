@@ -58,7 +58,15 @@ func GetIgnoredFingerprintsFromCloud(
 
 	ignoredFingerprints = make(map[string]types.IgnoredFingerprint)
 	for _, fingerprint := range data.Ignores {
-		ignoredFingerprints[fingerprint] = types.IgnoredFingerprint{}
+		item := types.IgnoredFingerprint{}
+
+		_, persistedInCloud := data.CloudIgnoredFingerprints[fingerprint]
+		if !persistedInCloud {
+			// it is a new addition; use information from ignore file
+			item = localIgnores[fingerprint]
+		}
+
+		ignoredFingerprints[fingerprint] = item
 	}
 
 	return data.ProjectFound, ignoredFingerprints, data.StaleIgnores, nil
