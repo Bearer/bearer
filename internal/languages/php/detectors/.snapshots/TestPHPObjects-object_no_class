@@ -13,9 +13,6 @@ children:
     - type: expression_statement
       id: 2
       range: 2:1 - 2:14
-      dataflow_sources:
-        - 3
-        - 13
       children:
         - type: binary_expression
           id: 3
@@ -28,9 +25,6 @@ children:
             - type: variable_name
               id: 4
               range: 2:1 - 2:6
-              dataflow_sources:
-                - 5
-                - 6
               children:
                 - type: '"$"'
                   id: 5

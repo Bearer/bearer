@@ -1,6 +1,10 @@
 type: program
 id: 0
 range: 1:1 - 15:3
+dataflow_sources:
+    - 1
+    - 2
+    - 100
 children:
     - type: php_tag
       id: 1
@@ -29,6 +33,10 @@ children:
             - type: const_declaration
               id: 7
               range: 3:5 - 3:36
+              dataflow_sources:
+                - 8
+                - 9
+                - 16
               children:
                 - type: '"const"'
                   id: 8
@@ -36,6 +44,10 @@ children:
                 - type: const_element
                   id: 9
                   range: 3:11 - 3:35
+                  dataflow_sources:
+                    - 10
+                    - 11
+                    - 12
                   children:
                     - type: name
                       id: 10
@@ -47,6 +59,10 @@ children:
                     - type: encapsed_string
                       id: 12
                       range: 3:22 - 3:35
+                      dataflow_sources:
+                        - 13
+                        - 14
+                        - 15
                       children:
                         - type: '"""'
                           id: 13
@@ -68,6 +84,8 @@ children:
                 - type: visibility_modifier
                   id: 18
                   range: 5:5 - 5:11
+                  dataflow_sources:
+                    - 19
                   children:
                     - type: '"public"'
                       id: 19
@@ -75,6 +93,8 @@ children:
                 - type: static_modifier
                   id: 20
                   range: 5:12 - 5:18
+                  dataflow_sources:
+                    - 21
                   children:
                     - type: '"static"'
                       id: 21
@@ -89,6 +109,10 @@ children:
                 - type: formal_parameters
                   id: 24
                   range: 5:32 - 5:39
+                  dataflow_sources:
+                    - 25
+                    - 26
+                    - 30
                   children:
                     - type: '"("'
                       id: 25
@@ -157,10 +181,16 @@ children:
                                 - type: class_constant_access_expression
                                   id: 40
                                   range: 7:14 - 7:28
+                                  dataflow_sources:
+                                    - 41
+                                    - 43
+                                    - 44
                                   children:
                                     - type: relative_scope
                                       id: 41
                                       range: 7:14 - 7:18
+                                      dataflow_sources:
+                                        - 42
                                       children:
                                         - type: '"self"'
                                           id: 42
@@ -178,6 +208,10 @@ children:
                                 - type: encapsed_string
                                   id: 46
                                   range: 7:31 - 7:34
+                                  dataflow_sources:
+                                    - 47
+                                    - 48
+                                    - 49
                                   children:
                                     - type: '"""'
                                       id: 47
@@ -199,10 +233,15 @@ children:
                         - type: augmented_assignment_expression
                           id: 52
                           range: 8:9 - 8:19
+                          dataflow_sources:
+                            - 53
+                            - 57
                           children:
                             - type: variable_name
                               id: 53
                               range: 8:9 - 8:11
+                              alias_of:
+                                - 34
                               children:
                                 - type: '"$"'
                                   id: 54
@@ -217,6 +256,10 @@ children:
                             - type: encapsed_string
                               id: 57
                               range: 8:15 - 8:19
+                              dataflow_sources:
+                                - 58
+                                - 59
+                                - 60
                               children:
                                 - type: '"""'
                                   id: 58
@@ -260,6 +303,10 @@ children:
                             - type: encapsed_string
                               id: 68
                               range: 10:15 - 10:21
+                              dataflow_sources:
+                                - 69
+                                - 70
+                                - 71
                               children:
                                 - type: '"""'
                                   id: 69
@@ -281,10 +328,15 @@ children:
                         - type: augmented_assignment_expression
                           id: 74
                           range: 11:9 - 11:24
+                          dataflow_sources:
+                            - 75
+                            - 79
                           children:
                             - type: variable_name
                               id: 75
                               range: 11:9 - 11:12
+                              alias_of:
+                                - 63
                               children:
                                 - type: '"$"'
                                   id: 76
@@ -299,6 +351,11 @@ children:
                             - type: subscript_expression
                               id: 79
                               range: 11:16 - 11:24
+                              dataflow_sources:
+                                - 80
+                                - 83
+                                - 84
+                                - 85
                               children:
                                 - type: variable_name
                                   id: 80
@@ -331,10 +388,15 @@ children:
                         - type: augmented_assignment_expression
                           id: 88
                           range: 12:9 - 12:24
+                          dataflow_sources:
+                            - 89
+                            - 93
                           children:
                             - type: variable_name
                               id: 89
                               range: 12:9 - 12:12
+                              alias_of:
+                                - 74
                               children:
                                 - type: '"$"'
                                   id: 90
@@ -349,6 +411,10 @@ children:
                             - type: encapsed_string
                               id: 93
                               range: 12:16 - 12:24
+                              dataflow_sources:
+                                - 94
+                                - 95
+                                - 96
                               children:
                                 - type: '"""'
                                   id: 94
@@ -372,6 +438,8 @@ children:
     - type: text_interpolation
       id: 100
       range: 15:1 - 15:3
+      dataflow_sources:
+        - 101
       children:
         - type: '"?>"'
           id: 101

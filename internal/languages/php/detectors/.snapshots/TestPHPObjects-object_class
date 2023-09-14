@@ -13,10 +13,6 @@ children:
     - type: class_declaration
       id: 2
       range: 2:1 - 9:2
-      dataflow_sources:
-        - 3
-        - 4
-        - 5
       queries:
         - 1
       children:
@@ -61,9 +57,6 @@ children:
                     - type: variable_name
                       id: 11
                       range: 4:12 - 4:17
-                      dataflow_sources:
-                        - 12
-                        - 13
                       children:
                         - type: '"$"'
                           id: 12
@@ -134,10 +127,6 @@ children:
                 - type: compound_statement
                   id: 28
                   range: 6:37 - 8:6
-                  dataflow_sources:
-                    - 29
-                    - 30
-                    - 45
                   children:
                     - type: '"{"'
                       id: 29
@@ -189,9 +178,6 @@ children:
                                         - type: variable_name
                                           id: 38
                                           range: 7:25 - 7:30
-                                          dataflow_sources:
-                                            - 39
-                                            - 40
                                           children:
                                             - type: '"$"'
                                               id: 39
