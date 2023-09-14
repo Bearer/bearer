@@ -22,6 +22,7 @@ func New(builder *tree.Builder) language.Analyzer {
 func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error) error {
 	switch node.Type() {
 	case "declaration_list",
+		"class_declaration",
 		"method_declaration",
 		"anonymous_function_creation_expression",
 		"for_statement",
@@ -29,7 +30,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
-	case "assignment_expression":
+	case "augmented_assignment_expression", "assignment_expression":
 		return analyzer.analyzeAssignment(node, visitChildren)
 	case "parenthesized_expression":
 		return analyzer.analyzeParentheses(node, visitChildren)
@@ -49,7 +50,9 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return visitChildren()
 	case "binary_expression", "unary_op_expression", "argument":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
-	case "while_statement", "do_statement", "if_statement": // statements don't have results
+	case "while_statement", "do_statement", "if_statement", "expression_statement", "compound_statement": // statements don't have results
+		return visitChildren()
+	case "variable_name":
 		return visitChildren()
 	case "match_expression":
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)

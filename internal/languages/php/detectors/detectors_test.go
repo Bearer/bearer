@@ -7,12 +7,12 @@ import (
 	"github.com/bearer/bearer/internal/scanner/detectors/testhelper"
 )
 
-func TestJavaObjects(t *testing.T) {
+func TestPHPObjects(t *testing.T) {
 	runTest(t, "object_class", "object", "testdata/class.php")
 	runTest(t, "object_no_class", "object", "testdata/no_class.php")
 }
 
-func TestJavaString(t *testing.T) {
+func TestPHPString(t *testing.T) {
 	runTest(t, "string", "string", "testdata/string.php")
 }
 
