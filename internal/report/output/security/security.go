@@ -278,11 +278,11 @@ func fingerprintOutput(
 			}
 
 			if len(staleFingerprints) > 0 {
-				// bearer.ignore entries that have been e.g. re-opened in the Cloud
-				output.StdErrLog(fmt.Sprintf("%d fingerprints present in your bearer.ignore are stale and have not been applied", len(staleFingerprints)))
+				// ignore file entries that have been e.g. re-opened in the Cloud
+				output.StdErrLog(fmt.Sprintf("%d fingerprints present in your ignore file are stale and have not been applied", len(staleFingerprints)))
 				for _, fingerprintId := range staleFingerprints {
 					output.StdErrLog(fmt.Sprintf("  - %s", fingerprintId))
-					output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your bearer.ignore file, run: bearer ignore remove " + fingerprintId))
+					output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your ignore file, run: bearer ignore remove " + fingerprintId))
 				}
 			}
 			output.StdErrLog("\n=====================================\n")
@@ -298,7 +298,7 @@ func fingerprintOutput(
 		output.StdErrLog("\n=====================================\n")
 		// legacy
 		if len(legacyExcludedFingerprints) > 0 {
-			output.StdErrLog(color.HiYellowString("Note: exclude-fingerprints is being replaced by bearer.ignore. To use the new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate."))
+			output.StdErrLog(color.HiYellowString("Note: exclude-fingerprints is being replaced by bearer ignore. To use the new ignore functionality, run bearer ignore migrate. See https://docs.bearer.com/reference/commands/#ignore_migrate."))
 		}
 
 		if !diffScan { // stale ignored fingerprint warning is misleading for diff scans
@@ -312,7 +312,7 @@ func fingerprintOutput(
 			// end legacy
 
 			if len(unusedFingerprints) > 0 {
-				output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your bearer.ignore file are no longer detected:", len(unusedFingerprints)))
+				output.StdErrLog(fmt.Sprintf("%d ignored fingerprints present in your ignore file are no longer detected:", len(unusedFingerprints)))
 				for _, fingerprintId := range unusedFingerprints {
 					fingerprint, ok := ignoredFingerprints[fingerprintId]
 					if !ok {
@@ -325,7 +325,7 @@ func fingerprintOutput(
 					} else {
 						output.StdErrLog(fmt.Sprintf("  - %s (%s)", fingerprintId, *fingerprint.Comment))
 					}
-					output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your bearer.ignore file, run: bearer ignore remove " + fingerprintId))
+					output.StdErrLog(color.HiBlackString("\tTo remove this fingerprint from your ignore file, run: bearer ignore remove " + fingerprintId))
 				}
 			}
 		}

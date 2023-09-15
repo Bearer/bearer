@@ -1,6 +1,5 @@
 name: ' ignore migrate'
-synopsis: |
-    Migrate ignored fingerprints from bearer.yml to bearer.ignore
+synopsis: Migrate ignored fingerprints from bearer.yml to ignore file
 usage: ' ignore migrate [flags]'
 options:
     - name: api-key
@@ -28,6 +27,7 @@ options:
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
     - name: ignore-file
+      default_value: bearer.ignore
       usage: Load ignore file from the specified path.
     - name: log-level
       default_value: info
@@ -36,7 +36,7 @@ options:
       default_value: "false"
       usage: Disable color in output
 example: |-
-    # Migrate existing ignored (excluded) fingerprints from bearer.yml file to bearer.ignore
+    # Migrate existing ignored (excluded) fingerprints from bearer.yml file to ignore file
     $ bearer ignore migrate
 see_also:
     - ' ignore - Manage ignored fingerprints'

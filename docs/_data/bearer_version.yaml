@@ -24,6 +24,7 @@ options:
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
     - name: ignore-file
+      default_value: bearer.ignore
       usage: Load ignore file from the specified path.
     - name: log-level
       default_value: info
