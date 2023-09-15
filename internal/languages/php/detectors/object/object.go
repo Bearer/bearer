@@ -2,9 +2,11 @@ package object
 
 import (
 	"github.com/bearer/bearer/internal/scanner/ast/query"
+	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
+	detectorscommon "github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 )
@@ -12,11 +14,13 @@ import (
 type objectDetector struct {
 	types.DetectorBase
 	// Base
-	classQuery *query.Query
+	classQuery         *query.Query
+	arrayCreationQuery *query.Query
 	// Naming
 	assignmentQuery *query.Query
 	// Projection
-	fieldAccessQuery *query.Query
+	fieldAccessQuery         *query.Query
+	subscriptExpressionQuery *query.Query
 }
 
 func New(querySet *query.Set) types.Detector {
@@ -51,10 +55,23 @@ func New(querySet *query.Set) types.Detector {
 		(member_call_expression object: (_) @object name: (name) @field) @root
 	]`)
 
+	// array('foo' => 'bar');
+	// [ 'foo' => 'bar' ];
+	arrayCreationQuery := querySet.Add(`
+			(array_creation_expression (array_element_initializer . (_) @key . (_) @value )) @root
+	`)
+
+	// $user["uuid"];
+	subscriptExpressionQuery := querySet.Add(`
+			(subscript_expression (_) @object (_) @key) @root
+	`)
+
 	return &objectDetector{
-		assignmentQuery:  assignmentQuery,
-		classQuery:       classQuery,
-		fieldAccessQuery: fieldAccessQuery,
+		classQuery:               classQuery,
+		arrayCreationQuery:       arrayCreationQuery,
+		assignmentQuery:          assignmentQuery,
+		fieldAccessQuery:         fieldAccessQuery,
+		subscriptExpressionQuery: subscriptExpressionQuery,
 	}
 }
 
@@ -76,7 +93,52 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
+	detections, err = detector.getArrayCreation(node, detectorContext)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
 	return detector.getProjections(node, detectorContext)
+}
+
+func (detector *objectDetector) getArrayCreation(
+	node *tree.Node,
+	detectorContext types.Context,
+) ([]interface{}, error) {
+	results := detector.arrayCreationQuery.MatchAt(node)
+	if len(results) == 0 {
+		return nil, nil
+	}
+
+	var properties []detectorscommon.Property
+	for _, result := range results {
+		pairNode := result["key"]
+		name := result["value"].Content()
+
+		propertyObjects, err := detectorContext.Scan(result["value"], ruleset.BuiltinObjectRule, traversalstrategy.Cursor)
+		if err != nil {
+			return nil, err
+		}
+
+		if len(propertyObjects) == 0 {
+			properties = append(properties, detectorscommon.Property{
+				Name: name,
+				Node: pairNode,
+			})
+
+			continue
+		}
+
+		for _, propertyObject := range propertyObjects {
+			properties = append(properties, detectorscommon.Property{
+				Name:   name,
+				Node:   pairNode,
+				Object: propertyObject,
+			})
+		}
+	}
+
+	return []interface{}{detectorscommon.Object{Properties: properties}}, nil
 }
 
 func (detector *objectDetector) getAssignment(
