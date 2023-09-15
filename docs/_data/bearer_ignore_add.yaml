@@ -36,6 +36,7 @@ options:
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
     - name: ignore-file
+      default_value: bearer.ignore
       usage: Load ignore file from the specified path.
     - name: log-level
       default_value: info
@@ -44,7 +45,7 @@ options:
       default_value: "false"
       usage: Disable color in output
 example: |-
-    # Add an ignored fingerprint to your bearer.ignore file
+    # Add an ignored fingerprint to your ignore file
     $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"
 see_also:
     - ' ignore - Manage ignored fingerprints'

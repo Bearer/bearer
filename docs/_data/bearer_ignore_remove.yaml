@@ -24,6 +24,7 @@ options:
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
     - name: ignore-file
+      default_value: bearer.ignore
       usage: Load ignore file from the specified path.
     - name: log-level
       default_value: info
@@ -32,7 +33,7 @@ options:
       default_value: "false"
       usage: Disable color in output
 example: |-
-    # Remove an ignored fingerprint from your bearer.ignore file
+    # Remove an ignored fingerprint from your ignore file
     $ bearer ignore remove <fingerprint>
 see_also:
     - ' ignore - Manage ignored fingerprints'
