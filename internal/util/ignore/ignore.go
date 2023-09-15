@@ -21,6 +21,11 @@ import (
 const DefaultIgnoreFilepath = "bearer.ignore"
 
 func GetIgnoredFingerprints(filePath string, target *string) (ignoredFingerprints map[string]types.IgnoredFingerprint, ignoreFilePath string, fileExists bool, err error) {
+	if filePath == "" {
+		// nothing to do here
+		return map[string]types.IgnoredFingerprint{}, filePath, false, nil
+	}
+
 	ignoreFilePath, isDefaultPath, fileExists, err := GetIgnoreFilePath(filePath, target)
 	if err != nil {
 		if isDefaultPath && !fileExists {
