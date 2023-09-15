@@ -43,7 +43,8 @@ builds:
           }
           EOF
           '
-        - "gon -log-level DEBUG 'dist/darwin/darwin_{{.Target}}/gon.hcl'"
+        - cmd: "gon -log-level DEBUG 'dist/darwin/darwin_{{.Target}}/gon.hcl'"
+          output: true
 
   - id: linux
     main: ./cmd/bearer
