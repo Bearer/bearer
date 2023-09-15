@@ -17,6 +17,7 @@ import (
 
 	"github.com/bearer/bearer/internal/classification/db"
 	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/detectors/dependencies"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
 	globaltypes "github.com/bearer/bearer/internal/types"
 	"github.com/bearer/bearer/internal/util/file"
@@ -27,6 +28,7 @@ import (
 	"github.com/bearer/bearer/internal/util/rego"
 	"github.com/bearer/bearer/internal/util/set"
 
+	dataflowtypes "github.com/bearer/bearer/internal/report/output/dataflow/types"
 	types "github.com/bearer/bearer/internal/report/output/security/types"
 	stats "github.com/bearer/bearer/internal/report/output/stats"
 	outputtypes "github.com/bearer/bearer/internal/report/output/types"
@@ -382,6 +384,7 @@ func BuildReportString(reportData *outputtypes.ReportData, config settings.Confi
 		reportStr,
 		config.Rules,
 		config.BuiltInRules,
+		reportData.Dataflow.Dependencies,
 		lineOfCodeOutput.Languages,
 		config,
 	)
@@ -510,6 +513,7 @@ func writeRuleListToString(
 	reportStr *strings.Builder,
 	rules map[string]*settings.Rule,
 	builtInRules map[string]*settings.Rule,
+	reportedDependencies []dataflowtypes.Dependency,
 	languages map[string]*gocloc.Language,
 	config settings.Config,
 ) int {
@@ -544,12 +548,35 @@ func writeRuleListToString(
 	sort.Slice(languageSlice, func(i, j int) bool {
 		return len(languageSlice[i].Files) > len(languageSlice[j].Files)
 	})
+	unsupportedLanguages := make(map[string]int)
 	for _, lang := range languageSlice {
 		if ruleCount, ok := ruleCountPerLang[lang.Name]; ok {
 			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(languages[lang.Name].Files))
+		} else {
+			for _, detector := range dependencies.DetectorsForLanguage(lang.Name) {
+				if _, ok := unsupportedLanguages[lang.Name]; ok {
+					break
+				}
+				for _, reportedDependency := range reportedDependencies {
+					if reportedDependency.Detector == detector {
+						unsupportedLanguages[lang.Name] = len(languages[lang.Name].Files)
+						break
+					}
+				}
+			}
 		}
 	}
+
+	for language, filesCount := range unsupportedLanguages {
+		tbl.AddRow(language, 0, 0, filesCount)
+	}
+
 	tbl.Print()
+
+	if len(unsupportedLanguages) > 0 {
+		reportStr.WriteString(fmt.Sprintf("\nWarning: Only partial support is offered for %s.\n", strings.Join(maps.Keys(unsupportedLanguages), ", ")))
+		reportStr.WriteString(color.HiBlackString("For more information, see https://docs.bearer.com/reference/supported-languages\n"))
+	}
 
 	return totalRuleCount
 }

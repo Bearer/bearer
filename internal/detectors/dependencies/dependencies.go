@@ -40,6 +40,54 @@ func (detector *detector) AcceptDir(dir *file.Path) (bool, error) {
 	return true, nil
 }
 
+func DetectorsForLanguage(language string) []string {
+	switch language {
+	case "C#":
+		return []string{
+			"nuget",
+			"packageconfig",
+			"paketdependencies",
+		}
+	case "Go":
+		return []string{
+			"gosum",
+		}
+	case "Java":
+		return []string{
+			"buildgradle",
+			"ivy",
+			"mvnplugin",
+			"pomxml",
+		}
+	case "Javascript":
+		return []string{
+			"npm",
+			"packagejson",
+			"projectjson",
+			"yarnlock",
+		}
+	case "PHP":
+		return []string{
+			"composerlock",
+			"composerjson",
+		}
+	case "Python":
+		return []string{
+			"pipdeptree",
+			"piplock",
+			"poetry",
+			"pyproject",
+			"requirements",
+		}
+	case "Ruby":
+		return []string{
+			"gemfile",
+		}
+	}
+
+	return []string{}
+}
+
 func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, report report.Report) (bool, error) {
 	switch file.Base {
 	case "Gemfile.lock":
