@@ -336,7 +336,7 @@ func FromOptions(opts flag.Options, versionMeta *version_check.VersionMeta) (Con
 		}
 	}
 
-	ignoredFingerprints, _, err := ignore.GetIgnoredFingerprints(opts.GeneralOptions.IgnoreFile, &opts.ScanOptions.Target)
+	ignoredFingerprints, _, _, err := ignore.GetIgnoredFingerprints(opts.GeneralOptions.IgnoreFile, &opts.ScanOptions.Target)
 	if err != nil {
 		return Config{}, err
 	}

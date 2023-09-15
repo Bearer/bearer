@@ -20,25 +20,25 @@ import (
 
 const DefaultIgnoreFilepath = "bearer.ignore"
 
-func GetIgnoredFingerprints(ignoreFilePath string, target *string) (ignoredFingerprints map[string]types.IgnoredFingerprint, fileExists bool, err error) {
-	ignorePath, isDefaultPath, fileExists, err := getIgnoreFilePath(ignoreFilePath, target)
+func GetIgnoredFingerprints(filePath string, target *string) (ignoredFingerprints map[string]types.IgnoredFingerprint, ignoreFilePath string, fileExists bool, err error) {
+	ignoreFilePath, isDefaultPath, fileExists, err := GetIgnoreFilePath(filePath, target)
 	if err != nil {
 		if isDefaultPath && !fileExists {
-			// bearer.ignore file does not exist: expected scenario
-			return map[string]types.IgnoredFingerprint{}, false, nil
+			// default bearer.ignore file does not exist: expected scenario
+			return map[string]types.IgnoredFingerprint{}, ignoreFilePath, false, nil
 		}
 
-		return ignoredFingerprints, fileExists, err
+		return ignoredFingerprints, ignoreFilePath, fileExists, err
 	}
 
 	// file exists
-	content, err := os.ReadFile(ignorePath)
+	content, err := os.ReadFile(ignoreFilePath)
 	if err != nil {
-		return ignoredFingerprints, true, err
+		return ignoredFingerprints, ignoreFilePath, true, err
 	}
 
 	err = json.Unmarshal(content, &ignoredFingerprints)
-	return ignoredFingerprints, true, err
+	return ignoredFingerprints, ignoreFilePath, true, err
 }
 
 func GetIgnoredFingerprintsFromCloud(
@@ -77,7 +77,7 @@ func MergeIgnoredFingerprints(fingerprintsToIgnore map[string]types.IgnoredFinge
 		if !force {
 			if _, ok := ignoredFingerprints[key]; ok {
 				return fmt.Errorf(
-					"fingerprint '%s' already exists in the bearer.ignore file. To view this entry run:\n\n$ bearer ignore show %s\n\nTo overwrite this entry, use --force",
+					"fingerprint '%s' already exists in your ignore file. To view this entry run:\n\n$ bearer ignore show %s\n\nTo overwrite this entry, use --force",
 					key,
 					key,
 				)
@@ -140,17 +140,13 @@ func GetAuthor() (*string, error) {
 	return pointer.String(strings.TrimSuffix(string(nameBytes), "\n")), nil
 }
 
-func getIgnoreFilePath(ignoreFilePath string, target *string) (
-	ignorePath string,
+func GetIgnoreFilePath(ignoreFilePath string, target *string) (
+	path string,
 	isDefaultPath bool,
 	fileExists bool,
 	err error,
 ) {
-	if ignoreFilePath == "" {
-		// use default ignore file path
-		isDefaultPath = true
-		ignoreFilePath = DefaultIgnoreFilepath
-	}
+	isDefaultPath = ignoreFilePath == DefaultIgnoreFilepath
 
 	_, err = os.Stat(ignoreFilePath)
 	if err == nil {
@@ -170,17 +166,17 @@ func getIgnoreFilePath(ignoreFilePath string, target *string) (
 	// append default path to target path and try again
 	targetPath, targetErr := targetPath(target)
 	if targetErr != nil {
-		return "", isDefaultPath, fileExists, targetErr
+		return ignoreFilePath, isDefaultPath, fileExists, targetErr
 	}
 
 	ignoreFilePath = filepath.Join(targetPath, ignoreFilePath)
 	info, err := os.Stat(ignoreFilePath)
 	if err != nil {
-		return "", isDefaultPath, fileExists, err
+		return ignoreFilePath, isDefaultPath, fileExists, err
 	}
 
 	if info.IsDir() {
-		return "", isDefaultPath, fileExists, fmt.Errorf("ignore file path %s is a dir not a file", ignoreFilePath)
+		return ignoreFilePath, isDefaultPath, fileExists, fmt.Errorf("ignore file path %s is a dir not a file", ignoreFilePath)
 	}
 
 	return ignoreFilePath, isDefaultPath, fileExists, nil

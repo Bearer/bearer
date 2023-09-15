@@ -31,20 +31,19 @@ Available Commands:
     migrate          Migrate ignored fingerprints
 
 Examples:
-    # Add an ignored fingerprint to your bearer.ignore file
+    # Add an ignored fingerprint to your ignore file
     $ bearer ignore add <fingerprint> --author Mish --comment "investigate this"
 
-    # Show the details of an ignored fingerprint from your bearer.ignore file
+    # Show the details of an ignored fingerprint from your ignore file
     $ bearer ignore show <fingerprint>
 
-    # Remove an ignored fingerprint from your bearer.ignore file
+    # Remove an ignored fingerprint from your ignore file
     $ bearer ignore remove <fingerprint>
 
     # Pull ignored fingerprints from the Cloud (requires API key)
     $ bearer ignore pull /path/to/your_project --api-key=XXXXX
 
     # Migrate existing ignored (excluded) fingerprints from bearer.yml file
-    # to bearer.ignore
     $ bearer ignore migrate
 
 `
@@ -78,7 +77,7 @@ func newIgnoreShowCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "show <fingerprint>",
 		Short: "Show an ignored fingerprint",
-		Example: `# Show the details of an ignored fingerprint from your bearer.ignore file
+		Example: `# Show the details of an ignored fingerprint from your ignore file
 $ bearer ignore show <fingerprint>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := IgnoreShowFlags.Bind(cmd); err != nil {
@@ -96,13 +95,13 @@ $ bearer ignore show <fingerprint>`,
 				return cmd.Help()
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
-				cmd.Printf("Issue loading ignored fingerprints from bearer.ignore file: %s", err)
+				cmd.Printf("Issue loading ignored fingerprints from %s: %s", err, ignoreFilepath)
 				return nil
 			}
 			if !fileExists {
-				cmd.Printf("bearer.ignore file not found. Perhaps you need to use --bearer-ignore-file to specify the path to bearer.ignore?\n")
+				cmd.Printf("Ignore file not found. Perhaps you need to use --ignore-file to specify the path to ignore?\n")
 				return nil
 			}
 
@@ -118,7 +117,7 @@ $ bearer ignore show <fingerprint>`,
 				fingerprintId := args[0]
 				selectedIgnoredFingerprint, ok := ignoredFingerprints[fingerprintId]
 				if !ok {
-					cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
+					cmd.Printf("Ignored fingerprint '%s' was not found in ignore file\n", fingerprintId)
 					return nil
 				}
 				cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint, options.GeneralOptions.NoColor))
@@ -143,7 +142,7 @@ func newIgnoreAddCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "add <fingerprint>",
 		Short: "Add an ignored fingerprint",
-		Example: `# Add an ignored fingerprint to your bearer.ignore file
+		Example: `# Add an ignored fingerprint to your ignore file
 $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := IgnoreAddFlags.Bind(cmd); err != nil {
@@ -168,14 +167,14 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				fingerprintId: fingerprintEntry,
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
 
 			// check for merge conflicts
 			if mergeErr := ignore.MergeIgnoredFingerprints(fingerprintsToIgnore, ignoredFingerprints, options.IgnoreAddOptions.Force); mergeErr != nil {
-				// handle expected error (duplicate entry in bearer.ignore)
+				// handle expected error (duplicate entry in ignore)
 				cmd.Printf("Error: %s\n", mergeErr.Error())
 				return nil
 			}
@@ -214,14 +213,14 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			ignoredFingerprints[fingerprintId] = fingerprintEntry
 
 			if !fileExists {
-				cmd.Printf("\nCreating bearer.ignore file...\n")
+				cmd.Printf("\nCreating ignore file...\n")
 			}
 
-			if err := writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.IgnoreFile); err != nil {
+			if err := writeIgnoreFile(ignoredFingerprints, ignoreFilepath); err != nil {
 				return err
 			}
 
-			cmd.Print("Fingerprint added to bearer.ignore:\n\n")
+			cmd.Print("Fingerprint added to ignore file:\n\n")
 			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, ignoredFingerprints[fingerprintId], options.GeneralOptions.NoColor))
 			cmd.Print("\n\n")
 			return nil
@@ -242,7 +241,7 @@ func newIgnoreRemoveCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "remove <fingerprint>",
 		Short: "Remove an ignored fingerprint",
-		Example: `# Remove an ignored fingerprint from your bearer.ignore file
+		Example: `# Remove an ignored fingerprint from your ignore file
 $ bearer ignore remove <fingerprint>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := IgnoreRemoveFlags.Bind(cmd); err != nil {
@@ -260,28 +259,28 @@ $ bearer ignore remove <fingerprint>`,
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
 			if !fileExists {
-				cmd.Printf("bearer.ignore file not found. Perhaps you need to use --bearer-ignore-file to specify the path to bearer.ignore?\n")
+				cmd.Printf("Ignore file not found. Perhaps you need to use --ignore-file to specify the path?\n")
 				return nil
 			}
 
 			fingerprintId := args[0]
 			removedFingerprint, ok := ignoredFingerprints[fingerprintId]
 			if !ok {
-				cmd.Printf("Ignored fingerprint '%s' was not found in bearer.ignore file\n", fingerprintId)
+				cmd.Printf("Ignored fingerprint '%s' was not found in ignore file\n", fingerprintId)
 				return nil
 			}
 
 			delete(ignoredFingerprints, fingerprintId)
-			if err := writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.IgnoreFile); err != nil {
+			if err := writeIgnoreFile(ignoredFingerprints, ignoreFilepath); err != nil {
 				return err
 			}
 
-			cmd.Print("Fingerprint successfully removed from bearer.ignore:\n\n")
+			cmd.Print("Fingerprint successfully removed from ignore file:\n\n")
 			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, removedFingerprint, options.GeneralOptions.NoColor))
 			cmd.Print("\n\n")
 			return nil
@@ -322,23 +321,14 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 				options.Target = args[0]
 			}
 
-			// confirm overwrite if bearer.ignore file exists
-			bearerIgnoreFilePath := options.GeneralOptions.IgnoreFile
-			fileExists := true
-			info, err := os.Stat(bearerIgnoreFilePath)
-			if os.IsNotExist(err) {
-				fileExists = false
-			} else {
-				if info.IsDir() {
-					return fmt.Errorf("bearer-ignore-file path %s is a dir not a file", bearerIgnoreFilePath)
-				}
-			}
-			if err != nil && fileExists {
+			// confirm overwrite if ignore file exists
+			ignoreFilePath, _, fileExists, err := ignore.GetIgnoreFilePath(options.GeneralOptions.IgnoreFile, &options.Target)
+			if err != nil {
 				return fmt.Errorf("file error: %s", err)
 			}
 
 			if fileExists {
-				overwriteApproved := requestConfirmation("Warning: this action will overwrite your current bearer.ignore file. Continue?")
+				overwriteApproved := requestConfirmation("Warning: this action will overwrite your current ignore file. Continue?")
 				cmd.Printf("\n")
 				if !overwriteApproved {
 					cmd.Printf("Okay, pull cancelled!\n")
@@ -370,7 +360,7 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 				return nil
 			}
 
-			// project found and we have ignores - write to bearer.ignore
+			// project found and we have ignores - write to ignore
 			cmd.Printf("Pulling %d ignores from the Cloud:\n", cloudIgnoresCount)
 			for fingerprintId, fingerprint := range data.CloudIgnoredFingerprints {
 				if fingerprint.Comment == nil {
@@ -381,7 +371,7 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 			}
 			cmd.Printf("\n")
 
-			if err = writeIgnoreFile(data.CloudIgnoredFingerprints, bearerIgnoreFilePath); err != nil {
+			if err = writeIgnoreFile(data.CloudIgnoredFingerprints, ignoreFilePath); err != nil {
 				return fmt.Errorf("error writing to file: %s", err)
 			}
 
@@ -404,8 +394,8 @@ func newIgnoreMigrateCommand() *cobra.Command {
 	}
 	cmd := &cobra.Command{
 		Use:   "migrate",
-		Short: "Migrate ignored fingerprints from bearer.yml to bearer.ignore",
-		Example: `# Migrate existing ignored (excluded) fingerprints from bearer.yml file to bearer.ignore
+		Short: "Migrate ignored fingerprints from bearer.yml to ignore file",
+		Example: `# Migrate existing ignored (excluded) fingerprints from bearer.yml file to ignore file
 $ bearer ignore migrate`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := IgnoreMigrateFlags.Bind(cmd); err != nil {
@@ -425,7 +415,7 @@ $ bearer ignore migrate`,
 			}
 			fingerprintsToMigrate := getIgnoredFingerprintsFromConfig(configFilePath)
 
-			ignoredFingerprints, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -435,7 +425,7 @@ $ bearer ignore migrate`,
 			cmd.Printf("Found %d ignores in:\n\t%s\n", migratedIgnoredCount, configFilePath)
 
 			if !fileExists {
-				cmd.Printf("\nCreating bearer.ignore file...\n")
+				cmd.Printf("\nCreating ignore file...\n")
 			}
 
 			if !options.IgnoreMigrateOptions.Force {
@@ -448,17 +438,17 @@ $ bearer ignore migrate`,
 				}
 			}
 
-			cmd.Printf("Added %d ignores to:\n\t%s\n", migratedIgnoredCount, options.GeneralOptions.IgnoreFile)
+			cmd.Printf("Added %d ignores to:\n\t%s\n", migratedIgnoredCount, ignoreFilepath)
 
 			if skippedIgnoresToMigrate != "" {
-				cmd.Printf("\nThe following ignores already exist in the bearer.ignore file:\n")
+				cmd.Printf("\nThe following ignores already exist in the ignore file:\n")
 				cmd.Printf(skippedIgnoresToMigrate)
 				cmd.Printf("\nTo overwrite these entries, use --force\n")
 			}
 
 			// either no duplicate entries at this point or --force is true so we can ignore merge error
 			_ = ignore.MergeIgnoredFingerprints(fingerprintsToMigrate, ignoredFingerprints, options.IgnoreMigrateOptions.Force)
-			return writeIgnoreFile(ignoredFingerprints, options.GeneralOptions.IgnoreFile)
+			return writeIgnoreFile(ignoredFingerprints, ignoreFilepath)
 		},
 		SilenceErrors: false,
 		SilenceUsage:  false,
@@ -479,18 +469,14 @@ func setLogLevel(cmd *cobra.Command) {
 	})
 }
 
-func writeIgnoreFile(ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint, bearerIgnoreFilePath string) error {
-	if bearerIgnoreFilePath == "" {
-		bearerIgnoreFilePath = ignore.DefaultIgnoreFilepath
-	}
-
+func writeIgnoreFile(ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint, ignoreFilePath string) error {
 	data, err := json.MarshalIndent(ignoredFingerprints, "", "  ")
 	if err != nil {
 		// failed to marshall data
 		return err
 	}
 
-	return os.WriteFile(bearerIgnoreFilePath, data, 0644)
+	return os.WriteFile(ignoreFilePath, data, 0644)
 }
 
 func getIgnoredFingerprintsFromConfig(configPath string) (ignoredFingerprintsFromConfig map[string]ignoretypes.IgnoredFingerprint) {
