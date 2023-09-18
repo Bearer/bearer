@@ -17,7 +17,6 @@ import (
 
 	"github.com/bearer/bearer/internal/classification/db"
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/detectors/dependencies"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
 	globaltypes "github.com/bearer/bearer/internal/types"
 	"github.com/bearer/bearer/internal/util/file"
@@ -548,27 +547,19 @@ func writeRuleListToString(
 	sort.Slice(languageSlice, func(i, j int) bool {
 		return len(languageSlice[i].Files) > len(languageSlice[j].Files)
 	})
-	unsupportedLanguages := make(map[string]int)
+	unsupportedLanguages := make(map[string]bool)
 	for _, lang := range languageSlice {
 		if ruleCount, ok := ruleCountPerLang[lang.Name]; ok {
 			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(languages[lang.Name].Files))
 		} else {
-			for _, detector := range dependencies.DetectorsForLanguage(lang.Name) {
-				if _, ok := unsupportedLanguages[lang.Name]; ok {
+			for _, reportedDependency := range reportedDependencies {
+				if unsupportedLanguages[reportedDependency.DetectorLanguage] {
 					break
 				}
-				for _, reportedDependency := range reportedDependencies {
-					if reportedDependency.Detector == detector {
-						unsupportedLanguages[lang.Name] = len(languages[lang.Name].Files)
-						break
-					}
-				}
+				unsupportedLanguages[lang.Name] = true
+				tbl.AddRow(lang.Name, 0, 0, len(languages[lang.Name].Files))
 			}
 		}
-	}
-
-	for language, filesCount := range unsupportedLanguages {
-		tbl.AddRow(language, 0, 0, filesCount)
 	}
 
 	tbl.Print()

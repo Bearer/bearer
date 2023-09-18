@@ -1,6 +1,7 @@
 package detectors
 
 type Type string
+type Language string
 
 const (
 	DetectorDependencies Type = "dependencies"

@@ -54,7 +54,7 @@ var queryRequires = parser.QueryMustCompile(language, `
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "npm"
-	report.Language = "Javascript"
+	report.Language = "JavaScript"
 	report.PackageManager = "npm"
 	tree, err := parser.ParseFile(f, f.Path, language)
 	if err != nil {
