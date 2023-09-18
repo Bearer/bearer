@@ -12,6 +12,7 @@ import (
 
 // methods that use `this` in their result
 var reflexiveMethods = []string{
+	"toString",
 	// String
 	"replace",
 	"replaceAll",
