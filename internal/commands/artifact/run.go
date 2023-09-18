@@ -402,7 +402,6 @@ func (r *runner) Report(
 	formatStr, err := reportoutput.FormatOutput(
 		reportData,
 		r.scanSettings,
-		cacheUsed,
 		report.Inputgocloc,
 		startTime,
 		endTime,
@@ -412,6 +411,22 @@ func (r *runner) Report(
 	}
 
 	logger(formatStr)
+
+	if !r.scanSettings.Scan.Quiet {
+		// add cached data warning message
+		if cacheUsed {
+			outputhandler.StdErrLog("Cached data used (no code changes detected). Unexpected? Use --force to force a re-scan.\n")
+		}
+		// add cloud info message
+		if r.scanSettings.Client != nil {
+			if r.scanSettings.Client.Error == nil {
+				outputhandler.StdErrLog("Data successfully sent to Bearer Cloud.")
+			} else {
+				// client error
+				outputhandler.StdErrLog(fmt.Sprintf("Failed to send data to Bearer Cloud. %s ", *r.scanSettings.Client.Error))
+			}
+		}
+	}
 
 	return reportData.ReportFailed, nil
 }
