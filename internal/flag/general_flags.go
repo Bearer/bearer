@@ -79,6 +79,14 @@ var (
 		Hide:            true,
 		DisableInConfig: true,
 	}
+	IgnoreGitFlag = Flag{
+		Name:            "ignore-git",
+		ConfigName:      "ignore-git",
+		Value:           false,
+		Usage:           "Ignore Git listing",
+		Hide:            true,
+		DisableInConfig: true,
+	}
 )
 
 type GeneralFlagGroup struct {
@@ -91,6 +99,7 @@ type GeneralFlagGroup struct {
 	DebugFlag           *Flag
 	LogLevelFlag        *Flag
 	DebugProfile        *Flag
+	IgnoreGit           *Flag
 }
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
@@ -103,6 +112,7 @@ type GeneralOptions struct {
 	Debug               bool   `mapstructure:"debug" json:"debug" yaml:"debug"`
 	LogLevel            string `mapstructure:"log-level" json:"log-level" yaml:"log-level"`
 	DebugProfile        bool
+	IgnoreGit           bool `mapstructure:"ignore-git" json:"ignore-git" yaml:"ignore-git"`
 }
 
 func NewGeneralFlagGroup() *GeneralFlagGroup {
@@ -116,6 +126,7 @@ func NewGeneralFlagGroup() *GeneralFlagGroup {
 		DebugFlag:           &DebugFlag,
 		LogLevelFlag:        &LogLevelFlag,
 		DebugProfile:        &DebugProfileFlag,
+		IgnoreGit:           &IgnoreGitFlag,
 	}
 }
 
@@ -134,6 +145,7 @@ func (f *GeneralFlagGroup) Flags() []*Flag {
 		f.DebugFlag,
 		f.LogLevelFlag,
 		f.DebugProfile,
+		f.IgnoreGit,
 	}
 }
 
@@ -169,6 +181,7 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		IgnoreFile:          getString(f.IgnoreFile),
 		Debug:               debug,
 		LogLevel:            logLevel,
+		IgnoreGit:           getBool(f.IgnoreGit),
 		DebugProfile:        getBool(f.DebugProfile),
 	}
 }

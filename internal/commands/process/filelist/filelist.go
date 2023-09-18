@@ -19,21 +19,23 @@ import (
 func Discover(repository *gitrepository.Repository, targetPath string, goclocResult *gocloc.Result, config settings.Config) (*flfiles.List, error) {
 	ignore := ignore.New(targetPath, config)
 
-	fileList, err := repository.ListFiles(ignore, goclocResult)
-	if err != nil {
-		log.Error().Msg("Git discovery failed")
-		return nil, err
-	}
+	if !config.IgnoreGit {
+		fileList, err := repository.ListFiles(ignore, goclocResult)
+		if err != nil {
+			log.Error().Msg("Git discovery failed")
+			return nil, err
+		}
 
-	if fileList != nil {
-		log.Debug().Msg("Files found from Git")
-		return fileList, nil
-	}
+		if fileList != nil {
+			log.Debug().Msg("Files found from Git")
+			return fileList, nil
+		}
 
-	log.Debug().Msg("No files found from Git")
+		log.Debug().Msg("No files found from Git")
+	}
 
 	var files []flfiles.File
-	err = filepath.WalkDir(targetPath, func(filePath string, d fs.DirEntry, err error) error {
+	err := filepath.WalkDir(targetPath, func(filePath string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
