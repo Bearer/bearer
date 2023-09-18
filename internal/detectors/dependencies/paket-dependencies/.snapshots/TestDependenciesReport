@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    DetectorLanguage: (detectors.Language) (len=2) "C#",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    DetectorLanguage: (detectors.Language) (len=2) "C#",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    DetectorLanguage: (detectors.Language) (len=2) "C#",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
@@ -68,6 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    DetectorLanguage: (detectors.Language) (len=2) "C#",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
@@ -90,6 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    DetectorLanguage: (detectors.Language) (len=2) "C#",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",
@@ -112,6 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    DetectorLanguage: (detectors.Language) (len=2) "C#",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "paket.dependencies",

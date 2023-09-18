@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -30,6 +31,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -58,6 +60,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -86,6 +89,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -114,6 +118,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -142,6 +147,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -170,6 +176,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -198,6 +205,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -226,6 +234,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -254,6 +263,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -282,6 +292,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -310,6 +321,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -338,6 +350,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -366,6 +379,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -394,6 +408,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -422,6 +437,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -450,6 +466,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -478,6 +495,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -506,6 +524,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -534,6 +553,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -562,6 +582,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -590,6 +611,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -618,6 +640,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -646,6 +669,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -674,6 +698,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -702,6 +727,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -730,6 +756,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -758,6 +785,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -786,6 +814,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -814,6 +843,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -842,6 +872,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -870,6 +901,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -898,6 +930,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -926,6 +959,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -954,6 +988,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -982,6 +1017,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1010,6 +1046,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1038,6 +1075,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1066,6 +1104,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1094,6 +1133,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1122,6 +1162,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1150,6 +1191,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1178,6 +1220,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1206,6 +1249,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1234,6 +1278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1262,6 +1307,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1290,6 +1336,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
@@ -1318,6 +1365,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",

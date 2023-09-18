@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -68,6 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -90,6 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -112,6 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -134,6 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -156,6 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -178,6 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -200,6 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -222,6 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -244,6 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -266,6 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -288,6 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -310,6 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -332,6 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -354,6 +370,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -376,6 +393,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -398,6 +416,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -420,6 +439,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -442,6 +462,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -464,6 +485,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -486,6 +508,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -508,6 +531,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -530,6 +554,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -552,6 +577,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -574,6 +600,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -596,6 +623,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -618,6 +646,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -640,6 +669,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -662,6 +692,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -684,6 +715,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -706,6 +738,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -728,6 +761,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -750,6 +784,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -772,6 +807,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -794,6 +830,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -816,6 +853,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -838,6 +876,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -860,6 +899,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -882,6 +922,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -904,6 +945,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -926,6 +968,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -948,6 +991,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -970,6 +1014,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -992,6 +1037,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1014,6 +1060,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1036,6 +1083,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1058,6 +1106,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1080,6 +1129,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1102,6 +1152,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1124,6 +1175,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1146,6 +1198,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1168,6 +1221,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1190,6 +1244,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1212,6 +1267,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1234,6 +1290,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1256,6 +1313,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1278,6 +1336,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1300,6 +1359,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1322,6 +1382,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1344,6 +1405,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1366,6 +1428,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1388,6 +1451,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1410,6 +1474,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1432,6 +1497,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1454,6 +1520,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",
@@ -1476,6 +1543,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
+    DetectorLanguage: (detectors.Language) (len=2) "Go",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=6) "go.sum",

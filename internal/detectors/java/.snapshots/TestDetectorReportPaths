@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -30,6 +31,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -58,6 +60,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -86,6 +89,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -114,6 +118,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -142,6 +147,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -170,6 +176,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -198,6 +205,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -226,6 +234,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -254,6 +263,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",
@@ -285,6 +295,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "config.java",

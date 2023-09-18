@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -68,6 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -90,6 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -112,6 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -134,6 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -156,6 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -178,6 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -200,6 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -222,6 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -244,6 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -266,6 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -288,6 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -310,6 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -332,6 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -354,6 +370,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -376,6 +393,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -398,6 +416,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -420,6 +439,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -442,6 +462,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -464,6 +485,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -486,6 +508,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -508,6 +531,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -530,6 +554,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -552,6 +577,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -574,6 +600,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -596,6 +623,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -618,6 +646,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -640,6 +669,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -662,6 +692,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -684,6 +715,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -706,6 +738,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -728,6 +761,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -750,6 +784,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -772,6 +807,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -794,6 +830,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -816,6 +853,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -838,6 +876,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -860,6 +899,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -882,6 +922,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -904,6 +945,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -926,6 +968,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -948,6 +991,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -970,6 +1014,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -992,6 +1037,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1014,6 +1060,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1036,6 +1083,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1058,6 +1106,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1080,6 +1129,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1102,6 +1152,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1124,6 +1175,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1146,6 +1198,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1168,6 +1221,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1190,6 +1244,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1212,6 +1267,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1234,6 +1290,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1256,6 +1313,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1278,6 +1336,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1300,6 +1359,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1322,6 +1382,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1344,6 +1405,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1366,6 +1428,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1388,6 +1451,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1410,6 +1474,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1432,6 +1497,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1454,6 +1520,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1476,6 +1543,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1498,6 +1566,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1520,6 +1589,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1542,6 +1612,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1564,6 +1635,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1586,6 +1658,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1608,6 +1681,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1630,6 +1704,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1652,6 +1727,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1674,6 +1750,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1696,6 +1773,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1718,6 +1796,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1740,6 +1819,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1762,6 +1842,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1784,6 +1865,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1806,6 +1888,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1828,6 +1911,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1850,6 +1934,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1872,6 +1957,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1894,6 +1980,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1916,6 +2003,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1938,6 +2026,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1960,6 +2049,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -1982,6 +2072,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2004,6 +2095,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2026,6 +2118,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2048,6 +2141,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2070,6 +2164,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2092,6 +2187,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2114,6 +2210,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2136,6 +2233,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2158,6 +2256,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2180,6 +2279,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2202,6 +2302,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2224,6 +2325,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2246,6 +2348,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2268,6 +2371,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2290,6 +2394,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2312,6 +2417,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2334,6 +2440,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2356,6 +2463,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2378,6 +2486,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2400,6 +2509,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2422,6 +2532,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2444,6 +2555,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2466,6 +2578,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2488,6 +2601,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2510,6 +2624,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2532,6 +2647,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2554,6 +2670,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2576,6 +2693,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2598,6 +2716,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2620,6 +2739,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2642,6 +2762,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2664,6 +2785,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2686,6 +2808,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2708,6 +2831,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2730,6 +2854,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2752,6 +2877,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2774,6 +2900,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2796,6 +2923,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2818,6 +2946,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2840,6 +2969,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2862,6 +2992,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2884,6 +3015,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2906,6 +3038,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2928,6 +3061,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2950,6 +3084,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2972,6 +3107,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -2994,6 +3130,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3016,6 +3153,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3038,6 +3176,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3060,6 +3199,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3082,6 +3222,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3104,6 +3245,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3126,6 +3268,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3148,6 +3291,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3170,6 +3314,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3192,6 +3337,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3214,6 +3360,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3236,6 +3383,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3258,6 +3406,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3280,6 +3429,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3302,6 +3452,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3324,6 +3475,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3346,6 +3498,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3368,6 +3521,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3390,6 +3544,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3412,6 +3567,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3434,6 +3590,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3456,6 +3613,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3478,6 +3636,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3500,6 +3659,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3522,6 +3682,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3544,6 +3705,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3566,6 +3728,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3588,6 +3751,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3610,6 +3774,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3632,6 +3797,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3654,6 +3820,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3676,6 +3843,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3698,6 +3866,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3720,6 +3889,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3742,6 +3912,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3764,6 +3935,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3786,6 +3958,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3808,6 +3981,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3830,6 +4004,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3852,6 +4027,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3874,6 +4050,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3896,6 +4073,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3918,6 +4096,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3940,6 +4119,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3962,6 +4142,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -3984,6 +4165,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4006,6 +4188,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4028,6 +4211,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4050,6 +4234,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4072,6 +4257,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4094,6 +4280,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4116,6 +4303,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4138,6 +4326,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4160,6 +4349,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4182,6 +4372,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4204,6 +4395,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4226,6 +4418,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4248,6 +4441,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4270,6 +4464,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4292,6 +4487,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4314,6 +4510,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4336,6 +4533,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4358,6 +4556,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4380,6 +4579,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4402,6 +4602,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4424,6 +4625,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4446,6 +4648,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4468,6 +4671,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4490,6 +4694,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4512,6 +4717,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4534,6 +4740,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4556,6 +4763,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4578,6 +4786,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4600,6 +4809,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4622,6 +4832,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4644,6 +4855,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4666,6 +4878,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4688,6 +4901,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4710,6 +4924,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4732,6 +4947,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4754,6 +4970,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4776,6 +4993,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4798,6 +5016,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4820,6 +5039,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4842,6 +5062,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4864,6 +5085,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4886,6 +5108,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4908,6 +5131,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4930,6 +5154,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4952,6 +5177,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4974,6 +5200,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -4996,6 +5223,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5018,6 +5246,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5040,6 +5269,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5062,6 +5292,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5084,6 +5315,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5106,6 +5338,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5128,6 +5361,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5150,6 +5384,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5172,6 +5407,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5194,6 +5430,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5216,6 +5453,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5238,6 +5476,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5260,6 +5499,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5282,6 +5522,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5304,6 +5545,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5326,6 +5568,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5348,6 +5591,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5370,6 +5614,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5392,6 +5637,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5414,6 +5660,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5436,6 +5683,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5458,6 +5706,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5480,6 +5729,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5502,6 +5752,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5524,6 +5775,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5546,6 +5798,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5568,6 +5821,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5590,6 +5844,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5612,6 +5867,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5634,6 +5890,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5656,6 +5913,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5678,6 +5936,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5700,6 +5959,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5722,6 +5982,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5744,6 +6005,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5766,6 +6028,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5788,6 +6051,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5810,6 +6074,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5832,6 +6097,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5854,6 +6120,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5876,6 +6143,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5898,6 +6166,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5920,6 +6189,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5942,6 +6212,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5964,6 +6235,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -5986,6 +6258,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6008,6 +6281,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6030,6 +6304,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6052,6 +6327,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6074,6 +6350,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6096,6 +6373,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6118,6 +6396,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6140,6 +6419,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6162,6 +6442,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6184,6 +6465,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6206,6 +6488,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6228,6 +6511,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6250,6 +6534,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6272,6 +6557,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6294,6 +6580,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6316,6 +6603,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6338,6 +6626,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6360,6 +6649,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6382,6 +6672,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6404,6 +6695,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6426,6 +6718,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6448,6 +6741,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6470,6 +6764,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6492,6 +6787,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6514,6 +6810,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "large-file/pom.xml",
@@ -6536,6 +6833,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6558,6 +6856,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6580,6 +6879,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6602,6 +6902,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6624,6 +6925,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6646,6 +6948,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6668,6 +6971,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6690,6 +6994,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6712,6 +7017,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6734,6 +7040,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6756,6 +7063,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v1/pom.xml",
@@ -6778,6 +7086,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6800,6 +7109,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6822,6 +7132,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6844,6 +7155,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6866,6 +7178,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6888,6 +7201,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6910,6 +7224,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6932,6 +7247,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6954,6 +7270,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6976,6 +7293,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -6998,6 +7316,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -7020,6 +7339,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "v2/pom.xml",
@@ -7042,6 +7362,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7064,6 +7385,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7086,6 +7408,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7108,6 +7431,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7130,6 +7454,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7152,6 +7477,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7174,6 +7500,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7196,6 +7523,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7218,6 +7546,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7240,6 +7569,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7262,6 +7592,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",
@@ -7284,6 +7615,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "v2-iso/pom.xml",

@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "paths/main.js",
@@ -30,6 +31,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -58,6 +60,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -86,6 +89,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -114,6 +118,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -142,6 +147,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -170,6 +176,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -198,6 +205,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -226,6 +234,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -254,6 +263,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -282,6 +292,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -310,6 +321,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -341,6 +353,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -372,6 +385,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -403,6 +417,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -434,6 +449,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",
@@ -480,6 +496,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=19) "variables/config.js",

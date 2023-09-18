@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "datatype.java",
@@ -30,6 +31,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "datatype.java",
@@ -58,6 +60,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "datatype.java",
@@ -86,6 +89,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=4) "java",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "datatype.java",

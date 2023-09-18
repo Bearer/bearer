@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -30,6 +31,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -58,6 +60,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -86,6 +89,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=10) "javascript",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -114,6 +118,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "php",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -145,6 +150,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "php",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -176,6 +182,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "php",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -211,6 +218,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "php",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",
@@ -257,6 +265,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "php",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.php",

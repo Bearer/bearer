@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
@@ -41,6 +42,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
@@ -72,6 +74,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
@@ -103,6 +106,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
@@ -134,6 +138,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
@@ -165,6 +170,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
@@ -196,6 +202,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=9) "config.go",
@@ -227,6 +234,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
@@ -255,6 +263,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
@@ -283,6 +292,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
@@ -311,6 +321,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=6) "golang",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=7) "urls.go",
