@@ -88,7 +88,6 @@ func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config
 func FormatOutput(
 	reportData *types.ReportData,
 	config settings.Config,
-	cacheUsed bool,
 	goclocResult *gocloc.Result,
 	startTime time.Time,
 	endTime time.Time,
@@ -117,25 +116,6 @@ func FormatOutput(
 	}
 	if formatStr == "" {
 		return "", fmt.Errorf(`--report flag "%s" does not support --format flag "%s"`, config.Report.Report, config.Report.Format)
-	}
-
-	if !config.Scan.Quiet && (reportData.SendToCloud || cacheUsed) {
-		// add cached data warning message
-		if cacheUsed {
-			formatStr += "\n\nCached data used (no code changes detected). Unexpected? Use --force to force a re-scan."
-		}
-
-		// add cloud info message
-		if reportData.SendToCloud {
-			if config.Client.Error == nil {
-				formatStr += "\n\nData successfully sent to Bearer Cloud."
-			} else {
-				// client error
-				formatStr += fmt.Sprintf("\n\nFailed to send data to Bearer Cloud. %s ", *config.Client.Error)
-			}
-		}
-
-		formatStr += "\n"
 	}
 
 	return formatStr, err
