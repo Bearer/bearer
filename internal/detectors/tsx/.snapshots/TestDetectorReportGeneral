@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
@@ -33,6 +34,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
@@ -64,6 +66,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
@@ -95,6 +98,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
@@ -126,6 +130,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",
@@ -172,6 +177,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
+    DetectorLanguage: (detectors.Language) "",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=10) "config.tsx",

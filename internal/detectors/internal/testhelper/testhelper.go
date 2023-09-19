@@ -177,11 +177,18 @@ func (report *InMemoryReport) AddFramework(
 
 func (report *InMemoryReport) AddDependency(
 	detectorType reportdetectors.Type,
+	detectorLanguage reportdetectors.Language,
 	dependency dependencies.Dependency,
 	source source.Source,
 ) {
 
-	report.Dependencies = append(report.Dependencies, &detections.Detection{DetectorType: detectorType, Value: dependency, Source: source, Type: detections.TypeDependency})
+	report.Dependencies = append(report.Dependencies, &detections.Detection{
+		DetectorType:     detectorType,
+		DetectorLanguage: detectorLanguage,
+		Value:            dependency,
+		Source:           source,
+		Type:             detections.TypeDependency,
+	})
 }
 
 func (report *InMemoryReport) AddSecretLeak(

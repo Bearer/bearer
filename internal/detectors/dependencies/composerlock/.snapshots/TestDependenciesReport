@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerlock",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerlock",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerlock",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
@@ -68,6 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerlock",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
@@ -90,6 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerlock",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
@@ -112,6 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerlock",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",
@@ -134,6 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerlock",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.lock",

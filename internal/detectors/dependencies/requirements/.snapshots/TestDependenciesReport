@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
@@ -68,6 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",

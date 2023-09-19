@@ -176,11 +176,18 @@ func (report *Detectors) AddDetection(detectionType detections.DetectionType, de
 
 func (report *Detectors) AddDependency(
 	detectorType detectors.Type,
+	detectorLanguage detectors.Language,
 	dependency dependencies.Dependency,
 	source source.Source,
 ) {
 
-	detection := &detections.Detection{DetectorType: detectorType, Value: dependency, Source: source, Type: detections.TypeDependency}
+	detection := &detections.Detection{
+		DetectorType:     detectorType,
+		DetectorLanguage: detectorLanguage,
+		Value:            dependency,
+		Source:           source,
+		Type:             detections.TypeDependency,
+	}
 	classifiedDetection, err := report.Classifier.Dependencies.Classify(*detection)
 	if err != nil {
 		report.AddError(source.Filename, fmt.Errorf("classification dependencies error: %s", err))

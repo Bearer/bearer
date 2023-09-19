@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=9) "mvnplugin",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=23) "maven-dependencies.json",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=9) "mvnplugin",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=23) "maven-dependencies.json",

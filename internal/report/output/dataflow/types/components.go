@@ -9,10 +9,11 @@ type Component struct {
 }
 
 type Dependency struct {
-	Name     string `json:"name" yaml:"name"`
-	Version  string `json:"version" yaml:"version"`
-	Filename string `json:"filename" yaml:"filename"`
-	Detector string `json:"detector" yaml:"detector"`
+	Name             string `json:"name" yaml:"name"`
+	Version          string `json:"version" yaml:"version"`
+	Filename         string `json:"filename" yaml:"filename"`
+	Detector         string `json:"detector" yaml:"detector"`
+	DetectorLanguage string `json:"-" yaml:"-"`
 }
 
 type ComponentLocation struct {

@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=9) "pyproject",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=9) "pyproject",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=9) "pyproject",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "pyproject.toml",

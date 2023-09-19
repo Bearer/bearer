@@ -62,9 +62,10 @@ type FrameworkDetection struct {
 }
 
 type Detection struct {
-	Type         DetectionType  `json:"type" yaml:"type"`
-	DetectorType detectors.Type `json:"detector_type" yaml:"detector_type"`
-	CommitSHA    string         `json:"commit_sha,omitempty" yaml:"commit_sha,omitempty"`
-	Source       source.Source  `json:"source" yaml:"source"`
-	Value        interface{}    `json:"value" yaml:"value"`
+	Type             DetectionType      `json:"type" yaml:"type"`
+	DetectorType     detectors.Type     `json:"detector_type" yaml:"detector_type"`
+	DetectorLanguage detectors.Language `json:"detector_language,omitempty" yaml:"detector_language,omitempty"`
+	CommitSHA        string             `json:"commit_sha,omitempty" yaml:"commit_sha,omitempty"`
+	Source           source.Source      `json:"source" yaml:"source"`
+	Value            interface{}        `json:"value" yaml:"value"`
 }

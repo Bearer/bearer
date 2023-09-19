@@ -20,9 +20,10 @@ type Holder struct {
 }
 
 type dependency struct {
-	name     string
-	filename string
-	version  string
+	name             string
+	filename         string
+	version          string
+	detectorLanguage string
 }
 
 type component struct {
@@ -103,6 +104,7 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 
 		holder.addDependency(
 			string(classifiedDetection.DetectorType),
+			string(classifiedDetection.DetectorLanguage),
 			classifiedDetection.Source.Filename,
 			name,
 			version,
@@ -163,6 +165,7 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 // addComponent adds component to hash list and at the same time blocks duplicates
 func (holder *Holder) addDependency(
 	detectorName string,
+	detectorLanguage string,
 	fileName string,
 	name string,
 	version string,
@@ -174,9 +177,10 @@ func (holder *Holder) addDependency(
 	holder.dependencies[detectorName] = append(
 		holder.dependencies[detectorName],
 		&dependency{
-			name:     name,
-			version:  version,
-			filename: fileName,
+			name:             name,
+			version:          version,
+			filename:         fileName,
+			detectorLanguage: detectorLanguage,
 		},
 	)
 }
@@ -235,10 +239,11 @@ func (holder *Holder) ToDataFlowForDependencies() []types.Dependency {
 	for detectorName, dependencies := range holder.dependencies {
 		for _, dependency := range dependencies {
 			data = append(data, types.Dependency{
-				Name:     dependency.name,
-				Version:  dependency.version,
-				Filename: dependency.filename,
-				Detector: detectorName,
+				Name:             dependency.name,
+				Version:          dependency.version,
+				Filename:         dependency.filename,
+				Detector:         detectorName,
+				DetectorLanguage: dependency.detectorLanguage,
 			})
 		}
 	}

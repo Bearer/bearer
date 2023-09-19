@@ -22,7 +22,7 @@ var dependencyLockedVersionRegexp *regexp.Regexp
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "yarn.lock"
-	report.Language = "Javascript"
+	report.Language = "JavaScript"
 	report.PackageManager = "npm"
 
 	fileBytes, err := os.ReadFile(f.AbsolutePath)

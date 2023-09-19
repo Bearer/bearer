@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -68,6 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -90,6 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -112,6 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -134,6 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -156,6 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -178,6 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -200,6 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -222,6 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -244,6 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -266,6 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -288,6 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -310,6 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -332,6 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -354,6 +370,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -376,6 +393,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -398,6 +416,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -420,6 +439,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -442,6 +462,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -464,6 +485,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -486,6 +508,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -508,6 +531,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -530,6 +554,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -552,6 +577,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -574,6 +600,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -596,6 +623,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -618,6 +646,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -640,6 +669,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -662,6 +692,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",
@@ -684,6 +715,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    DetectorLanguage: (detectors.Language) (len=6) "Python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "pipdeptree.json",

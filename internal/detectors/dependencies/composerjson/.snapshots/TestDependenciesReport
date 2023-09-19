@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerjson",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.json",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "composerjson",
+    DetectorLanguage: (detectors.Language) (len=3) "PHP",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=13) "composer.json",

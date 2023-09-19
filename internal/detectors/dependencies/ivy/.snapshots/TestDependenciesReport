@@ -2,6 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -24,6 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -46,6 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -68,6 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -90,6 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -112,6 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -134,6 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -156,6 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -178,6 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -200,6 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -222,6 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -244,6 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -266,6 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -288,6 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -310,6 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
@@ -332,6 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
+    DetectorLanguage: (detectors.Language) (len=4) "Java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=14) "ivy-report.xml",
