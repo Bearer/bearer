@@ -45,7 +45,8 @@ func ParseAndAnalyze(
 	}
 
 	analyzer := language.NewAnalyzer(builder)
-	if err := analyzeNode(ctx, ruleSet, builder, analyzer, builder.SitterRootNode()); err != nil {
+	var disabledRules []*ruleset.Rule
+	if err := analyzeNode(ctx, ruleSet, builder, analyzer, builder.SitterRootNode(), disabledRules); err != nil {
 		return nil, fmt.Errorf("error running language analysis: %w", err)
 	}
 
@@ -76,6 +77,7 @@ func analyzeNode(
 	builder *tree.Builder,
 	analyzer language.Analyzer,
 	node *sitter.Node,
+	disabledRules []*ruleset.Rule,
 ) error {
 	if ctx.Err() != nil {
 		return ctx.Err()
@@ -84,17 +86,25 @@ func analyzeNode(
 	visitChildren := func() error {
 		childCount := int(node.ChildCount())
 
-		var disabledRules []*ruleset.Rule
 		for i := 0; i < childCount; i++ {
 			child := node.Child(i)
+			nextChild := node.Child(i + 1)
 			if !child.IsNamed() {
 				continue
 			}
 
-			disabledRules = addDisabledRules(ruleSet, builder, disabledRules, node)
-			if err := analyzeNode(ctx, ruleSet, builder, analyzer, child); err != nil {
-				return err
+			if nextDisabledRules := addDisabledRules(ruleSet, builder, disabledRules, child); nextDisabledRules != nil {
+				if err := analyzeNode(ctx, ruleSet, builder, analyzer, nextChild, nextDisabledRules); err != nil {
+					return err
+				}
+			} else {
+				builder.AddDisabledRules(child, disabledRules)
+
+				if err := analyzeNode(ctx, ruleSet, builder, analyzer, child, disabledRules); err != nil {
+					return err
+				}
 			}
+
 		}
 
 		return nil
@@ -111,7 +121,6 @@ func addDisabledRules(
 ) []*ruleset.Rule {
 	if node.Type() == "comment" {
 		nextDisabledRules := disabledRules
-
 		nodeContent := builder.ContentFor(node)
 		if strings.Contains(nodeContent, "bearer:disable") {
 			rawRuleIDs := strings.Split(nodeContent, "bearer:disable")[1]
@@ -129,8 +138,6 @@ func addDisabledRules(
 
 		return nextDisabledRules
 	}
-
-	builder.AddDisabledRules(node, disabledRules)
 
 	return nil
 }
