@@ -1,6 +1,6 @@
 name: ' ignore pull'
 synopsis: Pull ignored fingerprints from Cloud
-usage: ' ignore pull [flags]'
+usage: ' ignore pull <path> [flags]'
 options:
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.

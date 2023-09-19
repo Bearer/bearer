@@ -299,7 +299,7 @@ func newIgnorePullCommand() *cobra.Command {
 		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
 	}
 	cmd := &cobra.Command{
-		Use:   "pull",
+		Use:   "pull <path>",
 		Short: "Pull ignored fingerprints from Cloud",
 		Example: `# Pull ignored fingerprints from the Cloud (requires API key)
 $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
