@@ -116,6 +116,7 @@ jobs:
           output: results.sarif
 +       # Add a new step to upload the SARIF file
       - name: Upload SARIF file
+        if: always()
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif
