@@ -62,6 +62,9 @@ options:
     - name: ignore-file
       default_value: bearer.ignore
       usage: Load ignore file from the specified path.
+    - name: ignore-git
+      default_value: "false"
+      usage: Ignore Git listing
     - name: internal-domains
       default_value: '[]'
       usage: |
