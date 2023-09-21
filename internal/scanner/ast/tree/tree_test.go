@@ -20,7 +20,7 @@ func parseTree(t *testing.T, content string) *tree.Tree {
 		t.Fatalf("failed to parse input: %s", err)
 	}
 
-	return tree.NewBuilder(contentBytes, sitterRootNode).Build()
+	return tree.NewBuilder(contentBytes, sitterRootNode, 0).Build()
 }
 
 func TestTree(t *testing.T) {

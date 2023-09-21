@@ -3,7 +3,6 @@ package rulescanner
 import (
 	"context"
 	"fmt"
-	"slices"
 	"time"
 
 	"github.com/rs/zerolog/log"
@@ -115,7 +114,7 @@ func (scanner *Scanner) detectAtNode(rule *ruleset.Rule, node *tree.Node) (*dete
 		return result, nil
 	}
 
-	if scanner.ruleDisabledForNode(rule, node) {
+	if node.RuleDisabled(rule.Index()) {
 		if log.Trace().Enabled() {
 			log.Trace().Msgf(
 				"detect at node end: %s at %s: rule disabled",
@@ -144,16 +143,6 @@ func (scanner *Scanner) detectAtNode(rule *ruleset.Rule, node *tree.Node) (*dete
 
 	scanner.cache.Put(node, rule, result)
 	return result, nil
-}
-
-func (scanner *Scanner) ruleDisabledForNode(rule *ruleset.Rule, node *tree.Node) bool {
-	for current := node; current != nil; current = current.Parent() {
-		if slices.Contains(node.DisabledRuleIndices(), rule.Index()) {
-			return true
-		}
-	}
-
-	return false
 }
 
 func traceResultText(result *detectorset.Result) string {

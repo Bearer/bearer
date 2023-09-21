@@ -1,0 +1,175 @@
+([]ast_test.ruleInfo) (len=4) {
+  (ast_test.ruleInfo) {
+    ID: (string) (len=5) "rule1",
+    Index: (int) 5
+  },
+  (ast_test.ruleInfo) {
+    ID: (string) (len=5) "rule2",
+    Index: (int) 6
+  },
+  (ast_test.ruleInfo) {
+    ID: (string) (len=5) "rule3",
+    Index: (int) 7
+  },
+  (ast_test.ruleInfo) {
+    ID: (string) (len=5) "rule4",
+    Index: (int) 8
+  }
+}
+type: program
+id: 0
+range: 2:3 - 9:2
+dataflow_sources:
+    - 1
+    - 2
+    - 3
+children:
+    - type: comment
+      id: 1
+      range: 2:3 - 2:31
+      content: '# bearer:disable rule1,rule2'
+    - type: comment
+      id: 2
+      range: 3:3 - 3:25
+      content: '# bearer:disable rule3'
+    - type: method
+      id: 3
+      range: 4:3 - 8:6
+      disabledrules:
+        - 5
+        - 6
+        - 7
+      children:
+        - type: '"def"'
+          id: 4
+          range: 4:3 - 4:6
+          disabledrules:
+            - 5
+            - 6
+            - 7
+        - type: identifier
+          id: 5
+          range: 4:7 - 4:8
+          content: m
+          disabledrules:
+            - 5
+            - 6
+            - 7
+        - type: method_parameters
+          id: 6
+          range: 4:8 - 4:11
+          dataflow_sources:
+            - 7
+            - 8
+            - 9
+          disabledrules:
+            - 5
+            - 6
+            - 7
+          children:
+            - type: '"("'
+              id: 7
+              range: 4:8 - 4:9
+              disabledrules:
+                - 5
+                - 6
+                - 7
+            - type: identifier
+              id: 8
+              range: 4:9 - 4:10
+              content: a
+              disabledrules:
+                - 5
+                - 6
+                - 7
+            - type: '")"'
+              id: 9
+              range: 4:10 - 4:11
+              disabledrules:
+                - 5
+                - 6
+                - 7
+        - type: comment
+          id: 10
+          range: 5:4 - 5:26
+          content: '# bearer:disable rule4'
+          disabledrules:
+            - 5
+            - 6
+            - 7
+        - type: call
+          id: 11
+          range: 6:4 - 6:9
+          disabledrules:
+            - 5
+            - 6
+            - 7
+            - 8
+          children:
+            - type: identifier
+              id: 12
+              range: 6:4 - 6:5
+              content: a
+              alias_of:
+                - 8
+              disabledrules:
+                - 5
+                - 6
+                - 7
+                - 8
+            - type: '"."'
+              id: 13
+              range: 6:5 - 6:6
+              disabledrules:
+                - 5
+                - 6
+                - 7
+                - 8
+            - type: identifier
+              id: 14
+              range: 6:6 - 6:9
+              content: foo
+              disabledrules:
+                - 5
+                - 6
+                - 7
+                - 8
+        - type: call
+          id: 15
+          range: 7:4 - 7:9
+          disabledrules:
+            - 5
+            - 6
+            - 7
+          children:
+            - type: identifier
+              id: 16
+              range: 7:4 - 7:5
+              content: b
+              disabledrules:
+                - 5
+                - 6
+                - 7
+            - type: '"."'
+              id: 17
+              range: 7:5 - 7:6
+              disabledrules:
+                - 5
+                - 6
+                - 7
+            - type: identifier
+              id: 18
+              range: 7:6 - 7:9
+              content: bar
+              disabledrules:
+                - 5
+                - 6
+                - 7
+        - type: '"end"'
+          id: 19
+          range: 8:3 - 8:6
+          disabledrules:
+            - 5
+            - 6
+            - 7
+

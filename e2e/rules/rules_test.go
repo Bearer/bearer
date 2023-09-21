@@ -31,6 +31,10 @@ func TestAuxilary(t *testing.T) {
 	runRulesTest("auxilary", "javascript_third_parties_datadog_test", t)
 }
 
+func TestDisabledRules(t *testing.T) {
+	runRulesTest("disabled_rules", "match_sink", t)
+}
+
 func TestReferenceFilters(t *testing.T) {
 	runRulesTest("reference_filters", "reference_filters_test", t)
 }
