@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"slices"
 
+	"golang.org/x/exp/maps"
+
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/report/customdetectors"
 	"github.com/bearer/bearer/internal/util/set"
@@ -90,7 +92,11 @@ func New(languageID string, settingsRules map[string]*settings.Rule) (*Set, erro
 func getLanguageRules(settingsRules map[string]*settings.Rule, languageID string) []*settings.Rule {
 	var result []*settings.Rule
 
-	for _, settingsRule := range settingsRules {
+	ruleIDs := maps.Keys(settingsRules)
+	slices.Sort(ruleIDs)
+
+	for _, ruleID := range ruleIDs {
+		settingsRule := settingsRules[ruleID]
 		if slices.Contains(settingsRule.Languages, languageID) {
 			result = append(result, settingsRule)
 		}
