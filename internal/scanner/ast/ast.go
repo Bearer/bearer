@@ -20,7 +20,7 @@ func Parse(
 	language language.Language,
 	contentBytes []byte,
 ) (*tree.Tree, error) {
-	builder, err := parseBuilder(ctx, language, contentBytes)
+	builder, err := parseBuilder(ctx, language, contentBytes, 0)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func ParseAndAnalyze(
 	querySet *query.Set,
 	contentBytes []byte,
 ) (*tree.Tree, error) {
-	builder, err := parseBuilder(ctx, language, contentBytes)
+	builder, err := parseBuilder(ctx, language, contentBytes, len(ruleSet.Rules()))
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +56,7 @@ func parseBuilder(
 	ctx context.Context,
 	language language.Language,
 	contentBytes []byte,
+	ruleCount int,
 ) (*tree.Builder, error) {
 	parser := sitter.NewParser()
 	defer parser.Close()
@@ -67,7 +68,7 @@ func parseBuilder(
 		return nil, err
 	}
 
-	return tree.NewBuilder(contentBytes, sitterTree.RootNode()), nil
+	return tree.NewBuilder(contentBytes, sitterTree.RootNode(), ruleCount), nil
 }
 
 func analyzeNode(

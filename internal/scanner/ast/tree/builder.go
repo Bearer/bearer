@@ -4,6 +4,7 @@ import (
 	"slices"
 
 	"github.com/bearer/bearer/internal/scanner/ruleset"
+	"github.com/bits-and-blooms/bitset"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -17,9 +18,10 @@ type Builder struct {
 	aliasOf map[int][]int
 	sitterRootNode *sitter.Node
 	sitterToNodeID map[*sitter.Node]int
+	ruleCount      int
 }
 
-func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node) *Builder {
+func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node, ruleCount int) *Builder {
 	builder := &Builder{
 		contentBytes:    contentBytes,
 		nodes:           make([]Node, 0, 1000),
@@ -28,6 +30,7 @@ func NewBuilder(contentBytes []byte, sitterRootNode *sitter.Node) *Builder {
 		aliasOf:         make(map[int][]int),
 		sitterRootNode:  sitterRootNode,
 		sitterToNodeID:  make(map[*sitter.Node]int),
+		ruleCount:       ruleCount,
 	}
 
 	builder.rootNodeID = builder.addNode(sitterRootNode)
@@ -94,10 +97,17 @@ func (builder *Builder) Alias(toNode *sitter.Node, fromNodes ...*sitter.Node) {
 }
 
 func (builder *Builder) AddDisabledRules(sitterNode *sitter.Node, rules []*ruleset.Rule) {
+	if len(rules) == 0 {
+		return
+	}
+
 	node := &builder.nodes[builder.sitterToNodeID[sitterNode]]
+	if node.disabledRuleIndices == nil {
+		node.disabledRuleIndices = bitset.New(uint(builder.ruleCount))
+	}
 
 	for _, rule := range rules {
-		node.disabledRuleIndices = append(node.disabledRuleIndices, rule.Index())
+		node.disabledRuleIndices.Set(uint(rule.Index()))
 	}
 }
 

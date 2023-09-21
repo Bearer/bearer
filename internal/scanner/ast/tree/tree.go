@@ -3,6 +3,7 @@ package tree
 import (
 	"fmt"
 
+	"github.com/bits-and-blooms/bitset"
 	sitter "github.com/smacker/go-tree-sitter"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
@@ -29,7 +30,7 @@ type Node struct {
 	children,
 	dataflowSources,
 	aliasOf []*Node
-	disabledRuleIndices []int
+	disabledRuleIndices *bitset.BitSet
 	// FIXME: remove the need for this
 	sitterNode   *sitter.Node
 	queryResults map[int][]QueryResult
@@ -124,8 +125,12 @@ func (node *Node) AliasOf() []*Node {
 	return node.aliasOf
 }
 
-func (node *Node) DisabledRuleIndices() []int {
-	return node.disabledRuleIndices
+func (node *Node) RuleDisabled(index int) bool {
+	if node.disabledRuleIndices == nil {
+		return false
+	}
+
+	return node.disabledRuleIndices.Test(uint(index))
 }
 
 func (node *Node) QueryResults(queryID int) []QueryResult {
@@ -167,9 +172,12 @@ func (node *Node) dumpValue() nodeDump {
 	queries := maps.Keys(node.queryResults)
 	slices.Sort(queries)
 
-	disabledRules := make([]int, len(node.disabledRuleIndices))
-	copy(disabledRules, node.disabledRuleIndices)
-	slices.Sort(disabledRules)
+	var disabledRules []int
+	for i := 0; i < int(node.disabledRuleIndices.Len()); i++ {
+		if node.disabledRuleIndices.Test(uint(i)) {
+			disabledRules = append(disabledRules, i)
+		}
+	}
 
 	contentRange := fmt.Sprintf(
 		"%d:%d - %d:%d",
