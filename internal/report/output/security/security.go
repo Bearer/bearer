@@ -553,11 +553,11 @@ func writeRuleListToString(
 			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(languages[lang.Name].Files))
 		} else {
 			for _, reportedDependency := range reportedDependencies {
-				if unsupportedLanguages[reportedDependency.DetectorLanguage] {
+				if reportedDependency.DetectorLanguage == lang.Name {
+					unsupportedLanguages[lang.Name] = true
+					tbl.AddRow(lang.Name, 0, 0, len(lang.Files))
 					break
 				}
-				unsupportedLanguages[lang.Name] = true
-				tbl.AddRow(lang.Name, 0, 0, len(languages[lang.Name].Files))
 			}
 		}
 	}
