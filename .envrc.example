@@ -10,3 +10,4 @@ export SCAN_DIR=/Users/username/OWASP
 export BEARER_DISABLE_DEFAULT_RULES=true
 export BEARER_EXTERNAL_RULE_DIR=$PWD/../bearer-rules/rules
 export BEARER_FORCE=true
+export BEARER_PHP_ENABLED=true

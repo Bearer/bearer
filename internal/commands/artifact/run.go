@@ -262,7 +262,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	}
 	languageList := FormatFoundLanguages(inputgocloc.Languages)
 
-	// set used language list for extetrnal rules to empty if we dont use them
+	// set used language list for external rules to empty if we dont use them
 	metaLanguageList := languageList
 	if opts.RuleOptions.DisableDefaultRules {
 		metaLanguageList = make([]string, 0)
@@ -455,7 +455,7 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 	for _, supportedLanguage := range maps.Keys(settings.GetSupportedRuleLanguages()) {
 		_, supportedLangPresent := foundLanguages[supportedLanguage]
 
-		if supportedLangPresent {
+		if supportedLangPresent && settings.GetSupportedRuleLanguages()[supportedLanguage] {
 			return true, nil
 		}
 	}

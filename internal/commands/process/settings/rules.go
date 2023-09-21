@@ -31,9 +31,12 @@ var (
 )
 
 func GetSupportedRuleLanguages() map[string]bool {
+	phpSupported := os.Getenv("BEARER_PHP_ENABLED") == "true"
+
 	return map[string]bool{
-		"php":        true,
+		"php":        phpSupported,
 		"java":       true,
+		"sql":        true, // partly supported but not exposed
 		"ruby":       true,
 		"javascript": true,
 		"typescript": true,
@@ -138,6 +141,13 @@ func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS
 		if id == "" {
 			log.Debug().Msgf("rule file missing metadata.id %s", path)
 			return nil
+		}
+
+		for _, language := range ruleDefinition.Languages {
+			if exists := GetSupportedRuleLanguages()[language]; !exists {
+				log.Debug().Msgf("rule file includes unsupported language[%s] %s", language, path)
+				return nil
+			}
 		}
 
 		if _, exists := loadedDefinitions[id]; exists {
