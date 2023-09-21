@@ -173,9 +173,11 @@ func (node *Node) dumpValue() nodeDump {
 	slices.Sort(queries)
 
 	var disabledRules []int
-	for i := 0; i < int(node.disabledRuleIndices.Len()); i++ {
-		if node.disabledRuleIndices.Test(uint(i)) {
-			disabledRules = append(disabledRules, i)
+	if node.disabledRuleIndices != nil {
+		for i := 0; i < int(node.disabledRuleIndices.Len()); i++ {
+			if node.disabledRuleIndices.Test(uint(i)) {
+				disabledRules = append(disabledRules, i)
+			}
 		}
 	}
 

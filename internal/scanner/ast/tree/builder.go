@@ -101,13 +101,21 @@ func (builder *Builder) AddDisabledRules(sitterNode *sitter.Node, rules []*rules
 		return
 	}
 
-	node := &builder.nodes[builder.sitterToNodeID[sitterNode]]
+	builder.addDisabledRulesForNode(builder.sitterToNodeID[sitterNode], rules)
+}
+
+func (builder *Builder) addDisabledRulesForNode(nodeID int, rules []*ruleset.Rule) {
+	node := &builder.nodes[nodeID]
 	if node.disabledRuleIndices == nil {
 		node.disabledRuleIndices = bitset.New(uint(builder.ruleCount))
 	}
 
 	for _, rule := range rules {
 		node.disabledRuleIndices.Set(uint(rule.Index()))
+	}
+
+	for _, childID := range builder.children[nodeID] {
+		builder.addDisabledRulesForNode(childID, rules)
 	}
 }
 
