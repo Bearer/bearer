@@ -553,11 +553,11 @@ func writeRuleListToString(
 			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(languages[lang.Name].Files))
 		} else {
 			for _, reportedDependency := range reportedDependencies {
-				if unsupportedLanguages[reportedDependency.DetectorLanguage] {
+				if reportedDependency.DetectorLanguage == lang.Name {
+					unsupportedLanguages[lang.Name] = true
+					tbl.AddRow(lang.Name, 0, 0, len(lang.Files))
 					break
 				}
-				unsupportedLanguages[lang.Name] = true
-				tbl.AddRow(lang.Name, 0, 0, len(languages[lang.Name].Files))
 			}
 		}
 	}
@@ -565,8 +565,15 @@ func writeRuleListToString(
 	tbl.Print()
 
 	if len(unsupportedLanguages) > 0 {
-		reportStr.WriteString(fmt.Sprintf("\nWarning: Only partial support is offered for %s.\n", strings.Join(maps.Keys(unsupportedLanguages), ", ")))
-		reportStr.WriteString(color.HiBlackString("For more information, see https://docs.bearer.com/reference/supported-languages\n"))
+		sortedUnsupportedLanguages := maps.Keys(unsupportedLanguages)
+		slices.Sort(sortedUnsupportedLanguages)
+		reportStr.WriteString(fmt.Sprintf(
+			"\nWarning: Only partial support is offered for %s.\n",
+			strings.Join(sortedUnsupportedLanguages, ", "),
+		))
+		reportStr.WriteString(color.HiBlackString(
+			"For more information, see https://docs.bearer.com/reference/supported-languages\n",
+		))
 	}
 
 	return totalRuleCount
