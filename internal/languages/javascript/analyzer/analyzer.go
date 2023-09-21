@@ -40,6 +40,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		})
 	case "assignment_expression":
 		return analyzer.analyzeAssignment(node, visitChildren)
+	case "as_expression":
+		return analyzer.analyzeAsExpression(node, visitChildren)
 	case "augmented_assignment_expression":
 		return analyzer.analyzeAugmentedAssignment(node, visitChildren)
 	case "variable_declarator":
@@ -85,6 +87,14 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 
 		return visitChildren()
 	}
+}
+
+func (analyzer *analyzer) analyzeAsExpression(node *sitter.Node, visitChildren func() error) error {
+	analyzer.builder.Alias(node, node.Child(0))
+
+	err := visitChildren()
+
+	return err
 }
 
 // user = ...
