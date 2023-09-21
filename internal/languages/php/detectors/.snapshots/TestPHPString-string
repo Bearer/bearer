@@ -356,6 +356,8 @@ children:
                                 - 83
                                 - 84
                                 - 85
+                              queries:
+                                - 4
                               children:
                                 - type: variable_name
                                   id: 80
