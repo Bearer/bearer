@@ -13,12 +13,17 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 )
 
+type ruleInfo struct {
+	ID    string
+	Index int
+}
+
 func TestDisabledRules(t *testing.T) {
 	content := `
-		# bearer:disable rule1
-		# bearer:disable rule2
+		# bearer:disable rule1,rule2
+		# bearer:disable rule3
 		def m(a)
-			# bearer:disable rule3
+			# bearer:disable rule4
 			a.foo
 			b.bar
 		end
@@ -33,10 +38,18 @@ func TestDisabledRules(t *testing.T) {
 			"rule1": {Id: "rule1", Languages: languageIDs},
 			"rule2": {Id: "rule2", Languages: languageIDs},
 			"rule3": {Id: "rule3", Languages: languageIDs},
+			"rule4": {Id: "rule4", Languages: languageIDs},
 		},
 	)
 	if err != nil {
 		t.Fatalf("failed to create rule set: %s", err)
+	}
+
+	var ruleDump []ruleInfo
+	for _, rule := range ruleSet.Rules() {
+		if rule.Type() != ruleset.RuleTypeBuiltin {
+			ruleDump = append(ruleDump, ruleInfo{ID: rule.ID(), Index: rule.Index()})
+		}
 	}
 
 	querySet := query.NewSet(language.ID(), language.SitterLanguage())
@@ -58,7 +71,7 @@ func TestDisabledRules(t *testing.T) {
 
 	cupaloy.SnapshotT(
 		t,
-		ruleSet.Rules(),
+		ruleDump,
 		tree.RootNode().Dump(),
 	)
 }

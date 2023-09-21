@@ -1,0 +1,35 @@
+low:
+    - rule:
+        cwe_ids:
+            - "319"
+        id: match_sink
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 7
+      full_filename: e2e/rules/testdata/data/disabled_rules/main.rb
+      filename: main.rb
+      source:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 3
+                end: 7
+      sink:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 3
+                end: 7
+        content: sink
+      parent_line_number: 7
+      snippet: sink
+      fingerprint: eb59f129d5424fb58e3bfcb5bfa83159_0
+      old_fingerprint: e94b7fee5e58e735f107aa1cb3cfb75b_0
+      code_extract: '  sink'
+
+
+--
+
