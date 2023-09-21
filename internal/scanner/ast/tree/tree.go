@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	sitter "github.com/smacker/go-tree-sitter"
+	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 )
@@ -143,6 +144,7 @@ type nodeDump struct {
 	DataflowSources []int      `yaml:"dataflow_sources,omitempty"`
 	AliasOf         []int      `yaml:"alias_of,omitempty"`
 	Queries         []int      `yaml:",omitempty"`
+	DisabledRules   []int      `yaml:",omitempty"`
 	Children        []nodeDump `yaml:",omitempty"`
 }
 
@@ -162,11 +164,12 @@ func (node *Node) dumpValue() nodeDump {
 		childDump[i] = child.dumpValue()
 	}
 
-	var queries []int
-	for queryID := range node.queryResults {
-		queries = append(queries, queryID)
-	}
+	queries := maps.Keys(node.queryResults)
 	slices.Sort(queries)
+
+	disabledRules := make([]int, len(node.disabledRuleIndices))
+	copy(disabledRules, node.disabledRuleIndices)
+	slices.Sort(disabledRules)
 
 	contentRange := fmt.Sprintf(
 		"%d:%d - %d:%d",
@@ -190,6 +193,7 @@ func (node *Node) dumpValue() nodeDump {
 		AliasOf:         nodeListToID(node.aliasOf),
 		Children:        childDump,
 		Queries:         queries,
+		DisabledRules:   disabledRules,
 	}
 }
 
