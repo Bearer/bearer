@@ -5,6 +5,7 @@ import (
 	"context"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 	"testing"
 	"time"
@@ -52,7 +53,12 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	timer := time.NewTimer(TestTimeout)
 	commandFinished := make(chan struct{}, 1)
 	combinedOutput := func() string {
-		errStr := strings.TrimSuffix(buffErr.String(), "exit status 1\n")
+		errStr := buffErr.String()
+		// trim any progrss bars as the output isnt consistant
+		re := regexp.MustCompile(`\s└.*`)
+		errStr = re.ReplaceAllString(errStr, "")
+		// trim exit status
+		errStr = strings.TrimSuffix(errStr, "exit status 1\n")
 		return buffOut.String() + "\n--\n" + errStr
 	}
 

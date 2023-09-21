@@ -1,0 +1,11 @@
+{}
+
+--
+Loading rules
+Scanning target e2e/flags/testdata/simple
+
+Running Detectors
+Generating dataflow
+Evaluating rules
+Failed to send data to Bearer Cloud. API key does not appear to be valid for my.bearer.sh. 
+
