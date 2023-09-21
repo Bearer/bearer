@@ -3,7 +3,7 @@
 --
 Loading rules
 Scanning target e2e/flags/testdata/simple
- └ 100% [===============] (1/1, 1 files/s) [0s]
+
 Running Detectors
 Generating dataflow
 Evaluating rules
