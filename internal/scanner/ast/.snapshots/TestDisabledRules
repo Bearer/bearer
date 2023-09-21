@@ -75,6 +75,9 @@ children:
     - type: method
       id: 3
       range: 4:3 - 8:6
+      disabledrules:
+        - 5
+        - 6
       children:
         - type: '"def"'
           id: 4
@@ -108,6 +111,8 @@ children:
         - type: call
           id: 11
           range: 6:4 - 6:9
+          disabledrules:
+            - 7
           children:
             - type: identifier
               id: 12

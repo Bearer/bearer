@@ -91,7 +91,7 @@ func analyzeNode(
 				continue
 			}
 
-			disabledRules = addDisabledRules(ruleSet, builder, disabledRules, node)
+			disabledRules = addDisabledRules(ruleSet, builder, disabledRules, child)
 			if err := analyzeNode(ctx, ruleSet, builder, analyzer, child); err != nil {
 				return err
 			}

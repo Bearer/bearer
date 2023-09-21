@@ -148,7 +148,7 @@ func (scanner *Scanner) detectAtNode(rule *ruleset.Rule, node *tree.Node) (*dete
 
 func (scanner *Scanner) ruleDisabledForNode(rule *ruleset.Rule, node *tree.Node) bool {
 	for current := node; current != nil; current = current.Parent() {
-		if slices.Contains(node.DisabledRuleIndices(), rule.Index()) {
+		if slices.Contains(current.DisabledRuleIndices(), rule.Index()) {
 			return true
 		}
 	}
