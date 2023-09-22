@@ -56,6 +56,9 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for scan
+    - name: hide-progress-bar
+      default_value: "false"
+      usage: Hide progress bar from output
     - name: host
       default_value: my.bearer.sh
       usage: Specify the Host for sending the report.
