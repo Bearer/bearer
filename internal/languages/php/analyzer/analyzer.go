@@ -30,7 +30,9 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
-	case "augmented_assignment_expression", "assignment_expression":
+	case "augmented_assignment_expression":
+		return analyzer.analyzeAugmentedAssignment(node, visitChildren)
+	case "assignment_expression":
 		return analyzer.analyzeAssignment(node, visitChildren)
 	case "parenthesized_expression":
 		return analyzer.analyzeParentheses(node, visitChildren)
@@ -48,7 +50,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
-	case "binary_expression", "unary_op_expression", "argument":
+	case "binary_expression", "unary_op_expression", "argument", "encapsed_string", "sequence_expression":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "while_statement", "do_statement", "if_statement", "expression_statement", "compound_statement": // statements don't have results
 		return visitChildren()
@@ -64,19 +66,27 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 }
 
 // $foo = a
-// $foo .= a
 func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren func() error) error {
 	left := node.ChildByFieldName("left")
 	right := node.ChildByFieldName("right")
-	operator := node.Child(1)
+	analyzer.builder.Alias(node, right)
+	analyzer.lookupVariable(right)
 
-	if analyzer.builder.ContentFor(operator) == "=" {
-		analyzer.builder.Alias(node, right)
-	} else {
-		analyzer.lookupVariable(left)
-		analyzer.builder.Dataflow(node, left, right)
+	err := visitChildren()
+
+	if left.Type() == "variable_name" {
+		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
 	}
 
+	return err
+}
+
+// $foo .= a
+func (analyzer *analyzer) analyzeAugmentedAssignment(node *sitter.Node, visitChildren func() error) error {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+	analyzer.builder.Dataflow(node, left, right)
+	analyzer.lookupVariable(left)
 	analyzer.lookupVariable(right)
 
 	err := visitChildren()
@@ -89,11 +99,11 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 }
 
 func (analyzer *analyzer) analyzeParentheses(node *sitter.Node, visitChildren func() error) error {
-	child := node.NamedChild(0)
-	analyzer.builder.Alias(node, child)
-	analyzer.lookupVariable(child)
+	analyzer.builder.Alias(node, node.NamedChild(0))
+	analyzer.lookupVariable(node.NamedChild(0))
+	err := visitChildren()
 
-	return visitChildren()
+	return err
 }
 
 // a ? x : y
