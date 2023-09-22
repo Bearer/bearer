@@ -68,9 +68,11 @@ const PLACEHOLDER_VALUE = "Unknown"
 func BuildCsvString(reportData *outputtypes.ReportData, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
 	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Finding,High Risk Finding,Medium Risk Finding,Low Risk Finding,Rules Passed\n")
-	err := AddReportData(reportData, config)
-	if err != nil {
-		return csvStr, err
+	if reportData.PrivacyReport == nil {
+		err := AddReportData(reportData, config)
+		if err != nil {
+			return csvStr, err
+		}
 	}
 
 	for _, subject := range reportData.PrivacyReport.Subjects {
