@@ -3,7 +3,6 @@
 --
 Loading rules
 Scanning target e2e/flags/testdata/simple
-
 Running Detectors
 Generating dataflow
 Evaluating rules
