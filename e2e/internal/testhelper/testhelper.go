@@ -5,7 +5,6 @@ import (
 	"context"
 	"os"
 	"os/exec"
-	"regexp"
 	"strings"
 	"testing"
 	"time"
@@ -16,12 +15,13 @@ import (
 var TestTimeout = 1 * time.Minute
 
 type TestCase struct {
-	name          string
-	arguments     []string
-	ShouldSucceed bool
-	options       TestCaseOptions
-	displayStdErr bool
-	ignoreForce   bool
+	name               string
+	arguments          []string
+	ShouldSucceed      bool
+	options            TestCaseOptions
+	displayStdErr      bool
+	displayProgressBar bool
+	ignoreForce        bool
 }
 
 type TestCaseOptions struct {
@@ -54,9 +54,6 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	commandFinished := make(chan struct{}, 1)
 	combinedOutput := func() string {
 		errStr := buffErr.String()
-		// trim any progrss bars as the output isnt consistant
-		re := regexp.MustCompile(`\s└.*`)
-		errStr = re.ReplaceAllString(errStr, "")
 		// trim exit status
 		errStr = strings.TrimSuffix(errStr, "exit status 1\n")
 		return buffOut.String() + "\n--\n" + errStr
@@ -153,6 +150,10 @@ func RunTests(t *testing.T, tests []TestCase) {
 
 func executeTest(test TestCase, t *testing.T) (string, error) {
 	arguments := test.arguments
+
+	if !test.displayProgressBar {
+		arguments = append(arguments, "--hide-progress-bar")
+	}
 
 	if !test.displayStdErr {
 		arguments = append(arguments, "--quiet")
