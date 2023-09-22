@@ -25,18 +25,20 @@ type TestCase struct {
 }
 
 type TestCaseOptions struct {
-	DisplayStdErr bool
-	IgnoreForce   bool
+	DisplayStdErr      bool
+	DisplayProgressBar bool
+	IgnoreForce        bool
 }
 
 func NewTestCase(name string, arguments []string, options TestCaseOptions) TestCase {
 	return TestCase{
-		name:          name,
-		arguments:     arguments,
-		ShouldSucceed: true,
-		options:       options,
-		displayStdErr: options.DisplayStdErr,
-		ignoreForce:   options.IgnoreForce,
+		name:               name,
+		arguments:          arguments,
+		ShouldSucceed:      true,
+		options:            options,
+		displayStdErr:      options.DisplayStdErr,
+		displayProgressBar: options.DisplayProgressBar,
+		ignoreForce:        options.IgnoreForce,
 	}
 }
 
