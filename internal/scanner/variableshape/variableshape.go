@@ -143,7 +143,7 @@ func NewSet(language language.Language, ruleSet *ruleset.Set) (*Set, error) {
 
 	for _, rule := range ruleSet.Rules() {
 		if err := set.add(language, rule); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error adding %s: %w", rule.ID(), err)
 		}
 	}
 
