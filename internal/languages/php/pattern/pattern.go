@@ -104,12 +104,17 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return true, true
 	}
 
-	// Class body class_body
-	// function block
-	// lambda () -> {} block
-	// try {} catch () {}
-	// unAnchored := []string{"class_body", "block", "try_statement", "catch_type", "resource_specification"}
-	unAnchored := []string{""}
+	// Associative array elements are unanchored
+	// eg. array("foo" => 42)
+	if parent.Type() == "array_creation_expression" &&
+		node.Type() == "array_element_initializer" &&
+		len(node.NamedChildren()) == 2 {
+		return false, false
+	}
+
+	// Class body declaration_list
+	// function/block compound_statement
+	unAnchored := []string{"declaration_list", "compound_statement"}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
