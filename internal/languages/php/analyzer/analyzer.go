@@ -50,7 +50,12 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
-	case "binary_expression", "unary_op_expression", "argument", "encapsed_string", "sequence_expression":
+	case "binary_expression",
+		"unary_op_expression",
+		"argument",
+		"encapsed_string",
+		"sequence_expression",
+		"array_element_initializer":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "while_statement", "do_statement", "if_statement", "expression_statement", "compound_statement": // statements don't have results
 		return visitChildren()
