@@ -11,7 +11,7 @@ require (
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/ghodss/yaml v1.0.0
 	github.com/gitsight/go-vcsurl v1.0.1
-	github.com/go-enry/go-enry/v2 v2.8.4
+	github.com/go-enry/go-enry/v2 v2.8.5
 	github.com/go-git/go-git/v5 v5.9.0
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.3.1
