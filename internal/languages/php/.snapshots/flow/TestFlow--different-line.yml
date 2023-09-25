@@ -1,0 +1,36 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: php_rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 3
+      full_filename: different-line.php
+      filename: different-line.php
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 9
+                end: 20
+      sink:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 1
+                end: 17
+        content: error_log($name)
+      parent_line_number: 4
+      snippet: error_log($name)
+      fingerprint: 22040fe52a02f18aa1f791dfddc636dd_0
+      old_fingerprint: 22040fe52a02f18aa1f791dfddc636dd_0
+

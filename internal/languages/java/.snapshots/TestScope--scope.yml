@@ -44,17 +44,17 @@ high:
             end: 3
             column:
                 start: 1
-                end: 48
+                end: 50
       sink:
         location:
             start: 3
             end: 3
             column:
                 start: 1
-                end: 48
-        content: 'scopeCursor(x ? request.getParameter("ok") : y)'
+                end: 50
+        content: 'scopeCursor(x ? request.getParameter("oops") : y)'
       parent_line_number: 3
-      snippet: 'scopeCursor(x ? request.getParameter("ok") : y)'
+      snippet: 'scopeCursor(x ? request.getParameter("oops") : y)'
       fingerprint: bdbeee20feb34c6881d975716e2fe09f_1
       old_fingerprint: bdbeee20feb34c6881d975716e2fe09f_1
     - rule:

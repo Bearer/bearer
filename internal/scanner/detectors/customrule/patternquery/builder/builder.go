@@ -11,7 +11,7 @@ import (
 
 	"github.com/bearer/bearer/internal/parser/nodeid"
 	"github.com/bearer/bearer/internal/scanner/ast"
-	"github.com/bearer/bearer/internal/scanner/ast/tree"
+	asttree "github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
 )
 
@@ -38,7 +38,7 @@ type builder struct {
 	inputParams      InputParams
 	variableToParams map[string][]string
 	paramToContent   map[string]map[string]string
-	matchNode        *tree.Node
+	matchNode        *asttree.Node
 }
 
 func Build(
@@ -71,17 +71,20 @@ func Build(
 
 	root := tree.RootNode()
 
-	if len(root.Children()) != 1 {
-		return nil, fmt.Errorf("expecting 1 node but got %d", len(root.Children()))
-	}
-
-	for {
-		root = root.Children()[0]
-
-		if patternLanguage.IsRoot(root) {
-			break
+	var foundRoot bool
+	root.Walk(func(rootNode *asttree.Node, visitChildren func() error) error { //nolint:errcheck
+		if foundRoot {
+			return nil
 		}
-	}
+
+		if patternLanguage.IsRoot(rootNode) {
+			root = rootNode
+			foundRoot = true
+			return nil
+		} else {
+			return visitChildren()
+		}
+	})
 
 	builder := builder{
 		patternLanguage:  patternLanguage,
@@ -114,7 +117,7 @@ func fixupInput(
 	patternLanguage language.Pattern,
 	byteInput []byte,
 	variables []language.PatternVariable,
-	rootNode *tree.Node,
+	rootNode *asttree.Node,
 ) ([]byte, bool) {
 	insideError := false
 	inputOffset := 0
@@ -123,9 +126,9 @@ func fixupInput(
 	copy(newInput, byteInput)
 	fixed := false
 
-	err := rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
+	err := rootNode.Walk(func(node *asttree.Node, visitChildren func() error) error {
 		oldInsideError := insideError
-		if node.Type() == "ERROR" {
+		if node.IsError() {
 			insideError = true
 		}
 		if err := visitChildren(); err != nil {
@@ -133,35 +136,50 @@ func fixupInput(
 		}
 		insideError = oldInsideError
 
-		if !insideError {
+		if !insideError && !node.IsMissing() {
 			return nil
 		}
 
-		variable := getVariableFor(node, patternLanguage, variables)
-		if variable == nil {
-			return nil
-		}
+		var newValue string
+		var originalValue string
 
-		if log.Trace().Enabled() {
-			log.Trace().Msgf("attempting pattern fixup. node: %s", node.Debug())
-		}
+		if insideError {
+			variable := getVariableFor(node, patternLanguage, variables)
+			if variable == nil {
+				return nil
+			}
 
-		newValue := patternLanguage.FixupVariableDummyValue(byteInput, node, variable.DummyValue)
-		if newValue == variable.DummyValue {
-			return nil
+			if log.Trace().Enabled() {
+				log.Trace().Msgf("attempting pattern fixup. node: %s", node.Debug())
+			}
+
+			newValue = patternLanguage.FixupVariableDummyValue(byteInput, node, variable.DummyValue)
+			if newValue == variable.DummyValue {
+				return nil
+			}
+			variable.DummyValue = newValue
+			originalValue = variable.DummyValue
+		} else {
+			if log.Trace().Enabled() {
+				log.Trace().Msgf("attempting pattern fixup (missing node). node: %s", node.Debug())
+			}
+
+			newValue = patternLanguage.FixupMissing(node)
+			if newValue == "" {
+				return nil
+			}
 		}
 
 		fixed = true
-		valueOffset := len(newValue) - len(variable.DummyValue)
-		variable.DummyValue = newValue
+		valueOffset := len(newValue) - len(originalValue)
 
-		newInput = append(
-			append(
-				newInput[:node.ContentStart.Byte+inputOffset],
-				newValue...,
-			),
-			newInput[node.ContentEnd.Byte+inputOffset:]...,
-		)
+		prefix := newInput[:node.ContentStart.Byte+inputOffset]
+		suffix := newInput[node.ContentEnd.Byte+inputOffset:]
+		// FIXME: We need to append suffix before
+		// newInput seems to be sharing memory in some circumstances
+		// suffix before and after the first append are not equal
+		appendedInput := appendByte([]byte(newValue), suffix...)
+		newInput = appendByte(prefix, appendedInput...)
 
 		inputOffset += valueOffset
 
@@ -176,7 +194,21 @@ func fixupInput(
 	return newInput, fixed
 }
 
-func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
+func appendByte(slice []byte, data ...byte) []byte {
+	m := len(slice)
+	n := m + len(data)
+	if n > cap(slice) { // if necessary, reallocate
+		// allocate double what's needed, for future growth.
+		newSlice := make([]byte, (n+1)*2)
+		copy(newSlice, slice)
+		slice = newSlice
+	}
+	slice = slice[0:n]
+	copy(slice[m:n], data)
+	return slice
+}
+
+func (builder *builder) build(rootNode *asttree.Node) (*Result, error) {
 	if len(rootNode.Children()) == 0 {
 		variable := builder.getVariableFor(rootNode)
 		if variable != nil {
@@ -204,7 +236,7 @@ func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
 	}, nil
 }
 
-func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bool) error {
+func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild bool) error {
 	if node.SitterNode().IsError() {
 		return fmt.Errorf(
 			"error parsing pattern at %d:%d: %s",
@@ -265,7 +297,7 @@ func (builder *builder) compileVariableNode(variable *language.PatternVariable) 
 }
 
 // Anonymous nodes match their content as a literal
-func (builder *builder) compileAnonymousNode(node *tree.Node) {
+func (builder *builder) compileAnonymousNode(node *asttree.Node) {
 	if !slices.Contains(builder.patternLanguage.AnonymousParentTypes(), node.Parent().Type()) {
 		return
 	}
@@ -274,7 +306,7 @@ func (builder *builder) compileAnonymousNode(node *tree.Node) {
 }
 
 // Leaves match their type and content
-func (builder *builder) compileLeafNode(node *tree.Node) {
+func (builder *builder) compileLeafNode(node *asttree.Node) {
 	if !slices.Contains(builder.patternLanguage.LeafContentTypes(), node.Type()) {
 		builder.write("[")
 
@@ -310,10 +342,10 @@ func (builder *builder) compileLeafNode(node *tree.Node) {
 }
 
 // Nodes with children match their type and child nodes
-func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
+func (builder *builder) compileNodeWithChildren(node *asttree.Node) error {
 	builder.write("[")
 
-	var children []*tree.Node
+	var children []*asttree.Node
 	if slices.Contains(builder.patternLanguage.AnonymousParentTypes(), node.Type()) {
 		children = node.Children()
 	} else {
@@ -359,12 +391,12 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 	return paramToVariable, equalParams
 }
 
-func (builder *builder) getVariableFor(node *tree.Node) *language.PatternVariable {
+func (builder *builder) getVariableFor(node *asttree.Node) *language.PatternVariable {
 	return getVariableFor(node, builder.patternLanguage, builder.inputParams.Variables)
 }
 
 func getVariableFor(
-	node *tree.Node,
+	node *asttree.Node,
 	patternLanguage language.Pattern,
 	variables []language.PatternVariable,
 ) *language.PatternVariable {
@@ -389,9 +421,9 @@ func (builder *builder) setMatchNode(
 	offset int,
 	focusedVariable string,
 	containerTypes []string,
-	node *tree.Node,
+	node *asttree.Node,
 ) {
-	err := node.Walk(func(node *tree.Node, visitChildren func() error) error {
+	err := node.Walk(func(node *asttree.Node, visitChildren func() error) error {
 		if focusedVariable != "" {
 			if variable := builder.getVariableFor(node); variable != nil && variable.Name == focusedVariable {
 				builder.matchNode = node

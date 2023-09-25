@@ -1,6 +1,8 @@
 package language
 
-import "github.com/bearer/bearer/internal/scanner/ast/tree"
+import (
+	"github.com/bearer/bearer/internal/scanner/ast/tree"
+)
 
 type PatternVariable struct {
 	NodeTypes  []string
@@ -72,7 +74,7 @@ type Pattern interface {
 	//   call(:verify_mode => OpenSSL::SSL::VERIFY_NONE)
 	NodeTypes(node *tree.Node) []string
 	// LeafContentTypes returns all the leaf node types which should be matched
-	// on their content. eg. strings literals will match their literal values
+	// on their content. eg. strings literals will match their literal values, function names, ...
 	LeafContentTypes() []string
 	// TranslateContent converts the content of a pattern node to a different
 	// type. This is used when NodeTypes returns multiple types for a leaf node.
@@ -105,4 +107,10 @@ type Pattern interface {
 	//   some_call key: value, other_key: value2
 	// we want the content of the match to be `key: value` and not `key: value, other_key: value2`
 	ContainerTypes() []string
+
+	// Handle cases where the language requires preamble (e.g. PHP requires `<?php`)
+	AdjustInput(input string) string
+
+	// Handle missing errors
+	FixupMissing(node *tree.Node) string
 }

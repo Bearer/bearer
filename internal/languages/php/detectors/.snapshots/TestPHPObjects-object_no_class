@@ -1,0 +1,76 @@
+type: program
+id: 0
+range: 1:1 - 3:3
+dataflow_sources:
+    - 1
+    - 2
+    - 14
+children:
+    - type: php_tag
+      id: 1
+      range: 1:1 - 1:6
+      content: <?php
+    - type: expression_statement
+      id: 2
+      range: 2:1 - 2:14
+      children:
+        - type: binary_expression
+          id: 3
+          range: 2:1 - 2:13
+          dataflow_sources:
+            - 4
+            - 7
+            - 8
+          children:
+            - type: variable_name
+              id: 4
+              range: 2:1 - 2:6
+              children:
+                - type: '"$"'
+                  id: 5
+                  range: 2:1 - 2:2
+                - type: name
+                  id: 6
+                  range: 2:2 - 2:6
+                  content: user
+            - type: '"."'
+              id: 7
+              range: 2:6 - 2:7
+            - type: function_call_expression
+              id: 8
+              range: 2:7 - 2:13
+              dataflow_sources:
+                - 10
+              children:
+                - type: name
+                  id: 9
+                  range: 2:7 - 2:11
+                  content: name
+                - type: arguments
+                  id: 10
+                  range: 2:11 - 2:13
+                  dataflow_sources:
+                    - 11
+                    - 12
+                  children:
+                    - type: '"("'
+                      id: 11
+                      range: 2:11 - 2:12
+                    - type: '")"'
+                      id: 12
+                      range: 2:12 - 2:13
+        - type: '";"'
+          id: 13
+          range: 2:13 - 2:14
+    - type: text_interpolation
+      id: 14
+      range: 3:1 - 3:3
+      dataflow_sources:
+        - 15
+      children:
+        - type: '"?>"'
+          id: 15
+          range: 3:1 - 3:3
+
+[]
+

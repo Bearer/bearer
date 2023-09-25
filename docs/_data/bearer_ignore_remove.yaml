@@ -26,6 +26,9 @@ options:
     - name: ignore-file
       default_value: bearer.ignore
       usage: Load ignore file from the specified path.
+    - name: ignore-git
+      default_value: "false"
+      usage: Ignore Git listing
     - name: log-level
       default_value: info
       usage: Set log level (error, info, debug, trace)

@@ -62,8 +62,9 @@ type Config struct {
 	BearerRulesVersion         string                                    `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
 	NoColor                    bool                                      `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
 	Debug                      bool                                      `mapstructure:"debug" json:"debug" yaml:"debug"`
-	LogLevel                   string                                    `mapstructure:"string" json:"string" yaml:"string"`
+	LogLevel                   string                                    `mapstructure:"log_level" json:"log_level" yaml:"log_level"`
 	DebugProfile               bool                                      `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
+	IgnoreGit                  bool                                      `mapstructure:"ignore_git" json:"ignore_git" yaml:"ignore_git"`
 }
 
 type Modules []*PolicyModule
@@ -292,6 +293,8 @@ func (rule *Rule) Language() string {
 		return "Ruby"
 	case "sql":
 		return "SQL"
+	case "php":
+		return "PHP"
 	default:
 		return rule.Languages[0]
 	}
@@ -352,6 +355,7 @@ func FromOptions(opts flag.Options, versionMeta *version_check.VersionMeta) (Con
 		Debug:               opts.GeneralOptions.Debug,
 		LogLevel:            opts.GeneralOptions.LogLevel,
 		IgnoreFile:          opts.GeneralOptions.IgnoreFile,
+		IgnoreGit:           opts.GeneralOptions.IgnoreGit,
 		Policies:            policies,
 		Rules:               result.Rules,
 		BuiltInRules:        result.BuiltInRules,

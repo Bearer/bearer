@@ -70,7 +70,7 @@ func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariab
 }
 
 func produceDummyValue(i int, nodeType string) string {
-	return "CurioVar" + fmt.Sprint(i)
+	return "BearerVar" + fmt.Sprint(i)
 }
 
 func (*Pattern) FindMatchNode(input []byte) [][]int {
@@ -115,7 +115,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	return !(node.Type() == "expression_statement")
+	return !slices.Contains([]string{"expression_statement", "program"}, node.Type())
 }
 
 func (*Pattern) NodeTypes(node *tree.Node) []string {

@@ -2,7 +2,6 @@ package analyzer
 
 import (
 	"slices"
-	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
 
@@ -67,7 +66,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeParameter(node, visitChildren)
 	case "resource":
 		return analyzer.analyzeResource(node, visitChildren)
-	case "switch":
+	case "switch_expression":
 		return analyzer.analyzeSwitch(node, visitChildren)
 	case "switch_block":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
@@ -75,12 +74,10 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return visitChildren()
 	case "argument_list", "array_access", "array_initializer", "binary_expression", "unary_expression":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
+	case "while_statement", "do_statement", "if_statement": // statements don't have results
+		return visitChildren()
 	default:
-		// statements don't have results
-		if !strings.HasSuffix(node.Type(), "_statement") {
-			analyzer.builder.Dataflow(node, analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)
-		}
-
+		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
 }

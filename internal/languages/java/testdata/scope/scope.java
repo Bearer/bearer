@@ -1,6 +1,6 @@
 scopeCursor(request.getParameter("oops"));
-scopeCursor(x + request.getParameter("oops"));
-scopeCursor(x ? request.getParameter("ok") : y);
+scopeCursor(x + request.getParameter("ok"));
+scopeCursor(x ? request.getParameter("oops") : y);
 scopeCursor(request.getParameter("ok") ? x : y);
 
 scopeNested(request.getParameter("oops"));
