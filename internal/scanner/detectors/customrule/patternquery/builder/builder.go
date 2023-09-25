@@ -257,7 +257,7 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 		builder.compileVariableNode(variable)
 	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
-	} else if len(node.NamedChildren()) == 0 {
+	} else if len(node.NamedChildren()) == 0 || builder.patternLanguage.IsLeaf(node) {
 		builder.compileLeafNode(node)
 	} else if err := builder.compileNodeWithChildren(node); err != nil {
 		return err

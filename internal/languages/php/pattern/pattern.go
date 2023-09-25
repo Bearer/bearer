@@ -87,8 +87,21 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
+func (*Pattern) IsLeaf(node *tree.Node) bool {
+	// Encapsed string literal
+	if node.Type() == "encapsed_string" {
+		namedChildren := node.NamedChildren()
+		if len(namedChildren) == 1 && namedChildren[0].Type() == "string" {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
+		"encapsed_string",
 		"string",
 		"name",
 		"integer",
@@ -124,6 +137,27 @@ func (*Pattern) IsRoot(node *tree.Node) bool {
 	return !slices.Contains([]string{"expression_statement", "php_tag", "program"}, node.Type()) && !node.IsMissing()
 }
 
-func (*Pattern) NodeTypes(node *tree.Node) []string {
+func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
+	parent := node.Parent()
+	if parent == nil {
+		return []string{node.Type()}
+	}
+
+	if (node.Type() == "string" && parent.Type() != "encapsed_string") ||
+		(node.Type() == "encapsed_string" && patternLanguage.IsLeaf(node)) {
+		return []string{"encapsed_string", "string"}
+	}
+
 	return []string{node.Type()}
+}
+
+func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) string {
+	if fromNodeType == "string" && toNodeType == "encapsed_string" {
+		return fmt.Sprintf(`"%s"`, content[1:len(content)-1])
+	}
+	if fromNodeType == "encapsed_string" && toNodeType == "string" {
+		return fmt.Sprintf("'%s'", content[1:len(content)-1])
+	}
+
+	return content
 }

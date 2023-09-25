@@ -93,7 +93,7 @@ func (scanner *Scanner) Scan(
 	}
 
 	if log.Trace().Enabled() {
-		log.Trace().Msgf("tree (%d nodes):\n%s", tree.NodeCount(), tree.RootNode().SitterNode().String())
+		log.Trace().Msgf("tree (%d nodes):\n%s", tree.NodeCount(), tree.RootNode().Dump())
 	}
 
 	sharedCache := cache.NewShared(scanner.ruleSet.Rules())
