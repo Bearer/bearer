@@ -18,6 +18,7 @@ scan:
     exit-code: -1
     external-rule-dir: []
     force: false
+    hide_progress_bar: false
     internal-domains: []
     parallel: 0
     quiet: false

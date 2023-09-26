@@ -67,6 +67,12 @@ var (
 		Value:      false,
 		Usage:      "Suppress non-essential messages",
 	}
+	HideProgressBarFlag = Flag{
+		Name:       "hide-progress-bar",
+		ConfigName: "scan.hide_progress_bar",
+		Value:      false,
+		Usage:      "Hide progress bar from output",
+	}
 	ForceFlag = Flag{
 		Name:       "force",
 		ConfigName: "scan.force",
@@ -108,6 +114,7 @@ type ScanFlagGroup struct {
 	ContextFlag                 *Flag
 	DataSubjectMappingFlag      *Flag
 	QuietFlag                   *Flag
+	HideProgressBarFlag         *Flag
 	ForceFlag                   *Flag
 	ExternalRuleDirFlag         *Flag
 	ParallelFlag                *Flag
@@ -123,6 +130,7 @@ type ScanOptions struct {
 	Context                 Context       `mapstructure:"context" json:"context" yaml:"context"`
 	DataSubjectMapping      string        `mapstructure:"data_subject_mapping" json:"data_subject_mapping" yaml:"data_subject_mapping"`
 	Quiet                   bool          `mapstructure:"quiet" json:"quiet" yaml:"quiet"`
+	HideProgressBar         bool          `mapstructure:"hide_progress_bar" json:"hide_progress_bar" yaml:"hide_progress_bar"`
 	Force                   bool          `mapstructure:"force" json:"force" yaml:"force"`
 	ExternalRuleDir         []string      `mapstructure:"external-rule-dir" json:"external-rule-dir" yaml:"external-rule-dir"`
 	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
@@ -141,6 +149,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		ContextFlag:                 &ContextFlag,
 		DataSubjectMappingFlag:      &DataSubjectMappingFlag,
 		QuietFlag:                   &QuietFlag,
+		HideProgressBarFlag:         &HideProgressBarFlag,
 		ForceFlag:                   &ForceFlag,
 		ExternalRuleDirFlag:         &ExternalRuleDirFlag,
 		ScannerFlag:                 &ScannerFlag,
@@ -162,6 +171,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.ContextFlag,
 		f.DataSubjectMappingFlag,
 		f.QuietFlag,
+		f.HideProgressBarFlag,
 		f.ForceFlag,
 		f.ExternalRuleDirFlag,
 		f.ScannerFlag,
@@ -201,6 +211,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Context:                 context,
 		DataSubjectMapping:      getString(f.DataSubjectMappingFlag),
 		Quiet:                   getBool(f.QuietFlag),
+		HideProgressBar:         getBool(f.HideProgressBarFlag),
 		Force:                   getBool(f.ForceFlag),
 		Target:                  target,
 		ExternalRuleDir:         getStringSlice(f.ExternalRuleDirFlag),
