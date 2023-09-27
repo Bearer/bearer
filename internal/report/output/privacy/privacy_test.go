@@ -28,6 +28,10 @@ func TestBuildCsvString(t *testing.T) {
 	output := &outputtypes.ReportData{
 		Dataflow: dummyDataflow(),
 	}
+	err = privacy.AddReportData(output, config)
+	if err != nil {
+		t.Fatalf("failed to add privacy report:%s", err)
+	}
 	stringBuilder, _ := privacy.BuildCsvString(output, config)
 	cupaloy.SnapshotT(t, stringBuilder.String())
 }
