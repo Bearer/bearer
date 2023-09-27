@@ -13,9 +13,12 @@ import (
 
 var (
 	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	matchNodeRegex            = regexp.MustCompile(`\$<!>`)
-	ellipsisRegex             = regexp.MustCompile(`\$<\.\.\.>`)
+	patternQueryVariableRegex      = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
+	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
+	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
+	unanchoredPatternNodeTypes     = []string{}
+	patternMatchNodeContainerTypes = []string{"formal_parameters"}
+	// unanchoredPatternNodeTypes = []string{"simple_parameter"}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
@@ -34,6 +37,14 @@ func (*Pattern) FixupMissing(node *tree.Node) string {
 	}
 
 	return ";"
+}
+
+func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
+	if slices.Contains([]string{"named_type"}, node.Parent().Type()) {
+		return "$" + dummyValue
+	}
+
+	return dummyValue
 }
 
 func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariable, error) {
@@ -89,13 +100,13 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 
 func (*Pattern) IsLeaf(node *tree.Node) bool {
 	// Encapsed string literal
-	if node.Type() == "encapsed_string" {
+	switch node.Type() {
+	case "encapsed_string":
 		namedChildren := node.NamedChildren()
 		if len(namedChildren) == 1 && namedChildren[0].Type() == "string" {
 			return true
 		}
 	}
-
 	return false
 }
 
@@ -110,11 +121,28 @@ func (*Pattern) LeafContentTypes() []string {
 	}
 }
 
-// ToDo:
 func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
+	if slices.Contains(unanchoredPatternNodeTypes, node.Type()) {
+		return false, false
+	}
+
 	parent := node.Parent()
 	if parent == nil {
 		return true, true
+	}
+
+	if parent.Type() == "method_declaration" {
+		// visibility
+		if node == parent.ChildByFieldName("name") {
+			return false, true
+		}
+
+		// type
+		if node == parent.ChildByFieldName("parameters") {
+			return true, false
+		}
+
+		return false, false
 	}
 
 	// Associative array elements are unanchored
@@ -127,7 +155,10 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 
 	// Class body declaration_list
 	// function/block compound_statement
-	unAnchored := []string{"declaration_list", "compound_statement"}
+	unAnchored := []string{
+		"declaration_list",
+		"compound_statement",
+	}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
@@ -160,4 +191,8 @@ func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) strin
 	}
 
 	return content
+}
+
+func (*Pattern) ContainerTypes() []string {
+	return patternMatchNodeContainerTypes
 }

@@ -1,6 +1,7 @@
 package analyzer
 
 import (
+	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
@@ -21,15 +22,12 @@ func New(builder *tree.Builder) language.Analyzer {
 
 func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error) error {
 	switch node.Type() {
-	case "declaration_list",
-		"class_declaration",
-		"method_declaration",
-		"anonymous_function_creation_expression",
-		"for_statement",
-		"block":
+	case "declaration_list", "class_declaration", "anonymous_function_creation_expression", "for_statement", "block", "method_declaration":
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
+	// case "formal_parameters":
+	// return analyzer.analyzeParameterList(node, visitChildren)
 	case "augmented_assignment_expression":
 		return analyzer.analyzeAugmentedAssignment(node, visitChildren)
 	case "assignment_expression":
@@ -50,12 +48,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
-	case "binary_expression",
-		"unary_op_expression",
-		"argument",
-		"encapsed_string",
-		"sequence_expression",
-		"array_element_initializer":
+	case "binary_expression", "unary_op_expression", "argument", "encapsed_string", "sequence_expression", "array_element_initializer", "formal_parameters":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "while_statement", "do_statement", "if_statement", "expression_statement", "compound_statement": // statements don't have results
 		return visitChildren()
@@ -102,6 +95,26 @@ func (analyzer *analyzer) analyzeAugmentedAssignment(node *sitter.Node, visitChi
 
 	return err
 }
+
+// // I think there is still an issue with the linking between the parameter for functions???
+// // all parameter definitions for a method
+// // function m($a, int $b)
+// func (analyzer *analyzer) analyzeParameterList(node *sitter.Node, visitChildren func() error) error {
+// 	children := analyzer.builder.ChildrenFor(node)
+// 	analyzer.builder.Dataflow(node, children...)
+
+// 	for _, child := range children {
+// 		log.Error().Msgf("analyzerParameterList[%s]", child.Type())
+// 		if child.Type() == "simple_parameter" {
+// 			name := child.ChildByFieldName("name")
+// 			log.Error().Msgf("analyzerParameterList -> %s", analyzer.builder.ContentFor(name))
+// 			analyzer.builder.Alias(node, name)
+// 			analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
+// 		}
+// 	}
+
+// 	return visitChildren()
+// }
 
 func (analyzer *analyzer) analyzeParentheses(node *sitter.Node, visitChildren func() error) error {
 	analyzer.builder.Alias(node, node.NamedChild(0))
@@ -155,8 +168,10 @@ func (analyzer *analyzer) analyzeFieldAccess(node *sitter.Node, visitChildren fu
 // fn($x = 42) => $x;
 // fn($x, ...$rest) => $rest;
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
+	log.Error().Msgf("analyzeParameter[%s] %s", node.Type(), analyzer.builder.ContentFor(node))
 	name := node.ChildByFieldName("name")
 	analyzer.builder.Alias(node, name)
+	analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
 
 	return visitChildren()
 }
@@ -202,6 +217,7 @@ func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
 	}
 
 	if pointsToNode := analyzer.scope.Lookup(analyzer.builder.ContentFor(node)); pointsToNode != nil {
+		log.Error().Msgf("lookupVariable[%s] %s", node.Type(), analyzer.builder.ContentFor(node))
 		analyzer.builder.Alias(node, pointsToNode)
 	}
 }
