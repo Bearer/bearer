@@ -201,9 +201,6 @@ func (builder *builder) build(rootNode *asttree.Node) (*Result, error) {
 
 	builder.write(" @root")
 	builder.write(")")
-	log.Error().Msgf("build %s", rootNode.SitterNode().String())
-	log.Error().Msgf("string builder %s", builder.stringBuilder.String())
-	log.Error().Msgf("input params builder %s", builder.stringBuilder.String())
 
 	paramToVariable, equalParams := builder.processVariableToParams()
 
@@ -382,8 +379,12 @@ func getVariableFor(
 	patternLanguage language.Pattern,
 	variables []language.PatternVariable,
 ) *language.PatternVariable {
+	if slices.Contains(patternLanguage.ContainerTypes(), node.Type()) {
+		return nil
+	}
+
 	for i, variable := range variables {
-		if (len(node.NamedChildren()) == 0 || patternLanguage.IsLeaf(node)) && node.Content() == variable.DummyValue {
+		if node.Content() == variable.DummyValue {
 			return &variables[i]
 		}
 	}

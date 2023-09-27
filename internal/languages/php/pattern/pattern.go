@@ -17,8 +17,7 @@ var (
 	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
 	unanchoredPatternNodeTypes     = []string{}
-	patternMatchNodeContainerTypes = []string{"formal_parameters"}
-	// unanchoredPatternNodeTypes = []string{"simple_parameter"}
+	patternMatchNodeContainerTypes = []string{"formal_parameters", "simple_parameter"}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
