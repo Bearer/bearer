@@ -79,8 +79,8 @@ var _ = Describe("Result", func() {
 		var result *bytereplacer.Result
 
 		BeforeEach(func(ctx SpecContext) {
-			replacer.Replace(0, 5, []byte("hello"))
-			replacer.Replace(6, 6, nil)
+			replacer.Replace(0, 5, []byte("hello")) // nolint:errcheck
+			replacer.Replace(6, 6, nil)             // nolint:errcheck
 			result = replacer.Done()
 		})
 
@@ -109,9 +109,9 @@ var _ = Describe("Result", func() {
 		var result *bytereplacer.Result
 
 		BeforeEach(func(ctx SpecContext) {
-			replacer.Replace(0, 5, []byte("hi"))
-			replacer.Replace(5, 5, []byte("!"))
-			replacer.Replace(6, 11, []byte("testing123"))
+			replacer.Replace(0, 5, []byte("hi"))          // nolint:errcheck
+			replacer.Replace(5, 5, []byte("!"))           // nolint:errcheck
+			replacer.Replace(6, 11, []byte("testing123")) // nolint:errcheck
 			result = replacer.Done()
 		})
 

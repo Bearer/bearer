@@ -248,8 +248,6 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 		builder.write(" .")
 	}
 
-	log.Error().Msgf("stringBuilder %s", builder.stringBuilder.String())
-
 	return nil
 }
 
