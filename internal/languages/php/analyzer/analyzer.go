@@ -133,9 +133,11 @@ func (analyzer *analyzer) analyzeConditional(node *sitter.Node, visitChildren fu
 	return visitChildren()
 }
 
+// foo(1, 2);
 // foo->bar(1, 2);
 func (analyzer *analyzer) analyzeMethodInvocation(node *sitter.Node, visitChildren func() error) error {
-	analyzer.lookupVariable(node.ChildByFieldName("object"))
+	analyzer.lookupVariable(node.ChildByFieldName("object"))   // method
+	analyzer.lookupVariable(node.ChildByFieldName("function")) // function
 
 	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
 		analyzer.builder.Dataflow(node, arguments)
