@@ -149,6 +149,21 @@ children:
               id: 29
               range: 6:8 - 6:9
 
+- node: 8
+  content: x += "b"
+  data:
+    value: ab
+    isliteral: true
+- node: 15
+  content: x += name
+  data:
+    value: ab*
+    isliteral: false
+- node: 23
+  content: y += "c"
+  data:
+    value: '*c'
+    isliteral: false
 - node: 4
   content: '"a"'
   data:

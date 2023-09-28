@@ -1,8 +1,6 @@
 package common
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
@@ -77,15 +75,7 @@ func ConcatenateChildStrings(node *tree.Node, detectorContext types.Context) ([]
 }
 
 func ConcatenateAssignEquals(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
-	dataflowSources := node.ChildByFieldName("left").DataflowSources()
-	if len(dataflowSources) == 0 {
-		return nil, nil
-	}
-	if len(dataflowSources) != 1 {
-		return nil, fmt.Errorf("expected exactly one data source for `+=` node but got %d", len(dataflowSources))
-	}
-
-	left, leftIsLiteral, err := GetStringValue(dataflowSources[0], detectorContext)
+	left, leftIsLiteral, err := GetStringValue(node.ChildByFieldName("left"), detectorContext)
 	if err != nil {
 		return nil, err
 	}

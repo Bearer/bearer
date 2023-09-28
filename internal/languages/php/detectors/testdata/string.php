@@ -10,6 +10,8 @@ class Greet {
         $s2 = "hey ";
         $s2 .= $args[0];
         $s2 .= " there";
+
+        $s3 = "foo '{$s2}' bar";
     }
 }
 ?>

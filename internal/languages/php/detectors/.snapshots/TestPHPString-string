@@ -1,10 +1,10 @@
 type: program
 id: 0
-range: 1:1 - 15:3
+range: 1:1 - 18:1
 dataflow_sources:
     - 1
     - 2
-    - 100
+    - 117
 children:
     - type: php_tag
       id: 1
@@ -12,7 +12,7 @@ children:
       content: <?php
     - type: class_declaration
       id: 2
-      range: 2:1 - 14:2
+      range: 2:1 - 16:2
       queries:
         - 1
       children:
@@ -25,7 +25,7 @@ children:
           content: Greet
         - type: declaration_list
           id: 5
-          range: 2:13 - 14:2
+          range: 2:13 - 16:2
           children:
             - type: '"{"'
               id: 6
@@ -79,7 +79,7 @@ children:
                   range: 3:35 - 3:36
             - type: method_declaration
               id: 17
-              range: 5:5 - 13:6
+              range: 5:5 - 15:6
               children:
                 - type: visibility_modifier
                   id: 18
@@ -139,7 +139,7 @@ children:
                       range: 5:38 - 5:39
                 - type: compound_statement
                   id: 31
-                  range: 6:5 - 13:6
+                  range: 6:5 - 15:6
                   children:
                     - type: '"{"'
                       id: 32
@@ -431,32 +431,151 @@ children:
                         - type: '";"'
                           id: 97
                           range: 12:24 - 12:25
-                    - type: '"}"'
+                    - type: expression_statement
                       id: 98
-                      range: 13:5 - 13:6
+                      range: 14:9 - 14:33
+                      children:
+                        - type: assignment_expression
+                          id: 99
+                          range: 14:9 - 14:32
+                          alias_of:
+                            - 104
+                          queries:
+                            - 0
+                          children:
+                            - type: variable_name
+                              id: 100
+                              range: 14:9 - 14:12
+                              children:
+                                - type: '"$"'
+                                  id: 101
+                                  range: 14:9 - 14:10
+                                - type: name
+                                  id: 102
+                                  range: 14:10 - 14:12
+                                  content: s3
+                            - type: '"="'
+                              id: 103
+                              range: 14:13 - 14:14
+                            - type: encapsed_string
+                              id: 104
+                              range: 14:15 - 14:32
+                              dataflow_sources:
+                                - 105
+                                - 106
+                                - 107
+                                - 108
+                                - 111
+                                - 112
+                                - 113
+                              children:
+                                - type: '"""'
+                                  id: 105
+                                  range: 14:15 - 14:16
+                                - type: string
+                                  id: 106
+                                  range: 14:16 - 14:21
+                                  content: foo '
+                                - type: '"{"'
+                                  id: 107
+                                  range: 14:21 - 14:22
+                                - type: variable_name
+                                  id: 108
+                                  range: 14:22 - 14:25
+                                  alias_of:
+                                    - 88
+                                  children:
+                                    - type: '"$"'
+                                      id: 109
+                                      range: 14:22 - 14:23
+                                    - type: name
+                                      id: 110
+                                      range: 14:23 - 14:25
+                                      content: s2
+                                - type: '"}"'
+                                  id: 111
+                                  range: 14:25 - 14:26
+                                - type: string
+                                  id: 112
+                                  range: 14:26 - 14:31
+                                  content: ''' bar'
+                                - type: '"""'
+                                  id: 113
+                                  range: 14:31 - 14:32
+                        - type: '";"'
+                          id: 114
+                          range: 14:32 - 14:33
+                    - type: '"}"'
+                      id: 115
+                      range: 15:5 - 15:6
             - type: '"}"'
-              id: 99
-              range: 14:1 - 14:2
+              id: 116
+              range: 16:1 - 16:2
     - type: text_interpolation
-      id: 100
-      range: 15:1 - 15:3
+      id: 117
+      range: 17:1 - 17:3
       dataflow_sources:
-        - 101
+        - 118
       children:
         - type: '"?>"'
-          id: 101
-          range: 15:1 - 15:3
+          id: 118
+          range: 17:1 - 17:3
 
+- node: 12
+  content: '"Hello World"'
+  data:
+    value: Hello World
+    isliteral: true
 - node: 14
   content: Hello World
   data:
     value: Hello World
     isliteral: true
+- node: 52
+  content: $s .= "!!"
+  data:
+    value: '*!!!'
+    isliteral: false
+- node: 74
+  content: $s2 .= $args[0]
+  data:
+    value: hey *
+    isliteral: false
+- node: 88
+  content: $s2 .= " there"
+  data:
+    value: hey * there
+    isliteral: false
 - node: 39
   content: self::Greeting . "!"
   data:
-    value: '**'
+    value: '*!'
     isliteral: false
+- node: 57
+  content: '"!!"'
+  data:
+    value: '!!'
+    isliteral: true
+- node: 68
+  content: '"hey "'
+  data:
+    value: 'hey '
+    isliteral: true
+- node: 93
+  content: '" there"'
+  data:
+    value: ' there'
+    isliteral: true
+- node: 104
+  content: '"foo ''{$s2}'' bar"'
+  data:
+    value: foo 'hey * there' bar
+    isliteral: false
+- node: 46
+  content: '"!"'
+  data:
+    value: '!'
+    isliteral: true
 - node: 59
   content: '!!'
   data:
@@ -471,6 +590,16 @@ children:
   content: ' there'
   data:
     value: ' there'
+    isliteral: true
+- node: 106
+  content: foo '
+  data:
+    value: foo '
+    isliteral: true
+- node: 112
+  content: ''' bar'
+  data:
+    value: ''' bar'
     isliteral: true
 - node: 48
   content: '!'

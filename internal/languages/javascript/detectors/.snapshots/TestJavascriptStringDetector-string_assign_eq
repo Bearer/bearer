@@ -181,6 +181,21 @@ children:
                   id: 36
                   range: 6:8 - 6:9
 
+- node: 11
+  content: x += "b"
+  data:
+    value: ab
+    isliteral: true
+- node: 19
+  content: x += name
+  data:
+    value: ab*
+    isliteral: false
+- node: 30
+  content: y += "c"
+  data:
+    value: '*c'
+    isliteral: false
 - node: 6
   content: '"a"'
   data:

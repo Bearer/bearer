@@ -363,6 +363,21 @@ children:
   data:
     value: Hello World
     isliteral: true
+- node: 44
+  content: s += "!!"
+  data:
+    value: Hello World!!!
+    isliteral: true
+- node: 57
+  content: s2 += args[0]
+  data:
+    value: hey *
+    isliteral: false
+- node: 67
+  content: s2 += " there"
+  data:
+    value: hey * there
+    isliteral: false
 - node: 38
   content: Greeting + "!"
   data:
