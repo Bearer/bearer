@@ -45,6 +45,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
+	case "dynamic_variable_name":
+		return analyzer.analyzeDynamicVariableName(node, visitChildren)
 	case "binary_expression",
 		"unary_op_expression",
 		"argument",
@@ -164,6 +166,12 @@ func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func
 
 func (analyzer *analyzer) analyzeSwitch(node *sitter.Node, visitChildren func() error) error {
 	analyzer.builder.Alias(node, node.ChildByFieldName("body"))
+
+	return visitChildren()
+}
+
+func (analyzer *analyzer) analyzeDynamicVariableName(node *sitter.Node, visitChildren func() error) error {
+	analyzer.lookupVariable(node.NamedChild(0))
 
 	return visitChildren()
 }
