@@ -12,6 +12,7 @@ import (
 	"github.com/bearer/bearer/internal/parser/nodeid"
 	"github.com/bearer/bearer/internal/scanner/ast"
 	asttree "github.com/bearer/bearer/internal/scanner/ast/tree"
+	"github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery/builder/bytereplacer"
 	"github.com/bearer/bearer/internal/scanner/language"
 )
 
@@ -57,15 +58,29 @@ func Build(
 		return nil, err
 	}
 
-	if fixedInput, fixed := fixupInput(
+	fixupResult, err := fixupInput(
 		patternLanguage,
 		processedInput,
 		inputParams.Variables,
 		tree.RootNode(),
-	); fixed {
-		tree, err = ast.Parse(context.TODO(), language, fixedInput)
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	if fixupResult.Changed() {
+		if log.Trace().Enabled() {
+			log.Trace().Msgf("fixedInput -> %s", fixupResult.Value())
+		}
+
+		tree, err = ast.Parse(context.TODO(), language, fixupResult.Value())
 		if err != nil {
 			return nil, err
+		}
+
+		inputParams.MatchNodeOffset = fixupResult.Translate(inputParams.MatchNodeOffset)
+		for i := range inputParams.UnanchoredOffsets {
+			inputParams.UnanchoredOffsets[i] = fixupResult.Translate(inputParams.UnanchoredOffsets[i])
 		}
 	}
 
@@ -118,13 +133,9 @@ func fixupInput(
 	byteInput []byte,
 	variables []language.PatternVariable,
 	rootNode *asttree.Node,
-) ([]byte, bool) {
+) (*bytereplacer.Result, error) {
+	replacer := bytereplacer.New(byteInput)
 	insideError := false
-	inputOffset := 0
-
-	newInput := make([]byte, len(byteInput))
-	copy(newInput, byteInput)
-	fixed := false
 
 	err := rootNode.Walk(func(node *asttree.Node, visitChildren func() error) error {
 		oldInsideError := insideError
@@ -141,7 +152,6 @@ func fixupInput(
 		}
 
 		var newValue string
-		var originalValue string
 
 		if insideError {
 			variable := getVariableFor(node, patternLanguage, variables)
@@ -158,7 +168,6 @@ func fixupInput(
 				return nil
 			}
 			variable.DummyValue = newValue
-			originalValue = variable.DummyValue
 		} else {
 			if log.Trace().Enabled() {
 				log.Trace().Msgf("attempting pattern fixup (missing node). node: %s", node.Debug())
@@ -170,42 +179,10 @@ func fixupInput(
 			}
 		}
 
-		fixed = true
-		valueOffset := len(newValue) - len(originalValue)
-
-		prefix := newInput[:node.ContentStart.Byte+inputOffset]
-		suffix := newInput[node.ContentEnd.Byte+inputOffset:]
-		// FIXME: We need to append suffix before
-		// newInput seems to be sharing memory in some circumstances
-		// suffix before and after the first append are not equal
-		appendedInput := appendByte([]byte(newValue), suffix...)
-		newInput = appendByte(prefix, appendedInput...)
-
-		inputOffset += valueOffset
-
-		return nil
+		return replacer.Replace(node.ContentStart.Byte, node.ContentEnd.Byte, []byte(newValue))
 	})
 
-	// walk errors are only ones we produce, and we don't make any
-	if err != nil {
-		panic(err)
-	}
-
-	return newInput, fixed
-}
-
-func appendByte(slice []byte, data ...byte) []byte {
-	m := len(slice)
-	n := m + len(data)
-	if n > cap(slice) { // if necessary, reallocate
-		// allocate double what's needed, for future growth.
-		newSlice := make([]byte, (n+1)*2)
-		copy(newSlice, slice)
-		slice = newSlice
-	}
-	slice = slice[0:n]
-	copy(slice[m:n], data)
-	return slice
+	return replacer.Done(), err
 }
 
 func (builder *builder) build(rootNode *asttree.Node) (*Result, error) {
@@ -257,7 +234,7 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 		builder.compileVariableNode(variable)
 	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
-	} else if len(node.NamedChildren()) == 0 {
+	} else if len(node.NamedChildren()) == 0 || builder.patternLanguage.IsLeaf(node) {
 		builder.compileLeafNode(node)
 	} else if err := builder.compileNodeWithChildren(node); err != nil {
 		return err
@@ -400,8 +377,12 @@ func getVariableFor(
 	patternLanguage language.Pattern,
 	variables []language.PatternVariable,
 ) *language.PatternVariable {
+	if slices.Contains(patternLanguage.ContainerTypes(), node.Type()) {
+		return nil
+	}
+
 	for i, variable := range variables {
-		if (len(node.NamedChildren()) == 0 || patternLanguage.IsLeaf(node)) && node.Content() == variable.DummyValue {
+		if node.Content() == variable.DummyValue {
 			return &variables[i]
 		}
 	}

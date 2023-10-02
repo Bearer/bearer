@@ -21,12 +21,7 @@ func New(builder *tree.Builder) language.Analyzer {
 
 func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error) error {
 	switch node.Type() {
-	case "declaration_list",
-		"class_declaration",
-		"method_declaration",
-		"anonymous_function_creation_expression",
-		"for_statement",
-		"block":
+	case "declaration_list", "class_declaration", "anonymous_function_creation_expression", "for_statement", "block", "method_declaration":
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
@@ -50,7 +45,19 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
-	case "binary_expression", "unary_op_expression", "argument", "encapsed_string", "sequence_expression":
+	case "dynamic_variable_name":
+		return analyzer.analyzeDynamicVariableName(node, visitChildren)
+	case "binary_expression",
+		"unary_op_expression",
+		"argument",
+		"encapsed_string",
+		"sequence_expression",
+		"array_element_initializer",
+		"formal_parameters",
+		"include_expression",
+		"include_once_expression",
+		"require_expression",
+		"require_once_expression":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "while_statement", "do_statement", "if_statement", "expression_statement", "compound_statement": // statements don't have results
 		return visitChildren()
@@ -126,9 +133,11 @@ func (analyzer *analyzer) analyzeConditional(node *sitter.Node, visitChildren fu
 	return visitChildren()
 }
 
+// foo(1, 2);
 // foo->bar(1, 2);
 func (analyzer *analyzer) analyzeMethodInvocation(node *sitter.Node, visitChildren func() error) error {
-	analyzer.lookupVariable(node.ChildByFieldName("object"))
+	analyzer.lookupVariable(node.ChildByFieldName("object"))   // method
+	analyzer.lookupVariable(node.ChildByFieldName("function")) // function
 
 	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
 		analyzer.builder.Dataflow(node, arguments)
@@ -152,12 +161,19 @@ func (analyzer *analyzer) analyzeFieldAccess(node *sitter.Node, visitChildren fu
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
 	name := node.ChildByFieldName("name")
 	analyzer.builder.Alias(node, name)
+	analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
 
 	return visitChildren()
 }
 
 func (analyzer *analyzer) analyzeSwitch(node *sitter.Node, visitChildren func() error) error {
 	analyzer.builder.Alias(node, node.ChildByFieldName("body"))
+
+	return visitChildren()
+}
+
+func (analyzer *analyzer) analyzeDynamicVariableName(node *sitter.Node, visitChildren func() error) error {
+	analyzer.lookupVariable(node.NamedChild(0))
 
 	return visitChildren()
 }

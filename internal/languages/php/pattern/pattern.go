@@ -13,9 +13,11 @@ import (
 
 var (
 	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	matchNodeRegex            = regexp.MustCompile(`\$<!>`)
-	ellipsisRegex             = regexp.MustCompile(`\$<\.\.\.>`)
+	patternQueryVariableRegex      = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
+	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
+	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
+	unanchoredPatternNodeTypes     = []string{}
+	patternMatchNodeContainerTypes = []string{"formal_parameters", "simple_parameter", "argument"}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
@@ -34,6 +36,14 @@ func (*Pattern) FixupMissing(node *tree.Node) string {
 	}
 
 	return ";"
+}
+
+func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
+	if slices.Contains([]string{"named_type"}, node.Parent().Type()) {
+		return "$" + dummyValue
+	}
+
+	return dummyValue
 }
 
 func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariable, error) {
@@ -87,8 +97,21 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
+func (*Pattern) IsLeaf(node *tree.Node) bool {
+	// Encapsed string literal
+	switch node.Type() {
+	case "encapsed_string":
+		namedChildren := node.NamedChildren()
+		if len(namedChildren) == 1 && namedChildren[0].Type() == "string" {
+			return true
+		}
+	}
+	return false
+}
+
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
+		"encapsed_string",
 		"string",
 		"name",
 		"integer",
@@ -97,19 +120,44 @@ func (*Pattern) LeafContentTypes() []string {
 	}
 }
 
-// ToDo:
 func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
+	if slices.Contains(unanchoredPatternNodeTypes, node.Type()) {
+		return false, false
+	}
+
 	parent := node.Parent()
 	if parent == nil {
 		return true, true
 	}
 
-	// Class body class_body
-	// function block
-	// lambda () -> {} block
-	// try {} catch () {}
-	// unAnchored := []string{"class_body", "block", "try_statement", "catch_type", "resource_specification"}
-	unAnchored := []string{""}
+	if parent.Type() == "method_declaration" {
+		// visibility
+		if node == parent.ChildByFieldName("name") {
+			return false, true
+		}
+
+		// type
+		if node == parent.ChildByFieldName("parameters") {
+			return true, false
+		}
+
+		return false, false
+	}
+
+	// Associative array elements are unanchored
+	// eg. array("foo" => 42)
+	if parent.Type() == "array_creation_expression" &&
+		node.Type() == "array_element_initializer" &&
+		len(node.NamedChildren()) == 2 {
+		return false, false
+	}
+
+	// Class body declaration_list
+	// function/block compound_statement
+	unAnchored := []string{
+		"declaration_list",
+		"compound_statement",
+	}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
 	return isUnanchored, isUnanchored
@@ -119,6 +167,31 @@ func (*Pattern) IsRoot(node *tree.Node) bool {
 	return !slices.Contains([]string{"expression_statement", "php_tag", "program"}, node.Type()) && !node.IsMissing()
 }
 
-func (*Pattern) NodeTypes(node *tree.Node) []string {
+func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
+	parent := node.Parent()
+	if parent == nil {
+		return []string{node.Type()}
+	}
+
+	if (node.Type() == "string" && parent.Type() != "encapsed_string") ||
+		(node.Type() == "encapsed_string" && patternLanguage.IsLeaf(node)) {
+		return []string{"encapsed_string", "string"}
+	}
+
 	return []string{node.Type()}
+}
+
+func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) string {
+	if fromNodeType == "string" && toNodeType == "encapsed_string" {
+		return fmt.Sprintf(`"%s"`, content[1:len(content)-1])
+	}
+	if fromNodeType == "encapsed_string" && toNodeType == "string" {
+		return fmt.Sprintf("'%s'", content[1:len(content)-1])
+	}
+
+	return content
+}
+
+func (*Pattern) ContainerTypes() []string {
+	return patternMatchNodeContainerTypes
 }
