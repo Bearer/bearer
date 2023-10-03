@@ -4,3 +4,5 @@
 
 x = "a"
 `${x} b`
+
+"hello\x20world\\"

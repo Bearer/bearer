@@ -94,4 +94,9 @@ children:
   data:
     value: a
     isliteral: true
+- node: 5
+  content: a
+  data:
+    value: a
+    isliteral: true
 

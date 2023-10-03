@@ -1,10 +1,12 @@
 package string
 
 import (
+	"fmt"
+	"strconv"
+
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
-	"github.com/bearer/bearer/internal/util/stringutil"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -28,8 +30,20 @@ func (detector *stringDetector) DetectAt(
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string":
+		return common.ConcatenateChildStrings(node, detectorContext)
+	case "string_fragment":
 		return []interface{}{common.String{
-			Value:     stringutil.StripQuotes(node.Content()),
+			Value:     node.Content(),
+			IsLiteral: true,
+		}}, nil
+	case "escape_sequence":
+		value, err := strconv.Unquote(fmt.Sprintf(`"%s"`, node.Content()))
+		if err != nil {
+			return nil, fmt.Errorf("failed to decode escape sequence: %w", err)
+		}
+
+		return []interface{}{common.String{
+			Value:     value,
 			IsLiteral: true,
 		}}, nil
 	case "template_string":
