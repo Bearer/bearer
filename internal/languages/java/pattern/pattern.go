@@ -13,12 +13,14 @@ import (
 
 var (
 	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	matchNodeRegex            = regexp.MustCompile(`\$<!>`)
-	ellipsisRegex             = regexp.MustCompile(`\$<\.\.\.>`)
+	queryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
+	matchNodeRegex     = regexp.MustCompile(`\$<!>`)
+	ellipsisRegex      = regexp.MustCompile(`\$<\.\.\.>`)
+
+	matchNodeContainerTypes = []string{"catch_formal_parameter", "catch_type", "formal_parameters"}
 
 	// todo: see if it is ok to replace typescripts `member_expression` with javas `field_access` and `method_invocation`
-	allowedPatternQueryTypes = []string{"identifier", "type_identifier", "_", "field_access", "method_invocation", "string_literal"}
+	allowedQueryTypes = []string{"identifier", "type_identifier", "_", "field_access", "method_invocation", "string_literal"}
 )
 
 type Pattern struct {
@@ -26,20 +28,20 @@ type Pattern struct {
 }
 
 func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariable, error) {
-	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
-	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
+	nameIndex := queryVariableRegex.SubexpIndex("name")
+	typesIndex := queryVariableRegex.SubexpIndex("types")
 	i := 0
 
 	var params []language.PatternVariable
 
-	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
+	replaced, err := regex.ReplaceAllWithSubmatches(queryVariableRegex, input, func(submatches []string) (string, error) {
 		nodeTypes := strings.Split(submatches[typesIndex], "|")
 		if nodeTypes[0] == "" {
 			nodeTypes = []string{"_"}
 		}
 
 		for _, nodeType := range nodeTypes {
-			if !slices.Contains(allowedPatternQueryTypes, nodeType) {
+			if !slices.Contains(allowedQueryTypes, nodeType) {
 				return "", fmt.Errorf("invalid node type '%s' in pattern query", nodeType)
 			}
 		}
@@ -127,4 +129,8 @@ func (*Pattern) NodeTypes(node *tree.Node) []string {
 	}
 
 	return []string{node.Type()}
+}
+
+func (*Pattern) ContainerTypes() []string {
+	return matchNodeContainerTypes
 }
