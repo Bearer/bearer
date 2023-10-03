@@ -1,11 +1,12 @@
 type: program
 id: 0
-range: 1:1 - 7:1
+range: 1:1 - 9:1
 dataflow_sources:
     - 1
     - 6
     - 17
     - 25
+    - 33
 children:
     - type: expression_statement
       id: 1
@@ -155,6 +156,43 @@ children:
             - type: '"`"'
               id: 32
               range: 6:8 - 6:9
+    - type: expression_statement
+      id: 33
+      range: 8:1 - 8:19
+      children:
+        - type: string
+          id: 34
+          range: 8:1 - 8:19
+          dataflow_sources:
+            - 35
+            - 36
+            - 37
+            - 38
+            - 39
+            - 40
+          children:
+            - type: '"""'
+              id: 35
+              range: 8:1 - 8:2
+            - type: string_fragment
+              id: 36
+              range: 8:2 - 8:7
+              content: hello
+            - type: escape_sequence
+              id: 37
+              range: 8:7 - 8:11
+              content: \x20
+            - type: string_fragment
+              id: 38
+              range: 8:11 - 8:16
+              content: world
+            - type: escape_sequence
+              id: 39
+              range: 8:16 - 8:18
+              content: \\
+            - type: '"""'
+              id: 40
+              range: 8:18 - 8:19
 
 - node: 2
   content: '"ab"'
@@ -171,6 +209,16 @@ children:
   data:
     value: a b
     isliteral: true
+- node: 34
+  content: '"hello\x20world\\"'
+  data:
+    value: hello world\
+    isliteral: true
+- node: 4
+  content: ab
+  data:
+    value: ab
+    isliteral: true
 - node: 8
   content: '"a"'
   data:
@@ -183,6 +231,41 @@ children:
     isliteral: true
 - node: 21
   content: '"a"'
+  data:
+    value: a
+    isliteral: true
+- node: 36
+  content: hello
+  data:
+    value: hello
+    isliteral: true
+- node: 37
+  content: \x20
+  data:
+    value: ' '
+    isliteral: true
+- node: 38
+  content: world
+  data:
+    value: world
+    isliteral: true
+- node: 39
+  content: \\
+  data:
+    value: \
+    isliteral: true
+- node: 10
+  content: a
+  data:
+    value: a
+    isliteral: true
+- node: 15
+  content: b
+  data:
+    value: b
+    isliteral: true
+- node: 23
+  content: a
   data:
     value: a
     isliteral: true

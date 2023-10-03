@@ -1,0 +1,18 @@
+(*builder.Result)({
+  Query: (string) (len=190) "([(class_declaration  . (_) . [(class_body  [(method_declaration . [ (void_type )] @param1 . [ (identifier )] @param2 . [(formal_parameters  . (_) @match . )] . [ (block )] .)] )] .)] @root)",
+  VariableNames: ([]string) (len=1) {
+    (string) (len=1) "_"
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) (len=2) {
+    (string) (len=6) "param1": (map[string]string) (len=1) {
+      (string) (len=9) "void_type": (string) (len=4) "void"
+    },
+    (string) (len=6) "param2": (map[string]string) (len=1) {
+      (string) (len=10) "identifier": (string) (len=4) "main"
+    }
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})

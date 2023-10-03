@@ -26,10 +26,6 @@ type Pattern struct {
 	language.PatternBase
 }
 
-func (*Pattern) IsLeaf(node *tree.Node) bool {
-	return node.Type() == "string"
-}
-
 func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")

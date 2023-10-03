@@ -211,4 +211,19 @@ children:
   data:
     value: c
     isliteral: true
+- node: 8
+  content: a
+  data:
+    value: a
+    isliteral: true
+- node: 16
+  content: b
+  data:
+    value: b
+    isliteral: true
+- node: 35
+  content: c
+  data:
+    value: c
+    isliteral: true
 
