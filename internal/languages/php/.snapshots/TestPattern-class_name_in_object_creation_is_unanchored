@@ -1,0 +1,14 @@
+(*builder.Result)({
+  Query: (string) (len=67) "([(object_creation_expression  . [ (name )] @param1 @match)] @root)",
+  VariableNames: ([]string) {
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) (len=1) {
+    (string) (len=6) "param1": (map[string]string) (len=1) {
+      (string) (len=4) "name": (string) (len=3) "Foo"
+    }
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})
