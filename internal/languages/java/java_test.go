@@ -4,10 +4,11 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/bradleyjkemp/cupaloy"
+
 	"github.com/bearer/bearer/internal/languages/java"
 	"github.com/bearer/bearer/internal/languages/testhelper"
 	patternquerybuilder "github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery/builder"
-	"github.com/bradleyjkemp/cupaloy"
 )
 
 //go:embed testdata/logger.yml

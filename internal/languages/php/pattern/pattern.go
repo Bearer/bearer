@@ -152,6 +152,13 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return false, false
 	}
 
+	// `new Foo` should match `new Foo()`
+	if parent.Type() == "object_creation_expression" {
+		if node == parent.NamedChildren()[0] {
+			return true, false
+		}
+	}
+
 	// Class body declaration_list
 	// function/block compound_statement
 	unAnchored := []string{

@@ -4,7 +4,11 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/bradleyjkemp/cupaloy"
+
+	"github.com/bearer/bearer/internal/languages/php"
 	"github.com/bearer/bearer/internal/languages/testhelper"
+	patternquerybuilder "github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery/builder"
 )
 
 //go:embed testdata/logger.yml
@@ -19,4 +23,21 @@ func TestFlow(t *testing.T) {
 
 func TestScope(t *testing.T) {
 	testhelper.GetRunner(t, scopeRule, "PHP").RunTest(t, "./testdata/scope", ".snapshots/")
+}
+
+func TestPattern(t *testing.T) {
+	for _, test := range []struct{ name, pattern string }{
+		{"class name in object creation is unanchored", `
+				new $<!>Foo;
+		`},
+	} {
+		t.Run(test.name, func(tt *testing.T) {
+			result, err := patternquerybuilder.Build(php.Get(), test.pattern, "")
+			if err != nil {
+				tt.Fatalf("failed to build pattern: %s", err)
+			}
+
+			cupaloy.SnapshotT(tt, result)
+		})
+	}
 }
