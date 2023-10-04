@@ -364,12 +364,8 @@ func FromOptions(opts flag.Options, versionMeta *version_check.VersionMeta) (Con
 	}
 
 	if config.Scan.DiffBaseBranch != "" {
-		if config.Report.Report != flag.ReportSecurity {
+		if config.Report.Report != flag.ReportSecurity && config.Report.Report != flag.ReportSaaS {
 			return Config{}, errors.New("diff base branch is only supported for the security report")
-		}
-
-		if config.Client != nil {
-			return Config{}, errors.New("diff base branch is not supported when using an api key")
 		}
 	}
 
