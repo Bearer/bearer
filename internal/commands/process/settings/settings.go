@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/bearer/api"
@@ -364,12 +365,8 @@ func FromOptions(opts flag.Options, versionMeta *version_check.VersionMeta) (Con
 	}
 
 	if config.Scan.DiffBaseBranch != "" {
-		if config.Report.Report != flag.ReportSecurity {
+		if !slices.Contains([]string{flag.ReportSecurity, flag.ReportSaaS}, config.Report.Report) {
 			return Config{}, errors.New("diff base branch is only supported for the security report")
-		}
-
-		if config.Client != nil {
-			return Config{}, errors.New("diff base branch is not supported when using an api key")
 		}
 	}
 

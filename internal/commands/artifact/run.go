@@ -38,7 +38,7 @@ import (
 	"github.com/bearer/bearer/internal/types"
 )
 
-var ErrFileListEmpty = errors.New("couldn't find any files to scan in the specified directory")
+var ErrFileListEmpty = errors.New("couldn't find any files to scan in the specified directory, for diff scans this can mean the compared branches were identical")
 
 // TargetKind represents what kind of artifact bearer scans
 type TargetKind string
