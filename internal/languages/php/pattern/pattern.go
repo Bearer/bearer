@@ -125,6 +125,12 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return false, false
 	}
 
+	// Named arguments are unanchored
+	// eg. f(x: 42)
+	if node.Type() == "argument" && node.ChildByFieldName("name") != nil {
+		return false, false
+	}
+
 	parent := node.Parent()
 	if parent == nil {
 		return true, true

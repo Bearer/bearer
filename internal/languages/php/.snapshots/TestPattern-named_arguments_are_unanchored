@@ -1,0 +1,18 @@
+(*builder.Result)({
+  Query: (string) (len=127) "([(function_call_expression . [ (name )] @param1 . [(arguments  [(argument . [ (name )] @param2  . (_) @match .)] )] .)] @root)",
+  VariableNames: ([]string) (len=1) {
+    (string) (len=1) "_"
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) (len=2) {
+    (string) (len=6) "param1": (map[string]string) (len=1) {
+      (string) (len=4) "name": (string) (len=3) "foo"
+    },
+    (string) (len=6) "param2": (map[string]string) (len=1) {
+      (string) (len=4) "name": (string) (len=1) "x"
+    }
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})
