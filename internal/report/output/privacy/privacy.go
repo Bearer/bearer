@@ -108,7 +108,7 @@ func AddReportData(reportData *outputtypes.ReportData, config settings.Config) e
 		output.StdErrLog("Evaluating rules")
 	}
 
-	bar := progressbar.GetProgressBar(len(config.Rules), config, "rules")
+	bar := progressbar.GetProgressBar(len(config.Rules), config)
 
 	subjectRuleFailures := make(map[string]RuleFailureSummary)
 	thirdPartyRuleFailures := make(map[string]map[string]RuleFailureSummary)
