@@ -1,0 +1,379 @@
+type: source_file
+id: 0
+range: 1:1 - 12:1
+dataflow_sources:
+    - 1
+    - 4
+    - 5
+    - 11
+    - 12
+    - 52
+children:
+    - type: package_clause
+      id: 1
+      range: 1:1 - 1:12
+      dataflow_sources:
+        - 2
+        - 3
+      children:
+        - type: '"package"'
+          id: 2
+          range: 1:1 - 1:8
+        - type: package_identifier
+          id: 3
+          range: 1:9 - 1:12
+          content: foo
+    - type: |-
+        "
+        "
+      id: 4
+      range: 1:12 - 3:1
+    - type: import_declaration
+      id: 5
+      range: 3:1 - 3:13
+      dataflow_sources:
+        - 6
+        - 7
+      children:
+        - type: '"import"'
+          id: 6
+          range: 3:1 - 3:7
+        - type: import_spec
+          id: 7
+          range: 3:8 - 3:13
+          dataflow_sources:
+            - 8
+          children:
+            - type: interpreted_string_literal
+              id: 8
+              range: 3:8 - 3:13
+              dataflow_sources:
+                - 9
+                - 10
+              children:
+                - type: '"""'
+                  id: 9
+                  range: 3:8 - 3:9
+                - type: '"""'
+                  id: 10
+                  range: 3:12 - 3:13
+    - type: |-
+        "
+        "
+      id: 11
+      range: 3:13 - 5:1
+    - type: function_declaration
+      id: 12
+      range: 5:1 - 11:2
+      children:
+        - type: '"func"'
+          id: 13
+          range: 5:1 - 5:5
+        - type: identifier
+          id: 14
+          range: 5:6 - 5:10
+          content: main
+        - type: parameter_list
+          id: 15
+          range: 5:10 - 5:12
+          dataflow_sources:
+            - 16
+            - 17
+          children:
+            - type: '"("'
+              id: 16
+              range: 5:10 - 5:11
+            - type: '")"'
+              id: 17
+              range: 5:11 - 5:12
+        - type: block
+          id: 18
+          range: 5:13 - 11:2
+          children:
+            - type: '"{"'
+              id: 19
+              range: 5:13 - 5:14
+            - type: short_var_declaration
+              id: 20
+              range: 6:2 - 8:3
+              alias_of:
+                - 25
+              queries:
+                - 0
+              children:
+                - type: expression_list
+                  id: 21
+                  range: 6:2 - 6:6
+                  dataflow_sources:
+                    - 22
+                  children:
+                    - type: identifier
+                      id: 22
+                      range: 6:2 - 6:6
+                      content: user
+                - type: '":="'
+                  id: 23
+                  range: 6:7 - 6:9
+                - type: expression_list
+                  id: 24
+                  range: 6:10 - 8:3
+                  dataflow_sources:
+                    - 25
+                  children:
+                    - type: composite_literal
+                      id: 25
+                      range: 6:10 - 8:3
+                      dataflow_sources:
+                        - 26
+                        - 27
+                      queries:
+                        - 2
+                      children:
+                        - type: type_identifier
+                          id: 26
+                          range: 6:10 - 6:14
+                          content: User
+                        - type: literal_value
+                          id: 27
+                          range: 6:14 - 8:3
+                          dataflow_sources:
+                            - 28
+                            - 29
+                            - 35
+                            - 36
+                          children:
+                            - type: '"{"'
+                              id: 28
+                              range: 6:14 - 6:15
+                            - type: keyed_element
+                              id: 29
+                              range: 7:3 - 7:23
+                              dataflow_sources:
+                                - 30
+                                - 31
+                                - 32
+                              children:
+                                - type: field_identifier
+                                  id: 30
+                                  range: 7:3 - 7:8
+                                  content: email
+                                - type: '":"'
+                                  id: 31
+                                  range: 7:8 - 7:9
+                                - type: interpreted_string_literal
+                                  id: 32
+                                  range: 7:10 - 7:23
+                                  dataflow_sources:
+                                    - 33
+                                    - 34
+                                  children:
+                                    - type: '"""'
+                                      id: 33
+                                      range: 7:10 - 7:11
+                                    - type: '"""'
+                                      id: 34
+                                      range: 7:22 - 7:23
+                            - type: '","'
+                              id: 35
+                              range: 7:23 - 7:24
+                            - type: '"}"'
+                              id: 36
+                              range: 8:2 - 8:3
+            - type: |-
+                "
+                "
+              id: 37
+              range: 8:3 - 10:1
+            - type: call_expression
+              id: 38
+              range: 10:2 - 10:25
+              dataflow_sources:
+                - 43
+              children:
+                - type: selector_expression
+                  id: 39
+                  range: 10:2 - 10:13
+                  queries:
+                    - 1
+                  children:
+                    - type: identifier
+                      id: 40
+                      range: 10:2 - 10:5
+                      content: fmt
+                    - type: '"."'
+                      id: 41
+                      range: 10:5 - 10:6
+                    - type: field_identifier
+                      id: 42
+                      range: 10:6 - 10:13
+                      content: Println
+                - type: argument_list
+                  id: 43
+                  range: 10:13 - 10:25
+                  dataflow_sources:
+                    - 44
+                    - 45
+                    - 49
+                  children:
+                    - type: '"("'
+                      id: 44
+                      range: 10:13 - 10:14
+                    - type: selector_expression
+                      id: 45
+                      range: 10:14 - 10:24
+                      queries:
+                        - 1
+                      children:
+                        - type: identifier
+                          id: 46
+                          range: 10:14 - 10:18
+                          content: user
+                          alias_of:
+                            - 20
+                        - type: '"."'
+                          id: 47
+                          range: 10:18 - 10:19
+                        - type: field_identifier
+                          id: 48
+                          range: 10:19 - 10:24
+                          content: email
+                    - type: '")"'
+                      id: 49
+                      range: 10:24 - 10:25
+            - type: |-
+                "
+                "
+              id: 50
+              range: 10:25 - 11:1
+            - type: '"}"'
+              id: 51
+              range: 11:1 - 11:2
+    - type: |-
+        "
+        "
+      id: 52
+      range: 11:2 - 12:1
+
+- node: 38
+  content: fmt.Println(user.email)
+  data:
+    properties:
+        - name: fmt
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 39
+                typeid: 30
+                contentstart:
+                    byte: 85
+                    line: 10
+                    column: 2
+                contentend:
+                    byte: 96
+                    line: 10
+                    column: 13
+                executingdetectors: []
+            data:
+                properties:
+                    - name: Println
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 39
+  content: fmt.Println
+  data:
+    properties:
+        - name: fmt
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 39
+                typeid: 30
+                contentstart:
+                    byte: 85
+                    line: 10
+                    column: 2
+                contentend:
+                    byte: 96
+                    line: 10
+                    column: 13
+                executingdetectors: []
+            data:
+                properties:
+                    - name: Println
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 25
+  content: |-
+    User{
+    		email: "foo@bar.com",
+    	}
+  data:
+    properties:
+        - name: User
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 25
+                typeid: 21
+                contentstart:
+                    byte: 50
+                    line: 6
+                    column: 10
+                contentend:
+                    byte: 82
+                    line: 8
+                    column: 3
+                executingdetectors: []
+            data:
+                properties:
+                    - name: email
+                      node:
+                        id: 30
+                        typeid: 25
+                        contentstart:
+                            byte: 58
+                            line: 7
+                            column: 3
+                        contentend:
+                            byte: 63
+                            line: 7
+                            column: 8
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 45
+  content: user.email
+  data:
+    properties:
+        - name: user
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 45
+                typeid: 30
+                contentstart:
+                    byte: 97
+                    line: 10
+                    column: 14
+                contentend:
+                    byte: 107
+                    line: 10
+                    column: 24
+                executingdetectors: []
+            data:
+                properties:
+                    - name: email
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+

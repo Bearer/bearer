@@ -1,5 +1,5 @@
 languages:
-  - <language>
+  - go
 patterns:
   - pattern: scopeCursor($<USER_INPUT>)
     filters:
@@ -19,8 +19,16 @@ patterns:
 auxiliary:
   - id: scope_test_user_input
     patterns:
-      - $_GET[$<_>]
-      - $_POST[$<_>]
+      - pattern: $<HTTP_REQUEST>.FormValue($<_>)
+        filters:
+          - variable: HTTP_REQUEST
+            detection: scope_test_http_request_init
+  - id: scope_test_http_request_init
+    patterns:
+      - func $<_>($<...>$<!>$<_> *http.Request$<...>)
+      - func $<_>($<...>$<!>$<_> http.Request$<...>)
+      - var $<!>$<_> *http.Request
+      - var $<!>$<_> http.Request
 severity: high
 metadata:
   description: Test detection filter scopes

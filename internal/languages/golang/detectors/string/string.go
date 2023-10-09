@@ -27,26 +27,21 @@ func (detector *stringDetector) DetectAt(
 	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
-	case "string":
-		value := node.Content()
-		if node.Parent() != nil && node.Parent().Type() != "encapsed_string" {
-			value = stringutil.StripQuotes(value)
+	case "binary_expression":
+		if node.Children()[1].Content() == "+" {
+			return common.ConcatenateChildStrings(node, detectorContext)
 		}
+	case "assignment_statement":
+		if node.Children()[1].Content() == "+=" {
+			return common.ConcatenateAssignEquals(node, detectorContext)
+		}
+	case "interpreted_string_literal", "raw_string_literal":
+		value := stringutil.StripQuotes(node.Content())
 
 		return []interface{}{common.String{
 			Value:     value,
 			IsLiteral: true,
 		}}, nil
-	case "encapsed_string":
-		return common.ConcatenateChildStrings(node, detectorContext)
-	case "binary_expression":
-		if node.Children()[1].Content() == "." {
-			return common.ConcatenateChildStrings(node, detectorContext)
-		}
-	case "augmented_assignment_expression":
-		if node.Children()[1].Content() == ".=" {
-			return common.ConcatenateAssignEquals(node, detectorContext)
-		}
 	}
 
 	return nil, nil

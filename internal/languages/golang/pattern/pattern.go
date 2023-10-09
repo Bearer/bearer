@@ -17,7 +17,7 @@ var (
 	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
 	unanchoredPatternNodeTypes     = []string{}
-	patternMatchNodeContainerTypes = []string{"formal_parameters", "simple_parameter", "argument"}
+	patternMatchNodeContainerTypes = []string{"parameter_declaration", "parameter_list", "var_spec"}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
@@ -26,24 +26,8 @@ type Pattern struct {
 	language.PatternBase
 }
 
-// func (*Pattern) AdjustInput(input string) string {
-// 	return input
-// }
-
-// func (*Pattern) FixupMissing(node *tree.Node) string {
-// 	if node.Type() != `";"` {
-// 		return ""
-// 	}
-
-// 	return ";"
-// }
-
-func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
-	if slices.Contains([]string{"named_type"}, node.Parent().Type()) {
-		return "$" + dummyValue
-	}
-
-	return dummyValue
+func (*Pattern) AdjustInput(input string) string {
+	return input + "\n"
 }
 
 func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariable, error) {
@@ -100,23 +84,24 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 func (*Pattern) IsLeaf(node *tree.Node) bool {
 	// Encapsed string literal
 	switch node.Type() {
-	case "encapsed_string":
-		namedChildren := node.NamedChildren()
-		if len(namedChildren) == 1 && namedChildren[0].Type() == "string" {
-			return true
-		}
+	case "raw_string_literal", "interpreted_string_literal":
+		return true
 	}
 	return false
 }
 
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
-		"encapsed_string",
-		"string",
-		"name",
-		"integer",
-		"float",
-		"boolean",
+		"identifier",
+		"package_identifier",
+		"type_identifier",
+		"raw_string_literal",
+		"intepreted_string_literal",
+		"int_literal",
+		"float_literal",
+		"true",
+		"false",
+		"nil",
 	}
 }
 
@@ -130,13 +115,8 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return true, true
 	}
 
-	if parent.Type() == "method_declaration" {
-		// visibility
-		if node == parent.ChildByFieldName("name") {
-			return false, true
-		}
-
-		// type
+	if parent.Type() == "function_declaration" {
+		// parameters
 		if node == parent.ChildByFieldName("parameters") {
 			return true, false
 		}
@@ -144,19 +124,11 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return false, false
 	}
 
-	// Associative array elements are unanchored
-	// eg. array("foo" => 42)
-	if parent.Type() == "array_creation_expression" &&
-		node.Type() == "array_element_initializer" &&
-		len(node.NamedChildren()) == 2 {
-		return false, false
-	}
-
-	// Class body declaration_list
-	// function/block compound_statement
+	// function declaration_list
 	unAnchored := []string{
-		"declaration_list",
-		"compound_statement",
+		"function_declaration",
+		"argument_list",
+		"var_declaration",
 	}
 
 	isUnanchored := !slices.Contains(unAnchored, parent.Type())
@@ -164,31 +136,14 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	return !slices.Contains([]string{"expression_statement", "program"}, node.Type()) && !node.IsMissing()
+	return !slices.Contains([]string{"source_file"}, node.Type()) && !node.IsMissing()
 }
 
 func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
-	parent := node.Parent()
-	if parent == nil {
-		return []string{node.Type()}
-	}
-
-	if (node.Type() == "string" && parent.Type() != "encapsed_string") ||
-		(node.Type() == "encapsed_string" && patternLanguage.IsLeaf(node)) {
-		return []string{"encapsed_string", "string"}
-	}
-
 	return []string{node.Type()}
 }
 
 func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) string {
-	if fromNodeType == "string" && toNodeType == "encapsed_string" {
-		return fmt.Sprintf(`"%s"`, content[1:len(content)-1])
-	}
-	if fromNodeType == "encapsed_string" && toNodeType == "string" {
-		return fmt.Sprintf("'%s'", content[1:len(content)-1])
-	}
-
 	return content
 }
 

@@ -2,6 +2,7 @@ package analyzer
 
 import (
 	sitter "github.com/smacker/go-tree-sitter"
+	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
@@ -21,50 +22,33 @@ func New(builder *tree.Builder) language.Analyzer {
 
 func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error) error {
 	switch node.Type() {
-	case "declaration_list", "class_declaration", "anonymous_function_creation_expression", "for_statement", "block", "method_declaration":
+	case "for_statement", "block", "method_declaration", "function_declaration":
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
-	case "augmented_assignment_expression":
-		return analyzer.analyzeAugmentedAssignment(node, visitChildren)
+	case "short_var_declaration":
+		return analyzer.analyzeShortVarDeclaration(node, visitChildren)
+	case "var_spec":
+		return analyzer.analyzeVarSpecDeclaration(node, visitChildren)
 	case "assignment_expression":
 		return analyzer.analyzeAssignment(node, visitChildren)
-	case "parenthesized_expression":
-		return analyzer.analyzeParentheses(node, visitChildren)
-	case "conditional_expression":
-		return analyzer.analyzeConditional(node, visitChildren)
-	case "function_call_expression", "member_call_expression":
-		return analyzer.analyzeMethodInvocation(node, visitChildren)
-	case "member_access_expression":
-		return analyzer.analyzeFieldAccess(node, visitChildren)
-	case "simple_parameter", "variadic_parameter":
+	case "call_expression":
+		return analyzer.analyzeCallExpression(node, visitChildren)
+	case "selector_expression":
+		return analyzer.analyzeSelectorExpression(node, visitChildren)
+	case "parameter_declaration":
 		return analyzer.analyzeParameter(node, visitChildren)
-	case "switch_statement":
+	case "expression_switch_statement":
 		return analyzer.analyzeSwitch(node, visitChildren)
-	case "switch_block":
+	case "expression_case", "default_case":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
-	case "switch_label":
-		return visitChildren()
-	case "dynamic_variable_name":
-		return analyzer.analyzeDynamicVariableName(node, visitChildren)
-	case "binary_expression",
-		"unary_op_expression",
-		"argument",
-		"encapsed_string",
-		"sequence_expression",
-		"array_element_initializer",
-		"formal_parameters",
-		"include_expression",
-		"include_once_expression",
-		"require_expression",
-		"require_once_expression":
+	case "argument_list":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
-	case "while_statement", "do_statement", "if_statement", "expression_statement", "compound_statement": // statements don't have results
+	case "return_statement", "go_statement", "defer_statement", "if_statement": // statements don't have results
 		return visitChildren()
-	case "variable_name":
+	case "identifier":
 		return visitChildren()
-	case "match_expression":
-		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("condition"))...)
+	case "index_expression":
 		return visitChildren()
 	default:
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
@@ -72,73 +56,65 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 	}
 }
 
-// $foo = a
+// foo = a
+// foo += a
 func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren func() error) error {
-	left := node.ChildByFieldName("left")
-	right := node.ChildByFieldName("right")
-	analyzer.builder.Alias(node, right)
+	left := node.ChildByFieldName("left").Child(0)
+	right := node.ChildByFieldName("right").Child(0)
+
+	if analyzer.builder.ContentFor(node.Child(1)) == "=" {
+		analyzer.builder.Alias(node, right)
+	} else { // +=
+		analyzer.builder.Dataflow(node, left, right)
+		analyzer.lookupVariable(left)
+	}
+
 	analyzer.lookupVariable(right)
 
 	err := visitChildren()
 
-	if left.Type() == "variable_name" {
-		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
-	}
+	analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
 
 	return err
 }
 
-// $foo .= a
-func (analyzer *analyzer) analyzeAugmentedAssignment(node *sitter.Node, visitChildren func() error) error {
+// foo, err := a
+func (analyzer *analyzer) analyzeShortVarDeclaration(node *sitter.Node, visitChildren func() error) error {
 	left := node.ChildByFieldName("left")
 	right := node.ChildByFieldName("right")
-	analyzer.builder.Dataflow(node, left, right)
-	analyzer.lookupVariable(left)
-	analyzer.lookupVariable(right)
 
-	err := visitChildren()
-
-	if left.Type() == "variable_name" {
-		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
+	for _, child := range analyzer.builder.ChildrenFor(left) {
+		if !slices.Contains([]string{"_", "err"}, analyzer.builder.ContentFor(child)) {
+			analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
+			analyzer.scope.Assign(analyzer.builder.ContentFor(child), node)
+		}
 	}
 
-	return err
-}
+	for _, child := range analyzer.builder.ChildrenFor(right) {
+		analyzer.builder.Alias(node, child)
+		analyzer.lookupVariable(child)
+	}
 
-func (analyzer *analyzer) analyzeParentheses(node *sitter.Node, visitChildren func() error) error {
-	analyzer.builder.Alias(node, node.NamedChild(0))
-	analyzer.lookupVariable(node.NamedChild(0))
 	err := visitChildren()
 
 	return err
 }
 
-// a ? x : y
-// a ?: x
-func (analyzer *analyzer) analyzeConditional(node *sitter.Node, visitChildren func() error) error {
-	condition := node.ChildByFieldName("condition")
-	consequence := node.ChildByFieldName("body")
-	alternative := node.ChildByFieldName("alternative")
-
-	analyzer.lookupVariable(condition)
-	analyzer.lookupVariable(consequence)
-	analyzer.lookupVariable(alternative)
-
-	if consequence != nil {
-		analyzer.builder.Alias(node, consequence, alternative)
-	} else {
-		analyzer.builder.Alias(node, condition, alternative)
+// var a, b string
+func (analyzer *analyzer) analyzeVarSpecDeclaration(node *sitter.Node, visitChildren func() error) error {
+	for _, child := range analyzer.builder.ChildrenFor(node) {
+		if child.Type() == "identifier" {
+			analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
+		}
 	}
 
-	return visitChildren()
+	err := visitChildren()
+
+	return err
 }
 
-// foo(1, 2);
-// foo->bar(1, 2);
-func (analyzer *analyzer) analyzeMethodInvocation(node *sitter.Node, visitChildren func() error) error {
-	analyzer.lookupVariable(node.ChildByFieldName("object"))   // method
-	analyzer.lookupVariable(node.ChildByFieldName("function")) // function
-
+// foo(1, 2)
+func (analyzer *analyzer) analyzeCallExpression(node *sitter.Node, visitChildren func() error) error {
 	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
 		analyzer.builder.Dataflow(node, arguments)
 	}
@@ -146,35 +122,27 @@ func (analyzer *analyzer) analyzeMethodInvocation(node *sitter.Node, visitChildr
 	return visitChildren()
 }
 
-// foo->bar
-func (analyzer *analyzer) analyzeFieldAccess(node *sitter.Node, visitChildren func() error) error {
-	analyzer.lookupVariable(node.ChildByFieldName("object"))
+// foo.bar
+func (analyzer *analyzer) analyzeSelectorExpression(node *sitter.Node, visitChildren func() error) error {
+	analyzer.lookupVariable(node.ChildByFieldName("operand"))
 
 	return visitChildren()
 }
 
 // method parameter declaration
 //
-// fn(bool $a) => $a;
-// fn($x = 42) => $x;
-// fn($x, ...$rest) => $rest;
+// fn(a string)
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
 	name := node.ChildByFieldName("name")
-	analyzer.builder.Alias(node, name)
-	analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
+	if name != nil {
+		analyzer.builder.Alias(node, name)
+		analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
+	}
 
 	return visitChildren()
 }
 
 func (analyzer *analyzer) analyzeSwitch(node *sitter.Node, visitChildren func() error) error {
-	analyzer.builder.Alias(node, node.ChildByFieldName("body"))
-
-	return visitChildren()
-}
-
-func (analyzer *analyzer) analyzeDynamicVariableName(node *sitter.Node, visitChildren func() error) error {
-	analyzer.lookupVariable(node.NamedChild(0))
-
 	return visitChildren()
 }
 
@@ -208,7 +176,7 @@ func (analyzer *analyzer) withScope(newScope *language.Scope, body func() error)
 }
 
 func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
-	if node == nil || node.Type() != "variable_name" {
+	if node == nil || node.Type() != "identifier" {
 		return
 	}
 

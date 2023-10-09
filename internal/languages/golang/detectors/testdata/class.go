@@ -1,8 +1,14 @@
-class User
-{
-    public $name = '';
+package foo
 
-    public function LowercaseName() {
-        echo strtolower($this->name);
-    }
+import "fmt"
+
+type User struct {
+	firstName string
+	lastName  string
+	email     string
+	uuid      string
+}
+
+func (x User) Name() {
+	fmt.Println(x.firstName)
 }

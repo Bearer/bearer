@@ -4,6 +4,8 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/golang"
 
+	// golang "github.com/bearer/bearer/internal/parser/sitter/golang2"
+
 	"github.com/bearer/bearer/internal/classification/schema"
 	"github.com/bearer/bearer/internal/report/detectors"
 	"github.com/bearer/bearer/internal/scanner/ast/query"

@@ -14,9 +14,9 @@ var loggerRule []byte
 var scopeRule []byte
 
 func TestFlow(t *testing.T) {
-	testhelper.GetRunner(t, loggerRule, "<language>").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
+	testhelper.GetRunner(t, loggerRule, "Go").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestScope(t *testing.T) {
-	testhelper.GetRunner(t, scopeRule, "<language>").RunTest(t, "./testdata/scope", ".snapshots/")
+	testhelper.GetRunner(t, scopeRule, "Go").RunTest(t, "./testdata/scope", ".snapshots/")
 }

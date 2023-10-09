@@ -1,0 +1,777 @@
+type: source_file
+id: 0
+range: 1:1 - 23:1
+dataflow_sources:
+    - 1
+    - 4
+    - 5
+    - 20
+    - 21
+    - 30
+    - 31
+    - 147
+children:
+    - type: package_clause
+      id: 1
+      range: 1:1 - 1:13
+      dataflow_sources:
+        - 2
+        - 3
+      children:
+        - type: '"package"'
+          id: 2
+          range: 1:1 - 1:8
+        - type: package_identifier
+          id: 3
+          range: 1:9 - 1:13
+          content: main
+    - type: |-
+        "
+        "
+      id: 4
+      range: 1:13 - 3:1
+    - type: import_declaration
+      id: 5
+      range: 3:1 - 6:2
+      dataflow_sources:
+        - 6
+        - 7
+      children:
+        - type: '"import"'
+          id: 6
+          range: 3:1 - 3:7
+        - type: import_spec_list
+          id: 7
+          range: 3:8 - 6:2
+          dataflow_sources:
+            - 8
+            - 9
+            - 13
+            - 14
+            - 18
+            - 19
+          children:
+            - type: '"("'
+              id: 8
+              range: 3:8 - 3:9
+            - type: import_spec
+              id: 9
+              range: 4:2 - 4:7
+              dataflow_sources:
+                - 10
+              children:
+                - type: interpreted_string_literal
+                  id: 10
+                  range: 4:2 - 4:7
+                  dataflow_sources:
+                    - 11
+                    - 12
+                  children:
+                    - type: '"""'
+                      id: 11
+                      range: 4:2 - 4:3
+                    - type: '"""'
+                      id: 12
+                      range: 4:6 - 4:7
+            - type: |-
+                "
+                "
+              id: 13
+              range: 4:7 - 5:1
+            - type: import_spec
+              id: 14
+              range: 5:2 - 5:6
+              dataflow_sources:
+                - 15
+              children:
+                - type: interpreted_string_literal
+                  id: 15
+                  range: 5:2 - 5:6
+                  dataflow_sources:
+                    - 16
+                    - 17
+                  children:
+                    - type: '"""'
+                      id: 16
+                      range: 5:2 - 5:3
+                    - type: '"""'
+                      id: 17
+                      range: 5:5 - 5:6
+            - type: |-
+                "
+                "
+              id: 18
+              range: 5:6 - 6:1
+            - type: '")"'
+              id: 19
+              range: 6:1 - 6:2
+    - type: |-
+        "
+        "
+      id: 20
+      range: 6:2 - 8:1
+    - type: var_declaration
+      id: 21
+      range: 8:1 - 8:29
+      dataflow_sources:
+        - 22
+        - 23
+      children:
+        - type: '"var"'
+          id: 22
+          range: 8:1 - 8:4
+        - type: var_spec
+          id: 23
+          range: 8:5 - 8:29
+          children:
+            - type: identifier
+              id: 24
+              range: 8:5 - 8:13
+              content: Greeting
+            - type: '"="'
+              id: 25
+              range: 8:14 - 8:15
+            - type: expression_list
+              id: 26
+              range: 8:16 - 8:29
+              dataflow_sources:
+                - 27
+              children:
+                - type: interpreted_string_literal
+                  id: 27
+                  range: 8:16 - 8:29
+                  dataflow_sources:
+                    - 28
+                    - 29
+                  children:
+                    - type: '"""'
+                      id: 28
+                      range: 8:16 - 8:17
+                    - type: '"""'
+                      id: 29
+                      range: 8:28 - 8:29
+    - type: |-
+        "
+        "
+      id: 30
+      range: 8:29 - 10:1
+    - type: function_declaration
+      id: 31
+      range: 10:1 - 22:2
+      children:
+        - type: '"func"'
+          id: 32
+          range: 10:1 - 10:5
+        - type: identifier
+          id: 33
+          range: 10:6 - 10:10
+          content: main
+        - type: parameter_list
+          id: 34
+          range: 10:10 - 10:12
+          dataflow_sources:
+            - 35
+            - 36
+          children:
+            - type: '"("'
+              id: 35
+              range: 10:10 - 10:11
+            - type: '")"'
+              id: 36
+              range: 10:11 - 10:12
+        - type: block
+          id: 37
+          range: 10:13 - 22:2
+          children:
+            - type: '"{"'
+              id: 38
+              range: 10:13 - 10:14
+            - type: short_var_declaration
+              id: 39
+              range: 11:2 - 11:21
+              alias_of:
+                - 44
+              queries:
+                - 0
+              children:
+                - type: expression_list
+                  id: 40
+                  range: 11:2 - 11:3
+                  dataflow_sources:
+                    - 41
+                  children:
+                    - type: identifier
+                      id: 41
+                      range: 11:2 - 11:3
+                      content: s
+                - type: '":="'
+                  id: 42
+                  range: 11:4 - 11:6
+                - type: expression_list
+                  id: 43
+                  range: 11:7 - 11:21
+                  dataflow_sources:
+                    - 44
+                  children:
+                    - type: binary_expression
+                      id: 44
+                      range: 11:7 - 11:21
+                      dataflow_sources:
+                        - 45
+                        - 46
+                        - 47
+                      children:
+                        - type: identifier
+                          id: 45
+                          range: 11:7 - 11:15
+                          content: Greeting
+                        - type: '"+"'
+                          id: 46
+                          range: 11:16 - 11:17
+                        - type: interpreted_string_literal
+                          id: 47
+                          range: 11:18 - 11:21
+                          dataflow_sources:
+                            - 48
+                            - 49
+                          children:
+                            - type: '"""'
+                              id: 48
+                              range: 11:18 - 11:19
+                            - type: '"""'
+                              id: 49
+                              range: 11:20 - 11:21
+            - type: |-
+                "
+                "
+              id: 50
+              range: 11:21 - 12:1
+            - type: assignment_statement
+              id: 51
+              range: 12:2 - 12:11
+              dataflow_sources:
+                - 52
+                - 54
+                - 55
+              queries:
+                - 0
+              children:
+                - type: expression_list
+                  id: 52
+                  range: 12:2 - 12:3
+                  dataflow_sources:
+                    - 53
+                  children:
+                    - type: identifier
+                      id: 53
+                      range: 12:2 - 12:3
+                      content: s
+                - type: '"+="'
+                  id: 54
+                  range: 12:4 - 12:6
+                - type: expression_list
+                  id: 55
+                  range: 12:7 - 12:11
+                  dataflow_sources:
+                    - 56
+                  children:
+                    - type: interpreted_string_literal
+                      id: 56
+                      range: 12:7 - 12:11
+                      dataflow_sources:
+                        - 57
+                        - 58
+                      children:
+                        - type: '"""'
+                          id: 57
+                          range: 12:7 - 12:8
+                        - type: '"""'
+                          id: 58
+                          range: 12:10 - 12:11
+            - type: |-
+                "
+                "
+              id: 59
+              range: 12:11 - 13:1
+            - type: call_expression
+              id: 60
+              range: 13:2 - 13:16
+              dataflow_sources:
+                - 65
+              children:
+                - type: selector_expression
+                  id: 61
+                  range: 13:2 - 13:13
+                  queries:
+                    - 1
+                  children:
+                    - type: identifier
+                      id: 62
+                      range: 13:2 - 13:5
+                      content: fmt
+                    - type: '"."'
+                      id: 63
+                      range: 13:5 - 13:6
+                    - type: field_identifier
+                      id: 64
+                      range: 13:6 - 13:13
+                      content: Println
+                - type: argument_list
+                  id: 65
+                  range: 13:13 - 13:16
+                  dataflow_sources:
+                    - 66
+                    - 67
+                    - 68
+                  children:
+                    - type: '"("'
+                      id: 66
+                      range: 13:13 - 13:14
+                    - type: identifier
+                      id: 67
+                      range: 13:14 - 13:15
+                      content: s
+                      alias_of:
+                        - 39
+                    - type: '")"'
+                      id: 68
+                      range: 13:15 - 13:16
+            - type: |-
+                "
+                "
+              id: 69
+              range: 13:16 - 15:1
+            - type: short_var_declaration
+              id: 70
+              range: 15:2 - 15:14
+              alias_of:
+                - 75
+              queries:
+                - 0
+              children:
+                - type: expression_list
+                  id: 71
+                  range: 15:2 - 15:4
+                  dataflow_sources:
+                    - 72
+                  children:
+                    - type: identifier
+                      id: 72
+                      range: 15:2 - 15:4
+                      content: s2
+                - type: '":="'
+                  id: 73
+                  range: 15:5 - 15:7
+                - type: expression_list
+                  id: 74
+                  range: 15:8 - 15:14
+                  dataflow_sources:
+                    - 75
+                  children:
+                    - type: interpreted_string_literal
+                      id: 75
+                      range: 15:8 - 15:14
+                      dataflow_sources:
+                        - 76
+                        - 77
+                      children:
+                        - type: '"""'
+                          id: 76
+                          range: 15:8 - 15:9
+                        - type: '"""'
+                          id: 77
+                          range: 15:13 - 15:14
+            - type: |-
+                "
+                "
+              id: 78
+              range: 15:14 - 16:1
+            - type: assignment_statement
+              id: 79
+              range: 16:2 - 16:18
+              dataflow_sources:
+                - 80
+                - 82
+                - 83
+              queries:
+                - 0
+              children:
+                - type: expression_list
+                  id: 80
+                  range: 16:2 - 16:4
+                  dataflow_sources:
+                    - 81
+                  children:
+                    - type: identifier
+                      id: 81
+                      range: 16:2 - 16:4
+                      content: s2
+                - type: '"+="'
+                  id: 82
+                  range: 16:5 - 16:7
+                - type: expression_list
+                  id: 83
+                  range: 16:8 - 16:18
+                  dataflow_sources:
+                    - 84
+                  children:
+                    - type: index_expression
+                      id: 84
+                      range: 16:8 - 16:18
+                      children:
+                        - type: selector_expression
+                          id: 85
+                          range: 16:8 - 16:15
+                          queries:
+                            - 1
+                          children:
+                            - type: identifier
+                              id: 86
+                              range: 16:8 - 16:10
+                              content: os
+                            - type: '"."'
+                              id: 87
+                              range: 16:10 - 16:11
+                            - type: field_identifier
+                              id: 88
+                              range: 16:11 - 16:15
+                              content: Args
+                        - type: '"["'
+                          id: 89
+                          range: 16:15 - 16:16
+                        - type: int_literal
+                          id: 90
+                          range: 16:16 - 16:17
+                          content: "0"
+                        - type: '"]"'
+                          id: 91
+                          range: 16:17 - 16:18
+            - type: |-
+                "
+                "
+              id: 92
+              range: 16:18 - 17:1
+            - type: assignment_statement
+              id: 93
+              range: 17:2 - 17:16
+              dataflow_sources:
+                - 94
+                - 96
+                - 97
+              queries:
+                - 0
+              children:
+                - type: expression_list
+                  id: 94
+                  range: 17:2 - 17:4
+                  dataflow_sources:
+                    - 95
+                  children:
+                    - type: identifier
+                      id: 95
+                      range: 17:2 - 17:4
+                      content: s2
+                - type: '"+="'
+                  id: 96
+                  range: 17:5 - 17:7
+                - type: expression_list
+                  id: 97
+                  range: 17:8 - 17:16
+                  dataflow_sources:
+                    - 98
+                  children:
+                    - type: interpreted_string_literal
+                      id: 98
+                      range: 17:8 - 17:16
+                      dataflow_sources:
+                        - 99
+                        - 100
+                      children:
+                        - type: '"""'
+                          id: 99
+                          range: 17:8 - 17:9
+                        - type: '"""'
+                          id: 100
+                          range: 17:15 - 17:16
+            - type: |-
+                "
+                "
+              id: 101
+              range: 17:16 - 18:1
+            - type: call_expression
+              id: 102
+              range: 18:2 - 18:17
+              dataflow_sources:
+                - 107
+              children:
+                - type: selector_expression
+                  id: 103
+                  range: 18:2 - 18:13
+                  queries:
+                    - 1
+                  children:
+                    - type: identifier
+                      id: 104
+                      range: 18:2 - 18:5
+                      content: fmt
+                    - type: '"."'
+                      id: 105
+                      range: 18:5 - 18:6
+                    - type: field_identifier
+                      id: 106
+                      range: 18:6 - 18:13
+                      content: Println
+                - type: argument_list
+                  id: 107
+                  range: 18:13 - 18:17
+                  dataflow_sources:
+                    - 108
+                    - 109
+                    - 110
+                  children:
+                    - type: '"("'
+                      id: 108
+                      range: 18:13 - 18:14
+                    - type: identifier
+                      id: 109
+                      range: 18:14 - 18:16
+                      content: s2
+                      alias_of:
+                        - 70
+                    - type: '")"'
+                      id: 110
+                      range: 18:16 - 18:17
+            - type: |-
+                "
+                "
+              id: 111
+              range: 18:17 - 20:1
+            - type: short_var_declaration
+              id: 112
+              range: 20:2 - 20:36
+              alias_of:
+                - 117
+              queries:
+                - 0
+              children:
+                - type: expression_list
+                  id: 113
+                  range: 20:2 - 20:4
+                  dataflow_sources:
+                    - 114
+                  children:
+                    - type: identifier
+                      id: 114
+                      range: 20:2 - 20:4
+                      content: s3
+                - type: '":="'
+                  id: 115
+                  range: 20:5 - 20:7
+                - type: expression_list
+                  id: 116
+                  range: 20:8 - 20:36
+                  dataflow_sources:
+                    - 117
+                  children:
+                    - type: binary_expression
+                      id: 117
+                      range: 20:8 - 20:36
+                      dataflow_sources:
+                        - 118
+                        - 131
+                        - 132
+                      children:
+                        - type: binary_expression
+                          id: 118
+                          range: 20:8 - 20:27
+                          dataflow_sources:
+                            - 119
+                            - 122
+                            - 123
+                          children:
+                            - type: interpreted_string_literal
+                              id: 119
+                              range: 20:8 - 20:14
+                              dataflow_sources:
+                                - 120
+                                - 121
+                              children:
+                                - type: '"""'
+                                  id: 120
+                                  range: 20:8 - 20:9
+                                - type: '"""'
+                                  id: 121
+                                  range: 20:13 - 20:14
+                            - type: '"+"'
+                              id: 122
+                              range: 20:15 - 20:16
+                            - type: index_expression
+                              id: 123
+                              range: 20:17 - 20:27
+                              children:
+                                - type: selector_expression
+                                  id: 124
+                                  range: 20:17 - 20:24
+                                  queries:
+                                    - 1
+                                  children:
+                                    - type: identifier
+                                      id: 125
+                                      range: 20:17 - 20:19
+                                      content: os
+                                    - type: '"."'
+                                      id: 126
+                                      range: 20:19 - 20:20
+                                    - type: field_identifier
+                                      id: 127
+                                      range: 20:20 - 20:24
+                                      content: Args
+                                - type: '"["'
+                                  id: 128
+                                  range: 20:24 - 20:25
+                                - type: int_literal
+                                  id: 129
+                                  range: 20:25 - 20:26
+                                  content: "0"
+                                - type: '"]"'
+                                  id: 130
+                                  range: 20:26 - 20:27
+                        - type: '"+"'
+                          id: 131
+                          range: 20:28 - 20:29
+                        - type: interpreted_string_literal
+                          id: 132
+                          range: 20:30 - 20:36
+                          dataflow_sources:
+                            - 133
+                            - 134
+                          children:
+                            - type: '"""'
+                              id: 133
+                              range: 20:30 - 20:31
+                            - type: '"""'
+                              id: 134
+                              range: 20:35 - 20:36
+            - type: |-
+                "
+                "
+              id: 135
+              range: 20:36 - 21:1
+            - type: call_expression
+              id: 136
+              range: 21:2 - 21:17
+              dataflow_sources:
+                - 141
+              children:
+                - type: selector_expression
+                  id: 137
+                  range: 21:2 - 21:13
+                  queries:
+                    - 1
+                  children:
+                    - type: identifier
+                      id: 138
+                      range: 21:2 - 21:5
+                      content: fmt
+                    - type: '"."'
+                      id: 139
+                      range: 21:5 - 21:6
+                    - type: field_identifier
+                      id: 140
+                      range: 21:6 - 21:13
+                      content: Println
+                - type: argument_list
+                  id: 141
+                  range: 21:13 - 21:17
+                  dataflow_sources:
+                    - 142
+                    - 143
+                    - 144
+                  children:
+                    - type: '"("'
+                      id: 142
+                      range: 21:13 - 21:14
+                    - type: identifier
+                      id: 143
+                      range: 21:14 - 21:16
+                      content: s3
+                      alias_of:
+                        - 112
+                    - type: '")"'
+                      id: 144
+                      range: 21:16 - 21:17
+            - type: |-
+                "
+                "
+              id: 145
+              range: 21:17 - 22:1
+            - type: '"}"'
+              id: 146
+              range: 22:1 - 22:2
+    - type: |-
+        "
+        "
+      id: 147
+      range: 22:2 - 23:1
+
+- node: 10
+  content: '"fmt"'
+  data:
+    value: fmt
+    isliteral: true
+- node: 15
+  content: '"os"'
+  data:
+    value: os
+    isliteral: true
+- node: 27
+  content: '"Hello World"'
+  data:
+    value: Hello World
+    isliteral: true
+- node: 44
+  content: Greeting + "!"
+  data:
+    value: '*!'
+    isliteral: false
+- node: 56
+  content: '"!!"'
+  data:
+    value: '!!'
+    isliteral: true
+- node: 75
+  content: '"hey "'
+  data:
+    value: 'hey '
+    isliteral: true
+- node: 98
+  content: '" there"'
+  data:
+    value: ' there'
+    isliteral: true
+- node: 117
+  content: '"foo " + os.Args[0] + " bar"'
+  data:
+    value: foo * bar
+    isliteral: false
+- node: 47
+  content: '"!"'
+  data:
+    value: '!'
+    isliteral: true
+- node: 118
+  content: '"foo " + os.Args[0]'
+  data:
+    value: foo *
+    isliteral: false
+- node: 132
+  content: '" bar"'
+  data:
+    value: ' bar'
+    isliteral: true
+- node: 119
+  content: '"foo "'
+  data:
+    value: 'foo '
+    isliteral: true
+
