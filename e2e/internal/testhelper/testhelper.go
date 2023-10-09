@@ -123,7 +123,7 @@ func RunTestsWithSnapshotSubdirectory(t *testing.T, tests []TestCase, snapshotSu
 			}
 
 			if !test.ShouldSucceed && err == nil {
-				t.Fatal("expected command to fail but it succeded instead")
+				t.Fatal("expected command to fail but it succeeded instead")
 			}
 
 			cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotSubdirectory))
@@ -142,7 +142,7 @@ func RunTests(t *testing.T, tests []TestCase) {
 			}
 
 			if !test.ShouldSucceed && err == nil {
-				t.Fatal("expected command to fail but it succeded instead")
+				t.Fatal("expected command to fail but it succeeded instead")
 			}
 
 			cupaloy.SnapshotT(t, combinedOutput)
