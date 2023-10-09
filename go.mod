@@ -34,7 +34,7 @@ require (
 	golang.org/x/exp v0.0.0-20230304125523-9ff063c70017
 	golang.org/x/mod v0.12.0
 	golang.org/x/net v0.16.0
-	golang.org/x/oauth2 v0.12.0
+	golang.org/x/oauth2 v0.13.0
 )
 
 require (
