@@ -37,7 +37,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeMethodInvocation(node, visitChildren)
 	case "member_access_expression":
 		return analyzer.analyzeFieldAccess(node, visitChildren)
-	case "simple_parameter", "variadic_parameter":
+	case "simple_parameter", "variadic_parameter", "property_promotion_parameter":
 		return analyzer.analyzeParameter(node, visitChildren)
 	case "switch_statement":
 		return analyzer.analyzeSwitch(node, visitChildren)
