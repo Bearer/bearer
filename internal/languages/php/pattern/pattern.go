@@ -39,8 +39,11 @@ func (*Pattern) FixupMissing(node *tree.Node) string {
 }
 
 func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
-	if slices.Contains([]string{"named_type"}, node.Parent().Type()) {
-		return "$" + dummyValue
+	if parent := node.Parent(); parent != nil {
+		if parent.Type() == "named_type" ||
+			(parent.Type() == "ERROR" && parent.Parent() != nil && parent.Parent().Type() == "declaration_list") {
+			return "$" + dummyValue
+		}
 	}
 
 	return dummyValue
@@ -129,6 +132,10 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// eg. f(x: 42)
 	if node.Type() == "argument" && node.ChildByFieldName("name") != nil {
 		return false, false
+	}
+
+	if node.Type() == "property_element" {
+		return false, true
 	}
 
 	parent := node.Parent()
