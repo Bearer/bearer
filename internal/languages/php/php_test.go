@@ -38,6 +38,11 @@ func TestPattern(t *testing.T) {
 					public $<!>$<_>;
 				}
 		`},
+		{"parameter names are unanchored", `
+				class $<_> {
+					public function $<_>($<_> $<!>$<_>) {}
+				}
+		`},
 	} {
 		t.Run(test.name, func(tt *testing.T) {
 			result, err := patternquerybuilder.Build(php.Get(), test.pattern, "")
