@@ -47,6 +47,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return visitChildren()
 	case "dynamic_variable_name":
 		return analyzer.analyzeDynamicVariableName(node, visitChildren)
+	case "subscript_expression":
+		return analyzer.analyzeSubscript(node, visitChildren)
 	case "binary_expression",
 		"unary_op_expression",
 		"argument",
@@ -174,6 +176,17 @@ func (analyzer *analyzer) analyzeSwitch(node *sitter.Node, visitChildren func() 
 
 func (analyzer *analyzer) analyzeDynamicVariableName(node *sitter.Node, visitChildren func() error) error {
 	analyzer.lookupVariable(node.NamedChild(0))
+
+	return visitChildren()
+}
+
+// foo["bar"]
+func (analyzer *analyzer) analyzeSubscript(node *sitter.Node, visitChildren func() error) error {
+	object := node.NamedChild(0)
+	analyzer.builder.Dataflow(node, object)
+	analyzer.lookupVariable(object)
+
+	analyzer.lookupVariable(node.NamedChild(1))
 
 	return visitChildren()
 }

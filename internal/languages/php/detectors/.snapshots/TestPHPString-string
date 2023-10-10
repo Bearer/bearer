@@ -353,15 +353,14 @@ children:
                               range: 11:16 - 11:24
                               dataflow_sources:
                                 - 80
-                                - 83
-                                - 84
-                                - 85
                               queries:
                                 - 4
                               children:
                                 - type: variable_name
                                   id: 80
                                   range: 11:16 - 11:21
+                                  alias_of:
+                                    - 27
                                   children:
                                     - type: '"$"'
                                       id: 81
