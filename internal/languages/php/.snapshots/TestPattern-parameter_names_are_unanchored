@@ -1,0 +1,12 @@
+(*builder.Result)({
+  Query: (string) (len=210) "([(class_declaration  . (_) . [(declaration_list  [(method_declaration [ (visibility_modifier )]  (_) . [(formal_parameters  . [(simple_parameter . (_) (_) @match)] . )] [ (compound_statement )])] )] .)] @root)",
+  VariableNames: ([]string) (len=1) {
+    (string) (len=1) "_"
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) {
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})
