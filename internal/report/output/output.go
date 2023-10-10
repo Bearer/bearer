@@ -3,16 +3,16 @@ package output
 import (
 	"errors"
 	"fmt"
+	"sort"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
+	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
-	globaltypes "github.com/bearer/bearer/internal/types"
-
 	"github.com/bearer/bearer/internal/report/output/dataflow"
 	"github.com/bearer/bearer/internal/report/output/detectors"
 	"github.com/bearer/bearer/internal/report/output/privacy"
@@ -20,6 +20,7 @@ import (
 	"github.com/bearer/bearer/internal/report/output/security"
 	"github.com/bearer/bearer/internal/report/output/stats"
 	"github.com/bearer/bearer/internal/report/output/types"
+	globaltypes "github.com/bearer/bearer/internal/types"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
@@ -30,6 +31,15 @@ func GetData(
 	baseBranchFindings *basebranchfindings.Findings,
 ) (*types.ReportData, error) {
 	data := &types.ReportData{}
+
+	// add languages
+	languages := []string{}
+	if report.Inputgocloc != nil && report.Inputgocloc.Languages != nil {
+		languages = maps.Keys(report.Inputgocloc.Languages)
+	}
+	sort.Strings(languages)
+	data.FoundLanguages = languages
+
 	// add detectors
 	err := detectors.AddReportData(data, report, config)
 	if config.Report.Report == flag.ReportDetectors || err != nil {

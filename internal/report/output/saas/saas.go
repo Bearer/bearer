@@ -25,13 +25,14 @@ import (
 
 func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta bool) error {
 	var meta *saas.Meta
-	meta, err := getMeta(config)
+	meta, err := getMeta(reportData, config)
 	if err != nil {
 		if ensureMeta {
 			return err
 		} else {
 			meta = &saas.Meta{
-				Target: config.Scan.Target,
+				Target:         config.Scan.Target,
+				FoundLanguages: reportData.FoundLanguages,
 			}
 		}
 	}
@@ -166,7 +167,7 @@ func createBearerGzipFileReport(
 	return &tempDir, &filename, nil
 }
 
-func getMeta(config settings.Config) (*saas.Meta, error) {
+func getMeta(reportData *types.ReportData, config settings.Config) (*saas.Meta, error) {
 	sha, err := getSha(config.Scan.Target)
 	if err != nil {
 		return nil, err
@@ -201,6 +202,7 @@ func getMeta(config settings.Config) (*saas.Meta, error) {
 		DiffBaseBranch:     config.Scan.DiffBaseBranch,
 		BearerRulesVersion: config.BearerRulesVersion,
 		BearerVersion:      build.Version,
+		FoundLanguages:     reportData.FoundLanguages,
 	}, nil
 }
 
