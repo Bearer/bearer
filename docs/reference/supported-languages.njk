@@ -42,34 +42,17 @@ supportChart:
   php:
     name: PHP
     support:
+      - Security
       - Privacy
       - Data Flow
     frameworks:
+      - Symfony
     rules: false
     searchName: lang-php
     searchTerm: php_
     status: Alpha
     comment: Beta coming soon
-  csharp:
-    name: C#
-    support:
-      - Privacy
-      - Data Flow
-    frameworks: []
-    rules: false
-    searchName: lang-csharp
-    searchTerm: csharp_
-    status: Alpha
-  python:
-    name: Python
-    support:
-        - Privacy
-        - Data Flow
-    frameworks: []
-    rules: false
-    searchName: lang-python
-    searchTerm: python_
-    status: Alpha
+    comment_link: https://github.com/Bearer/bearer/issues/1242
   go:
     name: Go
     support:
@@ -80,6 +63,31 @@ supportChart:
     searchName: lang-go
     searchTerm: go_
     status: Alpha
+    comment: Beta coming soon
+    comment_link: https://github.com/Bearer/bearer/issues/1302
+  python:
+    name: Python
+    support:
+        - Privacy
+        - Data Flow
+    frameworks: []
+    rules: false
+    searchName: lang-python
+    searchTerm: python_
+    status: Alpha
+    comment: Beta coming soon
+    comment_link: https://github.com/Bearer/bearer/issues/1303
+  csharp:
+    name: C#
+    support:
+      - Privacy
+      - Data Flow
+    frameworks: []
+    rules: false
+    searchName: lang-csharp
+    searchTerm: csharp_
+    status: Alpha
+
 ---
 {% renderTemplate "liquid,md" %}
 # Supported languages
@@ -124,7 +132,11 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
         </td>
         <td>
           {{ data.status }}<br/>
-          <span class="italic text-xs">{{ data.comment }}</span>
+          {% if data.comment_link %}
+            <span class="italic text-xs"><a href="{{data.comment_link}}">{{ data.comment }}</a></span>
+          {% else %}
+            <span class="italic text-xs">{{ data.comment }}</span>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}
