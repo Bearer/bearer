@@ -8,6 +8,8 @@ import (
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 )
 
+const NonLiteralValue = "\uFFFD" // unicode Replacement character
+
 type String struct {
 	Value     string
 	IsLiteral bool
@@ -58,7 +60,7 @@ func ConcatenateChildStrings(node *tree.Node, detectorContext types.Context) ([]
 		}
 
 		if childValue == "" && !childIsLiteral {
-			childValue = "*"
+			childValue = NonLiteralValue
 		}
 
 		value += childValue
@@ -86,7 +88,7 @@ func ConcatenateAssignEquals(node *tree.Node, detectorContext types.Context) ([]
 	}
 
 	if left == "" && !leftIsLiteral {
-		left = "*"
+		left = NonLiteralValue
 
 		// No detection when neither parts are a string
 		if right == "" && !rightIsLiteral {
@@ -95,7 +97,7 @@ func ConcatenateAssignEquals(node *tree.Node, detectorContext types.Context) ([]
 	}
 
 	if right == "" && !rightIsLiteral {
-		right = "*"
+		right = NonLiteralValue
 	}
 
 	return []interface{}{String{

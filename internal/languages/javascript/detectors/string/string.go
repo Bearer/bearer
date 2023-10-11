@@ -85,7 +85,7 @@ func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]int
 		}
 
 		if childValue == "" && !childIsLiteral {
-			childValue = "*"
+			childValue = common.NonLiteralValue
 		}
 
 		text += childValue

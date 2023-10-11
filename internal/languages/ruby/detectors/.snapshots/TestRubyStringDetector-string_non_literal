@@ -79,12 +79,12 @@ children:
 - node: 1
   content: '"a" + x'
   data:
-    value: a*
+    value: a�
     isliteral: false
 - node: 8
   content: '"#{x} b"'
   data:
-    value: '* b'
+    value: � b
     isliteral: false
 - node: 2
   content: '"a"'
@@ -94,7 +94,7 @@ children:
 - node: 10
   content: '#{x}'
   data:
-    value: '*'
+    value: �
     isliteral: false
 - node: 14
   content: ' b'

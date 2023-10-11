@@ -533,22 +533,22 @@ children:
 - node: 52
   content: $s .= "!!"
   data:
-    value: '*!!!'
+    value: �!!!
     isliteral: false
 - node: 74
   content: $s2 .= $args[0]
   data:
-    value: hey *
+    value: hey �
     isliteral: false
 - node: 88
   content: $s2 .= " there"
   data:
-    value: hey * there
+    value: hey � there
     isliteral: false
 - node: 39
   content: self::Greeting . "!"
   data:
-    value: '*!'
+    value: �!
     isliteral: false
 - node: 57
   content: '"!!"'
@@ -568,7 +568,7 @@ children:
 - node: 104
   content: '"foo ''{$s2}'' bar"'
   data:
-    value: foo 'hey * there' bar
+    value: foo 'hey � there' bar
     isliteral: false
 - node: 46
   content: '"!"'

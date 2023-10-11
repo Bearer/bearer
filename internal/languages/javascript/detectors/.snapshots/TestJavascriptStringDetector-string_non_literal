@@ -82,12 +82,12 @@ children:
 - node: 2
   content: '"a" + x'
   data:
-    value: a*
+    value: a�
     isliteral: false
 - node: 10
   content: '`${x} b`'
   data:
-    value: '* b'
+    value: � b
     isliteral: false
 - node: 3
   content: '"a"'

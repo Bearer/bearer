@@ -157,12 +157,12 @@ children:
 - node: 15
   content: x += name
   data:
-    value: ab*
+    value: ab�
     isliteral: false
 - node: 23
   content: y += "c"
   data:
-    value: '*c'
+    value: �c
     isliteral: false
 - node: 4
   content: '"a"'
