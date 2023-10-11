@@ -732,7 +732,7 @@ children:
 - node: 44
   content: Greeting + "!"
   data:
-    value: '*!'
+    value: �!
     isliteral: false
 - node: 56
   content: '"!!"'
@@ -752,7 +752,7 @@ children:
 - node: 117
   content: '"foo " + os.Args[0] + " bar"'
   data:
-    value: foo * bar
+    value: foo � bar
     isliteral: false
 - node: 47
   content: '"!"'
@@ -762,7 +762,7 @@ children:
 - node: 118
   content: '"foo " + os.Args[0]'
   data:
-    value: foo *
+    value: foo �
     isliteral: false
 - node: 132
   content: '" bar"'
