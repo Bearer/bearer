@@ -77,7 +77,7 @@ func (orchestrator *Orchestrator) Scan(
 }
 
 func (orchestrator *Orchestrator) waitForScan(fileComplete chan struct{}, totalCount int) {
-	progressBar := bearerprogress.GetProgressBar(totalCount, orchestrator.config, "files")
+	progressBar := bearerprogress.GetProgressBar(totalCount, orchestrator.config)
 	count := 0
 
 	defer func() {

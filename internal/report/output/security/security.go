@@ -137,7 +137,7 @@ func evaluateRules(
 
 	var bar *progressbar.ProgressBar
 	if !builtIn {
-		bar = bearerprogressbar.GetProgressBar(len(rules), config, "rules")
+		bar = bearerprogressbar.GetProgressBar(len(rules), config)
 	}
 
 	var fingerprints []string
