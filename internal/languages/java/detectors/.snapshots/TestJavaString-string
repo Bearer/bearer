@@ -371,12 +371,12 @@ children:
 - node: 57
   content: s2 += args[0]
   data:
-    value: hey *
+    value: hey �
     isliteral: false
 - node: 67
   content: s2 += " there"
   data:
-    value: hey * there
+    value: hey � there
     isliteral: false
 - node: 38
   content: Greeting + "!"
