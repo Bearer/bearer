@@ -294,6 +294,8 @@ func (rule *Rule) Language() string {
 		return "Ruby"
 	case "sql":
 		return "SQL"
+	case "go":
+		return "Go"
 	case "php":
 		return "PHP"
 	default:

@@ -1,0 +1,350 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 15
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 2
+                end: 40
+      sink:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 2
+                end: 40
+        content: scopeCursor(request.FormValue("oops"))
+      parent_line_number: 15
+      snippet: scopeCursor(request.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_0
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 18
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 18
+            end: 18
+            column:
+                start: 2
+                end: 40
+      sink:
+        location:
+            start: 18
+            end: 18
+            column:
+                start: 2
+                end: 40
+        content: scopeNested(request.FormValue("oops"))
+      parent_line_number: 18
+      snippet: scopeNested(request.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_1
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 19
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 19
+            end: 19
+            column:
+                start: 2
+                end: 44
+      sink:
+        location:
+            start: 19
+            end: 19
+            column:
+                start: 2
+                end: 44
+        content: scopeNested(x + request.FormValue("oops"))
+      parent_line_number: 19
+      snippet: scopeNested(x + request.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_2
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 20
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 20
+            end: 20
+            column:
+                start: 2
+                end: 43
+      sink:
+        location:
+            start: 20
+            end: 20
+            column:
+                start: 2
+                end: 43
+        content: scopeNested(y[request.FormValue("oops")])
+      parent_line_number: 20
+      snippet: scopeNested(y[request.FormValue("oops")])
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_3
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 22
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 22
+            end: 22
+            column:
+                start: 2
+                end: 40
+      sink:
+        location:
+            start: 22
+            end: 22
+            column:
+                start: 2
+                end: 40
+        content: scopeResult(request.FormValue("oops"))
+      parent_line_number: 22
+      snippet: scopeResult(request.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_4
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_4
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 23
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 23
+            end: 23
+            column:
+                start: 2
+                end: 44
+      sink:
+        location:
+            start: 23
+            end: 23
+            column:
+                start: 2
+                end: 44
+        content: scopeResult(x + request.FormValue("oops"))
+      parent_line_number: 23
+      snippet: scopeResult(x + request.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_5
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_5
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 32
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 32
+            end: 32
+            column:
+                start: 2
+                end: 36
+      sink:
+        location:
+            start: 32
+            end: 32
+            column:
+                start: 2
+                end: 36
+        content: scopeCursor(req.FormValue("oops"))
+      parent_line_number: 32
+      snippet: scopeCursor(req.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_6
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_6
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 35
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 35
+            end: 35
+            column:
+                start: 2
+                end: 36
+      sink:
+        location:
+            start: 35
+            end: 35
+            column:
+                start: 2
+                end: 36
+        content: scopeNested(req.FormValue("oops"))
+      parent_line_number: 35
+      snippet: scopeNested(req.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_7
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_7
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 36
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 36
+            end: 36
+            column:
+                start: 2
+                end: 40
+      sink:
+        location:
+            start: 36
+            end: 36
+            column:
+                start: 2
+                end: 40
+        content: scopeNested(x + req.FormValue("oops"))
+      parent_line_number: 36
+      snippet: scopeNested(x + req.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_8
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_8
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 37
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 37
+            end: 37
+            column:
+                start: 2
+                end: 39
+      sink:
+        location:
+            start: 37
+            end: 37
+            column:
+                start: 2
+                end: 39
+        content: scopeNested(y[req.FormValue("oops")])
+      parent_line_number: 37
+      snippet: scopeNested(y[req.FormValue("oops")])
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_9
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_9
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 39
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 39
+            end: 39
+            column:
+                start: 2
+                end: 36
+      sink:
+        location:
+            start: 39
+            end: 39
+            column:
+                start: 2
+                end: 36
+        content: scopeResult(req.FormValue("oops"))
+      parent_line_number: 39
+      snippet: scopeResult(req.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_10
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_10
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 40
+      full_filename: scope.go
+      filename: scope.go
+      source:
+        location:
+            start: 40
+            end: 40
+            column:
+                start: 2
+                end: 40
+      sink:
+        location:
+            start: 40
+            end: 40
+            column:
+                start: 2
+                end: 40
+        content: scopeResult(x + req.FormValue("oops"))
+      parent_line_number: 40
+      snippet: scopeResult(x + req.FormValue("oops"))
+      fingerprint: c87422d3d7e0f39d979f1dd26df088d6_11
+      old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_11
+

@@ -1,0 +1,104 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 19
+      full_filename: same-line.go
+      filename: same-line.go
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 19
+            end: 19
+            column:
+                start: 18
+                end: 27
+      sink:
+        location:
+            start: 19
+            end: 19
+            column:
+                start: 2
+                end: 28
+        content: log.Error().Msg(user.Name)
+      parent_line_number: 19
+      snippet: log.Error().Msg(user.Name)
+      fingerprint: 03b8fc38b73518ac9530e238e3db6896_0
+      old_fingerprint: 03b8fc38b73518ac9530e238e3db6896_0
+    - rule:
+        cwe_ids: []
+        id: rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 20
+      full_filename: same-line.go
+      filename: same-line.go
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 20
+            end: 20
+            column:
+                start: 18
+                end: 31
+      sink:
+        location:
+            start: 20
+            end: 20
+            column:
+                start: 2
+                end: 34
+        content: log.Error().Msg(user.FullName())
+      parent_line_number: 20
+      snippet: log.Error().Msg(user.FullName())
+      fingerprint: 03b8fc38b73518ac9530e238e3db6896_1
+      old_fingerprint: 03b8fc38b73518ac9530e238e3db6896_1
+    - rule:
+        cwe_ids: []
+        id: rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 21
+      full_filename: same-line.go
+      filename: same-line.go
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 21
+            end: 21
+            column:
+                start: 35
+                end: 48
+      sink:
+        location:
+            start: 21
+            end: 21
+            column:
+                start: 2
+                end: 51
+        content: log.Error().Msgf("user info %s", user.FullName())
+      parent_line_number: 21
+      snippet: log.Error().Msgf("user info %s", user.FullName())
+      fingerprint: 03b8fc38b73518ac9530e238e3db6896_2
+      old_fingerprint: 03b8fc38b73518ac9530e238e3db6896_2
+

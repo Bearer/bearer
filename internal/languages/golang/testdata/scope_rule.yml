@@ -1,0 +1,38 @@
+languages:
+  - go
+patterns:
+  - pattern: scopeCursor($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: cursor
+  - pattern: scopeNested($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: nested
+  - pattern: scopeResult($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: result
+auxiliary:
+  - id: scope_test_user_input
+    patterns:
+      - pattern: $<HTTP_REQUEST>.FormValue($<_>)
+        filters:
+          - variable: HTTP_REQUEST
+            detection: scope_test_http_request_init
+  - id: scope_test_http_request_init
+    patterns:
+      - func $<_>($<...>$<!>$<_> *http.Request$<...>)
+      - func $<_>($<...>$<!>$<_> http.Request$<...>)
+      - var $<!>$<_> *http.Request
+      - var $<!>$<_> http.Request
+severity: high
+metadata:
+  description: Test detection filter scopes
+  remediation_message: Test detection filter scopes
+  cwe_id:
+    - 42
+  id: scope_test

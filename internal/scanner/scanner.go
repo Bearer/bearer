@@ -7,6 +7,7 @@ import (
 
 	schemaclassifier "github.com/bearer/bearer/internal/classification/schema"
 	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/languages/golang"
 	"github.com/bearer/bearer/internal/languages/java"
 	"github.com/bearer/bearer/internal/languages/javascript"
 	"github.com/bearer/bearer/internal/languages/php"
@@ -36,7 +37,8 @@ func New(schemaClassifier *schemaclassifier.Classifier, rules map[string]*settin
 		java.Get(),
 		javascript.Get(),
 		ruby.Get(),
-		php.Get(), // FIXME: Not obvious to spot. Can we do something better (auto-registration)?
+		php.Get(),
+		golang.Get(),
 	}
 
 	languageScanners := make([]*languagescanner.Scanner, len(languages))

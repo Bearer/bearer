@@ -1,0 +1,19 @@
+type: "risk"
+languages:
+  - go
+patterns:
+  - pattern: log.$<LOGLEVEL>().$<METHOD>($<DATA_TYPE>)
+    filters:
+      - variable: LOGLEVEL
+        values:
+          - Error
+          - Debug
+      - variable: METHOD
+        values:
+          - Msgf
+          - Msg
+      - variable: DATA_TYPE
+        detection: datatype
+        scope: result
+metadata:
+  id: rule_logger_test
