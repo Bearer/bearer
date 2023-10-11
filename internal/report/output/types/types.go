@@ -12,6 +12,7 @@ type ReportData struct {
 	ReportFailed              bool
 	SendToCloud               bool
 	Files                     []string
+	FoundLanguages            []string
 	Detectors                 []any
 	Dataflow                  *DataFlow
 	FindingsBySeverity        map[string][]securitytypes.Finding
