@@ -3,9 +3,10 @@ package proto
 import (
 	"strings"
 
+	"github.com/smacker/go-tree-sitter/protobuf"
+
 	"github.com/bearer/bearer/internal/detectors/types"
 	"github.com/bearer/bearer/internal/parser"
-	"github.com/bearer/bearer/internal/parser/sitter/proto"
 	"github.com/bearer/bearer/internal/report/detectors"
 	"github.com/bearer/bearer/internal/report/schema"
 	"github.com/bearer/bearer/internal/util/file"
@@ -17,7 +18,7 @@ import (
 )
 
 var (
-	language         = proto.GetLanguage()
+	language         = protobuf.GetLanguage()
 	protoSchemaQuery = parser.QueryMustCompile(language, `
 	(
 		message

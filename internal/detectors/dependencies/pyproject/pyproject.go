@@ -1,12 +1,13 @@
 package pyproject
 
 import (
+	"github.com/rs/zerolog/log"
+	"github.com/smacker/go-tree-sitter/toml"
+
 	"github.com/bearer/bearer/internal/detectors/dependencies/depsbase"
 	"github.com/bearer/bearer/internal/parser"
-	"github.com/bearer/bearer/internal/parser/sitter/toml"
 	"github.com/bearer/bearer/internal/util/file"
 	"github.com/bearer/bearer/internal/util/stringutil"
-	"github.com/rs/zerolog/log"
 )
 
 var language = toml.GetLanguage()

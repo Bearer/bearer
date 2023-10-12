@@ -1,0 +1,24 @@
+{
+
+  "name": "tree-sitter-config-variables",
+  "version": "0.0.1",
+  "description": "config-variables grammar for tree-sitter",
+  "main": "bindings/node",
+  "keywords": [
+    "parsing",
+    "incremental"
+  ],
+  "dependencies": {
+    "nan": "^2.12.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.8"
+  },
+  "scripts": {
+    "clean": "rm -rf build",
+    "generate": "(cd build && tree-sitter generate --no-bindings)",
+    "build": "yarn clean && mkdir -p build && cp grammar.js build/ && cp -r test build/ && yarn generate",
+    "test": "(cd build && tree-sitter test)",
+    "update": "cp build/src/parser.c . && cp -R build/src/tree_sitter ."
+  }
+}

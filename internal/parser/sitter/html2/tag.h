@@ -1,10 +1,10 @@
-#include <string>
-#include <map>
+#include "tree_sitter/parser.h"
 
-using std::string;
-using std::map;
+#include <assert.h>
+#include <string.h>
 
-enum TagType {
+typedef enum
+{
   AREA,
   BASE,
   BASEFONT,
@@ -134,247 +134,292 @@ enum TagType {
   VIDEO,
 
   CUSTOM,
+
+  END_,
+} TagType;
+
+typedef struct
+{
+  uint32_t len;
+  uint32_t cap;
+  char *data;
+} String;
+
+typedef struct
+{
+  char tag_name[16];
+  TagType tag_value;
+} TagMap;
+
+typedef struct
+{
+  TagType type;
+  String custom_tag_name;
+} Tag;
+
+const TagMap TAG_TYPES_BY_TAG_NAME[126] = {
+    {"AREA", AREA},
+    {"BASE", BASE},
+    {"BASEFONT", BASEFONT},
+    {"BGSOUND", BGSOUND},
+    {"BR", BR},
+    {"COL", COL},
+    {"COMMAND", COMMAND},
+    {"EMBED", EMBED},
+    {"FRAME", FRAME},
+    {"HR", HR},
+    {"IMAGE", IMAGE},
+    {"IMG", IMG},
+    {"INPUT", INPUT},
+    {"ISINDEX", ISINDEX},
+    {"KEYGEN", KEYGEN},
+    {"LINK", LINK},
+    {"MENUITEM", MENUITEM},
+    {"META", META},
+    {"NEXTID", NEXTID},
+    {"PARAM", PARAM},
+    {"SOURCE", SOURCE},
+    {"TRACK", TRACK},
+    {"WBR", WBR},
+    {"A", A},
+    {"ABBR", ABBR},
+    {"ADDRESS", ADDRESS},
+    {"ARTICLE", ARTICLE},
+    {"ASIDE", ASIDE},
+    {"AUDIO", AUDIO},
+    {"B", B},
+    {"BDI", BDI},
+    {"BDO", BDO},
+    {"BLOCKQUOTE", BLOCKQUOTE},
+    {"BODY", BODY},
+    {"BUTTON", BUTTON},
+    {"CANVAS", CANVAS},
+    {"CAPTION", CAPTION},
+    {"CITE", CITE},
+    {"CODE", CODE},
+    {"COLGROUP", COLGROUP},
+    {"DATA", DATA},
+    {"DATALIST", DATALIST},
+    {"DD", DD},
+    {"DEL", DEL},
+    {"DETAILS", DETAILS},
+    {"DFN", DFN},
+    {"DIALOG", DIALOG},
+    {"DIV", DIV},
+    {"DL", DL},
+    {"DT", DT},
+    {"EM", EM},
+    {"FIELDSET", FIELDSET},
+    {"FIGCAPTION", FIGCAPTION},
+    {"FIGURE", FIGURE},
+    {"FOOTER", FOOTER},
+    {"FORM", FORM},
+    {"H1", H1},
+    {"H2", H2},
+    {"H3", H3},
+    {"H4", H4},
+    {"H5", H5},
+    {"H6", H6},
+    {"HEAD", HEAD},
+    {"HEADER", HEADER},
+    {"HGROUP", HGROUP},
+    {"HTML", HTML},
+    {"I", I},
+    {"IFRAME", IFRAME},
+    {"INS", INS},
+    {"KBD", KBD},
+    {"LABEL", LABEL},
+    {"LEGEND", LEGEND},
+    {"LI", LI},
+    {"MAIN", MAIN},
+    {"MAP", MAP},
+    {"MARK", MARK},
+    {"MATH", MATH},
+    {"MENU", MENU},
+    {"METER", METER},
+    {"NAV", NAV},
+    {"NOSCRIPT", NOSCRIPT},
+    {"OBJECT", OBJECT},
+    {"OL", OL},
+    {"OPTGROUP", OPTGROUP},
+    {"OPTION", OPTION},
+    {"OUTPUT", OUTPUT},
+    {"P", P},
+    {"PICTURE", PICTURE},
+    {"PRE", PRE},
+    {"PROGRESS", PROGRESS},
+    {"Q", Q},
+    {"RB", RB},
+    {"RP", RP},
+    {"RT", RT},
+    {"RTC", RTC},
+    {"RUBY", RUBY},
+    {"S", S},
+    {"SAMP", SAMP},
+    {"SCRIPT", SCRIPT},
+    {"SECTION", SECTION},
+    {"SELECT", SELECT},
+    {"SLOT", SLOT},
+    {"SMALL", SMALL},
+    {"SPAN", SPAN},
+    {"STRONG", STRONG},
+    {"STYLE", STYLE},
+    {"SUB", SUB},
+    {"SUMMARY", SUMMARY},
+    {"SUP", SUP},
+    {"SVG", SVG},
+    {"TABLE", TABLE},
+    {"TBODY", TBODY},
+    {"TD", TD},
+    {"TEMPLATE", TEMPLATE},
+    {"TEXTAREA", TEXTAREA},
+    {"TFOOT", TFOOT},
+    {"TH", TH},
+    {"THEAD", THEAD},
+    {"TIME", TIME},
+    {"TITLE", TITLE},
+    {"TR", TR},
+    {"U", U},
+    {"UL", UL},
+    {"VAR", VAR},
+    {"VIDEO", VIDEO},
+    {"CUSTOM", CUSTOM},
 };
-
-
-static const map<string, TagType> get_tag_map() {
-  map<string, TagType> result;
-#define TAG(name) result[#name] = name
-  TAG(AREA);
-  TAG(BASE);
-  TAG(BASEFONT);
-  TAG(BGSOUND);
-  TAG(BR);
-  TAG(COL);
-  TAG(COMMAND);
-  TAG(EMBED);
-  TAG(FRAME);
-  TAG(HR);
-  TAG(IMAGE);
-  TAG(IMG);
-  TAG(INPUT);
-  TAG(ISINDEX);
-  TAG(KEYGEN);
-  TAG(LINK);
-  TAG(MENUITEM);
-  TAG(META);
-  TAG(NEXTID);
-  TAG(PARAM);
-  TAG(SOURCE);
-  TAG(TRACK);
-  TAG(WBR);
-  TAG(A);
-  TAG(ABBR);
-  TAG(ADDRESS);
-  TAG(ARTICLE);
-  TAG(ASIDE);
-  TAG(AUDIO);
-  TAG(B);
-  TAG(BDI);
-  TAG(BDO);
-  TAG(BLOCKQUOTE);
-  TAG(BODY);
-  TAG(BUTTON);
-  TAG(CANVAS);
-  TAG(CAPTION);
-  TAG(CITE);
-  TAG(CODE);
-  TAG(COLGROUP);
-  TAG(DATA);
-  TAG(DATALIST);
-  TAG(DD);
-  TAG(DEL);
-  TAG(DETAILS);
-  TAG(DFN);
-  TAG(DIALOG);
-  TAG(DIV);
-  TAG(DL);
-  TAG(DT);
-  TAG(EM);
-  TAG(FIELDSET);
-  TAG(FIGCAPTION);
-  TAG(FIGURE);
-  TAG(FOOTER);
-  TAG(FORM);
-  TAG(H1);
-  TAG(H2);
-  TAG(H3);
-  TAG(H4);
-  TAG(H5);
-  TAG(H6);
-  TAG(HEAD);
-  TAG(HEADER);
-  TAG(HGROUP);
-  TAG(HTML);
-  TAG(I);
-  TAG(IFRAME);
-  TAG(INS);
-  TAG(KBD);
-  TAG(LABEL);
-  TAG(LEGEND);
-  TAG(LI);
-  TAG(MAIN);
-  TAG(MAP);
-  TAG(MARK);
-  TAG(MATH);
-  TAG(MENU);
-  TAG(METER);
-  TAG(NAV);
-  TAG(NOSCRIPT);
-  TAG(OBJECT);
-  TAG(OL);
-  TAG(OPTGROUP);
-  TAG(OPTION);
-  TAG(OUTPUT);
-  TAG(P);
-  TAG(PICTURE);
-  TAG(PRE);
-  TAG(PROGRESS);
-  TAG(Q);
-  TAG(RB);
-  TAG(RP);
-  TAG(RT);
-  TAG(RTC);
-  TAG(RUBY);
-  TAG(S);
-  TAG(SAMP);
-  TAG(SCRIPT);
-  TAG(SECTION);
-  TAG(SELECT);
-  TAG(SLOT);
-  TAG(SMALL);
-  TAG(SPAN);
-  TAG(STRONG);
-  TAG(STYLE);
-  TAG(SUB);
-  TAG(SUMMARY);
-  TAG(SUP);
-  TAG(SVG);
-  TAG(TABLE);
-  TAG(TBODY);
-  TAG(TD);
-  TAG(TEMPLATE);
-  TAG(TEXTAREA);
-  TAG(TFOOT);
-  TAG(TH);
-  TAG(THEAD);
-  TAG(TIME);
-  TAG(TITLE);
-  TAG(TR);
-  TAG(U);
-  TAG(UL);
-  TAG(VAR);
-  TAG(VIDEO);
-#undef TAG
-  return result;
-}
-
-static const map<string, TagType> TAG_TYPES_BY_TAG_NAME = get_tag_map();
 
 static const TagType TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS[] = {
-  ADDRESS,
-  ARTICLE,
-  ASIDE,
-  BLOCKQUOTE,
-  DETAILS,
-  DIV,
-  DL,
-  FIELDSET,
-  FIGCAPTION,
-  FIGURE,
-  FOOTER,
-  FORM,
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  H6,
-  HEADER,
-  HR,
-  MAIN,
-  NAV,
-  OL,
-  P,
-  PRE,
-  SECTION,
+    ADDRESS,
+    ARTICLE,
+    ASIDE,
+    BLOCKQUOTE,
+    DETAILS,
+    DIV,
+    DL,
+    FIELDSET,
+    FIGCAPTION,
+    FIGURE,
+    FOOTER,
+    FORM,
+    H1,
+    H2,
+    H3,
+    H4,
+    H5,
+    H6,
+    HEADER,
+    HR,
+    MAIN,
+    NAV,
+    OL,
+    P,
+    PRE,
+    SECTION,
 };
 
-static const TagType *TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS_END = (
-  TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS +
-  sizeof(TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS) /
-  sizeof(TagType)
-);
+static TagType get_tag_from_string(const char *tag_name)
+{
+  for (int i = 0; i < 126; i++)
+  {
+    if (strcmp(TAG_TYPES_BY_TAG_NAME[i].tag_name, tag_name) == 0)
+    {
+      return TAG_TYPES_BY_TAG_NAME[i].tag_value;
+    }
+  }
+  return CUSTOM;
+}
 
-struct Tag {
-  TagType type;
-  string custom_tag_name;
+static inline Tag new_tag()
+{
+  Tag tag;
+  tag.type = END_;
+  tag.custom_tag_name.data = NULL;
+  tag.custom_tag_name.len = 0;
+  tag.custom_tag_name.cap = 0;
+  return tag;
+}
 
-  // This default constructor is used in the case where there is not enough space
-  // in the serialization buffer to store all of the tags. In that case, tags
-  // that cannot be serialized will be treated as having an unknown type. These
-  // tags will be closed via implicit end tags regardless of the next closing
-  // tag is encountered.
-  Tag() : type(END_OF_VOID_TAGS) {}
+static Tag make_tag(TagType type, const char *name)
+{
+  Tag tag = new_tag();
+  tag.type = type;
+  if (type == CUSTOM)
+  {
+    tag.custom_tag_name.len = strlen(name);
+    tag.custom_tag_name.data =
+        (char *)calloc(1, sizeof(char) * (tag.custom_tag_name.len + 1));
+    strncpy(tag.custom_tag_name.data, name, tag.custom_tag_name.len);
+  }
+  return tag;
+}
 
-  Tag(TagType type, const string &name) : type(type), custom_tag_name(name) {}
+static inline void tag_free(Tag *tag)
+{
+  if (tag->type == CUSTOM)
+  {
+    free(tag->custom_tag_name.data);
+  }
+  tag->custom_tag_name.data = NULL;
+}
 
-  bool operator==(const Tag &other) const {
-    if (type != other.type) return false;
-    if (type == CUSTOM && custom_tag_name != other.custom_tag_name) return false;
+static inline bool is_void(const Tag *tag)
+{
+  return tag->type < END_OF_VOID_TAGS;
+}
+
+static inline Tag for_name(const char *name)
+{
+  return make_tag(get_tag_from_string(name), name);
+}
+
+static inline bool tagcmp(const Tag *_tag1, const Tag *_tag2)
+{
+  return _tag1->type == _tag2->type &&
+         (_tag1->type == CUSTOM ? strcmp(_tag1->custom_tag_name.data,
+                                         _tag2->custom_tag_name.data) == 0
+                                : true);
+}
+
+static bool can_contain(Tag *self, const Tag *other)
+{
+  TagType child = other->type;
+
+  switch (self->type)
+  {
+  case LI:
+    return child != LI;
+
+  case DT:
+  case DD:
+    return child != DT && child != DD;
+
+  case P:
+    for (int i = 0; i < 26; i++)
+    {
+      if (child == TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS[i])
+      {
+        return false;
+      }
+    }
+    return true;
+
+  case COLGROUP:
+    return child == COL;
+
+  case RB:
+  case RT:
+  case RP:
+    return child != RB && child != RT && child != RP;
+
+  case OPTGROUP:
+    return child != OPTGROUP;
+
+  case TR:
+    return child != TR;
+
+  case TD:
+  case TH:
+    return child != TD && child != TH && child != TR;
+
+  default:
     return true;
   }
-
-  inline bool is_void() const {
-    return type < END_OF_VOID_TAGS;
-  }
-
-  inline bool can_contain(const Tag &tag) {
-    TagType child = tag.type;
-
-    switch (type) {
-      case LI: return child != LI;
-
-      case DT:
-      case DD:
-        return child != DT && child != DD;
-
-      case P:
-        return std::find(
-          TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS,
-          TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS_END,
-          tag.type
-        ) == TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS_END;
-
-      case COLGROUP:
-        return child == COL;
-
-      case RB:
-      case RT:
-      case RP:
-        return child != RB && child != RT && child != RP;
-
-      case OPTGROUP:
-        return child != OPTGROUP;
-
-      case TR:
-        return child != TR;
-
-      case TD:
-      case TH:
-        return child != TD && child != TH && child != TR;
-
-      default:
-        return true;
-    }
-  }
-
-  static inline Tag for_name(const string &name) {
-    map<string, TagType>::const_iterator type = TAG_TYPES_BY_TAG_NAME.find(name);
-    if (type != TAG_TYPES_BY_TAG_NAME.end()) {
-      return Tag(type->second, string());
-    } else {
-      return Tag(CUSTOM, name);
-    }
-  }
-};
+}
