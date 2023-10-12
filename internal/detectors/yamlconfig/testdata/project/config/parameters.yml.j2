@@ -9,9 +9,10 @@
 {# This is a comment #}
 doctrine:
   dbal:
-    {%- for ntp_server in ntp_servers %}
-    - {{ ntp_server }}
-    {%- endfor %}
+    foo:
+      {%- for ntp_server in ntp_servers %}
+      - {{ ntp_server }}
+      {%- endfor %}
     {% if host_enabled %}default_connection: default{%- endif %}
     {{ bearer_key }}: {{ bearer_value }}
     connections:

@@ -67,7 +67,7 @@ children:
                         - type: '"""'
                           id: 13
                           range: 3:22 - 3:23
-                        - type: string
+                        - type: string_value
                           id: 14
                           range: 3:23 - 3:34
                           content: Hello World
@@ -216,7 +216,7 @@ children:
                                     - type: '"""'
                                       id: 47
                                       range: 7:31 - 7:32
-                                    - type: string
+                                    - type: string_value
                                       id: 48
                                       range: 7:32 - 7:33
                                       content: '!'
@@ -264,7 +264,7 @@ children:
                                 - type: '"""'
                                   id: 58
                                   range: 8:15 - 8:16
-                                - type: string
+                                - type: string_value
                                   id: 59
                                   range: 8:16 - 8:18
                                   content: '!!'
@@ -311,7 +311,7 @@ children:
                                 - type: '"""'
                                   id: 69
                                   range: 10:15 - 10:16
-                                - type: string
+                                - type: string_value
                                   id: 70
                                   range: 10:16 - 10:20
                                   content: 'hey '
@@ -420,7 +420,7 @@ children:
                                 - type: '"""'
                                   id: 94
                                   range: 12:16 - 12:17
-                                - type: string
+                                - type: string_value
                                   id: 95
                                   range: 12:17 - 12:23
                                   content: ' there'
@@ -471,7 +471,7 @@ children:
                                 - type: '"""'
                                   id: 105
                                   range: 14:15 - 14:16
-                                - type: string
+                                - type: string_value
                                   id: 106
                                   range: 14:16 - 14:21
                                   content: foo '
@@ -494,7 +494,7 @@ children:
                                 - type: '"}"'
                                   id: 111
                                   range: 14:25 - 14:26
-                                - type: string
+                                - type: string_value
                                   id: 112
                                   range: 14:26 - 14:31
                                   content: ''' bar'

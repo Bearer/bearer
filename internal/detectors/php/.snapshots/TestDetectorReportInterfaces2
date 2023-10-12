@@ -39,9 +39,9 @@
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(23),
-      StartColumnNumber: (*int)(11),
+      StartColumnNumber: (*int)(13),
       EndLineNumber: (*int)(23),
-      EndColumnNumber: (*int)(36),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=25) "\"https://api1.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -68,9 +68,9 @@
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(26),
-      StartColumnNumber: (*int)(11),
+      StartColumnNumber: (*int)(13),
       EndLineNumber: (*int)(26),
-      EndColumnNumber: (*int)(36),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=25) "\"https://api2.domain.com\"")
     },
     Value: (interfaces.Interface) {
@@ -97,9 +97,9 @@
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(43),
-      StartColumnNumber: (*int)(11),
+      StartColumnNumber: (*int)(13),
       EndLineNumber: (*int)(43),
-      EndColumnNumber: (*int)(36),
+      EndColumnNumber: (*int)(38),
       Text: (*string)((len=25) "\"https://api3.domain.com\"")
     },
     Value: (interfaces.Interface) {

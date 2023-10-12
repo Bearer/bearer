@@ -4,7 +4,6 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
-	"github.com/bearer/bearer/internal/util/stringutil"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -27,17 +26,12 @@ func (detector *stringDetector) DetectAt(
 	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
-	case "string":
-		value := node.Content()
-		if node.Parent() != nil && node.Parent().Type() != "encapsed_string" {
-			value = stringutil.StripQuotes(value)
-		}
-
+	case "string_value":
 		return []interface{}{common.String{
-			Value:     value,
+			Value:     node.Content(),
 			IsLiteral: true,
 		}}, nil
-	case "encapsed_string":
+	case "string", "encapsed_string":
 		return common.ConcatenateChildStrings(node, detectorContext)
 	case "binary_expression":
 		if node.Children()[1].Content() == "." {
