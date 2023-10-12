@@ -9,7 +9,7 @@ import (
 	"github.com/bearer/bearer/internal/flag"
 )
 
-func GetBearerVerionMeta(languages []string) (*VersionMeta, error) {
+func GetBearerVersionMeta(languages []string) (*VersionMeta, error) {
 	var meta VersionMeta
 	client := api.New(
 		api.API{

@@ -49,32 +49,21 @@ func loadRules(
 	externalRuleDirs []string,
 	options flag.RuleOptions,
 	versionMeta *version_check.VersionMeta,
-	force bool) (
+	force bool,
+) (
 	result LoadRulesResult,
 	err error,
 ) {
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
 
-	log.Debug().Msg("Loading rules")
-
 	if versionMeta.Rules.Version != nil {
 		result.BearerRulesVersion = *versionMeta.Rules.Version
-
-		urls := make([]string, 0, len(versionMeta.Rules.Packages))
-		for _, value := range versionMeta.Rules.Packages {
-			log.Debug().Msgf("Added rule package URL %s", value)
-			urls = append(urls, value)
-		}
-
-		err = LoadRuleDefinitionsFromUrls(definitions, urls)
-		if err != nil {
-			output.Fatal(fmt.Sprintf("Error loading rules: %s", err))
-			// sysexit
-		}
-	} else {
-		log.Debug().Msg("No rule packages found")
 	}
+
+	log.Debug().Msg("Loading rules")
+
+	loadRuleDefinitionsFromRemote(definitions, options, versionMeta)
 
 	if err := loadRuleDefinitionsFromDir(builtInDefinitions, buildInRulesFs); err != nil {
 		return result, fmt.Errorf("error loading built-in rules: %w", err)
@@ -102,6 +91,33 @@ func loadRules(
 	result.BuiltInRules = BuildRules(builtInDefinitions, builtInRules)
 
 	return result, nil
+}
+
+func loadRuleDefinitionsFromRemote(
+	definitions map[string]RuleDefinition,
+	options flag.RuleOptions,
+	versionMeta *version_check.VersionMeta,
+) {
+	if options.DisableDefaultRules {
+		return
+	}
+
+	if versionMeta.Rules.Version == nil {
+		log.Debug().Msg("No rule packages found")
+		return
+	}
+
+	urls := make([]string, 0, len(versionMeta.Rules.Packages))
+	for _, value := range versionMeta.Rules.Packages {
+		log.Debug().Msgf("Added rule package URL %s", value)
+		urls = append(urls, value)
+	}
+
+	err := LoadRuleDefinitionsFromUrls(definitions, urls)
+	if err != nil {
+		output.Fatal(fmt.Sprintf("Error loading rules: %s", err))
+		// sysexit
+	}
 }
 
 func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {

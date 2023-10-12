@@ -128,6 +128,13 @@ func (*Pattern) IsLeaf(node *tree.Node) bool {
 	return false
 }
 
+func (*Pattern) AnonymousParentTypes() []string {
+	return []string{
+		"binary_expression",
+		"unary_op_expression",
+	}
+}
+
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
 		"encapsed_string",
