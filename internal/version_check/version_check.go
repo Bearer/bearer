@@ -26,8 +26,22 @@ type BinaryVersionMeta struct {
 	Message string
 }
 
+func GetScanVersionMeta(ctx context.Context, options flag.Options, languages []string) (meta *VersionMeta, err error) {
+	if options.RuleOptions.DisableDefaultRules && options.GeneralOptions.DisableVersionCheck {
+		log.Debug().Msg("skipping version API call as check and default rules both disabled")
+
+		return &VersionMeta{
+			Binary: BinaryVersionMeta{
+				Latest: true,
+			},
+		}, nil
+	}
+
+	return GetVersionMeta(ctx, languages)
+}
+
 func GetVersionMeta(ctx context.Context, languages []string) (meta *VersionMeta, err error) {
-	meta, err = GetBearerVerionMeta(languages)
+	meta, err = GetBearerVersionMeta(languages)
 	if err != nil {
 		log.Debug().Msgf("Bearer version API failed: %s", err)
 

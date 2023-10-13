@@ -267,8 +267,8 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	if opts.RuleOptions.DisableDefaultRules {
 		metaLanguageList = make([]string, 0)
 	}
-	// deal with no version check here
-	versionMeta, err := version_check.GetVersionMeta(ctx, metaLanguageList)
+
+	versionMeta, err := version_check.GetScanVersionMeta(ctx, opts, metaLanguageList)
 	if err != nil {
 		log.Debug().Msgf("failed: %s", err)
 	} else {
