@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
 	"golang.org/x/exp/maps"
+	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
@@ -52,19 +53,15 @@ func GetData(
 	}
 
 	// add report-specific items
-	attemptCloudUpload := false
 	switch config.Report.Report {
 	case flag.ReportDataFlow:
 		return data, err
 	case flag.ReportSecurity:
-		attemptCloudUpload = true
 		err = security.AddReportData(data, config, baseBranchFindings)
 	case flag.ReportSaaS:
 		if err = security.AddReportData(data, config, baseBranchFindings); err != nil {
 			return nil, err
 		}
-
-		attemptCloudUpload = true
 		err = saas.GetReport(data, config, false)
 	case flag.ReportPrivacy:
 		err = privacy.AddReportData(data, config)
@@ -74,13 +71,17 @@ func GetData(
 		return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 	}
 
-	if attemptCloudUpload && config.Client != nil && config.Client.Error == nil {
-		// send SaaS report to Cloud
-		data.SendToCloud = true
-		saas.SendReport(config, data)
-	}
-
 	return data, err
+}
+
+func UploadReportToCloud(report *types.ReportData, config settings.Config) {
+	if slices.Contains([]string{flag.ReportSecurity, flag.ReportSaaS}, config.Report.Report) {
+		if config.Client != nil && config.Client.Error == nil {
+			// send SaaS report to Cloud
+			report.SendToCloud = true
+			saas.SendReport(config, report)
+		}
+	}
 }
 
 func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config settings.Config, isInternal bool) error {
