@@ -17,6 +17,7 @@ func TestSecrets(t *testing.T) {
 				"--scanner=secrets",
 				"--only-rule=gitleaks",
 				"--format=yaml",
+				"--disable-version-check",
 				"--disable-default-rules",
 				"--exit-code=0",
 			},
