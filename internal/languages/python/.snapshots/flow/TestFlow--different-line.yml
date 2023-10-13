@@ -1,0 +1,36 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 2
+      full_filename: different-line.py
+      filename: different-line.py
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 8
+                end: 17
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 20
+        content: logging.error(name)
+      parent_line_number: 3
+      snippet: logging.error(name)
+      fingerprint: c94602447d6771c00b72425485a6cf6c_0
+      old_fingerprint: c94602447d6771c00b72425485a6cf6c_0
+

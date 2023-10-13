@@ -1,0 +1,30 @@
+languages:
+  - python
+patterns:
+  - pattern: scopeCursor($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: cursor
+  - pattern: scopeNested($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: nested
+  - pattern: scopeResult($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: scope_test_user_input
+        scope: result
+auxiliary:
+  - id: scope_test_user_input
+    patterns:
+      - request.GET.get()
+      - request.POST.get()
+severity: high
+metadata:
+  description: Test detection filter scopes
+  remediation_message: Test detection filter scopes
+  cwe_id:
+    - 42
+  id: scope_test

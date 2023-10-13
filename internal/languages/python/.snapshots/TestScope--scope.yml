@@ -1,0 +1,350 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 1
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 37
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 37
+        content: scopeCursor(request.GET.get('oops'))
+      parent_line_number: 1
+      snippet: scopeCursor(request.GET.get('oops'))
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_0
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 3
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 49
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 49
+        content: scopeCursor(request.GET.get('oops') if x else y)
+      parent_line_number: 3
+      snippet: scopeCursor(request.GET.get('oops') if x else y)
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_1
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 5
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 5
+            end: 5
+            column:
+                start: 1
+                end: 42
+      sink:
+        location:
+            start: 5
+            end: 5
+            column:
+                start: 1
+                end: 42
+        content: scopeCursor(request.GET.get('oops') or y)
+      parent_line_number: 5
+      snippet: scopeCursor(request.GET.get('oops') or y)
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_2
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 7
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 1
+                end: 37
+      sink:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 1
+                end: 37
+        content: scopeNested(request.GET.get('oops'))
+      parent_line_number: 7
+      snippet: scopeNested(request.GET.get('oops'))
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_3
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 8
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 41
+      sink:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 41
+        content: scopeNested(x + request.GET.get('oops'))
+      parent_line_number: 8
+      snippet: scopeNested(x + request.GET.get('oops'))
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_4
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_4
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 9
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 49
+      sink:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 49
+        content: scopeNested(request.GET.get('oops') if x else y)
+      parent_line_number: 9
+      snippet: scopeNested(request.GET.get('oops') if x else y)
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_5
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_5
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 10
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 49
+      sink:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 49
+        content: scopeNested(x if request.GET.get('oops') else y)
+      parent_line_number: 10
+      snippet: scopeNested(x if request.GET.get('oops') else y)
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_6
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_6
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 11
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 42
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 42
+        content: scopeNested(request.GET.get('oops') or y)
+      parent_line_number: 11
+      snippet: scopeNested(request.GET.get('oops') or y)
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_7
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_7
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 13
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 1
+                end: 37
+      sink:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 1
+                end: 37
+        content: scopeResult(request.GET.get('oops'))
+      parent_line_number: 13
+      snippet: scopeResult(request.GET.get('oops'))
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_8
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_8
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 14
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 1
+                end: 41
+      sink:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 1
+                end: 41
+        content: scopeResult(x + request.GET.get('oops'))
+      parent_line_number: 14
+      snippet: scopeResult(x + request.GET.get('oops'))
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_9
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_9
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 15
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 1
+                end: 49
+      sink:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 1
+                end: 49
+        content: scopeResult(request.GET.get('oops') if x else y)
+      parent_line_number: 15
+      snippet: scopeResult(request.GET.get('oops') if x else y)
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_10
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_10
+    - rule:
+        cwe_ids:
+            - "42"
+        id: scope_test
+        title: Test detection filter scopes
+        description: Test detection filter scopes
+        documentation_url: ""
+      line_number: 17
+      full_filename: scope.py
+      filename: scope.py
+      source:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 1
+                end: 42
+      sink:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 1
+                end: 42
+        content: scopeResult(request.GET.get('oops') or y)
+      parent_line_number: 17
+      snippet: scopeResult(request.GET.get('oops') or y)
+      fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_11
+      old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_11
+
