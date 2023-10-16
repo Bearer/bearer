@@ -77,7 +77,7 @@ jobs:
         with:
           go-version: 1.21
       - name: Setup Gon
-        run: brew install mitchellh/gon/gon
+        run: brew install Bearer/tap/gon
       - name: Import Code-Signing Certificates
         uses: Apple-Actions/import-codesign-certs@v2
         with:
@@ -105,6 +105,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AC_USERNAME: ${{ secrets.AC_USERNAME }}
           AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
+          AC_PROVIDER: ${{ secrets.AC_PROVIDER }}
           GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
 
   publish:

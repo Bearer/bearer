@@ -30,10 +30,6 @@ builds:
 
           bundle_id = "com.bearer.bearer"
 
-          apple_id {
-            password = "@env:AC_PASSWORD"
-          }
-
           sign {
             application_identity = "Developer ID Application: Bearer Inc (5T2VP4YAG8)"
           }
@@ -73,8 +69,7 @@ changelog:
       - "^ci:"
 
 nfpms:
-  -
-    formats:
+  - formats:
       - deb
       - rpm
       - archlinux
