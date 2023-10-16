@@ -1,0 +1,80 @@
+type: module
+id: 0
+range: 1:1 - 1:12
+dataflow_sources:
+    - 1
+children:
+    - type: expression_statement
+      id: 1
+      range: 1:1 - 1:12
+      dataflow_sources:
+        - 2
+      children:
+        - type: call
+          id: 2
+          range: 1:1 - 1:12
+          dataflow_sources:
+            - 3
+            - 7
+          children:
+            - type: attribute
+              id: 3
+              range: 1:1 - 1:10
+              dataflow_sources:
+                - 4
+              queries:
+                - 3
+              children:
+                - type: identifier
+                  id: 4
+                  range: 1:1 - 1:5
+                  content: user
+                - type: '"."'
+                  id: 5
+                  range: 1:5 - 1:6
+                - type: identifier
+                  id: 6
+                  range: 1:6 - 1:10
+                  content: name
+            - type: argument_list
+              id: 7
+              range: 1:10 - 1:12
+              dataflow_sources:
+                - 8
+                - 9
+              children:
+                - type: '"("'
+                  id: 8
+                  range: 1:10 - 1:11
+                - type: '")"'
+                  id: 9
+                  range: 1:11 - 1:12
+
+- node: 3
+  content: user.name
+  data:
+    properties:
+        - name: user
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 3
+                typeid: 3
+                contentstart:
+                    byte: 0
+                    line: 1
+                    column: 1
+                contentend:
+                    byte: 9
+                    line: 1
+                    column: 10
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+

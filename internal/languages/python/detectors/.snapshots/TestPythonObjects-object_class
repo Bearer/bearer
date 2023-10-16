@@ -1,0 +1,563 @@
+type: module
+id: 0
+range: 1:1 - 8:33
+dataflow_sources:
+    - 1
+children:
+    - type: class_definition
+      id: 1
+      range: 1:1 - 8:33
+      queries:
+        - 2
+      children:
+        - type: '"class"'
+          id: 2
+          range: 1:1 - 1:6
+        - type: identifier
+          id: 3
+          range: 1:7 - 1:11
+          content: User
+        - type: '":"'
+          id: 4
+          range: 1:11 - 1:12
+        - type: block
+          id: 5
+          range: 2:5 - 8:33
+          children:
+            - type: function_definition
+              id: 6
+              range: 2:5 - 4:27
+              children:
+                - type: '"def"'
+                  id: 7
+                  range: 2:5 - 2:8
+                - type: identifier
+                  id: 8
+                  range: 2:9 - 2:17
+                  content: __init__
+                - type: parameters
+                  id: 9
+                  range: 2:17 - 2:39
+                  dataflow_sources:
+                    - 10
+                    - 11
+                    - 12
+                    - 13
+                    - 14
+                    - 15
+                    - 21
+                  children:
+                    - type: '"("'
+                      id: 10
+                      range: 2:17 - 2:18
+                    - type: identifier
+                      id: 11
+                      range: 2:18 - 2:22
+                      content: self
+                    - type: '","'
+                      id: 12
+                      range: 2:22 - 2:23
+                    - type: identifier
+                      id: 13
+                      range: 2:24 - 2:28
+                      content: name
+                    - type: '","'
+                      id: 14
+                      range: 2:28 - 2:29
+                    - type: default_parameter
+                      id: 15
+                      range: 2:30 - 2:38
+                      dataflow_sources:
+                        - 16
+                        - 17
+                        - 18
+                      children:
+                        - type: identifier
+                          id: 16
+                          range: 2:30 - 2:35
+                          content: email
+                        - type: '"="'
+                          id: 17
+                          range: 2:35 - 2:36
+                        - type: string
+                          id: 18
+                          range: 2:36 - 2:38
+                          dataflow_sources:
+                            - 19
+                            - 20
+                          children:
+                            - type: '"""'
+                              id: 19
+                              range: 2:36 - 2:37
+                            - type: '"""'
+                              id: 20
+                              range: 2:37 - 2:38
+                    - type: '")"'
+                      id: 21
+                      range: 2:38 - 2:39
+                - type: '":"'
+                  id: 22
+                  range: 2:39 - 2:40
+                - type: block
+                  id: 23
+                  range: 3:9 - 4:27
+                  children:
+                    - type: expression_statement
+                      id: 24
+                      range: 3:9 - 3:25
+                      dataflow_sources:
+                        - 25
+                      children:
+                        - type: assignment
+                          id: 25
+                          range: 3:9 - 3:25
+                          alias_of:
+                            - 31
+                          children:
+                            - type: attribute
+                              id: 26
+                              range: 3:9 - 3:18
+                              dataflow_sources:
+                                - 27
+                              queries:
+                                - 3
+                              children:
+                                - type: identifier
+                                  id: 27
+                                  range: 3:9 - 3:13
+                                  content: self
+                                - type: '"."'
+                                  id: 28
+                                  range: 3:13 - 3:14
+                                - type: identifier
+                                  id: 29
+                                  range: 3:14 - 3:18
+                                  content: name
+                            - type: '"="'
+                              id: 30
+                              range: 3:19 - 3:20
+                            - type: identifier
+                              id: 31
+                              range: 3:21 - 3:25
+                              content: name
+                    - type: expression_statement
+                      id: 32
+                      range: 4:9 - 4:27
+                      dataflow_sources:
+                        - 33
+                      children:
+                        - type: assignment
+                          id: 33
+                          range: 4:9 - 4:27
+                          alias_of:
+                            - 39
+                          children:
+                            - type: attribute
+                              id: 34
+                              range: 4:9 - 4:19
+                              dataflow_sources:
+                                - 35
+                              queries:
+                                - 3
+                              children:
+                                - type: identifier
+                                  id: 35
+                                  range: 4:9 - 4:13
+                                  content: self
+                                - type: '"."'
+                                  id: 36
+                                  range: 4:13 - 4:14
+                                - type: identifier
+                                  id: 37
+                                  range: 4:14 - 4:19
+                                  content: email
+                            - type: '"="'
+                              id: 38
+                              range: 4:20 - 4:21
+                            - type: identifier
+                              id: 39
+                              range: 4:22 - 4:27
+                              content: email
+            - type: function_definition
+              id: 40
+              range: 6:5 - 8:33
+              children:
+                - type: '"def"'
+                  id: 41
+                  range: 6:5 - 6:8
+                - type: identifier
+                  id: 42
+                  range: 6:9 - 6:23
+                  content: lowercase_name
+                - type: parameters
+                  id: 43
+                  range: 6:23 - 6:29
+                  dataflow_sources:
+                    - 44
+                    - 45
+                    - 46
+                  children:
+                    - type: '"("'
+                      id: 44
+                      range: 6:23 - 6:24
+                    - type: identifier
+                      id: 45
+                      range: 6:24 - 6:28
+                      content: self
+                    - type: '")"'
+                      id: 46
+                      range: 6:28 - 6:29
+                - type: '":"'
+                  id: 47
+                  range: 6:29 - 6:30
+                - type: block
+                  id: 48
+                  range: 7:9 - 8:33
+                  children:
+                    - type: expression_statement
+                      id: 49
+                      range: 7:9 - 7:33
+                      dataflow_sources:
+                        - 50
+                      children:
+                        - type: call
+                          id: 50
+                          range: 7:9 - 7:33
+                          dataflow_sources:
+                            - 51
+                            - 55
+                          children:
+                            - type: attribute
+                              id: 51
+                              range: 7:9 - 7:22
+                              dataflow_sources:
+                                - 52
+                              queries:
+                                - 3
+                              children:
+                                - type: identifier
+                                  id: 52
+                                  range: 7:9 - 7:16
+                                  content: logging
+                                - type: '"."'
+                                  id: 53
+                                  range: 7:16 - 7:17
+                                - type: identifier
+                                  id: 54
+                                  range: 7:17 - 7:22
+                                  content: error
+                            - type: argument_list
+                              id: 55
+                              range: 7:22 - 7:33
+                              dataflow_sources:
+                                - 56
+                                - 57
+                                - 61
+                              children:
+                                - type: '"("'
+                                  id: 56
+                                  range: 7:22 - 7:23
+                                - type: attribute
+                                  id: 57
+                                  range: 7:23 - 7:32
+                                  dataflow_sources:
+                                    - 58
+                                  queries:
+                                    - 3
+                                  children:
+                                    - type: identifier
+                                      id: 58
+                                      range: 7:23 - 7:27
+                                      content: self
+                                    - type: '"."'
+                                      id: 59
+                                      range: 7:27 - 7:28
+                                    - type: identifier
+                                      id: 60
+                                      range: 7:28 - 7:32
+                                      content: name
+                                - type: '")"'
+                                  id: 61
+                                  range: 7:32 - 7:33
+                    - type: expression_statement
+                      id: 62
+                      range: 8:9 - 8:33
+                      dataflow_sources:
+                        - 63
+                      children:
+                        - type: call
+                          id: 63
+                          range: 8:9 - 8:33
+                          dataflow_sources:
+                            - 64
+                            - 65
+                          children:
+                            - type: identifier
+                              id: 64
+                              range: 8:9 - 8:14
+                              content: print
+                            - type: argument_list
+                              id: 65
+                              range: 8:14 - 8:33
+                              dataflow_sources:
+                                - 66
+                                - 67
+                                - 78
+                              children:
+                                - type: '"("'
+                                  id: 66
+                                  range: 8:14 - 8:15
+                                - type: call
+                                  id: 67
+                                  range: 8:15 - 8:32
+                                  dataflow_sources:
+                                    - 68
+                                    - 75
+                                  children:
+                                    - type: attribute
+                                      id: 68
+                                      range: 8:15 - 8:30
+                                      dataflow_sources:
+                                        - 69
+                                      queries:
+                                        - 3
+                                      children:
+                                        - type: attribute
+                                          id: 69
+                                          range: 8:15 - 8:24
+                                          dataflow_sources:
+                                            - 70
+                                          queries:
+                                            - 3
+                                          children:
+                                            - type: identifier
+                                              id: 70
+                                              range: 8:15 - 8:19
+                                              content: self
+                                            - type: '"."'
+                                              id: 71
+                                              range: 8:19 - 8:20
+                                            - type: identifier
+                                              id: 72
+                                              range: 8:20 - 8:24
+                                              content: name
+                                        - type: '"."'
+                                          id: 73
+                                          range: 8:24 - 8:25
+                                        - type: identifier
+                                          id: 74
+                                          range: 8:25 - 8:30
+                                          content: lower
+                                    - type: argument_list
+                                      id: 75
+                                      range: 8:30 - 8:32
+                                      dataflow_sources:
+                                        - 76
+                                        - 77
+                                      children:
+                                        - type: '"("'
+                                          id: 76
+                                          range: 8:30 - 8:31
+                                        - type: '")"'
+                                          id: 77
+                                          range: 8:31 - 8:32
+                                - type: '")"'
+                                  id: 78
+                                  range: 8:32 - 8:33
+
+- node: 1
+  content: |-
+    class User:
+        def __init__(self, name, email=""):
+            self.name = name
+            self.email = email
+
+        def lowercase_name(self):
+            logging.error(self.name)
+            print(self.name.lower())
+  data:
+    properties:
+        - name: User
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 1
+                typeid: 1
+                contentstart:
+                    byte: 0
+                    line: 1
+                    column: 1
+                contentend:
+                    byte: 200
+                    line: 8
+                    column: 33
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node:
+                        id: 13
+                        typeid: 3
+                        contentstart:
+                            byte: 35
+                            line: 2
+                            column: 24
+                        contentend:
+                            byte: 39
+                            line: 2
+                            column: 28
+                        executingdetectors: []
+                      object: null
+                    - name: email
+                      node:
+                        id: 16
+                        typeid: 3
+                        contentstart:
+                            byte: 41
+                            line: 2
+                            column: 30
+                        contentend:
+                            byte: 46
+                            line: 2
+                            column: 35
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 26
+  content: self.name
+  data:
+    properties:
+        - name: self
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 26
+                typeid: 18
+                contentstart:
+                    byte: 60
+                    line: 3
+                    column: 9
+                contentend:
+                    byte: 69
+                    line: 3
+                    column: 18
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 34
+  content: self.email
+  data:
+    properties:
+        - name: self
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 34
+                typeid: 18
+                contentstart:
+                    byte: 85
+                    line: 4
+                    column: 9
+                contentend:
+                    byte: 95
+                    line: 4
+                    column: 19
+                executingdetectors: []
+            data:
+                properties:
+                    - name: email
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 51
+  content: logging.error
+  data:
+    properties:
+        - name: logging
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 51
+                typeid: 18
+                contentstart:
+                    byte: 143
+                    line: 7
+                    column: 9
+                contentend:
+                    byte: 156
+                    line: 7
+                    column: 22
+                executingdetectors: []
+            data:
+                properties:
+                    - name: error
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 57
+  content: self.name
+  data:
+    properties:
+        - name: self
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 57
+                typeid: 18
+                contentstart:
+                    byte: 157
+                    line: 7
+                    column: 23
+                contentend:
+                    byte: 166
+                    line: 7
+                    column: 32
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 69
+  content: self.name
+  data:
+    properties:
+        - name: self
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 69
+                typeid: 18
+                contentstart:
+                    byte: 182
+                    line: 8
+                    column: 15
+                contentend:
+                    byte: 191
+                    line: 8
+                    column: 24
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+

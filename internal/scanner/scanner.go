@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/bearer/internal/languages/java"
 	"github.com/bearer/bearer/internal/languages/javascript"
 	"github.com/bearer/bearer/internal/languages/php"
+	"github.com/bearer/bearer/internal/languages/python"
 	"github.com/bearer/bearer/internal/languages/ruby"
 	"github.com/bearer/bearer/internal/report"
 	reportdetections "github.com/bearer/bearer/internal/report/detections"
@@ -39,6 +40,7 @@ func New(schemaClassifier *schemaclassifier.Classifier, rules map[string]*settin
 		ruby.Get(),
 		php.Get(),
 		golang.Get(),
+		python.Get(),
 	}
 
 	languageScanners := make([]*languagescanner.Scanner, len(languages))

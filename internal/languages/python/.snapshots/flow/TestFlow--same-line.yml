@@ -1,0 +1,70 @@
+high:
+    - rule:
+        cwe_ids: []
+        id: rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 1
+      full_filename: same-line.py
+      filename: same-line.py
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 15
+                end: 24
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 25
+        content: logging.error(user.name)
+      parent_line_number: 1
+      snippet: logging.error(user.name)
+      fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_0
+      old_fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_0
+    - rule:
+        cwe_ids: []
+        id: rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 2
+      full_filename: same-line.py
+      filename: same-line.py
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 15
+                end: 24
+      sink:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 27
+        content: logging.error(user.name())
+      parent_line_number: 2
+      snippet: logging.error(user.name())
+      fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_1
+      old_fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_1
+

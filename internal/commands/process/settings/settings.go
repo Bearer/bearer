@@ -298,6 +298,8 @@ func (rule *Rule) Language() string {
 		return "Go"
 	case "php":
 		return "PHP"
+	case "python":
+		return "Python"
 	default:
 		return rule.Languages[0]
 	}

@@ -33,8 +33,10 @@ var (
 func GetSupportedRuleLanguages() map[string]bool {
 	phpSupported := os.Getenv("BEARER_PHP_ENABLED") == "true"
 	goSupported := os.Getenv("BEARER_GOLANG_ENABLED") == "true"
+	pythonSupported := os.Getenv("BEARER_PYTHON_ENABLED") == "true"
 
 	return map[string]bool{
+		"python":     pythonSupported,
 		"php":        phpSupported,
 		"go":         goSupported,
 		"java":       true,

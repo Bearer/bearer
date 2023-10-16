@@ -1,0 +1,13 @@
+type: risk
+languages:
+  - python
+patterns:
+  - pattern: logging.$<METHOD>($<DATA_TYPE>)
+    filters:
+      - variable: METHOD
+        values:
+          - error
+      - variable: DATA_TYPE
+        detection: datatype
+metadata:
+  id: rule_logger_test

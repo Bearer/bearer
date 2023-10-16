@@ -440,6 +440,8 @@ func (node *Node) Query(query *sitter.Query, onMatch func(captures Captures) err
 			break
 		}
 
+		// match = cursor.FilterPredicates(match, node.tree.input)
+
 		captures := make(Captures)
 		for _, capture := range match.Captures {
 			captures[query.CaptureNameForId(capture.Index)] = node.tree.wrap(capture.Node)
