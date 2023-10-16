@@ -77,8 +77,6 @@ func GetData(
 func UploadReportToCloud(report *types.ReportData, config settings.Config) {
 	if slices.Contains([]string{flag.ReportSecurity, flag.ReportSaaS}, config.Report.Report) {
 		if config.Client != nil && config.Client.Error == nil {
-			// send SaaS report to Cloud
-			report.SendToCloud = true
 			saas.SendReport(config, report)
 		}
 	}
