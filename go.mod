@@ -15,7 +15,7 @@ require (
 	github.com/go-git/go-git/v5 v5.9.0
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.3.1
-	github.com/hhatto/gocloc v0.5.1
+	github.com/hhatto/gocloc v0.5.2
 	github.com/onsi/ginkgo/v2 v2.13.0
 	github.com/onsi/gomega v1.28.0
 	github.com/open-policy-agent/opa v0.57.0
