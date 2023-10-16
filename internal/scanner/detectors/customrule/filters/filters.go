@@ -14,6 +14,7 @@ import (
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/scanner/variableshape"
+	"github.com/bearer/bearer/internal/util/entropy"
 )
 
 type Result struct {
@@ -399,6 +400,45 @@ func (filter *StringRegex) Evaluate(
 			"filters.StringRegex: %t for pattern %s at %s, content=%s",
 			result,
 			filter.Regex.String(),
+			node.Debug(),
+			value,
+		)
+	}
+
+	return boolResult(patternVariables, result), nil
+}
+
+type EntropyGreaterThan struct {
+	Variable *variableshape.Variable
+	Value    float64
+}
+
+func (filter *EntropyGreaterThan) Evaluate(
+	detectorContext detectortypes.Context,
+	patternVariables variableshape.Values,
+) (*Result, error) {
+	node := patternVariables.Node(filter.Variable)
+	value, isString, err := lookupString(detectorContext, node)
+	if err != nil {
+		return nil, err
+	}
+
+	if !isString {
+		if log.Trace().Enabled() {
+			log.Trace().Msgf("filters.EntropyGreaterThan: nil for min %f at %s", filter.Value, node.Debug())
+		}
+
+		return nil, nil
+	}
+
+	entropy := entropy.Shannon(value)
+	result := entropy > filter.Value
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"filters.EntropyGreaterThan: %t for entropy %f with min %f at %s, content=%s",
+			result,
+			entropy,
+			filter.Value,
 			node.Debug(),
 			value,
 		)

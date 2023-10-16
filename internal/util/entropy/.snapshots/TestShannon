@@ -1,0 +1,6 @@
+([]string) (len=4) {
+  (string) (len=4) "1.58",
+  (string) (len=4) "2.75",
+  (string) (len=4) "2.85",
+  (string) (len=4) "3.75"
+}

@@ -160,6 +160,13 @@ func translateFilter(
 		}, nil
 	}
 
+	if sourceFilter.EntropyGreaterThan != nil {
+		return &filters.EntropyGreaterThan{
+			Variable: variable,
+			Value:    *sourceFilter.EntropyGreaterThan,
+		}, nil
+	}
+
 	if sourceFilter.LessThan != nil {
 		return &filters.IntegerLessThan{
 			Variable: variable,
@@ -228,6 +235,7 @@ func scoreFilter(filter settings.PatternFilter) int {
 	}
 
 	if filter.StringRegex != nil ||
+		filter.EntropyGreaterThan != nil ||
 		filter.Detection != "" && filter.Scope == settings.CURSOR_STRICT_SCOPE {
 		return 2
 	}
