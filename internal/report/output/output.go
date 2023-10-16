@@ -3,12 +3,10 @@ package output
 import (
 	"errors"
 	"fmt"
-	"sort"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
-	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
@@ -34,11 +32,12 @@ func GetData(
 	data := &types.ReportData{}
 
 	// add languages
-	languages := []string{}
-	if report.Inputgocloc != nil && report.Inputgocloc.Languages != nil {
-		languages = maps.Keys(report.Inputgocloc.Languages)
+	languages := make(map[string]int32)
+	if report.Inputgocloc != nil {
+		for _, language := range report.Inputgocloc.Languages {
+			languages[language.Name] = language.Code
+		}
 	}
-	sort.Strings(languages)
 	data.FoundLanguages = languages
 
 	// add detectors
