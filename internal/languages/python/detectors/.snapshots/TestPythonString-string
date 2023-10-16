@@ -169,13 +169,14 @@ children:
                           range: 6:9 - 6:18
                           dataflow_sources:
                             - 37
-                            - 38
                             - 39
                           children:
                             - type: identifier
                               id: 37
                               range: 6:9 - 6:10
                               content: s
+                              alias_of:
+                                - 23
                             - type: '"+="'
                               id: 38
                               range: 6:11 - 6:13
@@ -237,13 +238,14 @@ children:
                           range: 9:9 - 9:22
                           dataflow_sources:
                             - 51
-                            - 52
                             - 53
                           children:
                             - type: identifier
                               id: 51
                               range: 9:9 - 9:11
                               content: s2
+                              alias_of:
+                                - 43
                             - type: '"+="'
                               id: 52
                               range: 9:12 - 9:14
@@ -280,13 +282,14 @@ children:
                           range: 10:9 - 10:23
                           dataflow_sources:
                             - 60
-                            - 61
                             - 62
                           children:
                             - type: identifier
                               id: 60
                               range: 10:9 - 10:11
                               content: s2
+                              alias_of:
+                                - 50
                             - type: '"+="'
                               id: 61
                               range: 10:12 - 10:14
@@ -360,46 +363,51 @@ children:
 - node: 10
   content: '"Hello World"'
   data:
-    value: '"Hello World"'
+    value: Hello World
     isliteral: true
 - node: 36
   content: s += "!!"
   data:
-    value: �"!!"
+    value: �!!!
+    isliteral: false
+- node: 50
+  content: s2 += args[0]
+  data:
+    value: hey �
     isliteral: false
 - node: 59
   content: s2 += " there"
   data:
-    value: �" there"
+    value: hey � there
     isliteral: false
 - node: 26
   content: Greet.Greeting + "!"
   data:
-    value: �"!"
+    value: �!
     isliteral: false
 - node: 39
   content: '"!!"'
   data:
-    value: '"!!"'
+    value: '!!'
     isliteral: true
 - node: 46
   content: '"hey "'
   data:
-    value: '"hey "'
+    value: 'hey '
     isliteral: true
 - node: 62
   content: '" there"'
   data:
-    value: '" there"'
+    value: ' there'
     isliteral: true
 - node: 69
   content: f"foo '{s2}' bar"
   data:
-    value: f"foo '{s2}' bar"
-    isliteral: true
+    value: foo '�' bar
+    isliteral: false
 - node: 32
   content: '"!"'
   data:
-    value: '"!"'
+    value: '!'
     isliteral: true
 

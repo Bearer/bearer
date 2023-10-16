@@ -25,6 +25,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
+	case "augmented_assignment":
+		return analyzer.analyzeAugmentedAssignment(node, visitChildren)
 	case "assignment":
 		return analyzer.analyzeAssignment(node, visitChildren)
 	case "attribute":
@@ -49,6 +51,23 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
+}
+
+// foo += a
+func (analyzer *analyzer) analyzeAugmentedAssignment(node *sitter.Node, visitChildren func() error) error {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+	analyzer.builder.Dataflow(node, left, right)
+	analyzer.lookupVariable(left)
+	analyzer.lookupVariable(right)
+
+	err := visitChildren()
+
+	if left.Type() == "identifier" {
+		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
+	}
+
+	return err
 }
 
 // foo = a

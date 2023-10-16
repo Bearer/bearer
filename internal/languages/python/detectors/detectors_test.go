@@ -14,6 +14,7 @@ func TestPythonObjects(t *testing.T) {
 
 func TestPythonString(t *testing.T) {
 	runTest(t, "string", "string", "testdata/string.py")
+	runTest(t, "string_literal", "string", "testdata/string_literal.py")
 }
 
 func runTest(t *testing.T, name, detectorType, fileName string) {
