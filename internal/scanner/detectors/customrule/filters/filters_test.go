@@ -479,6 +479,52 @@ var _ = Describe("StringRegex", func() {
 	})
 })
 
+var _ = Describe("EntropyGreaterThan", func() {
+	var filter *filters.EntropyGreaterThan
+	var variable *variableshape.Variable
+	var detectorContext detectortypes.Context
+	var patternVariables variableshape.Values
+
+	BeforeEach(func(ctx SpecContext) {
+		variable, patternVariables = setupContentTest(ctx, "hello", "other")
+		// entropy("Au+u1hvsvJeEXxky") == 3.75
+		detectorContext = setupStringTest(patternVariables.Node(variable), pointers.String("Au+u1hvsvJeEXxky"))
+	})
+
+	When("the variable node's content is a string with entropy greater than the filter value", func() {
+		BeforeEach(func(ctx SpecContext) {
+			filter = &filters.EntropyGreaterThan{Variable: variable, Value: 3.7}
+		})
+
+		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
+			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
+				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+			))
+		})
+	})
+
+	When("the variable node's content is a string with entropy less than or equal to the filter value", func() {
+		BeforeEach(func(ctx SpecContext) {
+			filter = &filters.EntropyGreaterThan{Variable: variable, Value: 3.8}
+		})
+
+		It("returns a result with NO matches", func(ctx SpecContext) {
+			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(filters.NewResult()))
+		})
+	})
+
+	When("the variable node is not a string value", func() {
+		BeforeEach(func(ctx SpecContext) {
+			filter = &filters.EntropyGreaterThan{Variable: variable, Value: 3.7}
+			detectorContext = setupStringTest(patternVariables.Node(variable), nil)
+		})
+
+		It("returns an unknown result", func(ctx SpecContext) {
+			Expect(filter.Evaluate(detectorContext, patternVariables)).To(BeNil())
+		})
+	})
+})
+
 var _ = Describe("IntegerLessThan", func() {
 	var filter *filters.IntegerLessThan
 	var variable *variableshape.Variable

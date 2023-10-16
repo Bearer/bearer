@@ -236,6 +236,7 @@ type PatternFilter struct {
 	GreaterThan        *int     `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
 	GreaterThanOrEqual *int     `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
 	StringRegex        *Regexp  `mapstructure:"string_regex" json:"string_regex" yaml:"string_regex"`
+	EntropyGreaterThan *float64 `mapstructure:"entropy_greater_than" json:"entropy_greater_than" yaml:"entropy_greater_than"`
 	FilenameRegex      *Regexp  `mapstructure:"filename_regex" json:"filename_regex" yaml:"filename_regex"`
 }
 
