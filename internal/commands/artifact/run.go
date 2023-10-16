@@ -380,6 +380,7 @@ func (r *runner) Report(
 	if err != nil {
 		return false, err
 	}
+	reportoutput.UploadReportToCloud(reportData, r.scanSettings)
 
 	endTime := time.Now()
 
