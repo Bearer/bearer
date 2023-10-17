@@ -208,8 +208,8 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		"compound_statement",
 	}
 
-	isUnanchored := !slices.Contains(unAnchored, parent.Type())
-	return isUnanchored, isUnanchored
+	isAnchored := !slices.Contains(unAnchored, parent.Type())
+	return isAnchored, isAnchored
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {

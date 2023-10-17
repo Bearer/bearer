@@ -106,8 +106,8 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// method statement_block
 	unAnchored := []string{"statement_block", "class_body", "object_pattern", "named_imports"}
 
-	isUnanchored := !slices.Contains(unAnchored, parent.Type())
-	return isUnanchored, isUnanchored
+	isAnchored := !slices.Contains(unAnchored, parent.Type())
+	return isAnchored, isAnchored
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
