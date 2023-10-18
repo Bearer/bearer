@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
-	detectorscommon "github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 )
@@ -51,9 +50,9 @@ func New(querySet *query.Set) types.Detector {
 	// $user->name;
 	// $user->name();
 	fieldAccessQuery := querySet.Add(`[
-		(member_access_expression object: (_) @object name: (name) @field) @root
-		(member_call_expression object: (_) @object name: (name) @field) @root
-	]`)
+		(member_access_expression object: (_) @object name: (name) @field)
+		(member_call_expression object: (_) @object name: (name) @field)
+	] @root`)
 
 	// array('foo' => 'bar');
 	// [ 'foo' => 'bar' ];
@@ -110,10 +109,10 @@ func (detector *objectDetector) getArrayCreation(
 		return nil, nil
 	}
 
-	var properties []detectorscommon.Property
+	var properties []common.Property
 	for _, result := range results {
-		pairNode := result["key"]
-		name := result["value"].Content()
+		keyNode := result["key"]
+		name := keyNode.Content()
 
 		propertyObjects, err := detectorContext.Scan(result["value"], ruleset.BuiltinObjectRule, traversalstrategy.Cursor)
 		if err != nil {
@@ -121,24 +120,24 @@ func (detector *objectDetector) getArrayCreation(
 		}
 
 		if len(propertyObjects) == 0 {
-			properties = append(properties, detectorscommon.Property{
+			properties = append(properties, common.Property{
 				Name: name,
-				Node: pairNode,
+				Node: keyNode,
 			})
 
 			continue
 		}
 
 		for _, propertyObject := range propertyObjects {
-			properties = append(properties, detectorscommon.Property{
+			properties = append(properties, common.Property{
 				Name:   name,
-				Node:   pairNode,
+				Node:   keyNode,
 				Object: propertyObject,
 			})
 		}
 	}
 
-	return []interface{}{detectorscommon.Object{Properties: properties}}, nil
+	return []interface{}{common.Object{Properties: properties}}, nil
 }
 
 func (detector *objectDetector) getAssignment(
