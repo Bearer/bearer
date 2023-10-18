@@ -10,8 +10,8 @@
   <br /><br />
   Bearer CLI is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security and privacy risks.
   <br /><br />
-  Currently supporting <strong>JavaScript</strong>, <strong>TypeScript</strong>, <strong>Ruby</strong>, and <strong>Java</strong> stacks.<br />
-  🚧 <strong>PHP</strong> Beta support is <a href="https://github.com/Bearer/bearer/issues/1242">coming next</a> 🚧 
+  Currently supporting: <strong>JavaScript/TypeScript</strong> (GA), <strong>Ruby</strong> (GA), <strong>Java</strong> (Beta), <strong>PHP</strong> (Beta), <strong>Go</strong> (Alpha), <strong>Python</strong> (Alpha) - <a href="https://docs.bearer.com/reference/supported-languages/">Learn more</a>
+
   <br /><br />
 
   [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
@@ -255,19 +255,39 @@ Finally, Bearer CLI also lets you detect components storing and processing sensi
 
 ### Supported Language
 
-Bearer CLI currently supports JavaScript, TypeScript, Ruby, Java and their associated most used frameworks and libraries. More languages will follow.
+Bearer CLI currently supports:
+<table>
+  <tr>
+    <td>GA</td>
+    <td>JavaScript/TypeScript, Ruby</td> 
+  </tr>
+  <tr>
+    <td>Beta</td>
+    <td>Java, PHP</td> 
+  </tr>
+  <tr>
+    <td>Alpha</td>
+    <td>Go, Python</td> 
+  </tr>
+</table> 
+
+[Learn more](https://docs.bearer.com/reference/supported-languages/) about language support.
 
 ### How long does it take to scan my code? Is it fast?
 
-It depends on the size of your applications. It can take as little as 20 seconds, up to a few minutes for an extremely large code base. We’ve added an internal caching layer that only looks at delta changes to allow quick, subsequent scans.
+It depends on the size of your applications. It can take as little as 20 seconds, up to a few minutes for an extremely large code base.
 
-Running Bearer CLI should not take more time than running your test suite.
+As a rule of thumb, Bearer CLI should never take more time than running your test suite.
+
+In the case of CI integration, we provide a diff scan solution to make it even faster, [learn more](https://docs.bearer.com/guides/configure-scan/#only-report-new-findings-on-a-branch).
 
 ### What about false positives?
 
 If you’re familiar with SAST tools, false positives are always a possibility.
 
-By using the most modern static code analysis techniques and providing a native filtering and prioritizing solution on the most important issues, we believe this problem won’t be a concern when using Bearer CLI.
+By using the most modern static code analysis techniques and providing a native filtering and prioritizing solution on the most important issues, we believe we have dramatically improved the overall SAST experience.
+
+We strive to provide the best possible experience for our users. [Learn more](https://docs.bearer.com/reference/supported-languages/#how-do-we-evaluate-language-support%3F) about how we achieve this.
 
 ### When and where to use Bearer CLI?
 
@@ -276,6 +296,8 @@ We recommend running Bearer CLI in your CI to check new PRs automatically for se
 You can also integrate Bearer CLI in your CD, though we recommend setting it to only fail on high criticality issues, as the impact for your organization might be important.
 
 In addition, running Bearer CLI as a scheduled job is a great way to keep track of your security posture and make sure new security issues are found even in projects with low activity.
+
+Make sure to read our [integration strategy guide](https://docs.bearer.com/guides/integration-strategy/) for more information.
 
 ## :raised_hand: Get in touch
 

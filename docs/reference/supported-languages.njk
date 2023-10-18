@@ -4,10 +4,6 @@ layout: layouts/doc.njk
 supportChart:
   ruby:
     name: Ruby
-    support:
-      - Security
-      - Privacy
-      - Data Flow
     frameworks:
       - Ruby on Rails
     rules: true
@@ -16,10 +12,6 @@ supportChart:
     status: GA
   javascript:
     name: JavaScript / TypeScript
-    support:
-      - Security
-      - Privacy
-      - Data Flow
     frameworks:
       - Express
       - React
@@ -29,10 +21,6 @@ supportChart:
     status: GA
   java:
     name: Java
-    support:
-      - Security
-      - Privacy
-      - Data Flow
     frameworks:
       - Spring
     rules: true
@@ -41,23 +29,14 @@ supportChart:
     status: Beta
   php:
     name: PHP
-    support:
-      - Security
-      - Privacy
-      - Data Flow
     frameworks:
       - Symfony
     rules: false
     searchName: lang-php
     searchTerm: php_
-    status: Alpha
-    comment: Beta coming soon
-    comment_link: https://github.com/Bearer/bearer/issues/1242
+    status: Beta
   go:
     name: Go
-    support:
-      - Privacy
-      - Data Flow
     frameworks: []
     rules: false
     searchName: lang-go
@@ -67,9 +46,6 @@ supportChart:
     comment_link: https://github.com/Bearer/bearer/issues/1302
   python:
     name: Python
-    support:
-        - Privacy
-        - Data Flow
     frameworks: []
     rules: false
     searchName: lang-python
@@ -77,16 +53,6 @@ supportChart:
     status: Alpha
     comment: Beta coming soon
     comment_link: https://github.com/Bearer/bearer/issues/1303
-  csharp:
-    name: C#
-    support:
-      - Privacy
-      - Data Flow
-    frameworks: []
-    rules: false
-    searchName: lang-csharp
-    searchTerm: csharp_
-    status: Alpha
 
 ---
 {% renderTemplate "liquid,md" %}
@@ -102,7 +68,6 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
     <tr>
       <th>Languages</th>
       <th>Frameworks</th>
-      <th>Report Types</th>
       <th># rules</th>
       <th>Status</th>
     </tr>
@@ -119,9 +84,6 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
           {% else %}
             -
           {% endif %}
-        </td>
-        <td>
-          {{ supportChart[language].support | join(", ")}}
         </td>
         <td>
           {% if data.rules %}
@@ -159,10 +121,9 @@ Bearer CLI supports the majority of frameworks, requiring only core language sup
 
 ### Support status definition
 
-- **General Availability (GA)**: A language at the GA stage encompasses Bearer's complete feature set, having been rigorously tested to ensure maximum accuracy.
-- **Beta**: A language in the Beta stage is equipped with the full range of Bearer's features, offering a high degree of precision. However, it may not include all the [security rules](/explanations/reports/#security-report).
-- **Alpha**: A language at the Alpha stage does not yet include the entire Bearer feature set, particularly regarding the [security report](/explanations/reports/#security-report).
-
+- **General Availability (GA)**: A language at the GA stage provides a comprehensive set of rules for a wide range of security risks and vulnerabilities. It has undergone rigorous testing to ensure maximum accuracy.
+- **Beta**: A language at the Beta stage offers good coverage of top security risks and vulnerabilities, providing a good level of protection.
+- **Alpha**: A language at the Alpha stage does not have a strong set of pre-built rules yet and is primarily intended for users interested in creating their own custom rules.
 
 ## How do we evaluate language support?
 
