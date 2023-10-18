@@ -72,6 +72,13 @@ func getObjectName(objectNode *tree.Node) string {
 		return objectNode.Content()
 	}
 
+	// $user->foo->name
+	// $user->foo()->name
+	switch objectNode.Type() {
+	case "member_access_expression", "member_call_expression":
+		return objectNode.ChildByFieldName("name").Content()
+	}
+
 	return ""
 }
 

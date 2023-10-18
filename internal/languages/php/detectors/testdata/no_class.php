@@ -1,3 +1,5 @@
 <?php
-$user.name();
+$user->name();
+$this->user->name();
+$this->user()->name;
 ?>
