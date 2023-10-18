@@ -16,8 +16,8 @@ var (
 	patternQueryVariableRegex      = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
 	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
-	unanchoredPatternNodeTypes     = []string{}
-	patternMatchNodeContainerTypes = []string{"formal_parameters", "simple_parameter", "argument"}
+	unanchoredPatternNodeTypes     = []string{"catch_clause"}
+	patternMatchNodeContainerTypes = []string{"formal_parameters", "simple_parameter", "argument", "type_list"}
 
 	allowedPatternQueryTypes = []string{"_"}
 
@@ -203,13 +203,15 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 
 	// Class body declaration_list
 	// function/block compound_statement
+	// Type1 | Type2
 	unAnchored := []string{
 		"declaration_list",
 		"compound_statement",
+		"type_list",
 	}
 
-	isUnanchored := !slices.Contains(unAnchored, parent.Type())
-	return isUnanchored, isUnanchored
+	isAnchored := !slices.Contains(unAnchored, parent.Type())
+	return isAnchored, isAnchored
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
