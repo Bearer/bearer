@@ -5,75 +5,7 @@ high:
         title: ""
         description: ""
         documentation_url: ""
-      line_number: 20
-      full_filename: different-line.go
-      filename: different-line.go
-      data_type:
-        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
-        name: Fullname
-      category_groups:
-        - PII
-        - Personal Data
-      source:
-        location:
-            start: 20
-            end: 20
-            column:
-                start: 3
-                end: 7
-      sink:
-        location:
-            start: 31
-            end: 31
-            column:
-                start: 2
-                end: 23
-        content: log.Error().Msg(user)
-      parent_line_number: 31
-      snippet: log.Error().Msg(user)
-      fingerprint: f8cb961f0fc2f87d026bf9f5db408736_0
-      old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_0
-    - rule:
-        cwe_ids: []
-        id: rule_logger_test
-        title: ""
-        description: ""
-        documentation_url: ""
-      line_number: 21
-      full_filename: different-line.go
-      filename: different-line.go
-      data_type:
-        category_uuid: 94007e1e-57d8-43e8-90f2-246236dc5dde
-        name: Gender
-      category_groups:
-        - PII
-        - Personal Data
-      source:
-        location:
-            start: 21
-            end: 21
-            column:
-                start: 3
-                end: 9
-      sink:
-        location:
-            start: 31
-            end: 31
-            column:
-                start: 2
-                end: 23
-        content: log.Error().Msg(user)
-      parent_line_number: 31
-      snippet: log.Error().Msg(user)
-      fingerprint: f8cb961f0fc2f87d026bf9f5db408736_1
-      old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_1
-    - rule:
-        cwe_ids: []
-        id: rule_logger_test
-        title: ""
-        description: ""
-        documentation_url: ""
-      line_number: 24
+      line_number: 29
       full_filename: different-line.go
       filename: different-line.go
       data_type:
@@ -99,15 +31,15 @@ high:
         content: log.Error().Msg(name)
       parent_line_number: 29
       snippet: log.Error().Msg(name)
-      fingerprint: f8cb961f0fc2f87d026bf9f5db408736_2
-      old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_2
+      fingerprint: f8cb961f0fc2f87d026bf9f5db408736_0
+      old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_0
     - rule:
         cwe_ids: []
         id: rule_logger_test
         title: ""
         description: ""
         documentation_url: ""
-      line_number: 26
+      line_number: 30
       full_filename: different-line.go
       filename: different-line.go
       data_type:
@@ -133,6 +65,40 @@ high:
         content: log.Error().Msg(other)
       parent_line_number: 30
       snippet: log.Error().Msg(other)
-      fingerprint: f8cb961f0fc2f87d026bf9f5db408736_3
-      old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_3
+      fingerprint: f8cb961f0fc2f87d026bf9f5db408736_1
+      old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_1
+    - rule:
+        cwe_ids: []
+        id: rule_logger_test
+        title: ""
+        description: ""
+        documentation_url: ""
+      line_number: 31
+      full_filename: different-line.go
+      filename: different-line.go
+      data_type:
+        category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+        name: Fullname
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 20
+            end: 20
+            column:
+                start: 3
+                end: 7
+      sink:
+        location:
+            start: 31
+            end: 31
+            column:
+                start: 2
+                end: 23
+        content: log.Error().Msg(user)
+      parent_line_number: 31
+      snippet: log.Error().Msg(user)
+      fingerprint: f8cb961f0fc2f87d026bf9f5db408736_2
+      old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_2
 

@@ -5,7 +5,7 @@ high:
         title: ""
         description: ""
         documentation_url: ""
-      line_number: 2
+      line_number: 3
       full_filename: different-line.py
       filename: different-line.py
       data_type:
