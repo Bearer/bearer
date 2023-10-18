@@ -16,7 +16,7 @@ high:
             - [Datadog docs](https://docs.datadoghq.com)
             - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
         documentation_url: ""
-      line_number: 3
+      line_number: 11
       full_filename: e2e/rules/testdata/data/auxilary/unsecure.js
       filename: unsecure.js
       data_type:

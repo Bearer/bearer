@@ -63,7 +63,7 @@ build_local_item(location, data_type) := {
 			"end": location.end_column_number,
 		},
 	},
-	"line_number": location.start_line_number,
+	"line_number": location.source.start_line_number,
 } if {
 	not input.rule.has_detailed_context == true
 }
