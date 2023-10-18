@@ -5,11 +5,10 @@ import (
 	"github.com/bearer/bearer/internal/util/stringutil"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
-	detectorscommon "github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
 )
 
-func (detector *objectDetector) getProjections( // Deal with subscriptExpressionQuery here / Check Ruby
+func (detector *objectDetector) getProjections(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
@@ -47,7 +46,7 @@ func (detector *objectDetector) getProjections( // Deal with subscriptExpression
 			return nil, nil
 		}
 
-		objects, err := detectorscommon.ProjectObject(
+		objects, err := common.ProjectObject(
 			node,
 			detectorContext,
 			objectNode,
@@ -66,10 +65,16 @@ func (detector *objectDetector) getProjections( // Deal with subscriptExpression
 }
 
 func getObjectName(objectNode *tree.Node) string {
+	switch objectNode.Type() {
 	// $user->name()
 	// $user->name
-	if objectNode.Type() == "variable_name" {
+	// user->name
+	case "variable_name", "name":
 		return objectNode.Content()
+	// $user->foo->name
+	// $user->foo()->name
+	case "member_access_expression", "member_call_expression":
+		return objectNode.ChildByFieldName("name").Content()
 	}
 
 	return ""

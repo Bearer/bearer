@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=36) {
+([]testhelper.ClassificationResult) (len=38) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=25) "RepositorySystemHookEvent",
     Decision: (classify.ClassificationDecision) {
@@ -104,6 +104,23 @@
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
           Reason: (string) (len=21) "valid_unknown_pattern"
+        },
+        Properties: (map[string]testhelper.ClassificationResult) <nil>
+      }
+    }
+  },
+  (testhelper.ClassificationResult) {
+    Name: (string) (len=29) "QueryRobotDialogDetailRequest",
+    Decision: (classify.ClassificationDecision) {
+      State: (classify.ValidationState) (len=7) "invalid",
+      Reason: (string) (len=19) "only_db_identifiers"
+    },
+    Properties: (map[string]testhelper.ClassificationResult) (len=1) {
+      (string) (len=10) "setOwnerId": (testhelper.ClassificationResult) {
+        Name: (string) (len=10) "setOwnerId",
+        Decision: (classify.ClassificationDecision) {
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=25) "known_database_identifier"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       }
@@ -287,6 +304,23 @@
     }
   },
   (testhelper.ClassificationResult) {
+    Name: (string) (len=20) "UserOAuthAccessToken",
+    Decision: (classify.ClassificationDecision) {
+      State: (classify.ValidationState) (len=5) "valid",
+      Reason: (string) (len=34) "valid_object_with_valid_properties"
+    },
+    Properties: (map[string]testhelper.ClassificationResult) (len=1) {
+      (string) (len=13) "getClientName": (testhelper.ClassificationResult) {
+        Name: (string) (len=13) "getClientName",
+        Decision: (classify.ClassificationDecision) {
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=13) "known_pattern"
+        },
+        Properties: (map[string]testhelper.ClassificationResult) <nil>
+      }
+    }
+  },
+  (testhelper.ClassificationResult) {
     Name: (string) (len=13) "UserQueryImpl",
     Decision: (classify.ClassificationDecision) {
       State: (classify.ValidationState) (len=5) "valid",
@@ -443,8 +477,8 @@
       (string) (len=9) "getUserId": (testhelper.ClassificationResult) {
         Name: (string) (len=9) "getUserId",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=25) "known_database_identifier"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -547,8 +581,8 @@
       (string) (len=9) "setUserId": (testhelper.ClassificationResult) {
         Name: (string) (len=9) "setUserId",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=25) "known_database_identifier"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },

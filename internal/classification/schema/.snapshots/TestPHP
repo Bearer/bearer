@@ -411,8 +411,8 @@
       (string) (len=7) "getName": (testhelper.ClassificationResult) {
         Name: (string) (len=7) "getName",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=22) "valid_extended_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
