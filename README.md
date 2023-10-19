@@ -279,7 +279,7 @@ It depends on the size of your applications. It can take as little as 20 seconds
 
 As a rule of thumb, Bearer CLI should never take more time than running your test suite.
 
-In the case of CI integration, we provide a diff scan solution to make it even faster, [learn more](https://docs.bearer.com/guides/configure-scan/#only-report-new-findings-on-a-branch).
+In the case of CI integration, we provide a diff scan solution to make it even faster. [Learn more](https://docs.bearer.com/guides/configure-scan/#only-report-new-findings-on-a-branch).
 
 ### What about false positives?
 
