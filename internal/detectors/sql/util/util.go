@@ -18,7 +18,7 @@ func ConvertToSimpleType(value string) string {
 	numberMap := []string{"bit", `tinyint(\(\d?\))?`, "smallint", "mediumint", "int", "integer", "bigint", `float(\(\d?,\d?\))`, `double(\(\d?,\d?\))?`, `decimal(\(\d?,\d?\))`, `dec`}
 	for _, typeValue := range numberMap {
 		reg := regexp.MustCompile(typeValue)
-		if reg.Match([]byte(simplified)) {
+		if reg.MatchString(simplified) {
 			return schema.SimpleTypeNumber
 		}
 	}
@@ -33,7 +33,7 @@ func ConvertToSimpleType(value string) string {
 	stringMap := []string{`char(\(\d?\))?`, `varchar(\(\d?\))?`, `character(\(\d?\))?`, "tinytext", "mediumtext", "longtext"}
 	for _, typeValue := range stringMap {
 		reg := regexp.MustCompile(typeValue)
-		if reg.Match([]byte(simplified)) {
+		if reg.MatchString(simplified) {
 			return schema.SimpleTypeString
 		}
 	}
