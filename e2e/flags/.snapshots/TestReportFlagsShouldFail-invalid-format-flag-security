@@ -2,7 +2,7 @@
 --
 Error: flag error: report flags error: invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html
 Usage:
-   scan [flags] <path>
+  bearer scan [flags] <path>
 Aliases:
   scan, s
 Examples:

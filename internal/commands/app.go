@@ -17,6 +17,7 @@ type VersionInfo struct {
 func NewApp(version string, commitSHA string) *cobra.Command {
 	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
+		NewCompletionCommand(),
 		NewProcessingWorkerCommand(),
 		NewInitCommand(),
 		NewScanCommand(),
@@ -40,6 +41,7 @@ Scan your source code to discover, filter and prioritize security and privacy ri
 Usage: bearer <command> [flags]
 
 Available Commands:
+	completion        Generate the autocompletion script for your shell
 	scan              Scan a directory or file
 	init              Write the default config to bearer.yml
 	ignore            Manage ignored fingerprints
@@ -65,6 +67,7 @@ Learn More:
 `
 
 	cmd := &cobra.Command{
+		Use:  "bearer",
 		Args: cobra.NoArgs,
 	}
 	cmd.SetUsageTemplate(usageTemplate)

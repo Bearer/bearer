@@ -51,6 +51,7 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 - [Run a privacy report](/guides/privacy/)
 - [Run a data flow report](/guides/dataflow/)
 - [Using Bearer Cloud](/guides/bearer-cloud/)
+- [Enable Completion Script](/guides/shell-completion)
 
 ## Explanations
 
