@@ -1,0 +1,261 @@
+type: program
+id: 0
+range: 1:1 - 12:3
+dataflow_sources:
+    - 1
+    - 2
+    - 12
+    - 32
+children:
+    - type: php_tag
+      id: 1
+      range: 1:1 - 1:6
+      content: <?php
+    - type: expression_statement
+      id: 2
+      range: 2:7 - 2:19
+      children:
+        - type: assignment_expression
+          id: 3
+          range: 2:7 - 2:18
+          alias_of:
+            - 8
+          children:
+            - type: variable_name
+              id: 4
+              range: 2:7 - 2:13
+              children:
+                - type: '"$"'
+                  id: 5
+                  range: 2:7 - 2:8
+                - type: name
+                  id: 6
+                  range: 2:8 - 2:13
+                  content: array
+            - type: '"="'
+              id: 7
+              range: 2:14 - 2:15
+            - type: array_creation_expression
+              id: 8
+              range: 2:16 - 2:18
+              dataflow_sources:
+                - 9
+                - 10
+              children:
+                - type: '"["'
+                  id: 9
+                  range: 2:16 - 2:17
+                - type: '"]"'
+                  id: 10
+                  range: 2:17 - 2:18
+        - type: '";"'
+          id: 11
+          range: 2:18 - 2:19
+    - type: foreach_statement
+      id: 12
+      range: 4:5 - 6:6
+      children:
+        - type: '"foreach"'
+          id: 13
+          range: 4:5 - 4:12
+        - type: '"("'
+          id: 14
+          range: 4:13 - 4:14
+        - type: variable_name
+          id: 15
+          range: 4:14 - 4:20
+          alias_of:
+            - 3
+          children:
+            - type: '"$"'
+              id: 16
+              range: 4:14 - 4:15
+            - type: name
+              id: 17
+              range: 4:15 - 4:20
+              content: array
+        - type: '"as"'
+          id: 18
+          range: 4:21 - 4:23
+        - type: variable_name
+          id: 19
+          range: 4:24 - 4:30
+          dataflow_sources:
+            - 15
+          children:
+            - type: '"$"'
+              id: 20
+              range: 4:24 - 4:25
+            - type: name
+              id: 21
+              range: 4:25 - 4:30
+              content: value
+        - type: '")"'
+          id: 22
+          range: 4:30 - 4:31
+        - type: compound_statement
+          id: 23
+          range: 4:32 - 6:6
+          children:
+            - type: '"{"'
+              id: 24
+              range: 4:32 - 4:33
+            - type: echo_statement
+              id: 25
+              range: 5:6 - 5:18
+              dataflow_sources:
+                - 26
+                - 27
+                - 30
+              children:
+                - type: '"echo"'
+                  id: 26
+                  range: 5:6 - 5:10
+                - type: variable_name
+                  id: 27
+                  range: 5:11 - 5:17
+                  alias_of:
+                    - 19
+                  children:
+                    - type: '"$"'
+                      id: 28
+                      range: 5:11 - 5:12
+                    - type: name
+                      id: 29
+                      range: 5:12 - 5:17
+                      content: value
+                - type: '";"'
+                  id: 30
+                  range: 5:17 - 5:18
+            - type: '"}"'
+              id: 31
+              range: 6:5 - 6:6
+    - type: foreach_statement
+      id: 32
+      range: 8:5 - 11:6
+      children:
+        - type: '"foreach"'
+          id: 33
+          range: 8:5 - 8:12
+        - type: '"("'
+          id: 34
+          range: 8:13 - 8:14
+        - type: variable_name
+          id: 35
+          range: 8:14 - 8:20
+          alias_of:
+            - 3
+          children:
+            - type: '"$"'
+              id: 36
+              range: 8:14 - 8:15
+            - type: name
+              id: 37
+              range: 8:15 - 8:20
+              content: array
+        - type: '"as"'
+          id: 38
+          range: 8:21 - 8:23
+        - type: pair
+          id: 39
+          range: 8:24 - 8:38
+          dataflow_sources:
+            - 40
+            - 43
+            - 44
+          children:
+            - type: variable_name
+              id: 40
+              range: 8:24 - 8:28
+              children:
+                - type: '"$"'
+                  id: 41
+                  range: 8:24 - 8:25
+                - type: name
+                  id: 42
+                  range: 8:25 - 8:28
+                  content: key
+            - type: '"=>"'
+              id: 43
+              range: 8:29 - 8:31
+            - type: variable_name
+              id: 44
+              range: 8:32 - 8:38
+              dataflow_sources:
+                - 35
+              children:
+                - type: '"$"'
+                  id: 45
+                  range: 8:32 - 8:33
+                - type: name
+                  id: 46
+                  range: 8:33 - 8:38
+                  content: value
+        - type: '")"'
+          id: 47
+          range: 8:38 - 8:39
+        - type: compound_statement
+          id: 48
+          range: 8:40 - 11:6
+          children:
+            - type: '"{"'
+              id: 49
+              range: 8:40 - 8:41
+            - type: echo_statement
+              id: 50
+              range: 9:6 - 9:16
+              dataflow_sources:
+                - 51
+                - 52
+                - 55
+              children:
+                - type: '"echo"'
+                  id: 51
+                  range: 9:6 - 9:10
+                - type: variable_name
+                  id: 52
+                  range: 9:11 - 9:15
+                  alias_of:
+                    - 40
+                  children:
+                    - type: '"$"'
+                      id: 53
+                      range: 9:11 - 9:12
+                    - type: name
+                      id: 54
+                      range: 9:12 - 9:15
+                      content: key
+                - type: '";"'
+                  id: 55
+                  range: 9:15 - 9:16
+            - type: echo_statement
+              id: 56
+              range: 10:6 - 10:18
+              dataflow_sources:
+                - 57
+                - 58
+                - 61
+              children:
+                - type: '"echo"'
+                  id: 57
+                  range: 10:6 - 10:10
+                - type: variable_name
+                  id: 58
+                  range: 10:11 - 10:17
+                  alias_of:
+                    - 44
+                  children:
+                    - type: '"$"'
+                      id: 59
+                      range: 10:11 - 10:12
+                    - type: name
+                      id: 60
+                      range: 10:12 - 10:17
+                      content: value
+                - type: '";"'
+                  id: 61
+                  range: 10:17 - 10:18
+            - type: '"}"'
+              id: 62
+              range: 11:5 - 11:6
+

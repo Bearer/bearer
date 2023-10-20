@@ -1,14 +1,19 @@
 package php_test
 
 import (
+	"context"
 	_ "embed"
 	"testing"
 
 	"github.com/bradleyjkemp/cupaloy"
 
+	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/languages/php"
 	"github.com/bearer/bearer/internal/languages/testhelper"
+	"github.com/bearer/bearer/internal/scanner/ast"
+	"github.com/bearer/bearer/internal/scanner/ast/query"
 	patternquerybuilder "github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery/builder"
+	"github.com/bearer/bearer/internal/scanner/ruleset"
 )
 
 //go:embed testdata/logger.yml
@@ -23,6 +28,44 @@ func TestFlow(t *testing.T) {
 
 func TestScope(t *testing.T) {
 	testhelper.GetRunner(t, scopeRule, "PHP").RunTest(t, "./testdata/scope", ".snapshots/")
+}
+
+func TestAnalyzer(t *testing.T) {
+	for _, test := range []struct{ name, code string }{
+		{"foreach", `<?php
+		    $array = [];
+
+				foreach ($array as $value) {
+					echo $value;
+				}
+
+				foreach ($array as $key => $value) {
+					echo $key;
+					echo $value;
+				}
+		`},
+	} {
+		t.Run(test.name, func(tt *testing.T) {
+			language := php.Get()
+
+			ruleSet, err := ruleset.New(language.ID(), make(map[string]*settings.Rule))
+			if err != nil {
+				tt.Fatalf("failed to create rule set: %s", err)
+			}
+
+			querySet := query.NewSet(language.ID(), language.SitterLanguage())
+			if err := querySet.Compile(); err != nil {
+				tt.Fatalf("failed to compile query set: %s", err)
+			}
+
+			result, err := ast.ParseAndAnalyze(context.Background(), language, ruleSet, querySet, []byte(test.code))
+			if err != nil {
+				tt.Fatalf("failed to parse example: %s", err)
+			}
+
+			cupaloy.SnapshotT(tt, result.RootNode().Dump())
+		})
+	}
 }
 
 func TestPattern(t *testing.T) {
