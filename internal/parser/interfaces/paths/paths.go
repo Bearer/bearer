@@ -41,11 +41,11 @@ func ValueIsRelevant(value *values.Value) bool {
 		return false
 	}
 
-	if looksLikeUrl.Match([]byte(text)) {
+	if looksLikeUrl.MatchString(text) {
 		return false
 	}
 
-	if !hasNormalChars.Match([]byte(text)) {
+	if !hasNormalChars.MatchString(text) {
 		return false
 	}
 

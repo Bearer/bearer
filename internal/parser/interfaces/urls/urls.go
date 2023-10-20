@@ -60,7 +60,7 @@ func textIsRelevant(value *values.Value) bool {
 		return false
 	}
 
-	if !hasUsefulInformation.Match([]byte(text)) {
+	if !hasUsefulInformation.MatchString(text) {
 		return false
 	}
 

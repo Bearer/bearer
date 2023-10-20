@@ -36,7 +36,7 @@ func cleanupDefunct() {
 	lines := strings.Split(string(stdout), "\n")
 
 	for _, line := range lines {
-		if !regexpDefunctProcess.Match([]byte(line)) {
+		if !regexpDefunctProcess.MatchString(line) {
 			continue
 		}
 

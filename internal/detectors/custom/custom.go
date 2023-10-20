@@ -387,7 +387,7 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 
 				paramContent := capture[param.BuildFullName()].Content()
 
-				if !regex.Match([]byte(paramContent)) {
+				if !regex.MatchString(paramContent) {
 					shouldIgnore = true
 					break
 				}
