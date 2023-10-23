@@ -137,8 +137,7 @@ func (*Pattern) AnonymousParentTypes() []string {
 
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
-		"encapsed_string",
-		"string",
+		"string_value",
 		"name",
 		"integer",
 		"float",
