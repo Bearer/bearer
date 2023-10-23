@@ -1,6 +1,6 @@
-name: ' ignore migrate'
+name: bearer ignore migrate
 synopsis: Migrate ignored fingerprints from bearer.yml to ignore file
-usage: ' ignore migrate [flags]'
+usage: bearer ignore migrate [flags]
 options:
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.
@@ -42,5 +42,5 @@ example: |-
     # Migrate existing ignored (excluded) fingerprints from bearer.yml file to ignore file
     $ bearer ignore migrate
 see_also:
-    - ' ignore - Manage ignored fingerprints'
+    - bearer ignore - Manage ignored fingerprints
 aliases: 

@@ -1,6 +1,6 @@
-name: ' ignore add'
+name: bearer ignore add
 synopsis: Add an ignored fingerprint
-usage: ' ignore add <fingerprint> [flags]'
+usage: bearer ignore add <fingerprint> [flags]
 options:
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.
@@ -51,5 +51,5 @@ example: |-
     # Add an ignored fingerprint to your ignore file
     $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"
 see_also:
-    - ' ignore - Manage ignored fingerprints'
+    - bearer ignore - Manage ignored fingerprints
 aliases: 

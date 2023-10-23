@@ -1,0 +1,11 @@
+name: bearer completion
+synopsis: Generate the autocompletion script for the your shell.
+usage: bearer completion [command]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for completion
+see_also:
+    - 'bearer - '
+aliases: 

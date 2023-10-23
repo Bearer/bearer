@@ -1,11 +1,11 @@
-name: ' init'
+name: bearer init
 synopsis: Generates a default config to `bearer.yml`
-usage: ' init [flags]'
+usage: bearer init [flags]
 options:
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for init
 see_also:
-    - ' - '
+    - 'bearer - '
 aliases: 
