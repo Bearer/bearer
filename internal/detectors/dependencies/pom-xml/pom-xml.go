@@ -1,12 +1,13 @@
 package pomxml
 
 import (
+	"github.com/rs/zerolog/log"
+
 	"github.com/bearer/bearer/internal/detectors/dependencies/depsbase"
 	"github.com/bearer/bearer/internal/parser"
-	xml "github.com/bearer/bearer/internal/parser/sitter/xml2"
+	"github.com/bearer/bearer/internal/parser/sitter/xml"
 	"github.com/bearer/bearer/internal/util/file"
 	"github.com/bearer/bearer/internal/util/stringutil"
-	"github.com/rs/zerolog/log"
 )
 
 var language = xml.GetLanguage()

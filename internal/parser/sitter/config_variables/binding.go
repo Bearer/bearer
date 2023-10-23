@@ -1,7 +1,7 @@
 package config_variables
 
 //#cgo CXXFLAGS: -std=gnu++11
-//#include "parser.h"
+//#include <tree_sitter/parser.h>
 //TSLanguage *tree_sitter_config_variables();
 import "C"
 import (

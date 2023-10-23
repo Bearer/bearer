@@ -1,5 +1,5 @@
 (*builder.Result)({
-  Query: (string) (len=328) "([(class_declaration  . (_) . [(class_body  [(method_declaration . [ (void_type )] @param1 . [ (identifier )] @param2 . [ (formal_parameters )] . [(block  [(try_statement  [ (block )] [(catch_clause   . [(catch_formal_parameter . [(catch_type (_) @match)] . [ (identifier )] @param3 .)]  . [ (block )] .)])] )] .)] )] .)] @root)",
+  Query: (string) (len=334) "([(class_declaration  . name: (_) . [(class_body  [(method_declaration . [ (void_type )] @param1 . [ (identifier )] @param2 . [ (formal_parameters )] . [(block  [(try_statement  [ (block )] [(catch_clause   . [(catch_formal_parameter . [(catch_type (_) @match)] . [ (identifier )] @param3 .)]  . [ (block )] .)])] )] .)] )] .)] @root)",
   VariableNames: ([]string) (len=1) {
     (string) (len=1) "_"
   },

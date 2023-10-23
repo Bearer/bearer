@@ -128,26 +128,27 @@ func annotate(tree *parser.Tree) error {
 			}
 
 		case "encapsed_string":
-			node.EachPart( //nolint:all,errcheck
-				func(text string) error {
-					value.AppendString(stringutil.StripQuotes(text))
+			for i := 0; i < node.ChildCount(); i++ {
+				child := node.Child(i)
+				if !child.IsNamed() {
+					continue
+				}
 
-					return nil
-				},
-				func(child *parser.Node) error {
-					value.Append(child.Value())
-
-					return nil
-				})
+				value.Append(child.Value())
+			}
 
 			return
 
 		case "string":
-			nodeContent := stringutil.StripQuotes(node.Content())
-			value.AppendString(nodeContent)
+			if child := node.FirstChild(); child != nil {
+				value.Append(child.Value())
+			}
 
 			return
+		case "string_value":
+			value.AppendString(node.Content())
 
+			return
 		case "variable_name":
 			value.AppendVariableReference(variables.VariableName, node.FirstChild().Content())
 

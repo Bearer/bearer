@@ -97,8 +97,21 @@ func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 	}
 
 	cmd.Dir = GetCWD()
+	cmd.Env = getEnvironment()
 
 	return cmd, cancel
+}
+
+func getEnvironment() []string {
+	var result []string
+
+	for _, variable := range os.Environ() {
+		if !strings.HasPrefix(variable, "BEARER_") {
+			result = append(result, variable)
+		}
+	}
+
+	return result
 }
 
 func executablePath() string {

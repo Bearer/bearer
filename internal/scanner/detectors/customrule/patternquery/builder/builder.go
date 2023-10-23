@@ -8,9 +8,11 @@ import (
 	"strings"
 
 	"github.com/rs/zerolog/log"
+	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/parser/nodeid"
 	"github.com/bearer/bearer/internal/scanner/ast"
+	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	asttree "github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/detectors/customrule/patternquery/builder/bytereplacer"
 	"github.com/bearer/bearer/internal/scanner/language"
@@ -33,6 +35,7 @@ type Result struct {
 }
 
 type builder struct {
+	sitterLanguage   *sitter.Language
 	patternLanguage  language.Pattern
 	stringBuilder    strings.Builder
 	idGenerator      nodeid.Generator
@@ -102,6 +105,7 @@ func Build(
 	})
 
 	builder := builder{
+		sitterLanguage:   language.SitterLanguage(),
 		patternLanguage:  patternLanguage,
 		stringBuilder:    strings.Builder{},
 		idGenerator:      &nodeid.IntGenerator{},
@@ -231,7 +235,7 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 	}
 
 	if variable := builder.getVariableFor(node); variable != nil {
-		builder.compileVariableNode(variable)
+		builder.compileVariableNode(node, variable)
 	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
 	} else if len(node.NamedChildren()) == 0 || builder.patternLanguage.IsLeaf(node) {
@@ -252,7 +256,12 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 }
 
 // variable nodes match their type and capture their content
-func (builder *builder) compileVariableNode(variable *language.PatternVariable) {
+func (builder *builder) compileVariableNode(node *tree.Node, variable *language.PatternVariable) {
+	if fieldName := fieldNameFor(builder.sitterLanguage, node); fieldName != "" {
+		builder.write(fieldName)
+		builder.write(": ")
+	}
+
 	if variable.Name == "_" {
 		builder.write("(_)")
 		return
@@ -423,5 +432,25 @@ func (builder *builder) setMatchNode(
 	// walk itself shouldn't trigger an error, and we aren't creating any
 	if err != nil {
 		panic(err)
+	}
+}
+
+func fieldNameFor(sitterLanguage *sitter.Language, node *tree.Node) string {
+	parent := node.Parent()
+	if parent == nil {
+		return ""
+	}
+
+	// the following is a workaround until
+	// https://github.com/tree-sitter/tree-sitter/pull/2104 is released
+	for i := 1; ; i++ {
+		name := sitterLanguage.FieldName(i)
+		if name == "" {
+			return ""
+		}
+
+		if parent.ChildByFieldName(name) == node {
+			return name
+		}
 	}
 }

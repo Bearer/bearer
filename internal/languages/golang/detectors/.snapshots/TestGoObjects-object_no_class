@@ -7,7 +7,7 @@ dataflow_sources:
     - 5
     - 11
     - 12
-    - 52
+    - 54
 children:
     - type: package_clause
       id: 1
@@ -139,8 +139,8 @@ children:
                           dataflow_sources:
                             - 28
                             - 29
-                            - 35
-                            - 36
+                            - 37
+                            - 38
                           children:
                             - type: '"{"'
                               id: 28
@@ -150,111 +150,123 @@ children:
                               range: 7:3 - 7:23
                               dataflow_sources:
                                 - 30
-                                - 31
                                 - 32
+                                - 33
                               children:
-                                - type: field_identifier
+                                - type: literal_element
                                   id: 30
                                   range: 7:3 - 7:8
-                                  content: email
+                                  dataflow_sources:
+                                    - 31
+                                  children:
+                                    - type: identifier
+                                      id: 31
+                                      range: 7:3 - 7:8
+                                      content: email
                                 - type: '":"'
-                                  id: 31
-                                  range: 7:8 - 7:9
-                                - type: interpreted_string_literal
                                   id: 32
+                                  range: 7:8 - 7:9
+                                - type: literal_element
+                                  id: 33
                                   range: 7:10 - 7:23
                                   dataflow_sources:
-                                    - 33
                                     - 34
                                   children:
-                                    - type: '"""'
-                                      id: 33
-                                      range: 7:10 - 7:11
-                                    - type: '"""'
+                                    - type: interpreted_string_literal
                                       id: 34
-                                      range: 7:22 - 7:23
+                                      range: 7:10 - 7:23
+                                      dataflow_sources:
+                                        - 35
+                                        - 36
+                                      children:
+                                        - type: '"""'
+                                          id: 35
+                                          range: 7:10 - 7:11
+                                        - type: '"""'
+                                          id: 36
+                                          range: 7:22 - 7:23
                             - type: '","'
-                              id: 35
+                              id: 37
                               range: 7:23 - 7:24
                             - type: '"}"'
-                              id: 36
+                              id: 38
                               range: 8:2 - 8:3
             - type: |-
                 "
                 "
-              id: 37
+              id: 39
               range: 8:3 - 10:1
             - type: call_expression
-              id: 38
+              id: 40
               range: 10:2 - 10:25
               dataflow_sources:
-                - 43
+                - 45
               children:
                 - type: selector_expression
-                  id: 39
+                  id: 41
                   range: 10:2 - 10:13
                   queries:
                     - 1
                   children:
                     - type: identifier
-                      id: 40
+                      id: 42
                       range: 10:2 - 10:5
                       content: fmt
                     - type: '"."'
-                      id: 41
+                      id: 43
                       range: 10:5 - 10:6
                     - type: field_identifier
-                      id: 42
+                      id: 44
                       range: 10:6 - 10:13
                       content: Println
                 - type: argument_list
-                  id: 43
+                  id: 45
                   range: 10:13 - 10:25
                   dataflow_sources:
-                    - 44
-                    - 45
-                    - 49
+                    - 46
+                    - 47
+                    - 51
                   children:
                     - type: '"("'
-                      id: 44
+                      id: 46
                       range: 10:13 - 10:14
                     - type: selector_expression
-                      id: 45
+                      id: 47
                       range: 10:14 - 10:24
                       queries:
                         - 1
                       children:
                         - type: identifier
-                          id: 46
+                          id: 48
                           range: 10:14 - 10:18
                           content: user
                           alias_of:
                             - 20
                         - type: '"."'
-                          id: 47
+                          id: 49
                           range: 10:18 - 10:19
                         - type: field_identifier
-                          id: 48
+                          id: 50
                           range: 10:19 - 10:24
                           content: email
                     - type: '")"'
-                      id: 49
+                      id: 51
                       range: 10:24 - 10:25
             - type: |-
                 "
                 "
-              id: 50
+              id: 52
               range: 10:25 - 11:1
             - type: '"}"'
-              id: 51
+              id: 53
               range: 11:1 - 11:2
     - type: |-
         "
         "
-      id: 52
+      id: 54
       range: 11:2 - 12:1
 
-- node: 38
+- node: 40
   content: fmt.Println(user.email)
   data:
     properties:
@@ -263,7 +275,7 @@ children:
           object:
             ruleid: object
             matchnode:
-                id: 39
+                id: 41
                 typeid: 30
                 contentstart:
                     byte: 85
@@ -281,7 +293,7 @@ children:
                       object: null
                 isvirtual: true
     isvirtual: true
-- node: 39
+- node: 41
   content: fmt.Println
   data:
     properties:
@@ -290,7 +302,7 @@ children:
           object:
             ruleid: object
             matchnode:
-                id: 39
+                id: 41
                 typeid: 30
                 contentstart:
                     byte: 85
@@ -349,7 +361,7 @@ children:
                       object: null
                 isvirtual: false
     isvirtual: false
-- node: 45
+- node: 47
   content: user.email
   data:
     properties:
@@ -358,7 +370,7 @@ children:
           object:
             ruleid: object
             matchnode:
-                id: 45
+                id: 47
                 typeid: 30
                 contentstart:
                     byte: 97

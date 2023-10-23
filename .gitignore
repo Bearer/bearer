@@ -20,3 +20,5 @@ temp/
 
 # docs
 docs/yarn.lock
+
+/internal/parser/sitter/config_variables/build
