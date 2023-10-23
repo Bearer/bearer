@@ -27,8 +27,7 @@ jobs:
       - uses: actions/checkout@v4
       - id: load_json
         run : |
-          content=$(cat ./kpi_scan/kpi_repo_list.json | jq -c)
-          echo "matrix=$content" >> $GITHUB_OUTPUT
+          echo "matrix=$(npx --yes json5 ./kpi_scan/kpi_repo_list.json5)" >> $GITHUB_OUTPUT
   build:
     needs: [build_and_push_docker_image, load_repo_list]
     name: Run Staging KPI scans
