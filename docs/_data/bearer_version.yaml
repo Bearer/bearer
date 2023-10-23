@@ -1,6 +1,6 @@
-name: ' version'
+name: bearer version
 synopsis: Print the version
-usage: ' version [flags]'
+usage: bearer version [flags]
 options:
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.
@@ -36,5 +36,5 @@ options:
       default_value: "false"
       usage: Disable color in output
 see_also:
-    - ' - '
+    - 'bearer - '
 aliases: 

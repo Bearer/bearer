@@ -1,6 +1,6 @@
-name: ' ignore show'
+name: bearer ignore show
 synopsis: Show an ignored fingerprint
-usage: ' ignore show <fingerprint> [flags]'
+usage: bearer ignore show <fingerprint> [flags]
 options:
     - name: all
       default_value: "false"
@@ -42,5 +42,5 @@ example: |-
     # Show the details of an ignored fingerprint from your ignore file
     $ bearer ignore show <fingerprint>
 see_also:
-    - ' ignore - Manage ignored fingerprints'
+    - bearer ignore - Manage ignored fingerprints
 aliases: 

@@ -1,7 +1,7 @@
 Scan a directory or file
 
 Usage:
-   scan [flags] <path>
+  bearer scan [flags] <path>
 Aliases:
   scan, s
 Examples:

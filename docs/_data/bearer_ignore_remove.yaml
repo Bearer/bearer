@@ -1,6 +1,6 @@
-name: ' ignore remove'
+name: bearer ignore remove
 synopsis: Remove an ignored fingerprint
-usage: ' ignore remove <fingerprint> [flags]'
+usage: bearer ignore remove <fingerprint> [flags]
 options:
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.
@@ -39,5 +39,5 @@ example: |-
     # Remove an ignored fingerprint from your ignore file
     $ bearer ignore remove <fingerprint>
 see_also:
-    - ' ignore - Manage ignored fingerprints'
+    - bearer ignore - Manage ignored fingerprints
 aliases: 

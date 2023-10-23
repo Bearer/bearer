@@ -1,6 +1,6 @@
-name: ' scan'
+name: bearer scan
 synopsis: Scan a directory or file
-usage: ' scan [flags] <path>'
+usage: bearer scan [flags] <path>
 options:
     - name: api-key
       usage: Use your Bearer API Key to send the report to Bearer.
@@ -112,5 +112,5 @@ example: |4-
       # Scan a local project, including language-specific files
       $ bearer scan /path/to/your_project
 see_also:
-    - ' - '
+    - 'bearer - '
 aliases: s

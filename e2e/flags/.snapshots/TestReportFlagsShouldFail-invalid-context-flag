@@ -2,7 +2,7 @@
 --
 Error: flag error: scan flag error: invalid context argument; supported values: health
 Usage:
-   scan [flags] <path>
+  bearer scan [flags] <path>
 Aliases:
   scan, s
 Examples:
