@@ -1,5 +1,5 @@
 (*builder.Result)({
-  Query: (string) (len=128) "([(class_declaration  . (_) . [(declaration_list  [(property_declaration . [ (visibility_modifier )] (_) @match )] )] .)] @root)",
+  Query: (string) (len=134) "([(class_declaration  . name: (_) . [(declaration_list  [(property_declaration . [ (visibility_modifier )] (_) @match )] )] .)] @root)",
   VariableNames: ([]string) (len=1) {
     (string) (len=1) "_"
   },
