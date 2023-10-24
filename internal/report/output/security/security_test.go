@@ -10,6 +10,8 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/report/schema"
+	globaltypes "github.com/bearer/bearer/internal/types"
+	"github.com/bearer/bearer/internal/util/set"
 	"github.com/bearer/bearer/internal/version_check"
 
 	dataflowtypes "github.com/bearer/bearer/internal/report/output/dataflow/types"
@@ -20,16 +22,7 @@ import (
 )
 
 func TestBuildReportString(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{
-		Report: "security",
-		Severity: map[string]bool{
-			"critical": true,
-			"high":     true,
-			"medium":   true,
-			"low":      true,
-			"warning":  true,
-		},
-	})
+	config, err := generateConfig(flag.ReportOptions{Report: "security"})
 	// set rule version
 	config.BearerRulesVersion = "TEST"
 
@@ -63,16 +56,7 @@ func TestBuildReportString(t *testing.T) {
 }
 
 func TestNoRulesBuildReportString(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{
-		Report: "security",
-		Severity: map[string]bool{
-			"critical": true,
-			"high":     true,
-			"medium":   true,
-			"low":      true,
-			"warning":  true,
-		},
-	})
+	config, err := generateConfig(flag.ReportOptions{Report: "security"})
 	// set rule version
 	config.BearerRulesVersion = "TEST"
 	config.Rules = map[string]*settings.Rule{}
@@ -101,16 +85,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 }
 
 func TestAddReportData(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{
-		Report: "security",
-		Severity: map[string]bool{
-			"critical": true,
-			"high":     true,
-			"medium":   true,
-			"low":      true,
-			"warning":  true,
-		},
-	})
+	config, err := generateConfig(flag.ReportOptions{Report: "security"})
 
 	config.Rules = map[string]*settings.Rule{
 		"ruby_lang_ssl_verification": testhelper.RubyLangSSLVerificationRule(),
@@ -132,15 +107,12 @@ func TestAddReportData(t *testing.T) {
 }
 
 func TestAddReportDataWithSeverity(t *testing.T) {
+	severity := set.New[string]()
+	severity.Add(globaltypes.LevelCritical)
+
 	config, err := generateConfig(flag.ReportOptions{
-		Report: "security",
-		Severity: map[string]bool{
-			"critical": true,
-			"high":     false,
-			"medium":   false,
-			"low":      false,
-			"warning":  false,
-		},
+		Report:   "security",
+		Severity: severity,
 	})
 
 	if err != nil {
@@ -159,6 +131,45 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 	cupaloy.SnapshotT(t, data.FindingsBySeverity)
 }
 
+func TestAddReportDataWithFailOnSeverity(t *testing.T) {
+	for _, test := range []struct {
+		Severity string
+		Expected bool
+	}{
+		{Severity: globaltypes.LevelCritical, Expected: true},
+		{Severity: globaltypes.LevelHigh, Expected: true},
+		{Severity: globaltypes.LevelMedium, Expected: false},
+		{Severity: globaltypes.LevelLow, Expected: false},
+		{Severity: globaltypes.LevelWarning, Expected: false},
+	} {
+		t.Run(test.Severity, func(tt *testing.T) {
+			failOnSeverity := set.New[string]()
+			failOnSeverity.Add(test.Severity)
+
+			config, err := generateConfig(flag.ReportOptions{
+				Report:         "security",
+				FailOnSeverity: failOnSeverity,
+			})
+
+			if err != nil {
+				tt.Fatalf("failed to generate config:%s", err)
+			}
+
+			config.Rules = map[string]*settings.Rule{
+				"ruby_rails_logger":          testhelper.RubyRailsLoggerRule(),
+				"ruby_lang_ssl_verification": testhelper.RubyLangSSLVerificationRule(),
+			}
+
+			data := dummyDataflowData()
+			if err = security.AddReportData(data, config, nil); err != nil {
+				tt.Fatalf("failed to generate security output err:%s", err)
+			}
+
+			assert.Equal(tt, test.Expected, data.ReportFailed)
+		})
+	}
+}
+
 func TestCalculateSeverity(t *testing.T) {
 	res := []securitytypes.SeverityMeta{
 		security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", true),
@@ -172,6 +183,19 @@ func TestCalculateSeverity(t *testing.T) {
 }
 
 func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
+	if reportOptions.Severity == nil {
+		reportOptions.Severity = set.New[string]()
+		reportOptions.Severity.AddAll(globaltypes.Severities)
+	}
+
+	if reportOptions.FailOnSeverity == nil {
+		reportOptions.FailOnSeverity = set.New[string]()
+		reportOptions.FailOnSeverity.Add(globaltypes.LevelCritical)
+		reportOptions.FailOnSeverity.Add(globaltypes.LevelHigh)
+		reportOptions.FailOnSeverity.Add(globaltypes.LevelMedium)
+		reportOptions.FailOnSeverity.Add(globaltypes.LevelLow)
+	}
+
 	opts := flag.Options{
 		ScanOptions: flag.ScanOptions{
 			Scanner: []string{"sast"},

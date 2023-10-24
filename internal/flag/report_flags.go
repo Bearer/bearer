@@ -3,7 +3,7 @@ package flag
 import (
 	"errors"
 
-	"github.com/bearer/bearer/internal/types"
+	"github.com/bearer/bearer/internal/util/set"
 )
 
 var (
@@ -26,11 +26,14 @@ var (
 	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
-var ErrInvalidFormatSecurity = errors.New("invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html")
-var ErrInvalidFormatPrivacy = errors.New("invalid format argument for privacy report; supported values: csv, json, yaml, html")
-var ErrInvalidFormatDefault = errors.New("invalid format argument; supported values: json, yaml")
-var ErrInvalidReport = errors.New("invalid report argument; supported values: security, privacy")
-var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
+var (
+	ErrInvalidFormatSecurity = errors.New("invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html")
+	ErrInvalidFormatPrivacy  = errors.New("invalid format argument for privacy report; supported values: csv, json, yaml, html")
+	ErrInvalidFormatDefault  = errors.New("invalid format argument; supported values: json, yaml")
+	ErrInvalidReport         = errors.New("invalid report argument; supported values: security, privacy")
+	ErrInvalidSeverity       = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
+	ErrInvalidFailOnSeverity = errors.New("invalid fail-on-severity argument; supported values: critical, high, medium, low, warning")
+)
 
 var (
 	FormatFlag = Flag{
@@ -58,6 +61,12 @@ var (
 		Value:      DefaultSeverity,
 		Usage:      "Specify which severities are included in the report.",
 	}
+	FailOnSeverityFlag = Flag{
+		Name:       "fail-on-severity",
+		ConfigName: "report.fail-on-severity",
+		Value:      "critical,high,medium,low",
+		Usage:      "Specify which severities cause the report to fail. Works in conjunction with --exit-code.",
+	}
 	ExcludeFingerprintFlag = Flag{
 		Name:            "exclude-fingerprint",
 		ConfigName:      "report.exclude-fingerprint",
@@ -74,6 +83,7 @@ type ReportFlagGroup struct {
 	Report             *Flag
 	Output             *Flag
 	Severity           *Flag
+	FailOnSeverity     *Flag
 	ExcludeFingerprint *Flag
 }
 
@@ -81,7 +91,8 @@ type ReportOptions struct {
 	Format             string          `mapstructure:"format" json:"format" yaml:"format"`
 	Report             string          `mapstructure:"report" json:"report" yaml:"report"`
 	Output             string          `mapstructure:"output" json:"output" yaml:"output"`
-	Severity           map[string]bool `mapstructure:"severity" json:"severity" yaml:"severity"`
+	Severity           set.Set[string] `mapstructure:"severity" json:"severity" yaml:"severity"`
+	FailOnSeverity     set.Set[string] `mapstructure:"fail-on-severity" json:"fail-on-severity" yaml:"fail-on-severity"`
 	ExcludeFingerprint map[string]bool `mapstructure:"exclude_fingerprints" json:"exclude_fingerprints" yaml:"exclude_fingerprints"`
 }
 
@@ -91,6 +102,7 @@ func NewReportFlagGroup() *ReportFlagGroup {
 		Report:             &ReportFlag,
 		Output:             &OutputFlag,
 		Severity:           &SeverityFlag,
+		FailOnSeverity:     &FailOnSeverityFlag,
 		ExcludeFingerprint: &ExcludeFingerprintFlag,
 	}
 }
@@ -105,6 +117,7 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 		f.Report,
 		f.Output,
 		f.Severity,
+		f.FailOnSeverity,
 		f.ExcludeFingerprint,
 	}
 }
@@ -147,24 +160,13 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 		return ReportOptions{}, invalidFormat
 	}
 
-	severity := getStringSlice(f.Severity)
-	severityMapping := make(map[string]bool)
-
-	for _, severityLevel := range severity {
-		switch severityLevel {
-		case types.LevelCritical:
-			severityMapping[types.LevelCritical] = true
-		case types.LevelHigh:
-			severityMapping[types.LevelHigh] = true
-		case types.LevelMedium:
-			severityMapping[types.LevelMedium] = true
-		case types.LevelLow:
-			severityMapping[types.LevelLow] = true
-		case types.LevelWarning:
-			severityMapping[types.LevelWarning] = true
-		default:
-			return ReportOptions{}, ErrInvalidSeverity
-		}
+	severity := getSeverities(f.Severity)
+	if severity == nil {
+		return ReportOptions{}, ErrInvalidSeverity
+	}
+	failOnSeverity := getSeverities(f.FailOnSeverity)
+	if failOnSeverity == nil {
+		return ReportOptions{}, ErrInvalidFailOnSeverity
 	}
 
 	// turn string slice into map for ease of access
@@ -178,7 +180,8 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 		Format:             format,
 		Report:             report,
 		Output:             getString(f.Output),
-		Severity:           severityMapping,
+		Severity:           severity,
+		FailOnSeverity:     failOnSeverity,
 		ExcludeFingerprint: excludeFingerprintsMapping,
 	}, nil
 }
