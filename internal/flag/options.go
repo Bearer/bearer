@@ -10,6 +10,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
+
+	"github.com/bearer/bearer/internal/types"
+	"github.com/bearer/bearer/internal/util/set"
 )
 
 var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
@@ -175,6 +178,20 @@ func getInteger(flag *Flag) int {
 	}
 
 	return viper.GetInt(flag.ConfigName)
+}
+
+func getSeverities(flag *Flag) set.Set[string] {
+	result := set.New[string]()
+
+	for _, value := range getStringSlice(flag) {
+		if !slices.Contains(types.Severities, value) {
+			return nil
+		}
+
+		result.Add(value)
+	}
+
+	return result
 }
 
 func (f *Flags) groups() []FlagGroup {

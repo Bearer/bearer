@@ -41,13 +41,6 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	globaltypes.LevelLow:      color.New(color.FgBlue).SprintFunc(),
 	globaltypes.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
-var orderedSeverityLevels = []string{
-	globaltypes.LevelCritical,
-	globaltypes.LevelHigh,
-	globaltypes.LevelMedium,
-	globaltypes.LevelLow,
-	globaltypes.LevelWarning,
-}
 
 type Findings = map[string][]types.Finding
 type IgnoredFindings = map[string][]types.IgnoredFinding
@@ -89,11 +82,11 @@ func AddReportData(
 		output.StdErrLog("Evaluating rules")
 	}
 
-	builtInFingerprints, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
+	builtInFingerprints, builtInFailed, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.BuiltInRules, config, dataflow, baseBranchFindings, true)
 	if err != nil {
 		return err
 	}
-	fingerprints, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
+	fingerprints, failed, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
 		return err
 	}
@@ -109,17 +102,9 @@ func AddReportData(
 		)
 	}
 
-	// fail the report if we have failures above the severity threshold
-	reportFailed := false
-	for severityLevel, findings := range summaryFindings {
-		if severityLevel != globaltypes.LevelWarning && len(findings) != 0 {
-			reportFailed = true
-		}
-	}
-
 	reportData.FindingsBySeverity = summaryFindings
 	reportData.IgnoredFindingsBySeverity = ignoredSummaryFindings
-	reportData.ReportFailed = reportFailed
+	reportData.ReportFailed = builtInFailed || failed
 	return nil
 }
 
@@ -131,7 +116,7 @@ func evaluateRules(
 	dataflow *outputtypes.DataFlow,
 	baseBranchFindings *basebranchfindings.Findings,
 	builtIn bool,
-) ([]string, error) {
+) ([]string, bool, error) {
 	outputFindings := map[string][]types.Finding{}
 	ignoredOutputFindings := map[string][]types.IgnoredFinding{}
 
@@ -141,6 +126,7 @@ func evaluateRules(
 	}
 
 	var fingerprints []string
+	failed := false
 
 	for _, rule := range maputil.ToSortedSlice(rules) {
 		if !builtIn {
@@ -166,19 +152,19 @@ func evaluateRules(
 			// TODO: perf question: can we do this once?
 			policy.Modules.ToRegoModules())
 		if err != nil {
-			return fingerprints, err
+			return fingerprints, false, err
 		}
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
 			if err != nil {
-				return fingerprints, err
+				return fingerprints, false, err
 			}
 
 			var results map[string][]Output
 			err = json.Unmarshal(jsonRes, &results)
 			if err != nil {
-				return fingerprints, err
+				return fingerprints, false, err
 			}
 
 			ruleSummary := &types.Rule{
@@ -236,13 +222,17 @@ func evaluateRules(
 				severityMeta := CalculateSeverity(finding.CategoryGroups, rule.GetSeverity(), output.IsLocal != nil && *output.IsLocal)
 				severity := severityMeta.DisplaySeverity
 
-				if config.Report.Severity[severity] {
+				if config.Report.Severity.Has(severity) {
 					finding.SeverityMeta = severityMeta
 					if ignored {
 						ignoredOutputFindings[severity] = append(ignoredOutputFindings[severity], types.IgnoredFinding{Finding: finding, IgnoreMeta: ignoredFingerprint})
 					} else {
 						outputFindings[severity] = append(outputFindings[severity], finding)
 					}
+				}
+
+				if config.Report.FailOnSeverity.Has(severity) && !ignored {
+					failed = true
 				}
 			}
 		}
@@ -251,7 +241,7 @@ func evaluateRules(
 	sortFindingsBySeverity(summaryFindings, outputFindings)
 	sortFindingsBySeverity(ignoredSummaryFindings, ignoredOutputFindings)
 
-	return fingerprints, nil
+	return fingerprints, failed, nil
 }
 
 func sortFindingsBySeverity[F types.GenericFinding](findingsBySeverity map[string][]F, outputFindings map[string][]F) {
@@ -400,7 +390,7 @@ func BuildReportString(reportData *outputtypes.ReportData, config settings.Confi
 		globaltypes.LevelWarning:  make(map[string]bool),
 	}
 
-	for _, severityLevel := range orderedSeverityLevels {
+	for _, severityLevel := range globaltypes.Severities {
 		for _, failure := range reportData.FindingsBySeverity[severityLevel] {
 			for i := 0; i < len(failure.CWEIDs); i++ {
 				failures[severityLevel]["CWE-"+failure.CWEIDs[i]] = true
@@ -661,7 +651,7 @@ func checkAndWriteFailureSummaryToString(
 	findings Findings,
 	ruleCount int,
 	failures map[string]map[string]bool,
-	severityForFailure map[string]bool,
+	reportedSeverity set.Set[string],
 ) bool {
 	reportStr.WriteString("\n=====================================")
 
@@ -672,7 +662,7 @@ func checkAndWriteFailureSummaryToString(
 	// give summary including counts
 	failureCount := 0
 	warningCount := 0
-	for _, severityLevel := range maps.Keys(severityForFailure) {
+	for _, severityLevel := range globaltypes.Severities {
 		if severityLevel == globaltypes.LevelWarning {
 			warningCount += len(findings[severityLevel])
 			continue
@@ -687,8 +677,8 @@ func checkAndWriteFailureSummaryToString(
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount+warningCount) + " findings\n"))
 
-	for _, severityLevel := range orderedSeverityLevels {
-		if !severityForFailure[severityLevel] {
+	for _, severityLevel := range globaltypes.Severities {
+		if !reportedSeverity.Has(severityLevel) {
 			continue
 		}
 		reportStr.WriteString("\n" + formatSeverity(severityLevel) + fmt.Sprint(len(findings[severityLevel])))
@@ -756,7 +746,7 @@ func removeDuplicates[F types.GenericFinding](data map[string][]F) map[string][]
 	reportedDetections := set.Set[key]{}
 
 	// filter duplicates
-	for _, severity := range orderedSeverityLevels {
+	for _, severity := range globaltypes.Severities {
 		findingsSlice, hasSeverity := data[severity]
 		if !hasSeverity {
 			continue

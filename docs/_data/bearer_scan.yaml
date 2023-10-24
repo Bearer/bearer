@@ -45,6 +45,10 @@ options:
       default_value: '[]'
       usage: |
         Specify directories paths that contain .yaml files with external rules configuration
+    - name: fail-on-severity
+      default_value: critical,high,medium,low
+      usage: |
+        Specify which severities cause the report to fail. Works in conjunction with --exit-code.
     - name: force
       default_value: "false"
       usage: Disable the cache and runs the detections again
