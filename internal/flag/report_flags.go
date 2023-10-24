@@ -2,8 +2,11 @@ package flag
 
 import (
 	"errors"
+	"strings"
 
+	globaltypes "github.com/bearer/bearer/internal/types"
 	"github.com/bearer/bearer/internal/util/set"
+	sliceutil "github.com/bearer/bearer/internal/util/slices"
 )
 
 var (
@@ -22,8 +25,6 @@ var (
 	ReportDetectors = "detectors" // nodoc: internal report type
 	ReportSaaS      = "saas"      // nodoc: internal report type
 	ReportStats     = "stats"     // nodoc: internal report type
-
-	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
 var (
@@ -31,8 +32,8 @@ var (
 	ErrInvalidFormatPrivacy  = errors.New("invalid format argument for privacy report; supported values: csv, json, yaml, html")
 	ErrInvalidFormatDefault  = errors.New("invalid format argument; supported values: json, yaml")
 	ErrInvalidReport         = errors.New("invalid report argument; supported values: security, privacy")
-	ErrInvalidSeverity       = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
-	ErrInvalidFailOnSeverity = errors.New("invalid fail-on-severity argument; supported values: critical, high, medium, low, warning")
+	ErrInvalidSeverity       = errors.New("invalid severity argument; supported values: " + strings.Join(globaltypes.Severities, ", "))
+	ErrInvalidFailOnSeverity = errors.New("invalid fail-on-severity argument; supported values: " + strings.Join(globaltypes.Severities, ", "))
 )
 
 var (
@@ -58,13 +59,13 @@ var (
 	SeverityFlag = Flag{
 		Name:       "severity",
 		ConfigName: "report.severity",
-		Value:      DefaultSeverity,
+		Value:      strings.Join(globaltypes.Severities, ","),
 		Usage:      "Specify which severities are included in the report.",
 	}
 	FailOnSeverityFlag = Flag{
 		Name:       "fail-on-severity",
 		ConfigName: "report.fail-on-severity",
-		Value:      "critical,high,medium,low",
+		Value:      strings.Join(sliceutil.Except(globaltypes.Severities, globaltypes.LevelWarning), ","),
 		Usage:      "Specify which severities cause the report to fail. Works in conjunction with --exit-code.",
 	}
 	ExcludeFingerprintFlag = Flag{
