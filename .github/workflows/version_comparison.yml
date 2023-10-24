@@ -1,0 +1,116 @@
+name: Version Comparison
+on:
+  workflow_dispatch:
+    inputs:
+      baseRef:
+        description: 'Base CLI ref (tag/branch/SHA)'
+      baseRulesRef:
+        description: 'Base rules ref'
+      testRef:
+        description: 'Test CLI ref (tag/branch/SHA)'
+      testRulesRef:
+        description: 'Test rules ref'
+
+jobs:
+  setup:
+    name: Setup version comparison
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.load_repo_list.outputs.matrix }}
+      cache_key: ${{ steps.cache_key.outputs.value }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: load_repo_list
+        name: Load KPI repository list
+        run : |
+          echo "matrix=$(npx --yes json5 ./kpi_scan/kpi_repo_list.json5)" >> $GITHUB_OUTPUT
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+      - id: cache_key
+        name: Create cache key
+        run: |
+          echo "value=cache-${{ github.run_id }}-${{ github.run_attempt }}" >> $GITHUB_OUTPUT
+      - name: Create cache folder
+        run: mkdir bearer-comparison
+      - name: Checkout base CLI
+        uses: actions/checkout@v4
+        with:
+          repository: bearer/bearer
+          ref: ${{ inputs.baseRef }}
+          path: base-cli
+      - name: Checkout base rules
+        uses: actions/checkout@v4
+        with:
+          repository: bearer/bearer-rules
+          ref: ${{ inputs.baseRulesRef }}
+          path: bearer-comparison/base-rules
+      - name: Build base CLI
+        run: |
+          cd ./base-cli
+          go build -o ../bearer-comparison/base-bearer ./cmd/bearer/main.go
+      - name: Checkout test CLI
+        uses: actions/checkout@v4
+        with:
+          repository: bearer/bearer
+          ref: ${{ inputs.testRef }}
+          path: test-cli
+      - name: Checkout test rules
+        uses: actions/checkout@v4
+        with:
+          repository: bearer/bearer-rules
+          ref: ${{ inputs.testRulesRef }}
+          path: bearer-comparison/test-rules
+      - name: Build test CLI
+        run: |
+          cd ./test-cli
+          go build -o ../bearer-comparison/test-bearer ./cmd/bearer/main.go
+      - name: Cache CLIs and rules
+        uses: actions/cache/save@v3
+        with:
+          path: bearer-comparison
+          key: ${{ steps.cache_key.outputs.value }}
+  test:
+    needs: [setup]
+    name: Scan ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.setup.outputs.matrix)}}
+      fail-fast: false
+    steps:
+      - name: Restore CLIs and rules
+        uses: actions/cache/restore@v3
+        with:
+          path: bearer-comparison
+          key: ${{ needs.setup.outputs.cache_key }}
+      - name: Checkout KPI repo
+        run: |
+          git clone --single-branch --depth 1 --no-tags ${{ matrix.repository_url }} ${{ matrix.name }}
+      - name: Run base scan
+        run: |
+          ./bearer-comparison/base-bearer scan ${{ matrix.name }} \
+            --format json \
+            --exit-code 0 \
+            --disable-default-rules \
+            --external-rule-dir ./bearer-comparison/base-rules/rules \
+            --force \
+            --disable-version-check \
+            --quiet \
+            --hide-progress-bar \
+            | jq > base.json
+      - name: Run test scan
+        run: |
+          ./bearer-comparison/test-bearer scan ${{ matrix.name }} \
+            --format json \
+            --exit-code 0 \
+            --disable-default-rules \
+            --external-rule-dir ./bearer-comparison/test-rules/rules \
+            --force \
+            --disable-version-check \
+            --quiet \
+            --hide-progress-bar \
+            | jq > test.json
+      - run: |
+          diff -u base.json test.json
+
