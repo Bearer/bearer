@@ -1,11 +1,14 @@
 package analyzer
 
 import (
+	"strings"
+
 	sitter "github.com/smacker/go-tree-sitter"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/language"
+	"github.com/bearer/bearer/internal/util/stringutil"
 )
 
 type analyzer struct {
@@ -46,6 +49,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "return_statement", "go_statement", "defer_statement", "if_statement": // statements don't have results
 		return visitChildren()
+	case "import_spec":
+		return analyzer.analyzeImportSpec(node, visitChildren)
 	case "identifier":
 		return visitChildren()
 	case "index_expression":
@@ -54,6 +59,23 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
+}
+
+// import foo "bar/baz"
+// import "bar/baz"
+func (analyzer *analyzer) analyzeImportSpec(node *sitter.Node, visitChildren func() error) error {
+	name := node.ChildByFieldName("name")
+	path := node.ChildByFieldName("path")
+
+	if name != nil {
+		analyzer.scope.Declare(analyzer.builder.ContentFor(name), path)
+	} else {
+		packageName := strings.Split(analyzer.builder.ContentFor(path), "/")
+		guessedName := stringutil.StripQuotes((packageName[len(packageName)-1]))
+		analyzer.scope.Declare(guessedName, path)
+	}
+
+	return visitChildren()
 }
 
 // foo = a

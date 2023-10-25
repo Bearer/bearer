@@ -16,8 +16,8 @@ var (
 	patternQueryVariableRegex      = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
 	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
-	unanchoredPatternNodeTypes     = []string{}
-	patternMatchNodeContainerTypes = []string{"parameter_declaration", "parameter_list", "var_spec"}
+	unanchoredPatternNodeTypes     = []string{"import_spec"}
+	patternMatchNodeContainerTypes = []string{"parameter_declaration", "parameter_list", "var_spec", "import_spec"}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
@@ -95,8 +95,9 @@ func (*Pattern) LeafContentTypes() []string {
 		"identifier",
 		"package_identifier",
 		"type_identifier",
+		"field_identifier",
 		"raw_string_literal",
-		"intepreted_string_literal",
+		"interpreted_string_literal",
 		"int_literal",
 		"float_literal",
 		"true",
@@ -113,6 +114,12 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	parent := node.Parent()
 	if parent == nil {
 		return true, true
+	}
+
+	if parent.Type() == "import_spec" {
+		if node == parent.ChildByFieldName("path") {
+			return false, true
+		}
 	}
 
 	if parent.Type() == "function_declaration" {
