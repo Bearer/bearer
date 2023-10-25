@@ -17,7 +17,11 @@ bearer:
   image:
     name: bearer/bearer
     entrypoint: [ "" ]
-
+  variables:
+    SHA: $CI_COMMIT_SHA
+    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
+    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
+    ORIGIN_URL: $CI_REPOSITORY_URL
   script: bearer scan .
 ```
 
@@ -38,6 +42,11 @@ bearer:
   image:
     name: bearer/bearer
     entrypoint: [ "" ]
+  variables:
+    SHA: $CI_COMMIT_SHA
+    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
+    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
+    ORIGIN_URL: $CI_REPOSITORY_URL
   script:
     - bearer scan . --format gitlab-sast --output gl-sast-report.json
 
@@ -60,6 +69,10 @@ bearer:
     name: bearer/bearer
     entrypoint: [ "" ]
   variables:
+    SHA: $CI_COMMIT_SHA
+    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
+    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
+    ORIGIN_URL: $CI_REPOSITORY_URL
     DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
     DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA
   script: bearer scan .
@@ -82,6 +95,7 @@ pr_check:
     SHA: $CI_COMMIT_SHA
     CURRENT_BRANCH: $CI_COMMIT_REF_NAME
     DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
+    ORIGIN_URL: $CI_REPOSITORY_URL
     DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
     DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA
   script:
