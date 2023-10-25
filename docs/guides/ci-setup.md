@@ -27,7 +27,11 @@ bearer:
   image:
     name: bearer/bearer
     entrypoint: [ "" ]
-
+  variables:
+    SHA: $CI_COMMIT_SHA
+    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
+    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
+    ORIGIN_URL: $CI_REPOSITORY_URL
   script: bearer scan .
 ```
 
