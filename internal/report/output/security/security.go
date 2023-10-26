@@ -228,11 +228,11 @@ func evaluateRules(
 						ignoredOutputFindings[severity] = append(ignoredOutputFindings[severity], types.IgnoredFinding{Finding: finding, IgnoreMeta: ignoredFingerprint})
 					} else {
 						outputFindings[severity] = append(outputFindings[severity], finding)
-					}
-				}
 
-				if config.Report.FailOnSeverity.Has(severity) && !ignored {
-					failed = true
+						if config.Report.FailOnSeverity.Has(severity) {
+							failed = true
+						}
+					}
 				}
 			}
 		}

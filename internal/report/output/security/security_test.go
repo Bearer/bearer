@@ -133,21 +133,30 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 
 func TestAddReportDataWithFailOnSeverity(t *testing.T) {
 	for _, test := range []struct {
+		FailOnSeverity,
 		Severity string
 		Expected bool
 	}{
-		{Severity: globaltypes.LevelCritical, Expected: true},
-		{Severity: globaltypes.LevelHigh, Expected: true},
-		{Severity: globaltypes.LevelMedium, Expected: false},
-		{Severity: globaltypes.LevelLow, Expected: false},
-		{Severity: globaltypes.LevelWarning, Expected: false},
+		{FailOnSeverity: globaltypes.LevelCritical, Expected: true},
+		{FailOnSeverity: globaltypes.LevelHigh, Expected: true},
+		{FailOnSeverity: globaltypes.LevelHigh, Severity: globaltypes.LevelCritical, Expected: false},
+		{FailOnSeverity: globaltypes.LevelMedium, Expected: false},
+		{FailOnSeverity: globaltypes.LevelLow, Expected: false},
+		{FailOnSeverity: globaltypes.LevelWarning, Expected: false},
 	} {
-		t.Run(test.Severity, func(tt *testing.T) {
+		t.Run(test.FailOnSeverity, func(tt *testing.T) {
 			failOnSeverity := set.New[string]()
-			failOnSeverity.Add(test.Severity)
+			failOnSeverity.Add(test.FailOnSeverity)
+
+			var severity set.Set[string]
+			if test.Severity != "" {
+				severity = set.New[string]()
+				severity.Add(test.Severity)
+			}
 
 			config, err := generateConfig(flag.ReportOptions{
 				Report:         "security",
+				Severity:       severity,
 				FailOnSeverity: failOnSeverity,
 			})
 
