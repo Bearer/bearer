@@ -45,12 +45,14 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeSwitch(node, visitChildren)
 	case "expression_case", "default_case":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
-	case "argument_list":
+	case "argument_list", "binary_expression":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "return_statement", "go_statement", "defer_statement", "if_statement": // statements don't have results
 		return visitChildren()
 	case "import_spec":
 		return analyzer.analyzeImportSpec(node, visitChildren)
+	case "range_clause":
+		return analyzer.analyzeRangeClause(node, visitChildren)
 	case "identifier":
 		return visitChildren()
 	case "index_expression":
@@ -59,6 +61,23 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
+}
+
+// for i, j := range x {}
+func (analyzer *analyzer) analyzeRangeClause(node *sitter.Node, visitChildren func() error) error {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+
+	analyzer.lookupVariable(right)
+
+	for _, child := range analyzer.builder.ChildrenFor(left) {
+		if !slices.Contains([]string{"_", "err", ","}, analyzer.builder.ContentFor(child)) {
+			analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
+			analyzer.builder.Dataflow(child, right)
+		}
+	}
+
+	return visitChildren()
 }
 
 // import foo "bar/baz"
