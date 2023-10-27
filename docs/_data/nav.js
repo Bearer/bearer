@@ -41,12 +41,12 @@ module.exports = [
         url: "/guides/dataflow/",
       },
       {
-        name: "Using Bearer Cloud",
-        url: "/guides/bearer-cloud/",
-      },
-      {
         name: "Enable shell completion",
         url: "/guides/shell-completion/",
+      },
+      {
+        name: "Using Bearer Cloud",
+        url: "/guides/bearer-cloud/",
       },
     ],
   },
