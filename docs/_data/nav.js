@@ -44,6 +44,10 @@ module.exports = [
         name: "Using Bearer Cloud",
         url: "/guides/bearer-cloud/",
       },
+      {
+        name: "Enable shell completion",
+        url: "/guides/shell-completion/",
+      },
     ],
   },
   {
