@@ -17,7 +17,14 @@ var (
 	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
 	unanchoredPatternNodeTypes     = []string{"import_spec"}
-	patternMatchNodeContainerTypes = []string{"parameter_declaration", "parameter_list", "var_spec", "import_spec"}
+	patternMatchNodeContainerTypes = []string{
+		"parameter_declaration",
+		"argument_list",
+		"expression_list",
+		"parameter_list",
+		"var_spec",
+		"import_spec",
+	}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
@@ -134,7 +141,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// function declaration_list
 	unAnchored := []string{
 		"function_declaration",
-		"argument_list",
+		// "argument_list",
 		"var_declaration",
 	}
 

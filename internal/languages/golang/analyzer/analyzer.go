@@ -45,7 +45,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeSwitch(node, visitChildren)
 	case "expression_case", "default_case":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
-	case "argument_list", "binary_expression":
+	case "argument_list", "binary_expression", "expression_list":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "return_statement", "go_statement", "defer_statement", "if_statement": // statements don't have results
 		return visitChildren()
@@ -125,7 +125,7 @@ func (analyzer *analyzer) analyzeShortVarDeclaration(node *sitter.Node, visitChi
 	right := node.ChildByFieldName("right")
 
 	for _, child := range analyzer.builder.ChildrenFor(left) {
-		if !slices.Contains([]string{"_", "err"}, analyzer.builder.ContentFor(child)) {
+		if !slices.Contains([]string{"_", ",", "err"}, analyzer.builder.ContentFor(child)) {
 			analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
 			analyzer.scope.Assign(analyzer.builder.ContentFor(child), node)
 		}
