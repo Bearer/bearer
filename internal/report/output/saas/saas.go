@@ -80,6 +80,7 @@ func SendReport(config settings.Config, reportData *types.ReportData) {
 			errorMessage := fmt.Sprintf("Unable to calculate Metadata. %s", err)
 			log.Debug().Msgf(errorMessage)
 			config.Client.Error = &errorMessage
+			return
 		}
 	}
 
