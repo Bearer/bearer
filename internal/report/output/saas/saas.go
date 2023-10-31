@@ -23,6 +23,11 @@ import (
 	pointer "github.com/bearer/bearer/internal/util/pointers"
 )
 
+var ShaEnvVarNames = [2]string{"SHA", "CI_COMMIT_SHA"}
+var CurrentBranchEnvVarNames = [2]string{"CURRENT_BRANCH", "CI_COMMIT_REF_NAME"}
+var DefaultBranchEnvVarNames = [2]string{"DEFAULT_BRANCH", "CI_DEFAULT_BRANCH"}
+var OriginUrlEnvVarNames = [2]string{"ORIGIN_URL", "CI_REPOSITORY_URL"}
+
 func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta bool) error {
 	var meta *saas.Meta
 	meta, err := getMeta(reportData, config)
@@ -207,10 +212,13 @@ func getMeta(reportData *types.ReportData, config settings.Config) (*saas.Meta, 
 }
 
 func getSha(target string) (*string, error) {
-	env := os.Getenv("SHA")
-	if env != "" {
-		return pointer.String(env), nil
+	for _, key := range ShaEnvVarNames {
+		env := os.Getenv(key)
+		if env != "" {
+			return pointer.String(env), nil
+		}
 	}
+
 	bytes, err := exec.Command("git", "-C", target, "rev-parse", "HEAD").Output()
 	if err != nil {
 		log.Error().Msg("Couldn't extract git info for commit sha please set 'SHA' environment variable.")
@@ -220,10 +228,13 @@ func getSha(target string) (*string, error) {
 }
 
 func getCurrentBranch(target string) (*string, error) {
-	env := os.Getenv("CURRENT_BRANCH")
-	if env != "" {
-		return pointer.String(env), nil
+	for _, key := range CurrentBranchEnvVarNames {
+		env := os.Getenv(key)
+		if env != "" {
+			return pointer.String(env), nil
+		}
 	}
+
 	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "HEAD").Output()
 	if err != nil {
 		log.Error().Msg("Couldn't extract git info for current branch please set 'CURRENT_BRANCH' environment variable.")
@@ -233,10 +244,13 @@ func getCurrentBranch(target string) (*string, error) {
 }
 
 func getDefaultBranch(target string) (*string, error) {
-	env := os.Getenv("DEFAULT_BRANCH")
-	if env != "" {
-		return pointer.String(env), nil
+	for _, key := range DefaultBranchEnvVarNames {
+		env := os.Getenv(key)
+		if env != "" {
+			return pointer.String(env), nil
+		}
 	}
+
 	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
 	if err != nil {
 		log.Error().Msg("Couldn't extract the default branch of this repository. Please set 'DEFAULT_BRANCH' environment variable.")
@@ -246,10 +260,13 @@ func getDefaultBranch(target string) (*string, error) {
 }
 
 func getRemote(target string) (*string, error) {
-	env := os.Getenv("ORIGIN_URL")
-	if env != "" {
-		return pointer.String(env), nil
+	for _, key := range OriginUrlEnvVarNames {
+		env := os.Getenv(key)
+		if env != "" {
+			return pointer.String(env), nil
+		}
 	}
+
 	bytes, err := exec.Command("git", "-C", target, "remote", "get-url", "origin").Output()
 	if err != nil {
 		log.Error().Msg("Couldn't extract git info for origin url please set 'ORIGIN_URL' environment variable.")
