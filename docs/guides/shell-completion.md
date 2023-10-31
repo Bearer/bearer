@@ -22,11 +22,7 @@ We currently support `zsh` `bash` and `fish`. To load completions in your curren
 source <(bearer completion zsh); compdef _bearer bearer
 ```
 
-Now you can test completions:
-
-```bash
-bearer [tab]
-```
+Now you can test completions. Type `bearer` into your terminal and hit the tab button on your keyboard.
 
 **Note:** if completions are not already enabled in your environment you will need
 to enable it. In zsh you can execute the following once:
