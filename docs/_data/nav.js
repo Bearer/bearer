@@ -41,7 +41,7 @@ module.exports = [
         url: "/guides/dataflow/",
       },
       {
-        name: "Enable shell completion",
+        name: "Shell completions",
         url: "/guides/shell-completion/",
       },
       {

@@ -2,39 +2,42 @@
 title: Enable Completion Script
 ---
 
-# Enable shell completion
+# Enabling shell completions
 
-Below is example steps to enable shell completion feature for `bearer` cli:
+Completions make it easier to use bearer on the command line. In this guide we will cover how to set everything up.
 
-## 1. Know your current shell
+## Discover your current shell
 
 ```bash
 $ echo $SHELL
-/bin/zsh # For this example it is zsh, but will be vary depend on your $SHELL, maybe /bin/bash or /bin/fish
+/bin/zsh
 ```
+In our example it's zsh, but will be vary depend on your $SHELL.
 
-## 2. Run `completion` command to get sub-commands
+## Test the completion scripts
 
-``` bash
-bearer completion -h
-```
-
-Generate the autocompletion script for the zsh shell.
-
-If shell completion is not already enabled in your environment you will need
-to enable it.  You can execute the following once:
-
-```bash
-echo "autoload -U compinit; compinit" >> ~/.zshrc
-```
-
-To load completions in your current shell session:
+We currently support `zsh` `bash` and `fish`. To load completions in your current shell session you can run the following:
 
 ```bash
 source <(bearer completion zsh); compdef _bearer bearer
 ```
 
-To load completions for every new session, execute once:
+Now you can test completions:
+
+```bash
+bearer [tab]
+```
+
+**Note:** if completions are not already enabled in your environment you will need
+to enable it. In zsh you can execute the following once:
+
+```bash
+echo "autoload -U compinit; compinit" >> ~/.zshrc
+```
+
+## Final setup
+
+To load completions for every new session you can add the test command to your `~/.zshrc` or similar. Alternatively if you are using zsh you can execute the following once:
 
 ### Linux
 
@@ -50,14 +53,3 @@ bearer completion zsh > $(brew --prefix)/share/zsh/site-functions/_bearer
 
 You will need to start a new shell for this setup to take effect.
 
-## 3. Run the sub-commands following the instruction
-
-```bash
-bearer completion zsh > "${fpath[1]}/_bearer"
-```
-
-## 4. Start a new shell and you can see the shell completion
-
-```bash
-bearer [tab]
-```
