@@ -4,7 +4,7 @@ title: Enable Completion Script
 
 # Enabling shell completions
 
-Completions make it easier to use bearer on the command line. In this guide we will cover how to set everything up.
+Completions make it easier to use Bearer on the command line. In this guide we will cover how to set everything up.
 
 ## Discover your current shell
 
@@ -12,7 +12,7 @@ Completions make it easier to use bearer on the command line. In this guide we w
 $ echo $SHELL
 /bin/zsh
 ```
-In our example it's zsh, but will be vary depend on your $SHELL.
+In our example it's zsh, but this will vary depending on your $SHELL.
 
 ## Test the completion scripts
 
