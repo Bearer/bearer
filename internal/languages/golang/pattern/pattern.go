@@ -141,7 +141,6 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// function declaration_list
 	unAnchored := []string{
 		"function_declaration",
-		// "argument_list",
 		"var_declaration",
 	}
 

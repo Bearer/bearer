@@ -5,7 +5,6 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
 	"github.com/bearer/bearer/internal/util/stringutil"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -27,7 +26,6 @@ func (detector *stringDetector) DetectAt(
 	node *tree.Node,
 	detectorContext types.Context,
 ) ([]interface{}, error) {
-	log.Error().Msgf("string detector %s", node.Type())
 	switch node.Type() {
 	case "binary_expression":
 		if node.Children()[1].Content() == "+" {
@@ -40,7 +38,6 @@ func (detector *stringDetector) DetectAt(
 	case "interpreted_string_literal", "raw_string_literal":
 		value := stringutil.StripQuotes(node.Content())
 
-		log.Error().Msgf("interpreted_string_literal %s", value)
 		return []interface{}{common.String{
 			Value:     value,
 			IsLiteral: true,

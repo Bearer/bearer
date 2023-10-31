@@ -43,8 +43,6 @@ children:
         - type: import_spec
           id: 7
           range: 3:8 - 3:13
-          dataflow_sources:
-            - 8
           children:
             - type: interpreted_string_literal
               id: 8
@@ -276,6 +274,8 @@ children:
                       id: 54
                       range: 13:2 - 13:5
                       content: fmt
+                      alias_of:
+                        - 8
                     - type: '"."'
                       id: 55
                       range: 13:5 - 13:6

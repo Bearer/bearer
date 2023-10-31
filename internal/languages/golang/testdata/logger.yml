@@ -2,7 +2,7 @@ type: "risk"
 languages:
   - go
 patterns:
-  - pattern: log.$<LOGLEVEL>().$<METHOD>($<DATA_TYPE>)
+  - pattern: log.$<LOGLEVEL>().$<METHOD>($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: LOGLEVEL
         values:
