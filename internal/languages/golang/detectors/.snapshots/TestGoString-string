@@ -57,8 +57,6 @@ children:
             - type: import_spec
               id: 9
               range: 4:2 - 4:7
-              dataflow_sources:
-                - 10
               children:
                 - type: interpreted_string_literal
                   id: 10
@@ -81,8 +79,6 @@ children:
             - type: import_spec
               id: 14
               range: 5:2 - 5:6
-              dataflow_sources:
-                - 15
               children:
                 - type: interpreted_string_literal
                   id: 15
@@ -204,6 +200,8 @@ children:
                       id: 41
                       range: 11:2 - 11:3
                       content: s
+                      alias_of:
+                        - 39
                 - type: '":="'
                   id: 42
                   range: 11:4 - 11:6
@@ -225,6 +223,8 @@ children:
                           id: 45
                           range: 11:7 - 11:15
                           content: Greeting
+                          alias_of:
+                            - 24
                         - type: '"+"'
                           id: 46
                           range: 11:16 - 11:17
@@ -266,6 +266,8 @@ children:
                       id: 53
                       range: 12:2 - 12:3
                       content: s
+                      alias_of:
+                        - 39
                 - type: '"+="'
                   id: 54
                   range: 12:4 - 12:6
@@ -309,6 +311,8 @@ children:
                       id: 62
                       range: 13:2 - 13:5
                       content: fmt
+                      alias_of:
+                        - 10
                     - type: '"."'
                       id: 63
                       range: 13:5 - 13:6
@@ -359,6 +363,8 @@ children:
                       id: 72
                       range: 15:2 - 15:4
                       content: s2
+                      alias_of:
+                        - 70
                 - type: '":="'
                   id: 73
                   range: 15:5 - 15:7
@@ -406,6 +412,8 @@ children:
                       id: 81
                       range: 16:2 - 16:4
                       content: s2
+                      alias_of:
+                        - 70
                 - type: '"+="'
                   id: 82
                   range: 16:5 - 16:7
@@ -429,6 +437,8 @@ children:
                               id: 86
                               range: 16:8 - 16:10
                               content: os
+                              alias_of:
+                                - 15
                             - type: '"."'
                               id: 87
                               range: 16:10 - 16:11
@@ -471,6 +481,8 @@ children:
                       id: 95
                       range: 17:2 - 17:4
                       content: s2
+                      alias_of:
+                        - 70
                 - type: '"+="'
                   id: 96
                   range: 17:5 - 17:7
@@ -514,6 +526,8 @@ children:
                       id: 104
                       range: 18:2 - 18:5
                       content: fmt
+                      alias_of:
+                        - 10
                     - type: '"."'
                       id: 105
                       range: 18:5 - 18:6
@@ -564,6 +578,8 @@ children:
                       id: 114
                       range: 20:2 - 20:4
                       content: s3
+                      alias_of:
+                        - 112
                 - type: '":="'
                   id: 115
                   range: 20:5 - 20:7
@@ -619,6 +635,8 @@ children:
                                       id: 125
                                       range: 20:17 - 20:19
                                       content: os
+                                      alias_of:
+                                        - 15
                                     - type: '"."'
                                       id: 126
                                       range: 20:19 - 20:20
@@ -673,6 +691,8 @@ children:
                       id: 138
                       range: 21:2 - 21:5
                       content: fmt
+                      alias_of:
+                        - 10
                     - type: '"."'
                       id: 139
                       range: 21:5 - 21:6
