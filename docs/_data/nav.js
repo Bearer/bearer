@@ -41,6 +41,10 @@ module.exports = [
         url: "/guides/dataflow/",
       },
       {
+        name: "Shell completions",
+        url: "/guides/shell-completion/",
+      },
+      {
         name: "Using Bearer Cloud",
         url: "/guides/bearer-cloud/",
       },
