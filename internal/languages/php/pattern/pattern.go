@@ -171,15 +171,19 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return false, true
 	}
 
-	if parent.Type() == "method_declaration" {
+	if slices.Contains([]string{
+		"method_declaration",
+		"function_definition",
+		"anonymous_function_creation_expression",
+	}, parent.Type()) {
 		// visibility
 		if node == parent.ChildByFieldName("name") {
 			return false, true
 		}
 
 		// type
-		if node == parent.ChildByFieldName("parameters") {
-			return true, false
+		if node == parent.ChildByFieldName("body") {
+			return false, true
 		}
 
 		return false, false
