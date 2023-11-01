@@ -89,6 +89,12 @@ func TestPattern(t *testing.T) {
 		{"catch clauses and types are unanchored", `
 				try {} catch ($<_> $<!>$$<_>) {}
 		`},
+		{"function names and bodies are unanchored", `
+				function $<_>() {}
+		`},
+		{"anonymous function names and bodies are unanchored", `
+				function () {};
+		`},
 	} {
 		t.Run(test.name, func(tt *testing.T) {
 			result, err := patternquerybuilder.Build(php.Get(), test.pattern, "")

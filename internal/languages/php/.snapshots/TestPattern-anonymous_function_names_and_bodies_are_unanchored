@@ -1,0 +1,11 @@
+(*builder.Result)({
+  Query: (string) (len=100) "([(anonymous_function_creation_expression  [ (formal_parameters )] [ (compound_statement )])] @root)",
+  VariableNames: ([]string) {
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) {
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})

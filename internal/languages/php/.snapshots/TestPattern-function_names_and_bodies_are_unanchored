@@ -1,5 +1,5 @@
 (*builder.Result)({
-  Query: (string) (len=232) "([(class_declaration  . name: (_) . [(declaration_list  [(method_declaration [ (visibility_modifier )]  name: (_) [(formal_parameters  . [(simple_parameter . type: (_) name: (_) @match)] . )] [ (compound_statement )])] )] .)] @root)",
+  Query: (string) (len=91) "([(function_definition  name: (_) [ (formal_parameters )] [ (compound_statement )])] @root)",
   VariableNames: ([]string) (len=1) {
     (string) (len=1) "_"
   },
