@@ -1,0 +1,10 @@
+bearer_mr:
+  variables:
+    DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA
+  script:
+    - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+    - curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
+    - bearer scan . --format=rdjson --output=rd.json || export BEARER_EXIT=$?
+    - cat rd.json | reviewdog -f=rdjson -reporter=gitlab-mr-discussion
+    - exit $BEARER_EXIT

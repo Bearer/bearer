@@ -49,26 +49,7 @@ bearer scan project-folder --api-key=XXXXXXXX
 
 Using the same setup process found in [the GitHub action guide](/guides/github-action/), configure the action to run `with` the `api-key` option. For example:
 
-```yaml
-# .github/workflows/bearer.yml
-name: Bearer
-on:
-  push:
-    branches:
-      - main
-permissions:
-  contents: read
-jobs:
-  rule_check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run Report
-        id: report
-        uses: bearer/bearer-action@v2
-        with:
-          api-key: {% raw %}${{ secrets.BEARER_TOKEN }}{% endraw %}
-```
+{% yamlExample "ci/github/cloud" %}
 
 We highly recommend using GitHub's [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets). In the example above, the secret is named `BEARER_TOKEN`.
 
@@ -76,19 +57,7 @@ We highly recommend using GitHub's [encrypted secrets](https://docs.github.com/e
 
 Set up the [GitLab CI/CD configuration](/guides/gitlab), then adjust your settings to include the `--api-key` flag with the `scan` command:
 
-```yaml
-# .gitlab-ci.yml
-bearer:
-  image:
-    name: bearer/bearer
-    entrypoint: [ "" ]
-  variables:
-    SHA: $CI_COMMIT_SHA
-    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
-    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
-    ORIGIN_URL: $CI_REPOSITORY_URL
-  script: bearer scan . --api-key=$BEARER_TOKEN
-```
+{% yamlExample "ci/gitlab/cloud" %}
 
 We recommend using [GitLab's CI/CD variables](https://docs.gitlab.com/ee/ci/variables/) to protect your token. In the example above, the variable is named `BEARER_TOKEN`.
 

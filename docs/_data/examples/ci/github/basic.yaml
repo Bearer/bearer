@@ -1,0 +1,17 @@
+name: Bearer
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  rule_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bearer
+        uses: bearer/bearer-action@v2

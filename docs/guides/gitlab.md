@@ -1,7 +1,6 @@
 ---
 title: Using GitLab CI/CD
 ---
-{% renderTemplate "md" %}
 
 # Using GitLab CI/CD
 
@@ -12,18 +11,7 @@ Running Bearer from the CLI is great, but if you want it integrated directly wit
 
 To integrate Bearer CLI with GitLab CI/CD, we recommend using the docker entrypoint method. Edit your existing `.gitlab-ci.yml` file or add one to your repository root, then add the following lines:
 
-```yml
-bearer:
-  image:
-    name: bearer/bearer
-    entrypoint: [ "" ]
-  variables:
-    SHA: $CI_COMMIT_SHA
-    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
-    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
-    ORIGIN_URL: $CI_REPOSITORY_URL
-  script: bearer scan .
-```
+{% yamlExample "ci/gitlab/basic" %}
 
 This tells GitLab to use the `bearer/bearer` docker image. You can adjust the `script` key to [customize the scan](/guides/configure-scan/) with flags the same way as a local installation. An example of this file is available in [our example GitLab repo](https://gitlab.com/bearer/bear-publishing/-/tree/main).
 
@@ -37,23 +25,7 @@ GitLab offers an integrated security scanner that can take results from Bearer C
 
 To take advantage of this, you'll need a GitLab plan that supports it. Then, you can configure your `.gitlab-ci.yml` file with Bearer CLI's special format type.
 
-```yml
-bearer:
-  image:
-    name: bearer/bearer
-    entrypoint: [ "" ]
-  variables:
-    SHA: $CI_COMMIT_SHA
-    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
-    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
-    ORIGIN_URL: $CI_REPOSITORY_URL
-  script:
-    - bearer scan . --format gitlab-sast --output gl-sast-report.json
-
-  artifacts:
-    reports:
-      sast: gl-sast-report.json
-```
+{% yamlExample "ci/gitlab/sast" %}
 
 These changes set the format to `gitlab-sast` and write an artifact that GitLab can use. Once run, the results of the security scan will display in the Security and Compliance section of the repository.
 
@@ -63,20 +35,7 @@ When Bearer CLI is being used to check a merge request, you can tell the Bearer
 CLI to only report findings introduced within the merge request by setting the
 `DIFF_BASE_BRANCH` variable.
 
-```yml
-bearer:
-  image:
-    name: bearer/bearer
-    entrypoint: [ "" ]
-  variables:
-    SHA: $CI_COMMIT_SHA
-    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
-    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
-    ORIGIN_URL: $CI_REPOSITORY_URL
-    DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
-    DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA
-  script: bearer scan .
-```
+{% yamlExample "ci/gitlab/diff" %}
 
 See our guide on [configuring a scan](/guides/configure-scan#only-report-new-findings-on-a-branch)
 for more information on differential scans.
@@ -89,21 +48,7 @@ Bearer CLI supports [Reviewdog](https://github.com/reviewdog/reviewdog) rdjson f
 
 To keep the thing in one job we download each binary then run the two commands individually.
 
-```yml
-pr_check:
-  variables:
-    SHA: $CI_COMMIT_SHA
-    CURRENT_BRANCH: $CI_COMMIT_REF_NAME
-    DEFAULT_BRANCH: $CI_DEFAULT_BRANCH
-    ORIGIN_URL: $CI_REPOSITORY_URL
-    DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
-    DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA
-  script:
-    - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
-    - curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
-    - bearer scan . --format=rdjson --output=rd.json
-    - cat rd.json | reviewdog -f=rdjson -reporter=gitlab-mr-discussion
-```
+{% yamlExample "ci/gitlab/diff-reviewdog" %}
 
 [Don't forget](https://github.com/reviewdog/reviewdog#reporter-gitlab-mergerequest-discussions--reportergitlab-mr-discussion) to set `REVIEWDOG_GITLAB_API_TOKEN` in your project environment variables with a personal API access token.
 
@@ -112,4 +57,4 @@ pr_check:
 For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/).
 
 Have a question or need help? Join our [Discord community](https://discord.gg/eaHZBJUXRF) or [open an issue on GitHub](https://github.com/Bearer/bearer/issues).
-{% endrenderTemplate %}
+

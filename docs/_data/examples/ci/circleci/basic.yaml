@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  bearer:
+    machine:
+      image: ubuntu-2204:2023.07.2
+    environment:
+      # Set to default branch of your repo
+      DEFAULT_BRANCH: main
+    steps:
+      - checkout
+      - run: curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /tmp
+      - run: CURRENT_BRANCH=$CIRCLE_BRANCH SHA=$CIRCLE_SHA1 /tmp/bearer scan .
+
+workflows:
+  test:
+    jobs:
+      - bearer
