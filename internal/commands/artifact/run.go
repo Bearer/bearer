@@ -256,7 +256,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		return fmt.Errorf("failed to get absolute target: %w", err)
 	}
 
-	inputgocloc, err := stats.GoclocDetectorOutput(targetPath)
+	inputgocloc, err := stats.GoclocDetectorOutput(targetPath, opts)
 	if err != nil {
 		log.Debug().Msgf("Error in line of code output %s", err)
 		return err
