@@ -4,46 +4,29 @@ title: Using Bearer Cloud
 
 # Bearer Cloud
 
-If you're looking to manage product and application code security at scale, Bearer Cloud offers a platform for teams that syncs with Bearer CLI's output.
+If you're looking to manage product and application code security at scale, Bearer Cloud offers a platform for engineering and security teams that syncs with Bearer CLI's engine.
 
 <iframe class="w-full aspect-video" src="https://youtube.com/embed/whPRe9GaY7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 [Learn more about Bearer Cloud](https://www.bearer.com/bearer-cloud).
 
-# Create an account
+## Get started with Bearer Cloud
 
-You can [start creating your free account](https://my.bearer.sh/users/sign_up) right now using your GitHub, GitLab, or Google SSO.
-
-{% callout "info" %}
-Bearer Cloud free plan comes with these limits:<br/>
-- 1 team member<br/>
-- 10 applications<br/>
-- Slack integration only<br/>
-
-Need more? <a href="https://www.bearer.com/contact">Contact us</a>.
- {% endcallout %}
+We provide many options for you to configure Bearer Cloud with your projects, more information below.
+![View Jira Ticket](/assets/img/cloud/setup.png)
 
 
-# Get started with Bearer Cloud
+### GitHub App
 
+The easiest way to start with Bearer Cloud, is to use Bearer's GitHub App which allows you to configure your project in 1-click.
 
-## Generate an API token
+Here is what happens behind the scenes:
+- A GitHub Action is automatically configured on your project, it will trigger scans on PR and on merge to your main branch. You can tweak the configuration however you want afterward. 
+- A Bearer Cloud API Key is generated and configured on your GitHub project so that scan results are securely sent to your Bearer Cloud Dashboard.
 
-To connect Bearer CLI to Bearer Cloud, you'll first need to generate an API token. [Log in to Bearer Cloud](https://my.bearer.sh) and navigate to *Settings > API tokens* by selecting your user account in the top right corner, or from the link in the "Add a project" form.
+The best part? Bearer does all this without ever having access to your source code beyond the *.github/workflows* directory, where the GitHub Action is configured.
 
-![API token settings page](/assets/img/api-token.jpg)
-
-## Add the API token to Bearer CLI
-
-Use the API token any place where you run a scan.
-
-### Local projects
-
-Use the `--api-key` flag with the `scan` command:
-
-```bash
-bearer scan project-folder --api-key=XXXXXXXX
-```
+In addition to a 1-click setup, **the GitHub App provides the best developer experience** thanks to the ability for them to ignore findings directly in the PR workflow, and for your Security team to review those in Bearer Cloud Dashboard. 
 
 ### GitHub Action
 
@@ -60,6 +43,14 @@ Set up the [GitLab CI/CD configuration](/guides/gitlab), then adjust your settin
 {% yamlExample "ci/gitlab/cloud" %}
 
 We recommend using [GitLab's CI/CD variables](https://docs.gitlab.com/ee/ci/variables/) to protect your token. In the example above, the variable is named `BEARER_TOKEN`.
+
+### Local projects
+
+Use the `--api-key` flag with the `scan` command:
+
+```bash
+bearer scan project-folder --api-key=XXXXXXXX
+```
 
 ## Import your projects
 
@@ -121,3 +112,4 @@ Below an example of a Slack notification triggered by a new finding:
 ## Need help?
 
 Get in touch with our team directly on [Discord](https://discord.com/invite/eaHZBJUXRF) or [book a demo](https://www.bearer.com/demo) with one of our engineer.
+
