@@ -18,6 +18,7 @@ var (
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
 	unanchoredPatternNodeTypes     = []string{"import_spec"}
 	patternMatchNodeContainerTypes = []string{
+		"range_clause",
 		"parameter_declaration",
 		"argument_list",
 		"expression_list",
@@ -95,6 +96,13 @@ func (*Pattern) IsLeaf(node *tree.Node) bool {
 		return true
 	}
 	return false
+}
+
+func (*Pattern) AnonymousParentTypes() []string {
+	return []string{
+		"unary_expression",
+		"binary_expression",
+	}
 }
 
 func (*Pattern) LeafContentTypes() []string {
