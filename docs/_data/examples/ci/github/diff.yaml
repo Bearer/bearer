@@ -1,0 +1,18 @@
+name: Bearer PR Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  rule_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bearer
+        uses: bearer/bearer-action@v2
+        with:
+          diff: true

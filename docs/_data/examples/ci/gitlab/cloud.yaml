@@ -1,0 +1,5 @@
+bearer:
+  image:
+    name: bearer/bearer
+    entrypoint: [ "" ]
+  script: bearer scan . --api-key=$BEARER_TOKEN

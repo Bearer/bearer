@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  bearer:
+    machine:
+      image: ubuntu-2204:2023.07.2
+    environment:
+      # Set to default branch of your repo
+      DEFAULT_BRANCH: main
+    steps:
+      - checkout
+      - run: curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /tmp
+      - run: curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /tmp
+      - run: |
+          CURRENT_BRANCH=$CIRCLE_BRANCH SHA=$CIRCLE_SHA1 /tmp/bearer scan . --format=rdjson --output=rd.json || export BEARER_EXIT=$?
+          cat rd.json | REVIEWDOG_GITHUB_API_TOKEN=$GITHUB_TOKEN /tmp/reviewdog -f=rdjson -reporter=github-pr-review
+          exit $BEARER_EXIT
+
+workflows:
+  test:
+    jobs:
+      - bearer:
+          filters:
+            branches:
+              # No need to run a check on default branch
+              ignore: main
+          context:
+            - bearer
+            # make sure to set GITHUB_TOKEN in your context

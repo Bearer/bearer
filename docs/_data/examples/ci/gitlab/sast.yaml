@@ -1,0 +1,9 @@
+bearer:
+  image:
+    name: bearer/bearer
+    entrypoint: [ "" ]
+  script:
+    - bearer scan . --format gitlab-sast --output gl-sast-report.json
+  artifacts:
+    reports:
+      sast: gl-sast-report.json

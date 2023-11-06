@@ -1,0 +1,21 @@
+name: Bearer
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  rule_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bearer
+        uses: bearer/bearer-action@v2
+        with:
+          config-file: '/some/path/bearer.yml'
+          only-rule: 'ruby_lang_cookies,ruby_lang_http_post_insecure_with_data'
+          skip-path: 'users/*.go,users/admin.sql'

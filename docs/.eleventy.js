@@ -12,7 +12,9 @@ const markdownItAnchor = require("markdown-it-anchor")
 const pluginTOC = require("eleventy-plugin-toc")
 const now = String(Date.now())
 const path = require("path")
+const fs = require("fs")
 const mermaid = require("./_src/_plugins/mermaid")
+const nav = require("./_data/nav")
 
 const mdSetup = markdownIt({ html: true })
   .use(markdownItEmoji)
@@ -48,6 +50,35 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("version", function () {
     return now
   })
+  eleventyConfig.addShortcode("sectionLinks", function (sectionName) {
+    const section = nav.find(item => item.name == sectionName)
+    let out = ""
+    if(section){
+      section.items.forEach(item => {
+        out += `- [${item.name}](${item.url})\n`
+      })
+    }
+
+    return out
+  })
+
+  // {% yamlExample "ci/gitlab/basic" %}
+  eleventyConfig.addShortcode('yamlExample', function (exampleName) {
+    const example = fs.readFileSync(`./_data/examples/${exampleName}.yaml`, 'utf8')
+    return '```yaml\n' + example + '\n```';
+  });
+
+  eleventyConfig.addShortcode('githubAction', function(data){
+    out = "| Option | Description | Default |\n"
+    out += "| - | - | - |\n"
+    Object.keys(data).sort().forEach(key => {
+      const item = data[key]
+      const default_val = item.default ? "`"+item.default+"`" : ""
+      out += `| **${key}** | ${item.description} | ${default_val} |\n`
+    });
+    return out
+  })
+
   eleventyConfig.setLibrary("md", mdSetup)
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin, {
     baseHref: "/",
