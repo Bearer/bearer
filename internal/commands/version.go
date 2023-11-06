@@ -42,7 +42,7 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 			} else {
 				version_check.DisplayBinaryVersionWarning(meta, false)
 			}
-			cmd.Printf("bearer version: %s\nsha: %s\n", version, commitSHA)
+			cmd.Printf("bearer version %s, build %s\n", version, commitSHA)
 			return nil
 		},
 	}

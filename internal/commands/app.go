@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 
+	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/internal/commands/artifact"
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/spf13/cobra"
@@ -65,12 +66,14 @@ Learn More:
 	For more examples, tutorials, and to learn more about the project
 	visit https://docs.bearer.com
 `
-
+	version := fmt.Sprintf("%s, build %s", build.Version, build.CommitSHA)
 	cmd := &cobra.Command{
-		Use:  "bearer",
-		Args: cobra.NoArgs,
+		Use:     "bearer",
+		Args:    cobra.NoArgs,
+		Version: version,
 	}
 	cmd.SetUsageTemplate(usageTemplate)
+
 	return cmd
 }
 
