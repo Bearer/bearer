@@ -19,7 +19,7 @@ func GoclocDetectorOutput(path string, opts flag.Options) (*gocloc.Result, error
 		progressBar := getProgressBar()
 		defer progressBar.Close()
 		clocOpts.OnCode = func(line string) {
-			progressBar.Add(1)
+			progressBar.Add(1) //nolint:errcheck
 		}
 	}
 
