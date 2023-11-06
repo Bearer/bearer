@@ -66,7 +66,7 @@ Learn More:
 	For more examples, tutorials, and to learn more about the project
 	visit https://docs.bearer.com
 `
-	version := fmt.Sprintf("%s@%s", build.Version, build.CommitSHA)
+	version := fmt.Sprintf("%s, build %s", build.Version, build.CommitSHA)
 	cmd := &cobra.Command{
 		Use:     "bearer",
 		Args:    cobra.NoArgs,
