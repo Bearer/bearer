@@ -45,7 +45,9 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeSwitch(node, visitChildren)
 	case "expression_case", "default_case":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
-	case "argument_list", "binary_expression", "expression_list":
+	case "qualified_type":
+		return analyzer.analyzeQualifiedType(node, visitChildren)
+	case "argument_list", "binary_expression", "expression_list", "unary_expression":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "return_statement", "go_statement", "defer_statement", "if_statement": // statements don't have results
 		return visitChildren()
@@ -61,6 +63,13 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
+}
+
+// big.Rat{}
+func (analyzer *analyzer) analyzeQualifiedType(node *sitter.Node, visitChildren func() error) error {
+	analyzer.lookupVariable(node.ChildByFieldName("package"))
+
+	return visitChildren()
 }
 
 // for i, j := range x {}
@@ -217,7 +226,7 @@ func (analyzer *analyzer) withScope(newScope *language.Scope, body func() error)
 }
 
 func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
-	if node == nil || node.Type() != "identifier" {
+	if node == nil || !slices.Contains([]string{"identifier", "package_identifier"}, node.Type()) {
 		return
 	}
 
