@@ -180,6 +180,9 @@ func evaluateRules(
 			sortByLineNumber(policyFailures)
 
 			for i, output := range policyFailures {
+				instanceID := instanceCount[output.Filename]
+				instanceCount[output.Filename]++
+
 				if baseBranchFindings != nil &&
 					baseBranchFindings.Consume(rule.Id, output.Filename, output.Sink.Start, output.Sink.End) {
 					continue
@@ -187,10 +190,9 @@ func evaluateRules(
 
 				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
-				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceCount[output.Filename])
+				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceID)
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
 
-				instanceCount[output.Filename]++
 				fingerprints = append(fingerprints, fingerprint)
 				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
 				codeExtract := getExtract(rawCodeExtract)
