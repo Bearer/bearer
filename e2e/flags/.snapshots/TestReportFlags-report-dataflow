@@ -1,4 +1,5 @@
 {"data_types":[{"category_name":"Contact","category_groups":["PII","Personal Data"],"name":"Email Address","detectors":[{"name":"ruby","locations":[{"filename":"main.rb","full_filename":"e2e/flags/testdata/simple/main.rb","start_line_number":1,"start_column_number":31,"end_column_number":36,"field_name":"email","object_name":"user","subject_name":"User"}]}]}]}
 
 --
+Analyzing codebase
 
