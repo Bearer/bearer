@@ -4,7 +4,7 @@ layout: "layouts/doc"
 permalink: "/"
 ---
 
-{% callout "info" %}🎉 Bearer Cloud is available now for free for everyone, <a href="/guides/bearer-cloud">learn more</a>.{% endcallout %}
+{% callout "info" %}Discover <a href="/guides/bearer-cloud">Bearer Cloud</a>, our solution to manage product and application code security at scale.{% endcallout %}
 
 # Bearer CLI
 
