@@ -306,6 +306,14 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 		return fmt.Errorf("error getting git worktree: %w", err)
 	}
 
+	status, err := worktree.Status()
+	if err != nil {
+		return err
+	}
+	if !status.IsClean() {
+		return errors.New("uncommitted changes found in worktree. commit or stash changes your changes and retry")
+	}
+
 	defer repository.restoreHead(worktree)
 
 	if err := worktree.Checkout(&git.CheckoutOptions{
