@@ -21,11 +21,11 @@ Bearer CLI offers a number of commands to use and customize the CLI to your need
 </ul>
 
 {% for item in items %}
-  <h2 class="inline-block text-neutral-100 bg-code p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e | replace(" ", "_")}}">bearer {{ item.name | trim | escape }}</h2>
+  <h2 class="inline-block text-neutral-100 bg-code p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e | replace(" ", "_")}}">{{ item.name | trim | escape }}</h2>
 
   <p>{{item.synopsis}}</p>
 
-  <pre class="language-bash"><code class="language-bash">bearer {{item.usage | trim}}</code></pre>
+  <pre class="language-bash"><code class="language-bash">{{item.usage | trim}}</code></pre>
 
   <h3 id="{{item.name | trim}}-flags">Flags</h3>
   <table class="table-auto">
