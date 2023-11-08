@@ -13,8 +13,12 @@ import (
 	"github.com/bearer/bearer/internal/util/output"
 )
 
-func AddReportData(reportData *types.ReportData, report globaltypes.Report, config settings.Config) error {
-	if !config.Scan.Quiet {
+func AddReportData(
+	reportData *types.ReportData,
+	report globaltypes.Report,
+	config settings.Config,
+) error {
+	if !config.Scan.Quiet && report.HasFiles {
 		output.StdErrLog("Running Detectors")
 	}
 

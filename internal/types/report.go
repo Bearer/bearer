@@ -7,4 +7,5 @@ import (
 type Report struct {
 	Path        string
 	Inputgocloc *gocloc.Result
+	HasFiles    bool
 }

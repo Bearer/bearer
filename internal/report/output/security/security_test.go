@@ -7,8 +7,11 @@ import (
 	"github.com/hhatto/gocloc"
 	"github.com/stretchr/testify/assert"
 
+	"github.com/bearer/bearer/internal/commands/process/filelist/files"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
+	"github.com/bearer/bearer/internal/report/basebranchfindings"
+	basebranchfindingstypes "github.com/bearer/bearer/internal/report/basebranchfindings/types"
 	"github.com/bearer/bearer/internal/report/schema"
 	globaltypes "github.com/bearer/bearer/internal/types"
 	"github.com/bearer/bearer/internal/util/set"
@@ -37,7 +40,7 @@ func TestBuildReportString(t *testing.T) {
 	}
 
 	data := dummyDataflowData()
-	if err := security.AddReportData(data, config, nil); err != nil {
+	if err := security.AddReportData(data, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -66,7 +69,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 	}
 
 	output := dummyDataflowData()
-	if err := security.AddReportData(output, config, nil); err != nil {
+	if err := security.AddReportData(output, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -97,7 +100,7 @@ func TestAddReportData(t *testing.T) {
 	}
 
 	output := dummyDataflowData()
-	if err = security.AddReportData(output, config, nil); err != nil {
+	if err = security.AddReportData(output, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -124,7 +127,7 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 	}
 
 	data := dummyDataflowData()
-	if err = security.AddReportData(data, config, nil); err != nil {
+	if err = security.AddReportData(data, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -170,7 +173,7 @@ func TestAddReportDataWithFailOnSeverity(t *testing.T) {
 			}
 
 			data := dummyDataflowData()
-			if err = security.AddReportData(data, config, nil); err != nil {
+			if err = security.AddReportData(data, config, nil, true); err != nil {
 				tt.Fatalf("failed to generate security output err:%s", err)
 			}
 
@@ -189,6 +192,100 @@ func TestCalculateSeverity(t *testing.T) {
 	}
 
 	cupaloy.SnapshotT(t, res)
+}
+
+func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
+	config, err := generateConfig(flag.ReportOptions{Report: "security"})
+	if err != nil {
+		t.Fatalf("failed to generate config:%s", err)
+	}
+
+	config.Rules = map[string]*settings.Rule{
+		"ruby_lang_ssl_verification": testhelper.RubyLangSSLVerificationRule(),
+	}
+
+	filename := "config/application.rb"
+
+	data := &outputtypes.ReportData{
+		Dataflow: &outputtypes.DataFlow{
+			Risks: []dataflowtypes.RiskDetector{
+				{
+					DetectorID: "ruby_lang_ssl_verification",
+					Locations: []dataflowtypes.RiskLocation{
+						{
+							Filename:        filename,
+							StartLineNumber: 1,
+							Source: &schema.Source{
+								StartLineNumber:   1,
+								StartColumnNumber: 1,
+								EndLineNumber:     1,
+								EndColumnNumber:   44,
+								Content:           "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+							},
+							PresenceMatches: []dataflowtypes.RiskPresence{
+								{
+									Name: "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+								},
+							},
+						},
+					},
+				},
+				{
+					DetectorID: "ruby_lang_ssl_verification",
+					Locations: []dataflowtypes.RiskLocation{
+						{
+							Filename:        filename,
+							StartLineNumber: 2,
+							Source: &schema.Source{
+								StartLineNumber:   2,
+								StartColumnNumber: 1,
+								EndLineNumber:     2,
+								EndColumnNumber:   44,
+								Content:           "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+							},
+							PresenceMatches: []dataflowtypes.RiskPresence{
+								{
+									Name: "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Files: []string{filename},
+	}
+
+	if err = security.AddReportData(data, config, nil, true); err != nil {
+		t.Fatalf("failed to generate security output err:%s", err)
+	}
+
+	fullScanFinding := data.FindingsBySeverity[globaltypes.LevelMedium][1]
+
+	chunks := basebranchfindings.NewChunks()
+	chunks.Add(basebranchfindingstypes.ChunkEqual, 1)
+	chunks.Add(basebranchfindingstypes.ChunkAdd, 1)
+
+	file := files.File{FilePath: filename}
+	fileList := &files.List{
+		Files:     []files.File{file},
+		BaseFiles: []files.File{file},
+		Chunks: map[string]basebranchfindingstypes.Chunks{
+			filename: chunks,
+		},
+	}
+
+	baseBranchFindings := basebranchfindings.New(fileList)
+	baseBranchFindings.Add("ruby_lang_ssl_verification", filename, 1, 1)
+
+	if err = security.AddReportData(data, config, baseBranchFindings, true); err != nil {
+		t.Fatalf("failed to generate security output with base branch findings err:%s", err)
+	}
+
+	diffFinding := data.FindingsBySeverity[globaltypes.LevelMedium][0]
+
+	assert.Equal(t, fullScanFinding.LineNumber, diffFinding.LineNumber)
+	assert.Equal(t, fullScanFinding.Fingerprint, diffFinding.Fingerprint)
 }
 
 func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {

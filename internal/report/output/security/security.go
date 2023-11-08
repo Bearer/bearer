@@ -74,10 +74,18 @@ func AddReportData(
 	reportData *outputtypes.ReportData,
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
+	hasFiles bool,
 ) error {
-	dataflow := reportData.Dataflow
 	summaryFindings := make(Findings)
 	ignoredSummaryFindings := make(IgnoredFindings)
+	reportData.FindingsBySeverity = summaryFindings
+	reportData.IgnoredFindingsBySeverity = ignoredSummaryFindings
+
+	if !hasFiles {
+		return nil
+	}
+
+	dataflow := reportData.Dataflow
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
@@ -102,8 +110,6 @@ func AddReportData(
 		)
 	}
 
-	reportData.FindingsBySeverity = summaryFindings
-	reportData.IgnoredFindingsBySeverity = ignoredSummaryFindings
 	reportData.ReportFailed = builtInFailed || failed
 	return nil
 }
@@ -180,6 +186,9 @@ func evaluateRules(
 			sortByLineNumber(policyFailures)
 
 			for i, output := range policyFailures {
+				instanceID := instanceCount[output.Filename]
+				instanceCount[output.Filename]++
+
 				if baseBranchFindings != nil &&
 					baseBranchFindings.Consume(rule.Id, output.Filename, output.Sink.Start, output.Sink.End) {
 					continue
@@ -187,10 +196,9 @@ func evaluateRules(
 
 				fingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.Filename)
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
-				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceCount[output.Filename])
+				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceID)
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
 
-				instanceCount[output.Filename]++
 				fingerprints = append(fingerprints, fingerprint)
 				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
 				codeExtract := getExtract(rawCodeExtract)
@@ -360,6 +368,15 @@ func getExtract(rawCodeExtract []file.Line) string {
 
 func BuildReportString(reportData *outputtypes.ReportData, config settings.Config, lineOfCodeOutput *gocloc.Result) *strings.Builder {
 	reportStr := &strings.Builder{}
+
+	if len(reportData.Files) == 0 {
+		reportStr.WriteString(
+			"\ncouldn't find any files to scan in the specified directory, " +
+				"for diff scans this can mean the compared branches were identical",
+		)
+
+		return reportStr
+	}
 
 	reportStr.WriteString("\n\nSecurity Report\n")
 	reportStr.WriteString("\n=====================================")

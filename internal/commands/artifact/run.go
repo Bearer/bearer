@@ -38,8 +38,6 @@ import (
 	"github.com/bearer/bearer/internal/types"
 )
 
-var ErrFileListEmpty = errors.New("couldn't find any files to scan in the specified directory, for diff scans this can mean the compared branches were identical")
-
 // TargetKind represents what kind of artifact bearer scans
 type TargetKind string
 
@@ -164,10 +162,6 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 		return nil, nil, err
 	}
 
-	if len(fileList.Files) == 0 {
-		return nil, nil, ErrFileListEmpty
-	}
-
 	orchestrator, err := orchestrator.New(
 		work.Repository{Dir: r.targetPath},
 		r.scanSettings,
@@ -185,18 +179,10 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 			outputhandler.StdErrLog(fmt.Sprintf("\nScanning base branch %s", opts.DiffBaseBranch))
 		}
 
-		if err := orchestrator.Scan(r.reportPath+".base", fileList.BaseFiles); err != nil {
-			return err
-		}
-
-		report := types.Report{Path: r.reportPath + ".base", Inputgocloc: r.goclocResult}
-
-		reportData, err := reportoutput.GetData(report, r.scanSettings, nil)
+		baseBranchFindings, err = r.scanBaseBranch(orchestrator, fileList)
 		if err != nil {
 			return err
 		}
-
-		baseBranchFindings = buildBaseBranchFindings(reportData, fileList)
 
 		if !opts.Quiet {
 			outputhandler.StdErrLog("\nScanning current branch")
@@ -212,6 +198,40 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 	}
 
 	return fileList.Files, baseBranchFindings, nil
+}
+
+func (r *runner) scanBaseBranch(
+	orchestrator *orchestrator.Orchestrator,
+	fileList *files.List,
+) (*basebranchfindings.Findings, error) {
+	result := basebranchfindings.New(fileList)
+
+	if len(fileList.BaseFiles) == 0 {
+		return result, nil
+	}
+
+	if err := orchestrator.Scan(r.reportPath+".base", fileList.BaseFiles); err != nil {
+		return nil, err
+	}
+
+	report := types.Report{
+		Path:        r.reportPath + ".base",
+		Inputgocloc: r.goclocResult,
+		HasFiles:    len(fileList.BaseFiles) != 0,
+	}
+
+	reportData, err := reportoutput.GetData(report, r.scanSettings, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, findings := range reportData.FindingsBySeverity {
+		for _, finding := range findings {
+			result.Add(finding.Rule.Id, finding.Filename, finding.Sink.Start, finding.Sink.End)
+		}
+	}
+
+	return result, nil
 }
 
 func getIgnoredFingerprints(client *api.API, settings settings.Config) (
@@ -314,12 +334,6 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 
 	files, baseBranchFindings, err := r.Scan(ctx, opts)
 	if err != nil {
-		if errors.Is(err, ErrFileListEmpty) {
-			outputhandler.StdOutLog(err.Error())
-			os.Exit(0)
-			return
-		}
-
 		return fmt.Errorf("scan error: %w", err)
 	}
 
@@ -360,7 +374,7 @@ func (r *runner) Report(
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 
-	report := types.Report{Path: r.reportPath, Inputgocloc: r.goclocResult}
+	report := types.Report{Path: r.reportPath, Inputgocloc: r.goclocResult, HasFiles: len(files) != 0}
 
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLog
@@ -489,21 +503,4 @@ func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages
 	sort.Strings(keys)
 
 	return keys
-}
-
-func buildBaseBranchFindings(reportData *outputtypes.ReportData, fileList *files.List) *basebranchfindings.Findings {
-	result := basebranchfindings.New(fileList)
-
-	for _, findings := range reportData.FindingsBySeverity {
-		for _, finding := range findings {
-			result.Add(
-				finding.Rule.Id,
-				finding.Filename,
-				finding.Sink.Start,
-				finding.Sink.End,
-			)
-		}
-	}
-
-	return result
 }

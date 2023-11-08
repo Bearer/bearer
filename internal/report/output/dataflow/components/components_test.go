@@ -139,7 +139,7 @@ func TestDataflowComponents(t *testing.T) {
 				return
 			}
 
-			if err = dataflow.AddReportData(output, settings.Config{}, false); err != nil {
+			if err = dataflow.AddReportData(output, settings.Config{}, false, true); err != nil {
 				t.Fatalf("failed to get dataflow output %s", err)
 				return
 			}

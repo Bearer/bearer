@@ -37,8 +37,9 @@ type Repository struct {
 	rootPath,
 	targetPath,
 	gitTargetPath string
-	baseRemoteRefName plumbing.ReferenceName
-	headRef           *plumbing.Reference
+	baseRemoteRefName,
+	baseLocalRefName plumbing.ReferenceName
+	headRef *plumbing.Reference
 	headCommit,
 	mergeBaseCommit *object.Commit
 	githubToken string
@@ -88,6 +89,7 @@ func New(
 		targetPath:        targetPath,
 		gitTargetPath:     gitTargetPath,
 		baseRemoteRefName: plumbing.NewRemoteReferenceName("origin", baseBranch),
+		baseLocalRefName:  plumbing.NewBranchReferenceName(baseBranch),
 		headRef:           headRef,
 		headCommit:        headCommit,
 		githubToken:       config.Scan.GithubToken,
@@ -304,6 +306,14 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 		return fmt.Errorf("error getting git worktree: %w", err)
 	}
 
+	status, err := worktree.Status()
+	if err != nil {
+		return err
+	}
+	if !status.IsClean() {
+		return errors.New("uncommitted changes found in worktree. commit or stash changes your changes and retry")
+	}
+
 	defer repository.restoreHead(worktree)
 
 	if err := worktree.Checkout(&git.CheckoutOptions{
@@ -390,12 +400,24 @@ func (repository *Repository) lookupMergeBaseHash(baseBranch string) (*plumbing.
 	log.Debug().Msg("finding merge base using local repository")
 
 	ref, err := repository.git.Reference(repository.baseRemoteRefName, true)
-	if err != nil {
+	if err != nil && err != plumbing.ErrReferenceNotFound {
 		if err == plumbing.ErrReferenceNotFound {
 			return nil, nil
 		}
 
 		return nil, fmt.Errorf("invalid ref: %w", err)
+	}
+
+	if err == plumbing.ErrReferenceNotFound {
+		log.Debug().Msg("remote ref not found, trying local ref")
+		ref, err = repository.git.Reference(repository.baseLocalRefName, true)
+		if err != nil {
+			if err == plumbing.ErrReferenceNotFound {
+				return nil, nil
+			}
+
+			return nil, fmt.Errorf("invalid ref: %w", err)
+		}
 	}
 
 	baseCommit, err := repository.git.CommitObject(ref.Hash())

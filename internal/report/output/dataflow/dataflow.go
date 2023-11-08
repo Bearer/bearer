@@ -42,7 +42,12 @@ func contains(detections []detections.DetectionType, detection detections.Detect
 	return false
 }
 
-func AddReportData(reportData *types.ReportData, config settings.Config, isInternal bool) error {
+func AddReportData(reportData *types.ReportData, config settings.Config, isInternal, hasFiles bool) error {
+	if !hasFiles {
+		reportData.Dataflow = &types.DataFlow{}
+		return nil
+	}
+
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
