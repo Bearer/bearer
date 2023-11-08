@@ -56,9 +56,9 @@ func GetData(
 	case flag.ReportDataFlow:
 		return data, err
 	case flag.ReportSecurity:
-		err = security.AddReportData(data, config, baseBranchFindings)
+		err = security.AddReportData(data, config, baseBranchFindings, report.HasFiles)
 	case flag.ReportSaaS:
-		if err = security.AddReportData(data, config, baseBranchFindings); err != nil {
+		if err = security.AddReportData(data, config, baseBranchFindings, report.HasFiles); err != nil {
 			return nil, err
 		}
 		err = saas.GetReport(data, config, false)
@@ -81,7 +81,12 @@ func UploadReportToCloud(report *types.ReportData, config settings.Config) {
 	}
 }
 
-func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config settings.Config, isInternal bool) error {
+func GetDataflow(
+	reportData *types.ReportData,
+	report globaltypes.Report,
+	config settings.Config,
+	isInternal bool,
+) error {
 	if reportData.Detectors == nil {
 		if err := detectors.AddReportData(reportData, report, config); err != nil {
 			return err
@@ -90,7 +95,7 @@ func GetDataflow(reportData *types.ReportData, report globaltypes.Report, config
 	for _, detection := range reportData.Detectors {
 		detection.(map[string]interface{})["id"] = uuid.NewString()
 	}
-	return dataflow.AddReportData(reportData, config, isInternal)
+	return dataflow.AddReportData(reportData, config, isInternal, report.HasFiles)
 }
 
 func FormatOutput(

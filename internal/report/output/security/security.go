@@ -74,10 +74,18 @@ func AddReportData(
 	reportData *outputtypes.ReportData,
 	config settings.Config,
 	baseBranchFindings *basebranchfindings.Findings,
+	hasFiles bool,
 ) error {
-	dataflow := reportData.Dataflow
 	summaryFindings := make(Findings)
 	ignoredSummaryFindings := make(IgnoredFindings)
+	reportData.FindingsBySeverity = summaryFindings
+	reportData.IgnoredFindingsBySeverity = ignoredSummaryFindings
+
+	if !hasFiles {
+		return nil
+	}
+
+	dataflow := reportData.Dataflow
 	if !config.Scan.Quiet {
 		output.StdErrLog("Evaluating rules")
 	}
@@ -102,8 +110,6 @@ func AddReportData(
 		)
 	}
 
-	reportData.FindingsBySeverity = summaryFindings
-	reportData.IgnoredFindingsBySeverity = ignoredSummaryFindings
 	reportData.ReportFailed = builtInFailed || failed
 	return nil
 }
@@ -362,6 +368,15 @@ func getExtract(rawCodeExtract []file.Line) string {
 
 func BuildReportString(reportData *outputtypes.ReportData, config settings.Config, lineOfCodeOutput *gocloc.Result) *strings.Builder {
 	reportStr := &strings.Builder{}
+
+	if len(reportData.Files) == 0 {
+		reportStr.WriteString(
+			"\ncouldn't find any files to scan in the specified directory, " +
+				"for diff scans this can mean the compared branches were identical",
+		)
+
+		return reportStr
+	}
 
 	reportStr.WriteString("\n\nSecurity Report\n")
 	reportStr.WriteString("\n=====================================")

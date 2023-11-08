@@ -155,7 +155,8 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 	runner.config.Scan.Target = testDataPath
 	reportData, err := output.GetData(
 		types.Report{
-			Path: detectorsReportPath,
+			Path:     detectorsReportPath,
+			HasFiles: true,
 		},
 		runner.config,
 		nil,

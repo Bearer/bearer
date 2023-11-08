@@ -233,7 +233,7 @@ func TestDataflowRisks(t *testing.T) {
 				return
 			}
 
-			if err = dataflow.AddReportData(output, test.Config, false); err != nil {
+			if err = dataflow.AddReportData(output, test.Config, false, true); err != nil {
 				t.Fatalf("failed to get dataflow output %s", err)
 				return
 			}

@@ -40,7 +40,7 @@ func TestBuildReportString(t *testing.T) {
 	}
 
 	data := dummyDataflowData()
-	if err := security.AddReportData(data, config, nil); err != nil {
+	if err := security.AddReportData(data, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -69,7 +69,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 	}
 
 	output := dummyDataflowData()
-	if err := security.AddReportData(output, config, nil); err != nil {
+	if err := security.AddReportData(output, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -100,7 +100,7 @@ func TestAddReportData(t *testing.T) {
 	}
 
 	output := dummyDataflowData()
-	if err = security.AddReportData(output, config, nil); err != nil {
+	if err = security.AddReportData(output, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -127,7 +127,7 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 	}
 
 	data := dummyDataflowData()
-	if err = security.AddReportData(data, config, nil); err != nil {
+	if err = security.AddReportData(data, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -173,7 +173,7 @@ func TestAddReportDataWithFailOnSeverity(t *testing.T) {
 			}
 
 			data := dummyDataflowData()
-			if err = security.AddReportData(data, config, nil); err != nil {
+			if err = security.AddReportData(data, config, nil, true); err != nil {
 				tt.Fatalf("failed to generate security output err:%s", err)
 			}
 
@@ -256,7 +256,7 @@ func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
 		Files: []string{filename},
 	}
 
-	if err = security.AddReportData(data, config, nil); err != nil {
+	if err = security.AddReportData(data, config, nil, true); err != nil {
 		t.Fatalf("failed to generate security output err:%s", err)
 	}
 
@@ -278,7 +278,7 @@ func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
 	baseBranchFindings := basebranchfindings.New(fileList)
 	baseBranchFindings.Add("ruby_lang_ssl_verification", filename, 1, 1)
 
-	if err = security.AddReportData(data, config, baseBranchFindings); err != nil {
+	if err = security.AddReportData(data, config, baseBranchFindings, true); err != nil {
 		t.Fatalf("failed to generate security output with base branch findings err:%s", err)
 	}
 
