@@ -31,6 +31,9 @@
     // php
     { "name": "OWASPWebGoatPHP", "repository_url": "https://github.com/OWASP/OWASPWebGoatPHP" },
     { "name": "Vulnerable-Web-Application", "repository_url": "https://github.com/OWASP/Vulnerable-Web-Application" },
-    { "name": "mediawiki", "repository_url": "https://github.com/wikimedia/mediawiki" }
+    { "name": "mediawiki", "repository_url": "https://github.com/wikimedia/mediawiki" },
+    // golang
+    { "name": "Vulnerability-goapp", "repository_url": "https://github.com/Hardw01f/Vulnerability-goapp" },
+    { "name": "govwa", "repository_url": "https://github.com/0c34/govwa" }
   ]
 }
