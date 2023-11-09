@@ -47,7 +47,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "qualified_type":
 		return analyzer.analyzeQualifiedType(node, visitChildren)
-	case "argument_list", "binary_expression", "expression_list", "unary_expression":
+	case "argument_list", "binary_expression", "expression_list", "unary_expression", "literal_element":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "return_statement", "go_statement", "defer_statement", "if_statement": // statements don't have results
 		return visitChildren()

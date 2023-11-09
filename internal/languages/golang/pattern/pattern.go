@@ -25,6 +25,7 @@ var (
 		"parameter_list",
 		"var_spec",
 		"import_spec",
+		"literal_element", // Can be removed once the tree-sitter-go is updated
 	}
 
 	allowedPatternQueryTypes = []string{"_"}
@@ -150,6 +151,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	unAnchored := []string{
 		"function_declaration",
 		"var_declaration",
+		"literal_value",
 	}
 
 	isAnchored := !slices.Contains(unAnchored, parent.Type())
