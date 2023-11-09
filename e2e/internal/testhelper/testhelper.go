@@ -3,6 +3,7 @@ package testhelper
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -42,7 +43,7 @@ func NewTestCase(name string, arguments []string, options TestCaseOptions) TestC
 	}
 }
 
-func executeApp(t *testing.T, arguments []string) (string, error) {
+func executeApp(t *testing.T, arguments []string) (string, string, error) {
 	cmd, cancel := CreateCommand(arguments)
 
 	buffOut := bytes.NewBuffer(nil)
@@ -54,12 +55,6 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 
 	timer := time.NewTimer(TestTimeout)
 	commandFinished := make(chan struct{}, 1)
-	combinedOutput := func() string {
-		errStr := buffErr.String()
-		// trim exit status
-		errStr = strings.TrimSuffix(errStr, "exit status 1\n")
-		return buffOut.String() + "\n--\n" + errStr
-	}
 
 	go func() {
 		err = cmd.Start()
@@ -76,12 +71,21 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	select {
 	case <-timer.C:
 		cancel()
-		t.Fatalf("command failed to complete on time 'bearer %s':\n%s", strings.Join(arguments, " "), combinedOutput())
+		t.Fatalf(
+			"command failed to complete on time 'bearer %s':\n%s\n--\n%s",
+			strings.Join(arguments, " "),
+			buffOut,
+			buffErr,
+		)
 	case <-commandFinished:
 		cancel()
 	}
 
-	return combinedOutput(), err
+	errStr := buffErr.String()
+	// make output from `go run` match a compiled executable
+	errStr = strings.TrimSuffix(errStr, "exit status 1\n")
+
+	return buffOut.String(), errStr, err
 }
 
 func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
@@ -129,18 +133,9 @@ func GetCWD() string {
 func RunTestsWithSnapshotSubdirectory(t *testing.T, tests []TestCase, snapshotSubdirectory string) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			combinedOutput, err := executeTest(test, t)
-
-			if test.ShouldSucceed && err != nil {
-				t.Fatalf("command completed with error %s %s", err, combinedOutput)
-			}
-
-			if !test.ShouldSucceed && err == nil {
-				t.Fatal("expected command to fail but it succeeded instead")
-			}
-
+			stdOut, stdErr := ExecuteTest(test, t)
 			cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotSubdirectory))
-			cupaloyCopy.SnapshotT(t, combinedOutput)
+			cupaloyCopy.SnapshotT(t, combineOutput(stdOut, stdErr))
 		})
 	}
 }
@@ -148,22 +143,13 @@ func RunTestsWithSnapshotSubdirectory(t *testing.T, tests []TestCase, snapshotSu
 func RunTests(t *testing.T, tests []TestCase) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			combinedOutput, err := executeTest(test, t)
-
-			if test.ShouldSucceed && err != nil {
-				t.Fatalf("command completed with error %s %s", err, combinedOutput)
-			}
-
-			if !test.ShouldSucceed && err == nil {
-				t.Fatal("expected command to fail but it succeeded instead")
-			}
-
-			cupaloy.SnapshotT(t, combinedOutput)
+			stdOut, stdErr := ExecuteTest(test, t)
+			cupaloy.SnapshotT(t, combineOutput(stdOut, stdErr))
 		})
 	}
 }
 
-func executeTest(test TestCase, t *testing.T) (string, error) {
+func ExecuteTest(test TestCase, t *testing.T) (string, string) {
 	arguments := test.arguments
 
 	if !test.displayProgressBar {
@@ -178,5 +164,18 @@ func executeTest(test TestCase, t *testing.T) (string, error) {
 		arguments = append(arguments, "--force")
 	}
 
-	return executeApp(t, arguments)
+	stdOut, stdErr, err := executeApp(t, arguments)
+	if test.ShouldSucceed && err != nil {
+		t.Fatalf("command completed with error %s %s", err, combineOutput(stdOut, stdErr))
+	}
+
+	if !test.ShouldSucceed && err == nil {
+		t.Fatal("expected command to fail but it succeeded instead")
+	}
+
+	return stdOut, stdErr
+}
+
+func combineOutput(stdOut, stdErr string) string {
+	return fmt.Sprintf("%s\n--\n%s", stdOut, stdErr)
 }

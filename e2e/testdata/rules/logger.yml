@@ -1,0 +1,15 @@
+patterns:
+  - pattern: logger.$<_>($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+        scope: result
+languages:
+  - ruby
+severity: high
+metadata:
+  description: Ruby logger
+  remediation_message: Ruby logger
+  cwe_id:
+    - 42
+  id: test_ruby_logger

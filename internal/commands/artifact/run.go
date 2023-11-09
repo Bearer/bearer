@@ -374,7 +374,11 @@ func (r *runner) Report(
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
 
-	report := types.Report{Path: r.reportPath, Inputgocloc: r.goclocResult, HasFiles: len(files) != 0}
+	report := types.Report{
+		Path:        r.reportPath,
+		Inputgocloc: r.goclocResult,
+		HasFiles:    r.CacheUsed() || len(files) != 0,
+	}
 
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLog
