@@ -8,9 +8,9 @@ import (
 	"github.com/bearer/bearer/internal/detectors/openapi/v2json"
 	"github.com/bearer/bearer/internal/parser/nodeid"
 	"github.com/bearer/bearer/internal/util/file"
-	"github.com/ghodss/yaml" // Need to use this as some features use custom JSON unmarshalling
 	"github.com/rs/zerolog/log"
 	"golang.org/x/mod/semver"
+	"sigs.k8s.io/yaml" // Need to use this as some features use custom JSON unmarshalling
 
 	"github.com/bearer/bearer/internal/detectors/openapi/v2yaml"
 	"github.com/bearer/bearer/internal/detectors/openapi/v3json"

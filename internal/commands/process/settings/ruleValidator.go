@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/ghodss/yaml"
 	"github.com/xeipuuv/gojsonschema"
+	"sigs.k8s.io/yaml"
 )
 
 const SCHEMA_URL = "https://raw.githubusercontent.com/Bearer/bearer-rules/main/scripts/rule_schema.json"
