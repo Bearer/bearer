@@ -30,6 +30,7 @@ type Node struct {
 	children,
 	dataflowSources,
 	aliasOf []*Node
+	expectedRuleIndices *bitset.BitSet
 	disabledRuleIndices *bitset.BitSet
 	// FIXME: remove the need for this
 	sitterNode   *sitter.Node
@@ -158,6 +159,7 @@ type nodeDump struct {
 	AliasOf         []int      `yaml:"alias_of,omitempty"`
 	Queries         []int      `yaml:",omitempty"`
 	DisabledRules   []int      `yaml:",omitempty"`
+	ExpectedRules   []int      `yaml:",omitempty"`
 	Children        []nodeDump `yaml:",omitempty"`
 }
 
@@ -189,6 +191,15 @@ func (node *Node) dumpValue() nodeDump {
 		}
 	}
 
+	var expectedRules []int
+	if node.expectedRuleIndices != nil {
+		for i := 0; i < int(node.expectedRuleIndices.Len()); i++ {
+			if node.expectedRuleIndices.Test(uint(i)) {
+				expectedRules = append(expectedRules, i)
+			}
+		}
+	}
+
 	contentRange := fmt.Sprintf(
 		"%d:%d - %d:%d",
 		node.ContentStart.Line,
@@ -212,6 +223,7 @@ func (node *Node) dumpValue() nodeDump {
 		Children:        childDump,
 		Queries:         queries,
 		DisabledRules:   disabledRules,
+		ExpectedRules:   expectedRules,
 	}
 }
 

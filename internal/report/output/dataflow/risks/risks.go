@@ -242,12 +242,10 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 		constructedDetector := types.RiskDetector{
 			DetectorID: detector.id,
 		}
+
 		locations := []types.RiskLocation{}
-
 		for _, file := range maputil.ToSortedSlice(detector.files) {
-
 			for _, line := range maputil.ToSortedSlice(file.startLineNumber) {
-
 				for _, source := range maputil.ToSortedSlice(line.source) {
 					location := types.RiskLocation{
 						Filename:          file.name,
@@ -304,9 +302,7 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 
 					locations = append(locations, location)
 				}
-
 			}
-
 		}
 		constructedDetector.Locations = locations
 
