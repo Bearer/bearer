@@ -42,6 +42,7 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	globaltypes.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
 
+type RawFindings = []types.RawFinding
 type Findings = map[string][]types.Finding
 type IgnoredFindings = map[string][]types.IgnoredFinding
 
@@ -97,6 +98,12 @@ func AddReportData(
 	fingerprints, failed, err := evaluateRules(summaryFindings, ignoredSummaryFindings, config.Rules, config, dataflow, baseBranchFindings, false)
 	if err != nil {
 		return err
+	}
+
+	for severity, findingsSlice := range summaryFindings {
+		for _, finding := range findingsSlice {
+			reportData.RawFindings = append(reportData.RawFindings, finding.ToRawFinding(severity))
+		}
 	}
 
 	if !config.Scan.Quiet {
