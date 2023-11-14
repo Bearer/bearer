@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -30,6 +29,7 @@ import (
 	"github.com/bearer/bearer/internal/report/output/stats"
 	outputtypes "github.com/bearer/bearer/internal/report/output/types"
 	scannerstats "github.com/bearer/bearer/internal/scanner/stats"
+	"github.com/bearer/bearer/internal/util/file"
 	"github.com/bearer/bearer/internal/util/ignore"
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
 	outputhandler "github.com/bearer/bearer/internal/util/output"
@@ -271,7 +271,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options) (err error) {
-	targetPath, err := filepath.Abs(opts.Target)
+	targetPath, err := file.CanonicalPath(opts.Target)
 	if err != nil {
 		return fmt.Errorf("failed to get absolute target: %w", err)
 	}
@@ -326,8 +326,6 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	if scanSettings.Debug {
 		stats = scannerstats.New()
 	}
-
-	gitrepository.ConfigureGithubAuth(scanSettings.Scan.GithubToken)
 
 	r := NewRunner(ctx, scanSettings, targetPath, inputgocloc, stats)
 	defer r.Close(ctx)

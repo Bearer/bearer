@@ -1,9 +1,27 @@
 package git
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
-func checkout(rootDir, ref string, filenames []string) error {
+func Switch(rootDir, ref string, detach bool) error {
+	args := []string{"switch"}
+
+	if detach {
+		args = append(args, "--detach")
+	}
+
+	return basicCommand(
+		context.TODO(),
+		rootDir,
+		append(args, ref)...,
+	)
+}
+
+func checkoutFiles(rootDir, ref string, filenames []string) error {
 	cmd := logAndBuildCommand(
+		context.TODO(),
 		"-c",
 		"advice.detachedHead=false",
 		"checkout",
@@ -23,36 +41,36 @@ func checkout(rootDir, ref string, filenames []string) error {
 	cmd.Stderr = logWriter
 
 	if err := cmd.Start(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return err
 	}
 
 	for _, filename := range filenames {
 		_, err := stdin.Write([]byte(filename))
 		if err != nil {
-			killProcess(cmd)
+			cmd.Cancel() //nolint:errcheck
 			return err
 		}
 
 		_, err = stdin.Write([]byte{0})
 		if err != nil {
-			killProcess(cmd)
+			cmd.Cancel() //nolint:errcheck
 			return err
 		}
 	}
 
 	if err := stdin.Close(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return err
 	}
 
 	if err := cmd.Wait(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return newError(err, logWriter.AllOutput())
 	}
 
 	// Using pathspec with checkout doesn't update the HEAD ref so do it manually
-	return basicCommand(rootDir, "update-ref", "HEAD", ref)
+	return basicCommand(context.TODO(), rootDir, "update-ref", "HEAD", ref)
 }
 
 func fetchBlobsForRange(rootDir, firstCommitSHA, lastCommitSHA string, filenames []string) error {
@@ -69,7 +87,7 @@ func fetchBlobsForRange(rootDir, firstCommitSHA, lastCommitSHA string, filenames
 // There's no command in git that does this directly but we can get the desired
 // behaviour by creating a pack and throwing it away
 func fetchBlobs(rootDir string, objectIDs []string) error {
-	cmd := logAndBuildCommand("pack-objects", "--progress", "--stdout")
+	cmd := logAndBuildCommand(context.TODO(), "pack-objects", "--progress", "--stdout")
 	cmd.Dir = rootDir
 
 	stdin, err := cmd.StdinPipe()
@@ -81,7 +99,7 @@ func fetchBlobs(rootDir string, objectIDs []string) error {
 	cmd.Stderr = logWriter
 
 	if err := cmd.Start(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return err
 	}
 
@@ -90,12 +108,12 @@ func fetchBlobs(rootDir string, objectIDs []string) error {
 	}
 
 	if err := stdin.Close(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return err
 	}
 
 	if err := cmd.Wait(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return newError(err, logWriter.AllOutput())
 	}
 

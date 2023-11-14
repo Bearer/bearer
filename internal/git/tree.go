@@ -2,12 +2,15 @@ package git
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"io"
 	"path"
 	"slices"
 	"strings"
 	"time"
+
+	"github.com/bearer/bearer/internal/util/file"
 )
 
 const blankID = "0000000000000000000000000000000000000000"
@@ -22,13 +25,36 @@ type TreeFile struct {
 	SHA      string `json:"sha" yaml:"sha"`
 }
 
+func GetRoot(targetPath string) string {
+	dir := targetPath
+	if !file.IsDir(dir) {
+		dir = path.Dir(dir)
+	}
+
+	command := logAndBuildCommand(context.TODO(), "rev-parse", "--show-toplevel")
+	command.Dir = dir
+
+	output, err := command.Output()
+	if err != nil {
+		return ""
+	}
+
+	path := strings.TrimSpace(string(output))
+	if path == "" {
+		return ""
+	}
+
+	canonicalPath, _ := file.CanonicalPath(path)
+	return canonicalPath
+}
+
 func GetTree(rootDir string) (*Tree, error) {
 	commit, err := getHeadCommitIdentifier(rootDir)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get commit identifier: %s", err)
 	}
 
-	files, err := listTree(rootDir, commit.SHA)
+	files, err := ListTree(rootDir, commit.SHA)
 	if err != nil {
 		return nil, fmt.Errorf("failed to list tree: %s", err)
 	}
@@ -36,10 +62,10 @@ func GetTree(rootDir string) (*Tree, error) {
 	return &Tree{Commit: *commit, Files: files}, nil
 }
 
-func listTree(rootDir, commitSHA string) ([]TreeFile, error) {
+func ListTree(rootDir, commitSHA string) ([]TreeFile, error) {
 	result := []TreeFile{}
 
-	cmd := logAndBuildCommand("ls-tree", "-r", "-z", commitSHA)
+	cmd := logAndBuildCommand(context.TODO(), "ls-tree", "-r", "-z", commitSHA)
 	cmd.Dir = rootDir
 
 	logWriter := &debugLogWriter{}
@@ -47,12 +73,12 @@ func listTree(rootDir, commitSHA string) ([]TreeFile, error) {
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
@@ -63,7 +89,7 @@ func listTree(rootDir, commitSHA string) ([]TreeFile, error) {
 			break
 		}
 		if err != nil {
-			killProcess(cmd)
+			cmd.Cancel() //nolint:errcheck
 			return nil, err
 		}
 
@@ -75,7 +101,7 @@ func listTree(rootDir, commitSHA string) ([]TreeFile, error) {
 
 		filename, err := stdoutBuf.ReadString(0)
 		if err != nil && err != io.EOF {
-			killProcess(cmd)
+			cmd.Cancel() //nolint:errcheck
 			return nil, err
 		}
 
@@ -87,7 +113,7 @@ func listTree(rootDir, commitSHA string) ([]TreeFile, error) {
 	stdout.Close()
 
 	if err := cmd.Wait(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, newError(err, logWriter.AllOutput())
 	}
 
@@ -115,6 +141,7 @@ func getObjectIDsUsedByRange(rootDir, firstCommitSHA, lastCommitSHA string) ([]s
 	result := []string{}
 
 	cmd := logAndBuildCommand(
+		context.TODO(),
 		"log",
 		"--no-renames",
 		"--first-parent",
@@ -131,12 +158,12 @@ func getObjectIDsUsedByRange(rootDir, firstCommitSHA, lastCommitSHA string) ([]s
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
@@ -157,14 +184,14 @@ func getObjectIDsUsedByRange(rootDir, firstCommitSHA, lastCommitSHA string) ([]s
 	}
 
 	if err := scanner.Err(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	stdout.Close()
 
 	if err := cmd.Wait(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, newError(err, logWriter.AllOutput())
 	}
 
@@ -179,7 +206,7 @@ func getObjectIDsForFiles(rootDir, commitSHA string, filenames []string) ([]stri
 		wantedFilenames[filename] = struct{}{}
 	}
 
-	treeFiles, err := listTree(rootDir, commitSHA)
+	treeFiles, err := ListTree(rootDir, commitSHA)
 	if err != nil {
 		return nil, err
 	}
@@ -201,7 +228,7 @@ func getObjectIDsForFiles(rootDir, commitSHA string, filenames []string) ([]stri
 }
 
 func getHeadCommitIdentifier(rootDir string) (*CommitIdentifier, error) {
-	cmd := logAndBuildCommand("log", "-1", "--format=%H %cI")
+	cmd := logAndBuildCommand(context.TODO(), "log", "-1", "--format=%H %cI")
 	cmd.Dir = rootDir
 
 	logWriter := &debugLogWriter{}
@@ -209,7 +236,7 @@ func getHeadCommitIdentifier(rootDir string) (*CommitIdentifier, error) {
 
 	output, err := cmd.Output()
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, newError(err, logWriter.AllOutput())
 	}
 
@@ -217,17 +244,9 @@ func getHeadCommitIdentifier(rootDir string) (*CommitIdentifier, error) {
 
 	parsedTimestamp, err := time.Parse(time.RFC3339, splitOutput[1])
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	return &CommitIdentifier{SHA: splitOutput[0], Timestamp: parsedTimestamp.UTC()}, nil
-}
-
-func commitPresent(rootDir, sha string) bool {
-	cmd := logAndBuildCommand("cat-file", "-t", sha)
-	cmd.Dir = rootDir
-
-	output, _ := cmd.Output()
-	return string(output) == "commit\n"
 }

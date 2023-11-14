@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os/exec"
-	"path/filepath"
 	"sort"
 	"strings"
 
@@ -15,6 +14,7 @@ import (
 
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/internal/commands/process/settings"
+	"github.com/bearer/bearer/internal/util/file"
 )
 
 func Build(scanSettings settings.Config) (string, error) {
@@ -50,7 +50,7 @@ func hashConfig(scanSettings settings.Config) (string, error) {
 		return "", fmt.Errorf("error building scanners hash: %w", err)
 	}
 
-	absTarget, err := filepath.Abs(scanSettings.Scan.Target)
+	absTarget, err := file.CanonicalPath(scanSettings.Scan.Target)
 	if err != nil {
 		return "", fmt.Errorf("error getting absolute path to target: %w", err)
 	}

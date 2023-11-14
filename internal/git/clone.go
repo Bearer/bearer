@@ -1,6 +1,7 @@
 package git
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net/url"
@@ -44,7 +45,7 @@ func CloneRangeAndCheckoutFiles(
 		firstCommitSHA = previousCommit.SHA
 	}
 
-	treeFiles, err := listTree(targetDir, commit.SHA)
+	treeFiles, err := ListTree(targetDir, commit.SHA)
 	if err != nil {
 		return false, err
 	}
@@ -60,7 +61,7 @@ func CloneRangeAndCheckoutFiles(
 		return false, err
 	}
 
-	if err := checkout(targetDir, commit.SHA, filenames); err != nil {
+	if err := checkoutFiles(targetDir, commit.SHA, filenames); err != nil {
 		return false, err
 	}
 
@@ -83,6 +84,7 @@ func appendMailmap(filenames []string, treeFiles []TreeFile) []string {
 
 func cloneTree(targetDir string, url *url.URL, branchName string) error {
 	return basicCommand(
+		context.TODO(),
 		"",
 		"clone",
 		"--depth=1",
@@ -114,11 +116,11 @@ func cloneTreeRange(
 		}
 	}
 
-	if !commitPresent(targetDir, commit.SHA) {
+	if !CommitPresent(targetDir, commit.SHA) {
 		return false, errors.New("target commit not found")
 	}
 
-	if previousCommit != nil && !commitPresent(targetDir, previousCommit.SHA) {
+	if previousCommit != nil && !CommitPresent(targetDir, previousCommit.SHA) {
 		log.Debug().Msg("previous commit is missing, possible re-written history")
 		// Fallback to non range clone
 		return false, nil
@@ -129,6 +131,7 @@ func cloneTreeRange(
 
 func cloneTreeSince(url *url.URL, branchName string, commit CommitIdentifier, targetDir string) error {
 	cmd := logAndBuildCommand(
+		context.TODO(),
 		"clone",
 		"--shallow-since="+commit.Timestamp.Format(time.RFC3339),
 		"--branch",
@@ -147,7 +150,7 @@ func cloneTreeSince(url *url.URL, branchName string, commit CommitIdentifier, ta
 	cmd.Stderr = logWriter
 
 	if err := cmd.Run(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return newError(err, logWriter.AllOutput())
 	}
 
@@ -155,5 +158,5 @@ func cloneTreeSince(url *url.URL, branchName string, commit CommitIdentifier, ta
 }
 
 func removeRemote(rootDir string) error {
-	return basicCommand(rootDir, "remote", "remove", "origin")
+	return basicCommand(context.TODO(), rootDir, "remote", "remove", "origin")
 }

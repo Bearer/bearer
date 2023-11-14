@@ -3,14 +3,14 @@ package files
 import (
 	"time"
 
-	bbftypes "github.com/bearer/bearer/internal/report/basebranchfindings/types"
+	"github.com/bearer/bearer/internal/git"
 )
 
 type List struct {
 	Files     []File
 	BaseFiles []File
 	Renames   map[string]string
-	Chunks    map[string]bbftypes.Chunks
+	Chunks    map[string]git.Chunks
 }
 
 type File struct {

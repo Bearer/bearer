@@ -2,6 +2,7 @@ package git
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"regexp"
 	"strings"
@@ -22,6 +23,7 @@ func GetCommitList(rootDir, firstCommitSHA, lastCommitSHA string) ([]CommitInfo,
 	result := []CommitInfo{}
 
 	cmd := logAndBuildCommand(
+		context.TODO(),
 		"log",
 		"--first-parent",
 		"--format=%H %cI%n%cN <%cE>%n%aN <%aE>%n%(trailers:unfold,valueonly,key=Co-authored-by)"+separator,
@@ -35,12 +37,12 @@ func GetCommitList(rootDir, firstCommitSHA, lastCommitSHA string) ([]CommitInfo,
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
@@ -85,14 +87,14 @@ func GetCommitList(rootDir, firstCommitSHA, lastCommitSHA string) ([]CommitInfo,
 	}
 
 	if err := scanner.Err(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	stdout.Close()
 
 	if err := cmd.Wait(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, newError(err, logWriter.AllOutput())
 	}
 
@@ -140,12 +142,12 @@ func translateCoAuthors(rootDir string, commitList []CommitInfo) error {
 }
 
 func checkMailmap(rootDir string, authors []string) ([]string, error) {
-	cmd := logAndBuildCommand("check-mailmap", "--stdin")
+	cmd := logAndBuildCommand(context.TODO(), "check-mailmap", "--stdin")
 	cmd.Dir = rootDir
 
 	stdin, err := cmd.StdinPipe()
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
@@ -162,12 +164,12 @@ func checkMailmap(rootDir string, authors []string) ([]string, error) {
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
@@ -179,14 +181,14 @@ func checkMailmap(rootDir string, authors []string) ([]string, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	stdout.Close()
 
 	if err := cmd.Wait(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, newError(err, logWriter.AllOutput())
 	}
 

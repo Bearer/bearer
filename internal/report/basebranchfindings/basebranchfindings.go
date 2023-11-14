@@ -4,7 +4,7 @@ import (
 	"slices"
 
 	"github.com/bearer/bearer/internal/commands/process/filelist/files"
-	"github.com/bearer/bearer/internal/report/basebranchfindings/types"
+	"github.com/bearer/bearer/internal/git"
 )
 
 type key struct {
@@ -14,15 +14,15 @@ type key struct {
 
 type Findings struct {
 	fileList *files.List
-	chunks   map[string][]chunk
-	items    map[key][]types.LineRange
+	chunks   map[string]git.Chunks
+	items    map[key][]git.ChunkRange
 }
 
 func New(fileList *files.List) *Findings {
 	return &Findings{
 		fileList: fileList,
-		chunks:   make(map[string][]chunk),
-		items:    make(map[key][]types.LineRange),
+		chunks:   make(map[string]git.Chunks),
+		items:    make(map[key][]git.ChunkRange),
 	}
 }
 
@@ -38,7 +38,10 @@ func (findings Findings) Add(ruleID string, baseFilename string, baseStartLine, 
 		Filename: filename,
 	}
 
-	findings.items[key] = append(findings.items[key], fileChunks.TranslateRange(baseStartLine, baseEndLine))
+	findings.items[key] = append(
+		findings.items[key],
+		fileChunks.TranslateRange(newRange(baseStartLine, baseEndLine)),
+	)
 }
 
 func (findings Findings) Consume(ruleID string, filename string, startLine, endLine int) bool {
@@ -47,7 +50,7 @@ func (findings Findings) Consume(ruleID string, filename string, startLine, endL
 		Filename: filename,
 	}
 
-	lineRange := types.LineRange{Start: startLine, End: endLine}
+	lineRange := newRange(startLine, endLine)
 
 	for i, findingLineRange := range findings.items[key] {
 		if findingLineRange.Overlap(lineRange) {
@@ -57,4 +60,8 @@ func (findings Findings) Consume(ruleID string, filename string, startLine, endL
 	}
 
 	return false
+}
+
+func newRange(startLine, endLine int) git.ChunkRange {
+	return git.ChunkRange{LineNumber: startLine, LineCount: endLine - startLine + 1}
 }

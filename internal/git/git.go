@@ -2,7 +2,9 @@ package git
 
 import (
 	"bytes"
+	"context"
 	"fmt"
+	"io"
 	"net/url"
 	"os"
 	"os/exec"
@@ -45,17 +47,17 @@ func urlWithCredentials(originalURL *url.URL, token string) *url.URL {
 	return &result
 }
 
-func logAndBuildCommand(args ...string) *exec.Cmd {
+func logAndBuildCommand(ctx context.Context, args ...string) *exec.Cmd {
 	log.Debug().Msgf("running command: git %s", strings.Join(args, " "))
 
-	cmd := exec.Command("git", args...)
+	cmd := exec.CommandContext(ctx, "git", args...)
 	cmd.Env = environment
 
 	return cmd
 }
 
-func basicCommand(workingDir string, args ...string) error {
-	cmd := logAndBuildCommand(args...)
+func basicCommand(ctx context.Context, workingDir string, args ...string) error {
+	cmd := logAndBuildCommand(ctx, args...)
 	if workingDir != "" {
 		cmd.Dir = workingDir
 	}
@@ -65,7 +67,41 @@ func basicCommand(workingDir string, args ...string) error {
 	cmd.Stderr = logWriter
 
 	if err := cmd.Run(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
+		return newError(err, logWriter.AllOutput())
+	}
+
+	return nil
+}
+
+func captureCommand(ctx context.Context, workingDir string, args []string, capture func(io.Reader) error) error {
+	command := logAndBuildCommand(ctx, args...)
+	if workingDir != "" {
+		command.Dir = workingDir
+	}
+
+	logWriter := &debugLogWriter{}
+	command.Stderr = logWriter
+
+	stdout, err := command.StdoutPipe()
+	if err != nil {
+		return err
+	}
+
+	if err := command.Start(); err != nil {
+		command.Cancel() //nolint:errcheck
+		return err
+	}
+
+	if err := capture(stdout); err != nil {
+		command.Cancel() //nolint:errcheck
+		return err
+	}
+
+	stdout.Close()
+
+	if err := command.Wait(); err != nil {
+		command.Cancel() //nolint:errcheck
 		return newError(err, logWriter.AllOutput())
 	}
 
@@ -74,12 +110,6 @@ func basicCommand(workingDir string, args ...string) error {
 
 var regexpDefunctProcess = regexp.MustCompile(" git <defunct>")
 var regexpPID = regexp.MustCompile("[0-9]+ ")
-
-func killProcess(cmd *exec.Cmd) {
-	if cmd != nil && cmd.Process != nil {
-		cmd.Process.Kill() //nolint:all,errcheck
-	}
-}
 
 func unquoteFilename(quoted string) (string, error) {
 	if len(quoted) == 0 || quoted[0] != '"' {

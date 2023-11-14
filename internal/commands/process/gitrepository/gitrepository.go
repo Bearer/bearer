@@ -4,19 +4,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net/http"
 	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/go-git/go-git/v5"
-	"github.com/go-git/go-git/v5/config"
-	"github.com/go-git/go-git/v5/plumbing"
-	"github.com/go-git/go-git/v5/plumbing/format/diff"
-	"github.com/go-git/go-git/v5/plumbing/object"
-	"github.com/go-git/go-git/v5/plumbing/transport/client"
-	githttp "github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/google/go-github/github"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
@@ -26,22 +18,19 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/filelist/ignore"
 	"github.com/bearer/bearer/internal/commands/process/filelist/timeout"
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/report/basebranchfindings"
-	bbftypes "github.com/bearer/bearer/internal/report/basebranchfindings/types"
+	"github.com/bearer/bearer/internal/git"
+	"github.com/bearer/bearer/internal/util/output"
 )
 
 type Repository struct {
 	ctx    context.Context
 	config settings.Config
-	git    *git.Repository
 	rootPath,
 	targetPath,
 	gitTargetPath string
-	baseRemoteRefName,
-	baseLocalRefName plumbing.ReferenceName
-	headRef *plumbing.Reference
-	headCommit,
-	mergeBaseCommit *object.Commit
+	headBranch string
+	headCommitHash,
+	mergeBaseCommitHash string
 	githubToken string
 }
 
@@ -51,19 +40,17 @@ func New(
 	targetPath string,
 	baseBranch string,
 ) (*Repository, error) {
-	gitRepository, err := git.PlainOpenWithOptions(targetPath, &git.PlainOpenOptions{
-		DetectDotGit: true,
-	})
-	if err != nil {
-		return nil, translateOpenError(baseBranch, err)
+	rootPath := git.GetRoot(targetPath)
+	if rootPath == "" {
+		log.Debug().Msg("no git repository found")
+
+		if baseBranch != "" {
+			return nil, errors.New("base branch specified but no git repository found")
+		}
+
+		return nil, nil
 	}
 
-	worktree, err := gitRepository.Worktree()
-	if err != nil {
-		return nil, fmt.Errorf("failed to get worktree: %w", err)
-	}
-
-	rootPath := worktree.Filesystem.Root()
 	gitTargetPath, err := filepath.Rel(rootPath, targetPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get relative target: %w", err)
@@ -71,31 +58,28 @@ func New(
 
 	log.Debug().Msgf("git target: [%s/]%s", rootPath, gitTargetPath)
 
-	headRef, err := gitRepository.Head()
+	headCommitHash, err := git.GetCurrentCommit(rootPath)
 	if err != nil {
 		return nil, fmt.Errorf("error getting head ref: %w", err)
 	}
 
-	headCommit, err := gitRepository.CommitObject(headRef.Hash())
+	headBranch, err := git.GetCurrentBranch(rootPath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get head commit: %w", err)
+		return nil, fmt.Errorf("error getting head ref: %w", err)
 	}
 
 	repository := &Repository{
-		ctx:               ctx,
-		config:            config,
-		git:               gitRepository,
-		rootPath:          rootPath,
-		targetPath:        targetPath,
-		gitTargetPath:     gitTargetPath,
-		baseRemoteRefName: plumbing.NewRemoteReferenceName("origin", baseBranch),
-		baseLocalRefName:  plumbing.NewBranchReferenceName(baseBranch),
-		headRef:           headRef,
-		headCommit:        headCommit,
-		githubToken:       config.Scan.GithubToken,
+		ctx:            ctx,
+		config:         config,
+		rootPath:       rootPath,
+		targetPath:     targetPath,
+		gitTargetPath:  gitTargetPath,
+		headBranch:     headBranch,
+		headCommitHash: headCommitHash,
+		githubToken:    config.Scan.GithubToken,
 	}
 
-	repository.mergeBaseCommit, err = repository.fetchMergeBaseCommit(baseBranch)
+	repository.mergeBaseCommitHash, err = repository.fetchMergeBaseCommit(baseBranch)
 	if err != nil {
 		return nil, err
 	}
@@ -111,35 +95,25 @@ func (repository *Repository) ListFiles(
 		return nil, nil
 	}
 
-	headTree, err := repository.headCommit.Tree()
-	if err != nil {
-		return nil, fmt.Errorf("failed to get head tree: %w", err)
+	if repository.mergeBaseCommitHash == "" {
+		return repository.getTreeFiles(ignore, goclocResult, repository.headCommitHash)
 	}
 
-	if repository.mergeBaseCommit == nil {
-		return repository.getTreeFiles(ignore, goclocResult, headTree)
-	}
-
-	filePatches, err := repository.getDiffPatch(headTree)
-	if err != nil {
-		return nil, err
-	}
-
-	return repository.getDiffFiles(ignore, goclocResult, filePatches)
+	return repository.getDiffFiles(ignore, goclocResult)
 }
 
-func (repository *Repository) fetchMergeBaseCommit(baseBranch string) (*object.Commit, error) {
+func (repository *Repository) fetchMergeBaseCommit(baseBranch string) (string, error) {
 	if baseBranch == "" {
-		return nil, nil
+		return "", nil
 	}
 
 	hash, err := repository.lookupMergeBaseHash(baseBranch)
 	if err != nil {
-		return nil, fmt.Errorf("error looking up hash: %w", err)
+		return "", fmt.Errorf("error looking up hash: %w", err)
 	}
 
-	if hash == nil {
-		return nil, fmt.Errorf(
+	if hash == "" {
+		return "", fmt.Errorf(
 			"could not find common ancestor between the current and %s branch. "+
 				"please check that the base branch is correct, and that you have "+
 				"fetched enough git history to include the latest common ancestor",
@@ -149,130 +123,77 @@ func (repository *Repository) fetchMergeBaseCommit(baseBranch string) (*object.C
 
 	log.Debug().Msgf("merge base commit: %s", hash)
 
-	commit, err := repository.git.CommitObject(*hash)
-	if err == nil {
-		return commit, nil
-	}
-
-	if err != plumbing.ErrObjectNotFound {
-		return nil, fmt.Errorf("error looking up commit: %w", err)
+	if git.CommitPresent(repository.rootPath, hash) {
+		return hash, nil
 	}
 
 	log.Debug().Msgf("merge base commit not present, fetching")
 
-	if err := repository.git.FetchContext(repository.ctx, &git.FetchOptions{
-		RefSpecs: []config.RefSpec{config.RefSpec(
-			fmt.Sprintf("+%s:%s", hash.String(), repository.baseRemoteRefName),
-		)},
-		Depth: 1,
-		Tags:  git.NoTags,
-	}); err != nil {
-		return nil, fmt.Errorf("error fetching: %w", err)
+	if err := git.FetchRef(repository.ctx, repository.rootPath, hash); err != nil {
+		return "", err
 	}
 
 	log.Debug().Msgf("merge base commit fetched")
 
-	return repository.git.CommitObject(*hash)
+	return hash, nil
 }
 
 func (repository *Repository) getTreeFiles(
 	ignore *ignore.FileIgnore,
 	goclocResult *gocloc.Result,
-	tree *object.Tree,
+	commitSHA string,
 ) (*files.List, error) {
 	var headFiles []files.File
 
-	if err := tree.Files().ForEach(func(f *object.File) error {
+	gitFiles, err := git.ListTree(repository.rootPath, commitSHA)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, file := range gitFiles {
 		if file := repository.fileFor(
 			ignore,
 			goclocResult,
-			f.Name,
+			file.Filename,
 		); file != nil {
 			headFiles = append(headFiles, *file)
 		}
-
-		return nil
-	}); err != nil {
-		return nil, err
 	}
 
 	return &files.List{Files: headFiles}, nil
 }
 
-func (repository *Repository) getDiffPatch(headTree *object.Tree) ([]diff.FilePatch, error) {
-	baseTree, err := repository.mergeBaseCommit.Tree()
+func (repository *Repository) getDiffFiles(
+	ignore *ignore.FileIgnore,
+	goclocResult *gocloc.Result,
+) (*files.List, error) {
+	var baseFiles, headFiles []files.File
+	renames := make(map[string]string)
+	chunks := make(map[string]git.Chunks)
+
+	filePatches, err := git.Diff(repository.rootPath, repository.mergeBaseCommitHash)
 	if err != nil {
 		return nil, err
 	}
 
-	changes, err := object.DiffTreeWithOptions(
-		repository.ctx,
-		baseTree,
-		headTree,
-		object.DefaultDiffTreeOptions,
-	)
-	if err != nil {
-		return nil, fmt.Errorf("error diffing tree: %w", err)
-	}
-
-	patch, err := changes.PatchContext(repository.ctx)
-	if err != nil {
-		return nil, fmt.Errorf("error getting diff patch: %w", err)
-	}
-
-	return patch.FilePatches(), nil
-}
-
-func (repository *Repository) translateDiffChunks(gitChunks []diff.Chunk) bbftypes.Chunks {
-	chunks := basebranchfindings.NewChunks()
-	for _, chunk := range gitChunks {
-		var changeType bbftypes.ChangeType
-		switch chunk.Type() {
-		case diff.Delete:
-			changeType = bbftypes.ChunkRemove
-		case diff.Add:
-			changeType = bbftypes.ChunkAdd
-		case diff.Equal:
-			changeType = bbftypes.ChunkEqual
-		default:
-			panic(fmt.Sprintf("unexpected git chunk type %d", chunk.Type()))
-		}
-
-		chunks.Add(changeType, strings.Count(chunk.Content(), "\n"))
-	}
-
-	return chunks
-}
-
-func (repository *Repository) getDiffFiles(
-	ignore *ignore.FileIgnore,
-	goclocResult *gocloc.Result,
-	filePatches []diff.FilePatch,
-) (*files.List, error) {
-	var baseFiles, headFiles []files.File
-	renames := make(map[string]string)
-	chunks := make(map[string]bbftypes.Chunks)
-
-	for _, filePatch := range filePatches {
-		fromFile, toFile := filePatch.Files()
-
+	for _, patch := range filePatches {
 		// we're not interested in removals
-		if toFile == nil {
+		if patch.ToPath == "" {
 			continue
 		}
 
-		headFile := repository.fileFor(ignore, goclocResult, toFile.Path())
+		headFile := repository.fileFor(ignore, goclocResult, patch.ToPath)
 		if headFile == nil {
 			continue
 		}
 
 		headFiles = append(headFiles, *headFile)
 
-		if fromFile == nil {
+		if patch.FromPath == "" {
 			continue
 		}
 
-		relativeFromPath, err := filepath.Rel(repository.gitTargetPath, fromFile.Path())
+		relativeFromPath, err := filepath.Rel(repository.gitTargetPath, patch.FromPath)
 		if err != nil {
 			return nil, err
 		}
@@ -285,7 +206,7 @@ func (repository *Repository) getDiffFiles(
 			renames[relativeFromPath] = headFile.FilePath
 		}
 
-		chunks[headFile.FilePath] = repository.translateDiffChunks(filePatch.Chunks())
+		chunks[headFile.FilePath] = patch.Chunks
 	}
 
 	return &files.List{
@@ -297,48 +218,34 @@ func (repository *Repository) getDiffFiles(
 }
 
 func (repository *Repository) WithBaseBranch(body func() error) error {
-	if repository == nil || repository.mergeBaseCommit == nil {
+	if repository == nil || repository.mergeBaseCommitHash == "" {
 		return nil
 	}
 
-	worktree, err := repository.git.Worktree()
-	if err != nil {
-		return fmt.Errorf("error getting git worktree: %w", err)
+	if err := git.Switch(repository.rootPath, repository.mergeBaseCommitHash, true); err != nil {
+		return fmt.Errorf("error switching to base branch: %w", err)
 	}
 
-	status, err := worktree.Status()
-	if err != nil {
-		return err
-	}
-	if !status.IsClean() {
-		return errors.New("uncommitted changes found in worktree. commit or stash changes your changes and retry")
-	}
+	err := body()
 
-	defer repository.restoreHead(worktree)
+	if restoreErr := repository.restoreHead(); restoreErr != nil {
+		wrappedErr := fmt.Errorf("error restoring to current commit: %w", restoreErr)
+		if err == nil {
+			return wrappedErr
+		}
 
-	if err := worktree.Checkout(&git.CheckoutOptions{
-		Hash: repository.mergeBaseCommit.Hash,
-	}); err != nil {
-		return fmt.Errorf("error checking out base branch: %w", err)
+		output.StdErrLog(wrappedErr.Error())
 	}
 
-	return body()
+	return err
 }
 
-func (repository *Repository) restoreHead(worktree *git.Worktree) {
-	checkoutOptions := &git.CheckoutOptions{}
-	if repository.headRef.Name().IsBranch() {
-		checkoutOptions.Branch = repository.headRef.Name()
-	} else {
-		checkoutOptions.Hash = repository.headRef.Hash()
+func (repository *Repository) restoreHead() error {
+	if repository.headBranch == "" {
+		return git.Switch(repository.rootPath, repository.headCommitHash, true)
 	}
 
-	if err := worktree.Checkout(checkoutOptions); err != nil {
-		log.Error().Msgf(
-			"error restoring git worktree. your worktree may not have been restored to it's original state! %s",
-			err,
-		)
-	}
+	return git.Switch(repository.rootPath, repository.headBranch, false)
 }
 
 func (repository *Repository) fileFor(
@@ -374,106 +281,57 @@ func (repository *Repository) fileFor(
 	}
 }
 
-func translateOpenError(baseBranch string, err error) error {
-	if err != git.ErrRepositoryNotExists {
-		return err
+func (repository *Repository) lookupMergeBaseHash(baseBranch string) (string, error) {
+	if sha := os.Getenv("DIFF_BASE_COMMIT"); sha != "" {
+		return sha, nil
 	}
 
-	log.Debug().Msg("no git repository found")
-
-	if baseBranch != "" {
-		return errors.New("base branch specified but no git repository found")
-	}
-
-	return nil
-}
-
-func (repository *Repository) lookupMergeBaseHash(baseBranch string) (*plumbing.Hash, error) {
-	if hash := repository.lookupMergeBaseRefFromVariable(); hash != nil {
-		return hash, nil
-	}
-
-	if hash, err := repository.lookupMergeBaseRefFromGithub(baseBranch); hash != nil || err != nil {
-		return hash, err
+	if sha, err := repository.lookupMergeBaseHashFromGithub(baseBranch); sha != "" || err != nil {
+		return sha, err
 	}
 
 	log.Debug().Msg("finding merge base using local repository")
 
-	ref, err := repository.git.Reference(repository.baseRemoteRefName, true)
-	if err != nil && err != plumbing.ErrReferenceNotFound {
-		if err == plumbing.ErrReferenceNotFound {
-			return nil, nil
-		}
-
-		return nil, fmt.Errorf("invalid ref: %w", err)
-	}
-
-	if err == plumbing.ErrReferenceNotFound {
-		log.Debug().Msg("remote ref not found, trying local ref")
-		ref, err = repository.git.Reference(repository.baseLocalRefName, true)
-		if err != nil {
-			if err == plumbing.ErrReferenceNotFound {
-				return nil, nil
-			}
-
-			return nil, fmt.Errorf("invalid ref: %w", err)
-		}
-	}
-
-	baseCommit, err := repository.git.CommitObject(ref.Hash())
+	sha, err := git.GetMergeBase(repository.rootPath, "origin/"+baseBranch, repository.headCommitHash)
 	if err != nil {
-		if err == plumbing.ErrObjectNotFound {
-			return nil, nil
+		if !strings.Contains(err.Error(), "Not a valid object name") {
+			return "", fmt.Errorf("invalid ref: %w", err)
 		}
-
-		return nil, fmt.Errorf("error looking up base commit: %w", err)
 	}
 
-	commonAncestors, err := repository.headCommit.MergeBase(baseCommit)
+	if sha != "" {
+		return sha, nil
+	}
+
+	log.Debug().Msg("remote ref not found, trying local ref")
+	sha, err = git.GetMergeBase(repository.rootPath, baseBranch, repository.headCommitHash)
 	if err != nil {
-		if err == plumbing.ErrObjectNotFound {
-			return nil, nil
-		}
-
-		return nil, fmt.Errorf("error computing merge base: %w", err)
-	}
-	if len(commonAncestors) == 0 {
-		return nil, nil
+		return "", fmt.Errorf("invalid ref: %w", err)
 	}
 
-	return &commonAncestors[0].Hash, nil
+	return sha, nil
 }
 
-func (repository *Repository) lookupMergeBaseRefFromVariable() *plumbing.Hash {
-	sha := os.Getenv("DIFF_BASE_COMMIT")
-	if sha == "" {
-		return nil
-	}
-
-	hash := plumbing.NewHash(sha)
-	return &hash
-}
-
-func (repository *Repository) lookupMergeBaseRefFromGithub(baseBranch string) (*plumbing.Hash, error) {
+func (repository *Repository) lookupMergeBaseHashFromGithub(baseBranch string) (string, error) {
 	if repository.githubToken == "" {
-		return nil, nil
+		return "", nil
 	}
 
 	githubRepository := os.Getenv("GITHUB_REPOSITORY")
 	if githubRepository == "" {
-		return nil, nil
+		return "", nil
 	}
 
 	log.Debug().Msg("finding merge base using github api")
 
 	splitRepository := strings.SplitN(githubRepository, "/", 2)
 	if len(splitRepository) != 2 {
-		return nil, fmt.Errorf("invalid github repository name '%s'", githubRepository)
+		return "", fmt.Errorf("invalid github repository name '%s'", githubRepository)
 	}
 
 	client, err := repository.newGithubClient()
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
 	comparison, _, err := client.Repositories.CompareCommits(
@@ -481,18 +339,17 @@ func (repository *Repository) lookupMergeBaseRefFromGithub(baseBranch string) (*
 		splitRepository[0],
 		splitRepository[1],
 		baseBranch,
-		repository.headRef.Hash().String(),
+		repository.headCommitHash,
 	)
 	if err != nil {
-		return nil, fmt.Errorf("error calling github compare api: %w", err)
+		return "", fmt.Errorf("error calling github compare api: %w", err)
 	}
 
 	if comparison.MergeBaseCommit == nil {
-		return nil, nil
+		return "", nil
 	}
 
-	hash := plumbing.NewHash(*comparison.MergeBaseCommit.SHA)
-	return &hash, nil
+	return *comparison.MergeBaseCommit.SHA, nil
 }
 
 func (repository *Repository) newGithubClient() (*github.Client, error) {
@@ -514,27 +371,4 @@ func (repository *Repository) newGithubClient() (*github.Client, error) {
 	}
 
 	return client, nil
-}
-
-type GithubTransport struct {
-	githubToken string
-}
-
-func (transport *GithubTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.SetBasicAuth("x-access-token", transport.githubToken)
-
-	return http.DefaultTransport.RoundTrip(req)
-}
-
-func ConfigureGithubAuth(githubToken string) {
-	if githubToken == "" {
-		return
-	}
-
-	githubClient := githttp.NewClient(&http.Client{
-		Transport: &GithubTransport{githubToken: githubToken},
-	})
-
-	client.InstallProtocol("http", githubClient)
-	client.InstallProtocol("https", githubClient)
 }

@@ -2,6 +2,7 @@ package git
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"strings"
 )
@@ -13,6 +14,7 @@ type RenamedFile struct {
 
 func GetRenames(rootDir, firstCommitSHA, lastCommitSHA string) ([]RenamedFile, error) {
 	cmd := logAndBuildCommand(
+		context.TODO(),
 		"log",
 		"--first-parent",
 		"--find-renames",
@@ -30,12 +32,12 @@ func GetRenames(rootDir, firstCommitSHA, lastCommitSHA string) ([]RenamedFile, e
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
@@ -49,12 +51,12 @@ func GetRenames(rootDir, firstCommitSHA, lastCommitSHA string) ([]RenamedFile, e
 
 		prevFilename, err := unquoteFilename(splitLine[1])
 		if err != nil {
-			killProcess(cmd)
+			cmd.Cancel() //nolint:errcheck
 			return nil, fmt.Errorf("failed to unquote previous filename: %s", err)
 		}
 		newFilename, err := unquoteFilename(splitLine[2])
 		if err != nil {
-			killProcess(cmd)
+			cmd.Cancel() //nolint:errcheck
 			return nil, fmt.Errorf("failed to unquote new filename: %s", err)
 		}
 
@@ -67,14 +69,14 @@ func GetRenames(rootDir, firstCommitSHA, lastCommitSHA string) ([]RenamedFile, e
 	}
 
 	if err := scanner.Err(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, err
 	}
 
 	stdout.Close()
 
 	if err := cmd.Wait(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return nil, newError(err, logWriter.AllOutput())
 	}
 
