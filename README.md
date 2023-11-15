@@ -10,7 +10,7 @@
   <br /><br />
   Bearer CLI is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security and privacy risks.
   <br /><br />
-  Currently supporting: <strong>JavaScript/TypeScript</strong> (GA), <strong>Ruby</strong> (GA), <strong>Java</strong> (Beta), <strong>PHP</strong> (Beta), <strong>Go</strong> (Alpha), <strong>Python</strong> (Alpha) - <a href="https://docs.bearer.com/reference/supported-languages/">Learn more</a>
+  Currently supporting: <strong>JavaScript/TypeScript</strong> (GA), <strong>Ruby</strong> (GA), <strong>Java</strong> (Beta), <strong>PHP</strong> (Beta), <strong>Go</strong> (Beta), <strong>Python</strong> (Alpha) - <a href="https://docs.bearer.com/reference/supported-languages/">Learn more</a>
 
   <br /><br />
 
@@ -259,17 +259,17 @@ Bearer CLI currently supports:
 <table>
   <tr>
     <td>GA</td>
-    <td>JavaScript/TypeScript, Ruby</td> 
+    <td>JavaScript/TypeScript, Ruby</td>
   </tr>
   <tr>
     <td>Beta</td>
-    <td>Java, PHP</td> 
+    <td>Java, PHP</td>
   </tr>
   <tr>
     <td>Alpha</td>
-    <td>Go, Python</td> 
+    <td>Go, Python</td>
   </tr>
-</table> 
+</table>
 
 [Learn more](https://docs.bearer.com/reference/supported-languages/) about language support.
 

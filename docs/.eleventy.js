@@ -51,10 +51,10 @@ module.exports = function (eleventyConfig) {
     return now
   })
   eleventyConfig.addShortcode("sectionLinks", function (sectionName) {
-    const section = nav.find(item => item.name == sectionName)
+    const section = nav.find((item) => item.name == sectionName)
     let out = ""
-    if(section){
-      section.items.forEach(item => {
+    if (section) {
+      section.items.forEach((item) => {
         out += `- [${item.name}](${item.url})\n`
       })
     }
@@ -63,19 +63,24 @@ module.exports = function (eleventyConfig) {
   })
 
   // {% yamlExample "ci/gitlab/basic" %}
-  eleventyConfig.addShortcode('yamlExample', function (exampleName) {
-    const example = fs.readFileSync(`./_data/examples/${exampleName}.yaml`, 'utf8')
-    return '```yaml\n' + example + '\n```';
-  });
+  eleventyConfig.addShortcode("yamlExample", function (exampleName) {
+    const example = fs.readFileSync(
+      `./_data/examples/${exampleName}.yaml`,
+      "utf8"
+    )
+    return "```yaml\n" + example + "\n```"
+  })
 
-  eleventyConfig.addShortcode('githubAction', function(data){
+  eleventyConfig.addShortcode("githubAction", function (data) {
     out = "| Option | Description | Default |\n"
     out += "| - | - | - |\n"
-    Object.keys(data).sort().forEach(key => {
-      const item = data[key]
-      const default_val = item.default ? "`"+item.default+"`" : ""
-      out += `| **${key}** | ${item.description} | ${default_val} |\n`
-    });
+    Object.keys(data)
+      .sort()
+      .forEach((key) => {
+        const item = data[key]
+        const default_val = item.default ? "`" + item.default + "`" : ""
+        out += `| **${key}** | ${item.description} | ${default_val} |\n`
+      })
     return out
   })
 
@@ -178,8 +183,7 @@ module.exports = function (eleventyConfig) {
     const target = parent.split(path.sep).slice(1, -1)
     const check = child.split(path.sep).slice(1, -1)
     // handles individual rule pages highlighting "rule" in side nav
-    const isRule =
-      target.includes("rules") && check[check.length - 2] === "rules"
+    const isRule = target.includes("rules")
     if (child === parent || isRule) {
       return true
     } else {
