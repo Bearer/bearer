@@ -14,6 +14,7 @@ type ReportData struct {
 	FoundLanguages            map[string]int32 // language => loc e.g. { "Ruby": 6742, "JavaScript": 122 }
 	Detectors                 []any
 	Dataflow                  *DataFlow
+	RawFindings               []securitytypes.RawFinding `json:"findings"`
 	FindingsBySeverity        map[string][]securitytypes.Finding
 	IgnoredFindingsBySeverity map[string][]securitytypes.IgnoredFinding
 	PrivacyReport             *privacytypes.Report

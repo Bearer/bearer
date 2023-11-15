@@ -1,0 +1,5 @@
+{"source":"Bearer","version":"dev","findings":[{"cwe_ids":["42"],"id":"test_ruby_logger","title":"Ruby logger","description":"Ruby logger","documentation_url":"","line_number":1,"full_filename":"e2e/flags/testdata/simple/main.rb","filename":"main.rb","data_type":{"category_uuid":"cef587dd-76db-430b-9e18-7b031e1a193b","name":"Email Address"},"category_groups":["PII","Personal Data"],"source":{"start":1,"end":1,"column":{"start":26,"end":36}},"sink":{"start":1,"end":1,"column":{"start":1,"end":37},"content":"logger.info(\"user info\", user.email)"},"parent_line_number":1,"snippet":"logger.info(\"user info\", user.email)","fingerprint":"fa5e03644738e4c17cbbd04a580506b1_0","old_fingerprint":"8240e1537878783bac845d1163c80555_0","code_extract":"logger.info(\"user info\", user.email)","severity":"critical"}]}
+
+--
+Analyzing codebase
+

@@ -36,6 +36,7 @@ func TestReportFlagsShouldFail(t *testing.T) {
 		newScanTest("invalid-format-flag-security", []string{"--format=testing"}),
 		newScanTest("invalid-format-flag-privacy", []string{"--report=privacy", "--format=testing"}),
 		newScanTest("invalid-context-flag", []string{"--context=testing"}),
+		newScanTest("format-jsonv2", []string{"--format=jsonv2", "--external-rule-dir=e2e/testdata/rules"}),
 	}
 
 	for i := range tests {
@@ -43,7 +44,6 @@ func TestReportFlagsShouldFail(t *testing.T) {
 	}
 
 	testhelper.RunTests(t, tests)
-
 }
 
 func TestOuputFlag(t *testing.T) {

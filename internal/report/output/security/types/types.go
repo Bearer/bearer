@@ -1,6 +1,7 @@
 package types
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -9,6 +10,11 @@ import (
 	"github.com/bearer/bearer/internal/util/file"
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
 )
+
+type RawFinding struct {
+	*Finding
+	Severity string `json:"severity" yaml:"severity"`
+}
 
 type Finding struct {
 	*Rule
@@ -36,7 +42,20 @@ type IgnoredFinding struct {
 
 type GenericFinding interface {
 	GetFinding() Finding
+	ToRawFinding(severity string) RawFinding
 	GetIgnoreMeta() *ignoretypes.IgnoredFingerprint
+}
+
+func (f Finding) ToRawFinding(severity string) RawFinding {
+	rawFindingJson, _ := json.Marshal(f)
+	var rawFinding RawFinding
+	err := json.Unmarshal(rawFindingJson, &rawFinding)
+	if err != nil {
+		return RawFinding{}
+	}
+
+	rawFinding.Severity = f.SeverityMeta.DisplaySeverity
+	return rawFinding
 }
 
 func (f Finding) GetFinding() Finding {
