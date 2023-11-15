@@ -29,6 +29,14 @@ func TestReportFlags(t *testing.T) {
 	testhelper.RunTests(t, tests)
 }
 
+func TestReportJsonV2Flags(t *testing.T) {
+	tests := []testhelper.TestCase{
+		newScanTest("format-jsonv2", []string{"--format=jsonv2", "--external-rule-dir=e2e/testdata/rules"}),
+	}
+
+	testhelper.RunTests(t, tests)
+}
+
 func TestReportFlagsShouldFail(t *testing.T) {
 	t.Parallel()
 	tests := []testhelper.TestCase{
@@ -43,7 +51,6 @@ func TestReportFlagsShouldFail(t *testing.T) {
 	}
 
 	testhelper.RunTests(t, tests)
-
 }
 
 func TestOuputFlag(t *testing.T) {
