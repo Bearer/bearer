@@ -49,7 +49,11 @@ type GenericFinding interface {
 func (f Finding) ToRawFinding(severity string) RawFinding {
 	rawFindingJson, _ := json.Marshal(f)
 	var rawFinding RawFinding
-	json.Unmarshal(rawFindingJson, &rawFinding)
+	err := json.Unmarshal(rawFindingJson, &rawFinding)
+	if err != nil {
+		return RawFinding{}
+	}
+
 	rawFinding.Severity = f.SeverityMeta.DisplaySeverity
 	return rawFinding
 }
