@@ -14,7 +14,6 @@ let counts = {
 }
 
 function updateCounts(lang, framework = null, id = null) {
-  console.log(`Lang ${lang} Framework ${framework}`)
   if (framework !== null) {
     if (counts.languages[lang].frameworks[framework]) {
       counts.languages[lang].frameworks[framework].count++
@@ -103,7 +102,6 @@ async function fetchData(location) {
           } else if (isDirectory(subDirPath) && subDir === "gosec") {
             const groupDirs = await readdir(subDirPath)
 
-            console.log("groupDirs ", groupDirs)
             groupDirs.forEach(async (groupDir) => {
               const groupDirPath = path.join(dirPath, subDir, groupDir)
               if (isDirectory(groupDirPath)) {
@@ -158,8 +156,6 @@ async function fetchFile(location, breadcrumb) {
       out.metadata.cwe_id.forEach((i) => {
         if (cweList[i] && cweList[i].owasp) {
           owasps.add(cweList[i].owasp.id)
-        } else {
-          console.log(`cweList[i] ${JSON.stringify(cweList[i])}`)
         }
       })
     }
