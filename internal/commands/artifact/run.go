@@ -25,7 +25,6 @@ import (
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
 	reportoutput "github.com/bearer/bearer/internal/report/output"
-	"github.com/bearer/bearer/internal/report/output/saas"
 	"github.com/bearer/bearer/internal/report/output/stats"
 	outputtypes "github.com/bearer/bearer/internal/report/output/types"
 	scannerstats "github.com/bearer/bearer/internal/scanner/stats"
@@ -60,8 +59,6 @@ type Runner interface {
 	Scan(ctx context.Context, opts flag.Options) ([]files.File, *basebranchfindings.Findings, error)
 	// Report a writes a report
 	Report(files []files.File, baseBranchFindings *basebranchfindings.Findings) (bool, error)
-	// Close closes runner
-	Close(ctx context.Context) error
 }
 
 type runner struct {
@@ -71,26 +68,29 @@ type runner struct {
 	goclocResult   *gocloc.Result
 	scanSettings   settings.Config
 	stats          *scannerstats.Stats
+	gitContext     *gitrepository.Context
 }
 
 // NewRunner initializes Runner that provides scanning functionalities.
 func NewRunner(
 	ctx context.Context,
 	scanSettings settings.Config,
+	gitContext *gitrepository.Context,
 	targetPath string,
 	goclocResult *gocloc.Result,
 	stats *scannerstats.Stats,
-) Runner {
+) (Runner, error) {
 	r := &runner{
 		scanSettings: scanSettings,
 		targetPath:   targetPath,
 		goclocResult: goclocResult,
 		stats:        stats,
+		gitContext:   gitContext,
 	}
 
-	scanID, err := scanid.Build(scanSettings)
+	scanID, err := scanid.Build(scanSettings, gitContext)
 	if err != nil {
-		log.Error().Msgf("failed to build scan id for caching %s", err)
+		return nil, fmt.Errorf("failed to build scan id for caching: %w", err)
 	}
 
 	path := os.TempDir() + "/bearer" + scanID
@@ -101,13 +101,13 @@ func NewRunner(
 	log.Debug().Msgf("creating report %s", path)
 
 	if _, err := os.Stat(completedPath); err == nil {
-		if !scanSettings.Scan.Force && scanSettings.Scan.DiffBaseBranch == "" {
+		if !scanSettings.Scan.Force {
 			// force is not set, and we are not running a diff scan
 			r.reuseDetection = true
 			log.Debug().Msgf("reuse detection for %s", path)
 			r.reportPath = completedPath
 
-			return r
+			return r, nil
 		} else {
 			if _, err = os.Stat(path); err == nil {
 				err := os.Remove(path)
@@ -131,16 +131,11 @@ func NewRunner(
 		log.Error().Msgf("failed to create path %s, %s, %#v", path, err.Error(), pathCreated)
 	}
 
-	return r
+	return r, nil
 }
 
 func (r *runner) CacheUsed() bool {
 	return r.reuseDetection
-}
-
-// Close closes everything
-func (r *runner) Close(ctx context.Context) error {
-	return nil
 }
 
 func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *basebranchfindings.Findings, error) {
@@ -152,7 +147,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 		outputhandler.StdErrLog(fmt.Sprintf("Scanning target %s", opts.Target))
 	}
 
-	repository, err := gitrepository.New(ctx, r.scanSettings, r.targetPath, opts.DiffBaseBranch)
+	repository, err := gitrepository.New(ctx, r.scanSettings, r.targetPath, r.gitContext)
 	if err != nil {
 		return nil, nil, fmt.Errorf("git repository error: %w", err)
 	}
@@ -176,7 +171,7 @@ func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *ba
 	var baseBranchFindings *basebranchfindings.Findings
 	if err := repository.WithBaseBranch(func() error {
 		if !opts.Quiet {
-			outputhandler.StdErrLog(fmt.Sprintf("\nScanning base branch %s", opts.DiffBaseBranch))
+			outputhandler.StdErrLog(fmt.Sprintf("\nScanning base branch %s", r.gitContext.BaseBranch))
 		}
 
 		baseBranchFindings, err = r.scanBaseBranch(orchestrator, fileList)
@@ -220,7 +215,7 @@ func (r *runner) scanBaseBranch(
 		HasFiles:    len(fileList.BaseFiles) != 0,
 	}
 
-	reportData, err := reportoutput.GetData(report, r.scanSettings, nil)
+	reportData, err := reportoutput.GetData(report, r.scanSettings, r.gitContext, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -234,7 +229,7 @@ func (r *runner) scanBaseBranch(
 	return result, nil
 }
 
-func getIgnoredFingerprints(client *api.API, settings settings.Config) (
+func getIgnoredFingerprints(client *api.API, settings settings.Config, gitContext *gitrepository.Context) (
 	useCloudIgnores bool,
 	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint,
 	staleIgnoredFingerprintIds []string,
@@ -246,15 +241,9 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config) (
 	}
 
 	if client != nil && client.Error == nil {
-		// get ignores from Cloud
-		vcsInfo, err := saas.GetVCSInfo(settings.Scan.Target)
-		if err != nil {
-			return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
-		}
-
 		useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err = ignore.GetIgnoredFingerprintsFromCloud(
 			client,
-			vcsInfo.FullName,
+			gitContext.FullName,
 			localIgnoredFingerprints,
 		)
 		if err != nil {
@@ -296,6 +285,11 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		version_check.DisplayBinaryVersionWarning(versionMeta, opts.ScanOptions.Quiet)
 	}
 
+	gitContext, err := gitrepository.NewContext(&opts)
+	if err != nil {
+		return fmt.Errorf("failed to get git context: %w", err)
+	}
+
 	if !opts.Quiet {
 		outputhandler.StdErrLog("Loading rules")
 	}
@@ -308,6 +302,7 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 	scanSettings.CloudIgnoresUsed, scanSettings.IgnoredFingerprints, scanSettings.StaleIgnoredFingerprintIds, err = getIgnoredFingerprints(
 		opts.GeneralOptions.Client,
 		scanSettings,
+		gitContext,
 	)
 	if err != nil {
 		return err
@@ -327,12 +322,14 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		stats = scannerstats.New()
 	}
 
-	r := NewRunner(ctx, scanSettings, targetPath, inputgocloc, stats)
-	defer r.Close(ctx)
+	r, err := NewRunner(ctx, scanSettings, gitContext, targetPath, inputgocloc, stats)
+	if err != nil {
+		return err
+	}
 
 	files, baseBranchFindings, err := r.Scan(ctx, opts)
 	if err != nil {
-		return fmt.Errorf("scan error: %w", err)
+		return err
 	}
 
 	reportFailed, err := r.Report(files, baseBranchFindings)
@@ -393,11 +390,11 @@ func (r *runner) Report(
 		outputhandler.StdErrLog("Using cached data")
 	}
 
-	reportData, err := reportoutput.GetData(report, r.scanSettings, baseBranchFindings)
+	reportData, err := reportoutput.GetData(report, r.scanSettings, r.gitContext, baseBranchFindings)
 	if err != nil {
 		return false, err
 	}
-	reportoutput.UploadReportToCloud(reportData, r.scanSettings)
+	reportoutput.UploadReportToCloud(reportData, r.scanSettings, r.gitContext)
 
 	endTime := time.Now()
 

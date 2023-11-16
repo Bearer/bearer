@@ -11,8 +11,8 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
+	"github.com/bearer/bearer/internal/commands/process/gitrepository"
 	"github.com/bearer/bearer/internal/flag"
-	"github.com/bearer/bearer/internal/report/output/saas"
 	"github.com/bearer/bearer/internal/util/ignore"
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
 	"github.com/bearer/bearer/internal/util/output"
@@ -345,27 +345,26 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 				}
 			}
 
-			// get project full name
-			vcsInfo, err := saas.GetVCSInfo(options.Target)
+			gitContext, err := gitrepository.NewContext(&options)
 			if err != nil {
-				return fmt.Errorf("error fetching project info: %s", err)
+				return fmt.Errorf("failed to get git context: %w", err)
 			}
 
-			data, err := options.GeneralOptions.Client.FetchIgnores(vcsInfo.FullName, []string{})
+			data, err := options.GeneralOptions.Client.FetchIgnores(gitContext.FullName, []string{})
 			if err != nil {
 				return fmt.Errorf("cloud error: %s", err)
 			}
 
 			if !data.ProjectFound {
 				// no project
-				cmd.Printf("Project %s not found in Cloud. Pull cancelled.", vcsInfo.FullName)
+				cmd.Printf("Project %s not found in Cloud. Pull cancelled.", gitContext.FullName)
 				return nil
 			}
 
 			cloudIgnoresCount := len(data.CloudIgnoredFingerprints)
 			if cloudIgnoresCount == 0 {
 				// project found but no ignores
-				cmd.Printf("No ignores for project %s found in the Cloud. Pull cancelled", vcsInfo.FullName)
+				cmd.Printf("No ignores for project %s found in the Cloud. Pull cancelled", gitContext.FullName)
 				return nil
 			}
 

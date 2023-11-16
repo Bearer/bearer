@@ -108,6 +108,16 @@ func captureCommand(ctx context.Context, workingDir string, args []string, captu
 	return nil
 }
 
+func captureCommandBasic(ctx context.Context, workingDir string, args ...string) (output string, err error) {
+	err = captureCommand(ctx, workingDir, args, func(r io.Reader) error {
+		outputBytes, readErr := io.ReadAll(r)
+		output = string(outputBytes)
+		return readErr
+	})
+
+	return
+}
+
 var regexpDefunctProcess = regexp.MustCompile(" git <defunct>")
 var regexpPID = regexp.MustCompile("[0-9]+ ")
 

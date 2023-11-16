@@ -5,26 +5,29 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"os/exec"
 	"sort"
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
+	"github.com/bearer/bearer/internal/commands/process/gitrepository"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/util/file"
 )
 
-func Build(scanSettings settings.Config) (string, error) {
-	// we want head as project may contain new changes
-	cmd := exec.Command("git", "-C", scanSettings.Scan.Target, "rev-parse", "HEAD")
-	sha, err := cmd.Output()
+func Build(scanSettings settings.Config, gitContext *gitrepository.Context) (string, error) {
+	var sha string
+	if gitContext != nil && !gitContext.HasUncommittedChanges {
+		if gitContext.BaseCommitHash == "" {
+			sha = gitContext.CurrentCommitHash
+		} else {
+			sha = gitContext.BaseCommitHash + "_" + gitContext.CurrentCommitHash
+		}
+	}
 
-	if err != nil {
-		log.Debug().Msgf("error getting git sha %s", err.Error())
-		sha = []byte(uuid.NewString())
+	if sha == "" {
+		sha = uuid.NewString()
 	}
 
 	configHash, err := hashConfig(scanSettings)
@@ -56,7 +59,6 @@ func hashConfig(scanSettings settings.Config) (string, error) {
 	}
 
 	targetHash := md5.Sum([]byte(absTarget))
-	baseBranchHash := md5.Sum([]byte(scanSettings.Scan.DiffBaseBranch))
 
 	hashBuilder := md5.New()
 	if _, err := hashBuilder.Write(targetHash[:]); err != nil {
@@ -66,9 +68,6 @@ func hashConfig(scanSettings settings.Config) (string, error) {
 		return "", err
 	}
 	if _, err := hashBuilder.Write(scannersHash); err != nil {
-		return "", err
-	}
-	if _, err := hashBuilder.Write(baseBranchHash[:]); err != nil {
 		return "", err
 	}
 

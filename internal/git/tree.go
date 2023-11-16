@@ -48,6 +48,18 @@ func GetRoot(targetPath string) string {
 	return canonicalPath
 }
 
+func HasUncommittedChanges(rootDir string) (bool, error) {
+	output, err := captureCommandBasic(
+		context.TODO(),
+		rootDir,
+		"status",
+		" --porcelain=v1",
+		" --no-renames",
+	)
+
+	return strings.Count(output, "\n") > 0, err
+}
+
 func GetTree(rootDir string) (*Tree, error) {
 	commit, err := getHeadCommitIdentifier(rootDir)
 	if err != nil {

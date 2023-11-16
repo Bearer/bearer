@@ -2,18 +2,18 @@ package saas
 
 import (
 	"compress/gzip"
+	"errors"
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
-	"github.com/gitsight/go-vcsurl"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/api/s3"
 	"github.com/bearer/bearer/cmd/bearer/build"
+	"github.com/bearer/bearer/internal/commands/process/gitrepository"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	saas "github.com/bearer/bearer/internal/report/output/saas/types"
 	securitytypes "github.com/bearer/bearer/internal/report/output/security/types"
@@ -23,14 +23,14 @@ import (
 	pointer "github.com/bearer/bearer/internal/util/pointers"
 )
 
-var ShaEnvVarNames = [2]string{"SHA", "CI_COMMIT_SHA"}
-var CurrentBranchEnvVarNames = [2]string{"CURRENT_BRANCH", "CI_COMMIT_REF_NAME"}
-var DefaultBranchEnvVarNames = [2]string{"DEFAULT_BRANCH", "CI_DEFAULT_BRANCH"}
-var OriginUrlEnvVarNames = [2]string{"ORIGIN_URL", "CI_REPOSITORY_URL"}
-
-func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta bool) error {
+func GetReport(
+	reportData *types.ReportData,
+	config settings.Config,
+	gitContext *gitrepository.Context,
+	ensureMeta bool,
+) error {
 	var meta *saas.Meta
-	meta, err := getMeta(reportData, config)
+	meta, err := getMeta(reportData, config, gitContext)
 	if err != nil {
 		if ensureMeta {
 			return err
@@ -58,24 +58,9 @@ func GetReport(reportData *types.ReportData, config settings.Config, ensureMeta 
 	return nil
 }
 
-func GetVCSInfo(target string) (*vcsurl.VCS, error) {
-	gitRemote, err := getRemote(target)
-	if err != nil {
-		return nil, err
-	}
-
-	info, err := vcsurl.Parse(*gitRemote)
-	if err != nil {
-		log.Debug().Msgf("couldn't parse origin url %s", err)
-		return nil, err
-	}
-
-	return info, nil
-}
-
-func SendReport(config settings.Config, reportData *types.ReportData) {
+func SendReport(config settings.Config, reportData *types.ReportData, gitContext *gitrepository.Context) {
 	if reportData.SaasReport == nil {
-		err := GetReport(reportData, config, true)
+		err := GetReport(reportData, config, gitContext, true)
 		if err != nil {
 			errorMessage := fmt.Sprintf("Unable to calculate Metadata. %s", err)
 			log.Debug().Msgf(errorMessage)
@@ -173,105 +158,59 @@ func createBearerGzipFileReport(
 	return &tempDir, &filename, nil
 }
 
-func getMeta(reportData *types.ReportData, config settings.Config) (*saas.Meta, error) {
-	sha, err := getSha(config.Scan.Target)
-	if err != nil {
-		return nil, err
+func getMeta(
+	reportData *types.ReportData,
+	config settings.Config,
+	gitContext *gitrepository.Context,
+) (*saas.Meta, error) {
+	if gitContext == nil {
+		return nil, errors.New("not a git repository")
 	}
 
-	currentBranch, err := getCurrentBranch(config.Scan.Target)
-	if err != nil {
-		return nil, err
+	var messages []string
+	if gitContext.CurrentBranch == "" {
+		messages = append(messages,
+			"Couldn't determine the current branch of the repository. "+
+				"Please set the 'BEARER_CURRENT_BRANCH' environment variable.",
+		)
+	}
+	if gitContext.DefaultBranch == "" {
+		messages = append(messages,
+			"Couldn't determine the default branch of the repository. "+
+				"Please set the 'BEARER_DEFAULT_BRANCH' environment variable.",
+		)
+	}
+	if gitContext.CurrentCommitHash == "" {
+		messages = append(messages,
+			"Couldn't determine the hash of the current commit of the repository. "+
+				"Please set the 'BEARER_CURRENT_COMMIT' environment variable.",
+		)
+	}
+	if gitContext.OriginURL == "" {
+		messages = append(messages,
+			"Couldn't determine the origin URL of the repository. "+
+				"Please set the 'BEARER_REPOSITORY_URL' environment variable.",
+		)
 	}
 
-	defaultBranch, err := getDefaultBranch(config.Scan.Target)
-	if err != nil {
-		return nil, err
-	}
-
-	info, err := GetVCSInfo(config.Scan.Target)
-	if err != nil {
-		return nil, err
+	if len(messages) != 0 {
+		return nil, errors.New(strings.Join(messages, "\n"))
 	}
 
 	return &saas.Meta{
-		ID:                 info.ID,
-		Host:               string(info.Host),
-		Username:           info.Username,
-		Name:               info.Name,
-		FullName:           info.FullName,
-		URL:                info.Raw,
+		ID:                 gitContext.ID,
+		Host:               gitContext.Host,
+		Username:           gitContext.Owner,
+		Name:               gitContext.Name,
+		FullName:           gitContext.FullName,
+		URL:                gitContext.OriginURL,
 		Target:             config.Scan.Target,
-		SHA:                *sha,
-		CurrentBranch:      *currentBranch,
-		DefaultBranch:      *defaultBranch,
-		DiffBaseBranch:     config.Scan.DiffBaseBranch,
+		SHA:                gitContext.CurrentCommitHash,
+		CurrentBranch:      gitContext.CurrentBranch,
+		DefaultBranch:      gitContext.DefaultBranch,
+		DiffBaseBranch:     gitContext.BaseBranch,
 		BearerRulesVersion: config.BearerRulesVersion,
 		BearerVersion:      build.Version,
 		FoundLanguages:     reportData.FoundLanguages,
 	}, nil
-}
-
-func getSha(target string) (*string, error) {
-	for _, key := range ShaEnvVarNames {
-		env := os.Getenv(key)
-		if env != "" {
-			return pointer.String(env), nil
-		}
-	}
-
-	bytes, err := exec.Command("git", "-C", target, "rev-parse", "HEAD").Output()
-	if err != nil {
-		log.Error().Msg("Couldn't extract git info for commit sha please set 'SHA' environment variable.")
-		return nil, err
-	}
-	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
-}
-
-func getCurrentBranch(target string) (*string, error) {
-	for _, key := range CurrentBranchEnvVarNames {
-		env := os.Getenv(key)
-		if env != "" {
-			return pointer.String(env), nil
-		}
-	}
-
-	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "HEAD").Output()
-	if err != nil {
-		log.Error().Msg("Couldn't extract git info for current branch please set 'CURRENT_BRANCH' environment variable.")
-		return nil, err
-	}
-	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
-}
-
-func getDefaultBranch(target string) (*string, error) {
-	for _, key := range DefaultBranchEnvVarNames {
-		env := os.Getenv(key)
-		if env != "" {
-			return pointer.String(env), nil
-		}
-	}
-
-	bytes, err := exec.Command("git", "-C", target, "rev-parse", "--abbrev-ref", "origin/HEAD").Output()
-	if err != nil {
-		log.Error().Msg("Couldn't extract the default branch of this repository. Please set 'DEFAULT_BRANCH' environment variable.")
-		return nil, err
-	}
-	return pointer.String(strings.TrimPrefix(strings.TrimSuffix(string(bytes), "\n"), "origin/")), nil
-}
-
-func getRemote(target string) (*string, error) {
-	for _, key := range OriginUrlEnvVarNames {
-		env := os.Getenv(key)
-		if env != "" {
-			return pointer.String(env), nil
-		}
-	}
-
-	bytes, err := exec.Command("git", "-C", target, "remote", "get-url", "origin").Output()
-	if err != nil {
-		log.Error().Msg("Couldn't extract git info for origin url please set 'ORIGIN_URL' environment variable.")
-		return nil, err
-	}
-	return pointer.String(strings.TrimSuffix(string(bytes), "\n")), nil
 }

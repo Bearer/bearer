@@ -160,6 +160,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		},
 		runner.config,
 		nil,
+		nil,
 	)
 	if err != nil {
 		t.Fatalf("failed to get output: %s", err)
