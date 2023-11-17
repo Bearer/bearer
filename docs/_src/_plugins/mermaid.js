@@ -24,7 +24,7 @@ module.exports = (eleventyConfig, options) => {
     };
     let src = "https://cdn.jsdelivr.net/npm/mermaid@10.1.0/+esm";
     return `<script type="module" async>import mermaid from "${src}"; document.addEventListener('DOMContentLoaded', mermaid.initialize(${JSON.stringify(
-      mermaid_config
+      mermaid_config,
     )}));</script>`;
   });
 };

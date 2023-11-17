@@ -66,10 +66,10 @@
     updateURL();
     const rules = document.querySelectorAll(".js-rule");
     const langs = document.querySelectorAll(
-      "#lang-filters .filter-toggle:checked"
+      "#lang-filters .filter-toggle:checked",
     );
     const owasp = document.querySelectorAll(
-      "#owasp-filters .filter-toggle:checked"
+      "#owasp-filters .filter-toggle:checked",
     );
     let ruleCount = 0;
     updateCounts(langs, owasp);
