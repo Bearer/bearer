@@ -27,6 +27,7 @@ var TypeSecretleak DetectionType = "secret_leak"
 var TypeCustom DetectionType = "custom"
 var TypeCustomClassified DetectionType = "custom_classified"
 var TypeCustomRisk DetectionType = "custom_risk"
+var TypeExpectedDetection DetectionType = "expected_detection"
 
 type ReportDetection interface {
 	AddDetection(detectionType DetectionType, detectorType detectors.Type, source source.Source, value interface{})

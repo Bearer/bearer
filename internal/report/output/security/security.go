@@ -42,6 +42,7 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	globaltypes.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
 
+type ExpectedDetections = []types.ExpectedDetection
 type RawFindings = []types.RawFinding
 type Findings = map[string][]types.Finding
 type IgnoredFindings = map[string][]types.IgnoredFinding
@@ -103,6 +104,22 @@ func AddReportData(
 	for severity, findingsSlice := range summaryFindings {
 		for _, finding := range findingsSlice {
 			reportData.RawFindings = append(reportData.RawFindings, finding.ToRawFinding(severity))
+		}
+	}
+
+	for _, expectedDetectionPerRule := range dataflow.ExpectedDetections {
+		for _, location := range expectedDetectionPerRule.Locations {
+			reportData.ExpectedDetections = append(reportData.ExpectedDetections, types.ExpectedDetection{
+				RuleID: expectedDetectionPerRule.DetectorID,
+				Location: types.Location{
+					Start: location.Source.StartLineNumber,
+					End:   location.Source.EndLineNumber,
+					Column: types.Column{
+						Start: location.Source.StartColumnNumber,
+						End:   location.Source.EndColumnNumber,
+					},
+				},
+			})
 		}
 	}
 

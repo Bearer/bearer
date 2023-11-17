@@ -47,7 +47,10 @@ func (scanner *Scanner) Scan(
 	rootNode *tree.Node,
 	rule *ruleset.Rule,
 	traversalStrategy traversalstrategy.Strategy,
-) ([]*detectortypes.Detection, error) {
+) (
+	[]*detectortypes.Detection,
+	error,
+) {
 	if scanner.stats != nil {
 		startTime := time.Now()
 		defer scanner.stats.Rule(rule.ID(), startTime)
@@ -92,8 +95,56 @@ func (scanner *Scanner) Scan(
 	return detections, nil
 }
 
+func (scanner *Scanner) ScanExpected(
+	rootNode *tree.Node,
+	rule *ruleset.Rule,
+	traversalStrategy traversalstrategy.Strategy,
+) (
+	[]*detectortypes.Detection,
+	error,
+) {
+	var detections []*detectortypes.Detection
+	if err := traversalStrategy.Traverse(scanner.traversalCache, rootNode, func(node *tree.Node) (bool, error) {
+		if scanner.ctx.Err() != nil {
+			return false, scanner.ctx.Err()
+		}
+
+		result, err := scanner.detectExpectedAtNode(rule, node)
+		if result == nil || err != nil {
+			return false, err
+		}
+
+		detections = append(detections, result.Detections...)
+		return result.Expected, nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return detections, nil
+}
+
 func (scanner *Scanner) Filename() string {
 	return scanner.filename
+}
+
+func (scanner *Scanner) detectExpectedAtNode(rule *ruleset.Rule, node *tree.Node) (*detectorset.Result, error) {
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("detect expected at node start: %s at %s", rule.ID(), node.Debug())
+	}
+
+	if node.RuleExpected(rule.Index()) {
+		return &detectorset.Result{
+			Detections: []*detectortypes.Detection{
+				{
+					RuleID:    rule.ID(),
+					MatchNode: node,
+				},
+			},
+			Expected: true,
+		}, nil
+	}
+
+	return nil, nil
 }
 
 func (scanner *Scanner) detectAtNode(rule *ruleset.Rule, node *tree.Node) (*detectorset.Result, error) {

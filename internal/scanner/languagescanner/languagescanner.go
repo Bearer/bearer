@@ -77,19 +77,19 @@ func (scanner *Scanner) Scan(
 	ctx context.Context,
 	fileStats *stats.FileStats,
 	fileInfo *file.FileInfo,
-) ([]*detectortypes.Detection, error) {
+) ([]*detectortypes.Detection, []*detectortypes.Detection, error) {
 	if !slices.Contains(scanner.language.EnryLanguages(), fileInfo.Language) {
-		return nil, nil
+		return nil, nil, nil
 	}
 
 	contentBytes, err := os.ReadFile(fileInfo.AbsolutePath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read file: %w", err)
+		return nil, nil, fmt.Errorf("failed to read file: %w", err)
 	}
 
 	tree, err := ast.ParseAndAnalyze(ctx, scanner.language, scanner.ruleSet, scanner.querySet, contentBytes)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if log.Trace().Enabled() {
@@ -108,15 +108,44 @@ func (scanner *Scanner) Scan(
 		cache,
 	)
 
-	return scanner.evaluateRules(ruleScanner, cache, tree)
+	detections, err := scanner.evaluateRules(ruleScanner, cache, tree)
+	// FIXME: Check if we are need to eval the tests or not
+	expectedDetections, _ := scanner.evaluateTests(ruleScanner, cache, tree)
+
+	return detections, expectedDetections, err
+}
+
+func (scanner *Scanner) evaluateTests(
+	ruleScanner *rulescanner.Scanner,
+	cache *cache.Cache,
+	tree *tree.Tree,
+) ([]*detectortypes.Detection, error) {
+	var detections []*detectortypes.Detection
+	for _, rule := range scanner.ruleSet.Rules() {
+		if rule.Type() != ruleset.RuleTypeTopLevel {
+			continue
+		}
+
+		cache.Clear()
+		expectedDetections, err := ruleScanner.ScanExpected(tree.RootNode(), rule, traversalstrategy.NestedStrict)
+		if err != nil {
+			return nil, err
+		}
+
+		detections = append(detections, expectedDetections...)
+	}
+
+	return detections, nil
 }
 
 func (scanner *Scanner) evaluateRules(
 	ruleScanner *rulescanner.Scanner,
 	cache *cache.Cache,
 	tree *tree.Tree,
-) ([]*detectortypes.Detection, error) {
-
+) (
+	[]*detectortypes.Detection,
+	error,
+) {
 	var detections []*detectortypes.Detection
 	for _, rule := range scanner.ruleSet.Rules() {
 		if rule.Type() != ruleset.RuleTypeTopLevel {

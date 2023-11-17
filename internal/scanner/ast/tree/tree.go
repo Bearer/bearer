@@ -134,6 +134,14 @@ func (node *Node) AliasOf() []*Node {
 	return node.aliasOf
 }
 
+func (node *Node) RuleExpected(index int) bool {
+	if node.expectedRuleIndices == nil {
+		return false
+	}
+
+	return node.expectedRuleIndices.Test(uint(index))
+}
+
 func (node *Node) RuleDisabled(index int) bool {
 	if node.disabledRuleIndices == nil {
 		return false

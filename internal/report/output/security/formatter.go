@@ -25,10 +25,11 @@ type Formatter struct {
 	EndTime      time.Time
 }
 
-type RawFindingsOutput struct {
-	Source   string      `json:"source" yaml:"source"`
-	Version  string      `json:"version" yaml:"version"`
-	Findings RawFindings `json:"findings" yaml:"findings"`
+type JsonV2Output struct {
+	Source   string             `json:"source" yaml:"source"`
+	Version  string             `json:"version" yaml:"version"`
+	Findings RawFindings        `json:"findings" yaml:"findings"`
+	Expected ExpectedDetections `json:"expected_findings,omitempty" yaml:"expected_findings,omitempty"`
 }
 
 func NewFormatter(reportData *outputtypes.ReportData, config settings.Config, goclocResult *gocloc.Result, startTime time.Time, endTime time.Time) *Formatter {
@@ -66,10 +67,11 @@ func (f Formatter) Format(format string) (output string, err error) {
 	case flag.FormatJSON:
 		return outputhandler.ReportJSON(f.ReportData.FindingsBySeverity)
 	case flag.FormatJSONV2:
-		return outputhandler.ReportJSON(RawFindingsOutput{
+		return outputhandler.ReportJSON(JsonV2Output{
 			Source:   "Bearer",
 			Version:  build.Version,
 			Findings: f.ReportData.RawFindings,
+			Expected: f.ReportData.ExpectedDetections,
 		})
 	case flag.FormatYAML:
 		return outputhandler.ReportYAML(f.ReportData.FindingsBySeverity)
