@@ -25,8 +25,8 @@ bearer scan . --scanner secrets
 ## Only report new findings on a branch
 
 {% callout %}
-  Differential scanning avoids scanning your entire codebase and drastically
-  reduces scan times. We recommended that you use this feature when possible.
+Differential scanning avoids scanning your entire codebase and drastically
+reduces scan times. We recommended that you use this feature when possible.
 {% endcallout %}
 
 When scanning a Git repository, you can choose to only report new findings that
@@ -59,7 +59,7 @@ To ignore this finding, run: bearer ignore add 4b0883d52334dfd9a4acce2fcf810121_
 ...
 ```
 
-If a finding is not relevant, you can ignore it automatically from future scans using the ```bearer ignore add``` command. This adds the finding's fingerprint to your ignore file. You can also provide optional author information or a comment:
+If a finding is not relevant, you can ignore it automatically from future scans using the `bearer ignore add` command. This adds the finding's fingerprint to your ignore file. You can also provide optional author information or a comment:
 
 ```bash
 bearer ignore add 4b0883d52334dfd9a4acce2fcf810121_0 \
@@ -115,7 +115,7 @@ In javascript:
 ```javascript
 // bearer:disable javascript_lang_logger
 function logUser(user) {
-  log.info(user.name)
+  log.info(user.name);
 }
 ```
 
@@ -130,9 +130,9 @@ end
 
 ```javascript
 function logUser(user) {
-  log.info(user.name)
+  log.info(user.name);
   // bearer:disable javascript_lang_logger
-  log.info(user.uuid)
+  log.info(user.uuid);
 }
 ```
 

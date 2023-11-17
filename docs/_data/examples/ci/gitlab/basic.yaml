@@ -1,5 +1,5 @@
 bearer:
   image:
     name: bearer/bearer
-    entrypoint: [ "" ]
+    entrypoint: [""]
   script: bearer scan .

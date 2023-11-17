@@ -77,5 +77,4 @@ WARNING: 0
 
 In addition of the security report, you can also run a [privacy report](/explanations/reports/#privacy-report).
 
-
 Ready for the next step? Additional options for using and configuring the `scan` command can be found in [configuring the scan command](/guides/configure-scan/).

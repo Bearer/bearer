@@ -1,7 +1,7 @@
 bearer_mr:
   image:
     name: bearer/bearer
-    entrypoint: [ "" ]
+    entrypoint: [""]
   variables:
     DIFF_BASE_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
     DIFF_BASE_COMMIT: $CI_MERGE_REQUEST_DIFF_BASE_SHA

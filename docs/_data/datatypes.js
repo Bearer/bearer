@@ -4,7 +4,7 @@ const PDID = "e1d3135b-3c0f-4b55-abce-19f27a26cbb3";
 
 async function fetchFile(location) {
   return readFile(location, { encoding: "utf8" }).then((file) =>
-    JSON.parse(file)
+    JSON.parse(file),
   );
 }
 
@@ -13,7 +13,7 @@ async function fetchData(dir) {
   let result = await Promise.all(
     files.map(async (file) => {
       return await fetchFile(path.join(dir, file));
-    })
+    }),
   );
   return result;
 }
@@ -70,9 +70,11 @@ function sortData(typesFile, catsFile, groupsFile) {
 // example();
 module.exports = async function () {
   let dataTypes = await fetchData("../internal/classification/db/data_types/");
-  let dataCats = await fetchData("../internal/classification/db/data_categories/");
+  let dataCats = await fetchData(
+    "../internal/classification/db/data_categories/",
+  );
   let groupings = await fetchFile(
-    "../internal/classification/db/category_grouping.json"
+    "../internal/classification/db/category_grouping.json",
   );
   return sortData(dataTypes, dataCats, groupings);
 };

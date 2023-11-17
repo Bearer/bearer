@@ -29,11 +29,13 @@ Just as with the CLI app, you can configure the action to meet the needs of your
 {% githubAction bearerAction.inputs %}
 
 ### Outputs
+
 If you want to process the output of the cli we recommend using the `output` input above to write a file that can be used elsewhere, but we also provide some basic outputs you can use if needed:
 
 {% githubAction bearerAction.outputs %}
 
 ## Configure GitHub code scanning
+
 Bearer CLI supports [GitHub code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning). By using the SARIF output format, you can display [security report](/explanations/reports/#security-report) findings directly in the Security tab of your repository.
 
 ![Bearer CLI results in GitHub security tab](/assets/img/gh-code-scanning.jpg)
@@ -56,6 +58,7 @@ See our guide on [configuring a scan](/guides/configure-scan#only-report-new-fin
 for more information on differential scans.
 
 ## Code Review Comments
+
 Bearer CLI supports [Reviewdog](https://github.com/reviewdog/reviewdog) rdjson format so you can use any of the reviewdog reporters to quickly add bearer feedback directly to your pull requests.
 
 ![Bearer CLI results in Github PR](/assets/img/gh-pr-review.png)
@@ -73,4 +76,3 @@ We can monitor findings with [Defect Dojo](https://github.com/DefectDojo/django-
 For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/).
 
 Have a question or need help? Join our [Discord community](https://discord.gg/eaHZBJUXRF) or [open an issue on GitHub](https://github.com/Bearer/bearer/issues).
-

@@ -4,7 +4,6 @@ title: Using GitLab CI/CD
 
 # Using GitLab CI/CD
 
-
 Running Bearer from the CLI is great, but if you want it integrated directly with your Git workflow there's nothing easier than a GitLab CI/CD integration. If you're unfamiliar with GitLab CI/CD, here's a [primer available from GitLab CI/CD](https://docs.gitlab.com/ee/ci/). You can also see how the integration works directly on our [Bear Publishing example app](https://gitlab.com/bearer/bear-publishing/-/blob/main/.gitlab-ci.yml).
 
 ## Getting started
@@ -57,4 +56,3 @@ To keep the thing in one job we download each binary then run the two commands i
 For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/).
 
 Have a question or need help? Join our [Discord community](https://discord.gg/eaHZBJUXRF) or [open an issue on GitHub](https://github.com/Bearer/bearer/issues).
-

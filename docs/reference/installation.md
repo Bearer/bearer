@@ -29,7 +29,6 @@ curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.s
 
 For MacOS we only support 12+ (Monterey) and later. For older versions we recommend using Docker.
 
-
 ### Homebrew
 
 Using Bearer CLI's official [Homebrew tap](https://github.com/Bearer/homebrew-tap):

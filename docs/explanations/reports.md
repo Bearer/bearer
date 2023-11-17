@@ -81,7 +81,6 @@ _Note: These examples use JSON for readability, but the default format for the p
 ]
 ```
 
-
 The third parties portion displays data subjects and data types that are sent to or processed by known third-party services. In the example below, Bearer CLI detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has triggered associated with this data point.
 
 ```json
@@ -171,6 +170,7 @@ You can use this to gain more detailed insights beyond what the Privacy report o
 ```
 
 If we look at the `db/schema.rb` file mentioned in the report, we can see that email is exposed:
+
 ```ruby
   create_table "users", force: :cascade do |t|
     t.string "name"

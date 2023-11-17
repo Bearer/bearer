@@ -15,18 +15,18 @@ If you're looking to manage product and application code security at scale, Bear
 We provide many options for you to configure Bearer Cloud with your projects, more information below.
 ![View Jira Ticket](/assets/img/cloud/setup.png)
 
-
 ### GitHub App
 
 The easiest way to start with Bearer Cloud, is to use Bearer's GitHub App which allows you to configure your project in 1-click.
 
 Here is what happens behind the scenes:
-- A GitHub Action is automatically configured on your project, it will trigger scans on PR and on merge to your main branch. You can tweak the configuration however you want afterward. 
+
+- A GitHub Action is automatically configured on your project, it will trigger scans on PR and on merge to your main branch. You can tweak the configuration however you want afterward.
 - A Bearer Cloud API Key is generated and configured on your GitHub project so that scan results are securely sent to your Bearer Cloud Dashboard.
 
-The best part? Bearer does all this without ever having access to your source code beyond the *.github/workflows* directory, where the GitHub Action is configured.
+The best part? Bearer does all this without ever having access to your source code beyond the _.github/workflows_ directory, where the GitHub Action is configured.
 
-In addition to a 1-click setup, **the GitHub App provides the best developer experience** thanks to the ability for them to ignore findings directly in the PR workflow, and for your Security team to review those in Bearer Cloud Dashboard. 
+In addition to a 1-click setup, **the GitHub App provides the best developer experience** thanks to the ability for them to ignore findings directly in the PR workflow, and for your Security team to review those in Bearer Cloud Dashboard.
 
 ### GitHub Action
 
@@ -76,40 +76,37 @@ This action overwrites the current ignore file (including any new additions not 
 
 ## Jira integration
 
-The Jira integration is available on the *Settings > Integrations* page.
+The Jira integration is available on the _Settings > Integrations_ page.
 
 To use the integration, you must connect a Jira account and allow access to the required permissions through the OAuth login.
 
 Following your company's best practices, you can provide access to an existing account or set up a new user in Jira specifically for this integration. Whichever option you choose, make sure the account has the access permissions required to create and update tickets in the projects you want to.
 
 You have two ways to use the Jira Integration:
+
 1. Creating a Jira Ticket directly from a finding.
-![Create Jira Ticket](/assets/img/jira-integration/create.png)
+   ![Create Jira Ticket](/assets/img/jira-integration/create.png)
 
 2. Link a finding to an existing Jira ticket.
-![Link Jira Ticket](/assets/img/jira-integration/link.png)
+   ![Link Jira Ticket](/assets/img/jira-integration/link.png)
 
 Once a finding is associated with a Jira ticket, you can quickly see it in the interface, view the ticket status and go to the ticket.
 
 ![View Jira Ticket](/assets/img/jira-integration/view.png)
 
-
 {% callout "warn" %}
 Findings on Bearer Cloud are only marked resolved when the associated code is fixed. If the associated Jira ticket is closed, but no code fix has been applied, the finding will stay open. The source of truth is always the code.
 {% endcallout %}
 
-
 ## Slack integration
 
-The Slack integration is available on the *Settings > Integrations* page.
+The Slack integration is available on the _Settings > Integrations_ page.
 
 To use the integration, you must connect a Slack account and allow access to the required permissions through the OAuth login, then select a default channel where you want to receive notifications on new findings.
 
 Below an example of a Slack notification triggered by a new finding:
 ![Slack notification](/assets/img/slack-integration/notification.png)
 
-
 ## Need help?
 
 Get in touch with our team directly on [Discord](https://discord.com/invite/eaHZBJUXRF) or [book a demo](https://www.bearer.com/demo) with one of our engineer.
-

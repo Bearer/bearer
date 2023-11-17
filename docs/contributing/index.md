@@ -9,6 +9,7 @@ Thanks for your interest in contributing! This guide will help you get started.
 ## Ways to contribute
 
 You can contribute in a variety of ways:
+
 - [File a new issue]({{meta.sourcePath}}/issues/new/choose) on GitHub.
 - [Browse the issues]({{meta.links.issues}}) and fix a bug by [contributing code](/contributing/code/).
 - Improve this [documentation](/contributing/docs/).

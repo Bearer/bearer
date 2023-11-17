@@ -12,7 +12,7 @@ module.exports = async function () {
       {
         duration: "60m",
         type: "json",
-      }
+      },
     );
   } catch (err) {
     console.log("Could not fetch release");

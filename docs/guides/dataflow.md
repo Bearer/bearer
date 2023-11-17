@@ -9,13 +9,13 @@ Bearer CLI's [data flow report type](/explanations/reports/#data-flow-report) pr
 The data flow report is made up of four sections:
 
 - Data types: For any data type Bearer detects, the report will display their categories, each instance within the codebase, and associated model and field information if available.
-- Risks: For languages that support security report rules, the report will include a `risks` section with information about any findings and their associated location within the codebase. 
+- Risks: For languages that support security report rules, the report will include a `risks` section with information about any findings and their associated location within the codebase.
 - Components: Resources such as internal data stores, cloud data stores, and third party APIs are displayed alongside their detection location.
 - Dependencies: A list of dependencies detected in package managers, along with their linked version.
 
 ## Getting started
 
-If you haven't already, install Bearer CLI using the instructions on the [installation page](/reference/installation/) or the [quick start](/quickstart/). 
+If you haven't already, install Bearer CLI using the instructions on the [installation page](/reference/installation/) or the [quick start](/quickstart/).
 
 To run your first data flow report, navigate to the project root and use the `bearer scan` command with the `--report dataflow` flag:
 
@@ -37,33 +37,33 @@ If you have [jq](https://stedolan.github.io/jq/) installed, it can format the ou
 bearer scan . --report dataflow | jq
 ```
 
-Below is an excerpt of the `data_types` portion of the data flow report. It includes the *Email address* data type with specifics on where Bearer CLI detected it.
+Below is an excerpt of the `data_types` portion of the data flow report. It includes the _Email address_ data type with specifics on where Bearer CLI detected it.
 
 ```json
 {
   "data_types": [
-  {
-    "category_name": "Contact",
-    "category_groups": ["PII", "Personal Data"],
-    "name": "Email Address",
-    "detectors": [
-      {
-        "name": "typescript",
-        "locations": [
-          {
-            "filename": "data/types.ts",
-            "full_filename": "data/types.ts",
-            "start_line_number": 22,
-            "start_column_number": 3,
-            "end_column_number": 8,
-            "field_name": "email",
-            "object_name": "User",
-            "subject_name": "User"
-          },
-        ]
-      }
-    ]
-  }
+    {
+      "category_name": "Contact",
+      "category_groups": ["PII", "Personal Data"],
+      "name": "Email Address",
+      "detectors": [
+        {
+          "name": "typescript",
+          "locations": [
+            {
+              "filename": "data/types.ts",
+              "full_filename": "data/types.ts",
+              "start_line_number": 22,
+              "start_column_number": 3,
+              "end_column_number": 8,
+              "field_name": "email",
+              "object_name": "User",
+              "subject_name": "User"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }
 ```
@@ -72,7 +72,7 @@ Next, if the codebase [supports rules](/reference/supported-languages/), the rep
 
 ```json
 {
-    "risks": [
+  "risks": [
     {
       "detector_id": "javascript_express_exposed_dir_listing",
       "locations": [
@@ -95,10 +95,10 @@ Next, if the codebase [supports rules](/reference/supported-languages/), the rep
               "name": "app.use($\u003c...\u003eserveIndex()$\u003c...\u003e)\n"
             }
           ]
-        },
+        }
       ]
     }
-    ]
+  ]
 }
 ```
 
@@ -119,7 +119,7 @@ Next, the `components` section contains third party services and local or extern
           "line_number": 36
         }
       ]
-    },
+    }
     // ...
   ]
 }
@@ -135,7 +135,7 @@ Finally, the `dependencies` portion analyzes package details for each language a
       "version": "15.0.4",
       "filename": "frontend/package.json",
       "detector": "package-json"
-    },
+    }
     // ...
   ]
 }

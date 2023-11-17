@@ -1,6 +1,7 @@
 ---
 title: Dynamic severity levels
 ---
+
 # Dynamic Severity Levels
 
 In order to help you decide which security findings to tackle first, Bearer CLI dynamically sets the severity of each detection. There are five levels: critical, high, medium, low, and warning. You'll see this in the security report output like in the finding below which has a severity of "High":
@@ -15,7 +16,7 @@ File: frontend/src/app/login/login.component.ts:102
  102       localStorage.setItem('email', this.user.email)
 ```
 
-Bearer CLI's ability to dynamically set severity means **a single rule can trigger at multiple severity levels** depending on how *severe* or risky the code appears.
+Bearer CLI's ability to dynamically set severity means **a single rule can trigger at multiple severity levels** depending on how _severe_ or risky the code appears.
 
 This doc explains how Bearer CLI calculates severity and the rationale behind behind the algorithm.
 
@@ -27,7 +28,7 @@ Each rule defines a severity level in its YML config:
 severity: low
 ```
 
-This is the rule's *base* or *default* severity. It is the lowest severity the rule can have, but depending on other variables that we'll get into shortly, that level can go higher. *The only exception is "warning" which is not affected by the dynamic severity system and will never increase.*
+This is the rule's _base_ or _default_ severity. It is the lowest severity the rule can have, but depending on other variables that we'll get into shortly, that level can go higher. _The only exception is "warning" which is not affected by the dynamic severity system and will never increase._
 
 The base severity level of default rules comes from an overall assessment of the rule, but is highly influenced by community resources like the [CWE Top 25 Most Dangerous Software Weaknesses](https://cwe.mitre.org/top25/archive/2022/2022_cwe_top25.html) and similar guidance from the industry. If you're building a custom rule, we recommend using a base severity level that best fits your risk assessment for the rule.
 
@@ -44,7 +45,7 @@ The algorithm also considers how the rule is triggered. Rule triggers are split 
 - **presence**: These rules trigger if the code exists, but isn’t dependent on data types. This could be a bad practice, but not data-specific.
 - **absence**:  These rules expect code to exist, but can’t find it. Examples are best practices, must-have settings, etc.
 
-*Note: These categories don’t map directly to configuration options in rule YAML files. See the [custom rule guide](/guides/custom-rule/) for which trigger types to use when writing your own rules.*
+_Note: These categories don’t map directly to configuration options in rule YAML files. See the [custom rule guide](/guides/custom-rule/) for which trigger types to use when writing your own rules._
 
 ## Assigning weights to each variable
 

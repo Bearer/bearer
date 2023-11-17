@@ -16,7 +16,7 @@ When you run a scan for the first time with the default settings, the applicatio
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepAfter' } } }%%
 flowchart TB
-    
+
     direction TB
     loadrule(Load rules) --> evalrule
     scan(Start scan) --> parse(Enumerate and\n parse files)
@@ -25,18 +25,18 @@ flowchart TB
     DNC --> df(Generate underlying \ndetection report)
     df --> evalrule(Match and evaluate \nrules)
     evalrule --> E(Generate report)
-    
+
     subgraph AST[Generate AST]
     direction LR
     AST1(Tree sitter) --> |Processes source| AST2(AST)
     end
-    
+
 
     subgraph DNC[Detection Engine]
     direction LR
     dd(Detect data types) --> cd(Classify data types)
     end
-    
+
 ```
 
 With the exception of loading rules from the [bearer-rules](https://github.com/bearer/bearer-rules) repo and checking the latest version, everything happens locally in your environment.
@@ -108,15 +108,15 @@ For example, a security rule requires the initialization of the session after th
 This code needs to raise an alert:
 
 ```jsx
-app.use(session({}))
-app.use(express.static(__dirname + "/public"))
+app.use(session({}));
+app.use(express.static(__dirname + "/public"));
 ```
 
 While this one should not:
 
 ```jsx
-app.use(express.static(__dirname + "/public"))
-app.use(session({}))
+app.use(express.static(__dirname + "/public"));
+app.use(session({}));
 ```
 
 ### Type analysis
@@ -129,16 +129,16 @@ If we take this code snippet as an example:
 
 ```tsx
 interface User {
-  email: string
-  gender: string
+  email: string;
+  gender: string;
 }
 
 let user: User = {
   email: "foo@example.com",
   gender: "male",
-}
+};
 
-console.log(`User is: ${user}`)
+console.log(`User is: ${user}`);
 ```
 
 We take a user as the source and analyze the context of the source. We know that a user contains some personal information, and that may leak into the logger (sink). Therefore, we are able to report that as a failure.

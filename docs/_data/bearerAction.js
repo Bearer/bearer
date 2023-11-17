@@ -8,7 +8,7 @@ module.exports = async function () {
       {
         duration: "60m",
         type: "text",
-      }
+      },
     );
     action = yaml.load(response);
   } catch (err) {

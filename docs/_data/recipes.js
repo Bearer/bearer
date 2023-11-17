@@ -3,7 +3,7 @@ const path = require("path");
 
 async function fetchFile(location) {
   return readFile(location, { encoding: "utf8" }).then((file) =>
-    JSON.parse(file)
+    JSON.parse(file),
   );
 }
 
@@ -17,7 +17,7 @@ async function fetchData(dir) {
         id: path.basename(file, ".json"),
         source: `/internal/classification/db/recipes/${file}`,
       };
-    })
+    }),
   );
   return result;
 }
