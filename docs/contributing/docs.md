@@ -39,7 +39,8 @@ As mentioned previously, The Bearer CLI docs run on [11ty](https://www.11ty.dev/
 
 ### Source files
 
-Source files make up the workings of our documentation site. They include data sources, styles, layouts, and more. 
+Source files make up the workings of our documentation site. They include data sources, styles, layouts, and more.
+
 - `.eleventy.js`, `.eleventyignore`, `11tydata.json`: Configuration files for 11ty.
 - `_redirects`: Whenever a breaking change to a path is made, make sure to acknowledge it in the redirects file. Netlify uses this to set redirects on the server.
 - `_data`: The source for all derived and shared data for documentation page. Some files, like `bearer_scan.yml` come directly from the CLI build, while others like `rules.js` convert source data into JSON that our page templates use.
@@ -57,10 +58,9 @@ Pages are written in markdown or nunjucks. See the [creating a new documentation
 - `/reference`: Reference pages primarily use the CLI's source as a foundation to display reference data in a nicer way.
 - `/contributing`: All docs related to contributing to the project live here.
 
-
 ## Creating a new documentation page
 
-To create a new page, first confirm that an existing page doesn't serve the same purpose. In general, **it's best to enhance an existing page** rather than create a new one. If you do need to create a new page, start by determining the location within the hierarchy. See the *Pages* section above for details on each section.
+To create a new page, first confirm that an existing page doesn't serve the same purpose. In general, **it's best to enhance an existing page** rather than create a new one. If you do need to create a new page, start by determining the location within the hierarchy. See the _Pages_ section above for details on each section.
 
 For traditional static documentation, use markdown and create a `.md` file in the selected category (guides, explanations, reference, contributing). Include frontmatter data for the `title` at minimum. This is used to create the page title in HTML. Then, starting with a top-level heading, write your doc in markdown. Review similar documentation pages for examples of how to create different elements.
 
@@ -98,13 +98,12 @@ To add an image to a page, first optimize it and add it to the `docs/assets/img`
 
 #### Building data-driven pages
 
-Some pages in the documentation, like the [rules](/reference/rules/) or [data types](/reference/datatypes/) pages, are data-driven. They are still static, but rely on a data source at build time to create the HTML. This is done by pairing a `data` file (.js) with a `page` file (.njk). The [11ty docs](https://www.11ty.dev/docs/data-js/) has explanations on how JavaScript data files work. 
+Some pages in the documentation, like the [rules](/reference/rules/) or [data types](/reference/datatypes/) pages, are data-driven. They are still static, but rely on a data source at build time to create the HTML. This is done by pairing a `data` file (.js) with a `page` file (.njk). The [11ty docs](https://www.11ty.dev/docs/data-js/) has explanations on how JavaScript data files work.
 
 In addition, the [data types](/reference/datatypes/) page should act as a good example. The process looks like this:
 
 1. At build time, `docs/_data/datatypes.js` reads source files from Bearer CLI.
 2. `docs/reference/datatypes.njk` looks for the global `datatypes` object created in step 1 and uses it to populate the template.
-
 
 ## Getting help
 

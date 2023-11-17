@@ -8,7 +8,7 @@ Recipes are part of how Bearer CLI makes connections between your code and other
 
 Recipes are located at `bearer/internal/classification/db/recipes/`.
 
-```md
+```
 .
 ├ internal/
 │  └ classification/
@@ -20,7 +20,7 @@ Each recipe consists of a `JSON` file containing the following properties:
 
 - `metadata` (object): Metadata about the recipe itself. Used for tracking recipe versions. Ex: `"metadata": { "version": "1.0" }`.
 - `name` (string): The name of the recipe.
-- `type` (string): The recipe type. Supported  types are `external_service`, `internal_service`, and `data_store`.
+- `type` (string): The recipe type. Supported types are `external_service`, `internal_service`, and `data_store`.
 - `urls` (array of strings): URLs used by the service. Bearer CLI will use this to aid in finding connections within a codebase. Supports wildcards.
 - `exclude_urls` (array of strings): Any urls that would be caught by the wildcards in the `urls` list that you'd like to explicitly exclude.
 - `packages` (array of objects): Common packages that connect to the service. Each package object should contain:

@@ -12,6 +12,7 @@ Completions make it easier to use Bearer on the command line. In this guide we w
 $ echo $SHELL
 /bin/zsh
 ```
+
 In our example it's zsh, but this will vary depending on your $SHELL.
 
 ## Test the completion scripts
@@ -48,4 +49,3 @@ bearer completion zsh > $(brew --prefix)/share/zsh/site-functions/_bearer
 ```
 
 You will need to start a new shell for this setup to take effect.
-

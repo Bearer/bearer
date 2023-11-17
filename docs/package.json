@@ -8,7 +8,11 @@
     "start": "eleventy --serve --incremental & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
     "debug": "DEBUG=Eleventy* eleventy --serve & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
     "build": "ELEVENTY_PRODUCTION=true eleventy && NODE_ENV=production npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --minify",
-    "clean": "rm -rf _site _tmp"
+    "clean": "rm -rf _site _tmp",
+    "lint": "npx eslint --ignore-path .gitignore .",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier --ignore-path .gitignore . --check",
+    "prettier:fix": "npm run prettier -- --write"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +23,12 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
     "@tailwindcss/typography": "^0.5.7",
     "eleventy-plugin-toc": "^1.1.5",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-promise": "^6.1.1",
     "gitly": "^2.4.1",
     "htmlencode": "^0.0.4",
     "js-yaml": "^4.1.0",
@@ -26,5 +36,8 @@
     "markdown-it-anchor": "^8.6.5",
     "markdown-it-emoji": "^2.0.2",
     "tailwindcss": "^3.1.8"
+  },
+  "prettier": {
+    "semi": false
   }
 }

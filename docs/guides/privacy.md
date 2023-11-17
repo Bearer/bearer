@@ -36,7 +36,7 @@ If you have [jq](https://stedolan.github.io/jq/) installed, it can format the ou
 bearer scan . --report privacy --format json | jq
 ```
 
-Here's a portion of the output. Notice that it is broken down into two main sets: *subjects* and *third_party*.
+Here's a portion of the output. Notice that it is broken down into two main sets: _subjects_ and _third_party_.
 
 ```json
 {
@@ -68,9 +68,7 @@ Here's a portion of the output. Notice that it is broken down into two main sets
     {
       "third_party": "Amazon AWS APIs",
       "subject_name": "Unknown",
-      "data_types": [
-        "Unknown"
-      ],
+      "data_types": ["Unknown"],
       "critical_risk_failure_count": 0,
       "high_risk_failure_count": 0,
       "medium_risk_failure_count": 0,
@@ -81,7 +79,7 @@ Here's a portion of the output. Notice that it is broken down into two main sets
 }
 ```
 
-Subjects are the individuals Bearer CLI associates with [data types](/reference/datatypes/). This information is derived from the [discovery and classification engine](/explanations/discovery-and-classification/). You can adjust this by overriding the [subject mapping](#subject-mapping). In this instance, Bearer CLI found some data types associated with the standard *User* subject, and one datatype with an *Unknown* subject. You can see the `detection_count` for each, as well as statistics for any rule findings linked to the datatype detection.
+Subjects are the individuals Bearer CLI associates with [data types](/reference/datatypes/). This information is derived from the [discovery and classification engine](/explanations/discovery-and-classification/). You can adjust this by overriding the [subject mapping](#subject-mapping). In this instance, Bearer CLI found some data types associated with the standard _User_ subject, and one datatype with an _Unknown_ subject. You can see the `detection_count` for each, as well as statistics for any rule findings linked to the datatype detection.
 
 In addition to subjects, Bearer CLI found one third party. In this case, the application is interacting with AWS. It's not clear if any datatypes are sent to AWS. In instances where the scan makes a clearer detection, the report will include the subject and data types sent to third parties. For example, in the [bear publishing](https://github.com/Bearer/bear-publishing) example app, a scan detects email addresses sent to Sentry.
 
@@ -89,9 +87,7 @@ In addition to subjects, Bearer CLI found one third party. In this case, the app
 {
   "third_party": "Sentry",
   "subject_name": "User",
-  "data_types": [
-    "Email Address"
-  ],
+  "data_types": ["Email Address"],
   "critical_risk_failure_count": 0,
   "high_risk_failure_count": 1,
   "medium_risk_failure_count": 0,

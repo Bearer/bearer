@@ -37,7 +37,6 @@ File: /bear-publishing/lib/jwt.rb:6
 
 You can see a full list of [built-in rules](/reference/rules) or create a [custom rule](/guides/custom-rule/).
 
-
 ## Secrets Scanner
 
 The Secrets scanner type detects hard-coded secrets in your code. It checks for common secret patterns such as keys, tokens, and passwords using the popular [Gitleaks](https://gitleaks.io/) library.
@@ -54,4 +53,3 @@ File: ../../OWASP/NodeGoat/README.md:59
 You can see a full list of [built-in patterns](https://github.com/Bearer/bearer/blob/main/internal/detectors/gitleaks/gitlab_config.toml).
 
 ⚠️ Secret detection patterns are not configurable today. If this is something you'd like to see, please open an [issue](https://github.com/Bearer/bearer/issues).
-

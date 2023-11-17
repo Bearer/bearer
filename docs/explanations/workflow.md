@@ -16,7 +16,7 @@ When you run a scan for the first time with the default settings, the applicatio
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'stepAfter' } } }%%
 flowchart TB
-    
+
     direction TB
     loadrule(Load rules) --> evalrule
     scan(Start scan) --> parse(Enumerate and\n parse files)
@@ -25,18 +25,18 @@ flowchart TB
     DNC --> df(Generate underlying \ndetection report)
     df --> evalrule(Match and evaluate \nrules)
     evalrule --> E(Generate report)
-    
+
     subgraph AST[Generate AST]
     direction LR
     AST1(Tree sitter) --> |Processes source| AST2(AST)
     end
-    
+
 
     subgraph DNC[Detection Engine]
     direction LR
     dd(Detect data types) --> cd(Classify data types)
     end
-    
+
 ```
 
 With the exception of loading rules from the [bearer-rules](https://github.com/bearer/bearer-rules) repo and checking the latest version, everything happens locally in your environment.

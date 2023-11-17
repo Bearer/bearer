@@ -9,7 +9,7 @@ const source = "bearer/bearer-rules"
 const rulesPath = "_tmp/rules-data"
 const excludeDirectories = [".github", "scripts"]
 
-let counts = {
+const counts = {
   languages: {},
 }
 
@@ -61,13 +61,13 @@ async function fetchRelease() {
       {
         duration: "60m",
         type: "json",
-      }
+      },
     )
   } catch (e) {
     console.error(e)
   }
   try {
-    let src = await gitly.download(`${source}#${latest.tag_name}`)
+    const src = await gitly.download(`${source}#${latest.tag_name}`)
     await gitly.extract(src, rulesPath)
   } catch (e) {
     throw console.error(e)
@@ -75,57 +75,53 @@ async function fetchRelease() {
 }
 
 async function fetchData(location) {
-  let rules = []
-  try {
-    const dirs = await readdir(location)
-    // ex: looping through rules [ruby, gitleaks, sql]
-    dirs.forEach(async (dir) => {
-      const dirPath = path.join(location, dir)
-      if (isDirectory(dirPath) && !excludeDirectories.includes(dir)) {
-        const subDirs = await readdir(dirPath)
-        updateCounts(dir)
-        // ex. looping through rules/ruby [lang, rails]
-        subDirs.forEach(async (subDir) => {
-          const subDirPath = path.join(dirPath, subDir)
-          if (
-            isDirectory(subDirPath) &&
-            subDir !== "shared" &&
-            subDir !== "gosec"
-          ) {
-            const files = await readdir(subDirPath)
-            const children = await fetchAllFiles(
-              subDirPath,
-              path.join(dir, subDir),
-              files
-            )
-            rules.push(...children)
-          } else if (isDirectory(subDirPath) && subDir === "gosec") {
-            const groupDirs = await readdir(subDirPath)
+  const rules = []
+  const dirs = await readdir(location)
+  // ex: looping through rules [ruby, gitleaks, sql]
+  dirs.forEach(async (dir) => {
+    const dirPath = path.join(location, dir)
+    if (isDirectory(dirPath) && !excludeDirectories.includes(dir)) {
+      const subDirs = await readdir(dirPath)
+      updateCounts(dir)
+      // ex. looping through rules/ruby [lang, rails]
+      subDirs.forEach(async (subDir) => {
+        const subDirPath = path.join(dirPath, subDir)
+        if (
+          isDirectory(subDirPath) &&
+          subDir !== "shared" &&
+          subDir !== "gosec"
+        ) {
+          const files = await readdir(subDirPath)
+          const children = await fetchAllFiles(
+            subDirPath,
+            path.join(dir, subDir),
+            files,
+          )
+          rules.push(...children)
+        } else if (isDirectory(subDirPath) && subDir === "gosec") {
+          const groupDirs = await readdir(subDirPath)
 
-            groupDirs.forEach(async (groupDir) => {
-              const groupDirPath = path.join(dirPath, subDir, groupDir)
-              if (isDirectory(groupDirPath)) {
-                const files = await readdir(groupDirPath)
-                const children = await fetchAllFiles(
-                  groupDirPath,
-                  path.join(dir, subDir, groupDir),
-                  files
-                )
-                rules.push(...children)
-              }
-            })
-          }
-        })
-      }
-    })
-    return { counts, rules }
-  } catch (err) {
-    throw err
-  }
+          groupDirs.forEach(async (groupDir) => {
+            const groupDirPath = path.join(dirPath, subDir, groupDir)
+            if (isDirectory(groupDirPath)) {
+              const files = await readdir(groupDirPath)
+              const children = await fetchAllFiles(
+                groupDirPath,
+                path.join(dir, subDir, groupDir),
+                files,
+              )
+              rules.push(...children)
+            }
+          })
+        }
+      })
+    }
+  })
+  return { counts, rules }
 }
 
 async function fetchAllFiles(directory, breadcrumb, files) {
-  let result = await Promise.all(
+  const result = await Promise.all(
     files.reduce((all, file) => {
       const location = path.join(directory, file)
       if (path.extname(location) === ".yml") {
@@ -133,17 +129,17 @@ async function fetchAllFiles(directory, breadcrumb, files) {
       } else {
         return all
       }
-    }, [])
+    }, []),
   )
   return result
 }
 
 async function fetchFile(location, breadcrumb) {
   return readFile(location, { encoding: "utf8" }).then((file) => {
-    let out = yaml.load(file)
-    let owasps = new Set()
-    let subdir = breadcrumb.split("/")
-    let groupId = subdir[subdir.length - 2]
+    const out = yaml.load(file)
+    const owasps = new Set()
+    const subdir = breadcrumb.split("/")
+    const groupId = subdir[subdir.length - 2]
     let framework = subdir[subdir.length - 1]
     let lang = subdir[subdir.length - 2]
     if (groupId === "gosec") {

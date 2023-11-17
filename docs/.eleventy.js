@@ -23,7 +23,7 @@ const mdSetup = markdownIt({ html: true })
 mdSetup.renderer.rules.code_inline = (tokens, idx, { langPrefix = "" }) => {
   const token = tokens[idx]
   return `<code class="${langPrefix}">${mdSetup.utils.escapeHtml(
-    token.content
+    token.content,
   )}</code>`
 }
 
@@ -66,7 +66,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("yamlExample", function (exampleName) {
     const example = fs.readFileSync(
       `./_data/examples/${exampleName}.yaml`,
-      "utf8"
+      "utf8",
     )
     return "```yaml\n" + example + "\n```"
   })
@@ -122,7 +122,8 @@ module.exports = function (eleventyConfig) {
   })
   eleventyConfig.addFilter("deduplicate", (arr) => {
     const result = arr.filter(
-      (value, index, self) => index === self.findIndex((t) => t.id === value.id)
+      (value, index, self) =>
+        index === self.findIndex((t) => t.id === value.id),
     )
     return result
   })
@@ -218,7 +219,7 @@ module.exports = function (eleventyConfig) {
       return `<div class="elv-callout${
         level ? ` elv-callout-${level}` : ""
       }">${labelHtml}${contentHtml}</div>`
-    }
+    },
   )
 
   return {

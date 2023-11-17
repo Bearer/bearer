@@ -5,6 +5,8 @@ on:
       - opened
       - synchronize
       - reopened
+    paths-ignore:
+      - 'docs/**'
 permissions:
   contents: read
 jobs:

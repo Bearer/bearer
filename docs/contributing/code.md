@@ -32,9 +32,8 @@ go mod download
 
 Finally, we use [direnv](https://direnv.net/) to manage env vars in development. This is primarily used for running tests. You can either:
 
-- Set up your own by using `.envrc.example` as a base. You're unlikely to need to set anything other than `GITHUB_WORKSPACE` for integration tests, so feel free to skip this step or export it manually using: ```export GITHUB_WORKSPACE=`pwd` ```.
+- Set up your own by using `.envrc.example` as a base. You're unlikely to need to set anything other than `GITHUB_WORKSPACE` for integration tests, so feel free to skip this step or export it manually using: ``export GITHUB_WORKSPACE=`pwd` ``.
 - Run tests using the script method mentioned [below](#running-tests).
-
 
 ## Running Bearer CLI locally from source
 
@@ -43,13 +42,14 @@ To run Bearer CLI from source use the following command from the `bearer` direct
 ```bash
 go run ./cmd/bearer/main.go [COMMAND]
 ```
+
 Use commands and flags as normal in place of `[COMMAND]`.
 
 ## Running tests
 
 Running tests is best performed using the [`run_tests.sh` script]({{meta.sourcePath}}/blob/main/scripts/run_tests.sh). This will configure all needed variables to handle both unit and integration tests.
 
-```
+```bash
 # From the project base
 ./scripts/run_tests.sh
 ```
@@ -58,7 +58,7 @@ Alternatively, you can run tests manually. Keep in mind you'll need to include t
 
 Run all tests:
 
-``` shell
+```shell
 go test ./...
 ```
 

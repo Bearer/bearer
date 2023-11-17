@@ -94,16 +94,16 @@ In this example:
 
 In other words, Bearer CLI can't match the attributes to a specific data type.
 
-As a last resort, it applies a new set of patterns called **Known Data Object Patterns**. These attempt to match the object directly to data types, using the attributes as context. In this instance, Bearer CLI understands that the `patient_id` is a medical context and therefore classifies the entire object as a "Health record."  
-  
-*Side note on PHI: You can tell Bearer CLI that your code is processing health data, and it will make sure to flag information such as email or first_name as PHI instead of PD. To do so, set the `--context` flag to `health`.*  
-  
+As a last resort, it applies a new set of patterns called **Known Data Object Patterns**. These attempt to match the object directly to data types, using the attributes as context. In this instance, Bearer CLI understands that the `patient_id` is a medical context and therefore classifies the entire object as a "Health record."
+
+_Side note on PHI: You can tell Bearer CLI that your code is processing health data, and it will make sure to flag information such as email or first_name as PHI instead of PD. To do so, set the `--context` flag to `health`._
+
 Each object will then need to be reviewed and classified manually by users. This approach avoids false negatives for sensitive data categories.
 
 ## How accurate is Bearer CLI's data classification?
 
-Bearer CLI is built with hundreds of patterns for each data type and context object to minimize false positives at the potential expense of missing some true positives.  
-  
+Bearer CLI is built with hundreds of patterns for each data type and context object to minimize false positives at the potential expense of missing some true positives.
+
 Our latest tests of unknown data sets **yield an accuracy of 93%**, or 7% false positives.
 
 ## You can improve Bearer CLI's detection and classification

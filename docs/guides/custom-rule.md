@@ -18,14 +18,14 @@ To better understand the structure of a rule file, let’s look at each key:
 
 - `patterns`: See the section below for the Pattern Syntax.
 - `sanitizer`: The id of an auxiliary rule which is used to restrict the
-main rule. If the sanitizer rule matches then the main rule is disabled inside
-the matched code.
+  main rule. If the sanitizer rule matches then the main rule is disabled inside
+  the matched code.
 - `languages`: An array of the languages the rule applies to. Available values are: `ruby`, `javascript`, `java`
 - `trigger`: Defines under which conditions the rule should raise a result. Optional.
   - `match_on`: Refers to the rule's pattern matches.
     - `presence`: Triggers if the rule's pattern is detected. (Default)
     - `absence`: Rule triggers on the absence of a pattern, but the presence of a `required_detection`. Examples include best practices such as missing configuration like forcing SSL communication. Note: rules that match on `absence` need a `required_detection` to be set.
-  - `required_detection`:  Used with the `match_on: absence` trigger. Indicates which rule is required to activate the result on the absence of the main rule.
+  - `required_detection`: Used with the `match_on: absence` trigger. Indicates which rule is required to activate the result on the absence of the main rule.
   - `data_types_required`: Sometimes we may want a rule to trigger only for applications that process sensitive data. One example is password strength, where the rule only triggers if sensitive data types are found in the application.
     - `false`: Default. Rule triggers whether or not any data types have been detected in the application.
     - `true`: Rule only triggers if at least one data type is detected in the application.
@@ -40,7 +40,6 @@ the matched code.
 - `auxiliary`: Allows you to define helper rules and detectors to make pattern-building more robust. Auxiliary rules contain a unique `id` and their own `patterns` in the same way rules do. You’re unlikely to use this regularly. See the [weak_encryption](https://github.com/Bearer/bearer-rules/blob/main/ruby/lang/weak_encryption.yml) rule for examples. In addition, see our advice on how to avoid [variable joining](#variable-joining) in auxiliary rules. (Optional)
 - `skip_data_types`: Allows you to prevent the specified data types from triggering this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
 - `only_data_types`: Allows you to limit the specified data types that trigger this rule. Takes an array of strings matching the data type names. Example: “Passwords”. (Optional)
-
 
 ## Patterns
 
@@ -77,7 +76,7 @@ In the YAML above, we’re using two patterns. One for a new FTP connection and 
 
 A new pattern appears! This time, it looks for sensitive data types inside the `Net::FTP.open()` block, using Bearer CLI’s built-in `datatype` detection. To better understand what’s happening, let’s examine variables and filters in more detail.
 
-*Note: in the example above, the third pattern uses a different YAML syntax and the `pattern` key. This is required to define filters for a pattern.*
+_Note: in the example above, the third pattern uses a different YAML syntax and the `pattern` key. This is required to define filters for a pattern._
 
 ### Variables
 
@@ -140,9 +139,9 @@ patterns:
   - `length_less_than`: Compare the length of the (string) variable to the number provided with a **less than** statement.
   - `string_regex`: Applies a regular expression test against the string value of the linked variable. This uses the [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
   - `less_than`: Compare the variable to the number provided with a **less than** statement.
-  - `less_than_or_equal`: Compare the variable to the number provided with a *less than or equal* statement.
-  - `greater_than`: Compare the variable to the number provided with a *greater than* statement.
-  - `greater_than_or_equal`: Compare the variable to the number provided with a *greater than or equal* statement.
+  - `less_than_or_equal`: Compare the variable to the number provided with a _less than or equal_ statement.
+  - `greater_than`: Compare the variable to the number provided with a _greater than_ statement.
+  - `greater_than_or_equal`: Compare the variable to the number provided with a _greater than or equal_ statement.
   - `regex`: Applies a regular expression test against the code content of the linked variable. This uses the [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
 - `not`: Inverts the results of another filter. Can be used with a single comparison key by nesting the key below `not`, or with an `either` block by nesting the block below `not`.
 - `either`: Allows for multiple conditional checks. It behaves like an OR condition. You can nest any filter inside of `either`, such as `values`, `detection`, etc.
@@ -219,11 +218,11 @@ Add the rule to your bearer config file.
 external-rule-dir: /path/to/rules/
 ```
 
-*Note: Including an external rules directory adds custom rules to the security report. To only run custom rules, you’ll need to use the `only-rule` flag or configuration setting and pass it the IDs of your custom rule.*
+_Note: Including an external rules directory adds custom rules to the security report. To only run custom rules, you’ll need to use the `only-rule` flag or configuration setting and pass it the IDs of your custom rule._
 
 ## Rule best practices
 
-1. Matching patterns in a rule cause *rule findings*. Depending on the severity level, findings can cause CI to exit and will display in the security report. Keep this in mind when writing patterns so you don’t match a best practice condition and trigger a failed scan.
+1. Matching patterns in a rule cause _rule findings_. Depending on the severity level, findings can cause CI to exit and will display in the security report. Keep this in mind when writing patterns so you don’t match a best practice condition and trigger a failed scan.
 2. Lean on the built-in resources, like the data type detectors and recipes before creating complex rules.
 
 ## Rule starter
@@ -270,18 +269,18 @@ patterns:
           variable: QUERY
           detection: my_rule_sanitized
 auxiliary:
-# Rule 1
+  # Rule 1
   - id: my_rule_sanitized
     patterns:
       - pattern: sanitize($<SANITIZED>)
         filters:
           - variable: SANITIZED
             detection: my_rule_user_input
-# Rule 2
+  # Rule 2
   - id: my_rule_user_input_source
     patterns:
       - user_input
-# Rule 3
+  # Rule 3
   - id: my_rule_user_input
     patterns:
       - pattern: $<USER_INPUT>
@@ -303,11 +302,13 @@ metadata:
 The `patterns` portion at the beginning should look familiar. The only difference compared to most rules is that it references `detection` types that are auxiliary rules. The main pattern looks for `sql_query`, and then uses filters to tell Bearer CLI to apply each detection to any code it finds in `$<QUERY>`. In this case, it wants to trigger the rule using `my_rule_user_input` but NOT `my_rule_sanitized`. I've labeled the core rule/pattern combo as rule 0, then each Aux rule as rules 1, 2, and 3 to make them easier to follow.
 
 Let's start with Rule 0's positive case and follow the detection:
+
 - **Rule 0**'s positive filter calls on `my_rule_user_input`, **Rule 3**, to handle the detection.
 - **Rule 3** uses the `my_rule_user_input_source` detection, which belongs to **Rule 2**. _It sets `contains: false`, but we'll come back to that._
 - **Rule 2** is a simple pattern that looks for `user_input`. This is from our initial code target example. Think of it as a variable that was passed to `sql_query`.
 
 That chain of detections will result in a match for the non-sanitized code. Now let's look at the the negative, `not` filter case and see if we notice any overlap.
+
 - **Rule 0**'s negative filter calls on `my_rule_sanitized`, which is **Rule 1**.
 - **Rule 1** sets up its own pattern to look for the `sanitize` function, then calls on `my_rule_user_input`, **Rule 3**, to handle the detection.
 - **Rule 3**, as we saw before, bounces the detection over to **Rule 2** to handle the code portion.
@@ -360,13 +361,17 @@ metadata:
 ```
 
 ## Syntax updates
+
 ### v1.1 Trigger changes
+
 If you have created a custom rule before v1.1 you will need to make the some small changes
 
 #### Local, Present
+
 If you use `trigger: local` or `trigger: present` you can simply remove the trigger attribute and your rule should work as before.
 
 #### Absence
+
 If you use `trigger: absence`, replace it with the following syntax and remove `trigger_rule_on_presence_of` from your existing rule.
 
 ```yaml
@@ -376,6 +381,7 @@ trigger:
 ```
 
 #### Global
+
 For `trigger: global` replace it with the following syntax.
 
 ```yaml
