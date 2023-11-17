@@ -99,4 +99,4 @@ module.exports = [
       { name: "Contribute new recipes", url: "/contributing/recipes/" },
     ],
   },
-];
+]

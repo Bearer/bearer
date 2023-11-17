@@ -115,7 +115,7 @@ In javascript:
 ```javascript
 // bearer:disable javascript_lang_logger
 function logUser(user) {
-  log.info(user.name);
+  log.info(user.name)
 }
 ```
 
@@ -130,9 +130,9 @@ end
 
 ```javascript
 function logUser(user) {
-  log.info(user.name);
+  log.info(user.name)
   // bearer:disable javascript_lang_logger
-  log.info(user.uuid);
+  log.info(user.uuid)
 }
 ```
 

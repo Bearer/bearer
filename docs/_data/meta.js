@@ -11,4 +11,4 @@ module.exports = {
     issues: "https://github.com/Bearer/bearer/issues",
     action: "https://github.com/marketplace/actions/bearer-action",
   },
-};
+}

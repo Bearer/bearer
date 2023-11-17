@@ -1,96 +1,96 @@
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
 
 const {
   EleventyHtmlBasePlugin,
   EleventyRenderPlugin,
-} = require("@11ty/eleventy");
+} = require("@11ty/eleventy")
 
-const yaml = require("js-yaml");
-const markdownIt = require("markdown-it");
-const markdownItEmoji = require("markdown-it-emoji");
-const markdownItAnchor = require("markdown-it-anchor");
-const pluginTOC = require("eleventy-plugin-toc");
-const now = String(Date.now());
-const path = require("path");
-const fs = require("fs");
-const mermaid = require("./_src/_plugins/mermaid");
-const nav = require("./_data/nav");
+const yaml = require("js-yaml")
+const markdownIt = require("markdown-it")
+const markdownItEmoji = require("markdown-it-emoji")
+const markdownItAnchor = require("markdown-it-anchor")
+const pluginTOC = require("eleventy-plugin-toc")
+const now = String(Date.now())
+const path = require("path")
+const fs = require("fs")
+const mermaid = require("./_src/_plugins/mermaid")
+const nav = require("./_data/nav")
 
 const mdSetup = markdownIt({ html: true })
   .use(markdownItEmoji)
-  .use(markdownItAnchor);
+  .use(markdownItAnchor)
 
 mdSetup.renderer.rules.code_inline = (tokens, idx, { langPrefix = "" }) => {
-  const token = tokens[idx];
+  const token = tokens[idx]
   return `<code class="${langPrefix}">${mdSetup.utils.escapeHtml(
     token.content,
-  )}</code>`;
-};
+  )}</code>`
+}
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addWatchTarget("./_src/styles/tailwind.config.js");
-  eleventyConfig.addWatchTarget("./_src/styles/tailwind.css");
-  eleventyConfig.addWatchTarget("./_src/js/*.js");
-  eleventyConfig.addPassthroughCopy("assets/img");
-  eleventyConfig.addPassthroughCopy("assets/fonts");
+  eleventyConfig.addWatchTarget("./_src/styles/tailwind.config.js")
+  eleventyConfig.addWatchTarget("./_src/styles/tailwind.css")
+  eleventyConfig.addWatchTarget("./_src/js/*.js")
+  eleventyConfig.addPassthroughCopy("assets/img")
+  eleventyConfig.addPassthroughCopy("assets/fonts")
   eleventyConfig.addPassthroughCopy({
     "./_src/styles/prism-theme.css": "./prism-theme.css",
-  });
+  })
   eleventyConfig.addPassthroughCopy({
     "./_src/styles/callout.css": "./callout.css",
-  });
-  eleventyConfig.addPassthroughCopy({ "./_src/js/app.js": "./app.js" });
+  })
+  eleventyConfig.addPassthroughCopy({ "./_src/js/app.js": "./app.js" })
   eleventyConfig.addPassthroughCopy({
     "./_src/js/rule-search.js": "./rule-search.js",
-  });
-  eleventyConfig.addPassthroughCopy({ "./_tmp/style.css": "./style.css" });
-  eleventyConfig.addPassthroughCopy({ "./robots.txt": "./robots.txt" });
-  eleventyConfig.addPassthroughCopy({ "./_redirects": "./_redirects" });
-  eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
+  })
+  eleventyConfig.addPassthroughCopy({ "./_tmp/style.css": "./style.css" })
+  eleventyConfig.addPassthroughCopy({ "./robots.txt": "./robots.txt" })
+  eleventyConfig.addPassthroughCopy({ "./_redirects": "./_redirects" })
+  eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents))
   eleventyConfig.addShortcode("version", function () {
-    return now;
-  });
+    return now
+  })
   eleventyConfig.addShortcode("sectionLinks", function (sectionName) {
-    const section = nav.find((item) => item.name == sectionName);
-    let out = "";
+    const section = nav.find((item) => item.name == sectionName)
+    let out = ""
     if (section) {
       section.items.forEach((item) => {
-        out += `- [${item.name}](${item.url})\n`;
-      });
+        out += `- [${item.name}](${item.url})\n`
+      })
     }
 
-    return out;
-  });
+    return out
+  })
 
   // {% yamlExample "ci/gitlab/basic" %}
   eleventyConfig.addShortcode("yamlExample", function (exampleName) {
     const example = fs.readFileSync(
       `./_data/examples/${exampleName}.yaml`,
       "utf8",
-    );
-    return "```yaml\n" + example + "\n```";
-  });
+    )
+    return "```yaml\n" + example + "\n```"
+  })
 
   eleventyConfig.addShortcode("githubAction", function (data) {
-    out = "| Option | Description | Default |\n";
-    out += "| - | - | - |\n";
+    out = "| Option | Description | Default |\n"
+    out += "| - | - | - |\n"
     Object.keys(data)
       .sort()
       .forEach((key) => {
-        const item = data[key];
-        const default_val = item.default ? "`" + item.default + "`" : "";
-        out += `| **${key}** | ${item.description} | ${default_val} |\n`;
-      });
-    return out;
-  });
+        const item = data[key]
+        const default_val = item.default ? "`" + item.default + "`" : ""
+        out += `| **${key}** | ${item.description} | ${default_val} |\n`
+      })
+    return out
+  })
 
-  eleventyConfig.setLibrary("md", mdSetup);
+  eleventyConfig.setLibrary("md", mdSetup)
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin, {
     baseHref: "/",
-  });
+  })
 
-  eleventyConfig.addPlugin(EleventyRenderPlugin);
-  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(EleventyRenderPlugin)
+  eleventyConfig.addPlugin(syntaxHighlight)
 
   // mermaid rendering
   eleventyConfig.addPlugin(mermaid, {
@@ -106,31 +106,31 @@ module.exports = function (eleventyConfig) {
       clusterBkg: "transparent",
       secondaryColor: "hsl(243,27%,35%)",
     },
-  });
+  })
 
   eleventyConfig.addPlugin(pluginTOC, {
     wrapper: "nav",
-  });
+  })
 
   eleventyConfig.addFilter("sortById", (arr) => {
-    arr.sort((a, b) => (a.metadata.id > b.metadata.id ? 1 : -1));
-    return arr;
-  });
+    arr.sort((a, b) => (a.metadata.id > b.metadata.id ? 1 : -1))
+    return arr
+  })
   eleventyConfig.addFilter("setAttribute", (obj, key, value) => {
-    obj[key] = value;
-    return obj;
-  });
+    obj[key] = value
+    return obj
+  })
   eleventyConfig.addFilter("deduplicate", (arr) => {
     const result = arr.filter(
       (value, index, self) =>
         index === self.findIndex((t) => t.id === value.id),
-    );
-    return result;
-  });
+    )
+    return result
+  })
 
   eleventyConfig.addFilter("keysToArr", (data) => {
-    return Object.keys(data);
-  });
+    return Object.keys(data)
+  })
   eleventyConfig.addFilter("rewriteFrameworks", (word) => {
     function updatePhrase(word) {
       const dictionary = {
@@ -139,93 +139,93 @@ module.exports = function (eleventyConfig) {
         express: "ExpressJS",
         react: "React",
         third_parties: "Third party",
-      };
+      }
 
       if (dictionary[word]) {
-        return dictionary[word];
+        return dictionary[word]
       }
-      return word;
+      return word
     }
 
     if (typeof word === "string") {
-      return updatePhrase(word);
+      return updatePhrase(word)
     } else if (Array.isArray(word)) {
-      let cleaned = word.filter((w) => w !== "third_parties");
-      return cleaned.map((w) => updatePhrase(w));
+      let cleaned = word.filter((w) => w !== "third_parties")
+      return cleaned.map((w) => updatePhrase(w))
     } else if (typeof word === "object") {
-      let cleaned = Object.keys(word).filter((w) => w !== "third_parties");
-      return cleaned.map((w) => updatePhrase(w));
+      let cleaned = Object.keys(word).filter((w) => w !== "third_parties")
+      return cleaned.map((w) => updatePhrase(w))
     }
-    return word;
-  });
+    return word
+  })
 
   eleventyConfig.addNunjucksFilter("packageMap", (name, manager, group) => {
     switch (manager) {
       case "rubygems":
-        return `https://rubygems.org/gems/${name}`;
+        return `https://rubygems.org/gems/${name}`
       case "packagist":
-        return `https://packagist.org/packages/${name}`;
+        return `https://packagist.org/packages/${name}`
       case "go":
-        return `https://${name}`;
+        return `https://${name}`
       case "npm":
-        return `https://www.npmjs.com/package/${name}`;
+        return `https://www.npmjs.com/package/${name}`
       case "pypi":
-        return `https://pypi.org/project/${name}`;
+        return `https://pypi.org/project/${name}`
       case "maven":
-        return `https://mvnrepository.com/artifact/${group}/${name}`;
+        return `https://mvnrepository.com/artifact/${group}/${name}`
       case "nuget":
-        return `https://www.nuget.org/packages/${name}`;
+        return `https://www.nuget.org/packages/${name}`
       default:
-        return "/";
+        return "/"
     }
-  });
+  })
 
   eleventyConfig.addNunjucksGlobal("navHighlight", (parent, child) => {
-    const target = parent.split(path.sep).slice(1, -1);
-    const check = child.split(path.sep).slice(1, -1);
+    const target = parent.split(path.sep).slice(1, -1)
+    const check = child.split(path.sep).slice(1, -1)
     // handles individual rule pages highlighting "rule" in side nav
-    const isRule = target.includes("rules");
+    const isRule = target.includes("rules")
     if (child === parent || isRule) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
-  });
+  })
 
   eleventyConfig.addPairedShortcode(
     "callout",
     function (content, level = "", format = "html", customLabel = "") {
       if (format === "md") {
-        content = mdIt.renderInline(content);
+        content = mdIt.renderInline(content)
       } else if (format === "md-block") {
-        content = mdIt.render(content);
+        content = mdIt.render(content)
       }
-      let label = "";
+      let label = ""
       if (customLabel) {
-        label = customLabel;
+        label = customLabel
       } else if (level === "info" || level === "error") {
-        label = level.toUpperCase();
+        label = level.toUpperCase()
       } else if (level === "warn") {
-        label = "WARNING";
+        label = "WARNING"
       }
       let labelHtml = label
         ? `<div class="elv-callout-label">${customLabel || label}</div>`
-        : "";
+        : ""
       let contentHtml =
         (content || "").trim().length > 0
           ? `<div class="elv-callout-c">${content}</div>`
-          : "";
+          : ""
 
       return `<div class="elv-callout${
         level ? ` elv-callout-${level}` : ""
-      }">${labelHtml}${contentHtml}</div>`;
+      }">${labelHtml}${contentHtml}</div>`
     },
-  );
+  )
 
   return {
     dir: {
       includes: "_src/_includes",
       output: "_site",
     },
-  };
-};
+  }
+}

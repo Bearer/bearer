@@ -108,15 +108,15 @@ For example, a security rule requires the initialization of the session after th
 This code needs to raise an alert:
 
 ```jsx
-app.use(session({}));
-app.use(express.static(__dirname + "/public"));
+app.use(session({}))
+app.use(express.static(__dirname + "/public"))
 ```
 
 While this one should not:
 
 ```jsx
-app.use(express.static(__dirname + "/public"));
-app.use(session({}));
+app.use(express.static(__dirname + "/public"))
+app.use(session({}))
 ```
 
 ### Type analysis
@@ -129,16 +129,16 @@ If we take this code snippet as an example:
 
 ```tsx
 interface User {
-  email: string;
-  gender: string;
+  email: string
+  gender: string
 }
 
 let user: User = {
   email: "foo@example.com",
   gender: "male",
-};
+}
 
-console.log(`User is: ${user}`);
+console.log(`User is: ${user}`)
 ```
 
 We take a user as the source and analyze the context of the source. We know that a user contains some personal information, and that may leak into the logger (sink). Therefore, we are able to report that as a failure.
