@@ -49,7 +49,7 @@ Use commands and flags as normal in place of `[COMMAND]`.
 
 Running tests is best performed using the [`run_tests.sh` script]({{meta.sourcePath}}/blob/main/scripts/run_tests.sh). This will configure all needed variables to handle both unit and integration tests.
 
-```
+```bash
 # From the project base
 ./scripts/run_tests.sh
 ```

@@ -8,12 +8,12 @@ Recipes are part of how Bearer CLI makes connections between your code and other
 
 Recipes are located at `bearer/internal/classification/db/recipes/`.
 
-```md
+```
 .
 ├ internal/
-│ └ classification/
-│ └ db/
-│ └ recipes/
+│  └ classification/
+│       └  db/
+│           └  recipes/
 ```
 
 Each recipe consists of a `JSON` file containing the following properties:
