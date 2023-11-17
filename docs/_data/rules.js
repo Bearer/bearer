@@ -76,7 +76,6 @@ async function fetchRelease() {
 
 async function fetchData(location) {
   let rules = []
-  try {
     const dirs = await readdir(location)
     // ex: looping through rules [ruby, gitleaks, sql]
     dirs.forEach(async (dir) => {
@@ -119,9 +118,6 @@ async function fetchData(location) {
       }
     })
     return { counts, rules }
-  } catch (err) {
-    throw err
-  }
 }
 
 async function fetchAllFiles(directory, breadcrumb, files) {

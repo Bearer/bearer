@@ -9,17 +9,13 @@ async function fetchFile(location) {
 }
 
 async function fetchData(dir) {
-  try {
-    const files = await readdir(dir);
-    let result = await Promise.all(
-      files.map(async (file) => {
-        return await fetchFile(path.join(dir, file));
-      })
-    );
-    return result;
-  } catch (err) {
-    throw err;
-  }
+  const files = await readdir(dir);
+  let result = await Promise.all(
+    files.map(async (file) => {
+      return await fetchFile(path.join(dir, file));
+    })
+  );
+  return result;
 }
 
 function sortData(typesFile, catsFile, groupsFile) {
@@ -31,12 +27,11 @@ function sortData(typesFile, catsFile, groupsFile) {
   // setup groups
   // makes output[key] per group where key is UUID of group(PD, pii, etc)
   for (const key in groupsFile.groups) {
-    outputResult = {
+    output[key] = {
       uuid: key,
       categories: {},
       ...groupsFile.groups[key],
     };
-    output[key] = outputResult;
   }
 
   // add categories to each group

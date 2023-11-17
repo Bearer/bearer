@@ -8,22 +8,18 @@ async function fetchFile(location) {
 }
 
 async function fetchData(dir) {
-  try {
-    const files = await readdir(dir);
-    let result = await Promise.all(
-      files.map(async (file) => {
-        let data = await fetchFile(path.join(dir, file));
-        return {
-          ...data,
-          id: path.basename(file, ".json"),
-          source: `/internal/classification/db/recipes/${file}`,
-        };
-      })
-    );
-    return result;
-  } catch (err) {
-    throw err;
-  }
+  const files = await readdir(dir);
+  let result = await Promise.all(
+    files.map(async (file) => {
+      let data = await fetchFile(path.join(dir, file));
+      return {
+        ...data,
+        id: path.basename(file, ".json"),
+        source: `/internal/classification/db/recipes/${file}`,
+      };
+    })
+  );
+  return result;
 }
 module.exports = async function () {
   let recipes = await fetchData("../internal/classification/db/recipes/");

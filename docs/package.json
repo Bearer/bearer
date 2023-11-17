@@ -9,9 +9,9 @@
     "debug": "DEBUG=Eleventy* eleventy --serve & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
     "build": "ELEVENTY_PRODUCTION=true eleventy && NODE_ENV=production npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --minify",
     "clean": "rm -rf _site _tmp",
-    "lint": "npx eslint _src",
+    "lint": "npx eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
-    "prettier": "npx prettier _src --check",
+    "prettier": "npx prettier --ignore-path .gitignore . --check",
     "prettier:fix": "npm run prettier -- --write"
   },
   "keywords": [],

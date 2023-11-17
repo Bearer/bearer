@@ -5,7 +5,7 @@
   const owaspCounter = document.querySelector(".js-owasp-count");
   const ruleCounter = document.querySelector(".js-rule-count");
   filterTriggers.forEach((button) => {
-    button.addEventListener("click", (e) => {
+    button.addEventListener("click", () => {
       const parent = button.parentElement;
       if (parent.classList.contains("filter-open")) {
         parent.classList.remove("filter-open");
@@ -105,18 +105,18 @@
   form.addEventListener("submit", (e) => {
     e.preventDefault();
   });
-  input.addEventListener("keyup", (e) => {
+  input.addEventListener("keyup", () => {
     clearTimeout(timer);
     timer = setTimeout(filterResults, delay);
   });
 
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", (e) => {
+    checkbox.addEventListener("change", () => {
       filterResults();
     });
   });
 
-  resetButton.addEventListener("click", (e) => {
+  resetButton.addEventListener("click", () => {
     resetForm(input);
   });
 
