@@ -29,7 +29,7 @@ require (
 	github.com/tangzero/inflector v1.0.0
 	github.com/weppos/publicsuffix-go v0.30.1
 	github.com/xeipuuv/gojsonschema v1.2.0
-	github.com/zricethezav/gitleaks/v8 v8.18.0
+	github.com/zricethezav/gitleaks/v8 v8.18.1
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
 	golang.org/x/mod v0.14.0
 	golang.org/x/net v0.18.0
@@ -56,7 +56,6 @@ require (
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.15.1 // indirect
-	github.com/petar-dambovaliev/aho-corasick v0.0.0-20211021192214-5ab2d9280aa9 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
@@ -71,6 +70,7 @@ require (
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
+	github.com/BobuSumisu/aho-corasick v1.0.3 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20230828082145-3c4c8a2d2371 // indirect
 	github.com/acomagu/bufpipe v1.0.4 // indirect
