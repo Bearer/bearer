@@ -1,0 +1,42 @@
+
+--
+
+5b926801859e02e36224dc3a648a2fda_0 
+├─ Ignored At: 2023-10-13T14:57:07Z
+├─ Author: gotbadger
+├─ False positive? Yes
+└─ Comment: variable is safe
+
+dc369468d8a5d5bb522d023ae7485376_0 
+├─ Ignored At: 2023-11-13T14:45:21Z
+├─ Author: gotbadger
+├─ False positive? Yes
+└─ Comment: secret placeholder
+
+fff78d76f2c44a5768dcb4d55a3bd276_0 
+├─ Ignored At: 2023-11-13T14:48:31Z
+├─ Author: gotbadger
+├─ False positive? No
+└─ Comment: data hash
+
+23d5ed741c83e2e54cc77bdf597bd15d_0 
+├─ Ignored At: 2023-11-13T14:52:08Z
+├─ Author: gotbadger
+├─ False positive? Yes
+└─ Comment: token generation
+
+68a86d90f28db878612eb5f699c06543_0 
+├─ Ignored At: 2023-11-13T15:00:28Z
+├─ Author: gotbadger
+├─ False positive? No
+└─ Comment: low risk
+
+6c3dd0e4ba8f4c427dffaea6c6696986_0 
+├─ Ignored At: 2023-11-15T11:51:54Z
+├─ Author: gotbadger
+├─ False positive? Yes
+└─ Comment: token gen
+
+
+
+
