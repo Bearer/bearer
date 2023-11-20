@@ -1,0 +1,9 @@
+patterns:
+  - sink
+languages:
+  - ruby
+severity: low
+metadata:
+  cwe_id:
+    - 319
+  id: expected_rule
