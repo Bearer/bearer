@@ -30,11 +30,11 @@ Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "he
 `
 )
 
-var ScanFlags = &flag.Flags{
-	ScanFlagGroup:    flag.NewScanFlagGroup(),
-	RuleFlagGroup:    flag.NewRuleFlagGroup(),
-	ReportFlagGroup:  flag.NewReportFlagGroup(),
-	GeneralFlagGroup: flag.NewGeneralFlagGroup(),
+var ScanFlags = flag.Flags{
+	flag.ReportFlagGroup,
+	flag.RuleFlagGroup,
+	flag.ScanFlagGroup,
+	flag.GeneralFlagGroup,
 }
 
 func NewScanCommand() *cobra.Command {

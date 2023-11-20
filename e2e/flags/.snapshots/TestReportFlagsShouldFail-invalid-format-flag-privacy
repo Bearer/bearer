@@ -1,6 +1,6 @@
 
 --
-Error: flag error: report flags error: invalid format argument for privacy report; supported values: csv, json, yaml, html
+Error: flag error: Report flags error: invalid format argument for privacy report; supported values: csv, json, yaml, html
 Usage:
   bearer scan [flags] <path>
 Aliases:
@@ -46,5 +46,5 @@ General Flags
       --no-color                Disable color in output
 
 
-flag error: report flags error: invalid format argument for privacy report; supported values: csv, json, yaml, html
+flag error: Report flags error: invalid format argument for privacy report; supported values: csv, json, yaml, html
 

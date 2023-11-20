@@ -15,92 +15,92 @@ const (
 	TraceLogLevel = "trace"
 )
 
+type generalFlagGroup struct{ flagGroupBase }
+
+var GeneralFlagGroup = &generalFlagGroup{flagGroupBase{name: "General"}}
+
 var (
-	HostFlag = Flag{
+	HostFlag = GeneralFlagGroup.add(Flag{
 		Name:            "host",
 		ConfigName:      "host",
 		Value:           "my.bearer.sh",
 		Usage:           "Specify the Host for sending the report.",
 		DisableInConfig: true,
 		Hide:            true,
-	}
-	APIKeyFlag = Flag{
+	})
+
+	APIKeyFlag = GeneralFlagGroup.add(Flag{
 		Name:            "api-key",
 		ConfigName:      "api-key",
 		Value:           "",
 		Usage:           "Use your Bearer API Key to send the report to Bearer.",
 		DisableInConfig: true,
 		Hide:            true,
-	}
-	ConfigFileFlag = Flag{
+	})
+
+	ConfigFileFlag = GeneralFlagGroup.add(Flag{
 		Name:            "config-file",
 		ConfigName:      "config-file",
 		Value:           "bearer.yml",
 		Usage:           "Load configuration from the specified path.",
 		DisableInConfig: true,
-	}
-	DisableVersionCheckFlag = Flag{
+	})
+
+	DisableVersionCheckFlag = GeneralFlagGroup.add(Flag{
 		Name:       "disable-version-check",
 		ConfigName: "disable-version-check",
 		Value:      false,
 		Usage:      "Disable Bearer version checking",
-	}
-	NoColorFlag = Flag{
+	})
+
+	NoColorFlag = GeneralFlagGroup.add(Flag{
 		Name:       "no-color",
 		ConfigName: "report.no-color",
 		Value:      false,
 		Usage:      "Disable color in output",
-	}
-	IgnoreFileFlag = Flag{
+	})
+
+	IgnoreFileFlag = GeneralFlagGroup.add(Flag{
 		Name:            "ignore-file",
 		ConfigName:      "ignore-file",
 		Value:           "bearer.ignore",
 		Usage:           "Load ignore file from the specified path.",
 		DisableInConfig: true,
-	}
-	DebugFlag = Flag{
+	})
+
+	DebugFlag = GeneralFlagGroup.add(Flag{
 		Name:            "debug",
 		ConfigName:      "debug",
 		Value:           false,
 		Usage:           "Enable debug logs. Equivalent to --log-level=debug",
 		DisableInConfig: true,
-	}
-	LogLevelFlag = Flag{
+	})
+
+	LogLevelFlag = GeneralFlagGroup.add(Flag{
 		Name:       "log-level",
 		ConfigName: "log-level",
 		Value:      "info",
 		Usage:      "Set log level (error, info, debug, trace)",
-	}
-	DebugProfileFlag = Flag{
+	})
+
+	DebugProfileFlag = GeneralFlagGroup.add(Flag{
 		Name:            "debug-profile",
 		ConfigName:      "debug-profile",
 		Value:           false,
 		Usage:           "Generate profiling data for debugging",
 		Hide:            true,
 		DisableInConfig: true,
-	}
-	IgnoreGitFlag = Flag{
+	})
+
+	IgnoreGitFlag = GeneralFlagGroup.add(Flag{
 		Name:            "ignore-git",
 		ConfigName:      "ignore-git",
 		Value:           false,
 		Usage:           "Ignore Git listing",
 		Hide:            true,
 		DisableInConfig: true,
-	}
+	})
 )
-
-type GeneralFlagGroup struct {
-	ConfigFile          *Flag
-	IgnoreFile          *Flag
-	APIKey              *Flag
-	Host                *Flag
-	DisableVersionCheck *Flag
-	NoColor             *Flag
-	DebugFlag           *Flag
-	LogLevelFlag        *Flag
-	DebugProfile        *Flag
-	IgnoreGit           *Flag
-}
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
 type GeneralOptions struct {
@@ -115,46 +115,12 @@ type GeneralOptions struct {
 	IgnoreGit           bool `mapstructure:"ignore-git" json:"ignore-git" yaml:"ignore-git"`
 }
 
-func NewGeneralFlagGroup() *GeneralFlagGroup {
-	return &GeneralFlagGroup{
-		ConfigFile:          &ConfigFileFlag,
-		APIKey:              &APIKeyFlag,
-		Host:                &HostFlag,
-		DisableVersionCheck: &DisableVersionCheckFlag,
-		NoColor:             &NoColorFlag,
-		IgnoreFile:          &IgnoreFileFlag,
-		DebugFlag:           &DebugFlag,
-		LogLevelFlag:        &LogLevelFlag,
-		DebugProfile:        &DebugProfileFlag,
-		IgnoreGit:           &IgnoreGitFlag,
-	}
-}
-
-func (f *GeneralFlagGroup) Name() string {
-	return "General"
-}
-
-func (f *GeneralFlagGroup) Flags() []*Flag {
-	return []*Flag{
-		f.ConfigFile,
-		f.APIKey,
-		f.Host,
-		f.DisableVersionCheck,
-		f.NoColor,
-		f.IgnoreFile,
-		f.DebugFlag,
-		f.LogLevelFlag,
-		f.DebugProfile,
-		f.IgnoreGit,
-	}
-}
-
-func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
+func (generalFlagGroup) SetOptions(options *Options, args []string) error {
 	var client *api.API
-	apiKey := getString(f.APIKey)
+	apiKey := getString(APIKeyFlag)
 	if apiKey != "" {
 		client = api.New(api.API{
-			Host:  getString(f.Host),
+			Host:  getString(HostFlag),
 			Token: apiKey,
 		})
 
@@ -167,21 +133,23 @@ func (f *GeneralFlagGroup) ToOptions() GeneralOptions {
 		}
 	}
 
-	debug := getBool(f.DebugFlag)
-	logLevel := getString(f.LogLevelFlag)
+	debug := getBool(DebugFlag)
+	logLevel := getString(LogLevelFlag)
 	if debug {
 		logLevel = DebugLogLevel
 	}
 
-	return GeneralOptions{
+	options.GeneralOptions = GeneralOptions{
 		Client:              client,
-		ConfigFile:          getString(f.ConfigFile),
-		DisableVersionCheck: getBool(f.DisableVersionCheck),
-		NoColor:             getBool(f.NoColor),
-		IgnoreFile:          getString(f.IgnoreFile),
+		ConfigFile:          getString(ConfigFileFlag),
+		DisableVersionCheck: getBool(DisableVersionCheckFlag),
+		NoColor:             getBool(NoColorFlag),
+		IgnoreFile:          getString(IgnoreFileFlag),
 		Debug:               debug,
 		LogLevel:            logLevel,
-		IgnoreGit:           getBool(f.IgnoreGit),
-		DebugProfile:        getBool(f.DebugProfile),
+		IgnoreGit:           getBool(IgnoreGitFlag),
+		DebugProfile:        getBool(DebugProfileFlag),
 	}
+
+	return nil
 }

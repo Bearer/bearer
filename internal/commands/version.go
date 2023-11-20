@@ -13,15 +13,13 @@ import (
 )
 
 func NewVersionCommand(version string, commitSHA string) *cobra.Command {
-	var VersionFlags = &flag.Flags{
-		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
-	}
+	var flags = flag.Flags{flag.GeneralFlagGroup}
 	cmd := &cobra.Command{
 		Use:   "version",
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := VersionFlags.Bind(cmd); err != nil {
+			if err := flags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
@@ -49,6 +47,6 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 	cmd.SetUsageFunc(func(cmd *cobra.Command) error {
 		return nil
 	})
-	VersionFlags.AddFlags(cmd)
+	flags.AddFlags(cmd)
 	return cmd
 }

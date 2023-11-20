@@ -14,11 +14,7 @@ import (
 )
 
 func NewProcessingWorkerCommand() *cobra.Command {
-	flags := &flag.Flags{
-		ProcessFlagGroup: flag.NewProcessGroup(),
-		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
-		ScanFlagGroup:    flag.NewScanFlagGroup(),
-	}
+	flags := flag.Flags{flag.WorkerFlagGroup}
 
 	cmd := &cobra.Command{
 		Use:   "processing-worker [flags] PATH",
@@ -38,21 +34,25 @@ func NewProcessingWorkerCommand() *cobra.Command {
 				debugprofile.Start()
 			}
 
-			processOptions, err := flags.ProcessFlagGroup.ToOptions()
+			options, err := flags.ToOptions(args)
 			if err != nil {
-				return fmt.Errorf("options binding error: %w", err)
+				return fmt.Errorf("flag error: %s", err)
 			}
 
-			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
-
-			err = worker.Start(processOptions.ParentProcessID, processOptions.Port)
-			return err
+			log.Debug().Msgf("running scan worker on port `%s`", options.WorkerOptions.Port)
+			return worker.Start(options.WorkerOptions.ParentProcessID, options.WorkerOptions.Port)
 		},
 		Hidden:        true,
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
-	cmd.SetFlagErrorFunc(flagErrorFunc)
+	cmd.SetFlagErrorFunc(func(command *cobra.Command, err error) error {
+		if err := command.Help(); err != nil {
+			return err
+		}
+		command.Println() // add empty line after list of flags
+		return err
+	})
 	flags.AddFlags(cmd)
 
 	return cmd

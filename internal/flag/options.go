@@ -44,26 +44,21 @@ type Flag struct {
 	Deprecated bool
 }
 
+type flagGroupBase struct {
+	name  string
+	flags []*Flag
+}
+
 type FlagGroup interface {
 	Name() string
 	Flags() []*Flag
+	SetOptions(options *Options, args []string) error
 }
 
-type Flags struct {
-	RepoFlagGroup          *RepoFlagGroup
-	ReportFlagGroup        *ReportFlagGroup
-	RuleFlagGroup          *RuleFlagGroup
-	ProcessFlagGroup       *ProcessFlagGroup
-	ScanFlagGroup          *ScanFlagGroup
-	GeneralFlagGroup       *GeneralFlagGroup
-	IgnoreAddFlagGroup     *IgnoreAddFlagGroup
-	IgnoreShowFlagGroup    *IgnoreShowFlagGroup
-	IgnoreMigrateFlagGroup *IgnoreMigrateFlagGroup
-}
+type Flags []FlagGroup
 
 // Options holds all the runtime configuration
 type Options struct {
-	RepoOptions
 	ReportOptions
 	RuleOptions
 	ScanOptions
@@ -71,6 +66,7 @@ type Options struct {
 	IgnoreAddOptions
 	IgnoreShowOptions
 	IgnoreMigrateOptions
+	WorkerOptions
 }
 
 func addFlag(cmd *cobra.Command, flag *Flag) {
@@ -194,42 +190,21 @@ func getSeverities(flag *Flag) set.Set[string] {
 	return result
 }
 
-func (f *Flags) groups() []FlagGroup {
-	var groups []FlagGroup
-	// This order affects the usage message, so they are sorted by frequency of use.
-	if f.ReportFlagGroup != nil {
-		groups = append(groups, f.ReportFlagGroup)
-	}
-	if f.RuleFlagGroup != nil {
-		groups = append(groups, f.RuleFlagGroup)
-	}
-	if f.ScanFlagGroup != nil {
-		groups = append(groups, f.ScanFlagGroup)
-	}
-	if f.GeneralFlagGroup != nil {
-		groups = append(groups, f.GeneralFlagGroup)
-	}
-	if f.ProcessFlagGroup != nil {
-		groups = append(groups, f.ProcessFlagGroup)
-	}
-	if f.RepoFlagGroup != nil {
-		groups = append(groups, f.RepoFlagGroup)
-	}
-	if f.IgnoreAddFlagGroup != nil {
-		groups = append(groups, f.IgnoreAddFlagGroup)
-	}
-	if f.IgnoreShowFlagGroup != nil {
-		groups = append(groups, f.IgnoreShowFlagGroup)
-	}
-	if f.IgnoreMigrateFlagGroup != nil {
-		groups = append(groups, f.IgnoreMigrateFlagGroup)
-	}
-
-	return groups
+func (f *flagGroupBase) add(flag Flag) *Flag {
+	f.flags = append(f.flags, &flag)
+	return &flag
 }
 
-func (f *Flags) AddFlags(cmd *cobra.Command) {
-	for _, group := range f.groups() {
+func (f *flagGroupBase) Name() string {
+	return f.name
+}
+
+func (f *flagGroupBase) Flags() []*Flag {
+	return f.flags
+}
+
+func (f Flags) AddFlags(cmd *cobra.Command) {
+	for _, group := range f {
 		for _, flag := range group.Flags() {
 			addFlag(cmd, flag)
 		}
@@ -240,9 +215,9 @@ func (f *Flags) AddFlags(cmd *cobra.Command) {
 	})
 }
 
-func (f *Flags) Usages(cmd *cobra.Command) string {
+func (f Flags) Usages(cmd *cobra.Command) string {
 	var usages string
-	for _, group := range f.groups() {
+	for _, group := range f {
 		flags := pflag.NewFlagSet(cmd.Name(), pflag.ContinueOnError)
 		lflags := cmd.LocalFlags()
 		for _, flag := range group.Flags() {
@@ -261,19 +236,16 @@ func (f *Flags) Usages(cmd *cobra.Command) string {
 	return strings.TrimSpace(usages)
 }
 
-func (f *Flags) Bind(cmd *cobra.Command) error {
+func (f Flags) Bind(cmd *cobra.Command) error {
 	return f.bind(cmd, false)
 }
 
-func (f *Flags) BindForConfigInit(cmd *cobra.Command) error {
+func (f Flags) BindForConfigInit(cmd *cobra.Command) error {
 	return f.bind(cmd, true)
 }
 
-func (f *Flags) bind(cmd *cobra.Command, supportIgnoreConfig bool) error {
-	for _, group := range f.groups() {
-		if group == nil {
-			continue
-		}
+func (f Flags) bind(cmd *cobra.Command, supportIgnoreConfig bool) error {
+	for _, group := range f {
 		for _, flag := range group.Flags() {
 			if supportIgnoreConfig && flag.DisableInConfig {
 				continue
@@ -287,52 +259,19 @@ func (f *Flags) bind(cmd *cobra.Command, supportIgnoreConfig bool) error {
 	return nil
 }
 
-// nolint: gocyclo
-func (f *Flags) ToOptions(args []string) (Options, error) {
-	var err error
-	opts := Options{}
+func (f Flags) ToOptions(args []string) (Options, error) {
+	// 	var err error
+	options := Options{}
 
-	if f.RepoFlagGroup != nil {
-		opts.RepoOptions = f.RepoFlagGroup.ToOptions()
-	}
-
-	if f.ReportFlagGroup != nil {
-		opts.ReportOptions, err = f.ReportFlagGroup.ToOptions()
-		if err != nil {
-			return Options{}, fmt.Errorf("report flags error: %w", err)
+	for _, group := range f {
+		if err := group.SetOptions(&options, args); err != nil {
+			return Options{}, fmt.Errorf("%s flags error: %w", group.Name(), err)
 		}
 	}
 
-	if f.RuleFlagGroup != nil {
-		opts.RuleOptions = f.RuleFlagGroup.ToOptions(args)
+	if options.ReportOptions.Report == "privacy" && !slices.Contains(options.ScanOptions.Scanner, "sast") {
+		return Options{}, ErrInvalidScannerReportCombination
 	}
 
-	if f.ScanFlagGroup != nil {
-		opts.ScanOptions, err = f.ScanFlagGroup.ToOptions(args)
-		if err != nil {
-			return Options{}, fmt.Errorf("scan flag error: %w", err)
-		}
-
-		if opts.ReportOptions.Report == "privacy" && !slices.Contains(opts.ScanOptions.Scanner, "sast") {
-			return Options{}, ErrInvalidScannerReportCombination
-		}
-	}
-
-	if f.GeneralFlagGroup != nil {
-		opts.GeneralOptions = f.GeneralFlagGroup.ToOptions()
-	}
-
-	if f.IgnoreAddFlagGroup != nil {
-		opts.IgnoreAddOptions = f.IgnoreAddFlagGroup.ToOptions()
-	}
-
-	if f.IgnoreShowFlagGroup != nil {
-		opts.IgnoreShowOptions = f.IgnoreShowFlagGroup.ToOptions()
-	}
-
-	if f.IgnoreMigrateFlagGroup != nil {
-		opts.IgnoreMigrateOptions = f.IgnoreMigrateFlagGroup.ToOptions()
-	}
-
-	return opts, nil
+	return options, nil
 }
