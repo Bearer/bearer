@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -107,9 +108,22 @@ $ bearer ignore show <fingerprint>`,
 
 			cmd.Print("\n")
 			if options.IgnoreShowOptions.All {
-				// show all fingerprints
+				// show all fingerprints sorted by date
+				var sortedIgnoredItems []ignoretypes.SortedIgnoredFingerpint
+
 				for fingerprintId, fingerprint := range ignoredFingerprints {
-					cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, fingerprint, options.GeneralOptions.NoColor))
+					sortedIgnoredItems = append(sortedIgnoredItems, ignoretypes.SortedIgnoredFingerpint{
+						FingerprintId:      fingerprintId,
+						IgnoredFingerprint: fingerprint,
+					})
+				}
+
+				sort.Slice(sortedIgnoredItems, func(i, j int) bool {
+					return sortedIgnoredItems[i].IgnoredFingerprint.IgnoredAt < sortedIgnoredItems[j].IgnoredFingerprint.IgnoredAt
+				})
+
+				for _, data := range sortedIgnoredItems {
+					cmd.Print(ignore.DisplayIgnoredEntryTextString(data.FingerprintId, data.IgnoredFingerprint, options.GeneralOptions.NoColor))
 					cmd.Print("\n\n")
 				}
 			} else {
