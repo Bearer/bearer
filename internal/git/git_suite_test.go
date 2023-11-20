@@ -28,7 +28,7 @@ func runGit(dir string, args ...string) {
 
 func addAndCommit(dir string) {
 	runGit(dir, "add", ".")
-	runGit(dir, "commit", "--allow-empty-message", "--message=")
+	runGit(dir, "commit", "--allow-empty-message", "--message=", "--author=Bearer CI <ci@bearer.com>")
 }
 
 func writeFile(tempDir, filename, content string) {

@@ -6,21 +6,25 @@ import (
 )
 
 // GetCurrentCommit gets a current commit from a HEAD for a local directory
-func GetCurrentCommit(dir string) (string, error) {
+func GetCurrentCommit(rootDir string) (string, error) {
 	output, err := captureCommandBasic(
 		context.TODO(),
-		dir,
+		rootDir,
 		"rev-parse",
 		"HEAD",
 	)
 
+	if err != nil && strings.Contains(err.Error(), "unknown revision") {
+		return "", nil
+	}
+
 	return strings.TrimSpace(output), err
 }
 
-func GetMergeBase(dir string, ref1, ref2 string) (sha string, err error) {
+func GetMergeBase(rootDir string, ref1, ref2 string) (string, error) {
 	output, err := captureCommandBasic(
 		context.TODO(),
-		dir,
+		rootDir,
 		"merge-base",
 		ref1,
 		ref2,
@@ -29,10 +33,21 @@ func GetMergeBase(dir string, ref1, ref2 string) (sha string, err error) {
 	return strings.TrimSpace(output), err
 }
 
-func CommitPresent(rootDir, sha string) bool {
-	cmd := logAndBuildCommand(context.TODO(), "cat-file", "-t", sha)
-	cmd.Dir = rootDir
+func CommitPresent(rootDir, hash string) (bool, error) {
+	output, err := captureCommandBasic(
+		context.TODO(),
+		rootDir,
+		"cat-file",
+		"-t",
+		hash,
+	)
+	if err != nil {
+		if strings.Contains(err.Error(), "could not get object info") {
+			return false, nil
+		}
 
-	output, _ := cmd.Output()
-	return string(output) == "commit\n"
+		return false, err
+	}
+
+	return output == "commit\n", nil
 }

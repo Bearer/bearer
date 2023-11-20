@@ -2,6 +2,7 @@ package gitrepository
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -21,7 +22,6 @@ import (
 type Repository struct {
 	ctx    context.Context
 	config settings.Config
-	rootPath,
 	targetPath,
 	gitTargetPath string
 	context *Context
@@ -38,7 +38,7 @@ func New(ctx context.Context, config settings.Config, targetPath string, context
 		return nil, fmt.Errorf("failed to get relative target: %w", err)
 	}
 
-	log.Debug().Msgf("git target: [%s/]%s", context.RootDir, gitTargetPath)
+	log.Debug().Msgf("git target: [%s]/%s", context.RootDir, gitTargetPath)
 
 	repository := &Repository{
 		ctx:           ctx,
@@ -78,13 +78,13 @@ func (repository *Repository) fetchMergeBaseCommit() error {
 
 	log.Debug().Msgf("merge base commit: %s", hash)
 
-	if git.CommitPresent(repository.rootPath, hash) {
-		return nil
+	if isPresent, err := git.CommitPresent(repository.context.RootDir, hash); isPresent || err != nil {
+		return err
 	}
 
 	log.Debug().Msgf("merge base commit not present, fetching")
 
-	if err := git.FetchRef(repository.ctx, repository.rootPath, hash); err != nil {
+	if err := git.FetchRef(repository.ctx, repository.context.RootDir, hash); err != nil {
 		return err
 	}
 
@@ -97,9 +97,13 @@ func (repository *Repository) getCurrentFiles(
 	ignore *ignore.FileIgnore,
 	goclocResult *gocloc.Result,
 ) (*files.List, error) {
+	if repository.context.CurrentCommitHash == "" {
+		return &files.List{}, nil
+	}
+
 	var headFiles []files.File
 
-	gitFiles, err := git.ListTree(repository.rootPath, repository.context.CurrentCommitHash)
+	gitFiles, err := git.ListTree(repository.context.RootDir, repository.context.CurrentCommitHash)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +129,7 @@ func (repository *Repository) getDiffFiles(
 	renames := make(map[string]string)
 	chunks := make(map[string]git.Chunks)
 
-	filePatches, err := git.Diff(repository.rootPath, repository.context.BaseCommitHash)
+	filePatches, err := git.Diff(repository.context.RootDir, repository.context.BaseCommitHash)
 	if err != nil {
 		return nil, err
 	}
@@ -176,7 +180,11 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 		return nil
 	}
 
-	if err := git.Switch(repository.rootPath, repository.context.BaseCommitHash, true); err != nil {
+	if repository.context.HasUncommittedChanges {
+		return errors.New("uncommitted changes found in your repository. commit or stash changes your changes and retry")
+	}
+
+	if err := git.Switch(repository.context.RootDir, repository.context.BaseCommitHash, true); err != nil {
 		return fmt.Errorf("error switching to base branch: %w", err)
 	}
 
@@ -196,10 +204,10 @@ func (repository *Repository) WithBaseBranch(body func() error) error {
 
 func (repository *Repository) restoreCurrent() error {
 	if repository.context.CurrentBranch == "" {
-		return git.Switch(repository.rootPath, repository.context.CurrentCommitHash, true)
+		return git.Switch(repository.context.RootDir, repository.context.CurrentCommitHash, true)
 	}
 
-	return git.Switch(repository.rootPath, repository.context.CurrentBranch, false)
+	return git.Switch(repository.context.RootDir, repository.context.CurrentBranch, false)
 }
 
 func (repository *Repository) fileFor(

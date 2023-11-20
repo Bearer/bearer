@@ -25,6 +25,7 @@ Rule Flags
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
       --data-subject-mapping string          Override default data subject mapping by providing a path to a custom mapping JSON file
+      --diff                                 Only report differences in findings relative to a base branch.
       --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default true)
       --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s (default 3s)
       --exit-code int                        Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan. (default -1)

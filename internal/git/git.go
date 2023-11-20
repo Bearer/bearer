@@ -5,19 +5,16 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"net/url"
 	"os"
 	"os/exec"
+	"path"
 	"regexp"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/rs/zerolog/log"
-)
 
-const (
-	mailmapFilename = ".mailmap"
+	"github.com/bearer/bearer/internal/util/file"
 )
 
 var (
@@ -27,24 +24,29 @@ var (
 		"GCM_INTERACTIVE=never",
 		"GIT_LFS_SKIP_SMUDGE=1",
 	)
-
-	specialFiles []string = []string{
-		mailmapFilename,
-		".gitignore",
-		".gitattributes",
-		".gitmodules",
-	}
 )
 
-type CommitIdentifier struct {
-	SHA       string    `json:"sha" yaml:"sha"`
-	Timestamp time.Time `json:"timestamp" yaml:"timestamp"`
-}
+func GetRoot(targetPath string) (string, error) {
+	dir := targetPath
+	if !file.IsDir(dir) {
+		dir = path.Dir(dir)
+	}
 
-func urlWithCredentials(originalURL *url.URL, token string) *url.URL {
-	result := *originalURL
-	result.User = url.UserPassword("x", token)
-	return &result
+	output, err := captureCommandBasic(context.TODO(), dir, "rev-parse", "--show-toplevel")
+	if err != nil {
+		if strings.Contains(err.Error(), "not a git repository") {
+			return "", nil
+		}
+
+		return "", err
+	}
+
+	path := strings.TrimSpace(output)
+	if path == "" {
+		return "", nil
+	}
+
+	return file.CanonicalPath(path)
 }
 
 func logAndBuildCommand(ctx context.Context, args ...string) *exec.Cmd {
@@ -117,9 +119,6 @@ func captureCommandBasic(ctx context.Context, workingDir string, args ...string)
 
 	return
 }
-
-var regexpDefunctProcess = regexp.MustCompile(" git <defunct>")
-var regexpPID = regexp.MustCompile("[0-9]+ ")
 
 func unquoteFilename(quoted string) (string, error) {
 	if len(quoted) == 0 || quoted[0] != '"' {

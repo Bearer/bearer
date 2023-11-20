@@ -159,8 +159,8 @@ var _ = Describe("ChunkRange", func() {
 		})
 
 		When("there are no lines in the range", func() {
-			It("returns an invalid (< start line) value", func() {
-				Expect(git.ChunkRange{LineNumber: 2, LineCount: 0}.EndLineNumber()).To(Equal(1))
+			It("returns the start line number", func() {
+				Expect(git.ChunkRange{LineNumber: 2, LineCount: 0}.EndLineNumber()).To(Equal(2))
 			})
 		})
 	})
@@ -214,7 +214,7 @@ var _ = Describe("ChunkRange", func() {
 })
 
 var _ = Describe("Chunks", func() {
-	FDescribe("TranslateRange", func() {
+	Describe("TranslateRange", func() {
 		When("the base range is preceded by an add chunk", func() {
 			chunks := git.Chunks{{
 				From: git.ChunkRange{LineNumber: 0, LineCount: 0},

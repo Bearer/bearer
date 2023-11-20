@@ -63,7 +63,7 @@ func GetData(
 		if err = security.AddReportData(data, config, baseBranchFindings, report.HasFiles); err != nil {
 			return nil, err
 		}
-		err = saas.GetReport(data, config, gitContext, false)
+		err = saas.GetReport(data, config, gitContext, true)
 	case flag.ReportPrivacy:
 		err = privacy.AddReportData(data, config)
 	case flag.ReportStats:

@@ -11,6 +11,7 @@ import (
 	"github.com/google/go-github/github"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
+	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/git"
@@ -33,9 +34,13 @@ type Context struct {
 }
 
 func NewContext(options *flag.Options) (*Context, error) {
-	rootDir := git.GetRoot(options.Target)
-	if rootDir == "" {
+	if options.IgnoreGit {
 		return nil, nil
+	}
+
+	rootDir, err := git.GetRoot(options.Target)
+	if rootDir == "" || err != nil {
+		return nil, err
 	}
 
 	currentBranch, err := getCurrentBranch(options, rootDir)
@@ -48,7 +53,7 @@ func NewContext(options *flag.Options) (*Context, error) {
 		return nil, fmt.Errorf("error getting default branch name: %w", err)
 	}
 
-	baseBranch, err := getBaseBranch(options)
+	baseBranch, err := getBaseBranch(options, defaultBranch)
 	if err != nil {
 		return nil, fmt.Errorf("error getting base branch name: %w", err)
 	}
@@ -87,7 +92,7 @@ func NewContext(options *flag.Options) (*Context, error) {
 		fullName = urlInfo.FullName
 	}
 
-	return &Context{
+	context := &Context{
 		RootDir:               rootDir,
 		CurrentBranch:         currentBranch,
 		DefaultBranch:         defaultBranch,
@@ -101,7 +106,12 @@ func NewContext(options *flag.Options) (*Context, error) {
 		Name:                  name,
 		FullName:              fullName,
 		HasUncommittedChanges: hasUncommittedChanges,
-	}, nil
+	}
+
+	contextYAML, _ := yaml.Marshal(context)
+	log.Debug().Msgf("git context:\n%s", contextYAML)
+
+	return context, nil
 }
 
 func getCurrentBranch(options *flag.Options, rootDir string) (string, error) {
@@ -125,13 +135,18 @@ func getDefaultBranch(options *flag.Options, rootDir string) (string, error) {
 	return git.GetDefaultBranch(rootDir)
 }
 
-func getBaseBranch(options *flag.Options) (string, error) {
+func getBaseBranch(options *flag.Options, defaultBranch string) (string, error) {
 	if !options.Diff {
 		return "", nil
 	}
 
 	if options.DiffBaseBranch != "" {
 		return options.DiffBaseBranch, nil
+	}
+
+	if defaultBranch != "" {
+		log.Debug().Msgf("using default branch %s for diff base branch", defaultBranch)
+		return defaultBranch, nil
 	}
 
 	return "", errors.New(

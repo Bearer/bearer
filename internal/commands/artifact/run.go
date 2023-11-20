@@ -290,6 +290,10 @@ func Run(ctx context.Context, opts flag.Options) (err error) {
 		return fmt.Errorf("failed to get git context: %w", err)
 	}
 
+	if opts.Diff && gitContext == nil {
+		return errors.New("--diff option requires a git repository")
+	}
+
 	if !opts.Quiet {
 		outputhandler.StdErrLog("Loading rules")
 	}
