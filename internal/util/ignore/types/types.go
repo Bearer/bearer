@@ -6,8 +6,3 @@ type IgnoredFingerprint struct {
 	FalsePositive bool    `json:"false_positive"`
 	IgnoredAt     string  `json:"ignored_at"`
 }
-
-type SortedIgnoredFingerpint struct {
-	FingerprintId      string
-	IgnoredFingerprint IgnoredFingerprint
-}

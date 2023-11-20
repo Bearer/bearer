@@ -109,21 +109,17 @@ $ bearer ignore show <fingerprint>`,
 			cmd.Print("\n")
 			if options.IgnoreShowOptions.All {
 				// show all fingerprints sorted by date
-				var sortedIgnoredItems []ignoretypes.SortedIgnoredFingerpint
-
-				for fingerprintId, fingerprint := range ignoredFingerprints {
-					sortedIgnoredItems = append(sortedIgnoredItems, ignoretypes.SortedIgnoredFingerpint{
-						FingerprintId:      fingerprintId,
-						IgnoredFingerprint: fingerprint,
-					})
+				keys := make([]string, 0, len(ignoredFingerprints))
+				for key := range ignoredFingerprints {
+					keys = append(keys, key)
 				}
 
-				sort.Slice(sortedIgnoredItems, func(i, j int) bool {
-					return sortedIgnoredItems[i].IgnoredFingerprint.IgnoredAt < sortedIgnoredItems[j].IgnoredFingerprint.IgnoredAt
+				sort.SliceStable(keys, func(i, j int) bool {
+					return ignoredFingerprints[keys[i]].IgnoredAt < ignoredFingerprints[keys[j]].IgnoredAt
 				})
 
-				for _, data := range sortedIgnoredItems {
-					cmd.Print(ignore.DisplayIgnoredEntryTextString(data.FingerprintId, data.IgnoredFingerprint, options.GeneralOptions.NoColor))
+				for _, k := range keys {
+					cmd.Print(ignore.DisplayIgnoredEntryTextString(k, ignoredFingerprints[k], options.GeneralOptions.NoColor))
 					cmd.Print("\n\n")
 				}
 			} else {
