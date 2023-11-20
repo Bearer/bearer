@@ -1,6 +1,6 @@
 
 --
-Error: flag error: scan flag error: invalid context argument; supported values: health
+Error: flag error: Scan flags error: invalid context argument; supported values: health
 Usage:
   bearer scan [flags] <path>
 Aliases:
@@ -46,5 +46,5 @@ General Flags
       --no-color                Disable color in output
 
 
-flag error: scan flag error: invalid context argument; supported values: health
+flag error: Scan flags error: invalid context argument; supported values: health
 

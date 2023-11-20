@@ -37,39 +37,43 @@ var (
 	ErrInvalidFailOnSeverity = errors.New("invalid fail-on-severity argument; supported values: " + strings.Join(globaltypes.Severities, ", "))
 )
 
+type reportFlagGroup struct{ flagGroupBase }
+
+var ReportFlagGroup = &reportFlagGroup{flagGroupBase{name: "Report"}}
+
 var (
-	FormatFlag = Flag{
+	FormatFlag = ReportFlagGroup.add(Flag{
 		Name:       "format",
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatEmpty,
 		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)",
-	}
-	ReportFlag = Flag{
+	})
+	ReportFlag = ReportFlagGroup.add(Flag{
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportSecurity,
 		Usage:      "Specify the type of report (security, privacy, dataflow).",
-	}
-	OutputFlag = Flag{
+	})
+	OutputFlag = ReportFlagGroup.add(Flag{
 		Name:       "output",
 		ConfigName: "report.output",
 		Value:      "",
 		Usage:      "Specify the output path for the report.",
-	}
-	SeverityFlag = Flag{
+	})
+	SeverityFlag = ReportFlagGroup.add(Flag{
 		Name:       "severity",
 		ConfigName: "report.severity",
 		Value:      strings.Join(globaltypes.Severities, ","),
 		Usage:      "Specify which severities are included in the report.",
-	}
-	FailOnSeverityFlag = Flag{
+	})
+	FailOnSeverityFlag = ReportFlagGroup.add(Flag{
 		Name:       "fail-on-severity",
 		ConfigName: "report.fail-on-severity",
 		Value:      strings.Join(sliceutil.Except(globaltypes.Severities, globaltypes.LevelWarning), ","),
 		Usage:      "Specify which severities cause the report to fail. Works in conjunction with --exit-code.",
-	}
-	ExcludeFingerprintFlag = Flag{
+	})
+	ExcludeFingerprintFlag = ReportFlagGroup.add(Flag{
 		Name:            "exclude-fingerprint",
 		ConfigName:      "report.exclude-fingerprint",
 		Value:           []string{},
@@ -77,17 +81,8 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 		Deprecated:      true,
-	}
+	})
 )
-
-type ReportFlagGroup struct {
-	Format             *Flag
-	Report             *Flag
-	Output             *Flag
-	Severity           *Flag
-	FailOnSeverity     *Flag
-	ExcludeFingerprint *Flag
-}
 
 type ReportOptions struct {
 	Format             string          `mapstructure:"format" json:"format" yaml:"format"`
@@ -98,35 +93,9 @@ type ReportOptions struct {
 	ExcludeFingerprint map[string]bool `mapstructure:"exclude_fingerprints" json:"exclude_fingerprints" yaml:"exclude_fingerprints"`
 }
 
-func NewReportFlagGroup() *ReportFlagGroup {
-	return &ReportFlagGroup{
-		Format:             &FormatFlag,
-		Report:             &ReportFlag,
-		Output:             &OutputFlag,
-		Severity:           &SeverityFlag,
-		FailOnSeverity:     &FailOnSeverityFlag,
-		ExcludeFingerprint: &ExcludeFingerprintFlag,
-	}
-}
-
-func (f *ReportFlagGroup) Name() string {
-	return "Report"
-}
-
-func (f *ReportFlagGroup) Flags() []*Flag {
-	return []*Flag{
-		f.Format,
-		f.Report,
-		f.Output,
-		f.Severity,
-		f.FailOnSeverity,
-		f.ExcludeFingerprint,
-	}
-}
-
-func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
+func (reportFlagGroup) SetOptions(options *Options, args []string) error {
 	invalidFormat := ErrInvalidFormatDefault
-	report := getString(f.Report)
+	report := getString(ReportFlag)
 	switch report {
 	case ReportPrivacy:
 		invalidFormat = ErrInvalidFormatPrivacy
@@ -138,52 +107,54 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	case ReportSaaS:
 	case ReportStats:
 	default:
-		return ReportOptions{}, ErrInvalidReport
+		return ErrInvalidReport
 	}
 
-	format := getString(f.Format)
+	format := getString(FormatFlag)
 	switch format {
 	case FormatYAML:
 	case FormatJSON:
 	case FormatEmpty:
 	case FormatHTML:
 		if report != ReportPrivacy && report != ReportSecurity {
-			return ReportOptions{}, invalidFormat
+			return invalidFormat
 		}
 	case FormatCSV:
 		if report != ReportPrivacy {
-			return ReportOptions{}, invalidFormat
+			return invalidFormat
 		}
 	case FormatSarif, FormatGitLabSast, FormatReviewDog, FormatJSONV2:
 		if report != ReportSecurity {
-			return ReportOptions{}, invalidFormat
+			return invalidFormat
 		}
 	default:
-		return ReportOptions{}, invalidFormat
+		return invalidFormat
 	}
 
-	severity := getSeverities(f.Severity)
+	severity := getSeverities(SeverityFlag)
 	if severity == nil {
-		return ReportOptions{}, ErrInvalidSeverity
+		return ErrInvalidSeverity
 	}
-	failOnSeverity := getSeverities(f.FailOnSeverity)
+	failOnSeverity := getSeverities(FailOnSeverityFlag)
 	if failOnSeverity == nil {
-		return ReportOptions{}, ErrInvalidFailOnSeverity
+		return ErrInvalidFailOnSeverity
 	}
 
 	// turn string slice into map for ease of access
-	excludeFingerprints := getStringSlice(f.ExcludeFingerprint)
+	excludeFingerprints := getStringSlice(ExcludeFingerprintFlag)
 	excludeFingerprintsMapping := make(map[string]bool)
 	for _, fingerprint := range excludeFingerprints {
 		excludeFingerprintsMapping[fingerprint] = true
 	}
 
-	return ReportOptions{
+	options.ReportOptions = ReportOptions{
 		Format:             format,
 		Report:             report,
-		Output:             getString(f.Output),
+		Output:             getString(OutputFlag),
 		Severity:           severity,
 		FailOnSeverity:     failOnSeverity,
 		ExcludeFingerprint: excludeFingerprintsMapping,
-	}, nil
+	}
+
+	return nil
 }

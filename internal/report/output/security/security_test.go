@@ -307,7 +307,6 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 			Scanner: []string{"sast"},
 		},
 		RuleOptions:    flag.RuleOptions{},
-		RepoOptions:    flag.RepoOptions{},
 		ReportOptions:  reportOptions,
 		GeneralOptions: flag.GeneralOptions{},
 	}

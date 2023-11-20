@@ -1,40 +1,26 @@
 package flag
 
+type ignoreMigrateFlagGroup struct{ flagGroupBase }
+
+var IgnoreMigrateFlagGroup = &ignoreMigrateFlagGroup{flagGroupBase{name: "Ignore Migrate"}}
+
 var (
-	IgnoreMigrateForceFlag = Flag{
+	IgnoreMigrateForceFlag = IgnoreMigrateFlagGroup.add(Flag{
 		Name:       "force",
 		ConfigName: "ignore_migrate.force",
 		Value:      false,
 		Usage:      "Overwrite an existing ignored finding.",
-	}
+	})
 )
-
-type IgnoreMigrateFlagGroup struct {
-	IgnoreMigrateForceFlag *Flag
-}
 
 type IgnoreMigrateOptions struct {
 	Force bool `mapstructure:"ignore_migrate_force" json:"ignore_migrate_force" yaml:"ignore_migrate_force"`
 }
 
-func NewIgnoreMigrateFlagGroup() *IgnoreMigrateFlagGroup {
-	return &IgnoreMigrateFlagGroup{
-		IgnoreMigrateForceFlag: &IgnoreMigrateForceFlag,
+func (ignoreMigrateFlagGroup) SetOptions(options *Options, args []string) error {
+	options.IgnoreMigrateOptions = IgnoreMigrateOptions{
+		Force: getBool(IgnoreMigrateForceFlag),
 	}
-}
 
-func (f *IgnoreMigrateFlagGroup) Name() string {
-	return "IgnoreMigrate"
-}
-
-func (f *IgnoreMigrateFlagGroup) Flags() []*Flag {
-	return []*Flag{
-		f.IgnoreMigrateForceFlag,
-	}
-}
-
-func (f *IgnoreMigrateFlagGroup) ToOptions() IgnoreMigrateOptions {
-	return IgnoreMigrateOptions{
-		Force: getBool(f.IgnoreMigrateForceFlag),
-	}
+	return nil
 }

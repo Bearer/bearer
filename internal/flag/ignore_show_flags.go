@@ -1,40 +1,26 @@
 package flag
 
+type ignoreShowFlagGroup struct{ flagGroupBase }
+
+var IgnoreShowFlagGroup = &ignoreShowFlagGroup{flagGroupBase{name: "Ignore Show"}}
+
 var (
-	AllFlag = Flag{
+	AllFlag = IgnoreShowFlagGroup.add(Flag{
 		Name:       "all",
 		ConfigName: "ignore_show.all",
 		Value:      false,
 		Usage:      "Show all ignored fingerprints.",
-	}
+	})
 )
-
-type IgnoreShowFlagGroup struct {
-	AllFlag *Flag
-}
 
 type IgnoreShowOptions struct {
 	All bool `mapstructure:"all" json:"all" yaml:"all"`
 }
 
-func NewIgnoreShowFlagGroup() *IgnoreShowFlagGroup {
-	return &IgnoreShowFlagGroup{
-		AllFlag: &AllFlag,
+func (ignoreShowFlagGroup) SetOptions(options *Options, args []string) error {
+	options.IgnoreShowOptions = IgnoreShowOptions{
+		All: getBool(AllFlag),
 	}
-}
 
-func (f *IgnoreShowFlagGroup) Name() string {
-	return "IgnoreShow"
-}
-
-func (f *IgnoreShowFlagGroup) Flags() []*Flag {
-	return []*Flag{
-		f.AllFlag,
-	}
-}
-
-func (f *IgnoreShowFlagGroup) ToOptions() IgnoreShowOptions {
-	return IgnoreShowOptions{
-		All: getBool(f.AllFlag),
-	}
+	return nil
 }

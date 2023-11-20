@@ -1,6 +1,6 @@
 
 --
-Error: flag error: report flags error: invalid report argument; supported values: security, privacy
+Error: flag error: Report flags error: invalid report argument; supported values: security, privacy
 Usage:
   bearer scan [flags] <path>
 Aliases:
@@ -46,5 +46,5 @@ General Flags
       --no-color                Disable color in output
 
 
-flag error: report flags error: invalid report argument; supported values: security, privacy
+flag error: Report flags error: invalid report argument; supported values: security, privacy
 

@@ -24,102 +24,90 @@ var (
 	ErrInvalidScanner = errors.New("invalid scanner argument; supported values: sast, secrets")
 )
 
+type scanFlagGroup struct{ flagGroupBase }
+
+var ScanFlagGroup = &scanFlagGroup{flagGroupBase{name: "Scan"}}
+
 var (
-	SkipPathFlag = Flag{
+	SkipPathFlag = ScanFlagGroup.add(Flag{
 		Name:       "skip-path",
 		ConfigName: "scan.skip-path",
 		Value:      []string{},
 		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql",
-	}
-	DisableDomainResolutionFlag = Flag{
+	})
+	DisableDomainResolutionFlag = ScanFlagGroup.add(Flag{
 		Name:       "disable-domain-resolution",
 		ConfigName: "scan.disable-domain-resolution",
 		Value:      true,
 		Usage:      "Do not attempt to resolve detected domains during classification",
-	}
-	DomainResolutionTimeoutFlag = Flag{
+	})
+	DomainResolutionTimeoutFlag = ScanFlagGroup.add(Flag{
 		Name:       "domain-resolution-timeout",
 		ConfigName: "scan.domain-resolution-timeout",
 		Value:      3 * time.Second,
 		Usage:      "Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s",
-	}
-	InternalDomainsFlag = Flag{
+	})
+	InternalDomainsFlag = ScanFlagGroup.add(Flag{
 		Name:       "internal-domains",
 		ConfigName: "scan.internal-domains",
 		Value:      []string{},
 		Usage:      "Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=\".*.my-company.com,private.sh\"",
-	}
-	ContextFlag = Flag{
+	})
+	ContextFlag = ScanFlagGroup.add(Flag{
 		Name:       "context",
 		ConfigName: "scan.context",
 		Value:      "",
 		Usage:      "Expand context of schema classification e.g., --context=health, to include data types particular to health",
-	}
-	DataSubjectMappingFlag = Flag{
+	})
+	DataSubjectMappingFlag = ScanFlagGroup.add(Flag{
 		Name:       "data-subject-mapping",
 		ConfigName: "scan.data_subject_mapping",
 		Value:      "",
 		Usage:      "Override default data subject mapping by providing a path to a custom mapping JSON file",
-	}
-	QuietFlag = Flag{
+	})
+	QuietFlag = ScanFlagGroup.add(Flag{
 		Name:       "quiet",
 		ConfigName: "scan.quiet",
 		Value:      false,
 		Usage:      "Suppress non-essential messages",
-	}
-	HideProgressBarFlag = Flag{
+	})
+	HideProgressBarFlag = ScanFlagGroup.add(Flag{
 		Name:       "hide-progress-bar",
 		ConfigName: "scan.hide_progress_bar",
 		Value:      false,
 		Usage:      "Hide progress bar from output",
-	}
-	ForceFlag = Flag{
+	})
+	ForceFlag = ScanFlagGroup.add(Flag{
 		Name:       "force",
 		ConfigName: "scan.force",
 		Value:      false,
 		Usage:      "Disable the cache and runs the detections again",
-	}
-	ExternalRuleDirFlag = Flag{
+	})
+	ExternalRuleDirFlag = ScanFlagGroup.add(Flag{
 		Name:       "external-rule-dir",
 		ConfigName: "scan.external-rule-dir",
 		Value:      []string{},
 		Usage:      "Specify directories paths that contain .yaml files with external rules configuration",
-	}
-	ScannerFlag = Flag{
+	})
+	ScannerFlag = ScanFlagGroup.add(Flag{
 		Name:       "scanner",
 		ConfigName: "scan.scanner",
 		Value:      []string{ScannerSAST},
 		Usage:      "Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast",
-	}
-	ParallelFlag = Flag{
+	})
+	ParallelFlag = ScanFlagGroup.add(Flag{
 		Name:       "parallel",
 		ConfigName: "scan.parallel",
 		Value:      0,
 		Usage:      "Specify the amount of parallelism to use during the scan",
-	}
-	ExitCodeFlag = Flag{
+	})
+	ExitCodeFlag = ScanFlagGroup.add(Flag{
 		Name:       "exit-code",
 		ConfigName: "scan.exit-code",
 		Value:      -1,
 		Usage:      "Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan.",
-	}
+	})
 )
-
-type ScanFlagGroup struct {
-	ScannerFlag                 *Flag
-	SkipPathFlag                *Flag
-	DisableDomainResolutionFlag *Flag
-	DomainResolutionTimeoutFlag *Flag
-	InternalDomainsFlag         *Flag
-	ContextFlag                 *Flag
-	DataSubjectMappingFlag      *Flag
-	QuietFlag                   *Flag
-	HideProgressBarFlag         *Flag
-	ForceFlag                   *Flag
-	ExternalRuleDirFlag         *Flag
-	ParallelFlag                *Flag
-	ExitCodeFlag                *Flag
-}
 
 type ScanOptions struct {
 	Target                  string        `mapstructure:"target" json:"target" yaml:"target"`
@@ -140,87 +128,49 @@ type ScanOptions struct {
 	GithubToken             string        `mapstructure:"github_token" json:"github_token" yaml:"github_token"`
 }
 
-func NewScanFlagGroup() *ScanFlagGroup {
-	return &ScanFlagGroup{
-		SkipPathFlag:                &SkipPathFlag,
-		DisableDomainResolutionFlag: &DisableDomainResolutionFlag,
-		DomainResolutionTimeoutFlag: &DomainResolutionTimeoutFlag,
-		InternalDomainsFlag:         &InternalDomainsFlag,
-		ContextFlag:                 &ContextFlag,
-		DataSubjectMappingFlag:      &DataSubjectMappingFlag,
-		QuietFlag:                   &QuietFlag,
-		HideProgressBarFlag:         &HideProgressBarFlag,
-		ForceFlag:                   &ForceFlag,
-		ExternalRuleDirFlag:         &ExternalRuleDirFlag,
-		ScannerFlag:                 &ScannerFlag,
-		ParallelFlag:                &ParallelFlag,
-		ExitCodeFlag:                &ExitCodeFlag,
-	}
-}
-
-func (f *ScanFlagGroup) Name() string {
-	return "Scan"
-}
-
-func (f *ScanFlagGroup) Flags() []*Flag {
-	return []*Flag{
-		f.SkipPathFlag,
-		f.DisableDomainResolutionFlag,
-		f.DomainResolutionTimeoutFlag,
-		f.InternalDomainsFlag,
-		f.ContextFlag,
-		f.DataSubjectMappingFlag,
-		f.QuietFlag,
-		f.HideProgressBarFlag,
-		f.ForceFlag,
-		f.ExternalRuleDirFlag,
-		f.ScannerFlag,
-		f.ParallelFlag,
-		f.ExitCodeFlag,
-	}
-}
-
-func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
+func (scanFlagGroup) SetOptions(options *Options, args []string) error {
 	var target string
 	if len(args) == 1 {
 		target = args[0]
 	}
 
-	context := getContext(f.ContextFlag)
+	context := getContext(ContextFlag)
 	switch context {
 	case Empty, Health:
 	default:
-		return ScanOptions{}, ErrInvalidContext
+		return ErrInvalidContext
 	}
 
-	scanners := getStringSlice(f.ScannerFlag)
+	scanners := getStringSlice(ScannerFlag)
 	for _, scanner := range scanners {
 		switch scanner {
 		case ScannerSAST:
 		case ScannerSecrets:
 		default:
-			return ScanOptions{}, ErrInvalidScanner
+			return ErrInvalidScanner
 		}
 	}
 
-	return ScanOptions{
-		SkipPath:                getStringSlice(f.SkipPathFlag),
-		DisableDomainResolution: getBool(f.DisableDomainResolutionFlag),
-		DomainResolutionTimeout: getDuration(f.DomainResolutionTimeoutFlag),
-		InternalDomains:         getStringSlice(f.InternalDomainsFlag),
+	options.ScanOptions = ScanOptions{
+		SkipPath:                getStringSlice(SkipPathFlag),
+		DisableDomainResolution: getBool(DisableDomainResolutionFlag),
+		DomainResolutionTimeout: getDuration(DomainResolutionTimeoutFlag),
+		InternalDomains:         getStringSlice(InternalDomainsFlag),
 		Context:                 context,
-		DataSubjectMapping:      getString(f.DataSubjectMappingFlag),
-		Quiet:                   getBool(f.QuietFlag),
-		HideProgressBar:         getBool(f.HideProgressBarFlag),
-		Force:                   getBool(f.ForceFlag),
+		DataSubjectMapping:      getString(DataSubjectMappingFlag),
+		Quiet:                   getBool(QuietFlag),
+		HideProgressBar:         getBool(HideProgressBarFlag),
+		Force:                   getBool(ForceFlag),
 		Target:                  target,
-		ExternalRuleDir:         getStringSlice(f.ExternalRuleDirFlag),
+		ExternalRuleDir:         getStringSlice(ExternalRuleDirFlag),
 		Scanner:                 scanners,
-		Parallel:                viper.GetInt(f.ParallelFlag.ConfigName),
-		ExitCode:                viper.GetInt(f.ExitCodeFlag.ConfigName),
+		Parallel:                viper.GetInt(ParallelFlag.ConfigName),
+		ExitCode:                viper.GetInt(ExitCodeFlag.ConfigName),
 		DiffBaseBranch:          os.Getenv("DIFF_BASE_BRANCH"),
 		GithubToken:             os.Getenv("GITHUB_TOKEN"),
-	}, nil
+	}
+
+	return nil
 }
 
 func getContext(flag *Flag) Context {
