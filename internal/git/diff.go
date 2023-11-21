@@ -195,7 +195,7 @@ func (chunks Chunks) getClosestChunk(baseLineNumber int) *Chunk {
 	var result *Chunk
 
 	for i, chunk := range chunks {
-		if chunk.From.LineNumber > baseLineNumber {
+		if chunk.From.StartLineNumber() > baseLineNumber {
 			break
 		}
 
@@ -209,12 +209,16 @@ func (chunk Chunk) EndDelta() int {
 	return chunk.To.EndLineNumber() - chunk.From.EndLineNumber()
 }
 
-func (chunkRange ChunkRange) EndLineNumber() int {
+func (chunkRange ChunkRange) StartLineNumber() int {
 	if chunkRange.LineCount == 0 {
-		return chunkRange.LineNumber
+		return chunkRange.LineNumber + 1
 	}
 
-	return chunkRange.LineNumber + chunkRange.LineCount - 1
+	return chunkRange.LineNumber
+}
+
+func (chunkRange ChunkRange) EndLineNumber() int {
+	return chunkRange.StartLineNumber() + chunkRange.LineCount - 1
 }
 
 func (chunkRange ChunkRange) Overlap(other ChunkRange) bool {

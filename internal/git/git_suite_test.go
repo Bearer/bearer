@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"strings"
 	"testing"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -22,13 +23,20 @@ func runGit(dir string, args ...string) {
 
 	output, err := command.CombinedOutput()
 	if err != nil {
-		Fail(fmt.Sprintf("failed to run git command: %s\n%s", err, output))
+		Fail(fmt.Sprintf("failed to run git command [%s]: %s\n%s", strings.Join(args, " "), err, output))
 	}
 }
 
 func addAndCommit(dir string) {
 	runGit(dir, "add", ".")
-	runGit(dir, "commit", "--allow-empty-message", "--message=", "--author=Bearer CI <ci@bearer.com>")
+	runGit(
+		dir,
+		"-c", "user.name=Bearer CI",
+		"-c", "user.email=ci@bearer.com",
+		"commit",
+		"--allow-empty-message",
+		"--message=",
+	)
 }
 
 func writeFile(tempDir, filename, content string) {

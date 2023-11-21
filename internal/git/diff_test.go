@@ -152,6 +152,18 @@ var _ = Describe("Diff", func() {
 })
 
 var _ = Describe("ChunkRange", func() {
+	Describe("StartLineNumber", func() {
+		It("returns the line number", func() {
+			Expect(git.ChunkRange{LineNumber: 2, LineCount: 1}.StartLineNumber()).To(Equal(2))
+		})
+
+		When("there are no lines in the range", func() {
+			It("returns the next line after the line number", func() {
+				Expect(git.ChunkRange{LineNumber: 2, LineCount: 0}.StartLineNumber()).To(Equal(3))
+			})
+		})
+	})
+
 	Describe("EndLineNumber", func() {
 		It("returns the (inclusive) end line number", func() {
 			Expect(git.ChunkRange{LineNumber: 2, LineCount: 1}.EndLineNumber()).To(Equal(2))
@@ -224,6 +236,19 @@ var _ = Describe("Chunks", func() {
 			It("returns a range shifted by the add", func() {
 				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 1, LineCount: 2})).To(
 					Equal(git.ChunkRange{LineNumber: 2, LineCount: 2}),
+				)
+			})
+		})
+
+		When("the base range is at an add chunk", func() {
+			chunks := git.Chunks{{
+				From: git.ChunkRange{LineNumber: 1, LineCount: 0},
+				To:   git.ChunkRange{LineNumber: 2, LineCount: 1},
+			}}
+
+			It("returns a range shifted by the add", func() {
+				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 2})).To(
+					Equal(git.ChunkRange{LineNumber: 3, LineCount: 2}),
 				)
 			})
 		})
