@@ -33,12 +33,13 @@ When scanning a Git repository, you can choose to only report new findings that
 have been introduced, relative to a base branch. Any findings that already
 existed in the base branch will not be reported.
 
-Use the `DIFF_BASE_BRANCH` environment variable to enable differential scanning,
-and to specify the base branch to use for comparison.
+Use the `--diff` flag to enable differential scanning. The repository's default
+branch will be used as the base branch for comparison. You can override this by
+setting the `BEARER_DIFF_BASE_BRANCH` environment variable.
 
 ```bash
 git checkout my-feature
-DIFF_BASE_BRANCH=main bearer scan .
+BEARER_DIFF_BASE_BRANCH=base-branch bearer scan --diff .
 ```
 
 If the base branch is not available in the git repository, it's head will be

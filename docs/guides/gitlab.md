@@ -31,8 +31,8 @@ These changes set the format to `gitlab-sast` and write an artifact that GitLab 
 ### Gitlab Merge Request Diff
 
 When Bearer CLI is being used to check a merge request, you can tell the Bearer
-CLI to only report findings introduced within the merge request by setting the
-`DIFF_BASE_BRANCH` variable.
+CLI to only report findings introduced within the merge request by adding the
+`--diff` flag.
 
 {% yamlExample "ci/gitlab/diff" %}
 
