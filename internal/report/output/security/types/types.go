@@ -11,6 +11,11 @@ import (
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
 )
 
+type ExpectedDetection struct {
+	RuleID   string   `json:"rule_id"`
+	Location Location `json:"location"`
+}
+
 type RawFinding struct {
 	*Finding
 	Severity string `json:"severity" yaml:"severity"`

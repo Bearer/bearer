@@ -47,7 +47,10 @@ func (scanner *Scanner) Scan(
 	rootNode *tree.Node,
 	rule *ruleset.Rule,
 	traversalStrategy traversalstrategy.Strategy,
-) ([]*detectortypes.Detection, error) {
+) (
+	[]*detectortypes.Detection,
+	error,
+) {
 	if scanner.stats != nil {
 		startTime := time.Now()
 		defer scanner.stats.Rule(rule.ID(), startTime)

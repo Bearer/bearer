@@ -21,6 +21,7 @@ const ()
 type Result struct {
 	Detections []*detectortypes.Detection
 	Sanitized  bool
+	Expected   bool
 }
 
 type Set interface {

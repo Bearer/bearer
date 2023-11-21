@@ -20,14 +20,16 @@ type ReportData struct {
 	PrivacyReport             *privacytypes.Report
 	Stats                     *statstypes.Stats
 	SaasReport                *saastypes.BearerReport
+	ExpectedDetections        []securitytypes.ExpectedDetection
 }
 
 type DataFlow struct {
-	Datatypes    []dataflowtypes.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks        []dataflowtypes.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
-	Components   []dataflowtypes.Component    `json:"components,omitempty" yaml:"components,omitempty"`
-	Dependencies []dataflowtypes.Dependency   `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
-	Errors       []dataflowtypes.Error        `json:"errors,omitempty" yaml:"errors,omitempty"`
+	Datatypes          []dataflowtypes.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	ExpectedDetections []dataflowtypes.RiskDetector `json:"expected_detections,omitempty" yaml:"expected_detections,omitempty"`
+	Risks              []dataflowtypes.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Components         []dataflowtypes.Component    `json:"components,omitempty" yaml:"components,omitempty"`
+	Dependencies       []dataflowtypes.Dependency   `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
+	Errors             []dataflowtypes.Error        `json:"errors,omitempty" yaml:"errors,omitempty"`
 }
 
 type GenericFormatter interface {

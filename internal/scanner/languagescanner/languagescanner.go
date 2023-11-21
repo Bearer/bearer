@@ -77,19 +77,19 @@ func (scanner *Scanner) Scan(
 	ctx context.Context,
 	fileStats *stats.FileStats,
 	fileInfo *file.FileInfo,
-) ([]*detectortypes.Detection, error) {
+) ([]*detectortypes.Detection, []*detectortypes.Detection, error) {
 	if !slices.Contains(scanner.language.EnryLanguages(), fileInfo.Language) {
-		return nil, nil
+		return nil, nil, nil
 	}
 
 	contentBytes, err := os.ReadFile(fileInfo.AbsolutePath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read file: %w", err)
+		return nil, nil, fmt.Errorf("failed to read file: %w", err)
 	}
 
 	tree, err := ast.ParseAndAnalyze(ctx, scanner.language, scanner.ruleSet, scanner.querySet, contentBytes)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if log.Trace().Enabled() {
@@ -108,15 +108,41 @@ func (scanner *Scanner) Scan(
 		cache,
 	)
 
-	return scanner.evaluateRules(ruleScanner, cache, tree)
+	detections, err := scanner.evaluateRules(ruleScanner, cache, tree)
+	expectedDetections, _ := scanner.ExpectedDetections(tree)
+
+	return detections, expectedDetections, err
+}
+
+func (scanner *Scanner) ExpectedDetections(tree *tree.Tree) ([]*detectortypes.Detection, error) {
+	var detections []*detectortypes.Detection
+	nodes := tree.Nodes()
+	for i := range tree.Nodes() {
+		node := &nodes[i]
+		if len(node.ExpectedRules()) > 0 {
+			for _, expectedRule := range node.ExpectedRules() {
+				rule, _ := scanner.ruleSet.RuleByID(expectedRule)
+				detections = append(detections, []*detectortypes.Detection{
+					{
+						RuleID:    rule.ID(),
+						MatchNode: node,
+					},
+				}...)
+			}
+		}
+	}
+
+	return detections, nil
 }
 
 func (scanner *Scanner) evaluateRules(
 	ruleScanner *rulescanner.Scanner,
 	cache *cache.Cache,
 	tree *tree.Tree,
-) ([]*detectortypes.Detection, error) {
-
+) (
+	[]*detectortypes.Detection,
+	error,
+) {
 	var detections []*detectortypes.Detection
 	for _, rule := range scanner.ruleSet.Rules() {
 		if rule.Type() != ruleset.RuleTypeTopLevel {

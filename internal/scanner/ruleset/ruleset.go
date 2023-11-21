@@ -128,6 +128,10 @@ func getRuleType(triggerRuleIDs set.Set[string], settingsRule *settings.Rule) Ru
 	}
 }
 
+func (set *Set) RuleByIndex(idx uint64) (*Rule, error) {
+	return set.Rules()[idx], nil
+}
+
 func (set *Set) RuleByID(id string) (*Rule, error) {
 	rule, exists := set.rulesByID[id]
 	if !exists {

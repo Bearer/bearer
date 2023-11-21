@@ -55,3 +55,18 @@ func TestRubyRailsDefaultEncryptionStructure(t *testing.T) {
 func TestRubyRailsDefaultEncryptionSchema(t *testing.T) {
 	runRulesTest("ruby_rails_default_encryption_schema_rb", "ruby_rails_default_encryption", t)
 }
+
+func TestExpectedRule(t *testing.T) {
+	testDataDir := "testdata/data/expected_rule"
+
+	testCases := []testhelper.TestCase{}
+	testCases = append(testCases,
+		buildRulesTestCaseJsonV2(
+			testDataDir,
+			filepath.Join("e2e", "rules", testDataDir),
+			"expected_rule",
+		),
+	)
+
+	testhelper.RunTestsWithSnapshotSubdirectory(t, testCases, ".snapshots")
+}

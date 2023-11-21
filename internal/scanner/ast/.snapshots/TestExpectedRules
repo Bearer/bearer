@@ -1,0 +1,67 @@
+([]ast_test.ruleInfo) (len=1) {
+  (ast_test.ruleInfo) {
+    ID: (string) (len=5) "rule1",
+    Index: (int) 5
+  }
+}
+type: program
+id: 0
+range: 2:3 - 6:2
+dataflow_sources:
+    - 1
+    - 2
+children:
+    - type: comment
+      id: 1
+      range: 2:3 - 2:26
+      content: '# bearer:expected rule1'
+    - type: method
+      id: 2
+      range: 3:3 - 5:6
+      expectedrules:
+        - rule1
+      children:
+        - type: '"def"'
+          id: 3
+          range: 3:3 - 3:6
+        - type: identifier
+          id: 4
+          range: 3:7 - 3:8
+          content: m
+        - type: method_parameters
+          id: 5
+          range: 3:8 - 3:11
+          dataflow_sources:
+            - 6
+            - 7
+            - 8
+          children:
+            - type: '"("'
+              id: 6
+              range: 3:8 - 3:9
+            - type: identifier
+              id: 7
+              range: 3:9 - 3:10
+              content: a
+            - type: '")"'
+              id: 8
+              range: 3:10 - 3:11
+        - type: call
+          id: 9
+          range: 4:4 - 4:9
+          children:
+            - type: identifier
+              id: 10
+              range: 4:4 - 4:5
+              content: b
+            - type: '"."'
+              id: 11
+              range: 4:5 - 4:6
+            - type: identifier
+              id: 12
+              range: 4:6 - 4:9
+              content: bar
+        - type: '"end"'
+          id: 13
+          range: 5:3 - 5:6
+

@@ -30,6 +30,7 @@ type Node struct {
 	children,
 	dataflowSources,
 	aliasOf []*Node
+	expectedRules       []string
 	disabledRuleIndices *bitset.BitSet
 	// FIXME: remove the need for this
 	sitterNode   *sitter.Node
@@ -58,6 +59,10 @@ func (tree *Tree) RootNode() *Node {
 
 func (tree *Tree) NodeFromSitter(sitterNode *sitter.Node) *Node {
 	return tree.sitterToNode[sitterNode]
+}
+
+func (tree *Tree) Nodes() []Node {
+	return tree.nodes
 }
 
 func (node *Node) Tree() *Tree {
@@ -133,6 +138,10 @@ func (node *Node) AliasOf() []*Node {
 	return node.aliasOf
 }
 
+func (node *Node) ExpectedRules() []string {
+	return node.expectedRules
+}
+
 func (node *Node) RuleDisabled(index int) bool {
 	if node.disabledRuleIndices == nil {
 		return false
@@ -158,6 +167,7 @@ type nodeDump struct {
 	AliasOf         []int      `yaml:"alias_of,omitempty"`
 	Queries         []int      `yaml:",omitempty"`
 	DisabledRules   []int      `yaml:",omitempty"`
+	ExpectedRules   []string   `yaml:",omitempty"`
 	Children        []nodeDump `yaml:",omitempty"`
 }
 
@@ -189,6 +199,11 @@ func (node *Node) dumpValue() nodeDump {
 		}
 	}
 
+	var expectedRules []string
+	if len(node.expectedRules) > 0 {
+		expectedRules = append(expectedRules, node.expectedRules...)
+	}
+
 	contentRange := fmt.Sprintf(
 		"%d:%d - %d:%d",
 		node.ContentStart.Line,
@@ -212,6 +227,7 @@ func (node *Node) dumpValue() nodeDump {
 		Children:        childDump,
 		Queries:         queries,
 		DisabledRules:   disabledRules,
+		ExpectedRules:   expectedRules,
 	}
 }
 

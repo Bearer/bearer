@@ -68,9 +68,31 @@ func (scanner *Scanner) Scan(
 	}
 
 	for _, languageScanner := range scanner.languageScanners {
-		detections, err := languageScanner.Scan(ctx, fileStats, file)
+		detections, expectedDetections, err := languageScanner.Scan(ctx, fileStats, file)
 		if err != nil {
 			return fmt.Errorf("%s scan failed: %w", languageScanner.LanguageID(), err)
+		}
+
+		for _, detection := range expectedDetections {
+			detectorType := detectors.Type(detection.RuleID)
+			report.AddDetection(reportdetections.TypeExpectedDetection,
+				detectorType,
+				source.New(
+					file,
+					file.Path,
+					detection.MatchNode.ContentStart.Line,
+					detection.MatchNode.ContentStart.Column,
+					detection.MatchNode.ContentEnd.Line,
+					detection.MatchNode.ContentEnd.Column,
+					fmt.Sprintf("bearer:expected %s", detection.RuleID),
+				),
+				reportschema.Source{
+					StartLineNumber:   detection.MatchNode.ContentStart.Line,
+					EndLineNumber:     detection.MatchNode.ContentEnd.Line,
+					StartColumnNumber: detection.MatchNode.ContentStart.Column,
+					EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
+					Content:           detection.MatchNode.Content(),
+				})
 		}
 
 		for _, detection := range detections {

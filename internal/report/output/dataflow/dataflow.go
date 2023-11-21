@@ -30,6 +30,7 @@ var allowedDetections []detections.DetectionType = []detections.DetectionType{
 	detections.TypeError,
 	detections.TypeFileList,
 	detections.TypeFileFailed,
+	detections.TypeExpectedDetection,
 }
 
 func contains(detections []detections.DetectionType, detection detections.DetectionType) bool {
@@ -48,6 +49,7 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 		return nil
 	}
 
+	expectedHolder := risks.New(config, isInternal)
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
@@ -142,6 +144,8 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 				if err = dataTypesHolder.AddSchema(castDetection, detectionExtras); err != nil {
 					return err
 				}
+			case detections.TypeExpectedDetection:
+				expectedHolder.AddRiskPresence(castDetection)
 			case detections.TypeCustomRisk:
 				ruleName := string(castDetection.DetectorType)
 				customDetector, ok := config.Rules[ruleName]
@@ -224,11 +228,12 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 
 	reportData.Files = files
 	reportData.Dataflow = &types.DataFlow{
-		Datatypes:    dataTypesHolder.ToDataFlow(),
-		Risks:        risksHolder.ToDataFlow(),
-		Components:   componentsHolder.ToDataFlow(),
-		Dependencies: componentsHolder.ToDataFlowForDependencies(),
-		Errors:       errorsHolder.ToDataFlow(),
+		Datatypes:          dataTypesHolder.ToDataFlow(),
+		ExpectedDetections: expectedHolder.ToDataFlow(),
+		Risks:              risksHolder.ToDataFlow(),
+		Components:         componentsHolder.ToDataFlow(),
+		Dependencies:       componentsHolder.ToDataFlowForDependencies(),
+		Errors:             errorsHolder.ToDataFlow(),
 	}
 
 	return nil

@@ -96,12 +96,28 @@ func (builder *Builder) Alias(toNode *sitter.Node, fromNodes ...*sitter.Node) {
 	)
 }
 
+func (builder *Builder) AddExpectedRules(sitterNode *sitter.Node, rules []*ruleset.Rule) {
+	if len(rules) == 0 {
+		return
+	}
+
+	builder.addExpectedRulesForNode(builder.sitterToNodeID[sitterNode], rules)
+}
+
 func (builder *Builder) AddDisabledRules(sitterNode *sitter.Node, rules []*ruleset.Rule) {
 	if len(rules) == 0 {
 		return
 	}
 
 	builder.addDisabledRulesForNode(builder.sitterToNodeID[sitterNode], rules)
+}
+
+func (builder *Builder) addExpectedRulesForNode(nodeID int, rules []*ruleset.Rule) {
+	node := &builder.nodes[nodeID]
+
+	for _, rule := range rules {
+		node.expectedRules = append(node.expectedRules, rule.ID())
+	}
 }
 
 func (builder *Builder) addDisabledRulesForNode(nodeID int, rules []*ruleset.Rule) {

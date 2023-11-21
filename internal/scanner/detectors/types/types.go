@@ -24,6 +24,9 @@ type Context interface {
 type Detector interface {
 	Rule() *ruleset.Rule
 	DetectAt(node *tree.Node, detectorContext Context) ([]interface{}, error)
+	DetectExpectedAt(node *tree.Node, detectorContext Context) ([]interface{}, error)
 }
 
-type DetectorBase struct{}
+type DetectorBase interface {
+	DetectExpectedAt(node *tree.Node, detectorContext Context) ([]interface{}, error)
+}

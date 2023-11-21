@@ -86,6 +86,7 @@ func analyzeNode(
 		childCount := int(node.ChildCount())
 
 		var disabledRules []*ruleset.Rule
+		var expectedRules []*ruleset.Rule
 		for i := 0; i < childCount; i++ {
 			child := node.Child(i)
 			if !child.IsNamed() {
@@ -93,6 +94,7 @@ func analyzeNode(
 			}
 
 			disabledRules = addDisabledRules(ruleSet, builder, disabledRules, child)
+			expectedRules = addExpectedRules(ruleSet, builder, expectedRules, child)
 			if err := analyzeNode(ctx, ruleSet, builder, analyzer, child); err != nil {
 				return err
 			}
@@ -102,6 +104,38 @@ func analyzeNode(
 	}
 
 	return analyzer.Analyze(node, visitChildren)
+}
+
+func addExpectedRules(
+	ruleSet *ruleset.Set,
+	builder *tree.Builder,
+	expectedRules []*ruleset.Rule,
+	node *sitter.Node,
+) []*ruleset.Rule {
+	if node.Type() == "comment" {
+		nextExpectedRules := expectedRules
+
+		nodeContent := builder.ContentFor(node)
+		if strings.Contains(nodeContent, "bearer:expected") {
+			rawRuleIDs := strings.Split(nodeContent, "bearer:expected")[1]
+
+			for _, ruleID := range strings.Split(rawRuleIDs, ",") {
+				rule, err := ruleSet.RuleByID(strings.TrimSpace(ruleID))
+				if err != nil {
+					log.Debug().Msgf("ignoring unknown expected rule '%s': %s", ruleID, err)
+					continue
+				}
+
+				nextExpectedRules = append(nextExpectedRules, rule)
+			}
+		}
+
+		return nextExpectedRules
+	}
+
+	builder.AddExpectedRules(node, expectedRules)
+
+	return nil
 }
 
 func addDisabledRules(

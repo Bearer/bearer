@@ -24,6 +24,22 @@ func buildRulesTestCase(testName, path, ruleID string) testhelper.TestCase {
 	return testhelper.NewTestCase(testName, arguments, options)
 }
 
+func buildRulesTestCaseJsonV2(testName, path, ruleID string) testhelper.TestCase {
+	arguments := []string{
+		"scan",
+		path,
+		"--only-rule=" + ruleID,
+		"--format=jsonv2",
+		"--disable-default-rules",
+		"--exit-code=0",
+		"--external-rule-dir=" + filepath.Join("e2e", "rules", "testdata", "rules"),
+	}
+
+	options := testhelper.TestCaseOptions{}
+
+	return testhelper.NewTestCase(testName, arguments, options)
+}
+
 func runRulesTest(folderPath string, ruleID string, t *testing.T) {
 	snapshotDirectory := ".snapshots"
 
