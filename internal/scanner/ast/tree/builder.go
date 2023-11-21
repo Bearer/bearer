@@ -114,12 +114,9 @@ func (builder *Builder) AddDisabledRules(sitterNode *sitter.Node, rules []*rules
 
 func (builder *Builder) addExpectedRulesForNode(nodeID int, rules []*ruleset.Rule) {
 	node := &builder.nodes[nodeID]
-	if node.expectedRuleIndices == nil {
-		node.expectedRuleIndices = bitset.New(uint(builder.ruleCount))
-	}
 
 	for _, rule := range rules {
-		node.expectedRuleIndices.Set(uint(rule.Index()))
+		node.expectedRules = append(node.expectedRules, rule.ID())
 	}
 }
 

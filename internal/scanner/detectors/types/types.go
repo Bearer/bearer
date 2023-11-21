@@ -14,11 +14,6 @@ type Detection struct {
 
 type Context interface {
 	Filename() string
-	ScanExpected(
-		rootNode *tree.Node,
-		rule *ruleset.Rule,
-		traversalStrategy traversalstrategy.Strategy,
-	) ([]*Detection, error)
 	Scan(
 		rootNode *tree.Node,
 		rule *ruleset.Rule,

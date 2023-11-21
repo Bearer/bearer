@@ -109,30 +109,27 @@ func (scanner *Scanner) Scan(
 	)
 
 	detections, err := scanner.evaluateRules(ruleScanner, cache, tree)
-	// FIXME: Check if we are need to eval the tests or not
-	expectedDetections, _ := scanner.evaluateTests(ruleScanner, cache, tree)
+	expectedDetections, _ := scanner.ExpectedDetections(tree)
 
 	return detections, expectedDetections, err
 }
 
-func (scanner *Scanner) evaluateTests(
-	ruleScanner *rulescanner.Scanner,
-	cache *cache.Cache,
-	tree *tree.Tree,
-) ([]*detectortypes.Detection, error) {
+func (scanner *Scanner) ExpectedDetections(tree *tree.Tree) ([]*detectortypes.Detection, error) {
 	var detections []*detectortypes.Detection
-	for _, rule := range scanner.ruleSet.Rules() {
-		if rule.Type() != ruleset.RuleTypeTopLevel {
-			continue
+	nodes := tree.Nodes()
+	for i := range tree.Nodes() {
+		node := &nodes[i]
+		if len(node.ExpectedRules()) > 0 {
+			for _, expectedRule := range node.ExpectedRules() {
+				rule, _ := scanner.ruleSet.RuleByID(expectedRule)
+				detections = append(detections, []*detectortypes.Detection{
+					{
+						RuleID:    rule.ID(),
+						MatchNode: node,
+					},
+				}...)
+			}
 		}
-
-		cache.Clear()
-		expectedDetections, err := ruleScanner.ScanExpected(tree.RootNode(), rule, traversalstrategy.NestedStrict)
-		if err != nil {
-			return nil, err
-		}
-
-		detections = append(detections, expectedDetections...)
 	}
 
 	return detections, nil

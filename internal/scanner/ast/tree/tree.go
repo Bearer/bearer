@@ -30,7 +30,7 @@ type Node struct {
 	children,
 	dataflowSources,
 	aliasOf []*Node
-	expectedRuleIndices *bitset.BitSet
+	expectedRules       []string
 	disabledRuleIndices *bitset.BitSet
 	// FIXME: remove the need for this
 	sitterNode   *sitter.Node
@@ -59,6 +59,10 @@ func (tree *Tree) RootNode() *Node {
 
 func (tree *Tree) NodeFromSitter(sitterNode *sitter.Node) *Node {
 	return tree.sitterToNode[sitterNode]
+}
+
+func (tree *Tree) Nodes() []Node {
+	return tree.nodes
 }
 
 func (node *Node) Tree() *Tree {
@@ -134,12 +138,8 @@ func (node *Node) AliasOf() []*Node {
 	return node.aliasOf
 }
 
-func (node *Node) RuleExpected(index int) bool {
-	if node.expectedRuleIndices == nil {
-		return false
-	}
-
-	return node.expectedRuleIndices.Test(uint(index))
+func (node *Node) ExpectedRules() []string {
+	return node.expectedRules
 }
 
 func (node *Node) RuleDisabled(index int) bool {
@@ -167,7 +167,7 @@ type nodeDump struct {
 	AliasOf         []int      `yaml:"alias_of,omitempty"`
 	Queries         []int      `yaml:",omitempty"`
 	DisabledRules   []int      `yaml:",omitempty"`
-	ExpectedRules   []int      `yaml:",omitempty"`
+	ExpectedRules   []string   `yaml:",omitempty"`
 	Children        []nodeDump `yaml:",omitempty"`
 }
 
@@ -199,13 +199,9 @@ func (node *Node) dumpValue() nodeDump {
 		}
 	}
 
-	var expectedRules []int
-	if node.expectedRuleIndices != nil {
-		for i := 0; i < int(node.expectedRuleIndices.Len()); i++ {
-			if node.expectedRuleIndices.Test(uint(i)) {
-				expectedRules = append(expectedRules, i)
-			}
-		}
+	var expectedRules []string
+	if len(node.expectedRules) > 0 {
+		expectedRules = append(expectedRules, node.expectedRules...)
 	}
 
 	contentRange := fmt.Sprintf(

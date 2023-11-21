@@ -51,19 +51,6 @@ func (context *MockDetectorContext) Scan(
 	panic("unreachable")
 }
 
-func (context *MockDetectorContext) ScanExpected(
-	rootNode *tree.Node,
-	rule *ruleset.Rule,
-	traversalStrategy traversalstrategy.Strategy,
-) ([]*detectortypes.Detection, error) {
-	if context.scan != nil {
-		return context.scan(rootNode, rule, traversalStrategy)
-	}
-
-	Fail("MockDetectorContext.scan called but no scan function was set")
-	panic("unreachable")
-}
-
 func (filter *MockFilter) Evaluate(
 	detectorContext detectortypes.Context,
 	patternVariables variableshape.Values,
