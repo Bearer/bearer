@@ -4,6 +4,10 @@ usage: bearer scan [flags] <path>
 options:
   - name: api-key
     usage: Use your Bearer API Key to send the report to Bearer.
+  - name: branch
+    usage: The name of the branch being scanned.
+  - name: commit
+    usage: The hash of the commit being scanned.
   - name: config-file
     default_value: bearer.yml
     usage: Load configuration from the specified path.
@@ -19,6 +23,16 @@ options:
   - name: debug-profile
     default_value: "false"
     usage: Generate profiling data for debugging
+  - name: default-branch
+    usage: The name of the default branch.
+  - name: diff
+    default_value: "false"
+    usage: |
+      Only report differences in findings relative to a base branch.
+  - name: diff-base-branch
+    usage: The name of the base branch to use for diff scanning.
+  - name: diff-base-commit
+    usage: The hash of the base commit to use for diff scanning.
   - name: disable-default-rules
     default_value: "false"
     usage: Disables all default and built-in rules.
@@ -56,6 +70,13 @@ options:
     shorthand: f
     usage: |
       Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)
+  - name: github-api-url
+    usage: A non-standard URL to use for the Github API
+  - name: github-repository
+    usage: |
+      The owner and name of the repository on Github. eg. Bearer/bearer
+  - name: github-token
+    usage: An access token for the Github API.
   - name: help
     shorthand: h
     default_value: "false"
@@ -97,6 +118,8 @@ options:
   - name: report
     default_value: security
     usage: Specify the type of report (security, privacy, dataflow).
+  - name: repository-url
+    usage: The remote URL of the repository.
   - name: scanner
     default_value: "[sast]"
     usage: |

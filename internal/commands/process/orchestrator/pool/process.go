@@ -90,6 +90,7 @@ func newProcess(options *ProcessOptions, id string) (*Process, error) {
 
 func (process *Process) start(config settings.Config) error {
 	if err := process.command.Start(); err != nil {
+		close(process.exitChannel)
 		return err
 	}
 

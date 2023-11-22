@@ -42,6 +42,9 @@ type Flag struct {
 
 	// Deprecated represents if the flag is deprecated
 	Deprecated bool
+
+	// Additional environment variables to read the value from, in addition to the default
+	EnvironmentVariables []string
 }
 
 type flagGroupBase struct {
@@ -62,6 +65,7 @@ type Options struct {
 	ReportOptions
 	RuleOptions
 	ScanOptions
+	RepositoryOptions
 	GeneralOptions
 	IgnoreAddOptions
 	IgnoreShowOptions
@@ -110,7 +114,11 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 	// viper.SetEnvPrefix("bearer")
 	// replacer := strings.NewReplacer("-", "_")
 	// viper.SetEnvKeyReplacer(replacer)
-	if err := viper.BindEnv(flag.ConfigName, strings.ToUpper("bearer_"+strings.ReplaceAll(flag.Name, "-", "_"))); err != nil {
+	arguments := append(
+		[]string{flag.ConfigName, strings.ToUpper("bearer_" + strings.ReplaceAll(flag.Name, "-", "_"))},
+		flag.EnvironmentVariables...,
+	)
+	if err := viper.BindEnv(arguments...); err != nil {
 		return err
 	}
 

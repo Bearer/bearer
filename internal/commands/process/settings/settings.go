@@ -369,7 +369,7 @@ func FromOptions(opts flag.Options, versionMeta *version_check.VersionMeta) (Con
 		BearerRulesVersion:  result.BearerRulesVersion,
 	}
 
-	if config.Scan.DiffBaseBranch != "" {
+	if config.Scan.Diff {
 		if !slices.Contains([]string{flag.ReportSecurity, flag.ReportSaaS}, config.Report.Report) {
 			return Config{}, errors.New("diff base branch is only supported for the security report")
 		}

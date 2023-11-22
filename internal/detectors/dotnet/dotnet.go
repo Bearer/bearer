@@ -80,12 +80,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 }
 
 func isProject(path string) (bool, error) {
-	handleDir, err := isDir(path)
-	if err != nil {
-		return false, err
-	}
-
-	if handleDir {
+	if file.IsDir(path) {
 		fileInfos, err := os.ReadDir(path)
 		if err != nil {
 			return false, err
@@ -126,13 +121,4 @@ func matchFilepath(filename string) (bool, error) {
 	}
 
 	return false, nil
-}
-
-func isDir(path string) (bool, error) {
-	fileInfo, err := os.Stat(path)
-	if err != nil {
-		return false, err
-	}
-
-	return fileInfo.IsDir(), nil
 }

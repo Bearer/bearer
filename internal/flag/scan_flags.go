@@ -107,6 +107,13 @@ var (
 		Value:      -1,
 		Usage:      "Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan.",
 	})
+	DiffFlag = ScanFlagGroup.add(Flag{
+		Name:            "diff",
+		ConfigName:      "scan.diff",
+		Value:           false,
+		Usage:           "Only report differences in findings relative to a base branch.",
+		DisableInConfig: true,
+	})
 )
 
 type ScanOptions struct {
@@ -124,8 +131,7 @@ type ScanOptions struct {
 	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
 	Parallel                int           `mapstructure:"parallel" json:"parallel" yaml:"parallel"`
 	ExitCode                int           `mapstructure:"exit-code" json:"exit-code" yaml:"exit-code"`
-	DiffBaseBranch          string        `mapstructure:"diff_base_branch" json:"diff_base_branch" yaml:"diff_base_branch"`
-	GithubToken             string        `mapstructure:"github_token" json:"github_token" yaml:"github_token"`
+	Diff                    bool          `mapstructure:"diff" json:"diff" yaml:"diff"`
 }
 
 func (scanFlagGroup) SetOptions(options *Options, args []string) error {
@@ -151,6 +157,9 @@ func (scanFlagGroup) SetOptions(options *Options, args []string) error {
 		}
 	}
 
+	// DIFF_BASE_BRANCH is used for backwards compatibilty
+	diff := getBool(DiffFlag) || os.Getenv("DIFF_BASE_BRANCH") != ""
+
 	options.ScanOptions = ScanOptions{
 		SkipPath:                getStringSlice(SkipPathFlag),
 		DisableDomainResolution: getBool(DisableDomainResolutionFlag),
@@ -166,8 +175,7 @@ func (scanFlagGroup) SetOptions(options *Options, args []string) error {
 		Scanner:                 scanners,
 		Parallel:                viper.GetInt(ParallelFlag.ConfigName),
 		ExitCode:                viper.GetInt(ExitCodeFlag.ConfigName),
-		DiffBaseBranch:          os.Getenv("DIFF_BASE_BRANCH"),
-		GithubToken:             os.Getenv("GITHUB_TOKEN"),
+		Diff:                    diff,
 	}
 
 	return nil

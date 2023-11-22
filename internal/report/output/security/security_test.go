@@ -10,8 +10,8 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/filelist/files"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
+	"github.com/bearer/bearer/internal/git"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
-	basebranchfindingstypes "github.com/bearer/bearer/internal/report/basebranchfindings/types"
 	"github.com/bearer/bearer/internal/report/schema"
 	globaltypes "github.com/bearer/bearer/internal/types"
 	"github.com/bearer/bearer/internal/util/set"
@@ -262,16 +262,15 @@ func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
 
 	fullScanFinding := data.FindingsBySeverity[globaltypes.LevelMedium][1]
 
-	chunks := basebranchfindings.NewChunks()
-	chunks.Add(basebranchfindingstypes.ChunkEqual, 1)
-	chunks.Add(basebranchfindingstypes.ChunkAdd, 1)
-
 	file := files.File{FilePath: filename}
 	fileList := &files.List{
 		Files:     []files.File{file},
 		BaseFiles: []files.File{file},
-		Chunks: map[string]basebranchfindingstypes.Chunks{
-			filename: chunks,
+		Chunks: map[string]git.Chunks{
+			filename: {{
+				From: git.ChunkRange{LineNumber: 1, LineCount: 0},
+				To:   git.ChunkRange{LineNumber: 2, LineCount: 1},
+			}},
 		},
 	}
 

@@ -130,7 +130,7 @@ func AddReportData(
 			config.Report.ExcludeFingerprint,
 			config.IgnoredFingerprints,
 			config.StaleIgnoredFingerprintIds,
-			config.Scan.DiffBaseBranch != "",
+			config.Scan.Diff,
 		)
 	}
 

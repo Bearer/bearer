@@ -2,20 +2,19 @@ package git
 
 import (
 	"bytes"
+	"context"
 	"fmt"
-	"net/url"
+	"io"
 	"os"
 	"os/exec"
+	"path"
 	"regexp"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/rs/zerolog/log"
-)
 
-const (
-	mailmapFilename = ".mailmap"
+	"github.com/bearer/bearer/internal/util/file"
 )
 
 var (
@@ -25,37 +24,42 @@ var (
 		"GCM_INTERACTIVE=never",
 		"GIT_LFS_SKIP_SMUDGE=1",
 	)
-
-	specialFiles []string = []string{
-		mailmapFilename,
-		".gitignore",
-		".gitattributes",
-		".gitmodules",
-	}
 )
 
-type CommitIdentifier struct {
-	SHA       string    `json:"sha" yaml:"sha"`
-	Timestamp time.Time `json:"timestamp" yaml:"timestamp"`
+func GetRoot(targetPath string) (string, error) {
+	dir := targetPath
+	if !file.IsDir(dir) {
+		dir = path.Dir(dir)
+	}
+
+	output, err := captureCommandBasic(context.TODO(), dir, "rev-parse", "--show-toplevel")
+	if err != nil {
+		if strings.Contains(err.Error(), "not a git repository") {
+			return "", nil
+		}
+
+		return "", err
+	}
+
+	path := strings.TrimSpace(output)
+	if path == "" {
+		return "", nil
+	}
+
+	return file.CanonicalPath(path)
 }
 
-func urlWithCredentials(originalURL *url.URL, token string) *url.URL {
-	result := *originalURL
-	result.User = url.UserPassword("x", token)
-	return &result
-}
-
-func logAndBuildCommand(args ...string) *exec.Cmd {
+func logAndBuildCommand(ctx context.Context, args ...string) *exec.Cmd {
 	log.Debug().Msgf("running command: git %s", strings.Join(args, " "))
 
-	cmd := exec.Command("git", args...)
+	cmd := exec.CommandContext(ctx, "git", args...)
 	cmd.Env = environment
 
 	return cmd
 }
 
-func basicCommand(workingDir string, args ...string) error {
-	cmd := logAndBuildCommand(args...)
+func basicCommand(ctx context.Context, workingDir string, args ...string) error {
+	cmd := logAndBuildCommand(ctx, args...)
 	if workingDir != "" {
 		cmd.Dir = workingDir
 	}
@@ -65,20 +69,55 @@ func basicCommand(workingDir string, args ...string) error {
 	cmd.Stderr = logWriter
 
 	if err := cmd.Run(); err != nil {
-		killProcess(cmd)
+		cmd.Cancel() //nolint:errcheck
 		return newError(err, logWriter.AllOutput())
 	}
 
 	return nil
 }
 
-var regexpDefunctProcess = regexp.MustCompile(" git <defunct>")
-var regexpPID = regexp.MustCompile("[0-9]+ ")
-
-func killProcess(cmd *exec.Cmd) {
-	if cmd != nil && cmd.Process != nil {
-		cmd.Process.Kill() //nolint:all,errcheck
+func captureCommand(ctx context.Context, workingDir string, args []string, capture func(io.Reader) error) error {
+	command := logAndBuildCommand(ctx, args...)
+	if workingDir != "" {
+		command.Dir = workingDir
 	}
+
+	logWriter := &debugLogWriter{}
+	command.Stderr = logWriter
+
+	stdout, err := command.StdoutPipe()
+	if err != nil {
+		return err
+	}
+
+	if err := command.Start(); err != nil {
+		command.Cancel() //nolint:errcheck
+		return err
+	}
+
+	if err := capture(stdout); err != nil {
+		command.Cancel() //nolint:errcheck
+		return err
+	}
+
+	stdout.Close()
+
+	if err := command.Wait(); err != nil {
+		command.Cancel() //nolint:errcheck
+		return newError(err, logWriter.AllOutput())
+	}
+
+	return nil
+}
+
+func captureCommandBasic(ctx context.Context, workingDir string, args ...string) (output string, err error) {
+	err = captureCommand(ctx, workingDir, args, func(r io.Reader) error {
+		outputBytes, readErr := io.ReadAll(r)
+		output = string(outputBytes)
+		return readErr
+	})
+
+	return
 }
 
 func unquoteFilename(quoted string) (string, error) {

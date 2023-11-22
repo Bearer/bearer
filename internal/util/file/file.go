@@ -400,3 +400,21 @@ func GetFullFilename(path string, filename string) string {
 
 	return path + "/" + filename
 }
+
+func IsDir(path string) bool {
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+
+	return fileInfo.IsDir()
+}
+
+func CanonicalPath(path string) (string, error) {
+	resolvedPath, err := filepath.EvalSymlinks(path)
+	if err != nil {
+		return "", err
+	}
+
+	return filepath.Abs(resolvedPath)
+}

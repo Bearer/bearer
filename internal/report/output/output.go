@@ -9,6 +9,7 @@ import (
 	"github.com/hhatto/gocloc"
 	"golang.org/x/exp/slices"
 
+	"github.com/bearer/bearer/internal/commands/process/gitrepository"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
@@ -27,6 +28,7 @@ var ErrUndefinedFormat = errors.New("undefined output format")
 func GetData(
 	report globaltypes.Report,
 	config settings.Config,
+	gitContext *gitrepository.Context,
 	baseBranchFindings *basebranchfindings.Findings,
 ) (*types.ReportData, error) {
 	data := &types.ReportData{}
@@ -61,7 +63,7 @@ func GetData(
 		if err = security.AddReportData(data, config, baseBranchFindings, report.HasFiles); err != nil {
 			return nil, err
 		}
-		err = saas.GetReport(data, config, false)
+		err = saas.GetReport(data, config, gitContext, false)
 	case flag.ReportPrivacy:
 		err = privacy.AddReportData(data, config)
 	case flag.ReportStats:
@@ -73,10 +75,10 @@ func GetData(
 	return data, err
 }
 
-func UploadReportToCloud(report *types.ReportData, config settings.Config) {
+func UploadReportToCloud(report *types.ReportData, config settings.Config, gitContext *gitrepository.Context) {
 	if slices.Contains([]string{flag.ReportSecurity, flag.ReportSaaS}, config.Report.Report) {
 		if config.Client != nil && config.Client.Error == nil {
-			saas.SendReport(config, report)
+			saas.SendReport(config, report, gitContext)
 		}
 	}
 }

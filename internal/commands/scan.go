@@ -34,6 +34,7 @@ var ScanFlags = flag.Flags{
 	flag.ReportFlagGroup,
 	flag.RuleFlagGroup,
 	flag.ScanFlagGroup,
+	flag.RepositoryFlagGroup,
 	flag.GeneralFlagGroup,
 }
 

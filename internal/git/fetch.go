@@ -1,14 +1,16 @@
 package git
 
-func FetchBranchLatest(rootDir string, branchName string) error {
+import "context"
+
+func FetchRef(ctx context.Context, rootDir string, ref string) error {
 	return basicCommand(
+		ctx,
 		rootDir,
-		"git",
 		"fetch",
 		"--no-tags",
 		"--no-recurse-submodules",
 		"--depth=1",
 		"origin",
-		branchName,
+		ref,
 	)
 }
