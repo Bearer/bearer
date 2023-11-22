@@ -168,10 +168,10 @@ func getMeta(
 	}
 
 	var messages []string
-	if gitContext.CurrentBranch == "" {
+	if gitContext.Branch == "" {
 		messages = append(messages,
-			"Couldn't determine the current branch of the repository. "+
-				"Please set the 'BEARER_CURRENT_BRANCH' environment variable.",
+			"Couldn't determine the name of the branch being scanned. "+
+				"Please set the 'BEARER_BRANCH' environment variable.",
 		)
 	}
 	if gitContext.DefaultBranch == "" {
@@ -180,10 +180,10 @@ func getMeta(
 				"Please set the 'BEARER_DEFAULT_BRANCH' environment variable.",
 		)
 	}
-	if gitContext.CurrentCommitHash == "" {
+	if gitContext.CommitHash == "" {
 		messages = append(messages,
 			"Couldn't determine the hash of the current commit of the repository. "+
-				"Please set the 'BEARER_CURRENT_COMMIT' environment variable.",
+				"Please set the 'BEARER_COMMIT' environment variable.",
 		)
 	}
 	if gitContext.OriginURL == "" {
@@ -205,8 +205,8 @@ func getMeta(
 		FullName:           gitContext.FullName,
 		URL:                gitContext.OriginURL,
 		Target:             config.Scan.Target,
-		SHA:                gitContext.CurrentCommitHash,
-		CurrentBranch:      gitContext.CurrentBranch,
+		SHA:                gitContext.CommitHash,
+		CurrentBranch:      gitContext.Branch,
 		DefaultBranch:      gitContext.DefaultBranch,
 		DiffBaseBranch:     gitContext.BaseBranch,
 		BearerRulesVersion: config.BearerRulesVersion,

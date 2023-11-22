@@ -17,11 +17,11 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	CurrentBranchFlag = RepositoryFlagGroup.add(Flag{
-		Name:       "current-branch",
-		ConfigName: "repository.current-branch",
+	BranchFlag = RepositoryFlagGroup.add(Flag{
+		Name:       "branch",
+		ConfigName: "repository.branch",
 		Value:      "",
-		Usage:      "The name of the current branch.",
+		Usage:      "The name of the branch being scanned.",
 		EnvironmentVariables: []string{
 			"CURRENT_BRANCH",     // legacy
 			"CI_COMMIT_REF_NAME", // gitlab
@@ -29,11 +29,11 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	CurrentCommitFlag = RepositoryFlagGroup.add(Flag{
-		Name:       "current-commit",
-		ConfigName: "repository.current-commit",
+	CommitFlag = RepositoryFlagGroup.add(Flag{
+		Name:       "commit",
+		ConfigName: "repository.commit",
 		Value:      "",
-		Usage:      "The hash of the current commit.",
+		Usage:      "The hash of the commit being scanned.",
 		EnvironmentVariables: []string{
 			"SHA",           // legacy
 			"CI_COMMIT_SHA", // gitlab
@@ -114,8 +114,8 @@ var (
 
 type RepositoryOptions struct {
 	OriginURL        string
-	CurrentBranch    string
-	CurrentCommit    string
+	Branch           string
+	Commit           string
 	DefaultBranch    string
 	DiffBaseBranch   string
 	DiffBaseCommit   string
@@ -127,8 +127,8 @@ type RepositoryOptions struct {
 func (repositoryFlagGroup) SetOptions(options *Options, args []string) error {
 	options.RepositoryOptions = RepositoryOptions{
 		OriginURL:        getString(RepositoryURLFlag),
-		CurrentBranch:    getString(CurrentBranchFlag),
-		CurrentCommit:    getString(CurrentCommitFlag),
+		Branch:           getString(BranchFlag),
+		Commit:           getString(CommitFlag),
 		DefaultBranch:    getString(DefaultBranchFlag),
 		DiffBaseBranch:   getString(DiffBaseBranchFlag),
 		DiffBaseCommit:   getString(DiffBaseCommitFlag),

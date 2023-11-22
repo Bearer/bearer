@@ -101,7 +101,8 @@ func NewRunner(
 	log.Debug().Msgf("creating report %s", path)
 
 	if _, err := os.Stat(completedPath); err == nil {
-		if !scanSettings.Scan.Force {
+		// diff can't use the cache because the base branch scan data is not in the report
+		if !scanSettings.Scan.Force && !scanSettings.Scan.Diff {
 			// force is not set, and we are not running a diff scan
 			r.reuseDetection = true
 			log.Debug().Msgf("reuse detection for %s", path)

@@ -19,9 +19,11 @@ import (
 
 type Context struct {
 	RootDir string
+	Branch,
 	CurrentBranch,
 	DefaultBranch,
 	BaseBranch string
+	CommitHash,
 	CurrentCommitHash,
 	BaseCommitHash string
 	OriginURL string
@@ -43,7 +45,7 @@ func NewContext(options *flag.Options) (*Context, error) {
 		return nil, err
 	}
 
-	currentBranch, err := getCurrentBranch(options, rootDir)
+	currentBranch, err := git.GetCurrentBranch(rootDir)
 	if err != nil {
 		return nil, fmt.Errorf("error getting current branch name: %w", err)
 	}
@@ -58,7 +60,7 @@ func NewContext(options *flag.Options) (*Context, error) {
 		return nil, fmt.Errorf("error getting base branch name: %w", err)
 	}
 
-	currentCommitHash, err := getCurrentCommitHash(options, rootDir)
+	currentCommitHash, err := git.GetCurrentCommit(rootDir)
 	if err != nil {
 		return nil, fmt.Errorf("error getting current commit hash: %w", err)
 	}
@@ -94,9 +96,11 @@ func NewContext(options *flag.Options) (*Context, error) {
 
 	context := &Context{
 		RootDir:               rootDir,
+		Branch:                getBranch(options, currentBranch),
 		CurrentBranch:         currentBranch,
 		DefaultBranch:         defaultBranch,
 		BaseBranch:            baseBranch,
+		CommitHash:            getCommitHash(options, currentCommitHash),
 		CurrentCommitHash:     currentCommitHash,
 		BaseCommitHash:        baseCommitHash,
 		OriginURL:             originURL,
@@ -114,17 +118,12 @@ func NewContext(options *flag.Options) (*Context, error) {
 	return context, nil
 }
 
-func getCurrentBranch(options *flag.Options, rootDir string) (string, error) {
-	if options.CurrentBranch != "" {
-		return options.CurrentBranch, nil
+func getBranch(options *flag.Options, currentBranch string) string {
+	if options.Branch != "" {
+		return options.Branch
 	}
 
-	name, err := git.GetCurrentBranch(rootDir)
-	if err != nil {
-		return "", err
-	}
-
-	return name, err
+	return currentBranch
 }
 
 func getDefaultBranch(options *flag.Options, rootDir string) (string, error) {
@@ -155,12 +154,12 @@ func getBaseBranch(options *flag.Options, defaultBranch string) (string, error) 
 	)
 }
 
-func getCurrentCommitHash(options *flag.Options, rootDir string) (string, error) {
-	if options.CurrentCommit != "" {
-		return options.CurrentCommit, nil
+func getCommitHash(options *flag.Options, currentCommitHash string) string {
+	if options.Commit != "" {
+		return options.Commit
 	}
 
-	return git.GetCurrentCommit(rootDir)
+	return currentCommitHash
 }
 
 func getBaseCommitHash(
