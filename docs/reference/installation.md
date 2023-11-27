@@ -27,7 +27,7 @@ The default installation script works well for most use cases, but if you need m
 curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 ```
 
-For MacOS we only support 12+ (Monterey) and later. For older versions we recommend using Docker.
+Note; Bearer requires `git` to be available on your `$PATH`. For MacOS we only support 12+ (Monterey) and later. For older versions we recommend using Docker.
 
 ### Homebrew
 
@@ -98,7 +98,7 @@ docker compose run bearer scan /tmp/scan --debug
 
 Download the archive file for your operating system/architecture from the [release page](https://github.com/bearer/bearer/releases).
 
-Unpack the archive, and put the binary somewhere in your `$PATH` (on UNIX-y systems, `/usr/local/bin` or the like). Make sure it has permission to execute.
+Unpack the archive, and put the binary somewhere in your `$PATH` (on UNIX-y systems, `/usr/local/bin` or the like). Make sure it has permission to execute. Note; Bearer requires `git` to be available on your `$PATH` also.
 
 ## Updating Bearer CLI
 
