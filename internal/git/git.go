@@ -91,7 +91,6 @@ func captureCommand(ctx context.Context, workingDir string, args []string, captu
 	}
 
 	if err := command.Start(); err != nil {
-		command.Cancel() //nolint:errcheck
 		return err
 	}
 
