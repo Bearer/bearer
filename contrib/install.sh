@@ -244,6 +244,16 @@ http_copy() {
   echo "$body"
 }
 
+check_dependencies() {
+  log_info "Checking dependencies..."
+  if git --version &> /dev/null; then
+    log_debug "Git is installed. Version: $(git --version)"
+  else
+    log_crit "Git is not installed on this system."
+    return 1
+  fi
+}
+
 github_release() {
   owner_repo=$1
   version=$2
@@ -310,6 +320,7 @@ log_prefix() {
 	echo "$PREFIX"
 }
 
+
 PLATFORM="${OS}/${ARCH}"
 GITHUB_DOWNLOAD=https://github.com/${OWNER}/${REPO}/releases/download
 
@@ -317,6 +328,8 @@ uname_os_check "$OS"
 uname_arch_check "$ARCH"
 
 parse_args "$@"
+
+check_dependencies
 
 get_binaries
 
