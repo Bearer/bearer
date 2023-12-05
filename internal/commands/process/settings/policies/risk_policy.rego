@@ -1,8 +1,8 @@
 package bearer.risk_policy
 
-import data.bearer.common
+import rego.v1
 
-import future.keywords
+import data.bearer.common
 
 contains(arr, elem) if {
 	arr[_] = elem
