@@ -1,6 +1,6 @@
 package bearer.common
 
-import future.keywords
+import rego.v1
 
 build_item(location) := {
 	"filename": location.filename,
