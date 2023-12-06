@@ -1729,8 +1729,8 @@
       (string) (len=17) "MothersMaidenName": (testhelper.ClassificationResult) {
         Name: (string) (len=17) "MothersMaidenName",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
+          State: (classify.ValidationState) (len=5) "valid",
+          Reason: (string) (len=21) "valid_unknown_pattern"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },

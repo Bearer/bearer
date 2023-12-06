@@ -1,8 +1,8 @@
 (testhelper.KPI) {
   DetectionsCount: (int) 353,
-  ValidDetectionsCount: (int) 119,
+  ValidDetectionsCount: (int) 120,
   ValidObjectDetectionsCount: (int) 27,
-  ValidFieldDetectionsCount: (int) 92,
+  ValidFieldDetectionsCount: (int) 93,
   ExpectedValidDetectionsCount: (int) 143,
   ExpectedValidObjectDetectionsCount: (int) 33,
   ExpectedValidFieldDetectionsCount: (int) 110,
