@@ -10,6 +10,7 @@ import (
 type TreeFile struct {
 	Filename string `json:"filename" yaml:"filename"`
 	SHA      string `json:"sha" yaml:"sha"`
+	Other    bool   `json:"other" yaml:"other"`
 }
 
 func HasUncommittedChanges(rootDir string) (bool, error) {
@@ -55,6 +56,34 @@ func ListTree(rootDir, commitSHA string) ([]TreeFile, error) {
 
 				if len(filename) > 1 {
 					result = append(result, TreeFile{Filename: filename[:len(filename)-1], SHA: sha})
+				}
+			}
+
+			return nil
+		},
+	)
+
+	if err != nil {
+		return result, nil
+	}
+
+	err = captureCommand(
+		context.TODO(),
+		rootDir,
+		[]string{"ls-files", "--others", "--exclude-standard", "-z"},
+		func(stdout io.Reader) error {
+			stdoutBuf := bufio.NewReader(stdout)
+			for {
+				filename, err := stdoutBuf.ReadString(0)
+				if err == io.EOF {
+					break
+				}
+				if err != nil {
+					return err
+				}
+
+				if len(filename) > 1 {
+					result = append(result, TreeFile{Filename: filename[:len(filename)-1], Other: true})
 				}
 			}
 

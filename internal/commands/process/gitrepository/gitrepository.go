@@ -226,7 +226,6 @@ func (repository *Repository) fileFor(
 	}
 
 	fullPath := filepath.Join(repository.targetPath, relativePath)
-
 	fileInfo, err := os.Stat(fullPath)
 	if err != nil {
 		log.Debug().Msgf("error getting file stat: %s, %s", fullPath, err)
