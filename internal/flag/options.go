@@ -109,8 +109,15 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 
 	viper.AutomaticEnv()
 	viper.SetEnvPrefix("bearer")
-	replacer := strings.NewReplacer("-", "_")
-	viper.SetEnvKeyReplacer(replacer)
+	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_", ".", "_"))
+	arguments := append(
+		[]string{flag.ConfigName},
+		flag.EnvironmentVariables...,
+	)
+
+	if err := viper.BindEnv(arguments...); err != nil {
+		return err
+	}
 
 	return nil
 }
