@@ -72,6 +72,8 @@ type Output struct {
 	DetailedContext string          `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
+var javascriptLanguages = []string{"JSX", "TypeScript", "JavaScript"}
+
 func AddReportData(
 	reportData *outputtypes.ReportData,
 	config settings.Config,
@@ -574,14 +576,11 @@ func writeRuleListToString(
 
 	tbl := table.New("Language", "Default Rules", "Custom Rules", "Files").WithWriter(reportStr)
 
-	languageSlice := maps.Values(languages)[:]
-	sort.Slice(languageSlice, func(i, j int) bool {
-		return len(languageSlice[i].Files) > len(languageSlice[j].Files)
-	})
+	languagePairs := getLanguagePairs(languages)
 	unsupportedLanguages := make(map[string]bool)
-	for _, lang := range languageSlice {
+	for _, lang := range languagePairs {
 		if ruleCount, ok := ruleCountPerLang[lang.Name]; ok {
-			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(languages[lang.Name].Files))
+			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(lang.Files))
 		} else {
 			for _, reportedDependency := range reportedDependencies {
 				if reportedDependency.DetectorLanguage == lang.Name {
@@ -608,6 +607,46 @@ func writeRuleListToString(
 	}
 
 	return totalRuleCount
+}
+
+func getLanguagePairs(languages map[string]*gocloc.Language) []*gocloc.Language {
+	languageSlice := maps.Values(languages)[:]
+	groupedLanguageSlice := make(map[string]*gocloc.Language)
+
+	for _, language := range languageSlice {
+		var detectedLanguage string
+		var files []string
+		if slices.Contains(javascriptLanguages, language.Name) {
+			detectedLanguage = "JavaScript"
+			files = language.Files
+		} else {
+			detectedLanguage = language.Name
+			files = language.Files
+		}
+
+		if _, exists := groupedLanguageSlice[detectedLanguage]; !exists {
+			groupedLanguageSlice[detectedLanguage] = &gocloc.Language{
+				Name:  detectedLanguage,
+				Files: files,
+			}
+		} else {
+			groupedLanguageSlice[detectedLanguage].Files = append(groupedLanguageSlice[detectedLanguage].Files, files...)
+		}
+	}
+
+	languagePairs := make([]*gocloc.Language, 0, len(groupedLanguageSlice))
+	for key := range groupedLanguageSlice {
+		languagePairs = append(languagePairs, &gocloc.Language{
+			Name:  key,
+			Files: groupedLanguageSlice[key].Files,
+		})
+	}
+
+	sort.Slice(languagePairs, func(i, j int) bool {
+		return len(languagePairs[i].Files) > len(languagePairs[j].Files)
+	})
+
+	return languagePairs
 }
 
 func countRules(
