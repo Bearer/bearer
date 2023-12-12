@@ -64,6 +64,26 @@ func TestDataflowComponents(t *testing.T) {
 			},
 		},
 		{
+			Name:        "single detection - framework",
+			FileContent: `{  "detector_type": "rails", "type": "framework_classified", "source": {"filename": "config/storage.yml", "line_number": 5, "start_line_number": 5}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Disk", "recipe_match": true, "recipe_type": "data_type", "recipe_sub_type": "flat_file"}}`,
+			Want: []types.Component{
+				{
+					Name:    "Disk",
+					Type:    "data_type",
+					SubType: "flat_file",
+					UUID:    "",
+					Locations: []types.ComponentLocation{
+						{
+							Detector:     "rails",
+							FullFilename: "config/storage.yml",
+							Filename:     "config/storage.yml",
+							LineNumber:   5,
+						},
+					},
+				},
+			},
+		},
+		{
 			Name:        "single detection - interface - no classification",
 			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2, "start_line_number": 2}}`,
 			Want:        []types.Component{},
