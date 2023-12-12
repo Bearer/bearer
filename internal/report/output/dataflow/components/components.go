@@ -143,7 +143,7 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 		return nil
 	}
 
-	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason, classifiedDetection.Classification.Decision.Reason)
+	componentType := getComponentType(classifiedDetection.Classification.RecipeType, classifiedDetection.Classification.Decision.Reason)
 	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
