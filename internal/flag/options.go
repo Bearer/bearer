@@ -107,14 +107,17 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 		return err
 	}
 
-	viper.AutomaticEnv()
-	viper.SetEnvPrefix("bearer")
-	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_", ".", "_"))
+	// We don't use viper.AutomaticEnv, so we need to add a prefix manually here.
+	// FIXME: look into replacing L113 by this?
+	// Check https://github.com/spf13/viper/blob/master/viper_test.go
+	// viper.AutomaticEnv()
+	// viper.SetEnvPrefix("bearer")
+	// replacer := strings.NewReplacer("-", "_")
+	// viper.SetEnvKeyReplacer(replacer)
 	arguments := append(
-		[]string{flag.ConfigName},
+		[]string{flag.ConfigName, strings.ToUpper("bearer_" + strings.ReplaceAll(flag.Name, "-", "_"))},
 		flag.EnvironmentVariables...,
 	)
-
 	if err := viper.BindEnv(arguments...); err != nil {
 		return err
 	}
