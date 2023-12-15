@@ -180,16 +180,8 @@ module.exports = function (eleventyConfig) {
     }
   })
 
-  eleventyConfig.addNunjucksGlobal("navHighlight", (parent, child) => {
-    const target = parent.split(path.sep).slice(1, -1)
-    const check = child.split(path.sep).slice(1, -1)
-    // handles individual rule pages highlighting "rule" in side nav
-    const isRule = target.includes("rules")
-    if (child === parent || isRule) {
-      return true
-    } else {
-      return false
-    }
+  eleventyConfig.addNunjucksGlobal("navHighlight", (item_url, current_url) => {
+    return current_url.startsWith(item_url)
   })
 
   eleventyConfig.addPairedShortcode(
