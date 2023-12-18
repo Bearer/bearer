@@ -6,7 +6,7 @@ import (
 	"github.com/bradleyjkemp/cupaloy"
 
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/report/output/dataflow/types"
 	"github.com/bearer/bearer/internal/report/output/privacy"
 	"github.com/bearer/bearer/internal/report/output/testhelper"
@@ -16,7 +16,7 @@ import (
 )
 
 func TestBuildCsvString(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{Report: "privacy"})
+	config, err := generateConfig(flagtypes.ReportOptions{Report: "privacy"})
 	config.Rules = map[string]*settings.Rule{
 		"ruby_third_parties_sentry": testhelper.RubyThirdPartiesSentryRule(),
 	}
@@ -37,7 +37,7 @@ func TestBuildCsvString(t *testing.T) {
 }
 
 func TestAddReportData(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{Report: "privacy"})
+	config, err := generateConfig(flagtypes.ReportOptions{Report: "privacy"})
 	config.Rules = map[string]*settings.Rule{
 		"ruby_third_parties_sentry": testhelper.RubyThirdPartiesSentryRule(),
 	}
@@ -56,14 +56,14 @@ func TestAddReportData(t *testing.T) {
 	cupaloy.SnapshotT(t, output.PrivacyReport)
 }
 
-func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
-	opts := flag.Options{
-		ScanOptions: flag.ScanOptions{
+func generateConfig(reportOptions flagtypes.ReportOptions) (settings.Config, error) {
+	opts := flagtypes.Options{
+		ScanOptions: flagtypes.ScanOptions{
 			Scanner: []string{"sast"},
 		},
-		RuleOptions:    flag.RuleOptions{},
+		RuleOptions:    flagtypes.RuleOptions{},
 		ReportOptions:  reportOptions,
-		GeneralOptions: flag.GeneralOptions{},
+		GeneralOptions: flagtypes.GeneralOptions{},
 	}
 
 	meta := &version_check.VersionMeta{

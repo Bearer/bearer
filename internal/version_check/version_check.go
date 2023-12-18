@@ -8,6 +8,7 @@ import (
 
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/util/output"
 )
 
@@ -26,7 +27,7 @@ type BinaryVersionMeta struct {
 	Message string
 }
 
-func GetScanVersionMeta(ctx context.Context, options flag.Options, languages []string) (meta *VersionMeta, err error) {
+func GetScanVersionMeta(ctx context.Context, options flagtypes.Options, languages []string) (meta *VersionMeta, err error) {
 	if options.RuleOptions.DisableDefaultRules && options.GeneralOptions.DisableVersionCheck {
 		log.Debug().Msg("skipping version API call as check and default rules both disabled")
 

@@ -1,11 +1,13 @@
 package flag
 
+import flagtypes "github.com/bearer/bearer/internal/flag/types"
+
 type repositoryFlagGroup struct{ flagGroupBase }
 
 var RepositoryFlagGroup = &repositoryFlagGroup{flagGroupBase{name: "Repository"}}
 
 var (
-	RepositoryURLFlag = RepositoryFlagGroup.add(Flag{
+	RepositoryURLFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "repository-url",
 		ConfigName: "repository.url",
 		Value:      "",
@@ -17,7 +19,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	BranchFlag = RepositoryFlagGroup.add(Flag{
+	BranchFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "branch",
 		ConfigName: "repository.branch",
 		Value:      "",
@@ -29,7 +31,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	CommitFlag = RepositoryFlagGroup.add(Flag{
+	CommitFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "commit",
 		ConfigName: "repository.commit",
 		Value:      "",
@@ -41,7 +43,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	DefaultBranchFlag = RepositoryFlagGroup.add(Flag{
+	DefaultBranchFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "default-branch",
 		ConfigName: "repository.default-branch",
 		Value:      "",
@@ -53,7 +55,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	DiffBaseBranchFlag = RepositoryFlagGroup.add(Flag{
+	DiffBaseBranchFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "diff-base-branch",
 		ConfigName: "repository.diff-base-branch",
 		Value:      "",
@@ -65,7 +67,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	DiffBaseCommitFlag = RepositoryFlagGroup.add(Flag{
+	DiffBaseCommitFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "diff-base-commit",
 		ConfigName: "repository.diff-base-commit",
 		Value:      "",
@@ -77,7 +79,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	GithubTokenFlag = RepositoryFlagGroup.add(Flag{
+	GithubTokenFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "github-token",
 		ConfigName: "repository.github-token",
 		Value:      "",
@@ -88,7 +90,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	GithubRepositoryFlag = RepositoryFlagGroup.add(Flag{
+	GithubRepositoryFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "github-repository",
 		ConfigName: "repository.github-repository",
 		Value:      "",
@@ -99,7 +101,7 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
-	GithubAPIURLFlag = RepositoryFlagGroup.add(Flag{
+	GithubAPIURLFlag = RepositoryFlagGroup.add(flagtypes.Flag{
 		Name:       "github-api-url",
 		ConfigName: "repository.github-api-url",
 		Value:      "",
@@ -124,8 +126,8 @@ type RepositoryOptions struct {
 	GithubAPIURL     string
 }
 
-func (repositoryFlagGroup) SetOptions(options *Options, args []string) error {
-	options.RepositoryOptions = RepositoryOptions{
+func (repositoryFlagGroup) SetOptions(options *flagtypes.Options, args []string) error {
+	options.RepositoryOptions = flagtypes.RepositoryOptions{
 		OriginURL:        getString(RepositoryURLFlag),
 		Branch:           getString(BranchFlag),
 		Commit:           getString(CommitFlag),

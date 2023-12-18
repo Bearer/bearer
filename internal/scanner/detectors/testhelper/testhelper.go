@@ -12,6 +12,7 @@ import (
 	"github.com/bearer/bearer/internal/classification"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/scanner/ast"
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/traversalstrategy"
@@ -40,10 +41,10 @@ func RunTest(
 	t.Run(name, func(tt *testing.T) {
 		classifier, err := classification.NewClassifier(&classification.Config{
 			Config: settings.Config{
-				Scan: flag.ScanOptions{
+				Scan: flagtypes.ScanOptions{
 					DisableDomainResolution: true,
 					DomainResolutionTimeout: 0,
-					Context:                 flag.Context(flag.Empty),
+					Context:                 flagtypes.Context(flag.Empty),
 				},
 			},
 		})

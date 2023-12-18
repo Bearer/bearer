@@ -11,6 +11,7 @@ import (
 
 	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/util/ignore"
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
 	"github.com/bearer/bearer/internal/util/output"
@@ -49,8 +50,8 @@ type WorkerOptions struct {
 type Config struct {
 	Client                     *api.API
 	Worker                     WorkerOptions                             `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan                       flag.ScanOptions                          `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report                     flag.ReportOptions                        `mapstructure:"report" json:"report" yaml:"report"`
+	Scan                       flagtypes.ScanOptions                     `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report                     flagtypes.ReportOptions                   `mapstructure:"report" json:"report" yaml:"report"`
 	IgnoredFingerprints        map[string]ignoretypes.IgnoredFingerprint `mapstructure:"ignored_fingerprints" json:"ignored_fingerprints" yaml:"ignored_fingerprints"`
 	StaleIgnoredFingerprintIds []string                                  `mapstructure:"stale_ignored_fingerprint_ids" json:"stale_ignored_fingerprint_ids" yaml:"stale_ignored_fingerprint_ids"`
 	CloudIgnoresUsed           bool                                      `mapstructure:"cloud_ignores_used" json:"cloud_ignores_used" yaml:"cloud_ignores_used"`
@@ -318,7 +319,7 @@ func defaultWorkerOptions() WorkerOptions {
 	}
 }
 
-func FromOptions(opts flag.Options, versionMeta *version_check.VersionMeta) (Config, error) {
+func FromOptions(opts flagtypes.Options, versionMeta *version_check.VersionMeta) (Config, error) {
 	policies := DefaultPolicies()
 	workerOptions := defaultWorkerOptions()
 	result, err := loadRules(

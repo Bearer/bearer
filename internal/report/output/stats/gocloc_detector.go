@@ -3,14 +3,14 @@ package stats
 import (
 	"time"
 
-	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/util/output"
 
 	"github.com/hhatto/gocloc"
 	"github.com/schollz/progressbar/v3"
 )
 
-func GoclocDetectorOutput(path string, opts flag.Options) (*gocloc.Result, error) {
+func GoclocDetectorOutput(path string, opts flagtypes.Options) (*gocloc.Result, error) {
 	clocOpts := gocloc.NewClocOptions()
 	clocOpts.SkipDuplicated = true
 	output.StdErrLog("Analyzing codebase")
@@ -29,7 +29,7 @@ func GoclocDetectorOutput(path string, opts flag.Options) (*gocloc.Result, error
 	return processor.Analyze([]string{path})
 }
 
-func hideProgress(opts flag.Options) bool {
+func hideProgress(opts flagtypes.Options) bool {
 	return opts.ScanOptions.HideProgressBar || opts.ScanOptions.Quiet || opts.Debug
 }
 

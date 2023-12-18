@@ -11,69 +11,21 @@ import (
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/types"
 	"github.com/bearer/bearer/internal/util/set"
 )
 
+type Flags []flagtypes.FlagGroup
+
 var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
-
-type Flag struct {
-	// Name is for CLI flag and environment variable.
-	// If this field is empty, it will be available only in config file.
-	Name string
-
-	// ConfigName is a key in config file. It is also used as a key of viper.
-	ConfigName string
-
-	// Shorthand is a shorthand letter.
-	Shorthand string
-
-	// Value is the default value. It must be filled to determine the flag type.
-	Value interface{}
-
-	// Usage explains how to use the flag.
-	Usage string
-
-	// DisableInConfig represents if flag should be present in config
-	DisableInConfig bool
-
-	// Do not show flag in the helper
-	Hide bool
-
-	// Deprecated represents if the flag is deprecated
-	Deprecated bool
-
-	// Additional environment variables to read the value from, in addition to the default
-	EnvironmentVariables []string
-}
 
 type flagGroupBase struct {
 	name  string
-	flags []*Flag
+	flags []*flagtypes.Flag
 }
 
-type FlagGroup interface {
-	Name() string
-	Flags() []*Flag
-	SetOptions(options *Options, args []string) error
-}
-
-type Flags []FlagGroup
-
-// Options holds all the runtime configuration
-type Options struct {
-	ReportOptions
-	RuleOptions
-	ScanOptions
-	RepositoryOptions
-	GeneralOptions
-	IgnoreAddOptions
-	IgnoreShowOptions
-	IgnoreMigrateOptions
-	WorkerOptions
-}
-
-func addFlag(cmd *cobra.Command, flag *Flag) {
+func addFlag(cmd *cobra.Command, flag *flagtypes.Flag) {
 	if flag == nil || flag.Name == "" {
 		return
 	}
@@ -94,7 +46,7 @@ func addFlag(cmd *cobra.Command, flag *Flag) {
 	}
 }
 
-func bind(cmd *cobra.Command, flag *Flag) error {
+func bind(cmd *cobra.Command, flag *flagtypes.Flag) error {
 	if flag == nil {
 		return nil
 	} else if flag.Name == "" {
@@ -122,7 +74,7 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 	return nil
 }
 
-func argsToMap(flag *Flag) map[string]bool {
+func argsToMap(flag *flagtypes.Flag) map[string]bool {
 	strSlice := getStringSlice(flag)
 
 	result := make(map[string]bool)
@@ -133,7 +85,7 @@ func argsToMap(flag *Flag) map[string]bool {
 	return result
 }
 
-func getString(flag *Flag) string {
+func getString(flag *flagtypes.Flag) string {
 	if flag == nil {
 		return ""
 	}
@@ -141,7 +93,7 @@ func getString(flag *Flag) string {
 	return viper.GetString(flag.ConfigName)
 }
 
-func getStringSlice(flag *Flag) []string {
+func getStringSlice(flag *flagtypes.Flag) []string {
 	if flag == nil {
 		return nil
 	}
@@ -159,21 +111,21 @@ func getStringSlice(flag *Flag) []string {
 	return v
 }
 
-func getBool(flag *Flag) bool {
+func getBool(flag *flagtypes.Flag) bool {
 	if flag == nil {
 		return false
 	}
 	return viper.GetBool(flag.ConfigName)
 }
 
-func getDuration(flag *Flag) time.Duration {
+func getDuration(flag *flagtypes.Flag) time.Duration {
 	if flag == nil {
 		return 0
 	}
 	return viper.GetDuration(flag.ConfigName)
 }
 
-func getInteger(flag *Flag) int {
+func getInteger(flag *flagtypes.Flag) int {
 	if flag == nil {
 		return -1
 	}
@@ -181,7 +133,7 @@ func getInteger(flag *Flag) int {
 	return viper.GetInt(flag.ConfigName)
 }
 
-func getSeverities(flag *Flag) set.Set[string] {
+func getSeverities(flag *flagtypes.Flag) set.Set[string] {
 	result := set.New[string]()
 
 	for _, value := range getStringSlice(flag) {
@@ -195,7 +147,7 @@ func getSeverities(flag *Flag) set.Set[string] {
 	return result
 }
 
-func (f *flagGroupBase) add(flag Flag) *Flag {
+func (f *flagGroupBase) add(flag flagtypes.Flag) *flagtypes.Flag {
 	f.flags = append(f.flags, &flag)
 	return &flag
 }
@@ -204,7 +156,7 @@ func (f *flagGroupBase) Name() string {
 	return f.name
 }
 
-func (f *flagGroupBase) Flags() []*Flag {
+func (f *flagGroupBase) Flags() []*flagtypes.Flag {
 	return f.flags
 }
 
@@ -264,18 +216,18 @@ func (f Flags) bind(cmd *cobra.Command, supportIgnoreConfig bool) error {
 	return nil
 }
 
-func (f Flags) ToOptions(args []string) (Options, error) {
+func (f Flags) ToOptions(args []string) (flagtypes.Options, error) {
 	// 	var err error
-	options := Options{}
+	options := flagtypes.Options{}
 
 	for _, group := range f {
 		if err := group.SetOptions(&options, args); err != nil {
-			return Options{}, fmt.Errorf("%s flags error: %w", group.Name(), err)
+			return flagtypes.Options{}, fmt.Errorf("%s flags error: %w", group.Name(), err)
 		}
 	}
 
 	if options.ReportOptions.Report == "privacy" && !slices.Contains(options.ScanOptions.Scanner, "sast") {
-		return Options{}, ErrInvalidScannerReportCombination
+		return flagtypes.Options{}, ErrInvalidScannerReportCombination
 	}
 
 	return options, nil

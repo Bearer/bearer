@@ -4,6 +4,7 @@ import (
 	"errors"
 	"strings"
 
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	globaltypes "github.com/bearer/bearer/internal/types"
 	"github.com/bearer/bearer/internal/util/set"
 	sliceutil "github.com/bearer/bearer/internal/util/slices"
@@ -42,38 +43,38 @@ type reportFlagGroup struct{ flagGroupBase }
 var ReportFlagGroup = &reportFlagGroup{flagGroupBase{name: "Report"}}
 
 var (
-	FormatFlag = ReportFlagGroup.add(Flag{
+	FormatFlag = ReportFlagGroup.add(flagtypes.Flag{
 		Name:       "format",
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatEmpty,
 		Usage:      "Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)",
 	})
-	ReportFlag = ReportFlagGroup.add(Flag{
+	ReportFlag = ReportFlagGroup.add(flagtypes.Flag{
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportSecurity,
 		Usage:      "Specify the type of report (security, privacy, dataflow).",
 	})
-	OutputFlag = ReportFlagGroup.add(Flag{
+	OutputFlag = ReportFlagGroup.add(flagtypes.Flag{
 		Name:       "output",
 		ConfigName: "report.output",
 		Value:      "",
 		Usage:      "Specify the output path for the report.",
 	})
-	SeverityFlag = ReportFlagGroup.add(Flag{
+	SeverityFlag = ReportFlagGroup.add(flagtypes.Flag{
 		Name:       "severity",
 		ConfigName: "report.severity",
 		Value:      strings.Join(globaltypes.Severities, ","),
 		Usage:      "Specify which severities are included in the report.",
 	})
-	FailOnSeverityFlag = ReportFlagGroup.add(Flag{
+	FailOnSeverityFlag = ReportFlagGroup.add(flagtypes.Flag{
 		Name:       "fail-on-severity",
 		ConfigName: "report.fail-on-severity",
 		Value:      strings.Join(sliceutil.Except(globaltypes.Severities, globaltypes.LevelWarning), ","),
 		Usage:      "Specify which severities cause the report to fail. Works in conjunction with --exit-code.",
 	})
-	ExcludeFingerprintFlag = ReportFlagGroup.add(Flag{
+	ExcludeFingerprintFlag = ReportFlagGroup.add(flagtypes.Flag{
 		Name:            "exclude-fingerprint",
 		ConfigName:      "report.exclude-fingerprint",
 		Value:           []string{},
@@ -93,7 +94,7 @@ type ReportOptions struct {
 	ExcludeFingerprint map[string]bool `mapstructure:"exclude_fingerprints" json:"exclude_fingerprints" yaml:"exclude_fingerprints"`
 }
 
-func (reportFlagGroup) SetOptions(options *Options, args []string) error {
+func (reportFlagGroup) SetOptions(options *flagtypes.Options, args []string) error {
 	invalidFormat := ErrInvalidFormatDefault
 	report := getString(ReportFlag)
 	switch report {
@@ -147,7 +148,7 @@ func (reportFlagGroup) SetOptions(options *Options, args []string) error {
 		excludeFingerprintsMapping[fingerprint] = true
 	}
 
-	options.ReportOptions = ReportOptions{
+	options.ReportOptions = flagtypes.ReportOptions{
 		Format:             format,
 		Report:             report,
 		Output:             getString(OutputFlag),

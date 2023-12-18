@@ -10,7 +10,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
 
-	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/report/customdetectors"
 	"github.com/bearer/bearer/internal/util/output"
 	"github.com/bearer/bearer/internal/util/set"
@@ -45,7 +45,7 @@ func GetSupportedRuleLanguages() map[string]bool {
 
 func loadRules(
 	externalRuleDirs []string,
-	options flag.RuleOptions,
+	options flagtypes.RuleOptions,
 	versionMeta *version_check.VersionMeta,
 	force bool,
 ) (
@@ -93,7 +93,7 @@ func loadRules(
 
 func loadRuleDefinitionsFromRemote(
 	definitions map[string]RuleDefinition,
-	options flag.RuleOptions,
+	options flagtypes.RuleOptions,
 	versionMeta *version_check.VersionMeta,
 ) {
 	if options.DisableDefaultRules {
@@ -310,7 +310,7 @@ func getSanitizers(definition *RuleDefinition) set.Set[string] {
 }
 
 func validateRuleOptionIDs(
-	options flag.RuleOptions,
+	options flagtypes.RuleOptions,
 	definitions map[string]RuleDefinition,
 	builtInDefinitions map[string]RuleDefinition,
 ) error {
@@ -341,7 +341,7 @@ func validateRuleOptionIDs(
 	return nil
 }
 
-func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefinition, rules map[string]struct{}) map[string]struct{} {
+func getEnabledRules(options flagtypes.RuleOptions, definitions map[string]RuleDefinition, rules map[string]struct{}) map[string]struct{} {
 	enabledRules := make(map[string]struct{})
 
 	for ruleId := range rules {

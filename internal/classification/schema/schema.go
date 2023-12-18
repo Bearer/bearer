@@ -3,7 +3,7 @@ package schema
 import (
 	"regexp"
 
-	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 
 	"github.com/bearer/bearer/internal/classification/db"
 	"github.com/bearer/bearer/internal/report/detectors"
@@ -40,7 +40,7 @@ type Config struct {
 	DataTypes                      []db.DataType
 	DataTypeClassificationPatterns []db.DataTypeClassificationPattern
 	KnownPersonObjectPatterns      []db.KnownPersonObjectPattern
-	Context                        flag.Context
+	Context                        flagtypes.Context
 }
 
 func New(config Config) *Classifier {

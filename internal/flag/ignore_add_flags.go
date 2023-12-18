@@ -1,11 +1,13 @@
 package flag
 
+import flagtypes "github.com/bearer/bearer/internal/flag/types"
+
 type ignoreAddFlagGroup struct{ flagGroupBase }
 
 var IgnoreAddFlagGroup = &ignoreAddFlagGroup{flagGroupBase{name: "Ignore Add"}}
 
 var (
-	AuthorFlag = IgnoreAddFlagGroup.add(Flag{
+	AuthorFlag = IgnoreAddFlagGroup.add(flagtypes.Flag{
 		Name:       "author",
 		ConfigName: "ignore_add.author",
 		Shorthand:  "a",
@@ -13,21 +15,21 @@ var (
 		Usage:      "Add author information to this ignored finding. (default output of \"git config user.name\")",
 	})
 
-	CommentFlag = IgnoreAddFlagGroup.add(Flag{
+	CommentFlag = IgnoreAddFlagGroup.add(flagtypes.Flag{
 		Name:       "comment",
 		ConfigName: "ignore_add.comment",
 		Value:      FormatEmpty,
 		Usage:      "Add a comment to this ignored finding.",
 	})
 
-	FalsePositiveFlag = IgnoreAddFlagGroup.add(Flag{
+	FalsePositiveFlag = IgnoreAddFlagGroup.add(flagtypes.Flag{
 		Name:       "false-positive",
 		ConfigName: "ignore_add.false-positive",
 		Value:      false,
 		Usage:      "Mark an this ignored finding as false positive.",
 	})
 
-	IgnoreAddForceFlag = IgnoreAddFlagGroup.add(Flag{
+	IgnoreAddForceFlag = IgnoreAddFlagGroup.add(flagtypes.Flag{
 		Name:       "force",
 		ConfigName: "ignore_add.force",
 		Value:      false,
@@ -42,8 +44,8 @@ type IgnoreAddOptions struct {
 	Force         bool   `mapstructure:"ignore_add_force" json:"ignore_add_force" yaml:"ignore_add_force"`
 }
 
-func (ignoreAddFlagGroup) SetOptions(options *Options, args []string) error {
-	options.IgnoreAddOptions = IgnoreAddOptions{
+func (ignoreAddFlagGroup) SetOptions(options *flagtypes.Options, args []string) error {
+	options.IgnoreAddOptions = flagtypes.IgnoreAddOptions{
 		Author:        getString(AuthorFlag),
 		Comment:       getString(CommentFlag),
 		FalsePositive: getBool(FalsePositiveFlag),

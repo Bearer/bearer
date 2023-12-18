@@ -9,7 +9,7 @@ import (
 
 	"github.com/bearer/bearer/internal/commands/process/filelist/files"
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/git"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
 	"github.com/bearer/bearer/internal/report/schema"
@@ -25,7 +25,7 @@ import (
 )
 
 func TestBuildReportString(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{Report: "security"})
+	config, err := generateConfig(flagtypes.ReportOptions{Report: "security"})
 	// set rule version
 	config.BearerRulesVersion = "TEST"
 
@@ -59,7 +59,7 @@ func TestBuildReportString(t *testing.T) {
 }
 
 func TestNoRulesBuildReportString(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{Report: "security"})
+	config, err := generateConfig(flagtypes.ReportOptions{Report: "security"})
 	// set rule version
 	config.BearerRulesVersion = "TEST"
 	config.Rules = map[string]*settings.Rule{}
@@ -88,7 +88,7 @@ func TestNoRulesBuildReportString(t *testing.T) {
 }
 
 func TestAddReportData(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{Report: "security"})
+	config, err := generateConfig(flagtypes.ReportOptions{Report: "security"})
 
 	config.Rules = map[string]*settings.Rule{
 		"ruby_lang_ssl_verification": testhelper.RubyLangSSLVerificationRule(),
@@ -113,7 +113,7 @@ func TestAddReportDataWithSeverity(t *testing.T) {
 	severity := set.New[string]()
 	severity.Add(globaltypes.LevelCritical)
 
-	config, err := generateConfig(flag.ReportOptions{
+	config, err := generateConfig(flagtypes.ReportOptions{
 		Report:   "security",
 		Severity: severity,
 	})
@@ -157,7 +157,7 @@ func TestAddReportDataWithFailOnSeverity(t *testing.T) {
 				severity.Add(test.Severity)
 			}
 
-			config, err := generateConfig(flag.ReportOptions{
+			config, err := generateConfig(flagtypes.ReportOptions{
 				Report:         "security",
 				Severity:       severity,
 				FailOnSeverity: failOnSeverity,
@@ -195,7 +195,7 @@ func TestCalculateSeverity(t *testing.T) {
 }
 
 func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
-	config, err := generateConfig(flag.ReportOptions{Report: "security"})
+	config, err := generateConfig(flagtypes.ReportOptions{Report: "security"})
 	if err != nil {
 		t.Fatalf("failed to generate config:%s", err)
 	}
@@ -287,7 +287,7 @@ func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
 	assert.Equal(t, fullScanFinding.Fingerprint, diffFinding.Fingerprint)
 }
 
-func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
+func generateConfig(reportOptions flagtypes.ReportOptions) (settings.Config, error) {
 	if reportOptions.Severity == nil {
 		reportOptions.Severity = set.New[string]()
 		reportOptions.Severity.AddAll(globaltypes.Severities)
@@ -301,13 +301,13 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 		reportOptions.FailOnSeverity.Add(globaltypes.LevelLow)
 	}
 
-	opts := flag.Options{
-		ScanOptions: flag.ScanOptions{
+	opts := flagtypes.Options{
+		ScanOptions: flagtypes.ScanOptions{
 			Scanner: []string{"sast"},
 		},
-		RuleOptions:    flag.RuleOptions{},
+		RuleOptions:    flagtypes.RuleOptions{},
 		ReportOptions:  reportOptions,
-		GeneralOptions: flag.GeneralOptions{},
+		GeneralOptions: flagtypes.GeneralOptions{},
 	}
 
 	meta := &version_check.VersionMeta{

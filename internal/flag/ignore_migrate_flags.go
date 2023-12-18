@@ -1,11 +1,13 @@
 package flag
 
+import flagtypes "github.com/bearer/bearer/internal/flag/types"
+
 type ignoreMigrateFlagGroup struct{ flagGroupBase }
 
 var IgnoreMigrateFlagGroup = &ignoreMigrateFlagGroup{flagGroupBase{name: "Ignore Migrate"}}
 
 var (
-	IgnoreMigrateForceFlag = IgnoreMigrateFlagGroup.add(Flag{
+	IgnoreMigrateForceFlag = IgnoreMigrateFlagGroup.add(flagtypes.Flag{
 		Name:       "force",
 		ConfigName: "ignore_migrate.force",
 		Value:      false,
@@ -17,8 +19,8 @@ type IgnoreMigrateOptions struct {
 	Force bool `mapstructure:"ignore_migrate_force" json:"ignore_migrate_force" yaml:"ignore_migrate_force"`
 }
 
-func (ignoreMigrateFlagGroup) SetOptions(options *Options, args []string) error {
-	options.IgnoreMigrateOptions = IgnoreMigrateOptions{
+func (ignoreMigrateFlagGroup) SetOptions(options *flagtypes.Options, args []string) error {
+	options.IgnoreMigrateOptions = flagtypes.IgnoreMigrateOptions{
 		Force: getBool(IgnoreMigrateForceFlag),
 	}
 

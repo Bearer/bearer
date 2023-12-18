@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/bearer/api"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	pointer "github.com/bearer/bearer/internal/util/pointers"
 	"github.com/rs/zerolog/log"
 )
@@ -20,7 +21,7 @@ type generalFlagGroup struct{ flagGroupBase }
 var GeneralFlagGroup = &generalFlagGroup{flagGroupBase{name: "General"}}
 
 var (
-	HostFlag = GeneralFlagGroup.add(Flag{
+	HostFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "host",
 		ConfigName:      "host",
 		Value:           "my.bearer.sh",
@@ -29,7 +30,7 @@ var (
 		Hide:            true,
 	})
 
-	APIKeyFlag = GeneralFlagGroup.add(Flag{
+	APIKeyFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "api-key",
 		ConfigName:      "api-key",
 		Value:           "",
@@ -38,7 +39,7 @@ var (
 		Hide:            true,
 	})
 
-	ConfigFileFlag = GeneralFlagGroup.add(Flag{
+	ConfigFileFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "config-file",
 		ConfigName:      "config-file",
 		Value:           "bearer.yml",
@@ -46,21 +47,21 @@ var (
 		DisableInConfig: true,
 	})
 
-	DisableVersionCheckFlag = GeneralFlagGroup.add(Flag{
+	DisableVersionCheckFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:       "disable-version-check",
 		ConfigName: "disable-version-check",
 		Value:      false,
 		Usage:      "Disable Bearer version checking",
 	})
 
-	NoColorFlag = GeneralFlagGroup.add(Flag{
+	NoColorFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:       "no-color",
 		ConfigName: "report.no-color",
 		Value:      false,
 		Usage:      "Disable color in output",
 	})
 
-	IgnoreFileFlag = GeneralFlagGroup.add(Flag{
+	IgnoreFileFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "ignore-file",
 		ConfigName:      "ignore-file",
 		Value:           "bearer.ignore",
@@ -68,7 +69,7 @@ var (
 		DisableInConfig: true,
 	})
 
-	DebugFlag = GeneralFlagGroup.add(Flag{
+	DebugFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "debug",
 		ConfigName:      "debug",
 		Value:           false,
@@ -76,14 +77,14 @@ var (
 		DisableInConfig: true,
 	})
 
-	LogLevelFlag = GeneralFlagGroup.add(Flag{
+	LogLevelFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:       "log-level",
 		ConfigName: "log-level",
 		Value:      "info",
 		Usage:      "Set log level (error, info, debug, trace)",
 	})
 
-	DebugProfileFlag = GeneralFlagGroup.add(Flag{
+	DebugProfileFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "debug-profile",
 		ConfigName:      "debug-profile",
 		Value:           false,
@@ -92,7 +93,7 @@ var (
 		DisableInConfig: true,
 	})
 
-	IgnoreGitFlag = GeneralFlagGroup.add(Flag{
+	IgnoreGitFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "ignore-git",
 		ConfigName:      "ignore-git",
 		Value:           false,
@@ -115,7 +116,7 @@ type GeneralOptions struct {
 	IgnoreGit           bool `mapstructure:"ignore-git" json:"ignore-git" yaml:"ignore-git"`
 }
 
-func (generalFlagGroup) SetOptions(options *Options, args []string) error {
+func (generalFlagGroup) SetOptions(options *flagtypes.Options, args []string) error {
 	var client *api.API
 	apiKey := getString(APIKeyFlag)
 	if apiKey != "" {
@@ -139,7 +140,7 @@ func (generalFlagGroup) SetOptions(options *Options, args []string) error {
 		logLevel = DebugLogLevel
 	}
 
-	options.GeneralOptions = GeneralOptions{
+	options.GeneralOptions = flagtypes.GeneralOptions{
 		Client:              client,
 		ConfigFile:          getString(ConfigFileFlag),
 		DisableVersionCheck: getBool(DisableVersionCheckFlag),
