@@ -23,6 +23,7 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/orchestrator/work"
 	"github.com/bearer/bearer/internal/commands/process/settings"
 	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/report/basebranchfindings"
 	reportoutput "github.com/bearer/bearer/internal/report/output"
 	"github.com/bearer/bearer/internal/report/output/stats"
@@ -56,7 +57,7 @@ type Runner interface {
 	// ReportPath returns the filename of the report
 	ReportPath() string
 	// Scan gathers the findings
-	Scan(ctx context.Context, opts flag.Options) ([]files.File, *basebranchfindings.Findings, error)
+	Scan(ctx context.Context, opts flagtypes.Options) ([]files.File, *basebranchfindings.Findings, error)
 	// Report a writes a report
 	Report(files []files.File, baseBranchFindings *basebranchfindings.Findings) (bool, error)
 }
@@ -139,7 +140,7 @@ func (r *runner) CacheUsed() bool {
 	return r.reuseDetection
 }
 
-func (r *runner) Scan(ctx context.Context, opts flag.Options) ([]files.File, *basebranchfindings.Findings, error) {
+func (r *runner) Scan(ctx context.Context, opts flagtypes.Options) ([]files.File, *basebranchfindings.Findings, error) {
 	if r.reuseDetection {
 		return nil, nil, nil
 	}
@@ -260,7 +261,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config, gitContex
 }
 
 // Run performs artifact scanning
-func Run(ctx context.Context, opts flag.Options) (err error) {
+func Run(ctx context.Context, opts flagtypes.Options) (err error) {
 	targetPath, err := file.CanonicalPath(opts.Target)
 	if err != nil {
 		return fmt.Errorf("failed to get absolute target: %w", err)

@@ -7,7 +7,7 @@ import (
 	"github.com/bearer/bearer/internal/commands/process/filelist"
 	"github.com/bearer/bearer/internal/commands/process/filelist/files"
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/hhatto/gocloc"
 	"github.com/stretchr/testify/assert"
 )
@@ -71,7 +71,7 @@ func TestFileList(t *testing.T) {
 			Input: input{
 				projectPath: filepath.Join("testdata", "happy_path", "skip"),
 				config: settings.Config{
-					Scan: flag.ScanOptions{
+					Scan: flagtypes.ScanOptions{
 						SkipPath: []string{"users/admin.go"},
 					},
 					Worker: settings.WorkerOptions{
@@ -94,7 +94,7 @@ func TestFileList(t *testing.T) {
 			Input: input{
 				projectPath: filepath.Join("testdata", "happy_path", "skip"),
 				config: settings.Config{
-					Scan: flag.ScanOptions{
+					Scan: flagtypes.ScanOptions{
 						SkipPath: []string{"users"},
 					},
 					Worker: settings.WorkerOptions{
@@ -110,7 +110,7 @@ func TestFileList(t *testing.T) {
 			Input: input{
 				projectPath: filepath.Join("testdata", "happy_path", "skip"),
 				config: settings.Config{
-					Scan: flag.ScanOptions{
+					Scan: flagtypes.ScanOptions{
 						SkipPath: []string{"users"},
 					},
 					Worker: settings.WorkerOptions{

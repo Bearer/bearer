@@ -13,7 +13,7 @@ import (
 	"golang.org/x/oauth2"
 	"gopkg.in/yaml.v3"
 
-	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/git"
 )
 
@@ -35,7 +35,7 @@ type Context struct {
 	HasUncommittedChanges bool
 }
 
-func NewContext(options *flag.Options) (*Context, error) {
+func NewContext(options *flagtypes.Options) (*Context, error) {
 	if options.IgnoreGit {
 		return nil, nil
 	}
@@ -118,7 +118,7 @@ func NewContext(options *flag.Options) (*Context, error) {
 	return context, nil
 }
 
-func getBranch(options *flag.Options, currentBranch string) string {
+func getBranch(options *flagtypes.Options, currentBranch string) string {
 	if options.Branch != "" {
 		return options.Branch
 	}
@@ -126,7 +126,7 @@ func getBranch(options *flag.Options, currentBranch string) string {
 	return currentBranch
 }
 
-func getDefaultBranch(options *flag.Options, rootDir string) (string, error) {
+func getDefaultBranch(options *flagtypes.Options, rootDir string) (string, error) {
 	if options.DefaultBranch != "" {
 		return options.DefaultBranch, nil
 	}
@@ -134,7 +134,7 @@ func getDefaultBranch(options *flag.Options, rootDir string) (string, error) {
 	return git.GetDefaultBranch(rootDir)
 }
 
-func getBaseBranch(options *flag.Options, defaultBranch string) (string, error) {
+func getBaseBranch(options *flagtypes.Options, defaultBranch string) (string, error) {
 	if !options.Diff {
 		return "", nil
 	}
@@ -154,7 +154,7 @@ func getBaseBranch(options *flag.Options, defaultBranch string) (string, error) 
 	)
 }
 
-func getCommitHash(options *flag.Options, currentCommitHash string) string {
+func getCommitHash(options *flagtypes.Options, currentCommitHash string) string {
 	if options.Commit != "" {
 		return options.Commit
 	}
@@ -163,7 +163,7 @@ func getCommitHash(options *flag.Options, currentCommitHash string) string {
 }
 
 func getBaseCommitHash(
-	options *flag.Options,
+	options *flagtypes.Options,
 	rootDir string,
 	baseBranch string,
 	currentCommitHash string,
@@ -210,7 +210,7 @@ func getBaseCommitHash(
 	)
 }
 
-func lookupBaseCommitHashFromGithub(options *flag.Options, baseBranch string, currentCommitHash string) (string, error) {
+func lookupBaseCommitHashFromGithub(options *flagtypes.Options, baseBranch string, currentCommitHash string) (string, error) {
 	if options.GithubToken == "" || options.GithubRepository == "" {
 		return "", nil
 	}
@@ -245,7 +245,7 @@ func lookupBaseCommitHashFromGithub(options *flag.Options, baseBranch string, cu
 	return *comparison.MergeBaseCommit.SHA, nil
 }
 
-func getOriginURL(options *flag.Options, rootDir string) (string, error) {
+func getOriginURL(options *flagtypes.Options, rootDir string) (string, error) {
 	if options.OriginURL != "" {
 		return options.OriginURL, nil
 	}
@@ -253,7 +253,7 @@ func getOriginURL(options *flag.Options, rootDir string) (string, error) {
 	return git.GetOriginURL(rootDir)
 }
 
-func newGithubClient(options *flag.Options) (*github.Client, error) {
+func newGithubClient(options *flagtypes.Options) (*github.Client, error) {
 	tokenSource := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: options.GithubToken})
 	httpClient := oauth2.NewClient(context.Background(), tokenSource)
 	client := github.NewClient(httpClient)

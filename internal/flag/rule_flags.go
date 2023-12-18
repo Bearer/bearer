@@ -1,23 +1,25 @@
 package flag
 
+import flagtypes "github.com/bearer/bearer/internal/flag/types"
+
 type ruleFlagGroup struct{ flagGroupBase }
 
 var RuleFlagGroup = &ruleFlagGroup{flagGroupBase{name: "Rule"}}
 
 var (
-	DisableDefaultRulesFlag = RuleFlagGroup.add(Flag{
+	DisableDefaultRulesFlag = RuleFlagGroup.add(flagtypes.Flag{
 		Name:       "disable-default-rules",
 		ConfigName: "rule.disable-default-rules",
 		Value:      false,
 		Usage:      "Disables all default and built-in rules.",
 	})
-	SkipRuleFlag = RuleFlagGroup.add(Flag{
+	SkipRuleFlag = RuleFlagGroup.add(flagtypes.Flag{
 		Name:       "skip-rule",
 		ConfigName: "rule.skip-rule",
 		Value:      []string{},
 		Usage:      "Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.",
 	})
-	OnlyRuleFlag = RuleFlagGroup.add(Flag{
+	OnlyRuleFlag = RuleFlagGroup.add(flagtypes.Flag{
 		Name:       "only-rule",
 		ConfigName: "rule.only-rule",
 		Value:      []string{},
@@ -31,8 +33,8 @@ type RuleOptions struct {
 	OnlyRule            map[string]bool `mapstructure:"only-rule" json:"only-rule" yaml:"only-rule"`
 }
 
-func (ruleFlagGroup) SetOptions(options *Options, args []string) error {
-	options.RuleOptions = RuleOptions{
+func (ruleFlagGroup) SetOptions(options *flagtypes.Options, args []string) error {
+	options.RuleOptions = flagtypes.RuleOptions{
 		DisableDefaultRules: getBool(DisableDefaultRulesFlag),
 		SkipRule:            argsToMap(SkipRuleFlag),
 		OnlyRule:            argsToMap(OnlyRuleFlag),

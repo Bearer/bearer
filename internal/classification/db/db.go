@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/internal/flag"
+	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/tangzero/inflector"
 )
 
@@ -141,11 +142,11 @@ func DefaultWithMapping(subjectMappingPath string) DefaultDB {
 	return defaultDB("", subjectMappingPath)
 }
 
-func DefaultWithContext(context flag.Context) DefaultDB {
+func DefaultWithContext(context flagtypes.Context) DefaultDB {
 	return defaultDB(context, "")
 }
 
-func defaultDB(context flag.Context, subjectMappingPath string) DefaultDB {
+func defaultDB(context flagtypes.Context, subjectMappingPath string) DefaultDB {
 	dataCategories := defaultDataCategories(context)
 	categories := map[string]DataCategory{}
 	for _, category := range dataCategories {
@@ -189,7 +190,7 @@ func defaultRecipes() []Recipe {
 	return recipes
 }
 
-func defaultDataCategories(context flag.Context) []DataCategory {
+func defaultDataCategories(context flagtypes.Context) []DataCategory {
 	skipHealthContext := true
 	if context == flag.Health {
 		skipHealthContext = false
