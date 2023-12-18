@@ -12,7 +12,7 @@ require (
 	github.com/gitsight/go-vcsurl v1.0.1
 	github.com/go-enry/go-enry/v2 v2.8.4
 	github.com/google/go-github v17.0.0+incompatible
-	github.com/google/uuid v1.4.0
+	github.com/google/uuid v1.5.0
 	github.com/hhatto/gocloc v0.5.2
 	github.com/onsi/ginkgo/v2 v2.13.2
 	github.com/onsi/gomega v1.30.0
