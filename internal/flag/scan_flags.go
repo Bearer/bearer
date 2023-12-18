@@ -89,10 +89,11 @@ var (
 		Usage:      "Specify directories paths that contain .yaml files with external rules configuration",
 	})
 	ScannerFlag = ScanFlagGroup.add(flagtypes.Flag{
-		Name:       "scanner",
-		ConfigName: "scan.scanner",
-		Value:      []string{ScannerSAST},
-		Usage:      "Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast",
+		Name:                 "scanner",
+		ConfigName:           "scan.scanner",
+		Value:                []string{ScannerSAST},
+		Usage:                "Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast",
+		EnvironmentVariables: []string{"SCANNER"},
 	})
 	ParallelFlag = ScanFlagGroup.add(flagtypes.Flag{
 		Name:       "parallel",

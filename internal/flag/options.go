@@ -18,6 +18,8 @@ import (
 
 type Flags []flagtypes.FlagGroup
 
+const envPrefix = "bearer"
+
 var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
 
 type flagGroupBase struct {
@@ -46,6 +48,26 @@ func addFlag(cmd *cobra.Command, flag *flagtypes.Flag) {
 	}
 }
 
+func BindViper(flag *flagtypes.Flag) error {
+	arguments := append(
+		[]string{
+			flag.ConfigName,
+			strings.ToUpper(
+				strings.Join(
+					[]string{
+						envPrefix,
+						strings.ReplaceAll(flag.Name, "-", "_"),
+					},
+					"_",
+				),
+			),
+		},
+		flag.EnvironmentVariables...,
+	)
+
+	return viper.BindEnv(arguments...)
+}
+
 func bind(cmd *cobra.Command, flag *flagtypes.Flag) error {
 	if flag == nil {
 		return nil
@@ -59,19 +81,7 @@ func bind(cmd *cobra.Command, flag *flagtypes.Flag) error {
 		return err
 	}
 
-	viper.AutomaticEnv()
-	viper.SetEnvPrefix("bearer")
-	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_", ".", "_"))
-	arguments := append(
-		[]string{flag.ConfigName},
-		flag.EnvironmentVariables...,
-	)
-
-	if err := viper.BindEnv(arguments...); err != nil {
-		return err
-	}
-
-	return nil
+	return BindViper(flag)
 }
 
 func argsToMap(flag *flagtypes.Flag) map[string]bool {
