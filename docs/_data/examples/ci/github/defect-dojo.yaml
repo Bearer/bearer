@@ -12,7 +12,7 @@ jobs:
   rule_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Run Report
         id: report
         uses: bearer/bearer-action@v2
