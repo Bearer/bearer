@@ -10,4 +10,4 @@ see_also:
   - bearer init - Generates a default config to `bearer.yml`
   - bearer scan - Scan a directory or file
   - bearer version - Print the version
-aliases:
+aliases: []

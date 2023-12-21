@@ -18,8 +18,7 @@ import (
 
 type Flags []flagtypes.FlagGroup
 
-const envPrefix = "bearer"
-
+var envPrefix = "bearer"
 var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
 
 type flagGroupBase struct {

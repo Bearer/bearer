@@ -49,13 +49,10 @@ func NewScanCommand() *cobra.Command {
 			if err := ScanFlags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
+
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := ScanFlags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			logLevel := viper.GetString(flag.LogLevelFlag.ConfigName)
 			if viper.GetBool(flag.DebugFlag.ConfigName) {
 				logLevel = flag.DebugLogLevel

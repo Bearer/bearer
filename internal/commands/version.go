@@ -18,12 +18,16 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 		Use:   "version",
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := flags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
+			return nil
+		},
+		RunE: func(cmd *cobra.Command, args []string) error {
 			logLevel := viper.GetString(flag.LogLevelFlag.ConfigName)
+
 			if viper.GetBool(flag.DebugFlag.ConfigName) {
 				logLevel = flag.DebugLogLevel
 			}
@@ -47,6 +51,8 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 	cmd.SetUsageFunc(func(cmd *cobra.Command) error {
 		return nil
 	})
+
 	flags.AddFlags(cmd)
+
 	return cmd
 }

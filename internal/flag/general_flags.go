@@ -36,7 +36,6 @@ var (
 		Value:           "",
 		Usage:           "Use your Bearer API Key to send the report to Bearer.",
 		DisableInConfig: true,
-		Hide:            true,
 	})
 
 	ConfigFileFlag = GeneralFlagGroup.add(flagtypes.Flag{

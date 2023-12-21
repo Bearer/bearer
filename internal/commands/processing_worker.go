@@ -19,11 +19,14 @@ func NewProcessingWorkerCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "processing-worker [flags] PATH",
 		Short: "start scan processing server",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := flags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
+			return nil
+		},
+		RunE: func(cmd *cobra.Command, args []string) error {
 			output.Setup(cmd, output.SetupRequest{
 				LogLevel:  viper.GetString(flag.LogLevelFlag.ConfigName),
 				Quiet:     viper.GetBool(flag.QuietFlag.ConfigName),

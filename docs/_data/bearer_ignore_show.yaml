@@ -5,42 +5,49 @@ options:
   - name: all
     default_value: "false"
     usage: Show all ignored fingerprints.
+    environment_variables:
+      - BEARER_ALL
   - name: api-key
     usage: Use your Bearer API Key to send the report to Bearer.
+    environment_variables:
+      - BEARER_API_KEY
   - name: config-file
     default_value: bearer.yml
     usage: Load configuration from the specified path.
+    environment_variables:
+      - BEARER_CONFIG_FILE
   - name: debug
     default_value: "false"
     usage: Enable debug logs. Equivalent to --log-level=debug
-  - name: debug-profile
-    default_value: "false"
-    usage: Generate profiling data for debugging
+    environment_variables:
+      - BEARER_DEBUG
   - name: disable-version-check
     default_value: "false"
     usage: Disable Bearer version checking
+    environment_variables:
+      - BEARER_DISABLE_VERSION_CHECK
   - name: help
     shorthand: h
     default_value: "false"
     usage: help for show
-  - name: host
-    default_value: my.bearer.sh
-    usage: Specify the Host for sending the report.
   - name: ignore-file
     default_value: bearer.ignore
     usage: Load ignore file from the specified path.
-  - name: ignore-git
-    default_value: "false"
-    usage: Ignore Git listing
+    environment_variables:
+      - BEARER_IGNORE_FILE
   - name: log-level
     default_value: info
     usage: Set log level (error, info, debug, trace)
+    environment_variables:
+      - BEARER_LOG_LEVEL
   - name: no-color
     default_value: "false"
     usage: Disable color in output
+    environment_variables:
+      - BEARER_NO_COLOR
 example: |-
   # Show the details of an ignored fingerprint from your ignore file
   $ bearer ignore show <fingerprint>
 see_also:
   - bearer ignore - Manage ignored fingerprints
-aliases:
+aliases: []
