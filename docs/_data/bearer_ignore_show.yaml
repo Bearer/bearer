@@ -7,6 +7,10 @@ options:
     usage: Show all ignored fingerprints.
     environment_variables:
       - BEARER_ALL
+  - name: api-key
+    usage: Use your Bearer API Key to send the report to Bearer.
+    environment_variables:
+      - BEARER_API_KEY
   - name: config-file
     default_value: bearer.yml
     usage: Load configuration from the specified path.

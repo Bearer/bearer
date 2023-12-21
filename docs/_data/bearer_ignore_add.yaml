@@ -2,6 +2,10 @@ name: bearer ignore add
 synopsis: Add an ignored fingerprint
 usage: bearer ignore add <fingerprint> [flags]
 options:
+  - name: api-key
+    usage: Use your Bearer API Key to send the report to Bearer.
+    environment_variables:
+      - BEARER_API_KEY
   - name: author
     shorthand: a
     usage: |

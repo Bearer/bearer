@@ -2,6 +2,10 @@ name: bearer ignore remove
 synopsis: Remove an ignored fingerprint
 usage: bearer ignore remove <fingerprint> [flags]
 options:
+  - name: api-key
+    usage: Use your Bearer API Key to send the report to Bearer.
+    environment_variables:
+      - BEARER_API_KEY
   - name: config-file
     default_value: bearer.yml
     usage: Load configuration from the specified path.
