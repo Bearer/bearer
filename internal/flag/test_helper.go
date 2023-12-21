@@ -1,7 +1,6 @@
 package flag
 
 import (
-	"fmt"
 	"testing"
 
 	flagtypes "github.com/bearer/bearer/internal/flag/types"
@@ -34,9 +33,6 @@ func RunFlagTest(testCase TestCase, t *testing.T) {
 
 			t.Setenv(testCase.env.key, testCase.env.value)
 		}
-
-		fmt.Println(testCase.name)
-		fmt.Println("envVar", viper.AllEnvVar())
 
 		sl := getStringSlice(testCase.flag)
 		assert.Equal(t, testCase.want, sl)
