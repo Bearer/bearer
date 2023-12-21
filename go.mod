@@ -123,8 +123,8 @@ require (
 	golang.org/x/sys v0.15.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
-	gopkg.in/yaml.v2 v2.4.0
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1
 )
 
-replace github.com/spf13/viper => github.com/cfabianski/viper v1.15.1-0.20231220102258-f9bd0ace5732
+replace github.com/spf13/viper => github.com/cfabianski/viper v1.15.1-0.20231221085120-53a0f7864cd6

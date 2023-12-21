@@ -40,19 +40,33 @@ type cmdDoc struct {
 	Aliases          []string    `yaml:"aliases,omitempty"`
 }
 
-var AllFlags = []*flagtypes.Flag{}
-var envVars = viper.AllEnvVar()
+var (
+	AllFlags  = []*flagtypes.Flag{}
+	EnvVars   = viper.AllEnvVar()
+	AllGroups = []flagtypes.FlagGroup{
+		flag.GeneralFlagGroup,
+		flag.IgnoreAddFlagGroup,
+		flag.IgnoreMigrateFlagGroup,
+		flag.IgnoreShowFlagGroup,
+		flag.ReportFlagGroup,
+		flag.RepositoryFlagGroup,
+		flag.RuleFlagGroup,
+		flag.ScanFlagGroup,
+		flag.WorkerFlagGroup,
+	}
+	boundFlags = set.New[*flagtypes.Flag]()
+)
 
 func main() {
-	AllFlags = append(AllFlags, flag.GeneralFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.IgnoreAddFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.IgnoreMigrateFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.IgnoreShowFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.ReportFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.RepositoryFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.RuleFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.ScanFlagGroup.Flags()...)
-	AllFlags = append(AllFlags, flag.WorkerFlagGroup.Flags()...)
+	for _, group := range AllGroups {
+		AllFlags = append(AllFlags, group.Flags()...)
+	}
+
+	for _, f := range AllFlags {
+		if boundFlags.Add(f) {
+			flag.BindViper(f) // nolint: errcheck
+		}
+	}
 
 	dir := "./docs/_data"
 	if _, err := os.Stat(dir); err != nil {
@@ -188,9 +202,9 @@ func lookupEnvVariables(flag *pflag.Flag, otherFlag *flagtypes.Flag) []string {
 	var vars []string
 
 	if otherFlag == nil {
-		vars = envVars[flag.Name]
+		vars = EnvVars[flag.Name]
 	} else {
-		vars = envVars[otherFlag.ConfigName]
+		vars = EnvVars[otherFlag.ConfigName]
 	}
 
 	return removeDup(vars)
