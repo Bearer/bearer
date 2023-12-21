@@ -2,142 +2,166 @@ name: bearer scan
 synopsis: Scan a directory or file
 usage: bearer scan [flags] <path>
 options:
-  - name: api-key
-    usage: Use your Bearer API Key to send the report to Bearer.
-  - name: branch
-    usage: The name of the branch being scanned.
-  - name: commit
-    usage: The hash of the commit being scanned.
-  - name: config-file
-    default_value: bearer.yml
-    usage: Load configuration from the specified path.
-  - name: context
-    usage: |
-      Expand context of schema classification e.g., --context=health, to include data types particular to health
-  - name: data-subject-mapping
-    usage: |
-      Override default data subject mapping by providing a path to a custom mapping JSON file
-  - name: debug
-    default_value: "false"
-    usage: Enable debug logs. Equivalent to --log-level=debug
-  - name: debug-profile
-    default_value: "false"
-    usage: Generate profiling data for debugging
-  - name: default-branch
-    usage: The name of the default branch.
-  - name: diff
-    default_value: "false"
-    usage: |
-      Only report differences in findings relative to a base branch.
-  - name: diff-base-branch
-    usage: The name of the base branch to use for diff scanning.
-  - name: diff-base-commit
-    usage: The hash of the base commit to use for diff scanning.
-  - name: disable-default-rules
-    default_value: "false"
-    usage: Disables all default and built-in rules.
-  - name: disable-domain-resolution
-    default_value: "true"
-    usage: |
-      Do not attempt to resolve detected domains during classification
-  - name: disable-version-check
-    default_value: "false"
-    usage: Disable Bearer version checking
-  - name: domain-resolution-timeout
-    default_value: 3s
-    usage: |
-      Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s
-  - name: exclude-fingerprint
-    default_value: "[]"
-    usage: |
-      Specify the comma-separated fingerprints of the findings you would like to exclude from the report.
-  - name: exit-code
-    default_value: "-1"
-    usage: |
-      Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan.
-  - name: external-rule-dir
-    default_value: "[]"
-    usage: |
-      Specify directories paths that contain .yaml files with external rules configuration
-  - name: fail-on-severity
-    default_value: critical,high,medium,low
-    usage: |
-      Specify which severities cause the report to fail. Works in conjunction with --exit-code.
-  - name: force
-    default_value: "false"
-    usage: Disable the cache and runs the detections again
-  - name: format
-    shorthand: f
-    usage: |
-      Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)
-  - name: github-api-url
-    usage: A non-standard URL to use for the Github API
-  - name: github-repository
-    usage: |
-      The owner and name of the repository on Github. eg. Bearer/bearer
-  - name: github-token
-    usage: An access token for the Github API.
-  - name: help
-    shorthand: h
-    default_value: "false"
-    usage: help for scan
-  - name: hide-progress-bar
-    default_value: "false"
-    usage: Hide progress bar from output
-  - name: host
-    default_value: my.bearer.sh
-    usage: Specify the Host for sending the report.
-  - name: ignore-file
-    default_value: bearer.ignore
-    usage: Load ignore file from the specified path.
-  - name: ignore-git
-    default_value: "false"
-    usage: Ignore Git listing
-  - name: internal-domains
-    default_value: "[]"
-    usage: |
-      Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
-  - name: log-level
-    default_value: info
-    usage: Set log level (error, info, debug, trace)
-  - name: no-color
-    default_value: "false"
-    usage: Disable color in output
-  - name: only-rule
-    default_value: "[]"
-    usage: |
-      Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
-  - name: output
-    usage: Specify the output path for the report.
-  - name: parallel
-    default_value: "0"
-    usage: Specify the amount of parallelism to use during the scan
-  - name: quiet
-    default_value: "false"
-    usage: Suppress non-essential messages
-  - name: report
-    default_value: security
-    usage: Specify the type of report (security, privacy, dataflow).
-  - name: repository-url
-    usage: The remote URL of the repository.
-  - name: scanner
-    default_value: "[sast]"
-    usage: |
-      Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast
-  - name: severity
-    default_value: critical,high,medium,low,warning
-    usage: Specify which severities are included in the report.
-  - name: skip-path
-    default_value: "[]"
-    usage: |
-      Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
-  - name: skip-rule
-    default_value: "[]"
-    usage: |
-      Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
+    - name: config-file
+      default_value: bearer.yml
+      usage: Load configuration from the specified path.
+      environment_variables:
+        - BEARER_CONFIG_FILE
+    - name: context
+      usage: |
+        Expand context of schema classification e.g., --context=health, to include data types particular to health
+      environment_variables:
+        - BEARER_CONTEXT
+    - name: data-subject-mapping
+      usage: |
+        Override default data subject mapping by providing a path to a custom mapping JSON file
+      environment_variables:
+        - BEARER_DATA_SUBJECT_MAPPING
+    - name: debug
+      default_value: "false"
+      usage: Enable debug logs. Equivalent to --log-level=debug
+      environment_variables:
+        - BEARER_DEBUG
+    - name: diff
+      default_value: "false"
+      usage: |
+        Only report differences in findings relative to a base branch.
+      environment_variables:
+        - BEARER_DIFF
+    - name: disable-default-rules
+      default_value: "false"
+      usage: Disables all default and built-in rules.
+      environment_variables:
+        - BEARER_DISABLE_DEFAULT_RULES
+    - name: disable-domain-resolution
+      default_value: "true"
+      usage: |
+        Do not attempt to resolve detected domains during classification
+      environment_variables:
+        - BEARER_DISABLE_DOMAIN_RESOLUTION
+    - name: disable-version-check
+      default_value: "false"
+      usage: Disable Bearer version checking
+      environment_variables:
+        - BEARER_DISABLE_VERSION_CHECK
+    - name: domain-resolution-timeout
+      default_value: 3s
+      usage: |
+        Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s
+      environment_variables:
+        - BEARER_DOMAIN_RESOLUTION_TIMEOUT
+    - name: exit-code
+      default_value: "-1"
+      usage: |
+        Force a given exit code for the scan command. Set this to 0 (success) to always return a success exit code despite any findings from the scan.
+      environment_variables:
+        - BEARER_EXIT_CODE
+    - name: external-rule-dir
+      default_value: '[]'
+      usage: |
+        Specify directories paths that contain .yaml files with external rules configuration
+      environment_variables:
+        - BEARER_EXTERNAL_RULE_DIR
+    - name: fail-on-severity
+      default_value: critical,high,medium,low
+      usage: |
+        Specify which severities cause the report to fail. Works in conjunction with --exit-code.
+      environment_variables:
+        - BEARER_FAIL_ON_SEVERITY
+    - name: force
+      default_value: "false"
+      usage: Disable the cache and runs the detections again
+      environment_variables:
+        - BEARER_FORCE
+    - name: format
+      shorthand: f
+      usage: |
+        Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)
+      environment_variables:
+        - BEARER_FORMAT
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for scan
+    - name: hide-progress-bar
+      default_value: "false"
+      usage: Hide progress bar from output
+      environment_variables:
+        - BEARER_HIDE_PROGRESS_BAR
+    - name: ignore-file
+      default_value: bearer.ignore
+      usage: Load ignore file from the specified path.
+      environment_variables:
+        - BEARER_IGNORE_FILE
+    - name: internal-domains
+      default_value: '[]'
+      usage: |
+        Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
+      environment_variables:
+        - BEARER_INTERNAL_DOMAINS
+    - name: log-level
+      default_value: info
+      usage: Set log level (error, info, debug, trace)
+      environment_variables:
+        - BEARER_LOG_LEVEL
+    - name: no-color
+      default_value: "false"
+      usage: Disable color in output
+      environment_variables:
+        - BEARER_NO_COLOR
+    - name: only-rule
+      default_value: '[]'
+      usage: |
+        Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
+      environment_variables:
+        - BEARER_ONLY_RULE
+    - name: output
+      usage: Specify the output path for the report.
+      environment_variables:
+        - BEARER_OUTPUT
+    - name: parallel
+      default_value: "0"
+      usage: Specify the amount of parallelism to use during the scan
+      environment_variables:
+        - BEARER_PARALLEL
+    - name: quiet
+      default_value: "false"
+      usage: Suppress non-essential messages
+      environment_variables:
+        - BEARER_QUIET
+    - name: report
+      default_value: security
+      usage: Specify the type of report (security, privacy, dataflow).
+      environment_variables:
+        - BEARER_REPORT
+    - name: scanner
+      default_value: '[sast]'
+      usage: |
+        Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast
+      environment_variables:
+        - BEARER_SCANNER
+        - SCANNER
+    - name: severity
+      default_value: critical,high,medium,low,warning
+      usage: Specify which severities are included in the report.
+      environment_variables:
+        - BEARER_SEVERITY
+    - name: skip-path
+      default_value: '[]'
+      usage: |
+        Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
+      environment_variables:
+        - BEARER_SKIP_PATH
+    - name: skip-rule
+      default_value: '[]'
+      usage: |
+        Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
+      environment_variables:
+        - BEARER_SKIP_RULE
 example: |4-
       # Scan a local project, including language-specific files
       $ bearer scan /path/to/your_project
 see_also:
-  - "bearer - "
-aliases: s
+    - 'bearer - '
+aliases:
+    - s

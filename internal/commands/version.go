@@ -1,8 +1,6 @@
 package commands
 
 import (
-	"fmt"
-
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -19,11 +17,8 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			logLevel := viper.GetString(flag.LogLevelFlag.ConfigName)
+
 			if viper.GetBool(flag.DebugFlag.ConfigName) {
 				logLevel = flag.DebugLogLevel
 			}
@@ -47,6 +42,9 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 	cmd.SetUsageFunc(func(cmd *cobra.Command) error {
 		return nil
 	})
+
 	flags.AddFlags(cmd)
+	flags.Bind(cmd) // nolint: errcheck
+
 	return cmd
 }

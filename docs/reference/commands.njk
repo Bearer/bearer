@@ -34,6 +34,7 @@ Bearer CLI offers a number of commands to use and customize the CLI to your need
         <th>Name</th>
         <th>Description</th>
         <th>Default Value</th>
+        <th>Environment Variables<th>
       </tr>
     </thead>
     <tbody>
@@ -46,6 +47,7 @@ Bearer CLI offers a number of commands to use and customize the CLI to your need
           </td>
           <td>{{option.usage}}</td>
           <td>{{option.default_value}}</td>
+          <td>{{ option.environment_variables }}</td>
         </tr>
       {% endfor %}
     </tbody>
@@ -57,7 +59,7 @@ Bearer CLI offers a number of commands to use and customize the CLI to your need
   {% endif %}
   {% if item.aliases %}
     <h3 id="{{item.name | trim}}-aliases">Aliases</h3>
-    <p>In addition to the primary <code>{{ item.name | trim }}</code> command, you can also use <code>{{ item.aliases | trim}}</code> in place of it.
+    <p>In addition to the primary <code>{{ item.name | trim }}</code> command, you can also use <code>{{ item.aliases }}</code> in place of it.
     </p>
   {% endif %}
 {% endfor %}

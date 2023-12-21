@@ -18,7 +18,8 @@ import (
 
 type Flags []flagtypes.FlagGroup
 
-const envPrefix = "bearer"
+var envPrefix = "bearer"
+var boundFlags = set.New[*flagtypes.Flag]()
 
 var ErrInvalidScannerReportCombination = errors.New("invalid scanner argument; privacy report requires sast scanner")
 
@@ -49,6 +50,10 @@ func addFlag(cmd *cobra.Command, flag *flagtypes.Flag) {
 }
 
 func BindViper(flag *flagtypes.Flag) error {
+	if !boundFlags.Add(flag) {
+		return nil
+	}
+
 	arguments := append(
 		[]string{
 			flag.ConfigName,

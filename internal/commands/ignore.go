@@ -81,10 +81,6 @@ func newIgnoreShowCommand() *cobra.Command {
 		Example: `# Show the details of an ignored fingerprint from your ignore file
 $ bearer ignore show <fingerprint>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := IgnoreShowFlags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			setLogLevel(cmd)
 
 			options, err := IgnoreShowFlags.ToOptions(args)
@@ -139,6 +135,7 @@ $ bearer ignore show <fingerprint>`,
 		SilenceUsage:  false,
 	}
 	IgnoreShowFlags.AddFlags(cmd)
+	IgnoreShowFlags.Bind(cmd) // nolint: errcheck
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreShowFlags.Usages(cmd)))
 
 	return cmd
@@ -156,10 +153,6 @@ func newIgnoreAddCommand() *cobra.Command {
 		Example: `# Add an ignored fingerprint to your ignore file
 $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := IgnoreShowFlags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			if len(args) == 0 {
 				return cmd.Help()
 			}
@@ -240,6 +233,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 		SilenceUsage:  false,
 	}
 	IgnoreShowFlags.AddFlags(cmd)
+	IgnoreShowFlags.Bind(cmd) // nolint: errcheck
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, IgnoreShowFlags.Usages(cmd)))
 
 	return cmd
@@ -254,10 +248,6 @@ func newIgnoreRemoveCommand() *cobra.Command {
 		Example: `# Remove an ignored fingerprint from your ignore file
 $ bearer ignore remove <fingerprint>`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			if len(args) == 0 {
 				return cmd.Help()
 			}
@@ -298,7 +288,9 @@ $ bearer ignore remove <fingerprint>`,
 		SilenceErrors: false,
 		SilenceUsage:  false,
 	}
+
 	flags.AddFlags(cmd)
+	flags.Bind(cmd) // nolint: errcheck
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
 
 	return cmd
@@ -313,10 +305,6 @@ func newIgnorePullCommand() *cobra.Command {
 		Example: `# Pull ignored fingerprints from the Cloud (requires API key)
 $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			setLogLevel(cmd)
 
 			options, err := flags.ToOptions(args)
@@ -390,6 +378,7 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 		SilenceUsage:  false,
 	}
 	flags.AddFlags(cmd)
+	flags.Bind(cmd) // nolint: errcheck
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
 
 	return cmd
@@ -406,10 +395,6 @@ func newIgnoreMigrateCommand() *cobra.Command {
 		Example: `# Migrate existing ignored (excluded) fingerprints from bearer.yml file to ignore file
 $ bearer ignore migrate`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			setLogLevel(cmd)
 
 			options, err := flags.ToOptions(args)
@@ -462,6 +447,7 @@ $ bearer ignore migrate`,
 		SilenceUsage:  false,
 	}
 	flags.AddFlags(cmd)
+	flags.Bind(cmd) // nolint: errcheck
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
 
 	return cmd

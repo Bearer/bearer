@@ -2,54 +2,62 @@ name: bearer ignore add
 synopsis: Add an ignored fingerprint
 usage: bearer ignore add <fingerprint> [flags]
 options:
-  - name: api-key
-    usage: Use your Bearer API Key to send the report to Bearer.
-  - name: author
-    shorthand: a
-    usage: |
-      Add author information to this ignored finding. (default output of "git config user.name")
-  - name: comment
-    usage: Add a comment to this ignored finding.
-  - name: config-file
-    default_value: bearer.yml
-    usage: Load configuration from the specified path.
-  - name: debug
-    default_value: "false"
-    usage: Enable debug logs. Equivalent to --log-level=debug
-  - name: debug-profile
-    default_value: "false"
-    usage: Generate profiling data for debugging
-  - name: disable-version-check
-    default_value: "false"
-    usage: Disable Bearer version checking
-  - name: false-positive
-    default_value: "false"
-    usage: Mark an this ignored finding as false positive.
-  - name: force
-    default_value: "false"
-    usage: Overwrite an existing ignored finding.
-  - name: help
-    shorthand: h
-    default_value: "false"
-    usage: help for add
-  - name: host
-    default_value: my.bearer.sh
-    usage: Specify the Host for sending the report.
-  - name: ignore-file
-    default_value: bearer.ignore
-    usage: Load ignore file from the specified path.
-  - name: ignore-git
-    default_value: "false"
-    usage: Ignore Git listing
-  - name: log-level
-    default_value: info
-    usage: Set log level (error, info, debug, trace)
-  - name: no-color
-    default_value: "false"
-    usage: Disable color in output
+    - name: author
+      shorthand: a
+      usage: |
+        Add author information to this ignored finding. (default output of "git config user.name")
+      environment_variables:
+        - BEARER_AUTHOR
+    - name: comment
+      usage: Add a comment to this ignored finding.
+      environment_variables:
+        - BEARER_COMMENT
+    - name: config-file
+      default_value: bearer.yml
+      usage: Load configuration from the specified path.
+      environment_variables:
+        - BEARER_CONFIG_FILE
+    - name: debug
+      default_value: "false"
+      usage: Enable debug logs. Equivalent to --log-level=debug
+      environment_variables:
+        - BEARER_DEBUG
+    - name: disable-version-check
+      default_value: "false"
+      usage: Disable Bearer version checking
+      environment_variables:
+        - BEARER_DISABLE_VERSION_CHECK
+    - name: false-positive
+      default_value: "false"
+      usage: Mark an this ignored finding as false positive.
+      environment_variables:
+        - BEARER_FALSE_POSITIVE
+    - name: force
+      default_value: "false"
+      usage: Overwrite an existing ignored finding.
+      environment_variables:
+        - BEARER_FORCE
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for add
+    - name: ignore-file
+      default_value: bearer.ignore
+      usage: Load ignore file from the specified path.
+      environment_variables:
+        - BEARER_IGNORE_FILE
+    - name: log-level
+      default_value: info
+      usage: Set log level (error, info, debug, trace)
+      environment_variables:
+        - BEARER_LOG_LEVEL
+    - name: no-color
+      default_value: "false"
+      usage: Disable color in output
+      environment_variables:
+        - BEARER_NO_COLOR
 example: |-
-  # Add an ignored fingerprint to your ignore file
-  $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"
+    # Add an ignored fingerprint to your ignore file
+    $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"
 see_also:
-  - bearer ignore - Manage ignored fingerprints
-aliases:
+    - bearer ignore - Manage ignored fingerprints

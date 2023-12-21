@@ -45,17 +45,7 @@ func NewScanCommand() *cobra.Command {
 		Short:   "Scan a directory or file",
 		Example: `  # Scan a local project, including language-specific files
   $ bearer scan /path/to/your_project`,
-		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if err := ScanFlags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-			return nil
-		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := ScanFlags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
 			logLevel := viper.GetString(flag.LogLevelFlag.ConfigName)
 			if viper.GetBool(flag.DebugFlag.ConfigName) {
 				logLevel = flag.DebugLogLevel
@@ -96,6 +86,7 @@ func NewScanCommand() *cobra.Command {
 	}
 
 	ScanFlags.AddFlags(cmd)
+	ScanFlags.Bind(cmd) // nolint:errcheck
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, ScanFlags.Usages(cmd)))
 
 	return cmd
