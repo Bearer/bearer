@@ -30,9 +30,7 @@ builds:
 
           bundle_id = "com.bearer.bearer"
 
-          sign {
-            application_identity = "Developer ID Application: Bearer Inc (5T2VP4YAG8)"
-          }
+          sign {}
 
           zip {
             output_path = "bearer_{{.Target}}.zip"
