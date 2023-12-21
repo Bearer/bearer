@@ -2,42 +2,42 @@ name: bearer ignore remove
 synopsis: Remove an ignored fingerprint
 usage: bearer ignore remove <fingerprint> [flags]
 options:
-    - name: config-file
-      default_value: bearer.yml
-      usage: Load configuration from the specified path.
-      environment_variables:
-        - BEARER_CONFIG_FILE
-    - name: debug
-      default_value: "false"
-      usage: Enable debug logs. Equivalent to --log-level=debug
-      environment_variables:
-        - BEARER_DEBUG
-    - name: disable-version-check
-      default_value: "false"
-      usage: Disable Bearer version checking
-      environment_variables:
-        - BEARER_DISABLE_VERSION_CHECK
-    - name: help
-      shorthand: h
-      default_value: "false"
-      usage: help for remove
-    - name: ignore-file
-      default_value: bearer.ignore
-      usage: Load ignore file from the specified path.
-      environment_variables:
-        - BEARER_IGNORE_FILE
-    - name: log-level
-      default_value: info
-      usage: Set log level (error, info, debug, trace)
-      environment_variables:
-        - BEARER_LOG_LEVEL
-    - name: no-color
-      default_value: "false"
-      usage: Disable color in output
-      environment_variables:
-        - BEARER_NO_COLOR
+  - name: config-file
+    default_value: bearer.yml
+    usage: Load configuration from the specified path.
+    environment_variables:
+      - BEARER_CONFIG_FILE
+  - name: debug
+    default_value: "false"
+    usage: Enable debug logs. Equivalent to --log-level=debug
+    environment_variables:
+      - BEARER_DEBUG
+  - name: disable-version-check
+    default_value: "false"
+    usage: Disable Bearer version checking
+    environment_variables:
+      - BEARER_DISABLE_VERSION_CHECK
+  - name: help
+    shorthand: h
+    default_value: "false"
+    usage: help for remove
+  - name: ignore-file
+    default_value: bearer.ignore
+    usage: Load ignore file from the specified path.
+    environment_variables:
+      - BEARER_IGNORE_FILE
+  - name: log-level
+    default_value: info
+    usage: Set log level (error, info, debug, trace)
+    environment_variables:
+      - BEARER_LOG_LEVEL
+  - name: no-color
+    default_value: "false"
+    usage: Disable color in output
+    environment_variables:
+      - BEARER_NO_COLOR
 example: |-
-    # Remove an ignored fingerprint from your ignore file
-    $ bearer ignore remove <fingerprint>
+  # Remove an ignored fingerprint from your ignore file
+  $ bearer ignore remove <fingerprint>
 see_also:
-    - bearer ignore - Manage ignored fingerprints
+  - bearer ignore - Manage ignored fingerprints

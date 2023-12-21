@@ -1,12 +1,12 @@
 name: bearer
 options:
-    - name: help
-      shorthand: h
-      default_value: "false"
-      usage: help for bearer
+  - name: help
+    shorthand: h
+    default_value: "false"
+    usage: help for bearer
 see_also:
-    - bearer completion - Generate the autocompletion script for the your shell.
-    - bearer ignore - Manage ignored fingerprints
-    - bearer init - Generates a default config to `bearer.yml`
-    - bearer scan - Scan a directory or file
-    - bearer version - Print the version
+  - bearer completion - Generate the autocompletion script for the your shell.
+  - bearer ignore - Manage ignored fingerprints
+  - bearer init - Generates a default config to `bearer.yml`
+  - bearer scan - Scan a directory or file
+  - bearer version - Print the version
