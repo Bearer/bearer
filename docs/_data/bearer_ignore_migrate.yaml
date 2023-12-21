@@ -50,3 +50,4 @@ example: |-
   $ bearer ignore migrate
 see_also:
   - bearer ignore - Manage ignored fingerprints
+aliases: []

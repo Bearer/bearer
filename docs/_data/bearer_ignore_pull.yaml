@@ -45,3 +45,4 @@ example: |-
   $ bearer ignore pull /path/to/your_project --api-key=XXXXX
 see_also:
   - bearer ignore - Manage ignored fingerprints
+aliases: []

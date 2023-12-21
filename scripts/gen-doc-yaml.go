@@ -37,7 +37,7 @@ type cmdDoc struct {
 	InheritedOptions []cmdOption `yaml:"inherited_options,omitempty"`
 	Example          string      `yaml:",omitempty"`
 	SeeAlso          []string    `yaml:"see_also,omitempty"`
-	Aliases          []string    `yaml:"aliases,omitempty"`
+	Aliases          []string    `yaml:"aliases"`
 }
 
 var (

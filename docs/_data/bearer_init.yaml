@@ -8,3 +8,4 @@ options:
     usage: help for init
 see_also:
   - "bearer - "
+aliases: []

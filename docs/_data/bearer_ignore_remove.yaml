@@ -45,3 +45,4 @@ example: |-
   $ bearer ignore remove <fingerprint>
 see_also:
   - bearer ignore - Manage ignored fingerprints
+aliases: []

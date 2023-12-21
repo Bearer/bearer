@@ -65,3 +65,4 @@ example: |-
   $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positive"
 see_also:
   - bearer ignore - Manage ignored fingerprints
+aliases: []
