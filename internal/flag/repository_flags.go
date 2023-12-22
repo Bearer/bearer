@@ -112,31 +112,32 @@ var (
 		DisableInConfig: true,
 		Hide:            true,
 	})
+	PullRequestNumberFlag = RepositoryFlagGroup.add(flagtypes.Flag{
+		Name:       "pull-request-number",
+		ConfigName: "repository.pull-request-number",
+		Value:      "",
+		Usage:      "Used when fetching branch level ignores for a PR/MR",
+		EnvironmentVariables: []string{
+			"PR_NUMBER",           // github
+			"CI_MERGE_REQUEST_ID", //gitlab
+		},
+		DisableInConfig: true,
+		Hide:            true,
+	})
 )
-
-type RepositoryOptions struct {
-	OriginURL        string
-	Branch           string
-	Commit           string
-	DefaultBranch    string
-	DiffBaseBranch   string
-	DiffBaseCommit   string
-	GithubToken      string
-	GithubRepository string
-	GithubAPIURL     string
-}
 
 func (repositoryFlagGroup) SetOptions(options *flagtypes.Options, args []string) error {
 	options.RepositoryOptions = flagtypes.RepositoryOptions{
-		OriginURL:        getString(RepositoryURLFlag),
-		Branch:           getString(BranchFlag),
-		Commit:           getString(CommitFlag),
-		DefaultBranch:    getString(DefaultBranchFlag),
-		DiffBaseBranch:   getString(DiffBaseBranchFlag),
-		DiffBaseCommit:   getString(DiffBaseCommitFlag),
-		GithubToken:      getString(GithubTokenFlag),
-		GithubRepository: getString(GithubRepositoryFlag),
-		GithubAPIURL:     getString(GithubAPIURLFlag),
+		OriginURL:         getString(RepositoryURLFlag),
+		Branch:            getString(BranchFlag),
+		Commit:            getString(CommitFlag),
+		DefaultBranch:     getString(DefaultBranchFlag),
+		DiffBaseBranch:    getString(DiffBaseBranchFlag),
+		DiffBaseCommit:    getString(DiffBaseCommitFlag),
+		GithubToken:       getString(GithubTokenFlag),
+		GithubRepository:  getString(GithubRepositoryFlag),
+		GithubAPIURL:      getString(GithubAPIURLFlag),
+		PullRequestNumber: getString(PullRequestNumberFlag),
 	}
 
 	return nil
