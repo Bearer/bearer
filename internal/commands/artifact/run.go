@@ -231,7 +231,7 @@ func (r *runner) scanBaseBranch(
 	return result, nil
 }
 
-func getIgnoredFingerprints(client *api.API, settings settings.Config, gitContext *gitrepository.Context) (
+func getIgnoredFingerprints(client *api.API, settings settings.Config, gitContext *gitrepository.Context, pullRequestNumber string) (
 	useCloudIgnores bool,
 	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint,
 	staleIgnoredFingerprintIds []string,
@@ -246,6 +246,7 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config, gitContex
 		useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err = ignore.GetIgnoredFingerprintsFromCloud(
 			client,
 			gitContext.FullName,
+			pullRequestNumber,
 			localIgnoredFingerprints,
 		)
 		if err != nil {
@@ -309,6 +310,7 @@ func Run(ctx context.Context, opts flagtypes.Options) (err error) {
 		opts.GeneralOptions.Client,
 		scanSettings,
 		gitContext,
+		opts.PullRequestNumber,
 	)
 	if err != nil {
 		return err

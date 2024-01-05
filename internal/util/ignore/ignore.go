@@ -49,6 +49,7 @@ func GetIgnoredFingerprints(filePath string, target *string) (ignoredFingerprint
 func GetIgnoredFingerprintsFromCloud(
 	client *api.API,
 	fullname string,
+	pullRequestNumber string,
 	localIgnores map[string]types.IgnoredFingerprint,
 ) (
 	useCloudIgnores bool,
@@ -56,7 +57,8 @@ func GetIgnoredFingerprintsFromCloud(
 	staleIgnoredFingerprintIds []string,
 	err error,
 ) {
-	data, err := client.FetchIgnores(fullname, maps.Keys(localIgnores))
+
+	data, err := client.FetchIgnores(fullname, pullRequestNumber, maps.Keys(localIgnores))
 	if err != nil {
 		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
 	}

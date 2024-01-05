@@ -92,15 +92,16 @@ type ReportOptions struct {
 }
 
 type RepositoryOptions struct {
-	OriginURL        string
-	Branch           string
-	Commit           string
-	DefaultBranch    string
-	DiffBaseBranch   string
-	DiffBaseCommit   string
-	GithubToken      string
-	GithubRepository string
-	GithubAPIURL     string
+	OriginURL         string
+	Branch            string
+	Commit            string
+	DefaultBranch     string
+	DiffBaseBranch    string
+	DiffBaseCommit    string
+	GithubToken       string
+	GithubRepository  string
+	GithubAPIURL      string
+	PullRequestNumber string
 }
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands

@@ -285,3 +285,38 @@ func Test_getRepositoryGithubAPIURLFlag(t *testing.T) {
 
 	RunFlagTests(testCases, t)
 }
+
+func Test_getPullRequestNumberFlag(t *testing.T) {
+	testCases := []TestCase{
+		{
+			name:      "Repository PullRequestNumber. Default",
+			flag:      PullRequestNumberFlag,
+			flagValue: "",
+			want:      nil,
+		},
+		{
+			name: "Repository PullRequestNumber. PR_NUMBER env",
+			flag: PullRequestNumberFlag,
+			env: Env{
+				key:   "PR_NUMBER",
+				value: "42",
+			},
+			want: []string{
+				string("42"),
+			},
+		},
+		{
+			name: "Repository PullRequestNumber. CI_MERGE_REQUEST_ID env",
+			flag: PullRequestNumberFlag,
+			env: Env{
+				key:   "CI_MERGE_REQUEST_ID",
+				value: "24",
+			},
+			want: []string{
+				string("24"),
+			},
+		},
+	}
+
+	RunFlagTests(testCases, t)
+}

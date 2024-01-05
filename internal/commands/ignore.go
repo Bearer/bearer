@@ -351,7 +351,6 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 
 			if fileExists {
 				overwriteApproved := requestConfirmation("Warning: this action will overwrite your current ignore file. Continue?")
-				cmd.Printf("\n")
 				if !overwriteApproved {
 					cmd.Printf("Okay, pull cancelled!\n")
 					return nil
@@ -363,7 +362,7 @@ $ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
 				return fmt.Errorf("failed to get git context: %w", err)
 			}
 
-			data, err := options.GeneralOptions.Client.FetchIgnores(gitContext.FullName, []string{})
+			data, err := options.GeneralOptions.Client.FetchIgnores(gitContext.FullName, "", []string{})
 			if err != nil {
 				return fmt.Errorf("cloud error: %s", err)
 			}

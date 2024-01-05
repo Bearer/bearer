@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"os"
 
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
 )
@@ -20,7 +19,7 @@ type CloudIgnorePayload struct {
 	PullRequestNumber string   `json:"pull_request_number,omitempty"`
 }
 
-func (api *API) FetchIgnores(fullname string, localIgnores []string) (*CloudIgnoreData, error) {
+func (api *API) FetchIgnores(fullname string, pullRequestNumber string, localIgnores []string) (*CloudIgnoreData, error) {
 	endpoint := Endpoints.FetchIgnores
 
 	bytes, err := api.makeRequest(endpoint.Route, endpoint.HttpMethod,
@@ -29,7 +28,7 @@ func (api *API) FetchIgnores(fullname string, localIgnores []string) (*CloudIgno
 			Data: CloudIgnorePayload{
 				Project:           fullname,
 				LocalIgnores:      localIgnores,
-				PullRequestNumber: os.Getenv("PR_NUMBER"),
+				PullRequestNumber: pullRequestNumber,
 			},
 		})
 	if err != nil {
