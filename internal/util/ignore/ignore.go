@@ -43,6 +43,9 @@ func GetIgnoredFingerprints(filePath string, target *string) (ignoredFingerprint
 	}
 
 	err = json.Unmarshal(content, &ignoredFingerprints)
+	if err != nil {
+		err = fmt.Errorf("ignore file '%s' is invalid - %s", ignoreFilePath, err)
+	}
 	return ignoredFingerprints, ignoreFilePath, true, err
 }
 
