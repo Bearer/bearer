@@ -14,7 +14,6 @@ import (
 	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/util/ignore"
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
-	"github.com/bearer/bearer/internal/util/output"
 	"github.com/bearer/bearer/internal/util/rego"
 	"github.com/bearer/bearer/internal/version_check"
 
@@ -320,7 +319,10 @@ func defaultWorkerOptions() WorkerOptions {
 }
 
 func FromOptions(opts flagtypes.Options, versionMeta *version_check.VersionMeta) (Config, error) {
-	policies := DefaultPolicies()
+	policies, err := DefaultPolicies()
+	if err != nil {
+		return Config{}, err
+	}
 	workerOptions := defaultWorkerOptions()
 	result, err := loadRules(
 		opts.ExternalRuleDir,
@@ -417,20 +419,20 @@ func (filter *PatternFilter) UnmarshalYAML(unmarshal func(interface{}) error) er
 	return nil
 }
 
-func DefaultPolicies() map[string]*Policy {
+func DefaultPolicies() (map[string]*Policy, error) {
 	policies := make(map[string]*Policy)
 	var policy []*Policy
 
 	err := yaml.Unmarshal(defaultPolicies, &policy)
 	if err != nil {
-		output.Fatal(fmt.Sprintf("failed to unmarshal policy file %s", err))
+		return nil, fmt.Errorf("failed to unmarshal policy file %s", err)
 	}
 
 	for _, policy := range policy {
 		policies[policy.Type] = policy
 	}
 
-	return policies
+	return policies, nil
 }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {

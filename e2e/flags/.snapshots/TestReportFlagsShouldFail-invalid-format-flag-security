@@ -48,5 +48,4 @@ General Flags
       --no-color                Disable color in output
 
 
-flag error: Report flags error: invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html, jsonv2
 

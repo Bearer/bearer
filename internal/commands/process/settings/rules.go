@@ -95,7 +95,7 @@ func loadRuleDefinitionsFromRemote(
 	definitions map[string]RuleDefinition,
 	options flagtypes.RuleOptions,
 	versionMeta *version_check.VersionMeta,
-) {
+) (err error) {
 	if options.DisableDefaultRules {
 		return
 	}
@@ -111,11 +111,12 @@ func loadRuleDefinitionsFromRemote(
 		urls = append(urls, value)
 	}
 
-	err := LoadRuleDefinitionsFromUrls(definitions, urls)
+	err = LoadRuleDefinitionsFromUrls(definitions, urls)
 	if err != nil {
-		output.Fatal(fmt.Sprintf("Error loading rules: %s", err))
-		// sysexit
+		err = fmt.Errorf("loading rules failed: %s", err)
 	}
+
+	return
 }
 
 func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS) error {

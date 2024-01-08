@@ -1,22 +1,16 @@
 package main
 
 import (
-	"github.com/bearer/bearer/cmd/bearer/build"
+	"os"
 
+	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/internal/commands"
-	"github.com/bearer/bearer/internal/util/output"
 )
 
 func main() {
-	if err := run(); err != nil {
-		output.Fatal(err.Error())
-	}
-}
-
-func run() error {
 	app := commands.NewApp(build.Version, build.CommitSHA)
 	if err := app.Execute(); err != nil {
-		return err
+		// error messages are printed by the framework
+		os.Exit(1)
 	}
-	return nil
 }
