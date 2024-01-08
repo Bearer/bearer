@@ -48,5 +48,4 @@ General Flags
       --no-color                Disable color in output
 
 
-flag error: Report flags error: invalid format argument for privacy report; supported values: csv, json, yaml, html
 

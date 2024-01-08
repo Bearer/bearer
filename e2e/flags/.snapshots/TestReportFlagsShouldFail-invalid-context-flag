@@ -48,5 +48,4 @@ General Flags
       --no-color                Disable color in output
 
 
-flag error: Scan flags error: invalid context argument; supported values: health
 
