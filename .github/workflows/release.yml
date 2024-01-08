@@ -106,6 +106,7 @@ jobs:
           AC_USERNAME: ${{ secrets.AC_USERNAME }}
           AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
           AC_PROVIDER: ${{ secrets.AC_PROVIDER }}
+          AC_APPLICATION_IDENTITY: ${{ secrets.AC_APPLICATION_IDENTITY }}
           GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
 
   publish:
