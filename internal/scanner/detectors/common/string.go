@@ -15,6 +15,20 @@ type String struct {
 	IsLiteral bool
 }
 
+func GetStringData(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
+	detections, err := detectorContext.Scan(node, ruleset.BuiltinStringRule, traversalstrategy.Cursor)
+	if err != nil {
+		return nil, err
+	}
+
+	result := make([]interface{}, len(detections))
+	for i, detection := range detections {
+		result[i] = detection.Data
+	}
+
+	return result, nil
+}
+
 func GetStringValue(node *tree.Node, detectorContext types.Context) (string, bool, error) {
 	detections, err := detectorContext.Scan(node, ruleset.BuiltinStringRule, traversalstrategy.Cursor)
 	if err != nil {

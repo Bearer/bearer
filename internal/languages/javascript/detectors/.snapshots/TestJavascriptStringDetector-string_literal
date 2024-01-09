@@ -1,12 +1,14 @@
 type: program
 id: 0
-range: 1:1 - 9:1
+range: 1:1 - 12:1
 dataflow_sources:
     - 1
     - 6
     - 17
     - 25
     - 33
+    - 41
+    - 49
 children:
     - type: expression_statement
       id: 1
@@ -193,6 +195,94 @@ children:
             - type: '"""'
               id: 40
               range: 8:18 - 8:19
+    - type: expression_statement
+      id: 41
+      range: 10:1 - 10:15
+      children:
+        - type: binary_expression
+          id: 42
+          range: 10:1 - 10:15
+          dataflow_sources:
+            - 43
+            - 44
+            - 45
+          children:
+            - type: "false"
+              id: 43
+              range: 10:1 - 10:6
+              content: "false"
+            - type: '"||"'
+              id: 44
+              range: 10:7 - 10:9
+            - type: string
+              id: 45
+              range: 10:10 - 10:15
+              dataflow_sources:
+                - 46
+                - 47
+                - 48
+              children:
+                - type: '"""'
+                  id: 46
+                  range: 10:10 - 10:11
+                - type: string_fragment
+                  id: 47
+                  range: 10:11 - 10:14
+                  content: foo
+                - type: '"""'
+                  id: 48
+                  range: 10:14 - 10:15
+    - type: expression_statement
+      id: 49
+      range: 11:1 - 11:15
+      children:
+        - type: binary_expression
+          id: 50
+          range: 11:1 - 11:15
+          dataflow_sources:
+            - 51
+            - 55
+            - 56
+          children:
+            - type: string
+              id: 51
+              range: 11:1 - 11:6
+              dataflow_sources:
+                - 52
+                - 53
+                - 54
+              children:
+                - type: '"""'
+                  id: 52
+                  range: 11:1 - 11:2
+                - type: string_fragment
+                  id: 53
+                  range: 11:2 - 11:5
+                  content: hey
+                - type: '"""'
+                  id: 54
+                  range: 11:5 - 11:6
+            - type: '"||"'
+              id: 55
+              range: 11:7 - 11:9
+            - type: string
+              id: 56
+              range: 11:10 - 11:15
+              dataflow_sources:
+                - 57
+                - 58
+                - 59
+              children:
+                - type: '"""'
+                  id: 57
+                  range: 11:10 - 11:11
+                - type: string_fragment
+                  id: 58
+                  range: 11:11 - 11:14
+                  content: foo
+                - type: '"""'
+                  id: 59
+                  range: 11:14 - 11:15
 
 - node: 2
   content: '"ab"'
@@ -213,6 +303,21 @@ children:
   content: '"hello\x20world\\"'
   data:
     value: hello world\
+    isliteral: true
+- node: 42
+  content: false || "foo"
+  data:
+    value: foo
+    isliteral: true
+- node: 50
+  content: '"hey" || "foo"'
+  data:
+    value: hey
+    isliteral: true
+- node: 50
+  content: '"hey" || "foo"'
+  data:
+    value: foo
     isliteral: true
 - node: 4
   content: ab
@@ -254,6 +359,21 @@ children:
   data:
     value: \
     isliteral: true
+- node: 45
+  content: '"foo"'
+  data:
+    value: foo
+    isliteral: true
+- node: 51
+  content: '"hey"'
+  data:
+    value: hey
+    isliteral: true
+- node: 56
+  content: '"foo"'
+  data:
+    value: foo
+    isliteral: true
 - node: 10
   content: a
   data:
@@ -268,5 +388,20 @@ children:
   content: a
   data:
     value: a
+    isliteral: true
+- node: 47
+  content: foo
+  data:
+    value: foo
+    isliteral: true
+- node: 53
+  content: hey
+  data:
+    value: hey
+    isliteral: true
+- node: 58
+  content: foo
+  data:
+    value: foo
     isliteral: true
 

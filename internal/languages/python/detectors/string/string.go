@@ -38,6 +38,20 @@ func (detector *stringDetector) DetectAt(
 		if node.Children()[1].Content() == "+" {
 			return common.ConcatenateChildStrings(node, detectorContext)
 		}
+	case "boolean_operator":
+		if node.Children()[1].Content() == "or" {
+			leftData, err := common.GetStringData(node.ChildByFieldName("left"), detectorContext)
+			if err != nil {
+				return nil, err
+			}
+
+			rightData, err := common.GetStringData(node.ChildByFieldName("right"), detectorContext)
+			if err != nil {
+				return nil, err
+			}
+
+			return append(leftData, rightData...), nil
+		}
 	case "augmented_assignment":
 		if node.Children()[1].Content() == "+=" {
 			return common.ConcatenateAssignEquals(node, detectorContext)

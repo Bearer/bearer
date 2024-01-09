@@ -1,6 +1,6 @@
 type: module
 id: 0
-range: 1:1 - 7:7
+range: 1:1 - 11:1
 dataflow_sources:
     - 1
     - 5
@@ -9,6 +9,8 @@ dataflow_sources:
     - 21
     - 25
     - 33
+    - 37
+    - 44
 children:
     - type: expression_statement
       id: 1
@@ -182,6 +184,81 @@ children:
             - type: '"""'
               id: 36
               range: 7:6 - 7:7
+    - type: expression_statement
+      id: 37
+      range: 9:1 - 9:15
+      dataflow_sources:
+        - 38
+      children:
+        - type: boolean_operator
+          id: 38
+          range: 9:1 - 9:15
+          alias_of:
+            - 39
+            - 41
+          children:
+            - type: "false"
+              id: 39
+              range: 9:1 - 9:6
+              content: "False"
+            - type: '"or"'
+              id: 40
+              range: 9:7 - 9:9
+            - type: string
+              id: 41
+              range: 9:10 - 9:15
+              dataflow_sources:
+                - 42
+                - 43
+              children:
+                - type: '"""'
+                  id: 42
+                  range: 9:10 - 9:11
+                - type: '"""'
+                  id: 43
+                  range: 9:14 - 9:15
+    - type: expression_statement
+      id: 44
+      range: 10:1 - 10:15
+      dataflow_sources:
+        - 45
+      children:
+        - type: boolean_operator
+          id: 45
+          range: 10:1 - 10:15
+          alias_of:
+            - 46
+            - 50
+          children:
+            - type: string
+              id: 46
+              range: 10:1 - 10:6
+              dataflow_sources:
+                - 47
+                - 48
+              children:
+                - type: '"""'
+                  id: 47
+                  range: 10:1 - 10:2
+                - type: '"""'
+                  id: 48
+                  range: 10:5 - 10:6
+            - type: '"or"'
+              id: 49
+              range: 10:7 - 10:9
+            - type: string
+              id: 50
+              range: 10:10 - 10:15
+              dataflow_sources:
+                - 51
+                - 52
+              children:
+                - type: '"""'
+                  id: 51
+                  range: 10:10 - 10:11
+                - type: '"""'
+                  id: 52
+                  range: 10:14 - 10:15
 
 - node: 2
   content: '''a'''
@@ -218,6 +295,21 @@ children:
   data:
     value: a\n
     isliteral: true
+- node: 38
+  content: False or "foo"
+  data:
+    value: foo
+    isliteral: true
+- node: 45
+  content: '"hey" or "foo"'
+  data:
+    value: hey
+    isliteral: true
+- node: 45
+  content: '"hey" or "foo"'
+  data:
+    value: foo
+    isliteral: true
 - node: 11
   content: '"a"'
   data:
@@ -227,5 +319,20 @@ children:
   content: '"b"'
   data:
     value: b
+    isliteral: true
+- node: 41
+  content: '"foo"'
+  data:
+    value: foo
+    isliteral: true
+- node: 46
+  content: '"hey"'
+  data:
+    value: hey
+    isliteral: true
+- node: 50
+  content: '"foo"'
+  data:
+    value: foo
     isliteral: true
 
