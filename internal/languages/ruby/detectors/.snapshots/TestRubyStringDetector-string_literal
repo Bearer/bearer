@@ -1,11 +1,14 @@
 type: program
 id: 0
-range: 1:1 - 7:1
+range: 1:1 - 11:1
 dataflow_sources:
     - 1
     - 5
     - 15
     - 22
+    - 30
+    - 37
+    - 44
 children:
     - type: string
       id: 1
@@ -144,6 +147,119 @@ children:
         - type: '"""'
           id: 29
           range: 6:8 - 6:9
+    - type: binary
+      id: 30
+      range: 8:1 - 8:15
+      dataflow_sources:
+        - 31
+        - 32
+        - 33
+      children:
+        - type: "false"
+          id: 31
+          range: 8:1 - 8:6
+          content: "false"
+        - type: '"||"'
+          id: 32
+          range: 8:7 - 8:9
+        - type: string
+          id: 33
+          range: 8:10 - 8:15
+          dataflow_sources:
+            - 34
+            - 35
+            - 36
+          children:
+            - type: '"""'
+              id: 34
+              range: 8:10 - 8:11
+            - type: string_content
+              id: 35
+              range: 8:11 - 8:14
+              content: foo
+            - type: '"""'
+              id: 36
+              range: 8:14 - 8:15
+    - type: binary
+      id: 37
+      range: 9:1 - 9:15
+      dataflow_sources:
+        - 38
+        - 39
+        - 40
+      children:
+        - type: "false"
+          id: 38
+          range: 9:1 - 9:6
+          content: "false"
+        - type: '"or"'
+          id: 39
+          range: 9:7 - 9:9
+        - type: string
+          id: 40
+          range: 9:10 - 9:15
+          dataflow_sources:
+            - 41
+            - 42
+            - 43
+          children:
+            - type: '"""'
+              id: 41
+              range: 9:10 - 9:11
+            - type: string_content
+              id: 42
+              range: 9:11 - 9:14
+              content: foo
+            - type: '"""'
+              id: 43
+              range: 9:14 - 9:15
+    - type: binary
+      id: 44
+      range: 10:1 - 10:15
+      dataflow_sources:
+        - 45
+        - 49
+        - 50
+      children:
+        - type: string
+          id: 45
+          range: 10:1 - 10:6
+          dataflow_sources:
+            - 46
+            - 47
+            - 48
+          children:
+            - type: '"""'
+              id: 46
+              range: 10:1 - 10:2
+            - type: string_content
+              id: 47
+              range: 10:2 - 10:5
+              content: hey
+            - type: '"""'
+              id: 48
+              range: 10:5 - 10:6
+        - type: '"||"'
+          id: 49
+          range: 10:7 - 10:9
+        - type: string
+          id: 50
+          range: 10:10 - 10:15
+          dataflow_sources:
+            - 51
+            - 52
+            - 53
+          children:
+            - type: '"""'
+              id: 51
+              range: 10:10 - 10:11
+            - type: string_content
+              id: 52
+              range: 10:11 - 10:14
+              content: foo
+            - type: '"""'
+              id: 53
+              range: 10:14 - 10:15
 
 - node: 1
   content: '"ab"'
@@ -159,6 +275,26 @@ children:
   content: '"#{x} b"'
   data:
     value: a b
+    isliteral: true
+- node: 30
+  content: false || "foo"
+  data:
+    value: foo
+    isliteral: true
+- node: 37
+  content: false or "foo"
+  data:
+    value: foo
+    isliteral: true
+- node: 44
+  content: '"hey" || "foo"'
+  data:
+    value: hey
+    isliteral: true
+- node: 44
+  content: '"hey" || "foo"'
+  data:
+    value: foo
     isliteral: true
 - node: 3
   content: ab
@@ -190,6 +326,26 @@ children:
   data:
     value: ' b'
     isliteral: true
+- node: 33
+  content: '"foo"'
+  data:
+    value: foo
+    isliteral: true
+- node: 40
+  content: '"foo"'
+  data:
+    value: foo
+    isliteral: true
+- node: 45
+  content: '"hey"'
+  data:
+    value: hey
+    isliteral: true
+- node: 50
+  content: '"foo"'
+  data:
+    value: foo
+    isliteral: true
 - node: 8
   content: a
   data:
@@ -204,5 +360,25 @@ children:
   content: a
   data:
     value: a
+    isliteral: true
+- node: 35
+  content: foo
+  data:
+    value: foo
+    isliteral: true
+- node: 42
+  content: foo
+  data:
+    value: foo
+    isliteral: true
+- node: 47
+  content: hey
+  data:
+    value: hey
+    isliteral: true
+- node: 52
+  content: foo
+  data:
+    value: foo
     isliteral: true
 
