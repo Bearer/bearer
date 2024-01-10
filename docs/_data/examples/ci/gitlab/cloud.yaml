@@ -1,5 +1,11 @@
-bearer:
+bearer_cloud:
+  stage: bearer
   image:
     name: bearer/bearer
     entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      variables:
+        BEARER_DIFF: 1
   script: bearer scan . --api-key=$BEARER_TOKEN
