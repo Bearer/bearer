@@ -80,18 +80,9 @@ func NewContext(options *flagtypes.Options) (*Context, error) {
 		return nil, fmt.Errorf("error getting origin url: %w", err)
 	}
 
-	var id, host, owner, name, fullName string
-	if originURL != "" {
-		urlInfo, err := vcsurl.Parse(originURL)
-		if err != nil {
-			return nil, fmt.Errorf("couldn't parse origin url: %w", err)
-		}
-
-		id = urlInfo.ID
-		host = string(urlInfo.Host)
-		owner = urlInfo.Username
-		name = urlInfo.Name
-		fullName = urlInfo.FullName
+	id, host, owner, name, fullName, err := getSCMInfo(originURL)
+	if err != nil {
+		return nil, err
 	}
 
 	context := &Context{
@@ -116,6 +107,31 @@ func NewContext(options *flagtypes.Options) (*Context, error) {
 	log.Debug().Msgf("git context:\n%s", contextYAML)
 
 	return context, nil
+}
+
+func getSCMInfo(originURL string) (
+	id,
+	host,
+	owner,
+	name,
+	fullName string,
+	scmParseError error,
+) {
+	if originURL != "" {
+		urlInfo, err := vcsurl.Parse(originURL)
+		if err != nil {
+			scmParseError = fmt.Errorf("couldn't parse origin url: %s", originURL)
+			return
+		}
+
+		id = urlInfo.ID
+		host = string(urlInfo.Host)
+		owner = urlInfo.Username
+		name = urlInfo.Name
+		fullName = urlInfo.FullName
+	}
+
+	return
 }
 
 func getBranch(options *flagtypes.Options, currentBranch string) string {
