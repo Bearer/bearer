@@ -128,3 +128,5 @@ require (
 )
 
 replace github.com/spf13/viper => github.com/cfabianski/viper v1.15.1-0.20231221085120-53a0f7864cd6
+
+replace github.com/gitsight/go-vcsurl => github.com/bearer/go-vcsurl v0.0.0-20240112143255-3be11ce9a61e

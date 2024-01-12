@@ -10,6 +10,8 @@ github.com/arbovm/levenshtein v0.0.0-20160628152529-48b4e1c0c4d0 h1:jfIu9sQUG6Ig
 github.com/arbovm/levenshtein v0.0.0-20160628152529-48b4e1c0c4d0/go.mod h1:t2tdKJDJF9BV14lnkjHmOQgcvEKgtqs5a1N3LNdJhGE=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
+github.com/bearer/go-vcsurl v0.0.0-20240112143255-3be11ce9a61e h1:JdIgUziiF2hbiWVYspGis73t/8hXx39bsgQtE6xpFyk=
+github.com/bearer/go-vcsurl v0.0.0-20240112143255-3be11ce9a61e/go.mod h1:qRFdKDa/0Lh9MT0xE+qQBYZ/01+mY1H40rZUHR24X9U=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
 github.com/bits-and-blooms/bitset v1.12.0 h1:U/q1fAF7xXRhFCrhROzIfffYnu+dlS38vCZtmFVPHmA=
@@ -67,8 +69,6 @@ github.com/gertd/go-pluralize v0.2.1 h1:M3uASbVjMnTsPb0PNqg+E/24Vwigyo/tvyMTtAlL
 github.com/gertd/go-pluralize v0.2.1/go.mod h1:rbYaKDbsXxmRfr8uygAEKhOWsjyrrqrkHVpZvoOp8zk=
 github.com/gitleaks/go-gitdiff v0.9.0 h1:SHAU2l0ZBEo8g82EeFewhVy81sb7JCxW76oSPtR/Nqg=
 github.com/gitleaks/go-gitdiff v0.9.0/go.mod h1:pKz0X4YzCKZs30BL+weqBIG7mx0jl4tF1uXV9ZyNvrA=
-github.com/gitsight/go-vcsurl v1.0.1 h1:wkijKsbVg9R2IBP97U7wOANeIW9WJJKkBwS9XqllzWo=
-github.com/gitsight/go-vcsurl v1.0.1/go.mod h1:qRFdKDa/0Lh9MT0xE+qQBYZ/01+mY1H40rZUHR24X9U=
 github.com/go-enry/go-enry/v2 v2.8.4 h1:QrY3hx/RiqCJJRbdU0MOcjfTM1a586J0WSooqdlJIhs=
 github.com/go-enry/go-enry/v2 v2.8.4/go.mod h1:9yrj4ES1YrbNb1Wb7/PWYr2bpaCXUGRt0uafN0ISyG8=
 github.com/go-enry/go-oniguruma v1.2.1 h1:k8aAMuJfMrqm/56SG2lV9Cfti6tC4x8673aHCcBk+eo=
