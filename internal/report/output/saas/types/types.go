@@ -23,6 +23,7 @@ type Meta struct {
 	BearerVersion      string           `json:"bearer_version,omitempty" yaml:"bearer_version,omitempty"`
 	FoundLanguages     map[string]int32 `json:"found_languages" yaml:"found_languages"`
 	GitlabPipelineId   string           `json:"gitlab_pipeline_id,omitempty" yaml:"gitlab_pipeline_id,omitempty"`
+	GitlabJobId        string           `json:"gitlab_job_id,omitempty" yaml:"gitlab_job_id,omitempty"`
 }
 
 type BearerReport struct {

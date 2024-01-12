@@ -306,10 +306,10 @@ func Test_getPullRequestNumberFlag(t *testing.T) {
 			},
 		},
 		{
-			name: "Repository PullRequestNumber. CI_MERGE_REQUEST_ID env",
+			name: "Repository PullRequestNumber. CI_MERGE_REQUEST_IID env",
 			flag: PullRequestNumberFlag,
 			env: Env{
-				key:   "CI_MERGE_REQUEST_ID",
+				key:   "CI_MERGE_REQUEST_IID",
 				value: "24",
 			},
 			want: []string{
