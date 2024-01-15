@@ -1,0 +1,25 @@
+{
+	"id": "github.com/Bearer/bear-publishing",
+	"host": "github.com",
+	"username": "Bearer",
+	"name": "bear-publishing",
+	"url": "git@github.com:Bearer/bear-publishing.git",
+	"full_name": "Bearer/bear-publishing",
+	"target": ".",
+	"sha": "9e54ffa8633898ab65bc4b4e804f7ef24cc068c4",
+	"current_branch": "main",
+	"default_branch": "main",
+	"bearer_rules_version": "v0.0.0",
+	"bearer_version": "dev",
+	"found_languages": {
+		"CSS": 26,
+		"HTML": 413,
+		"JavaScript": 16,
+		"Markdown": 11,
+		"Plain Text": 2,
+		"Ruby": 1198,
+		"YAML": 59
+	},
+	"gitlab_pipeline_id": "123",
+	"gitlab_job_id": "456"
+}

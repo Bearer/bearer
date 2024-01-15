@@ -1,0 +1,1043 @@
+{
+	"meta": {
+		"id": "github.com/Bearer/bear-publishing",
+		"host": "github.com",
+		"username": "Bearer",
+		"name": "bear-publishing",
+		"url": "git@github.com:Bearer/bear-publishing.git",
+		"full_name": "Bearer/bear-publishing",
+		"target": ".",
+		"sha": "9e54ffa8633898ab65bc4b4e804f7ef24cc068c4",
+		"current_branch": "main",
+		"default_branch": "main",
+		"bearer_rules_version": "v0.0.0",
+		"bearer_version": "dev",
+		"found_languages": {
+			"CSS": 26,
+			"HTML": 413,
+			"JavaScript": 16,
+			"Markdown": 11,
+			"Plain Text": 2,
+			"Ruby": 1198,
+			"YAML": 59
+		}
+	},
+	"findings": {
+		"high": [
+			{
+				"cwe_ids": [
+					"315",
+					"539"
+				],
+				"id": "ruby_lang_cookies",
+				"title": "Sensitive data stored in a cookie detected.",
+				"description": "## Description\n\nStoring sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.\n\n## Remediations\n\n❌ Avoid storing sensitive data in unencrypted cookies messages:\n\n```ruby\ncookies[:user_email] = \"john@doe.com\"\n```\n\n✅ To ensure cookie data stays safe, use encrypted cookies:\n\n```ruby\ncookies.encrypted[:user_email] = \"john@doe.com\"\n```\n\n## Resources\n\n- Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)\n- [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_cookies",
+				"line_number": 37,
+				"full_filename": "app/controllers/application_controller.rb",
+				"filename": "app/controllers/application_controller.rb",
+				"data_type": {
+					"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b",
+					"name": "Email Address"
+				},
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 37,
+					"end": 37,
+					"column": {
+						"start": 32,
+						"end": 50
+					}
+				},
+				"sink": {
+					"start": 37,
+					"end": 37,
+					"column": {
+						"start": 5,
+						"end": 50
+					},
+					"content": "cookies[:publisher_user] = current_user.email"
+				},
+				"parent_line_number": 37,
+				"snippet": "cookies[:publisher_user] = current_user.email",
+				"fingerprint": "4876f9f230dde333e2001c2c19da6d7b_0",
+				"old_fingerprint": "4876f9f230dde333e2001c2c19da6d7b_0",
+				"code_extract": "    cookies[:publisher_user] = current_user.email",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			},
+			{
+				"cwe_ids": [
+					"532",
+					"313"
+				],
+				"id": "ruby_lang_file_generation",
+				"title": "Sensitive data detected as part of a dynamic file generation.",
+				"description": "## Description\n\nIt is not uncommon to generate logs, backups, or data exports to static file formats. This rule checks if code exists to write sensitive data to static files.\n\n## Remediations\n\n❌ Avoid code like the following:\n\n```ruby\nFile.open(\"users.log\", \"w\") { |f| f.write \"#{Time.now} - User #{user.email} logged in\\n\" }\nFile.open(\"users.csv\", \"w\") do |f|\n  users.each do |user|\n    f.write \"#{user.email},#{user.first_name},#{user.last_name}\"\n  end\nend\n```\n\nIn instances where writing sensitive data is intentional, make sure to document its location according to your internal policies.\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_file_generation",
+				"line_number": 23,
+				"full_filename": "app/services/marketing_export.rb",
+				"filename": "app/services/marketing_export.rb",
+				"data_type": {
+					"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e",
+					"name": "Fullname"
+				},
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 23,
+					"end": 23,
+					"column": {
+						"start": 38,
+						"end": 47
+					}
+				},
+				"sink": {
+					"start": 23,
+					"end": 23,
+					"column": {
+						"start": 11,
+						"end": 60
+					},
+					"content": "csv \u003c\u003c [organization.name, user.name, user.email]"
+				},
+				"parent_line_number": 23,
+				"snippet": "csv \u003c\u003c [organization.name, user.name, user.email]",
+				"fingerprint": "8d07ee367dcf60b0820c38e465dd4659_0",
+				"old_fingerprint": "8d07ee367dcf60b0820c38e465dd4659_0",
+				"code_extract": "          csv \u003c\u003c [organization.name, user.name, user.email]",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			},
+			{
+				"cwe_ids": [
+					"798"
+				],
+				"id": "ruby_lang_hardcoded_secret",
+				"title": "Hard-coded secret detected.",
+				"description": "## Description\n\nApplications should store secret values securely and not as literal values\nin the source code.\n\n## Remediations\n\n✅ Retrieve secrets from a secure location at runtime\n\n## Resources\n- [OWASP hardcoded passwords](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password)\n- [OWASP secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#21-high-availability)\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_hardcoded_secret",
+				"line_number": 38,
+				"full_filename": "app/services/marketing_export.rb",
+				"filename": "app/services/marketing_export.rb",
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 38,
+					"end": 38,
+					"column": {
+						"start": 9,
+						"end": 32
+					}
+				},
+				"sink": {
+					"start": 38,
+					"end": 38,
+					"column": {
+						"start": 9,
+						"end": 32
+					},
+					"content": "password: 'password123'"
+				},
+				"parent_line_number": 38,
+				"snippet": "password: 'password123'",
+				"fingerprint": "a02f5294b8a4b27a014cde4b11d83709_0",
+				"old_fingerprint": "a02f5294b8a4b27a014cde4b11d83709_0",
+				"code_extract": "        password: 'password123'",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			},
+			{
+				"cwe_ids": [
+					"319"
+				],
+				"id": "ruby_lang_http_insecure",
+				"title": "Communication through an insecure HTTP connection detected.",
+				"description": "## Description\n\nApplications should only connect to API using HTTPS connections. This rule checks that all HTTP connections use HTTPS.\n\n## Remediations\n\n❌ Avoid using unsecured outgoing HTTP communication, especially in the context of API calls:\n\n```ruby\nresponse = HTTParty.get('http://insecure-api.com')\n```\n\n✅ Ensure to always connect though HTTPS:\n\n```ruby\nresponse = HTTParty.get('https://secure-api.com')\n```\n\n## Resources\n- [OWASP insecure transport](https://owasp.org/www-community/vulnerabilities/Insecure_Transport)\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_http_insecure",
+				"line_number": 102,
+				"full_filename": "app/controllers/orders_controller.rb",
+				"filename": "app/controllers/orders_controller.rb",
+				"data_type": {
+					"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b",
+					"name": "Email Address"
+				},
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 105,
+					"end": 105,
+					"column": {
+						"start": 11,
+						"end": 36
+					}
+				},
+				"sink": {
+					"start": 102,
+					"end": 109,
+					"column": {
+						"start": 7,
+						"end": 8
+					},
+					"content": "HTTParty.post(\n        \"http://webhook.example.com/sales_notification\",\n        body: {\n          email: current_user.email,\n          order_id: order.id,\n          total: order.total_price\n        }\n      )"
+				},
+				"parent_line_number": 102,
+				"snippet": "HTTParty.post(\n        \"http://webhook.example.com/sales_notification\",\n        body: {\n          email: current_user.email,\n          order_id: order.id,\n          total: order.total_price\n        }\n      )",
+				"fingerprint": "8d4d6af8cff3850aa9c1489d120443ff_0",
+				"old_fingerprint": "8d4d6af8cff3850aa9c1489d120443ff_0",
+				"code_extract": "      HTTParty.post(\n        \"http://webhook.example.com/sales_notification\",\n        body: {\n          email: current_user.email,\n          order_id: order.id,\n          total: order.total_price\n        }\n      )",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			},
+			{
+				"cwe_ids": [
+					"315"
+				],
+				"id": "ruby_lang_jwt",
+				"title": "Sensitive data in a JWT detected.",
+				"description": "## Description\n\nJWTs are not a secure place to store sensitive data. This rule looks for any sensitive data types saved to a JWT.\n\n## Remediations\n\n❌ Avoid storing sensitive data in JWT:\n\n```ruby\npayload = { data: 'data', email: user.email }\ntoken = JWT.encode payload, hmac_secret, 'HS256'\n```\n\n✅ If you need to store user's information, use their unique database identifier instead of personal identifiable information:\n\n```ruby\npayload = { data: 'data', user_id: user.uuid }\ntoken = JWT.encode payload, hmac_secret, 'HS256'\n```\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_lang_jwt",
+				"line_number": 3,
+				"full_filename": "lib/jwt.rb",
+				"filename": "lib/jwt.rb",
+				"data_type": {
+					"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b",
+					"name": "Email Address"
+				},
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 6,
+					"end": 6,
+					"column": {
+						"start": 16,
+						"end": 26
+					}
+				},
+				"sink": {
+					"start": 3,
+					"end": 11,
+					"column": {
+						"start": 5,
+						"end": 6
+					},
+					"content": "JWT.encode(\n      {\n        id: user.id,\n        email: user.email,\n        class: user.class,\n      },\n      nil,\n      'HS256'\n    )"
+				},
+				"parent_line_number": 3,
+				"snippet": "JWT.encode(\n      {\n        id: user.id,\n        email: user.email,\n        class: user.class,\n      },\n      nil,\n      'HS256'\n    )",
+				"fingerprint": "5ad3801892220a8a2de41644cc5d49d7_0",
+				"old_fingerprint": "5ad3801892220a8a2de41644cc5d49d7_0",
+				"code_extract": "    JWT.encode(\n      {\n        id: user.id,\n        email: user.email,\n        class: user.class,\n      },\n      nil,\n      'HS256'\n    )",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			},
+			{
+				"cwe_ids": [
+					"209",
+					"532"
+				],
+				"id": "ruby_rails_logger",
+				"title": "Sensitive data sent to Rails loggers detected.",
+				"description": "## Description\nLeaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to rails loggers.\n\n## Remediations\n❌ Avoid using sensitive data in logger messages:\n\n```ruby\nRails.logger.info('User is: #{user.email}')\n```\n\n✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:\n\n```ruby\nRails.logger.info('User is: #{user.uuid}')\n```\n\n## Resources\n- [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_logger",
+				"line_number": 35,
+				"full_filename": "app/controllers/application_controller.rb",
+				"filename": "app/controllers/application_controller.rb",
+				"data_type": {
+					"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b",
+					"name": "Email Address"
+				},
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 35,
+					"end": 35,
+					"column": {
+						"start": 40,
+						"end": 58
+					}
+				},
+				"sink": {
+					"start": 35,
+					"end": 35,
+					"column": {
+						"start": 5,
+						"end": 61
+					},
+					"content": "Rails.logger.info(\"current user: #{current_user.email}\")"
+				},
+				"parent_line_number": 35,
+				"snippet": "Rails.logger.info(\"current user: #{current_user.email}\")",
+				"fingerprint": "77fde9da85fdedee0988a0bdc12bf9ce_0",
+				"old_fingerprint": "77fde9da85fdedee0988a0bdc12bf9ce_0",
+				"code_extract": "    Rails.logger.info(\"current user: #{current_user.email}\")",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			},
+			{
+				"cwe_ids": [
+					"89"
+				],
+				"id": "ruby_rails_sql_injection",
+				"title": "Unsanitized user input in SQL query detected.",
+				"description": "## Description\n\nIncluding unsanitized data, such as user input or request data, in raw SQL\nqueries makes your application vulnerable to SQL injection attacks.\n\n## Remediations\n\n❌ Avoid raw queries, especially those that contain unsanitized user input:\n\n```ruby\nUser.where(\"user.email = #{params[:email]}\")\n```\n\n✅ Use the ActiveRecord API wherever possible:\n\n```ruby\nUser.where(email: params[:email])\n```\n\n✅ Use bind variables:\n\n```ruby\nUser.where(\"user.email = ?\", [params[:email]])\n```\n\n✅ Santize the value manually:\n\n```ruby\nUser.where(sanitize_sql([\"user.email = ?\", params[:email]]))\n```\n\n## Resources\n- [OWASP SQL injection explained](https://owasp.org/www-community/attacks/SQL_Injection)\n- [OWASP SQL injection prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [Securing Rails applications - SQL injection](https://guides.rubyonrails.org/security.html#sql-injection)\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_rails_sql_injection",
+				"line_number": 7,
+				"full_filename": "app/controllers/orders_controller.rb",
+				"filename": "app/controllers/orders_controller.rb",
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 7,
+					"end": 7,
+					"column": {
+						"start": 14,
+						"end": 62
+					}
+				},
+				"sink": {
+					"start": 7,
+					"end": 7,
+					"column": {
+						"start": 14,
+						"end": 62
+					},
+					"content": "current_organization.orders.find_by(params[:id])"
+				},
+				"parent_line_number": 7,
+				"snippet": "current_organization.orders.find_by(params[:id])",
+				"fingerprint": "f5610f7500c15998cbb80e92400de6c8_0",
+				"old_fingerprint": "f5610f7500c15998cbb80e92400de6c8_0",
+				"code_extract": "    @order = current_organization.orders.find_by(params[:id])",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			},
+			{
+				"cwe_ids": [
+					"201"
+				],
+				"id": "ruby_third_parties_sentry",
+				"title": "Sensitive data sent to Sentry detected.",
+				"description": "## Description\nLeaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Sentry.\n\n## Remediations\n\nWhen logging errors or events, ensure all sensitive data is removed.\n\n## Resources\n- [Sentry Docs](https://docs.sentry.io/)\n",
+				"documentation_url": "https://docs.bearer.com/reference/rules/ruby_third_parties_sentry",
+				"line_number": 39,
+				"full_filename": "app/controllers/application_controller.rb",
+				"filename": "app/controllers/application_controller.rb",
+				"data_type": {
+					"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b",
+					"name": "Email Address"
+				},
+				"category_groups": [
+					"PII",
+					"Personal Data"
+				],
+				"source": {
+					"start": 39,
+					"end": 39,
+					"column": {
+						"start": 28,
+						"end": 46
+					}
+				},
+				"sink": {
+					"start": 39,
+					"end": 39,
+					"column": {
+						"start": 5,
+						"end": 47
+					},
+					"content": "Sentry.set_user(email: current_user.email)"
+				},
+				"parent_line_number": 39,
+				"snippet": "Sentry.set_user(email: current_user.email)",
+				"fingerprint": "2c04f7c2317b4c96db79d415cc06a176_0",
+				"old_fingerprint": "2c04f7c2317b4c96db79d415cc06a176_0",
+				"code_extract": "    Sentry.set_user(email: current_user.email)",
+				"severity_meta": {
+					"rule_severity": "",
+					"sensitive_data_categories": null,
+					"display_severity": ""
+				}
+			}
+		]
+	},
+	"ignored_findings": {},
+	"data_types": [
+		{
+			"category_name": "Contact",
+			"category_groups": [
+				"PII",
+				"Personal Data"
+			],
+			"name": "Email Address",
+			"detectors": [
+				{
+					"name": "ruby",
+					"locations": [
+						{
+							"filename": "app/controllers/application_controller.rb",
+							"full_filename": "app/controllers/application_controller.rb",
+							"start_line_number": 35,
+							"start_column_number": 53,
+							"end_column_number": 58,
+							"field_name": "email",
+							"object_name": "current_user",
+							"subject_name": "User"
+						},
+						{
+							"filename": "app/controllers/application_controller.rb",
+							"full_filename": "app/controllers/application_controller.rb",
+							"start_line_number": 37,
+							"start_column_number": 45,
+							"end_column_number": 50,
+							"field_name": "email",
+							"object_name": "current_user",
+							"subject_name": "User"
+						},
+						{
+							"filename": "app/controllers/application_controller.rb",
+							"full_filename": "app/controllers/application_controller.rb",
+							"start_line_number": 39,
+							"start_column_number": 41,
+							"end_column_number": 46,
+							"field_name": "email",
+							"object_name": "current_user",
+							"subject_name": "User"
+						},
+						{
+							"filename": "app/controllers/application_controller.rb",
+							"full_filename": "app/controllers/application_controller.rb",
+							"start_line_number": 44,
+							"start_column_number": 33,
+							"end_column_number": 38,
+							"field_name": "email",
+							"object_name": "current_user",
+							"subject_name": "User"
+						},
+						{
+							"filename": "app/controllers/orders_controller.rb",
+							"full_filename": "app/controllers/orders_controller.rb",
+							"start_line_number": 105,
+							"start_column_number": 31,
+							"end_column_number": 36,
+							"field_name": "email",
+							"object_name": "current_user",
+							"subject_name": "User"
+						},
+						{
+							"filename": "app/models/user.rb",
+							"full_filename": "app/models/user.rb",
+							"start_line_number": 8,
+							"start_column_number": 21,
+							"end_column_number": 27,
+							"field_name": "email",
+							"object_name": "User",
+							"subject_name": "User"
+						},
+						{
+							"filename": "app/services/marketing_export.rb",
+							"full_filename": "app/services/marketing_export.rb",
+							"start_line_number": 23,
+							"start_column_number": 54,
+							"end_column_number": 59,
+							"field_name": "email",
+							"object_name": "user",
+							"subject_name": "User"
+						},
+						{
+							"filename": "lib/jwt.rb",
+							"full_filename": "lib/jwt.rb",
+							"start_line_number": 6,
+							"start_column_number": 21,
+							"end_column_number": 26,
+							"field_name": "email",
+							"object_name": "user",
+							"subject_name": "User"
+						}
+					]
+				},
+				{
+					"name": "schema_rb",
+					"locations": [
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 91,
+							"start_column_number": 14,
+							"end_column_number": 21,
+							"stored": true,
+							"source": {
+								"start_line_number": 89,
+								"start_column_number": 3,
+								"end_line_number": 97,
+								"end_column_number": 6,
+								"content": "create_table \"users\", force: :cascade do |t|\n    t.string \"name\"\n    t.string \"email\"\n    t.string \"telephone\"\n    t.integer \"organization_id\", null: false\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n    t.index [\"organization_id\"], name: \"index_users_on_organization_id\"\n  end"
+							},
+							"field_name": "email",
+							"object_name": "users",
+							"subject_name": "User"
+						}
+					]
+				}
+			]
+		},
+		{
+			"category_name": "Identification",
+			"category_groups": [
+				"PII",
+				"Personal Data"
+			],
+			"name": "Fullname",
+			"detectors": [
+				{
+					"name": "ruby",
+					"locations": [
+						{
+							"filename": "app/models/user.rb",
+							"full_filename": "app/models/user.rb",
+							"start_line_number": 5,
+							"start_column_number": 13,
+							"end_column_number": 18,
+							"field_name": "name",
+							"object_name": "User",
+							"subject_name": "User"
+						},
+						{
+							"filename": "app/services/marketing_export.rb",
+							"full_filename": "app/services/marketing_export.rb",
+							"start_line_number": 23,
+							"start_column_number": 43,
+							"end_column_number": 47,
+							"field_name": "name",
+							"object_name": "user",
+							"subject_name": "User"
+						}
+					]
+				},
+				{
+					"name": "schema_rb",
+					"locations": [
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 15,
+							"start_column_number": 14,
+							"end_column_number": 20,
+							"stored": true,
+							"source": {
+								"start_line_number": 14,
+								"start_column_number": 3,
+								"end_line_number": 18,
+								"end_column_number": 6,
+								"content": "create_table \"authors\", force: :cascade do |t|\n    t.string \"name\"\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n  end"
+							},
+							"field_name": "name",
+							"object_name": "authors",
+							"subject_name": "User"
+						},
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 90,
+							"start_column_number": 14,
+							"end_column_number": 20,
+							"stored": true,
+							"source": {
+								"start_line_number": 89,
+								"start_column_number": 3,
+								"end_line_number": 97,
+								"end_column_number": 6,
+								"content": "create_table \"users\", force: :cascade do |t|\n    t.string \"name\"\n    t.string \"email\"\n    t.string \"telephone\"\n    t.integer \"organization_id\", null: false\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n    t.index [\"organization_id\"], name: \"index_users_on_organization_id\"\n  end"
+							},
+							"field_name": "name",
+							"object_name": "users",
+							"subject_name": "User"
+						}
+					]
+				}
+			]
+		},
+		{
+			"category_name": "Contact",
+			"category_groups": [
+				"PII",
+				"Personal Data"
+			],
+			"name": "Physical Address",
+			"detectors": [
+				{
+					"name": "schema_rb",
+					"locations": [
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 78,
+							"start_column_number": 12,
+							"end_column_number": 28,
+							"stored": true,
+							"source": {
+								"start_line_number": 75,
+								"start_column_number": 3,
+								"end_line_number": 87,
+								"end_column_number": 6,
+								"content": "create_table \"payment_accounts\", force: :cascade do |t|\n    t.integer \"organization_id\", null: false\n    t.string \"reference_name\"\n    t.text \"holder_address\"\n    t.text \"bank_address\"\n    t.string \"bank_name\"\n    t.string \"account_number\"\n    t.string \"sort_code\"\n    t.string \"holder_name\"\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n    t.index [\"organization_id\"], name: \"index_payment_accounts_on_organization_id\"\n  end"
+							},
+							"field_name": "holder_address",
+							"object_name": "payment_accounts"
+						},
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 79,
+							"start_column_number": 12,
+							"end_column_number": 26,
+							"stored": true,
+							"source": {
+								"start_line_number": 75,
+								"start_column_number": 3,
+								"end_line_number": 87,
+								"end_column_number": 6,
+								"content": "create_table \"payment_accounts\", force: :cascade do |t|\n    t.integer \"organization_id\", null: false\n    t.string \"reference_name\"\n    t.text \"holder_address\"\n    t.text \"bank_address\"\n    t.string \"bank_name\"\n    t.string \"account_number\"\n    t.string \"sort_code\"\n    t.string \"holder_name\"\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n    t.index [\"organization_id\"], name: \"index_payment_accounts_on_organization_id\"\n  end"
+							},
+							"field_name": "bank_address",
+							"object_name": "payment_accounts"
+						}
+					]
+				}
+			]
+		},
+		{
+			"category_name": "Contact",
+			"category_groups": [
+				"PII",
+				"Personal Data"
+			],
+			"name": "Telephone Number",
+			"detectors": [
+				{
+					"name": "schema_rb",
+					"locations": [
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 92,
+							"start_column_number": 14,
+							"end_column_number": 25,
+							"stored": true,
+							"source": {
+								"start_line_number": 89,
+								"start_column_number": 3,
+								"end_line_number": 97,
+								"end_column_number": 6,
+								"content": "create_table \"users\", force: :cascade do |t|\n    t.string \"name\"\n    t.string \"email\"\n    t.string \"telephone\"\n    t.integer \"organization_id\", null: false\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n    t.index [\"organization_id\"], name: \"index_users_on_organization_id\"\n  end"
+							},
+							"field_name": "telephone",
+							"object_name": "users",
+							"subject_name": "User"
+						}
+					]
+				}
+			]
+		},
+		{
+			"category_name": "Transactional",
+			"category_groups": [
+				"PII",
+				"Personal Data"
+			],
+			"name": "Transactions",
+			"detectors": [
+				{
+					"name": "ruby",
+					"locations": [
+						{
+							"filename": "app/controllers/payment_accounts_controller.rb",
+							"full_filename": "app/controllers/payment_accounts_controller.rb",
+							"start_line_number": 28,
+							"start_column_number": 10,
+							"end_column_number": 26,
+							"field_name": "payment_account",
+							"object_name": "PaymentAccountsController"
+						},
+						{
+							"filename": "app/controllers/payment_accounts_controller.rb",
+							"full_filename": "app/controllers/payment_accounts_controller.rb",
+							"start_line_number": 33,
+							"start_column_number": 36,
+							"end_column_number": 52,
+							"field_name": "payment_account",
+							"object_name": "PaymentAccountsController"
+						},
+						{
+							"filename": "app/controllers/payment_accounts_controller.rb",
+							"full_filename": "app/controllers/payment_accounts_controller.rb",
+							"start_line_number": 41,
+							"start_column_number": 10,
+							"end_column_number": 26,
+							"field_name": "payment_account",
+							"object_name": "PaymentAccountsController"
+						},
+						{
+							"filename": "app/controllers/payment_accounts_controller.rb",
+							"full_filename": "app/controllers/payment_accounts_controller.rb",
+							"start_line_number": 46,
+							"start_column_number": 36,
+							"end_column_number": 52,
+							"field_name": "payment_account",
+							"object_name": "PaymentAccountsController"
+						},
+						{
+							"filename": "app/controllers/payment_accounts_controller.rb",
+							"full_filename": "app/controllers/payment_accounts_controller.rb",
+							"start_line_number": 53,
+							"start_column_number": 5,
+							"end_column_number": 21,
+							"field_name": "payment_account",
+							"object_name": "PaymentAccountsController"
+						},
+						{
+							"filename": "app/controllers/payment_accounts_controller.rb",
+							"full_filename": "app/controllers/payment_accounts_controller.rb",
+							"start_line_number": 63,
+							"start_column_number": 9,
+							"end_column_number": 28,
+							"field_name": "set_payment_account",
+							"object_name": "PaymentAccountsController"
+						},
+						{
+							"filename": "app/controllers/payment_accounts_controller.rb",
+							"full_filename": "app/controllers/payment_accounts_controller.rb",
+							"start_line_number": 68,
+							"start_column_number": 9,
+							"end_column_number": 31,
+							"field_name": "payment_account_params",
+							"object_name": "PaymentAccountsController"
+						}
+					]
+				}
+			]
+		},
+		{
+			"category_name": "Identification",
+			"category_groups": [
+				"PII",
+				"Personal Data"
+			],
+			"name": "Unique Identifier",
+			"detectors": [
+				{
+					"name": "schema_rb",
+					"locations": [
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 22,
+							"start_column_number": 15,
+							"end_column_number": 26,
+							"stored": true,
+							"source": {
+								"start_line_number": 20,
+								"start_column_number": 3,
+								"end_line_number": 30,
+								"end_column_number": 6,
+								"content": "create_table \"books\", force: :cascade do |t|\n    t.string \"title\"\n    t.integer \"author_id\", null: false\n    t.date \"published_at\"\n    t.text \"description\"\n    t.integer \"pages\"\n    t.decimal \"price\", precision: 5, scale: 2\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n    t.index [\"author_id\"], name: \"index_books_on_author_id\"\n  end"
+							},
+							"field_name": "author_id",
+							"object_name": "books"
+						},
+						{
+							"filename": "db/schema.rb",
+							"full_filename": "db/schema.rb",
+							"start_line_number": 47,
+							"start_column_number": 15,
+							"end_column_number": 24,
+							"stored": true,
+							"source": {
+								"start_line_number": 42,
+								"start_column_number": 3,
+								"end_line_number": 53,
+								"end_column_number": 6,
+								"content": "create_table \"orders\", force: :cascade do |t|\n    t.integer \"organization_id\", null: false\n    t.integer \"status\", default: 0, null: false\n    t.datetime \"created_at\", null: false\n    t.datetime \"updated_at\", null: false\n    t.integer \"user_id\"\n    t.datetime \"placed_at\"\n    t.integer \"payment_account_id\"\n    t.index [\"organization_id\"], name: \"index_orders_on_organization_id\"\n    t.index [\"payment_account_id\"], name: \"index_orders_on_payment_account_id\"\n    t.index [\"user_id\"], name: \"index_orders_on_user_id\"\n  end"
+							},
+							"field_name": "user_id",
+							"object_name": "orders"
+						}
+					]
+				}
+			]
+		}
+	],
+	"components": [
+		{
+			"name": "Segment",
+			"type": "external_service",
+			"sub_type": "third_party",
+			"locations": [
+				{
+					"detector": "gemfile-lock",
+					"full_filename": "Gemfile.lock",
+					"filename": "Gemfile.lock",
+					"line_number": 71
+				}
+			]
+		},
+		{
+			"name": "Disk",
+			"type": "data_store",
+			"sub_type": "flat_file",
+			"locations": [
+				{
+					"detector": "rails",
+					"full_filename": "config/storage.yml",
+					"filename": "config/storage.yml",
+					"line_number": 5
+				}
+			]
+		},
+		{
+			"name": "Redis",
+			"type": "data_store",
+			"sub_type": "key_value_cache",
+			"locations": [
+				{
+					"detector": "gemfile-lock",
+					"full_filename": "Gemfile.lock",
+					"filename": "Gemfile.lock",
+					"line_number": 192
+				}
+			]
+		},
+		{
+			"name": "SQLite",
+			"type": "data_store",
+			"sub_type": "database",
+			"locations": [
+				{
+					"detector": "gemfile-lock",
+					"full_filename": "Gemfile.lock",
+					"filename": "Gemfile.lock",
+					"line_number": 213
+				},
+				{
+					"detector": "gemfile-lock",
+					"full_filename": "Gemfile.lock",
+					"filename": "Gemfile.lock",
+					"line_number": 214
+				},
+				{
+					"detector": "rails",
+					"full_filename": "config/database.yml",
+					"filename": "config/database.yml",
+					"line_number": 24
+				}
+			]
+		},
+		{
+			"name": "Sentry",
+			"type": "external_service",
+			"sub_type": "third_party",
+			"locations": [
+				{
+					"detector": "gemfile-lock",
+					"full_filename": "Gemfile.lock",
+					"filename": "Gemfile.lock",
+					"line_number": 204
+				}
+			]
+		}
+	],
+	"errors": [],
+	"files": [
+		".gitattributes",
+		".github/workflows/bearer.yml",
+		".gitignore",
+		".gitlab-ci.yml",
+		".ruby-version",
+		"Gemfile",
+		"Gemfile.lock",
+		"README.md",
+		"Rakefile",
+		"app/assets/config/manifest.js",
+		"app/assets/images/.keep",
+		"app/assets/stylesheets/application.css",
+		"app/channels/application_cable/channel.rb",
+		"app/channels/application_cable/connection.rb",
+		"app/controllers/application_controller.rb",
+		"app/controllers/authors_controller.rb",
+		"app/controllers/books_controller.rb",
+		"app/controllers/concerns/.keep",
+		"app/controllers/orders_controller.rb",
+		"app/controllers/organization_controller.rb",
+		"app/controllers/payment_accounts_controller.rb",
+		"app/helpers/application_helper.rb",
+		"app/javascript/application.js",
+		"app/javascript/controllers/application.js",
+		"app/javascript/controllers/hello_controller.js",
+		"app/javascript/controllers/index.js",
+		"app/jobs/application_job.rb",
+		"app/mailers/application_mailer.rb",
+		"app/models/application_record.rb",
+		"app/models/author.rb",
+		"app/models/book.rb",
+		"app/models/concerns/.keep",
+		"app/models/line_item.rb",
+		"app/models/order.rb",
+		"app/models/organization.rb",
+		"app/models/payment_account.rb",
+		"app/models/user.rb",
+		"app/services/concerns/callable.rb",
+		"app/services/marketing_export.rb",
+		"app/views/authors/_author.html.erb",
+		"app/views/authors/index.html.erb",
+		"app/views/authors/show.html.erb",
+		"app/views/books/_book.html.erb",
+		"app/views/books/index.html.erb",
+		"app/views/layouts/application.html.erb",
+		"app/views/layouts/mailer.html.erb",
+		"app/views/layouts/mailer.text.erb",
+		"app/views/orders/_basket_count.html.erb",
+		"app/views/orders/_form.html.erb",
+		"app/views/orders/_order.html.erb",
+		"app/views/orders/checkout.html.erb",
+		"app/views/orders/current.html.erb",
+		"app/views/orders/edit.html.erb",
+		"app/views/orders/index.html.erb",
+		"app/views/orders/show.html.erb",
+		"app/views/organization/index.html.erb",
+		"app/views/passwordless/mailer/magic_link.text.erb",
+		"app/views/passwordless/sessions/create.html.erb",
+		"app/views/passwordless/sessions/new.html.erb",
+		"app/views/payment_accounts/_form.html.erb",
+		"app/views/payment_accounts/_payment_account.html.erb",
+		"app/views/payment_accounts/edit.html.erb",
+		"app/views/payment_accounts/index.html.erb",
+		"app/views/payment_accounts/new.html.erb",
+		"app/views/payment_accounts/show.html.erb",
+		"bin/bundle",
+		"bin/importmap",
+		"bin/rails",
+		"bin/rake",
+		"bin/setup",
+		"config.ru",
+		"config/application.rb",
+		"config/boot.rb",
+		"config/cable.yml",
+		"config/credentials.yml.enc",
+		"config/database.yml",
+		"config/environment.rb",
+		"config/environments/development.rb",
+		"config/environments/production.rb",
+		"config/environments/test.rb",
+		"config/importmap.rb",
+		"config/initializers/analytics_ruby.rb",
+		"config/initializers/assets.rb",
+		"config/initializers/content_security_policy.rb",
+		"config/initializers/filter_parameter_logging.rb",
+		"config/initializers/inflections.rb",
+		"config/initializers/permissions_policy.rb",
+		"config/initializers/sentry.rb",
+		"config/locales/en.yml",
+		"config/puma.rb",
+		"config/routes.rb",
+		"config/storage.yml",
+		"db/migrate/20221129111605_create_authors.rb",
+		"db/migrate/20221129112420_create_books.rb",
+		"db/migrate/20221129113900_create_passwordless_sessions.passwordless.rb",
+		"db/migrate/20221129115118_create_organizations.rb",
+		"db/migrate/20221129115301_create_users.rb",
+		"db/migrate/20221129161454_create_line_items.rb",
+		"db/migrate/20221129165914_create_orders.rb",
+		"db/migrate/20221129222646_add_user_and_placed_at_to_order.rb",
+		"db/migrate/20221202105953_create_payment_accounts.rb",
+		"db/migrate/20221205120112_add_account_to_order.rb",
+		"db/schema.rb",
+		"db/seeds.rb",
+		"lib/assets/.keep",
+		"lib/jwt.rb",
+		"lib/tasks/.keep",
+		"log/.keep",
+		"public/404.html",
+		"public/422.html",
+		"public/500.html",
+		"public/apple-touch-icon-precomposed.png",
+		"public/apple-touch-icon.png",
+		"public/favicon.ico",
+		"public/robots.txt",
+		"storage/.keep",
+		"test/application_system_test_case.rb",
+		"test/channels/application_cable/connection_test.rb",
+		"test/controllers/.keep",
+		"test/controllers/authors_controller_test.rb",
+		"test/controllers/books_controller_test.rb",
+		"test/controllers/orders_controller_test.rb",
+		"test/controllers/payment_accounts_controller_test.rb",
+		"test/factories/authors.rb",
+		"test/factories/books.rb",
+		"test/factories/line_items.rb",
+		"test/factories/orders.rb",
+		"test/factories/organizations.rb",
+		"test/factories/payment_accounts.rb",
+		"test/factories/users.rb",
+		"test/fixtures/files/.keep",
+		"test/helpers/.keep",
+		"test/integration/.keep",
+		"test/mailers/.keep",
+		"test/models/.keep",
+		"test/models/author_test.rb",
+		"test/models/book_test.rb",
+		"test/models/line_item_test.rb",
+		"test/models/order_test.rb",
+		"test/models/organization_test.rb",
+		"test/models/payment_account_test.rb",
+		"test/models/user_test.rb",
+		"test/system/.keep",
+		"test/system/authors_test.rb",
+		"test/system/books_test.rb",
+		"test/system/orders_test.rb",
+		"test/system/payment_accounts_test.rb",
+		"test/test_helper.rb",
+		"tmp/.keep",
+		"tmp/pids/.keep",
+		"tmp/storage/.keep",
+		"vendor/.keep",
+		"vendor/javascript/.keep",
+		"bearer.ignore",
+		"bearer.yml"
+	]
+}
