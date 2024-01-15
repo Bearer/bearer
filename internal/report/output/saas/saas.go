@@ -213,5 +213,6 @@ func getMeta(
 		BearerVersion:      build.Version,
 		FoundLanguages:     reportData.FoundLanguages,
 		GitlabPipelineId:   os.Getenv("CI_PIPELINE_ID"),
+		GitlabJobId:        os.Getenv("CI_JOB_ID"),
 	}, nil
 }

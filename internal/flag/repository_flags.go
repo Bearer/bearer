@@ -118,8 +118,8 @@ var (
 		Value:      "",
 		Usage:      "Used when fetching branch level ignores for a PR/MR",
 		EnvironmentVariables: []string{
-			"PR_NUMBER",           // github
-			"CI_MERGE_REQUEST_ID", //gitlab
+			"PR_NUMBER",            // github
+			"CI_MERGE_REQUEST_IID", //gitlab
 		},
 		DisableInConfig: true,
 		Hide:            true,
