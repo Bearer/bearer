@@ -1,5 +1,4 @@
 bearer_cloud:
-  stage: bearer
   image:
     name: bearer/bearer
     entrypoint: [""]
