@@ -67,7 +67,7 @@
       }
     }
   },
-  (string) (len=4) "high": ([]types.Finding) (len=1) {
+  (string) (len=6) "medium": ([]types.Finding) (len=1) {
     (types.Finding) {
       Rule: (*types.Rule)({
         CWEIDs: ([]string) (len=1) {
@@ -117,15 +117,12 @@
       },
       SeverityMeta: (types.SeverityMeta) {
         RuleSeverity: (string) (len=6) "medium",
-        SensitiveDataCategories: ([]string) (len=2) {
-          (string) (len=3) "PII",
-          (string) (len=13) "Personal Data"
-        },
-        HasLocalDataTypes: (*bool)(false),
-        SensitiveDataCategoryWeighting: (int) 2,
-        RuleSeverityWeighting: (int) 3,
-        FinalWeighting: (int) 5,
-        DisplaySeverity: (string) (len=4) "high"
+        SensitiveDataCategories: ([]string) <nil>,
+        HasLocalDataTypes: (*bool)(<nil>),
+        SensitiveDataCategoryWeighting: (int) 0,
+        RuleSeverityWeighting: (int) 0,
+        FinalWeighting: (int) 0,
+        DisplaySeverity: (string) (len=6) "medium"
       }
     }
   }

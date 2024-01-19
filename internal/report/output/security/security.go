@@ -472,6 +472,13 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		}
 	}
 
+	if !hasLocalDataTypes {
+		return types.SeverityMeta{
+			RuleSeverity:    severity,
+			DisplaySeverity: severity,
+		}
+	}
+
 	// highest sensitive data category
 	sensitiveDataCategoryWeighting := 0
 	if slices.Contains(groups, "PHI") {
@@ -496,10 +503,7 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		ruleSeverityWeighting = 2 // low weighting as default
 	}
 
-	triggerWeighting := 1
-	if hasLocalDataTypes {
-		triggerWeighting = 2
-	}
+	triggerWeighting := 2
 
 	var displaySeverity string
 	finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting)
