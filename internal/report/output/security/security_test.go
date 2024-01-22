@@ -140,12 +140,31 @@ func TestAddReportDataWithFailOnSeverity(t *testing.T) {
 		Severity string
 		Expected bool
 	}{
-		{FailOnSeverity: globaltypes.LevelCritical, Expected: true},
-		{FailOnSeverity: globaltypes.LevelHigh, Expected: true},
-		{FailOnSeverity: globaltypes.LevelHigh, Severity: globaltypes.LevelCritical, Expected: false},
-		{FailOnSeverity: globaltypes.LevelMedium, Expected: false},
-		{FailOnSeverity: globaltypes.LevelLow, Expected: false},
-		{FailOnSeverity: globaltypes.LevelWarning, Expected: false},
+		{
+			FailOnSeverity: globaltypes.LevelCritical,
+			Expected:       true,
+		},
+		{
+			FailOnSeverity: globaltypes.LevelHigh,
+			Expected:       false,
+		},
+		{
+			FailOnSeverity: globaltypes.LevelHigh,
+			Severity:       globaltypes.LevelCritical,
+			Expected:       false,
+		},
+		{
+			FailOnSeverity: globaltypes.LevelMedium,
+			Expected:       true,
+		},
+		{
+			FailOnSeverity: globaltypes.LevelLow,
+			Expected:       false,
+		},
+		{
+			FailOnSeverity: globaltypes.LevelWarning,
+			Expected:       false,
+		},
 	} {
 		t.Run(test.FailOnSeverity, func(tt *testing.T) {
 			failOnSeverity := set.New[string]()

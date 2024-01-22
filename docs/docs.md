@@ -63,7 +63,6 @@ Explanations dive into the rational behind Bearer CLI and explain some of its he
 - [Bearer CLI's scanner types](/explanations/scanners/)
 - [Bearer CLI's report types](/explanations/reports/)
 - [How Bearer CLI discovers and classifies data](/explanations/discovery-and-classification/)
-- [How Bearer CLI sets severity levels](/explanations/severity/)
 
 ## Reference
 
