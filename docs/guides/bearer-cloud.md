@@ -44,6 +44,15 @@ Set up the [GitLab CI/CD configuration](/guides/gitlab), then adjust your settin
 
 We recommend using [GitLab's CI/CD variables](https://docs.gitlab.com/ee/ci/variables/) to protect your token. In the example above, the variable is named `BEARER_TOKEN`.
 
+#### Enhanced Integration
+
+Once the above is configured and your first scan is complete, visit the integrations section to configure our direct GitLab integration. This gives developers the ability to ignore findings directly in the MR workflow, and for your Security team to review those in the Bearer Cloud Dashboard. Setup is done per project with the following steps:
+
+- Create an access token with the ‘api’ scope and ‘maintainer’ role. We recommend using a [project access token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html).
+- Enter the details for your desired project.
+- Behind the scenes, we validate the token and automatically create and configure a webhook to capture MR events.
+- Open an MR and see bearer findings directly in the comments!
+
 ### Local projects
 
 Use the `--api-key` flag with the `scan` command:
