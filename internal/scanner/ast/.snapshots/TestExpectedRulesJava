@@ -1,0 +1,657 @@
+([]ast_test.ruleInfo) (len=1) {
+  (ast_test.ruleInfo) {
+    ID: (string) (len=5) "rule1",
+    Index: (int) 5
+  }
+}
+type: program
+id: 0
+range: 2:3 - 15:2
+dataflow_sources:
+    - 1
+    - 8
+    - 15
+children:
+    - type: local_variable_declaration
+      id: 1
+      range: 2:3 - 2:20
+      dataflow_sources:
+        - 2
+        - 4
+        - 5
+        - 7
+      children:
+        - type: modifiers
+          id: 2
+          range: 2:3 - 2:9
+          dataflow_sources:
+            - 3
+          children:
+            - type: '"public"'
+              id: 3
+              range: 2:3 - 2:9
+        - type: type_identifier
+          id: 4
+          range: 2:10 - 2:16
+          content: String
+        - type: variable_declarator
+          id: 5
+          range: 2:17 - 2:20
+          children:
+            - type: identifier
+              id: 6
+              range: 2:17 - 2:20
+              content: bad
+              alias_of:
+                - 1
+        - type: '";"'
+          id: 7
+          range: 2:20 - 2:20
+    - type: ERROR
+      id: 8
+      range: 2:20 - 2:33
+      dataflow_sources:
+        - 9
+      children:
+        - type: formal_parameters
+          id: 9
+          range: 2:20 - 2:33
+          dataflow_sources:
+            - 10
+            - 11
+            - 14
+          children:
+            - type: '"("'
+              id: 10
+              range: 2:20 - 2:21
+            - type: formal_parameter
+              id: 11
+              range: 2:21 - 2:32
+              alias_of:
+                - 13
+              children:
+                - type: type_identifier
+                  id: 12
+                  range: 2:21 - 2:27
+                  content: String
+                - type: identifier
+                  id: 13
+                  range: 2:28 - 2:32
+                  content: text
+            - type: '")"'
+              id: 14
+              range: 2:32 - 2:33
+    - type: block
+      id: 15
+      range: 2:34 - 14:4
+      children:
+        - type: '"{"'
+          id: 16
+          range: 2:34 - 2:35
+        - type: local_variable_declaration
+          id: 17
+          range: 3:4 - 3:60
+          dataflow_sources:
+            - 18
+            - 19
+            - 30
+          children:
+            - type: type_identifier
+              id: 18
+              range: 3:4 - 3:17
+              content: MessageDigest
+            - type: variable_declarator
+              id: 19
+              range: 3:18 - 3:59
+              children:
+                - type: identifier
+                  id: 20
+                  range: 3:18 - 3:20
+                  content: md
+                  alias_of:
+                    - 17
+                    - 22
+                - type: '"="'
+                  id: 21
+                  range: 3:21 - 3:22
+                - type: method_invocation
+                  id: 22
+                  range: 3:23 - 3:59
+                  dataflow_sources:
+                    - 26
+                  children:
+                    - type: identifier
+                      id: 23
+                      range: 3:23 - 3:36
+                      content: MessageDigest
+                    - type: '"."'
+                      id: 24
+                      range: 3:36 - 3:37
+                    - type: identifier
+                      id: 25
+                      range: 3:37 - 3:48
+                      content: getInstance
+                    - type: argument_list
+                      id: 26
+                      range: 3:48 - 3:59
+                      dataflow_sources:
+                        - 27
+                        - 28
+                        - 29
+                      children:
+                        - type: '"("'
+                          id: 27
+                          range: 3:48 - 3:49
+                        - type: string_literal
+                          id: 28
+                          range: 3:49 - 3:58
+                          content: '"SHA-256"'
+                        - type: '")"'
+                          id: 29
+                          range: 3:58 - 3:59
+            - type: '";"'
+              id: 30
+              range: 3:59 - 3:60
+        - type: local_variable_declaration
+          id: 31
+          range: 4:4 - 4:59
+          dataflow_sources:
+            - 32
+            - 38
+            - 56
+          children:
+            - type: array_type
+              id: 32
+              range: 4:4 - 4:10
+              dataflow_sources:
+                - 33
+                - 35
+              children:
+                - type: integral_type
+                  id: 33
+                  range: 4:4 - 4:8
+                  dataflow_sources:
+                    - 34
+                  children:
+                    - type: '"byte"'
+                      id: 34
+                      range: 4:4 - 4:8
+                - type: dimensions
+                  id: 35
+                  range: 4:8 - 4:10
+                  dataflow_sources:
+                    - 36
+                    - 37
+                  children:
+                    - type: '"["'
+                      id: 36
+                      range: 4:8 - 4:9
+                    - type: '"]"'
+                      id: 37
+                      range: 4:9 - 4:10
+            - type: variable_declarator
+              id: 38
+              range: 4:11 - 4:58
+              children:
+                - type: identifier
+                  id: 39
+                  range: 4:11 - 4:22
+                  content: resultBytes
+                  alias_of:
+                    - 31
+                    - 41
+                - type: '"="'
+                  id: 40
+                  range: 4:23 - 4:24
+                - type: method_invocation
+                  id: 41
+                  range: 4:25 - 4:58
+                  dataflow_sources:
+                    - 45
+                  children:
+                    - type: identifier
+                      id: 42
+                      range: 4:25 - 4:27
+                      content: md
+                      alias_of:
+                        - 20
+                    - type: '"."'
+                      id: 43
+                      range: 4:27 - 4:28
+                    - type: identifier
+                      id: 44
+                      range: 4:28 - 4:34
+                      content: digest
+                    - type: argument_list
+                      id: 45
+                      range: 4:34 - 4:58
+                      dataflow_sources:
+                        - 46
+                        - 47
+                        - 55
+                      children:
+                        - type: '"("'
+                          id: 46
+                          range: 4:34 - 4:35
+                        - type: method_invocation
+                          id: 47
+                          range: 4:35 - 4:57
+                          dataflow_sources:
+                            - 48
+                            - 51
+                          children:
+                            - type: identifier
+                              id: 48
+                              range: 4:35 - 4:39
+                              content: text
+                              alias_of:
+                                - 13
+                            - type: '"."'
+                              id: 49
+                              range: 4:39 - 4:40
+                            - type: identifier
+                              id: 50
+                              range: 4:40 - 4:48
+                              content: getBytes
+                            - type: argument_list
+                              id: 51
+                              range: 4:48 - 4:57
+                              dataflow_sources:
+                                - 52
+                                - 53
+                                - 54
+                              children:
+                                - type: '"("'
+                                  id: 52
+                                  range: 4:48 - 4:49
+                                - type: string_literal
+                                  id: 53
+                                  range: 4:49 - 4:56
+                                  content: '"UTF-8"'
+                                - type: '")"'
+                                  id: 54
+                                  range: 4:56 - 4:57
+                        - type: '")"'
+                          id: 55
+                          range: 4:57 - 4:58
+            - type: '";"'
+              id: 56
+              range: 4:58 - 4:59
+        - type: local_variable_declaration
+          id: 57
+          range: 6:4 - 6:54
+          dataflow_sources:
+            - 58
+            - 59
+            - 68
+          children:
+            - type: type_identifier
+              id: 58
+              range: 6:4 - 6:17
+              content: StringBuilder
+            - type: variable_declarator
+              id: 59
+              range: 6:18 - 6:53
+              children:
+                - type: identifier
+                  id: 60
+                  range: 6:18 - 6:31
+                  content: stringBuilder
+                  alias_of:
+                    - 57
+                    - 62
+                - type: '"="'
+                  id: 61
+                  range: 6:32 - 6:33
+                - type: object_creation_expression
+                  id: 62
+                  range: 6:34 - 6:53
+                  dataflow_sources:
+                    - 63
+                    - 64
+                    - 65
+                  children:
+                    - type: '"new"'
+                      id: 63
+                      range: 6:34 - 6:37
+                    - type: type_identifier
+                      id: 64
+                      range: 6:38 - 6:51
+                      content: StringBuilder
+                    - type: argument_list
+                      id: 65
+                      range: 6:51 - 6:53
+                      dataflow_sources:
+                        - 66
+                        - 67
+                      children:
+                        - type: '"("'
+                          id: 66
+                          range: 6:51 - 6:52
+                        - type: '")"'
+                          id: 67
+                          range: 6:52 - 6:53
+            - type: '";"'
+              id: 68
+              range: 6:53 - 6:54
+        - type: for_statement
+          id: 69
+          range: 7:4 - 11:5
+          children:
+            - type: '"for"'
+              id: 70
+              range: 7:4 - 7:7
+            - type: '"("'
+              id: 71
+              range: 7:8 - 7:9
+            - type: local_variable_declaration
+              id: 72
+              range: 7:9 - 7:59
+              dataflow_sources:
+                - 73
+                - 75
+                - 79
+                - 80
+                - 87
+              children:
+                - type: integral_type
+                  id: 73
+                  range: 7:9 - 7:12
+                  dataflow_sources:
+                    - 74
+                  children:
+                    - type: '"int"'
+                      id: 74
+                      range: 7:9 - 7:12
+                - type: variable_declarator
+                  id: 75
+                  range: 7:13 - 7:18
+                  children:
+                    - type: identifier
+                      id: 76
+                      range: 7:13 - 7:14
+                      content: i
+                      alias_of:
+                        - 72
+                        - 78
+                    - type: '"="'
+                      id: 77
+                      range: 7:15 - 7:16
+                    - type: decimal_integer_literal
+                      id: 78
+                      range: 7:17 - 7:18
+                      content: "0"
+                - type: '","'
+                  id: 79
+                  range: 7:18 - 7:19
+                - type: variable_declarator
+                  id: 80
+                  range: 7:20 - 7:58
+                  children:
+                    - type: identifier
+                      id: 81
+                      range: 7:20 - 7:37
+                      content: resultBytesLength
+                      alias_of:
+                        - 72
+                        - 83
+                    - type: '"="'
+                      id: 82
+                      range: 7:38 - 7:39
+                    - type: field_access
+                      id: 83
+                      range: 7:40 - 7:58
+                      children:
+                        - type: identifier
+                          id: 84
+                          range: 7:40 - 7:51
+                          content: resultBytes
+                          alias_of:
+                            - 39
+                        - type: '"."'
+                          id: 85
+                          range: 7:51 - 7:52
+                        - type: identifier
+                          id: 86
+                          range: 7:52 - 7:58
+                          content: length
+                - type: '";"'
+                  id: 87
+                  range: 7:58 - 7:59
+            - type: binary_expression
+              id: 88
+              range: 7:60 - 7:81
+              dataflow_sources:
+                - 89
+                - 90
+                - 91
+              children:
+                - type: identifier
+                  id: 89
+                  range: 7:60 - 7:61
+                  content: i
+                  alias_of:
+                    - 76
+                - type: '"<"'
+                  id: 90
+                  range: 7:62 - 7:63
+                - type: identifier
+                  id: 91
+                  range: 7:64 - 7:81
+                  content: resultBytesLength
+                  alias_of:
+                    - 81
+            - type: '";"'
+              id: 92
+              range: 7:81 - 7:82
+            - type: update_expression
+              id: 93
+              range: 7:83 - 7:86
+              dataflow_sources:
+                - 94
+                - 95
+              children:
+                - type: identifier
+                  id: 94
+                  range: 7:83 - 7:84
+                  content: i
+                - type: '"++"'
+                  id: 95
+                  range: 7:84 - 7:86
+            - type: '")"'
+              id: 96
+              range: 7:86 - 7:87
+            - type: block
+              id: 97
+              range: 7:88 - 11:5
+              children:
+                - type: '"{"'
+                  id: 98
+                  range: 7:88 - 7:89
+                - type: local_variable_declaration
+                  id: 99
+                  range: 8:6 - 8:30
+                  dataflow_sources:
+                    - 100
+                    - 102
+                    - 110
+                  children:
+                    - type: integral_type
+                      id: 100
+                      range: 8:6 - 8:10
+                      dataflow_sources:
+                        - 101
+                      children:
+                        - type: '"byte"'
+                          id: 101
+                          range: 8:6 - 8:10
+                    - type: variable_declarator
+                      id: 102
+                      range: 8:11 - 8:29
+                      children:
+                        - type: identifier
+                          id: 103
+                          range: 8:11 - 8:12
+                          content: b
+                          alias_of:
+                            - 99
+                            - 105
+                        - type: '"="'
+                          id: 104
+                          range: 8:13 - 8:14
+                        - type: array_access
+                          id: 105
+                          range: 8:15 - 8:29
+                          dataflow_sources:
+                            - 106
+                            - 107
+                            - 108
+                            - 109
+                          children:
+                            - type: identifier
+                              id: 106
+                              range: 8:15 - 8:26
+                              content: resultBytes
+                              alias_of:
+                                - 39
+                            - type: '"["'
+                              id: 107
+                              range: 8:26 - 8:27
+                            - type: identifier
+                              id: 108
+                              range: 8:27 - 8:28
+                              content: i
+                              alias_of:
+                                - 76
+                            - type: '"]"'
+                              id: 109
+                              range: 8:28 - 8:29
+                    - type: '";"'
+                      id: 110
+                      range: 8:29 - 8:30
+                - type: line_comment
+                  id: 111
+                  range: 9:6 - 9:30
+                  content: // bearer:expected rule1
+                - type: local_variable_declaration
+                  id: 112
+                  range: 10:6 - 10:45
+                  dataflow_sources:
+                    - 113
+                    - 114
+                    - 125
+                  expectedrules:
+                    - rule1
+                  children:
+                    - type: type_identifier
+                      id: 113
+                      range: 10:6 - 10:12
+                      content: String
+                    - type: variable_declarator
+                      id: 114
+                      range: 10:13 - 10:44
+                      children:
+                        - type: identifier
+                          id: 115
+                          range: 10:13 - 10:19
+                          content: badHex
+                          alias_of:
+                            - 112
+                            - 117
+                        - type: '"="'
+                          id: 116
+                          range: 10:20 - 10:21
+                        - type: method_invocation
+                          id: 117
+                          range: 10:22 - 10:44
+                          dataflow_sources:
+                            - 121
+                          children:
+                            - type: identifier
+                              id: 118
+                              range: 10:22 - 10:29
+                              content: Integer
+                            - type: '"."'
+                              id: 119
+                              range: 10:29 - 10:30
+                            - type: identifier
+                              id: 120
+                              range: 10:30 - 10:41
+                              content: toHexString
+                            - type: argument_list
+                              id: 121
+                              range: 10:41 - 10:44
+                              dataflow_sources:
+                                - 122
+                                - 123
+                                - 124
+                              children:
+                                - type: '"("'
+                                  id: 122
+                                  range: 10:41 - 10:42
+                                - type: identifier
+                                  id: 123
+                                  range: 10:42 - 10:43
+                                  content: b
+                                  alias_of:
+                                    - 103
+                                - type: '")"'
+                                  id: 124
+                                  range: 10:43 - 10:44
+                    - type: '";"'
+                      id: 125
+                      range: 10:44 - 10:45
+                - type: '"}"'
+                  id: 126
+                  range: 11:4 - 11:5
+        - type: return_statement
+          id: 127
+          range: 13:4 - 13:36
+          dataflow_sources:
+            - 128
+            - 129
+            - 136
+          children:
+            - type: '"return"'
+              id: 128
+              range: 13:4 - 13:10
+            - type: method_invocation
+              id: 129
+              range: 13:11 - 13:35
+              dataflow_sources:
+                - 130
+                - 133
+              children:
+                - type: identifier
+                  id: 130
+                  range: 13:11 - 13:24
+                  content: stringBuilder
+                  alias_of:
+                    - 60
+                - type: '"."'
+                  id: 131
+                  range: 13:24 - 13:25
+                - type: identifier
+                  id: 132
+                  range: 13:25 - 13:33
+                  content: toString
+                - type: argument_list
+                  id: 133
+                  range: 13:33 - 13:35
+                  dataflow_sources:
+                    - 134
+                    - 135
+                  children:
+                    - type: '"("'
+                      id: 134
+                      range: 13:33 - 13:34
+                    - type: '")"'
+                      id: 135
+                      range: 13:34 - 13:35
+            - type: '";"'
+              id: 136
+              range: 13:35 - 13:36
+        - type: '"}"'
+          id: 137
+          range: 14:3 - 14:4
+

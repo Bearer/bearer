@@ -112,7 +112,7 @@ func addExpectedRules(
 	expectedRules []*ruleset.Rule,
 	node *sitter.Node,
 ) []*ruleset.Rule {
-	if node.Type() == "comment" {
+	if strings.Contains(node.Type(), "comment") {
 		nextExpectedRules := expectedRules
 
 		nodeContent := builder.ContentFor(node)
@@ -144,7 +144,7 @@ func addDisabledRules(
 	disabledRules []*ruleset.Rule,
 	node *sitter.Node,
 ) []*ruleset.Rule {
-	if node.Type() == "comment" {
+	if strings.Contains(node.Type(), "comment") {
 		nextDisabledRules := disabledRules
 
 		nodeContent := builder.ContentFor(node)
