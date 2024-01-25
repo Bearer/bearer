@@ -27,7 +27,7 @@ func (detector *stringDetector) DetectAt(
 	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
-	case "string_literal":
+	case "string_literal", "character_literal":
 		return []interface{}{common.String{
 			Value:     stringutil.StripQuotes(node.Content()),
 			IsLiteral: true,
