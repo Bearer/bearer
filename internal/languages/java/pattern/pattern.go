@@ -101,7 +101,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// function block
 	// lambda () -> {} block
 	// try {} catch () {}
-	unAnchored := []string{"class_body", "block", "try_statement", "catch_type", "resource_specification"}
+	unAnchored := []string{"class_declaration", "class_body", "block", "try_statement", "catch_type", "resource_specification"}
 
 	isAnchored := !slices.Contains(unAnchored, parent.Type())
 	return isAnchored, isAnchored

@@ -1,5 +1,5 @@
 (*builder.Result)({
-  Query: (string) (len=196) "([(class_declaration  . name: (_) . [(class_body  [(method_declaration . [ (void_type )] @param1 . [ (identifier )] @param2 . [(formal_parameters  . (_) @match . )] . [ (block )] .)] )] .)] @root)",
+  Query: (string) (len=190) "([(class_declaration  name: (_) [(class_body  [(method_declaration . [ (void_type )] @param1 . [ (identifier )] @param2 . [(formal_parameters  . (_) @match . )] . [ (block )] .)] )])] @root)",
   VariableNames: ([]string) (len=1) {
     (string) (len=1) "_"
   },
