@@ -22,12 +22,19 @@ var loggerRule []byte
 //go:embed testdata/scope_rule.yml
 var scopeRule []byte
 
+//go:embed testdata/md.yml
+var mdRule []byte
+
 func TestFlow(t *testing.T) {
 	testhelper.GetRunner(t, loggerRule, "PHP").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestScope(t *testing.T) {
 	testhelper.GetRunner(t, scopeRule, "PHP").RunTest(t, "./testdata/scope", ".snapshots/")
+}
+
+func TestConst(t *testing.T) {
+	testhelper.GetRunner(t, mdRule, "PHP").RunTest(t, "./testdata/md", ".snapshots/")
 }
 
 func TestAnalyzer(t *testing.T) {

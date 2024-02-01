@@ -1,0 +1,11 @@
+type: "risk"
+languages:
+  - php
+patterns:
+  - pattern: |
+      hash($<ALGORITHM>$<...>)
+    filters:
+      - variable: ALGORITHM
+        string_regex: md\d
+metadata:
+  id: php_rule_logger_test

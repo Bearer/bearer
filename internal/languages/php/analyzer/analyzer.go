@@ -1,6 +1,8 @@
 package analyzer
 
 import (
+	"slices"
+
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
@@ -45,6 +47,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "switch_label":
 		return visitChildren()
+	case "const_declaration":
+		return analyzer.analyzeConstDeclaration(node, visitChildren)
 	case "dynamic_variable_name":
 		return analyzer.analyzeDynamicVariableName(node, visitChildren)
 	case "subscript_expression":
@@ -197,6 +201,27 @@ func (analyzer *analyzer) analyzeSubscript(node *sitter.Node, visitChildren func
 	return visitChildren()
 }
 
+func (analyzer *analyzer) analyzeConstDeclaration(node *sitter.Node, visitChildren func() error) error {
+	child := node.NamedChild(0)
+
+	if child.Type() == "visibility_modifier" {
+		child = node.NamedChild(1)
+	}
+
+	left := child.NamedChild(0)
+	right := child.NamedChild(1)
+	analyzer.lookupVariable(right)
+
+	err := visitChildren()
+
+	if left.Type() == "name" {
+		analyzer.builder.Alias(left, right)
+		analyzer.scope.Declare("self::"+analyzer.builder.ContentFor(left), right)
+	}
+
+	return err
+}
+
 // catch(FooException | BarException $e) {}
 func (analyzer *analyzer) analyzeCatchClause(node *sitter.Node, visitChildren func() error) error {
 	return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
@@ -258,7 +283,7 @@ func (analyzer *analyzer) withScope(newScope *language.Scope, body func() error)
 }
 
 func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
-	if node == nil || node.Type() != "variable_name" {
+	if node == nil || !slices.Contains([]string{"variable_name", "class_constant_access_expression"}, node.Type()) {
 		return
 	}
 

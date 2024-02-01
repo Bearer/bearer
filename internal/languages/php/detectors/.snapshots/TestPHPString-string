@@ -33,10 +33,6 @@ children:
             - type: const_declaration
               id: 7
               range: 3:5 - 3:36
-              dataflow_sources:
-                - 8
-                - 9
-                - 16
               children:
                 - type: '"const"'
                   id: 8
@@ -53,6 +49,8 @@ children:
                       id: 10
                       range: 3:11 - 3:19
                       content: Greeting
+                      alias_of:
+                        - 12
                     - type: '"="'
                       id: 11
                       range: 3:20 - 3:21
@@ -185,6 +183,8 @@ children:
                                     - 41
                                     - 43
                                     - 44
+                                  alias_of:
+                                    - 12
                                   children:
                                     - type: relative_scope
                                       id: 41
@@ -533,8 +533,8 @@ children:
 - node: 52
   content: $s .= "!!"
   data:
-    value: �!!!
-    isliteral: false
+    value: Hello World!!!
+    isliteral: true
 - node: 74
   content: $s2 .= $args[0]
   data:
@@ -548,8 +548,8 @@ children:
 - node: 39
   content: self::Greeting . "!"
   data:
-    value: �!
-    isliteral: false
+    value: Hello World!
+    isliteral: true
 - node: 57
   content: '"!!"'
   data:
