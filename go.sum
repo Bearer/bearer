@@ -276,8 +276,8 @@ github.com/yashtewari/glob-intersection v0.2.0/go.mod h1:LK7pIC3piUjovexikBbJ26Y
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 github.com/yusufpapurcu/wmi v1.2.3 h1:E1ctvB7uKFMOJw3fdOW32DwGE9I7t++CRUEMKvFoFiw=
 github.com/yusufpapurcu/wmi v1.2.3/go.mod h1:SBZ9tNy3G9/m5Oi98Zks0QjeHVDvuK0qfxQmPyzfmi0=
-github.com/zricethezav/gitleaks/v8 v8.18.1 h1:Jlv3Pu6dritmro5Cy0rbBGW7fvP7izn3NMqN4Dk4c2o=
-github.com/zricethezav/gitleaks/v8 v8.18.1/go.mod h1:8Dn6XSzCXjbkxc2e/o1M+dwIHPAoyY7HsYjLWzgg+Zs=
+github.com/zricethezav/gitleaks/v8 v8.18.2 h1:slo/sMmgs3qA+6Vv6iqVhsCv+gsl3RekQXqDN0M4g5M=
+github.com/zricethezav/gitleaks/v8 v8.18.2/go.mod h1:8F5GrdCpEtyN5R+0MKPubbOPqIHptNckH3F7bYrhT+Y=
 go.opencensus.io v0.24.0 h1:y73uSU6J157QMP2kn2r30vwW1A2W2WFwSCGnAVxeaD0=
 go.opencensus.io v0.24.0/go.mod h1:vNK8G9p7aAivkbmorf4v+7Hgx+Zs0yY+0fOtgBfjQKo=
 go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.46.1 h1:aFJWCqJMNjENlcleuuOkGAPH82y0yULBScfXcIEdS24=
