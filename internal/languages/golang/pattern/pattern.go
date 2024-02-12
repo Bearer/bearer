@@ -138,7 +138,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		}
 	}
 
-	if parent.Type() == "function_declaration" {
+	if slices.Contains([]string{"function_declaration", "method_declaration"}, parent.Type()) {
 		// parameters
 		if node == parent.ChildByFieldName("parameters") {
 			return true, false
@@ -150,6 +150,7 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// function declaration_list
 	unAnchored := []string{
 		"function_declaration",
+		"method_declaration",
 		"var_declaration",
 		"literal_value",
 	}
