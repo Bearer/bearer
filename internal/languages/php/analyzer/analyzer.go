@@ -202,10 +202,14 @@ func (analyzer *analyzer) analyzeSubscript(node *sitter.Node, visitChildren func
 }
 
 func (analyzer *analyzer) analyzeConstDeclaration(node *sitter.Node, visitChildren func() error) error {
-	child := node.NamedChild(0)
+	var child *sitter.Node
 
-	if child.Type() == "visibility_modifier" {
-		child = node.NamedChild(1)
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child = node.NamedChild(i)
+
+		if child.Type() == "const_element" {
+			break
+		}
 	}
 
 	left := child.NamedChild(0)
