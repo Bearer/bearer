@@ -5,25 +5,25 @@ low:
         title: ""
         description: ""
         documentation_url: ""
-      line_number: 7
+      line_number: 9
       full_filename: main.php
       filename: main.php
       source:
         location:
-            start: 7
-            end: 7
+            start: 9
+            end: 9
             column:
                 start: 10
                 end: 38
       sink:
         location:
-            start: 7
-            end: 7
+            start: 9
+            end: 9
             column:
                 start: 10
                 end: 38
         content: hash( self::ALGO, $content )
-      parent_line_number: 7
+      parent_line_number: 9
       snippet: hash( self::ALGO, $content )
       fingerprint: b1e6825cdfdbf302da0f7c9887efd995_0
       old_fingerprint: b1e6825cdfdbf302da0f7c9887efd995_0
