@@ -27,7 +27,7 @@ The default installation script works well for most use cases, but if you need m
 curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 ```
 
-Note; Bearer requires `git` to be available on your `$PATH`. For MacOS we only support 12+ (Monterey) and later. For older versions we recommend using Docker.
+Note; Bearer requires `git` (2.34+) to be available on your `$PATH`. For MacOS we only support 12+ (Monterey) and later. Where these dependencies cannot be met we recommend using Docker.
 
 ### Homebrew
 
