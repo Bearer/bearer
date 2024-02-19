@@ -66,6 +66,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeParameter(node, visitChildren)
 	case "resource":
 		return analyzer.analyzeResource(node, visitChildren)
+	case "cast_expression":
+		return analyzer.analyzeCastExpression(node, visitChildren)
 	case "switch_expression":
 		return analyzer.analyzeSwitch(node, visitChildren)
 	case "switch_block":
@@ -105,6 +107,16 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 	}
 
 	return err
+}
+
+func (analyzer *analyzer) analyzeCastExpression(node *sitter.Node, visitChildren func() error) error {
+	value := node.ChildByFieldName("value")
+
+	analyzer.builder.Alias(node, value)
+
+	analyzer.lookupVariable(value)
+
+	return visitChildren()
 }
 
 // the "foo = 1" part in:
