@@ -1,5 +1,5 @@
 (map[string][]types.Finding) (len=2) {
-  (string) (len=3) "low": ([]types.Finding) (len=1) {
+  (string) (len=8) "critical": ([]types.Finding) (len=1) {
     (types.Finding) {
       Rule: (*types.Rule)({
         CWEIDs: ([]string) (len=2) {
@@ -53,13 +53,13 @@
       RawCodeExtract: ([]file.Line) {
       },
       SeverityMeta: (types.SeverityMeta) {
-        RuleSeverity: (string) (len=3) "low",
+        RuleSeverity: (string) (len=8) "critical",
         SensitiveDataCategories: ([]string) <nil>,
         HasLocalDataTypes: (*bool)(<nil>),
         SensitiveDataCategoryWeighting: (int) 0,
         RuleSeverityWeighting: (int) 0,
         FinalWeighting: (int) 0,
-        DisplaySeverity: (string) (len=3) "low"
+        DisplaySeverity: (string) (len=8) "critical"
       }
     }
   },

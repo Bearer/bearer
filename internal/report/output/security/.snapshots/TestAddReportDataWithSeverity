@@ -1,2 +1,66 @@
-(map[string][]types.Finding) {
+(map[string][]types.Finding) (len=1) {
+  (string) (len=8) "critical": ([]types.Finding) (len=1) {
+    (types.Finding) {
+      Rule: (*types.Rule)({
+        CWEIDs: ([]string) (len=2) {
+          (string) (len=3) "209",
+          (string) (len=3) "532"
+        },
+        Id: (string) (len=17) "ruby_rails_logger",
+        Title: (string) (len=46) "Sensitive data sent to Rails loggers detected.",
+        Description: (string) (len=608) "## Description\nLeaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to rails loggers.\n\n## Remediations\n❌ Avoid using sensitive data in logger messages:\n\n```ruby\nRails.logger.info('User is: #{user.email}')\n```\n\n✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:\n\n```ruby\nRails.logger.info('User is: #{user.uuid}')\n```\n\n## Resources\n- [OWASP logging cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)\n",
+        DocumentationUrl: (string) (len=57) "https://docs.bearer.com/reference/rules/ruby_rails_logger"
+      }),
+      LineNumber: (int) 1,
+      FullFilename: (string) "",
+      Filename: (string) (len=20) "pkg/datatype_leak.rb",
+      DataType: (*types.DataType)({
+        CategoryUUID: (string) (len=36) "35b94efa-9b67-49b2-abb9-29b6a759a030",
+        Name: (string) (len=14) "Biometric Data"
+      }),
+      CategoryGroups: ([]string) (len=3) {
+        (string) (len=3) "PII",
+        (string) (len=13) "Personal Data",
+        (string) (len=25) "Personal Data (Sensitive)"
+      },
+      Source: (types.Source) {
+        Location: (*types.Location)({
+          Start: (int) 1,
+          End: (int) 0,
+          Column: (types.Column) {
+            Start: (int) 0,
+            End: (int) 0
+          }
+        })
+      },
+      Sink: (types.Sink) {
+        Location: (*types.Location)({
+          Start: (int) 1,
+          End: (int) 2,
+          Column: (types.Column) {
+            Start: (int) 10,
+            End: (int) 28
+          }
+        }),
+        Content: (string) (len=38) "Rails.logger.info(user.biometric_data)"
+      },
+      ParentLineNumber: (int) 1,
+      ParentContent: (string) (len=38) "Rails.logger.info(user.biometric_data)",
+      Fingerprint: (string) (len=34) "375d7c2e9977cf2ce5dbf04b04237bea_0",
+      OldFingerprint: (string) (len=34) "80ce0185374c0975a9b2a71e9d11a4f0_0",
+      DetailedContext: (string) "",
+      CodeExtract: (string) "",
+      RawCodeExtract: ([]file.Line) {
+      },
+      SeverityMeta: (types.SeverityMeta) {
+        RuleSeverity: (string) (len=8) "critical",
+        SensitiveDataCategories: ([]string) <nil>,
+        HasLocalDataTypes: (*bool)(<nil>),
+        SensitiveDataCategoryWeighting: (int) 0,
+        RuleSeverityWeighting: (int) 0,
+        FinalWeighting: (int) 0,
+        DisplaySeverity: (string) (len=8) "critical"
+      }
+    }
+  }
 }
