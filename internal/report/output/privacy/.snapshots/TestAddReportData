@@ -5,9 +5,9 @@
       DataType: (string) (len=13) "Email Address",
       DetectionCount: (int) 1,
       CriticalRiskFindingCount: (int) 0,
-      HighRiskFindingCount: (int) 1,
+      HighRiskFindingCount: (int) 0,
       MediumRiskFindingCount: (int) 0,
-      LowRiskFindingCount: (int) 0,
+      LowRiskFindingCount: (int) 1,
       RulesPassedCount: (int) 0
     },
     (types.Subject) {
@@ -29,9 +29,9 @@
         (string) (len=13) "Email Address"
       },
       CriticalRiskFindingCount: (int) 0,
-      HighRiskFindingCount: (int) 1,
+      HighRiskFindingCount: (int) 0,
       MediumRiskFindingCount: (int) 0,
-      LowRiskFindingCount: (int) 0,
+      LowRiskFindingCount: (int) 1,
       RulesPassedCount: (int) 0
     }
   }

@@ -19,7 +19,6 @@ import (
 
 	dataflowtypes "github.com/bearer/bearer/internal/report/output/dataflow/types"
 	"github.com/bearer/bearer/internal/report/output/security"
-	securitytypes "github.com/bearer/bearer/internal/report/output/security/types"
 	"github.com/bearer/bearer/internal/report/output/testhelper"
 	outputtypes "github.com/bearer/bearer/internal/report/output/types"
 )
@@ -199,18 +198,6 @@ func TestAddReportDataWithFailOnSeverity(t *testing.T) {
 			assert.Equal(tt, test.Expected, data.ReportFailed)
 		})
 	}
-}
-
-func TestCalculateSeverity(t *testing.T) {
-	res := []securitytypes.SeverityMeta{
-		security.CalculateSeverity([]string{"PHI", "Personal Data"}, "low", true),
-		security.CalculateSeverity([]string{"Personal Data (Sensitive)"}, "low", false),
-		security.CalculateSeverity([]string{"Personal Data"}, "low", false),
-		security.CalculateSeverity([]string{"Personal Data"}, "warning", false),
-		security.CalculateSeverity([]string{}, "warning", false),
-	}
-
-	cupaloy.SnapshotT(t, res)
 }
 
 func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {

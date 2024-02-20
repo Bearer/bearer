@@ -10,14 +10,6 @@ https://docs.bearer.com/reference/rules [TEST]
 Language  Default Rules  Custom Rules  Files  
 
 
-CRITICAL: Sensitive data sent to Rails loggers detected. [CWE-209, CWE-532]
-https://docs.bearer.com/reference/rules/ruby_rails_logger
-To ignore this finding, run: bearer ignore add 375d7c2e9977cf2ce5dbf04b04237bea_0
-
-File: :1
-
-
-
 MEDIUM: Missing SSL certificate verification detected. [CWE-295]
 https://docs.bearer.com/reference/rules/ruby_lang_ssl_verification
 To ignore this finding, run: bearer ignore add 9005ef3db844b32c1a0317e032f4a16a_0
@@ -25,14 +17,22 @@ To ignore this finding, run: bearer ignore add 9005ef3db844b32c1a0317e032f4a16a_
 File: :2
 
 
+
+LOW: Sensitive data sent to Rails loggers detected. [CWE-209, CWE-532]
+https://docs.bearer.com/reference/rules/ruby_rails_logger
+To ignore this finding, run: bearer ignore add 375d7c2e9977cf2ce5dbf04b04237bea_0
+
+File: :1
+
+
 =====================================
 
 3 checks, 2 findings
 
-CRITICAL: 1 (CWE-209, CWE-532)
+CRITICAL: 0
 HIGH: 0
 MEDIUM: 1 (CWE-295)
-LOW: 0
+LOW: 1 (CWE-209, CWE-532)
 WARNING: 0
 
 Need help or want to discuss the output? Join the Community https://discord.gg/eaHZBJUXRF

@@ -1,4 +1,4 @@
-high:
+low:
     - rule:
         cwe_ids: []
         id: javascript_test_datatype_rule

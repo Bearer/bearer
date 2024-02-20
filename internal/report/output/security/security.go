@@ -472,60 +472,9 @@ func CalculateSeverity(groups []string, severity string, hasLocalDataTypes bool)
 		}
 	}
 
-	if !hasLocalDataTypes {
-		return types.SeverityMeta{
-			RuleSeverity:    severity,
-			DisplaySeverity: severity,
-		}
-	}
-
-	// highest sensitive data category
-	sensitiveDataCategoryWeighting := 0
-	if slices.Contains(groups, "PHI") {
-		sensitiveDataCategoryWeighting = 3
-	} else if slices.Contains(groups, "Personal Data (Sensitive)") {
-		sensitiveDataCategoryWeighting = 3
-	} else if slices.Contains(groups, "Personal Data") {
-		sensitiveDataCategoryWeighting = 2
-	} else if slices.Contains(groups, "PII") {
-		sensitiveDataCategoryWeighting = 1
-	}
-
-	var ruleSeverityWeighting int
-	switch severity {
-	case globaltypes.LevelCritical:
-		ruleSeverityWeighting = 8
-	case globaltypes.LevelHigh:
-		ruleSeverityWeighting = 5
-	case globaltypes.LevelMedium:
-		ruleSeverityWeighting = 3
-	default:
-		ruleSeverityWeighting = 2 // low weighting as default
-	}
-
-	triggerWeighting := 2
-
-	var displaySeverity string
-	finalWeighting := ruleSeverityWeighting + (sensitiveDataCategoryWeighting * triggerWeighting)
-	switch {
-	case finalWeighting >= 8:
-		displaySeverity = globaltypes.LevelCritical
-	case finalWeighting >= 5:
-		displaySeverity = globaltypes.LevelHigh
-	case finalWeighting >= 3:
-		displaySeverity = globaltypes.LevelMedium
-	default:
-		displaySeverity = globaltypes.LevelLow
-	}
-
 	return types.SeverityMeta{
-		RuleSeverity:                   severity,
-		SensitiveDataCategories:        groups,
-		HasLocalDataTypes:              &hasLocalDataTypes,
-		RuleSeverityWeighting:          ruleSeverityWeighting,
-		SensitiveDataCategoryWeighting: sensitiveDataCategoryWeighting,
-		FinalWeighting:                 finalWeighting,
-		DisplaySeverity:                displaySeverity,
+		RuleSeverity:    severity,
+		DisplaySeverity: severity,
 	}
 }
 

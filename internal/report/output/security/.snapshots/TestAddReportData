@@ -1,5 +1,5 @@
 (map[string][]types.Finding) (len=2) {
-  (string) (len=8) "critical": ([]types.Finding) (len=1) {
+  (string) (len=3) "low": ([]types.Finding) (len=1) {
     (types.Finding) {
       Rule: (*types.Rule)({
         CWEIDs: ([]string) (len=2) {
@@ -54,16 +54,12 @@
       },
       SeverityMeta: (types.SeverityMeta) {
         RuleSeverity: (string) (len=3) "low",
-        SensitiveDataCategories: ([]string) (len=3) {
-          (string) (len=3) "PII",
-          (string) (len=13) "Personal Data",
-          (string) (len=25) "Personal Data (Sensitive)"
-        },
-        HasLocalDataTypes: (*bool)(true),
-        SensitiveDataCategoryWeighting: (int) 3,
-        RuleSeverityWeighting: (int) 2,
-        FinalWeighting: (int) 8,
-        DisplaySeverity: (string) (len=8) "critical"
+        SensitiveDataCategories: ([]string) <nil>,
+        HasLocalDataTypes: (*bool)(<nil>),
+        SensitiveDataCategoryWeighting: (int) 0,
+        RuleSeverityWeighting: (int) 0,
+        FinalWeighting: (int) 0,
+        DisplaySeverity: (string) (len=3) "low"
       }
     }
   },

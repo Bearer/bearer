@@ -1,4 +1,4 @@
-high:
+low:
     - rule:
         cwe_ids: []
         id: java_rule_logger_test

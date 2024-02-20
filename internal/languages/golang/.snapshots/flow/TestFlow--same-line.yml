@@ -1,4 +1,4 @@
-high:
+low:
     - rule:
         cwe_ids: []
         id: rule_logger_test
