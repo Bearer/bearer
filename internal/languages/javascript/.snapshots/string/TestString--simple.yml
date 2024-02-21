@@ -1,4 +1,4 @@
-high:
+low:
     - rule:
         cwe_ids: []
         id: javascript_insecure_url_test
