@@ -1,7 +1,6 @@
 package file
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"os"
@@ -14,6 +13,7 @@ import (
 	"github.com/go-enry/go-enry/v2"
 	"github.com/rs/zerolog/log"
 
+	"github.com/bearer/bearer/internal/util/linescanner"
 	"github.com/bearer/bearer/internal/util/regex"
 
 	ignore "github.com/sabhiram/go-gitignore"
@@ -326,7 +326,7 @@ func ReadFileSinkLines(
 
 	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
+	scanner := linescanner.New(file)
 	lineCounter := 1
 	var extract []Line
 
@@ -370,7 +370,7 @@ func ReadFileSingleLine(filePath string, lineNumber int) (string, error) {
 	}
 	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
+	scanner := linescanner.New(file)
 	lineCounter := 1
 	for scanner.Scan() {
 		if lineCounter == lineNumber {
