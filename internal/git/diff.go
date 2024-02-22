@@ -1,12 +1,13 @@
 package git
 
 import (
-	"bufio"
 	"context"
 	"fmt"
 	"io"
 	"strconv"
 	"strings"
+
+	"github.com/bearer/bearer/internal/util/linescanner"
 )
 
 type ChunkRange struct {
@@ -46,7 +47,7 @@ func Diff(rootDir, baseRef string) ([]FilePatch, error) {
 		},
 		func(stdout io.Reader) error {
 			var err error
-			result, err = parseDiff(bufio.NewScanner(stdout))
+			result, err = parseDiff(linescanner.New(stdout))
 			if err != nil {
 				return err
 			}
@@ -58,7 +59,7 @@ func Diff(rootDir, baseRef string) ([]FilePatch, error) {
 	return result, err
 }
 
-func parseDiff(scanner *bufio.Scanner) ([]FilePatch, error) {
+func parseDiff(scanner *linescanner.Scanner) ([]FilePatch, error) {
 	var result []FilePatch
 	var fromPath, toPath string
 	var chunks []Chunk
@@ -108,7 +109,7 @@ func parseDiff(scanner *bufio.Scanner) ([]FilePatch, error) {
 
 	flush()
 
-	return result, nil
+	return result, scanner.Err()
 }
 
 func parseDiffHeader(value string) (string, string, error) {
