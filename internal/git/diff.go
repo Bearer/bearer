@@ -108,6 +108,10 @@ func parseDiff(scanner *bufio.Scanner) ([]FilePatch, error) {
 
 	flush()
 
+	if err := scanner.Err(); err != nil {
+		return result, err
+	}
+
 	return result, nil
 }
 
