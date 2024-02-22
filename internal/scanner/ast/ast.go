@@ -3,6 +3,7 @@ package ast
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -14,6 +15,8 @@ import (
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 )
+
+var ExpectedComment = regexp.MustCompile(`\A[^\w]*bearer:expected\s[\w,]+\z`)
 
 func Parse(
 	ctx context.Context,
@@ -116,7 +119,7 @@ func addExpectedRules(
 		nextExpectedRules := expectedRules
 
 		nodeContent := builder.ContentFor(node)
-		if strings.Contains(nodeContent, "bearer:expected") {
+		if ExpectedComment.Match([]byte(nodeContent)) {
 			rawRuleIDs := strings.Split(nodeContent, "bearer:expected")[1]
 
 			for _, ruleID := range strings.Split(rawRuleIDs, ",") {
