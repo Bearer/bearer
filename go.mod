@@ -21,7 +21,7 @@ require (
 	github.com/rs/zerolog v1.32.0
 	github.com/russross/blackfriday v1.6.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
-	github.com/schollz/progressbar/v3 v3.14.1
+	github.com/schollz/progressbar/v3 v3.14.2
 	github.com/shirou/gopsutil/v3 v3.24.1
 	github.com/smacker/go-tree-sitter v0.0.0-20230720070738-0d0a9f78d8f8
 	github.com/stretchr/testify v1.8.4
@@ -56,7 +56,7 @@ require (
 	github.com/muesli/termenv v0.15.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
-	github.com/rivo/uniseg v0.4.4 // indirect
+	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/tchap/go-patricia/v2 v2.3.1 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
