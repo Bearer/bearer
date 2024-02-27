@@ -1,0 +1,13 @@
+
+
+Security Report
+
+=====================================
+
+Zero rules found. A security report requires rules to function. Please check configuration.
+
+
+--
+Analyzing codebase
+Error: report error: 0 rules found for supported language, default rules could not be downloaded or possibly disabled without using --external-rule-dir
+

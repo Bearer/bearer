@@ -3,7 +3,7 @@
 --
 Analyzing codebase
 Loading rules
-Scanning target e2e/flags/testdata/simple
+Scanning target e2e/flags/testdata/ok
 Running Detectors
 Generating dataflow
 Evaluating rules

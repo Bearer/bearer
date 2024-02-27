@@ -11,9 +11,10 @@ func TestApiKeyFlags(t *testing.T) {
 	t.Parallel()
 	arguments := []string{
 		"scan",
-		filepath.Join("e2e", "flags", "testdata", "simple"),
+		filepath.Join("e2e", "flags", "testdata", "ok"),
 		"--disable-version-check",
 		"--disable-default-rules",
+		"--external-rule-dir", "e2e/testdata/rules",
 		"--api-key",
 		"123",
 		"--format",
