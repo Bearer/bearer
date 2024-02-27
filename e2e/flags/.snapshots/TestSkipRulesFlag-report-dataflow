@@ -1,0 +1,36 @@
+
+
+Security Report
+
+=====================================
+
+Rules: 
+Language  Default Rules  Custom Rules  Files  
+Ruby      0              1             1      
+
+
+HIGH: Ruby logger [CWE-42]
+To ignore this finding, run: bearer ignore add fa5e03644738e4c17cbbd04a580506b1_0
+
+File: e2e/flags/testdata/simple/main.rb:1
+
+ 1 logger.info("user info", user.email)
+=====================================
+
+1 checks, 1 findings
+
+CRITICAL: 0
+HIGH: 1 (CWE-42)
+MEDIUM: 0
+LOW: 0
+WARNING: 0
+
+Need help or want to discuss the output? Join the Community https://discord.gg/eaHZBJUXRF
+
+Retain state and manage your findings directly on Bearer Cloud. Learn more at https://docs.bearer.com/guides/bearer-cloud/
+
+
+--
+Analyzing codebase
+Warning: rule IDs bar,foo given to be skipped but were not found
+

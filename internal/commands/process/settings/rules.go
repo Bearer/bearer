@@ -325,18 +325,21 @@ func validateRuleOptionIDs(
 			invalidRuleIDs = append(invalidRuleIDs, id)
 		}
 	}
-
+	var invalidSkipRuleIDs []string
 	for id := range options.SkipRule {
 		_, existsInDefinition := definitions[id]
 		_, existsInBuiltInDefinition := builtInDefinitions[id]
 
 		if !existsInBuiltInDefinition && !existsInDefinition {
-			invalidRuleIDs = append(invalidRuleIDs, id)
+			invalidSkipRuleIDs = append(invalidSkipRuleIDs, id)
 		}
 	}
 
+	if len(invalidSkipRuleIDs) > 0 {
+		output.StdErrLog(fmt.Sprintf("Warning: rule IDs %s given to be skipped but were not found", strings.Join(invalidSkipRuleIDs, ",")))
+	}
 	if len(invalidRuleIDs) > 0 {
-		return fmt.Errorf("invalid rule IDs in only/skip option: %s", strings.Join(invalidRuleIDs, ","))
+		return fmt.Errorf("invalid rule IDs in only option: %s", strings.Join(invalidRuleIDs, ","))
 	}
 
 	return nil

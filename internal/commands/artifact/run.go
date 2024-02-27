@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"slices"
 	"sort"
 	"strings"
 	"time"
@@ -449,6 +450,10 @@ func (r *runner) Report(
 				outputhandler.StdErrLog(fmt.Sprintf("Failed to send data to Bearer Cloud. %s ", *r.scanSettings.Client.Error))
 			}
 		}
+	}
+
+	if len(r.scanSettings.Rules) == 0 && slices.Contains(r.scanSettings.Scan.Scanner, flag.ScannerSAST) && r.scanSettings.Report.Report == flag.ReportSecurity {
+		return false, fmt.Errorf("%d rules found for supported language, default rules could not be downloaded or possibly disabled without using --external-rule-dir", len(r.scanSettings.Rules))
 	}
 
 	return reportData.ReportFailed, nil

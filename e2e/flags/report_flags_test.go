@@ -29,6 +29,26 @@ func TestReportFlags(t *testing.T) {
 	testhelper.RunTests(t, tests)
 }
 
+func TestNoExternalRuleDir(t *testing.T) {
+	tests := []testhelper.TestCase{
+		newScanTest("report-dataflow", []string{"--report=security"}),
+	}
+	for i := range tests {
+		tests[i].ShouldSucceed = false
+	}
+	testhelper.RunTestsWithSnapshotSubdirectory(t, tests, ".snapshots")
+}
+
+func TestSkipRulesFlag(t *testing.T) {
+	tests := []testhelper.TestCase{
+		newScanTest("report-dataflow", []string{"--report=security", "--external-rule-dir=e2e/testdata/rules", "--skip-rule=bar,foo"}),
+	}
+	for i := range tests {
+		tests[i].ShouldSucceed = false
+	}
+	testhelper.RunTests(t, tests)
+}
+
 func TestReportFlagsShouldFail(t *testing.T) {
 	t.Parallel()
 	tests := []testhelper.TestCase{
