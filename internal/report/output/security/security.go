@@ -433,8 +433,15 @@ func BuildReportString(reportData *outputtypes.ReportData, config settings.Confi
 		globaltypes.LevelWarning:  make(map[string]bool),
 	}
 
+	failuresPerRule := map[string]int{}
 	for _, severityLevel := range globaltypes.Severities {
 		for _, failure := range reportData.FindingsBySeverity[severityLevel] {
+			if _, exist := failuresPerRule[failure.Id]; !exist {
+				failuresPerRule[failure.Id] = 0
+			}
+
+			failuresPerRule[failure.Id] += 1
+
 			for i := 0; i < len(failure.CWEIDs); i++ {
 				failures[severityLevel]["CWE-"+failure.CWEIDs[i]] = true
 			}
@@ -446,7 +453,7 @@ func BuildReportString(reportData *outputtypes.ReportData, config settings.Confi
 		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://docs.bearer.com/guides/custom-rule\n")
 	}
 
-	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, reportData.FindingsBySeverity, rulesAvailableCount, failures, config.Report.Severity)
+	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, reportData.FindingsBySeverity, failuresPerRule, rulesAvailableCount, failures, config.Report.Severity)
 
 	if noFailureSummary {
 		writeSuccessToString(rulesAvailableCount, reportStr)
@@ -682,6 +689,7 @@ func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
 func checkAndWriteFailureSummaryToString(
 	reportStr *strings.Builder,
 	findings Findings,
+	failuresPerRule map[string]int,
 	ruleCount int,
 	failures map[string]map[string]bool,
 	reportedSeverity set.Set[string],
@@ -710,6 +718,14 @@ func checkAndWriteFailureSummaryToString(
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount+warningCount) + " findings\n"))
 
+	// 162 checks, 3061 findings
+
+	// CRITICAL: 0
+	// HIGH: 213 (CWE-210, CWE-328, CWE-532, CWE-73, CWE-79, CWE-798, CWE-918)
+	// MEDIUM: 4 (CWE-346, CWE-601, CWE-693)
+	// LOW: 346 (CWE-319, CWE-409, CWE-79)
+	// WARNING: 2498 (CWE-22, CWE-295, CWE-330, CWE-532, CWE-73, CWE-80)
+
 	for _, severityLevel := range globaltypes.Severities {
 		if !reportedSeverity.Has(severityLevel) {
 			continue
@@ -722,6 +738,12 @@ func checkAndWriteFailureSummaryToString(
 				reportStr.WriteString(" (" + strings.Join(ruleIds, ", ") + ")")
 			}
 		}
+	}
+
+	reportStr.WriteString("\n")
+
+	for rule := range failuresPerRule {
+		reportStr.WriteString(fmt.Sprintf("\n%s: %d", rule, (failuresPerRule[rule])))
 	}
 
 	reportStr.WriteString("\n")
