@@ -17,7 +17,7 @@ var (
 	matchNodeRegex            = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex             = regexp.MustCompile(`\$<\.\.\.>`)
 
-	patternMatchNodeContainerTypes = []string{"import_clause", "import_specifier", "required_parameter"}
+	patternMatchNodeContainerTypes = []string{"import_clause", "import_specifier", "required_parameter", "option_parameter"}
 
 	allowedPatternQueryTypes = []string{"identifier", "property_identifier", "_", "member_expression", "string", "template_string"}
 )
@@ -124,6 +124,12 @@ func (*Pattern) NodeTypes(node *tree.Node) []string {
 	}
 
 	return []string{node.Type()}
+}
+
+func (*Pattern) AnonymousParentTypes() []string {
+	return []string{
+		"binary_expression",
+	}
 }
 
 func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
