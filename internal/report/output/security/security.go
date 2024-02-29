@@ -72,6 +72,11 @@ type Output struct {
 	DetailedContext string          `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
+type rulesCount struct {
+	Key   string
+	Count int
+}
+
 var javascriptLanguages = []string{"JSX", "TypeScript", "JavaScript"}
 
 func AddReportData(
@@ -742,8 +747,17 @@ func checkAndWriteFailureSummaryToString(
 
 	reportStr.WriteString("\n")
 
-	for rule := range failuresPerRule {
-		reportStr.WriteString(fmt.Sprintf("\n%s: %d", rule, (failuresPerRule[rule])))
+	var sortedRules []rulesCount
+	for k, v := range failuresPerRule {
+		sortedRules = append(sortedRules, rulesCount{k, v})
+	}
+
+	sort.Slice(sortedRules, func(i, j int) bool {
+		return sortedRules[i].Count > sortedRules[j].Count
+	})
+
+	for _, rule := range sortedRules {
+		reportStr.WriteString(fmt.Sprintf("\n%s: %d", rule.Key, rule.Count))
 	}
 
 	reportStr.WriteString("\n")
