@@ -116,6 +116,11 @@ module.exports = function (eleventyConfig) {
     arr.sort((a, b) => (a.metadata.id > b.metadata.id ? 1 : -1))
     return arr
   })
+  eleventyConfig.addFilter("removeGitleaks", (arr) => {
+    return arr.filter((value) => {
+      value.metadata.id == "gitleaks"
+    })
+  })
   eleventyConfig.addFilter("setAttribute", (obj, key, value) => {
     obj[key] = value
     return obj
