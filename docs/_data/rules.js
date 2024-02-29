@@ -8,6 +8,8 @@ const gitly = require("gitly")
 const source = "bearer/bearer-rules"
 const rulesPath = "_tmp/rules-data"
 const excludeDirectories = [".github", "scripts"]
+const gitleaksInternalRule =
+  "../internal/commands/process/settings/built_in_rules/third_party/gitleaks/secret_detection.yml"
 
 const counts = {
   languages: {},
@@ -77,6 +79,8 @@ async function fetchRelease() {
 async function fetchData(location) {
   const rules = []
   const dirs = await readdir(location)
+  const gitleaks = await fetchFile(gitleaksInternalRule, "/")
+  rules.push(gitleaks)
   // ex: looping through rules [ruby, gitleaks, sql]
   dirs.forEach(async (dir) => {
     const dirPath = path.join(location, dir)
@@ -147,7 +151,10 @@ async function fetchFile(location, breadcrumb) {
       lang = subdir[subdir.length - 3]
     }
 
-    updateCounts(lang, framework, out.metadata.id)
+    if (subdir && lang) {
+      updateCounts(lang, framework, out.metadata.id)
+    }
+
     if (out.metadata.cwe_id) {
       out.metadata.cwe_id.forEach((i) => {
         if (cweList[i] && cweList[i].owasp) {

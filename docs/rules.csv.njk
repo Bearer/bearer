@@ -5,5 +5,5 @@ layout: false
 ---
 
 Language; Rule Title; Rule ID; Framework; CWE; Doc
-{% for rule in rules.rules | sortById %}{{ rule.languages | join(", ")}}; {{ rule.metadata.description | safe }}; {{ rule.metadata.id }} ;{{ rule.framework }}; {{ rule.metadata.cwe_id | join(", ")}}; {{ rule.metadata.documentation_url }}
+{% for rule in rules.rules | sortById | removeGitleaks %}{{ rule.languages | join(", ")}}; {{ rule.metadata.description | safe }}; {{ rule.metadata.id }} ;{{ rule.framework }}; {{ rule.metadata.cwe_id | join(", ")}}; {{ rule.metadata.documentation_url }}
 {% endfor %}

@@ -26,7 +26,11 @@ eleventyComputed:
   {% endif %}
   <li>
     <strong>Source:</strong>
+    {% if rule.metadata.id == "gitleaks" %}
+    N/A
+    {% else %}
     <a class="text-main dark:text-main-300 hover:underline" href="https://github.com/bearer/bearer-rules/blob/main/rules/{{rule.location}}.yml">{{rule.name}}.yml</a>
+    {% endif %}
   </li>
 </ul>
 {% renderTemplate 'liquid,md',
@@ -60,7 +64,7 @@ rule.metadata %}
       </ul>
     {% endif %}
   {% endif %}
-
+  {% if rule.metadata.id != "gitleaks" %}
   {% renderTemplate "liquid,md",
   rule.metadata %}
   ## Configuration
@@ -75,3 +79,16 @@ rule.metadata %}
   bearer scan /path/to/your-project/ --only-rule={{id}}
   ```
 {% endrenderTemplate %}
+{% else %}
+  {% renderTemplate "liquid,md",
+  rule.metadata %}
+  ## Configuration
+
+  This is a built in rule that represents findings from the secrets scanner.
+
+  To enable this during a scan, use the following flag
+  ```shell
+  bearer scan /path/to/your-project/ --scanner=secrets,sast
+  ```
+{% endrenderTemplate %}
+{% endif %}
