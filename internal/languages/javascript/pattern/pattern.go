@@ -104,7 +104,16 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// arrow functions statement_block
 	// function statement_block
 	// method statement_block
-	unAnchored := []string{"statement_block", "class_body", "object_pattern", "named_imports", "method_definition"}
+	unAnchored := []string{
+		"statement_block",
+		"class_body",
+		"object_pattern",
+		"named_imports",
+		"method_definition",
+		"arrow_function",
+		"function_expression",
+		"required_parameter",
+	}
 
 	isAnchored := !slices.Contains(unAnchored, parent.Type())
 	return isAnchored, isAnchored
