@@ -16,7 +16,7 @@ require (
 	github.com/hhatto/gocloc v0.5.2
 	github.com/onsi/ginkgo/v2 v2.15.0
 	github.com/onsi/gomega v1.31.1
-	github.com/open-policy-agent/opa v0.61.0
+	github.com/open-policy-agent/opa v0.62.0
 	github.com/rodaine/table v1.1.1
 	github.com/rs/zerolog v1.32.0
 	github.com/russross/blackfriday v1.6.0
@@ -61,7 +61,7 @@ require (
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/yashtewari/glob-intersection v0.2.0 // indirect
-	golang.org/x/sync v0.5.0 // indirect
+	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/term v0.17.0 // indirect
 )
 
@@ -83,11 +83,10 @@ require (
 	github.com/google/pprof v0.0.0-20210720184732-4bb14d4b1be1 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
-	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
-	github.com/prometheus/client_golang v1.18.0 // indirect
+	github.com/prometheus/client_golang v1.19.0 // indirect
 	github.com/prometheus/client_model v0.5.0 // indirect
-	github.com/prometheus/common v0.45.0 // indirect
+	github.com/prometheus/common v0.48.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
 	github.com/rogpeppe/go-internal v1.11.0 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
@@ -106,7 +105,7 @@ require (
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/tools v0.16.1 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/protobuf v1.31.0 // indirect
+	google.golang.org/protobuf v1.32.0 // indirect
 )
 
 require (
@@ -119,7 +118,7 @@ require (
 	github.com/spf13/cast v1.6.0 // indirect
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
-	github.com/spf13/viper v1.18.1
+	github.com/spf13/viper v1.18.2
 	github.com/subosito/gotenv v1.6.0 // indirect
 	golang.org/x/sys v0.17.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
