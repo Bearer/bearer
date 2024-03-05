@@ -1,9 +1,13 @@
 <div align="center">
+  <a href="https://cycode.com/blog/cycode-acquires-bearer/"/>
+    <img alt="Bearer acquired by Cycode" src="https://github.com/Bearer/bearer/assets/699436/2428c48e-022b-403a-a03a-1fd10e200f89">
+  </a>
+  <br/>
+  <br/>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/img/bearer-logo-dark.svg">
     <img alt="Bearer" src="./docs/assets/img/bearer-logo-light.svg">
   </picture>
-
   <br />
   <hr/>
     Scan your source code against top <strong>security</strong> and <strong>privacy</strong> risks.
