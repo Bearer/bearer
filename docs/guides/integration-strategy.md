@@ -55,10 +55,6 @@ Here is our recommended strategy:
    - Postpone handling them for now, but note that they will appear on future scans.
    - Ignore them using the `bearer ignore` command, categorizing them as _allowed_ and providing a comment explaining why.
 
-{% callout "info" %}
-If you have many findings and need assistance from your team to triage and remediate them, consider using <a href="/guides/bearer-cloud">Bearer Cloud</a>, a UI interface that complements Bearer CLI for faster resolution.
-{% endcallout %}
-
 ## Step 3: Minimize new issues from being introduced
 
 To prevent the introduction of new issues in your codebase, it is crucial to identify and address them before developers merge their code into the main branch, as part of your CI.

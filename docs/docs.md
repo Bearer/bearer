@@ -4,8 +4,6 @@ layout: "layouts/doc"
 permalink: "/"
 ---
 
-{% callout "info" %}Discover <a href="/guides/bearer-cloud">Bearer Cloud</a>, our solution to manage product and application code security at scale.{% endcallout %}
-
 # Bearer CLI
 
 Welcome to the Bearer CLI documentation. Bearer CLI is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security and privacy risks.
@@ -52,7 +50,6 @@ Guides help you make the most of Bearer CLI so you can get up and running quickl
 - [Create custom rule](/guides/custom-rule/)
 - [Run a privacy report](/guides/privacy/)
 - [Run a data flow report](/guides/dataflow/)
-- [Using Bearer Cloud](/guides/bearer-cloud/)
 - [Enable Completion Script](/guides/shell-completion)
 
 ## Explanations

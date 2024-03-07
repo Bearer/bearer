@@ -24,8 +24,6 @@
   [![Test][test-img]][test]
   [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
   [![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
-
-  ☁️ Ready to take the next step? [Learn more about Bearer Cloud](https://docs.bearer.com/guides/bearer-cloud/). ☁️
 </div>
 
 ## Developer friendly static code analysis for security and privacy
@@ -52,8 +50,6 @@ Bearer CLI scans your source code for:
   * Privacy Impact Assessment (PIA).
   * Data Protection Impact Assessment (DPIA).
   * Records of Processing Activities (RoPA) input for GDPR compliance reporting.
-
-Bearer CLI also powers our SaaS solution, [Bearer Cloud](https://docs.bearer.com/guides/bearer-cloud/), allowing security teams to scale and monitor their application security program using the same engine.
 
 ## :rocket: Getting started
 
