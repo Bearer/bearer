@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -336,6 +337,7 @@ func validateRuleOptionIDs(
 	}
 
 	if len(invalidSkipRuleIDs) > 0 {
+		sort.Strings(invalidSkipRuleIDs)
 		output.StdErrLog(fmt.Sprintf("Warning: rule IDs %s given to be skipped but were not found", strings.Join(invalidSkipRuleIDs, ",")))
 	}
 	if len(invalidRuleIDs) > 0 {

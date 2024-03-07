@@ -69,9 +69,6 @@ bearer ignore add 4b0883d52334dfd9a4acce2fcf810121_0 \
   --false-positive
 ```
 
-<br/>
-{% callout "info" %} If you're looking for more options when it comes to managing findings, take a look at <a href="/guides/bearer-cloud">Bearer Cloud</a>. For ignored findings in particular, see <a href="/guides/bearer-cloud/#ignored-findings-in-bearer-cloud">Ignored findings in Bearer Cloud</a>. {% endcallout %}
-
 ## Skip or ignore specific rules
 
 Sometimes you want to ignore one or more rules, either for the entire scan or for individual blocks of code. Rules are identified by their id, for example: `ruby_lang_exception`.
@@ -198,14 +195,6 @@ Run the commands together, replacing the scan location and the output path to ma
 ```bash
 bearer scan . --format html --output path/to/security-scan.html
 ```
-
-## Send report to Bearer Cloud
-
-If you're looking to manage product and application code security at scale, [Bearer Cloud](https://www.bearer.com/bearer-cloud) offers a platform for teams that syncs with Bearer CLI's output.
-
-Learn how to [send your report](/guides/bearer-cloud) to Bearer Cloud.
-
-![Cloud dashboard](/assets/img/cloud-dashboard.jpg)
 
 ## Next steps
 
