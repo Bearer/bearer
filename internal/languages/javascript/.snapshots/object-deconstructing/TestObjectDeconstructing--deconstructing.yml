@@ -22,9 +22,8 @@ low:
             column:
                 start: 9
                 end: 13
-        content: user
+        content: ""
       parent_line_number: 1
-      snippet: user
       fingerprint: 391f0431340399f3f30398341feeb70a_0
       old_fingerprint: 391f0431340399f3f30398341feeb70a_0
 

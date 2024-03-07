@@ -28,9 +28,8 @@ low:
             column:
                 start: 1
                 end: 18
-        content: logger.info(user)
+        content: ""
       parent_line_number: 2
-      snippet: logger.info(user)
       fingerprint: 50cde2c647d72172d49858483ecb0b57_0
       old_fingerprint: 50cde2c647d72172d49858483ecb0b57_0
 

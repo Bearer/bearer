@@ -23,9 +23,8 @@ high:
             column:
                 start: 1
                 end: 8
-        content: lib.f()
+        content: ""
       parent_line_number: 4
-      snippet: lib.f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_0
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_0
     - rule:
@@ -52,9 +51,8 @@ high:
             column:
                 start: 1
                 end: 4
-        content: f()
+        content: ""
       parent_line_number: 5
-      snippet: f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_1
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_1
     - rule:
@@ -81,9 +79,8 @@ high:
             column:
                 start: 1
                 end: 4
-        content: x()
+        content: ""
       parent_line_number: 6
-      snippet: x()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_2
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_2
     - rule:
@@ -110,9 +107,8 @@ high:
             column:
                 start: 1
                 end: 6
-        content: y.f()
+        content: ""
       parent_line_number: 9
-      snippet: y.f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_3
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_3
     - rule:
@@ -139,9 +135,8 @@ high:
             column:
                 start: 1
                 end: 4
-        content: f()
+        content: ""
       parent_line_number: 11
-      snippet: f()
       fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_4
       old_fingerprint: 23ce8eb29bdfc7d63841656df3d9ae27_4
 

@@ -34,17 +34,11 @@ warning:
             column:
                 start: 1
                 end: 2
-        content: |-
-            CREATE TABLE public.users (
-              id bigint NOT NULL,
-              name character varying,
-              password character varying,
-              created_at timestamp(6) without time zone NOT NULL,
-              updated_at timestamp(6) without time zone NOT NULL,
-              email character varying DEFAULT ''::character varying NOT NULL
-            )
+        content: ""
       parent_line_number: 1
-      snippet: |-
+      fingerprint: e5e17cede9a731da09a639c9c78af007_0
+      old_fingerprint: 86b02d158d5ef7e6b68f6979f4f789aa_0
+      code_extract: |-
         CREATE TABLE public.users (
           id bigint NOT NULL,
           name character varying,
@@ -52,9 +46,46 @@ warning:
           created_at timestamp(6) without time zone NOT NULL,
           updated_at timestamp(6) without time zone NOT NULL,
           email character varying DEFAULT ''::character varying NOT NULL
-        )
-      fingerprint: e5e17cede9a731da09a639c9c78af007_0
-      old_fingerprint: 86b02d158d5ef7e6b68f6979f4f789aa_0
+        );
+    - rule:
+        cwe_ids:
+            - "312"
+        id: ruby_rails_default_encryption
+        title: Missing application-level encryption of sensitive data detected.
+        description: |
+            ## Description
+            Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.
+
+            ## Remediations
+            Whenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.
+
+            ## Resources
+            - [Ruby on Rails Active Record encryption](https://guides.rubyonrails.org/active_record_encryption.html)
+        documentation_url: ""
+      line_number: 7
+      full_filename: e2e/rules/testdata/data/ruby_rails_default_encryption_structure_sql/db/structure.sql
+      filename: db/structure.sql
+      category_groups:
+        - PII
+        - Personal Data
+      source:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 3
+                end: 8
+      sink:
+        location:
+            start: 1
+            end: 8
+            column:
+                start: 1
+                end: 2
+        content: ""
+      parent_line_number: 1
+      fingerprint: e5e17cede9a731da09a639c9c78af007_1
+      old_fingerprint: 86b02d158d5ef7e6b68f6979f4f789aa_1
       code_extract: |-
         CREATE TABLE public.users (
           id bigint NOT NULL,

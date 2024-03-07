@@ -23,9 +23,8 @@ high:
             column:
                 start: 1
                 end: 37
-        content: scopeCursor(request.GET.get('oops'))
+        content: ""
       parent_line_number: 1
-      snippet: scopeCursor(request.GET.get('oops'))
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_0
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_0
     - rule:
@@ -52,9 +51,8 @@ high:
             column:
                 start: 1
                 end: 49
-        content: scopeCursor(request.GET.get('oops') if x else y)
+        content: ""
       parent_line_number: 3
-      snippet: scopeCursor(request.GET.get('oops') if x else y)
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_1
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_1
     - rule:
@@ -81,9 +79,8 @@ high:
             column:
                 start: 1
                 end: 42
-        content: scopeCursor(request.GET.get('oops') or y)
+        content: ""
       parent_line_number: 5
-      snippet: scopeCursor(request.GET.get('oops') or y)
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_2
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_2
     - rule:
@@ -110,9 +107,8 @@ high:
             column:
                 start: 1
                 end: 37
-        content: scopeNested(request.GET.get('oops'))
+        content: ""
       parent_line_number: 7
-      snippet: scopeNested(request.GET.get('oops'))
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_3
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_3
     - rule:
@@ -139,9 +135,8 @@ high:
             column:
                 start: 1
                 end: 41
-        content: scopeNested(x + request.GET.get('oops'))
+        content: ""
       parent_line_number: 8
-      snippet: scopeNested(x + request.GET.get('oops'))
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_4
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_4
     - rule:
@@ -168,9 +163,8 @@ high:
             column:
                 start: 1
                 end: 49
-        content: scopeNested(request.GET.get('oops') if x else y)
+        content: ""
       parent_line_number: 9
-      snippet: scopeNested(request.GET.get('oops') if x else y)
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_5
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_5
     - rule:
@@ -197,9 +191,8 @@ high:
             column:
                 start: 1
                 end: 49
-        content: scopeNested(x if request.GET.get('oops') else y)
+        content: ""
       parent_line_number: 10
-      snippet: scopeNested(x if request.GET.get('oops') else y)
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_6
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_6
     - rule:
@@ -226,9 +219,8 @@ high:
             column:
                 start: 1
                 end: 42
-        content: scopeNested(request.GET.get('oops') or y)
+        content: ""
       parent_line_number: 11
-      snippet: scopeNested(request.GET.get('oops') or y)
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_7
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_7
     - rule:
@@ -255,9 +247,8 @@ high:
             column:
                 start: 1
                 end: 37
-        content: scopeResult(request.GET.get('oops'))
+        content: ""
       parent_line_number: 13
-      snippet: scopeResult(request.GET.get('oops'))
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_8
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_8
     - rule:
@@ -284,9 +275,8 @@ high:
             column:
                 start: 1
                 end: 41
-        content: scopeResult(x + request.GET.get('oops'))
+        content: ""
       parent_line_number: 14
-      snippet: scopeResult(x + request.GET.get('oops'))
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_9
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_9
     - rule:
@@ -313,9 +303,8 @@ high:
             column:
                 start: 1
                 end: 49
-        content: scopeResult(request.GET.get('oops') if x else y)
+        content: ""
       parent_line_number: 15
-      snippet: scopeResult(request.GET.get('oops') if x else y)
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_10
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_10
     - rule:
@@ -342,9 +331,8 @@ high:
             column:
                 start: 1
                 end: 42
-        content: scopeResult(request.GET.get('oops') or y)
+        content: ""
       parent_line_number: 17
-      snippet: scopeResult(request.GET.get('oops') or y)
       fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_11
       old_fingerprint: bf75ffc19e7352a46ad95a1ad74cedb9_11
 

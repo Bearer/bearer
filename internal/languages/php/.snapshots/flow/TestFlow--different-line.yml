@@ -28,9 +28,8 @@ low:
             column:
                 start: 1
                 end: 17
-        content: error_log($name)
+        content: ""
       parent_line_number: 4
-      snippet: error_log($name)
       fingerprint: 22040fe52a02f18aa1f791dfddc636dd_0
       old_fingerprint: 22040fe52a02f18aa1f791dfddc636dd_0
 

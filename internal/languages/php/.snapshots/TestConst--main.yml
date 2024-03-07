@@ -22,9 +22,8 @@ low:
             column:
                 start: 10
                 end: 38
-        content: hash( self::ALGO, $content )
+        content: ""
       parent_line_number: 9
-      snippet: hash( self::ALGO, $content )
       fingerprint: b1e6825cdfdbf302da0f7c9887efd995_0
       old_fingerprint: b1e6825cdfdbf302da0f7c9887efd995_0
 

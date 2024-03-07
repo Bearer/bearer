@@ -307,8 +307,6 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 
 		if rule.DetectPresence {
 			content := capture["rule"].Source(false)
-			content.Text = &rule.Pattern
-
 			var schemaSource *schema.Source
 			var source source.Source
 			if !rule.OmitParent {
@@ -318,7 +316,6 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 					EndLineNumber:     *source.EndLineNumber,
 					StartColumnNumber: *source.StartColumnNumber,
 					EndColumnNumber:   *source.EndColumnNumber,
-					Content:           *source.Text,
 				}
 			} else {
 				source = capture["rule"].Source(false)

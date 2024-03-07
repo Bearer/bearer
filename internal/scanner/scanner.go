@@ -84,14 +84,14 @@ func (scanner *Scanner) Scan(
 					detection.MatchNode.ContentStart.Column,
 					detection.MatchNode.ContentEnd.Line,
 					detection.MatchNode.ContentEnd.Column,
-					fmt.Sprintf("bearer:expected %s", detection.RuleID),
+					"",
 				),
 				reportschema.Source{
 					StartLineNumber:   detection.MatchNode.ContentStart.Line,
 					EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 					StartColumnNumber: detection.MatchNode.ContentStart.Column,
 					EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-					Content:           detection.MatchNode.Content(),
+					Content:           "",
 				})
 		}
 
@@ -109,14 +109,14 @@ func (scanner *Scanner) Scan(
 						detection.MatchNode.ContentStart.Column,
 						detection.MatchNode.ContentEnd.Line,
 						detection.MatchNode.ContentEnd.Column,
-						data.Pattern,
+						"",
 					),
 					reportschema.Source{
 						StartLineNumber:   detection.MatchNode.ContentStart.Line,
 						EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 						StartColumnNumber: detection.MatchNode.ContentStart.Column,
 						EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-						Content:           detection.MatchNode.Content(),
+						Content:           "",
 					})
 			}
 

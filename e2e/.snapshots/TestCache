@@ -29,9 +29,8 @@ high:
             column:
                 start: 1
                 end: 37
-        content: logger.info("user info", user.email)
+        content: ""
       parent_line_number: 1
-      snippet: logger.info("user info", user.email)
       fingerprint: fa5e03644738e4c17cbbd04a580506b1_0
       old_fingerprint: 16c8aedf4ee6fe1f129aec2a9c14310c_0
       code_extract: logger.info("user info", user.email)

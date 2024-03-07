@@ -8,7 +8,6 @@ build_item(location) := {
 	"sink": {
 		"start": location.source.start_line_number,
 		"end": location.source.end_line_number,
-		"content": location.source.content,
 		"column": {
 			"start": location.source.start_column_number,
 			"end": location.source.end_column_number,
@@ -49,7 +48,6 @@ build_local_item(location, data_type) := {
 	"sink": {
 		"start": location.source.start_line_number,
 		"end": location.source.end_line_number,
-		"content": location.source.content,
 		"column": {
 			"start": location.source.start_column_number,
 			"end": location.source.end_column_number,
@@ -75,7 +73,6 @@ build_item(location) := {
 	"sink": {
 		"start": location.source.start_line_number,
 		"end": location.source.end_line_number,
-		"content": location.source.content,
 		"column": {
 			"start": location.source.start_column_number,
 			"end": location.source.end_column_number,

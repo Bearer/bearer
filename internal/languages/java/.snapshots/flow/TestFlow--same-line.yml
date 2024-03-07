@@ -28,9 +28,8 @@ low:
             column:
                 start: 1
                 end: 24
-        content: logger.error(user.name)
+        content: ""
       parent_line_number: 1
-      snippet: logger.error(user.name)
       fingerprint: b000c2a9a82d59a1e826bc709cca9307_0
       old_fingerprint: b000c2a9a82d59a1e826bc709cca9307_0
 

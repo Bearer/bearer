@@ -109,7 +109,6 @@ func extractURLs(fileInfo *file.FileInfo, line string, lineNumber int, report re
 				LanguageType:      fileInfo.LanguageTypeString(),
 				StartLineNumber:   &lineNumber,
 				StartColumnNumber: pointers.Int(globalOffset + startOffset),
-				Text:              &url,
 			})
 		}
 

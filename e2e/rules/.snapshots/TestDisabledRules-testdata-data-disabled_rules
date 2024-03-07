@@ -23,9 +23,8 @@ low:
             column:
                 start: 3
                 end: 7
-        content: sink
+        content: ""
       parent_line_number: 7
-      snippet: sink
       fingerprint: eb59f129d5424fb58e3bfcb5bfa83159_0
       old_fingerprint: e94b7fee5e58e735f107aa1cb3cfb75b_0
       code_extract: '  sink'

@@ -226,7 +226,6 @@ func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
 								StartColumnNumber: 1,
 								EndLineNumber:     1,
 								EndColumnNumber:   44,
-								Content:           "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
 							},
 							PresenceMatches: []dataflowtypes.RiskPresence{
 								{
@@ -247,7 +246,6 @@ func TestFingerprintIsStableWithBaseBranchFindings(t *testing.T) {
 								StartColumnNumber: 1,
 								EndLineNumber:     2,
 								EndColumnNumber:   44,
-								Content:           "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
 							},
 							PresenceMatches: []dataflowtypes.RiskPresence{
 								{
@@ -341,7 +339,6 @@ func dummyDataflowData() *outputtypes.ReportData {
 					StartColumnNumber: 10,
 					EndLineNumber:     2,
 					EndColumnNumber:   28,
-					Content:           "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
 				},
 				PresenceMatches: []dataflowtypes.RiskPresence{
 					{
@@ -363,7 +360,6 @@ func dummyDataflowData() *outputtypes.ReportData {
 					StartColumnNumber: 10,
 					EndLineNumber:     2,
 					EndColumnNumber:   28,
-					Content:           "Rails.logger.info(user.biometric_data)",
 				},
 				DataTypes: []dataflowtypes.RiskDatatype{
 					{

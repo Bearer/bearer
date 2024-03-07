@@ -28,9 +28,8 @@ low:
             column:
                 start: 1
                 end: 50
-        content: console.log(`http://${config.domain}`, user.name)
+        content: ""
       parent_line_number: 1
-      snippet: console.log(`http://${config.domain}`, user.name)
       fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
       old_fingerprint: 5f1137c9ab0489aed97dddee99bff779_0
 

@@ -142,7 +142,6 @@ func extractDataStoresFromProperties(file *file.FileInfo, report report.Report) 
 		LanguageType:    file.LanguageTypeString(),
 		Filename:        file.RelativePath,
 		StartLineNumber: &property.lineNumber,
-		Text:            &property.text,
 	})
 
 	return nil
