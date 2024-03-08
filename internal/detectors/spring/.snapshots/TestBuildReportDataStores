@@ -13,7 +13,7 @@
       StartColumnNumber: (*int)(<nil>),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=33) "spring.datasource.url=jdbc:h2:dev")
+      Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {
       Driver: (string) (len=2) "h2"
@@ -53,7 +53,7 @@
       StartColumnNumber: (*int)(<nil>),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=57) "spring.datasource.driver-class-name=com.mysql.jdbc.Driver")
+      Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {
       Driver: (string) (len=21) "com.mysql.jdbc.Driver"
@@ -93,7 +93,7 @@
       StartColumnNumber: (*int)(<nil>),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=60) "spring.datasource.driverClassName=com.postgresql.jdbc.Driver")
+      Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {
       Driver: (string) (len=26) "com.postgresql.jdbc.Driver"
@@ -133,7 +133,7 @@
       StartColumnNumber: (*int)(<nil>),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=31) "spring.datasource.url=${DB_URL}")
+      Text: (*string)(<nil>)
     },
     Value: (spring.DataStore) {
       Driver: (string) ""

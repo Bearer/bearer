@@ -207,7 +207,6 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 
 		if parent != nil {
 			sourceSchema = &schema.Source{
-				Content:           parent.Content(),
 				StartLineNumber:   parent.StartLineNumber(),
 				StartColumnNumber: parent.StartColumnNumber(),
 				EndLineNumber:     parent.EndLineNumber(),

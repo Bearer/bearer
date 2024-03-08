@@ -29,9 +29,8 @@ high:
             column:
                 start: 1
                 end: 24
-        content: log("abc" + user.email)
+        content: ""
       parent_line_number: 4
-      snippet: log("abc" + user.email)
       fingerprint: 6c505050fabde2c4ed17380d19fab254_0
       old_fingerprint: d2e829ba86a33c5a52844641617ad8a7_0
       code_extract: log("abc" + user.email)
@@ -65,9 +64,8 @@ high:
             column:
                 start: 1
                 end: 15
-        content: log("abc" + x)
+        content: ""
       parent_line_number: 5
-      snippet: log("abc" + x)
       fingerprint: 6c505050fabde2c4ed17380d19fab254_1
       old_fingerprint: d2e829ba86a33c5a52844641617ad8a7_1
       code_extract: log("abc" + x)

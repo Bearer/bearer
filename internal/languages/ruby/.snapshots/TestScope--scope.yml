@@ -23,9 +23,8 @@ high:
             column:
                 start: 1
                 end: 28
-        content: scope_cursor(params[:oops])
+        content: ""
       parent_line_number: 1
-      snippet: scope_cursor(params[:oops])
       fingerprint: 23e17866f80f43957a84e824da9ce255_0
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_0
     - rule:
@@ -52,9 +51,8 @@ high:
             column:
                 start: 1
                 end: 36
-        content: 'scope_cursor(x ? params[:oops] : y)'
+        content: ""
       parent_line_number: 3
-      snippet: 'scope_cursor(x ? params[:oops] : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_1
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_1
     - rule:
@@ -81,9 +79,8 @@ high:
             column:
                 start: 1
                 end: 28
-        content: scope_nested(params[:oops])
+        content: ""
       parent_line_number: 6
-      snippet: scope_nested(params[:oops])
       fingerprint: 23e17866f80f43957a84e824da9ce255_2
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_2
     - rule:
@@ -110,9 +107,8 @@ high:
             column:
                 start: 1
                 end: 32
-        content: scope_nested(params[:oops] + x)
+        content: ""
       parent_line_number: 7
-      snippet: scope_nested(params[:oops] + x)
       fingerprint: 23e17866f80f43957a84e824da9ce255_3
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_3
     - rule:
@@ -139,9 +135,8 @@ high:
             column:
                 start: 1
                 end: 36
-        content: 'scope_nested(x ? params[:oops] : y)'
+        content: ""
       parent_line_number: 8
-      snippet: 'scope_nested(x ? params[:oops] : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_4
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_4
     - rule:
@@ -168,9 +163,8 @@ high:
             column:
                 start: 1
                 end: 36
-        content: 'scope_nested(params[:oops] ? x : y)'
+        content: ""
       parent_line_number: 9
-      snippet: 'scope_nested(params[:oops] ? x : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_5
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_5
     - rule:
@@ -197,9 +191,8 @@ high:
             column:
                 start: 1
                 end: 28
-        content: scope_result(params[:oops])
+        content: ""
       parent_line_number: 11
-      snippet: scope_result(params[:oops])
       fingerprint: 23e17866f80f43957a84e824da9ce255_6
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_6
     - rule:
@@ -226,9 +219,8 @@ high:
             column:
                 start: 1
                 end: 32
-        content: scope_result(params[:oops] + x)
+        content: ""
       parent_line_number: 12
-      snippet: scope_result(params[:oops] + x)
       fingerprint: 23e17866f80f43957a84e824da9ce255_7
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_7
     - rule:
@@ -255,9 +247,8 @@ high:
             column:
                 start: 1
                 end: 36
-        content: 'scope_result(x ? params[:oops] : y)'
+        content: ""
       parent_line_number: 13
-      snippet: 'scope_result(x ? params[:oops] : y)'
       fingerprint: 23e17866f80f43957a84e824da9ce255_8
       old_fingerprint: 23e17866f80f43957a84e824da9ce255_8
 

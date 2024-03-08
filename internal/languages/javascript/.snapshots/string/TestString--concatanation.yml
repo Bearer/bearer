@@ -28,9 +28,8 @@ low:
             column:
                 start: 1
                 end: 39
-        content: console.log("ht" + "tp://", user.name)
+        content: ""
       parent_line_number: 1
-      snippet: console.log("ht" + "tp://", user.name)
       fingerprint: 272ebbd3e69ab1032f6fb14b69a79ae8_0
       old_fingerprint: 272ebbd3e69ab1032f6fb14b69a79ae8_0
 

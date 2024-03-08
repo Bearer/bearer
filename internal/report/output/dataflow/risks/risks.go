@@ -85,12 +85,10 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 			StartColumnNumber: *detection.Source.StartColumnNumber,
 			EndLineNumber:     *detection.Source.EndLineNumber,
 			EndColumnNumber:   *detection.Source.EndColumnNumber,
-			Content:           *detection.Source.Text,
 		}
 	} else {
 		// parent can be nil
 		source = extractCustomRiskParent(detection.Value)
-		content = *detection.Source.Text
 	}
 
 	holder.addDatatype(

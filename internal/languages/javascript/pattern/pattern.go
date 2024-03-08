@@ -65,7 +65,7 @@ func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariab
 	return replaced, params, nil
 }
 
-func produceDummyValue(i int, nodeType string) string {
+func produceDummyValue(i int, _ string) string {
 	return "BearerVar" + fmt.Sprint(i)
 }
 

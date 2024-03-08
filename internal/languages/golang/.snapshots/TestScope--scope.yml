@@ -23,9 +23,8 @@ high:
             column:
                 start: 2
                 end: 40
-        content: scopeCursor(request.FormValue("oops"))
+        content: ""
       parent_line_number: 15
-      snippet: scopeCursor(request.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_0
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_0
     - rule:
@@ -52,9 +51,8 @@ high:
             column:
                 start: 2
                 end: 40
-        content: scopeNested(request.FormValue("oops"))
+        content: ""
       parent_line_number: 18
-      snippet: scopeNested(request.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_1
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_1
     - rule:
@@ -81,9 +79,8 @@ high:
             column:
                 start: 2
                 end: 44
-        content: scopeNested(x + request.FormValue("oops"))
+        content: ""
       parent_line_number: 19
-      snippet: scopeNested(x + request.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_2
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_2
     - rule:
@@ -110,9 +107,8 @@ high:
             column:
                 start: 2
                 end: 43
-        content: scopeNested(y[request.FormValue("oops")])
+        content: ""
       parent_line_number: 20
-      snippet: scopeNested(y[request.FormValue("oops")])
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_3
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_3
     - rule:
@@ -139,9 +135,8 @@ high:
             column:
                 start: 2
                 end: 40
-        content: scopeResult(request.FormValue("oops"))
+        content: ""
       parent_line_number: 22
-      snippet: scopeResult(request.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_4
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_4
     - rule:
@@ -168,9 +163,8 @@ high:
             column:
                 start: 2
                 end: 44
-        content: scopeResult(x + request.FormValue("oops"))
+        content: ""
       parent_line_number: 23
-      snippet: scopeResult(x + request.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_5
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_5
     - rule:
@@ -197,9 +191,8 @@ high:
             column:
                 start: 2
                 end: 36
-        content: scopeCursor(req.FormValue("oops"))
+        content: ""
       parent_line_number: 32
-      snippet: scopeCursor(req.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_6
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_6
     - rule:
@@ -226,9 +219,8 @@ high:
             column:
                 start: 2
                 end: 36
-        content: scopeNested(req.FormValue("oops"))
+        content: ""
       parent_line_number: 35
-      snippet: scopeNested(req.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_7
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_7
     - rule:
@@ -255,9 +247,8 @@ high:
             column:
                 start: 2
                 end: 40
-        content: scopeNested(x + req.FormValue("oops"))
+        content: ""
       parent_line_number: 36
-      snippet: scopeNested(x + req.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_8
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_8
     - rule:
@@ -284,9 +275,8 @@ high:
             column:
                 start: 2
                 end: 39
-        content: scopeNested(y[req.FormValue("oops")])
+        content: ""
       parent_line_number: 37
-      snippet: scopeNested(y[req.FormValue("oops")])
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_9
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_9
     - rule:
@@ -313,9 +303,8 @@ high:
             column:
                 start: 2
                 end: 36
-        content: scopeResult(req.FormValue("oops"))
+        content: ""
       parent_line_number: 39
-      snippet: scopeResult(req.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_10
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_10
     - rule:
@@ -342,9 +331,8 @@ high:
             column:
                 start: 2
                 end: 40
-        content: scopeResult(x + req.FormValue("oops"))
+        content: ""
       parent_line_number: 40
-      snippet: scopeResult(x + req.FormValue("oops"))
       fingerprint: c87422d3d7e0f39d979f1dd26df088d6_11
       old_fingerprint: c87422d3d7e0f39d979f1dd26df088d6_11
 

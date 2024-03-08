@@ -28,9 +28,8 @@ low:
             column:
                 start: 2
                 end: 23
-        content: log.Error().Msg(name)
+        content: ""
       parent_line_number: 29
-      snippet: log.Error().Msg(name)
       fingerprint: f8cb961f0fc2f87d026bf9f5db408736_0
       old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_0
     - rule:
@@ -62,9 +61,8 @@ low:
             column:
                 start: 2
                 end: 24
-        content: log.Error().Msg(other)
+        content: ""
       parent_line_number: 30
-      snippet: log.Error().Msg(other)
       fingerprint: f8cb961f0fc2f87d026bf9f5db408736_1
       old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_1
     - rule:
@@ -96,9 +94,8 @@ low:
             column:
                 start: 2
                 end: 23
-        content: log.Error().Msg(user)
+        content: ""
       parent_line_number: 31
-      snippet: log.Error().Msg(user)
       fingerprint: f8cb961f0fc2f87d026bf9f5db408736_2
       old_fingerprint: f8cb961f0fc2f87d026bf9f5db408736_2
 

@@ -91,7 +91,6 @@ func dummyDataflow() *outputtypes.DataFlow {
 					StartColumnNumber: 10,
 					EndLineNumber:     38,
 					EndColumnNumber:   28,
-					Content:           "Sentry.set_user(email: current_user.email)",
 				},
 				DataTypes: []types.RiskDatatype{
 					{

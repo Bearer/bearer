@@ -28,9 +28,8 @@ low:
             column:
                 start: 1
                 end: 23
-        content: error_log($user->name)
+        content: ""
       parent_line_number: 2
-      snippet: error_log($user->name)
       fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_0
       old_fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_0
     - rule:
@@ -62,9 +61,8 @@ low:
             column:
                 start: 1
                 end: 25
-        content: error_log($user->name())
+        content: ""
       parent_line_number: 3
-      snippet: error_log($user->name())
       fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_1
       old_fingerprint: c8260222d1f52cc14a35ce6ba7d9ec70_1
 

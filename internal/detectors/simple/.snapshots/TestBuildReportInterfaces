@@ -13,7 +13,7 @@
       StartColumnNumber: (*int)(14),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=23) "https://url.example.com")
+      Text: (*string)(<nil>)
     },
     Value: (interfaces.Interface) {
       Type: (interfaces.Type) (len=3) "url",
@@ -42,7 +42,7 @@
       StartColumnNumber: (*int)(14),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=35) "https://multi-a.example.com/foo?x=1")
+      Text: (*string)(<nil>)
     },
     Value: (interfaces.Interface) {
       Type: (interfaces.Type) (len=3) "url",
@@ -71,7 +71,7 @@
       StartColumnNumber: (*int)(53),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=31) "https://multi-b.example.com/bar")
+      Text: (*string)(<nil>)
     },
     Value: (interfaces.Interface) {
       Type: (interfaces.Type) (len=3) "url",
@@ -100,7 +100,7 @@
       StartColumnNumber: (*int)(0),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=38) "https://port1.example.com:3000/foo?x=1")
+      Text: (*string)(<nil>)
     },
     Value: (interfaces.Interface) {
       Type: (interfaces.Type) (len=3) "url",
@@ -129,7 +129,7 @@
       StartColumnNumber: (*int)(39),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=30) "https://port2.example.com:3000")
+      Text: (*string)(<nil>)
     },
     Value: (interfaces.Interface) {
       Type: (interfaces.Type) (len=3) "url",
@@ -158,7 +158,7 @@
       StartColumnNumber: (*int)(1),
       EndLineNumber: (*int)(<nil>),
       EndColumnNumber: (*int)(<nil>),
-      Text: (*string)((len=23) "http://link.example.com")
+      Text: (*string)(<nil>)
     },
     Value: (interfaces.Interface) {
       Type: (interfaces.Type) (len=3) "url",
