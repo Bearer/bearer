@@ -412,7 +412,7 @@ func (r *runner) Report(
 		return false, err
 	}
 
-	if !reportSupported && r.scanSettings.Report.Report != flag.ReportPrivacy {
+	if !reportSupported && r.scanSettings.Report.Report != flag.ReportPrivacy && !r.scanSettings.Scan.Quiet {
 		var placeholderStr *strings.Builder
 		placeholderStr, err = getPlaceholderOutput(reportData, report, r.scanSettings, report.Inputgocloc)
 		if err != nil {
