@@ -1,6 +1,7 @@
 package analyzer
 
 import (
+	"regexp"
 	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
@@ -10,6 +11,8 @@ import (
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/util/stringutil"
 )
+
+var versionRegex = regexp.MustCompile(`\Av\d+\z`)
 
 type analyzer struct {
 	builder *tree.Builder
@@ -100,6 +103,12 @@ func (analyzer *analyzer) analyzeImportSpec(node *sitter.Node, visitChildren fun
 	} else {
 		packageName := strings.Split(analyzer.builder.ContentFor(path), "/")
 		guessedName := stringutil.StripQuotes((packageName[len(packageName)-1]))
+
+		// account for imports like `github.com/airbrake/gobrake/v5`
+		if versionRegex.MatchString(guessedName) && len(packageName) > 1 {
+			guessedName = stringutil.StripQuotes((packageName[len(packageName)-2]))
+		}
+
 		analyzer.scope.Declare(guessedName, path)
 	}
 
@@ -232,5 +241,6 @@ func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
 
 	if pointsToNode := analyzer.scope.Lookup(analyzer.builder.ContentFor(node)); pointsToNode != nil {
 		analyzer.builder.Alias(node, pointsToNode)
+	} else {
 	}
 }

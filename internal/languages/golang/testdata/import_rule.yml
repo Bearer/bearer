@@ -1,0 +1,21 @@
+languages:
+  - go
+patterns:
+  - pattern: $<PACKAGE>.Test()
+    filters:
+      - variable: PACKAGE
+        detection: import_test_package
+        scope: cursor
+auxiliary:
+  - id: import_test_package
+    patterns:
+      - import $<!>"example.com/bar/v5"
+      - import $<!>"example.com/foo"
+      - import ($<!>"example.com/foo")
+severity: high
+metadata:
+  description: Test imports
+  remediation_message: Test imports
+  cwe_id:
+    - 42
+  id: import_test
