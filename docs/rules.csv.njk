@@ -3,7 +3,6 @@ permalink: '/rules.csv'
 eleventyExcludeFromCollections: true
 layout: false
 ---
-
-Language; Rule Title; Rule ID; Framework; CWE; Doc
-{% for rule in rules.rules | sortById | removeGitleaks %}{{ rule.languages | join(", ")}}; {{ rule.metadata.description | safe }}; {{ rule.metadata.id }} ;{{ rule.framework }}; {{ rule.metadata.cwe_id | join(", ")}}; {{ rule.metadata.documentation_url }}
+Language,Rule Title,Rule ID,Framework,CWE,Doc,Severity
+{% for rule in rules.rules | sortById | removeGitleaks %}{{ rule.languages[0] }},{{ rule.metadata.description | safe }},{{ rule.metadata.id }},{{ rule.framework }},{{ rule.metadata.cwe_id[0] }},{{ rule.metadata.documentation_url }},{{rule.severity}}
 {% endfor %}
