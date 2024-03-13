@@ -9,7 +9,7 @@ on:
       - synchronize
       - reopened
     paths-ignore:
-      - 'docs/**'
+      - "docs/**"
 permissions:
   contents: read
 jobs:
@@ -23,7 +23,7 @@ jobs:
         with:
           go-version: 1.21
       - name: Build binary for integration tests
-        run: go build -a -o ./bearer ./cmd/bearer/main.go
+        run: go build -a -o ./bearer ./cmd/bearer/bearer.go
       - name: Run tests
         run: go test -v ./e2e/... -p 8
         timeout-minutes: 10

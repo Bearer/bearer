@@ -96,7 +96,7 @@ func CreateCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 	if os.Getenv("USE_BINARY") != "" {
 		cmd = exec.CommandContext(ctx, executablePath(), arguments...)
 	} else {
-		arguments = append([]string{"run", GetCWD() + "/cmd/bearer/main.go"}, arguments...)
+		arguments = append([]string{"run", GetCWD() + "/cmd/bearer/bearer.go"}, arguments...)
 		cmd = exec.CommandContext(ctx, "go", arguments...)
 	}
 
