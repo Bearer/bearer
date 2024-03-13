@@ -196,7 +196,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 		return
 	}
 
-	if classification, ok := dataType.GetClassification().(classificationschema.Classification); ok && classification.Decision.State != classify.Valid {
+	if classification := dataType.GetClassification().(classificationschema.Classification); classification.Decision.State != classify.Valid {
 		return
 	}
 
