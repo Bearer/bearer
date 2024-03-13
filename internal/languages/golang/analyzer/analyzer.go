@@ -98,19 +98,20 @@ func (analyzer *analyzer) analyzeImportSpec(node *sitter.Node, visitChildren fun
 	name := node.ChildByFieldName("name")
 	path := node.ChildByFieldName("path")
 
+	var guessedName string
 	if name != nil {
-		analyzer.scope.Declare(analyzer.builder.ContentFor(name), path)
+		guessedName = analyzer.builder.ContentFor(name)
 	} else {
 		packageName := strings.Split(analyzer.builder.ContentFor(path), "/")
-		guessedName := stringutil.StripQuotes((packageName[len(packageName)-1]))
+		guessedName = stringutil.StripQuotes((packageName[len(packageName)-1]))
 
 		// account for imports like `github.com/airbrake/gobrake/v5`
 		if versionRegex.MatchString(guessedName) && len(packageName) > 1 {
 			guessedName = stringutil.StripQuotes((packageName[len(packageName)-2]))
 		}
-
-		analyzer.scope.Declare(guessedName, path)
 	}
+
+	analyzer.scope.Declare(strings.TrimSuffix(guessedName, "-go"), path)
 
 	return visitChildren()
 }
