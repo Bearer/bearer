@@ -118,7 +118,7 @@ module.exports = function (eleventyConfig) {
   })
   eleventyConfig.addFilter("removeGitleaks", (arr) => {
     return arr.filter((value) => {
-      value.metadata.id == "gitleaks"
+      return value.metadata.id != "gitleaks"
     })
   })
   eleventyConfig.addFilter("setAttribute", (obj, key, value) => {
