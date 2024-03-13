@@ -164,6 +164,10 @@ func (*Pattern) IsRoot(node *tree.Node) bool {
 }
 
 func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
+	if node.Type() == "identifier" && node.Parent().Type() == "source_file" {
+		return []string{"identifier", "package_identifier"}
+	}
+
 	return []string{node.Type()}
 }
 
