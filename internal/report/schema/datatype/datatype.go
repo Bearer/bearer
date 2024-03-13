@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/internal/report/detections"
 	"github.com/bearer/bearer/internal/report/detectors"
 	"github.com/bearer/bearer/internal/report/schema"
+	"github.com/bearer/bearer/internal/util/classify"
 	"github.com/bearer/bearer/internal/util/normalize_key"
 	"github.com/bearer/bearer/internal/util/pluralize"
 )
@@ -195,6 +196,10 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 		return
 	}
 
+	if classification, ok := dataType.GetClassification().(classificationschema.Classification); ok && classification.Decision.State != classify.Valid {
+		return
+	}
+
 	selfUUID := dataType.GetUUID()
 	if selfUUID == "" {
 		selfUUID = idGenerator.GenerateId()
@@ -213,10 +218,9 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				EndColumnNumber:   parent.EndColumnNumber(),
 			}
 		}
-		normalizedObjectName := ""
-		normalizedFieldName := ""
-		normalizedObjectName = pluralize.Singular(strings.ToLower(parentName))
-		normalizedFieldName = pluralize.Singular(strings.ToLower(selfName))
+
+		normalizedObjectName := pluralize.Singular(strings.ToLower(parentName))
+		normalizedFieldName := pluralize.Singular(strings.ToLower(selfName))
 
 		report.AddDetection(
 			detectionType,
