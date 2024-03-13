@@ -40,7 +40,7 @@ Finally, we use [direnv](https://direnv.net/) to manage env vars in development.
 To run Bearer CLI from source use the following command from the `bearer` directory:
 
 ```bash
-go run ./cmd/bearer/main.go [COMMAND]
+go run ./cmd/bearer/bearer.go [COMMAND]
 ```
 
 Use commands and flags as normal in place of `[COMMAND]`.

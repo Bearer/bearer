@@ -24,7 +24,7 @@ do_cleanup() {
 trap do_cleanup 1 2 3 6
 
 do_info "Building binary..."
-go build -a -o ./bearer ./cmd/bearer/main.go || do_error "Failed to build binary"
+go build -a -o ./bearer ./cmd/bearer/bearer.go || do_error "Failed to build binary"
 
 [ -f bearer ] || do_error "No binary found"
 
