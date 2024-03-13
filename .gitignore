@@ -8,6 +8,7 @@ bearer-build
 
 temp/
 
+bearer
 
 .envrc
 /*.pprof
