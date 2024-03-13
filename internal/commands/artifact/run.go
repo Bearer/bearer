@@ -97,6 +97,9 @@ func NewRunner(
 
 	path := os.TempDir() + "/bearer" + scanID
 	completedPath := strings.Replace(path, ".jsonl", "-completed.jsonl", 1)
+	if os.Getenv("COMPLETED_PATH") != "" {
+		completedPath = os.Getenv("COMPLETED_PATH")
+	}
 
 	r.reportPath = path
 
@@ -107,7 +110,7 @@ func NewRunner(
 		if !scanSettings.Scan.Force && !scanSettings.Scan.Diff {
 			// force is not set, and we are not running a diff scan
 			r.reuseDetection = true
-			log.Debug().Msgf("reuse detection for %s", path)
+			log.Debug().Msgf("reuse detection for %s with %s", path, completedPath)
 			r.reportPath = completedPath
 
 			return r, nil
