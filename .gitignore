@@ -6,11 +6,9 @@ bearer-build
 
 .DS_Store
 
-# binaries
-bearer
-
 temp/
 
+bearer
 
 .envrc
 /*.pprof
