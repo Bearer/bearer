@@ -26,4 +26,5 @@ scan:
     scanner:
         - sast
     skip-path: []
+    skip-test: true
 

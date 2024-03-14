@@ -53,7 +53,7 @@ func Extract(
 	}
 
 	for _, filename := range files {
-		err = detectors.ExtractWithDetectors(context.Background(), path, filename, &report, nil, registrations, nil)
+		err = detectors.ExtractWithDetectors(context.Background(), path, filename, &report, nil, registrations, nil, true)
 		if !assert.Nil(t, err) {
 			t.Errorf("report has errored %s", err)
 		}
