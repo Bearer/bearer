@@ -34,11 +34,13 @@ type Worker struct {
 	classifer       *classification.Classifier
 	enabledScanners []string
 	sastScanner     *scanner.Scanner
+	skipTest        bool
 }
 
 func (worker *Worker) Setup(config config.Config) error {
 	worker.debug = config.Debug
 	worker.enabledScanners = config.Scan.Scanner
+	worker.skipTest = config.Scan.SkipTest
 
 	if slices.Contains(worker.enabledScanners, "sast") {
 		classifier, err := classification.NewClassifier(&classification.Config{Config: config})
@@ -86,6 +88,7 @@ func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest)
 		fileStats,
 		worker.enabledScanners,
 		worker.sastScanner,
+		worker.skipTest,
 	)
 
 	if ctx.Err() != nil {

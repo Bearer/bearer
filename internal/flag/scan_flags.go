@@ -34,6 +34,12 @@ var (
 		Value:      []string{},
 		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql",
 	})
+	SkipTestFlag = ScanFlagGroup.add(flagtypes.Flag{
+		Name:       "skip-test",
+		ConfigName: "scan.skip-test",
+		Value:      true,
+		Usage:      "Disable automatic skipping of test files",
+	})
 	DisableDomainResolutionFlag = ScanFlagGroup.add(flagtypes.Flag{
 		Name:       "disable-domain-resolution",
 		ConfigName: "scan.disable-domain-resolution",
@@ -162,6 +168,7 @@ func (scanFlagGroup) SetOptions(options *flagtypes.Options, args []string) error
 
 	options.ScanOptions = flagtypes.ScanOptions{
 		SkipPath:                getStringSlice(SkipPathFlag),
+		SkipTest:                getBool(SkipTestFlag),
 		DisableDomainResolution: getBool(DisableDomainResolutionFlag),
 		DomainResolutionTimeout: getDuration(DomainResolutionTimeoutFlag),
 		InternalDomains:         getStringSlice(InternalDomainsFlag),
