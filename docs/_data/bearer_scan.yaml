@@ -162,6 +162,11 @@ options:
       Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
     environment_variables:
       - BEARER_SKIP_RULE
+  - name: skip-test
+    default_value: "true"
+    usage: Disable automatic skipping of test files
+    environment_variables:
+      - BEARER_SKIP_TEST
 example: |4-
       # Scan a local project, including language-specific files
       $ bearer scan /path/to/your_project

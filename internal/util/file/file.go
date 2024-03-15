@@ -27,13 +27,16 @@ type Line struct {
 	Strip      bool
 }
 
-var ignoredFilenames = []*regexp.Regexp{
-	regexp.MustCompile(`(^|/)\.git/`),
+var ignoreTestFiles = []*regexp.Regexp{
 	regexp.MustCompile(`(^|/)(?i:_*tests?_*)/`),
 	regexp.MustCompile(`(^|/)specs?/`),
-	regexp.MustCompile(`(^|/)testing/`),
 	regexp.MustCompile(`(^|/|[_-])(spec|test)s?\.`),
 	regexp.MustCompile(`(?i:unit[-_]?tests?)`),
+}
+
+var ignoredFilenames = []*regexp.Regexp{
+	regexp.MustCompile(`(^|/)\.git/`),
+	regexp.MustCompile(`(^|/)testing/`),
 	regexp.MustCompile(`(^|/)_*mocks?_*`),
 	regexp.MustCompile(`(^|/)fixtures/`),
 	regexp.MustCompile(`\.log$`),
@@ -110,7 +113,13 @@ func (path *Path) Exists() bool {
 	return true
 }
 
-func IterateFilesList(rootDir string, files []string, allowDir AllowDirFunction, visitFile VisitFileFunction) error {
+func IterateFilesList(
+	rootDir string,
+	files []string,
+	skipTest bool,
+	allowDir AllowDirFunction,
+	visitFile VisitFileFunction,
+) error {
 	gitIgnore := getGitIgnore(rootDir)
 
 	rootDir, err := filepath.Abs(rootDir)
@@ -145,6 +154,12 @@ func IterateFilesList(rootDir string, files []string, allowDir AllowDirFunction,
 		}
 
 		if regex.AnyMatch(ignoredFilenames, relativePath) {
+			log.Debug().Msgf("%s: skipping due to filename: other", path)
+			continue
+		}
+
+		if skipTest && regex.AnyMatch(ignoreTestFiles, relativePath) {
+			log.Debug().Msgf("%s: skipping due to filename: test", path)
 			continue
 		}
 
