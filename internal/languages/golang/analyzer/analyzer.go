@@ -111,7 +111,9 @@ func (analyzer *analyzer) analyzeImportSpec(node *sitter.Node, visitChildren fun
 		}
 	}
 
-	analyzer.scope.Declare(strings.TrimSuffix(guessedName, "-go"), path)
+	guessedName = strings.TrimSuffix(guessedName, "-go")
+	guessedName = strings.TrimPrefix(guessedName, "go-")
+	analyzer.scope.Declare(guessedName, path)
 
 	return visitChildren()
 }
