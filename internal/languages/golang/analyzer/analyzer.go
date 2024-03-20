@@ -61,7 +61,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 	case "identifier":
 		return visitChildren()
 	case "index_expression":
-		return visitChildren()
+		return analyzer.analyzeIndexExpression(node, visitChildren)
 	default:
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
@@ -191,6 +191,13 @@ func (analyzer *analyzer) analyzeSelectorExpression(node *sitter.Node, visitChil
 	return visitChildren()
 }
 
+// foo[bar]
+func (analyzer *analyzer) analyzeIndexExpression(node *sitter.Node, visitChildren func() error) error {
+	analyzer.lookupVariable(node.ChildByFieldName("operand"))
+
+	return visitChildren()
+}
+
 // method parameter declaration
 //
 // fn(a string)
@@ -244,6 +251,5 @@ func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
 
 	if pointsToNode := analyzer.scope.Lookup(analyzer.builder.ContentFor(node)); pointsToNode != nil {
 		analyzer.builder.Alias(node, pointsToNode)
-	} else {
 	}
 }
