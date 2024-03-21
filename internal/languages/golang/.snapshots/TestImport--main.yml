@@ -1,0 +1,142 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test imports
+        description: Test imports
+        documentation_url: ""
+      line_number: 13
+      full_filename: main.go
+      filename: main.go
+      source:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 2
+                end: 10
+      sink:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 2
+                end: 10
+        content: ""
+      parent_line_number: 13
+      fingerprint: 7cec89718a2276537c30e7b656c0ecb2_0
+      old_fingerprint: 7cec89718a2276537c30e7b656c0ecb2_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test imports
+        description: Test imports
+        documentation_url: ""
+      line_number: 14
+      full_filename: main.go
+      filename: main.go
+      source:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 2
+                end: 10
+      sink:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 2
+                end: 10
+        content: ""
+      parent_line_number: 14
+      fingerprint: 7cec89718a2276537c30e7b656c0ecb2_1
+      old_fingerprint: 7cec89718a2276537c30e7b656c0ecb2_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test imports
+        description: Test imports
+        documentation_url: ""
+      line_number: 15
+      full_filename: main.go
+      filename: main.go
+      source:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 2
+                end: 10
+      sink:
+        location:
+            start: 15
+            end: 15
+            column:
+                start: 2
+                end: 10
+        content: ""
+      parent_line_number: 15
+      fingerprint: 7cec89718a2276537c30e7b656c0ecb2_2
+      old_fingerprint: 7cec89718a2276537c30e7b656c0ecb2_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test imports
+        description: Test imports
+        documentation_url: ""
+      line_number: 16
+      full_filename: main.go
+      filename: main.go
+      source:
+        location:
+            start: 16
+            end: 16
+            column:
+                start: 2
+                end: 10
+      sink:
+        location:
+            start: 16
+            end: 16
+            column:
+                start: 2
+                end: 10
+        content: ""
+      parent_line_number: 16
+      fingerprint: 7cec89718a2276537c30e7b656c0ecb2_3
+      old_fingerprint: 7cec89718a2276537c30e7b656c0ecb2_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test imports
+        description: Test imports
+        documentation_url: ""
+      line_number: 17
+      full_filename: main.go
+      filename: main.go
+      source:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 2
+                end: 10
+      sink:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 2
+                end: 10
+        content: ""
+      parent_line_number: 17
+      fingerprint: 7cec89718a2276537c30e7b656c0ecb2_4
+      old_fingerprint: 7cec89718a2276537c30e7b656c0ecb2_4
+

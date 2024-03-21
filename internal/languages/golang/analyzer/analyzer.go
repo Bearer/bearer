@@ -1,6 +1,7 @@
 package analyzer
 
 import (
+	"regexp"
 	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
@@ -10,6 +11,9 @@ import (
 	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/util/stringutil"
 )
+
+var versionRegex = regexp.MustCompile(`\Av\d+\z`)
+var versionSuffixRegex = regexp.MustCompile(`\.v\d+\z`)
 
 type analyzer struct {
 	builder *tree.Builder
@@ -58,7 +62,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 	case "identifier":
 		return visitChildren()
 	case "index_expression":
-		return visitChildren()
+		return analyzer.analyzeIndexExpression(node, visitChildren)
 	default:
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
@@ -95,13 +99,25 @@ func (analyzer *analyzer) analyzeImportSpec(node *sitter.Node, visitChildren fun
 	name := node.ChildByFieldName("name")
 	path := node.ChildByFieldName("path")
 
+	var guessedName string
 	if name != nil {
-		analyzer.scope.Declare(analyzer.builder.ContentFor(name), path)
+		guessedName = analyzer.builder.ContentFor(name)
 	} else {
 		packageName := strings.Split(analyzer.builder.ContentFor(path), "/")
-		guessedName := stringutil.StripQuotes((packageName[len(packageName)-1]))
-		analyzer.scope.Declare(guessedName, path)
+		guessedName = stringutil.StripQuotes((packageName[len(packageName)-1]))
+
+		// account for imports like `github.com/airbrake/gobrake/v5`
+		if versionRegex.MatchString(guessedName) && len(packageName) > 1 {
+			guessedName = stringutil.StripQuotes((packageName[len(packageName)-2]))
+		}
+
+		// account for imports like `github.com/foo/bar.v3`
+		guessedName = versionSuffixRegex.ReplaceAllString(guessedName, "")
 	}
+
+	guessedName = strings.TrimSuffix(guessedName, "-go")
+	guessedName = strings.TrimPrefix(guessedName, "go-")
+	analyzer.scope.Declare(guessedName, path)
 
 	return visitChildren()
 }
@@ -174,6 +190,13 @@ func (analyzer *analyzer) analyzeCallExpression(node *sitter.Node, visitChildren
 
 // foo.bar
 func (analyzer *analyzer) analyzeSelectorExpression(node *sitter.Node, visitChildren func() error) error {
+	analyzer.lookupVariable(node.ChildByFieldName("operand"))
+
+	return visitChildren()
+}
+
+// foo[bar]
+func (analyzer *analyzer) analyzeIndexExpression(node *sitter.Node, visitChildren func() error) error {
 	analyzer.lookupVariable(node.ChildByFieldName("operand"))
 
 	return visitChildren()
