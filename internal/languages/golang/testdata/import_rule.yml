@@ -9,8 +9,10 @@ patterns:
 auxiliary:
   - id: import_test_package
     patterns:
-      - import $<!>"example.com/bar/v5"
-      - import $<!>"example.com/foo"
+      - import ($<!>"example.com/a/v5")
+      - import ($<!>"example.com/b")
+      - import ($<!>"example.com/c-go.v5")
+      - import ($<!>"example.com/go-d")
       - import ($<!>"example.com/foo")
 severity: high
 metadata:

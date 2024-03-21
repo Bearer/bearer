@@ -13,6 +13,7 @@ import (
 )
 
 var versionRegex = regexp.MustCompile(`\Av\d+\z`)
+var versionSuffixRegex = regexp.MustCompile(`\.v\d+\z`)
 
 type analyzer struct {
 	builder *tree.Builder
@@ -109,6 +110,9 @@ func (analyzer *analyzer) analyzeImportSpec(node *sitter.Node, visitChildren fun
 		if versionRegex.MatchString(guessedName) && len(packageName) > 1 {
 			guessedName = stringutil.StripQuotes((packageName[len(packageName)-2]))
 		}
+
+		// account for imports like `github.com/foo/bar.v3`
+		guessedName = versionSuffixRegex.ReplaceAllString(guessedName, "")
 	}
 
 	guessedName = strings.TrimSuffix(guessedName, "-go")

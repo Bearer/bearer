@@ -1,15 +1,19 @@
 package main
 
-import "example.com/bar/v5"
-import "example.com/foo"
-
 import (
-	baz "example.com/foo"
+	"example.com/a/v5"
+	"example.com/b"
+	"example.com/c-go.v5"
+	"example.com/go-d"
+
+	e "example.com/foo"
 )
 
 func m() {
-	foo.Test()
-	bar.Test()
-	baz.Test()
+	a.Test()
+	b.Test()
+	c.Test()
+	d.Test()
+	e.Test()
 	other.Test()
 }
