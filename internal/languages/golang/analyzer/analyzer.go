@@ -149,6 +149,11 @@ func (analyzer *analyzer) analyzeShortVarDeclaration(node *sitter.Node, visitChi
 	left := node.ChildByFieldName("left")
 	right := node.ChildByFieldName("right")
 
+	err := visitChildren()
+	if err != nil {
+		return err
+	}
+
 	for _, child := range analyzer.builder.ChildrenFor(left) {
 		if !slices.Contains([]string{"_", ",", "err"}, analyzer.builder.ContentFor(child)) {
 			analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
@@ -161,22 +166,22 @@ func (analyzer *analyzer) analyzeShortVarDeclaration(node *sitter.Node, visitChi
 		analyzer.lookupVariable(child)
 	}
 
-	err := visitChildren()
-
-	return err
+	return nil
 }
 
 // var a, b string
 func (analyzer *analyzer) analyzeVarSpecDeclaration(node *sitter.Node, visitChildren func() error) error {
+	err := visitChildren()
+	if err != nil {
+		return err
+	}
+
 	for _, child := range analyzer.builder.ChildrenFor(node) {
 		if child.Type() == "identifier" {
 			analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
 		}
 	}
-
-	err := visitChildren()
-
-	return err
+	return nil
 }
 
 // foo(1, 2)
