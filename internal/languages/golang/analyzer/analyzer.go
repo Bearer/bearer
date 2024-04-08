@@ -63,10 +63,21 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return visitChildren()
 	case "index_expression":
 		return analyzer.analyzeIndexExpression(node, visitChildren)
+	case "variadic_argument":
+		return analyzer.analyzeVariadicArgument(node, visitChildren)
 	default:
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
+}
+
+// x(arg...)
+func (analyzer *analyzer) analyzeVariadicArgument(node *sitter.Node, visitChildren func() error) error {
+	childNode := node.NamedChild(0)
+	analyzer.lookupVariable(childNode)
+	analyzer.builder.Dataflow(node, childNode)
+
+	return visitChildren()
 }
 
 // big.Rat{}
