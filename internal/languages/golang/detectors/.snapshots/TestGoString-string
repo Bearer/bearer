@@ -200,8 +200,6 @@ children:
                       id: 41
                       range: 11:2 - 11:3
                       content: s
-                      alias_of:
-                        - 39
                 - type: '":="'
                   id: 42
                   range: 11:4 - 11:6
@@ -363,8 +361,6 @@ children:
                       id: 72
                       range: 15:2 - 15:4
                       content: s2
-                      alias_of:
-                        - 70
                 - type: '":="'
                   id: 73
                   range: 15:5 - 15:7
@@ -578,8 +574,6 @@ children:
                       id: 114
                       range: 20:2 - 20:4
                       content: s3
-                      alias_of:
-                        - 112
                 - type: '":="'
                   id: 115
                   range: 20:5 - 20:7

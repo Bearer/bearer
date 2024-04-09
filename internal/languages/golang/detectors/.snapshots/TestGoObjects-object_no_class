@@ -109,8 +109,6 @@ children:
                       id: 22
                       range: 6:2 - 6:6
                       content: user
-                      alias_of:
-                        - 20
                 - type: '":="'
                   id: 23
                   range: 6:7 - 6:9
