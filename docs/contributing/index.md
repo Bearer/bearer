@@ -18,6 +18,12 @@ You can contribute in a variety of ways:
 
 All contributions and interactions with the community must adhere to our [contributor code of conduct]({{meta.sourcePath}}/blob/main/CODE_OF_CONDUCT.md).
 
+### CLA (Contributor License Agreement)
+
+A Contributor License Agreement (CLA) is a legal document that outlines the terms and conditions under which a contributor submits their work, such as code, documentation, or other materials, to a project.
+
+Before submitting any Pull Request, please take a look at our [CLA document](/cla.pdf), fill it out and send it to [research@cycode.com](mailto:research@cycode.com). After that, you are good to go.
+
 ## Best practices
 
 Here are some tips to get you started:
