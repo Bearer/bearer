@@ -11,8 +11,8 @@
 -->
 
 ## Checklist
+If this is your first time contributing please [sign the CLA](https://docs.bearer.com/contributing/)
 
 - [ ] I've added test coverage that shows my fix or feature works as expected.
 - [ ] I've updated or added documentation if required.
-- [ ] I've included usage information in the description if CLI behavior was updated or added.
-- [ ] PR title follows [Conventional Commits](https://www.conventionalcommits.org/) format
+
