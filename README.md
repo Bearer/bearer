@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://cycode.com/blog/cycode-acquires-bearer/"/>
-    <img alt="Bearer acquired by Cycode" src="https://github.com/Bearer/bearer/assets/699436/2428c48e-022b-403a-a03a-1fd10e200f89">
+    <img alt="Bearer acquired by Cycode" src="https://github.com/Bearer/bearer/assets/380564/6c522140-5f15-41a4-9270-11b7628f5b23">    
   </a>
   <br/>
   <br/>
