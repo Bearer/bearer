@@ -50,6 +50,7 @@ builds:
     goarch:
       - 386
       - amd64
+      - arm64
     ldflags:
       - -w
       - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
