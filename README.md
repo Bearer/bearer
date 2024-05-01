@@ -1,8 +1,7 @@
-<div align="center">
-  <a href="https://cycode.com/blog/cycode-acquires-bearer/"/>
-    <img alt="Bearer acquired by Cycode" src="https://github.com/Bearer/bearer/assets/380564/6c522140-5f15-41a4-9270-11b7628f5b23">    
-  </a>
-  <br/>
+<div display="flex" flex-direction="row" align-items="center" justify-content="space-between" width="100%">
+<a href="https://cycode.com/cygives/"/><img alt="Cygives-logo" src="./docs/assets/img/Cygives-logo.png"> </a>
+  Bearer is part of Cygives, the community hub for free & open developer security tools. <a href="https://cycode.com/cygives/">Learn more </a>
+   <hr/>
   <br/>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/img/bearer-logo-dark.svg">
