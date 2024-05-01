@@ -81,3 +81,7 @@ We'd love to see the impact you can bring to Bearer CLI. Our contributing docume
 - [Set up Bearer CLI locally to contribute code](/contributing/code/)
 - [Help improve and apply fixes to the documentation](/contributing/docs/)
 - [Add new recipes to Bearer CLI's database](/contributing/recipes/)
+
+## Cygives
+
+Bearer is part of [Cygives](https://cycode.com/cygives/), the community hub for free & open developer security tools.
