@@ -61,56 +61,56 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 
-  build-darwin:
-    needs: [tag]
-    name: build-darwin
-    runs-on: macos-12
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ needs.tag.outputs.ref }}
-      - run: git fetch --force --tags
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.21
-      - name: Setup Gon
-        run: brew install Bearer/tap/gon
-      - name: Import Code-Signing Certificates
-        uses: Apple-Actions/import-codesign-certs@v2
-        with:
-          # The certificates in a PKCS12 file encoded as a base64 string
-          p12-file-base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
-          # The password used to import the PKCS12 file.
-          p12-password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
-      - shell: bash
-        run: |
-          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-      - id: cache
-        uses: actions/cache@v4
-        with:
-          path: dist/darwin
-          key: darwin-${{ env.sha_short }}-canary
-      - uses: goreleaser/goreleaser-action@v5
-        if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
-        name: Run GoReleaser
-        with:
-          distribution: goreleaser-pro
-          version: latest
-          args: release --clean --split -f ./.goreleaser/canary.yaml
-        env:
-          GOOS: darwin
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AC_USERNAME: ${{ secrets.AC_USERNAME }}
-          AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
-          AC_PROVIDER: ${{ secrets.AC_PROVIDER }}
-          AC_APPLICATION_IDENTITY: ${{ secrets.AC_APPLICATION_IDENTITY }}
-          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+  # build-darwin:
+  #   needs: [tag]
+  #   name: build-darwin
+  #   runs-on: macos-12
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #         ref: ${{ needs.tag.outputs.ref }}
+  #     - run: git fetch --force --tags
+  #     - name: Set up Go
+  #       uses: actions/setup-go@v5
+  #       with:
+  #         go-version: 1.21
+  #     - name: Setup Gon
+  #       run: brew install Bearer/tap/gon
+  #     - name: Import Code-Signing Certificates
+  #       uses: Apple-Actions/import-codesign-certs@v2
+  #       with:
+  #         # The certificates in a PKCS12 file encoded as a base64 string
+  #         p12-file-base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
+  #         # The password used to import the PKCS12 file.
+  #         p12-password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
+  #     - shell: bash
+  #       run: |
+  #         echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+  #     - id: cache
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: dist/darwin
+  #         key: darwin-${{ env.sha_short }}-canary
+  #     - uses: goreleaser/goreleaser-action@v5
+  #       if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
+  #       name: Run GoReleaser
+  #       with:
+  #         distribution: goreleaser-pro
+  #         version: latest
+  #         args: release --clean --split -f ./.goreleaser/canary.yaml
+  #       env:
+  #         GOOS: darwin
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         AC_USERNAME: ${{ secrets.AC_USERNAME }}
+  #         AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
+  #         AC_PROVIDER: ${{ secrets.AC_PROVIDER }}
+  #         AC_APPLICATION_IDENTITY: ${{ secrets.AC_APPLICATION_IDENTITY }}
+  #         GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
 
   publish:
-    needs: [tag, build-darwin, build-linux]
+    needs: [tag, build-linux]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
