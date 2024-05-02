@@ -20,3 +20,5 @@ bearer
 docs/yarn.lock
 
 /internal/parser/sitter/config_variables/build
+
+internal/detectors/dotnet/**/obj
