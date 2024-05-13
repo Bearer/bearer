@@ -150,7 +150,7 @@ func (analyzer *analyzer) analyzeBoolean(node *sitter.Node, visitChildren func()
 	return visitChildren()
 }
 
-func (analyzer *analyzer) analyzeKeywordArgumentOperation(node *sitter.Node, visitChildren func() error) error {
+func (analyzer *analyzer) analyzeKeywordArgument(node *sitter.Node, visitChildren func() error) error {
 	value := node.ChildByFieldName("value")
 
 	analyzer.builder.Alias(node, value)
