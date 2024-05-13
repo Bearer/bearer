@@ -164,8 +164,8 @@ github.com/muesli/reflow v0.3.0/go.mod h1:pbwTDkVPibjO2kyvBQRBxTWEEGDGq0FlB1BIKt
 github.com/muesli/termenv v0.11.1-0.20220204035834-5ac8409525e0/go.mod h1:Bd5NYQ7pd+SrtBSrSNoBBmXlcY8+Xj4BMJgh8qcZrvs=
 github.com/muesli/termenv v0.15.1 h1:UzuTb/+hhlBugQz28rpzey4ZuKcZ03MeKsoG7IJZIxs=
 github.com/muesli/termenv v0.15.1/go.mod h1:HeAQPTzpfs016yGtA4g00CsdYnVLJvxsS4ANqrZs2sQ=
-github.com/onsi/ginkgo/v2 v2.17.2 h1:7eMhcy3GimbsA3hEnVKdw/PQM9XN9krpKVXsZdph0/g=
-github.com/onsi/ginkgo/v2 v2.17.2/go.mod h1:nP2DPOQoNsQmsVyv5rDA8JkXQoCs6goXIvr/PRJ1eCc=
+github.com/onsi/ginkgo/v2 v2.17.3 h1:oJcvKpIb7/8uLpDDtnQuf18xVnwKp8DTD7DQ6gTd/MU=
+github.com/onsi/ginkgo/v2 v2.17.3/go.mod h1:nP2DPOQoNsQmsVyv5rDA8JkXQoCs6goXIvr/PRJ1eCc=
 github.com/onsi/gomega v1.33.0 h1:snPCflnZrpMsy94p4lXVEkHo12lmPnc3vY5XBbreexE=
 github.com/onsi/gomega v1.33.0/go.mod h1:+925n5YtiFsLzzafLUHzVMBpvvRAzrydIBiSIxjX3wY=
 github.com/open-policy-agent/opa v0.64.1 h1:n8IJTYlFWzqiOYx+JiawbErVxiqAyXohovcZxYbskxQ=
