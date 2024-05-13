@@ -35,10 +35,12 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeSubscript(node, visitChildren)
 	case "call":
 		return analyzer.analyzeCall(node, visitChildren)
-	case "argument_list":
+	case "argument_list", "expression_statement", "list", "tuple":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
-	case "expression_statement":
-		return analyzer.analyzeGenericOperation(node, visitChildren)
+	case "parenthesized_expression":
+		return analyzer.analyzeGenericConstruct(node, visitChildren)
+	case "keyword_argument":
+		return analyzer.analyzeKeywordArgument(node, visitChildren)
 	case "while_statement", "try_statement", "if_statement": // statements don't have results
 		return visitChildren()
 	case "conditional_expression":
@@ -144,6 +146,27 @@ func (analyzer *analyzer) analyzeBoolean(node *sitter.Node, visitChildren func()
 	analyzer.lookupVariable(right)
 
 	analyzer.builder.Alias(node, left, right)
+
+	return visitChildren()
+}
+
+func (analyzer *analyzer) analyzeKeywordArgument(node *sitter.Node, visitChildren func() error) error {
+	value := node.ChildByFieldName("value")
+
+	analyzer.builder.Alias(node, value)
+	analyzer.lookupVariable(value)
+
+	return visitChildren()
+}
+
+// default analysis, where the children are assumed to be aliases
+func (analyzer *analyzer) analyzeGenericConstruct(node *sitter.Node, visitChildren func() error) error {
+	children := analyzer.builder.ChildrenFor(node)
+	analyzer.builder.Alias(node, children...)
+
+	for _, child := range children {
+		analyzer.lookupVariable(child)
+	}
 
 	return visitChildren()
 }
