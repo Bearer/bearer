@@ -15,7 +15,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/hhatto/gocloc v0.5.2
 	github.com/onsi/ginkgo/v2 v2.17.3
-	github.com/onsi/gomega v1.33.0
+	github.com/onsi/gomega v1.33.1
 	github.com/open-policy-agent/opa v0.64.1
 	github.com/rodaine/table v1.2.0
 	github.com/rs/zerolog v1.32.0
