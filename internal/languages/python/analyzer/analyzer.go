@@ -40,7 +40,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 	case "parenthesized_expression":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
 	case "keyword_argument":
-		return analyzer.analyzeKeywordArgumentOperation(node, visitChildren)
+		return analyzer.analyzeKeywordArgument(node, visitChildren)
 	case "while_statement", "try_statement", "if_statement": // statements don't have results
 		return visitChildren()
 	case "conditional_expression":
