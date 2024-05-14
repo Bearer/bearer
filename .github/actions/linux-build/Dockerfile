@@ -22,7 +22,7 @@ RUN apt-get update && \
     tar --extract --gunzip --file=/tmp/go.tar.gz --directory=/usr/local && \
     ln -s /usr/local/go/bin/go /usr/local/bin/ && \
     \
-    wget --output-document=/tmp/goreleaser.deb https://github.com/goreleaser/goreleaser-pro/releases/download/v1.26.0-pro/goreleaser-pro_1.26.0.pro_amd64.deb && \
+    wget --output-document=/tmp/goreleaser.deb https://github.com/goreleaser/goreleaser-pro/releases/download/v1.25.0-pro/goreleaser-pro_1.25.0.pro_amd64.deb && \
     dpkg --install /tmp/goreleaser.deb
 
 COPY entrypoint.sh /entrypoint.sh
