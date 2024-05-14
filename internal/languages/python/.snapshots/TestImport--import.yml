@@ -1,0 +1,338 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 2
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 17
+      sink:
+        location:
+            start: 2
+            end: 2
+            column:
+                start: 1
+                end: 17
+        content: ""
+      parent_line_number: 2
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_0
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 5
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 5
+            end: 5
+            column:
+                start: 1
+                end: 18
+      sink:
+        location:
+            start: 5
+            end: 5
+            column:
+                start: 1
+                end: 18
+        content: ""
+      parent_line_number: 5
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_1
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 8
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 15
+      sink:
+        location:
+            start: 8
+            end: 8
+            column:
+                start: 1
+                end: 15
+        content: ""
+      parent_line_number: 8
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_2
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 11
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 17
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 1
+                end: 17
+        content: ""
+      parent_line_number: 11
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_3
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 14
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 1
+                end: 17
+      sink:
+        location:
+            start: 14
+            end: 14
+            column:
+                start: 1
+                end: 17
+        content: ""
+      parent_line_number: 14
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_4
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_4
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 17
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 1
+                end: 17
+      sink:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 1
+                end: 17
+        content: ""
+      parent_line_number: 17
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_5
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_5
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 20
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 20
+            end: 20
+            column:
+                start: 1
+                end: 20
+      sink:
+        location:
+            start: 20
+            end: 20
+            column:
+                start: 1
+                end: 20
+        content: ""
+      parent_line_number: 20
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_6
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_6
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 23
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 23
+            end: 23
+            column:
+                start: 1
+                end: 16
+      sink:
+        location:
+            start: 23
+            end: 23
+            column:
+                start: 1
+                end: 16
+        content: ""
+      parent_line_number: 23
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_7
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_7
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 26
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 26
+            end: 26
+            column:
+                start: 1
+                end: 23
+      sink:
+        location:
+            start: 26
+            end: 26
+            column:
+                start: 1
+                end: 23
+        content: ""
+      parent_line_number: 26
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_8
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_8
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 30
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 30
+            end: 30
+            column:
+                start: 1
+                end: 11
+      sink:
+        location:
+            start: 30
+            end: 30
+            column:
+                start: 1
+                end: 11
+        content: ""
+      parent_line_number: 30
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_9
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_9
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 34
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 34
+            end: 34
+            column:
+                start: 1
+                end: 11
+      sink:
+        location:
+            start: 34
+            end: 34
+            column:
+                start: 1
+                end: 11
+        content: ""
+      parent_line_number: 34
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_10
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_10
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test detection filter import statements
+        description: Test detection filter import statements
+        documentation_url: ""
+      line_number: 38
+      full_filename: import.py
+      filename: import.py
+      source:
+        location:
+            start: 38
+            end: 38
+            column:
+                start: 1
+                end: 11
+      sink:
+        location:
+            start: 38
+            end: 38
+            column:
+                start: 1
+                end: 11
+        content: ""
+      parent_line_number: 38
+      fingerprint: 55db11cd18d0af4114644d01cefbc79d_11
+      old_fingerprint: 55db11cd18d0af4114644d01cefbc79d_11
+

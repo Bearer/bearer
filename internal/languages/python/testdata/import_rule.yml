@@ -1,0 +1,48 @@
+languages:
+  - python
+patterns:
+  - pattern: $<IMPORT_FROM>.someMethod($<...>)
+    filters:
+      - variable: IMPORT_FROM
+        detection: import_test_import_from
+        scope: result
+  - pattern: $<IMPORT>.someMethod($<...>)
+    filters:
+      - variable: IMPORT
+        detection: import_test_import
+        scope: result
+  - pattern: $<CLASS>.qwerty($<...>)
+    filters:
+      - variable: CLASS
+        detection: import_test_class_import
+        scope: result
+  - pattern: $<DOTTED>.bat.dottedMethod($<...>)
+    filters:
+      - variable: DOTTED
+        detection: import_test_dotted_name
+        scope: result
+auxiliary:
+  - id: import_test_import_from
+    patterns:
+      - from baz import $<!>foo
+      - from baz import foo as $<!>$<_>
+  - id: import_test_import
+    patterns:
+      - import $<!>bar
+      - import bar as $<!>$<_>
+  - id: import_test_class_import
+    patterns:
+      - import $<!>FooClass
+      - import FooClass as $<!>$<_>
+      - from baz import $<!>FooClass
+      - from baz import FooClass as $<!>$<_>
+  - id: import_test_dotted_name
+    patterns:
+      - import $<!>foo.bat
+severity: high
+metadata:
+  description: Test detection filter import statements
+  remediation_message: Test detection filter import statements
+  cwe_id:
+    - 42
+  id: import_test
