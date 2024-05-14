@@ -47,6 +47,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeConditional(node, visitChildren)
 	case "boolean_operator":
 		return analyzer.analyzeBoolean(node, visitChildren)
+	case "import_statement", "import_from_statement":
+		return analyzer.analyzeImport(node, visitChildren)
 	case "identifier":
 		return visitChildren()
 	default:
@@ -157,6 +159,27 @@ func (analyzer *analyzer) analyzeKeywordArgument(node *sitter.Node, visitChildre
 	analyzer.lookupVariable(value)
 
 	return visitChildren()
+}
+
+// import x
+// import a.b
+// from z import x
+// import x as y (aliased_import)
+// from z import x as y (aliased_import)
+func (analyzer *analyzer) analyzeImport(node *sitter.Node, visitChildren func() error) error {
+	children := analyzer.builder.ChildrenExcept(node, node.ChildByFieldName("module_name"))
+
+	for _, child := range children {
+		switch child.Type() {
+		case "aliased_import":
+			aliasedImportIdentifier := child.ChildByFieldName("alias")
+			analyzer.scope.Declare(analyzer.builder.ContentFor(aliasedImportIdentifier), aliasedImportIdentifier)
+		case "dotted_name":
+			analyzer.scope.Declare(analyzer.builder.ContentFor(child.NamedChild(0)), child.NamedChild(0))
+		}
+	}
+
+	return nil
 }
 
 // default analysis, where the children are assumed to be aliases
