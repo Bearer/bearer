@@ -17,7 +17,7 @@ var (
 	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
 	unanchoredPatternNodeTypes     = []string{}
-	patternMatchNodeContainerTypes = []string{}
+	patternMatchNodeContainerTypes = []string{"dotted_name"}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
@@ -126,6 +126,11 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	if parent.Type() == "array_creation_expression" &&
 		node.Type() == "array_element_initializer" &&
 		len(node.NamedChildren()) == 2 {
+		return false, false
+	}
+
+	if (parent.Type() == "import_statement" || parent.Type() == "import_from_statement" || parent.Type() == "relative_import") &&
+		(node.Type() == "dotted_name" || node.Type() == "aliased_import") {
 		return false, false
 	}
 
