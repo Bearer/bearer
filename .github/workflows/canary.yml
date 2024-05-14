@@ -100,7 +100,7 @@ jobs:
         name: Run GoReleaser
         with:
           distribution: goreleaser-pro
-          version: latest
+          version: 1.26.0
           args: release --clean --split -f ./.goreleaser/canary.yaml
         env:
           GOOS: darwin
@@ -137,6 +137,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser-pro
+          version: 1.26.0
           args: publish --merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
