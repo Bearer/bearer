@@ -1,6 +1,8 @@
 package analyzer
 
 import (
+	"slices"
+
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
@@ -39,6 +41,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "parenthesized_expression":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
+	case "parameters":
+		return analyzer.analyzeParameters(node, visitChildren)
 	case "keyword_argument":
 		return analyzer.analyzeKeywordArgument(node, visitChildren)
 	case "while_statement", "try_statement", "if_statement": // statements don't have results
@@ -152,6 +156,29 @@ func (analyzer *analyzer) analyzeBoolean(node *sitter.Node, visitChildren func()
 	return visitChildren()
 }
 
+// def f(self, param: Type)
+// def f(param: Type = default)
+func (analyzer *analyzer) analyzeParameters(node *sitter.Node, visitChildren func() error) error {
+	err := visitChildren()
+
+	for _, parameter := range analyzer.builder.ChildrenFor(node) {
+		switch parameter.Type() {
+		case "typed_parameter", "typed_default_parameter", "default_parameter":
+			name := parameter.NamedChild(0)
+
+			analyzer.builder.Alias(parameter, name)
+			analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
+
+			analyzer.lookupVariable(parameter.ChildByFieldName("type"))
+			analyzer.lookupVariable(parameter.ChildByFieldName("value"))
+		case "identifier":
+			analyzer.scope.Declare(analyzer.builder.ContentFor(parameter), parameter)
+		}
+	}
+
+	return err
+}
+
 func (analyzer *analyzer) analyzeKeywordArgument(node *sitter.Node, visitChildren func() error) error {
 	value := node.ChildByFieldName("value")
 
@@ -217,7 +244,7 @@ func (analyzer *analyzer) withScope(newScope *language.Scope, body func() error)
 }
 
 func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
-	if node == nil || node.Type() != "identifier" {
+	if node == nil || !slices.Contains([]string{"identifier", "type"}, node.Type()) {
 		return
 	}
 
