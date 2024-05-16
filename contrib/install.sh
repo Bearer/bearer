@@ -55,7 +55,6 @@ get_binaries() {
   case "$PLATFORM" in
     darwin/amd64) BINARIES="bearer" ;;
     darwin/arm64) BINARIES="bearer" ;;
-    linux/386) BINARIES="bearer" ;;
     linux/amd64) BINARIES="bearer" ;;
     linux/arm64) BINARIES="bearer" ;;
     *)

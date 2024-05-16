@@ -48,7 +48,6 @@ builds:
     goos:
       - linux
     goarch:
-      - 386
       - amd64
       - arm64
     ldflags:
@@ -56,11 +55,6 @@ builds:
       - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
       - -X "github.com/bearer/bearer/cmd/bearer/build.CommitSHA={{.Commit}}"
     overrides:
-      - goos: linux
-        goarch: 386
-        env:
-          - CC=i686-linux-gnu-gcc
-          - CXX=i686-linux-gnu-g++
       - goos: linux
         goarch: arm64
         env:
