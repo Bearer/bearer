@@ -1,11 +1,13 @@
 package string
 
 import (
+	"fmt"
 	"regexp"
 
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
+	"github.com/bearer/bearer/internal/util/stringutil"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -73,10 +75,19 @@ func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]int
 		var childIsLiteral bool
 		namedChildren := child.NamedChildren()
 
-		if len(namedChildren) == 0 {
+		switch {
+		case child.Type() == "escape_sequence":
+			value, err := stringutil.Unescape(child.Content())
+			if err != nil {
+				return fmt.Errorf("failed to decode escape sequence: %w", err)
+			}
+
+			childValue = value
+			childIsLiteral = true
+		case len(namedChildren) == 0:
 			childValue = ""
 			childIsLiteral = true
-		} else {
+		default:
 			var err error
 			childValue, childIsLiteral, err = common.GetStringValue(namedChildren[0], detectorContext)
 			if err != nil {
