@@ -57,7 +57,6 @@ get_binaries() {
     darwin/arm64) BINARIES="bearer" ;;
     linux/386) BINARIES="bearer" ;;
     linux/amd64) BINARIES="bearer" ;;
-    linux/arm64) BINARIES="bearer" ;;
     *)
       log_crit "platform $PLATFORM is not supported.  Make sure this script is up-to-date and file request at https://github.com/${PREFIX}/issues/new"
       exit 1
