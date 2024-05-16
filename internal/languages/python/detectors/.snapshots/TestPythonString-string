@@ -72,10 +72,6 @@ children:
                 - type: parameters
                   id: 16
                   range: 4:13 - 4:19
-                  dataflow_sources:
-                    - 17
-                    - 18
-                    - 19
                   children:
                     - type: '"("'
                       id: 17
@@ -261,6 +257,8 @@ children:
                                   id: 54
                                   range: 9:15 - 9:19
                                   content: args
+                                  alias_of:
+                                    - 18
                                 - type: '"["'
                                   id: 55
                                   range: 9:19 - 9:20

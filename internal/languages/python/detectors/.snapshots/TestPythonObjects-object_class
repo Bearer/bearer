@@ -38,14 +38,6 @@ children:
                 - type: parameters
                   id: 9
                   range: 2:17 - 2:39
-                  dataflow_sources:
-                    - 10
-                    - 11
-                    - 12
-                    - 13
-                    - 14
-                    - 15
-                    - 21
                   children:
                     - type: '"("'
                       id: 10
@@ -71,6 +63,8 @@ children:
                         - 16
                         - 17
                         - 18
+                      alias_of:
+                        - 16
                       children:
                         - type: identifier
                           id: 16
@@ -126,6 +120,8 @@ children:
                                   id: 27
                                   range: 3:9 - 3:13
                                   content: self
+                                  alias_of:
+                                    - 11
                                 - type: '"."'
                                   id: 28
                                   range: 3:13 - 3:14
@@ -140,6 +136,8 @@ children:
                               id: 31
                               range: 3:21 - 3:25
                               content: name
+                              alias_of:
+                                - 13
                     - type: expression_statement
                       id: 32
                       range: 4:9 - 4:27
@@ -164,6 +162,8 @@ children:
                                   id: 35
                                   range: 4:9 - 4:13
                                   content: self
+                                  alias_of:
+                                    - 11
                                 - type: '"."'
                                   id: 36
                                   range: 4:13 - 4:14
@@ -178,6 +178,8 @@ children:
                               id: 39
                               range: 4:22 - 4:27
                               content: email
+                              alias_of:
+                                - 16
             - type: function_definition
               id: 40
               range: 6:5 - 8:33
@@ -192,10 +194,6 @@ children:
                 - type: parameters
                   id: 43
                   range: 6:23 - 6:29
-                  dataflow_sources:
-                    - 44
-                    - 45
-                    - 46
                   children:
                     - type: '"("'
                       id: 44
@@ -269,6 +267,8 @@ children:
                                       id: 58
                                       range: 7:23 - 7:27
                                       content: self
+                                      alias_of:
+                                        - 45
                                     - type: '"."'
                                       id: 59
                                       range: 7:27 - 7:28
@@ -334,6 +334,8 @@ children:
                                               id: 70
                                               range: 8:15 - 8:19
                                               content: self
+                                              alias_of:
+                                                - 45
                                             - type: '"."'
                                               id: 71
                                               range: 8:19 - 8:20

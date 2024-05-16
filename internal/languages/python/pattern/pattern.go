@@ -16,8 +16,13 @@ var (
 	patternQueryVariableRegex      = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
 	matchNodeRegex                 = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex                  = regexp.MustCompile(`\$<\.\.\.>`)
-	unanchoredPatternNodeTypes     = []string{}
-	patternMatchNodeContainerTypes = []string{"dotted_name"}
+	unanchoredPatternNodeTypes     = []string{"function_definition"}
+	patternMatchNodeContainerTypes = []string{
+		"dotted_name",
+		"typed_parameter",
+		"typed_default_parameter",
+		"default_parameter",
+	}
 
 	allowedPatternQueryTypes = []string{"_"}
 )
@@ -102,6 +107,11 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return false, false
 	}
 
+	// return type or leading comment
+	if node.Type() == "block" {
+		return false, true
+	}
+
 	parent := node.Parent()
 	if parent == nil {
 		return true, true
@@ -118,6 +128,16 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 			return true, false
 		}
 
+		return false, false
+	}
+
+	// type parameters
+	if parent.Type() == "function_definition" && node == parent.ChildByFieldName("parameters") {
+		return false, true
+	}
+
+	// inherited types
+	if parent.Type() == "argument_list" && parent.Parent() != nil && parent.Parent().Type() == "class_definition" {
 		return false, false
 	}
 
@@ -147,6 +167,10 @@ func (*Pattern) IsRoot(node *tree.Node) bool {
 }
 
 func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
+	if node.Type() == "typed_parameter" {
+		return []string{"typed_parameter", "typed_default_parameter"}
+	}
+
 	return []string{node.Type()}
 }
 
