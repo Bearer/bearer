@@ -2,11 +2,11 @@ package string
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/bearer/bearer/internal/scanner/ast/query"
 	"github.com/bearer/bearer/internal/scanner/ast/tree"
 	"github.com/bearer/bearer/internal/scanner/ruleset"
+	"github.com/bearer/bearer/internal/util/stringutil"
 
 	"github.com/bearer/bearer/internal/scanner/detectors/common"
 	"github.com/bearer/bearer/internal/scanner/detectors/types"
@@ -37,7 +37,7 @@ func (detector *stringDetector) DetectAt(
 			IsLiteral: true,
 		}}, nil
 	case "escape_sequence":
-		value, err := strconv.Unquote(fmt.Sprintf(`"%s"`, node.Content()))
+		value, err := stringutil.Unescape(node.Content())
 		if err != nil {
 			return nil, fmt.Errorf("failed to decode escape sequence: %w", err)
 		}
