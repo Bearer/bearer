@@ -48,12 +48,18 @@ builds:
     goos:
       - linux
     goarch:
-      - 386
       - amd64
+      - arm64
     ldflags:
       - -w
       - -X "github.com/bearer/bearer/cmd/bearer/build.Version={{.Version}}"
       - -X "github.com/bearer/bearer/cmd/bearer/build.CommitSHA={{.Commit}}"
+    overrides:
+      - goos: linux
+        goarch: arm64
+        env:
+          - CC=aarch64-linux-gnu-gcc
+          - CXX=aarch64-linux-gnu-g++
 
 checksum:
   name_template: "checksums.txt"
