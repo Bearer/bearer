@@ -426,7 +426,12 @@ func IsDir(path string) bool {
 }
 
 func CanonicalPath(path string) (string, error) {
-	resolvedPath, err := filepath.EvalSymlinks(path)
+	absolutePath, err := filepath.Abs(path)
+	if err != nil {
+		return "", err
+	}
+
+	resolvedPath, err := filepath.EvalSymlinks(absolutePath)
 	if err != nil {
 		return "", err
 	}
