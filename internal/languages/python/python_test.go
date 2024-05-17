@@ -16,6 +16,9 @@ var scopeRule []byte
 //go:embed testdata/import_rule.yml
 var importRule []byte
 
+//go:embed testdata/subscript_rule.yml
+var subscriptRule []byte
+
 func TestFlow(t *testing.T) {
 	testhelper.GetRunner(t, loggerRule, "python").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
@@ -26,4 +29,8 @@ func TestScope(t *testing.T) {
 
 func TestImport(t *testing.T) {
 	testhelper.GetRunner(t, importRule, "python").RunTest(t, "./testdata/import", ".snapshots/")
+}
+
+func TestSubscript(t *testing.T) {
+	testhelper.GetRunner(t, subscriptRule, "python").RunTest(t, "./testdata/subscript", ".snapshots/")
 }

@@ -1,0 +1,142 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: subscript_test
+        title: Test detection filter subscript statements
+        description: Test detection filter subscript statements
+        documentation_url: ""
+      line_number: 1
+      full_filename: subscript.py
+      filename: subscript.py
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 13
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 13
+        content: ""
+      parent_line_number: 1
+      fingerprint: dbeafee632db3831065048aabd949c8b_0
+      old_fingerprint: dbeafee632db3831065048aabd949c8b_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: subscript_test
+        title: Test detection filter subscript statements
+        description: Test detection filter subscript statements
+        documentation_url: ""
+      line_number: 3
+      full_filename: subscript.py
+      filename: subscript.py
+      source:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 19
+      sink:
+        location:
+            start: 3
+            end: 3
+            column:
+                start: 1
+                end: 19
+        content: ""
+      parent_line_number: 3
+      fingerprint: dbeafee632db3831065048aabd949c8b_1
+      old_fingerprint: dbeafee632db3831065048aabd949c8b_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: subscript_test
+        title: Test detection filter subscript statements
+        description: Test detection filter subscript statements
+        documentation_url: ""
+      line_number: 7
+      full_filename: subscript.py
+      filename: subscript.py
+      source:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 1
+                end: 7
+      sink:
+        location:
+            start: 7
+            end: 7
+            column:
+                start: 1
+                end: 7
+        content: ""
+      parent_line_number: 7
+      fingerprint: dbeafee632db3831065048aabd949c8b_2
+      old_fingerprint: dbeafee632db3831065048aabd949c8b_2
+    - rule:
+        cwe_ids:
+            - "42"
+        id: subscript_test
+        title: Test detection filter subscript statements
+        description: Test detection filter subscript statements
+        documentation_url: ""
+      line_number: 9
+      full_filename: subscript.py
+      filename: subscript.py
+      source:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 13
+      sink:
+        location:
+            start: 9
+            end: 9
+            column:
+                start: 1
+                end: 13
+        content: ""
+      parent_line_number: 9
+      fingerprint: dbeafee632db3831065048aabd949c8b_3
+      old_fingerprint: dbeafee632db3831065048aabd949c8b_3
+    - rule:
+        cwe_ids:
+            - "42"
+        id: subscript_test
+        title: Test detection filter subscript statements
+        description: Test detection filter subscript statements
+        documentation_url: ""
+      line_number: 10
+      full_filename: subscript.py
+      filename: subscript.py
+      source:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 13
+      sink:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 13
+        content: ""
+      parent_line_number: 10
+      fingerprint: dbeafee632db3831065048aabd949c8b_4
+      old_fingerprint: dbeafee632db3831065048aabd949c8b_4
+
