@@ -32,7 +32,7 @@ func ReportHTMLWrapper(title string, body *string) (string, error) {
 	htmlContent := &strings.Builder{}
 
 	t := time.Now()
-	timeLayout := "January 2nd 2006, 15:04:05 pm (MST-0700)"
+	timeLayout := "January 2 2006, 15:04:05 pm (MST-0700)"
 
 	wrapperContent := html.WrapperHTMLPage{
 		Body:      *body,
