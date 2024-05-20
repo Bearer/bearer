@@ -157,7 +157,8 @@ func discoverFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*schemadat
 
 		parent := functionNameNode.Parent()
 
-		functionTypeNode := parent.ChildByFieldName("type")
+		functionTypeNode := parent.ChildByFieldName("returns")
+
 		functionType := ""
 		functionTextType := ""
 		if functionTypeNode != nil {

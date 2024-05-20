@@ -193,10 +193,10 @@
     Value: (interfaces.Interface) {
       Type: (interfaces.Type) (len=3) "url",
       Value: (*values.Value)({
-        Parts: ([]values.Part) (len=5) {
-          (*values.Unknown)({
-            Type: (values.PartType) (len=7) "unknown",
-            Parts: ([]values.Part) <nil>
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
           }),
           (*values.VariableReference)({
             Type: (values.PartType) (len=18) "variable_reference",
@@ -205,13 +205,9 @@
               Name: (string) (len=13) "CUSTOMER_HOST"
             }
           }),
-          (*values.Unknown)({
-            Type: (values.PartType) (len=7) "unknown",
-            Parts: ([]values.Part) <nil>
-          }),
-          (*values.Unknown)({
-            Type: (values.PartType) (len=7) "unknown",
-            Parts: ([]values.Part) <nil>
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=6) "/path/"
           }),
           (*values.VariableReference)({
             Type: (values.PartType) (len=18) "variable_reference",

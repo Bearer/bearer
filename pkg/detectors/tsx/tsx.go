@@ -86,6 +86,9 @@ func annotate(tree *parser.Tree, environmentVariablesQuery *sitter.Query) error 
 
 	return tree.Annotate(func(node *parser.Node, value *values.Value) {
 		switch node.Type() {
+		case "string_fragment":
+			value.AppendString(node.Content())
+			return
 		case "template_substitution":
 			value.Append(node.FirstChild().Value())
 
@@ -103,15 +106,9 @@ func annotate(tree *parser.Tree, environmentVariablesQuery *sitter.Query) error 
 			return
 
 		case "string", "template_string":
-			node.EachPart(func(text string) error { //nolint:all,errcheck
-				value.AppendString(text)
-
-				return nil
-			}, func(child *parser.Node) error {
-				value.Append(child.Value())
-
-				return nil
-			})
+			for i := 0; i < node.ChildCount(); i++ {
+				value.Append(node.Child(i).Value())
+			}
 
 			return
 		}

@@ -90,10 +90,7 @@ func (detector *stringDetector) DetectAt(
 	case "interpreted_string_literal", "raw_string_literal":
 		value := stringutil.StripQuotes(node.Content())
 
-		return []interface{}{common.String{
-			Value:     value,
-			IsLiteral: true,
-		}}, nil
+		return common.Literal(value), nil
 	}
 
 	return nil, nil
