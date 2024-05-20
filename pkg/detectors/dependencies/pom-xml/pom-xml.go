@@ -14,8 +14,8 @@ var language = xml.GetLanguage()
 
 var queryDependencies = parser.QueryMustCompile(language, `
 (element
-	(start_tag
-		(tag_name) @helper_dependency
+	(STag
+		(Name) @helper_dependency
 		(#match? @helper_dependency "^dependency$")
 	)
  ) @param_dependency
@@ -41,32 +41,37 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 		for i := 0; i < dependencyNode.ChildCount(); i++ {
 			child := dependencyNode.Child(i)
 
-			if child.Type() != "element" {
+			if child.Type() != "content" {
 				continue
 			}
 
-			tag := ""
-			tagContent := ""
-
 			for j := 0; j < child.ChildCount(); j++ {
-				elementChild := child.Child(j)
-
-				if elementChild.Type() == "start_tag" {
-					tag = elementChild.Child(0).Content()
+				childElement := child.Child(j)
+				if childElement.Type() != "element" {
+					continue
 				}
 
-				if elementChild.Type() == "text" {
-					tagContent = elementChild.Content()
-				}
-			}
+				tag := ""
+				tagContent := ""
 
-			switch tag {
-			case "groupId":
-				groupId = tagContent
-			case "artifactId":
-				artifactId = tagContent
-			case "version":
-				version = tagContent
+				for k := 0; k < childElement.ChildCount(); k++ {
+					subElement := childElement.Child(k)
+					switch subElement.Type() {
+					case "STag":
+						tag = subElement.Child(0).Content()
+					case "content":
+						tagContent += subElement.Content()
+					}
+				}
+
+				switch tag {
+				case "groupId":
+					groupId = tagContent
+				case "artifactId":
+					artifactId = tagContent
+				case "version":
+					version = tagContent
+				}
 			}
 		}
 

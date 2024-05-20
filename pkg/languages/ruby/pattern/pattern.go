@@ -148,14 +148,13 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	return true, true
 }
 
-func (*Pattern) NodeTypes(node *tree.Node) []string {
+func (*Pattern) NodeTypes(node *tree.Node, parentType string) []string {
 	parent := node.Parent()
 
 	// Make these equivalent:
 	//   key: value
 	//   :key => value
-	if parent != nil &&
-		parent.Type() == "pair" &&
+	if parentType == "pair" &&
 		node == parent.ChildByFieldName("key") &&
 		(node.Type() == "hash_key_symbol" || node.Type() == "simple_symbol") {
 		return []string{"hash_key_symbol", "simple_symbol"}
@@ -164,8 +163,18 @@ func (*Pattern) NodeTypes(node *tree.Node) []string {
 	// Make these equivalent:
 	//  call do ... end
 	//  call { ... }
-	if node.Type() == "block" || node.Type() == "do_block" {
-		return []string{"block", "do_block"}
+	blockTypes := []string{"block", "do_block"}
+	if slices.Contains(blockTypes, node.Type()) {
+		return blockTypes
+	}
+
+	// The block types use different bodies. This is to cope with matching both
+	// block types as equivalent
+	if parentType == "block" && node.Type() == "body_statement" {
+		return []string{"block_body"}
+	}
+	if parentType == "do_block" && node.Type() == "block_body" {
+		return []string{"body_statement"}
 	}
 
 	return []string{node.Type()}

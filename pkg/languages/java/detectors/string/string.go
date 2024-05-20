@@ -27,11 +27,12 @@ func (detector *stringDetector) DetectAt(
 	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
-	case "string_literal", "character_literal":
-		return []interface{}{common.String{
-			Value:     stringutil.StripQuotes(node.Content()),
-			IsLiteral: true,
-		}}, nil
+	case "character_literal":
+		return common.Literal(stringutil.StripQuotes(node.Content())), nil
+	case "string_fragment":
+		return common.Literal(node.Content()), nil
+	case "string_literal":
+		return common.ConcatenateChildStrings(node, detectorContext)
 	case "binary_expression":
 		if node.Children()[1].Content() == "+" {
 			return common.ConcatenateChildStrings(node, detectorContext)

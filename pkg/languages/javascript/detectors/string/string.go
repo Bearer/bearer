@@ -29,25 +29,19 @@ func (detector *stringDetector) DetectAt(
 	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
-	case "string":
+	case "string", "template_string":
 		return common.ConcatenateChildStrings(node, detectorContext)
 	case "string_fragment":
-		return []interface{}{common.String{
-			Value:     node.Content(),
-			IsLiteral: true,
-		}}, nil
+		return common.Literal(node.Content()), nil
 	case "escape_sequence":
 		value, err := stringutil.Unescape(node.Content())
 		if err != nil {
 			return nil, fmt.Errorf("failed to decode escape sequence: %w", err)
 		}
 
-		return []interface{}{common.String{
-			Value:     value,
-			IsLiteral: true,
-		}}, nil
-	case "template_string":
-		return handleTemplateString(node, detectorContext)
+		return common.Literal(value), nil
+	case "template_substitution":
+		return common.GetStringData(node.NamedChildren()[0], detectorContext)
 	case "binary_expression":
 		switch node.Children()[1].Content() {
 		case "+":
@@ -72,46 +66,4 @@ func (detector *stringDetector) DetectAt(
 	}
 
 	return nil, nil
-}
-
-func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
-	text := ""
-	isLiteral := true
-
-	err := node.EachContentPart(func(partText string) error {
-		text += partText
-		return nil
-	}, func(child *tree.Node) error {
-		var childValue string
-		var childIsLiteral bool
-		namedChildren := child.NamedChildren()
-
-		if len(namedChildren) == 0 {
-			childValue = ""
-			childIsLiteral = true
-		} else {
-			var err error
-			childValue, childIsLiteral, err = common.GetStringValue(namedChildren[0], detectorContext)
-			if err != nil {
-				return err
-			}
-		}
-
-		if childValue == "" && !childIsLiteral {
-			childValue = common.NonLiteralValue
-		}
-
-		text += childValue
-
-		if !childIsLiteral {
-			isLiteral = false
-		}
-
-		return nil
-	})
-
-	return []interface{}{common.String{
-		Value:     text,
-		IsLiteral: isLiteral,
-	}}, err
 }

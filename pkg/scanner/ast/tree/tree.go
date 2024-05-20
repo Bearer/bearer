@@ -2,11 +2,11 @@ package tree
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/bits-and-blooms/bitset"
 	sitter "github.com/smacker/go-tree-sitter"
 	"golang.org/x/exp/maps"
-	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 )
 
@@ -262,7 +262,6 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 
 	for _, child := range node.children {
 		end = child.ContentStart.Byte
-
 		if err := emit(); err != nil {
 			return err
 		}
@@ -274,9 +273,9 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 		}
 
 		start = child.ContentEnd.Byte
-		end = node.ContentEnd.Byte
 	}
 
+	end = node.ContentEnd.Byte
 	if err := emit(); err != nil {
 		return err
 	}
