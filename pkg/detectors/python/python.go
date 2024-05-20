@@ -114,6 +114,11 @@ func annotate(tree *parser.Tree) error {
 
 	return tree.Annotate(func(node *parser.Node, value *values.Value) {
 		switch node.Type() {
+		case "string_start", "string_end":
+			return
+		case "string_content":
+			value.AppendString(node.Content())
+			return
 		case "binary_operator":
 			if node.FirstUnnamedChild().Content() == "+" {
 				value.Append(node.ChildByFieldName("left").Value())
@@ -121,22 +126,12 @@ func annotate(tree *parser.Tree) error {
 
 				return
 			}
-		case "string":
-			node.EachPart(func(text string) error { //nolint:all,errcheck
-				value.AppendString(text)
-
-				return nil
-			}, func(child *parser.Node) error {
-				value.Append(child.Value())
-
-				return nil
-			})
-
-			return
-		case "concatenated_string":
+		case "string", "concatenated_string":
 			for i := 0; i < node.ChildCount(); i++ {
 				value.Append(node.Child(i).Value())
 			}
+
+			return
 		case "interpolation":
 			value.Append(node.FirstChild().Value())
 
@@ -239,7 +234,7 @@ func getEnvironImports(imports []pyImport) []string {
 
 func acceptExpression(node *parser.Node) bool {
 	if node.Type() == "string" {
-		quotes := node.FirstUnnamedChild().Content()
+		quotes := node.FirstChild().Content()
 		if quotes == `'''` || quotes == `"""` {
 			return false
 		}

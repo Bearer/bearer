@@ -72,7 +72,7 @@ type Pattern interface {
 	// way they parse:
 	//   call(verify_mode: OpenSSL::SSL::VERIFY_NONE)
 	//   call(:verify_mode => OpenSSL::SSL::VERIFY_NONE)
-	NodeTypes(node *tree.Node) []string
+	NodeTypes(node *tree.Node, parentType string) []string
 	// LeafContentTypes returns all the leaf node types which should be matched
 	// on their content. eg. strings literals will match their literal values, function names, ...
 	LeafContentTypes() []string

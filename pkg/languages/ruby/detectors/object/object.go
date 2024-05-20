@@ -41,11 +41,14 @@ func New(querySet *query.Set) types.Detector {
 	//   end
 	// end
 	classQuery := querySet.Add(`
-		(class name: (constant) @class_name
-			[
-				(call arguments: (argument_list (simple_symbol) @name))
-				(method name: (identifier) @name)
-			]
+		(class 
+			name: (constant) @class_name
+			body: (body_statement
+				[
+					(call arguments: (argument_list (simple_symbol) @name))
+					(method name: (identifier) @name)
+				]
+			)
 		) @root`)
 
 	// user.name
