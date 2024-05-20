@@ -18,7 +18,7 @@ const knexTablesModule = "knex/types/tables"
 
 var queryTable = `(interface_declaration
 	name: (type_identifier) @helper_Tables
-	body: (object_type) @param_table_body
+	body: (interface_body) @param_table_body
 )`
 
 func detectTableDeclarationModule(report report.Report, tree *parser.Tree, language *sitter.Language) {

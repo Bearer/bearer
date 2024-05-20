@@ -3,12 +3,13 @@ package datatype
 import (
 	"strings"
 
+	"github.com/smacker/go-tree-sitter/ruby"
+
 	"github.com/bearer/bearer/pkg/parser"
 	"github.com/bearer/bearer/pkg/parser/datatype"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
 	"github.com/bearer/bearer/pkg/report/schema"
 	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
-	"github.com/smacker/go-tree-sitter/ruby"
 )
 
 var classesQuery = parser.QueryMustCompile(ruby.GetLanguage(),
@@ -18,17 +19,19 @@ var classesQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 
 var classPropertiesQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 	`(class
-		( call
-			arguments: (argument_list
-				(simple_symbol) @param_id
+		body: (body_statement 
+			(call
+				arguments: (argument_list
+					(simple_symbol) @param_id
+				)
 			)
 		)
 	) @param_class`)
 
 var classFunctionsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 	`(class
-		( method
-			name: (identifier) @param_id
+		body: (body_statement 
+			(method name: (identifier) @param_id)
 		)
 	) @param_class`)
 

@@ -221,7 +221,7 @@ func (*Pattern) IsRoot(node *tree.Node) bool {
 	return !slices.Contains([]string{"expression_statement", "php_tag", "program"}, node.Type()) && !node.IsMissing()
 }
 
-func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
+func (patternLanguage *Pattern) NodeTypes(node *tree.Node, parentType string) []string {
 	parent := node.Parent()
 	if parent == nil {
 		return []string{node.Type()}

@@ -46,22 +46,28 @@ children:
             - type: '")"'
               id: 8
               range: 3:10 - 3:11
-        - type: call
+        - type: body_statement
           id: 9
           range: 4:4 - 4:9
+          dataflow_sources:
+            - 10
           children:
-            - type: identifier
+            - type: call
               id: 10
-              range: 4:4 - 4:5
-              content: b
-            - type: '"."'
-              id: 11
-              range: 4:5 - 4:6
-            - type: identifier
-              id: 12
-              range: 4:6 - 4:9
-              content: bar
+              range: 4:4 - 4:9
+              children:
+                - type: identifier
+                  id: 11
+                  range: 4:4 - 4:5
+                  content: b
+                - type: '"."'
+                  id: 12
+                  range: 4:5 - 4:6
+                - type: identifier
+                  id: 13
+                  range: 4:6 - 4:9
+                  content: bar
         - type: '"end"'
-          id: 13
+          id: 14
           range: 5:3 - 5:6
 

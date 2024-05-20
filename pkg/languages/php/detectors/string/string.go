@@ -27,10 +27,7 @@ func (detector *stringDetector) DetectAt(
 ) ([]interface{}, error) {
 	switch node.Type() {
 	case "string_value":
-		return []interface{}{common.String{
-			Value:     node.Content(),
-			IsLiteral: true,
-		}}, nil
+		return common.Literal(node.Content()), nil
 	case "string", "encapsed_string":
 		return common.ConcatenateChildStrings(node, detectorContext)
 	case "binary_expression":

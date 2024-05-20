@@ -199,7 +199,7 @@ func (builder *builder) build(rootNode *asttree.Node) (*Result, error) {
 
 	builder.write("(")
 
-	if err := builder.compileNode(rootNode, true, false); err != nil {
+	if err := builder.compileNode(rootNode, true, false, ""); err != nil {
 		return nil, err
 	}
 
@@ -217,7 +217,7 @@ func (builder *builder) build(rootNode *asttree.Node) (*Result, error) {
 	}, nil
 }
 
-func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild bool) error {
+func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild bool, parentType string) error {
 	if node.SitterNode().IsError() {
 		return fmt.Errorf(
 			"error parsing pattern at %d:%d: %s",
@@ -239,8 +239,8 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
 	} else if len(node.NamedChildren()) == 0 || builder.patternLanguage.IsLeaf(node) {
-		builder.compileLeafNode(node)
-	} else if err := builder.compileNodeWithChildren(node); err != nil {
+		builder.compileLeafNode(node, parentType)
+	} else if err := builder.compileNodeWithChildren(node, parentType); err != nil {
 		return err
 	}
 
@@ -292,11 +292,11 @@ func (builder *builder) compileAnonymousNode(node *asttree.Node) {
 }
 
 // Leaves match their type and content
-func (builder *builder) compileLeafNode(node *asttree.Node) {
+func (builder *builder) compileLeafNode(node *asttree.Node, parentType string) {
 	if !slices.Contains(builder.patternLanguage.LeafContentTypes(), node.Type()) {
 		builder.write("[")
 
-		for _, nodeType := range builder.patternLanguage.NodeTypes(node) {
+		for _, nodeType := range builder.patternLanguage.NodeTypes(node, parentType) {
 			builder.write(" (")
 			builder.write(nodeType)
 			builder.write(" )")
@@ -312,7 +312,7 @@ func (builder *builder) compileLeafNode(node *asttree.Node) {
 
 	builder.write("[")
 
-	for _, nodeType := range builder.patternLanguage.NodeTypes(node) {
+	for _, nodeType := range builder.patternLanguage.NodeTypes(node, parentType) {
 		paramContent[nodeType] = builder.patternLanguage.TranslateContent(
 			node.Type(),
 			nodeType, node.Content(),
@@ -328,7 +328,7 @@ func (builder *builder) compileLeafNode(node *asttree.Node) {
 }
 
 // Nodes with children match their type and child nodes
-func (builder *builder) compileNodeWithChildren(node *asttree.Node) error {
+func (builder *builder) compileNodeWithChildren(node *asttree.Node, parentType string) error {
 	builder.write("[")
 
 	var children []*asttree.Node
@@ -340,14 +340,14 @@ func (builder *builder) compileNodeWithChildren(node *asttree.Node) error {
 
 	lastNode := children[len(children)-1]
 
-	for _, nodeType := range builder.patternLanguage.NodeTypes(node) {
+	for _, nodeType := range builder.patternLanguage.NodeTypes(node, parentType) {
 		builder.write("(")
 		builder.write(nodeType)
 
 		for _, child := range node.Children() {
 			builder.write(" ")
 
-			if err := builder.compileNode(child, false, child == lastNode); err != nil {
+			if err := builder.compileNode(child, false, child == lastNode, nodeType); err != nil {
 				return err
 			}
 		}

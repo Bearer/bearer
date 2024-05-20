@@ -27,22 +27,26 @@ children:
             - type: '")"'
               id: 7
               range: 2:10 - 2:11
-        - type: call
+        - type: body_statement
           id: 8
           range: 3:4 - 3:9
           children:
-            - type: identifier
+            - type: call
               id: 9
-              range: 3:4 - 3:5
-              content: a
-            - type: '"."'
-              id: 10
-              range: 3:5 - 3:6
-            - type: identifier
-              id: 11
-              range: 3:6 - 3:9
-              content: foo
+              range: 3:4 - 3:9
+              children:
+                - type: identifier
+                  id: 10
+                  range: 3:4 - 3:5
+                  content: a
+                - type: '"."'
+                  id: 11
+                  range: 3:5 - 3:6
+                - type: identifier
+                  id: 12
+                  range: 3:6 - 3:9
+                  content: foo
         - type: '"end"'
-          id: 12
+          id: 13
           range: 4:3 - 4:6
 

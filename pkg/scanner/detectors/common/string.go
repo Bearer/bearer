@@ -1,6 +1,8 @@
 package common
 
 import (
+	"slices"
+
 	"github.com/bearer/bearer/pkg/scanner/ast/traversalstrategy"
 	"github.com/bearer/bearer/pkg/scanner/ast/tree"
 	"github.com/bearer/bearer/pkg/scanner/ruleset"
@@ -59,12 +61,16 @@ func GetStringValue(node *tree.Node, detectorContext types.Context) (string, boo
 	}
 }
 
-func ConcatenateChildStrings(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
+func ConcatenateChildStrings(
+	node *tree.Node,
+	detectorContext types.Context,
+	ignoredNodeTypes ...string,
+) ([]interface{}, error) {
 	value := ""
 	isLiteral := true
 
 	for _, child := range node.Children() {
-		if !child.IsNamed() {
+		if !child.IsNamed() || slices.Contains(ignoredNodeTypes, child.Type()) {
 			continue
 		}
 
@@ -118,4 +124,11 @@ func ConcatenateAssignEquals(node *tree.Node, detectorContext types.Context) ([]
 		Value:     left + right,
 		IsLiteral: leftIsLiteral && rightIsLiteral,
 	}}, nil
+}
+
+func Literal(value string) []interface{} {
+	return []interface{}{String{
+		Value:     value,
+		IsLiteral: true,
+	}}
 }

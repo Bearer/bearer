@@ -123,7 +123,7 @@ func (*Pattern) IsRoot(node *tree.Node) bool {
 	return !slices.Contains([]string{"expression_statement", "program"}, node.Type())
 }
 
-func (*Pattern) NodeTypes(node *tree.Node) []string {
+func (*Pattern) NodeTypes(node *tree.Node, parentType string) []string {
 	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
 		if len(node.NamedChildren()) == 0 {
 			return []string{"object"}

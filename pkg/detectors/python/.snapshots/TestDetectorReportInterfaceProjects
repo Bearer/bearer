@@ -1,4 +1,4 @@
-([]*detections.Detection) (len=15) {
+([]*detections.Detection) (len=16) {
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=6) "python",
@@ -448,6 +448,35 @@
           (*values.String)({
             Type: (values.PartType) (len=6) "string",
             Value: (string) (len=15) "raw.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      FullFilename: (string) "",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      StartLineNumber: (*int)(36),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(37),
+      EndColumnNumber: (*int)(18),
+      Text: (*string)((len=26) "\"part1.\"\n    \"example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=17) "part1.example.com"
           })
         }
       }),

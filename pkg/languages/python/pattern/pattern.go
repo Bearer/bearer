@@ -166,7 +166,7 @@ func (*Pattern) IsRoot(node *tree.Node) bool {
 	return !slices.Contains([]string{"module", "expression_statement"}, node.Type()) && !node.IsMissing()
 }
 
-func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
+func (patternLanguage *Pattern) NodeTypes(node *tree.Node, parentType string) []string {
 	if node.Type() == "typed_parameter" {
 		return []string{"typed_parameter", "typed_default_parameter"}
 	}
