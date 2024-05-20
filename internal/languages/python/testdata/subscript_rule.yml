@@ -1,0 +1,24 @@
+languages:
+  - python
+patterns:
+  - pattern: foo[$<USER_INPUT>]
+    filters:
+      - variable: USER_INPUT
+        detection: subscript_test_user_input
+        scope: result
+  - pattern: globals()[$<USER_INPUT>]$<...>
+    filters:
+      - variable: USER_INPUT
+        detection: subscript_test_user_input
+        scope: result
+auxiliary:
+  - id: subscript_test_user_input
+    patterns:
+      - input()
+severity: high
+metadata:
+  description: Test detection filter subscript statements
+  remediation_message: Test detection filter subscript statements
+  cwe_id:
+    - 42
+  id: subscript_test

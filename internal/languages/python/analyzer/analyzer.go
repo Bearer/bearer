@@ -120,10 +120,17 @@ func (analyzer *analyzer) analyzeAttribute(node *sitter.Node, visitChildren func
 }
 
 // foo["bar"]
+// foo[x]
+// globals()[y]
 func (analyzer *analyzer) analyzeSubscript(node *sitter.Node, visitChildren func() error) error {
 	objectNode := node.ChildByFieldName("value")
 	analyzer.builder.Dataflow(node, objectNode)
 	analyzer.lookupVariable(objectNode)
+
+	subscriptNode := node.ChildByFieldName("subscript")
+	if subscriptNode.Type() == "identifier" {
+		analyzer.lookupVariable(subscriptNode)
+	}
 
 	return visitChildren()
 }
