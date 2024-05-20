@@ -124,14 +124,11 @@ func (analyzer *analyzer) analyzeAttribute(node *sitter.Node, visitChildren func
 // globals()[y]
 func (analyzer *analyzer) analyzeSubscript(node *sitter.Node, visitChildren func() error) error {
 	objectNode := node.ChildByFieldName("value")
-	if objectNode.Type() == "identifier" {
-		analyzer.builder.Dataflow(node, objectNode)
-		analyzer.lookupVariable(objectNode)
-	}
+	analyzer.builder.Dataflow(node, objectNode)
+	analyzer.lookupVariable(objectNode)
 
 	subscriptNode := node.ChildByFieldName("subscript")
 	if subscriptNode.Type() == "identifier" {
-		analyzer.builder.Dataflow(node, subscriptNode)
 		analyzer.lookupVariable(subscriptNode)
 	}
 
