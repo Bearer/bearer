@@ -339,7 +339,7 @@ children:
                                 - type: interpolation
                                   id: 71
                                   range: 12:21 - 12:25
-                                  dataflow_sources:
+                                  alias_of:
                                     - 72
                                     - 73
                                     - 74
@@ -351,6 +351,8 @@ children:
                                       id: 73
                                       range: 12:22 - 12:24
                                       content: s2
+                                      alias_of:
+                                        - 59
                                     - type: '"}"'
                                       id: 74
                                       range: 12:24 - 12:25
@@ -401,7 +403,7 @@ children:
 - node: 69
   content: f"foo '{s2}' bar"
   data:
-    value: foo '�' bar
+    value: foo 'hey � there' bar
     isliteral: false
 - node: 32
   content: '"!"'
