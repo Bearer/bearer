@@ -148,7 +148,7 @@ children:
             - type: interpolation
               id: 28
               range: 6:3 - 6:8
-              dataflow_sources:
+              alias_of:
                 - 29
                 - 30
                 - 31
