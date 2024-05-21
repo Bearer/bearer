@@ -37,7 +37,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeSubscript(node, visitChildren)
 	case "call":
 		return analyzer.analyzeCall(node, visitChildren)
-	case "argument_list", "expression_statement", "list", "tuple":
+	case "argument_list", "expression_statement", "list", "tuple", "unary_operator", "binary_operator":
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "parenthesized_expression", "interpolation":
 		return analyzer.analyzeGenericConstruct(node, visitChildren)
