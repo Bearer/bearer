@@ -10,4 +10,4 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
 metadata:
-  id: rule_logger_test
+  id: datatypes_test
