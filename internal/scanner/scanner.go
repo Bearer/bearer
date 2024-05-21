@@ -7,12 +7,6 @@ import (
 
 	schemaclassifier "github.com/bearer/bearer/internal/classification/schema"
 	"github.com/bearer/bearer/internal/commands/process/settings"
-	"github.com/bearer/bearer/internal/languages/golang"
-	"github.com/bearer/bearer/internal/languages/java"
-	"github.com/bearer/bearer/internal/languages/javascript"
-	"github.com/bearer/bearer/internal/languages/php"
-	"github.com/bearer/bearer/internal/languages/python"
-	"github.com/bearer/bearer/internal/languages/ruby"
 	"github.com/bearer/bearer/internal/report"
 	reportdetections "github.com/bearer/bearer/internal/report/detections"
 	"github.com/bearer/bearer/internal/report/detectors"
@@ -21,11 +15,11 @@ import (
 	customruletypes "github.com/bearer/bearer/internal/scanner/detectors/customrule/types"
 	"github.com/bearer/bearer/internal/scanner/detectors/datatype"
 	detectortypes "github.com/bearer/bearer/internal/scanner/detectors/types"
-	"github.com/bearer/bearer/internal/scanner/language"
 	"github.com/bearer/bearer/internal/util/file"
 	"github.com/bearer/bearer/internal/util/pluralize"
 
 	"github.com/bearer/bearer/internal/scanner/languagescanner"
+	"github.com/bearer/bearer/internal/scanner/languageset"
 	"github.com/bearer/bearer/internal/scanner/stats"
 )
 
@@ -34,15 +28,7 @@ type Scanner struct {
 }
 
 func New(schemaClassifier *schemaclassifier.Classifier, rules map[string]*settings.Rule) (*Scanner, error) {
-	languages := []language.Language{
-		java.Get(),
-		javascript.Get(),
-		ruby.Get(),
-		php.Get(),
-		golang.Get(),
-		python.Get(),
-	}
-
+	languages := languageset.Get()
 	languageScanners := make([]*languagescanner.Scanner, len(languages))
 
 	for i, language := range languages {

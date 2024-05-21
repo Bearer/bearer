@@ -13,6 +13,7 @@ import (
 
 	flagtypes "github.com/bearer/bearer/internal/flag/types"
 	"github.com/bearer/bearer/internal/report/customdetectors"
+	"github.com/bearer/bearer/internal/scanner/languageset"
 	"github.com/bearer/bearer/internal/util/output"
 	"github.com/bearer/bearer/internal/util/set"
 	"github.com/bearer/bearer/internal/version_check"
@@ -30,19 +31,6 @@ var (
 		"string_literal",
 	}
 )
-
-func GetSupportedRuleLanguages() map[string]bool {
-	return map[string]bool{
-		"python":     true,
-		"php":        true,
-		"go":         true,
-		"java":       true,
-		"sql":        true, // partly supported but not exposed
-		"ruby":       true,
-		"javascript": true,
-		"typescript": true,
-	}
-}
 
 func loadRules(
 	externalRuleDirs []string,
@@ -162,7 +150,7 @@ func loadRuleDefinitionsFromDir(definitions map[string]RuleDefinition, dir fs.FS
 		}
 
 		for _, language := range ruleDefinition.Languages {
-			if exists := GetSupportedRuleLanguages()[language]; !exists {
+			if !languageset.IsSupportedLanguage(language) {
 				log.Debug().Msgf("rule file includes unsupported language[%s] %s", language, path)
 				return nil
 			}
