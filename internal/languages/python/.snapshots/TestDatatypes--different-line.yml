@@ -1,7 +1,7 @@
 low:
     - rule:
         cwe_ids: []
-        id: rule_logger_test
+        id: datatypes_test
         title: ""
         description: ""
         documentation_url: ""
@@ -30,6 +30,6 @@ low:
                 end: 20
         content: ""
       parent_line_number: 3
-      fingerprint: c94602447d6771c00b72425485a6cf6c_0
-      old_fingerprint: c94602447d6771c00b72425485a6cf6c_0
+      fingerprint: d3079d939d16cfca99001c1eeb9eda3c_0
+      old_fingerprint: d3079d939d16cfca99001c1eeb9eda3c_0
 

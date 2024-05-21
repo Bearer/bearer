@@ -1,0 +1,24 @@
+languages:
+  - python
+patterns:
+  - pattern: cursor_sink($<SOURCE>)
+    filters:
+      - variable: SOURCE
+        detection: flow_test_source
+        scope: cursor
+  - pattern: result_sink($<SOURCE>)
+    filters:
+      - variable: SOURCE
+        detection: flow_test_source
+        scope: result
+auxiliary:
+  - id: flow_test_source
+    patterns:
+      - source()
+severity: high
+metadata:
+  description: Test dataflow and variables
+  remediation_message: Test dataflow and variables
+  cwe_id:
+    - 42
+  id: flow_test

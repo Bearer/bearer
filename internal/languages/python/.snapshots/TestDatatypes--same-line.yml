@@ -1,7 +1,7 @@
 low:
     - rule:
         cwe_ids: []
-        id: rule_logger_test
+        id: datatypes_test
         title: ""
         description: ""
         documentation_url: ""
@@ -30,11 +30,11 @@ low:
                 end: 25
         content: ""
       parent_line_number: 1
-      fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_0
-      old_fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_0
+      fingerprint: 19205ed1e11f9a2acd2a0f2ed6b1cd6c_0
+      old_fingerprint: 19205ed1e11f9a2acd2a0f2ed6b1cd6c_0
     - rule:
         cwe_ids: []
-        id: rule_logger_test
+        id: datatypes_test
         title: ""
         description: ""
         documentation_url: ""
@@ -63,6 +63,6 @@ low:
                 end: 27
         content: ""
       parent_line_number: 2
-      fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_1
-      old_fingerprint: 4b26059938bf9c55dcda8d08bcf6a4bd_1
+      fingerprint: 19205ed1e11f9a2acd2a0f2ed6b1cd6c_1
+      old_fingerprint: 19205ed1e11f9a2acd2a0f2ed6b1cd6c_1
 

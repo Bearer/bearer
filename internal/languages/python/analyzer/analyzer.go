@@ -45,6 +45,10 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeParameters(node, visitChildren)
 	case "keyword_argument":
 		return analyzer.analyzeKeywordArgument(node, visitChildren)
+	case "for_statement":
+		return analyzer.analyzeForStatement(node, visitChildren)
+	case "with_item":
+		return analyzer.analyzeWithItem(node, visitChildren)
 	case "while_statement", "try_statement", "if_statement": // statements don't have results
 		return visitChildren()
 	case "conditional_expression":
@@ -193,6 +197,35 @@ func (analyzer *analyzer) analyzeKeywordArgument(node *sitter.Node, visitChildre
 	analyzer.lookupVariable(value)
 
 	return visitChildren()
+}
+
+func (analyzer *analyzer) analyzeForStatement(node *sitter.Node, visitChildren func() error) error {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+
+	analyzer.builder.Dataflow(left, right)
+	analyzer.scope.Declare(analyzer.builder.ContentFor(left), left)
+	analyzer.lookupVariable(right)
+
+	return visitChildren()
+}
+
+// with x, y as foo:
+func (analyzer *analyzer) analyzeWithItem(node *sitter.Node, visitChildren func() error) error {
+	value := node.ChildByFieldName("value")
+	analyzer.lookupVariable(value)
+
+	err := visitChildren()
+
+	if value.Type() == "as_pattern" {
+		aliasValue := value.NamedChild(0)
+		alias := value.ChildByFieldName("alias")
+		analyzer.lookupVariable(aliasValue)
+		analyzer.builder.Alias(alias, aliasValue)
+		analyzer.scope.Declare(analyzer.builder.ContentFor(alias), alias)
+	}
+
+	return err
 }
 
 // import x

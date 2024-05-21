@@ -7,11 +7,14 @@ import (
 	"github.com/bearer/bearer/internal/languages/testhelper"
 )
 
-//go:embed testdata/logger.yml
-var loggerRule []byte
+//go:embed testdata/datatypes_rule.yml
+var datatypesRule []byte
 
 //go:embed testdata/scope_rule.yml
 var scopeRule []byte
+
+//go:embed testdata/flow_rule.yml
+var flowRule []byte
 
 //go:embed testdata/import_rule.yml
 var importRule []byte
@@ -19,12 +22,16 @@ var importRule []byte
 //go:embed testdata/subscript_rule.yml
 var subscriptRule []byte
 
-func TestFlow(t *testing.T) {
-	testhelper.GetRunner(t, loggerRule, "python").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
+func TestDatatypes(t *testing.T) {
+	testhelper.GetRunner(t, datatypesRule, "python").RunTest(t, "./testdata/datatypes", ".snapshots/")
 }
 
 func TestScope(t *testing.T) {
 	testhelper.GetRunner(t, scopeRule, "python").RunTest(t, "./testdata/scope", ".snapshots/")
+}
+
+func TestFlow(t *testing.T) {
+	testhelper.GetRunner(t, flowRule, "python").RunTest(t, "./testdata/flow", ".snapshots/")
 }
 
 func TestImport(t *testing.T) {
