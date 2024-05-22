@@ -9,6 +9,13 @@ import (
 	"github.com/bearer/bearer/pkg/scanner/language"
 )
 
+var reflexiveMethods = []string{
+	"decode",
+	"encode",
+	"format",
+	"replace",
+}
+
 type analyzer struct {
 	builder *tree.Builder
 	scope   *language.Scope
@@ -23,7 +30,7 @@ func New(builder *tree.Builder) language.Analyzer {
 
 func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error) error {
 	switch node.Type() {
-	case "class_definition", "block", "function_definition":
+	case "class_definition", "function_definition":
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
@@ -100,10 +107,16 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 
 // foo.bar(a, b)
 func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() error) error {
-	if receiver := node.ChildByFieldName("function"); receiver != nil {
-		analyzer.lookupVariable(receiver)
+	if function := node.ChildByFieldName("function"); function != nil {
+		object := function.ChildByFieldName("object")
+		analyzer.lookupVariable(object)
 
-		analyzer.builder.Dataflow(node, receiver)
+		if function.Type() == "attribute" {
+			attribute := function.ChildByFieldName("attribute")
+			if attribute.Type() == "identifier" && slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(attribute)) {
+				analyzer.builder.Dataflow(node, object)
+			}
+		}
 	}
 
 	if argumentsNode := node.ChildByFieldName("arguments"); argumentsNode != nil {

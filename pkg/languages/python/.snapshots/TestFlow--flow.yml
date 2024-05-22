@@ -55,4 +55,32 @@ high:
       parent_line_number: 7
       fingerprint: 22039dd750c8bd604904ee9f5bc626f0_1
       old_fingerprint: 22039dd750c8bd604904ee9f5bc626f0_1
+    - rule:
+        cwe_ids:
+            - "42"
+        id: flow_test
+        title: Test dataflow and variables
+        description: Test dataflow and variables
+        documentation_url: ""
+      line_number: 13
+      full_filename: flow.py
+      filename: flow.py
+      source:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 5
+                end: 19
+      sink:
+        location:
+            start: 13
+            end: 13
+            column:
+                start: 5
+                end: 19
+        content: ""
+      parent_line_number: 13
+      fingerprint: 22039dd750c8bd604904ee9f5bc626f0_2
+      old_fingerprint: 22039dd750c8bd604904ee9f5bc626f0_2
 
