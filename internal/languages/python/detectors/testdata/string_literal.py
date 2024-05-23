@@ -9,3 +9,6 @@ r'a\n'
 
 False or "foo"
 "hey" or "foo"
+
+"a\
+b"

@@ -77,12 +77,18 @@ func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]int
 
 		switch {
 		case child.Type() == "escape_sequence":
-			value, err := stringutil.Unescape(child.Content())
-			if err != nil {
-				return fmt.Errorf("failed to decode escape sequence: %w", err)
+			// tree sitter parser doesn't handle line continuation inside a string
+			if child.Content() == "\\\n" || child.Content() == "\\\r\n" {
+				childValue = ""
+			} else {
+				value, err := stringutil.Unescape(child.Content())
+				if err != nil {
+					return fmt.Errorf("failed to decode escape sequence '%s': %w", child.Content(), err)
+				}
+
+				childValue = value
 			}
 
-			childValue = value
 			childIsLiteral = true
 		case len(namedChildren) == 0:
 			childValue = ""
