@@ -1,6 +1,6 @@
 type: module
 id: 0
-range: 1:1 - 12:1
+range: 1:1 - 14:3
 dataflow_sources:
     - 1
     - 5
@@ -12,6 +12,7 @@ dataflow_sources:
     - 37
     - 42
     - 49
+    - 58
 children:
     - type: expression_statement
       id: 1
@@ -284,6 +285,31 @@ children:
                 - type: '"""'
                   id: 57
                   range: 11:14 - 11:15
+    - type: expression_statement
+      id: 58
+      range: 13:1 - 14:3
+      dataflow_sources:
+        - 59
+      children:
+        - type: string
+          id: 59
+          range: 13:1 - 14:3
+          dataflow_sources:
+            - 60
+            - 61
+            - 62
+          children:
+            - type: '"""'
+              id: 60
+              range: 13:1 - 13:2
+            - type: escape_sequence
+              id: 61
+              range: 13:3 - 14:1
+              content: |
+                \
+            - type: '"""'
+              id: 62
+              range: 14:2 - 14:3
 
 - node: 2
   content: '''a'''
@@ -341,6 +367,13 @@ children:
   content: '"hey" or "foo"'
   data:
     value: foo
+    isliteral: true
+- node: 59
+  content: |-
+    "a\
+    b"
+  data:
+    value: ab
     isliteral: true
 - node: 11
   content: '"a"'
