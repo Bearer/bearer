@@ -22,6 +22,9 @@ var importRule []byte
 //go:embed testdata/subscript_rule.yml
 var subscriptRule []byte
 
+//go:embed testdata/pair_rule.yml
+var pairRule []byte
+
 func TestDatatypes(t *testing.T) {
 	testhelper.GetRunner(t, datatypesRule, "python").RunTest(t, "./testdata/datatypes", ".snapshots/")
 }
@@ -40,4 +43,8 @@ func TestImport(t *testing.T) {
 
 func TestSubscript(t *testing.T) {
 	testhelper.GetRunner(t, subscriptRule, "python").RunTest(t, "./testdata/subscript", ".snapshots/")
+}
+
+func TestPair(t *testing.T) {
+	testhelper.GetRunner(t, pairRule, "python").RunTest(t, "./testdata/pair", ".snapshots/")
 }
