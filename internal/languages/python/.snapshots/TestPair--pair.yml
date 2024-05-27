@@ -1,0 +1,30 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: pair_test
+        title: Test detection filter dictionary pair statements
+        description: Test detection filter dictionary pair statements
+        documentation_url: ""
+      line_number: 4
+      full_filename: pair.py
+      filename: pair.py
+      source:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 1
+                end: 46
+      sink:
+        location:
+            start: 4
+            end: 4
+            column:
+                start: 1
+                end: 46
+        content: ""
+      parent_line_number: 4
+      fingerprint: ccf6bc0c73d9320075b1353d72b65703_0
+      old_fingerprint: ccf6bc0c73d9320075b1353d72b65703_0
+

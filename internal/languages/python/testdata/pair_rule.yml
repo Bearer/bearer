@@ -1,0 +1,19 @@
+languages:
+  - python
+patterns:
+  - pattern: collection.find_one($<...>$<USER_INPUT>$<...>)
+    filters:
+      - variable: USER_INPUT
+        detection: pair_test_user_input
+        scope: result
+auxiliary:
+  - id: pair_test_user_input
+    patterns:
+      - input()
+severity: high
+metadata:
+  description: Test detection filter dictionary pair statements
+  remediation_message: Test detection filter dictionary pair statements
+  cwe_id:
+    - 42
+  id: pair_test
