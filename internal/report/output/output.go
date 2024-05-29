@@ -7,7 +7,6 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
-	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/internal/commands/process/gitrepository"
 	"github.com/bearer/bearer/internal/commands/process/settings"
@@ -73,14 +72,6 @@ func GetData(
 	}
 
 	return data, err
-}
-
-func UploadReportToCloud(report *types.ReportData, config settings.Config, gitContext *gitrepository.Context) {
-	if slices.Contains([]string{flag.ReportSecurity, flag.ReportSaaS}, config.Report.Report) {
-		if config.Client != nil && config.Client.Error == nil {
-			saas.SendReport(config, report, gitContext)
-		}
-	}
 }
 
 func GetDataflow(

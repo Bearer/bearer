@@ -11,7 +11,6 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/bearer/bearer/internal/commands/process/gitrepository"
 	"github.com/bearer/bearer/internal/flag"
 	"github.com/bearer/bearer/internal/util/ignore"
 	ignoretypes "github.com/bearer/bearer/internal/util/ignore/types"
@@ -28,7 +27,6 @@ Available Commands:
     add              Add an ignored fingerprint
     show             Show an ignored fingerprint
     remove           Remove an ignored fingerprint
-    pull             Pull ignored fingerprints from Cloud
     migrate          Migrate ignored fingerprints
 
 Examples:
@@ -40,9 +38,6 @@ Examples:
 
     # Remove an ignored fingerprint from your ignore file
     $ bearer ignore remove <fingerprint>
-
-    # Pull ignored fingerprints from the Cloud (requires API key)
-    $ bearer ignore pull /path/to/your_project --api-key=XXXXX
 
     # Migrate existing ignored (excluded) fingerprints from bearer.yml file
     $ bearer ignore migrate
@@ -61,7 +56,6 @@ Examples:
 		newIgnoreShowCommand(),
 		newIgnoreAddCommand(),
 		newIgnoreRemoveCommand(),
-		newIgnorePullCommand(),
 		newIgnoreMigrateCommand(),
 	)
 
@@ -308,99 +302,6 @@ $ bearer ignore remove <fingerprint>`,
 		SilenceUsage:  false,
 	}
 
-	flags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
-
-	return cmd
-}
-
-func newIgnorePullCommand() *cobra.Command {
-	var flags = flag.Flags{flag.GeneralFlagGroup}
-
-	cmd := &cobra.Command{
-		Use:   "pull <path>",
-		Short: "Pull ignored fingerprints from Cloud",
-		Example: `# Pull ignored fingerprints from the Cloud (requires API key)
-$ bearer ignore pull /path/to/your_project --api-key=XXXXX`,
-		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
-			return nil
-		},
-		RunE: func(cmd *cobra.Command, args []string) error {
-			setLogLevel(cmd)
-
-			options, err := flags.ToOptions(args)
-			if err != nil {
-				return fmt.Errorf("flag error: %s", err)
-			}
-
-			if len(args) == 0 {
-				return cmd.Help()
-			} else {
-				options.Target = args[0]
-			}
-
-			// confirm overwrite if ignore file exists
-			ignoreFilePath, _, fileExists, err := ignore.GetIgnoreFilePath(options.GeneralOptions.IgnoreFile, &options.Target)
-			if err != nil {
-				return fmt.Errorf("file error: %s", err)
-			}
-
-			if fileExists {
-				overwriteApproved := requestConfirmation("Warning: this action will overwrite your current ignore file. Continue?")
-				if !overwriteApproved {
-					cmd.Printf("Okay, pull cancelled!\n")
-					return nil
-				}
-			}
-
-			gitContext, err := gitrepository.NewContext(&options)
-			if err != nil {
-				return fmt.Errorf("failed to get git context: %w", err)
-			}
-
-			data, err := options.GeneralOptions.Client.FetchIgnores(gitContext.FullName, "", []string{})
-			if err != nil {
-				return fmt.Errorf("cloud error: %s", err)
-			}
-
-			if !data.ProjectFound {
-				// no project
-				cmd.Printf("Project %s not found in Cloud. Pull cancelled.", gitContext.FullName)
-				return nil
-			}
-
-			cloudIgnoresCount := len(data.CloudIgnoredFingerprints)
-			if cloudIgnoresCount == 0 {
-				// project found but no ignores
-				cmd.Printf("No ignores for project %s found in the Cloud. Pull cancelled", gitContext.FullName)
-				return nil
-			}
-
-			// project found and we have ignores - write to ignore
-			cmd.Printf("Pulling %d ignores from the Cloud:\n", cloudIgnoresCount)
-			for fingerprintId, fingerprint := range data.CloudIgnoredFingerprints {
-				if fingerprint.Comment == nil {
-					cmd.Printf("\t- %s\n", fingerprintId)
-				} else {
-					cmd.Printf("\t- %s (%s)\n", fingerprintId, *fingerprint.Comment)
-				}
-			}
-			cmd.Printf("\n")
-
-			if err = writeIgnoreFile(data.CloudIgnoredFingerprints, ignoreFilePath); err != nil {
-				return fmt.Errorf("error writing to file: %s", err)
-			}
-
-			cmd.Printf("Pull successful! To view updated ignore file, run: bearer ignore show --all\n")
-			return nil
-		},
-		SilenceErrors: false,
-		SilenceUsage:  false,
-	}
 	flags.AddFlags(cmd)
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
 

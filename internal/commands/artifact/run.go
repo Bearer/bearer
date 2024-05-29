@@ -15,7 +15,6 @@ import (
 
 	"golang.org/x/exp/maps"
 
-	"github.com/bearer/bearer/api"
 	"github.com/bearer/bearer/internal/commands/artifact/scanid"
 	"github.com/bearer/bearer/internal/commands/process/filelist"
 	"github.com/bearer/bearer/internal/commands/process/filelist/files"
@@ -232,7 +231,7 @@ func (r *runner) scanBaseBranch(
 	return result, nil
 }
 
-func getIgnoredFingerprints(client *api.API, settings settings.Config, gitContext *gitrepository.Context, pullRequestNumber string) (
+func getIgnoredFingerprints(settings settings.Config) (
 	useCloudIgnores bool,
 	ignoredFingerprints map[string]ignoretypes.IgnoredFingerprint,
 	staleIgnoredFingerprintIds []string,
@@ -241,22 +240,6 @@ func getIgnoredFingerprints(client *api.API, settings settings.Config, gitContex
 	localIgnoredFingerprints, _, _, err := ignore.GetIgnoredFingerprints(settings.IgnoreFile, &settings.Target)
 	if err != nil {
 		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
-	}
-
-	if client != nil && client.Error == nil {
-		useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err = ignore.GetIgnoredFingerprintsFromCloud(
-			client,
-			gitContext.FullName,
-			pullRequestNumber,
-			localIgnoredFingerprints,
-		)
-		if err != nil {
-			return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
-		}
-	}
-
-	if useCloudIgnores {
-		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, nil
 	}
 
 	return false, localIgnoredFingerprints, []string{}, nil
@@ -308,10 +291,7 @@ func Run(ctx context.Context, opts flagtypes.Options) (err error) {
 		return err
 	}
 	scanSettings.CloudIgnoresUsed, scanSettings.IgnoredFingerprints, scanSettings.StaleIgnoredFingerprintIds, err = getIgnoredFingerprints(
-		opts.GeneralOptions.Client,
 		scanSettings,
-		gitContext,
-		opts.PullRequestNumber,
 	)
 	if err != nil {
 		return err
@@ -403,7 +383,6 @@ func (r *runner) Report(
 	if err != nil {
 		return false, err
 	}
-	reportoutput.UploadReportToCloud(reportData, r.scanSettings, r.gitContext)
 
 	endTime := time.Now()
 
