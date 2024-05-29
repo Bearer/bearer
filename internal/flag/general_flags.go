@@ -1,11 +1,8 @@
 package flag
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/api"
 	flagtypes "github.com/bearer/bearer/internal/flag/types"
-	pointer "github.com/bearer/bearer/internal/util/pointers"
 	"github.com/rs/zerolog/log"
 )
 
@@ -119,18 +116,7 @@ func (generalFlagGroup) SetOptions(options *flagtypes.Options, args []string) er
 	var client *api.API
 	apiKey := getString(APIKeyFlag)
 	if apiKey != "" {
-		client = api.New(api.API{
-			Host:  getString(HostFlag),
-			Token: apiKey,
-		})
-
-		_, err := client.Hello()
-		if err != nil {
-			log.Debug().Msgf("couldn't initialize client -> %s", err.Error())
-			client.Error = pointer.String(fmt.Sprintf("API key does not appear to be valid for %s.", client.Host))
-		} else {
-			log.Debug().Msgf("Initialized client for report")
-		}
+		log.Debug().Msgf("API Key is no longer used please remove it from your config")
 	}
 
 	debug := getBool(DebugFlag)

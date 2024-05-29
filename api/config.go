@@ -13,30 +13,10 @@ type Endpoint struct {
 }
 
 type APIEndpoints struct {
-	RequestFileUpload Endpoint
-	ScanFinished      Endpoint
-	FetchIgnores      Endpoint
-	Hello             Endpoint
-	Version           Endpoint
+	Version Endpoint
 }
 
 var Endpoints = APIEndpoints{
-	RequestFileUpload: Endpoint{
-		HttpMethod: "POST",
-		Route:      "/cloud/file_uploads",
-	},
-	ScanFinished: Endpoint{
-		HttpMethod: "POST",
-		Route:      "/cloud/scans",
-	},
-	FetchIgnores: Endpoint{
-		HttpMethod: "GET",
-		Route:      "/cloud/ignores",
-	},
-	Hello: Endpoint{
-		HttpMethod: "POST",
-		Route:      "/cloud/hello",
-	},
 	Version: Endpoint{
 		HttpMethod: "GET",
 		Route:      "/r/version",

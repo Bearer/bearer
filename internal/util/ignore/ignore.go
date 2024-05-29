@@ -9,11 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/exp/maps"
-
 	"github.com/fatih/color"
 
-	"github.com/bearer/bearer/api"
 	types "github.com/bearer/bearer/internal/util/ignore/types"
 	pointer "github.com/bearer/bearer/internal/util/pointers"
 )
@@ -47,39 +44,6 @@ func GetIgnoredFingerprints(filePath string, target *string) (ignoredFingerprint
 		err = fmt.Errorf("ignore file '%s' is invalid - %s", ignoreFilePath, err)
 	}
 	return ignoredFingerprints, ignoreFilePath, true, err
-}
-
-func GetIgnoredFingerprintsFromCloud(
-	client *api.API,
-	fullname string,
-	pullRequestNumber string,
-	localIgnores map[string]types.IgnoredFingerprint,
-) (
-	useCloudIgnores bool,
-	ignoredFingerprints map[string]types.IgnoredFingerprint,
-	staleIgnoredFingerprintIds []string,
-	err error,
-) {
-
-	data, err := client.FetchIgnores(fullname, pullRequestNumber, maps.Keys(localIgnores))
-	if err != nil {
-		return useCloudIgnores, ignoredFingerprints, staleIgnoredFingerprintIds, err
-	}
-
-	ignoredFingerprints = make(map[string]types.IgnoredFingerprint)
-	for _, fingerprint := range data.Ignores {
-		item := types.IgnoredFingerprint{}
-
-		_, persistedInCloud := data.CloudIgnoredFingerprints[fingerprint]
-		if !persistedInCloud {
-			// it is a new addition; use information from ignore file
-			item = localIgnores[fingerprint]
-		}
-
-		ignoredFingerprints[fingerprint] = item
-	}
-
-	return data.ProjectFound, ignoredFingerprints, data.StaleIgnores, nil
 }
 
 func MergeIgnoredFingerprints(fingerprintsToIgnore map[string]types.IgnoredFingerprint, ignoredFingerprints map[string]types.IgnoredFingerprint, force bool) error {
