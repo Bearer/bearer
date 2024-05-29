@@ -10,10 +10,10 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/cmd/bearer/build"
-	"github.com/bearer/bearer/internal/commands"
-	"github.com/bearer/bearer/internal/flag"
-	flagtypes "github.com/bearer/bearer/internal/flag/types"
-	"github.com/bearer/bearer/internal/util/set"
+	"github.com/bearer/bearer/pkg/commands"
+	"github.com/bearer/bearer/pkg/flag"
+	flagtypes "github.com/bearer/bearer/pkg/flag/types"
+	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -74,7 +74,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	cmd := commands.NewApp(build.Version, build.CommitSHA)
+	cmd := commands.NewApp(build.Version, build.CommitSHA, nil)
 	err := writeDocs(
 		cmd,
 		dir,

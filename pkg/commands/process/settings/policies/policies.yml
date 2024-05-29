@@ -1,0 +1,17 @@
+- type: risk
+  query: |
+    policy_failure = data.bearer.risk_policy.policy_failure
+    local_rule_failure = data.bearer.risk_policy.local_rule_failure
+  modules:
+    - path: common.rego
+      name: bearer.common
+    - path: risk_policy.rego
+      name: bearer.risk_policy
+- type: privacy_report
+  query: |
+    items = data.bearer.privacy_report.items
+  modules:
+    - path: common.rego
+      name: bearer.common
+    - path: privacy_report.rego
+      name: bearer.privacy_report
