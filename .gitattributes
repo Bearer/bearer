@@ -1,2 +1,2 @@
-internal/parser/sitter/**/*.c linguist-generated
-internal/parser/sitter/**/*.cc linguist-generated
+pkg/parser/sitter/**/*.c linguist-generated
+pkg/parser/sitter/**/*.cc linguist-generated

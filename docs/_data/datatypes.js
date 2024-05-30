@@ -69,12 +69,10 @@ function sortData(typesFile, catsFile, groupsFile) {
 }
 // example();
 module.exports = async function () {
-  const dataTypes = await fetchData("../internal/classification/db/data_types/")
-  const dataCats = await fetchData(
-    "../internal/classification/db/data_categories/",
-  )
+  const dataTypes = await fetchData("../pkg/classification/db/data_types/")
+  const dataCats = await fetchData("../pkg/classification/db/data_categories/")
   const groupings = await fetchFile(
-    "../internal/classification/db/category_grouping.json",
+    "../pkg/classification/db/category_grouping.json",
   )
   return sortData(dataTypes, dataCats, groupings)
 }

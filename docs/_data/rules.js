@@ -9,7 +9,7 @@ const source = "bearer/bearer-rules"
 const rulesPath = "_tmp/rules-data"
 const excludeDirectories = [".github", "scripts"]
 const gitleaksInternalRule =
-  "../internal/commands/process/settings/built_in_rules/third_party/gitleaks/secret_detection.yml"
+  "../pkg/commands/process/settings/rules/built_in/third_party/gitleaks/secret_detection.yml"
 
 const counts = {
   languages: {},

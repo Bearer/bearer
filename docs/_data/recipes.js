@@ -15,13 +15,13 @@ async function fetchData(dir) {
       return {
         ...data,
         id: path.basename(file, ".json"),
-        source: `/internal/classification/db/recipes/${file}`,
+        source: `/pkg/classification/db/recipes/${file}`,
       }
     }),
   )
   return result
 }
 module.exports = async function () {
-  const recipes = await fetchData("../internal/classification/db/recipes/")
+  const recipes = await fetchData("../pkg/classification/db/recipes/")
   return recipes
 }

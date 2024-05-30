@@ -19,4 +19,4 @@ bearer
 # docs
 docs/yarn.lock
 
-/internal/parser/sitter/config_variables/build
+/pkg/parser/sitter/config_variables/build

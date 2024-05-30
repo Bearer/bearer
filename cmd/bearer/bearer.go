@@ -1,16 +1,10 @@
 package main
 
 import (
-	"os"
-
 	"github.com/bearer/bearer/cmd/bearer/build"
-	"github.com/bearer/bearer/internal/commands"
+	"github.com/bearer/bearer/external/run"
 )
 
 func main() {
-	app := commands.NewApp(build.Version, build.CommitSHA)
-	if err := app.Execute(); err != nil {
-		// error messages are printed by the framework
-		os.Exit(1)
-	}
+	run.Run(build.Version, build.CommitSHA, run.NewEngine(run.DefaultLanguages()))
 }
