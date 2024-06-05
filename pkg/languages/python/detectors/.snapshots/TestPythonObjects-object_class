@@ -23,6 +23,9 @@ children:
         - type: block
           id: 5
           range: 2:5 - 8:33
+          dataflow_sources:
+            - 6
+            - 40
           children:
             - type: function_definition
               id: 6
@@ -95,6 +98,9 @@ children:
                 - type: block
                   id: 23
                   range: 3:9 - 4:27
+                  dataflow_sources:
+                    - 24
+                    - 32
                   children:
                     - type: expression_statement
                       id: 24
@@ -211,6 +217,9 @@ children:
                 - type: block
                   id: 48
                   range: 7:9 - 8:33
+                  dataflow_sources:
+                    - 49
+                    - 62
                   children:
                     - type: expression_statement
                       id: 49
@@ -222,7 +231,6 @@ children:
                           id: 50
                           range: 7:9 - 7:33
                           dataflow_sources:
-                            - 51
                             - 55
                           children:
                             - type: attribute
@@ -289,7 +297,7 @@ children:
                           id: 63
                           range: 8:9 - 8:33
                           dataflow_sources:
-                            - 64
+                            - 0
                             - 65
                           children:
                             - type: identifier
@@ -311,7 +319,6 @@ children:
                                   id: 67
                                   range: 8:15 - 8:32
                                   dataflow_sources:
-                                    - 68
                                     - 75
                                   children:
                                     - type: attribute

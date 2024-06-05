@@ -14,7 +14,6 @@ children:
           id: 2
           range: 1:1 - 1:12
           dataflow_sources:
-            - 3
             - 7
           children:
             - type: attribute

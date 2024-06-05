@@ -23,6 +23,9 @@ children:
         - type: block
           id: 5
           range: 2:5 - 12:31
+          dataflow_sources:
+            - 6
+            - 13
           children:
             - type: expression_statement
               id: 6
@@ -89,6 +92,13 @@ children:
                 - type: block
                   id: 21
                   range: 5:9 - 12:31
+                  dataflow_sources:
+                    - 22
+                    - 35
+                    - 42
+                    - 49
+                    - 58
+                    - 65
                   children:
                     - type: expression_statement
                       id: 22
