@@ -111,6 +111,10 @@ func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() er
 		object := function.ChildByFieldName("object")
 		analyzer.lookupVariable(object)
 
+		if function.Type() == "identifier" {
+			analyzer.builder.Dataflow(node, object)
+		}
+
 		if function.Type() == "attribute" {
 			attribute := function.ChildByFieldName("attribute")
 			if attribute.Type() == "identifier" && slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(attribute)) {
