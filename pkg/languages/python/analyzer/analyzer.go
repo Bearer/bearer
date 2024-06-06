@@ -108,6 +108,9 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 // foo.bar(a, b)
 func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() error) error {
 	if function := node.ChildByFieldName("function"); function != nil {
+		analyzer.lookupVariable(function)
+		analyzer.builder.Dataflow(function)
+
 		object := function.ChildByFieldName("object")
 		analyzer.lookupVariable(object)
 

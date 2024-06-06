@@ -36,3 +36,5 @@ x.qwerty()
 import FooClass as SomethingElse
 y = SomethingElse()
 y.qwerty()
+
+foo()

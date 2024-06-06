@@ -1,6 +1,11 @@
 languages:
   - python
 patterns:
+  - pattern: $<IMPORT_FROM>($<...>)
+    filters:
+      - variable: IMPORT_FROM
+        detection: import_test_import_from
+        scope: result
   - pattern: $<IMPORT_FROM>.someMethod($<...>)
     filters:
       - variable: IMPORT_FROM
