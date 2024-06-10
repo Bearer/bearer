@@ -240,6 +240,12 @@ func getIgnoredFingerprints(settings settings.Config) (
 	return false, localIgnoredFingerprints, []string{}, nil
 }
 
+
+type ReportFailedError int
+func (exitcode ReportFailedError) Error() string {
+  return "Report failed with exitcode"
+}
+
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err error) {
 	targetPath, err := file.CanonicalPath(opts.Target)
@@ -341,9 +347,9 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 
 	if reportFailed {
 		if scanSettings.Scan.ExitCode == -1 {
-			defer os.Exit(1)
+			return ReportFailedError(1)
 		} else {
-			defer os.Exit(scanSettings.Scan.ExitCode)
+		  return ReportFailedError(scanSettings.Scan.ExitCode)
 		}
 	}
 
