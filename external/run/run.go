@@ -88,7 +88,6 @@ func DefaultLanguages() []Language {
 
 func Run(version, commitSHA string, engine Engine) {
 	err := commands.NewApp(version, commitSHA, engine).Execute()
-	engine.Close()
 
 	if err != nil {
 		// error messages are printed by the framework
