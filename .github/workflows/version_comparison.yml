@@ -23,7 +23,7 @@ jobs:
       - id: load_repo_list
         name: Load KPI repository list
         run: |
-          echo "matrix=$(npx --yes json5 ./kpi_scan/kpi_repo_list.json5)" >> $GITHUB_OUTPUT
+          echo "matrix=$(npx --yes json5 ./.github/workflows/version_comparison/repositories.json5)" >> $GITHUB_OUTPUT
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
