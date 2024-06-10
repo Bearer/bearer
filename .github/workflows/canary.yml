@@ -95,7 +95,7 @@ jobs:
         with:
           path: dist/darwin
           key: darwin-${{ env.sha_short }}-canary
-      - uses: goreleaser/goreleaser-action@v5
+      - uses: goreleaser/goreleaser-action@v6
         if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
         name: Run GoReleaser
         with:
@@ -134,7 +134,7 @@ jobs:
           path: dist/darwin
           key: darwin-${{ env.sha_short }}-canary
       - name: Release
-        uses: goreleaser/goreleaser-action@v5
+        uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser-pro
           version: 1.25.0
