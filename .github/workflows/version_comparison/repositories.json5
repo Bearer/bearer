@@ -1,0 +1,39 @@
+{
+  "include": [
+    // ruby
+    { "name": "railsgoat", "repository_url": "https://github.com/Bearer/railsgoat" },
+    { "name": "mastodon", "repository_url": "https://github.com/mastodon/mastodon" },
+    { "name": "frab", "repository_url": "https://github.com/frab/frab" },
+    { "name": "discourse", "repository_url": "https://github.com/discourse/discourse" },
+    { "name": "diaspora", "repository_url": "https://github.com/diaspora/diaspora" },
+    { "name": "gitlab", "repository_url": "https://gitlab.com/gitlab-org/gitlab" },
+    { "name": "chatwoot", "repository_url": "https://github.com/chatwoot/chatwoot" },
+    { "name": "postal", "repository_url": "https://github.com/postalserver/postal" },
+    { "name": "forem", "repository_url": "https://github.com/forem/forem" },
+    { "name": "openstreetmap-website", "repository_url": "https://github.com/openstreetmap/openstreetmap-website" },
+    { "name": "loomio", "repository_url": "https://github.com/loomio/loomio" },
+    { "name": "rdv-solidarites.fr", "repository_url": "https://github.com/betagouv/rdv-solidarites.fr" },
+    // javascript
+    { "name": "juice-shop", "repository_url": "https://github.com/Bearer/juice-shop" },
+    { "name": "NodeGoat", "repository_url": "https://github.com/Bearer/NodeGoat" },
+    { "name": "chapter", "repository_url": "https://github.com/freeCodeCamp/chapter" },
+    { "name": "Ghost", "repository_url": "https://github.com/TryGhost/Ghost" },
+    { "name": "wekan", "repository_url": "https://github.com/wekan/wekan" },
+    { "name": "backstage", "repository_url": "https://github.com/backstage/backstage" },
+    { "name": "medusa", "repository_url": "https://github.com/medusajs/medusa" },
+    { "name": "ToolJet", "repository_url": "https://github.com/ToolJet/ToolJet" },
+    { "name": "grafana", "repository_url": "https://github.com/grafana/grafana" },
+    { "name": "mattermost-server", "repository_url": "https://github.com/mattermost/mattermost-server" },
+    { "name": "Rocket.Chat", "repository_url": "https://github.com/RocketChat/Rocket.Chat" },
+    // java
+    { "name": "WebGoat", "repository_url": "https://github.com/Bearer/WebGoat" },
+    { "name": "BenchmarkJava", "repository_url": "https://github.com/OWASP-Benchmark/BenchmarkJava" },
+    // php
+    { "name": "OWASPWebGoatPHP", "repository_url": "https://github.com/OWASP/OWASPWebGoatPHP" },
+    { "name": "Vulnerable-Web-Application", "repository_url": "https://github.com/OWASP/Vulnerable-Web-Application" },
+    { "name": "mediawiki", "repository_url": "https://github.com/wikimedia/mediawiki" },
+    // golang
+    { "name": "Vulnerability-goapp", "repository_url": "https://github.com/Hardw01f/Vulnerability-goapp" },
+    { "name": "govwa", "repository_url": "https://github.com/0c34/govwa" }
+  ]
+}
