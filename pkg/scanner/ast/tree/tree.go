@@ -250,7 +250,7 @@ func nodeListToID(nodes []*Node) []int {
 // FIXME: remove this
 func (node *Node) EachContentPart(onText func(text string) error, onChild func(child *Node) error) error {
 	start := node.ContentStart.Byte
-	end := start
+	end := node.ContentEnd.Byte
 
 	emit := func() error {
 		if end <= start {
@@ -274,7 +274,7 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 		}
 
 		start = child.ContentEnd.Byte
-		end = start
+		end = node.ContentEnd.Byte
 	}
 
 	if err := emit(); err != nil {
