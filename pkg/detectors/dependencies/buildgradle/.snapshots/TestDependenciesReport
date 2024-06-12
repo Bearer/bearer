@@ -2,7 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gradleparser",
-    DetectorLanguage: (detectors.Language) (len=4) "Java",
+    DetectorLanguage: (detectors.Language) (len=4) "java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "build.gradle",
@@ -25,7 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gradleparser",
-    DetectorLanguage: (detectors.Language) (len=4) "Java",
+    DetectorLanguage: (detectors.Language) (len=4) "java",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "build.gradle",

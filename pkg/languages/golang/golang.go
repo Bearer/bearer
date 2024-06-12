@@ -42,6 +42,10 @@ func (*implementation) EnryLanguages() []string {
 	return []string{"Go"}
 }
 
+func (*implementation) GoclocLanguages() []string {
+	return []string{"Go"}
+}
+
 func (*implementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
 	return []detectortypes.Detector{
 		object.New(querySet),

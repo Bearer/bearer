@@ -2,7 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=14) "package-config",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "packages.config",
@@ -25,7 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=14) "package-config",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=15) "packages.config",

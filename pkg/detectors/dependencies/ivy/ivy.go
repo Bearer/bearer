@@ -81,7 +81,7 @@ func formattedName(inputname string) string {
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "ivy"
-	report.Language = "Java"
+	report.Language = "java"
 	report.PackageManager = "maven"
 
 	bytes, err := os.ReadFile(f.AbsolutePath)

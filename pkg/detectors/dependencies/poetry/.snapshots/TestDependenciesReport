@@ -2,7 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -25,7 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -48,7 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -71,7 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -94,7 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -117,7 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -140,7 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -163,7 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -186,7 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -209,7 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -232,7 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -255,7 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -278,7 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -301,7 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -324,7 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -347,7 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -370,7 +370,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -393,7 +393,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",
@@ -416,7 +416,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=11) "poetry.lock",

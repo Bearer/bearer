@@ -40,6 +40,10 @@ func (*implementation) EnryLanguages() []string {
 	return []string{"JavaScript", "TypeScript", "TSX"}
 }
 
+func (*implementation) GoclocLanguages() []string {
+	return []string{"JavaScript", "TypeScript", "JSX"}
+}
+
 func (*implementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
 	return []detectortypes.Detector{
 		object.New(querySet),

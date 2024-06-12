@@ -13,6 +13,7 @@ type Language interface {
 	ID() string
 	DisplayName() string
 	EnryLanguages() []string
+	GoclocLanguages() []string
 	NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector
 	SitterLanguage() *sitter.Language
 	Pattern() Pattern

@@ -22,7 +22,7 @@ var queryDependencies = parser.QueryMustCompile(language, `
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "composerjson"
-	report.Language = "PHP"
+	report.Language = "php"
 	report.PackageManager = "packagist"
 	tree, err := parser.ParseFile(f, f.Path, javascript.GetLanguage())
 	if err != nil {

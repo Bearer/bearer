@@ -55,7 +55,7 @@ var queryNestedDependencies = parser.QueryMustCompile(language, `
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "nuget"
-	report.Language = "C#"
+	report.Language = "csharp"
 	report.PackageManager = "nuget"
 	tree, err := parser.ParseFile(f, f.Path, language)
 	if err != nil {

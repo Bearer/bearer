@@ -2,7 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -25,7 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -48,7 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -71,7 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -94,7 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -117,7 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -140,7 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -163,7 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -186,7 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -209,7 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -232,7 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -255,7 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -278,7 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -301,7 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -324,7 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -347,7 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -370,7 +370,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -393,7 +393,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -416,7 +416,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -439,7 +439,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -462,7 +462,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -485,7 +485,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -508,7 +508,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -531,7 +531,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -554,7 +554,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -577,7 +577,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -600,7 +600,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -623,7 +623,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -646,7 +646,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -669,7 +669,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -692,7 +692,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -715,7 +715,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -738,7 +738,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -761,7 +761,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -784,7 +784,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -807,7 +807,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -830,7 +830,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -853,7 +853,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -876,7 +876,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -899,7 +899,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -922,7 +922,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -945,7 +945,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -968,7 +968,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -991,7 +991,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1014,7 +1014,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1037,7 +1037,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1060,7 +1060,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1083,7 +1083,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1106,7 +1106,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1129,7 +1129,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1152,7 +1152,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1175,7 +1175,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1198,7 +1198,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1221,7 +1221,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1244,7 +1244,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1267,7 +1267,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1290,7 +1290,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1313,7 +1313,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1336,7 +1336,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1359,7 +1359,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1382,7 +1382,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1405,7 +1405,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1428,7 +1428,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1451,7 +1451,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1474,7 +1474,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1497,7 +1497,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1520,7 +1520,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1543,7 +1543,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1566,7 +1566,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1589,7 +1589,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1612,7 +1612,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1635,7 +1635,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1658,7 +1658,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1681,7 +1681,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1704,7 +1704,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1727,7 +1727,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1750,7 +1750,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1773,7 +1773,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1796,7 +1796,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1819,7 +1819,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1842,7 +1842,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1865,7 +1865,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1888,7 +1888,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1911,7 +1911,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1934,7 +1934,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1957,7 +1957,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -1980,7 +1980,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2003,7 +2003,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2026,7 +2026,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2049,7 +2049,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2072,7 +2072,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2095,7 +2095,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2118,7 +2118,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2141,7 +2141,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2164,7 +2164,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2187,7 +2187,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2210,7 +2210,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2233,7 +2233,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2256,7 +2256,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2279,7 +2279,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2302,7 +2302,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2325,7 +2325,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2348,7 +2348,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2371,7 +2371,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2394,7 +2394,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2417,7 +2417,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",
@@ -2440,7 +2440,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
-    DetectorLanguage: (detectors.Language) (len=2) "C#",
+    DetectorLanguage: (detectors.Language) (len=6) "csharp",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=18) "packages.lock.json",

@@ -15,7 +15,7 @@ import (
 func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "gosum"
-	report.Language = "Go"
+	report.Language = "go"
 	report.PackageManager = "go"
 
 	fileBytes, err := os.ReadFile(file.AbsolutePath)

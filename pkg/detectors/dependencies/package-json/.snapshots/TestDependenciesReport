@@ -2,7 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -25,7 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -48,7 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -71,7 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -94,7 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -117,7 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -140,7 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -163,7 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -186,7 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -209,7 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -232,7 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -255,7 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -278,7 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -301,7 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -324,7 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -347,7 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -370,7 +370,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -393,7 +393,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -416,7 +416,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -439,7 +439,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -462,7 +462,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -485,7 +485,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -508,7 +508,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -531,7 +531,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -554,7 +554,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -577,7 +577,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -600,7 +600,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -623,7 +623,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -646,7 +646,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -669,7 +669,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -692,7 +692,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -715,7 +715,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -738,7 +738,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -761,7 +761,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -784,7 +784,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -807,7 +807,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -830,7 +830,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",
@@ -853,7 +853,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "package-json",
-    DetectorLanguage: (detectors.Language) (len=10) "JavaScript",
+    DetectorLanguage: (detectors.Language) (len=10) "javascript",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "package.json",

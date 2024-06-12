@@ -30,7 +30,7 @@ var queryDependencies = parser.QueryMustCompile(language, `
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "poetry"
-	report.Language = "Python"
+	report.Language = "python"
 	report.PackageManager = "pypi"
 	tree, err := parser.ParseFile(f, f.Path, language)
 	if err != nil {

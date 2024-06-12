@@ -40,6 +40,10 @@ func (*implementation) EnryLanguages() []string {
 	return []string{"PHP"}
 }
 
+func (*implementation) GoclocLanguages() []string {
+	return []string{"PHP"}
+}
+
 func (*implementation) NewBuiltInDetectors(schemaClassifier *schema.Classifier, querySet *query.Set) []detectortypes.Detector {
 	return []detectortypes.Detector{
 		object.New(querySet),

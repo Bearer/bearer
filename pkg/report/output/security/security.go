@@ -19,6 +19,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/engine"
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
+	"github.com/bearer/bearer/pkg/scanner/language"
 	globaltypes "github.com/bearer/bearer/pkg/types"
 	"github.com/bearer/bearer/pkg/util/file"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
@@ -72,8 +73,6 @@ type Output struct {
 	Severity        string          `json:"severity,omitempty" yaml:"severity,omitempty"`
 	DetailedContext string          `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
-
-var javascriptLanguages = []string{"JSX", "TypeScript", "JavaScript"}
 
 func AddReportData(
 	reportData *outputtypes.ReportData,
@@ -533,16 +532,22 @@ func writeRuleListToString(
 
 	tbl := table.New("Language", "Default Rules", "Custom Rules", "Files").WithWriter(reportStr)
 
-	languagePairs := getLanguagePairs(languages)
 	unsupportedLanguages := make(map[string]bool)
-	for _, lang := range languagePairs {
-		if ruleCount, ok := ruleCountPerLang[lang.Name]; ok {
-			tbl.AddRow(lang.Name, ruleCount.DefaultRuleCount, ruleCount.CustomRuleCount, len(lang.Files))
+	for _, languageFiles := range getFileCountByLanguage(engine, languages) {
+		languageID := languageFiles.language.ID()
+		displayName := languageFiles.language.DisplayName()
+		if ruleCount, ok := ruleCountPerLang[languageID]; ok {
+			tbl.AddRow(
+				displayName,
+				ruleCount.DefaultRuleCount,
+				ruleCount.CustomRuleCount,
+				languageFiles.fileCount,
+			)
 		} else {
 			for _, reportedDependency := range reportedDependencies {
-				if reportedDependency.DetectorLanguage == lang.Name {
-					unsupportedLanguages[lang.Name] = true
-					tbl.AddRow(lang.Name, 0, 0, len(lang.Files))
+				if reportedDependency.DetectorLanguage == languageID {
+					unsupportedLanguages[languageID] = true
+					tbl.AddRow(displayName, 0, 0, languageFiles.fileCount)
 					break
 				}
 			}
@@ -566,44 +571,34 @@ func writeRuleListToString(
 	return totalRuleCount
 }
 
-func getLanguagePairs(languages map[string]*gocloc.Language) []*gocloc.Language {
-	languageSlice := maps.Values(languages)[:]
-	groupedLanguageSlice := make(map[string]*gocloc.Language)
+type languageFiles struct {
+	language  language.Language
+	fileCount int
+}
 
-	for _, language := range languageSlice {
-		var detectedLanguage string
-		var files []string
-		if slices.Contains(javascriptLanguages, language.Name) {
-			detectedLanguage = "JavaScript"
-			files = language.Files
-		} else {
-			detectedLanguage = language.Name
-			files = language.Files
-		}
+func getFileCountByLanguage(engine engine.Engine, languages map[string]*gocloc.Language) []languageFiles {
+	filesByLanguage := make(map[language.Language]int)
 
-		if _, exists := groupedLanguageSlice[detectedLanguage]; !exists {
-			groupedLanguageSlice[detectedLanguage] = &gocloc.Language{
-				Name:  detectedLanguage,
-				Files: files,
-			}
-		} else {
-			groupedLanguageSlice[detectedLanguage].Files = append(groupedLanguageSlice[detectedLanguage].Files, files...)
+	for _, goclocLanguage := range languages {
+		language := getLanguageByGocloc(engine, goclocLanguage)
+		if language != nil {
+			filesByLanguage[language] += len(goclocLanguage.Files)
 		}
 	}
 
-	languagePairs := make([]*gocloc.Language, 0, len(groupedLanguageSlice))
-	for key := range groupedLanguageSlice {
-		languagePairs = append(languagePairs, &gocloc.Language{
-			Name:  key,
-			Files: groupedLanguageSlice[key].Files,
+	result := make([]languageFiles, 0, len(filesByLanguage))
+	for language, fileCount := range filesByLanguage {
+		result = append(result, languageFiles{
+			language:  language,
+			fileCount: fileCount,
 		})
 	}
 
-	sort.Slice(languagePairs, func(i, j int) bool {
-		return len(languagePairs[i].Files) > len(languagePairs[j].Files)
+	sort.Slice(result, func(i, j int) bool {
+		return result[i].fileCount > result[j].fileCount
 	})
 
-	return languagePairs
+	return result
 }
 
 func countRules(
@@ -627,16 +622,17 @@ func countRules(
 		}
 
 		var shouldCount bool
+		var languageID string
 
-		language := getLanguageDisplayName(engine, rule)
-
-		if language == "secret" {
+		if rule.IsSecrets() {
 			shouldCount = slices.Contains(config.Scan.Scanner, "secrets")
 		} else if slices.Contains(config.Scan.Scanner, "sast") {
-			if language == "JavaScript" {
-				shouldCount = languages["JavaScript"] != nil || languages["TypeScript"] != nil
-			} else {
-				shouldCount = languages[language] != nil
+			languageID = rule.Languages[0]
+			language := engine.GetLanguageById(languageID)
+			for _, name := range language.GoclocLanguages() {
+				if languages[name] != nil {
+					shouldCount = true
+				}
 			}
 		}
 
@@ -648,28 +644,28 @@ func countRules(
 		totalRuleCount += 1
 
 		defaultRule := strings.HasPrefix(rule.DocumentationUrl, "https://docs.bearer.com") || builtIn
-		if ruleCount, ok := ruleCountPerLang[language]; ok {
+		if ruleCount, ok := ruleCountPerLang[languageID]; ok {
 			if defaultRule {
 				if !defaultRulesUsed {
 					defaultRulesUsed = true
 				}
 				ruleCount.DefaultRuleCount += 1
-				ruleCountPerLang[language] = ruleCount
+				ruleCountPerLang[languageID] = ruleCount
 			} else {
 				ruleCount.CustomRuleCount += 1
-				ruleCountPerLang[language] = ruleCount
+				ruleCountPerLang[languageID] = ruleCount
 			}
 		} else {
 			if defaultRule {
 				if !defaultRulesUsed {
 					defaultRulesUsed = true
 				}
-				ruleCountPerLang[language] = RuleCounter{
+				ruleCountPerLang[languageID] = RuleCounter{
 					CustomRuleCount:  0,
 					DefaultRuleCount: 1,
 				}
 			} else {
-				ruleCountPerLang[language] = RuleCounter{
+				ruleCountPerLang[languageID] = RuleCounter{
 					CustomRuleCount:  1,
 					DefaultRuleCount: 0,
 				}
@@ -872,15 +868,12 @@ func codeExtract(filename string, Source types.Source, Sink types.Sink) []file.L
 	return code
 }
 
-func getLanguageDisplayName(engine engine.Engine, rule *settings.Rule) string {
-	if rule.Languages == nil {
-		return "secret"
+func getLanguageByGocloc(engine engine.Engine, goclocLanguage *gocloc.Language) language.Language {
+	for _, language := range engine.GetLanguages() {
+		if slices.Contains(language.GoclocLanguages(), goclocLanguage.Name) {
+			return language
+		}
 	}
 
-	language := engine.GetLanguageById(rule.Languages[0])
-	if language == nil {
-		return rule.Languages[0]
-	}
-
-	return language.DisplayName()
+	return nil
 }

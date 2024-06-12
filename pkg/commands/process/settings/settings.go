@@ -305,3 +305,7 @@ func (rule *Rule) GetSeverity() string {
 
 	return rule.Severity
 }
+
+func (rule *Rule) IsSecrets() bool {
+	return rule.Languages == nil
+}

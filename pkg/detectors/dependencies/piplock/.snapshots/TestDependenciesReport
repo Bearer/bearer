@@ -2,7 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
@@ -25,7 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
@@ -48,7 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
@@ -71,7 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
-    DetectorLanguage: (detectors.Language) (len=6) "Python",
+    DetectorLanguage: (detectors.Language) (len=6) "python",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Pipfile.lock",
