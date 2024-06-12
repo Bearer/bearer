@@ -14,6 +14,7 @@ var reflexiveMethods = []string{
 	"encode",
 	"format",
 	"replace",
+	"split",
 }
 
 type analyzer struct {
