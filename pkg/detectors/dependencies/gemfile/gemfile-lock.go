@@ -43,7 +43,7 @@ type SourceType struct {
 func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "gemfile-lock"
-	report.Language = "Ruby"
+	report.Language = "ruby"
 	report.PackageManager = "rubygems"
 
 	fileBytes, err := os.ReadFile(file.AbsolutePath)

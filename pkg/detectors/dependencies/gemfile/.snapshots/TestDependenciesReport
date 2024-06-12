@@ -2,7 +2,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -25,7 +25,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -48,7 +48,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -71,7 +71,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -94,7 +94,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -117,7 +117,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -140,7 +140,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -163,7 +163,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -186,7 +186,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -209,7 +209,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -232,7 +232,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -255,7 +255,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -278,7 +278,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -301,7 +301,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -324,7 +324,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -347,7 +347,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -370,7 +370,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -393,7 +393,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -416,7 +416,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -439,7 +439,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -462,7 +462,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -485,7 +485,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -508,7 +508,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -531,7 +531,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -554,7 +554,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -577,7 +577,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -600,7 +600,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -623,7 +623,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -646,7 +646,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -669,7 +669,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -692,7 +692,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -715,7 +715,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -738,7 +738,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -761,7 +761,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -784,7 +784,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -807,7 +807,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -830,7 +830,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -853,7 +853,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -876,7 +876,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -899,7 +899,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -922,7 +922,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -945,7 +945,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -968,7 +968,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -991,7 +991,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1014,7 +1014,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1037,7 +1037,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1060,7 +1060,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1083,7 +1083,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1106,7 +1106,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1129,7 +1129,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1152,7 +1152,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1175,7 +1175,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1198,7 +1198,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1221,7 +1221,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1244,7 +1244,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1267,7 +1267,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1290,7 +1290,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1313,7 +1313,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1336,7 +1336,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1359,7 +1359,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1382,7 +1382,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1405,7 +1405,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1428,7 +1428,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1451,7 +1451,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1474,7 +1474,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1497,7 +1497,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1520,7 +1520,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1543,7 +1543,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1566,7 +1566,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1589,7 +1589,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1612,7 +1612,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1635,7 +1635,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1658,7 +1658,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1681,7 +1681,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1704,7 +1704,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1727,7 +1727,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1750,7 +1750,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1773,7 +1773,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1796,7 +1796,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1819,7 +1819,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1842,7 +1842,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1865,7 +1865,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1888,7 +1888,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1911,7 +1911,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1934,7 +1934,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1957,7 +1957,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -1980,7 +1980,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -2003,7 +2003,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -2026,7 +2026,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -2049,7 +2049,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -2072,7 +2072,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -2095,7 +2095,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",
@@ -2118,7 +2118,7 @@
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=12) "gemfile-lock",
-    DetectorLanguage: (detectors.Language) (len=4) "Ruby",
+    DetectorLanguage: (detectors.Language) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "Gemfile.lock",

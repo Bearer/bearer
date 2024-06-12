@@ -34,7 +34,7 @@ var queryDependencies = parser.QueryMustCompile(language, `
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "mvnplugin"
-	report.Language = "Java"
+	report.Language = "java"
 	report.PackageManager = "maven"
 	tree, err := parser.ParseFile(f, f.Path, language)
 	if err != nil {

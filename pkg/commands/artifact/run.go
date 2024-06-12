@@ -240,10 +240,10 @@ func getIgnoredFingerprints(settings settings.Config) (
 	return false, localIgnoredFingerprints, []string{}, nil
 }
 
-
 type ReportFailedError int
+
 func (exitcode ReportFailedError) Error() string {
-  return "Report failed with exitcode"
+	return "Report failed with exitcode"
 }
 
 // Run performs artifact scanning
@@ -349,7 +349,7 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		if scanSettings.Scan.ExitCode == -1 {
 			return ReportFailedError(1)
 		} else {
-		  return ReportFailedError(scanSettings.Scan.ExitCode)
+			return ReportFailedError(scanSettings.Scan.ExitCode)
 		}
 	}
 
@@ -456,14 +456,11 @@ func anySupportedLanguagesPresent(engine engine.Engine, inputgocloc *gocloc.Resu
 		}
 	}
 
-	foundLanguages := make(map[string]bool)
-	for _, language := range inputgocloc.Languages {
-		foundLanguages[strings.ToLower(language.Name)] = true
-	}
-
-	for _, supportedLanguage := range engine.GetLanguages() {
-		if _, supportedLangPresent := foundLanguages[supportedLanguage.ID()]; supportedLangPresent {
-			return true
+	for _, goclocLanguage := range inputgocloc.Languages {
+		for _, language := range engine.GetLanguages() {
+			if slices.Contains(language.GoclocLanguages(), goclocLanguage.Name) {
+				return true
+			}
 		}
 	}
 

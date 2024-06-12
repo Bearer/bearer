@@ -80,7 +80,7 @@ func githubDependency(lineNumber int64, fields []string) depsbase.Dependency {
 func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "paket-dependencies"
-	report.Language = "C#"
+	report.Language = "csharp"
 	report.PackageManager = "nuget"
 
 	result := document{}

@@ -16,7 +16,7 @@ var lineRegexp = regexp.MustCompile(`^\s*([^#\s~=<>]+)\s*(?:[~=<>]=?([^#,\s]+))?
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "requirements.txt"
-	report.Language = "Python"
+	report.Language = "python"
 	report.PackageManager = "pypi"
 
 	fileBytes, err := os.ReadFile(f.AbsolutePath)
