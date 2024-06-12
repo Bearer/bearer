@@ -4,9 +4,11 @@ import (
 	"context"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/bearer/pkg/classification"
@@ -37,6 +39,13 @@ func RunTest(
 	fileName string,
 ) {
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
+	log.Logger = log.Output(zerolog.ConsoleWriter{
+		Out: os.Stderr,
+		FormatTimestamp: func(i interface{}) string {
+			timestamp, _ := time.Parse(time.RFC3339, i.(string))
+			return timestamp.Format("2006-01-02 15:04:05")
+		},
+	})
 
 	t.Run(name, func(tt *testing.T) {
 		classifier, err := classification.NewClassifier(&classification.Config{

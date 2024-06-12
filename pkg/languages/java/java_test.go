@@ -18,11 +18,11 @@ var loggerRule []byte
 var scopeRule []byte
 
 func TestFlow(t *testing.T) {
-	testhelper.GetRunner(t, loggerRule, "Java").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
+	testhelper.GetRunner(t, loggerRule, java.Get()).RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestScope(t *testing.T) {
-	testhelper.GetRunner(t, scopeRule, "Java").RunTest(t, "./testdata/scope", ".snapshots/")
+	testhelper.GetRunner(t, scopeRule, java.Get()).RunTest(t, "./testdata/scope", ".snapshots/")
 }
 
 func TestPattern(t *testing.T) {

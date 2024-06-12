@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/bearer/bearer/pkg/languages/golang"
 	"github.com/bearer/bearer/pkg/languages/testhelper"
 )
 
@@ -17,13 +18,13 @@ var scopeRule []byte
 var importRule []byte
 
 func TestFlow(t *testing.T) {
-	testhelper.GetRunner(t, loggerRule, "Go").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
+	testhelper.GetRunner(t, loggerRule, golang.Get()).RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestScope(t *testing.T) {
-	testhelper.GetRunner(t, scopeRule, "Go").RunTest(t, "./testdata/scope", ".snapshots/")
+	testhelper.GetRunner(t, scopeRule, golang.Get()).RunTest(t, "./testdata/scope", ".snapshots/")
 }
 
 func TestImport(t *testing.T) {
-	testhelper.GetRunner(t, importRule, "Go").RunTest(t, "./testdata/import", ".snapshots/")
+	testhelper.GetRunner(t, importRule, golang.Get()).RunTest(t, "./testdata/import", ".snapshots/")
 }

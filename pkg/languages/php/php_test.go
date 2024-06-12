@@ -26,15 +26,15 @@ var scopeRule []byte
 var mdRule []byte
 
 func TestFlow(t *testing.T) {
-	testhelper.GetRunner(t, loggerRule, "PHP").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
+	testhelper.GetRunner(t, loggerRule, php.Get()).RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestScope(t *testing.T) {
-	testhelper.GetRunner(t, scopeRule, "PHP").RunTest(t, "./testdata/scope", ".snapshots/")
+	testhelper.GetRunner(t, scopeRule, php.Get()).RunTest(t, "./testdata/scope", ".snapshots/")
 }
 
 func TestConst(t *testing.T) {
-	testhelper.GetRunner(t, mdRule, "PHP").RunTest(t, "./testdata/md", ".snapshots/")
+	testhelper.GetRunner(t, mdRule, php.Get()).RunTest(t, "./testdata/md", ".snapshots/")
 }
 
 func TestAnalyzer(t *testing.T) {
