@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 
@@ -12,91 +13,65 @@ import (
 	"github.com/rs/zerolog"
 	"gopkg.in/yaml.v3"
 
+	"github.com/bearer/bearer/pkg/classification"
 	"github.com/bearer/bearer/pkg/commands"
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/work"
-	"github.com/bearer/bearer/pkg/commands/process/orchestrator/worker"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	settingsloader "github.com/bearer/bearer/pkg/commands/process/settings/loader"
 	"github.com/bearer/bearer/pkg/commands/process/settings/rules"
-	engine "github.com/bearer/bearer/pkg/engine/implementation"
+	"github.com/bearer/bearer/pkg/detectors"
+	engine "github.com/bearer/bearer/pkg/engine"
+	engineimpl "github.com/bearer/bearer/pkg/engine/implementation"
 	"github.com/bearer/bearer/pkg/flag"
-	"github.com/bearer/bearer/pkg/languages"
 	"github.com/bearer/bearer/pkg/report/output"
+	"github.com/bearer/bearer/pkg/report/writer"
+	"github.com/bearer/bearer/pkg/scanner"
+	"github.com/bearer/bearer/pkg/scanner/language"
 	"github.com/bearer/bearer/pkg/types"
 	util "github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/version_check"
 )
 
 type Runner struct {
-	config settings.Config
-	worker worker.Worker
+	engine     engine.Engine
+	config     settings.Config
+	classifier *classification.Classifier
+	scanner    *scanner.Scanner
 }
 
-func GetRunner(t *testing.T, ruleBytes []byte, lang string) *Runner {
+func GetRunner(t *testing.T, ruleBytes []byte, lang language.Language) *Runner {
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
-	err := commands.ScanFlags.BindForConfigInit(commands.NewScanCommand(nil))
-	if err != nil {
-		t.Fatalf("failed to bind flags: %s", err)
+	engine := engineimpl.New([]language.Language{lang})
+	config := buildConfig(t, engine, ruleBytes)
+
+	if err := engine.Initialize(config.LogLevel); err != nil {
+		t.Fatalf("failed to initialize engine: %s", err)
 	}
 
-	configFlags, err := commands.ScanFlags.ToOptions([]string{})
+	classifier, err := classification.NewClassifier(&classification.Config{Config: config})
 	if err != nil {
-		t.Fatalf("failed to generate default flags: %s", err)
-	}
-	configFlags.Format = flag.FormatYAML
-	configFlags.Report = flag.ReportSecurity
-	configFlags.Quiet = true
-
-	meta := &version_check.VersionMeta{
-		Rules: version_check.RuleVersionMeta{
-			Packages: make(map[string]string),
-		},
-		Binary: version_check.BinaryVersionMeta{
-			Latest:  true,
-			Message: "",
-		},
+		t.Fatalf("failed to create classifier: %s", err)
 	}
 
-	engine := engine.New(languages.Default())
-	config, err := settingsloader.FromOptions(configFlags, meta, engine)
+	scanner, err := scanner.New(engine, classifier.Schema, config.Rules)
 	if err != nil {
-		t.Fatalf("failed to generate default scan settings: %s", err)
-	}
-
-	config.Rules = getRulesFromYaml(t, ruleBytes)
-
-	worker := worker.Worker{}
-	err = worker.Setup(config)
-	if err != nil {
-		t.Fatalf("failed to setup scan worker: %s", err)
+		t.Fatalf("failed to create scanner: %s", err)
 	}
 
 	runner := &Runner{
-		worker: worker,
-		config: config,
+		engine:     engine,
+		config:     config,
+		classifier: classifier,
+		scanner:    scanner,
 	}
+	runtime.SetFinalizer(runner, func(runner *Runner) {
+		runner.scanner.Close()
+		runner.engine.Close()
+	})
 
 	return runner
-}
-
-func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*settings.Rule {
-	var ruleDefinition settings.RuleDefinition
-	err := yaml.Unmarshal(ruleBytes, &ruleDefinition)
-	if err != nil {
-		t.Fatalf("failed to unmarshal rule %s", err)
-	}
-
-	definitions := map[string]settings.RuleDefinition{
-		ruleDefinition.Metadata.ID: ruleDefinition,
-	}
-	enabledRules := map[string]struct{}{
-		ruleDefinition.Metadata.ID: {},
-	}
-
-	return rules.BuildRules(definitions, enabledRules)
 }
 
 func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath string) {
@@ -125,11 +100,9 @@ func (runner *Runner) RunTest(t *testing.T, testdataPath string, snapshotPath st
 	}
 
 	for _, file := range fileList.Files {
-		myfile := file
-		ext := filepath.Ext(file.FilePath)
-		testName := "/" + strings.TrimSuffix(file.FilePath, ext) + ".yml"
-		t.Run(testName, func(t *testing.T) {
-			runner.scanSingleFile(t, testdataPath, myfile, snapshotPath)
+		testName := strings.TrimSuffix(file.FilePath, filepath.Ext(file.FilePath))
+		t.Run(testName, func(tt *testing.T) {
+			runner.scanSingleFile(tt, testdataPath, file, snapshotPath)
 		})
 	}
 }
@@ -146,15 +119,19 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to get absolute path of report file: %s", err)
 	}
 
-	_, err = runner.worker.Scan(context.Background(), work.ProcessRequest{
-		File:       fileRelativePath,
-		ReportPath: detectorsReportPath,
-		Repository: work.Repository{
-			Dir: testDataPath,
+	if err = detectors.Extract(
+		context.Background(),
+		testDataPath,
+		fileRelativePath.FilePath,
+		&writer.Detectors{
+			Classifier: runner.classifier,
+			File:       detectorsReportFile,
 		},
-	})
-
-	if err != nil {
+		nil,
+		[]string{"sast"},
+		runner.scanner,
+		false,
+	); err != nil {
 		t.Fatalf("failed to do scan %s", err)
 	}
 
@@ -177,6 +154,63 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to encoded to yaml: %s", err)
 	}
 
-	cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotsPath))
-	cupaloyCopy.SnapshotT(t, report)
+	cupaloy.NewDefaultConfig().WithOptions(
+		cupaloy.SnapshotSubdirectory(snapshotsPath),
+		cupaloy.SnapshotFileExtension(".yml"),
+	).SnapshotT(t, report)
+}
+
+func buildConfig(t *testing.T, engine engine.Engine, ruleBytes []byte) settings.Config {
+	err := commands.ScanFlags.BindForConfigInit(commands.NewScanCommand(nil))
+	if err != nil {
+		t.Fatalf("failed to bind flags: %s", err)
+	}
+
+	configFlags, err := commands.ScanFlags.ToOptions([]string{})
+	if err != nil {
+		t.Fatalf("failed to generate default flags: %s", err)
+	}
+	configFlags.Format = flag.FormatYAML
+	configFlags.Report = flag.ReportSecurity
+	configFlags.Quiet = true
+	configFlags.DisableDefaultRules = true
+	configFlags.ExternalRuleDir = []string{}
+	configFlags.DisableVersionCheck = true
+	configFlags.IgnoreGit = true
+
+	meta := &version_check.VersionMeta{
+		Rules: version_check.RuleVersionMeta{
+			Packages: make(map[string]string),
+		},
+		Binary: version_check.BinaryVersionMeta{
+			Latest:  true,
+			Message: "",
+		},
+	}
+
+	config, err := settingsloader.FromOptions(configFlags, meta, engine)
+	if err != nil {
+		t.Fatalf("failed to generate default scan settings: %s", err)
+	}
+
+	config.Rules = getRulesFromYaml(t, ruleBytes)
+
+	return config
+}
+
+func getRulesFromYaml(t *testing.T, ruleBytes []byte) map[string]*settings.Rule {
+	var ruleDefinition settings.RuleDefinition
+	err := yaml.Unmarshal(ruleBytes, &ruleDefinition)
+	if err != nil {
+		t.Fatalf("failed to unmarshal rule %s", err)
+	}
+
+	definitions := map[string]settings.RuleDefinition{
+		ruleDefinition.Metadata.ID: ruleDefinition,
+	}
+	enabledRules := map[string]struct{}{
+		ruleDefinition.Metadata.ID: {},
+	}
+
+	return rules.BuildRules(definitions, enabledRules)
 }

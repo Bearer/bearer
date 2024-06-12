@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/bearer/bearer/pkg/languages/javascript"
 	"github.com/bearer/bearer/pkg/languages/testhelper"
 )
 
@@ -26,25 +27,25 @@ var patternVariablesRule []byte
 var scopeRule []byte
 
 func TestFlow(t *testing.T) {
-	testhelper.GetRunner(t, datatypeRule, "Javascript").RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
+	testhelper.GetRunner(t, datatypeRule, javascript.Get()).RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")
 }
 
 func TestObjectDeconstructing(t *testing.T) {
-	testhelper.GetRunner(t, deconstructingRule, "Javascript").RunTest(t, "./testdata/testcases/object-deconstructing", ".snapshots/object-deconstructing/")
+	testhelper.GetRunner(t, deconstructingRule, javascript.Get()).RunTest(t, "./testdata/testcases/object-deconstructing", ".snapshots/object-deconstructing/")
 }
 
 func TestImport(t *testing.T) {
-	testhelper.GetRunner(t, importRule, "Javascript").RunTest(t, "./testdata/import", ".snapshots/import/")
+	testhelper.GetRunner(t, importRule, javascript.Get()).RunTest(t, "./testdata/import", ".snapshots/import/")
 }
 
 func TestString(t *testing.T) {
-	testhelper.GetRunner(t, insecureURLRule, "Javascript").RunTest(t, "./testdata/testcases/string", ".snapshots/string/")
+	testhelper.GetRunner(t, insecureURLRule, javascript.Get()).RunTest(t, "./testdata/testcases/string", ".snapshots/string/")
 }
 
 func TestPatternVariables(t *testing.T) {
-	testhelper.GetRunner(t, patternVariablesRule, "Javascript").RunTest(t, "./testdata/pattern_variables", ".snapshots/")
+	testhelper.GetRunner(t, patternVariablesRule, javascript.Get()).RunTest(t, "./testdata/pattern_variables", ".snapshots/")
 }
 
 func TestScope(t *testing.T) {
-	testhelper.GetRunner(t, scopeRule, "Javascript").RunTest(t, "./testdata/scope", ".snapshots/")
+	testhelper.GetRunner(t, scopeRule, javascript.Get()).RunTest(t, "./testdata/scope", ".snapshots/")
 }

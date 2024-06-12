@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/bearer/bearer/pkg/languages/ruby"
 	"github.com/bearer/bearer/pkg/languages/testhelper"
 )
 
@@ -17,13 +18,13 @@ var patternVariablesRule []byte
 var scopeRule []byte
 
 func TestRuby(t *testing.T) {
-	testhelper.GetRunner(t, loggerRule, "Ruby").RunTest(t, "./testdata/testcases", ".snapshots/")
+	testhelper.GetRunner(t, loggerRule, ruby.Get()).RunTest(t, "./testdata/testcases", ".snapshots/")
 }
 
 func TestPatternVariables(t *testing.T) {
-	testhelper.GetRunner(t, patternVariablesRule, "Ruby").RunTest(t, "./testdata/pattern_variables", ".snapshots/")
+	testhelper.GetRunner(t, patternVariablesRule, ruby.Get()).RunTest(t, "./testdata/pattern_variables", ".snapshots/")
 }
 
 func TestScope(t *testing.T) {
-	testhelper.GetRunner(t, scopeRule, "Ruby").RunTest(t, "./testdata/scope", ".snapshots/")
+	testhelper.GetRunner(t, scopeRule, ruby.Get()).RunTest(t, "./testdata/scope", ".snapshots/")
 }
