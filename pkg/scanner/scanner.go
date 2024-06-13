@@ -7,12 +7,7 @@ import (
 
 	schemaclassifier "github.com/bearer/bearer/pkg/classification/schema"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/languages/golang"
-	"github.com/bearer/bearer/pkg/languages/java"
-	"github.com/bearer/bearer/pkg/languages/javascript"
-	"github.com/bearer/bearer/pkg/languages/php"
-	"github.com/bearer/bearer/pkg/languages/python"
-	"github.com/bearer/bearer/pkg/languages/ruby"
+	"github.com/bearer/bearer/pkg/engine"
 	"github.com/bearer/bearer/pkg/report"
 	reportdetections "github.com/bearer/bearer/pkg/report/detections"
 	"github.com/bearer/bearer/pkg/report/detectors"
@@ -21,7 +16,6 @@ import (
 	customruletypes "github.com/bearer/bearer/pkg/scanner/detectors/customrule/types"
 	"github.com/bearer/bearer/pkg/scanner/detectors/datatype"
 	detectortypes "github.com/bearer/bearer/pkg/scanner/detectors/types"
-	"github.com/bearer/bearer/pkg/scanner/language"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/pluralize"
 
@@ -33,15 +27,12 @@ type Scanner struct {
 	languageScanners []*languagescanner.Scanner
 }
 
-func New(schemaClassifier *schemaclassifier.Classifier, rules map[string]*settings.Rule) (*Scanner, error) {
-	languages := []language.Language{
-		java.Get(),
-		javascript.Get(),
-		ruby.Get(),
-		php.Get(),
-		golang.Get(),
-		python.Get(),
-	}
+func New(
+	engine engine.Engine,
+	schemaClassifier *schemaclassifier.Classifier,
+	rules map[string]*settings.Rule,
+) (*Scanner, error) {
+	languages := engine.GetLanguages()
 
 	languageScanners := make([]*languagescanner.Scanner, len(languages))
 

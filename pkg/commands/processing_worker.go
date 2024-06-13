@@ -9,11 +9,12 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	"github.com/bearer/bearer/pkg/commands/process/orchestrator/worker"
+	"github.com/bearer/bearer/pkg/engine"
 	"github.com/bearer/bearer/pkg/flag"
 	"github.com/bearer/bearer/pkg/util/output"
 )
 
-func NewProcessingWorkerCommand() *cobra.Command {
+func NewProcessingWorkerCommand(engine engine.Engine) *cobra.Command {
 	flags := flag.Flags{flag.WorkerFlagGroup}
 
 	cmd := &cobra.Command{
@@ -43,7 +44,7 @@ func NewProcessingWorkerCommand() *cobra.Command {
 			}
 
 			log.Debug().Msgf("running scan worker on port `%s`", options.WorkerOptions.Port)
-			return worker.Start(options.WorkerOptions.ParentProcessID, options.WorkerOptions.Port)
+			return worker.Start(options.WorkerOptions.ParentProcessID, options.WorkerOptions.Port, engine)
 		},
 		Hidden:        true,
 		SilenceErrors: true,
