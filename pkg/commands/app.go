@@ -14,7 +14,7 @@ func NewApp(version string, commitSHA string, engine engine.Engine) *cobra.Comma
 	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
 		NewCompletionCommand(),
-		NewProcessingWorkerCommand(),
+		NewProcessingWorkerCommand(engine),
 		NewInitCommand(),
 		NewScanCommand(engine),
 		NewIgnoreCommand(),

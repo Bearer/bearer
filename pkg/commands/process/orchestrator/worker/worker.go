@@ -20,6 +20,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/debugprofile"
 	config "github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/detectors"
+	"github.com/bearer/bearer/pkg/engine"
 	"github.com/bearer/bearer/pkg/report/writer"
 	"github.com/bearer/bearer/pkg/scanner"
 	"github.com/bearer/bearer/pkg/scanner/stats"
@@ -32,6 +33,7 @@ var ErrorTimeoutReached = errors.New("file processing time exceeded")
 type Worker struct {
 	debug           bool
 	classifer       *classification.Classifier
+	engine          engine.Engine
 	enabledScanners []string
 	sastScanner     *scanner.Scanner
 	skipTest        bool
@@ -43,6 +45,10 @@ func (worker *Worker) Setup(config config.Config) error {
 	worker.skipTest = config.Scan.SkipTest
 
 	if slices.Contains(worker.enabledScanners, "sast") {
+		if err := worker.engine.Initialize(config.LogLevel); err != nil {
+			return err
+		}
+
 		classifier, err := classification.NewClassifier(&classification.Config{Config: config})
 		if err != nil {
 			return err
@@ -53,7 +59,7 @@ func (worker *Worker) Setup(config config.Config) error {
 			return err
 		}
 
-		sastScanner, err := scanner.New(classifier.Schema, config.Rules)
+		sastScanner, err := scanner.New(worker.engine, classifier.Schema, config.Rules)
 		if err != nil {
 			return err
 		}
@@ -102,10 +108,12 @@ func (worker *Worker) Close() {
 	if worker.sastScanner != nil {
 		worker.sastScanner.Close()
 	}
+
+	worker.engine.Close()
 }
 
-func Start(parentProcessID int, port string) error {
-	worker := Worker{}
+func Start(parentProcessID int, port string, engine engine.Engine) error {
+	worker := Worker{engine: engine}
 
 	ctx, cancelProcess := signal.NotifyContext(context.Background(), os.Interrupt)
 	go monitorParentProcess(ctx, parentProcessID, cancelProcess)

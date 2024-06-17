@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/bearer/bearer/pkg/languages/python"
 	"github.com/bearer/bearer/pkg/languages/testhelper"
 )
 
@@ -26,25 +27,25 @@ var subscriptRule []byte
 var pairRule []byte
 
 func TestDatatypes(t *testing.T) {
-	testhelper.GetRunner(t, datatypesRule, "python").RunTest(t, "./testdata/datatypes", ".snapshots/")
+	testhelper.GetRunner(t, datatypesRule, python.Get()).RunTest(t, "./testdata/datatypes", ".snapshots/")
 }
 
 func TestScope(t *testing.T) {
-	testhelper.GetRunner(t, scopeRule, "python").RunTest(t, "./testdata/scope", ".snapshots/")
+	testhelper.GetRunner(t, scopeRule, python.Get()).RunTest(t, "./testdata/scope", ".snapshots/")
 }
 
 func TestFlow(t *testing.T) {
-	testhelper.GetRunner(t, flowRule, "python").RunTest(t, "./testdata/flow", ".snapshots/")
+	testhelper.GetRunner(t, flowRule, python.Get()).RunTest(t, "./testdata/flow", ".snapshots/")
 }
 
 func TestImport(t *testing.T) {
-	testhelper.GetRunner(t, importRule, "python").RunTest(t, "./testdata/import", ".snapshots/")
+	testhelper.GetRunner(t, importRule, python.Get()).RunTest(t, "./testdata/import", ".snapshots/")
 }
 
 func TestSubscript(t *testing.T) {
-	testhelper.GetRunner(t, subscriptRule, "python").RunTest(t, "./testdata/subscript", ".snapshots/")
+	testhelper.GetRunner(t, subscriptRule, python.Get()).RunTest(t, "./testdata/subscript", ".snapshots/")
 }
 
 func TestPair(t *testing.T) {
-	testhelper.GetRunner(t, pairRule, "python").RunTest(t, "./testdata/pair", ".snapshots/")
+	testhelper.GetRunner(t, pairRule, python.Get()).RunTest(t, "./testdata/pair", ".snapshots/")
 }
