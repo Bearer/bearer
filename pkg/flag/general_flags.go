@@ -22,8 +22,8 @@ var (
 	HostFlag = GeneralFlagGroup.add(flagtypes.Flag{
 		Name:            "host",
 		ConfigName:      "host",
-		Value:           "my.bearer.sh",
-		Usage:           "Specify the Host for sending the report.",
+		Value:           "api.cycode.com",
+		Usage:           "Version check hostname.",
 		DisableInConfig: true,
 		Hide:            true,
 	})
@@ -32,7 +32,7 @@ var (
 		Name:            "api-key",
 		ConfigName:      "api-key",
 		Value:           "",
-		Usage:           "Use your Bearer API Key to send the report to Bearer.",
+		Usage:           "Legacy.",
 		DisableInConfig: true,
 	})
 

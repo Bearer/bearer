@@ -19,6 +19,6 @@ type APIEndpoints struct {
 var Endpoints = APIEndpoints{
 	Version: Endpoint{
 		HttpMethod: "GET",
-		Route:      "/r/version",
+		Route:      "/api/v1/bearerpublic/version",
 	},
 }
