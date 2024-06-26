@@ -1,8 +1,14 @@
 package api
 
+import "net/url"
+
 func (api *API) Version(languages []string) ([]byte, error) {
 	endpoint := Endpoints.Version
-	response, err := api.makeRequest(endpoint.Route, endpoint.HttpMethod, languages)
+	languageQuery := url.Values{}
+	for _, lang := range languages {
+		languageQuery.Add("_json[]", lang)
+	}
+	response, err := api.makeRequest(endpoint.Route+languageQuery.Encode(), endpoint.HttpMethod, nil)
 
 	return response, err
 }
