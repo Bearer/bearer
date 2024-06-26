@@ -34,6 +34,9 @@
     { "name": "mediawiki", "repository_url": "https://github.com/wikimedia/mediawiki" },
     // golang
     { "name": "Vulnerability-goapp", "repository_url": "https://github.com/Hardw01f/Vulnerability-goapp" },
-    { "name": "govwa", "repository_url": "https://github.com/0c34/govwa" }
+    { "name": "govwa", "repository_url": "https://github.com/0c34/govwa" },
+    // python
+    { "name": "PyGoat", "repository_url": "https://github.com/adeyosemanputra/pygoat" },
+    { "name": "Wagtail", "repository_url": "https://github.com/wagtail/wagtail" }
   ]
 }
