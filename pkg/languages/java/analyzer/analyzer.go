@@ -2,6 +2,7 @@ package analyzer
 
 import (
 	"slices"
+	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
 
@@ -48,6 +49,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 			return visitChildren()
 		})
+	case "import_declaration":
+		return analyzer.analyzeImport(node, visitChildren)
 	case "assignment_expression":
 		return analyzer.analyzeAssignment(node, visitChildren)
 	case "variable_declarator":
@@ -82,6 +85,29 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
 	}
+}
+
+// import foo.Bar;
+// import foo.*;
+// import static foo.Bar;
+func (analyzer *analyzer) analyzeImport(node *sitter.Node, visitChildren func() error) error {
+	// package import
+	if node.NamedChildCount() != 1 {
+		return nil
+	}
+
+	identifier := node.NamedChild(0)
+
+	content := analyzer.builder.ContentFor(node)
+	prefix := content[:identifier.StartByte()-node.StartByte()]
+	if strings.Contains(prefix, "static") {
+		return nil
+	}
+
+	name := identifier.ChildByFieldName("name")
+	analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
+	analyzer.builder.Alias(name, identifier)
+	return nil
 }
 
 // foo = a
