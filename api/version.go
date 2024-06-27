@@ -1,14 +1,17 @@
 package api
 
-import "net/url"
+import (
+	"fmt"
+	"net/url"
+)
 
 func (api *API) Version(languages []string) ([]byte, error) {
 	endpoint := Endpoints.Version
-	languageQuery := url.Values{}
+	queryString := "/?"
 	for _, lang := range languages {
-		languageQuery.Add("_json[]", lang)
+		queryString += fmt.Sprintf("_json[]=%s&", url.QueryEscape(lang))
 	}
-	response, err := api.makeRequest(endpoint.Route+languageQuery.Encode(), endpoint.HttpMethod, nil)
+	response, err := api.makeRequest(endpoint.Route+queryString, endpoint.HttpMethod, nil)
 
 	return response, err
 }
