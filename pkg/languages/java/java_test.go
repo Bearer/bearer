@@ -11,11 +11,18 @@ import (
 	patternquerybuilder "github.com/bearer/bearer/pkg/scanner/detectors/customrule/patternquery/builder"
 )
 
+//go:embed testdata/import.yml
+var importRule []byte
+
 //go:embed testdata/logger.yml
 var loggerRule []byte
 
 //go:embed testdata/scope_rule.yml
 var scopeRule []byte
+
+func TestImport(t *testing.T) {
+	testhelper.GetRunner(t, importRule, java.Get()).RunTest(t, "./testdata/import", ".snapshots/")
+}
 
 func TestFlow(t *testing.T) {
 	testhelper.GetRunner(t, loggerRule, java.Get()).RunTest(t, "./testdata/testcases/flow", ".snapshots/flow/")

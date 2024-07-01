@@ -1,0 +1,21 @@
+languages:
+  - java
+patterns:
+  - pattern: sink($<IMPORT>)
+    filters:
+      - variable: IMPORT
+        detection: flow_test_source
+        scope: cursor
+auxiliary:
+  - id: flow_test_source
+    patterns:
+      - import $<!>foo.Import
+      - import $<!>foo.Import2
+      - import $<!>foo.Import3
+severity: high
+metadata:
+  description: Test import handling
+  remediation_message: Test import handling
+  cwe_id:
+    - 42
+  id: import_test
