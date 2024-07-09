@@ -19,6 +19,7 @@ func FromOptions(
 	opts flagtypes.Options,
 	versionMeta *version_check.VersionMeta,
 	engine engine.Engine,
+	foundLanguageIDs []string,
 ) (settings.Config, error) {
 	policies, err := policies.Load()
 	if err != nil {
@@ -31,6 +32,7 @@ func FromOptions(
 		versionMeta,
 		engine,
 		opts.ScanOptions.Force,
+		foundLanguageIDs,
 	)
 	if err != nil {
 		return settings.Config{}, err

@@ -3,11 +3,16 @@ package artifact
 import (
 	"testing"
 
+	engineimpl "github.com/bearer/bearer/pkg/engine/implementation"
+	"github.com/bearer/bearer/pkg/languages"
+
 	"github.com/hhatto/gocloc"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestFormatLanguagesWithJavascriptAndTypescript(t *testing.T) {
+func TestGetFoundLanguageIDsWithJavascriptAndTypescript(t *testing.T) {
+	engine := engineimpl.New(languages.Default())
+
 	dummyGoclocLanguage := gocloc.Language{}
 	dummyGoclocResult := gocloc.Result{
 		Total: &dummyGoclocLanguage,
@@ -29,11 +34,13 @@ func TestFormatLanguagesWithJavascriptAndTypescript(t *testing.T) {
 	assert.Equal(
 		t,
 		[]string{"javascript", "ruby"},
-		FormatFoundLanguages(dummyGoclocResult.Languages),
+		GetFoundLanguageIDs(engine, dummyGoclocResult.Languages),
 	)
 }
 
-func TestFormatLanguagesWithoutJavascript(t *testing.T) {
+func TestGetFoundLanguageIDsWithoutJavascript(t *testing.T) {
+	engine := engineimpl.New(languages.Default())
+
 	dummyGoclocLanguage := gocloc.Language{}
 	dummyGoclocResult := gocloc.Result{
 		Total: &dummyGoclocLanguage,
@@ -52,11 +59,13 @@ func TestFormatLanguagesWithoutJavascript(t *testing.T) {
 	assert.Equal(
 		t,
 		[]string{"javascript", "ruby"},
-		FormatFoundLanguages(dummyGoclocResult.Languages),
+		GetFoundLanguageIDs(engine, dummyGoclocResult.Languages),
 	)
 }
 
-func TestFormatLanguagesWithJavascriptFirst(t *testing.T) {
+func TestGetFoundLanguageIDsWithJavascriptFirst(t *testing.T) {
+	engine := engineimpl.New(languages.Default())
+
 	dummyGoclocLanguage := gocloc.Language{}
 	dummyGoclocResult := gocloc.Result{
 		Total: &dummyGoclocLanguage,
@@ -78,6 +87,6 @@ func TestFormatLanguagesWithJavascriptFirst(t *testing.T) {
 	assert.Equal(
 		t,
 		[]string{"javascript", "ruby"},
-		FormatFoundLanguages(dummyGoclocResult.Languages),
+		GetFoundLanguageIDs(engine, dummyGoclocResult.Languages),
 	)
 }

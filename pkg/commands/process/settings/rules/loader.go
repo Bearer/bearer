@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"time"
 
@@ -159,7 +160,13 @@ func readRuleDefinitionZip(ruleDefinitions map[string]settings.RuleDefinition, f
 	return nil
 }
 
-func loadCustomDefinitions(engine engine.Engine, definitions map[string]settings.RuleDefinition, isBuiltIn bool, dir fs.FS) error {
+func loadCustomDefinitions(
+	engine engine.Engine,
+	definitions map[string]settings.RuleDefinition,
+	isBuiltIn bool,
+	dir fs.FS,
+	languageIDs []string,
+) error {
 	loadedDefinitions := make(map[string]settings.RuleDefinition)
 	if err := fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
 		if err != nil {
@@ -186,7 +193,7 @@ func loadCustomDefinitions(engine engine.Engine, definitions map[string]settings
 		err = yaml.Unmarshal(entry, &ruleDefinition)
 		if err != nil {
 			output.StdErrLog(validateCustomRuleSchema(entry, filename))
-			return fmt.Errorf("rule file was invalid")
+			return fmt.Errorf("rule file was invalid: %w", err)
 		}
 
 		if ruleDefinition.Metadata == nil {
@@ -202,8 +209,7 @@ func loadCustomDefinitions(engine engine.Engine, definitions map[string]settings
 
 		supported := isBuiltIn
 		for _, languageID := range ruleDefinition.Languages {
-			language := engine.GetLanguageById(languageID)
-			if language != nil {
+			if slices.Contains(languageIDs, languageID) {
 				supported = true
 			}
 		}

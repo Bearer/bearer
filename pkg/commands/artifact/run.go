@@ -13,8 +13,6 @@ import (
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 
-	"golang.org/x/exp/maps"
-
 	"github.com/bearer/bearer/pkg/commands/artifact/scanid"
 	"github.com/bearer/bearer/pkg/commands/process/filelist"
 	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
@@ -33,6 +31,7 @@ import (
 	"github.com/bearer/bearer/pkg/util/ignore"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/bearer/bearer/pkg/version_check"
 
 	"github.com/bearer/bearer/pkg/types"
@@ -258,10 +257,10 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		log.Debug().Msgf("Error in line of code output %s", err)
 		return err
 	}
-	languageList := FormatFoundLanguages(inputgocloc.Languages)
+	foundLanguageIDs := GetFoundLanguageIDs(engine, inputgocloc.Languages)
 
 	// set used language list for external rules to empty if we dont use them
-	metaLanguageList := languageList
+	metaLanguageList := foundLanguageIDs
 	if opts.RuleOptions.DisableDefaultRules {
 		metaLanguageList = make([]string, 0)
 	}
@@ -290,7 +289,7 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		return fmt.Errorf("failed to initialize engine: %w", err)
 	}
 
-	scanSettings, err := settingsloader.FromOptions(opts, versionMeta, engine)
+	scanSettings, err := settingsloader.FromOptions(opts, versionMeta, engine, foundLanguageIDs)
 	scanSettings.Target = opts.Target
 	if err != nil {
 		return err
@@ -476,18 +475,18 @@ func getPlaceholderOutput(reportData *outputtypes.ReportData, report types.Repor
 	return stats.GetPlaceholderOutput(reportData, inputgocloc, config)
 }
 
-func FormatFoundLanguages(languages map[string]*gocloc.Language) (foundLanguages []string) {
-	var foundLanguagesMap = make(map[string]bool, len(languages))
+func GetFoundLanguageIDs(engine engine.Engine, goclocLanguages map[string]*gocloc.Language) []string {
+	foundLanguages := set.New[string]()
 
-	for _, language := range languages {
-		if language.Name == "TypeScript" {
-			foundLanguagesMap["javascript"] = true
-		} else {
-			foundLanguagesMap[strings.ToLower(language.Name)] = true
+	for _, goclocLanguage := range goclocLanguages {
+		for _, language := range engine.GetLanguages() {
+			if slices.Contains(language.GoclocLanguages(), goclocLanguage.Name) {
+				foundLanguages.Add(language.ID())
+			}
 		}
 	}
 
-	keys := maps.Keys(foundLanguagesMap)
+	keys := foundLanguages.Items()
 	sort.Strings(keys)
 
 	return keys
