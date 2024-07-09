@@ -15,6 +15,7 @@ import (
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
 	"github.com/bearer/bearer/pkg/git"
 	"github.com/bearer/bearer/pkg/languages"
+	"github.com/bearer/bearer/pkg/languages/ruby"
 	"github.com/bearer/bearer/pkg/report/basebranchfindings"
 	"github.com/bearer/bearer/pkg/report/schema"
 	globaltypes "github.com/bearer/bearer/pkg/types"
@@ -334,7 +335,7 @@ func generateConfig(engine engine.Engine, reportOptions flagtypes.ReportOptions)
 		},
 	}
 
-	return settingsloader.FromOptions(opts, meta, engine)
+	return settingsloader.FromOptions(opts, meta, engine, []string{ruby.Get().ID()})
 }
 
 func dummyDataflowData() *outputtypes.ReportData {

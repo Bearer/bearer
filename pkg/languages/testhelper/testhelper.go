@@ -32,6 +32,7 @@ import (
 	"github.com/bearer/bearer/pkg/scanner/language"
 	"github.com/bearer/bearer/pkg/types"
 	util "github.com/bearer/bearer/pkg/util/output"
+	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/bearer/bearer/pkg/version_check"
 )
 
@@ -197,12 +198,18 @@ func buildConfig(t *testing.T, engine engine.Engine, ruleBytes []byte) settings.
 		},
 	}
 
-	config, err := settingsloader.FromOptions(configFlags, meta, engine)
+	rules := getRulesFromYaml(t, ruleBytes)
+	languageIDs := set.New[string]()
+	for _, rule := range rules {
+		languageIDs.AddAll(rule.Languages)
+	}
+
+	config, err := settingsloader.FromOptions(configFlags, meta, engine, languageIDs.Items())
 	if err != nil {
 		t.Fatalf("failed to generate default scan settings: %s", err)
 	}
 
-	config.Rules = getRulesFromYaml(t, ruleBytes)
+	config.Rules = rules
 
 	return config
 }

@@ -11,6 +11,7 @@ import (
 	engineimpl "github.com/bearer/bearer/pkg/engine/implementation"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
 	"github.com/bearer/bearer/pkg/languages"
+	"github.com/bearer/bearer/pkg/languages/ruby"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/privacy"
 	"github.com/bearer/bearer/pkg/report/output/testhelper"
@@ -82,7 +83,7 @@ func generateConfig(engine engine.Engine, reportOptions flagtypes.ReportOptions)
 		},
 	}
 
-	return settingsloader.FromOptions(opts, meta, engine)
+	return settingsloader.FromOptions(opts, meta, engine, []string{ruby.Get().ID()})
 }
 
 func dummyDataflow() *outputtypes.DataFlow {

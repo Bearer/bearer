@@ -39,6 +39,7 @@ func Load(
 	versionMeta *version_check.VersionMeta,
 	engine engine.Engine,
 	force bool,
+	foundLanguageIDs []string,
 ) (
 	result LoadRulesResult,
 	err error,
@@ -56,7 +57,7 @@ func Load(
 		return result, fmt.Errorf("error loading remote rules: %w", err)
 	}
 
-	if err := loadCustomDefinitions(engine, builtInDefinitions, true, builtInRulesFS); err != nil {
+	if err := loadCustomDefinitions(engine, builtInDefinitions, true, builtInRulesFS, nil); err != nil {
 		return result, fmt.Errorf("error loading built-in rules: %w", err)
 	}
 
@@ -66,7 +67,7 @@ func Load(
 			dir = filepath.Join(dirname, dir[2:])
 		}
 		log.Debug().Msgf("loading external rules from: %s", dir)
-		if err := loadCustomDefinitions(engine, definitions, false, os.DirFS(dir)); err != nil {
+		if err := loadCustomDefinitions(engine, definitions, false, os.DirFS(dir), foundLanguageIDs); err != nil {
 			return result, fmt.Errorf("external rules %w", err)
 		}
 	}
