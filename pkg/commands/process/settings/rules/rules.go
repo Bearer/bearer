@@ -26,6 +26,7 @@ const (
 type LoadRulesResult struct {
 	BuiltInRules       map[string]*settings.Rule
 	Rules              map[string]*settings.Rule
+	LoadedRuleCount    int
 	CacheUsed          bool
 	BearerRulesVersion string
 }
@@ -53,11 +54,16 @@ func Load(
 
 	log.Debug().Msg("Loading rules")
 
-	if err := loadDefinitionsFromRemote(definitions, options, versionMeta); err != nil {
+	count := 0
+
+	remoteCount, err := loadDefinitionsFromRemote(definitions, options, versionMeta)
+	if err != nil {
 		return result, fmt.Errorf("error loading remote rules: %w", err)
 	}
 
-	if err := loadCustomDefinitions(engine, builtInDefinitions, true, builtInRulesFS, nil); err != nil {
+	count += remoteCount
+
+	if _, err := loadCustomDefinitions(builtInDefinitions, true, builtInRulesFS, nil); err != nil {
 		return result, fmt.Errorf("error loading built-in rules: %w", err)
 	}
 
@@ -66,10 +72,14 @@ func Load(
 			dirname, _ := os.UserHomeDir()
 			dir = filepath.Join(dirname, dir[2:])
 		}
+
 		log.Debug().Msgf("loading external rules from: %s", dir)
-		if err := loadCustomDefinitions(engine, definitions, false, os.DirFS(dir), foundLanguageIDs); err != nil {
+		externalCount, err := loadCustomDefinitions(definitions, false, os.DirFS(dir), foundLanguageIDs)
+		if err != nil {
 			return result, fmt.Errorf("external rules %w", err)
 		}
+
+		count += externalCount
 	}
 
 	if err := validateRuleOptionIDs(options, definitions, builtInDefinitions); err != nil {
@@ -81,6 +91,7 @@ func Load(
 
 	result.Rules = BuildRules(definitions, enabledRules)
 	result.BuiltInRules = BuildRules(builtInDefinitions, builtInRules)
+	result.LoadedRuleCount = count
 
 	for _, definition := range definitions {
 		id := definition.Metadata.ID

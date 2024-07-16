@@ -50,14 +50,15 @@ type Config struct {
 	Target                     string                                    `mapstructure:"target" json:"target" yaml:"target"`
 	IgnoreFile                 string                                    `mapstructure:"ignore_file" json:"ignore_file" yaml:"ignore_file"`
 	Rules                      map[string]*Rule                          `mapstructure:"rules" json:"rules" yaml:"rules"`
-	BuiltInRules               map[string]*Rule                          `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
-	CacheUsed                  bool                                      `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
-	BearerRulesVersion         string                                    `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
-	NoColor                    bool                                      `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
-	Debug                      bool                                      `mapstructure:"debug" json:"debug" yaml:"debug"`
-	LogLevel                   string                                    `mapstructure:"log_level" json:"log_level" yaml:"log_level"`
-	DebugProfile               bool                                      `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
-	IgnoreGit                  bool                                      `mapstructure:"ignore_git" json:"ignore_git" yaml:"ignore_git"`
+	LoadedRuleCount            int
+	BuiltInRules               map[string]*Rule `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
+	CacheUsed                  bool             `mapstructure:"cache_used" json:"cache_used" yaml:"cache_used"`
+	BearerRulesVersion         string           `mapstructure:"bearer_rules_version" json:"bearer_rules_version" yaml:"bearer_rules_version"`
+	NoColor                    bool             `mapstructure:"no_color" json:"no_color" yaml:"no_color"`
+	Debug                      bool             `mapstructure:"debug" json:"debug" yaml:"debug"`
+	LogLevel                   string           `mapstructure:"log_level" json:"log_level" yaml:"log_level"`
+	DebugProfile               bool             `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
+	IgnoreGit                  bool             `mapstructure:"ignore_git" json:"ignore_git" yaml:"ignore_git"`
 }
 
 type Processor struct {

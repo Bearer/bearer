@@ -65,6 +65,7 @@ func FromOptions(
 		IgnoreGit:           opts.GeneralOptions.IgnoreGit,
 		Policies:            policies,
 		Rules:               result.Rules,
+		LoadedRuleCount:     result.LoadedRuleCount,
 		BuiltInRules:        result.BuiltInRules,
 		CacheUsed:           result.CacheUsed,
 		BearerRulesVersion:  result.BearerRulesVersion,

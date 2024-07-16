@@ -19,7 +19,6 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
-	"github.com/bearer/bearer/pkg/engine"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/version_check"
@@ -29,14 +28,14 @@ func loadDefinitionsFromRemote(
 	definitions map[string]settings.RuleDefinition,
 	options flagtypes.RuleOptions,
 	versionMeta *version_check.VersionMeta,
-) error {
+) (int, error) {
 	if options.DisableDefaultRules {
-		return nil
+		return 0, nil
 	}
 
 	if versionMeta.Rules.Version == nil {
 		log.Debug().Msg("No rule packages found")
-		return nil
+		return 0, nil
 	}
 
 	urls := make([]string, 0, len(versionMeta.Rules.Packages))
@@ -45,91 +44,98 @@ func loadDefinitionsFromRemote(
 		urls = append(urls, value)
 	}
 
-	if err := readDefinitionsFromUrls(definitions, urls); err != nil {
-		return fmt.Errorf("loading rules failed: %s", err)
+	count, err := readDefinitionsFromUrls(definitions, urls)
+	if err != nil {
+		return 0, fmt.Errorf("loading rules failed: %s", err)
 	}
 
-	return nil
+	return count, nil
 }
 
-func readDefinitionsFromUrls(ruleDefinitions map[string]settings.RuleDefinition, languageDownloads []string) (err error) {
+func readDefinitionsFromUrls(ruleDefinitions map[string]settings.RuleDefinition, languageDownloads []string) (int, error) {
 	bearerRulesDir := bearerRulesDir()
 	if _, err := os.Stat(bearerRulesDir); errors.Is(err, os.ErrNotExist) {
 		err := os.Mkdir(bearerRulesDir, os.ModePerm)
 		if err != nil {
-			return fmt.Errorf("could not create bearer-rules directory: %s", err)
+			return 0, fmt.Errorf("could not create bearer-rules directory: %s", err)
 		}
 	}
 
+	count := 0
 	for _, languagePackageUrl := range languageDownloads {
 		// Prepare filepath
 		urlHash := md5.Sum([]byte(languagePackageUrl))
 		filepath, err := filepath.Abs(filepath.Join(bearerRulesDir, fmt.Sprintf("%x.tar.gz", urlHash)))
-
 		if err != nil {
-			return err
+			return 0, err
 		}
 
+		var languageCount int
 		if _, err := os.Stat(filepath); err == nil {
 			log.Trace().Msgf("Using local cache for rule package: %s", languagePackageUrl)
 			file, err := os.Open(filepath)
 			if err != nil {
-				return err
+				return 0, err
 			}
 			defer file.Close()
 
-			if err = readRuleDefinitionZip(ruleDefinitions, file); err != nil {
-				return err
+			languageCount, err = readRuleDefinitionZip(ruleDefinitions, file)
+			if err != nil {
+				return 0, err
 			}
 		} else {
 			log.Trace().Msgf("Downloading rule package: %s", languagePackageUrl)
 			httpClient := &http.Client{Timeout: 60 * time.Second}
 			resp, err := httpClient.Get(languagePackageUrl)
 			if err != nil {
-				return err
+				return 0, err
 			}
 			defer resp.Body.Close()
 
 			// Create file in rules dir
 			file, err := os.Create(filepath)
 			if err != nil {
-				return err
+				return 0, err
 			}
 			defer file.Close()
 
 			// Copy the contents of the downloaded archive to the file
 			if _, err := io.Copy(file, resp.Body); err != nil {
-				return err
+				return 0, err
 			}
 			// reset file pointer to start of file
 			_, err = file.Seek(0, 0)
 			if err != nil {
-				return err
+				return 0, err
 			}
 
-			if err = readRuleDefinitionZip(ruleDefinitions, file); err != nil {
-				return err
+			languageCount, err = readRuleDefinitionZip(ruleDefinitions, file)
+			if err != nil {
+				return 0, err
 			}
 		}
+
+		count += languageCount
 	}
 
-	return nil
+	return count, nil
 }
 
-func readRuleDefinitionZip(ruleDefinitions map[string]settings.RuleDefinition, file *os.File) error {
+func readRuleDefinitionZip(ruleDefinitions map[string]settings.RuleDefinition, file *os.File) (int, error) {
 	gzr, err := gzip.NewReader(file)
 	if err != nil {
-		return err
+		return 0, err
 	}
 	defer gzr.Close()
 
 	tr := tar.NewReader(gzr)
+	count := 0
 	for {
 		header, err := tr.Next()
 		if err == io.EOF {
 			break
 		} else if err != nil {
-			return err
+			return 0, err
 		}
 
 		if !isRuleFile(header.Name) {
@@ -139,34 +145,35 @@ func readRuleDefinitionZip(ruleDefinitions map[string]settings.RuleDefinition, f
 		data := make([]byte, header.Size)
 		_, err = io.ReadFull(tr, data)
 		if err != nil {
-			return fmt.Errorf("failed to read file %s: %w", header.Name, err)
+			return 0, fmt.Errorf("failed to read file %s: %w", header.Name, err)
 		}
 
 		var ruleDefinition settings.RuleDefinition
 		err = yaml.Unmarshal(data, &ruleDefinition)
 		if err != nil {
-			return fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
+			return 0, fmt.Errorf("failed to unmarshal rule %s: %w", header.Name, err)
 		}
 
 		id := ruleDefinition.Metadata.ID
 		_, ruleExists := ruleDefinitions[id]
 		if ruleExists {
-			return fmt.Errorf("duplicate built-in rule ID %s", id)
+			return 0, fmt.Errorf("duplicate built-in rule ID %s", id)
 		}
 
 		ruleDefinitions[id] = ruleDefinition
+		count += 1
 	}
 
-	return nil
+	return count, nil
 }
 
 func loadCustomDefinitions(
-	engine engine.Engine,
 	definitions map[string]settings.RuleDefinition,
 	isBuiltIn bool,
 	dir fs.FS,
 	languageIDs []string,
-) error {
+) (int, error) {
+	count := 0
 	loadedDefinitions := make(map[string]settings.RuleDefinition)
 	if err := fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
 		if err != nil {
@@ -214,6 +221,8 @@ func loadCustomDefinitions(
 			}
 		}
 
+		count += 1
+
 		if !supported {
 			log.Debug().Msgf(
 				"rule file has no supported languages[%s] %s",
@@ -231,7 +240,7 @@ func loadCustomDefinitions(
 
 		return nil
 	}); err != nil {
-		return err
+		return 0, err
 	}
 
 	for id, definition := range loadedDefinitions {
@@ -240,7 +249,7 @@ func loadCustomDefinitions(
 		}
 	}
 
-	return nil
+	return count, nil
 }
 
 func bearerRulesDir() string {
