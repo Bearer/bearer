@@ -109,9 +109,7 @@ func getTriggerRuleIDs(languageRules []*settings.Rule) set.Set[string] {
 	triggerRuleIDs := set.New[string]()
 
 	for _, settingsRule := range languageRules {
-		if settingsRule.Trigger.RequiredDetection != nil {
-			triggerRuleIDs.Add(*settingsRule.Trigger.RequiredDetection)
-		}
+		triggerRuleIDs.AddAll(settingsRule.Trigger.RequiredDetections)
 	}
 
 	return triggerRuleIDs

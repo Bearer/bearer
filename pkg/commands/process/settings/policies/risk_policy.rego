@@ -51,22 +51,33 @@ presence_failures contains detector if {
 # # Build policy failures
 policy_failure contains item if {
 	input.rule.trigger.match_on == "absence"
-	some detector in input.dataflow.risks
 
-	detector.detector_id == input.rule.trigger.required_detection
+	count(input.rule.trigger.required_detections) == count({ required_detection |
+		required_detection := input.rule.trigger.required_detections[_]
+		some y in input.dataflow.risks
+		y.detector_id == required_detection
+	})
+
+	some detector in input.dataflow.risks
+	detector.detector_id == input.rule.trigger.required_detections[0]
+
 	some init_location in detector.locations
 
 	x := {other | other := input.dataflow.risks[_]; other.detector_id == input.rule.id}
 	count(x) == 0
-
 	item := data.bearer.common.build_item(init_location)
 }
 
 policy_failure contains item if {
 	input.rule.trigger.match_on == "absence"
-	some detector in input.dataflow.risks
+	count(input.rule.trigger.required_detections) == count({ required_detection |
+		required_detection := input.rule.trigger.required_detections[_]
+		some x in input.dataflow.risks
+		x.detector_id == required_detection
+	})
 
-	detector.detector_id == input.rule.trigger.required_detection
+	some detector in input.dataflow.risks
+	detector.detector_id == input.rule.trigger.required_detections[0]
 
 	some init_location in detector.locations
 	some other_detector in input.dataflow.risks

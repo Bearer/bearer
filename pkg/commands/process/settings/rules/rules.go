@@ -245,8 +245,11 @@ func BuildRules(
 			if definition.Trigger.DataTypesRequired != nil {
 				ruleTrigger.DataTypesRequired = *definition.Trigger.DataTypesRequired
 			}
+
+			// concat any required detections
+			ruleTrigger.RequiredDetections = definition.Trigger.RequiredDetections
 			if definition.Trigger.RequiredDetection != nil {
-				ruleTrigger.RequiredDetection = definition.Trigger.RequiredDetection
+				ruleTrigger.RequiredDetections = append(ruleTrigger.RequiredDetections, *definition.Trigger.RequiredDetection)
 			}
 		}
 
