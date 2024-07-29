@@ -1,6 +1,7 @@
 package filters
 
 import (
+	"fmt"
 	"regexp"
 	"slices"
 	"strconv"
@@ -203,6 +204,9 @@ func (filter *Rule) Evaluate(
 	patternVariables variableshape.Values,
 ) (*Result, error) {
 	node := patternVariables.Node(filter.Variable)
+	if node == nil {
+		return nil, fmt.Errorf("couldn't find node for var %s", filter.Variable.Name())
+	}
 	detections, err := detectorContext.Scan(node, filter.Rule, filter.TraversalStrategy)
 	if err != nil {
 		return nil, err
