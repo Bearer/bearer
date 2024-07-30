@@ -4,7 +4,7 @@ import rego.v1
 
 import data.bearer.common
 
-contains(arr, elem) if {
+array_contains(arr, elem) if {
 	arr[_] = elem
 }
 
@@ -38,7 +38,7 @@ items contains item if {
 	some location in detector.locations
 
 	not location.subject_name
-	not contains(data_types_with_subject, data_type.name)
+	not array_contains(data_types_with_subject, data_type.name)
 
 	item := {
 		"name": data_type.name,

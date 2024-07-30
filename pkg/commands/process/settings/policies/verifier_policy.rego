@@ -4,7 +4,7 @@ import rego.v1
 
 import data.bearer.common
 
-contains(arr, elem) if {
+array_contains(arr, elem) if {
 	# arr # ensure array is defined
 	arr[_] = elem
 }
@@ -13,11 +13,11 @@ policy_failure contains item if {
 	input.rule.trigger == "stored_data_types"
 
 	data_type = input.dataflow.data_types[_]
-	not contains(input.rule.skip_data_types, data_type.name)
+	not array_contains(input.rule.skip_data_types, data_type.name)
 
 	some detector in data_type.detectors
 
-	contains(input.rule.detectors, detector.name)
+	array_contains(input.rule.detectors, detector.name)
 
 	location = detector.locations[_]
 	count(input.rule.auto_encrypt_prefix) != 0
@@ -55,10 +55,10 @@ policy_failure contains item if {
 
 	data_type = input.dataflow.data_types[_]
 
-	not contains(input.rule.skip_data_types, data_type.name)
+	not array_contains(input.rule.skip_data_types, data_type.name)
 	some detector in data_type.detectors
 
-	contains(input.rule.detectors, detector.name)
+	array_contains(input.rule.detectors, detector.name)
 
 	location = detector.locations[_]
 

@@ -4,7 +4,7 @@ import rego.v1
 
 import data.bearer.common
 
-contains(arr, elem) if {
+array_contains(arr, elem) if {
 	arr[_] = elem
 }
 
@@ -108,7 +108,7 @@ policy_failure contains item if {
 	some detector in presence_failures
 	some data_type_location in detector.locations
 	some data_type in data_type_location.data_types
-	contains(input.rule.only_data_types, data_type.name)
+	array_contains(input.rule.only_data_types, data_type.name)
 
 	item := data.bearer.common.build_local_item(data_type_location, data_type)
 }
@@ -119,7 +119,7 @@ policy_failure contains item if {
 	some detector in presence_failures
 	some data_type_location in detector.locations
 	some data_type in data_type_location.data_types
-	not contains(input.rule.skip_data_types, data_type.name)
+	not array_contains(input.rule.skip_data_types, data_type.name)
 
 	item := data.bearer.common.build_local_item(data_type_location, data_type)
 }
@@ -146,13 +146,13 @@ policy_failure contains item if {
 policy_failure contains item if {
 	input.rule.trigger.match_on == "stored_data_types"
 
-	contains(input.rule.languages, input.dataflow.data_types[_].detectors[_].name)
+	array_contains(input.rule.languages, input.dataflow.data_types[_].detectors[_].name)
 	data_type = input.dataflow.data_types[_]
-	not contains(input.rule.skip_data_types, data_type.name)
+	not array_contains(input.rule.skip_data_types, data_type.name)
 
 	some detector in data_type.detectors
 
-	contains(input.rule.detectors, detector.name)
+	array_contains(input.rule.detectors, detector.name)
 
 	location = detector.locations[_]
 	count(input.rule.auto_encrypt_prefix) != 0
