@@ -111,15 +111,16 @@ const (
 )
 
 type RuleTrigger struct {
-	MatchOn           MatchOn `mapstructure:"match_on" json:"match_on" yaml:"match_on"`
-	DataTypesRequired bool    `mapstructure:"data_types_required" json:"data_types_required" yaml:"data_types_required"`
-	RequiredDetection *string `mapstructure:"required_detection" json:"required_detection" yaml:"required_detection"`
+	MatchOn            MatchOn  `mapstructure:"match_on" json:"match_on" yaml:"match_on"`
+	DataTypesRequired  bool     `mapstructure:"data_types_required" json:"data_types_required" yaml:"data_types_required"`
+	RequiredDetections []string `mapstructure:"required_detections" json:"required_detections" yaml:"required_detections"`
 }
 
 type RuleDefinitionTrigger struct {
-	MatchOn           *MatchOn `mapstructure:"match_on" json:"match_on" yaml:"match_on"`
-	RequiredDetection *string  `mapstructure:"required_detection" json:"required_detection" yaml:"required_detection"`
-	DataTypesRequired *bool    `mapstructure:"data_types_required" json:"data_types_required" yaml:"data_types_required"`
+	MatchOn            *MatchOn `mapstructure:"match_on" json:"match_on" yaml:"match_on"`
+	RequiredDetection  *string  `mapstructure:"required_detection" json:"required_detection" yaml:"required_detection"`
+	RequiredDetections []string `mapstructure:"required_detections" json:"required_detections" yaml:"required_detections"`
+	DataTypesRequired  *bool    `mapstructure:"data_types_required" json:"data_types_required" yaml:"data_types_required"`
 }
 
 type RuleMetadata struct {
