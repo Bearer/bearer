@@ -113,4 +113,7 @@ type Pattern interface {
 
 	// Handle missing errors
 	FixupMissing(node *tree.Node) string
+
+	// Check if node represents variable with given dummy value
+	IsVariable(node *tree.Node, dummyValue string) bool
 }
