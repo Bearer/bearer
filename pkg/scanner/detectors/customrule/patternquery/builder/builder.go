@@ -391,7 +391,7 @@ func getVariableFor(
 	}
 
 	for i, variable := range variables {
-		if node.Content() == variable.DummyValue {
+		if patternLanguage.IsVariable(node, variable.DummyValue) {
 			return &variables[i]
 		}
 	}

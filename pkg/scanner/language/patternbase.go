@@ -39,3 +39,7 @@ func (*PatternBase) AdjustInput(input string) string {
 func (*PatternBase) FixupMissing(node *tree.Node) string {
 	return ""
 }
+
+func (*PatternBase) IsVariable(node *tree.Node, dummyValue string) bool {
+	return node.Content() == dummyValue
+}
