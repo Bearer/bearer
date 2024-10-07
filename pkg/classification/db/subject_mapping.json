@@ -21,7 +21,6 @@
   "Customer": "User",
   "Developer": "User",
   "Doctor": "User",
-  "Driver": "User",
   "Employee": "User",
   "Employer": "User",
   "Follower": "User",

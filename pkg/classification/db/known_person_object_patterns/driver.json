@@ -1,8 +1,0 @@
-{
-  "metadata": { "version": "1.0" },
-  "id": 26,
-  "act_as_identifier": true,
-  "category": "Driver",
-  "include_regexp": "\\b.*driver.*\\b",
-  "exclude_regexp": "\\b.*sync.*\\b"
-}
