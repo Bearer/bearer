@@ -105,6 +105,24 @@ var _ = Describe("Diff", func() {
 				{FromPath: fromPath, ToPath: toPath},
 			}))
 		})
+
+		fromPath = "from bar.txt"
+		toPath = "to foo.txt"
+
+		It("decodes the paths correctly with whitespace in both from and to path", func() {
+			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{
+				{FromPath: fromPath, ToPath: toPath},
+			}))
+		})
+
+		fromPath = "from bar.txt"
+		toPath = "to.txt"
+
+		It("decodes the paths correctly with whitespace in from path", func() {
+			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{
+				{FromPath: fromPath, ToPath: toPath},
+			}))
+		})
 	})
 
 	When("a file contains changes", func() {

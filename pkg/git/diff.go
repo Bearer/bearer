@@ -28,6 +28,9 @@ type FilePatch struct {
 	Chunks Chunks
 }
 
+const SRC_PREFIX = "caf67b1d-c9b7-44ba-9b85-bd94727547af"
+const DST_PREFIX = "7dcfe536-96a9-49c5-8b86-7caa3d9e5e9c"
+
 func Diff(rootDir, baseRef string) ([]FilePatch, error) {
 	var result []FilePatch
 
@@ -40,7 +43,8 @@ func Diff(rootDir, baseRef string) ([]FilePatch, error) {
 			"--first-parent",
 			"--find-renames",
 			"--break-rewrites",
-			"--no-prefix",
+			"--src-prefix=" + SRC_PREFIX,
+			"--dst-prefix=" + DST_PREFIX,
 			"--no-color",
 			baseRef,
 			"--",
@@ -113,18 +117,38 @@ func parseDiff(scanner *linescanner.Scanner) ([]FilePatch, error) {
 }
 
 func parseDiffHeader(value string) (string, string, error) {
-	parts := strings.Split(value, " ")
-	fromPath, err := unquoteFilename(parts[2])
+	rawFromPath, rawToPath := splitPaths(value)
+	fromPath, err := unquoteFilename(rawFromPath)
 	if err != nil {
 		return "", "", fmt.Errorf("error parsing header 'from' path: %w", err)
 	}
 
-	toPath, err := unquoteFilename(parts[3])
+	toPath, err := unquoteFilename(rawToPath)
 	if err != nil {
 		return "", "", fmt.Errorf("error parsing header 'to' path: %w", err)
 	}
 
 	return fromPath, toPath, nil
+}
+
+func splitPaths(value string) (fromPath string, toPath string) {
+	split1 := strings.Split(value, SRC_PREFIX)[1]
+	split2 := strings.Split(split1, DST_PREFIX)
+
+	fromPath = strings.TrimSpace(split2[0])
+	toPath = strings.TrimSpace(split2[1])
+
+	// handle trailing whitespaces and missing quotation marks
+	// e.g. `foo\\t.txt \"`
+	if strings.Contains(fromPath, "\"") {
+		fromPath = "\"" + strings.TrimSpace(strings.ReplaceAll(fromPath, "\"", "")) + "\""
+	}
+
+	if strings.Contains(toPath, "\"") {
+		toPath = "\"" + strings.ReplaceAll(toPath, "\"", "") + "\""
+	}
+
+	return fromPath, toPath
 }
 
 func parseChunkHeader(value string) (Chunk, error) {
