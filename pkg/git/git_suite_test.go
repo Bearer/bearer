@@ -33,6 +33,7 @@ func addAndCommit(dir string) {
 		dir,
 		"-c", "user.name=Bearer CI",
 		"-c", "user.email=ci@bearer.com",
+		"-c", "commit.gpgSign=false",
 		"commit",
 		"--allow-empty-message",
 		"--message=",
