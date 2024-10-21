@@ -1,6 +1,7 @@
 module github.com/bearer/bearer
 
 go 1.21
+toolchain go1.22.5
 
 require (
 	github.com/bits-and-blooms/bitset v1.13.0
@@ -21,7 +22,7 @@ require (
 	github.com/rs/zerolog v1.33.0
 	github.com/russross/blackfriday v1.6.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
-	github.com/schollz/progressbar/v3 v3.14.6
+	github.com/schollz/progressbar/v3 v3.16.1
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/smacker/go-tree-sitter v0.0.0-20230720070738-0d0a9f78d8f8
 	github.com/stretchr/testify v1.9.0
