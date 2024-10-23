@@ -13,7 +13,9 @@ import (
 func GoclocDetectorOutput(path string, opts flagtypes.Options) (*gocloc.Result, error) {
 	clocOpts := gocloc.NewClocOptions()
 	clocOpts.SkipDuplicated = true
-	output.StdErrLog("Analyzing codebase")
+	if !(opts.Quiet) {
+		output.StdErrLog("Analyzing codebase")
+	}
 
 	if !hideProgress(opts) {
 		progressBar := getProgressBar()
