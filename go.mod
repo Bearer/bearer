@@ -7,7 +7,7 @@ require (
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/buildkite/terminal v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.1
-	github.com/fatih/color v1.17.0
+	github.com/fatih/color v1.18.0
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/gitsight/go-vcsurl v1.0.1
 	github.com/go-enry/go-enry/v2 v2.8.4
