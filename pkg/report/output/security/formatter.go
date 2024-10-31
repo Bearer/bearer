@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/engine"
 	"github.com/bearer/bearer/pkg/flag"
+	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	"github.com/bearer/bearer/pkg/report/output/gitlab"
 	"github.com/bearer/bearer/pkg/report/output/html"
 	"github.com/bearer/bearer/pkg/report/output/reviewdog"
@@ -28,10 +29,11 @@ type Formatter struct {
 }
 
 type JsonV2Output struct {
-	Source   string             `json:"source" yaml:"source"`
-	Version  string             `json:"version" yaml:"version"`
-	Findings RawFindings        `json:"findings" yaml:"findings"`
-	Expected ExpectedDetections `json:"expected_findings,omitempty" yaml:"expected_findings,omitempty"`
+	Source   string                `json:"source" yaml:"source"`
+	Version  string                `json:"version" yaml:"version"`
+	Findings RawFindings           `json:"findings" yaml:"findings"`
+	Expected ExpectedDetections    `json:"expected_findings,omitempty" yaml:"expected_findings,omitempty"`
+	Errors   []dataflowtypes.Error `json:"errors" yaml:"errors"`
 }
 
 func NewFormatter(
@@ -82,6 +84,7 @@ func (f Formatter) Format(format string) (output string, err error) {
 			Version:  build.Version,
 			Findings: f.ReportData.RawFindings,
 			Expected: f.ReportData.ExpectedDetections,
+			Errors:   f.ReportData.Dataflow.Errors,
 		})
 	case flag.FormatYAML:
 		return outputhandler.ReportYAML(f.ReportData.FindingsBySeverity)
