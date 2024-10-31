@@ -69,7 +69,7 @@ var _ = Describe("Not", func() {
 	When("the child filter has a match", func() {
 		BeforeEach(func(ctx SpecContext) {
 			filter = &filters.Not{
-				Child: &MockFilter{result: filters.NewResult(filters.NewMatch(nil, nil))},
+				Child: &MockFilter{result: filters.NewResult(filters.NewMatch(nil, nil, nil))},
 			}
 		})
 
@@ -87,7 +87,7 @@ var _ = Describe("Not", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -110,9 +110,9 @@ var _ = Describe("Either", func() {
 	patternVariables := []*tree.Node{{ID: 42}}
 
 	When("there are child filter matches", func() {
-		match1 := filters.NewMatch([]*tree.Node{{ID: 1}}, nil)
-		match2 := filters.NewMatch([]*tree.Node{{ID: 2}}, nil)
-		match3 := filters.NewMatch([]*tree.Node{{ID: 3}}, nil)
+		match1 := filters.NewMatch([]*tree.Node{{ID: 1}}, nil, nil)
+		match2 := filters.NewMatch([]*tree.Node{{ID: 2}}, nil, nil)
+		match3 := filters.NewMatch([]*tree.Node{{ID: 3}}, nil, nil)
 
 		BeforeEach(func(ctx SpecContext) {
 			filter = &filters.Either{
@@ -193,12 +193,12 @@ var _ = Describe("All", func() {
 		nodes = parseNodes(ctx, []string{"n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8"})
 		patternVariables = []*tree.Node{nodes[0], nil, nil, nil}
 
-		match1 = filters.NewMatch([]*tree.Node{nodes[0], nil, nil, nil}, []*detectortypes.Detection{datatype1})
-		match2 = filters.NewMatch([]*tree.Node{nil, nodes[2], nodes[4], nil}, []*detectortypes.Detection{datatype2})
-		match3 = filters.NewMatch([]*tree.Node{nil, nodes[3], nodes[5], nil}, []*detectortypes.Detection{datatype3})
-		match4 = filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[6]}, []*detectortypes.Detection{datatype4})
-		match5 = filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[7]}, []*detectortypes.Detection{datatype5})
-		discordantMatch = filters.NewMatch([]*tree.Node{nodes[1], nil, nil, nil}, []*detectortypes.Detection{discordantDatatype})
+		match1 = filters.NewMatch([]*tree.Node{nodes[0], nil, nil, nil}, nil, []*detectortypes.Detection{datatype1})
+		match2 = filters.NewMatch([]*tree.Node{nil, nodes[2], nodes[4], nil}, nil, []*detectortypes.Detection{datatype2})
+		match3 = filters.NewMatch([]*tree.Node{nil, nodes[3], nodes[5], nil}, nil, []*detectortypes.Detection{datatype3})
+		match4 = filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[6]}, nil, []*detectortypes.Detection{datatype4})
+		match5 = filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[7]}, nil, []*detectortypes.Detection{datatype5})
+		discordantMatch = filters.NewMatch([]*tree.Node{nodes[1], nil, nil, nil}, nil, []*detectortypes.Detection{discordantDatatype})
 	})
 
 	When("there is a single child filter with matches", func() {
@@ -238,10 +238,12 @@ var _ = Describe("All", func() {
 			Expect(result.Matches()).To(ContainElements(
 				filters.NewMatch(
 					[]*tree.Node{nodes[0], nodes[3], nodes[5], nodes[6]},
+					nil,
 					[]*detectortypes.Detection{datatype1, datatype3, datatype4},
 				),
 				filters.NewMatch(
 					[]*tree.Node{nodes[0], nodes[3], nodes[5], nodes[7]},
+					nil,
 					[]*detectortypes.Detection{datatype1, datatype3, datatype5},
 				),
 			))
@@ -289,7 +291,7 @@ var _ = Describe("All", func() {
 
 		It("returns a result with a single match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -306,7 +308,7 @@ var _ = Describe("FilenameRegex", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -341,7 +343,7 @@ var _ = Describe("Values", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -373,7 +375,7 @@ var _ = Describe("Regex", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -407,7 +409,7 @@ var _ = Describe("StringLengthLessThan", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -452,7 +454,7 @@ var _ = Describe("StringRegex", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -498,7 +500,7 @@ var _ = Describe("EntropyGreaterThan", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -541,7 +543,7 @@ var _ = Describe("IntegerLessThan", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -584,7 +586,7 @@ var _ = Describe("IntegerLessThanOrEqual", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 
@@ -596,7 +598,7 @@ var _ = Describe("IntegerLessThanOrEqual", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -639,7 +641,7 @@ var _ = Describe("IntegerGreaterThan", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -682,7 +684,7 @@ var _ = Describe("IntegerGreaterThanOrEqual", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
@@ -694,7 +696,7 @@ var _ = Describe("IntegerGreaterThanOrEqual", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
 			))
 		})
 	})
