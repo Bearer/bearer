@@ -454,7 +454,7 @@ var _ = Describe("StringRegex", func() {
 
 		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
 			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, nil, nil)),
+				filters.NewResult(filters.NewMatch(patternVariables, pointers.String("foo"), nil)),
 			))
 		})
 	})
