@@ -65,6 +65,7 @@ func (scanner *Scanner) Scan(
 		}
 
 		for _, detection := range expectedDetections {
+			value := ""
 			detectorType := detectors.Type(detection.RuleID)
 			report.AddDetection(reportdetections.TypeExpectedDetection,
 				detectorType,
@@ -82,7 +83,7 @@ func (scanner *Scanner) Scan(
 					EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 					StartColumnNumber: detection.MatchNode.ContentStart.Column,
 					EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-					Content:           "",
+					Content:           &value,
 				})
 		}
 
@@ -113,7 +114,7 @@ func (scanner *Scanner) Scan(
 						EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 						StartColumnNumber: detection.MatchNode.ContentStart.Column,
 						EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-						Content:           value,
+						Content:           &value,
 					})
 			}
 
@@ -144,6 +145,8 @@ func reportDatatypeDetection(
 	data := datatypeDetection.Data.(datatype.Data)
 
 	for _, property := range data.Properties {
+		detectionContent := detection.MatchNode.Content()
+
 		report.AddDetection(
 			reportdetections.TypeCustomClassified,
 			detectorType,
@@ -167,7 +170,7 @@ func reportDatatypeDetection(
 					EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 					StartColumnNumber: detection.MatchNode.ContentStart.Column,
 					EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-					Content:           detection.MatchNode.Content(),
+					Content:           &detectionContent,
 				},
 			},
 		)
