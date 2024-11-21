@@ -17,6 +17,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/frameworks"
 	"github.com/bearer/bearer/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/report/operations"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/report/schema/datatype"
 	"github.com/bearer/bearer/pkg/report/secret"
@@ -132,7 +133,6 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 			UUID:       schema.FieldUUID,
 		}
 	}
-
 	// Build parent data type
 	parentDataType := &datatype.DataType{
 		Node:       report.StoredSchemas.Node,
@@ -142,7 +142,6 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 		Properties: childDataTypes,
 		UUID:       report.StoredSchemas.ParentSchema.Value.ObjectUUID,
 	}
-
 	classifiedDatatypes := make(map[parser.NodeID]*datatype.ClassifiedDatatype, 0)
 
 	parentClassificationRequest := classificationschema.ClassificationRequest{DetectorType: report.StoredSchemas.DetectorType, Value: parentDataType.ToClassificationRequestDetection(), Filename: report.StoredSchemas.ParentSchema.Source.Filename}
@@ -221,6 +220,14 @@ func (report *Detectors) AddError(filePath string, err error) {
 		Message: err.Error(),
 		File:    filePath,
 	})
+}
+
+func (report *Detectors) AddOperation(
+	detectorType detectors.Type,
+	operation operations.Operation,
+	source source.Source,
+) {
+	report.AddDetection(detections.TypeOperation, detectorType, source, operation)
 }
 
 func (report *Detectors) Add(data interface{}) {

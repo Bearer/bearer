@@ -1,4 +1,669 @@
-([]*detections.Detection) (len=54) {
+([]*detections.Detection) (len=73) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(57),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(57),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"put\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(120),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(120),
+      EndColumnNumber: (*int)(13),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(179),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(179),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=17) "/pet/findByStatus",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(241),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(241),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=15) "/pet/findByTags",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(300),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(300),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(364),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(364),
+      EndColumnNumber: (*int)(13),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(413),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(413),
+      EndColumnNumber: (*int)(15),
+      Text: (*string)((len=8) "\"delete\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(457),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(457),
+      EndColumnNumber: (*int)(13),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=18) "/pet/*/uploadImage",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(518),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(518),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=16) "/store/inventory",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(549),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(549),
+      EndColumnNumber: (*int)(13),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/store/order",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(593),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(593),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(636),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(636),
+      EndColumnNumber: (*int)(15),
+      Text: (*string)((len=8) "\"delete\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(666),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(666),
+      EndColumnNumber: (*int)(13),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/user",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(713),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(713),
+      EndColumnNumber: (*int)(13),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=20) "/user/createWithList",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(755),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(755),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=11) "/user/login",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(821),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(821),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/user/logout",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(837),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(837),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(879),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(879),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"put\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(923),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(923),
+      EndColumnNumber: (*int)(15),
+      Text: (*string)((len=8) "\"delete\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=28) "https://api.{test}.me/api/v3",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=4) "test",
+              Values: ([]string) (len=2) {
+                (string) (len=5) "test1",
+                (string) (len=5) "test2"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",

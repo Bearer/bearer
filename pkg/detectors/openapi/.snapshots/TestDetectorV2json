@@ -1,4 +1,85 @@
-([]*detections.Detection) (len=9) {
+([]*detections.Detection) (len=12) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(17),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(17),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/pets",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v1",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(58),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(58),
+      EndColumnNumber: (*int)(13),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/pets",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v1",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(76),
+      StartColumnNumber: (*int)(7),
+      EndLineNumber: (*int)(76),
+      EndColumnNumber: (*int)(12),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/pets/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v1",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",

@@ -1,4 +1,1125 @@
-([]*detections.Detection) (len=48) {
+([]*detections.Detection) (len=67) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(55),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(55),
+      EndColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(90),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(90),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "put")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(130),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(130),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=17) "/pet/findByStatus",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(170),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(170),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=15) "/pet/findByTags",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(209),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(209),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(249),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(249),
+      EndColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(280),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(280),
+      EndColumnNumber: (*int)(11),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(308),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(308),
+      EndColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=18) "/pet/*/uploadImage",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(346),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(346),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=16) "/store/inventory",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(366),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(366),
+      EndColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/store/order",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(394),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(394),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(425),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(425),
+      EndColumnNumber: (*int)(11),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(448),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(448),
+      EndColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/user",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(477),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(477),
+      EndColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=20) "/user/createWithList",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(504),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(504),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=11) "/user/login",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(547),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(547),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/user/logout",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(558),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(558),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(585),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(585),
+      EndColumnNumber: (*int)(8),
+      Text: (*string)((len=3) "put")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      StartLineNumber: (*int)(614),
+      StartColumnNumber: (*int)(5),
+      EndLineNumber: (*int)(614),
+      EndColumnNumber: (*int)(11),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=7) "openapi",

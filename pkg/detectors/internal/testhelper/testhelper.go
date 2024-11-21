@@ -16,6 +16,7 @@ import (
 	reportdetectors "github.com/bearer/bearer/pkg/report/detectors"
 	"github.com/bearer/bearer/pkg/report/frameworks"
 	"github.com/bearer/bearer/pkg/report/interfaces"
+	"github.com/bearer/bearer/pkg/report/operations"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/report/schema/datatype"
 	"github.com/bearer/bearer/pkg/report/secret"
@@ -209,5 +210,18 @@ func (report *InMemoryReport) AddError(filePath string, err error) {
 		Type:    detections.TypeError,
 		Message: err.Error(),
 		File:    filePath,
+	})
+}
+
+func (report *InMemoryReport) AddOperation(
+	detectorType reportdetectors.Type,
+	operation operations.Operation,
+	source source.Source,
+) {
+	report.Detections = append(report.Detections, &detections.Detection{
+		DetectorType: detectorType,
+		Value:        operation,
+		Source:       source,
+		Type:         detections.TypeOperation,
 	})
 }

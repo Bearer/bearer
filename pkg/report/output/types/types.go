@@ -30,6 +30,7 @@ type DataFlow struct {
 	Components         []dataflowtypes.Component    `json:"components,omitempty" yaml:"components,omitempty"`
 	Dependencies       []dataflowtypes.Dependency   `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
 	Errors             []dataflowtypes.Error        `json:"errors,omitempty" yaml:"errors,omitempty"`
+	Paths              []dataflowtypes.Path         `json:"paths,omitempty" yaml:"paths,omitempty"`
 }
 
 type GenericFormatter interface {

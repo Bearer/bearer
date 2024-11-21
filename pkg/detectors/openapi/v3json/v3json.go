@@ -67,6 +67,9 @@ func ProcessFile(idGenerator nodeid.Generator, file *file.FileInfo, report repor
 		return false, err
 	}
 
+	servers := queries.FindUrls(file)
+
+	reportadder.AddOperations(file, report, foundPaths, servers)
 	reportadder.AddSchema(file, report, foundSchemas, idGenerator)
 
 	return true, err

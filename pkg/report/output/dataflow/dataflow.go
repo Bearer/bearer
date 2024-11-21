@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/detectiondecoder"
 	fileerrors "github.com/bearer/bearer/pkg/report/output/dataflow/file_errors"
+	"github.com/bearer/bearer/pkg/report/output/dataflow/paths"
 	"github.com/bearer/bearer/pkg/report/output/dataflow/risks"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	"github.com/bearer/bearer/pkg/util/file"
@@ -31,6 +32,7 @@ var allowedDetections []detections.DetectionType = []detections.DetectionType{
 	detections.TypeFileList,
 	detections.TypeFileFailed,
 	detections.TypeExpectedDetection,
+	detections.TypeOperation,
 }
 
 func contains(detections []detections.DetectionType, detection detections.DetectionType) bool {
@@ -53,6 +55,7 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
+	pathsHolder := paths.New(isInternal)
 	errorsHolder := fileerrors.New()
 
 	extras, err := datatypes.NewExtras(reportData.Detectors, config)
@@ -122,6 +125,7 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 			errorsHolder.AddError(errorDetection)
 		default:
 			var castDetection detections.Detection
+
 			buf := bytes.NewBuffer(nil)
 			if err := json.NewEncoder(buf).Encode(detection); err != nil {
 				return err
@@ -144,6 +148,12 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 				if err = dataTypesHolder.AddSchema(castDetection, detectionExtras); err != nil {
 					return err
 				}
+			case detections.TypeOperation:
+				operationDetection, err := detectiondecoder.GetOperation(detection)
+				if err != nil {
+					return err
+				}
+				pathsHolder.AddOperation(castDetection.DetectorType, operationDetection, fullFilename)
 			case detections.TypeExpectedDetection:
 				expectedHolder.AddRiskPresence(castDetection)
 			case detections.TypeCustomRisk:
@@ -234,6 +244,7 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 		Components:         componentsHolder.ToDataFlow(),
 		Dependencies:       componentsHolder.ToDataFlowForDependencies(),
 		Errors:             errorsHolder.ToDataFlow(),
+		Paths:              pathsHolder.ToDataFlow(),
 	}
 
 	return nil
