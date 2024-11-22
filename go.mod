@@ -1,6 +1,7 @@
 module github.com/bearer/bearer
 
 go 1.21
+toolchain go1.22.5
 
 require (
 	github.com/bits-and-blooms/bitset v1.14.3
@@ -28,9 +29,9 @@ require (
 	github.com/tangzero/inflector v1.0.0
 	github.com/weppos/publicsuffix-go v0.40.2
 	github.com/xeipuuv/gojsonschema v1.2.0
-	github.com/zricethezav/gitleaks/v8 v8.18.1
-	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56
-	golang.org/x/mod v0.20.0
+	github.com/zricethezav/gitleaks/v8 v8.21.2
+	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0
+	golang.org/x/mod v0.21.0
 	golang.org/x/net v0.31.0
 	golang.org/x/oauth2 v0.23.0
 	sigs.k8s.io/yaml v1.4.0
@@ -42,7 +43,7 @@ require (
 	github.com/charmbracelet/lipgloss v0.6.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/fatih/semgroup v1.2.0 // indirect
-	github.com/gitleaks/go-gitdiff v0.9.0 // indirect
+	github.com/gitleaks/go-gitdiff v0.9.1 // indirect
 	github.com/go-enry/go-oniguruma v1.2.1 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/h2non/filetype v1.1.3 // indirect
@@ -102,7 +103,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.28.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
-	golang.org/x/tools v0.24.0 // indirect
+	golang.org/x/tools v0.25.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 )
 
