@@ -49,7 +49,7 @@ func GetData(
 	}
 
 	// add dataflow to data
-	if err = GetDataflow(data, report, config, config.Report.Report != flag.ReportDataFlow); err != nil {
+	if err = GetDataflow(data, report, config, true); err != nil {
 		return data, err
 	}
 

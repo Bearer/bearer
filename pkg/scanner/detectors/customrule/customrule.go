@@ -108,6 +108,7 @@ func (detector *Detector) DetectAt(
 					Pattern:   pattern.Pattern,
 					Datatypes: match.DatatypeDetections(),
 					Variables: match.Variables(),
+					Value:     match.Value(),
 				})
 			}
 

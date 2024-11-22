@@ -28,6 +28,7 @@ var TypeCustom DetectionType = "custom"
 var TypeCustomClassified DetectionType = "custom_classified"
 var TypeCustomRisk DetectionType = "custom_risk"
 var TypeExpectedDetection DetectionType = "expected_detection"
+var TypeOperation DetectionType = "operation"
 
 type ReportDetection interface {
 	AddDetection(detectionType DetectionType, detectorType detectors.Type, source source.Source, value interface{})

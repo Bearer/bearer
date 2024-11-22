@@ -1,17 +1,23 @@
 package reportadder
 
 import (
+	"regexp"
 	"sort"
+	"strings"
 
 	"github.com/bearer/bearer/pkg/parser"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
 	reporttypes "github.com/bearer/bearer/pkg/report"
 	"github.com/bearer/bearer/pkg/report/detectors"
+	"github.com/bearer/bearer/pkg/report/operations"
+	"github.com/bearer/bearer/pkg/report/operations/operationshelper"
 	"github.com/bearer/bearer/pkg/report/schema"
 	"github.com/bearer/bearer/pkg/report/schema/schemahelper"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/stringutil"
 )
+
+var regexpPathVariable = regexp.MustCompile(`\{.+\}`)
 
 type SortableSchema struct {
 	Key   parser.Node
@@ -62,7 +68,7 @@ func AddSchema(file *file.FileInfo, report reporttypes.Report, foundValues map[p
 		if !report.SchemaGroupIsOpen() {
 			report.SchemaGroupBegin(
 				detectors.DetectorOpenAPI,
-				nil,
+				&node,
 				schema.Value,
 				&schema.Source,
 				nil,
@@ -93,4 +99,42 @@ func convertSchema(value string) string {
 	default:
 		return schema.SimpleTypeObject
 	}
+}
+
+func AddOperations(file *file.FileInfo, report reporttypes.Report, foundValues map[parser.Node]*operationshelper.Operation, servers []operations.Url) {
+	// we need sorted schemas so our reports are consistent and repeatable
+	var sortedOperations []*operationshelper.Operation
+	for _, operation := range foundValues {
+		sortedOperations = append(sortedOperations, operation)
+	}
+	sort.Slice(sortedOperations, func(i, j int) bool {
+		lineNumberA := sortedOperations[i].Source.StartLineNumber
+		lineNumberB := sortedOperations[j].Source.StartLineNumber
+		return *lineNumberA < *lineNumberB
+	})
+	for _, operation := range sortedOperations {
+		operation.Source.Language = file.Language
+		operation.Source.LanguageType = file.LanguageTypeString()
+		operation.Value.Path = standardizeOperationPath(stringutil.StripQuotes(operation.Value.Path))
+		operation.Value.Type = standardizeOperationType(stringutil.StripQuotes(operation.Value.Type))
+		operation.Value.Urls = servers
+		report.AddOperation(detectors.DetectorOpenAPI, operation.Value, operation.Source)
+	}
+}
+
+func standardizeOperationType(input string) (output string) {
+	input = strings.ToUpper(input)
+	supportedvalues := []string{operations.TypeGet, operations.TypeDelete, operations.TypePost, operations.TypePut}
+
+	for _, v := range supportedvalues {
+		if input == v {
+			return v
+		}
+	}
+
+	return operations.TypeOther
+}
+
+func standardizeOperationPath(input string) (output string) {
+	return regexpPathVariable.ReplaceAllString(input, "*")
 }
