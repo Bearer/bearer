@@ -33,6 +33,7 @@ func (holder *Holder) AddOperation(detectorType detectors.Type, detection operat
 		detection.Source.Filename,
 		fullFilename,
 		*detection.Source.StartLineNumber,
+		detection.Value.Type,
 		detection.Value.Path,
 		urls,
 	)
@@ -43,6 +44,7 @@ func (holder *Holder) addPath(
 	fileName string,
 	fullFilename string,
 	lineNumber int,
+	httpMethod string,
 	path string,
 	urls []string,
 ) {
@@ -59,6 +61,7 @@ func (holder *Holder) addPath(
 		FullFilename: fullFilename,
 		FullName:     fileName,
 		LineNumber:   &lineNumber,
+		HttpMethod:   httpMethod,
 		Path:         path,
 		Urls:         urls,
 	})
