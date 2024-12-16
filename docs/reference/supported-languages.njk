@@ -9,7 +9,7 @@ supportChart:
     rules: true
     searchName: lang-ruby
     searchTerm: ruby_
-    status: GA
+    support: Bearer CLI + Pro
   javascript:
     name: JavaScript / TypeScript
     frameworks:
@@ -18,15 +18,16 @@ supportChart:
     rules: true
     searchName: lang-jsts
     searchTerm: javascript_
-    status: GA
+    support: Bearer CLI + Pro
   java:
     name: Java
     frameworks:
       - Spring
+      - Java
     rules: true
     searchName: lang-java
     searchTerm: java_
-    status: GA
+    support: Bearer CLI + Pro
   php:
     name: PHP
     frameworks:
@@ -34,7 +35,7 @@ supportChart:
     rules: true
     searchName: lang-php
     searchTerm: php_
-    status: GA
+    support: Bearer CLI + Pro
   go:
     name: Go
     frameworks:
@@ -42,7 +43,7 @@ supportChart:
     rules: true
     searchName: lang-go
     searchTerm: go_
-    status: GA
+    support: Bearer CLI + Pro
   python:
     name: Python
     frameworks:
@@ -50,13 +51,39 @@ supportChart:
     rules: true
     searchName: lang-python
     searchTerm: python_
-    status: GA
+    support: Bearer CLI + Pro
+  csharp:
+    name: C#
+    frameworks:
+      - .Net
+    rules: true
+    searchName: lang-csharp
+    searchTerm: csharp_
+    support: Bearer Pro
+  kotlin:
+    name: Kotlin
+    frameworks:
+      - Android
+      - Spring
+      - Ktor
+    rules: true
+    searchName: lang-kotlin
+    searchTerm: kotlin_
+    support: Bearer Pro
+  elixir:
+    name: Elixir
+    frameworks:
+      - Phoenix
+    rules: true
+    searchName: lang-elixir
+    searchTerm: elixir_
+    support: Bearer Pro
 
 ---
 {% renderTemplate "liquid,md" %}
 # Supported languages
 
-Bearer CLI supports the following language and framework combinations.
+Bearer supports the following language and framework combinations.
 When you scan a codebase, Bearer will automatically select the appropriate language based on the file extension. For example, if your application is composed of Ruby and JavaScript code, Bearer will automatically apply the right language and set of rules.
 
 {% endrenderTemplate %}
@@ -67,7 +94,7 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
       <th>Languages</th>
       <th>Frameworks</th>
       <th># rules</th>
-      <th>Status</th>
+      <th>Support</th>
     </tr>
   </thead>
   <tbody>
@@ -84,14 +111,18 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
           {% endif %}
         </td>
         <td>
-          {% if data.rules %}
-            <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{rules.counts.languages[language].count}}</a>
+          {% if data.support == "Bearer Pro" %}
+            <a class="italic" target="_window" href="https://cycode.com/sast-static-application-security-testing/">Learn more</a>
           {% else %}
-            -
+            {% if data.rules %} 
+              <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{rules.counts.languages[language].count}}</a>
+            {% else %}
+              -
+            {% endif %}
           {% endif %}
         </td>
         <td>
-          {{ data.status }}<br/>
+          {{ data.support }}<br/>
           {% if data.comment_link %}
             <span class="italic text-xs"><a href="{{data.comment_link}}">{{ data.comment }}</a></span>
           {% else %}

@@ -15,10 +15,9 @@
   <hr/>
     Scan your source code against top <strong>security</strong> and <strong>privacy</strong> risks.
   <br /><br />
-  Bearer CLI is a static application security testing (SAST) tool that scans your source code and analyzes your data flows to discover, filter and prioritize security and privacy risks.
-  <br /><br />
-  Currently supporting: <strong>JavaScript/TypeScript</strong>, <strong>Ruby</strong>, <strong>PHP</strong>, <strong>Java</strong>, <strong>Go</strong>, <strong>Python</strong> - <a href="https://docs.bearer.com/reference/supported-languages/">Learn more</a>
-
+  Bearer is a static application security testing (SAST) tool designed to scan your source code and analyze data flows to identify, filter, and prioritize security and privacy risks.
+  <br/><br/>
+  Bearer offers a free, open solution, Bearer CLI, and a commercial solution, Bearer Pro, available through <a href="https://cycode.com/">Cycode</a>.
   <br /><br />
 
   [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
@@ -29,8 +28,14 @@
   [![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
 </div>
 
-## Developer friendly static code analysis for security and privacy
 
+## Language Support
+**Bearer CLI**: Go • Java • JavaScript • TypeScript • PHP • Python • Ruby <br/>
+**Bearer Pro by Cycode**: C# • Kotlin • Elixir *+ everything in Bearer OSS*
+
+<a href="https://docs.bearer.com/reference/supported-languages/">Learn more about language suppport</a>
+
+## Developer friendly static code analysis for security and privacy
 <hr/>
 
 <https://user-images.githubusercontent.com/1649672/230438696-9bb0fd35-2aa9-4273-9970-733189d01ff1.mp4>
