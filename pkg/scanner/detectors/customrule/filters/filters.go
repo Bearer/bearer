@@ -167,9 +167,17 @@ func (filter *All) joinMatches(matches, childMatches []Match) []Match {
 	for _, match := range matches {
 		for _, childMatch := range childMatches {
 			if variables, variablesMatch := match.variables.Merge(childMatch.variables); variablesMatch {
+				value := match.Value()
+
+				if value != nil {
+					*value += *childMatch.Value()
+				} else {
+					value = childMatch.Value()
+				}
+
 				result = append(result, NewMatch(
 					variables,
-					nil,
+					value,
 					// FIXME: this seems like it will create unnecessary duplicates
 					append(match.datatypeDetections, childMatch.datatypeDetections...),
 				))
