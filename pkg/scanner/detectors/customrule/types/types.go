@@ -9,5 +9,5 @@ type Data struct {
 	Pattern   string
 	Datatypes []*detectortypes.Detection
 	Variables variableshape.Values
-	Value     *string
+	Value     string
 }

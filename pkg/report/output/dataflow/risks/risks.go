@@ -85,7 +85,7 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 			StartColumnNumber: *detection.Source.StartColumnNumber,
 			EndLineNumber:     *detection.Source.EndLineNumber,
 			EndColumnNumber:   *detection.Source.EndColumnNumber,
-			Content:           &content,
+			Content:           content,
 		}
 	} else {
 		// parent can be nil
@@ -195,7 +195,7 @@ func (holder *Holder) addDatatype(
 	// create datatype source entry if it doesn't exist
 	sourceKey := "undefined_source"
 	if schema.Source != nil {
-		sourceKey = *schema.Source.Content
+		sourceKey = schema.Source.Content
 	}
 
 	if _, exists := line.source[sourceKey]; !exists {
