@@ -83,7 +83,7 @@ func (scanner *Scanner) Scan(
 					EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 					StartColumnNumber: detection.MatchNode.ContentStart.Column,
 					EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-					Content:           &value,
+					Content:           value,
 				})
 		}
 
@@ -92,12 +92,6 @@ func (scanner *Scanner) Scan(
 			data := detection.Data.(customruletypes.Data)
 
 			if len(data.Datatypes) == 0 {
-				var value = ""
-
-				if data.Value != nil {
-					value = *data.Value
-				}
-
 				report.AddDetection(reportdetections.TypeCustomRisk,
 					detectorType,
 					source.New(
@@ -107,14 +101,14 @@ func (scanner *Scanner) Scan(
 						detection.MatchNode.ContentStart.Column,
 						detection.MatchNode.ContentEnd.Line,
 						detection.MatchNode.ContentEnd.Column,
-						value,
+						data.Value,
 					),
 					reportschema.Source{
 						StartLineNumber:   detection.MatchNode.ContentStart.Line,
 						EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 						StartColumnNumber: detection.MatchNode.ContentStart.Column,
 						EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-						Content:           &value,
+						Content:           data.Value,
 					})
 			}
 
@@ -170,7 +164,7 @@ func reportDatatypeDetection(
 					EndLineNumber:     detection.MatchNode.ContentEnd.Line,
 					StartColumnNumber: detection.MatchNode.ContentStart.Column,
 					EndColumnNumber:   detection.MatchNode.ContentEnd.Column,
-					Content:           &detectionContent,
+					Content:           detectionContent,
 				},
 			},
 		)

@@ -33,11 +33,11 @@ type Schema struct {
 
 type Source struct {
 	// This is the starting line number, the very beginning of what's used by the custom detection
-	StartLineNumber   int     `json:"start_line_number,omitempty" yaml:"start_line_number,omitempty"`
-	StartColumnNumber int     `json:"start_column_number,omitempty" yaml:"start_column_number,omitempty"`
-	EndLineNumber     int     `json:"end_line_number,omitempty" yaml:"end_line_number,omitempty"`
-	EndColumnNumber   int     `json:"end_column_number,omitempty" yaml:"end_column_number,omitempty"`
-	Content           *string `json:"content,omitempty" yaml:"content,omitempty"`
+	StartLineNumber   int    `json:"start_line_number,omitempty" yaml:"start_line_number,omitempty"`
+	StartColumnNumber int    `json:"start_column_number,omitempty" yaml:"start_column_number,omitempty"`
+	EndLineNumber     int    `json:"end_line_number,omitempty" yaml:"end_line_number,omitempty"`
+	EndColumnNumber   int    `json:"end_column_number,omitempty" yaml:"end_column_number,omitempty"`
+	Content           string `json:"content,omitempty" yaml:"content,omitempty"`
 }
 
 type ReportSchema interface {

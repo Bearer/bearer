@@ -29,10 +29,10 @@ func NewResult(matches ...Match) *Result {
 type Match struct {
 	variables          variableshape.Values
 	datatypeDetections []*detectortypes.Detection
-	value              *string
+	value              string
 }
 
-func NewMatch(variables variableshape.Values, valueStr *string, datatypeDetections []*detectortypes.Detection) Match {
+func NewMatch(variables variableshape.Values, valueStr string, datatypeDetections []*detectortypes.Detection) Match {
 	return Match{variables: variables, value: valueStr, datatypeDetections: datatypeDetections}
 }
 
@@ -44,7 +44,7 @@ func (match *Match) Variables() variableshape.Values {
 	return match.variables
 }
 
-func (match *Match) Value() *string {
+func (match *Match) Value() string {
 	return match.value
 }
 
@@ -83,7 +83,7 @@ func (filter *Not) Evaluate(
 		log.Trace().Msgf("filters.Not: %t", result)
 	}
 
-	return boolResult(patternVariables, result, nil), nil
+	return boolResult(patternVariables, result, ""), nil
 }
 
 type Either struct {
@@ -130,7 +130,7 @@ func (filter *All) Evaluate(
 
 	if len(filter.Children) == 0 {
 		log.Trace().Msg("filters.All: true (no children)")
-		return boolResult(patternVariables, true, nil), nil
+		return boolResult(patternVariables, true, ""), nil
 	}
 
 	for i, child := range filter.Children {
@@ -167,9 +167,12 @@ func (filter *All) joinMatches(matches, childMatches []Match) []Match {
 	for _, match := range matches {
 		for _, childMatch := range childMatches {
 			if variables, variablesMatch := match.variables.Merge(childMatch.variables); variablesMatch {
+				value := match.Value()
+				value += childMatch.Value()
+
 				result = append(result, NewMatch(
 					variables,
-					nil,
+					value,
 					// FIXME: this seems like it will create unnecessary duplicates
 					append(match.datatypeDetections, childMatch.datatypeDetections...),
 				))
@@ -188,7 +191,7 @@ func (filter *FilenameRegex) Evaluate(
 	detectorContext detectortypes.Context,
 	patternVariables variableshape.Values,
 ) (*Result, error) {
-	return boolResult(patternVariables, filter.Regex.MatchString(detectorContext.Filename()), nil), nil
+	return boolResult(patternVariables, filter.Regex.MatchString(detectorContext.Filename()), ""), nil
 }
 
 type ImportedVariable struct {
@@ -224,7 +227,7 @@ func (filter *Rule) Evaluate(
 
 	if filter.IsDatatypeRule {
 		log.Trace().Msg("filters.Rule: match (datatype)")
-		return NewResult(NewMatch(patternVariables, nil, detections)), nil
+		return NewResult(NewMatch(patternVariables, "", detections)), nil
 	}
 
 	if log.Trace().Enabled() {
@@ -277,7 +280,7 @@ func (filter *Rule) Evaluate(
 		for _, detectionMatch := range subResult.matches {
 			if variables, variablesMatch := filter.importVariables(patternVariables, detectionMatch.variables); variablesMatch {
 				matched = true
-				matches = append(matches, NewMatch(variables, nil, detectionMatch.datatypeDetections))
+				matches = append(matches, NewMatch(variables, "", detectionMatch.datatypeDetections))
 			}
 		}
 
@@ -294,7 +297,7 @@ func (filter *Rule) Evaluate(
 	}
 
 	if hasPatternVariableMatch {
-		matches = append(matches, NewMatch(patternVariables, nil, datatypeDetections))
+		matches = append(matches, NewMatch(patternVariables, "", datatypeDetections))
 	}
 
 	return NewResult(matches...), nil
@@ -335,7 +338,7 @@ func (filter *Values) Evaluate(
 	patternVariables variableshape.Values,
 ) (*Result, error) {
 	node := patternVariables.Node(filter.Variable)
-	return boolResult(patternVariables, slices.Contains(filter.Values, node.Content()), nil), nil
+	return boolResult(patternVariables, slices.Contains(filter.Values, node.Content()), ""), nil
 }
 
 type Regex struct {
@@ -360,7 +363,7 @@ func (filter *Regex) Evaluate(
 		)
 	}
 
-	return boolResult(patternVariables, result, nil), nil
+	return boolResult(patternVariables, result, ""), nil
 }
 
 type StringLengthLessThan struct {
@@ -378,7 +381,7 @@ func (filter *StringLengthLessThan) Evaluate(
 		return nil, err
 	}
 
-	return boolResult(patternVariables, len(value) < filter.Value, nil), nil
+	return boolResult(patternVariables, len(value) < filter.Value, ""), nil
 }
 
 type StringRegex struct {
@@ -415,7 +418,7 @@ func (filter *StringRegex) Evaluate(
 		)
 	}
 
-	return boolResult(patternVariables, result, &value), nil
+	return boolResult(patternVariables, result, value), nil
 }
 
 type EntropyGreaterThan struct {
@@ -454,7 +457,7 @@ func (filter *EntropyGreaterThan) Evaluate(
 		)
 	}
 
-	return boolResult(patternVariables, result, nil), nil
+	return boolResult(patternVariables, result, ""), nil
 }
 
 type IntegerLessThan struct {
@@ -472,7 +475,7 @@ func (filter *IntegerLessThan) Evaluate(
 		return nil, err
 	}
 
-	return boolResult(patternVariables, value < filter.Value, nil), nil
+	return boolResult(patternVariables, value < filter.Value, ""), nil
 }
 
 type IntegerLessThanOrEqual struct {
@@ -490,7 +493,7 @@ func (filter *IntegerLessThanOrEqual) Evaluate(
 		return nil, err
 	}
 
-	return boolResult(patternVariables, value <= filter.Value, nil), nil
+	return boolResult(patternVariables, value <= filter.Value, ""), nil
 }
 
 type IntegerGreaterThan struct {
@@ -508,7 +511,7 @@ func (filter *IntegerGreaterThan) Evaluate(
 		return nil, err
 	}
 
-	return boolResult(patternVariables, value > filter.Value, nil), nil
+	return boolResult(patternVariables, value > filter.Value, ""), nil
 }
 
 type IntegerGreaterThanOrEqual struct {
@@ -526,7 +529,7 @@ func (filter *IntegerGreaterThanOrEqual) Evaluate(
 		return nil, err
 	}
 
-	return boolResult(patternVariables, value >= filter.Value, nil), nil
+	return boolResult(patternVariables, value >= filter.Value, ""), nil
 }
 
 type Unknown struct{}
@@ -559,11 +562,11 @@ func parseInteger(node *tree.Node) (int, bool, error) {
 	return value, true, nil
 }
 
-func boolResult(patternVariables variableshape.Values, value bool, valueStr *string) *Result {
+func boolResult(patternVariables variableshape.Values, value bool, valueStr string) *Result {
 	return NewResult(boolMatches(patternVariables, value, valueStr)...)
 }
 
-func boolMatches(patternVariables variableshape.Values, value bool, valueStr *string) []Match {
+func boolMatches(patternVariables variableshape.Values, value bool, valueStr string) []Match {
 	if value {
 		return []Match{NewMatch(patternVariables, valueStr, nil)}
 	} else {
