@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y ca-certificates gcc-multilib g++-multilib software-properties-common wget && \
