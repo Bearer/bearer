@@ -1,0 +1,17 @@
+languages:
+  - java
+patterns:
+  - pattern: |
+      $<!>@RequestMapping($<...>) class $<...>$<_>$<...>{}
+  - pattern: |
+      class $<...>$<_> $<...>{
+          $<!>@GetMapping($<...>)
+          $<...>$<_> $<_>($<...>)$<...>{}
+      }
+severity: high
+metadata:
+  description: Test detection decorator
+  remediation_message: Test detection decorator
+  cwe_id:
+    - 42
+  id: decorator_test
