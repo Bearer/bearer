@@ -1,0 +1,15 @@
+(*builder.Result)({
+  Query: (string) (len=220) "([(decorated_definition . [(decorator  . [(call . [(attribute . object: (_)  . [ (identifier )] @param1 .)] . [ (argument_list )] .)] .)] @match [(function_definition  . name: (_) [ (parameters )]  [ (block )])])] @root)",
+  VariableNames: ([]string) (len=1) {
+    (string) (len=1) "_"
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) (len=1) {
+    (string) (len=6) "param1": (map[string]string) (len=1) {
+      (string) (len=10) "identifier": (string) (len=5) "route"
+    }
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})

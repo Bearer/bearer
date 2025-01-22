@@ -1,0 +1,15 @@
+(*builder.Result)({
+  Query: (string) (len=243) "([(class_declaration  name: (_) [(class_body  [(method_declaration . [(modifiers [(annotation  . [ (identifier )] @param1 . [ (annotation_argument_list )] .)] @match)] type: (_) . name: (_) . [ (formal_parameters )] [ (block )] .)] )])] @root)",
+  VariableNames: ([]string) (len=1) {
+    (string) (len=1) "_"
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) (len=1) {
+    (string) (len=6) "param1": (map[string]string) (len=1) {
+      (string) (len=10) "identifier": (string) (len=14) "RequestMapping"
+    }
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})

@@ -20,6 +20,9 @@ var loggerRule []byte
 //go:embed testdata/scope_rule.yml
 var scopeRule []byte
 
+//go:embed testdata/decorator.yml
+var decoratorRule []byte
+
 func TestImport(t *testing.T) {
 	testhelper.GetRunner(t, importRule, java.Get()).RunTest(t, "./testdata/import", ".snapshots/")
 }
@@ -30,6 +33,10 @@ func TestFlow(t *testing.T) {
 
 func TestScope(t *testing.T) {
 	testhelper.GetRunner(t, scopeRule, java.Get()).RunTest(t, "./testdata/scope", ".snapshots/")
+}
+
+func TestDecorator(t *testing.T) {
+	testhelper.GetRunner(t, decoratorRule, java.Get()).RunTest(t, "./testdata/decorator", ".snapshots/")
 }
 
 func TestPattern(t *testing.T) {
@@ -45,6 +52,16 @@ func TestPattern(t *testing.T) {
 						try {} catch ($<!>$<_> e) {}
 					}
 				}
+		`},
+		{"catch class decorator", `
+				$<!>@RequestMapping()
+				class $<_> {}
+		`},
+		{"catch function decorator", `
+				class $<...>$<_> $<...>{
+          $<!>@RequestMapping()
+          $<...>$<_> $<_>($<...>)$<...>{}
+      	}
 		`},
 	} {
 		t.Run(test.name, func(tt *testing.T) {

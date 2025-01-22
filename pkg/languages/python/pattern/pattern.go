@@ -22,6 +22,8 @@ var (
 		"typed_parameter",
 		"typed_default_parameter",
 		"default_parameter",
+		"decorated_definition",
+		"module",
 	}
 
 	allowedPatternQueryTypes = []string{"_"}

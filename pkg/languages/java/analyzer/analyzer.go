@@ -81,6 +81,8 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeGenericOperation(node, visitChildren)
 	case "while_statement", "do_statement", "if_statement": // statements don't have results
 		return visitChildren()
+	case "marker_annotation", "annotation":
+		return analyzer.analyzeAnnotation(node, visitChildren)
 	default:
 		analyzer.builder.Dataflow(node, analyzer.builder.ChildrenFor(node)...)
 		return visitChildren()
@@ -141,6 +143,18 @@ func (analyzer *analyzer) analyzeCastExpression(node *sitter.Node, visitChildren
 	analyzer.builder.Alias(node, value)
 
 	analyzer.lookupVariable(value)
+
+	return visitChildren()
+}
+
+func (analyzer *analyzer) analyzeAnnotation(node *sitter.Node, visitChildren func() error) error {
+	name := node.ChildByFieldName("name")
+
+	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
+		analyzer.builder.Dataflow(node, arguments)
+	}
+
+	analyzer.lookupVariable(name)
 
 	return visitChildren()
 }

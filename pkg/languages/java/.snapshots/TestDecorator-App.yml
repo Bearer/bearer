@@ -1,0 +1,58 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: decorator_test
+        title: Test detection decorator
+        description: Test detection decorator
+        documentation_url: ""
+      line_number: 10
+      full_filename: App.java
+      filename: App.java
+      source:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 24
+      sink:
+        location:
+            start: 10
+            end: 10
+            column:
+                start: 1
+                end: 24
+        content: ""
+      parent_line_number: 10
+      fingerprint: 9179c7c01c992fa9270e5b900641b481_0
+      old_fingerprint: 9179c7c01c992fa9270e5b900641b481_0
+    - rule:
+        cwe_ids:
+            - "42"
+        id: decorator_test
+        title: Test detection decorator
+        description: Test detection decorator
+        documentation_url: ""
+      line_number: 17
+      full_filename: App.java
+      filename: App.java
+      source:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 3
+                end: 29
+      sink:
+        location:
+            start: 17
+            end: 17
+            column:
+                start: 3
+                end: 29
+        content: ""
+      parent_line_number: 17
+      fingerprint: 9179c7c01c992fa9270e5b900641b481_1
+      old_fingerprint: 9179c7c01c992fa9270e5b900641b481_1
+
