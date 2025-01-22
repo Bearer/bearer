@@ -4,7 +4,6 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/bearer/pkg/scanner/ast/tree"
@@ -151,7 +150,6 @@ func (analyzer *analyzer) analyzeCastExpression(node *sitter.Node, visitChildren
 func (analyzer *analyzer) analyzeAnnotation(node *sitter.Node, visitChildren func() error) error {
 	name := node.ChildByFieldName("name")
 
-	log.Error().Msgf("analyzeAnnotation %s", analyzer.builder.ContentFor(name))
 	if arguments := node.ChildByFieldName("arguments"); arguments != nil {
 		analyzer.builder.Dataflow(node, arguments)
 	}
