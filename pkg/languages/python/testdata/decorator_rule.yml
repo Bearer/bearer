@@ -1,0 +1,14 @@
+languages:
+  - python
+patterns:
+  - pattern: |
+      $<!>@$<_>.route()
+      def $<_>():
+
+severity: high
+metadata:
+  description: Test detection decorator
+  remediation_message: Test detection decorator
+  cwe_id:
+    - 42
+  id: decorator_test

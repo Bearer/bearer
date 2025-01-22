@@ -17,7 +17,15 @@ var (
 	matchNodeRegex     = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex      = regexp.MustCompile(`\$<\.\.\.>`)
 
-	matchNodeContainerTypes = []string{"catch_formal_parameter", "catch_type", "formal_parameters"}
+	matchNodeContainerTypes = []string{
+		"catch_formal_parameter",
+		"catch_type",
+		"formal_parameters",
+		"modifiers",
+		"method_declaration",
+		"class_declaration",
+		"program",
+	}
 
 	// todo: see if it is ok to replace typescripts `member_expression` with javas `field_access` and `method_invocation`
 	allowedQueryTypes = []string{"identifier", "type_identifier", "_", "field_access", "method_invocation", "string_literal"}
@@ -101,7 +109,15 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 	// function block
 	// lambda () -> {} block
 	// try {} catch () {}
-	unAnchored := []string{"class_declaration", "class_body", "block", "try_statement", "catch_type", "resource_specification"}
+	unAnchored := []string{
+		"class_declaration",
+		"class_body",
+		"block",
+		"try_statement",
+		"catch_type",
+		"resource_specification",
+		"modifiers",
+	}
 
 	isAnchored := !slices.Contains(unAnchored, parent.Type())
 	return isAnchored, isAnchored
