@@ -23,7 +23,6 @@ var (
 		"formal_parameters",
 		"modifiers",
 		"method_declaration",
-		"class_declaration",
 		"program",
 	}
 
@@ -147,6 +146,16 @@ func (*Pattern) NodeTypes(node *tree.Node) []string {
 	return []string{node.Type()}
 }
 
-func (*Pattern) ContainerTypes() []string {
-	return matchNodeContainerTypes
+func (*Pattern) IsContainer(node *tree.Node) bool {
+	if slices.Contains(matchNodeContainerTypes, node.Type()) {
+		return true
+	}
+
+	if node.Type() == "class_declaration" {
+		if children := node.NamedChildren(); len(children) != 0 && children[0].Type() == "modifiers" {
+			return true
+		}
+	}
+
+	return false
 }

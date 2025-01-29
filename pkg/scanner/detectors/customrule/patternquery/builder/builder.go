@@ -117,7 +117,6 @@ func Build(
 	builder.setMatchNode(
 		inputParams.MatchNodeOffset,
 		focusedVariable,
-		patternLanguage.ContainerTypes(),
 		tree.RootNode(),
 	)
 	if builder.matchNode == nil {
@@ -386,7 +385,7 @@ func getVariableFor(
 	patternLanguage language.Pattern,
 	variables []language.PatternVariable,
 ) *language.PatternVariable {
-	if slices.Contains(patternLanguage.ContainerTypes(), node.Type()) {
+	if patternLanguage.IsContainer(node) {
 		return nil
 	}
 
@@ -410,7 +409,6 @@ func (builder *builder) newParam() string {
 func (builder *builder) setMatchNode(
 	offset int,
 	focusedVariable string,
-	containerTypes []string,
 	node *asttree.Node,
 ) {
 	err := node.Walk(func(node *asttree.Node, visitChildren func() error) error {
@@ -420,7 +418,7 @@ func (builder *builder) setMatchNode(
 				return nil
 			}
 		} else {
-			if node.ContentStart.Byte == offset && !slices.Contains(containerTypes, node.Type()) {
+			if node.ContentStart.Byte == offset && !builder.patternLanguage.IsContainer(node) {
 				builder.matchNode = node
 				return nil
 			}

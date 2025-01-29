@@ -175,6 +175,6 @@ func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) strin
 	return content
 }
 
-func (*Pattern) ContainerTypes() []string {
-	return patternMatchNodeContainerTypes
+func (*Pattern) IsContainer(node *tree.Node) bool {
+	return slices.Contains(patternMatchNodeContainerTypes, node.Type())
 }

@@ -94,7 +94,8 @@ type Pattern interface {
 	//   some_call($<!>$<VAR>)
 	// we would return `[[10, 14]]`
 	FindMatchNode(input []byte) [][]int
-	// ContainerTypes returns a list of node types from which a match node should
+	// IsContainer returns a bool when node is included in the list of containers
+	// from which a match node should
 	// not be able to escape. There can be multiple nodes in the tree at the same
 	// character position, and we want to allow a match node to be the highest
 	// position node, terminating at a container node.
@@ -106,7 +107,7 @@ type Pattern interface {
 	// given the following Ruby code matching the pattern:
 	//   some_call key: value, other_key: value2
 	// we want the content of the match to be `key: value` and not `key: value, other_key: value2`
-	ContainerTypes() []string
+	IsContainer(node *tree.Node) bool
 
 	// Handle cases where the language requires preamble (e.g. PHP requires `<?php`)
 	AdjustInput(input string) string

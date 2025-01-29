@@ -94,8 +94,8 @@ func (*Pattern) AnonymousParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
-func (*Pattern) ContainerTypes() []string {
-	return patternMatchNodeContainerTypes
+func (*Pattern) IsContainer(node *tree.Node) bool {
+	return slices.Contains(patternMatchNodeContainerTypes, node.Type())
 }
 
 func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
