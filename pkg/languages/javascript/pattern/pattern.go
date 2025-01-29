@@ -77,8 +77,8 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
-func (*Pattern) ContainerTypes() []string {
-	return patternMatchNodeContainerTypes
+func (*Pattern) IsContainer(node *tree.Node) bool {
+	return slices.Contains(patternMatchNodeContainerTypes, node.Type())
 }
 
 func (*Pattern) LeafContentTypes() []string {
