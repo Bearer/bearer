@@ -176,17 +176,6 @@ func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
 	return []string{node.Type()}
 }
 
-// func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) string {
-// 	if fromNodeType == "string" && toNodeType == "encapsed_string" {
-// 		return fmt.Sprintf(`"%s"`, content[1:len(content)-1])
-// 	}
-// 	if fromNodeType == "encapsed_string" && toNodeType == "string" {
-// 		return fmt.Sprintf("'%s'", content[1:len(content)-1])
-// 	}
-
-// 	return content
-// }
-
-func (*Pattern) ContainerTypes() []string {
-	return patternMatchNodeContainerTypes
+func (*Pattern) IsContainer(node *tree.Node) bool {
+	return slices.Contains(patternMatchNodeContainerTypes, node.Type())
 }

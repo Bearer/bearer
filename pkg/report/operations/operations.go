@@ -1,11 +1,15 @@
 package operations
 
 const (
-	TypeGet    = "GET"
-	TypePost   = "POST"
-	TypePut    = "PUT"
-	TypeDelete = "DELETE"
-	TypeOther  = "OTHER"
+	TypeGet     = "GET"
+	TypePost    = "POST"
+	TypePut     = "PUT"
+	TypeDelete  = "DELETE"
+	TypePatch   = "PATCH"
+	TypeHead    = "HEAD"
+	TypeOptions = "OPTIONS"
+	TypeConnect = "CONNECT"
+	TypeTrace   = "TRACE"
 )
 
 type Operation struct {

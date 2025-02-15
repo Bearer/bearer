@@ -113,26 +113,39 @@ func AddOperations(file *file.FileInfo, report reporttypes.Report, foundValues m
 		return *lineNumberA < *lineNumberB
 	})
 	for _, operation := range sortedOperations {
-		operation.Source.Language = file.Language
-		operation.Source.LanguageType = file.LanguageTypeString()
-		operation.Value.Path = standardizeOperationPath(stringutil.StripQuotes(operation.Value.Path))
-		operation.Value.Type = standardizeOperationType(stringutil.StripQuotes(operation.Value.Type))
-		operation.Value.Urls = servers
-		report.AddOperation(detectors.DetectorOpenAPI, operation.Value, operation.Source)
+		if httpMethod := standardizeOperationType(stringutil.StripQuotes(operation.Value.Type)); httpMethod != nil {
+			operation.Source.Language = file.Language
+			operation.Source.LanguageType = file.LanguageTypeString()
+			operation.Value.Path = standardizeOperationPath(stringutil.StripQuotes(operation.Value.Path))
+			operation.Value.Type = *httpMethod
+			operation.Value.Urls = servers
+			report.AddOperation(detectors.DetectorOpenAPI, operation.Value, operation.Source)
+
+		}
 	}
 }
 
-func standardizeOperationType(input string) (output string) {
+func standardizeOperationType(input string) (output *string) {
 	input = strings.ToUpper(input)
-	supportedvalues := []string{operations.TypeGet, operations.TypeDelete, operations.TypePost, operations.TypePut}
+	supportedvalues := []string{
+		operations.TypeGet,
+		operations.TypePost,
+		operations.TypePut,
+		operations.TypeDelete,
+		operations.TypePatch,
+		operations.TypeHead,
+		operations.TypeOptions,
+		operations.TypeConnect,
+		operations.TypeTrace,
+	}
 
 	for _, v := range supportedvalues {
 		if input == v {
-			return v
+			return &v
 		}
 	}
 
-	return operations.TypeOther
+	return nil
 }
 
 func standardizeOperationPath(input string) (output string) {

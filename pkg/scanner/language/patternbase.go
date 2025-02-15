@@ -20,8 +20,8 @@ func (*PatternBase) ShouldSkipNode(node *tree.Node) bool {
 	return false
 }
 
-func (*PatternBase) ContainerTypes() []string {
-	return nil
+func (*PatternBase) IsContainer(node *tree.Node) bool {
+	return false
 }
 
 func (*PatternBase) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
