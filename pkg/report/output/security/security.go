@@ -198,13 +198,21 @@ func evaluateRules(
 			if err != nil {
 				return fingerprints, false, err
 			}
-
-			ruleSummary := &types.Rule{
-				Title:            rule.Description,
-				Description:      rule.RemediationMessage,
-				Id:               rule.Id,
-				CWEIDs:           rule.CWEIDs,
-				DocumentationUrl: rule.DocumentationUrl,
+			var ruleSummary *types.Rule
+			if config.Report.NoRuleMeta {
+				ruleSummary = &types.Rule{
+					Title:  rule.Description,
+					Id:     rule.Id,
+					CWEIDs: rule.CWEIDs,
+				}
+			} else {
+				ruleSummary = &types.Rule{
+					Title:            rule.Description,
+					Description:      rule.RemediationMessage,
+					Id:               rule.Id,
+					CWEIDs:           rule.CWEIDs,
+					DocumentationUrl: rule.DocumentationUrl,
+				}
 			}
 
 			instanceCount := make(map[string]int)
@@ -224,9 +232,12 @@ func evaluateRules(
 				oldFingerprintId := fmt.Sprintf("%s_%s", rule.Id, output.FullFilename)
 				fingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(fingerprintId)), instanceID)
 				oldFingerprint := fmt.Sprintf("%x_%d", md5.Sum([]byte(oldFingerprintId)), i)
-
 				fingerprints = append(fingerprints, fingerprint)
-				rawCodeExtract := codeExtract(output.FullFilename, output.Source, output.Sink)
+
+				rawCodeExtract := []file.Line{}
+				if !config.Report.NoExtract {
+					rawCodeExtract = codeExtract(output.FullFilename, output.Source, output.Sink)
+				}
 				codeExtract := getExtract(rawCodeExtract)
 
 				finding := types.Finding{

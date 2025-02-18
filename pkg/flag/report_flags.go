@@ -83,6 +83,18 @@ var (
 		Hide:            true,
 		Deprecated:      true,
 	})
+	NoExtractFlag = ReportFlagGroup.add(flagtypes.Flag{
+		Name:       "no-extract",
+		ConfigName: "report.no-extract",
+		Value:      false,
+		Usage:      "Do not include code extract in report.",
+	})
+	NoRuleMetaFlag = ReportFlagGroup.add(flagtypes.Flag{
+		Name:       "no-rule-meta",
+		ConfigName: "report.no-rule-meta",
+		Value:      false,
+		Usage:      "Do not include rule description content.",
+	})
 )
 
 type ReportOptions struct {
@@ -155,6 +167,8 @@ func (reportFlagGroup) SetOptions(options *flagtypes.Options, args []string) err
 		Severity:           severity,
 		FailOnSeverity:     failOnSeverity,
 		ExcludeFingerprint: excludeFingerprintsMapping,
+		NoExtract:          getBool(NoExtractFlag),
+		NoRuleMeta:         getBool(NoRuleMetaFlag),
 	}
 
 	return nil
