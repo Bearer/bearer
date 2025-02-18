@@ -4,6 +4,8 @@ report:
     fail-on-severity: critical,high,medium,low
     format: ""
     no-color: false
+    no-extract: false
+    no-rule-meta: false
     output: ""
     report: security
     severity: critical,high,medium,low,warning

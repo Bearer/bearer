@@ -113,6 +113,16 @@ options:
     usage: Disable color in output
     environment_variables:
       - BEARER_NO_COLOR
+  - name: no-extract
+    default_value: "false"
+    usage: Do not include code extract in report.
+    environment_variables:
+      - BEARER_NO_EXTRACT
+  - name: no-rule-meta
+    default_value: "false"
+    usage: Do not include rule description content.
+    environment_variables:
+      - BEARER_NO_RULE_META
   - name: only-rule
     default_value: "[]"
     usage: |
