@@ -69,7 +69,7 @@ sudo yum -y install bearer
 
 ### Docker
 
-Bearer CLI is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/bearer) and [ghcr.io](https://github.com/bearer/bearer/internals/container/bearer).
+Bearer CLI is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/bearer) and [ghcr.io](https://github.com/bearer/bearer/pkgs/container/bearer).
 
 With docker installed, you can run the following command with the appropriate paths in place of the examples.
 
