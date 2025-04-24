@@ -78,8 +78,17 @@ supportChart:
     searchName: lang-elixir
     searchTerm: elixir_
     support: Bearer Pro
+  vbnet:
+    name: VB.Net
+    frameworks:
+      - .Net
+    rules: true
+    searchName: lang-vbnet
+    searchTerm: vbnet_
+    support: Bearer Pro
 
 ---
+
 {% renderTemplate "liquid,md" %}
 # Supported languages
 
@@ -148,11 +157,11 @@ You can access the complete list of security rules and associated vulnerabilitie
 ### Framework support
 Bearer CLI supports the majority of frameworks, requiring only core language support to perform its analysis. However, certain frameworks may require specialized rules: these are mentioned in the table above in the "framework" section. If you observe any gaps in support for a particular framework, please [submit an issue](https://github.com/Bearer/bearer/issues) with relevant details and examples.
 
-### Support status definition
+## Do you support interprocedural and inter-file analysis?
 
-- **General Availability (GA)**: A language at the GA stage provides a comprehensive set of rules for a wide range of security risks and vulnerabilities. It has undergone rigorous testing to ensure maximum accuracy.
-- **Beta**: A language at the Beta stage offers good coverage of top security risks and vulnerabilities, providing a good level of protection.
-- **Alpha**: A language at the Alpha stage does not have a strong set of pre-built rules yet and is primarily intended for users interested in creating their own custom rules.
+Yes, Bearer Pro supports interprocedural and inter-file analysis, currently with full capabilities for Java and actively being extended to other major supported languages. This advanced analysis allows Bearer Pro to trace data flow and control flow across function and file boundaries within an entire codebase. This is crucial for accurately identifying complex vulnerabilities that depend on the interaction of different code components, significantly reducing false positives compared to analyses limited to individual functions or files.
+
+Bearer Pro's interprocedural and inter-file analysis for Java has demonstrated strong results on the OWASP Java Benchmark, achieving a score of 76% with a reported false positive rate of less than 2%.
 
 ## How do we evaluate language support?
 
@@ -163,7 +172,7 @@ The methodology we employ for testing our software is instrumental in achieving 
 Given this, as part of our language release procedure, we heavily depend on Open Source projects to evaluate the quality of our support. Our engineering team has composed an in-depth post detailing our approach, which we strongly recommend you review [here](https://www.bearer.com/blog/improving-precision-and-recall).
 
 
-## How does Bearer precision compare to solutions like Brakeman, Semgrep, or Snyk?
+## How does Bearer precision compare to solutions like Semgrep, Snyk, Checkmarx or SonarQube?
 
 Establishing a high degree of accuracy for a SAST is challenging, and comparing them becomes an even more complex task. As a part of our in-house toolkit, we have undertaken the task of determining how Bearer stands against other well-established solutions in the market. The comprehensive results of our comparative analysis, along with an open data set, are available [here](https://www.bearer.com/blog/benchmarking-top-sast-products).
 
