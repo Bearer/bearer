@@ -38,7 +38,6 @@
 
 ## Developer friendly static code analysis for security and privacy
 
-<hr/>
 
 <https://user-images.githubusercontent.com/1649672/230438696-9bb0fd35-2aa9-4273-9970-733189d01ff1.mp4>
 
