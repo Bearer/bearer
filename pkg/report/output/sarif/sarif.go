@@ -30,10 +30,10 @@ func ReportSarif(outputDetections map[string][]securitytypes.Finding, rules map[
 			DefaultConfiguration: sarif.Configuration{
 				Level: "error", // rule.Severity, accepted values are ("none", "note", "warning", "error")
 			},
-			// Properties: sarif.Properties{
-			// 		Tags:      []string{"maintainability"},
-			// 		Precision: "very-high",
-			// },
+			Properties: sarif.Properties{
+					Tags:      []string{"maintainability"},
+					Precision: "very-high",
+			},
 		})
 	}
 
