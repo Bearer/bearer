@@ -64,14 +64,6 @@ dockers:
       - "--label=org.opencontainers.image.documentation=https://docs.bearer.com"
       - "--platform=linux/amd64"
 
-announce:
-  discord:
-    enabled: true
-    message_template: |
-      Bearer {{ .Tag }} is out now! Check it out: https://github.com/bearer/bearer/releases/tag/{{ .Tag }}
-
-      {{ .ReleaseNotes }}
-
 furies:
   -
     account: bearer

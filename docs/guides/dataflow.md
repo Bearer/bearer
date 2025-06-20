@@ -151,4 +151,4 @@ bearer scan . --report dataflow --output output/path/data-flow-report.json
 
 ## Next steps
 
-For more ways to make the most of our Bearer CLI, see our guide on [configuring the scan](/guides/configure-scan/) and the [commands reference](/reference/commands/). Need additional help? [Open an issue]({{meta.links.issues}}) or join our [Discord community]({{meta.links.discord}}).
+For more ways to make the most of our Bearer CLI, see our guide on [configuring the scan](/guides/configure-scan/) and the [commands reference](/reference/commands/). Need additional help? [Open an issue]({{meta.links.issues}}).

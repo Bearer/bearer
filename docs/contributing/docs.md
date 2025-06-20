@@ -104,7 +104,3 @@ In addition, the [data types](/reference/datatypes/) page should act as a good e
 
 1. At build time, `docs/_data/datatypes.js` reads source files from Bearer CLI.
 2. `docs/reference/datatypes.njk` looks for the global `datatypes` object created in step 1 and uses it to populate the template.
-
-## Getting help
-
-If you're unsure where to start, have questions, or need help contributing to the documentation, join our [community discord]({{meta.links.discord}}) and we'll be happy to help out.
