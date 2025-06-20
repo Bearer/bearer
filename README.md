@@ -20,12 +20,11 @@
   Bearer offers a free, open solution, Bearer CLI, and a commercial solution, Bearer Pro, available through <a href="https://cycode.com/">Cycode</a>.
   <br /><br />
 
-[Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose) - [Discord Community][discord]
+[Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://docs.bearer.com) - [Report a Bug](https://github.com/Bearer/bearer/issues/new/choose)
 
 [![GitHub Release][release-img]][release]
 [![Test][test-img]][test]
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
-[![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
 
 </div>
 
@@ -307,7 +306,6 @@ Bearer Pro's interprocedural and inter-file analysis for Java has demonstrated s
 Thanks for using Bearer CLI. Still have questions?
 
 - Start with the [documentation](https://docs.bearer.com).
-- Have a question or need some help? Find the Bearer team on [Discord][discord].
 - Got a feature request or found a bug? [Open a new issue](https://github.com/Bearer/bearer/issues/new/choose).
 - Found a security issue? Check out our [Security Policy](https://github.com/Bearer/bearer/security/policy) for reporting details.
 - Find out more at [Bearer.com](https://www.bearer.com)
@@ -322,7 +320,7 @@ Everyone interacting with this project is expected to follow the guidelines of o
 
 ## :shield: Security
 
-To report a vulnerability or suspected vulnerability, [see our security policy](https://github.com/Bearer/bearer/security/policy). For any questions, concerns or other security matters, feel free to [open an issue](https://github.com/Bearer/bearer/issues/new/choose) or join the [Discord Community][discord].
+To report a vulnerability or suspected vulnerability, [see our security policy](https://github.com/Bearer/bearer/security/policy). For any questions, concerns or other security matters, feel free to [open an issue](https://github.com/Bearer/bearer/issues/new/choose).
 
 ## :mortar_board: License
 
@@ -336,4 +334,3 @@ You are not allowed to provide Bearer CLI to third parties as a hosted or manage
 [test-img]: https://github.com/Bearer/bearer/actions/workflows/test.yml/badge.svg
 [release]: https://github.com/Bearer/bearer/releases
 [release-img]: https://img.shields.io/github/release/Bearer/bearer.svg?logo=github
-[discord]: https://discord.gg/eaHZBJUXRF

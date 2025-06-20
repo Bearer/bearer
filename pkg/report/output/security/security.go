@@ -470,8 +470,6 @@ func BuildReportString(
 		writeStatsToString(reportData, reportStr, config, lineOfCodeOutput)
 	}
 
-	reportStr.WriteString("\nNeed help or want to discuss the output? Join the Community https://discord.gg/eaHZBJUXRF\n")
-
 	color.NoColor = initialColorSetting
 
 	return reportStr

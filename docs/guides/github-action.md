@@ -75,4 +75,4 @@ We can monitor findings with [Defect Dojo](https://github.com/DefectDojo/django-
 
 For more ways to use Bearer, check out the different [report types](/explanations/reports/), [available rules](/reference/rules/), [supported data types](/reference/datatypes/).
 
-Have a question or need help? Join our [Discord community](https://discord.gg/eaHZBJUXRF) or [open an issue on GitHub](https://github.com/Bearer/bearer/issues).
+Have a question or need help? Please [open an issue on GitHub](https://github.com/Bearer/bearer/issues).

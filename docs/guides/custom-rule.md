@@ -391,4 +391,4 @@ trigger:
 
 ## Need some help?
 
-If you’re running into any problems or need some help, check out the [Discord Community]({{meta.links.discord}}). You can also [create a new issue]({{meta.links.issues}}) on GitHub.
+If you’re running into any problems or need some help, you can [create a new issue]({{meta.links.issues}}) on GitHub.

@@ -47,4 +47,4 @@ In the future we hope to support diff scanning in Circle CI by having the CLI ca
 
 For other services, we recommend selecting the [installation method](/reference/installation/) that best fits the platform.
 
-Do you have a CI/CD workflow that you'd like to see added to this guide? [Open an issue]({{meta.links.issues}}) or let us know on [discord]({{meta.links.discord}}).
+Do you have a CI/CD workflow that you'd like to see added to this guide? [Open an issue]({{meta.links.issues}})
