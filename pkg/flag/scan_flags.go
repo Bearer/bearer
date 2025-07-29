@@ -44,7 +44,7 @@ var (
 		Name:       "skip-git-ignore",
 		ConfigName: "scan.skip-git-ignore",
 		Value:      false,
-		Usage:      "Do not automatically skip files that match patterns in .gitignore",
+		Usage:      "Scan files even if their paths match patterns in .gitignore",
 	})
 	DisableDomainResolutionFlag = ScanFlagGroup.add(flagtypes.Flag{
 		Name:       "disable-domain-resolution",

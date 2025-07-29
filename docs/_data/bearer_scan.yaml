@@ -162,8 +162,7 @@ options:
       - BEARER_SEVERITY
   - name: skip-git-ignore
     default_value: "false"
-    usage: |
-      Do not automatically skip files that match patterns in .gitignore
+    usage: Scan files even if their paths match patterns in .gitignore
     environment_variables:
       - BEARER_SKIP_GIT_IGNORE
   - name: skip-path
