@@ -141,6 +141,7 @@ func Extract(
 	enabledScanners []string,
 	sastScanner *scanner.Scanner,
 	skipTest bool,
+	skipGitIgnore bool,
 ) error {
 	return ExtractWithDetectors(
 		ctx,
@@ -151,6 +152,7 @@ func Extract(
 		Registrations(enabledScanners),
 		sastScanner,
 		skipTest,
+		skipGitIgnore,
 	)
 }
 
@@ -163,6 +165,7 @@ func ExtractWithDetectors(
 	allDetectors []InitializedDetector,
 	sastScanner *scanner.Scanner,
 	skipTest bool,
+	skipGitIgnore bool,
 ) error {
 
 	activeDetectors := make(map[InitializedDetector]activeDetector)
@@ -171,6 +174,7 @@ func ExtractWithDetectors(
 		rootDir,
 		[]string{filename},
 		skipTest,
+		skipGitIgnore,
 		func(dir *file.Path) (bool, error) {
 			for _, detector := range allDetectors {
 				active, isActive := activeDetectors[detector]

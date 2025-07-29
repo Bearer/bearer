@@ -37,12 +37,14 @@ type Worker struct {
 	enabledScanners []string
 	sastScanner     *scanner.Scanner
 	skipTest        bool
+	skipGitIgnore   bool
 }
 
 func (worker *Worker) Setup(config config.Config) error {
 	worker.debug = config.Debug
 	worker.enabledScanners = config.Scan.Scanner
 	worker.skipTest = config.Scan.SkipTest
+	worker.skipGitIgnore = config.Scan.SkipTest
 
 	if slices.Contains(worker.enabledScanners, "sast") {
 		if err := worker.engine.Initialize(config.LogLevel); err != nil {
@@ -95,6 +97,7 @@ func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest)
 		worker.enabledScanners,
 		worker.sastScanner,
 		worker.skipTest,
+		worker.skipGitIgnore,
 	)
 
 	if ctx.Err() != nil {
