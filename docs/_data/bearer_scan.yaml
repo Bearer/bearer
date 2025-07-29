@@ -3,7 +3,7 @@ synopsis: Scan a directory or file
 usage: bearer scan [flags] <path>
 options:
   - name: api-key
-    usage: Use your Bearer API Key to send the report to Bearer.
+    usage: Legacy.
     environment_variables:
       - BEARER_API_KEY
   - name: config-file
@@ -160,6 +160,12 @@ options:
     usage: Specify which severities are included in the report.
     environment_variables:
       - BEARER_SEVERITY
+  - name: skip-git-ignore
+    default_value: "false"
+    usage: |
+      Do not automatically skip files that match patterns in .gitignore
+    environment_variables:
+      - BEARER_SKIP_GIT_IGNORE
   - name: skip-path
     default_value: "[]"
     usage: |

@@ -8,7 +8,7 @@ options:
     environment_variables:
       - BEARER_ALL
   - name: api-key
-    usage: Use your Bearer API Key to send the report to Bearer.
+    usage: Legacy.
     environment_variables:
       - BEARER_API_KEY
   - name: config-file

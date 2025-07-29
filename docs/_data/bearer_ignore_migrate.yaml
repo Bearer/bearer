@@ -3,7 +3,7 @@ synopsis: Migrate ignored fingerprints from bearer.yml to ignore file
 usage: bearer ignore migrate [flags]
 options:
   - name: api-key
-    usage: Use your Bearer API Key to send the report to Bearer.
+    usage: Legacy.
     environment_variables:
       - BEARER_API_KEY
   - name: config-file
