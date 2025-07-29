@@ -117,10 +117,15 @@ func IterateFilesList(
 	rootDir string,
 	files []string,
 	skipTest bool,
+	skipGitIgnore bool,
 	allowDir AllowDirFunction,
 	visitFile VisitFileFunction,
 ) error {
-	gitIgnore := getGitIgnore(rootDir)
+	var gitIgnore *ignore.GitIgnore
+
+	if !skipGitIgnore {
+		gitIgnore = getGitIgnore(rootDir)
+	}
 
 	rootDir, err := filepath.Abs(rootDir)
 	if err != nil {

@@ -27,6 +27,7 @@ scan:
     quiet: false
     scanner:
         - sast
+    skip-git-ignore: false
     skip-path: []
     skip-test: true
 

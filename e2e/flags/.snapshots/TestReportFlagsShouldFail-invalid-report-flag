@@ -38,6 +38,7 @@ Scan Flags
       --parallel int                         Specify the amount of parallelism to use during the scan
       --quiet                                Suppress non-essential messages
       --scanner strings                      Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast (default [sast])
+      --skip-git-ignore                      Scan files even if their paths match patterns in .gitignore
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
       --skip-test                            Disable automatic skipping of test files (default true)
 

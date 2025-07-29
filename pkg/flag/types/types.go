@@ -61,6 +61,7 @@ type Options struct {
 type ScanOptions struct {
 	Target                  string        `mapstructure:"target" json:"target" yaml:"target"`
 	SkipTest                bool          `mapstructure:"skip-test" json:"skip-test" yaml:"skip-test"`
+	SkipGitIgnore           bool          `mapstructure:"skip-git-ignore" json:"skip-git-ignore" yaml:"skip-git-ignore"`
 	SkipPath                []string      `mapstructure:"skip-path" json:"skip-path" yaml:"skip-path"`
 	DisableDomainResolution bool          `mapstructure:"disable-domain-resolution" json:"disable-domain-resolution" yaml:"disable-domain-resolution"`
 	DomainResolutionTimeout time.Duration `mapstructure:"domain-resolution-timeout" json:"domain-resolution-timeout" yaml:"domain-resolution-timeout"`

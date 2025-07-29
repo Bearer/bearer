@@ -141,6 +141,7 @@ func (runner *Runner) scanSingleFile(t *testing.T, testDataPath string, fileRela
 		[]string{"sast"},
 		runner.scanner,
 		false,
+		false,
 	); err != nil {
 		t.Fatalf("failed to do scan %s", err)
 	}

@@ -40,6 +40,12 @@ var (
 		Value:      true,
 		Usage:      "Disable automatic skipping of test files",
 	})
+	SkipGitIgnore = ScanFlagGroup.add(flagtypes.Flag{
+		Name:       "skip-git-ignore",
+		ConfigName: "scan.skip-git-ignore",
+		Value:      false,
+		Usage:      "Scan files even if their paths match patterns in .gitignore",
+	})
 	DisableDomainResolutionFlag = ScanFlagGroup.add(flagtypes.Flag{
 		Name:       "disable-domain-resolution",
 		ConfigName: "scan.disable-domain-resolution",
@@ -169,6 +175,7 @@ func (scanFlagGroup) SetOptions(options *flagtypes.Options, args []string) error
 	options.ScanOptions = flagtypes.ScanOptions{
 		SkipPath:                getStringSlice(SkipPathFlag),
 		SkipTest:                getBool(SkipTestFlag),
+		SkipGitIgnore:           getBool(SkipGitIgnore),
 		DisableDomainResolution: getBool(DisableDomainResolutionFlag),
 		DomainResolutionTimeout: getDuration(DomainResolutionTimeoutFlag),
 		InternalDomains:         getStringSlice(InternalDomainsFlag),
