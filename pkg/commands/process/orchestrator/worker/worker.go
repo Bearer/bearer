@@ -44,7 +44,7 @@ func (worker *Worker) Setup(config config.Config) error {
 	worker.debug = config.Debug
 	worker.enabledScanners = config.Scan.Scanner
 	worker.skipTest = config.Scan.SkipTest
-	worker.skipGitIgnore = config.Scan.SkipTest
+	worker.skipGitIgnore = config.Scan.SkipGitIgnore
 
 	if slices.Contains(worker.enabledScanners, "sast") {
 		if err := worker.engine.Initialize(config.LogLevel); err != nil {
