@@ -1,6 +1,6 @@
 module github.com/bearer/bearer
 
-go 1.21
+go 1.23.0
 
 require (
 	github.com/bits-and-blooms/bitset v1.15.0
@@ -32,7 +32,7 @@ require (
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56
 	golang.org/x/mod v0.20.0
 	golang.org/x/net v0.35.0
-	golang.org/x/oauth2 v0.26.0
+	golang.org/x/oauth2 v0.30.0
 	sigs.k8s.io/yaml v1.4.0
 )
 
