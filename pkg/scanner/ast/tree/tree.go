@@ -267,8 +267,15 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 		}
 
 		if child.IsNamed() {
-			if err := onChild(child); err != nil {
-				return err
+			// String fragments should emit their text content, template substitutions should be replaced with placeholder
+			if child.Type() == "string_fragment" {
+				if err := onText(child.Content()); err != nil {
+					return err
+				}
+			} else {
+				if err := onChild(child); err != nil {
+					return err
+				}
 			}
 		}
 
