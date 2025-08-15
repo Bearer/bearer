@@ -83,13 +83,18 @@ func annotate(tree *parser.Tree) error {
 
 	return tree.Annotate(func(node *parser.Node, value *values.Value) {
 		switch node.Type() {
-		case "interpolated_string_text", "interpolated_verbatim_string_text":
+		case "interpolated_string_text",
+			"interpolated_verbatim_string_text",
+			"string_content",
+			"string_literal_content":
 			value.AppendString(node.Content())
 
 			return
 		case "interpolation":
 			value.Append(node.FirstChild().Value())
 
+			return
+		case "interpolation_start":
 			return
 		case "binary_expression":
 			if node.FirstUnnamedChild().Content() == "+" {

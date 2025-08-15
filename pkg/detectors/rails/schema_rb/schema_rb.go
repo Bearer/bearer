@@ -24,11 +24,13 @@ var (
 			arguments: (argument_list . (string) @table_name)
 			block: (do_block
 				parameters: (block_parameters (identifier) @block_param)
-				(call
-					receiver: (_) @receiver
-					method: (_) @type
-					arguments: (argument_list . (string) @column_name))
-				(#eq @receiver @block_param))
+				body: (body_statement
+						(call
+						receiver: (_) @receiver
+						method: (_) @type
+						arguments: (argument_list . (string) @column_name))
+					(#eq @receiver @block_param))
+				)
 			(#eq @table_method "create_table")) @rule
 	`)
 )

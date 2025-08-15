@@ -3,6 +3,7 @@ package query
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -119,7 +120,7 @@ func (querySet *Set) Compile() error {
 
 	sitterQuery, err := sitter.NewQuery([]byte(s.String()), querySet.sitterLanguage)
 	if err != nil {
-		return err
+		return fmt.Errorf("%w\n\n%s", err, s.String())
 	}
 
 	querySet.sitterQuery = sitterQuery

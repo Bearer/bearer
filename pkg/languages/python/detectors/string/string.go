@@ -2,7 +2,6 @@ package string
 
 import (
 	"fmt"
-	"regexp"
 
 	"github.com/bearer/bearer/pkg/scanner/ast/query"
 	"github.com/bearer/bearer/pkg/scanner/ast/tree"
@@ -12,8 +11,6 @@ import (
 	"github.com/bearer/bearer/pkg/scanner/detectors/common"
 	"github.com/bearer/bearer/pkg/scanner/detectors/types"
 )
-
-var stringRegex = regexp.MustCompile(`\A\w?['"]{1,3}(.*?)['"]{1,3}\z`)
 
 type stringDetector struct {
 	types.DetectorBase
@@ -32,13 +29,13 @@ func (detector *stringDetector) DetectAt(
 	detectorContext types.Context,
 ) ([]interface{}, error) {
 	switch node.Type() {
-	case "string":
+	case "string_content":
 		return handleTemplateString(node, detectorContext)
-	case "concatenated_string":
-		return common.ConcatenateChildStrings(node, detectorContext)
+	case "concatenated_string", "string":
+		return concatenateChildStrings(node, detectorContext)
 	case "binary_operator":
 		if node.Children()[1].Content() == "+" {
-			return common.ConcatenateChildStrings(node, detectorContext)
+			return concatenateChildStrings(node, detectorContext)
 		}
 	case "boolean_operator":
 		if node.Children()[1].Content() == "or" {
@@ -114,10 +111,12 @@ func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]int
 		return nil
 	})
 
-	text = stringRegex.ReplaceAllString(text, `$1`)
-
 	return []interface{}{common.String{
 		Value:     text,
 		IsLiteral: isLiteral,
 	}}, err
+}
+
+func concatenateChildStrings(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {
+	return common.ConcatenateChildStrings(node, detectorContext, "string_start", "string_end")
 }

@@ -7,7 +7,7 @@ dataflow_sources:
     - 5
     - 11
     - 12
-    - 54
+    - 55
 children:
     - type: package_clause
       id: 1
@@ -194,79 +194,85 @@ children:
                 "
               id: 39
               range: 8:3 - 10:1
-            - type: call_expression
+            - type: expression_statement
               id: 40
               range: 10:2 - 10:25
               dataflow_sources:
-                - 45
+                - 41
               children:
-                - type: selector_expression
+                - type: call_expression
                   id: 41
-                  range: 10:2 - 10:13
-                  queries:
-                    - 1
-                  children:
-                    - type: identifier
-                      id: 42
-                      range: 10:2 - 10:5
-                      content: fmt
-                      alias_of:
-                        - 8
-                    - type: '"."'
-                      id: 43
-                      range: 10:5 - 10:6
-                    - type: field_identifier
-                      id: 44
-                      range: 10:6 - 10:13
-                      content: Println
-                - type: argument_list
-                  id: 45
-                  range: 10:13 - 10:25
+                  range: 10:2 - 10:25
                   dataflow_sources:
                     - 46
-                    - 47
-                    - 51
                   children:
-                    - type: '"("'
-                      id: 46
-                      range: 10:13 - 10:14
                     - type: selector_expression
-                      id: 47
-                      range: 10:14 - 10:24
+                      id: 42
+                      range: 10:2 - 10:13
                       queries:
                         - 1
                       children:
                         - type: identifier
-                          id: 48
-                          range: 10:14 - 10:18
-                          content: user
+                          id: 43
+                          range: 10:2 - 10:5
+                          content: fmt
                           alias_of:
-                            - 20
+                            - 8
                         - type: '"."'
-                          id: 49
-                          range: 10:18 - 10:19
+                          id: 44
+                          range: 10:5 - 10:6
                         - type: field_identifier
-                          id: 50
-                          range: 10:19 - 10:24
-                          content: email
-                    - type: '")"'
-                      id: 51
-                      range: 10:24 - 10:25
+                          id: 45
+                          range: 10:6 - 10:13
+                          content: Println
+                    - type: argument_list
+                      id: 46
+                      range: 10:13 - 10:25
+                      dataflow_sources:
+                        - 47
+                        - 48
+                        - 52
+                      children:
+                        - type: '"("'
+                          id: 47
+                          range: 10:13 - 10:14
+                        - type: selector_expression
+                          id: 48
+                          range: 10:14 - 10:24
+                          queries:
+                            - 1
+                          children:
+                            - type: identifier
+                              id: 49
+                              range: 10:14 - 10:18
+                              content: user
+                              alias_of:
+                                - 20
+                            - type: '"."'
+                              id: 50
+                              range: 10:18 - 10:19
+                            - type: field_identifier
+                              id: 51
+                              range: 10:19 - 10:24
+                              content: email
+                        - type: '")"'
+                          id: 52
+                          range: 10:24 - 10:25
             - type: |-
                 "
                 "
-              id: 52
+              id: 53
               range: 10:25 - 11:1
             - type: '"}"'
-              id: 53
+              id: 54
               range: 11:1 - 11:2
     - type: |-
         "
         "
-      id: 54
+      id: 55
       range: 11:2 - 12:1
 
-- node: 40
+- node: 41
   content: fmt.Println(user.email)
   data:
     properties:
@@ -275,35 +281,8 @@ children:
           object:
             ruleid: object
             matchnode:
-                id: 41
-                typeid: 30
-                contentstart:
-                    byte: 85
-                    line: 10
-                    column: 2
-                contentend:
-                    byte: 96
-                    line: 10
-                    column: 13
-                executingdetectors: []
-            data:
-                properties:
-                    - name: Println
-                      node: null
-                      object: null
-                isvirtual: true
-    isvirtual: true
-- node: 41
-  content: fmt.Println
-  data:
-    properties:
-        - name: fmt
-          node: null
-          object:
-            ruleid: object
-            matchnode:
-                id: 41
-                typeid: 30
+                id: 42
+                typeid: 31
                 contentstart:
                     byte: 85
                     line: 10
@@ -361,7 +340,34 @@ children:
                       object: null
                 isvirtual: false
     isvirtual: false
-- node: 47
+- node: 42
+  content: fmt.Println
+  data:
+    properties:
+        - name: fmt
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 42
+                typeid: 31
+                contentstart:
+                    byte: 85
+                    line: 10
+                    column: 2
+                contentend:
+                    byte: 96
+                    line: 10
+                    column: 13
+                executingdetectors: []
+            data:
+                properties:
+                    - name: Println
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+- node: 48
   content: user.email
   data:
     properties:
@@ -370,8 +376,8 @@ children:
           object:
             ruleid: object
             matchnode:
-                id: 47
-                typeid: 30
+                id: 48
+                typeid: 31
                 contentstart:
                     byte: 97
                     line: 10
