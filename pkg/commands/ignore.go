@@ -366,7 +366,7 @@ $ bearer ignore migrate`,
 
 			if skippedIgnoresToMigrate != "" {
 				cmd.Printf("\nThe following ignores already exist in the ignore file:\n")
-				cmd.Printf(skippedIgnoresToMigrate)
+				cmd.Printf("%s", skippedIgnoresToMigrate)
 				cmd.Printf("\nTo overwrite these entries, use --force\n")
 			}
 

@@ -71,7 +71,7 @@ func NewScanCommand(engine engine.Engine) *cobra.Command {
 			}
 
 			_, loadFileMessage, _ := readConfig(args)
-			log.Debug().Msgf(loadFileMessage)
+			log.Debug().Msgf("%s", loadFileMessage)
 
 			options, err := ScanFlags.ToOptions(args)
 			if err != nil {
@@ -89,11 +89,11 @@ func NewScanCommand(engine engine.Engine) *cobra.Command {
 			err = artifact.Run(cmd.Context(), options, engine)
 			debugprofile.Stop()
 			engine.Close()
-			
+
 			if exitcode, ok := err.(artifact.ReportFailedError); ok {
-        os.Exit(int(exitcode))
+				os.Exit(int(exitcode))
 			}
-			
+
 			return err
 		},
 		SilenceErrors: false,
