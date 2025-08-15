@@ -27,11 +27,7 @@ This includes:
   - Data Protection Impact Assessment (DPIA).
   - Records of Processing Activities (RoPA) input for GDPR compliance reporting.
 
-Bearer CLI currently supports **JavaScript, TypeScript**, **Ruby**, and **Java** stacks, and more will follow.
-
-Want a quick rundown? Here's a minute and a half of what you can expect from Bearer CLI:
-
-<iframe class="w-full aspect-video" src="https://www.youtube.com/embed/WeyPmYyP5Nc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Bearer CLI currently supports **Go**, **Python**, **PHP**, **JavaScript**, **TypeScript**, **Ruby**, and **Java** stacks.
 
 ## Getting started
 
