@@ -319,6 +319,7 @@ children:
                                   id: 67
                                   range: 8:15 - 8:32
                                   dataflow_sources:
+                                    - 69
                                     - 75
                                   children:
                                     - type: attribute
