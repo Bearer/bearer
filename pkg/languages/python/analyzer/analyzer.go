@@ -15,6 +15,16 @@ var reflexiveMethods = []string{
 	"format",
 	"replace",
 	"split",
+	"lower",
+	"upper",
+	"strip",
+	"lstrip", 
+	"rstrip",
+	"capitalize",
+	"title",
+	"swapcase",
+	"casefold",
+	"expandtabs",
 }
 
 type analyzer struct {
