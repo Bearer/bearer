@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "matrix=$(npx --yes json5 ./.github/workflows/version_comparison/repositories.json5)" >> $GITHUB_OUTPUT
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: 1.25.0
       - id: cache_key
