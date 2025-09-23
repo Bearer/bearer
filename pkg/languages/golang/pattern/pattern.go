@@ -160,10 +160,10 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	return !slices.Contains([]string{"source_file"}, node.Type()) && !node.IsMissing()
+	return !slices.Contains([]string{"source_file", "expression_statement"}, node.Type()) && !node.IsMissing()
 }
 
-func (patternLanguage *Pattern) NodeTypes(node *tree.Node) []string {
+func (patternLanguage *Pattern) NodeTypes(node *tree.Node, parentType string) []string {
 	if node.Type() == "identifier" && node.Parent().Type() == "source_file" {
 		return []string{"identifier", "package_identifier"}
 	}

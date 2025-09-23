@@ -19,45 +19,51 @@ var language = xml.GetLanguage()
 
 var query = `
 (element
-	(_
-    	(tag_name) @helper_module
+	(STag
+    	(Name) @helper_module
         (#match? @helper_module "^module$")
-        (attribute
-        	(attribute_name) @helper_organisation
+        (Attribute
+        	(Name) @helper_organisation
             (#match? @helper_organisation "^organisation$")
-			(attribute_value) @param_organisation_name
+			(AttValue) @param_organisation_name
         )
-        (attribute
-        	(attribute_name) @helper_organisation_name
+        (Attribute
+        	(Name) @helper_organisation_name
             (#match? @helper_organisation_name "^name$")
-			(attribute_value) @param_module_name
+			(AttValue) @param_module_name
         )
     )
-    (element
-      	(_
-            (tag_name) @helper_revision
-            (#match? @helper_revision "^revision$")
-            (attribute
-                (attribute_name) @helper_revision_name
-                (#match? @helper_revision_name "^name$")
-                (attribute_value) @param_version
-            )
-      	)
-    )
+	(content
+		(element
+			(STag
+				(Name) @helper_revision
+				(#match? @helper_revision "^revision$")
+				(Attribute
+					(Name) @helper_revision_name
+					(#match? @helper_revision_name "^name$")
+					(AttValue) @param_version
+				)
+			)
+		)
+	)
 )
 `
 
 var queryDependencies = parser.QueryMustCompile(language, fmt.Sprintf(`
 (document
 	(element
-    	(element
-      		(start_tag
-              (tag_name) @helper_dependencies
-              (#match? @helper_dependencies "^dependencies$")
-          	)
+    	(content
+			(element
+				(STag
+					(Name) @helper_dependencies
+					(#match? @helper_dependencies "^dependencies$")
+				)
 
-            %s
-      )
+				(content
+					%s
+				)
+			)
+      	)
     )
 )
 `, query))

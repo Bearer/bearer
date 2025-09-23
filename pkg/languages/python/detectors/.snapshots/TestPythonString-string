@@ -25,7 +25,7 @@ children:
           range: 2:5 - 12:31
           dataflow_sources:
             - 6
-            - 13
+            - 14
           children:
             - type: expression_statement
               id: 6
@@ -54,369 +54,451 @@ children:
                       dataflow_sources:
                         - 11
                         - 12
+                        - 13
                       children:
-                        - type: '"""'
+                        - type: string_start
                           id: 11
                           range: 2:16 - 2:17
-                        - type: '"""'
+                          content: '"'
+                        - type: string_content
                           id: 12
+                          range: 2:17 - 2:28
+                          content: Hello World
+                        - type: string_end
+                          id: 13
                           range: 2:28 - 2:29
+                          content: '"'
             - type: function_definition
-              id: 13
+              id: 14
               range: 4:5 - 12:31
               children:
                 - type: '"def"'
-                  id: 14
+                  id: 15
                   range: 4:5 - 4:8
                 - type: identifier
-                  id: 15
+                  id: 16
                   range: 4:9 - 4:13
                   content: main
                 - type: parameters
-                  id: 16
+                  id: 17
                   range: 4:13 - 4:19
                   children:
                     - type: '"("'
-                      id: 17
+                      id: 18
                       range: 4:13 - 4:14
                     - type: identifier
-                      id: 18
+                      id: 19
                       range: 4:14 - 4:18
                       content: args
                     - type: '")"'
-                      id: 19
+                      id: 20
                       range: 4:18 - 4:19
                 - type: '":"'
-                  id: 20
+                  id: 21
                   range: 4:19 - 4:20
                 - type: block
-                  id: 21
+                  id: 22
                   range: 5:9 - 12:31
                   dataflow_sources:
-                    - 22
-                    - 35
-                    - 42
-                    - 49
-                    - 58
-                    - 65
+                    - 23
+                    - 37
+                    - 45
+                    - 53
+                    - 62
+                    - 70
                   children:
                     - type: expression_statement
-                      id: 22
+                      id: 23
                       range: 5:9 - 5:33
                       dataflow_sources:
-                        - 23
+                        - 24
                       children:
                         - type: assignment
-                          id: 23
+                          id: 24
                           range: 5:9 - 5:33
                           alias_of:
-                            - 26
+                            - 27
                           queries:
                             - 1
                           children:
                             - type: identifier
-                              id: 24
+                              id: 25
                               range: 5:9 - 5:10
                               content: s
                             - type: '"="'
-                              id: 25
+                              id: 26
                               range: 5:11 - 5:12
                             - type: binary_operator
-                              id: 26
+                              id: 27
                               range: 5:13 - 5:33
                               dataflow_sources:
-                                - 27
-                                - 31
+                                - 28
                                 - 32
+                                - 33
                               children:
                                 - type: attribute
-                                  id: 27
+                                  id: 28
                                   range: 5:13 - 5:27
                                   dataflow_sources:
-                                    - 28
+                                    - 29
                                   queries:
                                     - 3
                                   children:
                                     - type: identifier
-                                      id: 28
+                                      id: 29
                                       range: 5:13 - 5:18
                                       content: Greet
                                     - type: '"."'
-                                      id: 29
+                                      id: 30
                                       range: 5:18 - 5:19
                                     - type: identifier
-                                      id: 30
+                                      id: 31
                                       range: 5:19 - 5:27
                                       content: Greeting
                                 - type: '"+"'
-                                  id: 31
+                                  id: 32
                                   range: 5:28 - 5:29
                                 - type: string
-                                  id: 32
+                                  id: 33
                                   range: 5:30 - 5:33
                                   dataflow_sources:
-                                    - 33
                                     - 34
+                                    - 35
+                                    - 36
                                   children:
-                                    - type: '"""'
-                                      id: 33
-                                      range: 5:30 - 5:31
-                                    - type: '"""'
+                                    - type: string_start
                                       id: 34
+                                      range: 5:30 - 5:31
+                                      content: '"'
+                                    - type: string_content
+                                      id: 35
+                                      range: 5:31 - 5:32
+                                      content: '!'
+                                    - type: string_end
+                                      id: 36
                                       range: 5:32 - 5:33
+                                      content: '"'
                     - type: expression_statement
-                      id: 35
+                      id: 37
                       range: 6:9 - 6:18
                       dataflow_sources:
-                        - 36
+                        - 38
                       children:
                         - type: augmented_assignment
-                          id: 36
+                          id: 38
                           range: 6:9 - 6:18
                           dataflow_sources:
-                            - 37
                             - 39
+                            - 41
                           children:
                             - type: identifier
-                              id: 37
+                              id: 39
                               range: 6:9 - 6:10
                               content: s
                               alias_of:
-                                - 23
+                                - 24
                             - type: '"+="'
-                              id: 38
+                              id: 40
                               range: 6:11 - 6:13
                             - type: string
-                              id: 39
+                              id: 41
                               range: 6:14 - 6:18
                               dataflow_sources:
-                                - 40
-                                - 41
+                                - 42
+                                - 43
+                                - 44
                               children:
-                                - type: '"""'
-                                  id: 40
+                                - type: string_start
+                                  id: 42
                                   range: 6:14 - 6:15
-                                - type: '"""'
-                                  id: 41
+                                  content: '"'
+                                - type: string_content
+                                  id: 43
+                                  range: 6:15 - 6:17
+                                  content: '!!'
+                                - type: string_end
+                                  id: 44
                                   range: 6:17 - 6:18
+                                  content: '"'
                     - type: expression_statement
-                      id: 42
+                      id: 45
                       range: 8:9 - 8:20
                       dataflow_sources:
-                        - 43
+                        - 46
                       children:
                         - type: assignment
-                          id: 43
+                          id: 46
                           range: 8:9 - 8:20
                           alias_of:
-                            - 46
+                            - 49
                           queries:
                             - 1
                           children:
                             - type: identifier
-                              id: 44
+                              id: 47
                               range: 8:9 - 8:11
                               content: s2
                             - type: '"="'
-                              id: 45
+                              id: 48
                               range: 8:12 - 8:13
                             - type: string
-                              id: 46
+                              id: 49
                               range: 8:14 - 8:20
                               dataflow_sources:
-                                - 47
-                                - 48
+                                - 50
+                                - 51
+                                - 52
                               children:
-                                - type: '"""'
-                                  id: 47
+                                - type: string_start
+                                  id: 50
                                   range: 8:14 - 8:15
-                                - type: '"""'
-                                  id: 48
+                                  content: '"'
+                                - type: string_content
+                                  id: 51
+                                  range: 8:15 - 8:19
+                                  content: 'hey '
+                                - type: string_end
+                                  id: 52
                                   range: 8:19 - 8:20
+                                  content: '"'
                     - type: expression_statement
-                      id: 49
+                      id: 53
                       range: 9:9 - 9:22
                       dataflow_sources:
-                        - 50
+                        - 54
                       children:
                         - type: augmented_assignment
-                          id: 50
+                          id: 54
                           range: 9:9 - 9:22
                           dataflow_sources:
-                            - 51
-                            - 53
+                            - 55
+                            - 57
                           children:
                             - type: identifier
-                              id: 51
+                              id: 55
                               range: 9:9 - 9:11
                               content: s2
                               alias_of:
-                                - 43
+                                - 46
                             - type: '"+="'
-                              id: 52
+                              id: 56
                               range: 9:12 - 9:14
                             - type: subscript
-                              id: 53
+                              id: 57
                               range: 9:15 - 9:22
                               dataflow_sources:
-                                - 54
+                                - 58
                               queries:
                                 - 4
                               children:
                                 - type: identifier
-                                  id: 54
+                                  id: 58
                                   range: 9:15 - 9:19
                                   content: args
                                   alias_of:
-                                    - 18
+                                    - 19
                                 - type: '"["'
-                                  id: 55
+                                  id: 59
                                   range: 9:19 - 9:20
                                 - type: integer
-                                  id: 56
+                                  id: 60
                                   range: 9:20 - 9:21
                                   content: "0"
                                 - type: '"]"'
-                                  id: 57
+                                  id: 61
                                   range: 9:21 - 9:22
                     - type: expression_statement
-                      id: 58
+                      id: 62
                       range: 10:9 - 10:23
                       dataflow_sources:
-                        - 59
+                        - 63
                       children:
                         - type: augmented_assignment
-                          id: 59
+                          id: 63
                           range: 10:9 - 10:23
                           dataflow_sources:
-                            - 60
-                            - 62
+                            - 64
+                            - 66
                           children:
                             - type: identifier
-                              id: 60
+                              id: 64
                               range: 10:9 - 10:11
                               content: s2
                               alias_of:
-                                - 50
+                                - 54
                             - type: '"+="'
-                              id: 61
+                              id: 65
                               range: 10:12 - 10:14
                             - type: string
-                              id: 62
+                              id: 66
                               range: 10:15 - 10:23
                               dataflow_sources:
-                                - 63
-                                - 64
+                                - 67
+                                - 68
+                                - 69
                               children:
-                                - type: '"""'
-                                  id: 63
+                                - type: string_start
+                                  id: 67
                                   range: 10:15 - 10:16
-                                - type: '"""'
-                                  id: 64
+                                  content: '"'
+                                - type: string_content
+                                  id: 68
+                                  range: 10:16 - 10:22
+                                  content: ' there'
+                                - type: string_end
+                                  id: 69
                                   range: 10:22 - 10:23
+                                  content: '"'
                     - type: expression_statement
-                      id: 65
+                      id: 70
                       range: 12:9 - 12:31
                       dataflow_sources:
-                        - 66
+                        - 71
                       children:
                         - type: assignment
-                          id: 66
+                          id: 71
                           range: 12:9 - 12:31
                           alias_of:
-                            - 69
+                            - 74
                           queries:
                             - 1
                           children:
                             - type: identifier
-                              id: 67
+                              id: 72
                               range: 12:9 - 12:11
                               content: s3
                             - type: '"="'
-                              id: 68
+                              id: 73
                               range: 12:12 - 12:13
                             - type: string
-                              id: 69
+                              id: 74
                               range: 12:14 - 12:31
                               dataflow_sources:
-                                - 70
-                                - 71
                                 - 75
+                                - 76
+                                - 77
+                                - 81
+                                - 82
                               children:
-                                - type: '"""'
-                                  id: 70
+                                - type: string_start
+                                  id: 75
                                   range: 12:14 - 12:16
+                                  content: f"
+                                - type: string_content
+                                  id: 76
+                                  range: 12:16 - 12:21
+                                  content: foo '
                                 - type: interpolation
-                                  id: 71
+                                  id: 77
                                   range: 12:21 - 12:25
                                   alias_of:
-                                    - 72
-                                    - 73
-                                    - 74
+                                    - 78
+                                    - 79
+                                    - 80
                                   children:
                                     - type: '"{"'
-                                      id: 72
+                                      id: 78
                                       range: 12:21 - 12:22
                                     - type: identifier
-                                      id: 73
+                                      id: 79
                                       range: 12:22 - 12:24
                                       content: s2
                                       alias_of:
-                                        - 59
+                                        - 63
                                     - type: '"}"'
-                                      id: 74
+                                      id: 80
                                       range: 12:24 - 12:25
-                                - type: '"""'
-                                  id: 75
+                                - type: string_content
+                                  id: 81
+                                  range: 12:25 - 12:30
+                                  content: ''' bar'
+                                - type: string_end
+                                  id: 82
                                   range: 12:30 - 12:31
+                                  content: '"'
 
 - node: 10
   content: '"Hello World"'
   data:
     value: Hello World
     isliteral: true
-- node: 36
+- node: 12
+  content: Hello World
+  data:
+    value: Hello World
+    isliteral: true
+- node: 38
   content: s += "!!"
   data:
     value: �!!!
     isliteral: false
-- node: 50
+- node: 54
   content: s2 += args[0]
   data:
     value: hey �
     isliteral: false
-- node: 59
+- node: 63
   content: s2 += " there"
   data:
     value: hey � there
     isliteral: false
-- node: 26
+- node: 27
   content: Greet.Greeting + "!"
   data:
     value: �!
     isliteral: false
-- node: 39
+- node: 41
   content: '"!!"'
   data:
     value: '!!'
     isliteral: true
-- node: 46
+- node: 49
   content: '"hey "'
   data:
     value: 'hey '
     isliteral: true
-- node: 62
+- node: 66
   content: '" there"'
   data:
     value: ' there'
     isliteral: true
-- node: 69
+- node: 74
   content: f"foo '{s2}' bar"
   data:
     value: foo 'hey � there' bar
     isliteral: false
-- node: 32
+- node: 33
   content: '"!"'
+  data:
+    value: '!'
+    isliteral: true
+- node: 43
+  content: '!!'
+  data:
+    value: '!!'
+    isliteral: true
+- node: 51
+  content: 'hey '
+  data:
+    value: 'hey '
+    isliteral: true
+- node: 68
+  content: ' there'
+  data:
+    value: ' there'
+    isliteral: true
+- node: 76
+  content: foo '
+  data:
+    value: foo '
+    isliteral: true
+- node: 81
+  content: ''' bar'
+  data:
+    value: ''' bar'
+    isliteral: true
+- node: 35
+  content: '!'
   data:
     value: '!'
     isliteral: true

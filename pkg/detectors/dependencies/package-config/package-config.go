@@ -15,18 +15,18 @@ var language = xml.GetLanguage()
 var queryDependencies = parser.QueryMustCompile(language, `
 (element
 	(_
-    	(tag_name) @helper_package
+    	(Name) @helper_package
         (#match? @helper_package "^package$")
-        (attribute
-        	(attribute_name) @helper_id
-            (#match? @helper_id "^id$")
-			(attribute_value) @param_dependency
-        )
-        (attribute
-        	(attribute_name) @helper_version
-            (#match? @helper_version "^version$")
-			(attribute_value) @param_version
-        )
+		(Attribute
+			(Name) @helper_id
+			(#match? @helper_id "^id$")
+			(AttValue) @param_dependency
+		)
+		(Attribute
+			(Name) @helper_version
+			(#match? @helper_version "^version$")
+			(AttValue) @param_version
+		)
     )
 )
 `)

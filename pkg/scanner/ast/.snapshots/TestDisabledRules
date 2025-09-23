@@ -97,76 +97,92 @@ children:
             - 5
             - 6
             - 7
-        - type: call
+        - type: body_statement
           id: 11
-          range: 6:4 - 6:9
+          range: 6:4 - 7:9
+          dataflow_sources:
+            - 12
+            - 16
           disabledrules:
             - 5
             - 6
             - 7
             - 8
           children:
-            - type: identifier
+            - type: call
               id: 12
-              range: 6:4 - 6:5
-              content: a
-              alias_of:
-                - 8
+              range: 6:4 - 6:9
               disabledrules:
                 - 5
                 - 6
                 - 7
                 - 8
-            - type: '"."'
-              id: 13
-              range: 6:5 - 6:6
-              disabledrules:
-                - 5
-                - 6
-                - 7
-                - 8
-            - type: identifier
-              id: 14
-              range: 6:6 - 6:9
-              content: foo
-              disabledrules:
-                - 5
-                - 6
-                - 7
-                - 8
-        - type: call
-          id: 15
-          range: 7:4 - 7:9
-          disabledrules:
-            - 5
-            - 6
-            - 7
-          children:
-            - type: identifier
+              children:
+                - type: identifier
+                  id: 13
+                  range: 6:4 - 6:5
+                  content: a
+                  alias_of:
+                    - 8
+                  disabledrules:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                - type: '"."'
+                  id: 14
+                  range: 6:5 - 6:6
+                  disabledrules:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                - type: identifier
+                  id: 15
+                  range: 6:6 - 6:9
+                  content: foo
+                  disabledrules:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+            - type: call
               id: 16
-              range: 7:4 - 7:5
-              content: b
+              range: 7:4 - 7:9
               disabledrules:
                 - 5
                 - 6
                 - 7
-            - type: '"."'
-              id: 17
-              range: 7:5 - 7:6
-              disabledrules:
-                - 5
-                - 6
-                - 7
-            - type: identifier
-              id: 18
-              range: 7:6 - 7:9
-              content: bar
-              disabledrules:
-                - 5
-                - 6
-                - 7
+                - 8
+              children:
+                - type: identifier
+                  id: 17
+                  range: 7:4 - 7:5
+                  content: b
+                  disabledrules:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                - type: '"."'
+                  id: 18
+                  range: 7:5 - 7:6
+                  disabledrules:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                - type: identifier
+                  id: 19
+                  range: 7:6 - 7:9
+                  content: bar
+                  disabledrules:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
         - type: '"end"'
-          id: 19
+          id: 20
           range: 8:3 - 8:6
           disabledrules:
             - 5

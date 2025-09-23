@@ -134,7 +134,7 @@ func (*Pattern) FixupMissing(node *tree.Node) string {
 	return ";"
 }
 
-func (*Pattern) NodeTypes(node *tree.Node) []string {
+func (*Pattern) NodeTypes(node *tree.Node, parentType string) []string {
 	if node.Type() == "statement_block" && node.Parent().Type() == "program" {
 		if len(node.NamedChildren()) == 0 {
 			return []string{"object"}

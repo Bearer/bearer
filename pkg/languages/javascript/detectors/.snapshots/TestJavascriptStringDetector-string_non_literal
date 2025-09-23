@@ -53,6 +53,7 @@ children:
             - 11
             - 12
             - 16
+            - 17
           children:
             - type: '"`"'
               id: 11
@@ -75,8 +76,12 @@ children:
                 - type: '"}"'
                   id: 15
                   range: 3:5 - 3:6
-            - type: '"`"'
+            - type: string_fragment
               id: 16
+              range: 3:6 - 3:8
+              content: ' b'
+            - type: '"`"'
+              id: 17
               range: 3:8 - 3:9
 
 - node: 2
@@ -93,6 +98,11 @@ children:
   content: '"a"'
   data:
     value: a
+    isliteral: true
+- node: 16
+  content: ' b'
+  data:
+    value: ' b'
     isliteral: true
 - node: 5
   content: a
