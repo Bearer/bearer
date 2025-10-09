@@ -30,7 +30,7 @@ require (
 	github.com/xeipuuv/gojsonschema v1.2.0
 	github.com/zricethezav/gitleaks/v8 v8.18.1
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56
-	golang.org/x/mod v0.28.0
+	golang.org/x/mod v0.29.0
 	golang.org/x/net v0.46.0
 	golang.org/x/oauth2 v0.31.0
 	sigs.k8s.io/yaml v1.6.0
