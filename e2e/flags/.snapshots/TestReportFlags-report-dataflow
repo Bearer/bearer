@@ -1,4 +1,4 @@
-{"data_types":[{"uuid":"22e24c62-82d3-4b72-827c-e261533331bd","category_uuid":"cef587dd-76db-430b-9e18-7b031e1a193b","category_name":"Contact","category_groups":["PII","Personal Data"],"name":"Email Address","detectors":[{"name":"ruby","locations":[{"filename":"main.rb","full_filename":"e2e/flags/testdata/simple/main.rb","start_line_number":1,"start_column_number":31,"end_column_number":36,"field_name":"email","object_name":"user","subject_name":"User"}]}]}]}
+{"languages":{"Ruby":1},"data_types":[{"uuid":"22e24c62-82d3-4b72-827c-e261533331bd","category_uuid":"cef587dd-76db-430b-9e18-7b031e1a193b","category_name":"Contact","category_groups":["PII","Personal Data"],"name":"Email Address","detectors":[{"name":"ruby","locations":[{"filename":"main.rb","full_filename":"e2e/flags/testdata/simple/main.rb","start_line_number":1,"start_column_number":31,"end_column_number":36,"field_name":"email","object_name":"user","subject_name":"User"}]}]}]}
 
 --
 Analyzing codebase
