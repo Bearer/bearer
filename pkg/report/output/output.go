@@ -35,12 +35,20 @@ func GetData(
 
 	// add languages
 	languages := make(map[string]int32)
+	languageFiles := make(map[string]int32)
+	uniqueFiles := make(map[string]struct{})
 	if report.Inputgocloc != nil {
 		for _, language := range report.Inputgocloc.Languages {
 			languages[language.Name] = language.Code
+			languageFiles[language.Name] = int32(len(language.Files))
+			for _, filename := range language.Files {
+				uniqueFiles[filename] = struct{}{}
+			}
 		}
 	}
 	data.FoundLanguages = languages
+	data.LanguageFiles = languageFiles
+	data.TotalLanguageFiles = int32(len(uniqueFiles))
 
 	// add detectors
 	err := detectors.AddReportData(data, report, config)

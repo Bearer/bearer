@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"sort"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
@@ -45,10 +46,42 @@ func contains(detections []detections.DetectionType, detection detections.Detect
 	return false
 }
 
+func buildLanguageStats(found map[string]int32, files map[string]int32) []types.LanguageStats {
+	keySet := make(map[string]struct{})
+	for name := range found {
+		keySet[name] = struct{}{}
+	}
+	for name := range files {
+		keySet[name] = struct{}{}
+	}
+
+	if len(keySet) == 0 {
+		return nil
+	}
+
+	names := make([]string, 0, len(keySet))
+	for name := range keySet {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+
+	stats := make([]types.LanguageStats, 0, len(names))
+	for _, name := range names {
+		stats = append(stats, types.LanguageStats{
+			Language: name,
+			Lines:    found[name],
+			Files:    files[name],
+		})
+	}
+
+	return stats
+}
+
 func AddReportData(reportData *types.ReportData, config settings.Config, isInternal, hasFiles bool) error {
 	if !hasFiles {
 		reportData.Dataflow = &types.DataFlow{
-			Languages: reportData.FoundLanguages,
+			Languages:  buildLanguageStats(reportData.FoundLanguages, reportData.LanguageFiles),
+			TotalFiles: reportData.TotalLanguageFiles,
 		}
 		return nil
 	}
@@ -239,8 +272,13 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 	}
 
 	reportData.Files = files
+	totalFiles := int32(len(files))
+	if totalFiles == 0 {
+		totalFiles = reportData.TotalLanguageFiles
+	}
+
 	reportData.Dataflow = &types.DataFlow{
-		Languages:          reportData.FoundLanguages,
+		Languages:          buildLanguageStats(reportData.FoundLanguages, reportData.LanguageFiles),
 		Datatypes:          dataTypesHolder.ToDataFlow(),
 		ExpectedDetections: expectedHolder.ToDataFlow(),
 		Risks:              risksHolder.ToDataFlow(),
@@ -248,6 +286,7 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 		Dependencies:       componentsHolder.ToDataFlowForDependencies(),
 		Errors:             errorsHolder.ToDataFlow(),
 		Paths:              pathsHolder.ToDataFlow(),
+		TotalFiles:         totalFiles,
 	}
 
 	return nil
