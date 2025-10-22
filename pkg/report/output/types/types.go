@@ -24,6 +24,7 @@ type ReportData struct {
 }
 
 type DataFlow struct {
+	Languages          map[string]int32             `json:"languages,omitempty" yaml:"languages,omitempty"`
 	Datatypes          []dataflowtypes.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
 	ExpectedDetections []dataflowtypes.RiskDetector `json:"expected_detections,omitempty" yaml:"expected_detections,omitempty"`
 	Risks              []dataflowtypes.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`

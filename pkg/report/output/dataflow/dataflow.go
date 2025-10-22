@@ -47,7 +47,9 @@ func contains(detections []detections.DetectionType, detection detections.Detect
 
 func AddReportData(reportData *types.ReportData, config settings.Config, isInternal, hasFiles bool) error {
 	if !hasFiles {
-		reportData.Dataflow = &types.DataFlow{}
+		reportData.Dataflow = &types.DataFlow{
+			Languages: reportData.FoundLanguages,
+		}
 		return nil
 	}
 
@@ -238,6 +240,7 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 
 	reportData.Files = files
 	reportData.Dataflow = &types.DataFlow{
+		Languages:          reportData.FoundLanguages,
 		Datatypes:          dataTypesHolder.ToDataFlow(),
 		ExpectedDetections: expectedHolder.ToDataFlow(),
 		Risks:              risksHolder.ToDataFlow(),
