@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"math"
 	"sort"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -46,42 +47,10 @@ func contains(detections []detections.DetectionType, detection detections.Detect
 	return false
 }
 
-func buildLanguageStats(found map[string]int32, files map[string]int32) []types.LanguageStats {
-	keySet := make(map[string]struct{})
-	for name := range found {
-		keySet[name] = struct{}{}
-	}
-	for name := range files {
-		keySet[name] = struct{}{}
-	}
-
-	if len(keySet) == 0 {
-		return nil
-	}
-
-	names := make([]string, 0, len(keySet))
-	for name := range keySet {
-		names = append(names, name)
-	}
-	sort.Strings(names)
-
-	stats := make([]types.LanguageStats, 0, len(names))
-	for _, name := range names {
-		stats = append(stats, types.LanguageStats{
-			Language: name,
-			Lines:    found[name],
-			Files:    files[name],
-		})
-	}
-
-	return stats
-}
-
 func AddReportData(reportData *types.ReportData, config settings.Config, isInternal, hasFiles bool) error {
 	if !hasFiles {
 		reportData.Dataflow = &types.DataFlow{
-			Languages:  buildLanguageStats(reportData.FoundLanguages, reportData.LanguageFiles),
-			TotalFiles: reportData.TotalLanguageFiles,
+			Languages: selectLanguageStats(reportData, config.Report.IncludeStats),
 		}
 		return nil
 	}
@@ -272,13 +241,9 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 	}
 
 	reportData.Files = files
-	totalFiles := int32(len(files))
-	if totalFiles == 0 {
-		totalFiles = reportData.TotalLanguageFiles
-	}
 
 	reportData.Dataflow = &types.DataFlow{
-		Languages:          buildLanguageStats(reportData.FoundLanguages, reportData.LanguageFiles),
+		Languages:          selectLanguageStats(reportData, config.Report.IncludeStats),
 		Datatypes:          dataTypesHolder.ToDataFlow(),
 		ExpectedDetections: expectedHolder.ToDataFlow(),
 		Risks:              risksHolder.ToDataFlow(),
@@ -286,8 +251,57 @@ func AddReportData(reportData *types.ReportData, config settings.Config, isInter
 		Dependencies:       componentsHolder.ToDataFlowForDependencies(),
 		Errors:             errorsHolder.ToDataFlow(),
 		Paths:              pathsHolder.ToDataFlow(),
-		TotalFiles:         totalFiles,
 	}
 
 	return nil
+}
+
+func selectLanguageStats(reportData *types.ReportData, includeStats bool) []types.LanguageStats {
+	if !includeStats {
+		return nil
+	}
+
+	if len(reportData.LanguageStats) > 0 {
+		return calculateLanguagePercentages(reportData.LanguageStats)
+	}
+
+	if len(reportData.FoundLanguages) == 0 {
+		return nil
+	}
+
+	names := make([]string, 0, len(reportData.FoundLanguages))
+	for name := range reportData.FoundLanguages {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+
+	stats := make([]types.LanguageStats, 0, len(names))
+	for _, name := range names {
+		stats = append(stats, types.LanguageStats{
+			Language: name,
+			Lines:    reportData.FoundLanguages[name],
+			Files:    reportData.LanguageFiles[name],
+		})
+	}
+
+	return stats
+}
+
+func calculateLanguagePercentages(stats []types.LanguageStats) []types.LanguageStats {
+	totalBytes := int64(0)
+	for _, entry := range stats {
+		totalBytes += entry.Bytes
+	}
+
+	if totalBytes == 0 {
+		return stats
+	}
+
+	result := make([]types.LanguageStats, len(stats))
+	for index, entry := range stats {
+		entry.Percent = math.Round(float64(entry.Bytes)/float64(totalBytes)*10000) / 100
+		result[index] = entry
+	}
+
+	return result
 }

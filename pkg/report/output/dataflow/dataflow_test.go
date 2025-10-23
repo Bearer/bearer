@@ -7,7 +7,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/output/dataflow"
-	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
+	"github.com/bearer/bearer/pkg/report/output/types"
 )
 
 func TestAddReportDataIncludesLanguageStats(t *testing.T) {
@@ -27,21 +27,62 @@ func TestAddReportDataIncludesLanguageStats(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
-			reportData := &outputtypes.ReportData{
-				FoundLanguages:     map[string]int32{"Ruby": 123},
-				LanguageFiles:      map[string]int32{"Ruby": 7},
-				TotalLanguageFiles: 7,
+			reportData := &types.ReportData{
+				FoundLanguages: map[string]int32{"Ruby": 123},
+				LanguageFiles:  map[string]int32{"Ruby": 2},
 			}
 
-			err := dataflow.AddReportData(reportData, settings.Config{}, false, testCase.hasFiles)
+			config := settings.Config{}
+			config.Report.IncludeStats = true
+
+			err := dataflow.AddReportData(reportData, config, false, testCase.hasFiles)
 			require.NoError(t, err)
 
 			require.NotNil(t, reportData.Dataflow)
 			require.Len(t, reportData.Dataflow.Languages, 1)
 			require.Equal(t, "Ruby", reportData.Dataflow.Languages[0].Language)
 			require.Equal(t, int32(123), reportData.Dataflow.Languages[0].Lines)
-			require.Equal(t, int32(7), reportData.Dataflow.Languages[0].Files)
-			require.Equal(t, int32(7), reportData.Dataflow.TotalFiles)
+			require.Equal(t, int32(2), reportData.Dataflow.Languages[0].Files)
 		})
 	}
+}
+
+func TestAddReportDataWithPrecomputedLanguageStats(t *testing.T) {
+	reportData := &types.ReportData{
+		LanguageStats: []types.LanguageStats{
+			{
+				Language: "Ruby",
+				Lines:    42,
+				Files:    3,
+				Bytes:    420,
+			},
+		},
+	}
+
+	config := settings.Config{}
+	config.Report.IncludeStats = true
+
+	err := dataflow.AddReportData(reportData, config, false, true)
+	require.NoError(t, err)
+
+	require.NotNil(t, reportData.Dataflow)
+	require.Len(t, reportData.Dataflow.Languages, 1)
+	require.Equal(t, "Ruby", reportData.Dataflow.Languages[0].Language)
+	require.Equal(t, int32(42), reportData.Dataflow.Languages[0].Lines)
+	require.Equal(t, int32(3), reportData.Dataflow.Languages[0].Files)
+	require.Equal(t, int64(420), reportData.Dataflow.Languages[0].Bytes)
+	require.Equal(t, 100.0, reportData.Dataflow.Languages[0].Percent)
+}
+
+func TestAddReportDataWithoutIncludeStats(t *testing.T) {
+	reportData := &types.ReportData{
+		FoundLanguages: map[string]int32{"Ruby": 123},
+		LanguageFiles:  map[string]int32{"Ruby": 2},
+	}
+
+	err := dataflow.AddReportData(reportData, settings.Config{}, false, true)
+	require.NoError(t, err)
+
+	require.NotNil(t, reportData.Dataflow)
+	require.Nil(t, reportData.Dataflow.Languages)
 }

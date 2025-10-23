@@ -3,6 +3,7 @@ log-level: info
 report:
     fail-on-severity: critical,high,medium,low
     format: ""
+    include-stats: false
     no-color: false
     no-extract: false
     no-rule-meta: false

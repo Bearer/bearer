@@ -13,7 +13,7 @@ type ReportData struct {
 	Files                     []string
 	FoundLanguages            map[string]int32 // language => loc e.g. { "Ruby": 6742, "JavaScript": 122 }
 	LanguageFiles             map[string]int32 // language => file count
-	TotalLanguageFiles        int32
+	LanguageStats             []LanguageStats  // Pre-computed language statistics
 	Detectors                 []any
 	Dataflow                  *DataFlow
 	RawFindings               []securitytypes.RawFinding `json:"findings"`
@@ -34,13 +34,14 @@ type DataFlow struct {
 	Dependencies       []dataflowtypes.Dependency   `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
 	Errors             []dataflowtypes.Error        `json:"errors,omitempty" yaml:"errors,omitempty"`
 	Paths              []dataflowtypes.Path         `json:"paths,omitempty" yaml:"paths,omitempty"`
-	TotalFiles         int32                        `json:"total_files" yaml:"total_files"`
 }
 
 type LanguageStats struct {
-	Language string `json:"language" yaml:"language"`
-	Lines    int32  `json:"lines" yaml:"lines"`
-	Files    int32  `json:"files" yaml:"files"`
+	Language string  `json:"language" yaml:"language"`
+	Lines    int32   `json:"lines" yaml:"lines"`
+	Files    int32   `json:"files" yaml:"files"`
+	Bytes    int64   `json:"bytes,omitempty" yaml:"bytes,omitempty"`
+	Percent  float64 `json:"percentage,omitempty" yaml:"percentage,omitempty"`
 }
 
 type GenericFormatter interface {

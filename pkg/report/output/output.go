@@ -3,8 +3,15 @@ package output
 import (
 	"errors"
 	"fmt"
+	"io"
+	"math"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
 	"time"
 
+	"github.com/go-enry/go-enry/v2"
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
 
@@ -36,19 +43,18 @@ func GetData(
 	// add languages
 	languages := make(map[string]int32)
 	languageFiles := make(map[string]int32)
-	uniqueFiles := make(map[string]struct{})
 	if report.Inputgocloc != nil {
 		for _, language := range report.Inputgocloc.Languages {
 			languages[language.Name] = language.Code
 			languageFiles[language.Name] = int32(len(language.Files))
-			for _, filename := range language.Files {
-				uniqueFiles[filename] = struct{}{}
-			}
 		}
 	}
 	data.FoundLanguages = languages
 	data.LanguageFiles = languageFiles
-	data.TotalLanguageFiles = int32(len(uniqueFiles))
+
+	if config.Report.IncludeStats {
+		data.LanguageStats = computeLanguageStats(config.Scan.Target, report.Inputgocloc)
+	}
 
 	// add detectors
 	err := detectors.AddReportData(data, report, config)
@@ -98,6 +104,156 @@ func GetDataflow(
 		detection.(map[string]interface{})["id"] = uuid.NewString()
 	}
 	return dataflow.AddReportData(reportData, config, isInternal, report.HasFiles)
+}
+
+const languageSampleLimit = 16 * 1024
+
+func computeLanguageStats(root string, result *gocloc.Result) []types.LanguageStats {
+	if result == nil || len(result.Files) == 0 {
+		return nil
+	}
+
+	statsByLanguage := make(map[string]types.LanguageStats)
+
+	absRoot := root
+	if absRoot != "" {
+		if abs, err := filepath.Abs(root); err == nil {
+			absRoot = abs
+		}
+	}
+
+	var totalBytes int64
+
+	for path, file := range result.Files {
+		fullPath := path
+		if !filepath.IsAbs(fullPath) {
+			if absRoot != "" {
+				fullPath = filepath.Join(absRoot, path)
+			} else if abs, err := filepath.Abs(path); err == nil {
+				fullPath = abs
+			}
+		}
+
+		relPath := path
+		if absRoot != "" {
+			if rel, err := filepath.Rel(absRoot, fullPath); err == nil {
+				relPath = rel
+			}
+		}
+		relPath = filepath.ToSlash(relPath)
+
+		if shouldSkipLanguagePath(relPath) {
+			continue
+		}
+
+		fileInfo, err := os.Stat(fullPath)
+		if err != nil {
+			continue
+		}
+
+		language := detectLanguage(fullPath, file.Lang)
+		if language == "" {
+			continue
+		}
+
+		languageType := enry.GetLanguageType(language)
+		if languageType != enry.Programming && languageType != enry.Markup {
+			continue
+		}
+
+		aggregate := statsByLanguage[language]
+		aggregate.Language = language
+		aggregate.Lines += file.Code
+		aggregate.Files++
+		aggregate.Bytes += fileInfo.Size()
+		statsByLanguage[language] = aggregate
+		totalBytes += fileInfo.Size()
+	}
+
+	if len(statsByLanguage) == 0 {
+		return nil
+	}
+
+	languages := make([]string, 0, len(statsByLanguage))
+	for language := range statsByLanguage {
+		languages = append(languages, language)
+	}
+	sort.Strings(languages)
+
+	stats := make([]types.LanguageStats, 0, len(languages))
+	for _, language := range languages {
+		entry := statsByLanguage[language]
+		if totalBytes > 0 {
+			entry.Percent = math.Round(float64(entry.Bytes)/float64(totalBytes)*10000) / 100
+		}
+		stats = append(stats, entry)
+	}
+
+	sort.Slice(stats, func(i, j int) bool {
+		if stats[i].Bytes == stats[j].Bytes {
+			if stats[i].Lines == stats[j].Lines {
+				return stats[i].Language < stats[j].Language
+			}
+			return stats[i].Lines > stats[j].Lines
+		}
+		return stats[i].Bytes > stats[j].Bytes
+	})
+
+	return stats
+}
+
+func shouldSkipLanguagePath(path string) bool {
+	normalized := filepath.ToSlash(path)
+	if normalized == ".git" || strings.HasPrefix(normalized, ".git/") {
+		return true
+	}
+	return enry.IsVendor(normalized) ||
+		enry.IsDotFile(normalized) ||
+		enry.IsDocumentation(normalized) ||
+		enry.IsGenerated(normalized, nil)
+}
+
+func readSample(path string, limit int) ([]byte, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		_ = file.Close()
+	}()
+
+	buffer := make([]byte, limit)
+	n, err := file.Read(buffer)
+	if err != nil && err != io.EOF {
+		return nil, err
+	}
+
+	return buffer[:n], nil
+}
+
+func detectLanguage(path string, fallback string) string {
+	sample, err := readSample(path, languageSampleLimit)
+	if err != nil {
+		sample = nil
+	}
+
+	language := enry.GetLanguage(filepath.Base(path), sample)
+	if language == "" || language == enry.OtherLanguage {
+		language = fallback
+	}
+	if language == "" {
+		return ""
+	}
+
+	if canonical, ok := enry.GetLanguageByAlias(language); ok {
+		language = canonical
+	}
+
+	if group := enry.GetLanguageGroup(language); group != "" {
+		language = group
+	}
+
+	return language
 }
 
 func FormatOutput(

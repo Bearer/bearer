@@ -23,7 +23,7 @@ func newScanTest(name string, arguments []string) testhelper.TestCase {
 
 func TestReportFlags(t *testing.T) {
 	tests := []testhelper.TestCase{
-		newScanTest("report-dataflow", []string{"--report=dataflow"}),
+		newScanTest("report-dataflow", []string{"--report=dataflow", "--include-stats"}),
 	}
 
 	testhelper.RunTests(t, tests)

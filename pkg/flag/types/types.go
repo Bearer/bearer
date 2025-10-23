@@ -93,6 +93,7 @@ type ReportOptions struct {
 	ExcludeFingerprint map[string]bool `mapstructure:"exclude_fingerprints" json:"exclude_fingerprints" yaml:"exclude_fingerprints"`
 	NoExtract          bool            `mapstructure:"no-extract" json:"no-extract" yaml:"no-extract"`
 	NoRuleMeta         bool            `mapstructure:"no-rule-meta" json:"no-rule-meta" yaml:"no-rule-meta"`
+	IncludeStats       bool            `mapstructure:"include-stats" json:"include-stats" yaml:"include-stats"`
 }
 
 type RepositoryOptions struct {

@@ -12,6 +12,7 @@ Examples:
 Report Flags
       --fail-on-severity string   Specify which severities cause the report to fail. Works in conjunction with --exit-code. (default "critical,high,medium,low")
   -f, --format string             Specify report format (json, yaml, sarif, gitlab-sast, rdjson, html)
+      --include-stats             Include language usage statistics in reports that support them.
       --no-extract                Do not include code extract in report.
       --no-rule-meta              Do not include rule description content.
       --output string             Specify the output path for the report.
