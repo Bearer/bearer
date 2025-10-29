@@ -95,6 +95,12 @@ var (
 		Value:      false,
 		Usage:      "Do not include rule description content.",
 	})
+	IncludeStatsFlag = ReportFlagGroup.add(flagtypes.Flag{
+		Name:       "include-stats",
+		ConfigName: "report.include-stats",
+		Value:      false,
+		Usage:      "Include language usage statistics in reports that support them.",
+	})
 )
 
 type ReportOptions struct {
@@ -169,6 +175,7 @@ func (reportFlagGroup) SetOptions(options *flagtypes.Options, args []string) err
 		ExcludeFingerprint: excludeFingerprintsMapping,
 		NoExtract:          getBool(NoExtractFlag),
 		NoRuleMeta:         getBool(NoRuleMetaFlag),
+		IncludeStats:       getBool(IncludeStatsFlag),
 	}
 
 	return nil
