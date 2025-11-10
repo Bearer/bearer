@@ -16,7 +16,7 @@ require (
 	github.com/hhatto/gocloc v0.7.0
 	github.com/onsi/ginkgo/v2 v2.26.0
 	github.com/onsi/gomega v1.38.2
-	github.com/open-policy-agent/opa v1.9.0
+	github.com/open-policy-agent/opa v1.10.1
 	github.com/rodaine/table v1.3.0
 	github.com/rs/zerolog v1.34.0
 	github.com/russross/blackfriday v1.6.0
@@ -29,7 +29,7 @@ require (
 	github.com/weppos/publicsuffix-go v0.50.0
 	github.com/xeipuuv/gojsonschema v1.2.0
 	github.com/zricethezav/gitleaks/v8 v8.18.1
-	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56
+	golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f
 	golang.org/x/mod v0.29.0
 	golang.org/x/net v0.46.0
 	golang.org/x/oauth2 v0.32.0
