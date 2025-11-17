@@ -31,7 +31,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "gitly": "^2.4.1",
     "htmlencode": "^0.0.4",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.5",
     "markdown-it-emoji": "^2.0.2",
