@@ -3,7 +3,7 @@ module github.com/bearer/bearer
 go 1.25.0
 
 require (
-	github.com/bits-and-blooms/bitset v1.24.1
+	github.com/bits-and-blooms/bitset v1.24.3
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/buildkite/terminal v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.1
@@ -14,9 +14,9 @@ require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.6.0
 	github.com/hhatto/gocloc v0.7.0
-	github.com/onsi/ginkgo/v2 v2.26.0
+	github.com/onsi/ginkgo/v2 v2.27.2
 	github.com/onsi/gomega v1.38.2
-	github.com/open-policy-agent/opa v1.9.0
+	github.com/open-policy-agent/opa v1.10.1
 	github.com/rodaine/table v1.3.0
 	github.com/rs/zerolog v1.34.0
 	github.com/russross/blackfriday v1.6.0
@@ -32,7 +32,7 @@ require (
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56
 	golang.org/x/mod v0.29.0
 	golang.org/x/net v0.46.0
-	golang.org/x/oauth2 v0.32.0
+	golang.org/x/oauth2 v0.33.0
 	sigs.k8s.io/yaml v1.6.0
 )
 
@@ -112,7 +112,6 @@ require (
 	go.opentelemetry.io/otel/metric v1.38.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.38.0 // indirect
 	go.opentelemetry.io/otel/trace v1.38.0 // indirect
-	go.uber.org/automaxprocs v1.6.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.43.0 // indirect
