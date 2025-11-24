@@ -96,8 +96,9 @@ brew update && brew upgrade bearer/tap/bearer
   <summary>Debian/Ubuntu</summary>
 
 ```shell
+sudo apt-get update && sudo apt-get install ca-certificates -y && sudo update-ca-certificates
 sudo apt-get install apt-transport-https
-echo "deb [trusted=yes] https://apt.fury.io/bearer/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
+echo -e "Types: deb\nURIs: https://apt.fury.io/bearer/\nSuites: /\nTrusted: yes" | sudo tee /etc/apt/sources.list.d/fury.sources
 sudo apt-get update
 sudo apt-get install bearer
 ```
