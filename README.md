@@ -30,10 +30,14 @@
 
 ## Language Support
 
-**Bearer CLI**: Go • Java • JavaScript • TypeScript • PHP • Python • Ruby <br/>
-**Bearer Pro by Cycode**: Java _(Cross-file support)_ • C# • Kotlin • Elixir • VB.Net _+ everything in Bearer OSS_
+**Bearer CLI (Open Source)**: Go • Java • JavaScript • TypeScript • PHP • Python • Ruby
 
-<a href="https://docs.bearer.com/reference/supported-languages/">Learn more about language suppport</a>
+**Bearer Pro by Cycode**: _All Bearer CLI languages plus:_
+- **Advanced Cross-file Analysis**: Java • Python • C# _(alpha)_
+- **Additional Languages**: C# • Kotlin • Elixir • VB.Net
+
+
+<a href="https://docs.bearer.com/reference/supported-languages/">Learn more about language support</a>
 
 ## Developer friendly static code analysis for security and privacy
 
