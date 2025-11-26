@@ -2,23 +2,6 @@
 title: Supported Languages
 layout: layouts/doc.njk
 supportChart:
-  ruby:
-    name: Ruby
-    frameworks:
-      - Ruby on Rails
-    rules: true
-    searchName: lang-ruby
-    searchTerm: ruby_
-    support: Bearer CLI + Pro
-  javascript:
-    name: JavaScript / TypeScript
-    frameworks:
-      - Express
-      - React
-    rules: true
-    searchName: lang-jsts
-    searchTerm: javascript_
-    support: Bearer CLI + Pro
   java:
     name: Java
     frameworks:
@@ -27,23 +10,9 @@ supportChart:
     rules: true
     searchName: lang-java
     searchTerm: java_
-    support: Bearer CLI + Pro
-  php:
-    name: PHP
-    frameworks:
-      - Symfony
-    rules: true
-    searchName: lang-php
-    searchTerm: php_
-    support: Bearer CLI + Pro
-  go:
-    name: Go
-    frameworks:
-      - Gorilla
-    rules: true
-    searchName: lang-go
-    searchTerm: go_
-    support: Bearer CLI + Pro
+    oss: true
+    pro: true
+    crossfile: true
   python:
     name: Python
     frameworks:
@@ -51,7 +20,9 @@ supportChart:
     rules: true
     searchName: lang-python
     searchTerm: python_
-    support: Bearer CLI + Pro
+    oss: true
+    pro: true
+    crossfile: true
   csharp:
     name: C#
     frameworks:
@@ -59,7 +30,50 @@ supportChart:
     rules: true
     searchName: lang-csharp
     searchTerm: csharp_
-    support: Bearer Pro
+    oss: false
+    pro: true
+    crossfile: alpha
+  ruby:
+    name: Ruby
+    frameworks:
+      - Ruby on Rails
+    rules: true
+    searchName: lang-ruby
+    searchTerm: ruby_
+    oss: true
+    pro: true
+    crossfile: false
+  javascript:
+    name: JavaScript / TypeScript
+    frameworks:
+      - Express
+      - React
+    rules: true
+    searchName: lang-jsts
+    searchTerm: javascript_
+    oss: true
+    pro: true
+    crossfile: false
+  php:
+    name: PHP
+    frameworks:
+      - Symfony
+    rules: true
+    searchName: lang-php
+    searchTerm: php_
+    oss: true
+    pro: true
+    crossfile: false
+  go:
+    name: Go
+    frameworks:
+      - Gorilla
+    rules: true
+    searchName: lang-go
+    searchTerm: go_
+    oss: true
+    pro: true
+    crossfile: false
   kotlin:
     name: Kotlin
     frameworks:
@@ -69,7 +83,9 @@ supportChart:
     rules: true
     searchName: lang-kotlin
     searchTerm: kotlin_
-    support: Bearer Pro
+    oss: false
+    pro: true
+    crossfile: false
   elixir:
     name: Elixir
     frameworks:
@@ -77,7 +93,9 @@ supportChart:
     rules: true
     searchName: lang-elixir
     searchTerm: elixir_
-    support: Bearer Pro
+    oss: false
+    pro: true
+    crossfile: false
   vbnet:
     name: VB.Net
     frameworks:
@@ -85,7 +103,9 @@ supportChart:
     rules: true
     searchName: lang-vbnet
     searchTerm: vbnet_
-    support: Bearer Pro
+    oss: false
+    pro: true
+    crossfile: false
 
 ---
 
@@ -100,17 +120,18 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
 <table>
   <thead>
     <tr>
-      <th>Languages</th>
+      <th>Language</th>
       <th>Frameworks</th>
-      <th># rules</th>
-      <th>Support</th>
+      <th>Bearer OSS</th>
+      <th>Bearer Pro</th>
+      <th>Cross-file Analysis<br/></th>
     </tr>
   </thead>
   <tbody>
     {% for language, data in supportChart %}
       <tr>
         <td>
-          {{data.name}}
+          <strong>{{data.name}}</strong>
         </td>
         <td>
           {% if data.frameworks | length > 0 %}
@@ -119,29 +140,44 @@ When you scan a codebase, Bearer will automatically select the appropriate langu
             -
           {% endif %}
         </td>
-        <td>
-          {% if data.support == "Bearer Pro" %}
-            <a class="italic" target="_window" href="https://cycode.com/sast-static-application-security-testing/">Learn more</a>
+        <td style="text-align: center;">
+          {% if data.oss %}
+            <span style="color: green; font-size: 1.2em;">✓</span>
           {% else %}
-            {% if data.rules %} 
-              <a href="/reference/rules/?{{data.searchName}}={{data.searchTerm}}">{{rules.counts.languages[language].count}}</a>
-            {% else %}
-              -
-            {% endif %}
+            <span style="color: #ccc;">—</span>
           {% endif %}
         </td>
-        <td>
-          {{ data.support }}<br/>
-          {% if data.comment_link %}
-            <span class="italic text-xs"><a href="{{data.comment_link}}">{{ data.comment }}</a></span>
+        <td style="text-align: center;">
+          {% if data.pro %}
+            <span style="color: green; font-size: 1.2em;">✓</span>
           {% else %}
-            <span class="italic text-xs">{{ data.comment }}</span>
+            <span style="color: #ccc;">—</span>
+          {% endif %}
+        </td>
+        <td style="text-align: center;">
+          {% if data.crossfile == true %}
+            <span style="color: green; font-size: 1.2em;">✓</span>
+          {% elif data.crossfile == "roadmap" %}
+            <span class="italic text-xs" style="color: #666;">Roadmap</span>
+          {% elif data.crossfile == "alpha" %}
+            <span class="italic text-xs" style="color: #ff8c00;">Alpha</span>
+          {% else %}
+            <span style="color: #ccc;">—</span>
           {% endif %}
         </td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
+
+{% renderTemplate "liquid,md" %}
+
+**Legend:**
+- **Bearer OSS**: Available in the open-source CLI version
+- **Bearer Pro**: Available in the commercial Pro version
+- **Cross-file Analysis**: Advanced interprocedural and inter-file analysis capabilities (Pro only)
+
+{% endrenderTemplate %}
 
 {% renderTemplate "liquid,md" %}
 
@@ -157,11 +193,20 @@ You can access the complete list of security rules and associated vulnerabilitie
 ### Framework support
 Bearer CLI supports the majority of frameworks, requiring only core language support to perform its analysis. However, certain frameworks may require specialized rules: these are mentioned in the table above in the "framework" section. If you observe any gaps in support for a particular framework, please [submit an issue](https://github.com/Bearer/bearer/issues) with relevant details and examples.
 
-## Do you support interprocedural and inter-file analysis?
+## What is Cross-file Analysis?
 
-Yes, Bearer Pro supports interprocedural and inter-file analysis, currently with full capabilities for Java and actively being extended to other major supported languages. This advanced analysis allows Bearer Pro to trace data flow and control flow across function and file boundaries within an entire codebase. This is crucial for accurately identifying complex vulnerabilities that depend on the interaction of different code components, significantly reducing false positives compared to analyses limited to individual functions or files.
+Cross-file analysis, also known as interprocedural and inter-file analysis, is an advanced static analysis technique that traces data flow and control flow across function and file boundaries within an entire codebase. Unlike traditional SAST tools that analyze code at the function or single-file level, cross-file analysis provides a holistic view of how data moves through your application.
 
-Bearer Pro's interprocedural and inter-file analysis for Java has demonstrated strong results on the OWASP Java Benchmark, achieving a score of 76% with a reported false positive rate of less than 2%.
+### How Cross-file Analysis Works
+
+Modern applications are built with modular architectures where code is distributed across multiple files, modules, and components. A vulnerability might originate in one file, flow through several functions across different modules, and manifest as a security issue in a completely different part of the codebase.
+
+Cross-file analysis follows the complete data flow path by:
+
+1. **Tracing data origins**: Identifying where sensitive data enters your application (user input, database queries, API calls, etc.)
+2. **Following transformations**: Tracking how data is processed, transformed, and passed between functions and files
+3. **Detecting sinks**: Identifying where data ends up in potentially dangerous operations (database queries, file operations, external API calls, etc.)
+4. **Analyzing control flow**: Understanding the execution paths and conditions that affect data flow
 
 ## How do we evaluate language support?
 
