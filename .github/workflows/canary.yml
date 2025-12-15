@@ -46,7 +46,7 @@ jobs:
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - id: cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: dist/linux
           key: linux-${{ env.sha_short }}-canary
@@ -91,7 +91,7 @@ jobs:
         run: |
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - id: cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: dist/darwin
           key: darwin-${{ env.sha_short }}-canary
@@ -125,11 +125,11 @@ jobs:
       - shell: bash
         run: |
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: dist/linux
           key: linux-${{ env.sha_short }}-canary
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: dist/darwin
           key: darwin-${{ env.sha_short }}-canary
