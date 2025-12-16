@@ -351,7 +351,8 @@ func (filter *Regex) Evaluate(
 	patternVariables variableshape.Values,
 ) (*Result, error) {
 	node := patternVariables.Node(filter.Variable)
-	result := filter.Regex.MatchString(node.Content())
+	content := node.Content()
+	result := filter.Regex.MatchString(content)
 
 	if log.Trace().Enabled() {
 		log.Trace().Msgf(
@@ -359,11 +360,11 @@ func (filter *Regex) Evaluate(
 			result,
 			filter.Regex.String(),
 			node.Debug(),
-			node.Content(),
+			content,
 		)
 	}
 
-	return boolResult(patternVariables, result, ""), nil
+	return boolResult(patternVariables, result, content), nil
 }
 
 type StringLengthLessThan struct {

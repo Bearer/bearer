@@ -212,7 +212,12 @@ func (analyzer *analyzer) analyzeParameters(node *sitter.Node, visitChildren fun
 			analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
 
 			analyzer.lookupVariable(parameter.ChildByFieldName("type"))
-			analyzer.lookupVariable(parameter.ChildByFieldName("value"))
+
+			// Create dataflow from default value to parameter name
+			if defaultValue := parameter.ChildByFieldName("value"); defaultValue != nil {
+				analyzer.builder.Alias(name, defaultValue)
+				analyzer.lookupVariable(defaultValue)
+			}
 		case "identifier":
 			analyzer.scope.Declare(analyzer.builder.ContentFor(parameter), parameter)
 		}
