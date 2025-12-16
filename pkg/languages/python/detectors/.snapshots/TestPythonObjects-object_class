@@ -73,6 +73,8 @@ children:
                           id: 16
                           range: 2:30 - 2:35
                           content: email
+                          alias_of:
+                            - 18
                         - type: '"="'
                           id: 17
                           range: 2:35 - 2:36
