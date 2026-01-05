@@ -70,3 +70,11 @@ func TestExpectedRule(t *testing.T) {
 
 	testhelper.RunTestsWithSnapshotSubdirectory(t, testCases, ".snapshots")
 }
+
+func TestRustUnsafe(t *testing.T) {
+	runRulesTest("rust_unsafe", "rust_unsafe_test", t)
+}
+
+func TestRustHardcodedSecret(t *testing.T) {
+	runRulesTest("rust_hardcoded_secret", "rust_hardcoded_secret_test", t)
+}

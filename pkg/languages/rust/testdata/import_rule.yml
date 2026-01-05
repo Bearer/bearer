@@ -1,0 +1,16 @@
+languages:
+  - rust
+patterns:
+  - pattern: |
+      $<CLIENT>::new($<_>)
+    filters:
+      - variable: CLIENT
+        regex: \AHttpClient\z
+severity: low
+metadata:
+  description: Test use/import detection
+  remediation_message: Test use/import detection
+  cwe_id:
+    - 42
+  id: import_test
+

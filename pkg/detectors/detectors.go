@@ -30,6 +30,7 @@ import (
 	"github.com/bearer/bearer/pkg/detectors/python"
 	"github.com/bearer/bearer/pkg/detectors/rails"
 	"github.com/bearer/bearer/pkg/detectors/ruby"
+	"github.com/bearer/bearer/pkg/detectors/rust"
 	"github.com/bearer/bearer/pkg/detectors/simple"
 	"github.com/bearer/bearer/pkg/detectors/spring"
 	"github.com/bearer/bearer/pkg/detectors/sql"
@@ -113,6 +114,8 @@ func Registrations(scanners []string) []InitializedDetector {
 
 				{reportdetectors.DetectorSymfony, symfony.New()},
 				{reportdetectors.DetectorPHP, php.New(&nodeid.UUIDGenerator{})},
+
+				{reportdetectors.DetectorRust, rust.New(&nodeid.UUIDGenerator{})},
 
 				{reportdetectors.DetectorYamlConfig, yamlconfig.New()},
 

@@ -1,0 +1,30 @@
+low:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: import_test
+        title: Test use/import detection
+        description: Test use/import detection
+        documentation_url: ""
+      line_number: 16
+      full_filename: import.rs
+      filename: import.rs
+      source:
+        location:
+            start: 16
+            end: 16
+            column:
+                start: 18
+                end: 56
+      sink:
+        location:
+            start: 16
+            end: 16
+            column:
+                start: 18
+                end: 56
+        content: ""
+      parent_line_number: 16
+      fingerprint: 47229a514f2b654b9b0c9141d28e298f_0
+      old_fingerprint: 47229a514f2b654b9b0c9141d28e298f_0
+

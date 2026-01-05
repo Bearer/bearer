@@ -1,0 +1,89 @@
+([]*detections.Detection) (len=3) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "rust",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=6) "lib.rs",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "Rust",
+      LanguageType: (string) (len=11) "programming",
+      StartLineNumber: (*int)(4),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(4),
+      EndColumnNumber: (*int)(17),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Customer",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) (len=6) "String",
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>,
+      Source: (*schema.Source)(<nil>),
+      NormalizedObjectName: (string) (len=8) "customer",
+      NormalizedFieldName: (string) (len=4) "name"
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "rust",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=6) "lib.rs",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "Rust",
+      LanguageType: (string) (len=11) "programming",
+      StartLineNumber: (*int)(5),
+      StartColumnNumber: (*int)(13),
+      EndLineNumber: (*int)(5),
+      EndColumnNumber: (*int)(18),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Customer",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=5) "email",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) (len=6) "String",
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>,
+      Source: (*schema.Source)(<nil>),
+      NormalizedObjectName: (string) (len=8) "customer",
+      NormalizedFieldName: (string) (len=5) "email"
+    }
+  }),
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "rust",
+    DetectorLanguage: (detectors.Language) "",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=6) "lib.rs",
+      FullFilename: (string) "",
+      Language: (string) (len=4) "Rust",
+      LanguageType: (string) (len=11) "programming",
+      StartLineNumber: (*int)(9),
+      StartColumnNumber: (*int)(16),
+      EndLineNumber: (*int)(9),
+      EndColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Customer",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=3) "new",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) (len=8) "function",
+      SimpleFieldType: (string) (len=8) "function",
+      Classification: (interface {}) <nil>,
+      Source: (*schema.Source)(<nil>),
+      NormalizedObjectName: (string) (len=8) "customer",
+      NormalizedFieldName: (string) (len=3) "new"
+    }
+  })
+}

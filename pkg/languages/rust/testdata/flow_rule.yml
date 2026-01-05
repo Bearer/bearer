@@ -1,0 +1,19 @@
+languages:
+  - rust
+patterns:
+  - pattern: sink($<USER_DATA>)
+    filters:
+      - variable: USER_DATA
+        detection: flow_test_source
+        scope: result
+auxiliary:
+  - id: flow_test_source
+    patterns:
+      - pattern: source()
+severity: high
+metadata:
+  description: Test data flow
+  remediation_message: Test data flow
+  cwe_id:
+    - 42
+  id: flow_test

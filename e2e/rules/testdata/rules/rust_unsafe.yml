@@ -1,0 +1,15 @@
+languages:
+  - rust
+patterns:
+  - pattern: |
+      unsafe { $<...> }
+  - pattern: |
+      unsafe fn $<_>($<...>) $<...>
+severity: medium
+metadata:
+  description: "Unsafe code block detected."
+  remediation_message: "Consider using safe alternatives."
+  cwe_id:
+    - 120
+  id: rust_unsafe_test
+

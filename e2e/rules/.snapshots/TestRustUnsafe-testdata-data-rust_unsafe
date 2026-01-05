@@ -1,0 +1,72 @@
+medium:
+    - rule:
+        cwe_ids:
+            - "120"
+        id: rust_unsafe_test
+        title: Unsafe code block detected.
+        description: Consider using safe alternatives.
+        documentation_url: ""
+      line_number: 6
+      full_filename: e2e/rules/testdata/data/rust_unsafe/unsafe_code.rs
+      filename: unsafe_code.rs
+      source:
+        location:
+            start: 6
+            end: 9
+            column:
+                start: 5
+                end: 6
+      sink:
+        location:
+            start: 6
+            end: 9
+            column:
+                start: 5
+                end: 6
+        content: ""
+      parent_line_number: 6
+      fingerprint: e588045c66f2391d110ae0296bae2d5b_0
+      old_fingerprint: 40dca777262ec9429a831db70b41bc8d_0
+      code_extract: |4-
+            unsafe {
+                let raw_ptr = Box::into_raw(Box::new(42));
+                raw_ptr
+            }
+    - rule:
+        cwe_ids:
+            - "120"
+        id: rust_unsafe_test
+        title: Unsafe code block detected.
+        description: Consider using safe alternatives.
+        documentation_url: ""
+      line_number: 21
+      full_filename: e2e/rules/testdata/data/rust_unsafe/unsafe_code.rs
+      filename: unsafe_code.rs
+      source:
+        location:
+            start: 21
+            end: 24
+            column:
+                start: 5
+                end: 6
+      sink:
+        location:
+            start: 21
+            end: 24
+            column:
+                start: 5
+                end: 6
+        content: ""
+      parent_line_number: 21
+      fingerprint: e588045c66f2391d110ae0296bae2d5b_1
+      old_fingerprint: 40dca777262ec9429a831db70b41bc8d_1
+      code_extract: |4-
+            unsafe {
+                let ptr = dangerous_function();
+                println!("{}", *ptr);
+            }
+
+
+--
+Analyzing codebase
+

@@ -1,0 +1,30 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: flow_test
+        title: Test data flow
+        description: Test data flow
+        documentation_url: ""
+      line_number: 11
+      full_filename: different-line.rs
+      filename: different-line.rs
+      source:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 5
+                end: 15
+      sink:
+        location:
+            start: 11
+            end: 11
+            column:
+                start: 5
+                end: 15
+        content: ""
+      parent_line_number: 11
+      fingerprint: 2807682c470d228c473f203d964c29cd_0
+      old_fingerprint: 2807682c470d228c473f203d964c29cd_0
+

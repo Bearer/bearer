@@ -1,0 +1,14 @@
+(*builder.Result)({
+  Query: (string) (len=81) "([(call_expression . function: [(_)] @param1 . [(arguments  . (_) . )] .)] @root)",
+  VariableNames: ([]string) (len=2) {
+    (string) (len=4) "FUNC",
+    (string) (len=1) "_"
+  },
+  ParamToVariable: (map[string]string) (len=1) {
+    (string) (len=6) "param1": (string) (len=4) "FUNC"
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) {
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})

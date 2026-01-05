@@ -20,6 +20,7 @@ const (
 	DetectorRuby         Type = "ruby"
 	DetectorPHP          Type = "php"
 	DetectorPython       Type = "python"
+	DetectorRust         Type = "rust"
 	DetectorSimple       Type = "simple"
 	DetectorSpring       Type = "spring"
 	DetectorSymfony      Type = "symfony"

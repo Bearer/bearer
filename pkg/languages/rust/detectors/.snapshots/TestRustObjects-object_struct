@@ -1,0 +1,975 @@
+type: source_file
+id: 0
+range: 1:1 - 28:1
+dataflow_sources:
+    - 1
+    - 22
+    - 88
+children:
+    - type: struct_item
+      id: 1
+      range: 1:1 - 5:2
+      dataflow_sources:
+        - 2
+        - 3
+        - 4
+      children:
+        - type: '"struct"'
+          id: 2
+          range: 1:1 - 1:7
+        - type: type_identifier
+          id: 3
+          range: 1:8 - 1:12
+          content: User
+        - type: field_declaration_list
+          id: 4
+          range: 1:13 - 5:2
+          dataflow_sources:
+            - 5
+            - 6
+            - 10
+            - 11
+            - 15
+            - 16
+            - 20
+            - 21
+          children:
+            - type: '"{"'
+              id: 5
+              range: 1:13 - 1:14
+            - type: field_declaration
+              id: 6
+              range: 2:5 - 2:17
+              dataflow_sources:
+                - 7
+                - 8
+                - 9
+              children:
+                - type: field_identifier
+                  id: 7
+                  range: 2:5 - 2:9
+                  content: name
+                - type: '":"'
+                  id: 8
+                  range: 2:9 - 2:10
+                - type: type_identifier
+                  id: 9
+                  range: 2:11 - 2:17
+                  content: String
+            - type: '","'
+              id: 10
+              range: 2:17 - 2:18
+            - type: field_declaration
+              id: 11
+              range: 3:5 - 3:18
+              dataflow_sources:
+                - 12
+                - 13
+                - 14
+              children:
+                - type: field_identifier
+                  id: 12
+                  range: 3:5 - 3:10
+                  content: email
+                - type: '":"'
+                  id: 13
+                  range: 3:10 - 3:11
+                - type: type_identifier
+                  id: 14
+                  range: 3:12 - 3:18
+                  content: String
+            - type: '","'
+              id: 15
+              range: 3:18 - 3:19
+            - type: field_declaration
+              id: 16
+              range: 4:5 - 4:13
+              dataflow_sources:
+                - 17
+                - 18
+                - 19
+              children:
+                - type: field_identifier
+                  id: 17
+                  range: 4:5 - 4:8
+                  content: age
+                - type: '":"'
+                  id: 18
+                  range: 4:8 - 4:9
+                - type: primitive_type
+                  id: 19
+                  range: 4:10 - 4:13
+                  content: u32
+            - type: '","'
+              id: 20
+              range: 4:13 - 4:14
+            - type: '"}"'
+              id: 21
+              range: 5:1 - 5:2
+    - type: impl_item
+      id: 22
+      range: 7:1 - 15:2
+      children:
+        - type: '"impl"'
+          id: 23
+          range: 7:1 - 7:5
+        - type: type_identifier
+          id: 24
+          range: 7:6 - 7:10
+          content: User
+        - type: declaration_list
+          id: 25
+          range: 7:11 - 15:2
+          dataflow_sources:
+            - 26
+            - 27
+            - 65
+            - 87
+          children:
+            - type: '"{"'
+              id: 26
+              range: 7:11 - 7:12
+            - type: function_item
+              id: 27
+              range: 8:5 - 10:6
+              children:
+                - type: '"fn"'
+                  id: 28
+                  range: 8:5 - 8:7
+                - type: identifier
+                  id: 29
+                  range: 8:8 - 8:11
+                  content: new
+                - type: parameters
+                  id: 30
+                  range: 8:11 - 8:50
+                  dataflow_sources:
+                    - 31
+                    - 32
+                    - 36
+                    - 37
+                    - 41
+                    - 42
+                    - 46
+                  children:
+                    - type: '"("'
+                      id: 31
+                      range: 8:11 - 8:12
+                    - type: parameter
+                      id: 32
+                      range: 8:12 - 8:24
+                      alias_of:
+                        - 33
+                      children:
+                        - type: identifier
+                          id: 33
+                          range: 8:12 - 8:16
+                          content: name
+                        - type: '":"'
+                          id: 34
+                          range: 8:16 - 8:17
+                        - type: type_identifier
+                          id: 35
+                          range: 8:18 - 8:24
+                          content: String
+                    - type: '","'
+                      id: 36
+                      range: 8:24 - 8:25
+                    - type: parameter
+                      id: 37
+                      range: 8:26 - 8:39
+                      alias_of:
+                        - 38
+                      children:
+                        - type: identifier
+                          id: 38
+                          range: 8:26 - 8:31
+                          content: email
+                        - type: '":"'
+                          id: 39
+                          range: 8:31 - 8:32
+                        - type: type_identifier
+                          id: 40
+                          range: 8:33 - 8:39
+                          content: String
+                    - type: '","'
+                      id: 41
+                      range: 8:39 - 8:40
+                    - type: parameter
+                      id: 42
+                      range: 8:41 - 8:49
+                      alias_of:
+                        - 43
+                      children:
+                        - type: identifier
+                          id: 43
+                          range: 8:41 - 8:44
+                          content: age
+                        - type: '":"'
+                          id: 44
+                          range: 8:44 - 8:45
+                        - type: primitive_type
+                          id: 45
+                          range: 8:46 - 8:49
+                          content: u32
+                    - type: '")"'
+                      id: 46
+                      range: 8:49 - 8:50
+                - type: '"->"'
+                  id: 47
+                  range: 8:51 - 8:53
+                - type: type_identifier
+                  id: 48
+                  range: 8:54 - 8:58
+                  content: Self
+                - type: block
+                  id: 49
+                  range: 8:59 - 10:6
+                  children:
+                    - type: '"{"'
+                      id: 50
+                      range: 8:59 - 8:60
+                    - type: struct_expression
+                      id: 51
+                      range: 9:9 - 9:34
+                      dataflow_sources:
+                        - 52
+                        - 53
+                      children:
+                        - type: type_identifier
+                          id: 52
+                          range: 9:9 - 9:13
+                          content: User
+                        - type: field_initializer_list
+                          id: 53
+                          range: 9:14 - 9:34
+                          dataflow_sources:
+                            - 54
+                            - 55
+                            - 57
+                            - 58
+                            - 60
+                            - 61
+                            - 63
+                          children:
+                            - type: '"{"'
+                              id: 54
+                              range: 9:14 - 9:15
+                            - type: shorthand_field_initializer
+                              id: 55
+                              range: 9:16 - 9:20
+                              dataflow_sources:
+                                - 56
+                              children:
+                                - type: identifier
+                                  id: 56
+                                  range: 9:16 - 9:20
+                                  content: name
+                            - type: '","'
+                              id: 57
+                              range: 9:20 - 9:21
+                            - type: shorthand_field_initializer
+                              id: 58
+                              range: 9:22 - 9:27
+                              dataflow_sources:
+                                - 59
+                              children:
+                                - type: identifier
+                                  id: 59
+                                  range: 9:22 - 9:27
+                                  content: email
+                            - type: '","'
+                              id: 60
+                              range: 9:27 - 9:28
+                            - type: shorthand_field_initializer
+                              id: 61
+                              range: 9:29 - 9:32
+                              dataflow_sources:
+                                - 62
+                              children:
+                                - type: identifier
+                                  id: 62
+                                  range: 9:29 - 9:32
+                                  content: age
+                            - type: '"}"'
+                              id: 63
+                              range: 9:33 - 9:34
+                    - type: '"}"'
+                      id: 64
+                      range: 10:5 - 10:6
+            - type: function_item
+              id: 65
+              range: 12:5 - 14:6
+              children:
+                - type: '"fn"'
+                  id: 66
+                  range: 12:5 - 12:7
+                - type: identifier
+                  id: 67
+                  range: 12:8 - 12:16
+                  content: get_name
+                - type: parameters
+                  id: 68
+                  range: 12:16 - 12:23
+                  dataflow_sources:
+                    - 69
+                    - 70
+                    - 73
+                  children:
+                    - type: '"("'
+                      id: 69
+                      range: 12:16 - 12:17
+                    - type: self_parameter
+                      id: 70
+                      range: 12:17 - 12:22
+                      children:
+                        - type: '"&"'
+                          id: 71
+                          range: 12:17 - 12:18
+                        - type: self
+                          id: 72
+                          range: 12:18 - 12:22
+                          content: self
+                    - type: '")"'
+                      id: 73
+                      range: 12:22 - 12:23
+                - type: '"->"'
+                  id: 74
+                  range: 12:24 - 12:26
+                - type: reference_type
+                  id: 75
+                  range: 12:27 - 12:31
+                  dataflow_sources:
+                    - 76
+                    - 77
+                  children:
+                    - type: '"&"'
+                      id: 76
+                      range: 12:27 - 12:28
+                    - type: primitive_type
+                      id: 77
+                      range: 12:28 - 12:31
+                      content: str
+                - type: block
+                  id: 78
+                  range: 12:32 - 14:6
+                  children:
+                    - type: '"{"'
+                      id: 79
+                      range: 12:32 - 12:33
+                    - type: reference_expression
+                      id: 80
+                      range: 13:9 - 13:19
+                      alias_of:
+                        - 82
+                      children:
+                        - type: '"&"'
+                          id: 81
+                          range: 13:9 - 13:10
+                        - type: field_expression
+                          id: 82
+                          range: 13:10 - 13:19
+                          dataflow_sources:
+                            - 83
+                          queries:
+                            - 2
+                          children:
+                            - type: self
+                              id: 83
+                              range: 13:10 - 13:14
+                              content: self
+                            - type: '"."'
+                              id: 84
+                              range: 13:14 - 13:15
+                            - type: field_identifier
+                              id: 85
+                              range: 13:15 - 13:19
+                              content: name
+                    - type: '"}"'
+                      id: 86
+                      range: 14:5 - 14:6
+            - type: '"}"'
+              id: 87
+              range: 15:1 - 15:2
+    - type: function_item
+      id: 88
+      range: 17:1 - 26:2
+      children:
+        - type: '"fn"'
+          id: 89
+          range: 17:1 - 17:3
+        - type: identifier
+          id: 90
+          range: 17:4 - 17:8
+          content: main
+        - type: parameters
+          id: 91
+          range: 17:8 - 17:10
+          dataflow_sources:
+            - 92
+            - 93
+          children:
+            - type: '"("'
+              id: 92
+              range: 17:8 - 17:9
+            - type: '")"'
+              id: 93
+              range: 17:9 - 17:10
+        - type: block
+          id: 94
+          range: 17:11 - 26:2
+          children:
+            - type: '"{"'
+              id: 95
+              range: 17:11 - 17:12
+            - type: let_declaration
+              id: 96
+              range: 18:5 - 22:7
+              alias_of:
+                - 100
+              queries:
+                - 1
+              children:
+                - type: '"let"'
+                  id: 97
+                  range: 18:5 - 18:8
+                - type: identifier
+                  id: 98
+                  range: 18:9 - 18:13
+                  content: user
+                - type: '"="'
+                  id: 99
+                  range: 18:14 - 18:15
+                - type: struct_expression
+                  id: 100
+                  range: 18:16 - 22:6
+                  dataflow_sources:
+                    - 101
+                    - 102
+                  queries:
+                    - 0
+                  children:
+                    - type: type_identifier
+                      id: 101
+                      range: 18:16 - 18:20
+                      content: User
+                    - type: field_initializer_list
+                      id: 102
+                      range: 18:21 - 22:6
+                      dataflow_sources:
+                        - 103
+                        - 104
+                        - 118
+                        - 119
+                        - 133
+                        - 134
+                        - 138
+                        - 139
+                      children:
+                        - type: '"{"'
+                          id: 103
+                          range: 18:21 - 18:22
+                        - type: field_initializer
+                          id: 104
+                          range: 19:9 - 19:35
+                          dataflow_sources:
+                            - 105
+                            - 106
+                            - 107
+                          children:
+                            - type: field_identifier
+                              id: 105
+                              range: 19:9 - 19:13
+                              content: name
+                            - type: '":"'
+                              id: 106
+                              range: 19:13 - 19:14
+                            - type: call_expression
+                              id: 107
+                              range: 19:15 - 19:35
+                              dataflow_sources:
+                                - 112
+                              children:
+                                - type: scoped_identifier
+                                  id: 108
+                                  range: 19:15 - 19:27
+                                  dataflow_sources:
+                                    - 109
+                                    - 110
+                                    - 111
+                                  children:
+                                    - type: identifier
+                                      id: 109
+                                      range: 19:15 - 19:21
+                                      content: String
+                                    - type: '"::"'
+                                      id: 110
+                                      range: 19:21 - 19:23
+                                    - type: identifier
+                                      id: 111
+                                      range: 19:23 - 19:27
+                                      content: from
+                                - type: arguments
+                                  id: 112
+                                  range: 19:27 - 19:35
+                                  dataflow_sources:
+                                    - 113
+                                    - 114
+                                    - 117
+                                  children:
+                                    - type: '"("'
+                                      id: 113
+                                      range: 19:27 - 19:28
+                                    - type: string_literal
+                                      id: 114
+                                      range: 19:28 - 19:34
+                                      dataflow_sources:
+                                        - 115
+                                        - 116
+                                      children:
+                                        - type: '"""'
+                                          id: 115
+                                          range: 19:28 - 19:29
+                                        - type: '"""'
+                                          id: 116
+                                          range: 19:33 - 19:34
+                                    - type: '")"'
+                                      id: 117
+                                      range: 19:34 - 19:35
+                        - type: '","'
+                          id: 118
+                          range: 19:35 - 19:36
+                        - type: field_initializer
+                          id: 119
+                          range: 20:9 - 20:48
+                          dataflow_sources:
+                            - 120
+                            - 121
+                            - 122
+                          children:
+                            - type: field_identifier
+                              id: 120
+                              range: 20:9 - 20:14
+                              content: email
+                            - type: '":"'
+                              id: 121
+                              range: 20:14 - 20:15
+                            - type: call_expression
+                              id: 122
+                              range: 20:16 - 20:48
+                              dataflow_sources:
+                                - 127
+                              children:
+                                - type: scoped_identifier
+                                  id: 123
+                                  range: 20:16 - 20:28
+                                  dataflow_sources:
+                                    - 124
+                                    - 125
+                                    - 126
+                                  children:
+                                    - type: identifier
+                                      id: 124
+                                      range: 20:16 - 20:22
+                                      content: String
+                                    - type: '"::"'
+                                      id: 125
+                                      range: 20:22 - 20:24
+                                    - type: identifier
+                                      id: 126
+                                      range: 20:24 - 20:28
+                                      content: from
+                                - type: arguments
+                                  id: 127
+                                  range: 20:28 - 20:48
+                                  dataflow_sources:
+                                    - 128
+                                    - 129
+                                    - 132
+                                  children:
+                                    - type: '"("'
+                                      id: 128
+                                      range: 20:28 - 20:29
+                                    - type: string_literal
+                                      id: 129
+                                      range: 20:29 - 20:47
+                                      dataflow_sources:
+                                        - 130
+                                        - 131
+                                      children:
+                                        - type: '"""'
+                                          id: 130
+                                          range: 20:29 - 20:30
+                                        - type: '"""'
+                                          id: 131
+                                          range: 20:46 - 20:47
+                                    - type: '")"'
+                                      id: 132
+                                      range: 20:47 - 20:48
+                        - type: '","'
+                          id: 133
+                          range: 20:48 - 20:49
+                        - type: field_initializer
+                          id: 134
+                          range: 21:9 - 21:16
+                          dataflow_sources:
+                            - 135
+                            - 136
+                            - 137
+                          children:
+                            - type: field_identifier
+                              id: 135
+                              range: 21:9 - 21:12
+                              content: age
+                            - type: '":"'
+                              id: 136
+                              range: 21:12 - 21:13
+                            - type: integer_literal
+                              id: 137
+                              range: 21:14 - 21:16
+                              content: "30"
+                        - type: '","'
+                          id: 138
+                          range: 21:16 - 21:17
+                        - type: '"}"'
+                          id: 139
+                          range: 22:5 - 22:6
+                - type: '";"'
+                  id: 140
+                  range: 22:6 - 22:7
+            - type: expression_statement
+              id: 141
+              range: 24:5 - 24:31
+              children:
+                - type: macro_invocation
+                  id: 142
+                  range: 24:5 - 24:30
+                  dataflow_sources:
+                    - 143
+                    - 144
+                    - 145
+                  children:
+                    - type: identifier
+                      id: 143
+                      range: 24:5 - 24:12
+                      content: println
+                    - type: '"!"'
+                      id: 144
+                      range: 24:12 - 24:13
+                    - type: token_tree
+                      id: 145
+                      range: 24:13 - 24:30
+                      dataflow_sources:
+                        - 146
+                        - 147
+                        - 150
+                        - 151
+                        - 152
+                      children:
+                        - type: '"("'
+                          id: 146
+                          range: 24:13 - 24:14
+                        - type: string_literal
+                          id: 147
+                          range: 24:14 - 24:18
+                          dataflow_sources:
+                            - 148
+                            - 149
+                          children:
+                            - type: '"""'
+                              id: 148
+                              range: 24:14 - 24:15
+                            - type: '"""'
+                              id: 149
+                              range: 24:17 - 24:18
+                        - type: identifier
+                          id: 150
+                          range: 24:20 - 24:24
+                          content: user
+                        - type: identifier
+                          id: 151
+                          range: 24:25 - 24:29
+                          content: name
+                        - type: '")"'
+                          id: 152
+                          range: 24:29 - 24:30
+                - type: '";"'
+                  id: 153
+                  range: 24:30 - 24:31
+            - type: expression_statement
+              id: 154
+              range: 25:5 - 25:37
+              children:
+                - type: macro_invocation
+                  id: 155
+                  range: 25:5 - 25:36
+                  dataflow_sources:
+                    - 156
+                    - 157
+                    - 158
+                  children:
+                    - type: identifier
+                      id: 156
+                      range: 25:5 - 25:12
+                      content: println
+                    - type: '"!"'
+                      id: 157
+                      range: 25:12 - 25:13
+                    - type: token_tree
+                      id: 158
+                      range: 25:13 - 25:36
+                      dataflow_sources:
+                        - 159
+                        - 160
+                        - 163
+                        - 164
+                        - 165
+                        - 168
+                      children:
+                        - type: '"("'
+                          id: 159
+                          range: 25:13 - 25:14
+                        - type: string_literal
+                          id: 160
+                          range: 25:14 - 25:18
+                          dataflow_sources:
+                            - 161
+                            - 162
+                          children:
+                            - type: '"""'
+                              id: 161
+                              range: 25:14 - 25:15
+                            - type: '"""'
+                              id: 162
+                              range: 25:17 - 25:18
+                        - type: identifier
+                          id: 163
+                          range: 25:20 - 25:24
+                          content: user
+                        - type: identifier
+                          id: 164
+                          range: 25:25 - 25:33
+                          content: get_name
+                        - type: token_tree
+                          id: 165
+                          range: 25:33 - 25:35
+                          dataflow_sources:
+                            - 166
+                            - 167
+                          children:
+                            - type: '"("'
+                              id: 166
+                              range: 25:33 - 25:34
+                            - type: '")"'
+                              id: 167
+                              range: 25:34 - 25:35
+                        - type: '")"'
+                          id: 168
+                          range: 25:35 - 25:36
+                - type: '";"'
+                  id: 169
+                  range: 25:36 - 25:37
+            - type: '"}"'
+              id: 170
+              range: 26:1 - 26:2
+
+- node: 96
+  content: |-
+    let user = User {
+            name: String::from("John"),
+            email: String::from("john@example.com"),
+            age: 30,
+        };
+  data:
+    properties:
+        - name: user
+          node:
+            id: 96
+            typeid: 34
+            contentstart:
+                byte: 258
+                line: 18
+                column: 5
+            contentend:
+                byte: 384
+                line: 22
+                column: 7
+            executingdetectors: []
+          object:
+            ruleid: object
+            matchnode:
+                id: 100
+                typeid: 24
+                contentstart:
+                    byte: 269
+                    line: 18
+                    column: 16
+                contentend:
+                    byte: 383
+                    line: 22
+                    column: 6
+                executingdetectors: []
+            data:
+                properties:
+                    - name: User
+                      node: null
+                      object:
+                        ruleid: object
+                        matchnode:
+                            id: 100
+                            typeid: 24
+                            contentstart:
+                                byte: 269
+                                line: 18
+                                column: 16
+                            contentend:
+                                byte: 383
+                                line: 22
+                                column: 6
+                            executingdetectors: []
+                        data:
+                            properties:
+                                - name: name
+                                  node:
+                                    id: 104
+                                    typeid: 37
+                                    contentstart:
+                                        byte: 284
+                                        line: 19
+                                        column: 9
+                                    contentend:
+                                        byte: 310
+                                        line: 19
+                                        column: 35
+                                    executingdetectors: []
+                                  object: null
+                                - name: email
+                                  node:
+                                    id: 119
+                                    typeid: 37
+                                    contentstart:
+                                        byte: 320
+                                        line: 20
+                                        column: 9
+                                    contentend:
+                                        byte: 359
+                                        line: 20
+                                        column: 48
+                                    executingdetectors: []
+                                  object: null
+                                - name: age
+                                  node:
+                                    id: 134
+                                    typeid: 37
+                                    contentstart:
+                                        byte: 369
+                                        line: 21
+                                        column: 9
+                                    contentend:
+                                        byte: 376
+                                        line: 21
+                                        column: 16
+                                    executingdetectors: []
+                                  object: null
+                            isvirtual: false
+                isvirtual: false
+    isvirtual: true
+- node: 100
+  content: |-
+    User {
+            name: String::from("John"),
+            email: String::from("john@example.com"),
+            age: 30,
+        }
+  data:
+    properties:
+        - name: User
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 100
+                typeid: 24
+                contentstart:
+                    byte: 269
+                    line: 18
+                    column: 16
+                contentend:
+                    byte: 383
+                    line: 22
+                    column: 6
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node:
+                        id: 104
+                        typeid: 37
+                        contentstart:
+                            byte: 284
+                            line: 19
+                            column: 9
+                        contentend:
+                            byte: 310
+                            line: 19
+                            column: 35
+                        executingdetectors: []
+                      object: null
+                    - name: email
+                      node:
+                        id: 119
+                        typeid: 37
+                        contentstart:
+                            byte: 320
+                            line: 20
+                            column: 9
+                        contentend:
+                            byte: 359
+                            line: 20
+                            column: 48
+                        executingdetectors: []
+                      object: null
+                    - name: age
+                      node:
+                        id: 134
+                        typeid: 37
+                        contentstart:
+                            byte: 369
+                            line: 21
+                            column: 9
+                        contentend:
+                            byte: 376
+                            line: 21
+                            column: 16
+                        executingdetectors: []
+                      object: null
+                isvirtual: false
+    isvirtual: false
+- node: 82
+  content: self.name
+  data:
+    properties:
+        - name: self
+          node: null
+          object:
+            ruleid: object
+            matchnode:
+                id: 82
+                typeid: 32
+                contentstart:
+                    byte: 223
+                    line: 13
+                    column: 10
+                contentend:
+                    byte: 232
+                    line: 13
+                    column: 19
+                executingdetectors: []
+            data:
+                properties:
+                    - name: name
+                      node: null
+                      object: null
+                isvirtual: true
+    isvirtual: true
+

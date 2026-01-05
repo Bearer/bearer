@@ -1,0 +1,11 @@
+(*builder.Result)({
+  Query: (string) (len=41) "([(unsafe_block  . [ (block )] .)] @root)",
+  VariableNames: ([]string) {
+  },
+  ParamToVariable: (map[string]string) {
+  },
+  EqualParams: ([][]string) <nil>,
+  ParamToContent: (map[string]map[string]string) {
+  },
+  RootVariable: (*language.PatternVariable)(<nil>)
+})

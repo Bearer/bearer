@@ -1,0 +1,192 @@
+type: source_file
+id: 0
+range: 1:1 - 10:1
+dataflow_sources:
+    - 1
+children:
+    - type: function_item
+      id: 1
+      range: 1:1 - 8:2
+      children:
+        - type: '"fn"'
+          id: 2
+          range: 1:1 - 1:3
+        - type: identifier
+          id: 3
+          range: 1:4 - 1:8
+          content: main
+        - type: parameters
+          id: 4
+          range: 1:8 - 1:10
+          dataflow_sources:
+            - 5
+            - 6
+          children:
+            - type: '"("'
+              id: 5
+              range: 1:8 - 1:9
+            - type: '")"'
+              id: 6
+              range: 1:9 - 1:10
+        - type: block
+          id: 7
+          range: 1:11 - 8:2
+          children:
+            - type: '"{"'
+              id: 8
+              range: 1:11 - 1:12
+            - type: let_declaration
+              id: 9
+              range: 2:5 - 2:45
+              alias_of:
+                - 13
+              queries:
+                - 1
+              children:
+                - type: '"let"'
+                  id: 10
+                  range: 2:5 - 2:8
+                - type: identifier
+                  id: 11
+                  range: 2:9 - 2:12
+                  content: raw
+                - type: '"="'
+                  id: 12
+                  range: 2:13 - 2:14
+                - type: raw_string_literal
+                  id: 13
+                  range: 2:15 - 2:44
+                  content: r"raw string without escapes"
+                - type: '";"'
+                  id: 14
+                  range: 2:44 - 2:45
+            - type: let_declaration
+              id: 15
+              range: 3:5 - 3:57
+              alias_of:
+                - 19
+              queries:
+                - 1
+              children:
+                - type: '"let"'
+                  id: 16
+                  range: 3:5 - 3:8
+                - type: identifier
+                  id: 17
+                  range: 3:9 - 3:24
+                  content: raw_with_quotes
+                - type: '"="'
+                  id: 18
+                  range: 3:25 - 3:26
+                - type: raw_string_literal
+                  id: 19
+                  range: 3:27 - 3:56
+                  content: r#"raw string with "quotes""#
+                - type: '";"'
+                  id: 20
+                  range: 3:56 - 3:57
+            - type: let_declaration
+              id: 21
+              range: 4:5 - 4:65
+              alias_of:
+                - 25
+              queries:
+                - 1
+              children:
+                - type: '"let"'
+                  id: 22
+                  range: 4:5 - 4:8
+                - type: identifier
+                  id: 23
+                  range: 4:9 - 4:24
+                  content: raw_with_hashes
+                - type: '"="'
+                  id: 24
+                  range: 4:25 - 4:26
+                - type: raw_string_literal
+                  id: 25
+                  range: 4:27 - 4:64
+                  content: 'r##"raw string with # and "quotes""##'
+                - type: '";"'
+                  id: 26
+                  range: 4:64 - 4:65
+            - type: let_declaration
+              id: 27
+              range: 6:5 - 6:42
+              alias_of:
+                - 31
+              queries:
+                - 1
+              children:
+                - type: '"let"'
+                  id: 28
+                  range: 6:5 - 6:8
+                - type: identifier
+                  id: 29
+                  range: 6:9 - 6:22
+                  content: regex_pattern
+                - type: '"="'
+                  id: 30
+                  range: 6:23 - 6:24
+                - type: raw_string_literal
+                  id: 31
+                  range: 6:25 - 6:41
+                  content: r"\d+\.\d+\.\d+"
+                - type: '";"'
+                  id: 32
+                  range: 6:41 - 6:42
+            - type: let_declaration
+              id: 33
+              range: 7:5 - 7:47
+              alias_of:
+                - 37
+              queries:
+                - 1
+              children:
+                - type: '"let"'
+                  id: 34
+                  range: 7:5 - 7:8
+                - type: identifier
+                  id: 35
+                  range: 7:9 - 7:13
+                  content: path
+                - type: '"="'
+                  id: 36
+                  range: 7:14 - 7:15
+                - type: raw_string_literal
+                  id: 37
+                  range: 7:16 - 7:46
+                  content: r"C:\Users\Documents\file.txt"
+                - type: '";"'
+                  id: 38
+                  range: 7:46 - 7:47
+            - type: '"}"'
+              id: 39
+              range: 8:1 - 8:2
+
+- node: 13
+  content: r"raw string without escapes"
+  data:
+    value: raw string without escapes
+    isliteral: true
+- node: 19
+  content: r#"raw string with "quotes""#
+  data:
+    value: raw string with "quotes"
+    isliteral: true
+- node: 25
+  content: 'r##"raw string with # and "quotes""##'
+  data:
+    value: 'raw string with # and "quotes"'
+    isliteral: true
+- node: 31
+  content: r"\d+\.\d+\.\d+"
+  data:
+    value: \d+\.\d+\.\d+
+    isliteral: true
+- node: 37
+  content: r"C:\Users\Documents\file.txt"
+  data:
+    value: C:\Users\Documents\file.txt
+    isliteral: true
+

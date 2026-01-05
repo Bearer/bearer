@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/bearer/pkg/languages/php"
 	"github.com/bearer/bearer/pkg/languages/python"
 	"github.com/bearer/bearer/pkg/languages/ruby"
+	"github.com/bearer/bearer/pkg/languages/rust"
 	"github.com/bearer/bearer/pkg/scanner/language"
 )
 
@@ -18,5 +19,6 @@ func Default() []language.Language {
 		php.Get(),
 		python.Get(),
 		ruby.Get(),
+		rust.Get(),
 	}
 }
