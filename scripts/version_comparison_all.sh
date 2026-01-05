@@ -62,6 +62,9 @@ while IFS='|' read -r NAME URL; do
     COUNT=$((COUNT + 1))
     echo -e "${YELLOW}[$COUNT/$TOTAL] Processing: $NAME${NC}"
 
+    # Create output directory before running script (needed for log file)
+    mkdir -p "${OUTPUT_DIR}/${NAME}"
+
     # Run comparison script
     if "$SCRIPT_DIR/version_comparison.sh" "$URL" "$NAME" > "${OUTPUT_DIR}/${NAME}/run.log" 2>&1; then
         # Extract key stats from summary

@@ -106,7 +106,7 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 
 	err := visitChildren()
 
-	if left.Type() == "identifier" {
+	if left != nil && left.Type() == "identifier" {
 		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
 	}
 
@@ -123,7 +123,7 @@ func (analyzer *analyzer) analyzeAugmentedAssignment(node *sitter.Node, visitChi
 
 	err := visitChildren()
 
-	if left.Type() == "identifier" {
+	if left != nil && left.Type() == "identifier" {
 		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
 	}
 
@@ -141,7 +141,7 @@ func (analyzer *analyzer) analyzeVariableDeclarator(node *sitter.Node, visitChil
 
 	err := visitChildren()
 
-	if name.Type() == "identifier" {
+	if name != nil && name.Type() == "identifier" {
 		analyzer.scope.Declare(analyzer.builder.ContentFor(name), node)
 	}
 
@@ -193,9 +193,9 @@ func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() er
 	function := node.ChildByFieldName("function")
 	analyzer.lookupVariable(function)
 
-	if function.Type() == "member_expression" {
+	if function != nil && function.Type() == "member_expression" {
 		property := function.ChildByFieldName("property")
-		if slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(property)) {
+		if property != nil && slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(property)) {
 			analyzer.builder.Dataflow(node, function)
 		}
 	}
