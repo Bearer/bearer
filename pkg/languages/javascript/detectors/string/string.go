@@ -1,8 +1,6 @@
 package string
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/pkg/scanner/ast/query"
 	"github.com/bearer/bearer/pkg/scanner/ast/tree"
 	"github.com/bearer/bearer/pkg/scanner/ruleset"
@@ -34,11 +32,9 @@ func (detector *stringDetector) DetectAt(
 	case "string_fragment":
 		return common.Literal(node.Content()), nil
 	case "escape_sequence":
-		value, err := stringutil.Unescape(node.Content())
-		if err != nil {
-			return nil, fmt.Errorf("failed to decode escape sequence: %w", err)
-		}
-
+		// Use JavaScript-specific unescaping which handles unknown escapes
+		// (like \s, \d) by stripping the backslash, matching JavaScript behavior
+		value := stringutil.UnescapeJavaScript(node.Content())
 		return common.Literal(value), nil
 	case "template_substitution":
 		return common.GetStringData(node.NamedChildren()[0], detectorContext)

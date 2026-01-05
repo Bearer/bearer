@@ -1,8 +1,6 @@
 package string
 
 import (
-	"fmt"
-
 	"github.com/bearer/bearer/pkg/scanner/ast/query"
 	"github.com/bearer/bearer/pkg/scanner/ast/tree"
 	"github.com/bearer/bearer/pkg/scanner/ruleset"
@@ -78,12 +76,9 @@ func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]int
 			if child.Content() == "\\\n" || child.Content() == "\\\r\n" {
 				childValue = ""
 			} else {
-				value, err := stringutil.Unescape(child.Content())
-				if err != nil {
-					return fmt.Errorf("failed to decode escape sequence '%s': %w", child.Content(), err)
-				}
-
-				childValue = value
+				// Use Python-specific unescaping which handles unknown escapes
+				// (like \s, \d) by stripping the backslash, matching Python's historical behavior
+				childValue = stringutil.UnescapePython(child.Content())
 			}
 
 			childIsLiteral = true
