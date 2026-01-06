@@ -31,24 +31,28 @@ func (detector *stringDetector) DetectAt(
 	case "interpolation", "string":
 		return common.ConcatenateChildStrings(node, detectorContext)
 	case "binary":
-		switch node.Children()[1].Content() {
-		case "+":
-			return common.ConcatenateChildStrings(node, detectorContext)
-		case "||", "or":
-			leftData, err := common.GetStringData(node.ChildByFieldName("left"), detectorContext)
-			if err != nil {
-				return nil, err
-			}
+		children := node.Children()
+		if len(children) > 1 {
+			switch children[1].Content() {
+			case "+":
+				return common.ConcatenateChildStrings(node, detectorContext)
+			case "||", "or":
+				leftData, err := common.GetStringData(node.ChildByFieldName("left"), detectorContext)
+				if err != nil {
+					return nil, err
+				}
 
-			rightData, err := common.GetStringData(node.ChildByFieldName("right"), detectorContext)
-			if err != nil {
-				return nil, err
-			}
+				rightData, err := common.GetStringData(node.ChildByFieldName("right"), detectorContext)
+				if err != nil {
+					return nil, err
+				}
 
-			return append(leftData, rightData...), nil
+				return append(leftData, rightData...), nil
+			}
 		}
 	case "operator_assignment":
-		if node.Children()[1].Content() == "+=" {
+		children := node.Children()
+		if len(children) > 1 && children[1].Content() == "+=" {
 			return common.ConcatenateAssignEquals(node, detectorContext)
 		}
 	}

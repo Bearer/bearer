@@ -48,17 +48,16 @@ echo ""
 REPO_OUTPUT_DIR="${OUTPUT_DIR}/${REPO_NAME}"
 mkdir -p "$REPO_OUTPUT_DIR"
 
-# Clone repository
+# Clone repository (skip if already exists)
 REPO_DIR="${OUTPUT_DIR}/repos/${REPO_NAME}"
 echo -e "${YELLOW}[1/5] Cloning repository...${NC}"
-if [ -d "$REPO_DIR" ]; then
-    echo "  Repository already exists, pulling latest..."
-    cd "$REPO_DIR" && git pull --quiet 2>/dev/null || true
+if [ -d "$REPO_DIR/.git" ]; then
+    echo "  Repository already exists, skipping clone."
 else
     mkdir -p "$(dirname "$REPO_DIR")"
     git clone --single-branch --depth 1 --no-tags "$REPO_URL" "$REPO_DIR" 2>&1 | grep -v "^$" || true
+    echo "  Done."
 fi
-echo "  Done."
 
 # Run base scan (current release)
 echo -e "${YELLOW}[2/5] Running base scan (current release)...${NC}"

@@ -99,15 +99,20 @@ func Annotate(tree *parser.Tree) error {
 	return tree.Annotate(func(node *parser.Node, value *values.Value) {
 		switch node.Type() {
 		case "interpolation":
-			if node.ChildCount() > 0 {
-				value.Append(node.FirstChild().Value())
+			// FirstChild() uses NamedChild(0) internally, getting the actual expression
+			if firstChild := node.FirstChild(); firstChild != nil {
+				value.Append(firstChild.Value())
 			}
 
 			return
 		case "binary":
-			if node.FirstUnnamedChild().Content() == "+" {
-				value.Append(node.ChildByFieldName("left").Value())
-				value.Append(node.ChildByFieldName("right").Value())
+			if unnamed := node.FirstUnnamedChild(); unnamed != nil && unnamed.Content() == "+" {
+				if left := node.ChildByFieldName("left"); left != nil {
+					value.Append(left.Value())
+				}
+				if right := node.ChildByFieldName("right"); right != nil {
+					value.Append(right.Value())
+				}
 
 				return
 			}

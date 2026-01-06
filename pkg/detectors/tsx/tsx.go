@@ -90,13 +90,19 @@ func annotate(tree *parser.Tree, environmentVariablesQuery *sitter.Query) error 
 			value.AppendString(node.Content())
 			return
 		case "template_substitution":
-			value.Append(node.FirstChild().Value())
+			if firstChild := node.FirstChild(); firstChild != nil {
+				value.Append(firstChild.Value())
+			}
 
 			return
 		case "binary_expression":
-			if node.FirstUnnamedChild().Content() == "+" {
-				value.Append(node.ChildByFieldName("left").Value())
-				value.Append(node.ChildByFieldName("right").Value())
+			if unnamed := node.FirstUnnamedChild(); unnamed != nil && unnamed.Content() == "+" {
+				if left := node.ChildByFieldName("left"); left != nil {
+					value.Append(left.Value())
+				}
+				if right := node.ChildByFieldName("right"); right != nil {
+					value.Append(right.Value())
+				}
 
 				return
 			}
