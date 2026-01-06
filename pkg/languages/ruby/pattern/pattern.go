@@ -145,6 +145,15 @@ func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
 		return true, false
 	}
 
+	// Class/module body - don't anchor methods because there may be
+	// visibility modifiers (private, protected, public) as siblings
+	if parent.Type() == "body_statement" {
+		grandparent := parent.Parent()
+		if grandparent != nil && (grandparent.Type() == "class" || grandparent.Type() == "module" || grandparent.Type() == "singleton_class") {
+			return false, false
+		}
+	}
+
 	return true, true
 }
 
