@@ -62,32 +62,41 @@ func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]int
 	text := ""
 	isLiteral := true
 
+	// Process string content by iterating over children and extracting literal text between them
 	err := node.EachContentPart(func(partText string) error {
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {
 		var childValue string
 		var childIsLiteral bool
-		namedChildren := child.NamedChildren()
 
-		switch {
-		case child.Type() == "escape_sequence":
-			// tree sitter parser doesn't handle line continuation inside a string
+		switch child.Type() {
+		case "escape_sequence":
+			// Handle line continuation inside a string
 			if child.Content() == "\\\n" || child.Content() == "\\\r\n" {
 				childValue = ""
 			} else {
 				// Use Python-specific unescaping which handles unknown escapes
-				// (like \s, \d) by stripping the backslash, matching Python's historical behavior
 				childValue = stringutil.UnescapePython(child.Content())
 			}
-
 			childIsLiteral = true
-		case len(namedChildren) == 0:
-			childValue = ""
-			childIsLiteral = true
+		case "interpolation":
+			// Interpolation like {var} - get the value from the expression inside
+			namedChildren := child.NamedChildren()
+			if len(namedChildren) == 0 {
+				childValue = ""
+				childIsLiteral = true
+			} else {
+				var err error
+				childValue, childIsLiteral, err = common.GetStringValue(namedChildren[0], detectorContext)
+				if err != nil {
+					return err
+				}
+			}
 		default:
+			// Other child types - try to get their string value
 			var err error
-			childValue, childIsLiteral, err = common.GetStringValue(namedChildren[0], detectorContext)
+			childValue, childIsLiteral, err = common.GetStringValue(child, detectorContext)
 			if err != nil {
 				return err
 			}
@@ -106,10 +115,14 @@ func handleTemplateString(node *tree.Node, detectorContext types.Context) ([]int
 		return nil
 	})
 
+	if err != nil {
+		return nil, err
+	}
+
 	return []interface{}{common.String{
 		Value:     text,
 		IsLiteral: isLiteral,
-	}}, err
+	}}, nil
 }
 
 func concatenateChildStrings(node *tree.Node, detectorContext types.Context) ([]interface{}, error) {

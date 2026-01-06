@@ -267,8 +267,13 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 		}
 
 		if child.IsNamed() {
-			// String fragments should emit their text content, template substitutions should be replaced with placeholder
-			if child.Type() == "string_fragment" {
+			// Literal string content nodes should emit their text content, not be treated as children.
+			// Different languages use different node types for literal content:
+			// - string_fragment: JavaScript, TypeScript, TSX, Java
+			// - string_content: Python, Ruby
+			// - string_value: PHP
+			childType := child.Type()
+			if childType == "string_fragment" || childType == "string_content" || childType == "string_value" {
 				if err := onText(child.Content()); err != nil {
 					return err
 				}
