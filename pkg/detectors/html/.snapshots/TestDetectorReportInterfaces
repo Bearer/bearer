@@ -1,4 +1,4 @@
-([]*detections.Detection) (len=64) {
+([]*detections.Detection) (len=63) {
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=10) "javascript",
@@ -503,35 +503,6 @@
       Language: (string) (len=10) "JavaScript",
       LanguageType: (string) (len=11) "programming",
       StartLineNumber: (*int)(299),
-      StartColumnNumber: (*int)(45),
-      EndLineNumber: (*int)(299),
-      EndColumnNumber: (*int)(49),
-      Text: (*string)(<nil>)
-    },
-    Value: (schema.Schema) {
-      ObjectName: (string) (len=15) "twentyFourHours",
-      ObjectUUID: (string) (len=2) "33",
-      FieldName: (string) (len=4) "user",
-      FieldUUID: (string) (len=2) "34",
-      FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown",
-      Classification: (interface {}) <nil>,
-      Source: (*schema.Source)(<nil>),
-      NormalizedObjectName: (string) (len=14) "twentyfourhour",
-      NormalizedFieldName: (string) (len=4) "user"
-    }
-  }),
-  (*detections.Detection)({
-    Type: (detections.DetectionType) (len=6) "schema",
-    DetectorType: (detectors.Type) (len=10) "javascript",
-    DetectorLanguage: (detectors.Language) "",
-    CommitSHA: (string) "",
-    Source: (source.Source) {
-      Filename: (string) (len=14) "base.html.twig",
-      FullFilename: (string) "",
-      Language: (string) (len=10) "JavaScript",
-      LanguageType: (string) (len=11) "programming",
-      StartLineNumber: (*int)(299),
       StartColumnNumber: (*int)(50),
       EndLineNumber: (*int)(299),
       EndColumnNumber: (*int)(58),
@@ -539,9 +510,9 @@
     },
     Value: (schema.Schema) {
       ObjectName: (string) (len=4) "user",
-      ObjectUUID: (string) (len=2) "34",
+      ObjectUUID: (string) (len=2) "33",
       FieldName: (string) (len=8) "is24Hour",
-      FieldUUID: (string) (len=2) "35",
+      FieldUUID: (string) (len=2) "34",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
@@ -655,9 +626,9 @@
     },
     Value: (schema.Schema) {
       ObjectName: (string) (len=6) "loader",
-      ObjectUUID: (string) (len=2) "36",
+      ObjectUUID: (string) (len=2) "35",
       FieldName: (string) (len=8) "getKimai",
-      FieldUUID: (string) (len=2) "37",
+      FieldUUID: (string) (len=2) "36",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
@@ -684,9 +655,9 @@
     },
     Value: (schema.Schema) {
       ObjectName: (string) (len=6) "window",
-      ObjectUUID: (string) (len=2) "39",
+      ObjectUUID: (string) (len=2) "38",
       FieldName: (string) (len=9) "dataLayer",
-      FieldUUID: (string) (len=2) "40",
+      FieldUUID: (string) (len=2) "39",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
@@ -713,9 +684,9 @@
     },
     Value: (schema.Schema) {
       ObjectName: (string) (len=6) "window",
-      ObjectUUID: (string) (len=2) "39",
+      ObjectUUID: (string) (len=2) "38",
       FieldName: (string) (len=9) "dataLayer",
-      FieldUUID: (string) (len=2) "40",
+      FieldUUID: (string) (len=2) "39",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
@@ -742,9 +713,9 @@
     },
     Value: (schema.Schema) {
       ObjectName: (string) (len=9) "dataLayer",
-      ObjectUUID: (string) (len=2) "41",
+      ObjectUUID: (string) (len=2) "40",
       FieldName: (string) (len=4) "push",
-      FieldUUID: (string) (len=2) "42",
+      FieldUUID: (string) (len=2) "41",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
@@ -771,9 +742,9 @@
     },
     Value: (schema.Schema) {
       ObjectName: (string) (len=4) "user",
-      ObjectUUID: (string) (len=2) "43",
+      ObjectUUID: (string) (len=2) "42",
       FieldName: (string) (len=16) "is_authenticated",
-      FieldUUID: (string) (len=2) "44",
+      FieldUUID: (string) (len=2) "43",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
@@ -800,9 +771,9 @@
     },
     Value: (schema.Schema) {
       ObjectName: (string) (len=4) "gtag",
-      ObjectUUID: (string) (len=2) "46",
+      ObjectUUID: (string) (len=2) "45",
       FieldName: (string) (len=9) "'user_id'",
-      FieldUUID: (string) (len=2) "47",
+      FieldUUID: (string) (len=2) "46",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
