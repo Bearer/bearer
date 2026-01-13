@@ -216,9 +216,15 @@ func (filter *Rule) Evaluate(
 	if node == nil {
 		return nil, fmt.Errorf("couldn't find node for var %s", filter.Variable.Name())
 	}
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("filters.Rule.Evaluate: rule=%s, node=%s, traversal=%v", filter.Rule.ID(), node.Debug(), filter.TraversalStrategy)
+	}
 	detections, err := detectorContext.Scan(node, filter.Rule, filter.TraversalStrategy)
 	if err != nil {
 		return nil, err
+	}
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("filters.Rule.Evaluate: rule=%s, node=%s, detections=%d", filter.Rule.ID(), node.Debug(), len(detections))
 	}
 
 	if len(detections) == 0 {

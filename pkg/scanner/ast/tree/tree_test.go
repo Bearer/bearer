@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func parseTree(t *testing.T, sitterLanguage *sitter.Language, content string) *tree.Tree {
+func parseTree(t *testing.T, sitterLanguage *sitter.Language, content string, stringFragmentTypes []string) *tree.Tree {
 	contentBytes := []byte(content)
 
 	sitterRootNode, err := sitter.ParseCtx(context.Background(), contentBytes, sitterLanguage)
@@ -22,7 +22,7 @@ func parseTree(t *testing.T, sitterLanguage *sitter.Language, content string) *t
 		t.Fatalf("failed to parse input: %s", err)
 	}
 
-	return tree.NewBuilder(sitterLanguage, contentBytes, sitterRootNode, 0).Build()
+	return tree.NewBuilder(sitterLanguage, contentBytes, sitterRootNode, 0, stringFragmentTypes).Build()
 }
 
 func TestTree(t *testing.T) {
@@ -30,7 +30,7 @@ func TestTree(t *testing.T) {
 		def m(a)
 			a.foo
 		end
-	`)
+	`, []string{"string_content"})
 
 	cupaloy.SnapshotT(t, tree.RootNode().Dump())
 }
@@ -43,7 +43,7 @@ func TestContentParts(t *testing.T) {
 		{"`a${b}`", "a*"},
 	} {
 		t.Run(test.expression, func(tt *testing.T) {
-			ast := parseTree(tt, javascript.GetLanguage(), test.expression)
+			ast := parseTree(tt, javascript.GetLanguage(), test.expression, []string{"string_fragment"})
 			stringNode := ast.RootNode().NamedChildren()[0].NamedChildren()[0]
 			assert.Equal(tt, "template_string", stringNode.Type())
 

@@ -5,17 +5,19 @@ import (
 	"slices"
 
 	"github.com/bits-and-blooms/bitset"
+	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 	"golang.org/x/exp/maps"
 	"gopkg.in/yaml.v3"
 )
 
 type Tree struct {
-	contentBytes []byte
-	types        []string
-	nodes        []Node
-	rootNode     *Node
-	sitterToNode map[*sitter.Node]*Node
+	contentBytes        []byte
+	types               []string
+	nodes               []Node
+	rootNode            *Node
+	sitterToNode        map[*sitter.Node]*Node
+	stringFragmentTypes []string
 }
 
 type QueryResult map[string]*Node
@@ -160,7 +162,16 @@ func (node *Node) QueryResults(queryID int) []QueryResult {
 		return nil
 	}
 
-	return node.queryResults[queryID]
+	results := node.queryResults[queryID]
+	if len(results) == 0 {
+		// Log available query IDs for debugging
+		availableIDs := make([]int, 0, len(node.queryResults))
+		for id := range node.queryResults {
+			availableIDs = append(availableIDs, id)
+		}
+		log.Trace().Msgf("QueryResults: queryID=%d not found on node=%s, available IDs=%v", queryID, node.Type(), availableIDs)
+	}
+	return results
 }
 
 type nodeDump struct {
@@ -247,7 +258,9 @@ func nodeListToID(nodes []*Node) []int {
 	return result
 }
 
-// FIXME: remove this
+// EachContentPart iterates over the content parts of a node, calling onText for literal text
+// and onChild for child nodes. String fragment types are determined by the language configuration
+// stored in the tree.
 func (node *Node) EachContentPart(onText func(text string) error, onChild func(child *Node) error) error {
 	start := node.ContentStart.Byte
 	end := node.ContentEnd.Byte
@@ -260,6 +273,15 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 		return onText(string(node.tree.contentBytes[start:end]))
 	}
 
+	// Use the language-specific string fragment types from the tree
+	fragmentTypes := node.tree.stringFragmentTypes
+
+	// Create a map for O(1) lookup
+	fragmentTypeMap := make(map[string]bool, len(fragmentTypes))
+	for _, t := range fragmentTypes {
+		fragmentTypeMap[t] = true
+	}
+
 	for _, child := range node.children {
 		end = child.ContentStart.Byte
 		if err := emit(); err != nil {
@@ -268,12 +290,9 @@ func (node *Node) EachContentPart(onText func(text string) error, onChild func(c
 
 		if child.IsNamed() {
 			// Literal string content nodes should emit their text content, not be treated as children.
-			// Different languages use different node types for literal content:
-			// - string_fragment: JavaScript, TypeScript, TSX, Java
-			// - string_content: Python, Ruby
-			// - string_value: PHP
+			// The fragment types are language-specific and configured via Language.StringFragmentTypes()
 			childType := child.Type()
-			if childType == "string_fragment" || childType == "string_content" || childType == "string_value" {
+			if fragmentTypeMap[childType] {
 				if err := onText(child.Content()); err != nil {
 					return err
 				}

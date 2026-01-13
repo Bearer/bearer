@@ -81,6 +81,9 @@ func (detector *Detector) DetectAt(
 	node *tree.Node,
 	detectorContext detectortypes.Context,
 ) ([]interface{}, error) {
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("DetectAt: rule=%s, node=%s", detector.rule.ID(), node.Debug())
+	}
 	var detectionsData []interface{}
 
 	for _, pattern := range detector.patterns {
@@ -89,8 +92,12 @@ func (detector *Detector) DetectAt(
 			return nil, err
 		}
 
-		if log.Trace().Enabled() && len(results) != 0 {
-			log.Trace().Msgf("pattern %s matched (without filters)", pattern.Query.ID())
+		if log.Trace().Enabled() {
+			if len(results) != 0 {
+				log.Trace().Msgf("pattern %s matched (without filters) at node=%s", pattern.Query.ID(), node.Debug())
+			} else {
+				log.Trace().Msgf("pattern %s did not match at node=%s", pattern.Query.ID(), node.Debug())
+			}
 		}
 
 		for _, result := range results {

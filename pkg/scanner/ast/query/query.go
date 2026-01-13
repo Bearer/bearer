@@ -96,6 +96,10 @@ func (querySet *Set) Query(ctx context.Context, builder *tree.Builder, rootNode 
 			matchNode = resultRoot
 		}
 
+		if log.Trace().Enabled() {
+			log.Trace().Msgf("storing query result: PatternIndex=%d (querySet has %d queries), matchNode=%s, root=%s", match.PatternIndex, len(querySet.queries), matchNode.Type(), resultRoot.Type())
+		}
+
 		builder.QueryResult(int(match.PatternIndex), matchNode, result)
 	}
 
@@ -168,7 +172,18 @@ func (query *Query) ID() int {
 }
 
 func (query *Query) MatchAt(node *tree.Node) []tree.QueryResult {
-	return node.QueryResults(query.id)
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("MatchAt: query.id=%d, node id=%d type=%s content=%q", query.id, node.ID, node.Type(), node.Content())
+	}
+	results := node.QueryResults(query.id)
+	if log.Trace().Enabled() {
+		if len(results) == 0 {
+			log.Trace().Msgf("MatchAt: query.id=%d, node id=%d, found=0 results", query.id, node.ID)
+		} else {
+			log.Trace().Msgf("MatchAt: query.id=%d, node id=%d, found=%d results", query.id, node.ID, len(results))
+		}
+	}
+	return results
 }
 
 func (query *Query) MatchOnceAt(node *tree.Node) (tree.QueryResult, error) {

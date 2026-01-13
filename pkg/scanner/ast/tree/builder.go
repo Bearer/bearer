@@ -5,22 +5,24 @@ import (
 
 	"github.com/bearer/bearer/pkg/scanner/ruleset"
 	"github.com/bits-and-blooms/bitset"
+	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
 type Builder struct {
-	contentBytes []byte
-	types        []string
-	nodes        []Node
-	rootNodeID   int
+	contentBytes        []byte
+	types               []string
+	nodes               []Node
+	rootNodeID          int
 	children,
 	dataflowSources,
-	aliasOf map[int][]int
-	childrenByField map[int]map[string]int
-	sitterRootNode  *sitter.Node
-	sitterToNodeID  map[*sitter.Node]int
-	fieldNames      []string
-	ruleCount       int
+	aliasOf             map[int][]int
+	childrenByField     map[int]map[string]int
+	sitterRootNode      *sitter.Node
+	sitterToNodeID      map[*sitter.Node]int
+	fieldNames          []string
+	ruleCount           int
+	stringFragmentTypes []string
 }
 
 func NewBuilder(
@@ -28,6 +30,7 @@ func NewBuilder(
 	contentBytes []byte,
 	sitterRootNode *sitter.Node,
 	ruleCount int,
+	stringFragmentTypes []string,
 ) *Builder {
 	var fieldNames []string
 	for i := 1; ; i++ {
@@ -40,16 +43,17 @@ func NewBuilder(
 	}
 
 	builder := &Builder{
-		contentBytes:    contentBytes,
-		nodes:           make([]Node, 0, 1000),
-		children:        make(map[int][]int),
-		dataflowSources: make(map[int][]int),
-		aliasOf:         make(map[int][]int),
-		childrenByField: make(map[int]map[string]int),
-		sitterRootNode:  sitterRootNode,
-		sitterToNodeID:  make(map[*sitter.Node]int),
-		fieldNames:      fieldNames,
-		ruleCount:       ruleCount,
+		contentBytes:        contentBytes,
+		nodes:               make([]Node, 0, 1000),
+		children:            make(map[int][]int),
+		dataflowSources:     make(map[int][]int),
+		aliasOf:             make(map[int][]int),
+		childrenByField:     make(map[int]map[string]int),
+		sitterRootNode:      sitterRootNode,
+		sitterToNodeID:      make(map[*sitter.Node]int),
+		fieldNames:          fieldNames,
+		ruleCount:           ruleCount,
+		stringFragmentTypes: stringFragmentTypes,
 	}
 
 	builder.rootNodeID = builder.addNode(sitterRootNode)
@@ -165,10 +169,17 @@ func (builder *Builder) sitterToNodeIDs(nodes []*sitter.Node) []int {
 }
 
 func (builder *Builder) QueryResult(queryID int, sitterNode *sitter.Node, result map[string]*sitter.Node) {
-	node := &builder.nodes[builder.sitterToNodeID[sitterNode]]
+	nodeID := builder.sitterToNodeID[sitterNode]
+	node := &builder.nodes[nodeID]
 
 	if node.queryResults == nil {
 		node.queryResults = make(map[int][]QueryResult)
+	}
+
+	if log.Trace().Enabled() {
+		content := builder.contentBytes[sitterNode.StartByte():sitterNode.EndByte()]
+		nodeType := builder.types[node.TypeID]
+		log.Trace().Msgf("QueryResult: storing queryID=%d on node id=%d type=%s content=%q", queryID, nodeID, nodeType, string(content))
 	}
 
 	node.queryResults[queryID] = append(node.queryResults[queryID], builder.translateNodeMap(result))
@@ -181,11 +192,12 @@ func (builder *Builder) Build() *Tree {
 	builder.buildAliasOf()
 
 	tree := &Tree{
-		contentBytes: builder.contentBytes,
-		types:        builder.types,
-		nodes:        builder.nodes,
-		rootNode:     &builder.nodes[builder.rootNodeID],
-		sitterToNode: builder.buildSitterToNode(),
+		contentBytes:        builder.contentBytes,
+		types:               builder.types,
+		nodes:               builder.nodes,
+		rootNode:            &builder.nodes[builder.rootNodeID],
+		sitterToNode:        builder.buildSitterToNode(),
+		stringFragmentTypes: builder.stringFragmentTypes,
 	}
 
 	for i := range tree.nodes {
