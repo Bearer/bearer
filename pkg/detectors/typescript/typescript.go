@@ -86,14 +86,23 @@ func annotate(tree *parser.Tree, environmentVariablesQuery *sitter.Query) error 
 
 	return tree.Annotate(func(node *parser.Node, value *values.Value) {
 		switch node.Type() {
+		case "string_fragment":
+			value.AppendString(node.Content())
+			return
 		case "template_substitution":
-			value.Append(node.FirstChild().Value())
+			if firstChild := node.FirstChild(); firstChild != nil {
+				value.Append(firstChild.Value())
+			}
 
 			return
 		case "binary_expression":
-			if node.FirstUnnamedChild().Content() == "+" {
-				value.Append(node.ChildByFieldName("left").Value())
-				value.Append(node.ChildByFieldName("right").Value())
+			if unnamed := node.FirstUnnamedChild(); unnamed != nil && unnamed.Content() == "+" {
+				if left := node.ChildByFieldName("left"); left != nil {
+					value.Append(left.Value())
+				}
+				if right := node.ChildByFieldName("right"); right != nil {
+					value.Append(right.Value())
+				}
 
 				return
 			}
@@ -103,15 +112,9 @@ func annotate(tree *parser.Tree, environmentVariablesQuery *sitter.Query) error 
 			return
 
 		case "string", "template_string":
-			node.EachPart(func(text string) error { //nolint:all,errcheck
-				value.AppendString(text)
-
-				return nil
-			}, func(child *parser.Node) error {
-				value.Append(child.Value())
-
-				return nil
-			})
+			for i := 0; i < node.ChildCount(); i++ {
+				value.Append(node.Child(i).Value())
+			}
 
 			return
 		}

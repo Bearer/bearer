@@ -3,16 +3,16 @@ id: 0
 range: 1:1 - 14:3
 dataflow_sources:
     - 1
-    - 5
-    - 9
-    - 17
+    - 6
+    - 11
     - 21
-    - 25
-    - 33
-    - 37
-    - 42
-    - 49
-    - 58
+    - 26
+    - 31
+    - 40
+    - 45
+    - 51
+    - 59
+    - 70
 children:
     - type: expression_statement
       id: 1
@@ -26,377 +26,539 @@ children:
           dataflow_sources:
             - 3
             - 4
+            - 5
           children:
-            - type: '"""'
+            - type: string_start
               id: 3
               range: 1:1 - 1:2
-            - type: '"""'
+              content: ''''
+            - type: string_content
               id: 4
+              range: 1:2 - 1:3
+              content: a
+            - type: string_end
+              id: 5
               range: 1:3 - 1:4
+              content: ''''
     - type: expression_statement
-      id: 5
+      id: 6
       range: 2:1 - 2:4
       dataflow_sources:
-        - 6
+        - 7
       children:
         - type: string
-          id: 6
+          id: 7
           range: 2:1 - 2:4
           dataflow_sources:
-            - 7
             - 8
+            - 9
+            - 10
           children:
-            - type: '"""'
-              id: 7
-              range: 2:1 - 2:2
-            - type: '"""'
+            - type: string_start
               id: 8
+              range: 2:1 - 2:2
+              content: '"'
+            - type: string_content
+              id: 9
+              range: 2:2 - 2:3
+              content: a
+            - type: string_end
+              id: 10
               range: 2:3 - 2:4
+              content: '"'
     - type: expression_statement
-      id: 9
+      id: 11
       range: 3:1 - 3:8
       dataflow_sources:
-        - 10
+        - 12
       children:
         - type: concatenated_string
-          id: 10
+          id: 12
           range: 3:1 - 3:8
           dataflow_sources:
-            - 11
-            - 14
+            - 13
+            - 17
           children:
             - type: string
-              id: 11
+              id: 13
               range: 3:1 - 3:4
               dataflow_sources:
-                - 12
-                - 13
-              children:
-                - type: '"""'
-                  id: 12
-                  range: 3:1 - 3:2
-                - type: '"""'
-                  id: 13
-                  range: 3:3 - 3:4
-            - type: string
-              id: 14
-              range: 3:5 - 3:8
-              dataflow_sources:
+                - 14
                 - 15
                 - 16
               children:
-                - type: '"""'
+                - type: string_start
+                  id: 14
+                  range: 3:1 - 3:2
+                  content: '"'
+                - type: string_content
                   id: 15
-                  range: 3:5 - 3:6
-                - type: '"""'
+                  range: 3:2 - 3:3
+                  content: a
+                - type: string_end
                   id: 16
+                  range: 3:3 - 3:4
+                  content: '"'
+            - type: string
+              id: 17
+              range: 3:5 - 3:8
+              dataflow_sources:
+                - 18
+                - 19
+                - 20
+              children:
+                - type: string_start
+                  id: 18
+                  range: 3:5 - 3:6
+                  content: '"'
+                - type: string_content
+                  id: 19
+                  range: 3:6 - 3:7
+                  content: b
+                - type: string_end
+                  id: 20
                   range: 3:7 - 3:8
-    - type: expression_statement
-      id: 17
-      range: 4:1 - 4:8
-      dataflow_sources:
-        - 18
-      children:
-        - type: string
-          id: 18
-          range: 4:1 - 4:8
-          dataflow_sources:
-            - 19
-            - 20
-          children:
-            - type: '"""'
-              id: 19
-              range: 4:1 - 4:4
-            - type: '"""'
-              id: 20
-              range: 4:5 - 4:8
+                  content: '"'
     - type: expression_statement
       id: 21
-      range: 5:1 - 5:8
+      range: 4:1 - 4:8
       dataflow_sources:
         - 22
       children:
         - type: string
           id: 22
-          range: 5:1 - 5:8
+          range: 4:1 - 4:8
           dataflow_sources:
             - 23
             - 24
+            - 25
           children:
-            - type: '"""'
+            - type: string_start
               id: 23
-              range: 5:1 - 5:4
-            - type: '"""'
+              range: 4:1 - 4:4
+              content: '"""'
+            - type: string_content
               id: 24
-              range: 5:5 - 5:8
+              range: 4:4 - 4:5
+              content: a
+            - type: string_end
+              id: 25
+              range: 4:5 - 4:8
+              content: '"""'
     - type: expression_statement
-      id: 25
-      range: 6:1 - 6:11
+      id: 26
+      range: 5:1 - 5:8
       dataflow_sources:
-        - 26
+        - 27
       children:
         - type: string
-          id: 26
+          id: 27
+          range: 5:1 - 5:8
+          dataflow_sources:
+            - 28
+            - 29
+            - 30
+          children:
+            - type: string_start
+              id: 28
+              range: 5:1 - 5:4
+              content: ''''''''
+            - type: string_content
+              id: 29
+              range: 5:4 - 5:5
+              content: a
+            - type: string_end
+              id: 30
+              range: 5:5 - 5:8
+              content: ''''''''
+    - type: expression_statement
+      id: 31
+      range: 6:1 - 6:11
+      dataflow_sources:
+        - 32
+      children:
+        - type: string
+          id: 32
           range: 6:1 - 6:11
           dataflow_sources:
-            - 27
-            - 28
-            - 32
+            - 33
+            - 34
+            - 38
+            - 39
           children:
-            - type: '"""'
-              id: 27
+            - type: string_start
+              id: 33
               range: 6:1 - 6:3
+              content: f'
             - type: interpolation
-              id: 28
+              id: 34
               range: 6:3 - 6:8
               alias_of:
-                - 29
-                - 30
-                - 31
+                - 35
+                - 36
+                - 37
               children:
                 - type: '"{"'
-                  id: 29
+                  id: 35
                   range: 6:3 - 6:4
                 - type: identifier
-                  id: 30
+                  id: 36
                   range: 6:4 - 6:7
                   content: foo
                 - type: '"}"'
-                  id: 31
+                  id: 37
                   range: 6:7 - 6:8
-            - type: '"""'
-              id: 32
+            - type: string_content
+              id: 38
+              range: 6:8 - 6:10
+              content: ' a'
+            - type: string_end
+              id: 39
               range: 6:10 - 6:11
+              content: ''''
     - type: expression_statement
-      id: 33
+      id: 40
       range: 7:1 - 7:7
       dataflow_sources:
-        - 34
+        - 41
       children:
         - type: string
-          id: 34
+          id: 41
           range: 7:1 - 7:7
           dataflow_sources:
-            - 35
-            - 36
+            - 42
+            - 43
+            - 44
           children:
-            - type: '"""'
-              id: 35
+            - type: string_start
+              id: 42
               range: 7:1 - 7:3
-            - type: '"""'
-              id: 36
+              content: r'
+            - type: string_content
+              id: 43
+              range: 7:3 - 7:6
+              content: a\n
+            - type: string_end
+              id: 44
               range: 7:6 - 7:7
+              content: ''''
     - type: expression_statement
-      id: 37
+      id: 45
       range: 8:1 - 8:7
       dataflow_sources:
-        - 38
+        - 46
       children:
         - type: string
-          id: 38
+          id: 46
           range: 8:1 - 8:7
           dataflow_sources:
-            - 39
-            - 40
-            - 41
+            - 47
+            - 48
+            - 50
           children:
-            - type: '"""'
-              id: 39
+            - type: string_start
+              id: 47
               range: 8:1 - 8:2
-            - type: escape_sequence
-              id: 40
-              range: 8:3 - 8:5
-              content: \n
-            - type: '"""'
-              id: 41
+              content: '"'
+            - type: string_content
+              id: 48
+              range: 8:2 - 8:6
+              dataflow_sources:
+                - 49
+              children:
+                - type: escape_sequence
+                  id: 49
+                  range: 8:3 - 8:5
+                  content: \n
+            - type: string_end
+              id: 50
               range: 8:6 - 8:7
+              content: '"'
     - type: expression_statement
-      id: 42
+      id: 51
       range: 10:1 - 10:15
       dataflow_sources:
-        - 43
+        - 52
       children:
         - type: boolean_operator
-          id: 43
+          id: 52
           range: 10:1 - 10:15
           alias_of:
-            - 44
-            - 46
+            - 53
+            - 55
           children:
             - type: "false"
-              id: 44
+              id: 53
               range: 10:1 - 10:6
               content: "False"
             - type: '"or"'
-              id: 45
+              id: 54
               range: 10:7 - 10:9
             - type: string
-              id: 46
-              range: 10:10 - 10:15
-              dataflow_sources:
-                - 47
-                - 48
-              children:
-                - type: '"""'
-                  id: 47
-                  range: 10:10 - 10:11
-                - type: '"""'
-                  id: 48
-                  range: 10:14 - 10:15
-    - type: expression_statement
-      id: 49
-      range: 11:1 - 11:15
-      dataflow_sources:
-        - 50
-      children:
-        - type: boolean_operator
-          id: 50
-          range: 11:1 - 11:15
-          alias_of:
-            - 51
-            - 55
-          children:
-            - type: string
-              id: 51
-              range: 11:1 - 11:6
-              dataflow_sources:
-                - 52
-                - 53
-              children:
-                - type: '"""'
-                  id: 52
-                  range: 11:1 - 11:2
-                - type: '"""'
-                  id: 53
-                  range: 11:5 - 11:6
-            - type: '"or"'
-              id: 54
-              range: 11:7 - 11:9
-            - type: string
               id: 55
-              range: 11:10 - 11:15
+              range: 10:10 - 10:15
               dataflow_sources:
                 - 56
                 - 57
+                - 58
               children:
-                - type: '"""'
+                - type: string_start
                   id: 56
-                  range: 11:10 - 11:11
-                - type: '"""'
+                  range: 10:10 - 10:11
+                  content: '"'
+                - type: string_content
                   id: 57
-                  range: 11:14 - 11:15
+                  range: 10:11 - 10:14
+                  content: foo
+                - type: string_end
+                  id: 58
+                  range: 10:14 - 10:15
+                  content: '"'
     - type: expression_statement
-      id: 58
+      id: 59
+      range: 11:1 - 11:15
+      dataflow_sources:
+        - 60
+      children:
+        - type: boolean_operator
+          id: 60
+          range: 11:1 - 11:15
+          alias_of:
+            - 61
+            - 66
+          children:
+            - type: string
+              id: 61
+              range: 11:1 - 11:6
+              dataflow_sources:
+                - 62
+                - 63
+                - 64
+              children:
+                - type: string_start
+                  id: 62
+                  range: 11:1 - 11:2
+                  content: '"'
+                - type: string_content
+                  id: 63
+                  range: 11:2 - 11:5
+                  content: hey
+                - type: string_end
+                  id: 64
+                  range: 11:5 - 11:6
+                  content: '"'
+            - type: '"or"'
+              id: 65
+              range: 11:7 - 11:9
+            - type: string
+              id: 66
+              range: 11:10 - 11:15
+              dataflow_sources:
+                - 67
+                - 68
+                - 69
+              children:
+                - type: string_start
+                  id: 67
+                  range: 11:10 - 11:11
+                  content: '"'
+                - type: string_content
+                  id: 68
+                  range: 11:11 - 11:14
+                  content: foo
+                - type: string_end
+                  id: 69
+                  range: 11:14 - 11:15
+                  content: '"'
+    - type: expression_statement
+      id: 70
       range: 13:1 - 14:3
       dataflow_sources:
-        - 59
+        - 71
       children:
         - type: string
-          id: 59
+          id: 71
           range: 13:1 - 14:3
           dataflow_sources:
-            - 60
-            - 61
-            - 62
+            - 72
+            - 73
+            - 75
           children:
-            - type: '"""'
-              id: 60
+            - type: string_start
+              id: 72
               range: 13:1 - 13:2
-            - type: escape_sequence
-              id: 61
-              range: 13:3 - 14:1
-              content: |
-                \
-            - type: '"""'
-              id: 62
+              content: '"'
+            - type: string_content
+              id: 73
+              range: 13:2 - 14:2
+              dataflow_sources:
+                - 74
+              children:
+                - type: escape_sequence
+                  id: 74
+                  range: 13:3 - 14:1
+                  content: |
+                    \
+            - type: string_end
+              id: 75
               range: 14:2 - 14:3
+              content: '"'
 
 - node: 2
   content: '''a'''
   data:
     value: a
     isliteral: true
-- node: 6
+- node: 7
   content: '"a"'
   data:
     value: a
     isliteral: true
-- node: 10
+- node: 12
   content: '"a" "b"'
   data:
     value: ab
     isliteral: true
-- node: 18
+- node: 22
   content: '"""a"""'
   data:
     value: a
     isliteral: true
-- node: 22
+- node: 27
   content: '''''''a'''''''
   data:
     value: a
     isliteral: true
-- node: 26
+- node: 32
   content: f'{foo} a'
   data:
     value: � a
     isliteral: false
-- node: 34
+- node: 41
   content: r'a\n'
   data:
     value: a\n
     isliteral: true
-- node: 38
+- node: 46
   content: '"a\nb"'
   data:
     value: |-
         a
         b
     isliteral: true
-- node: 43
+- node: 52
   content: False or "foo"
   data:
     value: foo
     isliteral: true
-- node: 50
+- node: 60
   content: '"hey" or "foo"'
   data:
     value: hey
     isliteral: true
-- node: 50
+- node: 60
   content: '"hey" or "foo"'
   data:
     value: foo
     isliteral: true
-- node: 59
+- node: 71
   content: |-
     "a\
     b"
   data:
     value: ab
     isliteral: true
-- node: 11
+- node: 4
+  content: a
+  data:
+    value: a
+    isliteral: true
+- node: 9
+  content: a
+  data:
+    value: a
+    isliteral: true
+- node: 13
   content: '"a"'
   data:
     value: a
     isliteral: true
-- node: 14
+- node: 17
   content: '"b"'
   data:
     value: b
     isliteral: true
-- node: 46
+- node: 24
+  content: a
+  data:
+    value: a
+    isliteral: true
+- node: 29
+  content: a
+  data:
+    value: a
+    isliteral: true
+- node: 38
+  content: ' a'
+  data:
+    value: ' a'
+    isliteral: true
+- node: 43
+  content: a\n
+  data:
+    value: a\n
+    isliteral: true
+- node: 48
+  content: a\nb
+  data:
+    value: |-
+        a
+        b
+    isliteral: true
+- node: 55
   content: '"foo"'
   data:
     value: foo
     isliteral: true
-- node: 51
+- node: 61
   content: '"hey"'
   data:
     value: hey
     isliteral: true
-- node: 55
+- node: 66
   content: '"foo"'
+  data:
+    value: foo
+    isliteral: true
+- node: 73
+  content: |-
+    a\
+    b
+  data:
+    value: ab
+    isliteral: true
+- node: 15
+  content: a
+  data:
+    value: a
+    isliteral: true
+- node: 19
+  content: b
+  data:
+    value: b
+    isliteral: true
+- node: 57
+  content: foo
+  data:
+    value: foo
+    isliteral: true
+- node: 63
+  content: hey
+  data:
+    value: hey
+    isliteral: true
+- node: 68
+  content: foo
   data:
     value: foo
     isliteral: true

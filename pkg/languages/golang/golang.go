@@ -67,3 +67,8 @@ func (language *implementation) Pattern() language.Pattern {
 func (*implementation) NewAnalyzer(builder *tree.Builder) language.Analyzer {
 	return analyzer.New(builder)
 }
+
+func (*implementation) StringFragmentTypes() []string {
+	// Go doesn't have string interpolation, so no fragment types are needed
+	return nil
+}

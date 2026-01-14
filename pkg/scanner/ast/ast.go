@@ -71,7 +71,13 @@ func parseBuilder(
 		return nil, err
 	}
 
-	return tree.NewBuilder(language.SitterLanguage(), contentBytes, sitterTree.RootNode(), ruleCount), nil
+	return tree.NewBuilder(
+		language.SitterLanguage(),
+		contentBytes,
+		sitterTree.RootNode(),
+		ruleCount,
+		language.StringFragmentTypes(),
+	), nil
 }
 
 func analyzeNode(

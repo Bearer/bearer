@@ -134,7 +134,7 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 
 	err := visitChildren()
 
-	if left.Type() == "identifier" {
+	if left != nil && left.Type() == "identifier" {
 		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
 	}
 
@@ -151,7 +151,7 @@ func (analyzer *analyzer) analyzeOperatorAssignment(node *sitter.Node, visitChil
 
 	err := visitChildren()
 
-	if left.Type() == "identifier" {
+	if left != nil && left.Type() == "identifier" {
 		analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
 	}
 
@@ -163,8 +163,10 @@ func (analyzer *analyzer) analyzeCall(node *sitter.Node, visitChildren func() er
 	if receiver := node.ChildByFieldName("receiver"); receiver != nil {
 		analyzer.lookupVariable(receiver)
 
-		if slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(node.ChildByFieldName("method"))) {
-			analyzer.builder.Dataflow(node, receiver)
+		if method := node.ChildByFieldName("method"); method != nil {
+			if slices.Contains(reflexiveMethods, analyzer.builder.ContentFor(method)) {
+				analyzer.builder.Dataflow(node, receiver)
+			}
 		}
 	}
 
@@ -239,7 +241,7 @@ func (analyzer *analyzer) analyzeWhen(node *sitter.Node, visitChildren func() er
 func (analyzer *analyzer) analyzeParameter(node *sitter.Node, visitChildren func() error) error {
 	nameNode := node.ChildByFieldName("name")
 
-	if nameNode.Type() == "identifier" {
+	if nameNode != nil && nameNode.Type() == "identifier" {
 		analyzer.scope.Declare(analyzer.builder.ContentFor(nameNode), nameNode)
 	}
 

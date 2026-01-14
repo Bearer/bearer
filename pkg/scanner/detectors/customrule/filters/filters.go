@@ -216,9 +216,15 @@ func (filter *Rule) Evaluate(
 	if node == nil {
 		return nil, fmt.Errorf("couldn't find node for var %s", filter.Variable.Name())
 	}
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("filters.Rule.Evaluate: rule=%s, node=%s, traversal=%v", filter.Rule.ID(), node.Debug(), filter.TraversalStrategy)
+	}
 	detections, err := detectorContext.Scan(node, filter.Rule, filter.TraversalStrategy)
 	if err != nil {
 		return nil, err
+	}
+	if log.Trace().Enabled() {
+		log.Trace().Msgf("filters.Rule.Evaluate: rule=%s, node=%s, detections=%d", filter.Rule.ID(), node.Debug(), len(detections))
 	}
 
 	if len(detections) == 0 {
@@ -338,7 +344,19 @@ func (filter *Values) Evaluate(
 	patternVariables variableshape.Values,
 ) (*Result, error) {
 	node := patternVariables.Node(filter.Variable)
-	return boolResult(patternVariables, slices.Contains(filter.Values, node.Content()), ""), nil
+	result := slices.Contains(filter.Values, node.Content())
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"filters.Values: %t for values %v at %s, content=%s",
+			result,
+			filter.Values,
+			node.Debug(),
+			node.Content(),
+		)
+	}
+
+	return boolResult(patternVariables, result, ""), nil
 }
 
 type Regex struct {

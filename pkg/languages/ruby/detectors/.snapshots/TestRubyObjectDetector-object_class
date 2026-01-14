@@ -11,9 +11,7 @@ children:
         - 2
         - 3
         - 4
-        - 10
-        - 14
-        - 24
+        - 25
       queries:
         - 3
       children:
@@ -24,92 +22,100 @@ children:
           id: 3
           range: 1:7 - 1:8
           content: A
-        - type: call
+        - type: body_statement
           id: 4
-          range: 2:3 - 2:27
+          range: 2:3 - 8:6
           dataflow_sources:
-            - 6
+            - 5
+            - 11
+            - 15
           children:
-            - type: identifier
+            - type: call
               id: 5
-              range: 2:3 - 2:16
-              content: attr_accessor
-            - type: argument_list
-              id: 6
-              range: 2:17 - 2:27
+              range: 2:3 - 2:27
               dataflow_sources:
                 - 7
-                - 8
-                - 9
               children:
-                - type: simple_symbol
+                - type: identifier
+                  id: 6
+                  range: 2:3 - 2:16
+                  content: attr_accessor
+                - type: argument_list
                   id: 7
-                  range: 2:17 - 2:21
-                  content: :one
-                - type: '","'
-                  id: 8
-                  range: 2:21 - 2:22
-                - type: simple_symbol
-                  id: 9
-                  range: 2:23 - 2:27
-                  content: :two
-        - type: method
-          id: 10
-          range: 4:3 - 5:6
-          children:
-            - type: '"def"'
+                  range: 2:17 - 2:27
+                  dataflow_sources:
+                    - 8
+                    - 9
+                    - 10
+                  children:
+                    - type: simple_symbol
+                      id: 8
+                      range: 2:17 - 2:21
+                      content: :one
+                    - type: '","'
+                      id: 9
+                      range: 2:21 - 2:22
+                    - type: simple_symbol
+                      id: 10
+                      range: 2:23 - 2:27
+                      content: :two
+            - type: method
               id: 11
-              range: 4:3 - 4:6
-            - type: identifier
-              id: 12
-              range: 4:7 - 4:12
-              content: three
-            - type: '"end"'
-              id: 13
-              range: 5:3 - 5:6
-        - type: method
-          id: 14
-          range: 7:3 - 8:6
-          children:
-            - type: '"def"'
-              id: 15
-              range: 7:3 - 7:6
-            - type: identifier
-              id: 16
-              range: 7:7 - 7:11
-              content: four
-            - type: method_parameters
-              id: 17
-              range: 7:11 - 7:17
-              dataflow_sources:
-                - 18
-                - 19
-                - 20
-                - 21
-                - 22
+              range: 4:3 - 5:6
               children:
-                - type: '"("'
+                - type: '"def"'
+                  id: 12
+                  range: 4:3 - 4:6
+                - type: identifier
+                  id: 13
+                  range: 4:7 - 4:12
+                  content: three
+                - type: '"end"'
+                  id: 14
+                  range: 5:3 - 5:6
+            - type: method
+              id: 15
+              range: 7:3 - 8:6
+              children:
+                - type: '"def"'
+                  id: 16
+                  range: 7:3 - 7:6
+                - type: identifier
+                  id: 17
+                  range: 7:7 - 7:11
+                  content: four
+                - type: method_parameters
                   id: 18
-                  range: 7:11 - 7:12
-                - type: identifier
-                  id: 19
-                  range: 7:12 - 7:13
-                  content: a
-                - type: '","'
-                  id: 20
-                  range: 7:13 - 7:14
-                - type: identifier
-                  id: 21
-                  range: 7:15 - 7:16
-                  content: b
-                - type: '")"'
-                  id: 22
-                  range: 7:16 - 7:17
-            - type: '"end"'
-              id: 23
-              range: 8:3 - 8:6
+                  range: 7:11 - 7:17
+                  dataflow_sources:
+                    - 19
+                    - 20
+                    - 21
+                    - 22
+                    - 23
+                  children:
+                    - type: '"("'
+                      id: 19
+                      range: 7:11 - 7:12
+                    - type: identifier
+                      id: 20
+                      range: 7:12 - 7:13
+                      content: a
+                    - type: '","'
+                      id: 21
+                      range: 7:13 - 7:14
+                    - type: identifier
+                      id: 22
+                      range: 7:15 - 7:16
+                      content: b
+                    - type: '")"'
+                      id: 23
+                      range: 7:16 - 7:17
+                - type: '"end"'
+                  id: 24
+                  range: 8:3 - 8:6
         - type: '"end"'
-          id: 24
+          id: 25
           range: 9:1 - 9:4
 
 - node: 1
@@ -145,8 +151,8 @@ children:
                 properties:
                     - name: one
                       node:
-                        id: 7
-                        typeid: 7
+                        id: 8
+                        typeid: 8
                         contentstart:
                             byte: 24
                             line: 2
@@ -159,8 +165,8 @@ children:
                       object: null
                     - name: two
                       node:
-                        id: 9
-                        typeid: 7
+                        id: 10
+                        typeid: 8
                         contentstart:
                             byte: 30
                             line: 2
@@ -173,8 +179,8 @@ children:
                       object: null
                     - name: three
                       node:
-                        id: 12
-                        typeid: 5
+                        id: 13
+                        typeid: 6
                         contentstart:
                             byte: 42
                             line: 4
@@ -187,8 +193,8 @@ children:
                       object: null
                     - name: four
                       node:
-                        id: 16
-                        typeid: 5
+                        id: 17
+                        typeid: 6
                         contentstart:
                             byte: 61
                             line: 7

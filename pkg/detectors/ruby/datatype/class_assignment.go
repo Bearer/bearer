@@ -3,10 +3,11 @@ package datatype
 import (
 	"strings"
 
+	"github.com/smacker/go-tree-sitter/ruby"
+
 	"github.com/bearer/bearer/pkg/parser"
 	"github.com/bearer/bearer/pkg/report/schema"
 	schemadatatype "github.com/bearer/bearer/pkg/report/schema/datatype"
-	"github.com/smacker/go-tree-sitter/ruby"
 )
 
 var classAssignmentQuery = parser.QueryMustCompile(ruby.GetLanguage(),
@@ -22,17 +23,21 @@ var classAssignmentQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 
 var classAssignmentPropertiesQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 	`(do_block
-		( call
-			arguments: (argument_list
-				(simple_symbol) @param_id
+		body: (body_statement
+			(call
+				arguments: (argument_list
+					(simple_symbol) @param_id
+				)
 			)
 		)
 	) @param_class`)
 
 var classAssignmentFunctionsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 	`(do_block
-		( method
-			name: (identifier) @param_id
+		body: (body_statement
+			(method
+				name: (identifier) @param_id
+			)
 		)
 	) @param_class`)
 

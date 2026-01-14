@@ -85,12 +85,14 @@ children:
                             - 19
                             - 20
                           children:
-                            - type: '"""'
+                            - type: string_start
                               id: 19
                               range: 2:36 - 2:37
-                            - type: '"""'
+                              content: '"'
+                            - type: string_end
                               id: 20
                               range: 2:37 - 2:38
+                              content: '"'
                     - type: '")"'
                       id: 21
                       range: 2:38 - 2:39
@@ -447,7 +449,7 @@ children:
             ruleid: object
             matchnode:
                 id: 26
-                typeid: 18
+                typeid: 19
                 contentstart:
                     byte: 60
                     line: 3
@@ -474,7 +476,7 @@ children:
             ruleid: object
             matchnode:
                 id: 34
-                typeid: 18
+                typeid: 19
                 contentstart:
                     byte: 85
                     line: 4
@@ -501,7 +503,7 @@ children:
             ruleid: object
             matchnode:
                 id: 51
-                typeid: 18
+                typeid: 19
                 contentstart:
                     byte: 143
                     line: 7
@@ -528,7 +530,7 @@ children:
             ruleid: object
             matchnode:
                 id: 57
-                typeid: 18
+                typeid: 19
                 contentstart:
                     byte: 157
                     line: 7
@@ -555,7 +557,7 @@ children:
             ruleid: object
             matchnode:
                 id: 69
-                typeid: 18
+                typeid: 19
                 contentstart:
                     byte: 182
                     line: 8

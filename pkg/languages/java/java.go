@@ -65,3 +65,7 @@ func (language *implementation) Pattern() language.Pattern {
 func (*implementation) NewAnalyzer(builder *tree.Builder) language.Analyzer {
 	return analyzer.New(builder)
 }
+
+func (*implementation) StringFragmentTypes() []string {
+	return []string{"string_fragment"}
+}

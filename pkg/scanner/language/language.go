@@ -18,6 +18,11 @@ type Language interface {
 	SitterLanguage() *sitter.Language
 	Pattern() Pattern
 	NewAnalyzer(builder *tree.Builder) Analyzer
+	// StringFragmentTypes returns the node types that represent literal string content
+	// for this language. These types are used by EachContentPart to identify text content
+	// vs interpolated/dynamic content within string nodes.
+	// Examples: "string_fragment" (JS/Java), "string_content" (Python/Ruby), "string_value" (PHP)
+	StringFragmentTypes() []string
 }
 
 type Analyzer interface {
