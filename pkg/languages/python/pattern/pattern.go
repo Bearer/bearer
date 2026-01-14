@@ -89,7 +89,10 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 }
 
 func (*Pattern) IsLeaf(node *tree.Node) bool {
-	return false
+	// Treat string as leaf node even though new tree-sitter grammar gives it
+	// named children (string_start, string_content, string_end). We want to
+	// match string content as a whole, not by its internal structure.
+	return node.Type() == "string"
 }
 
 func (*Pattern) LeafContentTypes() []string {
