@@ -119,7 +119,9 @@ func (detector *Detector) DetectAt(
 				})
 			}
 
-			log.Trace().Msg("filters matched")
+			if log.Trace().Enabled() {
+				log.Trace().Msgf("filters matched for %s at %s", pattern.Query.ID(), node.Debug())
+			}
 		}
 	}
 

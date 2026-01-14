@@ -344,7 +344,19 @@ func (filter *Values) Evaluate(
 	patternVariables variableshape.Values,
 ) (*Result, error) {
 	node := patternVariables.Node(filter.Variable)
-	return boolResult(patternVariables, slices.Contains(filter.Values, node.Content()), ""), nil
+	result := slices.Contains(filter.Values, node.Content())
+
+	if log.Trace().Enabled() {
+		log.Trace().Msgf(
+			"filters.Values: %t for values %v at %s, content=%s",
+			result,
+			filter.Values,
+			node.Debug(),
+			node.Content(),
+		)
+	}
+
+	return boolResult(patternVariables, result, ""), nil
 }
 
 type Regex struct {
