@@ -31,6 +31,9 @@ func (detector *stringDetector) DetectAt(
 		return common.Literal(stringutil.StripQuotes(node.Content())), nil
 	case "string_fragment":
 		return common.Literal(node.Content()), nil
+	case "escape_sequence":
+		// New tree-sitter puts escape sequences as named children of string_literal
+		return common.Literal(node.Content()), nil
 	case "string_literal":
 		return common.ConcatenateChildStrings(node, detectorContext)
 	case "binary_expression":
