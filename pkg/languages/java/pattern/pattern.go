@@ -85,6 +85,12 @@ func (*Pattern) FindUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
+func (*Pattern) IsLeaf(node *tree.Node) bool {
+	// Treat string_literal as leaf node even though new tree-sitter grammar
+	// gives it named children. We want to match string content as a whole.
+	return node.Type() == "string_literal"
+}
+
 func (*Pattern) LeafContentTypes() []string {
 	return []string{
 		// todo: see if type identifier should be removed from here (User user) `User` is type
