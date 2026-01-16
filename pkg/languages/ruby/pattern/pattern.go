@@ -24,7 +24,8 @@ var (
 	unanchoredPatternNodeTypes      = []string{"pair", "keyword_parameter"}
 	allowedPatternQueryTypes        = []string{"identifier", "constant", "_", "call", "simple_symbol"}
 
-	classPatternErrorRegex = regexp.MustCompile(`\Aclass\s*\z`)
+	classPatternErrorRegex      = regexp.MustCompile(`\Aclass\s*\z`)
+	superclassPatternErrorRegex = regexp.MustCompile(`<\s*\z`)
 )
 
 type Pattern struct {
@@ -221,7 +222,12 @@ func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValu
 		}
 
 		errorPrefix := input[ancestor.ContentStart.Byte:node.ContentStart.Byte]
+		// Capitalize class name: class $<NAME>
 		if classPatternErrorRegex.Match(errorPrefix) {
+			return strings.ToUpper(string(dummyValue[0])) + dummyValue[1:]
+		}
+		// Capitalize superclass: class Foo < $<PARENT>
+		if superclassPatternErrorRegex.Match(errorPrefix) {
 			return strings.ToUpper(string(dummyValue[0])) + dummyValue[1:]
 		}
 	}
