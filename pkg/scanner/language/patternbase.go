@@ -1,6 +1,10 @@
 package language
 
-import "github.com/bearer/bearer/pkg/scanner/ast/tree"
+import (
+	"strings"
+
+	"github.com/bearer/bearer/pkg/scanner/ast/tree"
+)
 
 type PatternBase struct{}
 
@@ -41,5 +45,5 @@ func (*PatternBase) FixupMissing(node *tree.Node) string {
 }
 
 func (*PatternBase) IsVariable(node *tree.Node, dummyValue string) bool {
-	return node.Content() == dummyValue
+	return strings.EqualFold(node.Content(), dummyValue)
 }

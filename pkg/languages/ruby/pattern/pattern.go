@@ -17,6 +17,7 @@ var (
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
 	matchNodeRegex            = regexp.MustCompile(`\$<!>`)
 	ellipsisRegex             = regexp.MustCompile(`\$<\.\.\.>`)
+	scopeResolutionRegex      = regexp.MustCompile("::bearerVar")
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
 	patternMatchNodeContainerTypes  = []string{"argument_list", "keyword_parameter", "optional_parameter"}
@@ -65,6 +66,11 @@ func (*Pattern) ExtractVariables(input string) (string, []language.PatternVariab
 	if err != nil {
 		return "", nil, err
 	}
+
+	// following treesitter update - we need this find & replace
+	// so that we can still handle patterns with scope resolution
+	// e.g. Net::HTTP::$<CLASS>.new() or Net::$<_>::$<_>.new()
+	replaced = scopeResolutionRegex.ReplaceAllString(replaced, "::BearerVar")
 
 	return replaced, params, nil
 }
