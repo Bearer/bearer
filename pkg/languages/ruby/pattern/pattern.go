@@ -102,7 +102,30 @@ func (*Pattern) AnonymousParentTypes() []string {
 }
 
 func (*Pattern) IsContainer(node *tree.Node) bool {
-	return slices.Contains(patternMatchNodeContainerTypes, node.Type())
+	if slices.Contains(patternMatchNodeContainerTypes, node.Type()) {
+		return true
+	}
+	// Treat body_statement as a container so pattern variables skip over it
+	// and capture the actual content inside. In the new tree-sitter grammar,
+	// class/module/block bodies are wrapped in body_statement.
+	if node.Type() == "body_statement" {
+		return true
+	}
+	return false
+}
+
+func (*Pattern) IsLeaf(node *tree.Node) bool {
+	// Treat bare method calls (no receiver, no arguments) as leaf nodes.
+	// In the new tree-sitter grammar, `find_by!` is parsed as:
+	//   call(method: identifier)
+	// We want patterns like `find_by!` to match the identifier directly,
+	// not require a full call node structure.
+	if node.Type() == "call" {
+		if node.ChildByFieldName("receiver") == nil && node.ChildByFieldName("arguments") == nil {
+			return true
+		}
+	}
+	return false
 }
 
 func (*Pattern) IsAnchored(node *tree.Node) (bool, bool) {
@@ -212,7 +235,29 @@ func (*Pattern) TranslateContent(fromNodeType, toNodeType, content string) strin
 }
 
 func (*Pattern) IsRoot(node *tree.Node) bool {
-	return !slices.Contains([]string{"program"}, node.Type())
+	// Skip program node
+	if node.Type() == "program" {
+		return false
+	}
+
+	// Skip bare method calls (no receiver, no arguments) and use their
+	// method identifier as the root instead. In the new tree-sitter grammar,
+	// `find_by!` is parsed as call(method: identifier). We want auxiliary
+	// patterns like `find_by!` to compile to an identifier query, not a call query.
+	if node.Type() == "call" {
+		if node.ChildByFieldName("receiver") == nil && node.ChildByFieldName("arguments") == nil {
+			return false
+		}
+	}
+
+	// Skip body_statement nodes and use the actual content inside.
+	// In the new tree-sitter grammar, class/module/block bodies are wrapped
+	// in body_statement. Patterns should match the contents, not the wrapper.
+	if node.Type() == "body_statement" {
+		return false
+	}
+
+	return true
 }
 
 func (*Pattern) FixupVariableDummyValue(input []byte, node *tree.Node, dummyValue string) string {
