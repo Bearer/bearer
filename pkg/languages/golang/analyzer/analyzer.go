@@ -37,7 +37,7 @@ func (analyzer *analyzer) Analyze(node *sitter.Node, visitChildren func() error)
 		return analyzer.analyzeShortVarDeclaration(node, visitChildren)
 	case "var_spec":
 		return analyzer.analyzeVarSpecDeclaration(node, visitChildren)
-	case "assignment_expression":
+	case "assignment_statement":
 		return analyzer.analyzeAssignment(node, visitChildren)
 	case "call_expression":
 		return analyzer.analyzeCallExpression(node, visitChildren)

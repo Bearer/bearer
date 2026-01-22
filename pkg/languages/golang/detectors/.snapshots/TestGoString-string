@@ -248,9 +248,8 @@ children:
               id: 51
               range: 12:2 - 12:11
               dataflow_sources:
-                - 52
-                - 54
-                - 55
+                - 53
+                - 56
               queries:
                 - 0
               children:
@@ -265,6 +264,7 @@ children:
                       range: 12:2 - 12:3
                       content: s
                       alias_of:
+                        - 39
                         - 39
                 - type: '"+="'
                   id: 54
@@ -340,7 +340,7 @@ children:
                           range: 13:14 - 13:15
                           content: s
                           alias_of:
-                            - 39
+                            - 51
                         - type: '")"'
                           id: 69
                           range: 13:15 - 13:16
@@ -398,9 +398,8 @@ children:
               id: 80
               range: 16:2 - 16:18
               dataflow_sources:
-                - 81
-                - 83
-                - 84
+                - 82
+                - 85
               queries:
                 - 0
               children:
@@ -415,6 +414,7 @@ children:
                       range: 16:2 - 16:4
                       content: s2
                       alias_of:
+                        - 71
                         - 71
                 - type: '"+="'
                   id: 83
@@ -467,9 +467,8 @@ children:
               id: 94
               range: 17:2 - 17:16
               dataflow_sources:
-                - 95
-                - 97
-                - 98
+                - 96
+                - 99
               queries:
                 - 0
               children:
@@ -484,7 +483,8 @@ children:
                       range: 17:2 - 17:4
                       content: s2
                       alias_of:
-                        - 71
+                        - 80
+                        - 80
                 - type: '"+="'
                   id: 97
                   range: 17:5 - 17:7
@@ -559,7 +559,7 @@ children:
                           range: 18:14 - 18:16
                           content: s2
                           alias_of:
-                            - 71
+                            - 94
                         - type: '")"'
                           id: 112
                           range: 18:16 - 18:17
