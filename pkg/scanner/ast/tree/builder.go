@@ -176,13 +176,30 @@ func (builder *Builder) QueryResult(queryID int, sitterNode *sitter.Node, result
 		node.queryResults = make(map[int][]QueryResult)
 	}
 
+	translatedResult := builder.translateNodeMap(result)
+
+	// Deduplicate: skip if an equivalent result already exists for this queryID
+	// Two results are considered equivalent if they have the same root node
+	for _, existing := range node.queryResults[queryID] {
+		if existingRoot, ok := existing["root"]; ok {
+			if newRoot, ok := translatedResult["root"]; ok {
+				if existingRoot == newRoot {
+					if log.Trace().Enabled() {
+						log.Trace().Msgf("QueryResult: skipping duplicate queryID=%d on node id=%d", queryID, nodeID)
+					}
+					return
+				}
+			}
+		}
+	}
+
 	if log.Trace().Enabled() {
 		content := builder.contentBytes[sitterNode.StartByte():sitterNode.EndByte()]
 		nodeType := builder.types[node.TypeID]
 		log.Trace().Msgf("QueryResult: storing queryID=%d on node id=%d type=%s content=%q", queryID, nodeID, nodeType, string(content))
 	}
 
-	node.queryResults[queryID] = append(node.queryResults[queryID], builder.translateNodeMap(result))
+	node.queryResults[queryID] = append(node.queryResults[queryID], translatedResult)
 }
 
 func (builder *Builder) Build() *Tree {

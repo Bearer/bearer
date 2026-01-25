@@ -88,16 +88,19 @@ func (analyzer *analyzer) analyzeQualifiedType(node *sitter.Node, visitChildren 
 }
 
 // for i, j := range x {}
+// for range N {} (Go 1.22+ integer range with no loop variable)
 func (analyzer *analyzer) analyzeRangeClause(node *sitter.Node, visitChildren func() error) error {
 	left := node.ChildByFieldName("left")
 	right := node.ChildByFieldName("right")
 
 	analyzer.lookupVariable(right)
 
-	for _, child := range analyzer.builder.ChildrenFor(left) {
-		if !slices.Contains([]string{"_", "err", ","}, analyzer.builder.ContentFor(child)) {
-			analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
-			analyzer.builder.Dataflow(child, right)
+	if left != nil {
+		for _, child := range analyzer.builder.ChildrenFor(left) {
+			if !slices.Contains([]string{"_", "err", ","}, analyzer.builder.ContentFor(child)) {
+				analyzer.scope.Declare(analyzer.builder.ContentFor(child), child)
+				analyzer.builder.Dataflow(child, right)
+			}
 		}
 	}
 
