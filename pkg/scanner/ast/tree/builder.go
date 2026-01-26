@@ -179,16 +179,21 @@ func (builder *Builder) QueryResult(queryID int, sitterNode *sitter.Node, result
 	translatedResult := builder.translateNodeMap(result)
 
 	// Deduplicate: skip if an equivalent result already exists for this queryID
-	// Two results are considered equivalent if they have the same root node
+	// Two results are equivalent only if ALL variable bindings point to the same nodes
 	for _, existing := range node.queryResults[queryID] {
-		if existingRoot, ok := existing["root"]; ok {
-			if newRoot, ok := translatedResult["root"]; ok {
-				if existingRoot == newRoot {
-					if log.Trace().Enabled() {
-						log.Trace().Msgf("QueryResult: skipping duplicate queryID=%d on node id=%d", queryID, nodeID)
-					}
-					return
+		if len(existing) == len(translatedResult) {
+			allMatch := true
+			for key, newNode := range translatedResult {
+				if existingNode, ok := existing[key]; !ok || existingNode != newNode {
+					allMatch = false
+					break
 				}
+			}
+			if allMatch {
+				if log.Trace().Enabled() {
+					log.Trace().Msgf("QueryResult: skipping duplicate queryID=%d on node id=%d", queryID, nodeID)
+				}
+				return
 			}
 		}
 	}

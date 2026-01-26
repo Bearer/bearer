@@ -7,7 +7,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(55),
       StartColumnNumber: (*int)(5),
@@ -66,7 +66,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(90),
       StartColumnNumber: (*int)(5),
@@ -125,7 +125,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(130),
       StartColumnNumber: (*int)(5),
@@ -184,7 +184,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(170),
       StartColumnNumber: (*int)(5),
@@ -243,7 +243,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(209),
       StartColumnNumber: (*int)(5),
@@ -302,7 +302,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(249),
       StartColumnNumber: (*int)(5),
@@ -361,7 +361,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(280),
       StartColumnNumber: (*int)(5),
@@ -420,7 +420,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(308),
       StartColumnNumber: (*int)(5),
@@ -479,7 +479,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(346),
       StartColumnNumber: (*int)(5),
@@ -538,7 +538,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(366),
       StartColumnNumber: (*int)(5),
@@ -597,7 +597,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(394),
       StartColumnNumber: (*int)(5),
@@ -656,7 +656,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(425),
       StartColumnNumber: (*int)(5),
@@ -715,7 +715,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(448),
       StartColumnNumber: (*int)(5),
@@ -774,7 +774,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(477),
       StartColumnNumber: (*int)(5),
@@ -833,7 +833,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(504),
       StartColumnNumber: (*int)(5),
@@ -892,7 +892,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(547),
       StartColumnNumber: (*int)(5),
@@ -951,7 +951,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(558),
       StartColumnNumber: (*int)(5),
@@ -1010,7 +1010,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(585),
       StartColumnNumber: (*int)(5),
@@ -1069,7 +1069,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(614),
       StartColumnNumber: (*int)(5),
@@ -1128,7 +1128,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(137),
       StartColumnNumber: (*int)(17),
@@ -1157,7 +1157,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(179),
       StartColumnNumber: (*int)(17),
@@ -1186,7 +1186,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(216),
       StartColumnNumber: (*int)(17),
@@ -1215,7 +1215,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(223),
       StartColumnNumber: (*int)(17),
@@ -1244,7 +1244,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(256),
       StartColumnNumber: (*int)(17),
@@ -1273,7 +1273,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(263),
       StartColumnNumber: (*int)(17),
@@ -1302,7 +1302,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(268),
       StartColumnNumber: (*int)(17),
@@ -1331,7 +1331,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(287),
       StartColumnNumber: (*int)(17),
@@ -1360,7 +1360,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(293),
       StartColumnNumber: (*int)(17),
@@ -1389,7 +1389,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(315),
       StartColumnNumber: (*int)(17),
@@ -1418,7 +1418,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(322),
       StartColumnNumber: (*int)(17),
@@ -1447,7 +1447,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(404),
       StartColumnNumber: (*int)(17),
@@ -1476,7 +1476,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(435),
       StartColumnNumber: (*int)(17),
@@ -1505,7 +1505,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(511),
       StartColumnNumber: (*int)(17),
@@ -1534,7 +1534,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(517),
       StartColumnNumber: (*int)(17),
@@ -1563,7 +1563,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(565),
       StartColumnNumber: (*int)(17),
@@ -1592,7 +1592,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(593),
       StartColumnNumber: (*int)(17),
@@ -1621,7 +1621,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(621),
       StartColumnNumber: (*int)(17),
@@ -1650,7 +1650,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(642),
       StartColumnNumber: (*int)(9),
@@ -1679,7 +1679,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(646),
       StartColumnNumber: (*int)(9),
@@ -1708,7 +1708,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(650),
       StartColumnNumber: (*int)(9),
@@ -1737,7 +1737,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(654),
       StartColumnNumber: (*int)(9),
@@ -1766,7 +1766,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(657),
       StartColumnNumber: (*int)(9),
@@ -1795,7 +1795,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(665),
       StartColumnNumber: (*int)(9),
@@ -1824,7 +1824,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(672),
       StartColumnNumber: (*int)(9),
@@ -1853,7 +1853,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(676),
       StartColumnNumber: (*int)(9),
@@ -1882,7 +1882,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(679),
       StartColumnNumber: (*int)(9),
@@ -1911,7 +1911,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(691),
       StartColumnNumber: (*int)(9),
@@ -1940,7 +1940,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(694),
       StartColumnNumber: (*int)(9),
@@ -1969,7 +1969,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(697),
       StartColumnNumber: (*int)(9),
@@ -1998,7 +1998,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(700),
       StartColumnNumber: (*int)(9),
@@ -2027,7 +2027,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(709),
       StartColumnNumber: (*int)(9),
@@ -2056,7 +2056,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(713),
       StartColumnNumber: (*int)(9),
@@ -2085,7 +2085,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(722),
       StartColumnNumber: (*int)(9),
@@ -2114,7 +2114,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(725),
       StartColumnNumber: (*int)(13),
@@ -2143,7 +2143,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(728),
       StartColumnNumber: (*int)(13),
@@ -2172,7 +2172,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(731),
       StartColumnNumber: (*int)(9),
@@ -2201,7 +2201,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(734),
       StartColumnNumber: (*int)(9),
@@ -2230,7 +2230,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(737),
       StartColumnNumber: (*int)(9),
@@ -2259,7 +2259,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(740),
       StartColumnNumber: (*int)(9),
@@ -2288,7 +2288,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(743),
       StartColumnNumber: (*int)(9),
@@ -2317,7 +2317,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(746),
       StartColumnNumber: (*int)(9),
@@ -2346,7 +2346,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(749),
       StartColumnNumber: (*int)(9),
@@ -2375,7 +2375,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(760),
       StartColumnNumber: (*int)(9),
@@ -2404,7 +2404,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(763),
       StartColumnNumber: (*int)(9),
@@ -2433,7 +2433,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(770),
       StartColumnNumber: (*int)(9),
@@ -2462,7 +2462,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(773),
       StartColumnNumber: (*int)(9),
@@ -2491,7 +2491,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv3-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(775),
       StartColumnNumber: (*int)(9),
