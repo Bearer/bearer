@@ -176,13 +176,35 @@ func (builder *Builder) QueryResult(queryID int, sitterNode *sitter.Node, result
 		node.queryResults = make(map[int][]QueryResult)
 	}
 
+	translatedResult := builder.translateNodeMap(result)
+
+	// Deduplicate: skip if an equivalent result already exists for this queryID
+	// Two results are equivalent only if ALL variable bindings point to the same nodes
+	for _, existing := range node.queryResults[queryID] {
+		if len(existing) == len(translatedResult) {
+			allMatch := true
+			for key, newNode := range translatedResult {
+				if existingNode, ok := existing[key]; !ok || existingNode != newNode {
+					allMatch = false
+					break
+				}
+			}
+			if allMatch {
+				if log.Trace().Enabled() {
+					log.Trace().Msgf("QueryResult: skipping duplicate queryID=%d on node id=%d", queryID, nodeID)
+				}
+				return
+			}
+		}
+	}
+
 	if log.Trace().Enabled() {
 		content := builder.contentBytes[sitterNode.StartByte():sitterNode.EndByte()]
 		nodeType := builder.types[node.TypeID]
 		log.Trace().Msgf("QueryResult: storing queryID=%d on node id=%d type=%s content=%q", queryID, nodeID, nodeType, string(content))
 	}
 
-	node.queryResults[queryID] = append(node.queryResults[queryID], builder.translateNodeMap(result))
+	node.queryResults[queryID] = append(node.queryResults[queryID], translatedResult)
 }
 
 func (builder *Builder) Build() *Tree {

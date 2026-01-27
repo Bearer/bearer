@@ -10,7 +10,7 @@ require (
 	github.com/fatih/color v1.18.0
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/gitsight/go-vcsurl v1.0.1
-	github.com/go-enry/go-enry/v2 v2.8.4
+	github.com/go-enry/go-enry/v2 v2.9.2
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.6.0
 	github.com/hhatto/gocloc v0.7.0

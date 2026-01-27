@@ -7,7 +7,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(34),
       StartColumnNumber: (*int)(5),
@@ -34,7 +34,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(63),
       StartColumnNumber: (*int)(5),
@@ -61,7 +61,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(94),
       StartColumnNumber: (*int)(5),
@@ -88,7 +88,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(131),
       StartColumnNumber: (*int)(5),
@@ -115,7 +115,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(163),
       StartColumnNumber: (*int)(5),
@@ -142,7 +142,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(190),
       StartColumnNumber: (*int)(5),
@@ -169,7 +169,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(225),
       StartColumnNumber: (*int)(5),
@@ -196,7 +196,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(253),
       StartColumnNumber: (*int)(5),
@@ -223,7 +223,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(290),
       StartColumnNumber: (*int)(5),
@@ -250,7 +250,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(310),
       StartColumnNumber: (*int)(5),
@@ -277,7 +277,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(334),
       StartColumnNumber: (*int)(5),
@@ -304,7 +304,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(361),
       StartColumnNumber: (*int)(5),
@@ -331,7 +331,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(387),
       StartColumnNumber: (*int)(5),
@@ -358,7 +358,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(407),
       StartColumnNumber: (*int)(5),
@@ -385,7 +385,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(429),
       StartColumnNumber: (*int)(5),
@@ -412,7 +412,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(451),
       StartColumnNumber: (*int)(5),
@@ -439,7 +439,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(488),
       StartColumnNumber: (*int)(5),
@@ -466,7 +466,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(502),
       StartColumnNumber: (*int)(5),
@@ -493,7 +493,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(526),
       StartColumnNumber: (*int)(5),
@@ -520,7 +520,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(552),
       StartColumnNumber: (*int)(5),
@@ -547,7 +547,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(48),
       StartColumnNumber: (*int)(17),
@@ -576,7 +576,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(53),
       StartColumnNumber: (*int)(17),
@@ -605,7 +605,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(104),
       StartColumnNumber: (*int)(17),
@@ -634,7 +634,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(141),
       StartColumnNumber: (*int)(17),
@@ -663,7 +663,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(173),
       StartColumnNumber: (*int)(17),
@@ -692,7 +692,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(202),
       StartColumnNumber: (*int)(17),
@@ -721,7 +721,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(208),
       StartColumnNumber: (*int)(17),
@@ -750,7 +750,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(213),
       StartColumnNumber: (*int)(17),
@@ -779,7 +779,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(235),
       StartColumnNumber: (*int)(17),
@@ -808,7 +808,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(239),
       StartColumnNumber: (*int)(17),
@@ -837,7 +837,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(264),
       StartColumnNumber: (*int)(17),
@@ -866,7 +866,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(270),
       StartColumnNumber: (*int)(17),
@@ -895,7 +895,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(275),
       StartColumnNumber: (*int)(17),
@@ -924,7 +924,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(344),
       StartColumnNumber: (*int)(17),
@@ -953,7 +953,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(371),
       StartColumnNumber: (*int)(17),
@@ -982,7 +982,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(377),
       StartColumnNumber: (*int)(17),
@@ -1011,7 +1011,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(461),
       StartColumnNumber: (*int)(17),
@@ -1040,7 +1040,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(466),
       StartColumnNumber: (*int)(17),
@@ -1069,7 +1069,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(512),
       StartColumnNumber: (*int)(17),
@@ -1098,7 +1098,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(536),
       StartColumnNumber: (*int)(17),
@@ -1127,7 +1127,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(562),
       StartColumnNumber: (*int)(17),
@@ -1156,7 +1156,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(588),
       StartColumnNumber: (*int)(7),
@@ -1185,7 +1185,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(591),
       StartColumnNumber: (*int)(7),
@@ -1214,7 +1214,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(594),
       StartColumnNumber: (*int)(7),
@@ -1243,7 +1243,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(597),
       StartColumnNumber: (*int)(7),
@@ -1272,7 +1272,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(600),
       StartColumnNumber: (*int)(7),
@@ -1301,7 +1301,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(607),
       StartColumnNumber: (*int)(7),
@@ -1330,7 +1330,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(615),
       StartColumnNumber: (*int)(7),
@@ -1359,7 +1359,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(620),
       StartColumnNumber: (*int)(7),
@@ -1388,7 +1388,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(623),
       StartColumnNumber: (*int)(11),
@@ -1417,7 +1417,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(625),
       StartColumnNumber: (*int)(11),
@@ -1446,7 +1446,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(627),
       StartColumnNumber: (*int)(7),
@@ -1475,7 +1475,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(629),
       StartColumnNumber: (*int)(7),
@@ -1504,7 +1504,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(631),
       StartColumnNumber: (*int)(7),
@@ -1533,7 +1533,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(633),
       StartColumnNumber: (*int)(7),
@@ -1562,7 +1562,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(635),
       StartColumnNumber: (*int)(7),
@@ -1591,7 +1591,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(637),
       StartColumnNumber: (*int)(7),
@@ -1620,7 +1620,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(639),
       StartColumnNumber: (*int)(7),
@@ -1649,7 +1649,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(648),
       StartColumnNumber: (*int)(7),
@@ -1678,7 +1678,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(651),
       StartColumnNumber: (*int)(7),
@@ -1707,7 +1707,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(658),
       StartColumnNumber: (*int)(7),
@@ -1736,7 +1736,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(661),
       StartColumnNumber: (*int)(7),
@@ -1765,7 +1765,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(670),
       StartColumnNumber: (*int)(7),
@@ -1794,7 +1794,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(673),
       StartColumnNumber: (*int)(7),
@@ -1823,7 +1823,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(675),
       StartColumnNumber: (*int)(7),
@@ -1852,7 +1852,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(677),
       StartColumnNumber: (*int)(7),
@@ -1881,7 +1881,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.yaml",
       FullFilename: (string) "",
-      Language: (string) (len=4) "YAML",
+      Language: (string) (len=10) "OASv2-yaml",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(680),
       StartColumnNumber: (*int)(11),

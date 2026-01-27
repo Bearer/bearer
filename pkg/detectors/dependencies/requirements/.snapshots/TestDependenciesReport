@@ -7,8 +7,8 @@
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
       FullFilename: (string) "",
-      Language: (string) (len=4) "Text",
-      LanguageType: (string) (len=5) "prose",
+      Language: (string) (len=16) "Pip Requirements",
+      LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(2),
       StartColumnNumber: (*int)(0),
       EndLineNumber: (*int)(2),
@@ -30,8 +30,8 @@
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
       FullFilename: (string) "",
-      Language: (string) (len=4) "Text",
-      LanguageType: (string) (len=5) "prose",
+      Language: (string) (len=16) "Pip Requirements",
+      LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(3),
       StartColumnNumber: (*int)(0),
       EndLineNumber: (*int)(3),
@@ -53,8 +53,8 @@
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
       FullFilename: (string) "",
-      Language: (string) (len=4) "Text",
-      LanguageType: (string) (len=5) "prose",
+      Language: (string) (len=16) "Pip Requirements",
+      LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(4),
       StartColumnNumber: (*int)(0),
       EndLineNumber: (*int)(4),
@@ -76,8 +76,8 @@
     Source: (source.Source) {
       Filename: (string) (len=16) "requirements.txt",
       FullFilename: (string) "",
-      Language: (string) (len=4) "Text",
-      LanguageType: (string) (len=5) "prose",
+      Language: (string) (len=16) "Pip Requirements",
+      LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(5),
       StartColumnNumber: (*int)(0),
       EndLineNumber: (*int)(5),

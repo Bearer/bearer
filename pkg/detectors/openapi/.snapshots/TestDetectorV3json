@@ -7,7 +7,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(54),
       StartColumnNumber: (*int)(7),
@@ -42,7 +42,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(112),
       StartColumnNumber: (*int)(7),
@@ -77,7 +77,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(166),
       StartColumnNumber: (*int)(7),
@@ -112,7 +112,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(219),
       StartColumnNumber: (*int)(7),
@@ -147,7 +147,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(274),
       StartColumnNumber: (*int)(7),
@@ -182,7 +182,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(333),
       StartColumnNumber: (*int)(7),
@@ -217,7 +217,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(377),
       StartColumnNumber: (*int)(7),
@@ -252,7 +252,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(416),
       StartColumnNumber: (*int)(7),
@@ -287,7 +287,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(472),
       StartColumnNumber: (*int)(7),
@@ -322,7 +322,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(501),
       StartColumnNumber: (*int)(7),
@@ -357,7 +357,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(543),
       StartColumnNumber: (*int)(7),
@@ -392,7 +392,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(584),
       StartColumnNumber: (*int)(7),
@@ -427,7 +427,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(612),
       StartColumnNumber: (*int)(7),
@@ -462,7 +462,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(657),
       StartColumnNumber: (*int)(7),
@@ -497,7 +497,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(697),
       StartColumnNumber: (*int)(7),
@@ -532,7 +532,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(761),
       StartColumnNumber: (*int)(7),
@@ -567,7 +567,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(775),
       StartColumnNumber: (*int)(7),
@@ -602,7 +602,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(815),
       StartColumnNumber: (*int)(7),
@@ -637,7 +637,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(857),
       StartColumnNumber: (*int)(7),
@@ -672,7 +672,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(173),
       StartColumnNumber: (*int)(21),
@@ -701,7 +701,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(226),
       StartColumnNumber: (*int)(21),
@@ -730,7 +730,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(281),
       StartColumnNumber: (*int)(21),
@@ -759,7 +759,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(291),
       StartColumnNumber: (*int)(21),
@@ -788,7 +788,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(340),
       StartColumnNumber: (*int)(21),
@@ -817,7 +817,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(350),
       StartColumnNumber: (*int)(21),
@@ -846,7 +846,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(358),
       StartColumnNumber: (*int)(21),
@@ -875,7 +875,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(384),
       StartColumnNumber: (*int)(21),
@@ -904,7 +904,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(393),
       StartColumnNumber: (*int)(21),
@@ -933,7 +933,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(423),
       StartColumnNumber: (*int)(21),
@@ -962,7 +962,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(433),
       StartColumnNumber: (*int)(21),
@@ -991,7 +991,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(550),
       StartColumnNumber: (*int)(21),
@@ -1020,7 +1020,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(591),
       StartColumnNumber: (*int)(21),
@@ -1049,7 +1049,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(704),
       StartColumnNumber: (*int)(21),
@@ -1078,7 +1078,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(713),
       StartColumnNumber: (*int)(21),
@@ -1107,7 +1107,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(782),
       StartColumnNumber: (*int)(21),
@@ -1136,7 +1136,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(822),
       StartColumnNumber: (*int)(21),
@@ -1165,7 +1165,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(864),
       StartColumnNumber: (*int)(21),
@@ -1194,7 +1194,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(889),
       StartColumnNumber: (*int)(11),
@@ -1223,7 +1223,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(894),
       StartColumnNumber: (*int)(11),
@@ -1252,7 +1252,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(899),
       StartColumnNumber: (*int)(11),
@@ -1281,7 +1281,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(904),
       StartColumnNumber: (*int)(11),
@@ -1310,7 +1310,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(908),
       StartColumnNumber: (*int)(11),
@@ -1339,7 +1339,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(914),
       StartColumnNumber: (*int)(11),
@@ -1368,7 +1368,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(925),
       StartColumnNumber: (*int)(11),
@@ -1397,7 +1397,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(930),
       StartColumnNumber: (*int)(11),
@@ -1426,7 +1426,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(934),
       StartColumnNumber: (*int)(11),
@@ -1455,7 +1455,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(952),
       StartColumnNumber: (*int)(11),
@@ -1484,7 +1484,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(956),
       StartColumnNumber: (*int)(11),
@@ -1513,7 +1513,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(960),
       StartColumnNumber: (*int)(11),
@@ -1542,7 +1542,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(964),
       StartColumnNumber: (*int)(11),
@@ -1571,7 +1571,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(976),
       StartColumnNumber: (*int)(11),
@@ -1600,7 +1600,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(979),
       StartColumnNumber: (*int)(15),
@@ -1629,7 +1629,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(983),
       StartColumnNumber: (*int)(15),
@@ -1658,7 +1658,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(989),
       StartColumnNumber: (*int)(11),
@@ -1687,7 +1687,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1001),
       StartColumnNumber: (*int)(11),
@@ -1716,7 +1716,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1006),
       StartColumnNumber: (*int)(11),
@@ -1745,7 +1745,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1010),
       StartColumnNumber: (*int)(11),
@@ -1774,7 +1774,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1014),
       StartColumnNumber: (*int)(11),
@@ -1803,7 +1803,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1018),
       StartColumnNumber: (*int)(11),
@@ -1832,7 +1832,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1022),
       StartColumnNumber: (*int)(11),
@@ -1861,7 +1861,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1026),
       StartColumnNumber: (*int)(11),
@@ -1890,7 +1890,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1030),
       StartColumnNumber: (*int)(11),
@@ -1919,7 +1919,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1044),
       StartColumnNumber: (*int)(11),
@@ -1948,7 +1948,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1048),
       StartColumnNumber: (*int)(11),
@@ -1977,7 +1977,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1060),
       StartColumnNumber: (*int)(11),
@@ -2006,7 +2006,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1065),
       StartColumnNumber: (*int)(11),
@@ -2035,7 +2035,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1069),
       StartColumnNumber: (*int)(11),
@@ -2064,7 +2064,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1072),
       StartColumnNumber: (*int)(11),
@@ -2093,7 +2093,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1084),
       StartColumnNumber: (*int)(11),
@@ -2122,7 +2122,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1093),
       StartColumnNumber: (*int)(11),
@@ -2151,7 +2151,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1106),
       StartColumnNumber: (*int)(11),
@@ -2180,7 +2180,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1110),
       StartColumnNumber: (*int)(11),
@@ -2209,7 +2209,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-openapi.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv3-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(1113),
       StartColumnNumber: (*int)(11),

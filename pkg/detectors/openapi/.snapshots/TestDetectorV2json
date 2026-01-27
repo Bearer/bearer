@@ -7,7 +7,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(17),
       StartColumnNumber: (*int)(7),
@@ -34,7 +34,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(58),
       StartColumnNumber: (*int)(7),
@@ -61,7 +61,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(76),
       StartColumnNumber: (*int)(7),
@@ -88,7 +88,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(23),
       StartColumnNumber: (*int)(21),
@@ -117,7 +117,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(31),
       StartColumnNumber: (*int)(21),
@@ -146,7 +146,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(82),
       StartColumnNumber: (*int)(21),
@@ -175,7 +175,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(118),
       StartColumnNumber: (*int)(9),
@@ -204,7 +204,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(121),
       StartColumnNumber: (*int)(9),
@@ -233,7 +233,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(123),
       StartColumnNumber: (*int)(15),
@@ -262,7 +262,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(126),
       StartColumnNumber: (*int)(15),
@@ -291,7 +291,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(136),
       StartColumnNumber: (*int)(9),
@@ -320,7 +320,7 @@
     Source: (source.Source) {
       Filename: (string) (len=21) "petstore-swagger.json",
       FullFilename: (string) "",
-      Language: (string) (len=4) "JSON",
+      Language: (string) (len=10) "OASv2-json",
       LanguageType: (string) (len=4) "data",
       StartLineNumber: (*int)(140),
       StartColumnNumber: (*int)(9),

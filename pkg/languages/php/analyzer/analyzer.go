@@ -227,10 +227,13 @@ func (analyzer *analyzer) analyzeConstDeclaration(node *sitter.Node, visitChildr
 }
 
 // catch(FooException | BarException $e) {}
+// catch(FooException) {} // PHP 8+ allows catch without variable
 func (analyzer *analyzer) analyzeCatchClause(node *sitter.Node, visitChildren func() error) error {
 	return analyzer.withScope(language.NewScope(analyzer.scope), func() error {
 		name := node.ChildByFieldName("name")
-		analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
+		if name != nil {
+			analyzer.scope.Declare(analyzer.builder.ContentFor(name), name)
+		}
 
 		return visitChildren()
 	})
