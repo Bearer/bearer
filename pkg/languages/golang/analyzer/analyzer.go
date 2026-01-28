@@ -141,9 +141,22 @@ func (analyzer *analyzer) analyzeImportSpec(node *sitter.Node, visitChildren fun
 func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren func() error) error {
 	left := node.ChildByFieldName("left").Child(0)
 	right := node.ChildByFieldName("right").Child(0)
+	varName := analyzer.builder.ContentFor(left)
+
+	// Check if this variable already exists in scope (reassignment).
+	// If so, we need to preserve the taint chain by creating an alias
+	// from the previous value to this assignment.
+	previousNode := analyzer.scope.Lookup(varName)
 
 	if analyzer.builder.ContentFor(node.Child(1)) == "=" {
 		analyzer.builder.Alias(node, right)
+		// Preserve taint chain: if this is a reassignment of a previously declared
+		// variable (e.g., a function parameter), also alias the previous value.
+		// This ensures that if the original variable was tainted, the taint
+		// propagates through the reassignment.
+		if previousNode != nil {
+			analyzer.builder.Alias(node, previousNode)
+		}
 	} else { // +=
 		analyzer.builder.Dataflow(node, left, right)
 		analyzer.lookupVariable(left)
@@ -153,7 +166,7 @@ func (analyzer *analyzer) analyzeAssignment(node *sitter.Node, visitChildren fun
 
 	err := visitChildren()
 
-	analyzer.scope.Assign(analyzer.builder.ContentFor(left), node)
+	analyzer.scope.Assign(varName, node)
 
 	return err
 }
