@@ -289,8 +289,8 @@ github.com/valyala/fastjson v1.6.4 h1:uAUNq9Z6ymTgGhcm0UynUAB6tlbakBrz6CQFax3BXV
 github.com/valyala/fastjson v1.6.4/go.mod h1:CLCAqky6SMuOcxStkYQvblddUtoRxhYMGLrsQns1aXY=
 github.com/vektah/gqlparser/v2 v2.5.31 h1:YhWGA1mfTjID7qJhd1+Vxhpk5HTgydrGU9IgkWBTJ7k=
 github.com/vektah/gqlparser/v2 v2.5.31/go.mod h1:c1I28gSOVNzlfc4WuDlqU7voQnsqI6OG2amkBAFmgts=
-github.com/weppos/publicsuffix-go v0.50.1 h1:elrBHeSkS/eIb169+DnLrknqmdP4AjT0Q0tEdytz1Og=
-github.com/weppos/publicsuffix-go v0.50.1/go.mod h1:znn0JVXjcR5hpUl9pbEogwH6I710rA1AX0QQPT0bf+k=
+github.com/weppos/publicsuffix-go v0.50.2 h1:KsJFc8IEKTJovM46SRCnGNsM+rFShxcs6VEHjOJcXzE=
+github.com/weppos/publicsuffix-go v0.50.2/go.mod h1:CbQCKDtXF8UcT7hrxeMa0MDjwhpOI9iYOU7cfq+yo8k=
 github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f/go.mod h1:N2zxlSyiKSe5eX1tZViRH5QA0qijqEDrYZiPEAiq3wU=
 github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb h1:zGWFAtiMcyryUHoUjUJX0/lt1H2+i2Ka2n+D3DImSNo=
 github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb/go.mod h1:N2zxlSyiKSe5eX1tZViRH5QA0qijqEDrYZiPEAiq3wU=
