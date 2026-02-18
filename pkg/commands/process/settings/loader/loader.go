@@ -38,7 +38,7 @@ func FromOptions(
 		return settings.Config{}, err
 	}
 
-	ignoredFingerprints, _, _, err := ignore.GetIgnoredFingerprints(opts.GeneralOptions.IgnoreFile, &opts.ScanOptions.Target)
+	ignoredFingerprints, _, _, err := ignore.GetIgnoredFingerprints(opts.IgnoreFile, &opts.Target)
 	if err != nil {
 		return settings.Config{}, err
 	}
@@ -57,12 +57,12 @@ func FromOptions(
 		Scan:                opts.ScanOptions,
 		Report:              opts.ReportOptions,
 		IgnoredFingerprints: ignoredFingerprints,
-		NoColor:             opts.GeneralOptions.NoColor || opts.ReportOptions.Output != "",
-		DebugProfile:        opts.GeneralOptions.DebugProfile,
-		Debug:               opts.GeneralOptions.Debug,
-		LogLevel:            opts.GeneralOptions.LogLevel,
-		IgnoreFile:          opts.GeneralOptions.IgnoreFile,
-		IgnoreGit:           opts.GeneralOptions.IgnoreGit,
+		NoColor:             opts.NoColor || opts.Output != "",
+		DebugProfile:        opts.DebugProfile,
+		Debug:               opts.Debug,
+		LogLevel:            opts.LogLevel,
+		IgnoreFile:          opts.IgnoreFile,
+		IgnoreGit:           opts.IgnoreGit,
 		Policies:            policies,
 		Rules:               result.Rules,
 		LoadedRuleCount:     result.LoadedRuleCount,

@@ -35,10 +35,7 @@ func (res *Resolver) ResolveClosestContext(node *sitter.Node) *Context {
 
 func (res *Resolver) ResolveVariable(node *sitter.Node, variableName string) *variables.Variable {
 	currentContext := res.ResolveClosestContext(node)
-	for {
-		if currentContext == nil {
-			break
-		}
+	for currentContext != nil {
 
 		if variable, ok := currentContext.LocalVariables[variableName]; ok {
 			return variable

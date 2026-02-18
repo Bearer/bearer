@@ -109,7 +109,7 @@ func writeDocs(cmd *cobra.Command, dir string) error {
 	basename := "bearer.yaml"
 
 	if cmd.CommandPath() != "" {
-		basename = fmt.Sprintf("%s.yaml", strings.Replace(cmd.CommandPath(), " ", "_", -1))
+		basename = fmt.Sprintf("%s.yaml", strings.ReplaceAll(cmd.CommandPath(), " ", "_"))
 	}
 
 	filename := filepath.Join(dir, basename)
@@ -231,7 +231,7 @@ func genFlagResult(flags *pflag.FlagSet) []cmdOption {
 			return
 		}
 
-		if !(len(flag.ShorthandDeprecated) > 0) && len(flag.Shorthand) > 0 {
+		if (len(flag.ShorthandDeprecated) <= 0) && len(flag.Shorthand) > 0 {
 			opt := cmdOption{
 				flag.Name,
 				flag.Shorthand,

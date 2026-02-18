@@ -102,7 +102,7 @@ func (scanner *Scanner) Scan(
 	ruleScanner := rulescanner.New(
 		ctx,
 		scanner.detectorSet,
-		fileInfo.FileInfo.Name(),
+		fileInfo.Name(),
 		fileStats,
 		traversalCache,
 		cache,

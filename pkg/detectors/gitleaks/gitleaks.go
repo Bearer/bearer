@@ -14,6 +14,7 @@ import (
 	"github.com/pelletier/go-toml"
 	"github.com/zricethezav/gitleaks/v8/config"
 	"github.com/zricethezav/gitleaks/v8/detect"
+	"github.com/zricethezav/gitleaks/v8/sources"
 )
 
 //go:embed gitlab_config.toml
@@ -45,7 +46,15 @@ func (detector *detector) AcceptDir(dir *file.Path) (bool, error) {
 }
 
 func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, report report.Report) (bool, error) {
-	findings, err := detector.gitleaksDetector.DetectFiles(file.Path.AbsolutePath)
+	scanTargets := make(chan sources.ScanTarget, 1)
+	go func() {
+		defer close(scanTargets)
+		scanTargets <- sources.ScanTarget{
+			Path: file.AbsolutePath,
+		}
+	}()
+
+	findings, err := detector.gitleaksDetector.DetectFiles(scanTargets)
 
 	if err != nil {
 		return false, err
@@ -56,7 +65,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		report.AddSecretLeak(secret.Secret{
 			Description: finding.Description,
 		}, source.Source{
-			Filename:          file.Path.RelativePath,
+			Filename:          file.RelativePath,
 			StartLineNumber:   &finding.StartLine,
 			StartColumnNumber: &finding.StartColumn,
 			EndLineNumber:     &finding.EndLine,

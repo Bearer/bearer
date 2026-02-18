@@ -29,7 +29,7 @@ var builtinRuleIDs = []string{
 
 func validateCustomRuleSchema(entry []byte, filename string) string {
 	validationStr := &strings.Builder{}
-	validationStr.WriteString(fmt.Sprintf("Failed to load %s\nValidating against %s\n\n", filename, SCHEMA_URL))
+	fmt.Fprintf(validationStr, "Failed to load %s\nValidating against %s\n\n", filename, SCHEMA_URL)
 	schema, err := loadSchema(SCHEMA_URL)
 	if err != nil {
 		validationStr.WriteString("Could not load schema to validate")
@@ -51,9 +51,9 @@ func validateCustomRuleSchema(entry []byte, filename string) string {
 	if result.Valid() {
 		validationStr.WriteString("Format of appears valid but could not be loaded")
 	} else {
-		validationStr.WriteString(fmt.Sprintf("%s validation issues found:\n", filename))
+		fmt.Fprintf(validationStr, "%s validation issues found:\n", filename)
 		for _, desc := range result.Errors() {
-			validationStr.WriteString(fmt.Sprintf("- %s\n", desc))
+			fmt.Fprintf(validationStr, "- %s\n", desc)
 		}
 		fmt.Print("\n")
 	}

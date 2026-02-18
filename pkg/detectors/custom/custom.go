@@ -94,7 +94,7 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 
 		switch lang {
 		case "sql":
-			f, err := os.Open(file.Path.AbsolutePath)
+			f, err := os.Open(file.AbsolutePath)
 			if err != nil {
 				return false, err
 			}

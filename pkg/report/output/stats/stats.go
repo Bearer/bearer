@@ -115,10 +115,10 @@ func WriteStatsToString(outputStr *strings.Builder, statistics *types.Stats) {
 	}
 
 	if statistics.NumberOfDataTypes != 0 {
-		outputStr.WriteString(fmt.Sprintf(`- %d unique data type(s), representing %d occurrences, including %s.`,
+		fmt.Fprintf(outputStr, `- %d unique data type(s), representing %d occurrences, including %s.`,
 			statistics.NumberOfDataTypes,
 			totalDataTypeOccurrences,
-			strings.Join(statistics.DataGroups, ", ")))
+			strings.Join(statistics.DataGroups, ", "))
 	}
 
 	if statistics.NumberOfDatabases != 0 {
@@ -129,23 +129,23 @@ func WriteStatsToString(outputStr *strings.Builder, statistics *types.Stats) {
 			}
 		}
 
-		outputStr.WriteString(fmt.Sprintf(`
+		fmt.Fprintf(outputStr, `
 - %d database(s) storing %d data type(s) including %d encrypted data type(s).`,
 			statistics.NumberOfDatabases,
 			statistics.NumberOfDataTypes,
-			numberOfEncryptedDataTypes))
+			numberOfEncryptedDataTypes)
 	}
 
 	if statistics.NumberOfExternalAPIs != 0 {
-		outputStr.WriteString(fmt.Sprintf(`
+		fmt.Fprintf(outputStr, `
 - %d external service(s).`,
-			statistics.NumberOfExternalAPIs))
+			statistics.NumberOfExternalAPIs)
 	}
 
 	if statistics.NumberOfInternalAPIs != 0 {
-		outputStr.WriteString(fmt.Sprintf(`
+		fmt.Fprintf(outputStr, `
 - %d internal URL(s).`,
-			statistics.NumberOfInternalAPIs))
+			statistics.NumberOfInternalAPIs)
 	}
 }
 

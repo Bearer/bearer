@@ -191,10 +191,7 @@ func defaultRecipes() []Recipe {
 }
 
 func defaultDataCategories(context flagtypes.Context) []DataCategory {
-	skipHealthContext := true
-	if context == flag.Health {
-		skipHealthContext = false
-	}
+	skipHealthContext := !(context == flag.Health)
 
 	dataCategories := []DataCategory{}
 

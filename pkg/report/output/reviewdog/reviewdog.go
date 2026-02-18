@@ -18,7 +18,7 @@ func ReportReviewdog(outputDetections map[string][]securitytypes.Finding) (revie
 					severity = "ERROR"
 				}
 
-				message := "\n# " + finding.Rule.Title + "\n" + finding.Rule.Description
+				message := "\n# " + finding.Title + "\n" + finding.Description
 
 				reviewdogDiagnostics = append(reviewdogDiagnostics, reviewdog.Diagnostic{
 					Message:  message,
@@ -37,8 +37,8 @@ func ReportReviewdog(outputDetections map[string][]securitytypes.Finding) (revie
 						},
 					},
 					Code: reviewdog.Code{
-						RuleId:           finding.Rule.Id,
-						DocumentationUrl: finding.Rule.DocumentationUrl,
+						RuleId:           finding.Id,
+						DocumentationUrl: finding.DocumentationUrl,
 					},
 					Suggestions: []reviewdog.Suggestion{},
 				})

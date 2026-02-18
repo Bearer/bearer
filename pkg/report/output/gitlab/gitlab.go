@@ -22,9 +22,9 @@ func ReportGitLab(
 				identifiers := []gitlab.Identifier{
 					{
 						Type:  "bearer",
-						Name:  finding.Rule.Id,
-						Value: finding.Rule.Id,
-						Url:   finding.Rule.DocumentationUrl,
+						Name:  finding.Id,
+						Value: finding.Id,
+						Url:   finding.DocumentationUrl,
 					},
 				}
 				for _, cwe := range finding.CWEIDs {
@@ -39,7 +39,7 @@ func ReportGitLab(
 				vulnerabilities = append(vulnerabilities, gitlab.Vulnerability{
 					Id:                   finding.Fingerprint,
 					Category:             "sast",
-					Name:                 finding.Rule.Title,
+					Name:                 finding.Title,
 					Description:          extractDescription(finding.Description),
 					Solution:             extractSolution(finding.Description),
 					Severity:             formatSeverity(level), // level,

@@ -43,8 +43,8 @@ func NewProcessingWorkerCommand(engine engine.Engine) *cobra.Command {
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			log.Debug().Msgf("running scan worker on port `%s`", options.WorkerOptions.Port)
-			return worker.Start(options.WorkerOptions.ParentProcessID, options.WorkerOptions.Port, engine)
+			log.Debug().Msgf("running scan worker on port `%s`", options.Port)
+			return worker.Start(options.ParentProcessID, options.Port, engine)
 		},
 		Hidden:        true,
 		SilenceErrors: true,

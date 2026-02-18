@@ -30,7 +30,7 @@ func GoclocDetectorOutput(path string, opts flagtypes.Options) (*gocloc.Result, 
 }
 
 func hideProgress(opts flagtypes.Options) bool {
-	return opts.ScanOptions.HideProgressBar || opts.ScanOptions.Quiet || opts.Debug
+	return opts.HideProgressBar || opts.Quiet || opts.Debug
 }
 
 func getProgressBar() *progressbar.ProgressBar {

@@ -22,7 +22,7 @@ func (r *SerializableRegexp) UnmarshalText(b []byte) error {
 
 func (r *SerializableRegexp) MarshalText() ([]byte, error) {
 	if r.Regexp != nil {
-		return []byte(r.Regexp.String()), nil
+		return []byte(r.String()), nil
 	}
 
 	return nil, nil

@@ -43,7 +43,7 @@ func ReportSarif(outputDetections map[string][]securitytypes.Finding, rules map[
 		if findings, ok := outputDetections[level]; ok {
 			for _, finding := range findings {
 				results = append(results, sarif.Result{
-					RuleId: finding.Rule.Id,
+					RuleId: finding.Id,
 					Message: sarif.Message{
 						Text: finding.Title,
 					},

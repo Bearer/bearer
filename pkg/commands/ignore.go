@@ -89,11 +89,11 @@ $ bearer ignore show <fingerprint>`,
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			if len(args) == 0 && !options.IgnoreShowOptions.All {
+			if len(args) == 0 && !options.All {
 				return cmd.Help()
 			}
 
-			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreFile, nil)
 			if err != nil {
 				cmd.Printf("Issue loading ignored fingerprints from %s: %s", err, ignoreFilepath)
 				return nil
@@ -104,7 +104,7 @@ $ bearer ignore show <fingerprint>`,
 			}
 
 			cmd.Print("\n")
-			if options.IgnoreShowOptions.All {
+			if options.All {
 				// show all fingerprints sorted by date
 				keys := make([]string, 0, len(ignoredFingerprints))
 				for key := range ignoredFingerprints {
@@ -116,7 +116,7 @@ $ bearer ignore show <fingerprint>`,
 				})
 
 				for _, k := range keys {
-					cmd.Print(ignore.DisplayIgnoredEntryTextString(k, ignoredFingerprints[k], options.GeneralOptions.NoColor))
+					cmd.Print(ignore.DisplayIgnoredEntryTextString(k, ignoredFingerprints[k], options.NoColor))
 					cmd.Print("\n\n")
 				}
 			} else {
@@ -127,7 +127,7 @@ $ bearer ignore show <fingerprint>`,
 					cmd.Printf("Ignored fingerprint '%s' was not found in ignore file\n", fingerprintId)
 					return nil
 				}
-				cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint, options.GeneralOptions.NoColor))
+				cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, selectedIgnoredFingerprint, options.NoColor))
 			}
 			cmd.Print("\n\n")
 			return nil
@@ -178,7 +178,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 				fingerprintId: fingerprintEntry,
 			}
 
-			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -194,21 +194,21 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			fingerprintEntry = ignoredFingerprints[fingerprintId]
 
 			// add additional information to entry
-			if options.IgnoreAddOptions.Author != "" {
-				fingerprintEntry.Author = &options.IgnoreAddOptions.Author
+			if options.Author != "" {
+				fingerprintEntry.Author = &options.Author
 			} else {
 				if author, err := ignore.GetAuthor(); err == nil {
 					fingerprintEntry.Author = author
 				}
 			}
-			if options.IgnoreAddOptions.FalsePositive {
-				fingerprintEntry.FalsePositive = options.IgnoreAddOptions.FalsePositive
+			if options.FalsePositive {
+				fingerprintEntry.FalsePositive = options.FalsePositive
 			} else {
 				fingerprintEntry.FalsePositive = requestConfirmation("Is this finding a false positive?")
 				cmd.Printf("\n")
 			}
-			if options.IgnoreAddOptions.Comment != "" {
-				fingerprintEntry.Comment = &options.IgnoreAddOptions.Comment
+			if options.Comment != "" {
+				fingerprintEntry.Comment = &options.Comment
 			} else {
 				reader := bufio.NewReader(os.Stdin)
 				fmt.Print("Add a comment or press enter to continue: ")
@@ -232,7 +232,7 @@ $ bearer ignore add <fingerprint> --author Mish --comment "Possible false positi
 			}
 
 			cmd.Print("Fingerprint added to ignore file:\n\n")
-			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, ignoredFingerprints[fingerprintId], options.GeneralOptions.NoColor))
+			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, ignoredFingerprints[fingerprintId], options.NoColor))
 			cmd.Print("\n\n")
 			return nil
 		},
@@ -272,7 +272,7 @@ $ bearer ignore remove <fingerprint>`,
 				return fmt.Errorf("flag error: %s", err)
 			}
 
-			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}
@@ -294,7 +294,7 @@ $ bearer ignore remove <fingerprint>`,
 			}
 
 			cmd.Print("Fingerprint successfully removed from ignore file:\n\n")
-			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, removedFingerprint, options.GeneralOptions.NoColor))
+			cmd.Print(ignore.DisplayIgnoredEntryTextString(fingerprintId, removedFingerprint, options.NoColor))
 			cmd.Print("\n\n")
 			return nil
 		},
@@ -339,7 +339,7 @@ $ bearer ignore migrate`,
 			}
 			fingerprintsToMigrate := getIgnoredFingerprintsFromConfig(configFilePath)
 
-			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.GeneralOptions.IgnoreFile, nil)
+			ignoredFingerprints, ignoreFilepath, fileExists, err := ignore.GetIgnoredFingerprints(options.IgnoreFile, nil)
 			if err != nil {
 				return fmt.Errorf("error retrieving existing ignores: %s", err)
 			}

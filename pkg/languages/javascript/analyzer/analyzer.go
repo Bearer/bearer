@@ -334,7 +334,7 @@ func (analyzer *analyzer) withScope(newScope *language.Scope, body func() error)
 }
 
 func (analyzer *analyzer) lookupVariable(node *sitter.Node) {
-	if node == nil || !(node.Type() == "identifier" || node.Type() == "shorthand_property_identifier") {
+	if node == nil || (node.Type() != "identifier" && node.Type() != "shorthand_property_identifier") {
 		return
 	}
 

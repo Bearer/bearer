@@ -28,7 +28,7 @@ type BinaryVersionMeta struct {
 }
 
 func GetScanVersionMeta(ctx context.Context, options flagtypes.Options, languages []string) (meta *VersionMeta, err error) {
-	if options.RuleOptions.DisableDefaultRules && options.GeneralOptions.DisableVersionCheck {
+	if options.DisableDefaultRules && options.DisableVersionCheck {
 		log.Debug().Msg("skipping version API call as check and default rules both disabled")
 
 		return &VersionMeta{

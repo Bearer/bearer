@@ -218,7 +218,7 @@ func (r *runner) scanBaseBranch(fileList *files.List) (*basebranchfindings.Findi
 
 	for _, findings := range reportData.FindingsBySeverity {
 		for _, finding := range findings {
-			result.Add(finding.Rule.Id, finding.Filename, finding.Sink.Start, finding.Sink.End)
+			result.Add(finding.Id, finding.Filename, finding.Sink.Start, finding.Sink.End)
 		}
 	}
 
@@ -261,7 +261,7 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 
 	// set used language list for external rules to empty if we dont use them
 	metaLanguageList := foundLanguageIDs
-	if opts.RuleOptions.DisableDefaultRules {
+	if opts.DisableDefaultRules {
 		metaLanguageList = make([]string, 0)
 	}
 
@@ -269,7 +269,7 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 	if err != nil {
 		log.Debug().Msgf("failed: %s", err)
 	} else {
-		version_check.DisplayBinaryVersionWarning(versionMeta, opts.ScanOptions.Quiet)
+		version_check.DisplayBinaryVersionWarning(versionMeta, opts.Quiet)
 	}
 
 	gitContext, err := gitrepository.NewContext(&opts)

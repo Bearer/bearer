@@ -184,7 +184,7 @@ func ExtractWithDetectors(
 				}
 
 				if !isActive {
-					activate, err := detector.Detector.AcceptDir(dir)
+					activate, err := detector.AcceptDir(dir)
 					if err != nil {
 						report.AddError(dir.RelativePath, fmt.Errorf("accept dir failed for detector %s: %s", detector.Type, err))
 						continue
@@ -203,7 +203,7 @@ func ExtractWithDetectors(
 				if r := recover(); r != nil {
 					log.Printf("file %s -> error recovered %s", file.AbsolutePath, r)
 					log.Print(string(debug.Stack()))
-					report.AddError(file.Path.RelativePath, fmt.Errorf("skipping file: due to panic %s", r))
+					report.AddError(file.RelativePath, fmt.Errorf("skipping file: due to panic %s", r))
 				}
 			}
 			defer recovery()
@@ -227,7 +227,7 @@ func ExtractWithDetectors(
 					continue
 				}
 
-				wasConsumed, err := detector.Detector.ProcessFile(file, active.Path, active.Report)
+				wasConsumed, err := detector.ProcessFile(file, active.Path, active.Report)
 				if err != nil {
 					log.Debug().Msgf("failed to process file %s for detector %s: %s", file.RelativePath, detector.Type, err)
 					report.AddError(file.RelativePath, fmt.Errorf("failed to process file for detector %s: %s", detector.Type, err))

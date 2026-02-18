@@ -16,7 +16,7 @@ import (
 
 func TestDataflowPaths(t *testing.T) {
 	config := settings.Config{}
-	var lineNumber *int = new(int)
+	var lineNumber = new(int)
 	*lineNumber = 558
 
 	testCases := []struct {

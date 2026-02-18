@@ -568,10 +568,9 @@ func writeRuleListToString(
 	if len(unsupportedLanguages) > 0 {
 		sortedUnsupportedLanguages := maps.Keys(unsupportedLanguages)
 		slices.Sort(sortedUnsupportedLanguages)
-		reportStr.WriteString(fmt.Sprintf(
+		fmt.Fprintf(reportStr,
 			"\nWarning: Only partial support is offered for %s.\n",
-			strings.Join(sortedUnsupportedLanguages, ", "),
-		))
+			strings.Join(sortedUnsupportedLanguages, ", "))
 		reportStr.WriteString(color.HiBlackString(
 			"For more information, see https://docs.bearer.com/reference/supported-languages\n",
 		))
@@ -802,7 +801,7 @@ func removeDuplicates[F types.GenericFinding](data map[string][]F) map[string][]
 			key := key{
 				LineNumber: finding.LineNumber,
 				FileName:   finding.Filename,
-				Detector:   finding.Rule.Id,
+				Detector:   finding.Id,
 			}
 			if reportedDetections.Add(key) {
 				filteredData[severity] = append(filteredData[severity], genericFinding)
@@ -818,10 +817,10 @@ func sortFindings[F types.GenericFinding](data []F) {
 		vulnerabilityA := data[i].GetFinding()
 		vulnerabilityB := data[j].GetFinding()
 
-		if vulnerabilityA.Rule.Id < vulnerabilityB.Rule.Id {
+		if vulnerabilityA.Id < vulnerabilityB.Id {
 			return true
 		}
-		if vulnerabilityA.Rule.Id > vulnerabilityB.Rule.Id {
+		if vulnerabilityA.Id > vulnerabilityB.Id {
 			return false
 		}
 

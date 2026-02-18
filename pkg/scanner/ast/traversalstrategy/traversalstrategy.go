@@ -76,10 +76,7 @@ func makeTraverse(appendNext func(next *[]*tree.Node, node *tree.Node)) func(cac
 
 		data.nodes = append(data.nodes, rootNode)
 
-		for {
-			if len(data.nodes) == 0 {
-				break
-			}
+		for len(data.nodes) != 0 {
 
 			for _, node := range data.nodes {
 				bit := uint(node.ID)
