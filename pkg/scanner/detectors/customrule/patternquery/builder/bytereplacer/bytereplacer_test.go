@@ -1,138 +1,86 @@
 package bytereplacer_test
 
 import (
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/bearer/bearer/pkg/scanner/detectors/customrule/patternquery/builder/bytereplacer"
 )
 
-var _ = Describe("Replacer", func() {
-	var replacer *bytereplacer.Replacer
-
-	BeforeEach(func(ctx SpecContext) {
-		replacer = bytereplacer.New([]byte("hello world"))
+func TestReplacer_Replace(t *testing.T) {
+	t.Run("sequential order does not fail", func(t *testing.T) {
+		replacer := bytereplacer.New([]byte("hello world"))
+		require.NoError(t, replacer.Replace(0, 1, nil))
+		assert.NoError(t, replacer.Replace(1, 2, []byte("foo")))
 	})
 
-	Describe("Replace", func() {
-		When("replacements are made in sequential order", func() {
-			BeforeEach(func(ctx SpecContext) {
-				Expect(replacer.Replace(0, 1, nil)).To(Succeed())
-			})
-
-			It("does not fail", func(ctx SpecContext) {
-				Expect(replacer.Replace(1, 2, []byte("foo"))).To(Succeed())
-			})
-		})
-
-		When("replacements are made out of order", func() {
-			BeforeEach(func(ctx SpecContext) {
-				Expect(replacer.Replace(0, 2, nil)).To(Succeed())
-			})
-
-			It("returns an error", func(ctx SpecContext) {
-				Expect(replacer.Replace(1, 2, []byte("foo"))).To(
-					MatchError(ContainSubstring("replacements must be made in sequential order")),
-				)
-			})
-		})
+	t.Run("out of order returns error", func(t *testing.T) {
+		replacer := bytereplacer.New([]byte("hello world"))
+		require.NoError(t, replacer.Replace(0, 2, nil))
+		assert.ErrorContains(t, replacer.Replace(1, 2, []byte("foo")), "replacements must be made in sequential order")
 	})
-})
+}
 
-var _ = Describe("Result", func() {
-	var replacer *bytereplacer.Replacer
-	original := []byte("hello world")
+func TestResult_NoReplacements(t *testing.T) {
+	replacer := bytereplacer.New([]byte("hello world"))
+	result := replacer.Done()
 
-	BeforeEach(func(ctx SpecContext) {
-		replacer = bytereplacer.New(original)
+	t.Run("Changed returns false", func(t *testing.T) {
+		assert.False(t, result.Changed())
 	})
 
-	When("no replacements are made", func() {
-		var result *bytereplacer.Result
-
-		BeforeEach(func(ctx SpecContext) {
-			result = replacer.Done()
-		})
-
-		Describe("Changed", func() {
-			It("returns false", func(ctx SpecContext) {
-				Expect(result.Changed()).To(BeFalse())
-			})
-		})
-
-		Describe("Value", func() {
-			It("returns the original value", func(ctx SpecContext) {
-				Expect(result.Value()).To(Equal(original))
-			})
-		})
-
-		Describe("Translate", func() {
-			It("returns the original offset", func(ctx SpecContext) {
-				Expect(result.Translate(0)).To(Equal(0))
-				Expect(result.Translate(5)).To(Equal(5))
-				Expect(result.Translate(10)).To(Equal(10))
-			})
-		})
+	t.Run("Value returns original", func(t *testing.T) {
+		assert.Equal(t, []byte("hello world"), result.Value())
 	})
 
-	When("noop replacements are made", func() {
-		var result *bytereplacer.Result
+	t.Run("Translate returns original offset", func(t *testing.T) {
+		assert.Equal(t, 0, result.Translate(0))
+		assert.Equal(t, 5, result.Translate(5))
+		assert.Equal(t, 10, result.Translate(10))
+	})
+}
 
-		BeforeEach(func(ctx SpecContext) {
-			replacer.Replace(0, 5, []byte("hello")) // nolint:errcheck
-			replacer.Replace(6, 6, nil)             // nolint:errcheck
-			result = replacer.Done()
-		})
+func TestResult_NoopReplacements(t *testing.T) {
+	replacer := bytereplacer.New([]byte("hello world"))
+	replacer.Replace(0, 5, []byte("hello")) // nolint:errcheck
+	replacer.Replace(6, 6, nil)             // nolint:errcheck
+	result := replacer.Done()
 
-		Describe("Changed", func() {
-			It("returns false", func(ctx SpecContext) {
-				Expect(result.Changed()).To(BeFalse())
-			})
-		})
-
-		Describe("Value", func() {
-			It("returns the original value", func(ctx SpecContext) {
-				Expect(result.Value()).To(Equal(original))
-			})
-		})
-
-		Describe("Translate", func() {
-			It("returns the original offset", func(ctx SpecContext) {
-				Expect(result.Translate(0)).To(Equal(0))
-				Expect(result.Translate(5)).To(Equal(5))
-				Expect(result.Translate(10)).To(Equal(10))
-			})
-		})
+	t.Run("Changed returns false", func(t *testing.T) {
+		assert.False(t, result.Changed())
 	})
 
-	When("replacements are made", func() {
-		var result *bytereplacer.Result
-
-		BeforeEach(func(ctx SpecContext) {
-			replacer.Replace(0, 5, []byte("hi"))          // nolint:errcheck
-			replacer.Replace(5, 5, []byte("!"))           // nolint:errcheck
-			replacer.Replace(6, 11, []byte("testing123")) // nolint:errcheck
-			result = replacer.Done()
-		})
-
-		Describe("Changed", func() {
-			It("returns true", func(ctx SpecContext) {
-				Expect(result.Changed()).To(BeTrue())
-			})
-		})
-
-		Describe("Value", func() {
-			It("returns the updated value", func(ctx SpecContext) {
-				Expect(result.Value()).To(Equal([]byte("hi! testing123")))
-			})
-		})
-
-		Describe("Translate", func() {
-			It("returns the new offset", func(ctx SpecContext) {
-				Expect(result.Translate(0)).To(Equal(0))
-				Expect(result.Translate(5)).To(Equal(3))
-				Expect(result.Translate(11)).To(Equal(14))
-			})
-		})
+	t.Run("Value returns original", func(t *testing.T) {
+		assert.Equal(t, []byte("hello world"), result.Value())
 	})
-})
+
+	t.Run("Translate returns original offset", func(t *testing.T) {
+		assert.Equal(t, 0, result.Translate(0))
+		assert.Equal(t, 5, result.Translate(5))
+		assert.Equal(t, 10, result.Translate(10))
+	})
+}
+
+func TestResult_WithReplacements(t *testing.T) {
+	replacer := bytereplacer.New([]byte("hello world"))
+	replacer.Replace(0, 5, []byte("hi"))          // nolint:errcheck
+	replacer.Replace(5, 5, []byte("!"))           // nolint:errcheck
+	replacer.Replace(6, 11, []byte("testing123")) // nolint:errcheck
+	result := replacer.Done()
+
+	t.Run("Changed returns true", func(t *testing.T) {
+		assert.True(t, result.Changed())
+	})
+
+	t.Run("Value returns updated value", func(t *testing.T) {
+		assert.Equal(t, []byte("hi! testing123"), result.Value())
+	})
+
+	t.Run("Translate returns new offset", func(t *testing.T) {
+		assert.Equal(t, 0, result.Translate(0))
+		assert.Equal(t, 3, result.Translate(5))
+		assert.Equal(t, 14, result.Translate(11))
+	})
+}

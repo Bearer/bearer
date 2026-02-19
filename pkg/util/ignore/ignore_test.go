@@ -1,9 +1,9 @@
 package ignore_test
 
 import (
+	"maps"
+	"slices"
 	"testing"
-
-	"golang.org/x/exp/maps"
 
 	"github.com/stretchr/testify/assert"
 
@@ -108,7 +108,7 @@ func TestMergeIgnoredFingerprints(t *testing.T) {
 				t.Errorf("expected error for test case %s but none was returned", testCase.Name)
 			}
 
-			assert.ElementsMatch(t, testCase.Want, maps.Keys(ignores))
+			assert.ElementsMatch(t, testCase.Want, slices.Collect(maps.Keys(ignores)))
 		})
 	}
 }

@@ -3,337 +3,331 @@ package git_test
 import (
 	"os"
 	"path"
+	"testing"
 
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/bearer/bearer/pkg/git"
 )
 
-var _ = Describe("Diff", func() {
-	var tempDir, baseSHA string
-	filename := "foo.txt"
+func setupDiffTest(t *testing.T) (string, string) {
+	t.Helper()
 
-	BeforeEach(func() {
-		var err error
+	tempDir, err := os.MkdirTemp("", "diff-test")
+	require.NoError(t, err)
 
-		tempDir, err = os.MkdirTemp("", "diff-test")
-		Expect(err).To(BeNil())
-
-		runGit(tempDir, "init", ".")
-		writeFile(tempDir, filename, "1\n2\n3")
-		addAndCommit(tempDir)
-
-		baseSHA, err = git.GetCurrentCommit(tempDir)
-		Expect(err).To(BeNil())
-		Expect(baseSHA).NotTo(BeEmpty())
+	t.Cleanup(func() {
+		_ = os.RemoveAll(tempDir)
 	})
 
-	AfterEach(func() {
-		if tempDir != "" {
-			Expect(os.RemoveAll(tempDir)).To(Succeed())
-		}
-	})
+	runGit(t, tempDir, "init", ".")
+	writeFile(t, tempDir, "foo.txt", "1\n2\n3")
+	addAndCommit(t, tempDir)
 
-	When("a file was added", func() {
-		BeforeEach(func() {
-			writeFile(tempDir, "new.txt", "abc")
-			addAndCommit(tempDir)
-		})
+	baseSHA, err := git.GetCurrentCommit(tempDir)
+	require.NoError(t, err)
+	require.NotEmpty(t, baseSHA)
 
-		It("returns the expected result", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{{
-				ToPath: "new.txt",
-				Chunks: []git.Chunk{{
-					From: git.ChunkRange{LineNumber: 0, LineCount: 0},
-					To:   git.ChunkRange{LineNumber: 1, LineCount: 1},
-				}},
-			}}))
-		})
-	})
+	return tempDir, baseSHA
+}
 
-	When("a file was removed", func() {
-		BeforeEach(func() {
-			Expect(os.Remove(path.Join(tempDir, filename))).To(Succeed())
-			addAndCommit(tempDir)
-		})
+func TestDiff_FileAdded(t *testing.T) {
+	tempDir, baseSHA := setupDiffTest(t)
 
-		It("returns the expected result", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{{
-				FromPath: filename,
-				Chunks: []git.Chunk{{
-					From: git.ChunkRange{LineNumber: 1, LineCount: 3},
-					To:   git.ChunkRange{LineNumber: 0, LineCount: 0},
-				}},
-			}}))
-		})
-	})
+	writeFile(t, tempDir, "new.txt", "abc")
+	addAndCommit(t, tempDir)
 
-	When("a file was renamed", func() {
-		toPath := "to.txt"
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{{
+		ToPath: "new.txt",
+		Chunks: []git.Chunk{{
+			From: git.ChunkRange{LineNumber: 0, LineCount: 0},
+			To:   git.ChunkRange{LineNumber: 1, LineCount: 1},
+		}},
+	}}, result)
+}
 
-		BeforeEach(func() {
-			Expect(os.Rename(path.Join(tempDir, filename), path.Join(tempDir, toPath))).To(Succeed())
-			addAndCommit(tempDir)
-		})
+func TestDiff_FileRemoved(t *testing.T) {
+	tempDir, baseSHA := setupDiffTest(t)
 
-		It("returns the expected result", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{
-				{FromPath: filename, ToPath: toPath},
-			}))
-		})
-	})
+	require.NoError(t, os.Remove(path.Join(tempDir, "foo.txt")))
+	addAndCommit(t, tempDir)
 
-	When("paths contain characters requiring quoting", func() {
-		fromPath := "from\t.txt"
-		toPath := "to\t.txt"
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{{
+		FromPath: "foo.txt",
+		Chunks: []git.Chunk{{
+			From: git.ChunkRange{LineNumber: 1, LineCount: 3},
+			To:   git.ChunkRange{LineNumber: 0, LineCount: 0},
+		}},
+	}}, result)
+}
 
-		BeforeEach(func() {
-			writeFile(tempDir, fromPath, "1\n2")
-			addAndCommit(tempDir)
+func TestDiff_FileRenamed(t *testing.T) {
+	tempDir, baseSHA := setupDiffTest(t)
 
-			var err error
-			baseSHA, err = git.GetCurrentCommit(tempDir)
-			Expect(err).To(BeNil())
+	require.NoError(t, os.Rename(path.Join(tempDir, "foo.txt"), path.Join(tempDir, "to.txt")))
+	addAndCommit(t, tempDir)
 
-			Expect(os.Rename(path.Join(tempDir, fromPath), path.Join(tempDir, toPath))).To(Succeed())
-			addAndCommit(tempDir)
-		})
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{
+		{FromPath: "foo.txt", ToPath: "to.txt"},
+	}, result)
+}
 
-		It("decodes the paths correctly", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{
-				{FromPath: fromPath, ToPath: toPath},
-			}))
-		})
+func TestDiff_QuotedPathsWithTabs(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "diff-test")
+	require.NoError(t, err)
+	t.Cleanup(func() { _ = os.RemoveAll(tempDir) })
 
-		fromPath = "from bar.txt"
-		toPath = "to foo.txt"
+	runGit(t, tempDir, "init", ".")
 
-		It("decodes the paths correctly with whitespace in both from and to path", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{
-				{FromPath: fromPath, ToPath: toPath},
-			}))
-		})
+	fromPath := "from\t.txt"
+	toPath := "to\t.txt"
 
-		fromPath = "from bar.txt"
-		toPath = "to.txt"
+	writeFile(t, tempDir, fromPath, "1\n2")
+	addAndCommit(t, tempDir)
 
-		It("decodes the paths correctly with whitespace in from path", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{
-				{FromPath: fromPath, ToPath: toPath},
-			}))
-		})
-	})
+	baseSHA, err := git.GetCurrentCommit(tempDir)
+	require.NoError(t, err)
 
-	When("a file contains changes", func() {
-		BeforeEach(func() {
-			writeFile(tempDir, filename, "x\ny\n2\nd")
-			addAndCommit(tempDir)
-		})
+	require.NoError(t, os.Rename(path.Join(tempDir, fromPath), path.Join(tempDir, toPath)))
+	addAndCommit(t, tempDir)
 
-		It("returns the expected result", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{{
-				FromPath: filename,
-				ToPath:   filename,
-				Chunks: []git.Chunk{
-					{
-						From: git.ChunkRange{LineNumber: 1, LineCount: 1},
-						To:   git.ChunkRange{LineNumber: 1, LineCount: 2},
-					},
-					{
-						From: git.ChunkRange{LineNumber: 3, LineCount: 1},
-						To:   git.ChunkRange{LineNumber: 4, LineCount: 1},
-					},
-				},
-			}}))
-		})
-	})
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{
+		{FromPath: fromPath, ToPath: toPath},
+	}, result)
+}
 
-	When("a file contains a single line change (line count omitted from diff output)", func() {
-		BeforeEach(func() {
-			writeFile(tempDir, filename, "x\n2\n3")
-			addAndCommit(tempDir)
-			runGit(tempDir, "diff", "--unified=0", baseSHA)
-		})
+func TestDiff_QuotedPathsWithSpacesInBoth(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "diff-test")
+	require.NoError(t, err)
+	t.Cleanup(func() { _ = os.RemoveAll(tempDir) })
 
-		It("returns the correct line counts", func() {
-			Expect(git.Diff(tempDir, baseSHA)).To(ConsistOf([]git.FilePatch{{
-				FromPath: filename,
-				ToPath:   filename,
-				Chunks: []git.Chunk{{
-					From: git.ChunkRange{LineNumber: 1, LineCount: 1},
-					To:   git.ChunkRange{LineNumber: 1, LineCount: 1},
-				}},
-			}}))
-		})
-	})
-})
+	runGit(t, tempDir, "init", ".")
 
-var _ = Describe("ChunkRange", func() {
-	Describe("StartLineNumber", func() {
-		It("returns the line number", func() {
-			Expect(git.ChunkRange{LineNumber: 2, LineCount: 1}.StartLineNumber()).To(Equal(2))
-		})
+	fromPath := "from bar.txt"
+	toPath := "to foo.txt"
 
-		When("there are no lines in the range", func() {
-			It("returns the next line after the line number", func() {
-				Expect(git.ChunkRange{LineNumber: 2, LineCount: 0}.StartLineNumber()).To(Equal(3))
-			})
-		})
-	})
+	writeFile(t, tempDir, fromPath, "1\n2")
+	addAndCommit(t, tempDir)
 
-	Describe("EndLineNumber", func() {
-		It("returns the (inclusive) end line number", func() {
-			Expect(git.ChunkRange{LineNumber: 2, LineCount: 1}.EndLineNumber()).To(Equal(2))
-			Expect(git.ChunkRange{LineNumber: 3, LineCount: 2}.EndLineNumber()).To(Equal(4))
-		})
+	baseSHA, err := git.GetCurrentCommit(tempDir)
+	require.NoError(t, err)
 
-		When("there are no lines in the range", func() {
-			It("returns the start line number", func() {
-				Expect(git.ChunkRange{LineNumber: 2, LineCount: 0}.EndLineNumber()).To(Equal(2))
-			})
-		})
-	})
+	require.NoError(t, os.Rename(path.Join(tempDir, fromPath), path.Join(tempDir, toPath)))
+	addAndCommit(t, tempDir)
 
-	Describe("Overlap", func() {
-		When("the ranges are equal", func() {
-			a := git.ChunkRange{LineNumber: 1, LineCount: 2}
-			b := git.ChunkRange{LineNumber: 1, LineCount: 2}
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{
+		{FromPath: fromPath, ToPath: toPath},
+	}, result)
+}
 
-			It("is true", func() {
-				Expect(a.Overlap(b)).To(BeTrue())
-			})
-		})
+func TestDiff_QuotedPathsWithSpaceInFrom(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "diff-test")
+	require.NoError(t, err)
+	t.Cleanup(func() { _ = os.RemoveAll(tempDir) })
 
-		When("B overlaps A's start", func() {
-			a := git.ChunkRange{LineNumber: 2, LineCount: 2}
-			b := git.ChunkRange{LineNumber: 1, LineCount: 2}
+	runGit(t, tempDir, "init", ".")
 
-			It("is true", func() {
-				Expect(a.Overlap(b)).To(BeTrue())
-			})
-		})
+	fromPath := "from bar.txt"
+	toPath := "to.txt"
 
-		When("B overlaps A's end", func() {
-			a := git.ChunkRange{LineNumber: 1, LineCount: 2}
-			b := git.ChunkRange{LineNumber: 2, LineCount: 2}
+	writeFile(t, tempDir, fromPath, "1\n2")
+	addAndCommit(t, tempDir)
 
-			It("is true", func() {
-				Expect(a.Overlap(b)).To(BeTrue())
-			})
-		})
+	baseSHA, err := git.GetCurrentCommit(tempDir)
+	require.NoError(t, err)
 
-		When("B is before A", func() {
-			a := git.ChunkRange{LineNumber: 2, LineCount: 2}
-			b := git.ChunkRange{LineNumber: 1, LineCount: 1}
+	require.NoError(t, os.Rename(path.Join(tempDir, fromPath), path.Join(tempDir, toPath)))
+	addAndCommit(t, tempDir)
 
-			It("is false", func() {
-				Expect(a.Overlap(b)).To(BeFalse())
-			})
-		})
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{
+		{FromPath: fromPath, ToPath: toPath},
+	}, result)
+}
 
-		When("B is after A", func() {
-			a := git.ChunkRange{LineNumber: 1, LineCount: 2}
-			b := git.ChunkRange{LineNumber: 3, LineCount: 2}
+func TestDiff_FileContainsChanges(t *testing.T) {
+	tempDir, baseSHA := setupDiffTest(t)
 
-			It("is false", func() {
-				Expect(a.Overlap(b)).To(BeFalse())
-			})
-		})
-	})
-})
+	writeFile(t, tempDir, "foo.txt", "x\ny\n2\nd")
+	addAndCommit(t, tempDir)
 
-var _ = Describe("Chunks", func() {
-	Describe("TranslateRange", func() {
-		When("the base range is preceded by an add chunk", func() {
-			chunks := git.Chunks{{
-				From: git.ChunkRange{LineNumber: 0, LineCount: 0},
-				To:   git.ChunkRange{LineNumber: 1, LineCount: 1},
-			}}
-
-			It("returns a range shifted by the add", func() {
-				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 1, LineCount: 2})).To(
-					Equal(git.ChunkRange{LineNumber: 2, LineCount: 2}),
-				)
-			})
-		})
-
-		When("the base range is at an add chunk", func() {
-			chunks := git.Chunks{{
-				From: git.ChunkRange{LineNumber: 1, LineCount: 0},
-				To:   git.ChunkRange{LineNumber: 2, LineCount: 1},
-			}}
-
-			It("returns a range shifted by the add", func() {
-				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 2})).To(
-					Equal(git.ChunkRange{LineNumber: 3, LineCount: 2}),
-				)
-			})
-		})
-
-		When("the base range surrounds a remove chunk", func() {
-			chunks := git.Chunks{{
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{{
+		FromPath: "foo.txt",
+		ToPath:   "foo.txt",
+		Chunks: []git.Chunk{
+			{
+				From: git.ChunkRange{LineNumber: 1, LineCount: 1},
+				To:   git.ChunkRange{LineNumber: 1, LineCount: 2},
+			},
+			{
 				From: git.ChunkRange{LineNumber: 3, LineCount: 1},
-				To:   git.ChunkRange{LineNumber: 2, LineCount: 0},
-			}}
+				To:   git.ChunkRange{LineNumber: 4, LineCount: 1},
+			},
+		},
+	}}, result)
+}
 
-			It("returns a range that still overlaps the unchanged portion by the same amount", func() {
-				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 3})).To(
-					Equal(git.ChunkRange{LineNumber: 2, LineCount: 2}),
-				)
-			})
-		})
+func TestDiff_SingleLineChange(t *testing.T) {
+	tempDir, baseSHA := setupDiffTest(t)
 
-		When("the base range overlaps the start of a remove chunk", func() {
-			chunks := git.Chunks{{
-				From: git.ChunkRange{LineNumber: 3, LineCount: 2},
-				To:   git.ChunkRange{LineNumber: 2, LineCount: 0},
-			}}
+	writeFile(t, tempDir, "foo.txt", "x\n2\n3")
+	addAndCommit(t, tempDir)
+	runGit(t, tempDir, "diff", "--unified=0", baseSHA)
 
-			It("returns a range that ends at the removed chunk", func() {
-				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 2})).To(
-					Equal(git.ChunkRange{LineNumber: 2, LineCount: 1}),
-				)
-			})
-		})
+	result, err := git.Diff(tempDir, baseSHA)
+	require.NoError(t, err)
+	assert.Equal(t, []git.FilePatch{{
+		FromPath: "foo.txt",
+		ToPath:   "foo.txt",
+		Chunks: []git.Chunk{{
+			From: git.ChunkRange{LineNumber: 1, LineCount: 1},
+			To:   git.ChunkRange{LineNumber: 1, LineCount: 1},
+		}},
+	}}, result)
+}
 
-		When("the base range is inside a remove chunk", func() {
-			chunks := git.Chunks{{
-				From: git.ChunkRange{LineNumber: 1, LineCount: 2},
-				To:   git.ChunkRange{LineNumber: 0, LineCount: 0},
-			}}
-
-			It("returns an invalid range (will be ignored)", func() {
-				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 1, LineCount: 1})).To(
-					Equal(git.ChunkRange{LineNumber: 0, LineCount: 0}),
-				)
-			})
-		})
-
-		When("the base range overlaps the start of an edit chunk", func() {
-			chunks := git.Chunks{{
-				From: git.ChunkRange{LineNumber: 2, LineCount: 1},
-				To:   git.ChunkRange{LineNumber: 2, LineCount: 2},
-			}}
-
-			It("expands the range to the end of the chunk", func() {
-				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 1, LineCount: 2})).To(
-					Equal(git.ChunkRange{LineNumber: 1, LineCount: 3}),
-				)
-			})
-		})
-
-		When("the base range overlaps the end of an edit chunk", func() {
-			chunks := git.Chunks{{
-				From: git.ChunkRange{LineNumber: 1, LineCount: 2},
-				To:   git.ChunkRange{LineNumber: 1, LineCount: 3},
-			}}
-
-			It("expands the range to the start of the chunk", func() {
-				Expect(chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 2})).To(
-					Equal(git.ChunkRange{LineNumber: 1, LineCount: 4}),
-				)
-			})
-		})
+func TestChunkRange_StartLineNumber(t *testing.T) {
+	t.Run("returns the line number", func(t *testing.T) {
+		assert.Equal(t, 2, git.ChunkRange{LineNumber: 2, LineCount: 1}.StartLineNumber())
 	})
-})
+
+	t.Run("when there are no lines in the range returns the next line", func(t *testing.T) {
+		assert.Equal(t, 3, git.ChunkRange{LineNumber: 2, LineCount: 0}.StartLineNumber())
+	})
+}
+
+func TestChunkRange_EndLineNumber(t *testing.T) {
+	t.Run("returns the inclusive end line number", func(t *testing.T) {
+		assert.Equal(t, 2, git.ChunkRange{LineNumber: 2, LineCount: 1}.EndLineNumber())
+		assert.Equal(t, 4, git.ChunkRange{LineNumber: 3, LineCount: 2}.EndLineNumber())
+	})
+
+	t.Run("when there are no lines in the range returns the start line number", func(t *testing.T) {
+		assert.Equal(t, 2, git.ChunkRange{LineNumber: 2, LineCount: 0}.EndLineNumber())
+	})
+}
+
+func TestChunkRange_Overlap(t *testing.T) {
+	t.Run("equal ranges overlap", func(t *testing.T) {
+		a := git.ChunkRange{LineNumber: 1, LineCount: 2}
+		b := git.ChunkRange{LineNumber: 1, LineCount: 2}
+		assert.True(t, a.Overlap(b))
+	})
+
+	t.Run("B overlaps A start", func(t *testing.T) {
+		a := git.ChunkRange{LineNumber: 2, LineCount: 2}
+		b := git.ChunkRange{LineNumber: 1, LineCount: 2}
+		assert.True(t, a.Overlap(b))
+	})
+
+	t.Run("B overlaps A end", func(t *testing.T) {
+		a := git.ChunkRange{LineNumber: 1, LineCount: 2}
+		b := git.ChunkRange{LineNumber: 2, LineCount: 2}
+		assert.True(t, a.Overlap(b))
+	})
+
+	t.Run("B is before A", func(t *testing.T) {
+		a := git.ChunkRange{LineNumber: 2, LineCount: 2}
+		b := git.ChunkRange{LineNumber: 1, LineCount: 1}
+		assert.False(t, a.Overlap(b))
+	})
+
+	t.Run("B is after A", func(t *testing.T) {
+		a := git.ChunkRange{LineNumber: 1, LineCount: 2}
+		b := git.ChunkRange{LineNumber: 3, LineCount: 2}
+		assert.False(t, a.Overlap(b))
+	})
+}
+
+func TestChunks_TranslateRange(t *testing.T) {
+	t.Run("preceded by an add chunk shifts range", func(t *testing.T) {
+		chunks := git.Chunks{{
+			From: git.ChunkRange{LineNumber: 0, LineCount: 0},
+			To:   git.ChunkRange{LineNumber: 1, LineCount: 1},
+		}}
+		assert.Equal(t,
+			git.ChunkRange{LineNumber: 2, LineCount: 2},
+			chunks.TranslateRange(git.ChunkRange{LineNumber: 1, LineCount: 2}),
+		)
+	})
+
+	t.Run("at an add chunk shifts range", func(t *testing.T) {
+		chunks := git.Chunks{{
+			From: git.ChunkRange{LineNumber: 1, LineCount: 0},
+			To:   git.ChunkRange{LineNumber: 2, LineCount: 1},
+		}}
+		assert.Equal(t,
+			git.ChunkRange{LineNumber: 3, LineCount: 2},
+			chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 2}),
+		)
+	})
+
+	t.Run("surrounds a remove chunk overlaps unchanged portion", func(t *testing.T) {
+		chunks := git.Chunks{{
+			From: git.ChunkRange{LineNumber: 3, LineCount: 1},
+			To:   git.ChunkRange{LineNumber: 2, LineCount: 0},
+		}}
+		assert.Equal(t,
+			git.ChunkRange{LineNumber: 2, LineCount: 2},
+			chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 3}),
+		)
+	})
+
+	t.Run("overlaps start of remove chunk ends at removed chunk", func(t *testing.T) {
+		chunks := git.Chunks{{
+			From: git.ChunkRange{LineNumber: 3, LineCount: 2},
+			To:   git.ChunkRange{LineNumber: 2, LineCount: 0},
+		}}
+		assert.Equal(t,
+			git.ChunkRange{LineNumber: 2, LineCount: 1},
+			chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 2}),
+		)
+	})
+
+	t.Run("inside a remove chunk returns invalid range", func(t *testing.T) {
+		chunks := git.Chunks{{
+			From: git.ChunkRange{LineNumber: 1, LineCount: 2},
+			To:   git.ChunkRange{LineNumber: 0, LineCount: 0},
+		}}
+		assert.Equal(t,
+			git.ChunkRange{LineNumber: 0, LineCount: 0},
+			chunks.TranslateRange(git.ChunkRange{LineNumber: 1, LineCount: 1}),
+		)
+	})
+
+	t.Run("overlaps start of edit chunk expands to end", func(t *testing.T) {
+		chunks := git.Chunks{{
+			From: git.ChunkRange{LineNumber: 2, LineCount: 1},
+			To:   git.ChunkRange{LineNumber: 2, LineCount: 2},
+		}}
+		assert.Equal(t,
+			git.ChunkRange{LineNumber: 1, LineCount: 3},
+			chunks.TranslateRange(git.ChunkRange{LineNumber: 1, LineCount: 2}),
+		)
+	})
+
+	t.Run("overlaps end of edit chunk expands to start", func(t *testing.T) {
+		chunks := git.Chunks{{
+			From: git.ChunkRange{LineNumber: 1, LineCount: 2},
+			To:   git.ChunkRange{LineNumber: 1, LineCount: 3},
+		}}
+		assert.Equal(t,
+			git.ChunkRange{LineNumber: 1, LineCount: 4},
+			chunks.TranslateRange(git.ChunkRange{LineNumber: 2, LineCount: 2}),
+		)
+	})
+}

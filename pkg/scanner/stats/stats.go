@@ -4,12 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"maps"
 	"slices"
 	"strings"
 	"sync"
 	"time"
-
-	"golang.org/x/exp/maps"
 
 	"github.com/dustin/go-humanize"
 )
@@ -195,7 +194,7 @@ func (stats *Stats) reportSlowestRules(writer io.StringWriter) {
 		"\nSlowest rules (total runtime %s):\n",
 		totalRuleDuration.Truncate(time.Millisecond),
 	))
-	sortedRuleIDs := maps.Keys(stats.rules)
+	sortedRuleIDs := slices.Collect(maps.Keys(stats.rules))
 	slices.SortFunc(sortedRuleIDs, func(a, b string) int {
 		return int(stats.rules[b] - stats.rules[a])
 	})

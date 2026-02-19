@@ -11,7 +11,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/secret"
 	"github.com/bearer/bearer/pkg/report/source"
 	"github.com/bearer/bearer/pkg/util/file"
-	"github.com/pelletier/go-toml"
+	toml "github.com/pelletier/go-toml/v2"
 	"github.com/zricethezav/gitleaks/v8/config"
 	"github.com/zricethezav/gitleaks/v8/detect"
 )

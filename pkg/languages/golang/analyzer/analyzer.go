@@ -2,10 +2,10 @@ package analyzer
 
 import (
 	"regexp"
+	"slices"
 	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
-	"golang.org/x/exp/slices"
 
 	"github.com/bearer/bearer/pkg/scanner/ast/tree"
 	"github.com/bearer/bearer/pkg/scanner/language"

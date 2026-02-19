@@ -18,7 +18,7 @@ var reflexiveMethods = []string{
 	"lower",
 	"upper",
 	"strip",
-	"lstrip", 
+	"lstrip",
 	"rstrip",
 	"capitalize",
 	"title",

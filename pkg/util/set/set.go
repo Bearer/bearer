@@ -1,7 +1,5 @@
 package set
 
-import "golang.org/x/exp/maps"
-
 type Set[T comparable] map[T]struct{}
 
 func New[T comparable]() Set[T] {
@@ -29,5 +27,9 @@ func (set Set[T]) Has(item T) bool {
 }
 
 func (set Set[T]) Items() []T {
-	return maps.Keys(set)
+	result := make([]T, 0, len(set))
+	for item := range set {
+		result = append(result, item)
+	}
+	return result
 }

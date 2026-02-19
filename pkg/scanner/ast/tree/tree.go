@@ -2,12 +2,12 @@ package tree
 
 import (
 	"fmt"
+	"maps"
 	"slices"
 
 	"github.com/bits-and-blooms/bitset"
 	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
-	"golang.org/x/exp/maps"
 	"gopkg.in/yaml.v3"
 )
 
@@ -203,8 +203,7 @@ func (node *Node) dumpValue() nodeDump {
 		childDump[i] = child.dumpValue()
 	}
 
-	queries := maps.Keys(node.queryResults)
-	slices.Sort(queries)
+	queries := slices.Sorted(maps.Keys(node.queryResults))
 
 	var disabledRules []int
 	if node.disabledRuleIndices != nil {

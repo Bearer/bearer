@@ -4,9 +4,10 @@ import (
 	"context"
 	"regexp"
 	"strings"
+	"testing"
 
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/bearer/bearer/pkg/languages/ruby"
 	"github.com/bearer/bearer/pkg/scanner/ast"
@@ -26,6 +27,7 @@ type MockFilter struct {
 }
 
 type MockDetectorContext struct {
+	t        *testing.T
 	filename string
 	scan     func(
 		rootNode *tree.Node,
@@ -34,20 +36,20 @@ type MockDetectorContext struct {
 	) ([]*detectortypes.Detection, error)
 }
 
-func (context *MockDetectorContext) Filename() string {
-	return context.filename
+func (ctx *MockDetectorContext) Filename() string {
+	return ctx.filename
 }
 
-func (context *MockDetectorContext) Scan(
+func (ctx *MockDetectorContext) Scan(
 	rootNode *tree.Node,
 	rule *ruleset.Rule,
 	traversalStrategy traversalstrategy.Strategy,
 ) ([]*detectortypes.Detection, error) {
-	if context.scan != nil {
-		return context.scan(rootNode, rule, traversalStrategy)
+	if ctx.scan != nil {
+		return ctx.scan(rootNode, rule, traversalStrategy)
 	}
 
-	Fail("MockDetectorContext.scan called but no scan function was set")
+	ctx.t.Fatal("MockDetectorContext.scan called but no scan function was set")
 	panic("unreachable")
 }
 
@@ -58,127 +60,101 @@ func (filter *MockFilter) Evaluate(
 	return filter.result, filter.err
 }
 
-var defaultDetectorContext = &MockDetectorContext{
-	filename: "src/foo.go",
+func newDefaultDetectorContext(t *testing.T) *MockDetectorContext {
+	return &MockDetectorContext{t: t, filename: "src/foo.go"}
 }
 
-var _ = Describe("Not", func() {
-	var filter *filters.Not
-	var patternVariables = []*tree.Node{{ID: 42}}
-
-	When("the child filter has a match", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Not{
-				Child: &MockFilter{result: filters.NewResult(filters.NewMatch(nil, "", nil))},
-			}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
-	})
-
-	When("the child filter has NO matches", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Not{
-				Child: &MockFilter{result: filters.NewResult()},
-			}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
-	})
-
-	When("the child filter result is unknown", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Not{
-				Child: &MockFilter{result: nil},
-			}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
-	})
-})
-
-var _ = Describe("Either", func() {
-	var filter *filters.Either
+func TestNot(t *testing.T) {
 	patternVariables := []*tree.Node{{ID: 42}}
+	detectorCtx := newDefaultDetectorContext(t)
 
-	When("there are child filter matches", func() {
+	t.Run("child filter has a match returns NO matches", func(t *testing.T) {
+		filter := &filters.Not{
+			Child: &MockFilter{result: filters.NewResult(filters.NewMatch(nil, "", nil))},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
+	})
+
+	t.Run("child filter has NO matches returns match with pattern variables", func(t *testing.T) {
+		filter := &filters.Not{
+			Child: &MockFilter{result: filters.NewResult()},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
+	})
+
+	t.Run("child filter result is unknown returns unknown", func(t *testing.T) {
+		filter := &filters.Not{
+			Child: &MockFilter{result: nil},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
+	})
+}
+
+func TestEither(t *testing.T) {
+	patternVariables := []*tree.Node{{ID: 42}}
+	detectorCtx := newDefaultDetectorContext(t)
+
+	t.Run("child filter matches are combined", func(t *testing.T) {
 		match1 := filters.NewMatch([]*tree.Node{{ID: 1}}, "", nil)
 		match2 := filters.NewMatch([]*tree.Node{{ID: 2}}, "", nil)
 		match3 := filters.NewMatch([]*tree.Node{{ID: 3}}, "", nil)
 
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Either{
-				Children: []filters.Filter{
-					&MockFilter{result: filters.NewResult(match1, match2)},
-					&MockFilter{result: filters.NewResult(match3)},
-					&MockFilter{result: nil},
-					&MockFilter{result: filters.NewResult()},
-				},
-			}
-		})
-
-		It("returns a result with all matches combined", func(ctx SpecContext) {
-			result, err := filter.Evaluate(defaultDetectorContext, patternVariables)
-
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result.Matches()).To(ContainElements(match1, match2, match3))
-		})
+		filter := &filters.Either{
+			Children: []filters.Filter{
+				&MockFilter{result: filters.NewResult(match1, match2)},
+				&MockFilter{result: filters.NewResult(match3)},
+				&MockFilter{result: nil},
+				&MockFilter{result: filters.NewResult()},
+			},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		require.NotNil(t, result)
+		assert.Contains(t, result.Matches(), match1)
+		assert.Contains(t, result.Matches(), match2)
+		assert.Contains(t, result.Matches(), match3)
 	})
 
-	When("no child filter matches", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Either{
-				Children: []filters.Filter{
-					&MockFilter{result: nil},
-					&MockFilter{result: filters.NewResult()},
-				},
-			}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("no child filter matches returns NO matches", func(t *testing.T) {
+		filter := &filters.Either{
+			Children: []filters.Filter{
+				&MockFilter{result: nil},
+				&MockFilter{result: filters.NewResult()},
+			},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("all child filter results are unknown", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Either{
-				Children: []filters.Filter{
-					&MockFilter{result: nil},
-					&MockFilter{result: nil},
-				},
-			}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
+	t.Run("all child filter results unknown returns unknown", func(t *testing.T) {
+		filter := &filters.Either{
+			Children: []filters.Filter{
+				&MockFilter{result: nil},
+				&MockFilter{result: nil},
+			},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
 	})
 
-	When("there are NO child filters", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Either{Children: nil}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
+	t.Run("no child filters returns unknown", func(t *testing.T) {
+		filter := &filters.Either{Children: nil}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
 	})
-})
+}
 
-var _ = Describe("All", func() {
-	var filter *filters.All
-	var nodes []*tree.Node
-	var patternVariables variableshape.Values
+func TestAll(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
 
 	datatype1 := &detectortypes.Detection{RuleID: "dt1"}
 	datatype2 := &detectortypes.Detection{RuleID: "dt2"}
@@ -187,565 +163,399 @@ var _ = Describe("All", func() {
 	datatype5 := &detectortypes.Detection{RuleID: "dt5"}
 	discordantDatatype := &detectortypes.Detection{RuleID: "dtd"}
 
-	var match1, match2, match3, match4, match5, discordantMatch filters.Match
+	setup := func(t *testing.T) ([]*tree.Node, variableshape.Values, filters.Match, filters.Match, filters.Match, filters.Match, filters.Match, filters.Match) {
+		t.Helper()
 
-	BeforeEach(func(ctx SpecContext) {
-		nodes = parseNodes(ctx, []string{"n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8"})
-		patternVariables = []*tree.Node{nodes[0], nil, nil, nil}
+		nodes := parseNodes(t, []string{"n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8"})
+		patternVariables := []*tree.Node{nodes[0], nil, nil, nil}
 
-		match1 = filters.NewMatch([]*tree.Node{nodes[0], nil, nil, nil}, "", []*detectortypes.Detection{datatype1})
-		match2 = filters.NewMatch([]*tree.Node{nil, nodes[2], nodes[4], nil}, "", []*detectortypes.Detection{datatype2})
-		match3 = filters.NewMatch([]*tree.Node{nil, nodes[3], nodes[5], nil}, "", []*detectortypes.Detection{datatype3})
-		match4 = filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[6]}, "", []*detectortypes.Detection{datatype4})
-		match5 = filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[7]}, "", []*detectortypes.Detection{datatype5})
-		discordantMatch = filters.NewMatch([]*tree.Node{nodes[1], nil, nil, nil}, "", []*detectortypes.Detection{discordantDatatype})
+		match1 := filters.NewMatch([]*tree.Node{nodes[0], nil, nil, nil}, "", []*detectortypes.Detection{datatype1})
+		match2 := filters.NewMatch([]*tree.Node{nil, nodes[2], nodes[4], nil}, "", []*detectortypes.Detection{datatype2})
+		match3 := filters.NewMatch([]*tree.Node{nil, nodes[3], nodes[5], nil}, "", []*detectortypes.Detection{datatype3})
+		match4 := filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[6]}, "", []*detectortypes.Detection{datatype4})
+		match5 := filters.NewMatch([]*tree.Node{nodes[0], nodes[3], nil, nodes[7]}, "", []*detectortypes.Detection{datatype5})
+		discordantMatch := filters.NewMatch([]*tree.Node{nodes[1], nil, nil, nil}, "", []*detectortypes.Detection{discordantDatatype})
+
+		return nodes, patternVariables, match1, match2, match3, match4, match5, discordantMatch
+	}
+
+	t.Run("single child filter with matches returns child matches", func(t *testing.T) {
+		_, patternVariables, match1, match2, _, _, _, _ := setup(t)
+		filter := &filters.All{
+			Children: []filters.Filter{
+				&MockFilter{result: filters.NewResult(match1, match2)},
+			},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		require.NotNil(t, result)
+		assert.Contains(t, result.Matches(), match1)
+		assert.Contains(t, result.Matches(), match2)
 	})
 
-	When("there is a single child filter with matches", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.All{
-				Children: []filters.Filter{
-					&MockFilter{result: filters.NewResult(match1, match2)},
-				},
-			}
-		})
-
-		It("returns a result with the child matches", func(ctx SpecContext) {
-			result, err := filter.Evaluate(defaultDetectorContext, patternVariables)
-
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result.Matches()).To(ContainElements(match1, match2))
-		})
+	t.Run("multiple child filters all match returns joined matches", func(t *testing.T) {
+		nodes, patternVariables, match1, _, match3, match4, match5, _ := setup(t)
+		filter := &filters.All{
+			Children: []filters.Filter{
+				&MockFilter{result: filters.NewResult(match1)},
+				&MockFilter{result: filters.NewResult(
+					filters.NewMatch([]*tree.Node{nil, nodes[2], nodes[4], nil}, "", []*detectortypes.Detection{datatype2}),
+					match3,
+				)},
+				&MockFilter{result: filters.NewResult(match4, match5)},
+			},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		require.NotNil(t, result)
+		assert.Contains(t, result.Matches(), filters.NewMatch(
+			[]*tree.Node{nodes[0], nodes[3], nodes[5], nodes[6]},
+			"",
+			[]*detectortypes.Detection{datatype1, datatype3, datatype4},
+		))
+		assert.Contains(t, result.Matches(), filters.NewMatch(
+			[]*tree.Node{nodes[0], nodes[3], nodes[5], nodes[7]},
+			"",
+			[]*detectortypes.Detection{datatype1, datatype3, datatype5},
+		))
 	})
 
-	When("there are multiple child filters that all match", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.All{
-				Children: []filters.Filter{
-					&MockFilter{result: filters.NewResult(match1)},
-					&MockFilter{result: filters.NewResult(match2, match3)},
-					&MockFilter{result: filters.NewResult(match4, match5)},
-				},
-			}
-		})
-
-		It("returns a result with the matches joined by variables", func(ctx SpecContext) {
-			result, err := filter.Evaluate(defaultDetectorContext, patternVariables)
-
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result.Matches()).To(ContainElements(
-				filters.NewMatch(
-					[]*tree.Node{nodes[0], nodes[3], nodes[5], nodes[6]},
-					"",
-					[]*detectortypes.Detection{datatype1, datatype3, datatype4},
-				),
-				filters.NewMatch(
-					[]*tree.Node{nodes[0], nodes[3], nodes[5], nodes[7]},
-					"",
-					[]*detectortypes.Detection{datatype1, datatype3, datatype5},
-				),
-			))
-		})
+	t.Run("one child has NO joining matches returns NO matches", func(t *testing.T) {
+		_, patternVariables, match1, match2, match3, match4, match5, discordantMatch := setup(t)
+		filter := &filters.All{
+			Children: []filters.Filter{
+				&MockFilter{result: filters.NewResult(match1)},
+				&MockFilter{result: filters.NewResult(match2, match3)},
+				&MockFilter{result: filters.NewResult(match4, match5)},
+				&MockFilter{result: filters.NewResult(discordantMatch)},
+			},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("one child has NO matches that join to the other matches", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.All{
-				Children: []filters.Filter{
-					// this is the same example as above, but with the addition of
-					// the discordant match
-					&MockFilter{result: filters.NewResult(match1)},
-					&MockFilter{result: filters.NewResult(match2, match3)},
-					&MockFilter{result: filters.NewResult(match4, match5)},
-					&MockFilter{result: filters.NewResult(discordantMatch)},
-				},
-			}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("at least one child unknown returns unknown", func(t *testing.T) {
+		_, patternVariables, match1, _, _, _, _, _ := setup(t)
+		filter := &filters.All{
+			Children: []filters.Filter{
+				&MockFilter{result: filters.NewResult(match1)},
+				&MockFilter{result: nil},
+			},
+		}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
 	})
 
-	When("at least one child filter result is unknown", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.All{
-				Children: []filters.Filter{
-					&MockFilter{result: filters.NewResult(match1)},
-					&MockFilter{result: nil},
-				},
-			}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
+	t.Run("no child filters returns match with pattern variables", func(t *testing.T) {
+		_, patternVariables, _, _, _, _, _, _ := setup(t)
+		filter := &filters.All{Children: nil}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
+}
 
-	When("there are NO child filters", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.All{Children: nil}
-		})
-
-		It("returns a result with a single match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
-	})
-})
-
-var _ = Describe("FilenameRegex", func() {
-	var filter *filters.FilenameRegex
+func TestFilenameRegex(t *testing.T) {
 	patternVariables := []*tree.Node{{ID: 42}}
+	detectorCtx := newDefaultDetectorContext(t)
 
-	When("the filename matches the regex", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.FilenameRegex{Regex: regexp.MustCompile(`foo`)}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+	t.Run("filename matches regex returns match", func(t *testing.T) {
+		filter := &filters.FilenameRegex{Regex: regexp.MustCompile(`foo`)}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the filename does NOT match the regex", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.FilenameRegex{Regex: regexp.MustCompile(`bar`)}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("filename does NOT match regex returns NO matches", func(t *testing.T) {
+		filter := &filters.FilenameRegex{Regex: regexp.MustCompile(`bar`)}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
-})
+}
 
-var _ = Describe("Rule", func() {
-})
+func TestValues(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
 
-var _ = Describe("Values", func() {
-	var filter *filters.Values
-	var variable *variableshape.Variable
-	var patternVariables variableshape.Values
+	variable, patternVariables := setupContentTest(t, "hello", "other")
 
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "hello", "other")
+	t.Run("content equals one of the values returns match", func(t *testing.T) {
+		filter := &filters.Values{Variable: variable, Values: []string{"hello", "other"}}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node's content is equal to one of the filter's values", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Values{Variable: variable, Values: []string{"hello", "other"}}
-		})
+	t.Run("content does NOT match any value returns NO matches", func(t *testing.T) {
+		filter := &filters.Values{Variable: variable, Values: []string{"other"}}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
+	})
+}
 
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+func TestRegex(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
+
+	variable, patternVariables := setupContentTest(t, "hello", "other")
+
+	t.Run("content matches regex returns match", func(t *testing.T) {
+		filter := &filters.Regex{Variable: variable, Regex: regexp.MustCompile(`l{2}`)}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node's content does NOT match any filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Values{Variable: variable, Values: []string{"other"}}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("content does NOT match regex returns NO matches", func(t *testing.T) {
+		filter := &filters.Regex{Variable: variable, Regex: regexp.MustCompile(`other`)}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
-})
+}
 
-var _ = Describe("Regex", func() {
-	var filter *filters.Regex
-	var variable *variableshape.Variable
-	var patternVariables variableshape.Values
+func TestStringLengthLessThan(t *testing.T) {
+	variable, patternVariables := setupContentTest(t, "hello", "other")
 
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "hello", "other")
-	})
-
-	When("the variable node's content matches the regex", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Regex{Variable: variable, Regex: regexp.MustCompile(`l{2}`)}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+	t.Run("string length less than filter value returns match", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), pointers.String("foo"))
+		filter := &filters.StringLengthLessThan{Variable: variable, Value: 4}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node's content does NOT match the regex", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.Regex{Variable: variable, Regex: regexp.MustCompile(`other`)}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
-	})
-})
-
-var _ = Describe("StringLengthLessThan", func() {
-	var filter *filters.StringLengthLessThan
-	var variable *variableshape.Variable
-	var detectorContext detectortypes.Context
-	var patternVariables variableshape.Values
-
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "hello", "other")
-		detectorContext = setupStringTest(patternVariables.Node(variable), pointers.String("foo"))
+	t.Run("string length greater or equal returns NO matches", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), pointers.String("foo"))
+		filter := &filters.StringLengthLessThan{Variable: variable, Value: 3}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("the variable node's string detector value has length less than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.StringLengthLessThan{Variable: variable, Value: 4}
-		})
+	t.Run("no string detector value returns unknown", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), nil)
+		filter := &filters.StringLengthLessThan{Variable: variable, Value: 4}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
+	})
+}
 
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+func TestStringRegex(t *testing.T) {
+	variable, patternVariables := setupContentTest(t, "hello", "other")
+
+	t.Run("string value matches regex returns match", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), pointers.String("foo"))
+		filter := &filters.StringRegex{Variable: variable, Regex: regexp.MustCompile(`o{2}`)}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "foo", nil)), result)
 	})
 
-	When("the variable node's string detector value has length greater than or equal to the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.StringLengthLessThan{Variable: variable, Value: 3}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("string value does NOT match regex returns NO matches", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), pointers.String("foo"))
+		filter := &filters.StringRegex{Variable: variable, Regex: regexp.MustCompile(`bar`)}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("the variable node has NO string detector value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.StringLengthLessThan{Variable: variable, Value: 4}
-			detectorContext = setupStringTest(patternVariables.Node(variable), nil)
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(BeNil())
-		})
+	t.Run("no string detector value returns unknown", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), nil)
+		filter := &filters.StringRegex{Variable: variable, Regex: regexp.MustCompile(`o{2}`)}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
 	})
-})
+}
 
-var _ = Describe("StringRegex", func() {
-	var filter *filters.StringRegex
-	var variable *variableshape.Variable
-	var detectorContext detectortypes.Context
-	var patternVariables variableshape.Values
+func TestEntropyGreaterThan(t *testing.T) {
+	variable, patternVariables := setupContentTest(t, "hello", "other")
 
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "hello", "other")
-		detectorContext = setupStringTest(patternVariables.Node(variable), pointers.String("foo"))
-	})
-
-	When("the variable node's string detector value matches the filter regex", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.StringRegex{Variable: variable, Regex: regexp.MustCompile(`o{2}`)}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "foo", nil)),
-			))
-		})
-	})
-
-	When("the variable node's string detector value does NOT match the filter regex", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.StringRegex{Variable: variable, Regex: regexp.MustCompile(`bar`)}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
-	})
-
-	When("the variable node has NO string detector value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.StringRegex{Variable: variable, Regex: regexp.MustCompile(`o{2}`)}
-			detectorContext = setupStringTest(patternVariables.Node(variable), nil)
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(BeNil())
-		})
-	})
-})
-
-var _ = Describe("EntropyGreaterThan", func() {
-	var filter *filters.EntropyGreaterThan
-	var variable *variableshape.Variable
-	var detectorContext detectortypes.Context
-	var patternVariables variableshape.Values
-
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "hello", "other")
+	t.Run("entropy greater than filter value returns match", func(t *testing.T) {
 		// entropy("Au+u1hvsvJeEXxky") == 3.75
-		detectorContext = setupStringTest(patternVariables.Node(variable), pointers.String("Au+u1hvsvJeEXxky"))
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), pointers.String("Au+u1hvsvJeEXxky"))
+		filter := &filters.EntropyGreaterThan{Variable: variable, Value: 3.7}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node's content is a string with entropy greater than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.EntropyGreaterThan{Variable: variable, Value: 3.7}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+	t.Run("entropy less than or equal returns NO matches", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), pointers.String("Au+u1hvsvJeEXxky"))
+		filter := &filters.EntropyGreaterThan{Variable: variable, Value: 3.8}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("the variable node's content is a string with entropy less than or equal to the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.EntropyGreaterThan{Variable: variable, Value: 3.8}
-		})
+	t.Run("not a string value returns unknown", func(t *testing.T) {
+		detectorCtx := setupStringTest(t, patternVariables.Node(variable), nil)
+		filter := &filters.EntropyGreaterThan{Variable: variable, Value: 3.7}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
+	})
+}
 
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+func TestIntegerLessThan(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
+
+	t.Run("integer less than filter value returns match", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerLessThan{Variable: variable, Value: 10}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node is not a string value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.EntropyGreaterThan{Variable: variable, Value: 3.7}
-			detectorContext = setupStringTest(patternVariables.Node(variable), nil)
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(detectorContext, patternVariables)).To(BeNil())
-		})
-	})
-})
-
-var _ = Describe("IntegerLessThan", func() {
-	var filter *filters.IntegerLessThan
-	var variable *variableshape.Variable
-	var patternVariables variableshape.Values
-
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "9", "other")
+	t.Run("integer greater or equal returns NO matches", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerLessThan{Variable: variable, Value: 9}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("the variable node's content is an integer less than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerLessThan{Variable: variable, Value: 10}
-		})
+	t.Run("not an integer value returns unknown", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "hello", "other")
+		filter := &filters.IntegerLessThan{Variable: variable, Value: 10}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
+	})
+}
 
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+func TestIntegerLessThanOrEqual(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
+
+	t.Run("integer less than filter value returns match", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerLessThanOrEqual{Variable: variable, Value: 10}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node's content is an integer greater than or equal to the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerLessThan{Variable: variable, Value: 9}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("integer equal to filter value returns match", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerLessThanOrEqual{Variable: variable, Value: 9}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node is not an integer value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			variable, patternVariables = setupContentTest(ctx, "hello", "other")
-			filter = &filters.IntegerLessThan{Variable: variable, Value: 10}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
-	})
-})
-
-var _ = Describe("IntegerLessThanOrEqual", func() {
-	var filter *filters.IntegerLessThanOrEqual
-	var variable *variableshape.Variable
-	var patternVariables variableshape.Values
-
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "9", "other")
+	t.Run("integer greater than filter value returns NO matches", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerLessThanOrEqual{Variable: variable, Value: 8}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("the variable node's content is an integer less than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerLessThanOrEqual{Variable: variable, Value: 10}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
-
+	t.Run("not an integer value returns unknown", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "hello", "other")
+		filter := &filters.IntegerLessThanOrEqual{Variable: variable, Value: 10}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
 	})
-	When("the variable node's content is an integer equal to the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerLessThanOrEqual{Variable: variable, Value: 9}
-		})
+}
 
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+func TestIntegerGreaterThan(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
+
+	t.Run("integer greater than filter value returns match", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerGreaterThan{Variable: variable, Value: 8}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node's content is an integer greater than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerLessThanOrEqual{Variable: variable, Value: 8}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("integer less than or equal returns NO matches", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerGreaterThan{Variable: variable, Value: 9}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("the variable node is not an integer value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			variable, patternVariables = setupContentTest(ctx, "hello", "other")
-			filter = &filters.IntegerLessThanOrEqual{Variable: variable, Value: 10}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
+	t.Run("not an integer value returns unknown", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "hello", "other")
+		filter := &filters.IntegerGreaterThan{Variable: variable, Value: 8}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
 	})
-})
+}
 
-var _ = Describe("IntegerGreaterThan", func() {
-	var filter *filters.IntegerGreaterThan
-	var variable *variableshape.Variable
-	var patternVariables variableshape.Values
+func TestIntegerGreaterThanOrEqual(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
 
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "9", "other")
-	})
-
-	When("the variable node's content is an integer greater than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerGreaterThan{Variable: variable, Value: 8}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+	t.Run("integer greater than filter value returns match", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 8}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node's content is an integer less than or equal to the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerGreaterThan{Variable: variable, Value: 9}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
+	t.Run("integer equal to filter value returns match", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 9}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(filters.NewMatch(patternVariables, "", nil)), result)
 	})
 
-	When("the variable node is not an integer value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			variable, patternVariables = setupContentTest(ctx, "hello", "other")
-			filter = &filters.IntegerGreaterThan{Variable: variable, Value: 8}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
-	})
-})
-
-var _ = Describe("IntegerGreaterThanOrEqual", func() {
-	var filter *filters.IntegerGreaterThanOrEqual
-	var variable *variableshape.Variable
-	var patternVariables variableshape.Values
-
-	BeforeEach(func(ctx SpecContext) {
-		variable, patternVariables = setupContentTest(ctx, "9", "other")
+	t.Run("integer less than filter value returns NO matches", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "9", "other")
+		filter := &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 10}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Equal(t, filters.NewResult(), result)
 	})
 
-	When("the variable node's content is an integer greater than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 8}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
+	t.Run("not an integer value returns unknown", func(t *testing.T) {
+		variable, patternVariables := setupContentTest(t, "hello", "other")
+		filter := &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 8}
+		result, err := filter.Evaluate(detectorCtx, patternVariables)
+		require.NoError(t, err)
+		assert.Nil(t, result)
 	})
+}
 
-	When("the variable node's content is an integer equal to the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 9}
-		})
-
-		It("returns a result with a match using the pattern variables", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(
-				filters.NewResult(filters.NewMatch(patternVariables, "", nil)),
-			))
-		})
-	})
-
-	When("the variable node's content is an integer less than the filter value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			filter = &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 10}
-		})
-
-		It("returns a result with NO matches", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(Equal(filters.NewResult()))
-		})
-	})
-
-	When("the variable node is not an integer value", func() {
-		BeforeEach(func(ctx SpecContext) {
-			variable, patternVariables = setupContentTest(ctx, "hello", "other")
-			filter = &filters.IntegerGreaterThanOrEqual{Variable: variable, Value: 8}
-		})
-
-		It("returns an unknown result", func(ctx SpecContext) {
-			Expect(filter.Evaluate(defaultDetectorContext, patternVariables)).To(BeNil())
-		})
-	})
-})
-
-var _ = Describe("Unknown", func() {
+func TestUnknown(t *testing.T) {
+	detectorCtx := newDefaultDetectorContext(t)
 	filter := &filters.Unknown{}
+	result, err := filter.Evaluate(detectorCtx, nil)
+	require.NoError(t, err)
+	assert.Nil(t, result)
+}
 
-	It("returns an unknown result", func(ctx SpecContext) {
-		Expect(filter.Evaluate(defaultDetectorContext, nil)).To(BeNil())
-	})
-})
+func parseNodes(t *testing.T, content []string) []*tree.Node {
+	t.Helper()
 
-func parseNodes(ctx context.Context, content []string) []*tree.Node {
-	tree, err := ast.Parse(ctx, ruby.Get(), []byte(strings.Join(content, "\n")))
-	Expect(err).To(BeNil())
+	tree, err := ast.Parse(context.Background(), ruby.Get(), []byte(strings.Join(content, "\n")))
+	require.NoError(t, err)
 	return tree.RootNode().NamedChildren()
 }
 
-func setupContentTest(ctx context.Context, content, otherContent string) (*variableshape.Variable, variableshape.Values) {
+func setupContentTest(t *testing.T, content, otherContent string) (*variableshape.Variable, variableshape.Values) {
+	t.Helper()
+
 	variableShape := variableshape.NewBuilder().Add("one").Add("two").Build()
 
 	otherVariable, err := variableShape.Variable("one")
-	Expect(err).To(BeNil())
+	require.NoError(t, err)
 	variable, err := variableShape.Variable("two")
-	Expect(err).To(BeNil())
+	require.NoError(t, err)
 
-	nodes := parseNodes(ctx, []string{otherContent, content})
+	nodes := parseNodes(t, []string{otherContent, content})
 
 	patternVariables := variableShape.NewValues()
 	patternVariables.Set(otherVariable, nodes[0])
@@ -754,9 +564,12 @@ func setupContentTest(ctx context.Context, content, otherContent string) (*varia
 	return variable, patternVariables
 }
 
-func setupStringTest(node *tree.Node, value *string) detectortypes.Context {
+func setupStringTest(t *testing.T, node *tree.Node, value *string) detectortypes.Context {
+	t.Helper()
+
 	return &MockDetectorContext{
-		filename: defaultDetectorContext.filename,
+		t:        t,
+		filename: "src/foo.go",
 		scan: func(
 			rootNode *tree.Node,
 			rule *ruleset.Rule,
@@ -777,7 +590,7 @@ func setupStringTest(node *tree.Node, value *string) detectortypes.Context {
 				}}, nil
 			}
 
-			Fail("unexpected call to MockDetectorContext.scan")
+			t.Fatal("unexpected call to MockDetectorContext.scan")
 			panic("unreachable")
 		},
 	}

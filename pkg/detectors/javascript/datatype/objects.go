@@ -147,67 +147,67 @@ func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.D
 			continue
 		}
 
-	if parent.Type() == "arguments" {
-		grandparent := parent.Parent()
-		if grandparent == nil {
-			continue
-		}
-
-		if grandparent.Type() == "subscript_expression" {
-			index := grandparent.ChildByFieldName("index")
-
-			if index == nil {
+		if parent.Type() == "arguments" {
+			grandparent := parent.Parent()
+			if grandparent == nil {
 				continue
 			}
 
-			if index.Type() == "string" || index.Type() == "number" {
-				datatype.Name = index.Content()
-				continue
-			}
-		}
+			if grandparent.Type() == "subscript_expression" {
+				index := grandparent.ChildByFieldName("index")
 
-		if grandparent.Type() == "call_expression" {
-			function := grandparent.ChildByFieldName("function")
-			if function == nil {
-				continue
-			}
-
-			if function.Type() == "identifier" {
-				datatype.Name = function.Content()
-				continue
-			}
-
-			if function.Type() == "member_expression" {
-				property := function.ChildByFieldName("property")
-				if property != nil {
-					datatype.Name = property.Content()
+				if index == nil {
+					continue
 				}
-				continue
-			}
-		}
 
-	}
-
-	if parent.Type() == "return_statement" {
-		grandparent := parent.Parent()
-		if grandparent == nil {
-			continue
-		}
-
-		if grandparent.Type() == "statement_block" {
-			grandGrandParent := grandparent.Parent()
-			if grandGrandParent == nil {
-				continue
-			}
-
-			if grandGrandParent.Type() == "function_declaration" {
-				identifier := grandGrandParent.ChildByFieldName("name")
-
-				if identifier != nil {
-					datatype.Name = identifier.Content()
+				if index.Type() == "string" || index.Type() == "number" {
+					datatype.Name = index.Content()
 					continue
 				}
 			}
+
+			if grandparent.Type() == "call_expression" {
+				function := grandparent.ChildByFieldName("function")
+				if function == nil {
+					continue
+				}
+
+				if function.Type() == "identifier" {
+					datatype.Name = function.Content()
+					continue
+				}
+
+				if function.Type() == "member_expression" {
+					property := function.ChildByFieldName("property")
+					if property != nil {
+						datatype.Name = property.Content()
+					}
+					continue
+				}
+			}
+
+		}
+
+		if parent.Type() == "return_statement" {
+			grandparent := parent.Parent()
+			if grandparent == nil {
+				continue
+			}
+
+			if grandparent.Type() == "statement_block" {
+				grandGrandParent := grandparent.Parent()
+				if grandGrandParent == nil {
+					continue
+				}
+
+				if grandGrandParent.Type() == "function_declaration" {
+					identifier := grandGrandParent.ChildByFieldName("name")
+
+					if identifier != nil {
+						datatype.Name = identifier.Content()
+						continue
+					}
+				}
 
 				// fallback to assigment expression
 				assigmentExpression := grandGrandParent.Parent()

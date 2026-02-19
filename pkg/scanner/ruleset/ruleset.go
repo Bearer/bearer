@@ -2,9 +2,8 @@ package ruleset
 
 import (
 	"fmt"
+	"maps"
 	"slices"
-
-	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
@@ -92,8 +91,7 @@ func New(languageID string, settingsRules map[string]*settings.Rule) (*Set, erro
 func getLanguageRules(settingsRules map[string]*settings.Rule, languageID string) []*settings.Rule {
 	var result []*settings.Rule
 
-	ruleIDs := maps.Keys(settingsRules)
-	slices.Sort(ruleIDs)
+	ruleIDs := slices.Sorted(maps.Keys(settingsRules))
 
 	for _, ruleID := range ruleIDs {
 		settingsRule := settingsRules[ruleID]

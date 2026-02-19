@@ -8,7 +8,7 @@ import (
 	"time"
 
 	term "github.com/buildkite/terminal"
-	"github.com/russross/blackfriday"
+	"github.com/russross/blackfriday/v2"
 
 	html "github.com/bearer/bearer/pkg/report/output/html/types"
 	privacytypes "github.com/bearer/bearer/pkg/report/output/privacy/types"
@@ -131,7 +131,7 @@ func kebabCase(s string) string {
 }
 
 func markdownToHtml(s string) string {
-	html := blackfriday.MarkdownCommon([]byte(s))
+	html := blackfriday.Run([]byte(s))
 	return strings.ReplaceAll(string(html), "<h2", "<h4")
 }
 
