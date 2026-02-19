@@ -26,7 +26,7 @@ require (
 	github.com/smacker/go-tree-sitter v0.0.0-20240827094217-dd81d9e9be82
 	github.com/stretchr/testify v1.11.1
 	github.com/tangzero/inflector v1.0.0
-	github.com/weppos/publicsuffix-go v0.50.1
+	github.com/weppos/publicsuffix-go v0.50.2
 	github.com/xeipuuv/gojsonschema v1.2.0
 	github.com/zricethezav/gitleaks/v8 v8.18.1
 	golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f
