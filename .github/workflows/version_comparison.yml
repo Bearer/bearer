@@ -67,7 +67,7 @@ jobs:
           cd ./test-cli
           go build -a -o ../bearer-comparison/test-bearer ./cmd/bearer/bearer.go || go build -a -o ../bearer-comparison/test-bearer ./cmd/bearer/main.go
       - name: Cache CLIs and rules
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: bearer-comparison
           key: ${{ steps.cache_key.outputs.value }}
@@ -80,7 +80,7 @@ jobs:
       fail-fast: false
     steps:
       - name: Restore CLIs and rules
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: bearer-comparison
           key: ${{ needs.setup.outputs.cache_key }}
