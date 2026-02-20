@@ -10,7 +10,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/flag"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
-	"github.com/tangzero/inflector"
+	"github.com/bearer/bearer/pkg/util/pluralize"
 )
 
 var PHIDataCategoryGroupUUID = "247fa503-115b-490a-96e5-bcd357bd5686"
@@ -416,7 +416,7 @@ func defaultKnownPersonObjectPatterns(dataTypes []DataType, subjectMappingPath s
 		}
 		if knownPersonObjectPattern.ActAsIdentifier {
 			category := strings.ToLower(knownPersonObjectPattern.Category)
-			pluralCategory := inflector.Pluralize(category)
+			pluralCategory := pluralize.Plural(category)
 
 			knownPersonObjectPattern.IdentifierRegexpMatcher, err = regexp.Compile("(?i)^[\\S]*(" + category + "|" + pluralCategory + ")\\s?(uu)?id")
 
