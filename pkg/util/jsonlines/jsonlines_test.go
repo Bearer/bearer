@@ -1,11 +1,11 @@
 package jsonlines_test
 
 import (
+	"encoding/json"
 	"os"
 	"testing"
 
 	"github.com/bearer/bearer/pkg/util/jsonlines"
-	"github.com/mitchellh/mapstructure"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -57,9 +57,13 @@ func TestJsonlines(t *testing.T) {
 
 	for _, v := range decodedValue {
 		var object TestFile
-		err := mapstructure.Decode(v, &object)
+		b, err := json.Marshal(v)
 		if err != nil {
-			t.Fatalf("failed to decode mapstructure %s", err)
+			t.Fatalf("failed to marshal to json %s", err)
+		}
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			t.Fatalf("failed to unmarshal from json %s", err)
 		}
 
 		decodedObjects = append(decodedObjects, object)

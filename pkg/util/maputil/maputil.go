@@ -1,10 +1,9 @@
 package maputil
 
 import (
+	"cmp"
 	"reflect"
 	"sort"
-
-	"golang.org/x/exp/constraints"
 )
 
 func SortedStringKeys(mapValue interface{}) []string {
@@ -20,7 +19,7 @@ func SortedStringKeys(mapValue interface{}) []string {
 	return keys
 }
 
-func ToSortedSlice[mapKey constraints.Ordered, T any](input map[mapKey]T) []T {
+func ToSortedSlice[mapKey cmp.Ordered, T any](input map[mapKey]T) []T {
 	keys := make([]mapKey, 0)
 	for key := range input {
 		keys = append(keys, key)

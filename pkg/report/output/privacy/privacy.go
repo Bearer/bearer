@@ -3,10 +3,10 @@ package privacy
 import (
 	"encoding/json"
 	"fmt"
+	"maps"
+	"slices"
 	"sort"
 	"strings"
-
-	"golang.org/x/exp/maps"
 
 	"github.com/bearer/bearer/pkg/classification/db"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -336,7 +336,7 @@ func AddReportData(reportData *outputtypes.ReportData, config settings.Config) e
 			thirdPartyInventory = append(thirdPartyInventory, types.ThirdParty{
 				ThirdParty:               component.Name,
 				DataSubject:              ruleFailure.DataSubject,
-				DataTypes:                maps.Keys(ruleFailure.DataTypes),
+				DataTypes:                slices.Collect(maps.Keys(ruleFailure.DataTypes)),
 				CriticalRiskFindingCount: ruleFailure.CriticalRiskFindingCount,
 				HighRiskFindingCount:     ruleFailure.HighRiskFindingCount,
 				MediumRiskFindingCount:   ruleFailure.MediumRiskFindingCount,
@@ -346,7 +346,7 @@ func AddReportData(reportData *outputtypes.ReportData, config settings.Config) e
 		}
 	}
 
-	subjects := maps.Values(subjectInventory)
+	subjects := slices.Collect(maps.Values(subjectInventory))
 	sortInventory(subjects, thirdPartyInventory)
 
 	reportData.PrivacyReport = &types.Report{

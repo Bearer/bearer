@@ -152,20 +152,20 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 			for i := 0; i < hashNode.ChildCount(); i++ {
 				pair := hashNode.Child(i)
 
-			if pair.Type() != "pair" {
-				continue
-			}
+				if pair.Type() != "pair" {
+					continue
+				}
 
-			key := pair.ChildByFieldName("key")
-			if key == nil || key.Type() != "hash_key_symbol" {
-				continue
-			}
+				key := pair.ChildByFieldName("key")
+				if key == nil || key.Type() != "hash_key_symbol" {
+					continue
+				}
 
-			value := pair.ChildByFieldName("value")
-			// value can be nil for Ruby 3.1 shorthand hash syntax (e.g., { key: } instead of { key: key })
-			if value == nil || value.Type() != "hash" {
-				continue
-			}
+				value := pair.ChildByFieldName("value")
+				// value can be nil for Ruby 3.1 shorthand hash syntax (e.g., { key: } instead of { key: key })
+				if value == nil || value.Type() != "hash" {
+					continue
+				}
 
 				helperDatatypes[key.ID()] = &schemadatatype.DataType{
 					Node:       key,
@@ -177,18 +177,18 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 				}
 
 				for j := 0; j < value.ChildCount(); j++ {
-				childPair := value.Child(j)
+					childPair := value.Child(j)
 
-				if childPair == nil || childPair.Type() != "pair" {
-					continue
-				}
+					if childPair == nil || childPair.Type() != "pair" {
+						continue
+					}
 
-				childKey := childPair.ChildByFieldName("key")
-				if childKey == nil || childKey.Type() != "hash_key_symbol" {
-					continue
-				}
+					childKey := childPair.ChildByFieldName("key")
+					if childKey == nil || childKey.Type() != "hash_key_symbol" {
+						continue
+					}
 
-				propertyName := childKey.Content()
+					propertyName := childKey.Content()
 
 					helperDatatypes[key.ID()].Properties[propertyName] = &schemadatatype.DataType{
 						Node:       childKey,

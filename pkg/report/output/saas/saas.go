@@ -5,8 +5,6 @@ import (
 	"os"
 	"strings"
 
-	"golang.org/x/exp/maps"
-
 	"github.com/bearer/bearer/cmd/bearer/build"
 	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -53,7 +51,7 @@ func GetReport(
 
 func translateFindingsBySeverity[F securitytypes.GenericFinding](someFindingsBySeverity map[string][]F) map[string][]saas.SaasFinding {
 	saasFindingsBySeverity := make(map[string][]saas.SaasFinding)
-	for _, severity := range maps.Keys(someFindingsBySeverity) {
+	for severity := range someFindingsBySeverity {
 		for _, someFinding := range someFindingsBySeverity[severity] {
 			finding := someFinding.GetFinding()
 			saasFindingsBySeverity[severity] = append(saasFindingsBySeverity[severity], saas.SaasFinding{

@@ -4,11 +4,10 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"maps"
 	"slices"
 	"sort"
 	"strings"
-
-	"golang.org/x/exp/maps"
 
 	"github.com/fatih/color"
 	"github.com/hhatto/gocloc"
@@ -391,7 +390,7 @@ func removeUnusedFingerprints(
 	}
 	// end legacy
 
-	return maps.Keys(filteredBearerIgnoreFingerprints), maps.Keys(filteredExcludeFingerprints)
+	return slices.Collect(maps.Keys(filteredBearerIgnoreFingerprints)), slices.Collect(maps.Keys(filteredExcludeFingerprints))
 }
 
 func getExtract(rawCodeExtract []file.Line) string {
@@ -518,7 +517,7 @@ func writeRuleListToString(
 	builtInRuleCountPerLang, totalBuiltInRuleCount, builtInRulesUsed := countRules(engine, builtInRules, languages, config, true)
 
 	// combine default and built-in rules per lang
-	for _, lang := range maps.Keys(builtInRuleCountPerLang) {
+	for lang := range builtInRuleCountPerLang {
 		if ruleCount, ok := ruleCountPerLang[lang]; ok {
 			ruleCount.DefaultRuleCount += builtInRuleCountPerLang[lang].DefaultRuleCount
 			ruleCountPerLang[lang] = ruleCount
@@ -566,8 +565,7 @@ func writeRuleListToString(
 	tbl.Print()
 
 	if len(unsupportedLanguages) > 0 {
-		sortedUnsupportedLanguages := maps.Keys(unsupportedLanguages)
-		slices.Sort(sortedUnsupportedLanguages)
+		sortedUnsupportedLanguages := slices.Sorted(maps.Keys(unsupportedLanguages))
 		reportStr.WriteString(fmt.Sprintf(
 			"\nWarning: Only partial support is offered for %s.\n",
 			strings.Join(sortedUnsupportedLanguages, ", "),
@@ -728,7 +726,7 @@ func checkAndWriteFailureSummaryToString(
 		}
 		reportStr.WriteString("\n" + formatSeverity(severityLevel) + fmt.Sprint(len(findings[severityLevel])))
 		if len(failures[severityLevel]) > 0 {
-			ruleIds := maps.Keys(failures[severityLevel])
+			ruleIds := slices.Collect(maps.Keys(failures[severityLevel]))
 			sort.Strings(ruleIds)
 			if len(ruleIds) > 0 {
 				reportStr.WriteString(" (" + strings.Join(ruleIds, ", ") + ")")

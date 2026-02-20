@@ -87,29 +87,29 @@ func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.Nod
 			continue
 		}
 
-	parent := node.Parent()
-	if parent == nil {
-		datatypes[node.ID()] = helperType
-		continue
-	}
-	if parent.Type() == "member_expression" {
-		// link to root node
-		object := parent.ChildByFieldName("object")
-		if object != nil && (object.Type() == "identifier" || object.Type() == "this") {
-			if objectDatatype, ok := helperDatatypes[object.ID()]; ok {
-				objectDatatype.Properties[helperType.Name] = helperType
-			}
+		parent := node.Parent()
+		if parent == nil {
+			datatypes[node.ID()] = helperType
 			continue
 		}
+		if parent.Type() == "member_expression" {
+			// link to root node
+			object := parent.ChildByFieldName("object")
+			if object != nil && (object.Type() == "identifier" || object.Type() == "this") {
+				if objectDatatype, ok := helperDatatypes[object.ID()]; ok {
+					objectDatatype.Properties[helperType.Name] = helperType
+				}
+				continue
+			}
 
-		// link to chain
-		if object != nil && object.Type() == "member_expression" {
-			if objectDatatype, ok := helperDatatypes[object.ID()]; ok {
-				objectDatatype.Properties[helperType.Name] = helperType
+			// link to chain
+			if object != nil && object.Type() == "member_expression" {
+				if objectDatatype, ok := helperDatatypes[object.ID()]; ok {
+					objectDatatype.Properties[helperType.Name] = helperType
+				}
+				continue
 			}
-			continue
 		}
-	}
 
 		// link to root document
 		datatypes[node.ID()] = helperType

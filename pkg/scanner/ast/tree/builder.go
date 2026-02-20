@@ -10,13 +10,13 @@ import (
 )
 
 type Builder struct {
-	contentBytes        []byte
-	types               []string
-	nodes               []Node
-	rootNodeID          int
+	contentBytes []byte
+	types        []string
+	nodes        []Node
+	rootNodeID   int
 	children,
 	dataflowSources,
-	aliasOf             map[int][]int
+	aliasOf map[int][]int
 	childrenByField     map[int]map[string]int
 	sitterRootNode      *sitter.Node
 	sitterToNodeID      map[*sitter.Node]int

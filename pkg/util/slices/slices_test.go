@@ -2,35 +2,34 @@ package slices_test
 
 import (
 	"slices"
+	"testing"
 
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
+	"github.com/stretchr/testify/assert"
 
 	sliceutil "github.com/bearer/bearer/pkg/util/slices"
 )
 
-var _ = Describe("Except", func() {
+func TestExcept(t *testing.T) {
 	slice := []string{"a", "b", "b"}
 
-	When("the slice contains the value", func() {
-		It("returns a slice without any occurances of the value", func() {
-			Expect(sliceutil.Except(slice, "b")).To(Equal([]string{"a"}))
+	t.Run("when the slice contains the value", func(t *testing.T) {
+		t.Run("returns a slice without any occurrences of the value", func(t *testing.T) {
+			assert.Equal(t, []string{"a"}, sliceutil.Except(slice, "b"))
 		})
 
-		It("leaves the original slice unchanged", func() {
+		t.Run("leaves the original slice unchanged", func(t *testing.T) {
 			sliceutil.Except(slice, "b")
-
-			Expect(slice).To(Equal([]string{"a", "b", "b"}))
+			assert.Equal(t, []string{"a", "b", "b"}, slice)
 		})
 	})
 
-	When("the slice does NOT contain the value", func() {
-		It("returns a copy of the original slice", func() {
+	t.Run("when the slice does NOT contain the value", func(t *testing.T) {
+		t.Run("returns a copy of the original slice", func(t *testing.T) {
 			new := sliceutil.Except(slice, "not-there")
-			Expect(new).To(Equal(slice))
+			assert.Equal(t, slice, new)
 
 			new = slices.Delete(new, 0, 1)
-			Expect(new).NotTo(Equal(slice))
+			assert.NotEqual(t, slice, new)
 		})
 	})
-})
+}
