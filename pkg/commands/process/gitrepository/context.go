@@ -199,7 +199,7 @@ func getBaseCommitHash(
 	log.Debug().Msg("finding merge base using local repository")
 	hash, err := git.GetMergeBase(rootDir, "origin/"+baseBranch, currentCommitHash)
 	if err != nil {
-		if !strings.Contains(err.Error(), "Not a valid object name") {
+		if !strings.Contains(strings.ToLower(err.Error()), "not a valid object name") {
 			return "", fmt.Errorf("invalid ref: %w", err)
 		}
 	}
