@@ -23,6 +23,11 @@ type Builder struct {
 	fieldNames          []string
 	ruleCount           int
 	stringFragmentTypes []string
+	// visitNode is set by the AST analysis loop before each Analyze call.
+	// It allows analyzers to visit individual child subtrees (rather than
+	// all children at once via visitChildren), enabling split visiting where
+	// different children need to be processed in different scopes.
+	visitNode func(node *sitter.Node) error
 }
 
 func NewBuilder(
@@ -63,6 +68,24 @@ func NewBuilder(
 
 func (builder *Builder) SitterRootNode() *sitter.Node {
 	return builder.sitterRootNode
+}
+
+// SetVisitNode is called by the AST analysis loop to provide a function that
+// visits a single child node's subtree. Analyzers can use VisitNode to control
+// child visit order — e.g. visiting a for-loop's iterator before declaring
+// pattern bindings, then visiting the body afterward.
+func (builder *Builder) SetVisitNode(fn func(node *sitter.Node) error) {
+	builder.visitNode = fn
+}
+
+// VisitNode visits a single child node's subtree using the function provided
+// by SetVisitNode. This enables split visiting where different children need
+// to be processed in different scopes (e.g. for-loop value vs body).
+func (builder *Builder) VisitNode(node *sitter.Node) error {
+	if node == nil || builder.visitNode == nil {
+		return nil
+	}
+	return builder.visitNode(node)
 }
 
 func (builder *Builder) LastChild(node *sitter.Node) *sitter.Node {
