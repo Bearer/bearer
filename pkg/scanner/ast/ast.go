@@ -112,6 +112,10 @@ func analyzeNode(
 		return nil
 	}
 
+	builder.SetVisitNode(func(child *sitter.Node) error {
+		return analyzeNode(ctx, ruleSet, builder, analyzer, child)
+	})
+
 	return analyzer.Analyze(node, visitChildren)
 }
 
