@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Run Cimon (eBPF)
-        uses: cycodelabs/cimon-action@v0
+        uses: cycodelabs/cimon-action@72dc71dd1448de5f6e69a648bb5f13fa8995be52 # v0
         with:
           client-id: ${{ secrets.CIMON_CLIENT_ID }}
           secret: ${{ secrets.CIMON_SECRET }}
@@ -24,7 +24,7 @@ jobs:
       - name: Bump version and push tag
         if: startsWith(github.ref, 'refs/tags') != true
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
+        uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag_prefix: v
@@ -85,7 +85,7 @@ jobs:
       - name: Setup Gon
         run: brew install Bearer/tap/gon
       - name: Import Code-Signing Certificates
-        uses: Apple-Actions/import-codesign-certs@v6
+        uses: Apple-Actions/import-codesign-certs@b610f78488812c1e56b20e6df63ec42d833f2d14 # v6
         with:
           # The certificates in a PKCS12 file encoded as a base64 string
           p12-file-base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
@@ -99,7 +99,7 @@ jobs:
         with:
           path: dist/darwin
           key: darwin-${{ env.sha_short }}
-      - uses: goreleaser/goreleaser-action@v5
+      - uses: goreleaser/goreleaser-action@5742e2a039330cbb23ebf35f046f814d4c6ff811 # v5
         if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
         name: Run GoReleaser
         with:
@@ -138,7 +138,7 @@ jobs:
           path: dist/darwin
           key: darwin-${{ env.sha_short }}
       - name: Release
-        uses: goreleaser/goreleaser-action@v5
+        uses: goreleaser/goreleaser-action@5742e2a039330cbb23ebf35f046f814d4c6ff811 # v5
         with:
           distribution: goreleaser-pro
           version: 1.25.0
@@ -152,7 +152,7 @@ jobs:
           FURY_TOKEN: ${{ secrets.FURY_TOKEN }}
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@e368e328979b113139d6f9068e03accaed98a518 # v0.34.1
         with:
           image-ref: "docker.io/bearer/bearer:latest"
           format: "table"
