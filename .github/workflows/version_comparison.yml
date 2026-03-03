@@ -11,6 +11,9 @@ on:
       testRulesRef:
         description: "Test rules ref"
 
+permissions:
+  contents: read
+
 jobs:
   setup:
     name: Setup version comparison
