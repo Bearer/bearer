@@ -23,7 +23,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/smacker/go-tree-sitter v0.0.0-20240827094217-dd81d9e9be82
 	github.com/stretchr/testify v1.11.1
-	github.com/weppos/publicsuffix-go v0.50.2
+	github.com/weppos/publicsuffix-go v0.50.3
 	github.com/xeipuuv/gojsonschema v1.2.0
 	github.com/zricethezav/gitleaks/v8 v8.18.1
 	golang.org/x/mod v0.33.0
