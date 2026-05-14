@@ -256,7 +256,7 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 
 // variable nodes match their type and capture their content
 func (builder *builder) compileVariableNode(node *tree.Node, variable *language.PatternVariable) {
-	if fieldName := fieldNameFor(builder.sitterLanguage, node); fieldName != "" {
+	if fieldName := builder.fieldNameFor(node); fieldName != "" {
 		builder.write(fieldName)
 		builder.write(": ")
 	}
@@ -433,16 +433,27 @@ func (builder *builder) setMatchNode(
 	}
 }
 
-func fieldNameFor(sitterLanguage *sitter.Language, node *tree.Node) string {
+func (builder *builder) fieldNameFor(node *tree.Node) string {
 	parent := node.Parent()
 	if parent == nil {
+		return ""
+	}
+
+	if builder.patternLanguage.UseCanonicalFieldName() {
+		sitterParent := parent.SitterNode()
+		sitterNode := node.SitterNode()
+		for i := 0; i < int(sitterParent.ChildCount()); i++ {
+			if sitterParent.Child(i).Equal(sitterNode) {
+				return sitterParent.FieldNameForChild(i)
+			}
+		}
 		return ""
 	}
 
 	// the following is a workaround until
 	// https://github.com/tree-sitter/tree-sitter/pull/2104 is released
 	for i := 1; ; i++ {
-		name := sitterLanguage.FieldName(i)
+		name := builder.sitterLanguage.FieldName(i)
 		if name == "" {
 			return ""
 		}

@@ -117,4 +117,14 @@ type Pattern interface {
 
 	// Check if node represents variable with given dummy value
 	IsVariable(node *tree.Node, dummyValue string) bool
+
+	// UseCanonicalFieldName controls how field names are determined when
+	// compiling pattern variables to tree-sitter queries. The default (false)
+	// uses a workaround that iterates field names and asks parent.ChildByFieldName.
+	// This workaround misidentifies children whose field name is shared with a
+	// sibling (e.g. Swift's `parameter` node, where both children are bound to
+	// the `name:` field) and can emit a field that doesn't exist at scan time.
+	// When true, the builder uses tree-sitter's canonical FieldNameForChild API
+	// instead, which always matches what scan-time queries match against.
+	UseCanonicalFieldName() bool
 }

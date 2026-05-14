@@ -47,3 +47,7 @@ func (*PatternBase) FixupMissing(node *tree.Node) string {
 func (*PatternBase) IsVariable(node *tree.Node, dummyValue string) bool {
 	return strings.EqualFold(node.Content(), dummyValue)
 }
+
+func (*PatternBase) UseCanonicalFieldName() bool {
+	return false
+}
