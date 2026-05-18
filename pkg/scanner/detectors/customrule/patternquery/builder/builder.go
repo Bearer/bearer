@@ -256,7 +256,7 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 
 // variable nodes match their type and capture their content
 func (builder *builder) compileVariableNode(node *tree.Node, variable *language.PatternVariable) {
-	if fieldName := fieldNameFor(builder.sitterLanguage, node); fieldName != "" {
+	if fieldName := builder.patternLanguage.FieldNameFor(builder.sitterLanguage, node); fieldName != "" {
 		builder.write(fieldName)
 		builder.write(": ")
 	}
@@ -430,25 +430,5 @@ func (builder *builder) setMatchNode(
 	// walk itself shouldn't trigger an error, and we aren't creating any
 	if err != nil {
 		panic(err)
-	}
-}
-
-func fieldNameFor(sitterLanguage *sitter.Language, node *tree.Node) string {
-	parent := node.Parent()
-	if parent == nil {
-		return ""
-	}
-
-	// the following is a workaround until
-	// https://github.com/tree-sitter/tree-sitter/pull/2104 is released
-	for i := 1; ; i++ {
-		name := sitterLanguage.FieldName(i)
-		if name == "" {
-			return ""
-		}
-
-		if parent.ChildByFieldName(name) == node {
-			return name
-		}
 	}
 }

@@ -1,6 +1,8 @@
 package language
 
 import (
+	sitter "github.com/smacker/go-tree-sitter"
+
 	"github.com/bearer/bearer/pkg/scanner/ast/tree"
 )
 
@@ -117,4 +119,13 @@ type Pattern interface {
 
 	// Check if node represents variable with given dummy value
 	IsVariable(node *tree.Node, dummyValue string) bool
+
+	// FieldNameFor returns the tree-sitter field name for the given node when
+	// compiling pattern variables to queries, or empty string if there is none.
+	// The default implementation in PatternBase uses FieldNameForWorkaround,
+	// which is correct unless multiple children share a field name (e.g. Swift's
+	// `parameter` node, where both children are bound to the `name:` field).
+	// Languages with such nodes should override and call FieldNameForChild
+	// instead.
+	FieldNameFor(sitterLanguage *sitter.Language, node *tree.Node) string
 }
