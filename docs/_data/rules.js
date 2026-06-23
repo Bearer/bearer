@@ -82,13 +82,13 @@ async function fetchData(location) {
   const gitleaks = await fetchFile(gitleaksInternalRule, "/")
   rules.push(gitleaks)
   // ex: looping through rules [ruby, gitleaks, sql]
-  dirs.forEach(async (dir) => {
+  for (const dir of dirs) {
     const dirPath = path.join(location, dir)
     if (isDirectory(dirPath) && !excludeDirectories.includes(dir)) {
       const subDirs = await readdir(dirPath)
       updateCounts(dir)
       // ex. looping through rules/ruby [lang, rails]
-      subDirs.forEach(async (subDir) => {
+      for (const subDir of subDirs) {
         const subDirPath = path.join(dirPath, subDir)
         if (
           isDirectory(subDirPath) &&
@@ -105,7 +105,7 @@ async function fetchData(location) {
         } else if (isDirectory(subDirPath) && subDir === "gosec") {
           const groupDirs = await readdir(subDirPath)
 
-          groupDirs.forEach(async (groupDir) => {
+          for (const groupDir of groupDirs) {
             const groupDirPath = path.join(dirPath, subDir, groupDir)
             if (isDirectory(groupDirPath)) {
               const files = await readdir(groupDirPath)
@@ -116,11 +116,11 @@ async function fetchData(location) {
               )
               rules.push(...children)
             }
-          })
+          }
         }
-      })
+      }
     }
-  })
+  }
   return { counts, rules }
 }
 
