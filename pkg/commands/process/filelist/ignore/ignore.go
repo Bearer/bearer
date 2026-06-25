@@ -45,7 +45,8 @@ func (fileignore *FileIgnore) Ignore(
 	}
 
 	if !fileInfo.IsDir() {
-		if fileInfo.Size() > int64(fileignore.config.Worker.FileSizeMaximum) {
+		maxSize := fileignore.config.Worker.FileSizeMaximum
+		if maxSize > 0 && fileInfo.Size() > int64(maxSize) {
 			log.Debug().Msgf("skipping file due to size: %s %s", projectPath, relativePath)
 			return true
 		}
