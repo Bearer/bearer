@@ -34,7 +34,10 @@ var ignoreTestFiles = []*regexp.Regexp{
 	regexp.MustCompile(`(?i:unit[-_]?tests?)`),
 }
 
-var ignoredFilenames = []*regexp.Regexp{
+// IgnoredFilenames is the built-in list of path patterns that are skipped
+// during a scan. It is exported so it can be overridden or extended at
+// startup, before scanning begins.
+var IgnoredFilenames = []*regexp.Regexp{
 	regexp.MustCompile(`(^|/)\.git/`),
 	regexp.MustCompile(`(^|/)testing/`),
 	regexp.MustCompile(`(^|/)_*mocks?_*`),
@@ -82,7 +85,7 @@ func (path *Path) Join(elements ...string) *Path {
 }
 
 func (fileInfo *FileInfo) isGlobalIgnored() bool {
-	return fileInfo.isBinary || fileInfo.isGitIgnored || fileInfo.isImage || fileInfo.isTest
+	return fileInfo.isBinary || fileInfo.isGitIgnored || fileInfo.isImage
 }
 
 func (fileInfo *FileInfo) LanguageTypeString() string {
@@ -158,7 +161,7 @@ func IterateFilesList(
 			relativePath += "/"
 		}
 
-		if regex.AnyMatch(ignoredFilenames, relativePath) {
+		if regex.AnyMatch(IgnoredFilenames, relativePath) {
 			log.Debug().Msgf("%s: skipping due to filename: other", path)
 			continue
 		}
@@ -217,6 +220,11 @@ func IterateFilesList(
 
 		if fileInfo.isGlobalIgnored() {
 			log.Debug().Msgf("ignored due to file type %s", path)
+			continue
+		}
+
+		if skipTest && fileInfo.isTest {
+			log.Debug().Msgf("%s: skipping due to file type: test", path)
 			continue
 		}
 
