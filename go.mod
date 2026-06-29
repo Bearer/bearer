@@ -14,7 +14,7 @@ require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.6.0
 	github.com/hhatto/gocloc v0.7.0
-	github.com/open-policy-agent/opa v1.17.1
+	github.com/open-policy-agent/opa v1.18.0
 	github.com/rodaine/table v1.3.1
 	github.com/rs/zerolog v1.35.1
 	github.com/russross/blackfriday/v2 v2.1.0
@@ -88,7 +88,7 @@ require (
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
 	github.com/valyala/fastjson v1.6.10 // indirect
-	github.com/vektah/gqlparser/v2 v2.5.33 // indirect
+	github.com/vektah/gqlparser/v2 v2.5.34 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
@@ -109,7 +109,7 @@ require (
 	github.com/subosito/gotenv v1.6.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
 	golang.org/x/text v0.38.0 // indirect
-	gopkg.in/ini.v1 v1.67.2 // indirect
+	gopkg.in/ini.v1 v1.67.3 // indirect
 	gopkg.in/yaml.v3 v3.0.1
 )
 
