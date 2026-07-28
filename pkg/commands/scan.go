@@ -75,7 +75,7 @@ func NewScanCommand(engine engine.Engine) *cobra.Command {
 
 			options, err := ScanFlags.ToOptions(args)
 			if err != nil {
-				return fmt.Errorf("flag error: %s", err)
+				return fmt.Errorf("flag error: %w", err)
 			}
 
 			if len(args) == 0 {
