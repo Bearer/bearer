@@ -195,6 +195,7 @@ func Start(parentProcessID int, port string, engine engine.Engine) error {
 
 func monitorParentProcess(ctx context.Context, parentProcessID int, cancel func()) {
 	timer := time.NewTimer(5 * time.Second)
+	defer timer.Stop()
 
 	for {
 		select {

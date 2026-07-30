@@ -127,6 +127,7 @@ func (process *Process) monitorCommand() {
 			}
 
 			timeout := time.NewTimer(settings.TimeoutWorkerShutdown)
+			defer timeout.Stop()
 			select {
 			case <-timeout.C:
 				log.Debug().Msgf("killing %s after timeout", process.id)
@@ -152,6 +153,7 @@ func (process *Process) kill() {
 
 func (process *Process) monitorMemory() {
 	tick := time.NewTicker(500 * time.Millisecond)
+	defer tick.Stop()
 	monitor, err := gopsutilprocess.NewProcessWithContext(process.context, int32(process.command.Process.Pid))
 	if err != nil {
 		log.Debug().Msgf("failed to start memory monitor: %s", err)
@@ -278,6 +280,7 @@ func (process *Process) Scan(scanRequest work.ProcessRequest) (*work.ProcessResp
 	}()
 
 	timeout := time.NewTimer(scanRequest.File.Timeout + settings.TimeoutWorkerFileGrace)
+	defer timeout.Stop()
 	select {
 	case response := <-scanComplete:
 		return response, nil
