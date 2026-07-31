@@ -252,7 +252,7 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		return fmt.Errorf("failed to get absolute target: %w", err)
 	}
 
-	if err := validateLanguages(engine, opts.ScanOptions.Language); err != nil {
+	if err := validateLanguages(engine, opts.Language); err != nil {
 		return err
 	}
 
@@ -262,7 +262,7 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		return err
 	}
 
-	if allowed := allowedGoclocLanguages(engine, opts.ScanOptions.Language); allowed != nil {
+	if allowed := allowedGoclocLanguages(engine, opts.Language); allowed != nil {
 		filterGoclocResult(inputgocloc, allowed)
 	}
 
