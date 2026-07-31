@@ -89,7 +89,11 @@ func (scanner *Scanner) Scan(
 
 		for _, detection := range detections {
 			detectorType := detectors.Type(detection.RuleID)
-			data := detection.Data.(customruletypes.Data)
+			data, ok := detection.Data.(customruletypes.Data)
+			if !ok {
+				fmt.Printf("Warning: detection.Data is not of type customruletypes.Data, skipping\n")
+				continue
+			}
 
 			if len(data.Datatypes) == 0 {
 				report.AddDetection(reportdetections.TypeCustomRisk,
@@ -136,7 +140,11 @@ func reportDatatypeDetection(
 	datatypeDetection *detectortypes.Detection,
 	objectName string,
 ) {
-	data := datatypeDetection.Data.(datatype.Data)
+	data, ok := datatypeDetection.Data.(datatype.Data)
+	if !ok {
+		fmt.Printf("Warning: datatypeDetection.Data is not of type datatype.Data, skipping\n")
+		return
+	}
 
 	for _, property := range data.Properties {
 		detectionContent := detection.MatchNode.Content()
