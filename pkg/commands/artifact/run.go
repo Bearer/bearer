@@ -375,6 +375,7 @@ func (r *runner) Report(
 		if err != nil {
 			return false, fmt.Errorf("error creating output file %w", err)
 		}
+		defer reportFile.Close()
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
