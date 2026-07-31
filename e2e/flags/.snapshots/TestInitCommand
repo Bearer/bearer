@@ -24,6 +24,7 @@ scan:
     force: false
     hide_progress_bar: false
     internal-domains: []
+    language: []
     parallel: 0
     quiet: false
     scanner:

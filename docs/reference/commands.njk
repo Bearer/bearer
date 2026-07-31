@@ -28,30 +28,32 @@ Bearer CLI offers a number of commands to use and customize the CLI to your need
   <pre class="language-bash"><code class="language-bash">{{item.usage | trim}}</code></pre>
 
   <h3 id="{{item.name | trim}}-flags">Flags</h3>
-  <table class="table-auto">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Default Value</th>
-        <th>Environment Variables<th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for option in item.options -%}
+  <div class="overflow-x-auto">
+    <table class="table-auto">
+      <thead>
         <tr>
-          <td>
-            {% if option.shorthand %}
-              <code class="">-{{option.shorthand}}</code>, {% endif %}
-            <code class="">--{{option.name}}</code>
-          </td>
-          <td>{{option.usage}}</td>
-          <td>{{option.default_value}}</td>
-          <td>{{ option.environment_variables }}</td>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Default Value</th>
+          <th>Environment Variables</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for option in item.options -%}
+          <tr>
+            <td>
+              {% if option.shorthand %}
+                <code class="">-{{option.shorthand}}</code>, {% endif %}
+              <code class="">--{{option.name}}</code>
+            </td>
+            <td>{{option.usage}}</td>
+            <td>{{ option.default_value | e | replace(",", ",<br>") | safe }}</td>
+            <td>{{ option.environment_variables }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
   {% if item.example %}
     <h3 id="{{item.name | trim}}-usage">Usage</h3>

@@ -54,6 +54,10 @@ func (fileignore *FileIgnore) Ignore(
 			log.Debug().Msgf("skipping file (suspected minified JS): %s %s", projectPath, relativePath)
 			return true
 		}
+		if fileignore.skipByLanguage(filePath, goclocResult) {
+			log.Debug().Msgf("skipping file (language not in --language filter): %s %s", projectPath, relativePath)
+			return true
+		}
 	}
 
 	dirTrimmedPath := filepath.Dir(trimmedPath)
@@ -76,6 +80,23 @@ func (fileignore *FileIgnore) Ignore(
 		goclocResult,
 		dirInfo,
 	)
+}
+
+// skipByLanguage reports whether a file should be ignored because of the
+// --language restriction. When no languages are requested it never skips.
+// Otherwise the gocloc result has already been restricted to the requested
+// languages upstream, so any file absent from it is not one of those languages
+// (a different language or unrecognised) and is skipped.
+func (fileignore *FileIgnore) skipByLanguage(fullPath string, goclocResult *gocloc.Result) bool {
+	if len(fileignore.config.Scan.Language) == 0 {
+		return false
+	}
+
+	if goclocResult == nil {
+		return true
+	}
+
+	return goclocResult.Files[fullPath] == nil
 }
 
 func isMinified(fullPath string, size int64, goclocResult *gocloc.Result) bool {

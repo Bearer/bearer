@@ -97,12 +97,25 @@ options:
     usage: Load ignore file from the specified path.
     environment_variables:
       - BEARER_IGNORE_FILE
+  - name: include-stats
+    default_value: "false"
+    usage: |
+      Include language usage statistics in reports that support them.
+    environment_variables:
+      - BEARER_INCLUDE_STATS
   - name: internal-domains
     default_value: "[]"
     usage: |
       Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
     environment_variables:
       - BEARER_INTERNAL_DOMAINS
+  - name: language
+    default_value: "[]"
+    usage: |
+      Restrict languages to scan e.g. --language=ruby,python. Unrestricted by default.
+    environment_variables:
+      - BEARER_LANGUAGE
+      - LANGUAGE
   - name: log-level
     default_value: info
     usage: Set log level (error, info, debug, trace)
