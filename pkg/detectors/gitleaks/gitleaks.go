@@ -1,6 +1,7 @@
 package gitleaks
 
 import (
+	"context"
 	_ "embed"
 	"log"
 	"strings"
@@ -14,6 +15,7 @@ import (
 	toml "github.com/pelletier/go-toml/v2"
 	"github.com/zricethezav/gitleaks/v8/config"
 	"github.com/zricethezav/gitleaks/v8/detect"
+	"github.com/zricethezav/gitleaks/v8/sources"
 )
 
 //go:embed gitlab_config.toml
@@ -21,6 +23,7 @@ var RawConfig []byte
 
 type detector struct {
 	gitleaksDetector *detect.Detector
+	config           config.Config
 	idGenerator      nodeid.Generator
 }
 
@@ -36,6 +39,7 @@ func New(idGenerator nodeid.Generator) types.Detector {
 
 	return &detector{
 		gitleaksDetector: gitleaksDetector,
+		config:           cfg,
 		idGenerator:      idGenerator,
 	}
 }
@@ -45,8 +49,15 @@ func (detector *detector) AcceptDir(dir *file.Path) (bool, error) {
 }
 
 func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, report report.Report) (bool, error) {
-	findings, err := detector.gitleaksDetector.DetectFiles(file.Path.AbsolutePath)
-
+	findings, err := detector.gitleaksDetector.DetectSource(
+		context.Background(),
+		&sources.Files{
+			Config:          &detector.config,
+			Path:            file.AbsolutePath,
+			Sema:            detector.gitleaksDetector.Sema,
+			MaxArchiveDepth: detector.gitleaksDetector.MaxArchiveDepth,
+		},
+	)
 	if err != nil {
 		return false, err
 	}
