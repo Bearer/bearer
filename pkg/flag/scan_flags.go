@@ -107,6 +107,13 @@ var (
 		Usage:                "Specify which scanner to use e.g. --scanner=secrets, --scanner=secrets,sast",
 		EnvironmentVariables: []string{"SCANNER"},
 	})
+	LanguageFlag = ScanFlagGroup.add(flagtypes.Flag{
+		Name:                 "language",
+		ConfigName:           "scan.language",
+		Value:                []string{},
+		Usage:                "Restrict languages to scan e.g. --language=ruby,python. Unrestricted by default.",
+		EnvironmentVariables: []string{"LANGUAGE"},
+	})
 	ParallelFlag = ScanFlagGroup.add(flagtypes.Flag{
 		Name:       "parallel",
 		ConfigName: "scan.parallel",
@@ -187,6 +194,7 @@ func (scanFlagGroup) SetOptions(options *flagtypes.Options, args []string) error
 		Target:                  target,
 		ExternalRuleDir:         getStringSlice(ExternalRuleDirFlag),
 		Scanner:                 scanners,
+		Language:                getStringSlice(LanguageFlag),
 		Parallel:                viper.GetInt(ParallelFlag.ConfigName),
 		ExitCode:                viper.GetInt(ExitCodeFlag.ConfigName),
 		Diff:                    diff,

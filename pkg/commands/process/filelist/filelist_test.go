@@ -1,6 +1,7 @@
 package filelist_test
 
 import (
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -154,4 +155,74 @@ func TestFileList(t *testing.T) {
 		})
 	}
 
+}
+
+func TestDiscoverLanguageFilter(t *testing.T) {
+	dir := t.TempDir()
+	for name, content := range map[string]string{
+		"a.rb": "puts 1\n",
+		"b.py": "print(1)\n",
+		"c.go": "package main\n",
+	} {
+		if err := os.WriteFile(filepath.Join(dir, name), []byte(content), 0o600); err != nil {
+			t.Fatalf("failed to write %s: %s", name, err)
+		}
+	}
+
+	// gocloc result covering all languages (no --language restriction)
+	fullGocloc := &gocloc.Result{
+		Files: map[string]*gocloc.ClocFile{
+			filepath.Join(dir, "a.rb"): {Lang: "Ruby", Code: 1},
+			filepath.Join(dir, "b.py"): {Lang: "Python", Code: 1},
+			filepath.Join(dir, "c.go"): {Lang: "Go", Code: 1},
+		},
+	}
+
+	// gocloc result as it would be after being restricted to ruby upstream: only
+	// the ruby file remains
+	rubyOnlyGocloc := &gocloc.Result{
+		Files: map[string]*gocloc.ClocFile{
+			filepath.Join(dir, "a.rb"): {Lang: "Ruby", Code: 1},
+		},
+	}
+
+	baseConfig := settings.Config{
+		Worker: settings.WorkerOptions{
+			FileSizeMaximum:           100000,
+			TimeoutFileBytesPerSecond: 1,
+		},
+	}
+
+	restrictedConfig := baseConfig
+	restrictedConfig.Scan = flagtypes.ScanOptions{Language: []string{"ruby"}}
+
+	filePaths := func(list *files.List) []string {
+		paths := make([]string, 0, len(list.Files))
+		for _, f := range list.Files {
+			paths = append(paths, f.FilePath)
+		}
+		return paths
+	}
+
+	t.Run("no restriction scans every language", func(t *testing.T) {
+		output, err := filelist.Discover(nil, dir, fullGocloc, baseConfig)
+		assert.NoError(t, err)
+		assert.ElementsMatch(t, []string{"a.rb", "b.py", "c.go"}, filePaths(output))
+	})
+
+	t.Run("restriction keeps only files in the pre-filtered gocloc result", func(t *testing.T) {
+		output, err := filelist.Discover(nil, dir, rubyOnlyGocloc, restrictedConfig)
+		assert.NoError(t, err)
+		assert.ElementsMatch(t, []string{"a.rb"}, filePaths(output))
+	})
+
+	t.Run("restriction skips files absent from the gocloc result", func(t *testing.T) {
+		if err := os.WriteFile(filepath.Join(dir, "notes.txt"), []byte("hello\n"), 0o600); err != nil {
+			t.Fatalf("failed to write notes.txt: %s", err)
+		}
+
+		output, err := filelist.Discover(nil, dir, rubyOnlyGocloc, restrictedConfig)
+		assert.NoError(t, err)
+		assert.ElementsMatch(t, []string{"a.rb"}, filePaths(output))
+	})
 }

@@ -73,6 +73,7 @@ type ScanOptions struct {
 	Force                   bool          `mapstructure:"force" json:"force" yaml:"force"`
 	ExternalRuleDir         []string      `mapstructure:"external-rule-dir" json:"external-rule-dir" yaml:"external-rule-dir"`
 	Scanner                 []string      `mapstructure:"scanner" json:"scanner" yaml:"scanner"`
+	Language                []string      `mapstructure:"language" json:"language" yaml:"language"`
 	Parallel                int           `mapstructure:"parallel" json:"parallel" yaml:"parallel"`
 	ExitCode                int           `mapstructure:"exit-code" json:"exit-code" yaml:"exit-code"`
 	Diff                    bool          `mapstructure:"diff" json:"diff" yaml:"diff"`

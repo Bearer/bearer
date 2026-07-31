@@ -252,11 +252,20 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		return fmt.Errorf("failed to get absolute target: %w", err)
 	}
 
+	if err := validateLanguages(engine, opts.ScanOptions.Language); err != nil {
+		return err
+	}
+
 	inputgocloc, err := stats.GoclocDetectorOutput(targetPath, opts)
 	if err != nil {
 		log.Debug().Msgf("Error in line of code output %s", err)
 		return err
 	}
+
+	if allowed := allowedGoclocLanguages(engine, opts.ScanOptions.Language); allowed != nil {
+		filterGoclocResult(inputgocloc, allowed)
+	}
+
 	foundLanguageIDs := GetFoundLanguageIDs(engine, inputgocloc.Languages)
 
 	// set used language list for external rules to empty if we dont use them
@@ -490,4 +499,81 @@ func GetFoundLanguageIDs(engine engine.Engine, goclocLanguages map[string]*goclo
 	sort.Strings(keys)
 
 	return keys
+}
+
+func validateLanguages(engine engine.Engine, requested []string) error {
+	if len(requested) == 0 {
+		return nil
+	}
+
+	valid := set.New[string]()
+	for _, language := range engine.GetLanguages() {
+		valid.Add(language.ID())
+	}
+
+	var unknown []string
+	for _, id := range requested {
+		if !valid.Has(id) {
+			unknown = append(unknown, id)
+		}
+	}
+
+	if len(unknown) == 0 {
+		return nil
+	}
+
+	validIDs := valid.Items()
+	sort.Strings(validIDs)
+
+	return fmt.Errorf(
+		"invalid language argument: %s; supported values: %s",
+		strings.Join(unknown, ", "),
+		strings.Join(validIDs, ", "),
+	)
+}
+
+func filterGoclocResult(result *gocloc.Result, allowed set.Set[string]) {
+	if result == nil {
+		return
+	}
+
+	for path, file := range result.Files {
+		if !allowed.Has(file.Lang) {
+			delete(result.Files, path)
+		}
+	}
+
+	for name := range result.Languages {
+		if !allowed.Has(name) {
+			delete(result.Languages, name)
+		}
+	}
+
+	total := &gocloc.Language{Name: "TOTAL"}
+	for _, language := range result.Languages {
+		total.Code += language.Code
+		total.Comments += language.Comments
+		total.Blanks += language.Blanks
+		total.Total += language.Total
+		total.Files = append(total.Files, language.Files...)
+	}
+	result.Total = total
+}
+
+func allowedGoclocLanguages(engine engine.Engine, requested []string) set.Set[string] {
+	if len(requested) == 0 {
+		return nil
+	}
+
+	enabled := set.New[string]()
+	enabled.AddAll(requested)
+
+	allowed := set.New[string]()
+	for _, language := range engine.GetLanguages() {
+		if enabled.Has(language.ID()) {
+			allowed.AddAll(language.GoclocLanguages())
+		}
+	}
+
+	return allowed
 }
