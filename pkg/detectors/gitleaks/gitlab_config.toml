@@ -809,6 +809,7 @@ keywords = [
 ]
 
 [[rules]]
+id = "yandex-iam-cookie-v1"
 description = "Yandex.Cloud IAM Cookie v1"
 regex = '''\bc1\.[A-Z0-9a-z_-]+[=]{0,2}\.[A-Z0-9a-z_-]{86}[=]{0,2}['|\"|\n|\r|\s|\x60]'''
 keywords = [
@@ -816,6 +817,7 @@ keywords = [
 ]
 
 [[rules]]
+id = "yandex-iam-token-v1"
 description = "Yandex.Cloud IAM Token v1"
 regex = '''\bt1\.[A-Z0-9a-z_-]+[=]{0,2}\.[A-Z0-9a-z_-]{86}[=]{0,2}['|\"|\n|\r|\s|\x60]'''
 keywords = [
@@ -823,6 +825,7 @@ keywords = [
 ]
 
 [[rules]]
+id = "yandex-iam-api-key-v1"
 description = "Yandex.Cloud IAM API key v1"
 regex = '''\bAQVN[A-Za-z0-9_\-]{35,38}['|\"|\n|\r|\s|\x60]'''
 keywords = [
@@ -830,6 +833,7 @@ keywords = [
 ]
 
 [[rules]]
+id = "yandex-aws-access-secret"
 description = "Yandex.Cloud AWS API compatible Access Secret"
 regex = '''\bYC[a-zA-Z0-9_\-]{38}['|\"|\n|\r|\s|\x60]'''
 keywords = [
