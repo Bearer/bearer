@@ -33,8 +33,8 @@
 **Bearer CLI (Open Source)**: Go • Java • JavaScript • TypeScript • PHP • Python • Ruby
 
 **Bearer Pro by Cycode**: _All Bearer CLI languages plus:_
-- **Advanced Cross-file Analysis**: Java • Python • C# _(alpha)_
-- **Additional Languages**: C# • Kotlin • Elixir • VB.Net
+- **Advanced Cross-file Analysis**: Java • Python • C# • Go
+- **Additional Languages**: C# • Kotlin • Elixir • VB.Net • Rust • Swift
 
 
 <a href="https://docs.bearer.com/reference/supported-languages/">Learn more about language support</a>
@@ -302,7 +302,7 @@ Make sure to read our [integration strategy guide](https://docs.bearer.com/guide
 
 ## Do you support interprocedural and inter-file analysis?
 
-Yes, Bearer Pro supports interprocedural and inter-file analysis, currently with full capabilities for Java and actively being extended to other major supported languages. This advanced analysis allows Bearer Pro to trace data flow and control flow across function and file boundaries within an entire codebase. This is crucial for accurately identifying complex vulnerabilities that depend on the interaction of different code components, significantly reducing false positives compared to analyses limited to individual functions or files.
+Yes, Bearer Pro supports interprocedural and inter-file analysis, currently with full capabilities for Java, Python, C#, and Go, and actively being extended to other major supported languages. This advanced analysis allows Bearer Pro to trace data flow and control flow across function and file boundaries within an entire codebase. This is crucial for accurately identifying complex vulnerabilities that depend on the interaction of different code components, significantly reducing false positives compared to analyses limited to individual functions or files.
 
 Bearer Pro's interprocedural and inter-file analysis for Java has demonstrated strong results on the OWASP Java Benchmark, achieving a score of 76% with a reported false positive rate of less than 2%.
 
