@@ -1,4 +1,4 @@
-FROM golang:1.25.0
+FROM golang:1.26.6
 
 RUN apt update
 RUN apt install jq -y
