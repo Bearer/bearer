@@ -250,8 +250,8 @@ github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 h1:C3w9PqII01/Oq
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822/go.mod h1:+n7T8mK8HuQTcFwEeznm/DIxMOiR9yIdICNftLE1DvQ=
 github.com/nwaples/rardecode/v2 v2.1.0 h1:JQl9ZoBPDy+nIZGb1mx8+anfHp/LV3NE2MjMiv0ct/U=
 github.com/nwaples/rardecode/v2 v2.1.0/go.mod h1:7uz379lSxPe6j9nvzxUZ+n7mnJNgjsRNb6IbvGVHRmw=
-github.com/open-policy-agent/opa v1.19.0 h1:+j2OCsjMezZEML2T1lI9giJdGJS/PL1XFKgkHPGIhpo=
-github.com/open-policy-agent/opa v1.19.0/go.mod h1:pb6Y6klyf7X7X8uXNDflruA9dQC2gMqWROXI5w/kvv0=
+github.com/open-policy-agent/opa v1.19.1 h1:aB1nOncChnTbQurjRQVJnjTJxditt8VqszlbaM3GGKU=
+github.com/open-policy-agent/opa v1.19.1/go.mod h1:pb6Y6klyf7X7X8uXNDflruA9dQC2gMqWROXI5w/kvv0=
 github.com/pelletier/go-toml/v2 v2.4.3 h1:GTRvJQutkOSftxIFD5xw9aepkYNuPWmVJpffdDPYVpY=
 github.com/pelletier/go-toml/v2 v2.4.3/go.mod h1:2gIqNv+qfxSVS7cM2xJQKtLSTLUE9V8t9Stt+h56mCY=
 github.com/pierrec/lz4/v4 v4.1.21 h1:yOVMLb6qSIDP67pl/5F7RepeKYu/VmTyEXvuMI5d9mQ=
