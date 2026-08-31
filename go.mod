@@ -14,7 +14,7 @@ require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.6.0
 	github.com/hhatto/gocloc v0.7.0
-	github.com/open-policy-agent/opa v1.19.1
+	github.com/open-policy-agent/opa v1.20.0
 	github.com/rodaine/table v1.3.1
 	github.com/rs/zerolog v1.35.1
 	github.com/russross/blackfriday/v2 v2.1.0
@@ -85,7 +85,7 @@ require (
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
-	github.com/klauspost/compress v1.19.0 // indirect
+	github.com/klauspost/compress v1.19.1 // indirect
 	github.com/klauspost/pgzip v1.2.6 // indirect
 	github.com/lestrrat-go/blackmagic v1.0.4 // indirect
 	github.com/lestrrat-go/dsig v1.2.1 // indirect
