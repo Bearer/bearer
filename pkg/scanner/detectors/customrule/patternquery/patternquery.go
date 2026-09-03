@@ -189,7 +189,13 @@ func (query *query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *Re
 			continue
 		}
 
-		if content, typeMatched := typedContent[node.Type()]; !typeMatched || node.Content() != content {
+		content, typeMatched := typedContent[node.Type()]
+		if !typeMatched {
+			// nodes compiled as a bare `_` wildcard (anonymous leaves) are keyed
+			// on the wildcard rather than on their type
+			content, typeMatched = typedContent["_"]
+		}
+		if !typeMatched || node.Content() != content {
 			return nil
 		}
 	}

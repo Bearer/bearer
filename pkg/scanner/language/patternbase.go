@@ -38,6 +38,10 @@ func (*PatternBase) AnonymousParentTypes() []string {
 	return nil
 }
 
+func (*PatternBase) IsAnonymousLeaf(node *tree.Node) bool {
+	return false
+}
+
 func (*PatternBase) AdjustInput(input string) string {
 	return input
 }

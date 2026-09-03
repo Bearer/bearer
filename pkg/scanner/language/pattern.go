@@ -64,6 +64,18 @@ type Pattern interface {
 	// If we don't match the "==" then the pattern would also incorrectly match:
 	//   a != b
 	AnonymousParentTypes() []string
+	// IsAnonymousLeaf returns whether a pattern node stands in a position where
+	// the code may carry an anonymous token instead of a named node, so that the
+	// query must use a bare `_` wildcard for it and compare its content, rather
+	// than match a named node type. The default is false.
+	//
+	// eg. in Perl the name of a named unary operator is an anonymous token:
+	//   rmdir $dir    -> (func1op_call_expression "rmdir" (scalar))
+	// while a user-defined function has a named `function` node:
+	//   remove $dir   -> (function_call_expression function: (function) (scalar))
+	// Returning true for the function slot of call nodes lets one pattern
+	// (`$<FUNCTION>($<PATH>)` with a `values:` filter) match both spellings.
+	IsAnonymousLeaf(node *tree.Node) bool
 	// NodeTypes returns the types to use for a given node. This allows us
 	// to match using equivalent syntax without having to enumerate all the
 	// combinations in rules.

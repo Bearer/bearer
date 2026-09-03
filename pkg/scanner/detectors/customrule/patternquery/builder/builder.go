@@ -34,6 +34,10 @@ type Result struct {
 	RootVariable    *language.PatternVariable
 }
 
+// anonymousLeafType is the ParamToContent key used for nodes compiled as a
+// bare `_` wildcard, whose actual type is only known at match time.
+const anonymousLeafType = "_"
+
 type builder struct {
 	sitterLanguage   *sitter.Language
 	patternLanguage  language.Pattern
@@ -235,9 +239,11 @@ func (builder *builder) compileNode(node *asttree.Node, isRoot bool, isLastChild
 
 	if variable := builder.getVariableFor(node); variable != nil {
 		builder.compileVariableNode(node, variable)
+	} else if builder.patternLanguage.IsAnonymousLeaf(node) {
+		builder.compileAnonymousLeafNode(node)
 	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
-	} else if len(node.NamedChildren()) == 0 || builder.patternLanguage.IsLeaf(node) {
+	} else if (len(node.NamedChildren()) == 0 && !builder.hasAnonymousLeafChild(node)) || builder.patternLanguage.IsLeaf(node) {
 		builder.compileLeafNode(node, parentType)
 	} else if err := builder.compileNodeWithChildren(node, parentType); err != nil {
 		return err
@@ -269,6 +275,14 @@ func (builder *builder) compileVariableNode(node *tree.Node, variable *language.
 	paramName := builder.newParam()
 	builder.variableToParams[variable.Name] = append(builder.variableToParams[variable.Name], paramName)
 
+	// the code may have an anonymous token here: a bare wildcard matches
+	// named and anonymous nodes alike, `(_)` only matches named nodes
+	if builder.patternLanguage.IsAnonymousLeaf(node) {
+		builder.write("_ @")
+		builder.write(paramName)
+		return
+	}
+
 	builder.write("[")
 
 	for _, nodeType := range variable.NodeTypes {
@@ -278,6 +292,30 @@ func (builder *builder) compileVariableNode(node *tree.Node, variable *language.
 	}
 
 	builder.write("] @")
+	builder.write(paramName)
+}
+
+// hasAnonymousLeafChild reports whether a node has a child compiled as an
+// anonymous leaf: such a node is not a leaf itself even when it has no named
+// children (eg. Perl `shift` with no operand).
+func (builder *builder) hasAnonymousLeafChild(node *asttree.Node) bool {
+	for _, child := range node.Children() {
+		if builder.patternLanguage.IsAnonymousLeaf(child) {
+			return true
+		}
+	}
+
+	return false
+}
+
+// Anonymous leaves (see Pattern.IsAnonymousLeaf) match any node, named or
+// anonymous, whose content equals the pattern's. The content is checked at
+// match time under the wildcard type key.
+func (builder *builder) compileAnonymousLeafNode(node *asttree.Node) {
+	paramName := builder.newParam()
+	builder.paramToContent[paramName] = map[string]string{anonymousLeafType: node.Content()}
+
+	builder.write("_ @")
 	builder.write(paramName)
 }
 
@@ -334,7 +372,11 @@ func (builder *builder) compileNodeWithChildren(node *asttree.Node, parentType s
 	if slices.Contains(builder.patternLanguage.AnonymousParentTypes(), node.Type()) {
 		children = node.Children()
 	} else {
-		children = node.NamedChildren()
+		for _, child := range node.Children() {
+			if child.IsNamed() || builder.patternLanguage.IsAnonymousLeaf(child) {
+				children = append(children, child)
+			}
+		}
 	}
 
 	lastNode := children[len(children)-1]
