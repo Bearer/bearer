@@ -3,7 +3,10 @@ package php_test
 import (
 	"context"
 	_ "embed"
+	"slices"
 	"testing"
+
+	"github.com/go-enry/go-enry/v2"
 
 	"github.com/bradleyjkemp/cupaloy"
 
@@ -111,5 +114,17 @@ func TestPattern(t *testing.T) {
 
 			cupaloy.SnapshotT(tt, result)
 		})
+	}
+}
+
+func TestEnryLanguagesCoverPHPFileExtensions(t *testing.T) {
+	content := []byte("<?php echo 1; ?>")
+	scanned := php.Get().EnryLanguages()
+
+	for _, filename := range []string{"index.php", "template.phtml", "legacy.php5", "helpers.inc"} {
+		language := enry.GetLanguage(filename, content)
+		if !slices.Contains(scanned, language) {
+			t.Errorf("%s is detected as %q, which the PHP scanner skips", filename, language)
+		}
 	}
 }
