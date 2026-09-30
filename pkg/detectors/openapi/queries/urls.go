@@ -3,7 +3,6 @@ package queries
 import (
 	"bytes"
 	"encoding/json"
-	"os"
 
 	"github.com/bearer/bearer/pkg/report/operations"
 	"github.com/bearer/bearer/pkg/util/file"
@@ -26,7 +25,7 @@ type Variable struct {
 }
 
 func FindUrls(file *file.FileInfo) (urls []operations.Url) {
-	fileBytes, err := os.ReadFile(file.AbsolutePath)
+	fileBytes, err := file.ReadBytes()
 	if err != nil {
 		return nil
 	}

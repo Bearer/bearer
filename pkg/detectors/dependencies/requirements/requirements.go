@@ -2,7 +2,6 @@ package requirements
 
 import (
 	"bytes"
-	"os"
 	"regexp"
 
 	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
@@ -19,7 +18,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report.Language = "python"
 	report.PackageManager = "pypi"
 
-	fileBytes, err := os.ReadFile(f.AbsolutePath)
+	fileBytes, err := f.ReadBytes()
 	if err != nil {
 		log.Error().Msgf("%s: there was an error while opening the file: %s", report.Provider, err.Error())
 		return nil

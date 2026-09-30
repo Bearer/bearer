@@ -3,7 +3,6 @@ package spring
 import (
 	"bytes"
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -87,7 +86,7 @@ type AppConfigProperties map[string]Property
 func ReadPropertiesFile(file *file.FileInfo) (AppConfigProperties, error) {
 	config := AppConfigProperties{}
 
-	fileBytes, err := os.ReadFile(file.AbsolutePath)
+	fileBytes, err := file.ReadBytes()
 	if err != nil {
 		log.Error().Msgf("There was an error while opening the file: %s", err.Error())
 		return nil, err
@@ -160,7 +159,7 @@ func getProperty(driverClass1 Property, driverClass2 Property, url Property) Pro
 }
 
 func extractDataStoresFromYAML(file *file.FileInfo, report report.Report) error {
-	input, err := os.ReadFile(file.AbsolutePath)
+	input, err := file.ReadBytes()
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package file
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -57,6 +58,8 @@ type VisitFileFunction func(file *FileInfo) error
 type Path struct {
 	AbsolutePath string
 	RelativePath string
+	scope        *InputScope
+	input        *BoundInput
 }
 
 type FileInfo struct {
@@ -81,6 +84,7 @@ func (path *Path) Join(elements ...string) *Path {
 	return &Path{
 		AbsolutePath: filepath.Join(append([]string{path.AbsolutePath}, elements...)...),
 		RelativePath: filepath.Join(append([]string{path.RelativePath}, elements...)...),
+		scope:        path.scope,
 	}
 }
 
@@ -104,6 +108,9 @@ func (fileInfo *FileInfo) LanguageTypeString() string {
 }
 
 func (path *Path) Exists() bool {
+	if path.scope != nil {
+		return path.scope.contextExists(path.AbsolutePath)
+	}
 	_, err := os.Stat(path.AbsolutePath)
 	if os.IsNotExist(err) {
 		return false
@@ -116,6 +123,96 @@ func (path *Path) Exists() bool {
 	return true
 }
 
+// ConfiguredExclusion applies the file eligibility rules that are shared by
+// discovery and processing. filename is relative to rootDir. A non-empty
+// reason is an intentional exclusion; a non-nil error means that the input
+// could not be inspected and must be treated as a discovery failure.
+func ConfiguredExclusion(rootDir, filename string, skipTest, skipGitIgnore bool) (reason string, retErr error) {
+	scope, err := OpenInputScope(rootDir)
+	if err != nil {
+		return "", err
+	}
+	defer func() { retErr = errors.Join(retErr, scope.Close()) }()
+	info, err := scope.statRelative(filename)
+	if err != nil {
+		return "", err
+	}
+	relative := filepath.Clean(filename)
+	if scope.single != "" {
+		relative = scope.single
+	}
+	if info.IsDir() {
+		return configuredPathExclusion(relative+"/", skipTest), nil
+	}
+	bound, err := scope.Acquire(filename, nil)
+	if err != nil {
+		return "", err
+	}
+	if reason := configuredPathExclusion(relative, skipTest); reason != "" {
+		return reason, nil
+	}
+	var gitIgnore *ignore.GitIgnore
+	if !skipGitIgnore {
+		gitIgnore, err = getScopedGitIgnore(scope)
+		if err != nil {
+			return "", err
+		}
+	}
+	pathObject := &Path{AbsolutePath: filepath.Join(scope.logicalRoot(), relative), RelativePath: relative, scope: scope, input: bound}
+	fi, err := newFileInfo(gitIgnore, pathObject, bound.Info())
+	if err != nil {
+		return "", err
+	}
+	if fi.isGlobalIgnored() {
+		return "file-type-or-gitignore", nil
+	}
+	if skipTest && fi.isTest {
+		return "test-type", nil
+	}
+	return "", nil
+}
+
+func configuredPathExclusion(relativePath string, skipTest bool) string {
+	if regex.AnyMatch(IgnoredFilenames, relativePath) {
+		return "built-in-path"
+	}
+	if skipTest && regex.AnyMatch(ignoreTestFiles, relativePath) {
+		return "test-name"
+	}
+	return ""
+}
+
+func configuredExclusion(rootDir, relativePath string, fileStat os.FileInfo, skipTest bool, gitIgnore *ignore.GitIgnore) (string, error) {
+	if fileStat.IsDir() {
+		relativePath += "/"
+	}
+	if reason := configuredPathExclusion(relativePath, skipTest); reason != "" {
+		return reason, nil
+	}
+	if fileStat.IsDir() {
+		return "", nil
+	}
+	if fileStat.Mode()&(os.ModeSymlink|os.ModeSocket) != 0 {
+		return "", nil
+	}
+
+	pathObject := &Path{
+		AbsolutePath: filepath.Join(rootDir, filepath.FromSlash(relativePath)),
+		RelativePath: relativePath,
+	}
+	fileInfo, err := newFileInfo(gitIgnore, pathObject, fileStat)
+	if err != nil {
+		return "", err
+	}
+	if fileInfo.isGlobalIgnored() {
+		return "file-type-or-gitignore", nil
+	}
+	if skipTest && fileInfo.isTest {
+		return "test-type", nil
+	}
+	return "", nil
+}
+
 func IterateFilesList(
 	rootDir string,
 	files []string,
@@ -124,111 +221,135 @@ func IterateFilesList(
 	allowDir AllowDirFunction,
 	visitFile VisitFileFunction,
 ) error {
-	var gitIgnore *ignore.GitIgnore
+	return IterateFilesListWithExclusions(rootDir, files, skipTest, skipGitIgnore, allowDir, visitFile, nil)
+}
 
-	if !skipGitIgnore {
-		gitIgnore = getGitIgnore(rootDir)
-	}
+// IterateFilesListWithExclusions observes the existing filtering decisions. It
+// does not predict processing from discovery or change which filters apply.
+func IterateFilesListWithExclusions(rootDir string, files []string, skipTest, skipGitIgnore bool,
+	allowDir AllowDirFunction, visitFile VisitFileFunction, excluded func(string)) error {
+	return IterateFilesListWithInput(rootDir, files, skipTest, skipGitIgnore, allowDir, visitFile, excluded, nil)
+}
 
-	rootDir, err := filepath.Abs(rootDir)
+// IterateFilesListWithInput binds all consumer reads, including context reads,
+// to one acquired root. The expectation is required by worker entrypoints.
+func IterateFilesListWithInput(rootDir string, files []string, skipTest, skipGitIgnore bool,
+	allowDir AllowDirFunction, visitFile VisitFileFunction, excluded func(string), expectation *InputExpectation, completed ...func(*InputScope) error) (retErr error) {
+	scope, err := OpenInputScope(rootDir)
 	if err != nil {
 		return err
 	}
-
-	for _, fileToScan := range files {
-		path := rootDir + "/" + fileToScan
-		path, err = filepath.Abs(path)
+	defer func() { retErr = errors.Join(retErr, scope.Close()) }()
+	if expectation != nil && len(files) != 1 {
+		return errors.New("expectation requires one input")
+	}
+	// A worker request binds the root as well as the selected bytes. Enforce
+	// that binding before acquiring any context from this newly opened root.
+	// Reuse the acquisition below rather than validating by a pathname check.
+	var expectedInput *BoundInput
+	if expectation != nil {
+		expectedInput, err = scope.Acquire(files[0], expectation)
 		if err != nil {
 			return err
 		}
-
-		fileStat, err := os.Stat(path)
-		if _, ok := err.(*os.PathError); ok {
-			log.Debug().Msgf("%s: skipping due to err: %s", path, err)
-			return nil
-		}
-
+	}
+	var gitIgnore *ignore.GitIgnore
+	if !skipGitIgnore {
+		gitIgnore, err = getScopedGitIgnore(scope)
 		if err != nil {
 			return err
 		}
-
-		relativePath, err := filepath.Rel(rootDir, path)
-		if err != nil {
-			return err
+	}
+	skip := func(reason string) {
+		if excluded != nil {
+			excluded(reason)
 		}
-
-		if fileStat.IsDir() {
-			relativePath += "/"
-		}
-
-		if regex.AnyMatch(IgnoredFilenames, relativePath) {
-			log.Debug().Msgf("%s: skipping due to filename: other", path)
-			continue
-		}
-
-		if skipTest && regex.AnyMatch(ignoreTestFiles, relativePath) {
-			log.Debug().Msgf("%s: skipping due to filename: test", path)
-			continue
-		}
-
-		// skip file based on parent directory
-		var parentDirectories = []string{}
-		possibleDirectories := strings.Split(relativePath, "/")
-		startPath := rootDir
-		for _, dir := range possibleDirectories {
-			parentDirectories = append(parentDirectories, startPath)
-
-			startPath = startPath + "/" + dir
-		}
-		isAllowed := true
-		for _, parentDirectory := range parentDirectories {
-			allowed, err := allowDir(&Path{
-				AbsolutePath: parentDirectory,
-				RelativePath: strings.TrimPrefix(parentDirectory, rootDir),
-			})
-
+	}
+	for _, relative := range files {
+		bound := expectedInput
+		if bound == nil {
+			bound, err = scope.Acquire(relative, nil)
 			if err != nil {
 				return err
 			}
-
-			if !allowed {
-				isAllowed = false
+		}
+		eligibility, err := scope.selector(relative)
+		if err != nil {
+			return err
+		}
+		absolute := filepath.Join(scope.logicalRoot(), eligibility)
+		if reason := configuredPathExclusion(eligibility, skipTest); reason != "" {
+			skip(reason)
+			if err = bound.Close(); err != nil {
+				return err
+			}
+			continue
+		}
+		directories := []string{"."}
+		dir := filepath.Dir(eligibility)
+		if dir != "." {
+			acc := ""
+			for _, part := range strings.Split(dir, string(filepath.Separator)) {
+				acc = filepath.Join(acc, part)
+				directories = append(directories, acc)
+			}
+		}
+		allowed := true
+		for _, dir := range directories {
+			ok, e := allowDir(&Path{AbsolutePath: filepath.Join(scope.logicalRoot(), dir), RelativePath: strings.TrimPrefix(filepath.Join(scope.logicalRoot(), dir), scope.logicalRoot()), scope: scope})
+			// A bool-only detector predicate must not turn a scoped I/O fault
+			// into an ordinary directory exclusion.
+			if e = errors.Join(e, scope.Err()); e != nil {
+				return e
+			}
+			if !ok {
+				allowed = false
 				break
 			}
 		}
-		if !isAllowed {
+		if !allowed {
+			skip("directory-filter")
+			if err = bound.Close(); err != nil {
+				return err
+			}
 			continue
 		}
-
-		pathObject := &Path{
-			AbsolutePath: path,
-			RelativePath: relativePath,
-		}
-
-		if (fileStat.Mode() & (os.ModeSymlink | os.ModeSocket)) != 0 {
-			continue
-		}
-
-		if fileStat.IsDir() {
-			continue
-		}
-
-		fileInfo, err := newFileInfo(gitIgnore, pathObject, fileStat)
+		pathObject := &Path{AbsolutePath: absolute, RelativePath: eligibility, scope: scope, input: bound}
+		info, err := newFileInfo(gitIgnore, pathObject, bound.Info())
 		if err != nil {
-			log.Debug().Msgf("skipping %s due to err: %s", path, err)
+			return err
 		}
-
-		if fileInfo.isGlobalIgnored() {
-			log.Debug().Msgf("ignored due to file type %s", path)
+		reason := ""
+		if info.isGlobalIgnored() {
+			reason = "file-type-or-gitignore"
+		} else if skipTest && info.isTest {
+			reason = "test-type"
+		}
+		if reason != "" {
+			skip(reason)
+			if err = bound.Close(); err != nil {
+				return err
+			}
 			continue
 		}
-
-		if skipTest && fileInfo.isTest {
-			log.Debug().Msgf("%s: skipping due to file type: test", path)
-			continue
+		info.RelativePath = relative
+		if scope.single != "" {
+			info.RelativePath = "."
 		}
-
-		if err := visitFile(fileInfo); err != nil {
+		err = visitFile(info)
+		err = errors.Join(err, bound.Close(), scope.Err())
+		if err != nil {
+			return err
+		}
+	}
+	if err := scope.Validate(); err != nil {
+		return err
+	}
+	for _, transfer := range completed {
+		if transfer == nil {
+			return errors.New("context handoff unavailable")
+		}
+		if err := transfer(scope); err != nil {
 			return err
 		}
 	}
@@ -236,11 +357,14 @@ func IterateFilesList(
 }
 
 func newFileInfo(gitIgnore *ignore.GitIgnore, path *Path, file os.FileInfo) (*FileInfo, error) {
-	guessBytes, err := guessBytes(path.AbsolutePath)
+	guessBytes, err := path.ReadBytes()
 	if err != nil {
 		return nil, err
 	}
 
+	if len(guessBytes) > guessByteCount {
+		guessBytes = guessBytes[:guessByteCount]
+	}
 	language := enry.GetLanguage(pathlib.Base(path.AbsolutePath), guessBytes)
 	languageType := enry.GetLanguageType(language)
 
@@ -288,38 +412,21 @@ func FileInfoFromPath(filePath string) (*FileInfo, error) {
 	return newFileInfo(nil, path, file)
 }
 
-// returns the first guessByteCount of the specified file
+// Discovery metadata is acquired safely and does not certify terminal processing.
 func guessBytes(filename string) ([]byte, error) {
-	result := make([]byte, guessByteCount)
-
-	file, err := os.Open(filename)
+	data, err := (&Path{AbsolutePath: filename}).ReadBytes()
+	if len(data) > guessByteCount {
+		data = data[:guessByteCount]
+	}
+	return data, err
+}
+func getGitIgnore(rootPath string) (*ignore.GitIgnore, error) {
+	scope, err := OpenInputScope(rootPath)
 	if err != nil {
 		return nil, err
 	}
-
-	n, err := file.Read(result)
-	file.Close()
-	if err != nil && err != io.EOF {
-		return nil, err
-	}
-
-	return result[:n], nil
-}
-
-func getGitIgnore(rootPath string) *ignore.GitIgnore {
-	gitIgnoreFilename := filepath.Join(rootPath, ".gitignore")
-
-	var err error
-	if _, err = os.Stat(gitIgnoreFilename); err == nil {
-		var gitIgnore *ignore.GitIgnore
-		gitIgnore, err = ignore.CompileIgnoreFile(gitIgnoreFilename)
-		if err == nil {
-			return gitIgnore
-		}
-	}
-
-	// log.Debug().Msgf("no .gitignore, or error reading it: %s", err)
-	return nil
+	result, err := getScopedGitIgnore(scope)
+	return result, errors.Join(err, scope.Close())
 }
 
 func EnsureFileExists(filePath string) *os.File {
@@ -354,7 +461,12 @@ func ReadFileSinkLines(
 
 	defer file.Close()
 
-	scanner := linescanner.New(file)
+	return ReadSinkLines(file, sinkStartLine, sinkEndLine, sourceStartLine, sourceEndLine, buffer)
+}
+
+// ReadSinkLines consumes an already acquired reader without reopening a path.
+func ReadSinkLines(reader io.Reader, sinkStartLine, sinkEndLine, sourceStartLine, sourceEndLine, buffer int) ([]Line, error) {
+	scanner := linescanner.New(reader)
 	lineCounter := 1
 	var extract []Line
 
