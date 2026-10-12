@@ -6,7 +6,7 @@ require (
 	github.com/bits-and-blooms/bitset v1.26.0
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/buildkite/terminal v3.2.0+incompatible
-	github.com/dustin/go-humanize v1.0.1
+	github.com/dustin/go-humanize v1.1.0
 	github.com/fatih/color v1.19.0
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/gitsight/go-vcsurl v1.0.1
