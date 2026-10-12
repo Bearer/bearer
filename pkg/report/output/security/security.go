@@ -3,6 +3,7 @@ package security
 import (
 	"crypto/md5"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"maps"
 	"slices"
@@ -235,7 +236,11 @@ func evaluateRules(
 
 				rawCodeExtract := []file.Line{}
 				if !config.Report.NoExtract {
-					rawCodeExtract = codeExtract(output.FullFilename, output.Source, output.Sink)
+					var extractErr error
+					rawCodeExtract, extractErr = codeExtract(config, output.Filename, output.Source, output.Sink)
+					if extractErr != nil {
+						return nil, false, fmt.Errorf("report source extraction: %w", extractErr)
+					}
 				}
 				codeExtract := getExtract(rawCodeExtract)
 
@@ -858,21 +863,29 @@ func sortByLineNumber(outputs []Output) {
 	})
 }
 
-func codeExtract(filename string, Source types.Source, Sink types.Sink) []file.Line {
-	code, err := file.ReadFileSinkLines(
-		filename,
-		Sink.Start,
-		Sink.End,
-		Source.Start,
-		Source.End,
-		settings.CodeExtractBuffer,
-	)
-
-	if err != nil {
-		return []file.Line{}
+func codeExtract(config settings.Config, filename string, Source types.Source, Sink types.Sink) (lines []file.Line, retErr error) {
+	scope := config.ReportInputs
+	if scope == nil {
+		return nil, errors.New("report input capability unavailable")
 	}
-
-	return code
+	if config.CacheUsed {
+		// Cached excerpts are display inputs, not fresh processing evidence.
+		// Register full provenance in the runner-owned scope; closing this
+		// acquisition releases handles but retains final reconciliation.
+		input, err := scope.Acquire(filename, nil)
+		if err != nil {
+			return nil, err
+		}
+		if err = input.Close(); err != nil {
+			return nil, err
+		}
+	}
+	reader, err := scope.ReportReader(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer func() { retErr = errors.Join(retErr, reader.Close()) }()
+	return file.ReadSinkLines(reader, Sink.Start, Sink.End, Source.Start, Source.End, settings.CodeExtractBuffer)
 }
 
 func getLanguageByGocloc(engine engine.Engine, goclocLanguage *gocloc.Language) language.Language {

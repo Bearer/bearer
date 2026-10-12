@@ -3,7 +3,6 @@ package languagescanner
 import (
 	"context"
 	"fmt"
-	"os"
 	"slices"
 
 	"github.com/rs/zerolog/log"
@@ -82,7 +81,7 @@ func (scanner *Scanner) Scan(
 		return nil, nil, nil
 	}
 
-	contentBytes, err := os.ReadFile(fileInfo.AbsolutePath)
+	contentBytes, err := fileInfo.ReadBytes()
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to read file: %w", err)
 	}
