@@ -8,6 +8,7 @@ import (
 	"sort"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/coverage"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
 	"github.com/bearer/bearer/pkg/report/detections"
 	reportdetectors "github.com/bearer/bearer/pkg/report/detectors"
@@ -48,6 +49,9 @@ func contains(detections []detections.DetectionType, detection detections.Detect
 }
 
 func AddReportData(reportData *types.ReportData, config settings.Config, isInternal, hasFiles bool) error {
+	if err := addCoverage(reportData); err != nil {
+		return err
+	}
 	if !hasFiles {
 		reportData.Dataflow = &types.DataFlow{
 			Languages: selectLanguageStats(reportData, config.Report.IncludeStats),
@@ -304,4 +308,58 @@ func calculateLanguagePercentages(stats []types.LanguageStats) []types.LanguageS
 	}
 
 	return result
+}
+
+// addCoverage rejects repeated/partial records instead of keeping the last one.
+// A legacy report can still render, but exports null coverage, never success.
+func addCoverage(data *types.ReportData) error {
+	data.Coverage = nil
+	for _, raw := range data.Detectors {
+		m, ok := raw.(map[string]interface{})
+		if !ok {
+			return fmt.Errorf("malformed detection")
+		}
+		if m["type"] != string(detections.TypeCoverage) {
+			continue
+		}
+		if data.Coverage != nil {
+			return fmt.Errorf("duplicate coverage record")
+		}
+		b, err := json.Marshal(m["coverage"])
+		if err != nil {
+			return err
+		}
+		record, err := coverage.Decode(b)
+		if err != nil {
+			return err
+		}
+		if err = record.Validate(record.Discovery.Files); err != nil {
+			return err
+		}
+		data.Coverage = record
+	}
+	return nil
+}
+
+// AddCoverageDiagnostics is shared by detector-only output, which must not run
+// the dataflow transformations or mutate the raw detector payload to validate it.
+func AddCoverageDiagnostics(data *types.ReportData) error {
+	if err := addCoverage(data); err != nil {
+		return err
+	}
+	for _, raw := range data.Detectors {
+		m, ok := raw.(map[string]interface{})
+		if !ok {
+			return fmt.Errorf("malformed detection")
+		}
+		kind, ok := m["type"].(string)
+		if !ok {
+			return fmt.Errorf("missing detection type")
+		}
+		if kind == string(detections.TypeError) || kind == string(detections.TypeFileFailed) {
+			return fmt.Errorf("processing diagnostics incomplete")
+		}
+	}
+	data.Dataflow = &types.DataFlow{}
+	return nil
 }

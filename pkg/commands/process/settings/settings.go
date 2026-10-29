@@ -1,6 +1,7 @@
 package settings
 
 import (
+	inputfile "github.com/bearer/bearer/pkg/util/file"
 	"time"
 
 	"github.com/bearer/bearer/api"
@@ -39,6 +40,10 @@ type WorkerOptions struct {
 }
 
 type Config struct {
+	// ReportInputs is process-local ownership, never worker configuration or cache data.
+	// The artifact runner closes it after report delivery, or on any earlier error.
+	ReportInputs *inputfile.InputScope `json:"-" yaml:"-" mapstructure:"-"`
+
 	Client                     *api.API
 	Worker                     WorkerOptions                             `mapstructure:"worker" json:"worker" yaml:"worker"`
 	Scan                       flagtypes.ScanOptions                     `mapstructure:"scan" json:"scan" yaml:"scan"`
