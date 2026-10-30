@@ -63,7 +63,7 @@ func Load(
 
 	count += remoteCount
 
-	if _, err := loadCustomDefinitions(builtInDefinitions, true, builtInRulesFS, nil); err != nil {
+	if _, err := loadCustomDefinitions(builtInDefinitions, true, builtInRulesFS, nil, nil); err != nil {
 		return result, fmt.Errorf("error loading built-in rules: %w", err)
 	}
 
@@ -74,7 +74,7 @@ func Load(
 		}
 
 		log.Debug().Msgf("loading external rules from: %s", dir)
-		externalCount, err := loadCustomDefinitions(definitions, false, os.DirFS(dir), foundLanguageIDs)
+		externalCount, err := loadCustomDefinitions(definitions, false, os.DirFS(dir), foundLanguageIDs, options.OnlyRule)
 		if err != nil {
 			return result, fmt.Errorf("external rules %w", err)
 		}
