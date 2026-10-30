@@ -172,6 +172,7 @@ func loadCustomDefinitions(
 	isBuiltIn bool,
 	dir fs.FS,
 	languageIDs []string,
+	onlyRule map[string]bool,
 ) (int, error) {
 	count := 0
 	loadedDefinitions := make(map[string]settings.RuleDefinition)
@@ -214,7 +215,9 @@ func loadCustomDefinitions(
 			return nil
 		}
 
-		supported := isBuiltIn
+		// The only-rule option already names the rules to load, so the language
+		// filter must not remove them (or the shared rules they import) first.
+		supported := isBuiltIn || len(onlyRule) > 0
 		for _, languageID := range ruleDefinition.Languages {
 			if slices.Contains(languageIDs, languageID) {
 				supported = true
