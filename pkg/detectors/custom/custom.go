@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"os"
 	"regexp"
 	"slices"
 	"strings"
@@ -94,15 +93,15 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 
 		switch lang {
 		case "sql":
-			f, err := os.Open(file.Path.AbsolutePath)
-			if err != nil {
-				return false, err
-			}
-			fileBytes, err := io.ReadAll(f)
+			f, err := file.Reader()
 			if err != nil {
 				return false, err
 			}
 			defer f.Close()
+			fileBytes, err := io.ReadAll(f)
+			if err != nil {
+				return false, err
+			}
 			// our sql tree sitter parser tends to error sometimes mid file causing us to partially parse file
 			// with this hack we increase our parsing percentage
 			chunks := createTableRegexp.Split(string(fileBytes), -1)

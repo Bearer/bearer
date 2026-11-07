@@ -3,6 +3,7 @@ package work
 import (
 	"github.com/bearer/bearer/pkg/commands/process/filelist/files"
 	"github.com/bearer/bearer/pkg/scanner/stats"
+	"github.com/bearer/bearer/pkg/util/file"
 )
 
 type InitializeResponse struct {
@@ -22,8 +23,9 @@ type Repository struct {
 
 type ProcessRequest struct {
 	Repository
-	File       files.File
-	ReportPath string
+	File             files.File
+	ReportPath       string
+	InputExpectation *file.InputExpectation
 }
 
 var RouteInitialize = "/initialize"

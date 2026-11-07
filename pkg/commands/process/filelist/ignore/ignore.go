@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	fileutil "github.com/bearer/bearer/pkg/util/file"
 	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog/log"
 	ignore "github.com/sabhiram/go-gitignore"
@@ -30,33 +31,48 @@ func (fileignore *FileIgnore) Ignore(
 	goclocResult *gocloc.Result,
 	fileInfo fs.FileInfo,
 ) bool {
+	reason, err := fileignore.Decision(projectPath, filePath, goclocResult, fileInfo)
+	return err != nil || reason != ""
+}
+
+// Decision returns a stable exclusion reason. A non-nil error is a discovery
+// failure, not an exclusion, and callers must record the scan as incomplete.
+func (fileignore *FileIgnore) Decision(
+	projectPath string,
+	filePath string,
+	goclocResult *gocloc.Result,
+	fileInfo fs.FileInfo,
+) (string, error) {
 	relativePath := strings.TrimPrefix(filePath, projectPath)
 	trimmedPath := strings.TrimPrefix(relativePath, "/")
 
-	symlink, _ := isSymlink(filePath)
+	symlink, err := isSymlink(filePath)
+	if err != nil {
+		return "", err
+	}
 	if symlink {
 		log.Debug().Msgf("skipping symlink: %s %s", projectPath, relativePath)
-		return true
+		return "symlink", nil
 	}
 
 	if fileignore.ignorer.MatchesPath(trimmedPath) {
 		log.Debug().Msgf("file ignore match: %s %s", projectPath, relativePath)
-		return true
+		return "skip-path", nil
 	}
 
 	if !fileInfo.IsDir() {
 		maxSize := fileignore.config.Worker.FileSizeMaximum
 		if maxSize > 0 && fileInfo.Size() > int64(maxSize) {
 			log.Debug().Msgf("skipping file due to size: %s %s", projectPath, relativePath)
-			return true
+			return "file-size", nil
 		}
 		if isMinified(filePath, fileInfo.Size(), goclocResult) {
 			log.Debug().Msgf("skipping file (suspected minified JS): %s %s", projectPath, relativePath)
-			return true
+			return "minified-js", nil
 		}
 		if fileignore.skipByLanguage(filePath, goclocResult) {
 			log.Debug().Msgf("skipping file (language not in --language filter): %s %s", projectPath, relativePath)
-			return true
+			return "language-filter", nil
 		}
 	}
 
@@ -65,20 +81,41 @@ func (fileignore *FileIgnore) Ignore(
 
 	// No parent directory, allow
 	if dirTrimmedPath == "." || dirTrimmedPath[len(dirTrimmedPath)-1] == filepath.Separator {
-		return false
+		return fileignore.configuredDecision(projectPath, trimmedPath)
 	}
 
 	dirInfo, err := os.Stat(dirPath)
 	if err != nil {
 		log.Debug().Msgf("error getting dir stat %s: %s", dirPath, err)
-		return true
+		return "", err
 	}
 
-	return fileignore.Ignore(
+	reason, err := fileignore.Decision(
 		projectPath,
 		dirPath,
 		goclocResult,
 		dirInfo,
+	)
+	if err != nil || reason != "" {
+		return reason, err
+	}
+
+	return fileignore.configuredDecision(projectPath, trimmedPath)
+}
+
+func (fileignore *FileIgnore) configuredDecision(projectPath, filename string) (string, error) {
+	// Diff discovery keeps its historical head-side decision here so the
+	// caller can preserve rename/chunk metadata. The diff runner evaluates
+	// configured eligibility independently in each checked-out tree.
+	if fileignore.config.Scan.Diff {
+		return "", nil
+	}
+
+	return fileutil.ConfiguredExclusion(
+		projectPath,
+		filename,
+		fileignore.config.Scan.SkipTest,
+		fileignore.config.Scan.SkipGitIgnore,
 	)
 }
 

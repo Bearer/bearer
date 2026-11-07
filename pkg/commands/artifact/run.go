@@ -1,10 +1,15 @@
 package artifact
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/bearer/bearer/pkg/report/coverage"
+	"io"
 	"os"
+	"path/filepath"
 	"slices"
 	"sort"
 	"strings"
@@ -70,6 +75,7 @@ type runner struct {
 	stats          *scannerstats.Stats
 	gitContext     *gitrepository.Context
 	engine         engine.Engine
+	discovery      coverage.Discovery
 }
 
 // NewRunner initializes Runner that provides scanning functionalities.
@@ -132,9 +138,12 @@ func NewRunner(
 	log.Debug().Msgf("successfully created reportPath %s", path)
 
 	if err != nil {
-		log.Error().Msgf("failed to create path %s, %s, %#v", path, err.Error(), pathCreated)
+		return nil, fmt.Errorf("failed to create report: %w", err)
 	}
 
+	if err := pathCreated.Close(); err != nil {
+		return nil, err
+	}
 	return r, nil
 }
 
@@ -142,7 +151,12 @@ func (r *runner) CacheUsed() bool {
 	return r.reuseDetection
 }
 
-func (r *runner) Scan(ctx context.Context, opts flagtypes.Options) ([]files.File, *basebranchfindings.Findings, error) {
+func (r *runner) Scan(ctx context.Context, opts flagtypes.Options) (result []files.File, baseResult *basebranchfindings.Findings, retErr error) {
+	defer func() {
+		if retErr != nil {
+			retErr = errors.Join(retErr, r.closeReportInputs())
+		}
+	}()
 	if r.reuseDetection {
 		return nil, nil, nil
 	}
@@ -161,6 +175,10 @@ func (r *runner) Scan(ctx context.Context, opts flagtypes.Options) ([]files.File
 		return nil, nil, err
 	}
 
+	r.discovery = fileList.Coverage
+	if err := r.validateDiscovery(opts.Diff); err != nil {
+		return nil, nil, err
+	}
 	var baseBranchFindings *basebranchfindings.Findings
 	if err := repository.WithBaseBranch(func() error {
 		if !opts.Quiet {
@@ -181,34 +199,52 @@ func (r *runner) Scan(ctx context.Context, opts flagtypes.Options) ([]files.File
 		return nil, nil, err
 	}
 
-	if err := r.engine.Scan(&r.scanSettings, r.stats, r.reportPath, r.targetPath, fileList.Files); err != nil {
+	// The current Engine interface cannot cancel a scan without racing its
+	// lazy initialization. Do not concurrently call Close here. Check cancellation
+	// before and after processing; the caller must still bound the process lifetime.
+	if ctx.Err() != nil {
+		return nil, nil, ctx.Err()
+	}
+	scanInputs := fileList.Files
+	if opts.Diff {
+		// Diff discovery preserves the base/head mapping. Evaluate eligibility
+		// separately in each checked-out tree; this mode still has no coverage.
+		scanInputs, err = r.configuredInputs(scanInputs)
+		if err != nil {
+			return nil, nil, err
+		}
+	}
+	scanErr := r.scanWithInputs(r.reportPath, scanInputs)
+	if ctx.Err() != nil {
+		return nil, nil, ctx.Err()
+	}
+	if err := scanErr; err != nil {
 		return nil, nil, err
 	}
 
-	return fileList.Files, baseBranchFindings, nil
+	return scanInputs, baseBranchFindings, nil
 }
 
-func (r *runner) scanBaseBranch(fileList *files.List) (*basebranchfindings.Findings, error) {
+func (r *runner) scanBaseBranch(fileList *files.List) (resultFindings *basebranchfindings.Findings, retErr error) {
+	defer func() { retErr = errors.Join(retErr, r.closeReportInputs()) }()
 	result := basebranchfindings.New(fileList)
 
-	if len(fileList.BaseFiles) == 0 {
+	eligibleBase, err := r.configuredInputs(fileList.BaseFiles)
+	if err != nil {
+		return nil, err
+	}
+	if len(eligibleBase) == 0 {
 		return result, nil
 	}
 
-	if err := r.engine.Scan(
-		&r.scanSettings,
-		r.stats,
-		r.reportPath+".base",
-		r.targetPath,
-		fileList.BaseFiles,
-	); err != nil {
+	if err := r.scanWithInputs(r.reportPath+".base", eligibleBase); err != nil {
 		return nil, err
 	}
 
 	report := types.Report{
 		Path:        r.reportPath + ".base",
 		Inputgocloc: r.goclocResult,
-		HasFiles:    len(fileList.BaseFiles) != 0,
+		HasFiles:    len(eligibleBase) != 0,
 	}
 
 	reportData, err := reportoutput.GetData(report, r.scanSettings, r.gitContext, nil)
@@ -329,12 +365,24 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		return err
 	}
 
+	// Cover cancellation between Scan and Report as well as report failures.
+	defer func() {
+		if owned, ok := r.(*runner); ok {
+			err = errors.Join(err, owned.closeReportInputs())
+		}
+	}()
 	files, baseBranchFindings, err := r.Scan(ctx, opts)
 	if err != nil {
 		return err
 	}
 
+	if ctx.Err() != nil {
+		return ctx.Err()
+	}
 	reportFailed, err := r.Report(files, baseBranchFindings)
+	if ctx.Err() != nil {
+		return ctx.Err()
+	}
 	if err != nil {
 		return fmt.Errorf("report error: %w", err)
 	} else {
@@ -367,9 +415,11 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 func (r *runner) Report(
 	files []files.File,
 	baseBranchFindings *basebranchfindings.Findings,
-) (bool, error) {
+) (failed bool, retErr error) {
+	defer func() { retErr = errors.Join(retErr, r.closeReportInputs()) }()
 	startTime := time.Now()
 	cacheUsed := r.CacheUsed()
+	r.scanSettings.CacheUsed = cacheUsed
 
 	report := types.Report{
 		Path:        r.reportPath,
@@ -377,14 +427,132 @@ func (r *runner) Report(
 		HasFiles:    r.CacheUsed() || len(files) != 0,
 	}
 
-	// if output is defined we want to write only to file
-	logger := outputhandler.StdOutLog
-	if r.scanSettings.Report.Output != "" {
-		reportFile, err := os.Create(r.scanSettings.Report.Output)
-		if err != nil {
-			return false, fmt.Errorf("error creating output file %w", err)
+	// Validate the entire input stream before formatting. Malformed or
+	// truncated records must not become a successful cached or fresh report.
+	raw, err := os.ReadFile(r.reportPath)
+	if err != nil {
+		return false, err
+	}
+	decoder := json.NewDecoder(bytes.NewReader(raw))
+	fileLists := 0
+	var contextReceipts []*file.ContextReceipt
+	var reportInputNames []string
+	for {
+		var rawRecord json.RawMessage
+		err = decoder.Decode(&rawRecord)
+		if err == io.EOF {
+			break
 		}
-		logger = outputhandler.PlainLogger(reportFile)
+		if err != nil {
+			return false, err
+		}
+		if err = coverage.CheckJSON(rawRecord); err != nil {
+			return false, err
+		}
+		var record map[string]any
+		recordDecoder := json.NewDecoder(bytes.NewReader(rawRecord))
+		// The envelope is typed below; opaque values must not pass through float64.
+		recordDecoder.UseNumber()
+		if err = recordDecoder.Decode(&record); err != nil {
+			return false, err
+		}
+		if record == nil {
+			return false, errors.New("null report record")
+		}
+		kind, ok := record["type"].(string)
+		if !ok {
+			return false, errors.New("report record type required")
+		}
+		if err := rejectLegacyAliases(record, []string{"type", "detector_type", "detector_language", "commit_sha", "framework_detection_type", "source", "value", "filenames", "coverage", "message", "file", "file_size", "timeout_duration", "error"}, false); err != nil {
+			return false, err
+		}
+		switch kind {
+		case "file_list":
+			if err := rejectLegacyAliases(record, []string{"type", "filenames"}, true); err != nil {
+				return false, err
+			}
+			fileLists++
+			names, ok := record["filenames"].([]any)
+			if !ok || fileLists != 1 {
+				return false, errors.New("invalid/duplicate report file list")
+			}
+			seen := map[string]bool{}
+			for _, value := range names {
+				name, ok := value.(string)
+				if !ok || name == "" || seen[name] {
+					return false, errors.New("invalid report filename")
+				}
+				seen[name] = true
+				reportInputNames = append(reportInputNames, name)
+			}
+		case file.ContextReceiptType:
+			receipt, e := file.DecodeContextReceipt(rawRecord)
+			if e != nil {
+				return false, e
+			}
+			contextReceipts = append(contextReceipts, receipt)
+		case "processing_coverage":
+			payload, ok := record["coverage"]
+			if !ok {
+				return false, errors.New("missing coverage record")
+			}
+			encoded, err := json.Marshal(payload)
+			if err != nil {
+				return false, err
+			}
+			if _, err := coverage.Decode(encoded); err != nil {
+				return false, err
+			}
+		case "error", "file_error":
+			return false, errors.New("report records processing failure")
+		case "dependency", "dependency_classified", "interface", "interface_classified", "schema", "schema_classified", "create_view", "framework", "framework_classified", "filler", "secret_leak", "custom", "custom_classified", "custom_risk", "expected_detection", "operation":
+			if err := validateLegacyDetection(rawRecord); err != nil {
+				return false, err
+			}
+
+		default:
+			return false, errors.New("unknown report record type")
+		}
+	}
+	if fileLists != 1 {
+		return false, errors.New("report file list unavailable")
+	}
+
+	seenContext := map[string]bool{}
+	listedContext := map[string]bool{}
+	for _, name := range reportInputNames {
+		listedContext[name] = true
+	}
+	for _, receipt := range contextReceipts {
+		if seenContext[receipt.Input.Relative] || !listedContext[receipt.Input.Relative] {
+			return false, errors.New("duplicate/unlisted context handoff")
+		}
+		seenContext[receipt.Input.Relative] = true
+	}
+	if !cacheUsed {
+		if len(contextReceipts) != len(reportInputNames) {
+			return false, errors.New("missing context handoff")
+		}
+		scope := r.scanSettings.ReportInputs
+		if scope == nil {
+			return false, errors.New("fresh context handoff scope unavailable")
+		}
+		seen := map[string]bool{}
+		for _, receipt := range contextReceipts {
+			if seen[receipt.Input.Relative] {
+				return false, errors.New("duplicate context handoff")
+			}
+			seen[receipt.Input.Relative] = true
+			if e := scope.ImportContextReceipt(receipt, nil); e != nil {
+				return false, e
+			}
+		}
+		if e := scope.RequireContextReceipts(reportInputNames); e != nil {
+			return false, e
+		}
+	}
+	if err := r.prepareCachedStatisticsInputs(cacheUsed); err != nil {
+		return false, err
 	}
 
 	if cacheUsed && !r.scanSettings.Scan.Quiet {
@@ -397,6 +565,9 @@ func (r *runner) Report(
 		return false, err
 	}
 
+	if err := r.bindReportCoverage(reportData, cacheUsed); err != nil {
+		return false, err
+	}
 	endTime := time.Now()
 
 	reportSupported := anySupportedLanguagesPresent(r.engine, report.Inputgocloc, r.scanSettings)
@@ -407,7 +578,9 @@ func (r *runner) Report(
 			return false, err
 		}
 
-		logger(placeholderStr.String())
+		if err := r.acceptReport(func() error { return deliverReport(r.scanSettings.Report.Output, []byte(placeholderStr.String())) }); err != nil {
+			return false, err
+		}
 		return true, nil
 	}
 
@@ -422,8 +595,6 @@ func (r *runner) Report(
 	if err != nil {
 		return false, fmt.Errorf("error generating report %s", err)
 	}
-
-	logger(formatStr)
 
 	if !r.scanSettings.Scan.Quiet {
 		// add cached data warning message
@@ -445,6 +616,9 @@ func (r *runner) Report(
 		return false, fmt.Errorf("%d rules found for supported language, default rules could not be downloaded or possibly disabled without using --external-rule-dir", len(r.scanSettings.Rules))
 	}
 
+	if err := r.acceptReport(func() error { return deliverReport(r.scanSettings.Report.Output, []byte(formatStr)) }); err != nil {
+		return false, err
+	}
 	return reportData.ReportFailed, nil
 }
 
@@ -576,4 +750,328 @@ func allowedGoclocLanguages(engine engine.Engine, requested []string) set.Set[st
 	}
 
 	return allowed
+}
+
+// Only the explicit unsupported diff inventory is compatible with a legacy
+// findings report. Other incomplete discovery must never enter this route.
+func (r *runner) unsupportedDiffCoverage() bool {
+	d := r.discovery
+	return r.scanSettings.Scan.Diff && r.gitContext != nil && r.gitContext.BaseCommitHash != "" &&
+		!d.Complete && len(d.Files) == 0 && len(d.Excluded) == 0 && len(d.Errors) == 1 &&
+		d.Errors[0] == "git diff discovery does not expose a supported same-run terminal file inventory"
+}
+
+func (r *runner) validateDiscovery(diff bool) error {
+	if diff != r.scanSettings.Scan.Diff {
+		return errors.New("inconsistent diff mode")
+	}
+	if diff && r.unsupportedDiffCoverage() {
+		return nil
+	}
+	if !r.discovery.Complete || len(r.discovery.Errors) > 0 {
+		return errors.New("incomplete input discovery")
+	}
+	return nil
+}
+
+func (r *runner) bindReportCoverage(data *outputtypes.ReportData, cached bool) error {
+	if cached && r.CacheUsed() && !r.scanSettings.Scan.Force && !r.scanSettings.Scan.Diff {
+		// NewRunner selected an existing completed cache. Its findings may render,
+		// but even valid prior-run coverage cannot describe processing in this run.
+		if data.Dataflow == nil || len(data.Dataflow.Errors) != 0 {
+			return errors.New("cached processing diagnostics incomplete")
+		}
+		if data.Coverage != nil {
+			if err := data.Coverage.Validate(data.Coverage.Discovery.Files); err != nil {
+				return err
+			}
+		}
+		clearUnavailableCoverage(data)
+		return nil
+	}
+
+	if !r.unsupportedDiffCoverage() {
+		return bindCoverage(data, r.discovery, cached)
+	}
+	// Preserve processing/diagnostic failures even though discovery coverage for
+	// this mode is unavailable. A successful findings report is not coverage proof.
+	if cached {
+		return errors.New("cached scan has no fresh same-run discovery")
+	}
+	if data.Coverage == nil {
+		return errors.New("processing coverage unavailable")
+	}
+	if err := data.Coverage.Validate(data.Coverage.Discovery.Files); err != nil {
+		return err
+	}
+	if data.Dataflow == nil || len(data.Dataflow.Errors) != 0 {
+		return errors.New("processing diagnostics incomplete")
+	}
+	clearUnavailableCoverage(data)
+	return nil
+}
+
+// bindCoverage joins the actual discovery and worker records. It does not claim
+// coverage of a caller's external promise; that must be reconciled independently.
+func bindCoverage(data *outputtypes.ReportData, discovery coverage.Discovery, cached bool) error {
+	if cached {
+		return errors.New("cached scan has no fresh same-run discovery")
+	}
+	if data.Coverage == nil {
+		return errors.New("processing coverage unavailable")
+	}
+	if err := data.Coverage.Validate(discovery.Files); err != nil {
+		return err
+	}
+	if len(data.Coverage.Discovery.Files) != len(discovery.Files) {
+		return errors.New("discovery/processing inventory mismatch")
+	}
+	if data.Dataflow == nil || len(data.Dataflow.Errors) != 0 {
+		return errors.New("processing diagnostics incomplete")
+	}
+	bound := *data.Coverage
+	bound.Discovery = discovery
+	if err := bound.Validate(discovery.Files); err != nil {
+		return err
+	}
+	// Detector output retains raw records independently of the security coverage
+	// field. Bind both representations only after all reconciliation succeeds.
+	encoded, err := json.Marshal(&bound)
+	if err != nil {
+		return err
+	}
+	var rawCoverage map[string]any
+	if err := json.Unmarshal(encoded, &rawCoverage); err != nil {
+		return err
+	}
+	data.Coverage = &bound
+	for _, record := range data.Detectors {
+		if raw, ok := record.(map[string]any); ok && raw["type"] == "processing_coverage" {
+			raw["coverage"] = rawCoverage
+		}
+	}
+	return nil
+}
+
+type deliveryFile interface {
+	io.Writer
+	Sync() error
+	Close() error
+	Name() string
+}
+type deliveryOps struct {
+	create func(string) (deliveryFile, error)
+	rename func(string, string) error
+	remove func(string) error
+}
+
+func deliverReport(destination string, data []byte) error {
+	if destination == "" {
+		return coverage.WriteFull(os.Stdout, data)
+	}
+	return publishReport(destination, data, deliveryOps{
+		create: func(dir string) (deliveryFile, error) { return os.CreateTemp(dir, ".bearer-report-*") }, rename: os.Rename, remove: os.Remove,
+	})
+}
+func publishReport(destination string, data []byte, ops deliveryOps) (retErr error) {
+	f, err := ops.create(filepath.Dir(destination))
+	if err != nil {
+		return err
+	}
+	closed := false
+	defer func() {
+		if !closed {
+			retErr = errors.Join(retErr, f.Close())
+		}
+		_ = ops.remove(f.Name())
+	}()
+	if err = coverage.WriteFull(f, data); err != nil {
+		return err
+	}
+	if err = f.Sync(); err != nil {
+		return err
+	}
+	err = f.Close()
+	closed = true
+	if err != nil {
+		return err
+	}
+	if err = ops.rename(f.Name(), destination); err != nil {
+		return err
+	}
+	return nil
+}
+
+// rejectLegacyAliases preserves unrelated legacy extensions, but never permits
+// an alternate spelling that encoding/json would fold onto a declared field.
+func rejectLegacyAliases(record map[string]any, keys []string, exact bool) error {
+	for key := range record {
+		known := false
+		for _, canonical := range keys {
+			if key == canonical {
+				known = true
+				break
+			}
+			if strings.EqualFold(key, canonical) {
+				return errors.New("aliased legacy report field")
+			}
+		}
+		if exact && !known {
+			return errors.New("unknown legacy report field")
+		}
+	}
+	return nil
+}
+
+func validateLegacyDetection(raw json.RawMessage) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(raw, &fields); err != nil {
+		return err
+	}
+	checkString := func(fields map[string]json.RawMessage, key string, required bool) error {
+		raw, present := fields[key]
+		if !present {
+			if required {
+				return fmt.Errorf("missing legacy %s", key)
+			}
+			return nil
+		}
+		if bytes.Equal(bytes.TrimSpace(raw), []byte("null")) {
+			return fmt.Errorf("null legacy %s", key)
+		}
+		var value string
+		if err := json.Unmarshal(raw, &value); err != nil {
+			return fmt.Errorf("invalid legacy %s", key)
+		}
+		return nil
+	}
+	for _, key := range []string{"type", "detector_type"} {
+		if err := checkString(fields, key, true); err != nil {
+			return err
+		}
+	}
+	for _, key := range []string{"detector_language", "commit_sha", "framework_detection_type"} {
+		if err := checkString(fields, key, false); err != nil {
+			return err
+		}
+	}
+	if _, ok := fields["value"]; !ok {
+		return errors.New("missing legacy detection value")
+	}
+	var sourceFields map[string]json.RawMessage
+	if err := json.Unmarshal(fields["source"], &sourceFields); err != nil || sourceFields == nil {
+		return errors.New("invalid legacy detection source")
+	}
+	sourceKeys := make(map[string]any, len(sourceFields))
+	for key := range sourceFields {
+		sourceKeys[key] = nil
+	}
+	if err := rejectLegacyAliases(sourceKeys, []string{"filename", "full_filename", "language", "language_type", "start_line_number", "start_column_number", "end_line_number", "end_column_number", "text"}, false); err != nil {
+		return err
+	}
+	if err := checkString(sourceFields, "filename", true); err != nil {
+		return err
+	}
+	for _, key := range []string{"full_filename", "language", "language_type"} {
+		if err := checkString(sourceFields, key, false); err != nil {
+			return err
+		}
+	}
+	for _, key := range []string{"start_line_number", "start_column_number", "end_line_number", "end_column_number"} {
+		if raw, present := sourceFields[key]; present {
+			var value *int
+			if err := json.Unmarshal(raw, &value); err != nil {
+				return fmt.Errorf("invalid legacy source %s", key)
+			}
+		}
+	}
+	if raw, present := sourceFields["text"]; present {
+		var value *string
+		if err := json.Unmarshal(raw, &value); err != nil {
+			return errors.New("invalid legacy source text")
+		}
+	}
+	return nil
+}
+
+// Keep unavailable coverage out of both public representations. A non-nil raw
+// slice also prevents a later formatter/placeholder from reloading the cache.
+func clearUnavailableCoverage(data *outputtypes.ReportData) {
+	data.Coverage = nil
+	records := make([]any, 0, len(data.Detectors))
+	for _, record := range data.Detectors {
+		if value, ok := record.(map[string]any); ok && value["type"] == "processing_coverage" {
+			continue
+		}
+		records = append(records, record)
+	}
+	data.Detectors = records
+}
+
+// Select scheduled inputs for the current checked-out view without mutating the
+// diff mapping or any independently fixed external coverage promise.
+func (r *runner) configuredInputs(inputs []files.File) ([]files.File, error) {
+	eligible := make([]files.File, 0, len(inputs))
+	for _, input := range inputs {
+		reason, err := file.ConfiguredExclusion(r.targetPath, input.FilePath, r.scanSettings.Scan.SkipTest, r.scanSettings.Scan.SkipGitIgnore)
+		if err != nil {
+			return nil, err
+		}
+		if reason == "" {
+			eligible = append(eligible, input)
+		}
+	}
+	return eligible, nil
+}
+
+func (r *runner) scanWithInputs(reportPath string, inputs []files.File) error {
+	if r.scanSettings.ReportInputs != nil {
+		return errors.New("previous report input scope still owned")
+	}
+	scope, err := file.OpenInputScope(r.targetPath)
+	if err != nil {
+		return err
+	}
+	r.scanSettings.ReportInputs = scope
+	return r.engine.Scan(&r.scanSettings, r.stats, reportPath, r.targetPath, inputs)
+}
+func (r *runner) validateReportInputs() error {
+	if r.scanSettings.ReportInputs != nil {
+		return r.scanSettings.ReportInputs.Validate()
+	}
+	return nil
+}
+func (r *runner) closeReportInputs() error {
+	scope := r.scanSettings.ReportInputs
+	r.scanSettings.ReportInputs = nil
+	if scope == nil {
+		return nil
+	}
+	return scope.Close()
+}
+
+// Reconcile after delivery as well as before it. A delivered partial report is
+// not accepted when final input/descriptor close fails.
+func (r *runner) acceptReport(deliver func() error) (retErr error) {
+	defer func() { retErr = errors.Join(retErr, r.closeReportInputs()) }()
+	if err := r.validateReportInputs(); err != nil {
+		return err
+	}
+	return deliver()
+}
+
+// Cached statistics and finding excerpts describe current display context,
+// not processing by the cached scan. Only a genuinely selected, structurally validated cache may
+// obtain this scope. Fresh scans must retain their original processing scope.
+// Report's error defer and acceptReport own it through delivery/final close.
+func (r *runner) prepareCachedStatisticsInputs(cached bool) error {
+	if !cached || r.scanSettings.ReportInputs != nil {
+		return nil
+	}
+	scope, err := file.OpenInputScope(r.targetPath)
+	if err != nil {
+		return err
+	}
+	r.scanSettings.ReportInputs = scope
+	return nil
 }

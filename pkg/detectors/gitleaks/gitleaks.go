@@ -3,6 +3,9 @@ package gitleaks
 import (
 	"context"
 	_ "embed"
+	"errors"
+	"fmt"
+	"io"
 	"log"
 	"strings"
 
@@ -49,12 +52,18 @@ func (detector *detector) AcceptDir(dir *file.Path) (bool, error) {
 }
 
 func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, report report.Report) (bool, error) {
+	reader, err := file.Reader()
+	if err != nil {
+		return false, err
+	}
+	defer reader.Close()
+
 	findings, err := detector.gitleaksDetector.DetectSource(
 		context.Background(),
-		&sources.Files{
+		&readerSource{
+			content:         reader,
 			Config:          &detector.config,
 			Path:            file.AbsolutePath,
-			Sema:            detector.gitleaksDetector.Sema,
 			MaxArchiveDepth: detector.gitleaksDetector.MaxArchiveDepth,
 		},
 	)
@@ -77,4 +86,65 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	}
 
 	return false, nil
+}
+
+// readerSource adapts an already-acquired reader to Gitleaks' single-file
+// source contract. Path remains metadata used for archive suffix selection and
+// outer allowlists; it is never opened by this source.
+type readerSource struct {
+	content         io.Reader
+	Path            string
+	Config          *config.Config
+	MaxArchiveDepth int
+}
+
+var ErrArchiveExpansionUnsupported = errors.New("Bearer Gitleaks adapter: enabled archive expansion is unsupported")
+
+func (s *readerSource) Fragments(ctx context.Context, yield sources.FragmentsFunc) error {
+	// Reject the effective request before allowlists or content handling; silently
+	// skipping an enabled expansion request would misrepresent this contract.
+	if s.MaxArchiveDepth > 0 {
+		return ErrArchiveExpansionUnsupported
+	}
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+	if s.Config != nil {
+		for _, a := range s.Config.Allowlists {
+			if a.PathAllowed(s.Path) {
+				return nil
+			}
+		}
+	}
+	if s.content == nil {
+		return fmt.Errorf("gitleaks input reader is nil")
+	}
+
+	input := &sources.File{
+		Content:         s.content,
+		Path:            s.Path,
+		Config:          s.Config,
+		MaxArchiveDepth: s.MaxArchiveDepth,
+	}
+
+	var fragmentErr error
+	err := input.Fragments(ctx, func(fragment sources.Fragment, err error) error {
+		if err != nil {
+			// Preserve Gitleaks' normal behavior of scanning a fragment that
+			// contains bytes, while making the source-level I/O failure visible
+			// to DetectSource after its callback logs and continues.
+			fragmentErr = err
+		}
+		if yieldErr := yield(fragment, err); yieldErr != nil {
+			return yieldErr
+		}
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+	if err != nil {
+		return err
+	}
+	return fragmentErr
 }

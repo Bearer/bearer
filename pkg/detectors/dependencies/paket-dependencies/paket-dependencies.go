@@ -2,7 +2,6 @@ package paketdependencies
 
 import (
 	"bytes"
-	"os"
 	"regexp"
 	"strings"
 
@@ -85,7 +84,7 @@ func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 
 	result := document{}
 
-	fileBytes, err := os.ReadFile(file.AbsolutePath)
+	fileBytes, err := file.ReadBytes()
 	if err != nil {
 		log.Error().Msgf("%s: there was an error while opening the file: %s", report.Provider, err.Error())
 		return nil

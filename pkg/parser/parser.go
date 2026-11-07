@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -59,7 +58,7 @@ func ParseBytes(fileInfo *file.FileInfo, file *file.Path, input []byte, language
 }
 
 func ParseFile(fileInfo *file.FileInfo, file *file.Path, language *sitter.Language) (*Tree, error) {
-	input, err := os.ReadFile(file.AbsolutePath)
+	input, err := file.ReadBytes()
 	if err != nil {
 		return nil, err
 	}
