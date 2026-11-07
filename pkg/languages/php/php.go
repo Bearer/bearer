@@ -37,7 +37,9 @@ func (*implementation) DisplayName() string {
 }
 
 func (*implementation) EnryLanguages() []string {
-	return []string{"PHP"}
+	// enry reports .phtml as HTML+PHP, and that is the default template extension
+	// for Magento 2 and Laminas, so without it those files are never scanned
+	return []string{"PHP", "HTML+PHP"}
 }
 
 func (*implementation) GoclocLanguages() []string {
