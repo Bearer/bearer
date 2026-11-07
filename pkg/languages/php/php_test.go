@@ -6,6 +6,8 @@ import (
 	"testing"
 
 	"github.com/bradleyjkemp/cupaloy"
+	"github.com/go-enry/go-enry/v2"
+	"github.com/stretchr/testify/assert"
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/languages/php"
@@ -112,4 +114,19 @@ func TestPattern(t *testing.T) {
 			cupaloy.SnapshotT(tt, result)
 		})
 	}
+}
+
+// enry classifies .phtml as HTML+PHP rather than PHP, and the scanner skips a
+// file whose detected language is not in this list. .phtml is the default
+// template extension for Magento 2 and Laminas, so leaving it out means those
+// templates are never scanned.
+func TestEnryLanguagesCoversPhtml(t *testing.T) {
+	languages := php.Get().EnryLanguages()
+
+	assert.Contains(t, languages, "PHP")
+	assert.Contains(t, languages, "HTML+PHP")
+
+	detected, _ := enry.GetLanguageByExtension("template.phtml")
+	assert.Equal(t, "HTML+PHP", detected, "enry classification changed; this list needs to follow it")
+	assert.Contains(t, languages, detected)
 }

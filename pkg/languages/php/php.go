@@ -37,7 +37,10 @@ func (*implementation) DisplayName() string {
 }
 
 func (*implementation) EnryLanguages() []string {
-	return []string{"PHP"}
+	// enry classifies .phtml as HTML+PHP rather than PHP. It is the default
+	// template extension for Magento 2 and Laminas, and tree-sitter-php parses
+	// it the same way, so without this the scanner skips those files entirely.
+	return []string{"PHP", "HTML+PHP"}
 }
 
 func (*implementation) GoclocLanguages() []string {
