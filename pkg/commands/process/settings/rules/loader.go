@@ -20,6 +20,7 @@ import (
 
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
+	"github.com/bearer/bearer/pkg/report/customdetectors"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/version_check"
 )
@@ -167,13 +168,100 @@ func readRuleDefinitionZip(ruleDefinitions map[string]settings.RuleDefinition, f
 	return count, nil
 }
 
-func loadCustomDefinitions(
+// ruleDir is one rule directory: its path, for messages, and its files.
+type ruleDir struct {
+	path string
+	fs   fs.FS
+}
+
+// loadDefinitions loads rule directories in order: a rule is validated against the rules of its own
+// directory, and a rule ID in a later directory replaces the same ID from an earlier one. When there
+// is more than one directory, a rule may also import a `type: shared` rule from any of the other
+// directories, if that shared rule is valid in its own directory, so a custom rule can reuse a shared
+// rule kept in another directory.
+func loadDefinitions(
 	definitions map[string]settings.RuleDefinition,
+	dirs []ruleDir,
+	isBuiltIn bool,
+	languageIDs []string,
+	onlyRule map[string]bool,
+) (int, error) {
+	count := 0
+	dirDefinitions := make([]map[string]settings.RuleDefinition, 0, len(dirs))
+	sharedDefinitions := make(map[string]settings.RuleDefinition)
+
+	for _, dir := range dirs {
+		loadedDefinitions, dirCount, err := readCustomDefinitions(isBuiltIn, dir.fs, languageIDs, onlyRule)
+		if err != nil {
+			return 0, err
+		}
+
+		// With a single directory every shared rule is already in that directory, so there is nothing
+		// to share and loading stays exactly as it was. A shared rule is only offered to other
+		// directories if it is valid in its own: importing an invalid one would otherwise make the
+		// engine fail to start, where before the importing rule was just dropped.
+		if len(dirs) > 1 {
+			for id, definition := range loadedDefinitions {
+				if definition.Type == customdetectors.TypeShared &&
+					len(validateCustomRuleDefinition(loadedDefinitions, &definition)) == 0 {
+					sharedDefinitions[id] = definition
+				}
+			}
+		}
+
+		dirDefinitions = append(dirDefinitions, loadedDefinitions)
+		count += dirCount
+	}
+
+	for _, loadedDefinitions := range dirDefinitions {
+		if len(sharedDefinitions) == 0 {
+			addValidDefinitions(definitions, loadedDefinitions, loadedDefinitions)
+			continue
+		}
+
+		visibleDefinitions := make(map[string]settings.RuleDefinition, len(sharedDefinitions)+len(loadedDefinitions))
+		for id, definition := range sharedDefinitions {
+			visibleDefinitions[id] = definition
+		}
+		for id, definition := range loadedDefinitions {
+			visibleDefinitions[id] = definition
+		}
+
+		addValidDefinitions(definitions, loadedDefinitions, visibleDefinitions)
+	}
+
+	return count, nil
+}
+
+// addValidDefinitions copies into definitions each loaded definition that is valid, checking its
+// imports and filter references against visibleDefinitions. Invalid definitions are logged and left
+// out.
+func addValidDefinitions(
+	definitions map[string]settings.RuleDefinition,
+	loadedDefinitions map[string]settings.RuleDefinition,
+	visibleDefinitions map[string]settings.RuleDefinition,
+) {
+	for id, definition := range loadedDefinitions {
+		issues := validateCustomRuleDefinition(visibleDefinitions, &definition)
+		if len(issues) == 0 {
+			definitions[id] = definition
+			continue
+		}
+
+		for _, issue := range issues {
+			log.Debug().Msgf("%s: %s", id, issue)
+		}
+
+		log.Debug().Msgf("%s ignored due to validation errors", id)
+	}
+}
+
+func readCustomDefinitions(
 	isBuiltIn bool,
 	dir fs.FS,
 	languageIDs []string,
 	onlyRule map[string]bool,
-) (int, error) {
+) (map[string]settings.RuleDefinition, int, error) {
 	count := 0
 	loadedDefinitions := make(map[string]settings.RuleDefinition)
 	if err := fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
@@ -243,16 +331,10 @@ func loadCustomDefinitions(
 
 		return nil
 	}); err != nil {
-		return 0, err
+		return nil, 0, err
 	}
 
-	for id, definition := range loadedDefinitions {
-		if validateCustomRuleDefinition(loadedDefinitions, &definition) {
-			definitions[id] = definition
-		}
-	}
-
-	return count, nil
+	return loadedDefinitions, count, nil
 }
 
 func bearerRulesDir() string {

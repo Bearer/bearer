@@ -1,0 +1,16 @@
+languages:
+  - ruby
+imports:
+  - e2e_shared_user_input
+patterns:
+  - pattern: unsafe($<USER_INPUT>)
+    filters:
+      - variable: USER_INPUT
+        detection: e2e_shared_user_input
+severity: high
+metadata:
+  description: "Test shared rule from another directory"
+  remediation_message: "Test shared rule from another directory"
+  cwe_id:
+    - 42
+  id: shared_rule_other_directory_test

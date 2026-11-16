@@ -1,0 +1,8 @@
+type: shared
+languages:
+  - ruby
+patterns:
+  - params[$<_>]
+metadata:
+  description: "Test shared rule for user input"
+  id: e2e_shared_user_input

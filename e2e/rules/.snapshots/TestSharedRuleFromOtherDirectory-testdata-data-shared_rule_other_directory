@@ -1,0 +1,35 @@
+high:
+    - rule:
+        cwe_ids:
+            - "42"
+        id: shared_rule_other_directory_test
+        title: Test shared rule from another directory
+        description: Test shared rule from another directory
+        documentation_url: ""
+      line_number: 1
+      full_filename: e2e/rules/testdata/data/shared_rule_other_directory/main.rb
+      filename: main.rb
+      source:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 22
+      sink:
+        location:
+            start: 1
+            end: 1
+            column:
+                start: 1
+                end: 22
+        content: ""
+      parent_line_number: 1
+      fingerprint: aa053dfb6a3e4ec65435f949d4c22dd6_0
+      old_fingerprint: 356c9a7fd6b8bd5a6f85ccaefe443b38_0
+      code_extract: unsafe(params[:name])
+
+
+--
+Analyzing codebase
+
