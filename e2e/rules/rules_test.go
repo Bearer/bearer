@@ -56,6 +56,27 @@ func TestRubyRailsDefaultEncryptionSchema(t *testing.T) {
 	runRulesTest("ruby_rails_default_encryption_schema_rb", "ruby_rails_default_encryption", t)
 }
 
+func TestSharedRuleFromOtherDirectory(t *testing.T) {
+	testCases := []testhelper.TestCase{
+		testhelper.NewTestCase(
+			"testdata/data/shared_rule_other_directory",
+			[]string{
+				"scan",
+				filepath.Join("e2e", "rules", "testdata", "data", "shared_rule_other_directory"),
+				"--only-rule=shared_rule_other_directory_test",
+				"--format=yaml",
+				"--disable-default-rules",
+				"--exit-code=0",
+				"--external-rule-dir=" + filepath.Join("e2e", "rules", "testdata", "shared_rules"),
+				"--external-rule-dir=" + filepath.Join("e2e", "rules", "testdata", "rules_importing_shared"),
+			},
+			testhelper.TestCaseOptions{},
+		),
+	}
+
+	testhelper.RunTestsWithSnapshotSubdirectory(t, testCases, ".snapshots")
+}
+
 func TestExpectedRule(t *testing.T) {
 	testDataDir := "testdata/data/expected_rule"
 
