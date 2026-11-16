@@ -63,10 +63,12 @@ func Load(
 
 	count += remoteCount
 
-	if _, err := loadCustomDefinitions(builtInDefinitions, true, builtInRulesFS, nil, nil); err != nil {
+	builtInDirs := []ruleDir{{path: "built-in", fs: builtInRulesFS}}
+	if _, err := loadDefinitions(builtInDefinitions, builtInDirs, true, nil, nil); err != nil {
 		return result, fmt.Errorf("error loading built-in rules: %w", err)
 	}
 
+	dirs := make([]ruleDir, 0, len(externalRuleDirs))
 	for _, dir := range externalRuleDirs {
 		if strings.HasPrefix(dir, "~/") {
 			dirname, _ := os.UserHomeDir()
@@ -74,13 +76,15 @@ func Load(
 		}
 
 		log.Debug().Msgf("loading external rules from: %s", dir)
-		externalCount, err := loadCustomDefinitions(definitions, false, os.DirFS(dir), foundLanguageIDs, options.OnlyRule)
-		if err != nil {
-			return result, fmt.Errorf("external rules %w", err)
-		}
-
-		count += externalCount
+		dirs = append(dirs, ruleDir{path: dir, fs: os.DirFS(dir)})
 	}
+
+	externalCount, err := loadDefinitions(definitions, dirs, false, foundLanguageIDs, options.OnlyRule)
+	if err != nil {
+		return result, fmt.Errorf("external rules %w", err)
+	}
+
+	count += externalCount
 
 	if err := validateRuleOptionIDs(options, definitions, builtInDefinitions); err != nil {
 		return result, err

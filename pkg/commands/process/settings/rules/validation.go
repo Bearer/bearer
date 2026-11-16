@@ -8,7 +8,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/rs/zerolog/log"
 	"github.com/xeipuuv/gojsonschema"
 	"sigs.k8s.io/yaml"
 
@@ -82,13 +81,14 @@ func validateData(data []byte, schema *gojsonschema.Schema) (*gojsonschema.Resul
 	return schema.Validate(loader)
 }
 
-func validateCustomRuleDefinition(allDefinitions map[string]settings.RuleDefinition, definition *settings.RuleDefinition) bool {
+// validateCustomRuleDefinition returns why a custom rule definition is invalid, or nothing when it is
+// valid.
+func validateCustomRuleDefinition(allDefinitions map[string]settings.RuleDefinition, definition *settings.RuleDefinition) []string {
 	metadata := definition.Metadata
 
-	valid := true
+	var issues []string
 	fail := func(message string) {
-		valid = false
-		log.Debug().Msgf("%s: %s", metadata.ID, message)
+		issues = append(issues, message)
 	}
 
 	visibleRuleIDs := set.New[string]()
@@ -147,11 +147,7 @@ func validateCustomRuleDefinition(allDefinitions map[string]settings.RuleDefinit
 		}
 	}
 
-	if !valid {
-		log.Debug().Msgf("%s ignored due to validation errors", metadata.ID)
-	}
-
-	return valid
+	return issues
 }
 
 func validateRuleOptionIDs(
