@@ -1,6 +1,8 @@
 package output
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -14,6 +16,7 @@ import (
 	"github.com/go-enry/go-enry/v2"
 	"github.com/google/uuid"
 	"github.com/hhatto/gocloc"
+	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
@@ -28,6 +31,8 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	"github.com/bearer/bearer/pkg/report/output/types"
 	globaltypes "github.com/bearer/bearer/pkg/types"
+	inputfile "github.com/bearer/bearer/pkg/util/file"
+	outputhandler "github.com/bearer/bearer/pkg/util/output"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
@@ -53,12 +58,24 @@ func GetData(
 	data.LanguageFiles = languageFiles
 
 	if config.Report.IncludeStats {
-		data.LanguageStats = computeLanguageStats(config.Scan.Target, report.Inputgocloc)
+		var err error
+		data.LanguageStats, err = computeLanguageStats(config.Scan.Target, report.Inputgocloc, config.ReportInputs)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	// add detectors
-	err := detectors.AddReportData(data, report, config)
-	if config.Report.Report == flag.ReportDetectors || err != nil {
+	if !config.Scan.Quiet && report.HasFiles {
+		outputhandler.StdErrLog("Running Detectors")
+	}
+	err := readReportDetections(data, report.Path)
+	if err != nil {
+		return data, err
+	}
+	if config.Report.Report == flag.ReportDetectors {
+		// Validate common metadata without adding IDs or changing detector output.
+		err = dataflow.AddCoverageDiagnostics(data)
 		return data, err
 	}
 
@@ -96,7 +113,7 @@ func GetDataflow(
 	isInternal bool,
 ) error {
 	if reportData.Detectors == nil {
-		if err := detectors.AddReportData(reportData, report, config); err != nil {
+		if err := readReportDetections(reportData, report.Path); err != nil {
 			return err
 		}
 	}
@@ -108,11 +125,14 @@ func GetDataflow(
 
 const languageSampleLimit = 16 * 1024
 
-func computeLanguageStats(root string, result *gocloc.Result) []types.LanguageStats {
+func computeLanguageStats(root string, result *gocloc.Result, scope *inputfile.InputScope) ([]types.LanguageStats, error) {
 	if result == nil || len(result.Files) == 0 {
-		return nil
+		return nil, nil
 	}
 
+	if scope == nil {
+		return nil, errors.New("statistics input scope unavailable")
+	}
 	statsByLanguage := make(map[string]types.LanguageStats)
 
 	absRoot := root
@@ -146,12 +166,11 @@ func computeLanguageStats(root string, result *gocloc.Result) []types.LanguageSt
 			continue
 		}
 
-		fileInfo, err := os.Stat(fullPath)
+		sample, fileInfo, err := scope.ReportSample(filepath.FromSlash(relPath), languageSampleLimit)
 		if err != nil {
-			continue
+			return nil, fmt.Errorf("statistics sample: %w", err)
 		}
-
-		language := detectLanguage(fullPath, file.Lang)
+		language := detectLanguage(fullPath, file.Lang, sample)
 		if language == "" {
 			continue
 		}
@@ -171,7 +190,7 @@ func computeLanguageStats(root string, result *gocloc.Result) []types.LanguageSt
 	}
 
 	if len(statsByLanguage) == 0 {
-		return nil
+		return nil, nil
 	}
 
 	languages := make([]string, 0, len(statsByLanguage))
@@ -199,7 +218,7 @@ func computeLanguageStats(root string, result *gocloc.Result) []types.LanguageSt
 		return stats[i].Bytes > stats[j].Bytes
 	})
 
-	return stats
+	return stats, nil
 }
 
 func shouldSkipLanguagePath(path string) bool {
@@ -213,30 +232,7 @@ func shouldSkipLanguagePath(path string) bool {
 		enry.IsGenerated(normalized, nil)
 }
 
-func readSample(path string, limit int) ([]byte, error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer func() {
-		_ = file.Close()
-	}()
-
-	buffer := make([]byte, limit)
-	n, err := file.Read(buffer)
-	if err != nil && err != io.EOF {
-		return nil, err
-	}
-
-	return buffer[:n], nil
-}
-
-func detectLanguage(path string, fallback string) string {
-	sample, err := readSample(path, languageSampleLimit)
-	if err != nil {
-		sample = nil
-	}
-
+func detectLanguage(path string, fallback string, sample []byte) string {
 	language := enry.GetLanguage(filepath.Base(path), sample)
 	if language == "" || language == enry.OtherLanguage {
 		language = fallback
@@ -291,4 +287,71 @@ func FormatOutput(
 	}
 
 	return formatStr, err
+}
+
+// Read all records and surface reader errors rather than silently truncating at
+// the old line scanner's token limit. Detection payloads remain unchanged.
+func readReportDetections(data *types.ReportData, filename string) (retErr error) {
+	f, err := os.Open(filename)
+	if err != nil {
+		return err
+	}
+	defer func() { retErr = errors.Join(retErr, f.Close()) }()
+	decoder := json.NewDecoder(f)
+	decoder.UseNumber()
+	data.Detectors = []interface{}{}
+	for {
+		var raw json.RawMessage
+		if err := decoder.Decode(&raw); err == io.EOF {
+			return nil
+		} else if err != nil {
+			return err
+		}
+		var item map[string]interface{}
+		recordDecoder := json.NewDecoder(bytes.NewReader(raw))
+		recordDecoder.UseNumber()
+		if err := recordDecoder.Decode(&item); err != nil {
+			return err
+		}
+		if item == nil {
+			return fmt.Errorf("null report record")
+		}
+		if item["type"] == inputfile.ContextReceiptType {
+			if _, err := inputfile.DecodeContextReceipt(raw); err != nil {
+				return err
+			}
+			continue // Internal handoff is never emitted as a finding or current coverage.
+		}
+		data.Detectors = append(data.Detectors, preserveReportNumbers(item))
+	}
+}
+
+// Preserve opaque JSON number tokens in both existing detector serializers.
+// json.Number alone marshals as a YAML string; explicit scalar tags retain the
+// numeric type without a float64 conversion or a payload-specific schema.
+type reportNumber string
+
+func (n reportNumber) MarshalJSON() ([]byte, error) { return []byte(n), nil }
+func (n reportNumber) MarshalYAML() (interface{}, error) {
+	tag := "!!int"
+	if strings.ContainsAny(string(n), ".eE") {
+		tag = "!!float"
+	}
+	return &yaml.Node{Kind: yaml.ScalarNode, Tag: tag, Value: string(n)}, nil
+}
+
+func preserveReportNumbers(value any) any {
+	switch v := value.(type) {
+	case json.Number:
+		return reportNumber(v.String())
+	case map[string]any:
+		for key, item := range v {
+			v[key] = preserveReportNumbers(item)
+		}
+	case []any:
+		for i, item := range v {
+			v[i] = preserveReportNumbers(item)
+		}
+	}
+	return value
 }

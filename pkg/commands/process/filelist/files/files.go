@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/bearer/bearer/pkg/git"
+	"github.com/bearer/bearer/pkg/report/coverage"
 )
 
 type List struct {
@@ -11,6 +12,7 @@ type List struct {
 	BaseFiles []File
 	Renames   map[string]string
 	Chunks    map[string]git.Chunks
+	Coverage  coverage.Discovery
 }
 
 type File struct {

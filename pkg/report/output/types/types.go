@@ -1,6 +1,7 @@
 package types
 
 import (
+	"github.com/bearer/bearer/pkg/report/coverage"
 	dataflowtypes "github.com/bearer/bearer/pkg/report/output/dataflow/types"
 	privacytypes "github.com/bearer/bearer/pkg/report/output/privacy/types"
 	saastypes "github.com/bearer/bearer/pkg/report/output/saas/types"
@@ -9,6 +10,7 @@ import (
 )
 
 type ReportData struct {
+	Coverage                  *coverage.Record
 	ReportFailed              bool
 	Files                     []string
 	FoundLanguages            map[string]int32 // language => loc e.g. { "Ruby": 6742, "JavaScript": 122 }

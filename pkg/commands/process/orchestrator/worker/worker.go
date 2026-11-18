@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"os"
@@ -74,37 +75,27 @@ func (worker *Worker) Setup(config config.Config) error {
 }
 
 func (worker *Worker) Scan(ctx context.Context, scanRequest work.ProcessRequest) (*stats.FileStats, error) {
-	var fileStats *stats.FileStats
-	if worker.debug {
-		fileStats = stats.NewFileStats()
-	}
-
 	file, err := os.Create(scanRequest.ReportPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open output file %w", err)
 	}
-	defer file.Close()
+	return worker.scanReport(ctx, scanRequest, file)
+}
 
-	err = detectors.Extract(
-		ctx,
-		scanRequest.Dir,
-		scanRequest.File.FilePath,
-		&writer.Detectors{
-			Classifier: worker.classifer,
-			File:       file,
-		},
-		fileStats,
-		worker.enabledScanners,
-		worker.sastScanner,
-		worker.skipTest,
-		worker.skipGitIgnore,
-	)
-
-	if ctx.Err() != nil {
-		return fileStats, ErrorTimeoutReached
+// scanReport is the same worker completion path, with a closeable sink so all
+// report delivery failures participate in the returned response error.
+func (worker *Worker) scanReport(ctx context.Context, scanRequest work.ProcessRequest, file io.WriteCloser) (fileStats *stats.FileStats, retErr error) {
+	if worker.debug {
+		fileStats = stats.NewFileStats()
 	}
-
-	return fileStats, err
+	report := &writer.Detectors{Classifier: worker.classifer, File: file}
+	defer func() { retErr = errors.Join(retErr, report.Err(), file.Close()) }()
+	retErr = detectors.ExtractWithInput(ctx, scanRequest.Dir, scanRequest.File.FilePath, report, fileStats,
+		worker.enabledScanners, worker.sastScanner, worker.skipTest, worker.skipGitIgnore, scanRequest.InputExpectation)
+	if ctx.Err() != nil {
+		retErr = errors.Join(retErr, ErrorTimeoutReached)
+	}
+	return fileStats, retErr
 }
 
 func (worker *Worker) Close() {

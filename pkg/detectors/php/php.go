@@ -1,7 +1,6 @@
 package php
 
 import (
-	"os"
 	"regexp"
 
 	"github.com/bearer/bearer/pkg/detectors/html"
@@ -56,7 +55,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		return false, nil
 	}
 
-	fileContent, err := os.ReadFile(file.AbsolutePath)
+	fileContent, err := file.ReadBytes()
 	if err != nil {
 		return false, nil
 	}

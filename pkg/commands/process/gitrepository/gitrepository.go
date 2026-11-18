@@ -16,6 +16,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/filelist/timeout"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/git"
+	"github.com/bearer/bearer/pkg/report/coverage"
 	"github.com/bearer/bearer/pkg/util/output"
 )
 
@@ -98,27 +99,49 @@ func (repository *Repository) getCurrentFiles(
 	goclocResult *gocloc.Result,
 ) (*files.List, error) {
 	if repository.context.CurrentCommitHash == "" {
-		return &files.List{}, nil
+		return &files.List{Coverage: incompleteCoverage()}, nil
 	}
 
 	var headFiles []files.File
+	discovery := completeCoverage()
 
 	gitFiles, err := git.ListTree(repository.context.RootDir, repository.context.CurrentCommitHash)
 	if err != nil {
 		return nil, err
 	}
 
-	for _, file := range gitFiles {
-		if file := repository.fileFor(
+	for _, gitFile := range gitFiles {
+		headFile, reason, fileErr := repository.fileForWithCoverage(
 			ignore,
 			goclocResult,
-			file.Filename,
-		); file != nil {
-			headFiles = append(headFiles, *file)
+			gitFile.Filename,
+		)
+		if fileErr != nil {
+			discovery.Errors = append(discovery.Errors, fmt.Sprintf("%s: %v", gitFile.Filename, fileErr))
+			continue
+		}
+		if reason != "" {
+			// Included paths and in-target exclusions share the fixed target namespace.
+			relative, relErr := filepath.Rel(repository.targetPath, filepath.Join(repository.context.RootDir, gitFile.Filename))
+			if relErr != nil {
+				discovery.Errors = append(discovery.Errors, relErr.Error())
+				continue
+			}
+			exclusion := coverage.Exclusion{Path: filepath.ToSlash(relative), Reason: reason}
+			if relative == ".." || strings.HasPrefix(relative, ".."+string(filepath.Separator)) {
+				exclusion = coverage.Exclusion{Scope: "repository", Path: filepath.ToSlash(gitFile.Filename), Reason: "outside-target"}
+			}
+			discovery.Excluded = append(discovery.Excluded, exclusion)
+			continue
+		}
+		if headFile != nil {
+			headFiles = append(headFiles, *headFile)
+			discovery.Files = append(discovery.Files, headFile.FilePath)
 		}
 	}
 
-	return &files.List{Files: headFiles}, nil
+	discovery.Complete = len(discovery.Errors) == 0
+	return &files.List{Files: headFiles, Coverage: discovery}, nil
 }
 
 func (repository *Repository) getDiffFiles(
@@ -172,7 +195,32 @@ func (repository *Repository) getDiffFiles(
 		BaseFiles: baseFiles,
 		Renames:   renames,
 		Chunks:    chunks,
+		Coverage:  unsupportedCoverage(),
 	}, nil
+}
+
+func unsupportedCoverage() coverage.Discovery {
+	return coverage.Discovery{
+		Files:    []string{},
+		Excluded: []coverage.Exclusion{},
+		Errors:   []string{"git diff discovery does not expose a supported same-run terminal file inventory"},
+	}
+}
+
+func completeCoverage() coverage.Discovery {
+	return coverage.Discovery{
+		Files:    []string{},
+		Excluded: []coverage.Exclusion{},
+		Errors:   []string{},
+		Complete: true,
+	}
+}
+
+func incompleteCoverage() coverage.Discovery {
+	coverage := completeCoverage()
+	coverage.Complete = false
+	coverage.Errors = append(coverage.Errors, "git current-tree discovery has no commit inventory")
+	return coverage
 }
 
 func (repository *Repository) WithBaseBranch(body func() error) error {
@@ -215,29 +263,44 @@ func (repository *Repository) fileFor(
 	goclocResult *gocloc.Result,
 	gitRelativePath string,
 ) *files.File {
+	file, _, _ := repository.fileForWithCoverage(ignore, goclocResult, gitRelativePath)
+	return file
+}
+
+func (repository *Repository) fileForWithCoverage(
+	ignore *ignore.FileIgnore,
+	goclocResult *gocloc.Result,
+	gitRelativePath string,
+) (*files.File, string, error) {
 	relativePath, err := filepath.Rel(repository.gitTargetPath, gitRelativePath)
 	if err != nil {
 		log.Error().Msg(err.Error())
-		return nil
+		return nil, "", err
 	}
 
-	if strings.Contains(relativePath, "..") {
-		return nil
+	if relativePath == ".." || strings.HasPrefix(relativePath, ".."+string(filepath.Separator)) {
+		return nil, "outside-target", nil
 	}
 
 	fullPath := filepath.Join(repository.targetPath, relativePath)
 	fileInfo, err := os.Stat(fullPath)
 	if err != nil {
 		log.Debug().Msgf("error getting file stat: %s, %s", fullPath, err)
-		return nil
+		return nil, "", err
 	}
 
-	if ignore != nil && ignore.Ignore(repository.targetPath, fullPath, goclocResult, fileInfo) {
-		return nil
+	if ignore != nil {
+		reason, decisionErr := ignore.Decision(repository.targetPath, fullPath, goclocResult, fileInfo)
+		if decisionErr != nil {
+			return nil, "", decisionErr
+		}
+		if reason != "" {
+			return nil, reason, nil
+		}
 	}
 
 	return &files.File{
 		Timeout:  timeout.Assign(fileInfo, repository.config),
 		FilePath: relativePath,
-	}
+	}, "", nil
 }

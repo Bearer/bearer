@@ -2,7 +2,6 @@ package gemfile
 
 import (
 	"bytes"
-	"os"
 	"regexp"
 
 	"github.com/bearer/bearer/pkg/detectors/dependencies/depsbase"
@@ -46,7 +45,7 @@ func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report.Language = "ruby"
 	report.PackageManager = "rubygems"
 
-	fileBytes, err := os.ReadFile(file.AbsolutePath)
+	fileBytes, err := file.ReadBytes()
 	if err != nil {
 		log.Error().Msgf("%s: there was an error while opening the file: %s", report.Provider, err.Error())
 		return nil

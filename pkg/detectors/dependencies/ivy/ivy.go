@@ -2,7 +2,6 @@ package ivy
 
 import (
 	"fmt"
-	"os"
 	"regexp"
 	"strings"
 
@@ -90,7 +89,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report.Language = "java"
 	report.PackageManager = "maven"
 
-	bytes, err := os.ReadFile(f.AbsolutePath)
+	bytes, err := f.ReadBytes()
 	if err != nil {
 		log.Error().Msgf("%s: there was an error while reading the file: %s", report.Provider, err.Error())
 	}

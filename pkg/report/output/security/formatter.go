@@ -2,6 +2,7 @@ package security
 
 import (
 	"fmt"
+	"github.com/bearer/bearer/pkg/report/coverage"
 	"time"
 
 	"github.com/hhatto/gocloc"
@@ -29,6 +30,7 @@ type Formatter struct {
 }
 
 type JsonV2Output struct {
+	Coverage *coverage.Record      `json:"coverage"`
 	Source   string                `json:"source" yaml:"source"`
 	Version  string                `json:"version" yaml:"version"`
 	Findings RawFindings           `json:"findings" yaml:"findings"`
@@ -80,6 +82,7 @@ func (f Formatter) Format(format string) (output string, err error) {
 		return outputhandler.ReportJSON(f.ReportData.FindingsBySeverity)
 	case flag.FormatJSONV2:
 		return outputhandler.ReportJSON(JsonV2Output{
+			Coverage: f.ReportData.Coverage,
 			Source:   "Bearer",
 			Version:  build.Version,
 			Findings: f.ReportData.RawFindings,

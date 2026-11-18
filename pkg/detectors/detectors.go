@@ -2,6 +2,7 @@ package detectors
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"path/filepath"
 	"runtime/debug"
@@ -166,11 +167,33 @@ func ExtractWithDetectors(
 	sastScanner *scanner.Scanner,
 	skipTest bool,
 	skipGitIgnore bool,
-) error {
+) (retErr error) {
+	return extractWithInput(ctx, rootDir, filename, report, fileStats, allDetectors, sastScanner, skipTest, skipGitIgnore, nil)
+}
+func ExtractWithInput(ctx context.Context, rootDir, filename string, report reporttypes.Report, fileStats *stats.FileStats, enabledScanners []string, sastScanner *scanner.Scanner, skipTest, skipGitIgnore bool, expectation *file.InputExpectation) error {
+	if expectation == nil {
+		return errors.New("missing worker input expectation")
+	}
+	return extractWithInput(ctx, rootDir, filename, report, fileStats, Registrations(enabledScanners), sastScanner, skipTest, skipGitIgnore, expectation)
+}
+func extractWithInput(ctx context.Context, rootDir, filename string, report reporttypes.Report, fileStats *stats.FileStats, allDetectors []InitializedDetector, sastScanner *scanner.Scanner, skipTest, skipGitIgnore bool, expectation *file.InputExpectation) (retErr error) {
+	visited := false
+	exclusion := "input not visited"
+	defer func() {
+		if sink, ok := report.(interface{ Err() error }); ok {
+			retErr = errors.Join(retErr, sink.Err())
+		}
+		if ctx.Err() != nil {
+			retErr = errors.Join(retErr, ctx.Err())
+		}
+		if !visited {
+			retErr = errors.Join(retErr, fmt.Errorf("processing input excluded: %s", exclusion))
+		}
+	}()
 
 	activeDetectors := make(map[InitializedDetector]activeDetector)
 
-	if err := file.IterateFilesList(
+	if err := file.IterateFilesListWithInput(
 		rootDir,
 		[]string{filename},
 		skipTest,
@@ -199,6 +222,7 @@ func ExtractWithDetectors(
 			return true, nil
 		},
 		func(file *file.FileInfo) error {
+			visited = true
 			recovery := func() {
 				if r := recover(); r != nil {
 					log.Printf("file %s -> error recovered %s", file.AbsolutePath, r)
@@ -240,6 +264,24 @@ func ExtractWithDetectors(
 			}
 
 			return nil
+		},
+		func(reason string) { exclusion = reason },
+		expectation,
+		func(scope *file.InputScope) error {
+			if expectation == nil {
+				return nil
+			} // Standalone extraction has no parent handoff.
+			receipt, err := scope.ContextReceipt(expectation)
+			if err != nil {
+				return err
+			}
+			sink, ok := report.(interface {
+				AddContextReceipt(*file.ContextReceipt) error
+			})
+			if !ok {
+				return errors.New("context handoff sink unavailable")
+			}
+			return sink.AddContextReceipt(receipt)
 		},
 	); err != nil {
 		return err

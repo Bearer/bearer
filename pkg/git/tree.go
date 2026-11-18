@@ -3,6 +3,8 @@ package git
 import (
 	"bufio"
 	"context"
+	"encoding/hex"
+	"fmt"
 	"io"
 	"strings"
 )
@@ -27,69 +29,60 @@ func HasUncommittedChanges(rootDir string) (bool, error) {
 
 func ListTree(rootDir, commitSHA string) ([]TreeFile, error) {
 	result := []TreeFile{}
-
-	err := captureCommand(
-		context.TODO(),
-		rootDir,
-		[]string{"ls-tree", "-r", "-z", commitSHA},
-		func(stdout io.Reader) error {
-			stdoutBuf := bufio.NewReader(stdout)
-			for {
-				metadata, err := stdoutBuf.ReadString('\t')
-				if err == io.EOF {
-					break
-				}
-				if err != nil {
-					return err
-				}
-
-				splitMeta := strings.Split(metadata[:len(metadata)-1], " ")
-				if len(splitMeta) != 3 {
-					continue
-				}
-				sha := splitMeta[2]
-
-				filename, err := stdoutBuf.ReadString(0)
-				if err != nil && err != io.EOF {
-					return err
-				}
-
-				if len(filename) > 1 {
-					result = append(result, TreeFile{Filename: filename[:len(filename)-1], SHA: sha})
-				}
-			}
-
-			return nil
-		},
-	)
-
+	err := captureCommand(context.TODO(), rootDir, []string{"ls-tree", "-r", "-z", commitSHA}, func(stdout io.Reader) error {
+		return readTreeRecords(stdout, false, &result)
+	})
 	if err != nil {
-		return result, nil
+		return result, err
 	}
+	err = captureCommand(context.TODO(), rootDir, []string{"ls-files", "--others", "--exclude-standard", "-z"}, func(stdout io.Reader) error {
+		return readTreeRecords(stdout, true, &result)
+	})
+	return result, err
+}
 
-	err = captureCommand(
-		context.TODO(),
-		rootDir,
-		[]string{"ls-files", "--others", "--exclude-standard", "-z"},
-		func(stdout io.Reader) error {
-			stdoutBuf := bufio.NewReader(stdout)
-			for {
-				filename, err := stdoutBuf.ReadString(0)
-				if err == io.EOF {
-					break
-				}
-				if err != nil {
-					return err
-				}
-
-				if len(filename) > 1 {
-					result = append(result, TreeFile{Filename: filename[:len(filename)-1], Other: true})
+// Git's -z record terminator is mandatory; EOF inside a record is partial input.
+func readTreeRecords(input io.Reader, other bool, result *[]TreeFile) error {
+	reader := bufio.NewReader(input)
+	for {
+		record, err := reader.ReadString(0)
+		if err == io.EOF && len(record) == 0 {
+			return nil
+		}
+		if err != nil {
+			if err == io.EOF {
+				return io.ErrUnexpectedEOF
+			}
+			return err
+		}
+		record = strings.TrimSuffix(record, "\x00")
+		if record == "" {
+			return fmt.Errorf("empty Git inventory record")
+		}
+		entry := TreeFile{Other: other}
+		if other {
+			entry.Filename = record
+		} else {
+			parts := strings.SplitN(record, "\t", 2)
+			if len(parts) != 2 || parts[1] == "" {
+				return fmt.Errorf("invalid Git tree record")
+			}
+			metadata := strings.Split(parts[0], " ")
+			if len(metadata) != 3 || metadata[0] == "" || (metadata[1] != "blob" && metadata[1] != "tree" && metadata[1] != "commit") {
+				return fmt.Errorf("invalid Git tree metadata")
+			}
+			for _, ch := range metadata[0] {
+				if ch < '0' || ch > '7' {
+					return fmt.Errorf("invalid Git file mode")
 				}
 			}
-
-			return nil
-		},
-	)
-
-	return result, err
+			hash, e := hex.DecodeString(metadata[2])
+			if e != nil || (len(hash) != 20 && len(hash) != 32) {
+				return fmt.Errorf("invalid Git object id")
+			}
+			entry.Filename = parts[1]
+			entry.SHA = metadata[2]
+		}
+		*result = append(*result, entry)
+	}
 }

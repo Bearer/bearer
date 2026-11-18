@@ -1,7 +1,6 @@
 package simple
 
 import (
-	"os"
 	"regexp"
 
 	"github.com/bearer/bearer/pkg/detectors/types"
@@ -57,13 +56,13 @@ func (detector *detector) ProcessFile(fileInfo *file.FileInfo, dir *file.Path, r
 		return false, nil
 	}
 
-	file, err := os.Open(fileInfo.AbsolutePath)
+	input, err := fileInfo.Reader()
 	if err != nil {
 		return false, err
 	}
-	defer file.Close()
+	defer input.Close()
 
-	scanner := linescanner.New(file)
+	scanner := linescanner.New(input)
 	for scanner.Scan() {
 		line := scanner.Text()
 

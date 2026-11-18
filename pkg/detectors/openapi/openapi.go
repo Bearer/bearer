@@ -3,7 +3,6 @@ package openapi
 import (
 	"bytes"
 	"encoding/json"
-	"os"
 
 	"github.com/bearer/bearer/pkg/detectors/openapi/v2json"
 	"github.com/bearer/bearer/pkg/parser/nodeid"
@@ -69,7 +68,7 @@ func getFileType(file *file.FileInfo) (detectors.OpenAPIFileType, error) {
 		return "", nil
 	}
 
-	input, err := os.ReadFile(file.AbsolutePath)
+	input, err := file.ReadBytes()
 	if err != nil {
 		return "", err
 	}

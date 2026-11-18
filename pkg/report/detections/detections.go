@@ -1,6 +1,7 @@
 package detections
 
 import (
+	"github.com/bearer/bearer/pkg/report/coverage"
 	"time"
 
 	"github.com/bearer/bearer/pkg/report/detectors"
@@ -70,4 +71,11 @@ type Detection struct {
 	CommitSHA        string             `json:"commit_sha,omitempty" yaml:"commit_sha,omitempty"`
 	Source           source.Source      `json:"source" yaml:"source"`
 	Value            interface{}        `json:"value" yaml:"value"`
+}
+
+var TypeCoverage DetectionType = "processing_coverage"
+
+type CoverageDetection struct {
+	Type     DetectionType   `json:"type"`
+	Coverage coverage.Record `json:"coverage"`
 }

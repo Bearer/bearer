@@ -1,9 +1,12 @@
 package writer
 
 import (
+	"errors"
 	"fmt"
+	inputfile "github.com/bearer/bearer/pkg/util/file"
 	"io"
 	"log"
+	"sync"
 
 	classification "github.com/bearer/bearer/pkg/classification"
 	classificationschema "github.com/bearer/bearer/pkg/classification/schema"
@@ -42,6 +45,8 @@ type SchemaGroup struct {
 }
 
 type Detectors struct {
+	errorMutex    sync.Mutex
+	writeError    error
 	Classifier    *classification.Classifier
 	File          io.Writer
 	StoredSchemas *SchemaGroup
@@ -233,8 +238,34 @@ func (report *Detectors) AddOperation(
 func (report *Detectors) Add(data interface{}) {
 	detectionsToAdd := []interface{}{data}
 
-	err := jsonlines.Encode(report.File, &detectionsToAdd)
+	err := jsonlines.Encode(completeWriter{report.File}, &detectionsToAdd)
 	if err != nil {
+		report.errorMutex.Lock()
+		report.writeError = errors.Join(report.writeError, err)
+		report.errorMutex.Unlock()
 		log.Printf("failed to encode data line %s", err)
 	}
+}
+
+// Err retains delivery failures even when the error record itself could not be written.
+func (report *Detectors) Err() error {
+	report.errorMutex.Lock()
+	defer report.errorMutex.Unlock()
+	return report.writeError
+}
+
+type completeWriter struct{ io.Writer }
+
+func (w completeWriter) Write(b []byte) (int, error) {
+	n, err := w.Writer.Write(b)
+	if err == nil && n != len(b) {
+		err = io.ErrShortWrite
+	}
+	return n, err
+}
+
+// AddContextReceipt uses the same sticky diagnostic sink as detector records.
+func (report *Detectors) AddContextReceipt(receipt *inputfile.ContextReceipt) error {
+	report.Add(receipt)
+	return report.Err()
 }

@@ -2,7 +2,6 @@ package symfony
 
 import (
 	"net/url"
-	"os"
 	"regexp"
 	"strings"
 
@@ -66,7 +65,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 }
 
 func extractDatabasesFromConfig(file *file.FileInfo, report report.Report) error {
-	input, err := os.ReadFile(file.AbsolutePath)
+	input, err := file.ReadBytes()
 	if err != nil {
 		return err
 	}

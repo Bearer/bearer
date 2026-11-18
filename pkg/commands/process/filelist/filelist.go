@@ -1,6 +1,7 @@
 package filelist
 
 import (
+	"fmt"
 	"io/fs"
 	"path/filepath"
 	"strings"
@@ -13,6 +14,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/filelist/timeout"
 	"github.com/bearer/bearer/pkg/commands/process/gitrepository"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
+	"github.com/bearer/bearer/pkg/report/coverage"
 )
 
 // Discover searches directory for files to scan, skipping the ones specified by skip config and assigning timeout speficfied by timeout config
@@ -35,8 +37,14 @@ func Discover(repository *gitrepository.Repository, targetPath string, goclocRes
 	}
 
 	var files []flfiles.File
+	discovery := coverage.Discovery{
+		Files:    []string{},
+		Excluded: []coverage.Exclusion{},
+		Errors:   []string{},
+	}
 	err := filepath.WalkDir(targetPath, func(filePath string, d fs.DirEntry, err error) error {
 		if err != nil {
+			discovery.Errors = append(discovery.Errors, fmt.Sprintf("%s: %v", filePath, err))
 			return err
 		}
 
@@ -47,21 +55,32 @@ func Discover(repository *gitrepository.Repository, targetPath string, goclocRes
 
 		fileInfo, err := d.Info()
 		if err != nil {
-			log.Debug().Msgf("skipping due to info error %s: %s", relativePath, err)
-			return nil
+			discovery.Errors = append(discovery.Errors, fmt.Sprintf("%s: %v", relativePath, err))
+			return err
 		}
 
 		if d.IsDir() {
-			if ignore.Ignore(targetPath, filePath, goclocResult, fileInfo) {
+			reason, decisionErr := ignore.Decision(targetPath, filePath, goclocResult, fileInfo)
+			if decisionErr != nil {
+				discovery.Errors = append(discovery.Errors, fmt.Sprintf("%s: %v", relativePath, decisionErr))
+				return decisionErr
+			}
+			if reason != "" {
+				discovery.Excluded = append(discovery.Excluded, coverage.Exclusion{Path: relativePath, Reason: reason})
 				return filepath.SkipDir
 			}
 
 			return nil
 		}
 
-		if ignore.Ignore(targetPath, filePath, goclocResult, fileInfo) {
+		reason, decisionErr := ignore.Decision(targetPath, filePath, goclocResult, fileInfo)
+		if decisionErr != nil {
+			discovery.Errors = append(discovery.Errors, fmt.Sprintf("%s: %v", relativePath, decisionErr))
+			return decisionErr
+		}
+		if reason != "" {
 			log.Debug().Msgf("skipping file due to file skip rules: %s", relativePath)
-
+			discovery.Excluded = append(discovery.Excluded, coverage.Exclusion{Path: relativePath, Reason: reason})
 			return nil
 		}
 
@@ -69,9 +88,11 @@ func Discover(repository *gitrepository.Repository, targetPath string, goclocRes
 			FilePath: relativePath,
 			Timeout:  timeout.Assign(fileInfo, config),
 		})
+		discovery.Files = append(discovery.Files, relativePath)
 
 		return nil
 	})
 
-	return &flfiles.List{Files: files}, err
+	discovery.Complete = err == nil
+	return &flfiles.List{Files: files, Coverage: discovery}, err
 }
