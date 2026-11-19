@@ -37,7 +37,7 @@ func (*implementation) DisplayName() string {
 }
 
 func (*implementation) EnryLanguages() []string {
-	return []string{"PHP"}
+	return []string{"PHP", "HTML+PHP"}
 }
 
 func (*implementation) GoclocLanguages() []string {
