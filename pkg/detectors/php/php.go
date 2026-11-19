@@ -52,7 +52,7 @@ func (detector *detector) AcceptDir(dir *file.Path) (bool, error) {
 }
 
 func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, report reporttypes.Report) (bool, error) {
-	if file.Language != "PHP" {
+	if file.Language != "PHP" && file.Language != "HTML+PHP" {
 		return false, nil
 	}
 
