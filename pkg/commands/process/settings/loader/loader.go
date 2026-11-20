@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/bearer/pkg/engine"
 	"github.com/bearer/bearer/pkg/flag"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
+	"github.com/bearer/bearer/pkg/structurederrors"
 	"github.com/bearer/bearer/pkg/util/ignore"
 	"github.com/bearer/bearer/pkg/version_check"
 )
@@ -20,6 +21,7 @@ func FromOptions(
 	versionMeta *version_check.VersionMeta,
 	engine engine.Engine,
 	foundLanguageIDs []string,
+	errorCollector *structurederrors.Collector,
 ) (settings.Config, error) {
 	policies, err := policies.Load()
 	if err != nil {
@@ -33,6 +35,7 @@ func FromOptions(
 		engine,
 		opts.ScanOptions.Force,
 		foundLanguageIDs,
+		errorCollector,
 	)
 	if err != nil {
 		return settings.Config{}, err
@@ -69,6 +72,7 @@ func FromOptions(
 		BuiltInRules:        result.BuiltInRules,
 		CacheUsed:           result.CacheUsed,
 		BearerRulesVersion:  result.BearerRulesVersion,
+		StructuredErrors:    errorCollector,
 	}
 
 	if config.Scan.Diff {

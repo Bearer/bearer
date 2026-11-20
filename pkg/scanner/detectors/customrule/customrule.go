@@ -51,12 +51,16 @@ func New(
 			variableShape,
 		)
 		if err != nil {
-			return nil, fmt.Errorf("error compiling pattern: %s", err)
+			return nil, &ruleset.PatternError{
+				RuleID:       rule.ID(),
+				PatternIndex: i,
+				Err:          fmt.Errorf("error compiling pattern: %s", err),
+			}
 		}
 
 		filter, err := translateFiltersTop(ruleSet, variableShapeSet, variableShapeSet.Shape(rule), pattern.Filters)
 		if err != nil {
-			return nil, err
+			return nil, &ruleset.PatternError{RuleID: rule.ID(), PatternIndex: i, IsFilter: true, Err: err}
 		}
 
 		compiledPatterns = append(compiledPatterns, Pattern{
