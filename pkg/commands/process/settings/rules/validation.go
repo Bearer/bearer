@@ -14,6 +14,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
+	"github.com/bearer/bearer/pkg/structurederrors"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/util/set"
 )
@@ -81,14 +82,28 @@ func validateData(data []byte, schema *gojsonschema.Schema) (*gojsonschema.Resul
 	return schema.Validate(loader)
 }
 
+// validationIssue is one reason a custom rule definition is invalid
+type validationIssue struct {
+	code          structurederrors.Code
+	message       string
+	relatedRuleID string
+}
+
+func (issue validationIssue) String() string {
+	return issue.message
+}
+
 // validateCustomRuleDefinition returns why a custom rule definition is invalid, or nothing when it is
 // valid.
-func validateCustomRuleDefinition(allDefinitions map[string]settings.RuleDefinition, definition *settings.RuleDefinition) []string {
+func validateCustomRuleDefinition(
+	allDefinitions map[string]settings.RuleDefinition,
+	definition *settings.RuleDefinition,
+) []validationIssue {
 	metadata := definition.Metadata
 
-	var issues []string
-	fail := func(message string) {
-		issues = append(issues, message)
+	var issues []validationIssue
+	fail := func(code structurederrors.Code, relatedRuleID string, message string) {
+		issues = append(issues, validationIssue{code: code, message: message, relatedRuleID: relatedRuleID})
 	}
 
 	visibleRuleIDs := set.New[string]()
@@ -101,12 +116,12 @@ func validateCustomRuleDefinition(allDefinitions map[string]settings.RuleDefinit
 		importedDefinition, exists := allDefinitions[importedID]
 
 		if !exists {
-			fail(fmt.Sprintf("import of unknown rule '%s'", importedID))
+			fail(structurederrors.CodeImportUnknownRule, importedID, fmt.Sprintf("import of unknown rule '%s'", importedID))
 			continue
 		}
 
 		if importedDefinition.Type != customdetectors.TypeShared {
-			fail(fmt.Sprintf("imported rule '%s' is not of type 'shared'", importedID))
+			fail(structurederrors.CodeImportNotShared, importedID, fmt.Sprintf("imported rule '%s' is not of type 'shared'", importedID))
 		}
 	}
 
@@ -116,34 +131,42 @@ func validateCustomRuleDefinition(allDefinitions map[string]settings.RuleDefinit
 
 	for _, filterRuleID := range getFilterRuleReferences(definition).Items() {
 		if !visibleRuleIDs.Has(filterRuleID) {
-			fail(fmt.Sprintf("filter references invalid or non-imported rule '%s'", filterRuleID))
+			fail(
+				structurederrors.CodeFilterUnknownRule,
+				filterRuleID,
+				fmt.Sprintf("filter references invalid or non-imported rule '%s'", filterRuleID),
+			)
 		}
 	}
 
 	for _, sanitizerRuleID := range getSanitizers(definition).Items() {
 		if !visibleRuleIDs.Has(sanitizerRuleID) {
-			fail(fmt.Sprintf("sanitizer references invalid or non-imported rule '%s'", sanitizerRuleID))
+			fail(
+				structurederrors.CodeSanitizerUnknownRule,
+				sanitizerRuleID,
+				fmt.Sprintf("sanitizer references invalid or non-imported rule '%s'", sanitizerRuleID),
+			)
 		}
 	}
 
 	if metadata.ID == "" {
-		fail("metadata.id must be specified")
+		fail(structurederrors.CodeRuleMissingID, "", "metadata.id must be specified")
 	}
 
 	if definition.Type == customdetectors.TypeShared {
 		metadata := definition.Metadata
 		if metadata != nil {
 			if metadata.CWEIDs != nil {
-				fail("cwe ids cannot be specified for a shared rule")
+				fail(structurederrors.CodeSharedRuleInvalidField, "", "cwe ids cannot be specified for a shared rule")
 			}
 
 			if metadata.RemediationMessage != "" {
-				fail("remediation message cannot be specified for a shared rule")
+				fail(structurederrors.CodeSharedRuleInvalidField, "", "remediation message cannot be specified for a shared rule")
 			}
 		}
 
 		if definition.Severity != "" {
-			fail("severity cannot be specified for a shared rule")
+			fail(structurederrors.CodeSharedRuleInvalidField, "", "severity cannot be specified for a shared rule")
 		}
 	}
 

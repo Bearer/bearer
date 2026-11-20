@@ -32,7 +32,7 @@ func TestLoadDefinitionsLanguageFilter(t *testing.T) {
 	t.Run("drops rules for languages that were not found", func(t *testing.T) {
 		definitions := make(map[string]settings.RuleDefinition)
 
-		count, err := loadDefinitions(definitions, []ruleDir{{path: "rules", fs: dir}}, false, []string{"python"}, nil)
+		count, err := loadDefinitions(definitions, []ruleDir{{path: "rules", fs: dir}}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.Equal(t, 1, count)
@@ -42,7 +42,7 @@ func TestLoadDefinitionsLanguageFilter(t *testing.T) {
 	t.Run("keeps rules for languages that were found", func(t *testing.T) {
 		definitions := make(map[string]settings.RuleDefinition)
 
-		_, err := loadDefinitions(definitions, []ruleDir{{path: "rules", fs: dir}}, false, []string{"ruby"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{{path: "rules", fs: dir}}, false, []string{"ruby"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.Contains(t, definitions, "ruby_test_rule")
@@ -52,7 +52,7 @@ func TestLoadDefinitionsLanguageFilter(t *testing.T) {
 		definitions := make(map[string]settings.RuleDefinition)
 		onlyRule := map[string]bool{"ruby_test_rule": true}
 
-		_, err := loadDefinitions(definitions, []ruleDir{{path: "rules", fs: dir}}, false, []string{"python"}, onlyRule)
+		_, err := loadDefinitions(definitions, []ruleDir{{path: "rules", fs: dir}}, false, []string{"python"}, onlyRule, nil)
 
 		assert.NoError(t, err)
 		assert.Contains(t, definitions, "ruby_test_rule")
@@ -147,7 +147,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 	t.Run("keeps a rule that imports a shared rule from another directory", func(t *testing.T) {
 		definitions := make(map[string]settings.RuleDefinition)
 
-		count, err := loadDefinitions(definitions, []ruleDir{builtInDir, tenantDir}, false, []string{"python"}, nil)
+		count, err := loadDefinitions(definitions, []ruleDir{builtInDir, tenantDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.Equal(t, 2, count)
@@ -158,7 +158,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 	t.Run("does not depend on the order of the directories", func(t *testing.T) {
 		definitions := make(map[string]settings.RuleDefinition)
 
-		_, err := loadDefinitions(definitions, []ruleDir{tenantDir, builtInDir}, false, []string{"python"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{tenantDir, builtInDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.Contains(t, definitions, "custom_python_test_rule")
@@ -170,7 +170,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 			"python/import.yml": &fstest.MapFile{Data: []byte(riskRuleYAML)},
 		}}
 
-		_, err := loadDefinitions(definitions, []ruleDir{riskDir, tenantDir}, false, []string{"python"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{riskDir, tenantDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.NotContains(t, definitions, "custom_python_test_rule")
@@ -184,7 +184,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 			},
 		}
 
-		_, err := loadDefinitions(definitions, []ruleDir{tenantDir}, false, []string{"python"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{tenantDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.NotContains(t, definitions, "custom_python_test_rule")
@@ -196,7 +196,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 			"custom_python_unknown_import.yml": &fstest.MapFile{Data: []byte(customRuleImportingUnknownYAML)},
 		}}
 
-		_, err := loadDefinitions(definitions, []ruleDir{builtInDir, unknownDir}, false, []string{"python"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{builtInDir, unknownDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.NotContains(t, definitions, "custom_python_unknown_import")
@@ -208,7 +208,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 			"python/shared/import.yml": &fstest.MapFile{Data: []byte(invalidSharedImportRuleYAML)},
 		}}
 
-		_, err := loadDefinitions(definitions, []ruleDir{invalidSharedDir, tenantDir}, false, []string{"python"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{invalidSharedDir, tenantDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.NotContains(t, definitions, "python_shared_test_import")
@@ -230,7 +230,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 			"python/shared/import.yml": &fstest.MapFile{Data: []byte(invalidSharedImportRuleYAML)},
 		}}
 
-		_, err := loadDefinitions(definitions, []ruleDir{invalidSharedDir, tenantDir}, false, []string{"python"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{invalidSharedDir, tenantDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.Equal(t, 1, strings.Count(logOutput.String(), "python_shared_test_import ignored due to validation errors"))
@@ -248,6 +248,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 			false,
 			[]string{"python"},
 			nil,
+			nil,
 		)
 
 		assert.NoError(t, err)
@@ -261,7 +262,7 @@ func TestLoadDefinitionsImportsAcrossDirectories(t *testing.T) {
 			"copy.yml": &fstest.MapFile{Data: []byte(sharedImportRuleV2YAML)},
 		}}
 
-		_, err := loadDefinitions(definitions, []ruleDir{builtInDir, laterDir}, false, []string{"python"}, nil)
+		_, err := loadDefinitions(definitions, []ruleDir{builtInDir, laterDir}, false, []string{"python"}, nil, nil)
 
 		assert.NoError(t, err)
 		assert.Equal(t, "second version of the shared rule", definitions["python_shared_test_import"].Metadata.Description)

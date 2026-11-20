@@ -14,6 +14,7 @@ import (
 	"github.com/bearer/bearer/pkg/engine"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
+	"github.com/bearer/bearer/pkg/structurederrors"
 	"github.com/bearer/bearer/pkg/util/set"
 	"github.com/bearer/bearer/pkg/version_check"
 )
@@ -41,6 +42,7 @@ func Load(
 	engine engine.Engine,
 	force bool,
 	foundLanguageIDs []string,
+	errorCollector *structurederrors.Collector,
 ) (
 	result LoadRulesResult,
 	err error,
@@ -64,7 +66,7 @@ func Load(
 	count += remoteCount
 
 	builtInDirs := []ruleDir{{path: "built-in", fs: builtInRulesFS}}
-	if _, err := loadDefinitions(builtInDefinitions, builtInDirs, true, nil, nil); err != nil {
+	if _, err := loadDefinitions(builtInDefinitions, builtInDirs, true, nil, nil, nil); err != nil {
 		return result, fmt.Errorf("error loading built-in rules: %w", err)
 	}
 
@@ -79,7 +81,14 @@ func Load(
 		dirs = append(dirs, ruleDir{path: dir, fs: os.DirFS(dir)})
 	}
 
-	externalCount, err := loadDefinitions(definitions, dirs, false, foundLanguageIDs, options.OnlyRule)
+	externalCount, err := loadDefinitions(
+		definitions,
+		dirs,
+		false,
+		foundLanguageIDs,
+		options.OnlyRule,
+		errorCollector,
+	)
 	if err != nil {
 		return result, fmt.Errorf("external rules %w", err)
 	}

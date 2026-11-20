@@ -154,9 +154,9 @@ func NewSet(language language.Language, ruleSet *ruleset.Set) (*Set, error) {
 func (set *Set) add(language language.Language, rule *ruleset.Rule) error {
 	builder := NewBuilder()
 
-	for _, pattern := range rule.Patterns() {
+	for i, pattern := range rule.Patterns() {
 		if err := addVariablesFromPattern(language, builder, pattern.Pattern); err != nil {
-			return err
+			return &ruleset.PatternError{RuleID: rule.ID(), PatternIndex: i, Err: err}
 		}
 
 		addVariablesFromFilters(builder, pattern.Filters)

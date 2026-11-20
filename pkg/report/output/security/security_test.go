@@ -335,7 +335,7 @@ func generateConfig(engine engine.Engine, reportOptions flagtypes.ReportOptions)
 		},
 	}
 
-	return settingsloader.FromOptions(opts, meta, engine, []string{ruby.Get().ID()})
+	return settingsloader.FromOptions(opts, meta, engine, []string{ruby.Get().ID()}, nil)
 }
 
 func dummyDataflowData() *outputtypes.ReportData {
