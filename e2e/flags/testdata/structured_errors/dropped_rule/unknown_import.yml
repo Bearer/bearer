@@ -1,0 +1,13 @@
+imports:
+  - test_missing_shared_rule
+patterns:
+  - pattern: logger.info($<_>)
+languages:
+  - ruby
+severity: high
+metadata:
+  description: "Rule with an unknown import"
+  remediation_message: "Fix the import"
+  cwe_id:
+    - 42
+  id: test_unknown_import

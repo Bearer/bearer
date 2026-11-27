@@ -1,0 +1,6 @@
+{"source":"Bearer","version":"dev","findings":null,"errors":[],"structured_errors":{"schema_version":"1","items":[{"severity":"error","code":"pattern_invalid","message":"pattern must only contain a single match node","rule_id":"test_invalid_pattern","rule_file":"e2e/flags/testdata/structured_errors/invalid_pattern/invalid_pattern.yml","pattern_index":1,"pattern":"$\u003c!\u003elogger.info($\u003c_\u003e) $\u003c!\u003elogger.warn($\u003c_\u003e)","language":"ruby"}]}}
+
+--
+Analyzing codebase
+Error: failed to start bearer, error with your configuration error creating ruby language scanner: error creating variable shape set: error adding test_invalid_pattern: pattern must only contain a single match node
+

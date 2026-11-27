@@ -40,6 +40,20 @@ func TestReportEmpty(t *testing.T) {
 	assert.Equal(t, []structurederrors.Item{}, report.Items)
 }
 
+func TestHasErrors(t *testing.T) {
+	collector := structurederrors.New()
+	assert.False(t, collector.HasErrors())
+
+	collector.Add(structurederrors.Item{Severity: structurederrors.SeverityWarning})
+	assert.False(t, collector.HasErrors())
+
+	collector.Add(structurederrors.Item{Severity: structurederrors.SeverityError})
+	assert.True(t, collector.HasErrors())
+
+	var disabled *structurederrors.Collector
+	assert.False(t, disabled.HasErrors())
+}
+
 func TestDisabled(t *testing.T) {
 	var collector *structurederrors.Collector
 

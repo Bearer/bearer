@@ -7,6 +7,7 @@ import (
 	"slices"
 
 	"github.com/bearer/bearer/pkg/classification"
+	"github.com/bearer/bearer/pkg/commands/process/orchestrator/pool"
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	"github.com/bearer/bearer/pkg/engine"
 	"github.com/bearer/bearer/pkg/flag"
@@ -34,7 +35,10 @@ func checkRules(engine engine.Engine, config settings.Config) error {
 		languageScanner, err := languagescanner.New(language, classifier.Schema, config.Rules)
 		if err != nil {
 			config.StructuredErrors.Add(engineErrorItem(language.ID(), config.Rules, err))
-			return fmt.Errorf("error creating %s language scanner: %w", language.ID(), err)
+			// the same message as when the workers fail to start with these rules
+			return errors.New(pool.StartupErrorMessage(
+				fmt.Errorf("error creating %s language scanner: %w", language.ID(), err),
+			))
 		}
 
 		languageScanner.Close()
@@ -76,9 +80,11 @@ func engineErrorItem(languageID string, rules map[string]*settings.Rule, err err
 }
 
 // writeStructuredErrorsReport writes a report holding only the structured errors, for when rule
-// errors stop the scan before there is a normal report to put them in
+// errors stop the scan before there is a normal report to put them in. Nothing is written when no
+// rule errors were recorded, as the scan was then stopped by something else, and a report with no
+// errors and no findings would look like a clean scan.
 func writeStructuredErrorsReport(errorCollector *structurederrors.Collector, outputPath string) error {
-	if !errorCollector.Enabled() {
+	if !errorCollector.HasErrors() {
 		return nil
 	}
 

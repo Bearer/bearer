@@ -125,6 +125,20 @@ func (collector *Collector) Add(item Item) {
 	collector.items = append(collector.items, item)
 }
 
+// HasErrors returns whether any item with error severity has been collected
+func (collector *Collector) HasErrors() bool {
+	if collector == nil {
+		return false
+	}
+
+	collector.mutex.Lock()
+	defer collector.mutex.Unlock()
+
+	return slices.ContainsFunc(collector.items, func(item Item) bool {
+		return item.Severity == SeverityError
+	})
+}
+
 // Report returns the collected items in a stable order, or nil when the collector is disabled
 func (collector *Collector) Report() *Report {
 	if collector == nil {
