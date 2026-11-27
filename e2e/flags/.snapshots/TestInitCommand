@@ -4,6 +4,7 @@ report:
     fail-on-severity: critical,high,medium,low
     format: ""
     include-stats: false
+    include-structured-errors: false
     no-color: false
     no-extract: false
     no-rule-meta: false

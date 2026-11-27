@@ -21,6 +21,7 @@ import (
 	"github.com/bearer/bearer/pkg/commands/process/settings"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
 	"github.com/bearer/bearer/pkg/report/customdetectors"
+	"github.com/bearer/bearer/pkg/structurederrors"
 	"github.com/bearer/bearer/pkg/util/output"
 	"github.com/bearer/bearer/pkg/version_check"
 )
@@ -185,13 +186,14 @@ func loadDefinitions(
 	isBuiltIn bool,
 	languageIDs []string,
 	onlyRule map[string]bool,
+	errorCollector *structurederrors.Collector,
 ) (int, error) {
 	count := 0
 	dirDefinitions := make([]map[string]settings.RuleDefinition, 0, len(dirs))
 	sharedDefinitions := make(map[string]settings.RuleDefinition)
 
 	for _, dir := range dirs {
-		loadedDefinitions, dirCount, err := readCustomDefinitions(isBuiltIn, dir.fs, languageIDs, onlyRule)
+		loadedDefinitions, dirCount, err := readCustomDefinitions(isBuiltIn, dir, languageIDs, onlyRule, errorCollector)
 		if err != nil {
 			return 0, err
 		}
@@ -215,7 +217,7 @@ func loadDefinitions(
 
 	for _, loadedDefinitions := range dirDefinitions {
 		if len(sharedDefinitions) == 0 {
-			addValidDefinitions(definitions, loadedDefinitions, loadedDefinitions)
+			addValidDefinitions(definitions, loadedDefinitions, loadedDefinitions, errorCollector)
 			continue
 		}
 
@@ -227,7 +229,7 @@ func loadDefinitions(
 			visibleDefinitions[id] = definition
 		}
 
-		addValidDefinitions(definitions, loadedDefinitions, visibleDefinitions)
+		addValidDefinitions(definitions, loadedDefinitions, visibleDefinitions, errorCollector)
 	}
 
 	return count, nil
@@ -240,6 +242,7 @@ func addValidDefinitions(
 	definitions map[string]settings.RuleDefinition,
 	loadedDefinitions map[string]settings.RuleDefinition,
 	visibleDefinitions map[string]settings.RuleDefinition,
+	errorCollector *structurederrors.Collector,
 ) {
 	for id, definition := range loadedDefinitions {
 		issues := validateCustomRuleDefinition(visibleDefinitions, &definition)
@@ -250,6 +253,13 @@ func addValidDefinitions(
 
 		for _, issue := range issues {
 			log.Debug().Msgf("%s: %s", id, issue)
+			errorCollector.Add(structurederrors.Item{
+				Severity:      structurederrors.SeverityError,
+				Code:          issue.code,
+				Message:       issue.message,
+				RuleID:        id,
+				RelatedRuleID: issue.relatedRuleID,
+			})
 		}
 
 		log.Debug().Msgf("%s ignored due to validation errors", id)
@@ -258,13 +268,14 @@ func addValidDefinitions(
 
 func readCustomDefinitions(
 	isBuiltIn bool,
-	dir fs.FS,
+	dir ruleDir,
 	languageIDs []string,
 	onlyRule map[string]bool,
+	errorCollector *structurederrors.Collector,
 ) (map[string]settings.RuleDefinition, int, error) {
 	count := 0
 	loadedDefinitions := make(map[string]settings.RuleDefinition)
-	if err := fs.WalkDir(dir, ".", func(path string, dirEntry fs.DirEntry, err error) error {
+	if err := fs.WalkDir(dir.fs, ".", func(path string, dirEntry fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -280,26 +291,41 @@ func readCustomDefinitions(
 			return nil
 		}
 
-		entry, err := fs.ReadFile(dir, path)
+		rulePath := filepath.Join(dir.path, path)
+		ruleError := func(code structurederrors.Code, ruleID string, err error) {
+			errorCollector.Add(structurederrors.Item{
+				Severity: structurederrors.SeverityError,
+				Code:     code,
+				Message:  err.Error(),
+				RuleID:   ruleID,
+				RuleFile: rulePath,
+			})
+		}
+
+		entry, err := fs.ReadFile(dir.fs, path)
 		if err != nil {
+			ruleError(structurederrors.CodeRuleReadFailed, "", err)
 			return fmt.Errorf("failed to read file %s: %w", path, err)
 		}
 
 		var ruleDefinition settings.RuleDefinition
 		err = yaml.Unmarshal(entry, &ruleDefinition)
 		if err != nil {
+			ruleError(structurederrors.CodeRuleYAMLInvalid, "", err)
 			output.StdErrLog(validateCustomRuleSchema(entry, filename))
 			return fmt.Errorf("rule file was invalid: %w", err)
 		}
 
 		if ruleDefinition.Metadata == nil {
 			log.Debug().Msgf("rule file has invalid metadata %s", path)
+			ruleError(structurederrors.CodeRuleMissingMetadata, "", errors.New("rule file has no metadata"))
 			return nil
 		}
 
 		id := ruleDefinition.Metadata.ID
 		if id == "" {
 			log.Debug().Msgf("rule file missing metadata.id %s", path)
+			ruleError(structurederrors.CodeRuleMissingID, "", errors.New("metadata.id must be specified"))
 			return nil
 		}
 
@@ -320,14 +346,32 @@ func readCustomDefinitions(
 				strings.Join(ruleDefinition.Languages, ", "),
 				path,
 			)
+			errorCollector.Add(structurederrors.Item{
+				Severity: structurederrors.SeverityWarning,
+				Code:     structurederrors.CodeRuleLanguageNotFound,
+				Message: fmt.Sprintf(
+					"rule languages [%s] were not found in the scan target (found: [%s]); the rule was not run",
+					strings.Join(ruleDefinition.Languages, ", "),
+					strings.Join(languageIDs, ", "),
+				),
+				RuleID:   id,
+				RuleFile: rulePath,
+			})
 			return nil
 		}
 
 		if _, exists := loadedDefinitions[id]; exists {
-			return fmt.Errorf("duplicate rule ID %s", id)
+			err := fmt.Errorf("duplicate rule ID %s", id)
+			ruleError(structurederrors.CodeRuleDuplicateID, id, err)
+			return err
 		}
 
 		loadedDefinitions[id] = ruleDefinition
+
+		errorCollector.RegisterRule(id, rulePath, "")
+		for _, auxiliaryDefinition := range ruleDefinition.Auxiliary {
+			errorCollector.RegisterRule(auxiliaryDefinition.Id, rulePath, id)
+		}
 
 		return nil
 	}); err != nil {

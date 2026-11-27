@@ -1,0 +1,12 @@
+patterns:
+  - pattern: logger.info($<_>)
+  - pattern: $<!>logger.info($<_>) $<!>logger.warn($<_>)
+languages:
+  - ruby
+severity: high
+metadata:
+  description: "Rule with a pattern that cannot be compiled"
+  remediation_message: "Fix the pattern"
+  cwe_id:
+    - 42
+  id: test_invalid_pattern

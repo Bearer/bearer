@@ -205,7 +205,7 @@ func buildConfig(t *testing.T, engine engine.Engine, ruleBytes []byte) settings.
 		languageIDs.AddAll(rule.Languages)
 	}
 
-	config, err := settingsloader.FromOptions(configFlags, meta, engine, languageIDs.Items())
+	config, err := settingsloader.FromOptions(configFlags, meta, engine, languageIDs.Items(), nil)
 	if err != nil {
 		t.Fatalf("failed to generate default scan settings: %s", err)
 	}

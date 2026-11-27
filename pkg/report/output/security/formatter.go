@@ -16,6 +16,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/reviewdog"
 	"github.com/bearer/bearer/pkg/report/output/sarif"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
+	"github.com/bearer/bearer/pkg/structurederrors"
 	outputhandler "github.com/bearer/bearer/pkg/util/output"
 )
 
@@ -34,6 +35,8 @@ type JsonV2Output struct {
 	Findings RawFindings           `json:"findings" yaml:"findings"`
 	Expected ExpectedDetections    `json:"expected_findings,omitempty" yaml:"expected_findings,omitempty"`
 	Errors   []dataflowtypes.Error `json:"errors" yaml:"errors"`
+	// StructuredErrors is only present when the include-structured-errors option is enabled
+	StructuredErrors *structurederrors.Report `json:"structured_errors,omitempty" yaml:"structured_errors,omitempty"`
 }
 
 func NewFormatter(
@@ -80,11 +83,12 @@ func (f Formatter) Format(format string) (output string, err error) {
 		return outputhandler.ReportJSON(f.ReportData.FindingsBySeverity)
 	case flag.FormatJSONV2:
 		return outputhandler.ReportJSON(JsonV2Output{
-			Source:   "Bearer",
-			Version:  build.Version,
-			Findings: f.ReportData.RawFindings,
-			Expected: f.ReportData.ExpectedDetections,
-			Errors:   f.ReportData.Dataflow.Errors,
+			Source:           "Bearer",
+			Version:          build.Version,
+			Findings:         f.ReportData.RawFindings,
+			Expected:         f.ReportData.ExpectedDetections,
+			Errors:           f.ReportData.Dataflow.Errors,
+			StructuredErrors: f.Config.StructuredErrors.Report(),
 		})
 	case flag.FormatYAML:
 		return outputhandler.ReportYAML(f.ReportData.FindingsBySeverity)
@@ -102,4 +106,15 @@ func (f Formatter) Format(format string) (output string, err error) {
 	}
 
 	return output, err
+}
+
+// StructuredErrorsOutput is the jsonv2 report for a scan that stopped before scanning because of
+// errors in its rules. It has no findings, only the structured errors.
+func StructuredErrorsOutput(errorCollector *structurederrors.Collector) (string, error) {
+	return outputhandler.ReportJSON(JsonV2Output{
+		Source:           "Bearer",
+		Version:          build.Version,
+		Errors:           []dataflowtypes.Error{},
+		StructuredErrors: errorCollector.Report(),
+	})
 }

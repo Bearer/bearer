@@ -98,15 +98,7 @@ func (process *Process) start(config *settings.Config) error {
 	go process.monitorMemory()
 
 	if err := process.initialize(config); err != nil {
-		var result = strings.Split(err.Error(), "failed to create detector customDetector:")
-		if len(result) > 1 {
-			// custom detector issue ; assume custom rule parse issue
-			var ruleName = strings.TrimSpace(strings.Split(result[1], ":")[0])
-			log.Debug().Msgf("%s", err.Error())
-			output.Fatal(fmt.Sprintf("could not parse rule %s. Is this a custom rule? See documentation on rule patterns and format https://docs.bearer.com/guides/custom-rule/", ruleName))
-		} else {
-			output.Fatal(fmt.Sprintf("failed to start bearer, error with your configuration %s", err))
-		}
+		output.Fatal(StartupErrorMessage(err))
 
 		return err
 	}
@@ -335,4 +327,18 @@ func allocatePort() (int, error) {
 	}
 	defer l.Close()
 	return l.Addr().(*net.TCPAddr).Port, nil
+}
+
+// StartupErrorMessage is the message shown when the scanner cannot be set up with the given
+// configuration
+func StartupErrorMessage(err error) string {
+	var result = strings.Split(err.Error(), "failed to create detector customDetector:")
+	if len(result) > 1 {
+		// custom detector issue ; assume custom rule parse issue
+		var ruleName = strings.TrimSpace(strings.Split(result[1], ":")[0])
+		log.Debug().Msgf("%s", err.Error())
+		return fmt.Sprintf("could not parse rule %s. Is this a custom rule? See documentation on rule patterns and format https://docs.bearer.com/guides/custom-rule/", ruleName)
+	}
+
+	return fmt.Sprintf("failed to start bearer, error with your configuration %s", err)
 }

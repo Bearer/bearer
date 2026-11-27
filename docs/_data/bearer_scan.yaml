@@ -97,6 +97,12 @@ options:
     usage: Load ignore file from the specified path.
     environment_variables:
       - BEARER_IGNORE_FILE
+  - name: include-structured-errors
+    default_value: "false"
+    usage: |
+      Include structured errors about rules in the report (jsonv2 format only).
+    environment_variables:
+      - BEARER_INCLUDE_STRUCTURED_ERRORS
   - name: include-stats
     default_value: "false"
     usage: |

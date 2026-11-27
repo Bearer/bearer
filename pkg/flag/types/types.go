@@ -86,15 +86,16 @@ type RuleOptions struct {
 }
 
 type ReportOptions struct {
-	Format             string          `mapstructure:"format" json:"format" yaml:"format"`
-	Report             string          `mapstructure:"report" json:"report" yaml:"report"`
-	Output             string          `mapstructure:"output" json:"output" yaml:"output"`
-	Severity           set.Set[string] `mapstructure:"severity" json:"severity" yaml:"severity"`
-	FailOnSeverity     set.Set[string] `mapstructure:"fail-on-severity" json:"fail-on-severity" yaml:"fail-on-severity"`
-	ExcludeFingerprint map[string]bool `mapstructure:"exclude_fingerprints" json:"exclude_fingerprints" yaml:"exclude_fingerprints"`
-	NoExtract          bool            `mapstructure:"no-extract" json:"no-extract" yaml:"no-extract"`
-	NoRuleMeta         bool            `mapstructure:"no-rule-meta" json:"no-rule-meta" yaml:"no-rule-meta"`
-	IncludeStats       bool            `mapstructure:"include-stats" json:"include-stats" yaml:"include-stats"`
+	Format                  string          `mapstructure:"format" json:"format" yaml:"format"`
+	Report                  string          `mapstructure:"report" json:"report" yaml:"report"`
+	Output                  string          `mapstructure:"output" json:"output" yaml:"output"`
+	Severity                set.Set[string] `mapstructure:"severity" json:"severity" yaml:"severity"`
+	FailOnSeverity          set.Set[string] `mapstructure:"fail-on-severity" json:"fail-on-severity" yaml:"fail-on-severity"`
+	ExcludeFingerprint      map[string]bool `mapstructure:"exclude_fingerprints" json:"exclude_fingerprints" yaml:"exclude_fingerprints"`
+	NoExtract               bool            `mapstructure:"no-extract" json:"no-extract" yaml:"no-extract"`
+	NoRuleMeta              bool            `mapstructure:"no-rule-meta" json:"no-rule-meta" yaml:"no-rule-meta"`
+	IncludeStats            bool            `mapstructure:"include-stats" json:"include-stats" yaml:"include-stats"`
+	IncludeStructuredErrors bool            `mapstructure:"include-structured-errors" json:"include-structured-errors" yaml:"include-structured-errors"`
 }
 
 type RepositoryOptions struct {

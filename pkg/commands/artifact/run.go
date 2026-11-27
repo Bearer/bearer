@@ -27,6 +27,7 @@ import (
 	"github.com/bearer/bearer/pkg/report/output/stats"
 	outputtypes "github.com/bearer/bearer/pkg/report/output/types"
 	scannerstats "github.com/bearer/bearer/pkg/scanner/stats"
+	"github.com/bearer/bearer/pkg/structurederrors"
 	"github.com/bearer/bearer/pkg/util/file"
 	"github.com/bearer/bearer/pkg/util/ignore"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
@@ -298,9 +299,21 @@ func Run(ctx context.Context, opts flagtypes.Options, engine engine.Engine) (err
 		return fmt.Errorf("failed to initialize engine: %w", err)
 	}
 
-	scanSettings, err := settingsloader.FromOptions(opts, versionMeta, engine, foundLanguageIDs)
+	var errorCollector *structurederrors.Collector
+	if opts.IncludeStructuredErrors {
+		errorCollector = structurederrors.New()
+	}
+
+	scanSettings, err := settingsloader.FromOptions(opts, versionMeta, engine, foundLanguageIDs, errorCollector)
 	scanSettings.Target = opts.Target
+	if err == nil {
+		err = checkRules(engine, scanSettings)
+	}
 	if err != nil {
+		if reportErr := writeStructuredErrorsReport(errorCollector, opts.Output); reportErr != nil {
+			log.Error().Msgf("failed to write structured errors report: %s", reportErr)
+		}
+
 		return err
 	}
 	scanSettings.CloudIgnoresUsed, scanSettings.IgnoredFingerprints, scanSettings.StaleIgnoredFingerprintIds, err = getIgnoredFingerprints(

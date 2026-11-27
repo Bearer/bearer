@@ -30,12 +30,13 @@ var (
 )
 
 var (
-	ErrInvalidFormatSecurity = errors.New("invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html, jsonv2")
-	ErrInvalidFormatPrivacy  = errors.New("invalid format argument for privacy report; supported values: csv, json, yaml, html")
-	ErrInvalidFormatDefault  = errors.New("invalid format argument; supported values: json, yaml")
-	ErrInvalidReport         = errors.New("invalid report argument; supported values: security, privacy")
-	ErrInvalidSeverity       = errors.New("invalid severity argument; supported values: " + strings.Join(globaltypes.Severities, ", "))
-	ErrInvalidFailOnSeverity = errors.New("invalid fail-on-severity argument; supported values: " + strings.Join(globaltypes.Severities, ", "))
+	ErrInvalidFormatSecurity   = errors.New("invalid format argument for security report; supported values: json, yaml, sarif, gitlab-sast, rdjson, html, jsonv2")
+	ErrInvalidFormatPrivacy    = errors.New("invalid format argument for privacy report; supported values: csv, json, yaml, html")
+	ErrInvalidFormatDefault    = errors.New("invalid format argument; supported values: json, yaml")
+	ErrInvalidReport           = errors.New("invalid report argument; supported values: security, privacy")
+	ErrInvalidSeverity         = errors.New("invalid severity argument; supported values: " + strings.Join(globaltypes.Severities, ", "))
+	ErrInvalidFailOnSeverity   = errors.New("invalid fail-on-severity argument; supported values: " + strings.Join(globaltypes.Severities, ", "))
+	ErrInvalidStructuredErrors = errors.New("the include-structured-errors option is only supported with the jsonv2 format for the security report")
 )
 
 type reportFlagGroup struct{ flagGroupBase }
@@ -101,6 +102,12 @@ var (
 		Value:      false,
 		Usage:      "Include language usage statistics in reports that support them.",
 	})
+	IncludeStructuredErrorsFlag = ReportFlagGroup.add(flagtypes.Flag{
+		Name:       "include-structured-errors",
+		ConfigName: "report.include-structured-errors",
+		Value:      false,
+		Usage:      "Include structured errors about rules in the report (jsonv2 format only).",
+	})
 )
 
 type ReportOptions struct {
@@ -159,6 +166,11 @@ func (reportFlagGroup) SetOptions(options *flagtypes.Options, args []string) err
 		return ErrInvalidFailOnSeverity
 	}
 
+	includeStructuredErrors := getBool(IncludeStructuredErrorsFlag)
+	if includeStructuredErrors && format != FormatJSONV2 {
+		return ErrInvalidStructuredErrors
+	}
+
 	// turn string slice into map for ease of access
 	excludeFingerprints := getStringSlice(ExcludeFingerprintFlag)
 	excludeFingerprintsMapping := make(map[string]bool)
@@ -167,15 +179,16 @@ func (reportFlagGroup) SetOptions(options *flagtypes.Options, args []string) err
 	}
 
 	options.ReportOptions = flagtypes.ReportOptions{
-		Format:             format,
-		Report:             report,
-		Output:             getString(OutputFlag),
-		Severity:           severity,
-		FailOnSeverity:     failOnSeverity,
-		ExcludeFingerprint: excludeFingerprintsMapping,
-		NoExtract:          getBool(NoExtractFlag),
-		NoRuleMeta:         getBool(NoRuleMetaFlag),
-		IncludeStats:       getBool(IncludeStatsFlag),
+		Format:                  format,
+		Report:                  report,
+		Output:                  getString(OutputFlag),
+		Severity:                severity,
+		FailOnSeverity:          failOnSeverity,
+		ExcludeFingerprint:      excludeFingerprintsMapping,
+		NoExtract:               getBool(NoExtractFlag),
+		NoRuleMeta:              getBool(NoRuleMetaFlag),
+		IncludeStats:            getBool(IncludeStatsFlag),
+		IncludeStructuredErrors: includeStructuredErrors,
 	}
 
 	return nil

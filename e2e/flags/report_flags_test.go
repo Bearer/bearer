@@ -88,3 +88,29 @@ func TestOuputFlag(t *testing.T) {
 
 	cupaloy.SnapshotT(t, string(fileContent))
 }
+
+func TestIncludeStructuredErrorsFlag(t *testing.T) {
+	rulesPath := filepath.Join("e2e", "flags", "testdata", "structured_errors")
+	arguments := func(ruleDir string, extra ...string) []string {
+		return append([]string{
+			"--format=jsonv2",
+			"--include-structured-errors",
+			"--exit-code=0",
+			"--external-rule-dir=e2e/testdata/rules," + filepath.Join(rulesPath, ruleDir),
+		}, extra...)
+	}
+
+	// the rule is dropped and reported, and the scan carries on
+	testhelper.RunTests(t, []testhelper.TestCase{
+		newScanTest("dropped-rule", arguments("dropped_rule")),
+	})
+
+	// the scan stops, but the report is written first with the error
+	invalidPattern := newScanTest("invalid-pattern", arguments("invalid_pattern"))
+	invalidPattern.ShouldSucceed = false
+	// the option is only supported with the jsonv2 format
+	unsupportedFormat := newScanTest("unsupported-format", arguments("dropped_rule", "--format=json"))
+	unsupportedFormat.ShouldSucceed = false
+
+	testhelper.RunTests(t, []testhelper.TestCase{invalidPattern, unsupportedFormat})
+}

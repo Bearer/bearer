@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/bearer/api"
 	flagtypes "github.com/bearer/bearer/pkg/flag/types"
+	"github.com/bearer/bearer/pkg/structurederrors"
 	ignoretypes "github.com/bearer/bearer/pkg/util/ignore/types"
 	"github.com/bearer/bearer/pkg/util/regex"
 	"github.com/bearer/bearer/pkg/util/rego"
@@ -59,6 +60,8 @@ type Config struct {
 	LogLevel                   string           `mapstructure:"log_level" json:"log_level" yaml:"log_level"`
 	DebugProfile               bool             `mapstructure:"debug_profile" json:"debug_profile" yaml:"debug_profile"`
 	IgnoreGit                  bool             `mapstructure:"ignore_git" json:"ignore_git" yaml:"ignore_git"`
+	// StructuredErrors is nil unless the include-structured-errors option is enabled. It is not sent to workers.
+	StructuredErrors *structurederrors.Collector `mapstructure:"-" json:"-" yaml:"-"`
 }
 
 type Processor struct {
